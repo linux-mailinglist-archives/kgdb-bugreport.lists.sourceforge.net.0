@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5B14B3534B
-	for <lists+kgdb-bugreport@lfdr.de>; Wed,  5 Jun 2019 01:24:43 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4CE7F35370
+	for <lists+kgdb-bugreport@lfdr.de>; Wed,  5 Jun 2019 01:25:23 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1hYInK-0003Ir-3w
-	for lists+kgdb-bugreport@lfdr.de; Tue, 04 Jun 2019 23:24:42 +0000
+	id 1hYIny-0004ch-1y
+	for lists+kgdb-bugreport@lfdr.de; Tue, 04 Jun 2019 23:25:22 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1hYInI-0003Ic-O1
- for kgdb-bugreport@lists.sourceforge.net; Tue, 04 Jun 2019 23:24:40 +0000
+ (envelope-from <sashal@kernel.org>) id 1hYInw-0004ca-NF
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 04 Jun 2019 23:25:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=EEWcRCGG/99hm3yL7HMCq6NEZ1uX+ja8RgYz2cJWMnE=; b=kvvT7ByWxIcebdD9yVVx0sHYc+
- 9kF1Y0D9Y7DAUF4/lQmDwQqa8O+LIWVZ9sZuP71Q6mp7JyNE4iQ1MRoetBUaTFPEX7Mj024i7piEa
- 0dLyAODqi8DcyDDmW3c9EBCVHsl0joaeQScBALHcYaZMMFeQ6L0N5e5DglFScO70Q6xg=;
+ bh=5eWB64fU4/4TmvaDGk4TrYYh4qzYXW982wq0uCMU+4Q=; b=lJrcOhFL56Z9tyhONKk16opAMR
+ uLOvd90OgyykAEh3TmRQs2jF8a0FcPzRCBTINzKOXsjkScSlULMaGBwCeD3/r9GPy4U1AE3VhHMOl
+ bSsoUDBYzs5CUY9AWN+TtGRbDh0LTm2eRDOt5SF0Bt05WQs4TcEfcJDcnnMuQY3AiZRA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -30,35 +30,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=EEWcRCGG/99hm3yL7HMCq6NEZ1uX+ja8RgYz2cJWMnE=; b=YaJUJPAvLhxIKUi88xLpGwCzlM
- 059+qQmJ3VvvlzA8440Vn4FDP67S7D7Dua59gAGj51dc/DMg2XPVQI5Cd3KClmZgo2n6sYSPHLHke
- hwYjbR0pKF7HM6qWM+RoLF3BDxS5Yif3aSCAEF+0gGaiC+c7lGywXEYQTMEblXdle0SU=;
+ bh=5eWB64fU4/4TmvaDGk4TrYYh4qzYXW982wq0uCMU+4Q=; b=EXdRnTNszUtWv3c9lyqAgOgh8F
+ Y7E9vWURULdfqXAyzj85Hsppdl6Crc7xrjo9E74NjtGRFUheW/xbYGz95U+CCtqnawTG0WttiFsdI
+ kn/fp9+78O2N2skQ0aY6nOp+FWq6RN5GKeet5PsZm3APSo8cAdzINS0ldTD4+utcQ0pc=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hYInH-007Wqc-MF
- for kgdb-bugreport@lists.sourceforge.net; Tue, 04 Jun 2019 23:24:40 +0000
+ id 1hYInv-007vJp-L9
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 04 Jun 2019 23:25:20 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 78AF3208C3;
- Tue,  4 Jun 2019 23:24:33 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 632AD21019;
+ Tue,  4 Jun 2019 23:25:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1559690674;
- bh=0xDaq6sf4YN7169JdPWC6VPkMZp1QHIpgS/sexm+Gb4=;
+ s=default; t=1559690714;
+ bh=EJnq8IEeTg02jxtr0X79PQyChSZhrYq4oMizD6LZy2o=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=lm1Ug9f/T1L7XB6W6PGlOitRa1VJaONMNE1TYy0rmZV5DRrOq2ypRXtyJmaLN3rVy
- w5fJJcMw2n7vDot6U72VlM4C1f59TM8pfm4dWKDBFM4lAujf/i6pazyT8HrwBt63Eb
- Df7wDDlyA6S7r2diZsu7ejYz6hAWn/MdTwDHRZLs=
+ b=qZ/2pe0fpqpnvDNOhTpBC3TcU1B48knpFd37Vzpx2lAbjExjTxK+ztIZGOaPDJzug
+ 4yfKRKU7+QZmtC5919jX5oMND5OyhXMbfr+C7ELqD8MpMryd4oe8Or8vU6JA5rGPFJ
+ wsqF29gFlCVcJpJhC3xWE3WlQjL+arKbCQsu6uAw=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Tue,  4 Jun 2019 19:23:59 -0400
-Message-Id: <20190604232416.7479-8-sashal@kernel.org>
+Date: Tue,  4 Jun 2019 19:24:48 -0400
+Message-Id: <20190604232459.7745-7-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190604232416.7479-1-sashal@kernel.org>
-References: <20190604232416.7479-1-sashal@kernel.org>
+In-Reply-To: <20190604232459.7745-1-sashal@kernel.org>
+References: <20190604232459.7745-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -74,8 +74,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 T_DKIMWL_WL_HIGH       DKIMwl.org - Whitelisted High sender
  -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hYInH-007Wqc-MF
-Subject: [Kgdb-bugreport] [PATCH AUTOSEL 4.14 08/24] Drivers: misc: fix
+X-Headers-End: 1hYInv-007vJp-L9
+Subject: [Kgdb-bugreport] [PATCH AUTOSEL 4.9 07/17] Drivers: misc: fix
  out-of-bounds access in function param_set_kgdbts_var
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -113,10 +113,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/misc/kgdbts.c b/drivers/misc/kgdbts.c
-index fc7efedbc4be..94cbc5c98cae 100644
+index 99635dd9dbac..bb3a76ad80da 100644
 --- a/drivers/misc/kgdbts.c
 +++ b/drivers/misc/kgdbts.c
-@@ -1134,7 +1134,7 @@ static void kgdbts_put_char(u8 chr)
+@@ -1132,7 +1132,7 @@ static void kgdbts_put_char(u8 chr)
  
  static int param_set_kgdbts_var(const char *kmessage, struct kernel_param *kp)
  {
@@ -125,7 +125,7 @@ index fc7efedbc4be..94cbc5c98cae 100644
  
  	if (len >= MAX_CONFIG_LEN) {
  		printk(KERN_ERR "kgdbts: config string too long\n");
-@@ -1154,7 +1154,7 @@ static int param_set_kgdbts_var(const char *kmessage, struct kernel_param *kp)
+@@ -1152,7 +1152,7 @@ static int param_set_kgdbts_var(const char *kmessage, struct kernel_param *kp)
  
  	strcpy(config, kmessage);
  	/* Chop out \n char as a result of echo */
