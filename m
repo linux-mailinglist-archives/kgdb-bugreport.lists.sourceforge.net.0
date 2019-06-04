@@ -2,83 +2,112 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 31B933224A
-	for <lists+kgdb-bugreport@lfdr.de>; Sun,  2 Jun 2019 08:46:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9DF1C3B611
+	for <lists+kgdb-bugreport@lfdr.de>; Mon, 10 Jun 2019 15:33:49 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:To:Message-ID:Date:In-Reply-To:References:
+	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=/5fUmVr2KrpujwVhSUoXKpLDcGYN3Z2p1wmjaT4Q6Aw=; b=EKZixrBCVJ9DnktP3RlPMzxfLV
+	uLjApgU9JgOM1Tjf60eY9d+jaM+atibMS28YTA4sGl7xakzqAPHG5RywzUYUkCookxIILsLueQ8vF
+	wuwwzKmIm1zUaTT5f60Fc+oxggBJPNgCqyayCaLaJ60J84K9iA79eYu54OzN7ZasORg8=;
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1hXKGf-0005QI-SI
-	for lists+kgdb-bugreport@lfdr.de; Sun, 02 Jun 2019 06:46:57 +0000
+	id 1haKQm-0002d0-O8
+	for lists+kgdb-bugreport@lfdr.de; Mon, 10 Jun 2019 13:33:48 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <penguin-kernel@i-love.sakura.ne.jp>)
- id 1hXKGe-0005Q0-5e
- for kgdb-bugreport@lists.sourceforge.net; Sun, 02 Jun 2019 06:46:56 +0000
+ (envelope-from <brendanhiggins@google.com>) id 1hYHQj-0000D7-9l
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 04 Jun 2019 21:57:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:References:Cc:To:From:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
+ Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
+ Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+ :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=PKFoMkEnZJpQ4+wWwZzET8U8tzR9Az0PDxoHz9+kZrM=; b=ejNg+Ikhvs3qM2bR6V+N4xkTjH
- q3CLZWV9WmpmnsDDVmFZHIts9E61nC8z6HTObHSFfxwk0z40JoX8epgcaTYBnPuUCLfg80JCRAEuF
- P9M6sxYYxrMtaNh1TDkSdI/gafRBSnXOraIDhP4EhlcPua5qC2daTsHSRXTH2nivTZyQ=;
+ bh=nm6nxsfvdF1NlydS0vPcNG8Czdz9QMNoM/DaRUKeru8=; b=HEPCZDsb7GaZtQcXAO6z6+ndSG
+ euZW5HQbhjif4fwyPGmus9zyblE/V5DfReus1ANCz65c5O35xI+TlDBZMabnm2ntPbKo+irFK7Tyn
+ UR7TRxOvkyVYr6l/Z/jmZPc8aFIke5svKwsByrIl4tSqcq/gd/Vx/1w0WjBaP0okII8E=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:References:Cc:To:From:Subject:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
+ :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=PKFoMkEnZJpQ4+wWwZzET8U8tzR9Az0PDxoHz9+kZrM=; b=M60+Cx2QfSYJTY6s8kveA52HeH
- jojIDr/24OX758PhrHskeYbl9MYcESS9NW66i3P2XZwkLVquaOGwkMfzpRxmQ2+tYsOYrHv0DMwr5
- Cn4Dwm4FnGDLOQgThFkGIRVaefiHTG2AgEClkQ50doO59j1C6hzJPQ0oSBIjI5DygNl8=;
-Received: from www262.sakura.ne.jp ([202.181.97.72])
+ bh=nm6nxsfvdF1NlydS0vPcNG8Czdz9QMNoM/DaRUKeru8=; b=Ifw/CwuN9YwB7os6e9kSmaai+X
+ QAfjdfYqvx8xN0bQ97tgp1LFObj1Vpzq5rxy0yRqZMu7/21820iFkBKD4uHdgr4P0oupN3laCpgRL
+ HwjFXphjxLLWj1IYME3tGeT6AMYrKleZP1xGp4a20wEltuy6746RZadpXGVXCvAPPV/M=;
+Received: from mail-lj1-f196.google.com ([209.85.208.196])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hXKGb-00GPKG-9C
- for kgdb-bugreport@lists.sourceforge.net; Sun, 02 Jun 2019 06:46:56 +0000
-Received: from fsav305.sakura.ne.jp (fsav305.sakura.ne.jp [153.120.85.136])
- by www262.sakura.ne.jp (8.15.2/8.15.2) with ESMTP id x526DgaG092969;
- Sun, 2 Jun 2019 15:13:42 +0900 (JST)
- (envelope-from penguin-kernel@i-love.sakura.ne.jp)
-Received: from www262.sakura.ne.jp (202.181.97.72)
- by fsav305.sakura.ne.jp (F-Secure/fsigk_smtp/530/fsav305.sakura.ne.jp);
- Sun, 02 Jun 2019 15:13:42 +0900 (JST)
-X-Virus-Status: clean(F-Secure/fsigk_smtp/530/fsav305.sakura.ne.jp)
-Received: from [192.168.1.8] (softbank126012062002.bbtec.net [126.12.62.2])
- (authenticated bits=0)
- by www262.sakura.ne.jp (8.15.2/8.15.2) with ESMTPSA id x526DcJa092941
- (version=TLSv1.2 cipher=AES256-SHA bits=256 verify=NO);
- Sun, 2 Jun 2019 15:13:42 +0900 (JST)
- (envelope-from penguin-kernel@i-love.sakura.ne.jp)
-From: Tetsuo Handa <penguin-kernel@i-love.sakura.ne.jp>
-To: Petr Mladek <pmladek@suse.com>,
- Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>
-References: <20190528002412.1625-1-dima@arista.com>
- <20190528041500.GB26865@jagdpanzerIV> <20190528044619.GA3429@jagdpanzerIV>
- <20190528134227.xyb3622gjwu52q4r@pathway.suse.cz>
- <82605abd-14d9-376a-446c-48475ae305dc@i-love.sakura.ne.jp>
-Message-ID: <c265f674-e293-332b-a037-895025354a69@i-love.sakura.ne.jp>
-Date: Sun, 2 Jun 2019 15:13:35 +0900
-User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.0
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.90_1)
+ id 1hYHQh-007M41-OQ
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 04 Jun 2019 21:57:17 +0000
+Received: by mail-lj1-f196.google.com with SMTP id v29so9938769ljv.0
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Tue, 04 Jun 2019 14:57:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=nm6nxsfvdF1NlydS0vPcNG8Czdz9QMNoM/DaRUKeru8=;
+ b=nLRStuQzBAP59j/hKQNMV8C2AGPtk1eCG2pVy9YzYyeSjd5qJhpZEFP4EeezoVeUTW
+ jCVxFCEslDbIYQBvl1fiWZwQgMWKrBfYmhsQbY0FOyfRCagOJrBrYjrjVYnfRKEkWBk3
+ 6ocN8V2mwExKGi+I0etI2k6Ni8hGVyzZ0e9VpFO0N23q3SvM0zXQkqkIxHDnQrOWEsbB
+ 6dEDi7PBY/pmmPrtXyvpaYGxcVTNutTpomS6BWz/12hpgG8D/gC5FYBWpRRzRM5m5zt8
+ WdpVD7qsXc2+NJj9mv+e1rum3ydGcI/lFQo5HIg7f8lqXChuKP/uhCGMxzROQ+8FUS+v
+ VZnw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=nm6nxsfvdF1NlydS0vPcNG8Czdz9QMNoM/DaRUKeru8=;
+ b=YDOpKYArB/Qf8pp6brBbH57b+WezMVYPljcjkARfIVNaWq3QiwoO9ngzMzzNiWm4Ek
+ xcTbqOCvPb8yDliPof2lsLJszudvy3dSedqJ2ydQvB65yjExjB1SKzUDf/mDhcwjGJqC
+ xKp4DtIvTy4k9abmQhBFgAKXYFnzW7MwSc9g5D9yep1iPJpZhtXKGjtTrJMDAVoIOrju
+ 5r0sI6SlkEeBkLWfCkJCMfkii9OCNKo4c9En3BuMx8zRsJ3bSJDtD30J/Q/+qmSsbw1Q
+ EndNmjBHoSaNWCPMFz2yE3p7x2maWaXn3wKkwArTLPTv358K1kL0yA0YQuQGXk1yZrrh
+ 42Tg==
+X-Gm-Message-State: APjAAAWHvtzp5jhsDrA6Td2q5i7XyCHJQnyDjU9r74qH0rE4L3+aZ8rc
+ d37BvllskHrS/D4cUEQEXP3hxEtBMz5tzasjpXomig==
+X-Google-Smtp-Source: APXvYqwE1CV5WfOBv8U7SSbJEQLGVSNIIKxmFZ1p4N1xuuO/XMklmNvMFn5XfSsxTekMg8/K0WDmZz2xlx1whsztp4E=
+X-Received: by 2002:a2e:a318:: with SMTP id l24mr6354112lje.36.1559685428378; 
+ Tue, 04 Jun 2019 14:57:08 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <82605abd-14d9-376a-446c-48475ae305dc@i-love.sakura.ne.jp>
-Content-Language: en-US
-X-Spam-Score: 0.0 (/)
+References: <20190514054251.186196-1-brendanhiggins@google.com>
+ <20190514054251.186196-16-brendanhiggins@google.com>
+ <20190514073422.4287267c@lwn.net>
+ <20190514180810.GA109557@google.com> <20190514121623.0314bf07@lwn.net>
+ <20190514231902.GA12893@google.com> <20190515074546.07700142@lwn.net>
+In-Reply-To: <20190515074546.07700142@lwn.net>
+Date: Tue, 4 Jun 2019 14:56:57 -0700
+Message-ID: <CAFd5g44XatHJnNvRdqBGLnwcvOxTUAKM-tjKH94NGbyXGVVatQ@mail.gmail.com>
+To: Jonathan Corbet <corbet@lwn.net>
+X-Spam-Score: -16.3 (----------------)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: i-love.sakura.ne.jp]
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.208.196 listed in list.dnswl.org]
+ -0.7 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.208.196 listed in wl.mailspike.net]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM white-list
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1hXKGb-00GPKG-9C
-Subject: [Kgdb-bugreport] [RFC] printk: Introduce per context console
- loglevel.
+ -7.5 USER_IN_DEF_SPF_WL     From: address is in the default SPF white-list
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.5 ENV_AND_HDR_SPF_MATCH  Env and Hdr From used in default SPF WL Match
+ -0.0 T_DKIMWL_WL_MED        DKIMwl.org - Medium sender
+X-Headers-End: 1hYHQh-007M41-OQ
+X-Mailman-Approved-At: Mon, 10 Jun 2019 13:33:47 +0000
+Subject: Re: [Kgdb-bugreport] [PATCH v3 15/18] Documentation: kunit: add
+ documentation for KUnit
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -90,508 +119,103 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-ia64@vger.kernel.org, Dmitry Safonov <dima@arista.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, x86@kernel.org,
- linux-kernel@vger.kernel.org, Steven Rostedt <rostedt@goodmis.org>,
- Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
- Jiri Slaby <jslaby@suse.com>, kgdb-bugreport@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+From: Brendan Higgins via Kgdb-bugreport <kgdb-bugreport@lists.sourceforge.net>
+Reply-To: Brendan Higgins <brendanhiggins@google.com>
+Cc: songliubraving@fb.com, Petr Mladek <pmladek@suse.com>,
+ "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>, catalin.marinas@arm.com,
+ Amir Goldstein <amir73il@gmail.com>, ast@kernel.org,
+ dri-devel <dri-devel@lists.freedesktop.org>, oberpar@linux.ibm.com,
+ Sasha Levin <Alexander.Levin@microsoft.com>,
+ Masahiro Yamada <yamada.masahiro@socionext.com>, netdev@vger.kernel.org,
+ glider@google.com, Michael Ellerman <mpe@ellerman.id.au>,
+ "open list:KERNEL SELFTEST FRAMEWORK" <linux-kselftest@vger.kernel.org>,
+ kgdb-bugreport@lists.sourceforge.net, shuah <shuah@kernel.org>,
+ cocci@systeme.lip6.fr, Rob Herring <robh@kernel.org>,
+ daniel.thompson@linaro.org, daniel@iogearbox.net,
+ linux-nvdimm <linux-nvdimm@lists.01.org>, Gilles.Muller@lip6.fr,
+ Knut Omang <knut.omang@oracle.com>,
+ Kieran Bingham <kieran.bingham@ideasonboard.com>, kasan-dev@googlegroups.com,
+ Felix Guo <felixguoxiuping@gmail.com>, wfg@linux.intel.com,
+ Joel Stanley <joel@jms.id.au>, David Rientjes <rientjes@google.com>,
+ aryabinin@virtuozzo.com, Jeff Dike <jdike@addtoit.com>,
+ Dan Carpenter <dan.carpenter@oracle.com>,
+ devicetree <devicetree@vger.kernel.org>,
+ linux-kbuild <linux-kbuild@vger.kernel.org>, nicolas.palix@imag.fr, "Bird,
+ Timothy" <Tim.Bird@sony.com>, jason.wessel@windriver.com,
+ linux-um@lists.infradead.org, Steven Rostedt <rostedt@goodmis.org>,
+ Julia Lawall <julia.lawall@lip6.fr>, yhs@fb.com,
+ Dan Williams <dan.j.williams@intel.com>, Dmitry Vyukov <dvyukov@google.com>,
+ kunit-dev@googlegroups.com, michal.lkml@markovi.net,
+ Theodore Ts'o <tytso@mit.edu>, Richard Weinberger <richard@nod.at>,
+ Stephen Boyd <sboyd@kernel.org>, Greg KH <gregkh@linuxfoundation.org>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Luis Chamberlain <mcgrof@kernel.org>, Daniel Vetter <daniel@ffwll.ch>,
+ Kees Cook <keescook@google.com>, linux-fsdevel@vger.kernel.org,
+ bpf@vger.kernel.org, Logan Gunthorpe <logang@deltatee.com>, kafai@fb.com,
+ Kevin Hilman <khilman@baylibre.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Dmitry Safonov proposed KERN_UNSUPPRESSED loglevel which pretends as if
-ignore_loglevel was specified for per printk() basis, for we can fail to
-apply temporarily manipulated console loglevel because console loglevel
-is evaluated when the message is printed to consoles rather than when
-the message is stored into the buffer [1].
-
-Temporary manipulation of console loglevel for SysRq is applied to only
-the header line. At first I though that we also want to apply temporary
-manipulation of console loglevel for SysRq to the body lines, for showing
-only the header line is hardly helpful. But I realized that we should not
-force showing the body lines because some users might be triggering SysRq
- from /proc and reading via syslog rather than via console output. Users
-who need to read via console output should be able to manipulate console
-loglevel by triggering SysRq from console.
-
-Since we currently defer storing of the messages from NMI context and
-recursive context, we would need to explicitly pass KERN_UNSUPPRESSED.
-But Sergey Senozhatsky thinks that it might be fine to automatically
-apply KERN_UNSUPPRESSED to printk() from NMI context and recursive
-context, for messages from these contexts are likely important [2].
-Then, we could avoid explicitly passing KERN_UNSUPPRESSED, by introducing
-per context console loglevel.
-
-This patch introduces per CPU console loglevel (for in_nmi(), in_irq() and
-in_serving_softirq()) and per thread console loglevel (for in_task()), and
-replaces temporary manipulation of global console_loglevel with temporary
-manipulation of per context console_loglevel based on an assumption that
-users who are temporarily manipulating global console_loglevel needs to
-apply it to only current context. (Note that triggering SysRq-t from /proc
-runs in in_task() context, and it should not disable preemption because it
-may take long period. Thus, per thread console loglevel is used.)
-
-If per context console_loglevel is 0 when printk() is called, global
-console_loglevel is evaluated when the message is printed to consoles.
-If per context console_loglevel is not 0 when printk() is called, per
-context console_loglevel is evaluated when the message is stored, and
-that result supersedes global console_loglevel evaluation.
-
-With the combination of automatically applying CONSOLE_LOGLEVEL_MOTORMOUTH
-for printk() from NMI context and recursive context, this patch does not
-introduce KERN_UNSUPPRESSED loglevel. (Note that CONSOLE_LOGLEVEL_SILENT
-is changed from 0 to -1 in order to make per context console_loglevel
-evaluation simpler.)
-
-[1] https://lkml.kernel.org/r/20190528002412.1625-1-dima@arista.com
-[2] https://lkml.kernel.org/r/20190528044619.GA3429@jagdpanzerIV
-
-Signed-off-by: Tetsuo Handa <penguin-kernel@I-love.SAKURA.ne.jp>
----
- arch/ia64/kernel/mca.c        | 36 ++++++++++++++-----------
- arch/x86/platform/uv/uv_nmi.c |  6 ++---
- drivers/tty/sysrq.c           | 10 +++----
- include/linux/printk.h        | 29 +++++++++++---------
- include/linux/sched.h         |  3 +++
- kernel/debug/kdb/kdb_bt.c     |  7 ++---
- kernel/debug/kdb/kdb_io.c     |  6 ++---
- kernel/debug/kdb/kdb_main.c   |  7 ++---
- kernel/printk/printk.c        | 63 +++++++++++++++++++++++++++++++++++++++----
- kernel/printk/printk_safe.c   |  4 +++
- 10 files changed, 121 insertions(+), 50 deletions(-)
-
-diff --git a/arch/ia64/kernel/mca.c b/arch/ia64/kernel/mca.c
-index 6a52d76..57b2c7c 100644
---- a/arch/ia64/kernel/mca.c
-+++ b/arch/ia64/kernel/mca.c
-@@ -189,19 +189,23 @@
- static unsigned long mlogbuf_timestamp = 0;
- 
- static int loglevel_save = -1;
--#define BREAK_LOGLEVEL(__console_loglevel)		\
--	oops_in_progress = 1;				\
--	if (loglevel_save < 0)				\
--		loglevel_save = __console_loglevel;	\
--	__console_loglevel = 15;
--
--#define RESTORE_LOGLEVEL(__console_loglevel)		\
--	if (loglevel_save >= 0) {			\
--		__console_loglevel = loglevel_save;	\
--		loglevel_save = -1;			\
--	}						\
--	mlogbuf_finished = 0;				\
--	oops_in_progress = 0;
-+#define BREAK_LOGLEVEL()					\
-+	do {							\
-+		oops_in_progress = 1;				\
-+		if (loglevel_save < 0)				\
-+			loglevel_save = get_local_loglevel();	\
-+		set_local_loglevel(CONSOLE_LOGLEVEL_MOTORMOUTH);\
-+	} while (0)
-+
-+#define RESTORE_LOGLEVEL()					\
-+	do {							\
-+		if (loglevel_save >= 0) {			\
-+			set_local_loglevel(loglevel_save);	\
-+			loglevel_save = -1;			\
-+		}						\
-+		mlogbuf_finished = 0;				\
-+		oops_in_progress = 0;				\
-+	} while (0)
- 
- /*
-  * Push messages into buffer, print them later if not urgent.
-@@ -288,7 +292,7 @@ void ia64_mlogbuf_dump(void)
-  */
- static void ia64_mlogbuf_finish(int wait)
- {
--	BREAK_LOGLEVEL(console_loglevel);
-+	BREAK_LOGLEVEL();
- 
- 	spin_lock_init(&mlogbuf_rlock);
- 	ia64_mlogbuf_dump();
-@@ -1623,7 +1627,7 @@ static void mca_insert_tr(u64 iord)
- 	 * To enable show_stack from INIT, we use oops_in_progress which should
- 	 * be used in real oops. This would cause something wrong after INIT.
- 	 */
--	BREAK_LOGLEVEL(console_loglevel);
-+	BREAK_LOGLEVEL();
- 	ia64_mlogbuf_dump_from_init();
- 
- 	printk(KERN_ERR "Processes interrupted by INIT -");
-@@ -1648,7 +1652,7 @@ static void mca_insert_tr(u64 iord)
- 		read_unlock(&tasklist_lock);
- 	}
- 	/* FIXME: This will not restore zapped printk locks. */
--	RESTORE_LOGLEVEL(console_loglevel);
-+	RESTORE_LOGLEVEL();
- 	return NOTIFY_DONE;
- }
- 
-diff --git a/arch/x86/platform/uv/uv_nmi.c b/arch/x86/platform/uv/uv_nmi.c
-index 9d08ff5..a6c1a86 100644
---- a/arch/x86/platform/uv/uv_nmi.c
-+++ b/arch/x86/platform/uv/uv_nmi.c
-@@ -753,13 +753,13 @@ static void uv_nmi_dump_state(int cpu, struct pt_regs *regs, int master)
- 	if (master) {
- 		int tcpu;
- 		int ignored = 0;
--		int saved_console_loglevel = console_loglevel;
-+		int saved_loglevel = get_local_loglevel();
- 
- 		pr_alert("UV: tracing %s for %d CPUs from CPU %d\n",
- 			uv_nmi_action_is("ips") ? "IPs" : "processes",
- 			atomic_read(&uv_nmi_cpus_in_nmi), cpu);
- 
--		console_loglevel = uv_nmi_loglevel;
-+		set_local_loglevel(uv_nmi_loglevel);
- 		atomic_set(&uv_nmi_slave_continue, SLAVE_EXIT);
- 		for_each_online_cpu(tcpu) {
- 			if (cpumask_test_cpu(tcpu, uv_nmi_cpu_mask))
-@@ -772,7 +772,7 @@ static void uv_nmi_dump_state(int cpu, struct pt_regs *regs, int master)
- 		if (ignored)
- 			pr_alert("UV: %d CPUs ignored NMI\n", ignored);
- 
--		console_loglevel = saved_console_loglevel;
-+		set_local_loglevel(saved_loglevel);
- 		pr_alert("UV: process trace complete\n");
- 	} else {
- 		while (!atomic_read(&uv_nmi_slave_continue))
-diff --git a/drivers/tty/sysrq.c b/drivers/tty/sysrq.c
-index 573b205..18cb58e 100644
---- a/drivers/tty/sysrq.c
-+++ b/drivers/tty/sysrq.c
-@@ -541,8 +541,8 @@ void __handle_sysrq(int key, bool check_mask)
- 	 * simply emit this at KERN_EMERG as that would change message
- 	 * routing in the consumers of /proc/kmsg.
- 	 */
--	orig_log_level = console_loglevel;
--	console_loglevel = CONSOLE_LOGLEVEL_DEFAULT;
-+	orig_log_level = get_local_loglevel();
-+	set_local_loglevel(CONSOLE_LOGLEVEL_DEFAULT);
- 
-         op_p = __sysrq_get_key_op(key);
-         if (op_p) {
-@@ -552,11 +552,11 @@ void __handle_sysrq(int key, bool check_mask)
- 		 */
- 		if (!check_mask || sysrq_on_mask(op_p->enable_mask)) {
- 			pr_info("%s\n", op_p->action_msg);
--			console_loglevel = orig_log_level;
-+			set_local_loglevel(orig_log_level);
- 			op_p->handler(key);
- 		} else {
- 			pr_info("This sysrq operation is disabled.\n");
--			console_loglevel = orig_log_level;
-+			set_local_loglevel(orig_log_level);
- 		}
- 	} else {
- 		pr_info("HELP : ");
-@@ -574,7 +574,7 @@ void __handle_sysrq(int key, bool check_mask)
- 			}
- 		}
- 		pr_cont("\n");
--		console_loglevel = orig_log_level;
-+		set_local_loglevel(orig_log_level);
- 	}
- 	rcu_read_unlock();
- 	rcu_sysrq_end();
-diff --git a/include/linux/printk.h b/include/linux/printk.h
-index cefd374..78b357a 100644
---- a/include/linux/printk.h
-+++ b/include/linux/printk.h
-@@ -47,7 +47,7 @@ static inline const char *printk_skip_headers(const char *buffer)
- #define MESSAGE_LOGLEVEL_DEFAULT CONFIG_MESSAGE_LOGLEVEL_DEFAULT
- 
- /* We show everything that is MORE important than this.. */
--#define CONSOLE_LOGLEVEL_SILENT  0 /* Mum's the word */
-+#define CONSOLE_LOGLEVEL_SILENT -1 /* Mum's the word */
- #define CONSOLE_LOGLEVEL_MIN	 1 /* Minimum loglevel we let people use */
- #define CONSOLE_LOGLEVEL_DEBUG	10 /* issue debug messages */
- #define CONSOLE_LOGLEVEL_MOTORMOUTH 15	/* You can't shut this one up */
-@@ -66,17 +66,6 @@ static inline const char *printk_skip_headers(const char *buffer)
- #define minimum_console_loglevel (console_printk[2])
- #define default_console_loglevel (console_printk[3])
- 
--static inline void console_silent(void)
--{
--	console_loglevel = CONSOLE_LOGLEVEL_SILENT;
--}
--
--static inline void console_verbose(void)
--{
--	if (console_loglevel)
--		console_loglevel = CONSOLE_LOGLEVEL_MOTORMOUTH;
--}
--
- /* strlen("ratelimit") + 1 */
- #define DEVKMSG_STR_MAX_SIZE 10
- extern char devkmsg_log_str[];
-@@ -205,6 +194,8 @@ extern bool printk_timed_ratelimit(unsigned long *caller_jiffies,
- extern void printk_safe_init(void);
- extern void printk_safe_flush(void);
- extern void printk_safe_flush_on_panic(void);
-+int get_local_loglevel(void);
-+void set_local_loglevel(int level);
- #else
- static inline __printf(1, 0)
- int vprintk(const char *s, va_list args)
-@@ -280,8 +271,22 @@ static inline void printk_safe_flush(void)
- static inline void printk_safe_flush_on_panic(void)
- {
- }
-+
-+static inline int get_local_loglevel(void)
-+{
-+	return 0;
-+}
-+
-+static inline void set_local_loglevel(int level)
-+{
-+}
- #endif
- 
-+static inline void console_verbose(void)
-+{
-+	set_local_loglevel(CONSOLE_LOGLEVEL_MOTORMOUTH);
-+}
-+
- extern int kptr_restrict;
- 
- #ifndef pr_fmt
-diff --git a/include/linux/sched.h b/include/linux/sched.h
-index 1183741..283d0d2 100644
---- a/include/linux/sched.h
-+++ b/include/linux/sched.h
-@@ -732,6 +732,9 @@ struct task_struct {
- 	/* to be used once the psi infrastructure lands upstream. */
- 	unsigned			use_memdelay:1;
- #endif
-+#ifdef CONFIG_PRINTK
-+	unsigned			printk_loglevel:8;
-+#endif
- 
- 	unsigned long			atomic_flags; /* Flags requiring atomic access. */
- 
-diff --git a/kernel/debug/kdb/kdb_bt.c b/kernel/debug/kdb/kdb_bt.c
-index 7e2379a..e2580d3 100644
---- a/kernel/debug/kdb/kdb_bt.c
-+++ b/kernel/debug/kdb/kdb_bt.c
-@@ -21,8 +21,9 @@
- 
- static void kdb_show_stack(struct task_struct *p, void *addr)
- {
--	int old_lvl = console_loglevel;
--	console_loglevel = CONSOLE_LOGLEVEL_MOTORMOUTH;
-+	int old_lvl = get_local_loglevel();
-+
-+	set_local_loglevel(CONSOLE_LOGLEVEL_MOTORMOUTH);
- 	kdb_trap_printk++;
- 	kdb_set_current_task(p);
- 	if (addr) {
-@@ -36,7 +37,7 @@ static void kdb_show_stack(struct task_struct *p, void *addr)
- 	} else {
- 		show_stack(p, NULL);
- 	}
--	console_loglevel = old_lvl;
-+	set_local_loglevel(old_lvl);
- 	kdb_trap_printk--;
- }
- 
-diff --git a/kernel/debug/kdb/kdb_io.c b/kernel/debug/kdb/kdb_io.c
-index 3a5184e..723d62d 100644
---- a/kernel/debug/kdb/kdb_io.c
-+++ b/kernel/debug/kdb/kdb_io.c
-@@ -715,8 +715,8 @@ int vkdb_printf(enum kdb_msgsrc src, const char *fmt, va_list ap)
- 		}
- 	}
- 	if (logging) {
--		saved_loglevel = console_loglevel;
--		console_loglevel = CONSOLE_LOGLEVEL_SILENT;
-+		saved_loglevel = get_local_loglevel();
-+		set_local_loglevel(CONSOLE_LOGLEVEL_SILENT);
- 		if (printk_get_level(kdb_buffer) || src == KDB_MSGSRC_PRINTK)
- 			printk("%s", kdb_buffer);
- 		else
-@@ -845,7 +845,7 @@ int vkdb_printf(enum kdb_msgsrc src, const char *fmt, va_list ap)
- kdb_print_out:
- 	suspend_grep = 0; /* end of what may have been a recursive call */
- 	if (logging)
--		console_loglevel = saved_loglevel;
-+		set_local_loglevel(saved_loglevel);
- 	/* kdb_printf_cpu locked the code above. */
- 	smp_store_release(&kdb_printf_cpu, old_cpu);
- 	local_irq_restore(flags);
-diff --git a/kernel/debug/kdb/kdb_main.c b/kernel/debug/kdb/kdb_main.c
-index 9ecfa37..e1f55d8 100644
---- a/kernel/debug/kdb/kdb_main.c
-+++ b/kernel/debug/kdb/kdb_main.c
-@@ -1130,13 +1130,14 @@ static int kdb_reboot(int argc, const char **argv)
- 
- static void kdb_dumpregs(struct pt_regs *regs)
- {
--	int old_lvl = console_loglevel;
--	console_loglevel = CONSOLE_LOGLEVEL_MOTORMOUTH;
-+	int old_lvl = get_local_loglevel();
-+
-+	set_local_loglevel(CONSOLE_LOGLEVEL_MOTORMOUTH);
- 	kdb_trap_printk++;
- 	show_regs(regs);
- 	kdb_trap_printk--;
- 	kdb_printf("\n");
--	console_loglevel = old_lvl;
-+	set_local_loglevel(old_lvl);
- }
- 
- void kdb_set_current_task(struct task_struct *p)
-diff --git a/kernel/printk/printk.c b/kernel/printk/printk.c
-index 1888f6a..9adb180 100644
---- a/kernel/printk/printk.c
-+++ b/kernel/printk/printk.c
-@@ -351,7 +351,9 @@ enum con_msg_format_flags {
-  */
- 
- enum log_flags {
--	LOG_NEWLINE	= 2,	/* text ended with a newline */
-+	LOG_ALWAYS_CON  = 1,    /* Force suppress_message_printing() = false */
-+	LOG_NEVER_CON   = 2,    /* Force suppress_message_printing() = true */
-+	LOG_NEWLINE	= 4,	/* text ended with a newline */
- 	LOG_CONT	= 8,	/* text is a fragment of a continuation line */
- };
- 
-@@ -1172,6 +1174,9 @@ void __init setup_log_buf(int early)
- }
- 
- static bool __read_mostly ignore_loglevel;
-+static DEFINE_PER_CPU(char, printk_loglevel_nmi);
-+static DEFINE_PER_CPU(char, printk_loglevel_irq);
-+static DEFINE_PER_CPU(char, printk_loglevel_softirq);
- 
- static int __init ignore_loglevel_setup(char *str)
- {
-@@ -1186,11 +1191,40 @@ static int __init ignore_loglevel_setup(char *str)
- MODULE_PARM_DESC(ignore_loglevel,
- 		 "ignore loglevel setting (prints all kernel messages to the console)");
- 
--static bool suppress_message_printing(int level)
-+static bool suppress_message_printing(int flags, int level)
- {
-+	if (flags & LOG_ALWAYS_CON)
-+		return false;
-+	if (flags & LOG_NEVER_CON)
-+		return true;
- 	return (level >= console_loglevel && !ignore_loglevel);
- }
- 
-+int get_local_loglevel(void)
-+{
-+	if (in_nmi())
-+		return this_cpu_read(printk_loglevel_nmi);
-+	if (in_irq())
-+		return this_cpu_read(printk_loglevel_irq);
-+	if (in_serving_softirq())
-+		return this_cpu_read(printk_loglevel_softirq);
-+	return current->printk_loglevel;
-+}
-+EXPORT_SYMBOL(get_local_loglevel);
-+
-+void set_local_loglevel(int level)
-+{
-+	if (in_nmi())
-+		this_cpu_write(printk_loglevel_nmi, (char) level);
-+	else if (in_irq())
-+		this_cpu_write(printk_loglevel_irq, (char) level);
-+	else if (in_serving_softirq())
-+		this_cpu_write(printk_loglevel_softirq, (char) level);
-+	else
-+		current->printk_loglevel = (char) level;
-+}
-+EXPORT_SYMBOL(set_local_loglevel);
-+
- #ifdef CONFIG_BOOT_PRINTK_DELAY
- 
- static int boot_delay; /* msecs delay after each printk during bootup */
-@@ -1220,7 +1254,7 @@ static void boot_delay_msec(int level)
- 	unsigned long timeout;
- 
- 	if ((boot_delay == 0 || system_state >= SYSTEM_RUNNING)
--		|| suppress_message_printing(level)) {
-+	    || suppress_message_printing(0, level)) {
- 		return;
- 	}
- 
-@@ -1934,6 +1968,25 @@ int vprintk_store(int facility, int level,
- 	if (level == LOGLEVEL_DEFAULT)
- 		level = default_message_loglevel;
- 
-+	{
-+		int loglevel;
-+
-+		if (in_nmi())
-+			loglevel = this_cpu_read(printk_loglevel_nmi);
-+		else if (in_irq())
-+			loglevel = this_cpu_read(printk_loglevel_irq);
-+		else if (in_serving_softirq())
-+			loglevel = this_cpu_read(printk_loglevel_softirq);
-+		else
-+			loglevel = current->printk_loglevel;
-+		if (loglevel) {
-+			if (level >= loglevel && !ignore_loglevel)
-+				lflags |= LOG_NEVER_CON;
-+			else
-+				lflags |= LOG_ALWAYS_CON;
-+		}
-+	}
-+
- 	if (dict)
- 		lflags |= LOG_NEWLINE;
- 
-@@ -2080,7 +2133,7 @@ static void call_console_drivers(const char *ext_text, size_t ext_len,
- 				 const char *text, size_t len) {}
- static size_t msg_print_text(const struct printk_log *msg, bool syslog,
- 			     bool time, char *buf, size_t size) { return 0; }
--static bool suppress_message_printing(int level) { return false; }
-+static bool suppress_message_printing(int flags, int level) { return false; }
- 
- #endif /* CONFIG_PRINTK */
- 
-@@ -2418,7 +2471,7 @@ void console_unlock(void)
- 			break;
- 
- 		msg = log_from_idx(console_idx);
--		if (suppress_message_printing(msg->level)) {
-+		if (suppress_message_printing(msg->flags, msg->level)) {
- 			/*
- 			 * Skip record we have buffered and already printed
- 			 * directly to the console when we received it, and
-diff --git a/kernel/printk/printk_safe.c b/kernel/printk/printk_safe.c
-index b4045e7..0104ed6 100644
---- a/kernel/printk/printk_safe.c
-+++ b/kernel/printk/printk_safe.c
-@@ -186,6 +186,9 @@ static void __printk_safe_flush(struct irq_work *work)
- 	unsigned long flags;
- 	size_t len;
- 	int i;
-+	int level = get_local_loglevel();
-+
-+	set_local_loglevel(CONSOLE_LOGLEVEL_MOTORMOUTH);
- 
- 	/*
- 	 * The lock has two functions. First, one reader has to flush all
-@@ -232,6 +235,7 @@ static void __printk_safe_flush(struct irq_work *work)
- out:
- 	report_message_lost(s);
- 	raw_spin_unlock_irqrestore(&read_lock, flags);
-+	set_local_loglevel(level);
- }
- 
- /**
--- 
-1.8.3.1
-
-
-
-
-_______________________________________________
-Kgdb-bugreport mailing list
-Kgdb-bugreport@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport
+U29ycnksIHRvIGVtYWlsIHNvIG1hbnkgcGVvcGxlLCBidXQgdGhlcmUgYXJlIGEgbG90IG9mIG1h
+aW50YWluZXJzIGluCnRoaXMgZGlyZWN0b3J5LgoKT24gV2VkLCBNYXkgMTUsIDIwMTkgYXQgNjo0
+NSBBTSBKb25hdGhhbiBDb3JiZXQgPGNvcmJldEBsd24ubmV0PiB3cm90ZToKPgo+IE9uIFR1ZSwg
+MTQgTWF5IDIwMTkgMTY6MTk6MDIgLTA3MDAKPiBCcmVuZGFuIEhpZ2dpbnMgPGJyZW5kYW5oaWdn
+aW5zQGdvb2dsZS5jb20+IHdyb3RlOgo+Cj4gPiBIbW1tLi4ucHJvYmFibHkgcHJlbWF0dXJlIHRv
+IGJyaW5nIHRoaXMgdXAsIGJ1dCBEb2N1bWVudGF0aW9uL2Rldi10b29scy8KPiA+IGlzIGtpbmQg
+b2YgdGhyb3duIHRvZ2V0aGVyLgo+Cj4gV2FpdCBhIG1pbnV0ZSwgbWFuLi4uICpJKiBjcmVhdGVk
+IHRoYXQgZGlyZWN0b3J5LCBhcmUgeW91IGltcHVnbmluZyBteQo+IHdvcms/IDopCgpXaGF0PyEg
+SSB3b3VsZCBuZXZlciEgOy0pCgpDb250ZXh0IGZvciB0aGUgcGVvcGxlIEkganVzdCBhZGRlZDog
+SSBwcm9wb3NlZCBkb2N1bWVudGF0aW9uIGZvciBhCm5ldyBkZXZlbG9wbWVudCB0b29sLiBKb24g
+dmVyeSByZWFzb25hYmx5IHN1Z2dlc3RlZCBpdCBzaG91bGQgZ28gaW4KRG9jdW1lbnRhdGlvbi9k
+ZXYtdG9vbHMvLCB3aGljaCBpcyBub3QgdmVyeSB3ZWxsIG9yZ2FuaXplZC4gVGhpcyBpbgp0dXJu
+IHByb21wdGVkIGEgZGlzY3Vzc2lvbiBhYm91dCBjbGVhbmluZyBpdCB1cC4KCj4gQnV0IHllcywg
+ImtpbmQgb2YgdGhyb3duIHRvZ2V0aGVyIiBpcyBhIGdvb2QgZGVzY3JpcHRpb24gb2YgbXVjaCBv
+Zgo+IERvY3VtZW50YXRpb24vLiAgQSBudW1iZXIgb2YgcGVvcGxlIGhhdmUgYmVlbiB3b3JraW5n
+IGZvciB5ZWFycyB0byBtYWtlCj4gdGhhdCBiZXR0ZXIsIHdpdGggc29tZSBzdWNjZXNzLCBidXQg
+dGhlcmUgaXMgYSBsb25nIHdheSB0byBnbyB5ZXQuICBUaGUKPiBkZXYtdG9vbHMgZGlyZWN0b3J5
+IGlzIGFuIGltcHJvdmVtZW50IG92ZXIgaGF2aW5nIHRoYXQgc3R1ZmYgc2NhdHRlcmVkIGFsbAo+
+IG92ZXIgdGhlIHBsYWNlIOKAlCBhdCBsZWFzdCBpdCdzIGFjdHVhbGx5IHRocm93biB0b2dldGhl
+ciDigJQgYnV0IGl0J3Mgbm90IHRoZQo+IGVuZCBwb2ludC4KPgo+ID4gSXQgd291bGQgYmUgbmlj
+ZSB0byBwcm92aWRlIGEgY29oZXJlbnQgb3ZlcnZpZXcsIG1heWJlIHByb3ZpZGUgc29tZQo+ID4g
+YmFzaWMgZ3JvdXBpbmcgYXMgd2VsbC4KPiA+Cj4gPiBJdCB3b3VsZCBiZSBuaWNlIGlmIHRoZXJl
+IHdhcyBraW5kIG9mIGEgZ2VudGxlIGludHJvZHVjdGlvbiB0byB0aGUKPiA+IHRvb2xzLCB3aGlj
+aCBvbmVzIHlvdSBzaG91bGQgYmUgbG9va2luZyBhdCwgd2hlbiwgd2h5LCBldGMuCj4KPiBUb3Rh
+bCBhZ3JlZW1lbnQuICBBbGwgd2UgbmVlZCBpcyBzb21lYm9keSB0byB3cml0ZSBpdCEgIDopCgpJ
+IHdvdWxkbid0IG1pbmQgdGFraW5nIGEgc3RhYiBhdCBpdCBpbiBhIGxhdGVyIHBhdGNoc2V0LgoK
+TXkgaW5pdGlhbCBpZGVhOiB0aGVyZSBpcyBhIGJ1bmNoIG1vcmUgc3R1ZmYgdGhhdCBuZWVkcyB0
+byBiZSBhZGRlZApoZXJlLCBzbyBwcm9iYWJseSBkb24ndCB3YW50IHRvIGRvIGl0IGFsbCBhdCBv
+bmNlLgoKSSBhbSB0aGlua2luZyB0aGUgZmlyc3Qgc3RlcCBpcyBqdXN0IHRvIGNhdGVnb3JpemUg
+dGhpbmdzIGluIGEKc2Vuc2libGUgbWFubmVyIHNvIHNvbWVib2R5IGRvZXNuJ3QgbG9vayBhdCB0
+aGUgaW5kZXggYW5kIHNlZSAqYWxsIHRoZQp0b29scyogaW1tZWRpYXRlbHkgY2F1c2luZyB0aGVp
+ciBleWVzIHRvIGdsYXplIG92ZXIuIEZyb20gZmlyc3QKZ2xhbmNlcyBpdCBsb29rcyBsaWtlIHRo
+ZSB1c2VycyBvZiB0aGVzZSB0b29scyBpcyBnb2luZyB0byBiZSBzb21ld2hhdApkaXNqb2ludC4K
+Ck1heWJlIGJyZWFrIHRoaW5ncyBhcGFydCBieSB3aG8gYW5kIGhvdyBzb21lb25lIHdvdWxkIHVz
+ZSB0aGUgdG9vbC4gRm9yIGV4YW1wbGUsCgpJdCBsb29rcyBsaWtlIENvY2NpbmVsbGUgaXMgZ29p
+bmcgdG8gYmUgdXNlZCBwcmltYXJpbHkgYnkgcGVvcGxlIGRvaW5nCmNvZGUgamFuaXRvciB3b3Jr
+IGFuZCBsYXJnZSBzY2FsZSBjaGFuZ2VzLgoKU3BhcnNlIHNlZW1zIGxpa2UgYSBwcmVzdWJtaXQg
+dG9vbC4KCmdkYiBhbmQga2RiIGFyZSBsaWtlbHkgdXNlZCBieSBldmVyeW9uZSBmb3IgZGVidWdn
+aW5nLgoKa3NlbGZ0ZXN0IChhbmQsIGlmIEkgZ2V0IG15IHdheSwgS1VuaXQpIGFyZSB1c2VkIHBy
+aW1hcmlseSBwZW9wbGUKY29udHJpYnV0aW5nIG5ldyBmZWF0dXJlcyAodGhpcyBpcyBvbmUgSSBo
+YXZlIG1vcmUgb2YgYSB2ZXN0ZWQKaW50ZXJlc3QgaW4sIHNvIEkgd2lsbCBsZWF2ZSBpdCBhdCB0
+aGF0LCBidXQgdGhlIHBvaW50IGlzOiBJIHRoaW5rCnRoZXkgd291bGQgZ28gdG9nZXRoZXIpLgoK
+TW9zdCBvZiB0aGUgcmVtYWluaW5nIHRvb2xzIChleGNlcHQgZ2NvdikgbG9vayBsaWtlIHRoZSBr
+aW5kIG9mIGxvbmcKcnVubmluZyB0ZXN0cyB0aGF0IHlvdSBwb2ludCBhdCBhIHN0YWJsZSB0cmVl
+IGFuZCBsZXQgaXQgc2l0IGFuZCBjYXRjaApidWdzLiBTdXBlciB1c2VmdWwsIGJ1dCBJIGRvbid0
+IHRoaW5rIHlvdXIgYXZlcmFnZSBrZXJuZWwgZGV2IGlzIGdvaW5nCnRvIGJlIHRyeWluZyB0byBz
+ZXQgaXQgdXAgb3IgcnVuIGl0LiBQbGVhc2UgY29ycmVjdCBtZSBpZiBJIGFtIHdyb25nLgoKU28g
+dGhhdCBsZWF2ZXMgZ2Nvdi4gSSB0aGluayBpdCBpcyBhd2Vzb21lLCBidXQgSSBhbSBub3Qgc3Vy
+ZSBob3cgdG8KY2F0ZWdvcml6ZSBpdC4gRGVmaW5pdGVseSB3YW50IHNvbWUgYWR2aWNlIGhlcmUu
+CgpPbmNlIGV2ZXJ5dGhpbmcgaXMgYXBwcm9wcmlhdGVseSBjYXRlZ29yaXplZCBieSBzaGFwZSwg
+aW4gKGEpCnN1YnNlcXVlbnQgcGF0Y2hzZXQocykgd2UgY2FuIHRpZSBlYWNoIG9uZSBpbiB3aXRo
+IGEgZ3VpZGUsIG5vdCBqdXN0Cm9uIGhvdyB0byB1c2UgdGhlIHRvb2wsIGJ1dCBob3cgdGhlIHdv
+cmtmbG93IGxvb2tzIGZvciBzb21lb25lIHdobwp1c2VzIHRoYXQgdG9vbC4gRm9yIGV4YW1wbGUs
+IHdlIG1pZ2h0IHdhbnQgdG8gYSBndWlkZSBvbiBob3cgdG8gZG8KbGFyZ2Ugc2NhbGUgY2hhbmdl
+cyBpbiB0aGUgTGludXgga2VybmVsIGFuZCBoYXZlIHRoYXQgdGllIGluIHdpdGgKQ29jY2luZWxs
+ZS4gRm9yIGtzZWxmdGVzdCBhbmQgS1VuaXQsIHdlIG1pZ2h0IHdhbnQgdG8gcHJvdmlkZSBhIGd1
+aWRlCm9uIGhvdyB0byB0ZXN0IExpbnV4IGtlcm5lbCBjb2RlLCB3aGljaCB3b3VsZCBjb3ZlciB3
+aGVuIGFuZCBob3cgdG8KdXNlIGVhY2guCgpBbnl3YXksIGp1c3QgYSB2YWd1ZSBza2V0Y2guIExv
+b2tpbmcgZm9yd2FyZCB0byBoZWFyIHdoYXQgZXZlcnlvbmUgdGhpbmtzIQoKCl9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCktnZGItYnVncmVwb3J0IG1haWxp
+bmcgbGlzdApLZ2RiLWJ1Z3JlcG9ydEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0
+cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8va2dkYi1idWdyZXBvcnQK
