@@ -2,111 +2,107 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A30155B837
-	for <lists+kgdb-bugreport@lfdr.de>; Mon,  1 Jul 2019 11:42:47 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:To:Message-ID:Date:In-Reply-To:References:
-	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=vA/qQqPv7KHJ/KRkZeApCxMAHYQz2I9EmCK9+9qwYi4=; b=d+pK7qPp/uFcLLNkvpQn2Ksnaa
-	SNC4rG8VDp8V6w9IybnQdngW8hHW+CN4FDGK12Ykk8P3qxZJr04aKoVhGMdHFBXGsJfhwfbIp4FIb
-	1VvcaoKOUw0BP8fobzcM/xoYnm+tgQCdX0shs8tIdIk63ILhx2dgr85ta17gmeZyfRJo=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id A0EEA5CD12
+	for <lists+kgdb-bugreport@lfdr.de>; Tue,  2 Jul 2019 11:58:26 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1hhspd-00083E-Ne
-	for lists+kgdb-bugreport@lfdr.de; Mon, 01 Jul 2019 09:42:41 +0000
+	id 1hiFYG-0004V3-92
+	for lists+kgdb-bugreport@lfdr.de; Tue, 02 Jul 2019 09:58:16 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <dianders@google.com>) id 1hhFCt-0005Ou-WB
- for kgdb-bugreport@lists.sourceforge.net; Sat, 29 Jun 2019 15:24:04 +0000
+ (envelope-from <daniel.thompson@linaro.org>) id 1hiFYE-0004Uu-BK
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 02 Jul 2019 09:58:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=rb4ujqVAw96PiZ4Kdy6zh7jQWdxFSvYHFgTi6dHok/s=; b=PblzMBrHDKsRjh+W9yxp4TgG99
- W+RhowIuTdKn4Ti3HxFT/7aTsOSPskZ07XH9CCUz9KEvadcsQpmApLJ84cStB8NtJPso5ffw1ppjY
- WLKclHsCGM0iSS87yj2koUrONnD4by0D/IoQJ4KE8m6yivna+W90C4h/kYifeUjAxnag=;
+ bh=a2k1iaFL22UQeCW7P8EdQa9YlwZKftNrx5So7kK5VS4=; b=mzaO/tYNTPNLK3/V3xOqUsQ/wM
+ m2XKUaNTWVv3E2Uy5wldzNa24+GU8un2Pf6vmTrYRV/tfFwLMIh7lFVGm2eILci2sQsI8HwQMSF/A
+ b6o5v39iid7cbWtUBtbzFxhv0jSWER/E8HipIP5bctsj3XswLCP4072EVEV4SpJJh09E=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=rb4ujqVAw96PiZ4Kdy6zh7jQWdxFSvYHFgTi6dHok/s=; b=eu0L+FXERi6XksUVRtHfz+60HP
- 9LwYwjmyMc06OUb1Nud5Hg8fWDwsnAB/gB4BDs5mAsnJW6/zuDEEyByyhagzkOSc410iyikr/lBYj
- HDPchq7KysajvBxY58+eL/0cQrDLYCY755CPKr/7RrLxyuWE/sy687mQlr6Nf9SqTJFA=;
-Received: from mail-io1-f68.google.com ([209.85.166.68])
+ bh=a2k1iaFL22UQeCW7P8EdQa9YlwZKftNrx5So7kK5VS4=; b=Ah8lE64539c3aPxhP63N5+puu9
+ dA+AlNwIX64QRAJ9F6c04wlaWNIyUh18PA0iwZl7lqPh4+zAQk4YePZV44BJBVXyIoEJbkKb1bkCB
+ JmQl0UmTFbCtp+Y9kHdAUrmKUQXcvYcUZWyEsuIl2pROcvSrXwtgBh4hgut1QywEryi8=;
+Received: from mail-wm1-f52.google.com ([209.85.128.52])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.90_1)
- id 1hhFCz-001mLh-Ol
- for kgdb-bugreport@lists.sourceforge.net; Sat, 29 Jun 2019 15:24:11 +0000
-Received: by mail-io1-f68.google.com with SMTP id k20so18918358ios.10
+ id 1hiFYK-004fK4-FO
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 02 Jul 2019 09:58:23 +0000
+Received: by mail-wm1-f52.google.com with SMTP id w9so177719wmd.1
  for <kgdb-bugreport@lists.sourceforge.net>;
- Sat, 29 Jun 2019 08:24:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=rb4ujqVAw96PiZ4Kdy6zh7jQWdxFSvYHFgTi6dHok/s=;
- b=i4t8aFK2vW2co/byHHflzkSvGmfGkRVo2MznhCYrrTiI6vhL48z1S0R7/215Volb50
- HCqLFUlSTBHGyPfNyv1inHodw2zUnSTyC1QeqoJ1RnKS2mA9fSBLGF7Rf+NmzFdRLoTu
- UneguH4XWSYt9d2ilVWzydfoFqgAMzuR49QPMlD4U8l63JGEYDz1FbqRCYz9U7DGb0Om
- e2T16Z261WJSH6dwK8XieYyEq3U4VSNHnFTcNzrNpUhEllXmoAg9RY06uPKr+cIY4Fys
- Lgzhc5uSjP3BA36AbbnnIcu9V1/XuvjxBcQBMOBZGhY9QVNu8t27E87yZESch+v6m1HJ
- +LCw==
+ Tue, 02 Jul 2019 02:58:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=a2k1iaFL22UQeCW7P8EdQa9YlwZKftNrx5So7kK5VS4=;
+ b=DnSw1olK6wIjK8tb5god4zKT22kOka5YK0JokmXF3bisVc8EgeHG2tbEV24AFxURYH
+ 6+aDWkjADfU0QQgOHfUkanMm1LOvmyka2RJLXP5im8Y9WzvfEp8ofiPzcHTm4TUfwJmU
+ zJeOTRy9chD/YyOsJ9yBP9grKkBKl51/djiRMv9DF7enL9jNCQ5AE+gKwk000gDnWLq8
+ xbbuTI7rZgh2EWgZAOZqTlNFMqj/Q7ha10nLXt3PReSfeph5gSTkVNgiccxGXGD0zArB
+ L0CthCJw0nf5inPUsBLMStFAFc4l4wPQYthxqn6Uu1bLek9J7w4tAd9vPPN3MMgp+38A
+ Syhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=rb4ujqVAw96PiZ4Kdy6zh7jQWdxFSvYHFgTi6dHok/s=;
- b=Xv0MrHk9kwkTlLNIi+dcwSptjTq+iZ8H1vmfqe4Fncls8GvfanFfFK7elCbg73Hltn
- KYIbebdshwRjuM3SrXOo4j50zPTNNj5nRdp0RcN7y3vAxdFicw/u28T9RuoQXA+1h0pe
- bmJA5vCa7XPPTQBnIXRFqHxiv9AICwgqsMcsfYon6/+2qPyZXlXl2V56rze2gJ7NqvhI
- zpcusX9HqtZmn6Ld01kI1gZM8LcsmjLvlZdWc3PnDA9aC2/kk+H5tseL0eE31yVQCdWT
- a0qh36RwsWDz4pbzkWZ26URtXAkVGfyFudAUkV4I3vyxixyS3Eb2t1nk3jVofubVhErM
- TKaA==
-X-Gm-Message-State: APjAAAWP46wsKtkQ+2x9R5UA1Ak4j0OgKL2TJNXDo+NYuSWOGL1iRUJs
- fo4B2MO2yCwb30dUu9QbeLTFsltw3Gd/HcRWhnZuBw==
-X-Google-Smtp-Source: APXvYqy/tqeBF4uzsVP2Ishjc5IYOD68hyWvXj/8JBhE1nVEw8GrcxpR4kAtGom/bRd9BFM9m4OmIeGm09zUJTndyO8=
-X-Received: by 2002:a02:878a:: with SMTP id t10mr18035298jai.112.1561821843424; 
- Sat, 29 Jun 2019 08:24:03 -0700 (PDT)
-MIME-Version: 1.0
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=a2k1iaFL22UQeCW7P8EdQa9YlwZKftNrx5So7kK5VS4=;
+ b=eTBY9Mj9kPYXOlHZ5vloB/JuSdRF4HuEUKJssslu0ZQ7MfmzJlnbIloSbymN5iTWye
+ Ql7SElovwadmGBjf1u0Sf9tZrswZBu7i+c+sCr9XrgNo0gKD7ObFFXILlEvotZMWfKr4
+ Oxj4TIZ/YUndMUNpHTFc3ylT4UrCtAbbaNFcnVDteibpje/o4H/8d9+ESmtYPBfZTYt7
+ vtPeLBgwIX/K3G71DKyVnWM0vOsmkBOpd92N6cV2KRkZF7XV+t0tfnA+d7/gxFoWVb7c
+ YcYnzIpMblIT1J1brjl88XDcyTRqjM82nEbZi5lMdZv/Fo5MkXOstABoamPsazndkvcy
+ 12Iw==
+X-Gm-Message-State: APjAAAVxavKJqd6DVfhskDeVemYG8c15kLxIHroGvU7HnDsFOIaAI5JZ
+ UHG6b4cmxl9Cc1pUsmt6U9ZO+ZtOLAkF4Q==
+X-Google-Smtp-Source: APXvYqzvNzrQjX3Kbcxp8AlZJA4oh1zW3Yson+CC1zmGQBddbiCMQAQBuqfz+5wYspJhKVBjXQPbcA==
+X-Received: by 2002:a7b:cd84:: with SMTP id y4mr2873839wmj.41.1562059687739;
+ Tue, 02 Jul 2019 02:28:07 -0700 (PDT)
+Received: from holly.lan (cpc141214-aztw34-2-0-cust773.18-1.cable.virginm.net.
+ [86.9.19.6])
+ by smtp.gmail.com with ESMTPSA id x20sm27846280wrg.52.2019.07.02.02.28.07
+ (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+ Tue, 02 Jul 2019 02:28:07 -0700 (PDT)
+Date: Tue, 2 Jul 2019 10:28:05 +0100
+From: Daniel Thompson <daniel.thompson@linaro.org>
+To: Doug Anderson <dianders@google.com>
+Message-ID: <20190702092805.bsaoe4eymufrvbz3@holly.lan>
 References: <CAD=FV=W5oYiNRQEz4wg-8swR=sq6txWS28HryBkxhCkUXsnNjg@mail.gmail.com>
  <391f6bc3-71fb-0330-693d-841e4a15de9b@windriver.com>
-In-Reply-To: <391f6bc3-71fb-0330-693d-841e4a15de9b@windriver.com>
-Date: Sat, 29 Jun 2019 08:23:51 -0700
-Message-ID: <CAD=FV=V4iKq-dTYDQgd6bqMpgehSVr=CfOfAs7Y+EdGzt8hwow@mail.gmail.com>
-To: Jason Wessel <jason.wessel@windriver.com>
-X-Spam-Score: -15.6 (---------------)
+ <CAD=FV=V4iKq-dTYDQgd6bqMpgehSVr=CfOfAs7Y+EdGzt8hwow@mail.gmail.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <CAD=FV=V4iKq-dTYDQgd6bqMpgehSVr=CfOfAs7Y+EdGzt8hwow@mail.gmail.com>
+User-Agent: NeoMutt/20180716
+X-Spam-Score: -0.6 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.128.52 listed in list.dnswl.org]
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: windriver.com]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.166.68 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.68 listed in wl.mailspike.net]
+ -0.1 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.128.52 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM white-list
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -7.5 USER_IN_DEF_SPF_WL     From: address is in the default SPF white-list
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.5 ENV_AND_HDR_SPF_MATCH  Env and Hdr From used in default SPF WL Match
- -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium sender
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hhFCz-001mLh-Ol
-X-Mailman-Approved-At: Mon, 01 Jul 2019 09:42:40 +0000
+ -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1hiFYK-004fK4-FO
 Subject: Re: [Kgdb-bugreport] Entering kdb/kgdb at panic time before CPUs
  are killed?
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
@@ -120,49 +116,54 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-From: Doug Anderson via Kgdb-bugreport <kgdb-bugreport@lists.sourceforge.net>
-Reply-To: Doug Anderson <dianders@google.com>
 Cc: kgdb-bugreport@lists.sourceforge.net,
- Daniel Thompson <daniel.thompson@linaro.org>
+ Jason Wessel <jason.wessel@windriver.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Hi,
+On Sat, Jun 29, 2019 at 08:23:51AM -0700, Doug Anderson wrote:
+> Hi,
+> 
+> On Fri, Jun 28, 2019 at 8:17 PM Jason Wessel <jason.wessel@windriver.com> wrote:
+> >
+> > On 6/28/19 4:17 PM, Doug Anderson wrote:
+> > > I was trying to debug a crash using kdb / kgdb today and ran into a
+> > > problem I've seen before: being unable to get kdb / kgdb to debug one
+> > > of important tasks on the system.  Specifically I was unable to use
+> > > kdb to point to the CPU running the task and there was no shadow CPU
+> > > in kgdb.  Running "ps" in kdb showed:
+> > >
+> > > 0xecc9bd80      111        2  1    0   R  0xecc9c488  kworker/0:1H
+> > >    Error: no saved data for this cpu
+> > >
+> > > I decided to dig a little bit more this time and found that the
+> > > problem appears to be that "panic" stops all CPUs before calling the
+> > > panic notifier and then kdb / kgdb shows the CPU as dead.
+> > >
+> > > I wondered if anyone has given any thought to this problem before.
+> > > Obviously a "fix" is to add a special case for kdb / kgdb in the
+> > > panic() function before the CPUs die, but presumably that will be met
+> > > with resistance.  I'm curious if anyone else has good ideas.
+> > >
+> > >
+> > > -Doug
+> >
+> >
+> > You could set a breakpoint at panic(), instead of waiting for the notifier.
+> 
+> Yup, I've got that as a workaround.  I was wondering more about if
+> anyone had brilliant ideas about a solution that might be able to land
+> upstream.  I guess maybe the best bet is to just try sending up a
+> patch to add a special case to panic() and see what falls out.  ;-)
 
-On Fri, Jun 28, 2019 at 8:17 PM Jason Wessel <jason.wessel@windriver.com> wrote:
->
-> On 6/28/19 4:17 PM, Doug Anderson wrote:
-> > I was trying to debug a crash using kdb / kgdb today and ran into a
-> > problem I've seen before: being unable to get kdb / kgdb to debug one
-> > of important tasks on the system.  Specifically I was unable to use
-> > kdb to point to the CPU running the task and there was no shadow CPU
-> > in kgdb.  Running "ps" in kdb showed:
-> >
-> > 0xecc9bd80      111        2  1    0   R  0xecc9c488  kworker/0:1H
-> >    Error: no saved data for this cpu
-> >
-> > I decided to dig a little bit more this time and found that the
-> > problem appears to be that "panic" stops all CPUs before calling the
-> > panic notifier and then kdb / kgdb shows the CPU as dead.
-> >
-> > I wondered if anyone has given any thought to this problem before.
-> > Obviously a "fix" is to add a special case for kdb / kgdb in the
-> > panic() function before the CPUs die, but presumably that will be met
-> > with resistance.  I'm curious if anyone else has good ideas.
-> >
-> >
-> > -Doug
->
->
-> You could set a breakpoint at panic(), instead of waiting for the notifier.
+Probably, yes.
 
-Yup, I've got that as a workaround.  I was wondering more about if
-anyone had brilliant ideas about a solution that might be able to land
-upstream.  I guess maybe the best bet is to just try sending up a
-patch to add a special case to panic() and see what falls out.  ;-)
+There's not a lot of love for notifiers these days so there would be
+some grounds for optimism here!
 
--Doug
+
+Daniel.
 
 
 _______________________________________________
