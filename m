@@ -2,98 +2,92 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A0EEA5CD12
-	for <lists+kgdb-bugreport@lfdr.de>; Tue,  2 Jul 2019 11:58:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D06465EA8C
+	for <lists+kgdb-bugreport@lfdr.de>; Wed,  3 Jul 2019 19:35:55 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1hiFYG-0004V3-92
-	for lists+kgdb-bugreport@lfdr.de; Tue, 02 Jul 2019 09:58:16 +0000
+	id 1hijAW-0002Wj-Jj
+	for lists+kgdb-bugreport@lfdr.de; Wed, 03 Jul 2019 17:35:44 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <daniel.thompson@linaro.org>) id 1hiFYE-0004Uu-BK
- for kgdb-bugreport@lists.sourceforge.net; Tue, 02 Jul 2019 09:58:14 +0000
+ (envelope-from <dianders@chromium.org>) id 1hijAU-0002Wa-Rc
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 03 Jul 2019 17:35:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=a2k1iaFL22UQeCW7P8EdQa9YlwZKftNrx5So7kK5VS4=; b=mzaO/tYNTPNLK3/V3xOqUsQ/wM
- m2XKUaNTWVv3E2Uy5wldzNa24+GU8un2Pf6vmTrYRV/tfFwLMIh7lFVGm2eILci2sQsI8HwQMSF/A
- b6o5v39iid7cbWtUBtbzFxhv0jSWER/E8HipIP5bctsj3XswLCP4072EVEV4SpJJh09E=;
+ bh=+UmPDjs3GC5y05O+oZrqETNtB8YeU/EW2F2rKy6gZYM=; b=hvI6uyMy9shBZQvHl950cXeV7+
+ KSAoZYQRU2x3u/gOgqcgTiGC4M5sfdgQDT7ZrtP8m6Way6EKXYiDQ7H1Xb+JSjLS4X/99lQ8De/Kc
+ 9y1f8c2rKJlNCnbYa9xxCTHLR9gzMN+qTgUx5LE1e8sdSnOAx52zVaS1wACc9kJDjucc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=a2k1iaFL22UQeCW7P8EdQa9YlwZKftNrx5So7kK5VS4=; b=Ah8lE64539c3aPxhP63N5+puu9
- dA+AlNwIX64QRAJ9F6c04wlaWNIyUh18PA0iwZl7lqPh4+zAQk4YePZV44BJBVXyIoEJbkKb1bkCB
- JmQl0UmTFbCtp+Y9kHdAUrmKUQXcvYcUZWyEsuIl2pROcvSrXwtgBh4hgut1QywEryi8=;
-Received: from mail-wm1-f52.google.com ([209.85.128.52])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=+UmPDjs3GC5y05O+oZrqETNtB8YeU/EW2F2rKy6gZYM=; b=N
+ 62mast9qifToAzv7aV4fuVJO6wIX6wQ7fEUCfCkmVlgztsmGjlKlE6ov9b/8UWc4w/JSTPaw+JNMp
+ 8rfeC6wVIXoeLobb/iGMSh6vBYGUUsZetkNHDo/rjld1XOM/xF3AMBDQxQXU6HItxVbhvUDR6C6Bs
+ GKMSpdI9p3qx0lQc=;
+Received: from mail-pf1-f194.google.com ([209.85.210.194])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.90_1)
- id 1hiFYK-004fK4-FO
- for kgdb-bugreport@lists.sourceforge.net; Tue, 02 Jul 2019 09:58:23 +0000
-Received: by mail-wm1-f52.google.com with SMTP id w9so177719wmd.1
+ id 1hijAd-006Ytk-9B
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 03 Jul 2019 17:35:52 +0000
+Received: by mail-pf1-f194.google.com with SMTP id t16so1604252pfe.11
  for <kgdb-bugreport@lists.sourceforge.net>;
- Tue, 02 Jul 2019 02:58:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=a2k1iaFL22UQeCW7P8EdQa9YlwZKftNrx5So7kK5VS4=;
- b=DnSw1olK6wIjK8tb5god4zKT22kOka5YK0JokmXF3bisVc8EgeHG2tbEV24AFxURYH
- 6+aDWkjADfU0QQgOHfUkanMm1LOvmyka2RJLXP5im8Y9WzvfEp8ofiPzcHTm4TUfwJmU
- zJeOTRy9chD/YyOsJ9yBP9grKkBKl51/djiRMv9DF7enL9jNCQ5AE+gKwk000gDnWLq8
- xbbuTI7rZgh2EWgZAOZqTlNFMqj/Q7ha10nLXt3PReSfeph5gSTkVNgiccxGXGD0zArB
- L0CthCJw0nf5inPUsBLMStFAFc4l4wPQYthxqn6Uu1bLek9J7w4tAd9vPPN3MMgp+38A
- Syhg==
+ Wed, 03 Jul 2019 10:35:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=+UmPDjs3GC5y05O+oZrqETNtB8YeU/EW2F2rKy6gZYM=;
+ b=CE+SFJ51m98HEAk8kgNmqvYvCWofjk5rGAhF3Elt5bcDGLdmEcucHq00QvIjP89zrX
+ hu148gAghEBmxJ8NsPimHOa/aT1biE8OaAaFKWjfHLSqUHAzBkeRx6BhbS7YLKY+XI5s
+ Zz9C4shehSMwv2zep4uH9Lx2318mHw/flZj+c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=a2k1iaFL22UQeCW7P8EdQa9YlwZKftNrx5So7kK5VS4=;
- b=eTBY9Mj9kPYXOlHZ5vloB/JuSdRF4HuEUKJssslu0ZQ7MfmzJlnbIloSbymN5iTWye
- Ql7SElovwadmGBjf1u0Sf9tZrswZBu7i+c+sCr9XrgNo0gKD7ObFFXILlEvotZMWfKr4
- Oxj4TIZ/YUndMUNpHTFc3ylT4UrCtAbbaNFcnVDteibpje/o4H/8d9+ESmtYPBfZTYt7
- vtPeLBgwIX/K3G71DKyVnWM0vOsmkBOpd92N6cV2KRkZF7XV+t0tfnA+d7/gxFoWVb7c
- YcYnzIpMblIT1J1brjl88XDcyTRqjM82nEbZi5lMdZv/Fo5MkXOstABoamPsazndkvcy
- 12Iw==
-X-Gm-Message-State: APjAAAVxavKJqd6DVfhskDeVemYG8c15kLxIHroGvU7HnDsFOIaAI5JZ
- UHG6b4cmxl9Cc1pUsmt6U9ZO+ZtOLAkF4Q==
-X-Google-Smtp-Source: APXvYqzvNzrQjX3Kbcxp8AlZJA4oh1zW3Yson+CC1zmGQBddbiCMQAQBuqfz+5wYspJhKVBjXQPbcA==
-X-Received: by 2002:a7b:cd84:: with SMTP id y4mr2873839wmj.41.1562059687739;
- Tue, 02 Jul 2019 02:28:07 -0700 (PDT)
-Received: from holly.lan (cpc141214-aztw34-2-0-cust773.18-1.cable.virginm.net.
- [86.9.19.6])
- by smtp.gmail.com with ESMTPSA id x20sm27846280wrg.52.2019.07.02.02.28.07
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=+UmPDjs3GC5y05O+oZrqETNtB8YeU/EW2F2rKy6gZYM=;
+ b=NyKGLEq1HwU+RGSWmrJvOIvGdb4ynutEjGCX5LQjnHBBp10xE8+gUe5vzfoMwOJYpl
+ vx1gkEbbnUkpl9ahIprno3fLE6RoddSHmtjDBjAnkTdKW+eTovw/F1MlF/ONEPTbwLNx
+ 8iE9sL6baapA3kpXM/R7bFjSxruTXBxNehvPgpIKTTMjEK3Z4QkdKNh+nPvsGyUy1IP/
+ quMwEVWs92QZb7uEFZb4t7CUyqwguQ8M5QHyvedZGwkmSGDC67dJMMzP0CETqSM/iiNp
+ pRNI1DnwLQ52sxUS8XCXN8UwkODcu5iMJx5Wtxdi3AHs4BCLccjn7xyBx/ZzZd1Gk5/X
+ xmqA==
+X-Gm-Message-State: APjAAAUSpbB8qm28GjxNHWL3cCGo9mNuIeTQ13BDtnuNCF0uMrSNNilN
+ NG70r8FEA3hME+AR3bn/ysOUbQncW4o=
+X-Google-Smtp-Source: APXvYqxX1K1OeKVXQOBcW9auPYZkXDcwye8GnP0TxTOWeq4hZJnaeE2iK6rzD5yBrEYcFe8IYYAFqQ==
+X-Received: by 2002:a63:6c04:: with SMTP id h4mr7204915pgc.94.1562173486714;
+ Wed, 03 Jul 2019 10:04:46 -0700 (PDT)
+Received: from tictac2.mtv.corp.google.com
+ ([2620:15c:202:1:24fa:e766:52c9:e3b2])
+ by smtp.gmail.com with ESMTPSA id u75sm2767289pgb.92.2019.07.03.10.04.45
  (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Tue, 02 Jul 2019 02:28:07 -0700 (PDT)
-Date: Tue, 2 Jul 2019 10:28:05 +0100
-From: Daniel Thompson <daniel.thompson@linaro.org>
-To: Doug Anderson <dianders@google.com>
-Message-ID: <20190702092805.bsaoe4eymufrvbz3@holly.lan>
-References: <CAD=FV=W5oYiNRQEz4wg-8swR=sq6txWS28HryBkxhCkUXsnNjg@mail.gmail.com>
- <391f6bc3-71fb-0330-693d-841e4a15de9b@windriver.com>
- <CAD=FV=V4iKq-dTYDQgd6bqMpgehSVr=CfOfAs7Y+EdGzt8hwow@mail.gmail.com>
+ Wed, 03 Jul 2019 10:04:46 -0700 (PDT)
+From: Douglas Anderson <dianders@chromium.org>
+To: Jason Wessel <jason.wessel@windriver.com>,
+ Daniel Thompson <daniel.thompson@linaro.org>,
+ Andrew Morton <akpm@linux-foundation.org>
+Date: Wed,  3 Jul 2019 10:03:54 -0700
+Message-Id: <20190703170354.217312-1-dianders@chromium.org>
+X-Mailer: git-send-email 2.22.0.410.gd8fdbe21b5-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAD=FV=V4iKq-dTYDQgd6bqMpgehSVr=CfOfAs7Y+EdGzt8hwow@mail.gmail.com>
-User-Agent: NeoMutt/20180716
-X-Spam-Score: -0.6 (/)
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.128.52 listed in list.dnswl.org]
+ trust [209.85.210.194 listed in list.dnswl.org]
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: windriver.com]
- -0.1 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.128.52 listed in wl.mailspike.net]
+ for more information. [URIs: chromium.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.210.194 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -101,10 +95,11 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hiFYK-004fK4-FO
-Subject: Re: [Kgdb-bugreport] Entering kdb/kgdb at panic time before CPUs
- are killed?
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1hijAd-006Ytk-9B
+Subject: [Kgdb-bugreport] [PATCH] kgdb: Don't use a notifier to enter kgdb
+ at panic; call directly
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -116,54 +111,166 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: kgdb-bugreport@lists.sourceforge.net,
- Jason Wessel <jason.wessel@windriver.com>
+Cc: Feng Tang <feng.tang@intel.com>, Kees Cook <keescook@chromium.org>,
+ kgdb-bugreport@lists.sourceforge.net, YueHaibing <yuehaibing@huawei.com>,
+ Douglas Anderson <dianders@chromium.org>,
+ "Steven Rostedt \(VMware\)" <rostedt@goodmis.org>,
+ linux-kernel@vger.kernel.org, Martin Schwidefsky <schwidefsky@de.ibm.com>,
+ Thomas Gleixner <tglx@linutronix.de>, Borislav Petkov <bp@suse.de>,
+ Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Sat, Jun 29, 2019 at 08:23:51AM -0700, Doug Anderson wrote:
-> Hi,
-> 
-> On Fri, Jun 28, 2019 at 8:17 PM Jason Wessel <jason.wessel@windriver.com> wrote:
-> >
-> > On 6/28/19 4:17 PM, Doug Anderson wrote:
-> > > I was trying to debug a crash using kdb / kgdb today and ran into a
-> > > problem I've seen before: being unable to get kdb / kgdb to debug one
-> > > of important tasks on the system.  Specifically I was unable to use
-> > > kdb to point to the CPU running the task and there was no shadow CPU
-> > > in kgdb.  Running "ps" in kdb showed:
-> > >
-> > > 0xecc9bd80      111        2  1    0   R  0xecc9c488  kworker/0:1H
-> > >    Error: no saved data for this cpu
-> > >
-> > > I decided to dig a little bit more this time and found that the
-> > > problem appears to be that "panic" stops all CPUs before calling the
-> > > panic notifier and then kdb / kgdb shows the CPU as dead.
-> > >
-> > > I wondered if anyone has given any thought to this problem before.
-> > > Obviously a "fix" is to add a special case for kdb / kgdb in the
-> > > panic() function before the CPUs die, but presumably that will be met
-> > > with resistance.  I'm curious if anyone else has good ideas.
-> > >
-> > >
-> > > -Doug
-> >
-> >
-> > You could set a breakpoint at panic(), instead of waiting for the notifier.
-> 
-> Yup, I've got that as a workaround.  I was wondering more about if
-> anyone had brilliant ideas about a solution that might be able to land
-> upstream.  I guess maybe the best bet is to just try sending up a
-> patch to add a special case to panic() and see what falls out.  ;-)
+Right now kgdb/kdb hooks up to debug panics by registering for the
+panic notifier.  This works OK except that it means that kgdb/kdb gets
+called _after_ the CPUs in the system are taken offline.  That means
+that if anything important was happening on those CPUs (like something
+that might have contributed to the panic) you can't debug them.
 
-Probably, yes.
+Specifically I ran into a case where I got a panic because a task was
+"blocked for more than 120 seconds" which was detected on CPU 2.  I
+nicely got shown stack traces in the kernel log for all CPUs including
+CPU 0, which was running 'PID: 111 Comm: kworker/0:1H' and was in the
+middle of __mmc_switch().
 
-There's not a lot of love for notifiers these days so there would be
-some grounds for optimism here!
+I then ended up at the kdb prompt where switched over to kgdb to try
+to look at local variables of the process on CPU 0.  I found that I
+couldn't.  Digging more, I found that I had no info on any tasks
+running on CPUs other than CPU 2 and that asking kdb for help showed
+me "Error: no saved data for this cpu".  This was because all the CPUs
+were offline.
 
+Let's move the entry of kdb/kgdb to a direct call from panic() and
+stop using the generic notifier.  Putting a direct call in allows us
+to order things more properly and it also doesn't seem like we're
+breaking any abstractions by calling into the debugger from the panic
+function.
 
-Daniel.
+Signed-off-by: Douglas Anderson <dianders@chromium.org>
+---
+
+ include/linux/kgdb.h      |  2 ++
+ kernel/debug/debug_core.c | 31 +++++++++++--------------------
+ kernel/panic.c            |  8 ++++++++
+ 3 files changed, 21 insertions(+), 20 deletions(-)
+
+diff --git a/include/linux/kgdb.h b/include/linux/kgdb.h
+index fbf144aaa749..b072aeb1fd78 100644
+--- a/include/linux/kgdb.h
++++ b/include/linux/kgdb.h
+@@ -326,8 +326,10 @@ extern atomic_t			kgdb_active;
+ 	(raw_smp_processor_id() == atomic_read(&kgdb_active))
+ extern bool dbg_is_early;
+ extern void __init dbg_late_init(void);
++extern void kgdb_panic(const char *msg);
+ #else /* ! CONFIG_KGDB */
+ #define in_dbg_master() (0)
+ #define dbg_late_init()
++static inline void kgdb_panic(const char *msg) {}
+ #endif /* ! CONFIG_KGDB */
+ #endif /* _KGDB_H_ */
+diff --git a/kernel/debug/debug_core.c b/kernel/debug/debug_core.c
+index 5cc608de6883..b26bf06cff9e 100644
+--- a/kernel/debug/debug_core.c
++++ b/kernel/debug/debug_core.c
+@@ -896,30 +896,25 @@ static struct sysrq_key_op sysrq_dbg_op = {
+ };
+ #endif
+ 
+-static int kgdb_panic_event(struct notifier_block *self,
+-			    unsigned long val,
+-			    void *data)
++void kgdb_panic(const char *msg)
+ {
++	if (!kgdb_io_module_registered)
++		return;
++
+ 	/*
+-	 * Avoid entering the debugger if we were triggered due to a panic
+-	 * We don't want to get stuck waiting for input from user in such case.
+-	 * panic_timeout indicates the system should automatically
++	 * We don't want to get stuck waiting for input from user if
++	 * "panic_timeout" indicates the system should automatically
+ 	 * reboot on panic.
+ 	 */
+ 	if (panic_timeout)
+-		return NOTIFY_DONE;
++		return;
+ 
+ 	if (dbg_kdb_mode)
+-		kdb_printf("PANIC: %s\n", (char *)data);
++		kdb_printf("PANIC: %s\n", msg);
++
+ 	kgdb_breakpoint();
+-	return NOTIFY_DONE;
+ }
+ 
+-static struct notifier_block kgdb_panic_event_nb = {
+-       .notifier_call	= kgdb_panic_event,
+-       .priority	= INT_MAX,
+-};
+-
+ void __weak kgdb_arch_late(void)
+ {
+ }
+@@ -968,8 +963,6 @@ static void kgdb_register_callbacks(void)
+ 			kgdb_arch_late();
+ 		register_module_notifier(&dbg_module_load_nb);
+ 		register_reboot_notifier(&dbg_reboot_notifier);
+-		atomic_notifier_chain_register(&panic_notifier_list,
+-					       &kgdb_panic_event_nb);
+ #ifdef CONFIG_MAGIC_SYSRQ
+ 		register_sysrq_key('g', &sysrq_dbg_op);
+ #endif
+@@ -983,16 +976,14 @@ static void kgdb_register_callbacks(void)
+ static void kgdb_unregister_callbacks(void)
+ {
+ 	/*
+-	 * When this routine is called KGDB should unregister from the
+-	 * panic handler and clean up, making sure it is not handling any
++	 * When this routine is called KGDB should unregister from
++	 * handlers and clean up, making sure it is not handling any
+ 	 * break exceptions at the time.
+ 	 */
+ 	if (kgdb_io_module_registered) {
+ 		kgdb_io_module_registered = 0;
+ 		unregister_reboot_notifier(&dbg_reboot_notifier);
+ 		unregister_module_notifier(&dbg_module_load_nb);
+-		atomic_notifier_chain_unregister(&panic_notifier_list,
+-					       &kgdb_panic_event_nb);
+ 		kgdb_arch_exit();
+ #ifdef CONFIG_MAGIC_SYSRQ
+ 		unregister_sysrq_key('g', &sysrq_dbg_op);
+diff --git a/kernel/panic.c b/kernel/panic.c
+index 4d9f55bf7d38..e2971168b059 100644
+--- a/kernel/panic.c
++++ b/kernel/panic.c
+@@ -12,6 +12,7 @@
+ #include <linux/debug_locks.h>
+ #include <linux/sched/debug.h>
+ #include <linux/interrupt.h>
++#include <linux/kgdb.h>
+ #include <linux/kmsg_dump.h>
+ #include <linux/kallsyms.h>
+ #include <linux/notifier.h>
+@@ -219,6 +220,13 @@ void panic(const char *fmt, ...)
+ 		dump_stack();
+ #endif
+ 
++	/*
++	 * If kgdb is enabled, give it a chance to run before we stop all
++	 * the other CPUs or else we won't be able to debug processes left
++	 * running on them.
++	 */
++	kgdb_panic(buf);
++
+ 	/*
+ 	 * If we have crashed and we have a crash kernel loaded let it handle
+ 	 * everything else.
+-- 
+2.22.0.410.gd8fdbe21b5-goog
+
 
 
 _______________________________________________
