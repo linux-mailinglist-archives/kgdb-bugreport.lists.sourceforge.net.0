@@ -2,104 +2,106 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9AB487A56D
-	for <lists+kgdb-bugreport@lfdr.de>; Tue, 30 Jul 2019 12:04:02 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 73C297A589
+	for <lists+kgdb-bugreport@lfdr.de>; Tue, 30 Jul 2019 12:05:52 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1hsOzB-0000IW-C8
-	for lists+kgdb-bugreport@lfdr.de; Tue, 30 Jul 2019 10:04:01 +0000
+	id 1hsP0x-0005DS-64
+	for lists+kgdb-bugreport@lfdr.de; Tue, 30 Jul 2019 10:05:51 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <hslester96@gmail.com>) id 1hs7Ln-0003qr-IL
- for kgdb-bugreport@lists.sourceforge.net; Mon, 29 Jul 2019 15:14:11 +0000
+ (envelope-from <daniel.thompson@linaro.org>) id 1hsP0v-0005Cv-Jn
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 30 Jul 2019 10:05:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=7VhBroyGxGn/uVVtotJh4SOBVCoW5vZobk9B4v8Ue9c=; b=Vyz6bXTg6mj+SBNi4qe8WBaP4m
- kbks7yAzmZ3zBp2cPLw2s5rnqk5v9RVOKXnosc8jPlx5LMcRiLu2wknG1a3t0dmaM+2xVXblXMlUP
- T/er8455QyFcF4EX9dw5Dx7/WEU1QW1cbOT7Hur2Us98p3EyWJ0KrKRX6nw7FmxYdrpA=;
+ bh=OKHPgt351A2QI/YnAoBew430R/eEud4lktf6EqpjGpg=; b=gjXB0gtMLQ45Ef3wRmheM+vihi
+ smyX6+Zom9/osWakDGVHyZ1OpqbX11jqrsWGpsUufftg1nUS6dokJyixWDhgdfqTRIsRfOz3zjE8a
+ 8tF/Nhwuj5b5PCsBjlVm4icGfaq1Ithtz9fLMWsCWX04f3u7hltHmi8pMZzHqaiXV3YU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=7VhBroyGxGn/uVVtotJh4SOBVCoW5vZobk9B4v8Ue9c=; b=V
- Rfv54zYjBV7UxkKBU4Msde8oJWLsKy65yRyj2ZiRRcFZNNFkgY951CbBI3a5MOvBUmqewS7Spkekd
- y5CQ2YuSS96PxvC/2QcFF0CMFFzanjGoqOg97TB8P/Cs5YmX379/4c9jyqs21zM45oP0LevTaIIaJ
- 5J5tQ7peNzG2b2iE=;
-Received: from mail-pf1-f193.google.com ([209.85.210.193])
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=OKHPgt351A2QI/YnAoBew430R/eEud4lktf6EqpjGpg=; b=QyE5a5uEC5FGUGAudBVvdENNJL
+ IQaRpsbXfgQG9VdVlSAozWaUHFDkbTlCyxa3aTJfPHlU4yJrN0L5lqIxMyzXo+ED0WcRvStCPiKmF
+ MVZ6TpJscx9R3uX7fFD/2S6vgjJrZg02XXAputWyhK3eEd4L5T2Ck/YSHc8XfsroFVUc=;
+Received: from mail-wm1-f67.google.com ([209.85.128.67])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.90_1)
- id 1hs7Ll-003YZH-94
- for kgdb-bugreport@lists.sourceforge.net; Mon, 29 Jul 2019 15:14:11 +0000
-Received: by mail-pf1-f193.google.com with SMTP id g2so28200015pfq.0
+ id 1hsP0q-004eTo-Bu
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 30 Jul 2019 10:05:49 +0000
+Received: by mail-wm1-f67.google.com with SMTP id u25so45711902wmc.4
  for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 29 Jul 2019 08:14:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=7VhBroyGxGn/uVVtotJh4SOBVCoW5vZobk9B4v8Ue9c=;
- b=lXJjen3fN3Ee408KHLV8ItbVARbeeRH8QusB5XN/bdyL10ToU0zPjHbw3tviGvtmov
- 1+nuJmhnC8aZTaJuHxY8CinSweSTbWgDIBfm9tFwkmciqu3oE358dI5cpLuX6h/Iiwwo
- eMIebB6D0dGyb7ouKfTG+OCtjuJcvsub/TGjZwFGQ8aJJlFgBPGoKfTqSuXoLmEplv2p
- RJcXZz1s2jalkDD4vp2T+ZGURehXZJBl2TIUaxjwSTCimgAiFeii7jIJfiMA9VZKoXRL
- hWJme+SF0QE7L4CYCdA0Ixw9Cq/KdG8qqanqDX0lQnhtyfFcZgmXRF6ZtAolGXao8XD5
- y9zQ==
+ Tue, 30 Jul 2019 03:05:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=OKHPgt351A2QI/YnAoBew430R/eEud4lktf6EqpjGpg=;
+ b=RqBfxw97A4nmG8mtwYF0ixTRO1L2KitydpEs0s7A9mThwfv3W3lssL9LdVrwBCNSTL
+ 6aTa3QikOhqtxE8YBtXu8RFvVtc0749oRJnZzvfR2Jf1aXTQ1KGUb60z4+d7aqpxpuFt
+ Yimlk5DPLJT8+c3Gvq8/wpNlwQDJoT4InUI8dySJ+VfY9eE2glqRn98uvt9rstvIlgkb
+ ujoyIDTr3IF+RcBEuw60GT1gGg+/z6IFD/bcphdQG9oFzRNxt7d2bV96UeLvKqZPqa1G
+ 57xWhKorvU+Mz7lw8uXpGHPgX4epyPFoX+aBQbvdKc287NFLi0I40AcA5VkoBBcGPrrB
+ cI7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=7VhBroyGxGn/uVVtotJh4SOBVCoW5vZobk9B4v8Ue9c=;
- b=R1WARSHrqAfyXyef1J0rIKXzR/siKdqZ8sP+tgksQMblbfT+VnWcdXehfPHRcY+oKs
- tzxvW3ondh9Aw5a2uCncP79yg6bBc7cP5yZRvQWxC25enE2wH478qU4Qbe/c8TGg+Inn
- chANUaQh62aJpKZNc8jdCliu1BoWX7+whvpNjn93PKXIC+5RIgjN1vvO+RZDBXdlarYs
- JpRJVVBLVa7geZtswbmIb3s4t0FM5Gq7qpsSxzw3AjznXlNPB0JSAxkDmNLP6Lf4aeVW
- Cvis2bdHTr9RhIvSUygoIQa5kZzyYBCW1SSMNubw8BR5lwMdjtMjUDqedJwenEV5QGgc
- eY9g==
-X-Gm-Message-State: APjAAAU5zR++ITkHSupBTmBeSoMihlc1wGHVNAl95oXUy/sJ+Meg4fgG
- wgRXdkwunc+HRX5UFYoe1BAEDcZ83rQ=
-X-Google-Smtp-Source: APXvYqzkKOqzk9ZnxlW7J1CY7+nTn7Zv8asacrJvldoL2+p/rPVCdf0r0PJ9TYacnzPoLzZJvoPeSQ==
-X-Received: by 2002:aa7:8817:: with SMTP id c23mr37633718pfo.146.1564413243726; 
- Mon, 29 Jul 2019 08:14:03 -0700 (PDT)
-Received: from suzukaze.ipads-lab.se.sjtu.edu.cn ([89.31.126.54])
- by smtp.gmail.com with ESMTPSA id i126sm73927399pfb.32.2019.07.29.08.14.01
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=OKHPgt351A2QI/YnAoBew430R/eEud4lktf6EqpjGpg=;
+ b=iwCIzwNME6BHtFbUCfb8xrwThakv256tQN6hvQArE4vwzX5jMAHj8Yxky4AO5odZm7
+ 5liVZD3yqmUBrZWu4KHG1ZWapFKFH3jDFG0ecCZtg8Fguq2T7TWG1MFPLZE95oUN+rEU
+ dipWSG55ku3/Q4xNIp2NxEVHET/bOGJNrVHwxbp47ozqfQt/dEMkouN+kas2bR37zFUj
+ Yoa4TIVUAltBV4BVt3i0Lu24jelZuo3Dyc6CLby2WUZQlfOKh9dsNZj/UXAUmegpSABb
+ PPNRsXI+PeKGNrnyxjqcr38N1aTNTOVPqiryt9Ay/6U9m4s5UlkHEGc4d1MCAUpwvWeF
+ jXTg==
+X-Gm-Message-State: APjAAAVYyIKOc5V9Hn9tjGsNCGMieVyvysqX+A6qYkJgMRfu/WusWSWf
+ 3iBJQ+LnFPCoC9UwkpgkEHzzUA==
+X-Google-Smtp-Source: APXvYqzMcRBOGS9JyQwlv9X1JATjMYuUOHXer2CbHw/UNsXtIbzYshroVuyxhY0awf3K6l7Q+DIEDA==
+X-Received: by 2002:a1c:1f4e:: with SMTP id
+ f75mr101927560wmf.137.1564481137788; 
+ Tue, 30 Jul 2019 03:05:37 -0700 (PDT)
+Received: from holly.lan (cpc152527-shef18-2-0-cust115.17-1.cable.virginm.net.
+ [77.99.252.116])
+ by smtp.gmail.com with ESMTPSA id s12sm59321417wmh.34.2019.07.30.03.05.37
  (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Mon, 29 Jul 2019 08:14:03 -0700 (PDT)
-From: Chuhong Yuan <hslester96@gmail.com>
-To: 
-Date: Mon, 29 Jul 2019 23:13:59 +0800
-Message-Id: <20190729151359.9334-1-hslester96@gmail.com>
-X-Mailer: git-send-email 2.20.1
+ Tue, 30 Jul 2019 03:05:37 -0700 (PDT)
+Date: Tue, 30 Jul 2019 11:05:35 +0100
+From: Daniel Thompson <daniel.thompson@linaro.org>
+To: Chuhong Yuan <hslester96@gmail.com>
+Message-ID: <20190730100535.iv7blrsktbenjfwv@holly.lan>
+References: <20190729151359.9334-1-hslester96@gmail.com>
 MIME-Version: 1.0
-X-Spam-Score: -0.3 (/)
+Content-Disposition: inline
+In-Reply-To: <20190729151359.9334-1-hslester96@gmail.com>
+User-Agent: NeoMutt/20180716
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (hslester96[at]gmail.com)
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: linaro.org]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.210.193 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.210.193 listed in wl.mailspike.net]
+ trust [209.85.128.67 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.128.67 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit (hslester96[at]gmail.com)
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hs7Ll-003YZH-94
-X-Mailman-Approved-At: Tue, 30 Jul 2019 10:03:59 +0000
-Subject: [Kgdb-bugreport] [PATCH 02/12] kdb: Replace strncmp with
+X-Headers-End: 1hsP0q-004eTo-Bu
+Subject: Re: [Kgdb-bugreport] [PATCH 02/12] kdb: Replace strncmp with
  str_has_prefix
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -112,39 +114,42 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: kgdb-bugreport@lists.sourceforge.net,
- Daniel Thompson <daniel.thompson@linaro.org>,
- Chuhong Yuan <hslester96@gmail.com>, linux-kernel@vger.kernel.org,
+Cc: kgdb-bugreport@lists.sourceforge.net, linux-kernel@vger.kernel.org,
  Jason Wessel <jason.wessel@windriver.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-strncmp(str, const, len) is error-prone.
-We had better use newly introduced
-str_has_prefix() instead of it.
+On Mon, Jul 29, 2019 at 11:13:59PM +0800, Chuhong Yuan wrote:
+> strncmp(str, const, len) is error-prone.
+> We had better use newly introduced
+> str_has_prefix() instead of it.
+> 
+> Signed-off-by: Chuhong Yuan <hslester96@gmail.com>
 
-Signed-off-by: Chuhong Yuan <hslester96@gmail.com>
----
- kernel/debug/kdb/kdb_main.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Acked-by: Daniel Thompson <daniel.thompson@linaro.org>
 
-diff --git a/kernel/debug/kdb/kdb_main.c b/kernel/debug/kdb/kdb_main.c
-index 9ecfa37c7fbf..4567fe998c30 100644
---- a/kernel/debug/kdb/kdb_main.c
-+++ b/kernel/debug/kdb/kdb_main.c
-@@ -830,7 +830,7 @@ static void parse_grep(const char *str)
- 	cp++;
- 	while (isspace(*cp))
- 		cp++;
--	if (strncmp(cp, "grep ", 5)) {
-+	if (!str_has_prefix(cp, "grep ")) {
- 		kdb_printf("invalid 'pipe', see grephelp\n");
- 		return;
- 	}
--- 
-2.20.1
 
+> ---
+>  kernel/debug/kdb/kdb_main.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/kernel/debug/kdb/kdb_main.c b/kernel/debug/kdb/kdb_main.c
+> index 9ecfa37c7fbf..4567fe998c30 100644
+> --- a/kernel/debug/kdb/kdb_main.c
+> +++ b/kernel/debug/kdb/kdb_main.c
+> @@ -830,7 +830,7 @@ static void parse_grep(const char *str)
+>  	cp++;
+>  	while (isspace(*cp))
+>  		cp++;
+> -	if (strncmp(cp, "grep ", 5)) {
+> +	if (!str_has_prefix(cp, "grep ")) {
+>  		kdb_printf("invalid 'pipe', see grephelp\n");
+>  		return;
+>  	}
+> -- 
+> 2.20.1
+> 
 
 
 _______________________________________________
