@@ -2,104 +2,103 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EE7D17CC17
-	for <lists+kgdb-bugreport@lfdr.de>; Wed, 31 Jul 2019 20:38:12 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id CF22B7CC29
+	for <lists+kgdb-bugreport@lfdr.de>; Wed, 31 Jul 2019 20:41:50 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1hstUJ-0000Vr-N9
-	for lists+kgdb-bugreport@lfdr.de; Wed, 31 Jul 2019 18:38:11 +0000
+	id 1hstXp-0008FR-JD
+	for lists+kgdb-bugreport@lfdr.de; Wed, 31 Jul 2019 18:41:49 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <dianders@chromium.org>) id 1hstUI-0000Vh-FO
- for kgdb-bugreport@lists.sourceforge.net; Wed, 31 Jul 2019 18:38:10 +0000
+ (envelope-from <dianders@chromium.org>) id 1hstXp-0008FJ-7z
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 31 Jul 2019 18:41:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=zjtC8sWjZNJx0P6yMG+1aWsfMer3nnMRaqwuNWwAHUA=; b=BhBxzSQtq4ST8z1HWBVFp8jt3l
- sSTcziTyN0JMm6oUG4iQ1TKjMeqrNPm6HOW/ayI0GWhKC3L4eK2yWsNzzKQOyvNXS+bhj+SR0oHcx
- pSgKZb5iqRyCqxC+YXL6sL2v2iwW45lNLBZ/eQNqei1fM1Cvj6FDcHXmMu7T6RjhZBOw=;
+ bh=3AsLIdRn1/s/ajhZAFGpfmDm8iyB8h5HN7OzbntAvwU=; b=X8VEY3mshl6aqa/Nt6Mk1LvtGZ
+ CQKgELFIUoYAAw17XZCdaClHHYx9dYLS9mq68p9miT6lxMzBsNc2dVooMVR88EVEEmZlmM1IPdBmM
+ Nd3fq4xHlp0gbVEGLsmDISxFdtUjjt9PyCXBOglOnNrww9UcNllJa5I+pR6yviCkU4cs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=zjtC8sWjZNJx0P6yMG+1aWsfMer3nnMRaqwuNWwAHUA=; b=R
- Zke2coEOw0uFAd8nV4OuSIH+Su8A6xrU6hkzDgDX6/epXNRhC4TaeOEkxNuIccGnf1dY1C4GWQOga
- gp4FsGbuRB3T8kbw/HsJuMWNRjqP1dJiM3DIdl8kMtJiHvLQ6mMa2K3soVkFH8Ko4Xmw5yURQff70
- dIKOT+HMM+8FwJHs=;
-Received: from mail-pg1-f194.google.com ([209.85.215.194])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=3AsLIdRn1/s/ajhZAFGpfmDm8iyB8h5HN7OzbntAvwU=; b=EDHgiJdlnfvXRuZJu1kgfyiwh/
+ nSu7IqkHEc2i63iVO29lWdWXNQHCalFut0I//J0K/CQfGr3l/yvNdyNlNeAm2Ia0jLJ8LEhCOVjFX
+ 2Ty5xECvzD8Y1tELvrMSH8AuOShkpgWaWuHGkF8OJRoSLCqxBnsYlyKp2fTaxlqtMYJY=;
+Received: from mail-io1-f65.google.com ([209.85.166.65])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.90_1)
- id 1hstUF-003pAZ-09
- for kgdb-bugreport@lists.sourceforge.net; Wed, 31 Jul 2019 18:38:10 +0000
-Received: by mail-pg1-f194.google.com with SMTP id s1so26180372pgr.2
+ id 1hstXk-005Xc0-PD
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 31 Jul 2019 18:41:49 +0000
+Received: by mail-io1-f65.google.com with SMTP id z3so19653907iog.0
  for <kgdb-bugreport@lists.sourceforge.net>;
- Wed, 31 Jul 2019 11:38:06 -0700 (PDT)
+ Wed, 31 Jul 2019 11:41:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=zjtC8sWjZNJx0P6yMG+1aWsfMer3nnMRaqwuNWwAHUA=;
- b=W6r6NVsSM3sfuwYaY4kLS85qQNfzYFtMTI130jGDvP1R+VuOuUwQtF64QwOqDNzNEt
- +DuF4HJThWpun+jqGczik3D9VNSKQCBCESg+3xiq8E8J1ZB2EhQaOgtof/TD83ybsb8D
- JqLs+CG/oEYkAQUr1z4npXyg6V7qU7Ftr6UBs=
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=3AsLIdRn1/s/ajhZAFGpfmDm8iyB8h5HN7OzbntAvwU=;
+ b=PxOfkjT7L+Hwdws3JZ6LI7RIiZnSFD26K9lcMVVxc7bdsCSr6UJeCFlxR2ViMJRVgZ
+ kKcCXB97d79J4mBEjnLyj18g9tQyLOnRgxTkJ1nN/qkHZ8DkRWoinzBu16Zow0FHmIpz
+ HVoScJTEr7/TuqQu0dTMDxJariUa7FqrVwyGs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=zjtC8sWjZNJx0P6yMG+1aWsfMer3nnMRaqwuNWwAHUA=;
- b=ovoyAagD3kA0Y/i/e0i1KqNgoOFelFWoQXJwnm8aX0l4jqPK1EeB2ZQIDRdasAW0+W
- CZVLj9Q47o0vZx9zesdywex4tINifeQpeeM8CCSn24AYFK5tpWoqGLLQ17/QCeVAfSBI
- X4RFA1HdLm3tmo7rbRmesXomc//gPCB1mEbeq9Nup8f8qswUMX+TW29NcAz95VpLwP5X
- DPAGAg8xcO7RpSauM6uFzvVHLv5df0d4dHmLtitFm+Ay2LnrN/+jEp0JWtI6NFE4NONU
- HXnYXDzac8SoyhkLGGLVWovE1XTOhz7QQLLvzAT4RUEBnHg1tOC6l5jjVn8eu3lrJ//a
- iFQA==
-X-Gm-Message-State: APjAAAUziKXOi4qH0y+Xal5aKNId3opPCMdA3kawBdZpaIeBc1zXRg5+
- nya9gdV0pDxpR7pq96/NCwehsg==
-X-Google-Smtp-Source: APXvYqz2lOY5ye/a8/v4SX9s061hy4NQdE6wREGK6sZ1cqPFLmnEgkpDzKvR/YCGdE18IDSL0nneVg==
-X-Received: by 2002:aa7:8007:: with SMTP id j7mr48381112pfi.154.1564598281165; 
- Wed, 31 Jul 2019 11:38:01 -0700 (PDT)
-Received: from tictac2.mtv.corp.google.com
- ([2620:15c:202:1:24fa:e766:52c9:e3b2])
- by smtp.gmail.com with ESMTPSA id u69sm91315929pgu.77.2019.07.31.11.38.00
- (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Wed, 31 Jul 2019 11:38:00 -0700 (PDT)
-From: Douglas Anderson <dianders@chromium.org>
-To: Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>,
- Jason Wessel <jason.wessel@windriver.com>,
- Daniel Thompson <daniel.thompson@linaro.org>
-Date: Wed, 31 Jul 2019 11:37:32 -0700
-Message-Id: <20190731183732.178134-1-dianders@chromium.org>
-X-Mailer: git-send-email 2.22.0.770.g0f2c4a37fd-goog
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=3AsLIdRn1/s/ajhZAFGpfmDm8iyB8h5HN7OzbntAvwU=;
+ b=dsXj9RCrkaBtVYySZFRkJeL4k/vXGqbg2SXhnIBiDU/r5gvQWyBq4/dES3YgkAn63+
+ XTfkOxKvaMoRHxM+K1zVo55C7gpNML5yYpOPcKjD5Ud1lEw0V0LviN72oI6dxe9n1UN0
+ tuQFUR3WWYg1mstdRUit6VoKkqtlO/Be41P20jeLUfLDxTyqO7lmoqoS62wG/pcQTr8H
+ 2Dft7R98ohTlQZEs4UGthCbC8ladQXZVr47ynNh43MsfCJbvPNJRqhU/UOuaqLT/y5h6
+ N0K9uW5uluuua82gOHNzUgjIZohE2eNkjAYPvjm18ruQAGI13LQoIcUVN+oU1Jd+KIqy
+ Z4+w==
+X-Gm-Message-State: APjAAAUCuVEPd1z2ijBn4EaGqN+rg0jMDufF4qTAspXqb5xS4rFm9fuZ
+ Z90h12WKueLFI7XqQ3RkiZSigDi/eY0=
+X-Google-Smtp-Source: APXvYqwWn+dm94Vv+QpTVuc7BTJC8wC1gHAAhpTJ5zSrZBGnWjjuuM6inYuZvgK8Sa6dVvGt+9BGJQ==
+X-Received: by 2002:a02:c65a:: with SMTP id k26mr54671169jan.18.1564598498154; 
+ Wed, 31 Jul 2019 11:41:38 -0700 (PDT)
+Received: from mail-io1-f43.google.com (mail-io1-f43.google.com.
+ [209.85.166.43])
+ by smtp.gmail.com with ESMTPSA id l14sm65953653iob.1.2019.07.31.11.41.37
+ for <kgdb-bugreport@lists.sourceforge.net>
+ (version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
+ Wed, 31 Jul 2019 11:41:37 -0700 (PDT)
+Received: by mail-io1-f43.google.com with SMTP id j6so18721330ioa.5
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Wed, 31 Jul 2019 11:41:37 -0700 (PDT)
+X-Received: by 2002:a02:a1c7:: with SMTP id o7mr131531038jah.26.1564598496739; 
+ Wed, 31 Jul 2019 11:41:36 -0700 (PDT)
 MIME-Version: 1.0
+References: <20190730221800.28326-1-dianders@chromium.org>
+ <20190731125733.op3y5j5psuj6pet3@willie-the-truck>
+In-Reply-To: <20190731125733.op3y5j5psuj6pet3@willie-the-truck>
+From: Doug Anderson <dianders@chromium.org>
+Date: Wed, 31 Jul 2019 11:41:20 -0700
+X-Gmail-Original-Message-ID: <CAD=FV=WYC4x7MCfkHbB=Mm-6NJywbXs4zAGfz0t+5OdXFOmE7g@mail.gmail.com>
+Message-ID: <CAD=FV=WYC4x7MCfkHbB=Mm-6NJywbXs4zAGfz0t+5OdXFOmE7g@mail.gmail.com>
+To: Will Deacon <will@kernel.org>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: chromium.org]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.215.194 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.215.194 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.166.65 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1hstUF-003pAZ-09
-Subject: [Kgdb-bugreport] [PATCH v2] kdb: Fix stack crawling on 'running'
- CPUs that aren't the master
+X-Headers-End: 1hstXk-005Xc0-PD
+Subject: Re: [Kgdb-bugreport] [PATCH] arm64: debug: Make 'btc' and similar
+ work in kdb
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,212 +111,206 @@ List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
 Cc: Christophe Leroy <christophe.leroy@c-s.fr>,
- kgdb-bugreport@lists.sourceforge.net, linux-kernel@vger.kernel.org
+ Mark Rutland <mark.rutland@arm.com>,
+ Daniel Thompson <daniel.thompson@linaro.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ kgdb-bugreport@lists.sourceforge.net,
+ Jason Wessel <jason.wessel@windriver.com>, LKML <linux-kernel@vger.kernel.org>,
+ Catalin Marinas <catalin.marinas@arm.com>,
+ Thomas Gleixner <tglx@linutronix.de>,
+ Linux ARM <linux-arm-kernel@lists.infradead.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-In kdb when you do 'btc' (back trace on CPU) it doesn't necessarily
-give you the right info.  Specifically on many architectures
-(including arm64, where I tested) you can't dump the stack of a
-"running" process that isn't the process running on the current CPU.
-This can be seen by this:
+Hi,
 
- echo SOFTLOCKUP > /sys/kernel/debug/provoke-crash/DIRECT
- # wait 2 seconds
- <sysrq>g
+On Wed, Jul 31, 2019 at 5:57 AM Will Deacon <will@kernel.org> wrote:
+>
+> Hi Doug,
+>
+> On Tue, Jul 30, 2019 at 03:18:00PM -0700, Douglas Anderson wrote:
+> > diff --git a/arch/arm64/kernel/kgdb.c b/arch/arm64/kernel/kgdb.c
+> > index 43119922341f..b666210fbc75 100644
+> > --- a/arch/arm64/kernel/kgdb.c
+> > +++ b/arch/arm64/kernel/kgdb.c
+> > @@ -148,6 +148,45 @@ sleeping_thread_to_gdb_regs(unsigned long *gdb_regs, struct task_struct *task)
+> >       gdb_regs[32] = cpu_context->pc;
+> >  }
+> >
+> > +void kgdb_call_nmi_hook(void *ignored)
+> > +{
+> > +     struct pt_regs *regs;
+> > +
+> > +     /*
+> > +      * NOTE: get_irq_regs() is supposed to get the registers from
+> > +      * before the IPI interrupt happened and so is supposed to
+> > +      * show where the processor was.  In some situations it's
+> > +      * possible we might be called without an IPI, so it might be
+> > +      * safer to figure out how to make kgdb_breakpoint() work
+> > +      * properly here.
+> > +      */
+> > +     regs = get_irq_regs();
+> > +
+> > +     /*
+> > +      * Some commands (like 'btc') assume that they can find info about
+> > +      * a task in the 'cpu_context'.  Unfortunately that's only valid
+> > +      * for sleeping tasks.  ...but let's make it work anyway by just
+> > +      * writing the registers to the right place.  This is safe because
+> > +      * nobody else is using the 'cpu_context' for a running task.
+> > +      */
+> > +     current->thread.cpu_context.x19 = regs->regs[19];
+> > +     current->thread.cpu_context.x20 = regs->regs[20];
+> > +     current->thread.cpu_context.x21 = regs->regs[21];
+> > +     current->thread.cpu_context.x22 = regs->regs[22];
+> > +     current->thread.cpu_context.x23 = regs->regs[23];
+> > +     current->thread.cpu_context.x24 = regs->regs[24];
+> > +     current->thread.cpu_context.x25 = regs->regs[25];
+> > +     current->thread.cpu_context.x26 = regs->regs[26];
+> > +     current->thread.cpu_context.x27 = regs->regs[27];
+> > +     current->thread.cpu_context.x28 = regs->regs[28];
+> > +     current->thread.cpu_context.fp = regs->regs[29];
+> > +
+> > +     current->thread.cpu_context.sp = regs->sp;
+> > +     current->thread.cpu_context.pc = regs->pc;
+> > +
+> > +     kgdb_nmicallback(raw_smp_processor_id(), regs);
+> > +}
+>
+> This is really gross... :/
 
-Here's what I see now on rk3399-gru-kevin.  I see the stack crawl for
-the CPU that handled the sysrq but everything else just shows me stuck
-in __switch_to() which is bogus:
+Well, sort of.  At first I definitely thought of it as a hack.  ...but
+then I realized that it's actually not so terrible.  Although the
+other processors (the ones that are not the kgdb master) are
+technically "running" as far as Linux is concerned, you can also think
+of them as "stopped" in the debugger.  It's convenient to think of
+them the same way you'd think of sleeping tasks.
 
-======
+Said another way: normally for a "running" task you couldn't put
+anything in the "cpu_context" because it'd be wrong the moment you put
+it there.  ...but when a CPU is stopped in kgdb then there's actually
+something quite sane to put there.
 
-[0]kdb> btc
-btc: cpu status: Currently on cpu 0
-Available cpus: 0, 1-3(I), 4, 5(I)
+So with just a small shift in the concept of what "cpu_context" is for
+then it becomes not so gross.
+
+
+> Can you IPI the other CPUs instead and have them backtrace locally, like we
+> do for things like magic sysrq (sysrq_handle_showallcpus())?
+
+No, unfortunately.  All the other CPUs are in a tight loop (with
+interrupts off) waiting to be released by the kgdb master.  Amusingly,
+it's possible to simulate this.  You can run a sysrq from the kdb
+prompt.  When I do "sr l" from kdb:
+
+A) The CPU running the kgdb master provides a stack crawl but it's not
+really what you want.  Presumably this doesn't matter (we wouldn't
+want to send the IPI to the calling CPU), but it's interesting to look
+at.  We end up in the fallback workqueue case in
+sysrq_handle_showallcpus().  Then we will backtrace based on the regs
+returned by "get_irq_regs()".  Thus instead of:
+
+[0]kdb> bt
 Stack traceback for pid 0
 0xffffff801101a9c0        0        0  1    0   R  0xffffff801101b3b0 *swapper/0
 Call trace:
  dump_backtrace+0x0/0x138
- ...
+ show_stack+0x20/0x2c
+ kdb_show_stack+0x60/0x84
+ kdb_bt1+0xb8/0x100
+ kdb_bt+0x24c/0x408
+ kdb_parse+0x53c/0x664
+ kdb_main_loop+0x7fc/0x888
+ kdb_stub+0x2b0/0x3d0
+ kgdb_cpu_enter+0x27c/0x5c4
+ kgdb_handle_exception+0x198/0x1f4
  kgdb_compiled_brk_fn+0x34/0x44
- ...
+ brk_handler+0x88/0xd0
+ do_debug_exception+0xe0/0x128
+ el1_dbg+0x18/0x8c
+ kgdb_breakpoint+0x20/0x3c
  sysrq_handle_dbg+0x34/0x5c
-Stack traceback for pid 0
-0xffffffc0f175a040        0        0  1    1   I  0xffffffc0f175aa30  swapper/1
+ __handle_sysrq+0x14c/0x170
+ handle_sysrq+0x38/0x44
+ serial8250_handle_irq+0xe8/0xfc
+ dw8250_handle_irq+0x94/0xd0
+ serial8250_interrupt+0x48/0xa4
+ __handle_irq_event_percpu+0x134/0x25c
+ handle_irq_event_percpu+0x34/0x8c
+ handle_irq_event+0x48/0x78
+ handle_fasteoi_irq+0xd0/0x1a0
+ __handle_domain_irq+0x84/0xc4
+ gic_handle_irq+0x10c/0x180
+ el1_irq+0xb8/0x180
+ cpuidle_enter_state+0x284/0x428
+ cpuidle_enter+0x38/0x4c
+ do_idle+0x168/0x29c
+ cpu_startup_entry+0x24/0x28
+ rest_init+0xd4/0xe0
+ arch_call_rest_init+0x10/0x18
+ start_kernel+0x320/0x3a4
+
+I get:
+
+[0]kdb> sr l
+sysrq: Show backtrace of all active CPUs
+sysrq: CPU0:
+CPU: 0 PID: 0 Comm: swapper/0 Not tainted 5.3.0-rc2+ #28
+Hardware name: Google Kevin (DT)
+pstate: 20000005 (nzCv daif -PAN -UAO)
+pc : cpuidle_enter_state+0x284/0x428
+lr : cpuidle_enter_state+0x274/0x428
+sp : ffffff8011003e60
+x29: ffffff8011003eb0 x28: ffffff8010f366b8
+x27: ffffff8011010000 x26: 0000000000000001
+x25: ffffff80110eb000 x24: 0000000000000000
+x23: 00000024232e8f0a x22: 0000002420501a35
+x21: 0000000000000002 x20: ffffffc0ee86e080
+x19: ffffffc0f65426c0 x18: 0000000000000000
+x17: 000000000000003e x16: 000000000000003f
+x15: 0000000000000000 x14: ffffff801101a9c0
+x13: 0000000000013320 x12: 0000000000000020
+x11: 000000000624dd2f x10: 00000000ffffffff
+x9 : 0000000100000001 x8 : 00000000000000c0
+x7 : 00000032b5593519 x6 : 0000000000300000
+x5 : 0000000000000000 x4 : 0000000000000101
+x3 : 00000000ffffffff x2 : 0000000000000001
+x1 : ffffffc0f6548d80 x0 : 0000000000000000
 Call trace:
- __switch_to+0x1e4/0x240
- 0xffffffc0f65616c0
-Stack traceback for pid 0
-0xffffffc0f175d040        0        0  1    2   I  0xffffffc0f175da30  swapper/2
-Call trace:
- __switch_to+0x1e4/0x240
- 0xffffffc0f65806c0
-Stack traceback for pid 0
-0xffffffc0f175b040        0        0  1    3   I  0xffffffc0f175ba30  swapper/3
-Call trace:
- __switch_to+0x1e4/0x240
- 0xffffffc0f659f6c0
-Stack traceback for pid 1474
-0xffffffc0dde8b040     1474      727  1    4   R  0xffffffc0dde8ba30  bash
-Call trace:
- __switch_to+0x1e4/0x240
- __schedule+0x464/0x618
- 0xffffffc0dde8b040
-Stack traceback for pid 0
-0xffffffc0f17b0040        0        0  1    5   I  0xffffffc0f17b0a30  swapper/5
-Call trace:
- __switch_to+0x1e4/0x240
- 0xffffffc0f65dd6c0
+ cpuidle_enter_state+0x284/0x428
+ cpuidle_enter+0x38/0x4c
+ do_idle+0x168/0x29c
+ cpu_startup_entry+0x24/0x28
+ rest_init+0xd4/0xe0
+ arch_call_rest_init+0x10/0x18
+ start_kernel+0x320/0x3a4
 
-===
 
-The problem is that 'btc' eventually boils down to
-  show_stack(task_struct, NULL);
+B) All the other CPUs don't respond.  ...until you exit the debugger
+and then they all print their stacks, a little too late.
 
-...and show_stack() doesn't work for "running" CPUs because their
-registers haven't been stashed.
-
-On x86 things might work better (I haven't tested) because kdb has a
-special case for x86 in kdb_show_stack() where it passes the stack
-pointer to show_stack().  This wouldn't work on arm64 where the stack
-crawling function seems needs the "fp" and "pc", not the "sp" which is
-presumably why arm64's show_stack() function totally ignores the "sp"
-parameter.
-
-NOTE: we _can_ get a good stack dump for all the cpus if we manually
-switch each one to the kdb master and do a back trace.  AKA:
-  cpu 4
-  bt
-...will give the expected trace.  That's because now arm64's
-dump_backtrace will now see that "tsk == current" and go through a
-different path.
-
-In this patch I fix the problems by catching a request to stack crawl
-a task that's running on a CPU and then I ask that CPU to do the stack
-crawl.
-
-NOTE: this will (presumably) change what stack crawls are printed for
-x86 machines.  Now kdb functions will show up in the stack crawl.
-Presumably this is OK but if it's not we can go back and add a special
-case for x86 again.
-
-Signed-off-by: Douglas Anderson <dianders@chromium.org>
 ---
 
-Changes in v2:
-- Totally new approach; now arch agnostic.
+The weird crawl for the master CPU made me think that maybe I could
+use "show_regs()" to show the stacks of the other CPUs, but that
+didn't work.  The arm64 stack crawling code really only works for a
+sleeping task or for the current running task.
 
- kernel/debug/debug_core.c |  5 +++++
- kernel/debug/debug_core.h |  1 +
- kernel/debug/kdb/kdb_bt.c | 44 ++++++++++++++++++++++++++++++---------
- 3 files changed, 40 insertions(+), 10 deletions(-)
+...this again gets back to the fact that we can really think of those
+other CPUs stopped in the debugger as "sleeping".
 
-diff --git a/kernel/debug/debug_core.c b/kernel/debug/debug_core.c
-index 5cc608de6883..a89c72714fe6 100644
---- a/kernel/debug/debug_core.c
-+++ b/kernel/debug/debug_core.c
-@@ -92,6 +92,8 @@ static int kgdb_use_con;
- bool dbg_is_early = true;
- /* Next cpu to become the master debug core */
- int dbg_switch_cpu;
-+/* cpu number of slave we request a stack crawl of */
-+int dbg_slave_dumpstack_cpu = -1;
- 
- /* Use kdb or gdbserver mode */
- int dbg_kdb_mode = 1;
-@@ -580,6 +582,9 @@ static int kgdb_cpu_enter(struct kgdb_state *ks, struct pt_regs *regs,
- 				atomic_xchg(&kgdb_active, cpu);
- 				break;
- 			}
-+		} else if (dbg_slave_dumpstack_cpu == cpu) {
-+			dump_stack();
-+			dbg_slave_dumpstack_cpu = -1;
- 		} else if (kgdb_info[cpu].exception_state & DCPU_IS_SLAVE) {
- 			if (!raw_spin_is_locked(&dbg_slave_lock))
- 				goto return_normal;
-diff --git a/kernel/debug/debug_core.h b/kernel/debug/debug_core.h
-index b4a7c326d546..dca74d5caef2 100644
---- a/kernel/debug/debug_core.h
-+++ b/kernel/debug/debug_core.h
-@@ -62,6 +62,7 @@ extern int dbg_io_get_char(void);
- /* Switch from one cpu to another */
- #define DBG_SWITCH_CPU_EVENT -123456
- extern int dbg_switch_cpu;
-+extern int dbg_slave_dumpstack_cpu;
- 
- /* gdbstub interface functions */
- extern int gdb_serial_stub(struct kgdb_state *ks);
-diff --git a/kernel/debug/kdb/kdb_bt.c b/kernel/debug/kdb/kdb_bt.c
-index 7e2379aa0a1e..10095ae05826 100644
---- a/kernel/debug/kdb/kdb_bt.c
-+++ b/kernel/debug/kdb/kdb_bt.c
-@@ -10,6 +10,7 @@
-  */
- 
- #include <linux/ctype.h>
-+#include <linux/delay.h>
- #include <linux/string.h>
- #include <linux/kernel.h>
- #include <linux/sched/signal.h>
-@@ -22,20 +23,43 @@
- static void kdb_show_stack(struct task_struct *p, void *addr)
- {
- 	int old_lvl = console_loglevel;
-+	int time_left;
-+	int cpu;
-+
- 	console_loglevel = CONSOLE_LOGLEVEL_MOTORMOUTH;
- 	kdb_trap_printk++;
--	kdb_set_current_task(p);
--	if (addr) {
--		show_stack((struct task_struct *)p, addr);
--	} else if (kdb_current_regs) {
--#ifdef CONFIG_X86
--		show_stack(p, &kdb_current_regs->sp);
--#else
--		show_stack(p, NULL);
--#endif
-+
-+	if (!addr && kdb_task_has_cpu(p)) {
-+		cpu = kdb_process_cpu(p);
-+
-+		if (cpu == raw_smp_processor_id()) {
-+			dump_stack();
-+			goto exit;
-+		}
-+
-+		/*
-+		 * In general architectures don't support dumping the stack
-+		 * of a "running" process that's not the current one so if
-+		 * we want to dump the stack of a running process that's not
-+		 * the master then we'll set a global letting the slave
-+		 * (which should be looping) know to dump its own stack.
-+		 */
-+		dbg_slave_dumpstack_cpu = cpu;
-+		for (time_left = MSEC_PER_SEC; time_left; time_left--) {
-+			udelay(1000);
-+			if (dbg_slave_dumpstack_cpu == -1)
-+				break;
-+		}
-+		if (dbg_slave_dumpstack_cpu != -1) {
-+			kdb_printf("ERROR: Timeout dumping CPU %d stack\n",
-+				   cpu);
-+			dbg_slave_dumpstack_cpu = -1;
-+		}
- 	} else {
--		show_stack(p, NULL);
-+		show_stack(p, addr);
- 	}
-+
-+exit:
- 	console_loglevel = old_lvl;
- 	kdb_trap_printk--;
- }
--- 
-2.22.0.770.g0f2c4a37fd-goog
+=====
 
+OK, so I think I managed to get something that maybe you're happy with:
+
+https://lkml.kernel.org/r/20190731183732.178134-1-dianders@chromium.org
+
+...I still think it's not such a hack to stash the state in the
+"cpu_context" and I could imagine it might have other benefits when
+debugging, but my new patch does have the advantage that it's more
+platform agnostic.  ;-)  Let me know what you think...
+
+-Doug
 
 
 _______________________________________________
