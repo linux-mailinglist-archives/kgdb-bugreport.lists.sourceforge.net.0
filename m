@@ -2,72 +2,105 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4CA687C562
-	for <lists+kgdb-bugreport@lfdr.de>; Wed, 31 Jul 2019 16:52:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D8A137C71A
+	for <lists+kgdb-bugreport@lfdr.de>; Wed, 31 Jul 2019 17:44:56 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1hspyC-0006It-2T
-	for lists+kgdb-bugreport@lfdr.de; Wed, 31 Jul 2019 14:52:48 +0000
+	id 1hsqmd-0000Jq-Kr
+	for lists+kgdb-bugreport@lfdr.de; Wed, 31 Jul 2019 15:44:55 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jan.kiszka@siemens.com>) id 1hspyA-0006Ih-No
- for kgdb-bugreport@lists.sourceforge.net; Wed, 31 Jul 2019 14:52:46 +0000
+ (envelope-from <dianders@chromium.org>) id 1hsqmc-0000Jj-Li
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 31 Jul 2019 15:44:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=C0j6LRjSOXclU2ISf0TVnSPk4tF629F4eS5htnIxM4s=; b=TJ9/bMxDFy/ijuzcskpQ6wcMbg
- eLCWaXXY2sJOGRfJ8NOQkhWtHR/mtG9w3HGkg8apnjioVehq7DHxsHgNXGaPahPeDuNvCxrI7lA7i
- Z9YMjJQmo5sGjnIC0wSgNJPYALTq4a0d963c0B2kTQVDyRrY/sONyYJwgkulUJ5zxM50=;
+ bh=qsX4XfgYHIx0Ks8iO8OgXUq5IkTUq6aae68f1+yjlQI=; b=INl9xZRvx+C/ufIXH4owcws+fp
+ yqlJs7k+RLN9/+JbEGTZn+HtKUQSSJXeDT+Qx6VI0VYJeX00ofRHBTys0Km/5nxDnDSUXD2qODC1T
+ q56NBiyIhvc+Gkjn1368AK6Sbu/xe3xfe1bGjZkb8qSDceSdLZwdYbOkuTFeOpMFDTU4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=C0j6LRjSOXclU2ISf0TVnSPk4tF629F4eS5htnIxM4s=; b=e+wNzHhJc5Rs0xpYhmgG49gWxw
- knyddeQo70gm70/gBCTCPDd0kb7JGcbMHEvllEAiBpRL4my/I1STrMxc1iA7Q1NWpu5j/EWPzPu7S
- aTwpcNtNnRTsCEhPjSOmvxKXKCop7KkM06ifv9IaowDZL+ptuhxoV4PcGYjo5nH1EYuU=;
-Received: from goliath.siemens.de ([192.35.17.28])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hspy7-003QDm-RX
- for kgdb-bugreport@lists.sourceforge.net; Wed, 31 Jul 2019 14:52:46 +0000
-Received: from mail2.sbs.de (mail2.sbs.de [192.129.41.66])
- by goliath.siemens.de (8.15.2/8.15.2) with ESMTPS id x6VEOTva024755
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 31 Jul 2019 16:24:30 +0200
-Received: from [139.25.68.37] (md1q0hnc.ad001.siemens.net [139.25.68.37] (may
- be forged))
- by mail2.sbs.de (8.15.2/8.15.2) with ESMTP id x6VEOTdf027880;
- Wed, 31 Jul 2019 16:24:29 +0200
-To: Douglas Anderson <dianders@chromium.org>,
- Kieran Bingham <kbingham@kernel.org>,
- Andrew Morton <akpm@linux-foundation.org>
-References: <20190730234052.148744-1-dianders@chromium.org>
-From: Jan Kiszka <jan.kiszka@siemens.com>
-Message-ID: <34bbd6b5-2e37-159a-b75b-36a6be11c506@siemens.com>
-Date: Wed, 31 Jul 2019 16:24:28 +0200
-User-Agent: Mozilla/5.0 (X11; U; Linux i686 (x86_64); de; rv:1.8.1.12)
- Gecko/20080226 SUSE/2.0.0.12-1.1 Thunderbird/2.0.0.12 Mnenhy/0.7.5.666
+ bh=qsX4XfgYHIx0Ks8iO8OgXUq5IkTUq6aae68f1+yjlQI=; b=Cwl6qLUF8VC2z4aUibt8zmjAG1
+ YZRRUptPkLDNA5sL2OnLU7ZCbRjS/fMmRq5QpVu3nh3V1g//VKnDGCe7RnTz17kH6q7UCM64i+73V
+ xpEWLxNoVFhUpWzhHHvNV0Wmo4NRfYWsCBjTFFeasEm8EAmv+OqOE7BbjIZwABtazRk4=;
+Received: from mail-io1-f66.google.com ([209.85.166.66])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.90_1)
+ id 1hsqma-005Oi2-Vd
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 31 Jul 2019 15:44:54 +0000
+Received: by mail-io1-f66.google.com with SMTP id k20so137258513ios.10
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Wed, 31 Jul 2019 08:44:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=qsX4XfgYHIx0Ks8iO8OgXUq5IkTUq6aae68f1+yjlQI=;
+ b=WxvIw2iyPVeIC/iNqk7I2SIHISdvuL90JO15ijRYglvi7BlFkdCQcF6FpMSHtw9dht
+ Jz34vclpuQCNmGLOzlSWm4/DhBnIeTDcgJeajGCyhjsTsICrv14fQI1J7LZ4+vJ0qeyr
+ araBDazAnWOXtK000jiQtp6ObIomOwJ8NRqJ0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=qsX4XfgYHIx0Ks8iO8OgXUq5IkTUq6aae68f1+yjlQI=;
+ b=tIsaSdpxmMhIeChUkFcKbO6rhA/Ha3TjKD6i34vsZTujtbwtEikz31Luh50QPjdssQ
+ 9L/o3rKxIyzgA2WpgynEMoy+zRA0P6y4y0foidmDe9ZZ+B0n2BBgySW9d0+pHlbnWpp5
+ 9hUCafxRohjwOntK4YhhmmNNRVtnDWNODSHQ8KMAtbk5oD0yJ1NpzRxMJy8GqTFNe7kN
+ MApTk3ILDA8Ht2Udcx33iblPid48CkfMdb6IQkJOe6aUsU7oIulq6j9jcV5eJvzogVxY
+ V+20P8NdWB2qspI6eK9WtMVwjMQb4v6AmXCpmDgcXqo7dFnTPv/NZjzvbTPNs4HpqyYG
+ LObg==
+X-Gm-Message-State: APjAAAUi+N6273VWcV9uyVNkaUdLixmD3DAR5iMI+VdjOsI7DEGfDcVY
+ vtfbzB3YqKByCBqTcK5dzgPKiSNk6WQ=
+X-Google-Smtp-Source: APXvYqyz+4qWzPRDpQwZcnvkCYQG8NMg7r7qJ5YTp/GnVqbpSDyJeAbYlf34eQdIkLqNKcnFmLJGrQ==
+X-Received: by 2002:a5e:924d:: with SMTP id z13mr26506704iop.247.1564587886981; 
+ Wed, 31 Jul 2019 08:44:46 -0700 (PDT)
+Received: from mail-io1-f51.google.com (mail-io1-f51.google.com.
+ [209.85.166.51])
+ by smtp.gmail.com with ESMTPSA id m4sm58342235iok.68.2019.07.31.08.44.46
+ for <kgdb-bugreport@lists.sourceforge.net>
+ (version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
+ Wed, 31 Jul 2019 08:44:46 -0700 (PDT)
+Received: by mail-io1-f51.google.com with SMTP id f4so137312879ioh.6
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Wed, 31 Jul 2019 08:44:46 -0700 (PDT)
+X-Received: by 2002:a5d:885a:: with SMTP id t26mr4018292ios.218.1564587885757; 
+ Wed, 31 Jul 2019 08:44:45 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20190730234052.148744-1-dianders@chromium.org>
-Content-Language: en-US
-X-Spam-Score: 0.0 (/)
+References: <20190730234052.148744-1-dianders@chromium.org>
+ <34bbd6b5-2e37-159a-b75b-36a6be11c506@siemens.com>
+In-Reply-To: <34bbd6b5-2e37-159a-b75b-36a6be11c506@siemens.com>
+From: Doug Anderson <dianders@chromium.org>
+Date: Wed, 31 Jul 2019 08:44:30 -0700
+X-Gmail-Original-Message-ID: <CAD=FV=Uqa79UyFFj6zrr_B=rrwfmJAFLLatf8wQ73V70U-frvA@mail.gmail.com>
+Message-ID: <CAD=FV=Uqa79UyFFj6zrr_B=rrwfmJAFLLatf8wQ73V70U-frvA@mail.gmail.com>
+To: Jan Kiszka <jan.kiszka@siemens.com>
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.166.66 listed in list.dnswl.org]
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: symbols.py]
+ for more information. [URIs: googlesource.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1hspy7-003QDm-RX
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1hsqma-005Oi2-Vd
 Subject: Re: [Kgdb-bugreport] [PATCH] scripts/gdb: Handle split debug
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -80,57 +113,50 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: kgdb-bugreport@lists.sourceforge.net,
- Daniel Thompson <daniel.thompson@linaro.org>,
- Stephen Boyd <swboyd@chromium.org>, linux-kernel@vger.kernel.org,
- Jason Wessel <jason.wessel@windriver.com>
+Cc: Daniel Thompson <daniel.thompson@linaro.org>,
+ kgdb-bugreport@lists.sourceforge.net, Kieran Bingham <kbingham@kernel.org>,
+ LKML <linux-kernel@vger.kernel.org>, Stephen Boyd <swboyd@chromium.org>,
+ Jason Wessel <jason.wessel@windriver.com>,
+ Andrew Morton <akpm@linux-foundation.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On 31.07.19 01:40, Douglas Anderson wrote:
-> Some systems (like Chrome OS) may use "split debug" for kernel
-> modules.  That means that the debug symbols are in a different file
-> than the main elf file.  Let's handle that by also searching for debug
-> symbols that end in ".ko.debug".
+Hi,
 
-Is this split-up depending on additional kernel patches, is this already
-possible with mainline, or is this purely a packaging topic? Wondering because
-of testability in case it's downstream-only.
+On Wed, Jul 31, 2019 at 7:24 AM Jan Kiszka <jan.kiszka@siemens.com> wrote:
+>
+> On 31.07.19 01:40, Douglas Anderson wrote:
+> > Some systems (like Chrome OS) may use "split debug" for kernel
+> > modules.  That means that the debug symbols are in a different file
+> > than the main elf file.  Let's handle that by also searching for debug
+> > symbols that end in ".ko.debug".
+>
+> Is this split-up depending on additional kernel patches, is this already
+> possible with mainline, or is this purely a packaging topic? Wondering because
+> of testability in case it's downstream-only.
 
-Jan
+It is a packaging topic.  You can take a normal elf file and split the
+debug out of it using objcopy.  Try "man objcopy" and then take a look
+at the "--only-keep-debug" option.  It'll give you a whole recipe for
+doing splitdebug.  The suffix used for the debug symbols is arbitrary.
+If people have other another suffix besides ".ko.debug" then we could
+presumably support that too...
 
-> 
-> Signed-off-by: Douglas Anderson <dianders@chromium.org>
-> ---
-> 
->  scripts/gdb/linux/symbols.py | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/scripts/gdb/linux/symbols.py b/scripts/gdb/linux/symbols.py
-> index 2f5b95f09fa0..34e40e96dee2 100644
-> --- a/scripts/gdb/linux/symbols.py
-> +++ b/scripts/gdb/linux/symbols.py
-> @@ -77,12 +77,12 @@ lx-symbols command."""
->              gdb.write("scanning for modules in {0}\n".format(path))
->              for root, dirs, files in os.walk(path):
->                  for name in files:
-> -                    if name.endswith(".ko"):
-> +                    if name.endswith(".ko") or name.endswith(".ko.debug"):
->                          self.module_files.append(root + "/" + name)
->          self.module_files_updated = True
->  
->      def _get_module_file(self, module_name):
-> -        module_pattern = ".*/{0}\.ko$".format(
-> +        module_pattern = ".*/{0}\.ko(?:.debug)?$".format(
->              module_name.replace("_", r"[_\-]"))
->          for name in self.module_files:
->              if re.match(module_pattern, name) and os.path.exists(name):
-> 
+For portage (which is the packaging system used by Chrome OS) split
+debug is supported by default (and the suffix is .ko.debug).  ...and
+so in Chrome OS we always get the installed elf files stripped and
+then the symbols stashed away.
 
--- 
-Siemens AG, Corporate Technology, CT RDA IOT SES-DE
-Corporate Competence Center Embedded Linux
+At the moment we don't actually use the normal portage magic to do
+this for the kernel though since it affects our ability to get good
+stack dumps in the kernel.  We instead pass a script as "strip" [1].
+
+
+[1] https://chromium.googlesource.com/chromiumos/overlays/chromiumos-overlay/+/refs/heads/master/eclass/cros-kernel/strip_splitdebug
+
+
+-Doug
 
 
 _______________________________________________
