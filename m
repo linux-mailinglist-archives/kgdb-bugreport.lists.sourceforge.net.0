@@ -2,101 +2,100 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 00A81D163F
-	for <lists+kgdb-bugreport@lfdr.de>; Wed,  9 Oct 2019 19:29:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A9822D26A7
+	for <lists+kgdb-bugreport@lfdr.de>; Thu, 10 Oct 2019 11:50:25 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1iIFlj-0002hC-Q8
-	for lists+kgdb-bugreport@lfdr.de; Wed, 09 Oct 2019 17:28:59 +0000
+	id 1iIV5U-0002DK-Gu
+	for lists+kgdb-bugreport@lfdr.de; Thu, 10 Oct 2019 09:50:24 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <dianders@chromium.org>) id 1iIFli-0002h5-RR
- for kgdb-bugreport@lists.sourceforge.net; Wed, 09 Oct 2019 17:28:58 +0000
+ (envelope-from <daniel.thompson@linaro.org>) id 1iIV5T-0002DD-4E
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 10 Oct 2019 09:50:23 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=X6N0xkl4bTPUi6zGcRxZ0oIYFX/fveTjl+e6ocsFVkI=; b=il1pyawItM9sl4MQTxPPva3zvg
- PjTvdO52eOsUtJnISgFatumi4udZAXhFMPD+2w5LWpJNMPQgbRDAmiPaAHwFOPvnyhwDHTc0Z9Qnw
- UorcXuXRjXbKqEbJHf4KFcp+0qKGblT0juJtJ1xQOr7yweNwqMdHKFG3QHmwH/KqJDfY=;
+ bh=yNx+8n36uJ0WGHxBC9aaDo5XpCmOIJvnh/6Zg8N6jFk=; b=YLANBAhmdVWHR4o5AHdUApUpTJ
+ MQgxj9BUURp5po/DaP1sgGXBwqe0uj/d9XJ1YcIYNIgPaRytr/NCUgcLRo4Gjslr/uC/MtFWvUsWV
+ c3MVmEkHmfzeJeP77UdGPy5ODFXX5/wdMcpRkQ2uAWS6jTUQx/rClPNHFrcx8gSxfuVc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=X6N0xkl4bTPUi6zGcRxZ0oIYFX/fveTjl+e6ocsFVkI=; b=B+OXyz+jzxbRHNKgTBGluXqBko
- C7nz/S6R3sT8cIz90b/Ihg2Hm5txWkrPKfUax4ebDa68BtwiM0/iALbTU/NvIk61t4mk/9A80WDBJ
- qfEKX8gvbupZbFllu1eFU4QTtN3aIKPaL5QiPch826h4IIe72UiMuCuphD5kCKYRUP+k=;
-Received: from mail-io1-f68.google.com ([209.85.166.68])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=yNx+8n36uJ0WGHxBC9aaDo5XpCmOIJvnh/6Zg8N6jFk=; b=HnT/r6ZQkxVAooQg9TXI6yebxa
+ o+KUvz8rbTezCWMH0IZ928mPO40be4mkRHSX8jFf3cPWTo8QUksxiUQnn4fC2GvoIFRnSXZ01oIeu
+ uxUKjVbUdmmsGk13ctVZOinwHilqV0G9PCPmBUu566xqCkZGlSLAJrpNP796g0N9c6XY=;
+Received: from mail-wm1-f66.google.com ([209.85.128.66])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1iIFlf-00BZiE-Fd
- for kgdb-bugreport@lists.sourceforge.net; Wed, 09 Oct 2019 17:28:58 +0000
-Received: by mail-io1-f68.google.com with SMTP id c6so6717199ioo.13
+ id 1iIV5O-004smb-Jf
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 10 Oct 2019 09:50:23 +0000
+Received: by mail-wm1-f66.google.com with SMTP id p7so6206527wmp.4
  for <kgdb-bugreport@lists.sourceforge.net>;
- Wed, 09 Oct 2019 10:28:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=X6N0xkl4bTPUi6zGcRxZ0oIYFX/fveTjl+e6ocsFVkI=;
- b=FW0PIz9QpEJNdQumuiaUalMyaj2SzMhIDhra6dX9NJb4a5Laxke+fDfxJBtD/etYOr
- w4jxzvQnZ27rB/wkJMbsqX6XfuqANFpnb7FoaCJegpZLlaXI+p5vU0X2V9REcsVm3F79
- NLP9UYGd300jIkFcrZZaDZLF+ymWhQ+VxPBlg=
+ Thu, 10 Oct 2019 02:50:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=yNx+8n36uJ0WGHxBC9aaDo5XpCmOIJvnh/6Zg8N6jFk=;
+ b=XnOJV7YI/chmZQMSTTcgcjcrpoZZh39oUa9LFBeXkUiykjjr5JEBgkK+KfCLOJG6O8
+ 6+NIc/vyXLmNqfB90MKN8p2Unok1c+fSiHgnwCyrXBJKeaQPqrFkhiy2P/mLshMb4fvb
+ kB1pTofuj/RzTNiCrP5P+CFGWNF9hxdI1rBTBJP7STVGBnVmS1G7saGVLs5yod9EAWcS
+ s7eZ+f9uqQ04q8bq3OcoV3Z9FvZ/0mp2Ibn69cbg0K9ejU+OuHVyhxeUwJhjfdA2m2K9
+ WgkfJfrzns34UQNFKX1MMnVPj95NEovFrbRBNTgc3kzs4zUd37NIBrwK7WMsOH19ho8h
+ xmLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=X6N0xkl4bTPUi6zGcRxZ0oIYFX/fveTjl+e6ocsFVkI=;
- b=CpYPYR66HthQh2I8ZGyLEKYvcdK/l+lpk6DKmQ9jcGVdbcQgvYLQPjTNzZzP/U9C+H
- 0VENRPr0q9dIzgbrQvimWAjYCxtDrWoq4vtGoYIKEED3Sz5shtdYSb8iIec6cNx2lDTP
- UXeI6VksrW+OgawZfI+7Y+mi8u8mNng/8Ccg0akJKaXIO9nTY80AV/idxng5W2RaFCwb
- r9namEpGrSXaFHYcD0hPWwbFK4zqx8FqmD5vyd9gCa+SbckOSGXyZjI1bdXyzV+g/HUF
- 0SB+EgC/Z3+bKpLemG9DXAgkMU0WIYgZvu+IgcSoXA+LawztVw9P6Q5ATkPjZBSH+qge
- a56w==
-X-Gm-Message-State: APjAAAVRTTY+sAeleoniXlzxb4Jkc/125B9XcRIgy2SNSKh2k52LLhTT
- hrROQgp+ZRNQIYye7OqD9xLtYsoDAPM=
-X-Google-Smtp-Source: APXvYqyEfIxAA+xplhJmlJwduZ2Vsi6DjglLmOamWy9Z7FwavMmFD3BO60QRuzcAtPNaMva6JDbCwQ==
-X-Received: by 2002:a05:6638:1f0:: with SMTP id
- t16mr4207542jaq.119.1570642129143; 
- Wed, 09 Oct 2019 10:28:49 -0700 (PDT)
-Received: from mail-io1-f53.google.com (mail-io1-f53.google.com.
- [209.85.166.53])
- by smtp.gmail.com with ESMTPSA id c11sm1373397ioi.67.2019.10.09.10.28.48
- for <kgdb-bugreport@lists.sourceforge.net>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 09 Oct 2019 10:28:48 -0700 (PDT)
-Received: by mail-io1-f53.google.com with SMTP id n26so6783219ioj.8
- for <kgdb-bugreport@lists.sourceforge.net>;
- Wed, 09 Oct 2019 10:28:48 -0700 (PDT)
-X-Received: by 2002:a5d:9386:: with SMTP id c6mr4649645iol.269.1570642128135; 
- Wed, 09 Oct 2019 10:28:48 -0700 (PDT)
-MIME-Version: 1.0
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=yNx+8n36uJ0WGHxBC9aaDo5XpCmOIJvnh/6Zg8N6jFk=;
+ b=lUxL8npEUQddanT6r+pkZkfTl3UKHz9bEafZmV3noIBD6DAWSLoW3amBJUCvVs//i3
+ mhXIg5GJ9UjJURnpJcv9nm9WVZlK1eJ6y9PpVj6k9o9jqiM5XllGaiRDA7Nq5nuACbAh
+ frZ7G3cTpzPSQt89RcHZ2fXgyJoAOsqvXqba9u8zZK7MrFWXmS+pvnUMkMCeV9VT4WUK
+ XU8MHY+RabKBFCcvlI9lzaDHHSM/9ueADK5B78vyb1YZN1fhYKwyjjuv61Rvvm8fDO7o
+ QJIMcqZlwB9INhas09tnQd5inVUnr2wUvU8ww+83rWjcqUqlKo99tBSRmZIEotEJT3EN
+ RqlA==
+X-Gm-Message-State: APjAAAW4i1aLu3sVEi0rFxCMDRjm9sLzrWeEhjLQCEVshIi3XZ6jrMPU
+ nDrilqNNZ9vko7ilw7sB3YR7gKPVAcuTWg==
+X-Google-Smtp-Source: APXvYqzFLiv9I4jhmsqgSvPdg5cd8l8SX5O0wt8s2GhMRL49oWG4zEBcs3xLTe0L/Aic6+31c8mwog==
+X-Received: by 2002:a1c:20d8:: with SMTP id g207mr6926175wmg.79.1570701011994; 
+ Thu, 10 Oct 2019 02:50:11 -0700 (PDT)
+Received: from holly.lan (cpc141214-aztw34-2-0-cust773.18-1.cable.virginm.net.
+ [86.9.19.6])
+ by smtp.gmail.com with ESMTPSA id 207sm7788894wme.17.2019.10.10.02.50.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 10 Oct 2019 02:50:11 -0700 (PDT)
+Date: Thu, 10 Oct 2019 10:50:09 +0100
+From: Daniel Thompson <daniel.thompson@linaro.org>
+To: Doug Anderson <dianders@chromium.org>
+Message-ID: <20191010095009.25a5zvoykpmvtktq@holly.lan>
 References: <20191008132043.7966-1-daniel.thompson@linaro.org>
  <20191008132043.7966-4-daniel.thompson@linaro.org>
  <CAD=FV=W9Tdh2hPekzgSYnCqoTX_ms1GY-FXgnxd-uEW0SWbyuw@mail.gmail.com>
  <20191009093049.tnz442bo54bzmzmz@holly.lan>
-In-Reply-To: <20191009093049.tnz442bo54bzmzmz@holly.lan>
-From: Doug Anderson <dianders@chromium.org>
-Date: Wed, 9 Oct 2019 10:28:36 -0700
-X-Gmail-Original-Message-ID: <CAD=FV=UuLYPpkJBWbkWoJzv97A6jxRFa4QmmD-0chSrsuT_bPg@mail.gmail.com>
-Message-ID: <CAD=FV=UuLYPpkJBWbkWoJzv97A6jxRFa4QmmD-0chSrsuT_bPg@mail.gmail.com>
-To: Daniel Thompson <daniel.thompson@linaro.org>
+ <CAD=FV=UuLYPpkJBWbkWoJzv97A6jxRFa4QmmD-0chSrsuT_bPg@mail.gmail.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <CAD=FV=UuLYPpkJBWbkWoJzv97A6jxRFa4QmmD-0chSrsuT_bPg@mail.gmail.com>
+User-Agent: NeoMutt/20180716
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.128.66 listed in list.dnswl.org]
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: linaro.org]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.166.68 listed in list.dnswl.org]
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.68 listed in wl.mailspike.net]
+ [209.85.128.66 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -104,9 +103,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iIFlf-00BZiE-Fd
+X-Headers-End: 1iIV5O-004smb-Jf
 Subject: Re: [Kgdb-bugreport] [PATCH v2 3/5] kdb: Remove special case logic
  from kdb_read()
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
@@ -126,51 +124,34 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Hi,
-
-On Wed, Oct 9, 2019 at 2:30 AM Daniel Thompson
-<daniel.thompson@linaro.org> wrote:
->
-> > > @@ -183,17 +186,7 @@ static int kdb_read_get_key(char *buffer, size_t bufsize)
-> > >   *     function.  It is not reentrant - it relies on the fact
-> > >   *     that while kdb is running on only one "master debug" cpu.
-> > >   * Remarks:
-> > > - *
-> > > - * The buffer size must be >= 2.  A buffer size of 2 means that the caller only
-> > > - * wants a single key.
-> >
-> > By removing this you broke "BTAPROMPT".  So doing:
-> >
-> > set BTAPROMPT=1
-> > bta
-> >
-> > It's now impossible to quit out.  Not that I've ever used BTAPROMPT,
-> > but seems like we should either get rid of it or keep it working.
->
-> Thanks. Just to check I got exactly what you meant I assume this could
-> also have been phrased as "it looks like you forgot to convert the
-> kdb_getstr() in kdb_bt1() over to use the new kdb_getchar() function"?
-
-Right.  Sorry for wording it in a confusing way.  ;-)
-
-
-> > > @@ -741,7 +732,7 @@ int vkdb_printf(enum kdb_msgsrc src, const char *fmt, va_list ap)
+On Wed, Oct 09, 2019 at 10:28:36AM -0700, Doug Anderson wrote:
+> On Wed, Oct 9, 2019 at 2:30 AM Daniel Thompson
+> <daniel.thompson@linaro.org> wrote:
+> > > > @@ -741,7 +732,7 @@ int vkdb_printf(enum kdb_msgsrc src, const char *fmt, va_list ap)
+> > > >
+> > > >         /* check for having reached the LINES number of printed lines */
+> > > >         if (kdb_nextline >= linecount) {
+> > > > -               char buf1[16] = "";
+> > > > +               char ch;
 > > >
-> > >         /* check for having reached the LINES number of printed lines */
-> > >         if (kdb_nextline >= linecount) {
-> > > -               char buf1[16] = "";
-> > > +               char ch;
+> > > The type of "ch" should be the same as returned by kdb_getchar()?
+> > > Either "int" if you're keeping it "int" or "unsigned char"?
 > >
-> > The type of "ch" should be the same as returned by kdb_getchar()?
-> > Either "int" if you're keeping it "int" or "unsigned char"?
->
-> Probably... although the assumption that kdb strings are char * is burnt
-> in a lot of places so there will still be further tidy up needed.
+> > Probably... although the assumption that kdb strings are char * is burnt
+> > in a lot of places so there will still be further tidy up needed.
+> 
+> True.  It doesn't matter a whole lot so if you think it's easier to
+> keep it as char that's OK too.
 
-True.  It doesn't matter a whole lot so if you think it's easier to
-keep it as char that's OK too.
+After looking at it from a number of angles I think we can have this
+match the return type of kdb_getchar()... but the best way to achieve
+this is to make kdb_getchar() return a unqualified char.
 
--Doug
+That ends up consistent across the sub-system and shouldn't do any
+narrowing that wouldn't already have been happening inside kdb_read().
+
+
+Daniel.
 
 
 _______________________________________________
