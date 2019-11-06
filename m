@@ -2,114 +2,82 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B5A2DF2B8E
+	by mail.lfdr.de (Postfix) with ESMTPS id B8D58F2B8F
 	for <lists+kgdb-bugreport@lfdr.de>; Thu,  7 Nov 2019 10:55:54 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:Date:Message-ID:
-	References:To:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=AVUExYJO2yK35q077NuZrosqHvZdqaM/ZATOPB9YVnE=; b=Nhgo8EGP0kUEf5cacoRqEyF6vl
-	aEoLWqyNSwxEdpnrKQ599EQJO92pGoERKC7pF3LaTdHotbxYsQe5x85oMDf0VuYKod+GpIH68KbKQ
-	hd1TEElnuS5BOD6dmuCv0hzbP95bYUNhTLK5iuRyCeRWylEo4W+ym+UTPV/YOqRB8gGU=;
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1iSeW9-00088U-EX
+	id 1iSeW9-00088d-G0
 	for lists+kgdb-bugreport@lfdr.de; Thu, 07 Nov 2019 09:55:53 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <dima@arista.com>) id 1iSOA7-0002Rd-Vb
- for kgdb-bugreport@lists.sourceforge.net; Wed, 06 Nov 2019 16:28:03 +0000
+ (envelope-from <peterz@infradead.org>) id 1iSS1I-0004S8-Gg
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 06 Nov 2019 20:35:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ILRv70ifsS4R/1VQKE/+LZSUA7puynZg3ILLVfy9hZk=; b=Wr67hmGXJskkZ1mH1ntFsJ7Ofq
- 2hGZWvFnCt2TDB4wQ3V3TkVrsEzLHr9MbbhDtRJwEa5o/GaFkWkt1mKUFJobOSkR+/ndEUeKNsTTO
- 44CfUAXWgRfGFuYwMNBCOjf8QdQAYjwcY2zKqJ/+zbUtoIgItAKUEt7Op5Z/JhTQtIqI=;
+ bh=IJrcQXptkMvPiExxcW5iB0NzeMYZeKfH93+EIxkwDzY=; b=ScRwZOz5cBCgndfRnNKphkJlnN
+ sP+m8ULaPGQSpQo4a3W5+E/h9kUAn36DcJD4kdS9TVVcgaXnuTLId9WF2VJK+L0mIliJsVTNF+9P+
+ iO1WGoTPLAn3D63dvzzmQS+g0a/udcOXySpDkhE58LOrp1bsproHLzGORKqhEuJgrKBo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ILRv70ifsS4R/1VQKE/+LZSUA7puynZg3ILLVfy9hZk=; b=aWv375Q90h8T3zKtawwCuEe1eK
- pUzkpTTHfGUC+sgzYugOncFaGTktb3hISudcPqwoaSXUdP4NbTUc9I97U9TKOaY2cvtkQnKPpVuWR
- IxJ4pny802VHPVIV/4xYIX3c7AuJtmpwSCBiRDYtpA5n7PTDH/GkA42u3F/GfdMl3MoA=;
-Received: from mail-pg1-f196.google.com ([209.85.215.196])
+ bh=IJrcQXptkMvPiExxcW5iB0NzeMYZeKfH93+EIxkwDzY=; b=UOeKruMRoLNA9N4aump1XroIsJ
+ DFQlCpwXOJu12ZHfbzRVxucFwvGfBQ/krTk6RIZypoDg1C8r4/2F9kAa9QvCkmVZkizzYAbFPd8Vo
+ g63lbw9Hg58+66YT8H47rmzhHHMrK/7YhA2kBtJCm1GskkIiGLHmJ2IVYjIiP3P+9xL8=;
+Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1iSOA6-002YI2-CU
- for kgdb-bugreport@lists.sourceforge.net; Wed, 06 Nov 2019 16:28:03 +0000
-Received: by mail-pg1-f196.google.com with SMTP id k13so6161439pgh.3
- for <kgdb-bugreport@lists.sourceforge.net>;
- Wed, 06 Nov 2019 08:28:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=arista.com; s=googlenew;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=ILRv70ifsS4R/1VQKE/+LZSUA7puynZg3ILLVfy9hZk=;
- b=CdDAyQ43Jv36qsn9EkuUTZw8nt/+mOBKFoXfvdiENDFswTz54lmUElxhgNjniKxvLI
- izkIqTz62/+BsaxfKUgZ8S2RMG637jnDm+u0E1aGEUIzsEbWwsDV18EKNobslN2UlmYW
- WhC8g2REeIsonwoMKiOWl5u0CwVw1KGMvWwvlr5qjl4PZWOYWYsDg5p9F3UN6uGx7U/X
- y0XyKjPvcy9QpHnBDaHHpgbyRB/umgRbu9qBjoNr1nlR2d6FHD+lGiNEfvnrob7yl41T
- Rb+d5GPnNkrUNEfbqJzu6sSRExc4iKzcT+7U+xgq+doooMPjYjmc+eE6U7r6YPGlvf7O
- nVDg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=ILRv70ifsS4R/1VQKE/+LZSUA7puynZg3ILLVfy9hZk=;
- b=cDCeVkGs7hKE2j34TISx6BThVhEoVUOvggdDPwnNoEc4MAeFD1C7PbEkMkEf3C7uK+
- EH4ew1XMeDM9B424VgUrMDxTnu4U6i008f9/Yeqe9hyEPSuN7lX2bfeqHl61AMopBkyB
- Qx0Hiyp7J49PJBCwqUndHHnrod6pcbEOMM6nO9zWaBQcR/lhAJy45fVOHGK6qawFnqPx
- fQAE5jYtiOTDA27vWd8UxuO3OG6SpTpMaZ0LB80gcyZrCHOybYkuxUdiyn0IJesEIwux
- angvtwEM+tihjD4ic3o+zVtnGCsXJ9aj7lTj5zhAdMUU9Lnr0ekIBRw6gCo9UPPIWIrJ
- Vlxw==
-X-Gm-Message-State: APjAAAWOSLD+BQH3sH2rcHGHHzGkW2v30vPRZtirHGe9MgI035ja0P/1
- toQGpbTfUVd4OPz8swKQ9fdjrQ==
-X-Google-Smtp-Source: APXvYqwbfJs+Rexz1GsgVLAw54LaKdVOAeh16aFzChJ5nDbwhrH1h0946xekzcVYBN4WN+Q23T6sbg==
-X-Received: by 2002:a63:66c1:: with SMTP id a184mr3898212pgc.164.1573057676186; 
- Wed, 06 Nov 2019 08:27:56 -0800 (PST)
-Received: from [10.83.36.153] ([217.173.96.166])
- by smtp.gmail.com with ESMTPSA id m15sm21253387pgv.58.2019.11.06.08.27.41
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 06 Nov 2019 08:27:55 -0800 (PST)
-To: Peter Zijlstra <peterz@infradead.org>
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1iSS1E-002mmi-9r
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 06 Nov 2019 20:35:12 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=IJrcQXptkMvPiExxcW5iB0NzeMYZeKfH93+EIxkwDzY=; b=dLqPPOZnjveWBeyFqFHqrbtNZ
+ Duw5YArJPTaMMMK8SsjUxFjkIDQhNUSGD5PvNQVqSS+e/GWXU1Um5AVf/5sUPjLz45CKuM0IRDAMs
+ VJOI3PF4FsdFW2Mj099DRLCzazEzb+zrotnV0I1WVxXeWHoGdNsYMsg3hXOH54aFacQzs/oy4AisX
+ 0iQV33+aUEMHy+n5TIl+aUKiWMNj3wlvtrjuO4fCRVPkUgi8SKL+BQOZYBkn7NslBLpVF53Y5s7wl
+ nyOBB1ExO8CnC6/BiF+fSyjnLlUc7UEIcgZ13IIdTf4f2/4oA2gULPIuZ+oV94CGzcp/+zHem6q8U
+ 4ISIm47TA==;
+Received: from j217100.upc-j.chello.nl ([24.132.217.100]
+ helo=worktop.programming.kicks-ass.net)
+ by bombadil.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+ id 1iSS0p-0001aI-GA; Wed, 06 Nov 2019 20:34:43 +0000
+Received: by worktop.programming.kicks-ass.net (Postfix, from userid 1000)
+ id C2126980DF5; Wed,  6 Nov 2019 21:34:40 +0100 (CET)
+Date: Wed, 6 Nov 2019 21:34:40 +0100
+From: Peter Zijlstra <peterz@infradead.org>
+To: Dmitry Safonov <dima@arista.com>
+Message-ID: <20191106203440.GH3079@worktop.programming.kicks-ass.net>
 References: <20191106030542.868541-1-dima@arista.com>
  <20191106092039.GT4131@hirez.programming.kicks-ass.net>
-Message-ID: <10db6fa1-5b17-ebe6-09e0-6335e09e4db8@arista.com>
-Date: Wed, 6 Nov 2019 16:27:33 +0000
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.1.1
+ <10db6fa1-5b17-ebe6-09e0-6335e09e4db8@arista.com>
 MIME-Version: 1.0
-In-Reply-To: <20191106092039.GT4131@hirez.programming.kicks-ass.net>
-Content-Language: en-US
+Content-Disposition: inline
+In-Reply-To: <10db6fa1-5b17-ebe6-09e0-6335e09e4db8@arista.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.215.196 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.215.196 listed in wl.mailspike.net]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iSOA6-002YI2-CU
+X-Headers-End: 1iSS1E-002mmi-9r
 X-Mailman-Approved-At: Thu, 07 Nov 2019 09:55:52 +0000
 Subject: Re: [Kgdb-bugreport] [PATCH 00/50] Add log level to show_stack()
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
@@ -123,8 +91,6 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-From: Dmitry Safonov via Kgdb-bugreport <kgdb-bugreport@lists.sourceforge.net>
-Reply-To: Dmitry Safonov <dima@arista.com>
 Cc: Juri Lelli <juri.lelli@redhat.com>, linux-sh@vger.kernel.org,
  Catalin Marinas <catalin.marinas@arm.com>, Ben Segall <bsegall@google.com>,
  Guo Ren <guoren@kernel.org>, Pavel Machek <pavel@ucw.cz>,
@@ -182,60 +148,69 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Hi Peter,
-
-On 11/6/19 9:20 AM, Peter Zijlstra wrote:
-> On Wed, Nov 06, 2019 at 03:04:51AM +0000, Dmitry Safonov wrote:
->> Add log level argument to show_stack().
->> Done in three stages:
->> 1. Introducing show_stack_loglvl() for every architecture
->> 2. Migrating old users with an explicit log level
->> 3. Renaming show_stack_loglvl() into show_stack()
->>
->> Justification:
->> o It's a design mistake to move a business-logic decision
->>   into platform realization detail.
->> o I have currently two patches sets that would benefit from this work:
->>   Removing console_loglevel jumps in sysrq driver [1]
->>   Hung task warning before panic [2] - suggested by Tetsuo (but he
->>   probably didn't realise what it would involve).
->> o While doing (1), (2) the backtraces were adjusted to headers
->>   and other messages for each situation - so there won't be a situation
->>   when the backtrace is printed, but the headers are missing because
->>   they have lesser log level (or the reverse).
->> o As the result in (2) plays with console_loglevel for kdb are removed.
+On Wed, Nov 06, 2019 at 04:27:33PM +0000, Dmitry Safonov wrote:
+> Hi Peter,
 > 
-> I really don't understand that word salad. Why are you doing this?
+> On 11/6/19 9:20 AM, Peter Zijlstra wrote:
+> > On Wed, Nov 06, 2019 at 03:04:51AM +0000, Dmitry Safonov wrote:
+> >> Add log level argument to show_stack().
+> >> Done in three stages:
+> >> 1. Introducing show_stack_loglvl() for every architecture
+> >> 2. Migrating old users with an explicit log level
+> >> 3. Renaming show_stack_loglvl() into show_stack()
+> >>
+> >> Justification:
+> >> o It's a design mistake to move a business-logic decision
+> >>   into platform realization detail.
+> >> o I have currently two patches sets that would benefit from this work:
+> >>   Removing console_loglevel jumps in sysrq driver [1]
+> >>   Hung task warning before panic [2] - suggested by Tetsuo (but he
+> >>   probably didn't realise what it would involve).
+> >> o While doing (1), (2) the backtraces were adjusted to headers
+> >>   and other messages for each situation - so there won't be a situation
+> >>   when the backtrace is printed, but the headers are missing because
+> >>   they have lesser log level (or the reverse).
+> >> o As the result in (2) plays with console_loglevel for kdb are removed.
+> > 
+> > I really don't understand that word salad. Why are you doing this?
+> > 
 > 
+> Sorry, I should have tried to describe better.
+> 
+> I'm trying to remove external users of console_loglevel by following
+> reasons:
 
-Sorry, I should have tried to describe better.
+I suppose since all my machines have 'debug ignore_loglevel
+earlyprintk=serial,ttyS0,115200 console=ttyS0,115200' I don't have this
+experience.
 
-I'm trying to remove external users of console_loglevel by following
-reasons:
-- changing console_loglevel on SMP means that unwanted messages from
-other CPUs will appear (that have lower log level)
-- on UMP unwanted messages may appear if the code is preempted while it
-hasn't set the console_loglevel back to old
-- rising console_loglevel to print wanted message(s) may not work at all
-if printk() has being delayed and the console_loglevel is already set
-back to old value
+> - changing console_loglevel on SMP means that unwanted messages from
+> other CPUs will appear (that have lower log level)
+> - on UMP unwanted messages may appear if the code is preempted while it
+> hasn't set the console_loglevel back to old
+> - rising console_loglevel to print wanted message(s) may not work at all
+> if printk() has being delayed and the console_loglevel is already set
+> back to old value
 
-Sysrq driver changes console_loglevel because it needs to print message
-with a specific log level (the code said userspace relies on this).
-Kdb changes console_loglevel to print backtrace as the log level depends
-on architecture realisation.
+Sure, frobbing the global console_loglevel is bad.
 
-I also have patches in wip those needs to print backtrace with specific
-loglevel (higher when it's critical, lower when it's notice and
-shouldn't go to serial console).
+> I also have patches in wip those needs to print backtrace with specific
+> loglevel (higher when it's critical, lower when it's notice and
+> shouldn't go to serial console).
 
-Besides on local tests I see hits those have headers (messages like
-"Backtrace: ") without an actual backtrace and the reverse - a backtrace
-without a reason for it. It's quite annoying and worth addressing by
-syncing headers log levels to backtraces.
+(everything always should go to serial, serial is awesome :-)
 
-Thanks,
-          Dmitry
+> Besides on local tests I see hits those have headers (messages like
+> "Backtrace: ") without an actual backtrace and the reverse - a backtrace
+> without a reason for it. It's quite annoying and worth addressing by
+> syncing headers log levels to backtraces.
+
+I suppose I'm surprised there are backtraces that are not important.
+Either badness happened and it needs printing, or the user asked for it
+and it needs printing.
+
+Perhaps we should be removing backtraces if they're not important
+instead of allowing to print them as lower loglevels?
 
 
 _______________________________________________
