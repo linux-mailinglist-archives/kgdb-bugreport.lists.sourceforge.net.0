@@ -2,115 +2,63 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A40E8F1236
+	by mail.lfdr.de (Postfix) with ESMTPS id B2137F1237
 	for <lists+kgdb-bugreport@lfdr.de>; Wed,  6 Nov 2019 10:32:11 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
-	Message-Id:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	 bh=1YA261jFIQWkwdY0UQGAxJXS3n63eLE8Sk63SJmbpFc=; b=ASI/W3iA51bB05TXjgQly5Fxy
-	65+dIxmsd90RyHN+2sZn35k7HEVhZr8H2tvvOLe/TqZKzHh1/DQ6AEZut7DyKAnJnEXXeQhei8Cwt
-	uU5utFDc/hPRijDnKohXnf7zaK+rfG8cJC7m06Ad2qb/xL6djfzVe5gG1n5xD+/U+Ilhg=;
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1iSHfe-00074B-GK
+	id 1iSHfe-00074L-Hz
 	for lists+kgdb-bugreport@lfdr.de; Wed, 06 Nov 2019 09:32:10 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <dima@arista.com>) id 1iSC4I-0003j9-UI
- for kgdb-bugreport@lists.sourceforge.net; Wed, 06 Nov 2019 03:33:14 +0000
+ (envelope-from <pmladek@suse.com>) id 1iSGnE-0006g9-W8
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 06 Nov 2019 08:35:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=NQVs5wwFF+ZXBQRWhQmdDS/dpWCW86lqTZTcB1oCVCs=; b=OAAqkJ0vRxPDYxibiZrUq8uqhP
- POe9Q5Dc/qrDyC9Re2u4Gzwj+RGzxQ9Cr1FAqXkXjF1nr3gq3kSCEN6TUsFg0cCIqWRQtPnTD8qAL
- nrag25iSfO5hrpOG46WUBFXDPbmwUem/OBYY7/j/0jhJDPFsDv61eTmMjIqpeHdUzJrU=;
+ bh=Qk+OYjvpNaLjFaIqmjjs7SMjcunhbhU68T3kJ5WqXMs=; b=RHfBlfwX735YfJLjx9E+Zbt+BG
+ h/2AuFp75IWOxYCTlsFIdMFjeE4LM5P8bXtdo/wynxzEhGgUK1GGM+Sgc/3IjKniSCpnzkM7jwLxR
+ 5K3DcwQvZkwktkVT+w2z+U1WzGaAR6xOTjMJt8kG0ytYwyGIvbuToFbWk/3nPZt3dbog=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=NQVs5wwFF+ZXBQRWhQmdDS/dpWCW86lqTZTcB1oCVCs=; b=YTYu/Mr4BZGc6eOk37/j5mDMc9
- JhuMEeW5eWTYrOsZot9MfMQ40RO5hzmPD2ZM28798ZMkGSPaEXiEBW+7V/gP1s9D5Z4Kr3x+3TLPu
- 9CxHaucfyQez3TtL5dIpqIrv1fSu5lbkcwP49jTaL5tQ1cOj1JBdYof+vuxZzT4QS+cI=;
-Received: from mail-io1-f67.google.com ([209.85.166.67])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1iSC4H-002HKP-Ix
- for kgdb-bugreport@lists.sourceforge.net; Wed, 06 Nov 2019 03:33:14 +0000
-Received: by mail-io1-f67.google.com with SMTP id q83so4160552iod.1
- for <kgdb-bugreport@lists.sourceforge.net>;
- Tue, 05 Nov 2019 19:33:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=arista.com; s=googlenew;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=NQVs5wwFF+ZXBQRWhQmdDS/dpWCW86lqTZTcB1oCVCs=;
- b=hwEVVRAjUSZdGmd+zIYiiAm0BS6vQRqT7Np8QLCJa9rwgas6NUYjnhfkxHtysM2NyL
- 3gqqp68+OE4P2hnz0GpO+I46aH+QG3hAxxxcnelkgX2r/YMrlvKrsawetAKp9JCiRRqE
- OAGyhs55+Hnz0vlSMDamrklsOrmY5Pcm97Z91Y30EhluCasiFBZpNilghWULDcjczBqO
- mygnTgXwjiCXE0sqnj6Jz/SU6uHZH3yEKabR4lbld4B0wynD8fnk4lR02tSLVmIhdYu8
- XJ/GpU/rAbDRkgoh8bFh0hg7qQaCVAbssY8fkgRhfF7uJO84arARAzE72rim2JzgLg06
- wXqw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=NQVs5wwFF+ZXBQRWhQmdDS/dpWCW86lqTZTcB1oCVCs=;
- b=kg9Ks7K5Oj/yFq5bo6gRGnI/7mVXYjvaTJZFunZ7AlsOx5wmUDwHiX5xQf9b0Ap7QB
- vTMPFULfn1w6aCp5yWx0RjJmXG6CTa+28NziTkbbWeMUQu1BAYcug3jjljpPa5ZbS4P7
- QtTC5mxduDgN/ca5ZAvaxeLUhWhtsTGt8ZdrJihrF+Kk5aURueCanz7bT+SjVh+cxHvI
- /pILhFuP8ct3E5OH93qAk2ynCctIubrgk0lYTFq4YS+nS7IOKbd0vH4iG3od6Cza8hDB
- Vo7K28aHgIUgX9dg+Ub871FOOUV83RlN4b+InBoWRQHSNwKCoORBhmyOx3c3wOP8Mnej
- JXzA==
-X-Gm-Message-State: APjAAAUQTOpIMHLUaeM5mAaItR0SPKlPc19HuzvcQb3BZylMpNSHRmO2
- PLrlrL8pRjYbClNKgOwzmByv5KTfuvY=
-X-Google-Smtp-Source: APXvYqzO/MiX6rzUz7ULsfgX2r4ZuEI8e6SlpcEQ3E12/qqbszPZo0vGvcYI2lG10DGwQ7pYN8yQaA==
-X-Received: by 2002:a63:c405:: with SMTP id h5mr240542pgd.60.1573009745814;
- Tue, 05 Nov 2019 19:09:05 -0800 (PST)
-Received: from Mindolluin.ire.aristanetworks.com ([217.173.96.166])
- by smtp.gmail.com with ESMTPSA id k24sm19570487pgl.6.2019.11.05.19.09.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Nov 2019 19:09:05 -0800 (PST)
-To: linux-kernel@vger.kernel.org
-Date: Wed,  6 Nov 2019 03:05:38 +0000
-Message-Id: <20191106030542.868541-48-dima@arista.com>
-X-Mailer: git-send-email 2.23.0
-In-Reply-To: <20191106030542.868541-1-dima@arista.com>
+ bh=Qk+OYjvpNaLjFaIqmjjs7SMjcunhbhU68T3kJ5WqXMs=; b=O8UhdKB+BNwJfuIB3q7kMbvOP9
+ 0xZEJm3kxeyumxzCATEStlCzcgKOU8NtpOBwsKqC0cMDTNwep9Rq8fH9zzZRp9TBF1GlDp0YRHO3z
+ WgIU7QBRiwCzMQjZlDsktNw6SI7gXfAFMYYqntIwB8FtwMwIVQ5EPRELuGxpKjlR2zuI=;
+Received: from mx2.suse.de ([195.135.220.15] helo=mx1.suse.de)
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1iSGnC-001tsZ-K2
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 06 Nov 2019 08:35:56 +0000
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx1.suse.de (Postfix) with ESMTP id 19FADAE65;
+ Wed,  6 Nov 2019 08:35:47 +0000 (UTC)
+Date: Wed, 6 Nov 2019 09:35:38 +0100
+From: Petr Mladek <pmladek@suse.com>
+To: Dmitry Safonov <dima@arista.com>
+Message-ID: <20191106083538.z5nlpuf64cigxigh@pathway.suse.cz>
 References: <20191106030542.868541-1-dima@arista.com>
 MIME-Version: 1.0
-X-Spam-Score: -0.1 (/)
+Content-Disposition: inline
+In-Reply-To: <20191106030542.868541-1-dima@arista.com>
+User-Agent: NeoMutt/20170912 (1.9.0)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: chromium.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.67 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.166.67 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iSC4H-002HKP-Ix
+X-Headers-End: 1iSGnC-001tsZ-K2
 X-Mailman-Approved-At: Wed, 06 Nov 2019 09:32:08 +0000
-Subject: [Kgdb-bugreport] [PATCH 47/50] kdb: Don't play with console_loglevel
+Subject: Re: [Kgdb-bugreport] [PATCH 00/50] Add log level to show_stack()
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -122,71 +70,111 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-From: Dmitry Safonov via Kgdb-bugreport <kgdb-bugreport@lists.sourceforge.net>
-Reply-To: Dmitry Safonov <dima@arista.com>
-Cc: Petr Mladek <pmladek@suse.com>,
- Daniel Thompson <daniel.thompson@linaro.org>, Dmitry Safonov <dima@arista.com>,
- Tetsuo Handa <penguin-kernel@I-love.SAKURA.ne.jp>,
+Cc: Juri Lelli <juri.lelli@redhat.com>, linux-sh@vger.kernel.org,
+ Catalin Marinas <catalin.marinas@arm.com>, Ben Segall <bsegall@google.com>,
+ Guo Ren <guoren@kernel.org>, Pavel Machek <pavel@ucw.cz>,
+ Vincent Guittot <vincent.guittot@linaro.org>,
+ Paul Burton <paulburton@kernel.org>, Michael Ellerman <mpe@ellerman.id.au>,
+ Geert Uytterhoeven <geert@linux-m68k.org>, Mel Gorman <mgorman@suse.de>,
+ Jiri Slaby <jslaby@suse.com>, Matt Turner <mattst88@gmail.com>,
+ uclinux-h8-devel@lists.sourceforge.jp, Len Brown <len.brown@intel.com>,
+ linux-pm@vger.kernel.org, Heiko Carstens <heiko.carstens@de.ibm.com>,
+ linux-um@lists.infradead.org, Thomas Gleixner <tglx@linutronix.de>,
+ Dietmar Eggemann <dietmar.eggemann@arm.com>,
+ Richard Henderson <rth@twiddle.net>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Jason Wessel <jason.wessel@windriver.com>,
- Dmitry Safonov <0x7f454c46@gmail.com>, Steven Rostedt <rostedt@goodmis.org>,
- Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
- Jiri Slaby <jslaby@suse.com>, kgdb-bugreport@lists.sourceforge.net,
- Andrew Morton <akpm@linux-foundation.org>, Ingo Molnar <mingo@kernel.org>
+ "Rafael J. Wysocki" <rjw@rjwysocki.net>, linux-kernel@vger.kernel.org,
+ Ralf Baechle <ralf@linux-mips.org>, Paul Mackerras <paulus@samba.org>,
+ Andrew Morton <akpm@linux-foundation.org>, linux-ia64@vger.kernel.org,
+ Tetsuo Handa <penguin-kernel@I-love.SAKURA.ne.jp>,
+ James Hogan <jhogan@kernel.org>,
+ "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+ Max Filippov <jcmvbkbc@gmail.com>, Vincent Chen <deanbo422@gmail.com>,
+ Ingo Molnar <mingo@kernel.org>, linux-s390@vger.kernel.org,
+ linux-c6x-dev@linux-c6x.org, Yoshinori Sato <ysato@users.sourceforge.jp>,
+ linux-hexagon@vger.kernel.org, Helge Deller <deller@gmx.de>,
+ linux-xtensa@linux-xtensa.org, Vasily Gorbik <gor@linux.ibm.com>,
+ Aurelien Jacquiot <jacquiot.aurelien@gmail.com>,
+ linux-m68k@lists.linux-m68k.org, Stafford Horne <shorne@gmail.com>,
+ linux-arm-kernel@lists.infradead.org, Chris Zankel <chris@zankel.net>,
+ Tony Luck <tony.luck@intel.com>,
+ Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+ Dmitry Safonov <0x7f454c46@gmail.com>, Will Deacon <will@kernel.org>,
+ Daniel Thompson <daniel.thompson@linaro.org>,
+ Brian Cain <bcain@codeaurora.org>,
+ Christian Borntraeger <borntraeger@de.ibm.com>,
+ kgdb-bugreport@lists.sourceforge.net, linux-snps-arc@lists.infradead.org,
+ Fenghua Yu <fenghua.yu@intel.com>, Borislav Petkov <bp@alien8.de>,
+ Jeff Dike <jdike@addtoit.com>, Steven Rostedt <rostedt@goodmis.org>,
+ Ivan Kokshaysky <ink@jurassic.park.msu.ru>, Greentime Hu <green.hu@gmail.com>,
+ Guan Xuetao <gxt@pku.edu.cn>, linux-parisc@vger.kernel.org,
+ linux-alpha@vger.kernel.org, Ley Foon Tan <lftan@altera.com>,
+ "David S. Miller" <davem@davemloft.net>, Rich Felker <dalias@libc.org>,
+ Peter Zijlstra <peterz@infradead.org>, "H. Peter Anvin" <hpa@zytor.com>,
+ sparclinux@vger.kernel.org, linux-riscv@lists.infradead.org,
+ Anton Ivanov <anton.ivanov@cambridgegreys.com>,
+ Jonas Bonn <jonas@southpole.se>, Richard Weinberger <richard@nod.at>,
+ x86@kernel.org, Russell King <linux@armlinux.org.uk>,
+ clang-built-linux@googlegroups.com, Ingo Molnar <mingo@redhat.com>,
+ Mark Salter <msalter@redhat.com>, Albert Ou <aou@eecs.berkeley.edu>,
+ Stefan Kristiansson <stefan.kristiansson@saunalahti.fi>,
+ openrisc@lists.librecores.org, Paul Walmsley <paul.walmsley@sifive.com>,
+ Michal Simek <monstr@monstr.eu>, Vineet Gupta <vgupta@synopsys.com>,
+ linux-mips@vger.kernel.org, Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Jason Wessel <jason.wessel@windriver.com>,
+ nios2-dev@lists.rocketboards.org, linuxppc-dev@lists.ozlabs.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Print the stack trace with KERN_EMERG - it should be always visible.
+On Wed 2019-11-06 03:04:51, Dmitry Safonov wrote:
+> Add log level argument to show_stack().
+> Done in three stages:
+> 1. Introducing show_stack_loglvl() for every architecture
+> 2. Migrating old users with an explicit log level
+> 3. Renaming show_stack_loglvl() into show_stack()
+> 
+> Justification:
+> o It's a design mistake to move a business-logic decision
+>   into platform realization detail.
+> o I have currently two patches sets that would benefit from this work:
+>   Removing console_loglevel jumps in sysrq driver [1]
 
-Playing with console_loglevel is a bad idea as there may be more
-messages printed than wanted. Also the stack trace might be not printed
-at all if printk() was deferred and console_loglevel was raised back
-before the trace got flushed.
+Just to clarify. The problem in sysrq driver is a bit different.
+It modifies console_loglevel to show even less important message
+on the console.
 
-Cc: Daniel Thompson <daniel.thompson@linaro.org>
-Cc: Douglas Anderson <dianders@chromium.org>
-Cc: Jason Wessel <jason.wessel@windriver.com>
-Cc: kgdb-bugreport@lists.sourceforge.net
-Signed-off-by: Dmitry Safonov <dima@arista.com>
----
- kernel/debug/kdb/kdb_bt.c | 11 ++++-------
- 1 file changed, 4 insertions(+), 7 deletions(-)
+IMHO, it should be solved by printing the header line with pr_error().
+It is not ideal. A cleaner solution might be to introduce another
+loglevel that will always get pushed to the console. But I am
+not sure if it is worth this single line.
 
-diff --git a/kernel/debug/kdb/kdb_bt.c b/kernel/debug/kdb/kdb_bt.c
-index 7e2379aa0a1e..5ce1fe082a38 100644
---- a/kernel/debug/kdb/kdb_bt.c
-+++ b/kernel/debug/kdb/kdb_bt.c
-@@ -21,22 +21,19 @@
- 
- static void kdb_show_stack(struct task_struct *p, void *addr)
- {
--	int old_lvl = console_loglevel;
--	console_loglevel = CONSOLE_LOGLEVEL_MOTORMOUTH;
- 	kdb_trap_printk++;
- 	kdb_set_current_task(p);
- 	if (addr) {
--		show_stack((struct task_struct *)p, addr);
-+		show_stack_loglvl(p, addr, KERN_EMERG);
- 	} else if (kdb_current_regs) {
- #ifdef CONFIG_X86
--		show_stack(p, &kdb_current_regs->sp);
-+		show_stack_loglvl(p, &kdb_current_regs->sp, KERN_EMERG);
- #else
--		show_stack(p, NULL);
-+		show_stack_loglvl(p, NULL, KERN_EMERG);
- #endif
- 	} else {
--		show_stack(p, NULL);
-+		show_stack_loglvl(p, NULL, KERN_EMERG);
- 	}
--	console_loglevel = old_lvl;
- 	kdb_trap_printk--;
- }
- 
--- 
-2.23.0
+>   Hung task warning before panic [2] - suggested by Tetsuo (but he
+>   probably didn't realise what it would involve).
+> o While doing (1), (2) the backtraces were adjusted to headers
+>   and other messages for each situation - so there won't be a situation
+>   when the backtrace is printed, but the headers are missing because
+>   they have lesser log level (or the reverse).
+> o As the result in (2) plays with console_loglevel for kdb are removed.
 
+> The least important for upstream, but maybe still worth to note that
+> every company I've worked in so far had an off-list patch to print
+> backtrace with the needed log level (but only for the architecture they
+> cared about).
+> If you have other ideas how you will benefit from show_stack() with
+> a log level - please, reply to this cover letter.
+
+I agree with all the other justification.
+
+I would add. The backtrace is really useful for debugging. It should
+be possible to print it even in less critical situations.
+
+I am afraid that many people use WARN() for this purpose. But WARN()
+is not always appropriate. WARN() misuse huts when panic_on_warn
+option is used.
+
+Best Regards,
+Petr
 
 
 _______________________________________________
