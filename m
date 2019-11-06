@@ -2,74 +2,83 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B8D58F2B8F
-	for <lists+kgdb-bugreport@lfdr.de>; Thu,  7 Nov 2019 10:55:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 10E0FF2B90
+	for <lists+kgdb-bugreport@lfdr.de>; Thu,  7 Nov 2019 10:55:55 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1iSeW9-00088d-G0
+	id 1iSeW9-00088m-PG
 	for lists+kgdb-bugreport@lfdr.de; Thu, 07 Nov 2019 09:55:53 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <peterz@infradead.org>) id 1iSS1I-0004S8-Gg
- for kgdb-bugreport@lists.sourceforge.net; Wed, 06 Nov 2019 20:35:12 +0000
+ (envelope-from <linux+kgdb-bugreport=lists.sourceforge.net@armlinux.org.uk>)
+ id 1iSV2E-000681-Vo
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 06 Nov 2019 23:48:23 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=IJrcQXptkMvPiExxcW5iB0NzeMYZeKfH93+EIxkwDzY=; b=ScRwZOz5cBCgndfRnNKphkJlnN
- sP+m8ULaPGQSpQo4a3W5+E/h9kUAn36DcJD4kdS9TVVcgaXnuTLId9WF2VJK+L0mIliJsVTNF+9P+
- iO1WGoTPLAn3D63dvzzmQS+g0a/udcOXySpDkhE58LOrp1bsproHLzGORKqhEuJgrKBo=;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=IJrcQXptkMvPiExxcW5iB0NzeMYZeKfH93+EIxkwDzY=; b=UOeKruMRoLNA9N4aump1XroIsJ
- DFQlCpwXOJu12ZHfbzRVxucFwvGfBQ/krTk6RIZypoDg1C8r4/2F9kAa9QvCkmVZkizzYAbFPd8Vo
- g63lbw9Hg58+66YT8H47rmzhHHMrK/7YhA2kBtJCm1GskkIiGLHmJ2IVYjIiP3P+9xL8=;
-Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iSS1E-002mmi-9r
- for kgdb-bugreport@lists.sourceforge.net; Wed, 06 Nov 2019 20:35:12 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
- :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=Sender:In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
  List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=IJrcQXptkMvPiExxcW5iB0NzeMYZeKfH93+EIxkwDzY=; b=dLqPPOZnjveWBeyFqFHqrbtNZ
- Duw5YArJPTaMMMK8SsjUxFjkIDQhNUSGD5PvNQVqSS+e/GWXU1Um5AVf/5sUPjLz45CKuM0IRDAMs
- VJOI3PF4FsdFW2Mj099DRLCzazEzb+zrotnV0I1WVxXeWHoGdNsYMsg3hXOH54aFacQzs/oy4AisX
- 0iQV33+aUEMHy+n5TIl+aUKiWMNj3wlvtrjuO4fCRVPkUgi8SKL+BQOZYBkn7NslBLpVF53Y5s7wl
- nyOBB1ExO8CnC6/BiF+fSyjnLlUc7UEIcgZ13IIdTf4f2/4oA2gULPIuZ+oV94CGzcp/+zHem6q8U
- 4ISIm47TA==;
-Received: from j217100.upc-j.chello.nl ([24.132.217.100]
- helo=worktop.programming.kicks-ass.net)
- by bombadil.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1iSS0p-0001aI-GA; Wed, 06 Nov 2019 20:34:43 +0000
-Received: by worktop.programming.kicks-ass.net (Postfix, from userid 1000)
- id C2126980DF5; Wed,  6 Nov 2019 21:34:40 +0100 (CET)
-Date: Wed, 6 Nov 2019 21:34:40 +0100
-From: Peter Zijlstra <peterz@infradead.org>
-To: Dmitry Safonov <dima@arista.com>
-Message-ID: <20191106203440.GH3079@worktop.programming.kicks-ass.net>
+ bh=PRxpis2yYVwo9kDaUSfGCl5VFlJxyHbhU0YR7G7gbJ8=; b=NJ/NBJAolZYUt6Ighhix+XVki
+ NgqKHCGxA1mvg3ZtJh0zyjEFLKmF5NqBxwUV+kO/385qvKQUdNcJ+9ih85R/xPaOS6PDmBD1Bq9qB
+ M7ASqdEJr9xUsiu2anYN5KZQX2C2urBfIv1yOjr555+ehBNJBG6fUYVXT9+6Ww9Kdn5zw=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
+ ;
+ h=Sender:In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
+ Subject:Cc:To:From:Date:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=PRxpis2yYVwo9kDaUSfGCl5VFlJxyHbhU0YR7G7gbJ8=; b=lo2ojlcC9AdCRRBs5I0aMzN+Kx
+ pa/Isww9cq7PWCpFXefo0Xtj1OiY677AZY0xu07aMDPoViYjL0Iu+OG78id8YMHqBrlEyQEaa/XTm
+ yM6flmIfdBCikIXbLh6Kbl0rVwzM1H5gZGLsb4uGUPzKkryhzElVuKCZkoJ6H4I4mt3g=;
+Received: from pandora.armlinux.org.uk ([78.32.30.218])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1iSV2C-003rD6-Iq
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 06 Nov 2019 23:48:22 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=armlinux.org.uk; s=pandora-2019; h=Sender:In-Reply-To:Content-Type:
+ MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=PRxpis2yYVwo9kDaUSfGCl5VFlJxyHbhU0YR7G7gbJ8=; b=iy2paYFVbfDDxvP/gOAeR2zl0
+ YOZEPL3WjHOmVg+0OQahNkJkI83R2voT2LINyyq/NpOQgJ8XbP653WAnOCKJeMd3FQfk1r00D1g6Z
+ fp0OZxAP4Vl3Ld3lf2vsPvJVAaYSvfV/oRelynTl2M99Xzch5Yo0n9rKkDRrpqI+VDj8uG0IE0Mwu
+ DLXZUR9cXBF6yhsVU66Hv9Zw3qb9D4TtgACKhdNRerRuquMvaCXNfaGPMRzGBVS3f+JaE6Gz3Dc5B
+ ZjnPN/i029uWQPyVkPtoGc8KSHKL1/41r92P9256aLhtNWmorZhciQ3YdFO8welchayVt2ute4n7E
+ rzURiZTZA==;
+Received: from shell.armlinux.org.uk
+ ([2001:4d48:ad52:3201:5054:ff:fe00:4ec]:52746)
+ by pandora.armlinux.org.uk with esmtpsa
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <linux@armlinux.org.uk>)
+ id 1iSUgS-00085H-Vb; Wed, 06 Nov 2019 23:25:53 +0000
+Received: from linux by shell.armlinux.org.uk with local (Exim 4.92)
+ (envelope-from <linux@shell.armlinux.org.uk>)
+ id 1iSUfp-0004Pa-1s; Wed, 06 Nov 2019 23:25:13 +0000
+Date: Wed, 6 Nov 2019 23:25:13 +0000
+From: Russell King - ARM Linux admin <linux@armlinux.org.uk>
+To: Peter Zijlstra <peterz@infradead.org>
+Message-ID: <20191106232512.GU25745@shell.armlinux.org.uk>
 References: <20191106030542.868541-1-dima@arista.com>
  <20191106092039.GT4131@hirez.programming.kicks-ass.net>
  <10db6fa1-5b17-ebe6-09e0-6335e09e4db8@arista.com>
+ <20191106203440.GH3079@worktop.programming.kicks-ass.net>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <10db6fa1-5b17-ebe6-09e0-6335e09e4db8@arista.com>
+In-Reply-To: <20191106203440.GH3079@worktop.programming.kicks-ass.net>
 User-Agent: Mutt/1.10.1 (2018-07-13)
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: armlinux.org.uk]
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -77,7 +86,7 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1iSS1E-002mmi-9r
+X-Headers-End: 1iSV2C-003rD6-Iq
 X-Mailman-Approved-At: Thu, 07 Nov 2019 09:55:52 +0000
 Subject: Re: [Kgdb-bugreport] [PATCH 00/50] Add log level to show_stack()
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
@@ -95,7 +104,8 @@ Cc: Juri Lelli <juri.lelli@redhat.com>, linux-sh@vger.kernel.org,
  Catalin Marinas <catalin.marinas@arm.com>, Ben Segall <bsegall@google.com>,
  Guo Ren <guoren@kernel.org>, Pavel Machek <pavel@ucw.cz>,
  Vincent Guittot <vincent.guittot@linaro.org>,
- Paul Burton <paulburton@kernel.org>, Michael Ellerman <mpe@ellerman.id.au>,
+ Paul Burton <paulburton@kernel.org>, Dmitry Safonov <dima@arista.com>,
+ Michael Ellerman <mpe@ellerman.id.au>,
  Geert Uytterhoeven <geert@linux-m68k.org>, Mel Gorman <mgorman@suse.de>,
  Jiri Slaby <jslaby@suse.com>, Matt Turner <mattst88@gmail.com>,
  uclinux-h8-devel@lists.sourceforge.jp, Len Brown <len.brown@intel.com>,
@@ -135,9 +145,9 @@ Cc: Juri Lelli <juri.lelli@redhat.com>, linux-sh@vger.kernel.org,
  sparclinux@vger.kernel.org, linux-riscv@lists.infradead.org,
  Anton Ivanov <anton.ivanov@cambridgegreys.com>,
  Jonas Bonn <jonas@southpole.se>, Richard Weinberger <richard@nod.at>,
- x86@kernel.org, Russell King <linux@armlinux.org.uk>,
- clang-built-linux@googlegroups.com, Ingo Molnar <mingo@redhat.com>,
- Mark Salter <msalter@redhat.com>, Albert Ou <aou@eecs.berkeley.edu>,
+ x86@kernel.org, clang-built-linux@googlegroups.com,
+ Ingo Molnar <mingo@redhat.com>, Mark Salter <msalter@redhat.com>,
+ Albert Ou <aou@eecs.berkeley.edu>,
  Stefan Kristiansson <stefan.kristiansson@saunalahti.fi>,
  openrisc@lists.librecores.org, Paul Walmsley <paul.walmsley@sifive.com>,
  Michal Simek <monstr@monstr.eu>, Vineet Gupta <vgupta@synopsys.com>,
@@ -148,69 +158,34 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Wed, Nov 06, 2019 at 04:27:33PM +0000, Dmitry Safonov wrote:
-> Hi Peter,
-> 
-> On 11/6/19 9:20 AM, Peter Zijlstra wrote:
-> > On Wed, Nov 06, 2019 at 03:04:51AM +0000, Dmitry Safonov wrote:
-> >> Add log level argument to show_stack().
-> >> Done in three stages:
-> >> 1. Introducing show_stack_loglvl() for every architecture
-> >> 2. Migrating old users with an explicit log level
-> >> 3. Renaming show_stack_loglvl() into show_stack()
-> >>
-> >> Justification:
-> >> o It's a design mistake to move a business-logic decision
-> >>   into platform realization detail.
-> >> o I have currently two patches sets that would benefit from this work:
-> >>   Removing console_loglevel jumps in sysrq driver [1]
-> >>   Hung task warning before panic [2] - suggested by Tetsuo (but he
-> >>   probably didn't realise what it would involve).
-> >> o While doing (1), (2) the backtraces were adjusted to headers
-> >>   and other messages for each situation - so there won't be a situation
-> >>   when the backtrace is printed, but the headers are missing because
-> >>   they have lesser log level (or the reverse).
-> >> o As the result in (2) plays with console_loglevel for kdb are removed.
-> > 
-> > I really don't understand that word salad. Why are you doing this?
-> > 
-> 
-> Sorry, I should have tried to describe better.
-> 
-> I'm trying to remove external users of console_loglevel by following
-> reasons:
+On Wed, Nov 06, 2019 at 09:34:40PM +0100, Peter Zijlstra wrote:
+> I suppose I'm surprised there are backtraces that are not important.
+> Either badness happened and it needs printing, or the user asked for it
+> and it needs printing.
 
-I suppose since all my machines have 'debug ignore_loglevel
-earlyprintk=serial,ttyS0,115200 console=ttyS0,115200' I don't have this
-experience.
+Or utterly meaningless.
 
-> - changing console_loglevel on SMP means that unwanted messages from
-> other CPUs will appear (that have lower log level)
-> - on UMP unwanted messages may appear if the code is preempted while it
-> hasn't set the console_loglevel back to old
-> - rising console_loglevel to print wanted message(s) may not work at all
-> if printk() has being delayed and the console_loglevel is already set
-> back to old value
+> Perhaps we should be removing backtraces if they're not important
+> instead of allowing to print them as lower loglevels?
 
-Sure, frobbing the global console_loglevel is bad.
+Definitely!  WARN_ON() is well overused - and as is typical, used
+without much thought.  Bound to happen after Linus got shirty about
+BUG_ON() being over used.  Everyone just grabbed the next nearest thing
+to assert().
 
-> I also have patches in wip those needs to print backtrace with specific
-> loglevel (higher when it's critical, lower when it's notice and
-> shouldn't go to serial console).
+As a kind of example, I've recently come across one WARN_ON() in a
+driver subsystem (that shall remain nameless at the moment) which very
+likely has multiple different devices on a platform.  The WARN_ON()
+triggers as a result of a problem with the hardware, but because it's a
+WARN_ON(), you've no idea which device has a problem.  The backtrace is
+mostly meaningless.  So you know that a problem has occurred, but the
+kernel prints *useless* backtrace to let you know, and totally omits
+the *useful* information.
 
-(everything always should go to serial, serial is awesome :-)
-
-> Besides on local tests I see hits those have headers (messages like
-> "Backtrace: ") without an actual backtrace and the reverse - a backtrace
-> without a reason for it. It's quite annoying and worth addressing by
-> syncing headers log levels to backtraces.
-
-I suppose I'm surprised there are backtraces that are not important.
-Either badness happened and it needs printing, or the user asked for it
-and it needs printing.
-
-Perhaps we should be removing backtraces if they're not important
-instead of allowing to print them as lower loglevels?
+-- 
+RMK's Patch system: https://www.armlinux.org.uk/developer/patches/
+FTTC broadband for 0.8mile line in suburbia: sync at 12.1Mbps down 622kbps up
+According to speedtest.net: 11.9Mbps down 500kbps up
 
 
 _______________________________________________
