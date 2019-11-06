@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B2137F1237
-	for <lists+kgdb-bugreport@lfdr.de>; Wed,  6 Nov 2019 10:32:11 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id CACC3F150C
+	for <lists+kgdb-bugreport@lfdr.de>; Wed,  6 Nov 2019 12:27:07 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1iSHfe-00074L-Hz
-	for lists+kgdb-bugreport@lfdr.de; Wed, 06 Nov 2019 09:32:10 +0000
+	id 1iSJSs-0005rD-LX
+	for lists+kgdb-bugreport@lfdr.de; Wed, 06 Nov 2019 11:27:06 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <pmladek@suse.com>) id 1iSGnE-0006g9-W8
- for kgdb-bugreport@lists.sourceforge.net; Wed, 06 Nov 2019 08:35:56 +0000
+ (envelope-from <peterz@infradead.org>) id 1iSHnU-0000n9-FA
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 06 Nov 2019 09:40:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Qk+OYjvpNaLjFaIqmjjs7SMjcunhbhU68T3kJ5WqXMs=; b=RHfBlfwX735YfJLjx9E+Zbt+BG
- h/2AuFp75IWOxYCTlsFIdMFjeE4LM5P8bXtdo/wynxzEhGgUK1GGM+Sgc/3IjKniSCpnzkM7jwLxR
- 5K3DcwQvZkwktkVT+w2z+U1WzGaAR6xOTjMJt8kG0ytYwyGIvbuToFbWk/3nPZt3dbog=;
+ bh=XC4fPCw3J3i5aH6OXgVy9H1qRwbB/y9LePlmMadDkeQ=; b=GKQSj71MOmajcRBEMMk7MJiV3j
+ ZjZIBKADRSq2Kp2iHgb+p3jAXTf0DNiPZhW9K3yaF6RFgBFRg1M43IYnIgWZcbrI/5/bWk5e/HJ4U
+ e3JiN8Xtx6CDdtAl1GjZAxaBiCnNfZI9q4Dguz5eu/w88v42lyb2u6qezK1ZFhSWvCEU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -30,34 +30,59 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Qk+OYjvpNaLjFaIqmjjs7SMjcunhbhU68T3kJ5WqXMs=; b=O8UhdKB+BNwJfuIB3q7kMbvOP9
- 0xZEJm3kxeyumxzCATEStlCzcgKOU8NtpOBwsKqC0cMDTNwep9Rq8fH9zzZRp9TBF1GlDp0YRHO3z
- WgIU7QBRiwCzMQjZlDsktNw6SI7gXfAFMYYqntIwB8FtwMwIVQ5EPRELuGxpKjlR2zuI=;
-Received: from mx2.suse.de ([195.135.220.15] helo=mx1.suse.de)
+ bh=XC4fPCw3J3i5aH6OXgVy9H1qRwbB/y9LePlmMadDkeQ=; b=GW4gAnFkteF5ptyfx4FKSjUbZE
+ RjGwIDkoMRg5wQIeJuBbjKpucZOtntNCZFr8Ow5TBrttHzFJIaVFBPcwn73V17COkw13BgmGrNESt
+ tvDUP8wgYUUPc2qg1QFND8+vIRWybfVZpszqBO+rrTg++RYm1/XXfXQCySV4Nj/BqfRk=;
+Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iSGnC-001tsZ-K2
- for kgdb-bugreport@lists.sourceforge.net; Wed, 06 Nov 2019 08:35:56 +0000
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx1.suse.de (Postfix) with ESMTP id 19FADAE65;
- Wed,  6 Nov 2019 08:35:47 +0000 (UTC)
-Date: Wed, 6 Nov 2019 09:35:38 +0100
-From: Petr Mladek <pmladek@suse.com>
+ id 1iSHnQ-001xvb-19
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 06 Nov 2019 09:40:16 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=XC4fPCw3J3i5aH6OXgVy9H1qRwbB/y9LePlmMadDkeQ=; b=ChIeMW0IZbNT7DDWy38jbL0ti
+ o3kdjyNHnjm8CZpcaqKlsG3bH6W2x8fORIgfBYfmM7e5nS0piuqmqum28O0zH/5977tOw4px+tdeS
+ oTR+oQSX5ZlLLCwbPSqWqFbvOrVdrNZQaG6kPwneTb7qqLVv0nfzlXYK0ztdA5NXh1Sq3O0rh2L7t
+ 3kF6Hs7vAdiIgMe4W9PbjKANnM5eic3qCufRluAtUmPDlbf/PoOH4pP8V97waGVRV2PiwFuD7mO5V
+ DbuXHw4dzseLAoH/5uIRR0LLRcVINkzsLiGoRAGsofVWC7f1rZCmkGeTl/XGifnDxZqPsBDQ9OfnO
+ +Z33+sWYQ==;
+Received: from j217100.upc-j.chello.nl ([24.132.217.100]
+ helo=noisy.programming.kicks-ass.net)
+ by bombadil.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+ id 1iSHUe-00058d-4m; Wed, 06 Nov 2019 09:20:48 +0000
+Received: from hirez.programming.kicks-ass.net
+ (hirez.programming.kicks-ass.net [192.168.1.225])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (Client did not present a certificate)
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id A681A301A79;
+ Wed,  6 Nov 2019 10:19:35 +0100 (CET)
+Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
+ id 9F3F529A4C2C6; Wed,  6 Nov 2019 10:20:39 +0100 (CET)
+Date: Wed, 6 Nov 2019 10:20:39 +0100
+From: Peter Zijlstra <peterz@infradead.org>
 To: Dmitry Safonov <dima@arista.com>
-Message-ID: <20191106083538.z5nlpuf64cigxigh@pathway.suse.cz>
+Message-ID: <20191106092039.GT4131@hirez.programming.kicks-ass.net>
 References: <20191106030542.868541-1-dima@arista.com>
 MIME-Version: 1.0
 Content-Disposition: inline
 In-Reply-To: <20191106030542.868541-1-dima@arista.com>
-User-Agent: NeoMutt/20170912 (1.9.0)
-X-Spam-Score: 0.0 (/)
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1iSGnC-001tsZ-K2
-X-Mailman-Approved-At: Wed, 06 Nov 2019 09:32:08 +0000
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+X-Headers-End: 1iSHnQ-001xvb-19
+X-Mailman-Approved-At: Wed, 06 Nov 2019 11:27:05 +0000
 Subject: Re: [Kgdb-bugreport] [PATCH 00/50] Add log level to show_stack()
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -110,7 +135,7 @@ Cc: Juri Lelli <juri.lelli@redhat.com>, linux-sh@vger.kernel.org,
  Guan Xuetao <gxt@pku.edu.cn>, linux-parisc@vger.kernel.org,
  linux-alpha@vger.kernel.org, Ley Foon Tan <lftan@altera.com>,
  "David S. Miller" <davem@davemloft.net>, Rich Felker <dalias@libc.org>,
- Peter Zijlstra <peterz@infradead.org>, "H. Peter Anvin" <hpa@zytor.com>,
+ Petr Mladek <pmladek@suse.com>, "H. Peter Anvin" <hpa@zytor.com>,
  sparclinux@vger.kernel.org, linux-riscv@lists.infradead.org,
  Anton Ivanov <anton.ivanov@cambridgegreys.com>,
  Jonas Bonn <jonas@southpole.se>, Richard Weinberger <richard@nod.at>,
@@ -127,7 +152,7 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Wed 2019-11-06 03:04:51, Dmitry Safonov wrote:
+On Wed, Nov 06, 2019 at 03:04:51AM +0000, Dmitry Safonov wrote:
 > Add log level argument to show_stack().
 > Done in three stages:
 > 1. Introducing show_stack_loglvl() for every architecture
@@ -139,16 +164,6 @@ On Wed 2019-11-06 03:04:51, Dmitry Safonov wrote:
 >   into platform realization detail.
 > o I have currently two patches sets that would benefit from this work:
 >   Removing console_loglevel jumps in sysrq driver [1]
-
-Just to clarify. The problem in sysrq driver is a bit different.
-It modifies console_loglevel to show even less important message
-on the console.
-
-IMHO, it should be solved by printing the header line with pr_error().
-It is not ideal. A cleaner solution might be to introduce another
-loglevel that will always get pushed to the console. But I am
-not sure if it is worth this single line.
-
 >   Hung task warning before panic [2] - suggested by Tetsuo (but he
 >   probably didn't realise what it would involve).
 > o While doing (1), (2) the backtraces were adjusted to headers
@@ -157,24 +172,7 @@ not sure if it is worth this single line.
 >   they have lesser log level (or the reverse).
 > o As the result in (2) plays with console_loglevel for kdb are removed.
 
-> The least important for upstream, but maybe still worth to note that
-> every company I've worked in so far had an off-list patch to print
-> backtrace with the needed log level (but only for the architecture they
-> cared about).
-> If you have other ideas how you will benefit from show_stack() with
-> a log level - please, reply to this cover letter.
-
-I agree with all the other justification.
-
-I would add. The backtrace is really useful for debugging. It should
-be possible to print it even in less critical situations.
-
-I am afraid that many people use WARN() for this purpose. But WARN()
-is not always appropriate. WARN() misuse huts when panic_on_warn
-option is used.
-
-Best Regards,
-Petr
+I really don't understand that word salad. Why are you doing this?
 
 
 _______________________________________________
