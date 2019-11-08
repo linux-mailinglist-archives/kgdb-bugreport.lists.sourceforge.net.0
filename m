@@ -2,92 +2,63 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 10E0FF2B90
-	for <lists+kgdb-bugreport@lfdr.de>; Thu,  7 Nov 2019 10:55:55 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id A3AF4F4C96
+	for <lists+kgdb-bugreport@lfdr.de>; Fri,  8 Nov 2019 14:05:09 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1iSeW9-00088m-PG
-	for lists+kgdb-bugreport@lfdr.de; Thu, 07 Nov 2019 09:55:53 +0000
+	id 1iT3wq-0002ir-Ce
+	for lists+kgdb-bugreport@lfdr.de; Fri, 08 Nov 2019 13:05:08 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <linux+kgdb-bugreport=lists.sourceforge.net@armlinux.org.uk>)
- id 1iSV2E-000681-Vo
- for kgdb-bugreport@lists.sourceforge.net; Wed, 06 Nov 2019 23:48:23 +0000
+ (envelope-from <pmladek@suse.com>) id 1iT3wn-0002iH-W5
+ for kgdb-bugreport@lists.sourceforge.net; Fri, 08 Nov 2019 13:05:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Sender:In-Reply-To:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=PRxpis2yYVwo9kDaUSfGCl5VFlJxyHbhU0YR7G7gbJ8=; b=NJ/NBJAolZYUt6Ighhix+XVki
- NgqKHCGxA1mvg3ZtJh0zyjEFLKmF5NqBxwUV+kO/385qvKQUdNcJ+9ih85R/xPaOS6PDmBD1Bq9qB
- M7ASqdEJr9xUsiu2anYN5KZQX2C2urBfIv1yOjr555+ehBNJBG6fUYVXT9+6Ww9Kdn5zw=;
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=La9f0W75O1O7X1+adHiQmzYierWrtdMcZjwxWFaAWaY=; b=Ia/x75D+qPN88hlqG+6OH92iow
+ RpimJ2UEoZ4xf2uCLU4w4CUja9pQhlHPWsEh9kwV9CnVzNIM28TZIcGOn7LlWjUDQat9Wpw+I42hD
+ JNUa3Lw7x2ip4HyXPd9zMp1G6SDl14GD/7TlR6Ydr1vCRpWrlpK5+AnzmUMqJHU0Zso8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Sender:In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
- Subject:Cc:To:From:Date:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=PRxpis2yYVwo9kDaUSfGCl5VFlJxyHbhU0YR7G7gbJ8=; b=lo2ojlcC9AdCRRBs5I0aMzN+Kx
- pa/Isww9cq7PWCpFXefo0Xtj1OiY677AZY0xu07aMDPoViYjL0Iu+OG78id8YMHqBrlEyQEaa/XTm
- yM6flmIfdBCikIXbLh6Kbl0rVwzM1H5gZGLsb4uGUPzKkryhzElVuKCZkoJ6H4I4mt3g=;
-Received: from pandora.armlinux.org.uk ([78.32.30.218])
+ bh=La9f0W75O1O7X1+adHiQmzYierWrtdMcZjwxWFaAWaY=; b=YhSqVZ81sU9s0spE/9o1ff3DTM
+ Ypyn9P5WlxNjQ0pzpnADo0qB9I4W5iyLA/13EK6f0lfdQ2r+jraEoAvWQNu5jAqPnxP3Y8ZqeoaVk
+ 4pa8m8wjIzDH4GhR5JdMiCuagn89E4qp85CChMYYLqYB3yWpSNO7y5vO8YmTQedbO9GI=;
+Received: from mx2.suse.de ([195.135.220.15] helo=mx1.suse.de)
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1iSV2C-003rD6-Iq
- for kgdb-bugreport@lists.sourceforge.net; Wed, 06 Nov 2019 23:48:22 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=armlinux.org.uk; s=pandora-2019; h=Sender:In-Reply-To:Content-Type:
- MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=PRxpis2yYVwo9kDaUSfGCl5VFlJxyHbhU0YR7G7gbJ8=; b=iy2paYFVbfDDxvP/gOAeR2zl0
- YOZEPL3WjHOmVg+0OQahNkJkI83R2voT2LINyyq/NpOQgJ8XbP653WAnOCKJeMd3FQfk1r00D1g6Z
- fp0OZxAP4Vl3Ld3lf2vsPvJVAaYSvfV/oRelynTl2M99Xzch5Yo0n9rKkDRrpqI+VDj8uG0IE0Mwu
- DLXZUR9cXBF6yhsVU66Hv9Zw3qb9D4TtgACKhdNRerRuquMvaCXNfaGPMRzGBVS3f+JaE6Gz3Dc5B
- ZjnPN/i029uWQPyVkPtoGc8KSHKL1/41r92P9256aLhtNWmorZhciQ3YdFO8welchayVt2ute4n7E
- rzURiZTZA==;
-Received: from shell.armlinux.org.uk
- ([2001:4d48:ad52:3201:5054:ff:fe00:4ec]:52746)
- by pandora.armlinux.org.uk with esmtpsa
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <linux@armlinux.org.uk>)
- id 1iSUgS-00085H-Vb; Wed, 06 Nov 2019 23:25:53 +0000
-Received: from linux by shell.armlinux.org.uk with local (Exim 4.92)
- (envelope-from <linux@shell.armlinux.org.uk>)
- id 1iSUfp-0004Pa-1s; Wed, 06 Nov 2019 23:25:13 +0000
-Date: Wed, 6 Nov 2019 23:25:13 +0000
-From: Russell King - ARM Linux admin <linux@armlinux.org.uk>
-To: Peter Zijlstra <peterz@infradead.org>
-Message-ID: <20191106232512.GU25745@shell.armlinux.org.uk>
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1iT3wk-006bcl-Pk
+ for kgdb-bugreport@lists.sourceforge.net; Fri, 08 Nov 2019 13:05:04 +0000
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx1.suse.de (Postfix) with ESMTP id 4150BABE8;
+ Fri,  8 Nov 2019 13:04:55 +0000 (UTC)
+Date: Fri, 8 Nov 2019 14:04:47 +0100
+From: Petr Mladek <pmladek@suse.com>
+To: Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>
+Message-ID: <20191108130447.h3wfgo4efjkto56f@pathway.suse.cz>
 References: <20191106030542.868541-1-dima@arista.com>
- <20191106092039.GT4131@hirez.programming.kicks-ass.net>
- <10db6fa1-5b17-ebe6-09e0-6335e09e4db8@arista.com>
- <20191106203440.GH3079@worktop.programming.kicks-ass.net>
+ <20191106083538.z5nlpuf64cigxigh@pathway.suse.cz>
+ <20191108103719.GB175344@google.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20191106203440.GH3079@worktop.programming.kicks-ass.net>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <20191108103719.GB175344@google.com>
+User-Agent: NeoMutt/20170912 (1.9.0)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: armlinux.org.uk]
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
-X-Headers-End: 1iSV2C-003rD6-Iq
-X-Mailman-Approved-At: Thu, 07 Nov 2019 09:55:52 +0000
+X-Headers-End: 1iT3wk-006bcl-Pk
 Subject: Re: [Kgdb-bugreport] [PATCH 00/50] Add log level to show_stack()
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -141,13 +112,13 @@ Cc: Juri Lelli <juri.lelli@redhat.com>, linux-sh@vger.kernel.org,
  Guan Xuetao <gxt@pku.edu.cn>, linux-parisc@vger.kernel.org,
  linux-alpha@vger.kernel.org, Ley Foon Tan <lftan@altera.com>,
  "David S. Miller" <davem@davemloft.net>, Rich Felker <dalias@libc.org>,
- Petr Mladek <pmladek@suse.com>, "H. Peter Anvin" <hpa@zytor.com>,
+ Peter Zijlstra <peterz@infradead.org>, "H. Peter Anvin" <hpa@zytor.com>,
  sparclinux@vger.kernel.org, linux-riscv@lists.infradead.org,
  Anton Ivanov <anton.ivanov@cambridgegreys.com>,
  Jonas Bonn <jonas@southpole.se>, Richard Weinberger <richard@nod.at>,
- x86@kernel.org, clang-built-linux@googlegroups.com,
- Ingo Molnar <mingo@redhat.com>, Mark Salter <msalter@redhat.com>,
- Albert Ou <aou@eecs.berkeley.edu>,
+ x86@kernel.org, Russell King <linux@armlinux.org.uk>,
+ clang-built-linux@googlegroups.com, Ingo Molnar <mingo@redhat.com>,
+ Mark Salter <msalter@redhat.com>, Albert Ou <aou@eecs.berkeley.edu>,
  Stefan Kristiansson <stefan.kristiansson@saunalahti.fi>,
  openrisc@lists.librecores.org, Paul Walmsley <paul.walmsley@sifive.com>,
  Michal Simek <monstr@monstr.eu>, Vineet Gupta <vgupta@synopsys.com>,
@@ -158,34 +129,37 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Wed, Nov 06, 2019 at 09:34:40PM +0100, Peter Zijlstra wrote:
-> I suppose I'm surprised there are backtraces that are not important.
-> Either badness happened and it needs printing, or the user asked for it
-> and it needs printing.
+On Fri 2019-11-08 19:37:19, Sergey Senozhatsky wrote:
+> On (19/11/06 09:35), Petr Mladek wrote:
+> > I agree with all the other justification.
+> > 
+> > I would add. The backtrace is really useful for debugging. It should
+> > be possible to print it even in less critical situations.
+> 
+> Hmm, I don't know.
+> Do we really need debug/info level backtraces?
 
-Or utterly meaningless.
+debug is exactly the loglevel where registry content and backtrace
+might be very useful. It is not always important to reach the console.
 
-> Perhaps we should be removing backtraces if they're not important
-> instead of allowing to print them as lower loglevels?
 
-Definitely!  WARN_ON() is well overused - and as is typical, used
-without much thought.  Bound to happen after Linus got shirty about
-BUG_ON() being over used.  Everyone just grabbed the next nearest thing
-to assert().
+> May be all backtraces can be converted to something more severe
+> (so we can stop playing games with loglvl) and then we can
+> clean up "(ab)users"?
 
-As a kind of example, I've recently come across one WARN_ON() in a
-driver subsystem (that shall remain nameless at the moment) which very
-likely has multiple different devices on a platform.  The WARN_ON()
-triggers as a result of a problem with the hardware, but because it's a
-WARN_ON(), you've no idea which device has a problem.  The backtrace is
-mostly meaningless.  So you know that a problem has occurred, but the
-kernel prints *useless* backtrace to let you know, and totally omits
-the *useful* information.
+IMHO, we should distinguish warning, error, crit, alert, emerg
+situations. Backtraces and any related messages should be
+filtered the same way. Any information might be useless without
+the context.
 
--- 
-RMK's Patch system: https://www.armlinux.org.uk/developer/patches/
-FTTC broadband for 0.8mile line in suburbia: sync at 12.1Mbps down 622kbps up
-According to speedtest.net: 11.9Mbps down 500kbps up
+I agree that it is complicated to pass the loglevel as
+a parameter. It would be better define the default
+log level for a given code section. It might be stored
+in task_struct for the normal context and in per-CPU
+variables for interrupt contexts.
+
+Best Regards,
+Petr
 
 
 _______________________________________________
