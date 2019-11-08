@@ -2,27 +2,28 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1EAB0F7034
-	for <lists+kgdb-bugreport@lfdr.de>; Mon, 11 Nov 2019 10:12:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 57745F7172
+	for <lists+kgdb-bugreport@lfdr.de>; Mon, 11 Nov 2019 11:10:12 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1iU5kJ-0008Hi-Su
-	for lists+kgdb-bugreport@lfdr.de; Mon, 11 Nov 2019 09:12:27 +0000
+	id 1iU6eB-0002aR-4Z
+	for lists+kgdb-bugreport@lfdr.de; Mon, 11 Nov 2019 10:10:11 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <pmladek@suse.com>) id 1iU5kH-0008HZ-Nb
- for kgdb-bugreport@lists.sourceforge.net; Mon, 11 Nov 2019 09:12:25 +0000
+ (envelope-from <sergey.senozhatsky.work@gmail.com>)
+ id 1iT1dx-0003Ap-Up
+ for kgdb-bugreport@lists.sourceforge.net; Fri, 08 Nov 2019 10:37:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ckDLLBNybB00NN8bJ+zRvU0mCEzS1GZ+ad57vCEWPjg=; b=cQlpD23aP4bfKdyeyN7HiVAGoK
- SflFeTgJLt+AxFRMLefuJ6Xc6DflclklBijDwv5eydJeO8EbgWW/ie/JpJ80vmyObiM9Y5GGTAn//
- wyk1qSt1zx6JcwrVeI1WwxDGIXufOpIqARrNzBgwmx/8Wuk7CvYBBuIoemQm42UwSqtg=;
+ bh=S+Nia2Oa5QzCO5JT/esBQ1livkv4TlWV+4fZRWkEO+o=; b=UvfqXLO3/RJgeKh1UlCrY6PBXl
+ RNntfeUuRS2EBz+4nxxhmBPR8wSh/rL4FnN7WyhVAa6SEBsciVzlpmU22MYUf4rzWv/cCyt6jLTH8
+ n8MNYhF9rj8CqmfmhwJinjpWpHbTv3zbEKEiJXpBssKtgeQMRNteOCB6uT/bq0IzovLs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -30,37 +31,77 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ckDLLBNybB00NN8bJ+zRvU0mCEzS1GZ+ad57vCEWPjg=; b=Tmc8UAHLOAuFi2NDkHEwALRMzt
- UKbkwF8x9kOmqxZ70/oIK3a5kFFbFiQaEdfQGv5Xhhtzq+6LEyF4Kt8XGX50MOdc+4T1grhMYKI2c
- iODFCXmCsuXTPCRhY3j8yjmNndBWhpvmXY7Ck4stJnaNLIVazdrJkVloKnjVnJzbODto=;
-Received: from mx2.suse.de ([195.135.220.15] helo=mx1.suse.de)
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iU5kF-00Bprl-7p
- for kgdb-bugreport@lists.sourceforge.net; Mon, 11 Nov 2019 09:12:25 +0000
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx1.suse.de (Postfix) with ESMTP id 54EB2ACA3;
- Mon, 11 Nov 2019 09:12:15 +0000 (UTC)
-Date: Mon, 11 Nov 2019 10:12:07 +0100
-From: Petr Mladek <pmladek@suse.com>
-To: Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>
-Message-ID: <20191111091207.u3lrd6cmumnx4czr@pathway.suse.cz>
+ bh=S+Nia2Oa5QzCO5JT/esBQ1livkv4TlWV+4fZRWkEO+o=; b=RsDVKQCFlz5fWKc+UL57HKNryF
+ +6aaZQfruSSglF8Xqsmfbzd4xHeqGOUiKeLcORKYJ4hpGHNn2POLi6YSkwpuc5LBBTWZDb8B/bTG/
+ GKVrJjkBpHqra2GLkHW+cPmoySiI6cMEwlQcTEe/NQJ6ZsyQ5stwIsfVsnzCw+eyL4ls=;
+Received: from mail-pf1-f193.google.com ([209.85.210.193])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1iT1dv-004r3t-W7
+ for kgdb-bugreport@lists.sourceforge.net; Fri, 08 Nov 2019 10:37:29 +0000
+Received: by mail-pf1-f193.google.com with SMTP id s5so4269402pfh.9
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Fri, 08 Nov 2019 02:37:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=S+Nia2Oa5QzCO5JT/esBQ1livkv4TlWV+4fZRWkEO+o=;
+ b=f9fUi1K0epILaPpMKUGA+FGIJ+GYnQXz31FR/JIRsr0jNtvXVD8WKS6AKbo2g/yYiS
+ jp2Jgic4IxPn6T+PZphyltIyB4vnkBFwniOcMw51O2csFX1kjAC4QKejH96MUOsdWVPi
+ BoIKRt+J7TT0AysruvIMXwSoJkxw5mAFsb1iShx9yrdJQ4jAMH1x3fQmLCILPy17O63N
+ P5MCDaBbfZ4mb7y00oRdGf9IW4tz0D1nAGsSM5DLvdeQEZfjNAjb8k+88kSyJh4+WTH8
+ CfsXzxfWKj+ARiV2OGLJRKeQ2vRNt5PSY65UAb+0sRHT/5MlGv9E/r9lKer8LjaXODrM
+ kWIA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=S+Nia2Oa5QzCO5JT/esBQ1livkv4TlWV+4fZRWkEO+o=;
+ b=O/8pP65agvuLKLrUy4JT4YIE4T0a+8EaZxESX58Wtks1f7rZ9ye0KHiOn1un+FEQz2
+ V3eqSuWC2fwFu5n4w4Mbtflui41emMSUzYFpURbrCmbGsufZlUPlIKHAw6ft+Dt+0NIv
+ cG/p/g7ol9PlMqP8Qymw6Xt5KTSN9ZBzmwqh/QSEoozufSIgWMGCdOd6WMf/27DcwBEY
+ FeH6Cl5HQK9dszA0eAwWWwzEyW9lp84Mx8zMDEIuRJTQq1h7T6ECJvfWeOaRBEoYOe9L
+ iFUcHUafmWp6KYcNIc+dbMoPf4lD7PhELvRs7GySgOW6bSIHQi7NL9Yv+bp6f3UdFmfY
+ wzXg==
+X-Gm-Message-State: APjAAAXNVwhuvKx5rVswYg9tmjoZVOov/gvjeM25l1cnRbMxGkwmtQ1g
+ 7Ktu+JxyiCF7eDlvlXhQn7M=
+X-Google-Smtp-Source: APXvYqyO7sUpnj6a7Ff+Mjm5FDdK7wKit2fH7+9aIK/ZJYnbn96UndAqrCFpv1s9jhGv09wzRODVog==
+X-Received: by 2002:a17:90a:25ea:: with SMTP id
+ k97mr12085072pje.110.1573209442245; 
+ Fri, 08 Nov 2019 02:37:22 -0800 (PST)
+Received: from localhost ([2401:fa00:8f:203:250d:e71d:5a0a:9afe])
+ by smtp.gmail.com with ESMTPSA id m14sm5221119pgj.8.2019.11.08.02.37.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 08 Nov 2019 02:37:21 -0800 (PST)
+Date: Fri, 8 Nov 2019 19:37:19 +0900
+From: Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>
+To: Petr Mladek <pmladek@suse.com>
+Message-ID: <20191108103719.GB175344@google.com>
 References: <20191106030542.868541-1-dima@arista.com>
  <20191106083538.z5nlpuf64cigxigh@pathway.suse.cz>
- <20191108103719.GB175344@google.com>
- <20191108130447.h3wfgo4efjkto56f@pathway.suse.cz>
- <20191111012336.GA85185@google.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20191111012336.GA85185@google.com>
-User-Agent: NeoMutt/20170912 (1.9.0)
-X-Spam-Score: 0.0 (/)
+In-Reply-To: <20191106083538.z5nlpuf64cigxigh@pathway.suse.cz>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (sergey.senozhatsky.work[at]gmail.com)
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.210.193 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.210.193 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1iU5kF-00Bprl-7p
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1iT1dv-004r3t-W7
+X-Mailman-Approved-At: Mon, 11 Nov 2019 10:10:09 +0000
 Subject: Re: [Kgdb-bugreport] [PATCH 00/50] Add log level to show_stack()
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -131,59 +172,18 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Mon 2019-11-11 10:23:36, Sergey Senozhatsky wrote:
-> On (19/11/08 14:04), Petr Mladek wrote:
-> [..]
-> > I agree that it is complicated to pass the loglevel as
-> > a parameter. It would be better define the default
-> > log level for a given code section. It might be stored
-> > in task_struct for the normal context and in per-CPU
-> > variables for interrupt contexts.
+On (19/11/06 09:35), Petr Mladek wrote:
+> I agree with all the other justification.
 > 
-> I do recall that we talked about per-CPU printk state bit which would
-> start/end "just print it" section. We probably can extend it to "just
-> log_store" type of functionality. Doesn't look like a very bad idea.
+> I would add. The backtrace is really useful for debugging. It should
+> be possible to print it even in less critical situations.
 
-The problem with per-CPU printk is that we would need to disable
-interrupts. It is not always wanted. Also people might not expect
-this from a printk() API.
+Hmm, I don't know.
+Do we really need debug/info level backtraces? May be all backtraces
+can be converted to something more severe (so we can stop playing games
+with loglvl) and then we can clean up "(ab)users"?
 
-
-> "This task/context is in trouble, whatever it printk()-s is important".
-
-It might be a minimal loglevel. More important messages would still
-be printed() with the higher loglevel.
-
-But yes, this per-code-section loglevel is problematic. The feedback
-against the patchset shows that people want it also the other way.
-I mean to keep pr_debug() as pr_debug().
-
-A solution might be to use the per-code-section loglevel only instead
-of some special loglevel.
-
-
-> Per-console loglevel also might help sometimes. Slower consoles would
-> ->write() only critical messages, faster consoles everything.
-
-This looks like another problem to me. Anyway, this filtering will
-work better when the loglevel will be consistent across the related
-lines.
-
-> Passing log_level as part of message payload, which printk machinery
-> magically hides is not entirely exciting. What we have in the code
-> now - printk("%s blah\n", lvl) - is not what we see in the logs.
-> Because the leading '%s' becomes special. And printk()/sprintf()
-> documentation should reflect that: '%s' prints a string, but sometimes
-> it doesn't.
-
-I personally do not see this as a big problem.
-
-The explicitly passed loglevel makes me feel more confident that
-all needed printk() calls were updated. But it might be a false
-feeling. I do not really have any strong preference.
-
-Best Regards,
-Petr
+	-ss
 
 
 _______________________________________________
