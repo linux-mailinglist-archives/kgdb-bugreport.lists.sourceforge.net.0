@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 68092F6139
-	for <lists+kgdb-bugreport@lfdr.de>; Sat,  9 Nov 2019 20:46:27 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9D59CF6138
+	for <lists+kgdb-bugreport@lfdr.de>; Sat,  9 Nov 2019 20:45:41 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1iTWgj-0004hH-9E
-	for lists+kgdb-bugreport@lfdr.de; Sat, 09 Nov 2019 19:46:25 +0000
+	id 1iTWg0-0005b6-DF
+	for lists+kgdb-bugreport@lfdr.de; Sat, 09 Nov 2019 19:45:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <dianders@chromium.org>) id 1iTWgi-0004hA-9E
- for kgdb-bugreport@lists.sourceforge.net; Sat, 09 Nov 2019 19:46:24 +0000
+ (envelope-from <dianders@chromium.org>) id 1iTWfz-0005az-OV
+ for kgdb-bugreport@lists.sourceforge.net; Sat, 09 Nov 2019 19:45:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=FDlNx6EGMrp3vN/hMVd1kyT0CxIKEbIPYjtFrXlWFSw=; b=bhq2CoDA1QdTdUKij4ZcGmRFmj
- A4lY4r81OxOjOQpsQSW165cxUrKdB1hOPAxiPrGtx3ozzUnscta31dpLp2vn3w5cewDcxvSbfQNv/
- dMJR7TZI0grsyNiuIvtb4fTY4s42u97g0G/TWHOTlxfHQ7FfyAkISmHuLpfLwjecMf9Y=;
+ bh=TY/VtRKwYYhLwNyDqkkRR3WLEh0rigRGo+K8ilv6++I=; b=U1dvo3cnvrUQEjh6uh4tIpyRab
+ ufTY0OJxKpkxKRBL03Jbd5Atq3mBlm5QwEkdrDbAB+RX1d1C457DsQXGqajL3mnLYTjiEhH3WCDuo
+ pmponRyRys2CyPpvWnX1oA0fV26Unj2YHryFnlSikhNJZ5FMENsMcS7FfFEwZNR8V8U8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -30,51 +30,52 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=FDlNx6EGMrp3vN/hMVd1kyT0CxIKEbIPYjtFrXlWFSw=; b=RnTF4cesP6tzrAv98efQEzhEtg
- 49k+yCXqugKECRzpTl3KAgUGW+Vl8J+pjxLQ+sdG1Hjas1F+JyPjVmCpYw3/+mNVXIwAbPqBl9ft2
- 0F6Xs+Ot8WDISL3b7xsV1940cO+7QFsNUh+2C6kjd2Y6c0iSakJU97mPo1g6kRNtIuN8=;
-Received: from mail-io1-f66.google.com ([209.85.166.66])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ bh=TY/VtRKwYYhLwNyDqkkRR3WLEh0rigRGo+K8ilv6++I=; b=dR/NSDZAKuUDb7fukBpKe7q1QR
+ 8Jz94pNUSMMYTEQMdKNUlqW83xuhPbY35jvu0BROZUZBgqbCmNpdTQyUJ5U5fnsE+KOl3Ivivs7XM
+ a8EpiUKSiKpaWsHDMpvazJsH4ya2S9D+otwP93wVpgogyGKyelgRo4Fdsrdj4s4Kbm70=;
+Received: from mail-pf1-f195.google.com ([209.85.210.195])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1iTWgg-009qdl-Fg
- for kgdb-bugreport@lists.sourceforge.net; Sat, 09 Nov 2019 19:46:24 +0000
-Received: by mail-io1-f66.google.com with SMTP id i13so8647627ioj.5
+ id 1iTWfw-00C0Zn-7Y
+ for kgdb-bugreport@lists.sourceforge.net; Sat, 09 Nov 2019 19:45:39 +0000
+Received: by mail-pf1-f195.google.com with SMTP id v19so7434197pfm.3
  for <kgdb-bugreport@lists.sourceforge.net>;
- Sat, 09 Nov 2019 11:46:22 -0800 (PST)
+ Sat, 09 Nov 2019 11:45:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=FDlNx6EGMrp3vN/hMVd1kyT0CxIKEbIPYjtFrXlWFSw=;
- b=ZzFmB7sQK3gNmFEeDI9qpvLvJ1+N05YxWvEuumFV/BcGrWe9iFzRin5aqvjGTKaR9P
- jqm9KQ+kCcE6UAOTUuZCEzJ1Y28Zql+YlERBbd4b1VaF/hxXwZxAYXfL49v/4yFpClf7
- JONMJc6wtb1wy2WdlfJr4HYyIBX2UU49UcKYs=
+ bh=TY/VtRKwYYhLwNyDqkkRR3WLEh0rigRGo+K8ilv6++I=;
+ b=g/eGJl9U1jxbmYciVtsfJlQad5WJ9yjfHBla5ZFyS8bkdypSn6QJNcS+QzONHVDmxz
+ c3bkKkAA9KmJyZdaBb/uS1OAnpIVOPuWkOHCwaNST4/PMCibEJWbUj2oec78TJVoaXAh
+ ZbYGWvn9nzwcN52NfDz5SD0MvWzK4S78iTyQI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=FDlNx6EGMrp3vN/hMVd1kyT0CxIKEbIPYjtFrXlWFSw=;
- b=q9snY96lbQpJVrrIF1OgO4HUJSgSe/P+IglZPTrQv0KjZcyDiavzpb46qMO5/iacIQ
- AoeoTUqW8xdR+HB6Lgda3spHEzHtNqk11P+9Ab5lUt5CCWBCgSnXvA9Fp5ti3leMDeFm
- A2i/zPuevT7ytE9RU6FNpYA41cAeeDC7BFVNXVcgg+TnPOYEEMcJZTZO0/xENLFEXmJK
- ETSaxuA4zfhDWDmB4Q/NMkZMOtPgi5mfgyCiP6BiJYYsfIvmetuQS8gAWfRzPENpOwdS
- 1jDu13L+0rXuMMJp/KhrFa2asQdZOTrNfwT/xuH82UyI0w+KPAXUc5dv31dppATl59nh
- jOVA==
-X-Gm-Message-State: APjAAAWtr9CL41NnewNN88wZ2C+qfEMgip5ugrkIw6jbJs/nof2m97Q3
- Yv2CcwO162D30NtZNQ9CTJhJqJhXSHo=
-X-Google-Smtp-Source: APXvYqylPzIZ+Djw1JoI0Ai9UaxOOYX4sETzbck6F8sybWeqW/bp7Rd3HddEPdVW3U7hfLf/l1vWvw==
-X-Received: by 2002:a63:7c10:: with SMTP id x16mr19430535pgc.176.1573327072998; 
- Sat, 09 Nov 2019 11:17:52 -0800 (PST)
+ bh=TY/VtRKwYYhLwNyDqkkRR3WLEh0rigRGo+K8ilv6++I=;
+ b=ZzNhEToeCLvZqIbnNA9j+3t1zo6noUVjvAMkMPwL+rVKhFNb0aVH8xYbv340zsTZsW
+ iu1IB4+qe1VqqrlmyXICe+SDbWepO6S1zk8iDgDeta31RxcQNye4RtvlZlrXHOiCh6sy
+ E6F1XEVk6yvKH6b/tVYJPUMfCtlzQbebvqZzpwFL2A3UOHeM8QOx5BZ8ce3ooDLSBh/Z
+ Ku4hfgTY/6FVAezQHGoQkRhubOasf9du0mVuSfDtANLb9y5aO+ETWXFW5kBvseMX2vap
+ nHM2ooEgVyTJ5AF7v0KOE5jtwH9usHR03KgY5jkT65KwNPhRBQ7qoeAqSQNBi04SHt7r
+ 3/Sg==
+X-Gm-Message-State: APjAAAXq17d7zgep52u96D/VCzxU8h78wFjciOr7ECoefCykPNyv4lkP
+ +cb8otAfV2zoBXjTZe0AxtYNTw==
+X-Google-Smtp-Source: APXvYqwLoettSe3c6USEi+mt/ICgOC1tLDB2bnaxht2vYq9Nq+Ctfo+iismzUSyrS1z789xLf+LMZA==
+X-Received: by 2002:a17:90a:ba89:: with SMTP id
+ t9mr22462463pjr.138.1573327074178; 
+ Sat, 09 Nov 2019 11:17:54 -0800 (PST)
 Received: from tictac2.mtv.corp.google.com
  ([2620:15c:202:1:24fa:e766:52c9:e3b2])
- by smtp.gmail.com with ESMTPSA id i11sm9193577pgd.7.2019.11.09.11.17.52
+ by smtp.gmail.com with ESMTPSA id i11sm9193577pgd.7.2019.11.09.11.17.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 Nov 2019 11:17:52 -0800 (PST)
+ Sat, 09 Nov 2019 11:17:53 -0800 (PST)
 From: Douglas Anderson <dianders@chromium.org>
 To: Paul Burton <paul.burton@mips.com>,
  Jason Wessel <jason.wessel@windriver.com>,
  Daniel Thompson <daniel.thompson@linaro.org>
-Date: Sat,  9 Nov 2019 11:16:43 -0800
-Message-Id: <20191109111624.4.Ibc3d982bbeb9e46872d43973ba808cd4c79537c7@changeid>
+Date: Sat,  9 Nov 2019 11:16:44 -0800
+Message-Id: <20191109111624.5.I121f4c6f0c19266200bf6ef003de78841e5bfc3d@changeid>
 X-Mailer: git-send-email 2.24.0.432.g9d3f5f5b63-goog
 In-Reply-To: <20191109191644.191766-1-dianders@chromium.org>
 References: <20191109191644.191766-1-dianders@chromium.org>
@@ -82,10 +83,10 @@ MIME-Version: 1.0
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.66 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.210.195 listed in wl.mailspike.net]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.166.66 listed in list.dnswl.org]
+ trust [209.85.210.195 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -93,11 +94,12 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iTWgg-009qdl-Fg
-Subject: [Kgdb-bugreport] [PATCH 4/5] kdb: Gid rid of implicit setting of
- the current task / regs
+ -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1iTWfw-00C0Zn-7Y
+Subject: [Kgdb-bugreport] [PATCH 5/5] kdb: Get rid of confusing diag msg
+ from "rd" if current task has no regs
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,107 +113,101 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>,
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
 Cc: qiaochong@loongson.cn, Christophe Leroy <christophe.leroy@c-s.fr>,
  "Gustavo A. R. Silva" <gustavo@embeddedor.com>,
- kgdb-bugreport@lists.sourceforge.net, Prarit Bhargava <prarit@redhat.com>,
- Chuhong Yuan <hslester96@gmail.com>, ralf@linux-mips.org,
- linux-kernel@vger.kernel.org, Nicholas Mc Guire <hofrat@osadl.org>,
- Will Deacon <will@kernel.org>, Dan Carpenter <dan.carpenter@oracle.com>
+ kgdb-bugreport@lists.sourceforge.net, Chuhong Yuan <hslester96@gmail.com>,
+ ralf@linux-mips.org, linux-kernel@vger.kernel.org,
+ Nicholas Mc Guire <hofrat@osadl.org>, Dan Carpenter <dan.carpenter@oracle.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Some (but not all?) of the kdb backtrace paths would cause the
-kdb_current_task and kdb_current_regs to remain changed.  As discussed
-in a review of a previous patch [1], this doesn't seem intuitive, so
-let's fix that.
+If you switch to a sleeping task with the "pid" command and then type
+"rd", kdb tells you this:
 
-...but, it turns out that there's actually no longer any reason to set
-the current task / current regs while backtracing anymore anyway.  As
-of commit 2277b492582d ("kdb: Fix stack crawling on 'running' CPUs
-that aren't the master") if we're backtracing on a task running on a
-CPU we ask that CPU to do the backtrace itself.  Linux can do that
-without anything fancy.  If we're doing backtrace on a sleeping task
-we can also do that fine without updating globals.  So this patch
-mostly just turns into deleting a bunch of code.
+  No current kdb registers.  You may need to select another task
+  diag: -17: Invalid register name
 
-[1] https://lore.kernel.org/r/20191010150735.dhrj3pbjgmjrdpwr@holly.lan
+The first message makes sense, but not the second.  Fix it by just
+returning 0 after commands accessing the current registers finish if
+we've already printed the "No current kdb registers" error.
+
+While fixing kdb_rd(), change the function to use "if" rather than
+"ifdef".  It cleans the function up a bit and any modern compiler will
+have no trouble handling still producing good code.
 
 Signed-off-by: Douglas Anderson <dianders@chromium.org>
 ---
 
- kernel/debug/kdb/kdb_bt.c      | 8 +-------
- kernel/debug/kdb/kdb_main.c    | 2 +-
- kernel/debug/kdb/kdb_private.h | 1 -
- 3 files changed, 2 insertions(+), 9 deletions(-)
+ kernel/debug/kdb/kdb_main.c | 28 +++++++++++++---------------
+ 1 file changed, 13 insertions(+), 15 deletions(-)
 
-diff --git a/kernel/debug/kdb/kdb_bt.c b/kernel/debug/kdb/kdb_bt.c
-index 4af48ac53625..3de0cc780c16 100644
---- a/kernel/debug/kdb/kdb_bt.c
-+++ b/kernel/debug/kdb/kdb_bt.c
-@@ -119,7 +119,6 @@ kdb_bt_cpu(unsigned long cpu)
- 		return;
- 	}
- 
--	kdb_set_current_task(kdb_tsk);
- 	kdb_bt1(kdb_tsk, ~0UL, false);
- }
- 
-@@ -166,10 +165,8 @@ kdb_bt(int argc, const char **argv)
- 		if (diag)
- 			return diag;
- 		p = find_task_by_pid_ns(pid, &init_pid_ns);
--		if (p) {
--			kdb_set_current_task(p);
-+		if (p)
- 			return kdb_bt1(p, ~0UL, false);
--		}
- 		kdb_printf("No process with pid == %ld found\n", pid);
- 		return 0;
- 	} else if (strcmp(argv[0], "btt") == 0) {
-@@ -178,11 +175,9 @@ kdb_bt(int argc, const char **argv)
- 		diag = kdbgetularg((char *)argv[1], &addr);
- 		if (diag)
- 			return diag;
--		kdb_set_current_task((struct task_struct *)addr);
- 		return kdb_bt1((struct task_struct *)addr, ~0UL, false);
- 	} else if (strcmp(argv[0], "btc") == 0) {
- 		unsigned long cpu = ~0;
--		struct task_struct *save_current_task = kdb_current_task;
- 		if (argc > 1)
- 			return KDB_ARGCOUNT;
- 		if (argc == 1) {
-@@ -204,7 +199,6 @@ kdb_bt(int argc, const char **argv)
- 				kdb_bt_cpu(cpu);
- 				touch_nmi_watchdog();
- 			}
--			kdb_set_current_task(save_current_task);
- 		}
- 		return 0;
- 	} else {
 diff --git a/kernel/debug/kdb/kdb_main.c b/kernel/debug/kdb/kdb_main.c
-index 4d44b3746836..ba12e9f4661e 100644
+index ba12e9f4661e..b22292b649c4 100644
 --- a/kernel/debug/kdb/kdb_main.c
 +++ b/kernel/debug/kdb/kdb_main.c
-@@ -1138,7 +1138,7 @@ static void kdb_dumpregs(struct pt_regs *regs)
- 	console_loglevel = old_lvl;
+@@ -543,9 +543,8 @@ int kdbgetaddrarg(int argc, const char **argv, int *nextarg,
+ 		if (diag)
+ 			return diag;
+ 	} else if (symname[0] == '%') {
+-		diag = kdb_check_regs();
+-		if (diag)
+-			return diag;
++		if (kdb_check_regs())
++			return 0;
+ 		/* Implement register values with % at a later time as it is
+ 		 * arch optional.
+ 		 */
+@@ -1836,8 +1835,7 @@ static int kdb_go(int argc, const char **argv)
+  */
+ static int kdb_rd(int argc, const char **argv)
+ {
+-	int len = kdb_check_regs();
+-#if DBG_MAX_REG_NUM > 0
++	int len = 0;
+ 	int i;
+ 	char *rname;
+ 	int rsize;
+@@ -1846,8 +1844,14 @@ static int kdb_rd(int argc, const char **argv)
+ 	u16 reg16;
+ 	u8 reg8;
+ 
+-	if (len)
+-		return len;
++	if (kdb_check_regs())
++		return 0;
++
++	/* Fallback to Linux showregs() if we don't have DBG_MAX_REG_NUM */
++	if (DBG_MAX_REG_NUM <= 0) {
++		kdb_dumpregs(kdb_current_regs);
++		return 0;
++	}
+ 
+ 	for (i = 0; i < DBG_MAX_REG_NUM; i++) {
+ 		rsize = dbg_reg_def[i].size * 2;
+@@ -1889,12 +1893,7 @@ static int kdb_rd(int argc, const char **argv)
+ 		}
+ 	}
+ 	kdb_printf("\n");
+-#else
+-	if (len)
+-		return len;
+ 
+-	kdb_dumpregs(kdb_current_regs);
+-#endif
+ 	return 0;
  }
  
--void kdb_set_current_task(struct task_struct *p)
-+static void kdb_set_current_task(struct task_struct *p)
- {
- 	kdb_current_task = p;
+@@ -1928,9 +1927,8 @@ static int kdb_rm(int argc, const char **argv)
+ 	if (diag)
+ 		return diag;
  
-diff --git a/kernel/debug/kdb/kdb_private.h b/kernel/debug/kdb/kdb_private.h
-index e829b22f3946..2e296e4a234c 100644
---- a/kernel/debug/kdb/kdb_private.h
-+++ b/kernel/debug/kdb/kdb_private.h
-@@ -240,7 +240,6 @@ extern void *debug_kmalloc(size_t size, gfp_t flags);
- extern void debug_kfree(void *);
- extern void debug_kusage(void);
+-	diag = kdb_check_regs();
+-	if (diag)
+-		return diag;
++	if (kdb_check_regs())
++		return 0;
  
--extern void kdb_set_current_task(struct task_struct *);
- extern struct task_struct *kdb_current_task;
- extern struct pt_regs *kdb_current_regs;
- 
+ 	diag = KDB_BADREG;
+ 	for (i = 0; i < DBG_MAX_REG_NUM; i++) {
 -- 
 2.24.0.432.g9d3f5f5b63-goog
 
