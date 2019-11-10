@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EDBBFF6327
-	for <lists+kgdb-bugreport@lfdr.de>; Sun, 10 Nov 2019 03:50:08 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id CEB63F6352
+	for <lists+kgdb-bugreport@lfdr.de>; Sun, 10 Nov 2019 03:51:38 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1iTdIl-0005n6-QG
-	for lists+kgdb-bugreport@lfdr.de; Sun, 10 Nov 2019 02:50:07 +0000
+	id 1iTdKD-0006us-KL
+	for lists+kgdb-bugreport@lfdr.de; Sun, 10 Nov 2019 02:51:37 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1iTdIh-0005me-Fu
- for kgdb-bugreport@lists.sourceforge.net; Sun, 10 Nov 2019 02:50:03 +0000
+ (envelope-from <sashal@kernel.org>) id 1iTdKB-0006ul-RC
+ for kgdb-bugreport@lists.sourceforge.net; Sun, 10 Nov 2019 02:51:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
  :References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=c1dTncOSdr+IapvtHpk/fki/A0ZN+fTVObIzhZFP1HM=; b=CpRkT/AEbnvflTHvokzc2gRP1Y
- ViKN6ksWkPyYcs2VBaQdcjG8DCBwDU7lFyBoRWx8nfm8WqqJdWKDYTeKuxcR5P6ZKvG4fd0ZY2HWQ
- W6/7YAVpJrkap06G7lC3l/B9b5Ph+aUq9nOnPt/oih+4ZS9XW10N4kRjk0wSSmKOetIY=;
+ bh=c1dTncOSdr+IapvtHpk/fki/A0ZN+fTVObIzhZFP1HM=; b=ZbefZas4F2W2uHe7q1VKWzE44c
+ JL86tzkJfA1jVKBxnTTOaEnbZBR8sj1YiJ0UTSXxrkiJnt+9AfvJegWF6OmRKBC7wwZdu/z52qrU4
+ EZN8uetAiiveJREwJ67BJOM6sSQn+MbkJENHAL9ynaXVVPqZJvR0hh7yOyrdgRCQ2Dk4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:MIME-Version:References:
@@ -30,35 +30,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=c1dTncOSdr+IapvtHpk/fki/A0ZN+fTVObIzhZFP1HM=; b=QfEUc5mqvSna+w9eDS3ZHKmqH2
- ncwCOEeuCPFY/Uw9KzNalCM5UWYz+QDMfRgh75UtXOO1bW5yZARUWtWmTEut58PSTWpoXNtLolt2E
- 6gGAsZvgMSYzVZbzi4HhuXFFi9bIZyYVvIg5jV0Rob3f4txWCNz2oktYQRbTW2Y0D24g=;
+ bh=c1dTncOSdr+IapvtHpk/fki/A0ZN+fTVObIzhZFP1HM=; b=E90b/l00ji2mATtcjMPjKjH1OL
+ bp3L9bWn6YoT8lx58EzLfWV+P9tow7fbfRIQjtxm9p/xgkor0btxmPbCT8Go1WFckUttsq871VSVG
+ TdRGxLlm2UWcI6kagBZ8hEi5UHSkrjdplSSGPeGIRmjm1v7gIBRVfcsbxEsMDe4UTqEc=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iTdId-00CT1N-Av
- for kgdb-bugreport@lists.sourceforge.net; Sun, 10 Nov 2019 02:50:01 +0000
+ id 1iTdKA-00AASl-OR
+ for kgdb-bugreport@lists.sourceforge.net; Sun, 10 Nov 2019 02:51:35 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 9D0AB22595;
- Sun, 10 Nov 2019 02:49:52 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 096FF22595;
+ Sun, 10 Nov 2019 02:51:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1573354193;
+ s=default; t=1573354288;
  bh=BpAp6XH2uSlXE1JsPhrWmKuprZOOpZwsT4hO8c9rf1g=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=CwFllO4md0/aP1yVmk+DZSOcrulkzi1fsJdOb2tDvz5j8kem4lQM9GbOuEvpZn8iE
- 4I4jZVG0X1d3V3cn23tKmk11xOSVS+x79XhYvxvtOXdcC7CywGwxWdaNmBq8ODB50d
- gXZ3LvyWE21erI21D6s5M1Jr+I16V9a+As9LmVq4=
+ b=ZHdwmJIpTwkONjtWhQeqtQ4KkoVC+y49y0dWZ2AZ10uxgOJ9nwrMVHVyxOEVfQGfq
+ s0MKQpWz+q0Pn8hnvRnyKbjBeRGzdi0QnS3TI1B4drveggjb9XIfdzqqakNfjIlxpS
+ JebYjxvnsrgMhWDZfr2v4SB2VmWxwsb8HvCyxclQ=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Sat,  9 Nov 2019 21:48:20 -0500
-Message-Id: <20191110024846.32598-41-sashal@kernel.org>
+Date: Sat,  9 Nov 2019 21:50:22 -0500
+Message-Id: <20191110025032.827-30-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20191110024846.32598-1-sashal@kernel.org>
-References: <20191110024846.32598-1-sashal@kernel.org>
+In-Reply-To: <20191110025032.827-1-sashal@kernel.org>
+References: <20191110025032.827-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -74,8 +74,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iTdId-00CT1N-Av
-Subject: [Kgdb-bugreport] [PATCH AUTOSEL 4.9 41/66] misc: kgdbts: Fix
+X-Headers-End: 1iTdKA-00AASl-OR
+Subject: [Kgdb-bugreport] [PATCH AUTOSEL 4.4 30/40] misc: kgdbts: Fix
  restrict error
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
