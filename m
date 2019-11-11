@@ -2,97 +2,107 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CBBD3F7175
-	for <lists+kgdb-bugreport@lfdr.de>; Mon, 11 Nov 2019 11:10:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CC8FCF80E2
+	for <lists+kgdb-bugreport@lfdr.de>; Mon, 11 Nov 2019 21:16:48 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:Date:Message-ID:
+	References:To:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=xYqfYS0sjNh/yHY5gr3JzqW3YukvlozD1D3GSj9P6OA=; b=YuS3xey9nkUPVl+MjddY74w1+O
+	NokB4chYlnnpEjEy1eyFSQAdgKTP1tnlmfXgDTIjSxfV+6TO31tV2CCYGFCRsEtb2MmpYdMCpyTkU
+	nG7RIKTNURs53nu/QjxE2yR70vfEUOfser6J/SG9C89DidUmsofidu7NXYyN4Hq0hfFs=;
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1iU6eB-0002au-L1
-	for lists+kgdb-bugreport@lfdr.de; Mon, 11 Nov 2019 10:10:11 +0000
+	id 1iUG7D-0004EA-B1
+	for lists+kgdb-bugreport@lfdr.de; Mon, 11 Nov 2019 20:16:47 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sergey.senozhatsky.work@gmail.com>)
- id 1iTyQk-00056k-P4
- for kgdb-bugreport@lists.sourceforge.net; Mon, 11 Nov 2019 01:23:46 +0000
+ (envelope-from <dima@arista.com>) id 1iUG7B-0004E2-8v
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 11 Nov 2019 20:16:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=meRRGW7ni43do21CnMh1ypMYB7GRo8yRghEKxpnOMtM=; b=RDsJx02E1qvaJdgOx4HzOEsHBr
- NupT5qqYF56wiSw6JahilHPbmWQNXJN/znLmCEznOgj+1uK4CaV0JSZavc9FX8svzS7oCsZRV/VUB
- qdkU6uCyQ4t27isFQ4+QGDRsK301qytSM6461JeWn1AB8w01rLMuFmoAboclVKUuhPIQ=;
+ bh=QOJc4N4PavQU2sAVS1vG4t8ohqXXXnqqV8/w5qQonB8=; b=O8J64j9mMgbS6UinUn77EC5kU9
+ ixw/Ze9C/e+Z0zPsNmOOmbMrOiQ/FU37oo8GgSE6NpgB53ww0B9hKqujHOuTVh/iO490SLU/25h++
+ ZvHuqs3m+2VD4UdbEqYScmVRoFSDosUf/sYDC8DkMxIqEuKKgCUfmwMIJ7UiS7QwFbhA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=meRRGW7ni43do21CnMh1ypMYB7GRo8yRghEKxpnOMtM=; b=H1yTole9TQhueSOcJs/phdS3jd
- Z6QWio2e4VghntSceVNXeq9s1AFZnsawYK19R4xIQa1jJWBvlMRmT9wSmWEArIVsa0VlVNOTCflcM
- ibKFTFDLCLkgeAymj2WP1vuN80rhu5Xiu+Qa/irPYauNWiPCARG+NBjyW2ygwyhotnHs=;
-Received: from mail-pg1-f195.google.com ([209.85.215.195])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ bh=QOJc4N4PavQU2sAVS1vG4t8ohqXXXnqqV8/w5qQonB8=; b=U8SeTQIfsa8u3wJhhrz1XdFmzF
+ yzGXnnVGTd42jKdLQTU6LbntD+vQah9+Ddky0Tn37soVENfVq2Mjtm0UPo/a9EoClOuMt/JQQ7Zdz
+ 1ckMp8ae7xZ6SsfVKWRQlYknFb1mgy/fJB6D+z70ROiStWMDod+DjP3go+CyKLN4wK8E=;
+Received: from mail-wm1-f67.google.com ([209.85.128.67])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1iTyQj-00BI4N-CK
- for kgdb-bugreport@lists.sourceforge.net; Mon, 11 Nov 2019 01:23:46 +0000
-Received: by mail-pg1-f195.google.com with SMTP id z188so2432590pgb.1
+ id 1iUG78-00CVTB-4S
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 11 Nov 2019 20:16:45 +0000
+Received: by mail-wm1-f67.google.com with SMTP id z19so615133wmk.3
  for <kgdb-bugreport@lists.sourceforge.net>;
- Sun, 10 Nov 2019 17:23:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=meRRGW7ni43do21CnMh1ypMYB7GRo8yRghEKxpnOMtM=;
- b=PEUFO8IEu1osGIrKprDzvbxlNRJeZ7+VQZKgcPA4VWwOYdra1vch/X2sOCSKa29N9n
- VdblGN+C6xXZa66p438tGiFX2wH1ZMvXaLBCYR4jMYFYKpHWbu3dvuf4i51nfGHovAdM
- kJ21eWqlCVZNsUh7vR0KmZmoQmTZB1DoPsxQK2h0K8DrMvb84HP3pZHYPYw+F3AAOb8s
- 2PUdw4923VWsoF2jPoVNv2KKLc7p6DTbwWWIyb/CwJRvDtzNsBcrU623traZ5+UDPhd8
- dvUZh/U5lV6A1081bATRr1q945s51Yb6awkYmElXIQG0WkPEPjbs1iqGD3WlzUt7rcka
- L5/w==
+ Mon, 11 Nov 2019 12:16:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=arista.com; s=googlenew;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=QOJc4N4PavQU2sAVS1vG4t8ohqXXXnqqV8/w5qQonB8=;
+ b=cZIehrzGpUFezD2aa4zmv8OufN5OtO0USzsaArEEUTu0egX1JDp7fXq/MKdHB+YxUr
+ j/kC7hgtECdh5x1noQBDdzd4zMsGonK7DNa4R/e8/R7qxcehDcLnLo5qSFE4wjuyW42o
+ PQpFktb3ed0G2yVCt/fgkRLVHHWNH3ragHLlsd4kHSnraDACO77RcGzlulVu3SB7tcFm
+ Ka75d1q24hYXLZJbDgNbGl6ynhrMJhmWegwmwjFp7I5D0Fg2d54s1iF9aPGxd1hnX+B8
+ gISwE6rYfN65iX3ZaYqQ/BYKUKfAwSvjgwPgiFEkk/eO1PVC0atmmvIxVoVwNPzimOsY
+ R2mw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=meRRGW7ni43do21CnMh1ypMYB7GRo8yRghEKxpnOMtM=;
- b=TmVu/ZQDGm4zgobH0HEny5LnZogGhasv9z/QxOK3dyTzckhBPyaYrXKE7JYQe+COWl
- sXu3S7UWxVoWDcApFY8ujioWjjA1dM6YiA4POT/D83cdpKPXXiTJE10vnMZaKT87GjW+
- ZH1hXvji9697BZdtLmcLs/L5SKXPfB2vrmYMskgHwfKZduxoCmoDEgWvpQ8xjKAB+bRz
- GhimDK5zD26plXQhuCY5lNyCysCgq0dRASv3aOmB/T6qxJBbd/WGF8mvZLjR9yBp0TMQ
- yK4yuzqytvB/ceor79Esod54zzlOyhiPvaVK0Mf0j0JezLQaJ8TcyZgEo8zouGFheXvM
- qNww==
-X-Gm-Message-State: APjAAAVEVcRy93k55k/FqQZ6VZEsZept0pn00Ma8VQKQrcB2+s1LKph2
- B1OGiY2KpQ7wgwtso98lNfQ=
-X-Google-Smtp-Source: APXvYqy6vC5fNwNO+7Jnp+tE/qbyOeavvD3kd+/MEwk8H/f5hGFY+WAM1K+Wsl4w+fZzo2o0jtZpqg==
-X-Received: by 2002:a63:b047:: with SMTP id z7mr20331363pgo.224.1573435419566; 
- Sun, 10 Nov 2019 17:23:39 -0800 (PST)
-Received: from localhost ([2401:fa00:8f:203:250d:e71d:5a0a:9afe])
- by smtp.gmail.com with ESMTPSA id r8sm12584714pgr.59.2019.11.10.17.23.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 10 Nov 2019 17:23:38 -0800 (PST)
-Date: Mon, 11 Nov 2019 10:23:36 +0900
-From: Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>
-To: Petr Mladek <pmladek@suse.com>
-Message-ID: <20191111012336.GA85185@google.com>
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=QOJc4N4PavQU2sAVS1vG4t8ohqXXXnqqV8/w5qQonB8=;
+ b=fZn/+plQNB2VZm1x7batDj+pSkohhHH5CLpH5oFYxMmCQG3mzOPMOQXCX3CTWp70V6
+ LTjHTzJztDAFDrkbDtUBv0TflbobGN8qx5Uf5bEJDsl0jg4rOeUKCnTtP1azTSdCR+V3
+ SsOIYr3CHK2zWqdSFFHdPoEksaPrvCgxfPzbubVutwo8tC6JOxOd5o9JR/VGVHBJvEQc
+ 4He4J3Acw7C6cFoqVpfKSN4XKh7wElNrNE/djTXTCWRC8LuV7OLYvejbOb5khkgwShYT
+ qUvRNUVXOifu0zTkVaOLKWnad5QNcvjdSjDAI3qShzfIAEdE8AN1l2eZ2mVk00ZCNOVr
+ GRog==
+X-Gm-Message-State: APjAAAUKP8LS2cyJ7cMrEnA0rtV9NUwGCJUdf+6UsTf6cHiWeYi4dy1U
+ jWpBmR2FIXAd/pQP5UMChZBN/w7brh00VQ==
+X-Google-Smtp-Source: APXvYqwUswzQhu0DkD+M5khz/mFK8gHdabdOoahgxknZZUvPWQw4U7A4JmJR+GV6KsoYg/TOZHa6cQ==
+X-Received: by 2002:a1c:2342:: with SMTP id j63mr585268wmj.56.1573501654084;
+ Mon, 11 Nov 2019 11:47:34 -0800 (PST)
+Received: from [10.83.36.153] ([217.173.96.166])
+ by smtp.gmail.com with ESMTPSA id f67sm723039wme.16.2019.11.11.11.47.30
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 11 Nov 2019 11:47:33 -0800 (PST)
+To: Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>,
+ Petr Mladek <pmladek@suse.com>
 References: <20191106030542.868541-1-dima@arista.com>
  <20191106083538.z5nlpuf64cigxigh@pathway.suse.cz>
  <20191108103719.GB175344@google.com>
  <20191108130447.h3wfgo4efjkto56f@pathway.suse.cz>
+ <20191111012336.GA85185@google.com>
+Message-ID: <13e72b62-c842-8ed5-5b41-bc1692b28f53@arista.com>
+Date: Mon, 11 Nov 2019 19:47:25 +0000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.2.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20191108130447.h3wfgo4efjkto56f@pathway.suse.cz>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+In-Reply-To: <20191111012336.GA85185@google.com>
+Content-Language: en-US
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (sergey.senozhatsky.work[at]gmail.com)
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.215.195 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.128.67 listed in wl.mailspike.net]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.215.195 listed in list.dnswl.org]
+ trust [209.85.128.67 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -100,9 +110,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1iTyQj-00BI4N-CK
-X-Mailman-Approved-At: Mon, 11 Nov 2019 10:10:09 +0000
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1iUG78-00CVTB-4S
 Subject: Re: [Kgdb-bugreport] [PATCH 00/50] Add log level to show_stack()
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -115,13 +124,13 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: Juri Lelli <juri.lelli@redhat.com>,
- Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>,
- linux-sh@vger.kernel.org, Catalin Marinas <catalin.marinas@arm.com>,
- Ben Segall <bsegall@google.com>, Guo Ren <guoren@kernel.org>,
- Pavel Machek <pavel@ucw.cz>, Vincent Guittot <vincent.guittot@linaro.org>,
- Paul Burton <paulburton@kernel.org>, Dmitry Safonov <dima@arista.com>,
- Michael Ellerman <mpe@ellerman.id.au>,
+From: Dmitry Safonov via Kgdb-bugreport <kgdb-bugreport@lists.sourceforge.net>
+Reply-To: Dmitry Safonov <dima@arista.com>
+Cc: Juri Lelli <juri.lelli@redhat.com>, linux-sh@vger.kernel.org,
+ Catalin Marinas <catalin.marinas@arm.com>, Ben Segall <bsegall@google.com>,
+ Guo Ren <guoren@kernel.org>, Pavel Machek <pavel@ucw.cz>,
+ Vincent Guittot <vincent.guittot@linaro.org>,
+ Paul Burton <paulburton@kernel.org>, Michael Ellerman <mpe@ellerman.id.au>,
  Geert Uytterhoeven <geert@linux-m68k.org>, Mel Gorman <mgorman@suse.de>,
  Jiri Slaby <jslaby@suse.com>, Matt Turner <mattst88@gmail.com>,
  uclinux-h8-devel@lists.sourceforge.jp, Len Brown <len.brown@intel.com>,
@@ -174,30 +183,56 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On (19/11/08 14:04), Petr Mladek wrote:
-[..]
-> I agree that it is complicated to pass the loglevel as
-> a parameter. It would be better define the default
-> log level for a given code section. It might be stored
-> in task_struct for the normal context and in per-CPU
-> variables for interrupt contexts.
+Hi Sergey, Petr,
 
-I do recall that we talked about per-CPU printk state bit which would
-start/end "just print it" section. We probably can extend it to "just
-log_store" type of functionality. Doesn't look like a very bad idea.
-"This task/context is in trouble, whatever it printk()-s is important".
+On 11/11/19 1:23 AM, Sergey Senozhatsky wrote:
+> On (19/11/08 14:04), Petr Mladek wrote:
+> [..]
+>> I agree that it is complicated to pass the loglevel as
+>> a parameter. It would be better define the default
+>> log level for a given code section. It might be stored
+>> in task_struct for the normal context and in per-CPU
+>> variables for interrupt contexts.
+> 
+> I do recall that we talked about per-CPU printk state bit which would
+> start/end "just print it" section. We probably can extend it to "just
+> log_store" type of functionality. Doesn't look like a very bad idea.
+> "This task/context is in trouble, whatever it printk()-s is important".
 
-Per-console loglevel also might help sometimes. Slower consoles would
-->write() only critical messages, faster consoles everything.
+I don't see how bits on task_struct or in per-cpu are easier than
+supplying a log level parameter down the stack.
+How would it work if sysrq_handle_crash() called by key-press?
+How would that interact with deferred printing?
+How would it make visible prints from current context, but not from
+something that preempted it?
 
-Passing log_level as part of message payload, which printk machinery
-magically hides is not entirely exciting. What we have in the code
-now - printk("%s blah\n", lvl) - is not what we see in the logs.
-Because the leading '%s' becomes special. And printk()/sprintf()
-documentation should reflect that: '%s' prints a string, but sometimes
-it doesn't.
+Furthermore, what problems are you trying to solve with this design?
+Only sysrq driver? Kdb?
+In my perspective it sounds too complicated and over-engineered for
+something that has two-three users.
+Also I've tried to point that I need to print backtrace sometimes with
+KERN_DEBUG loglevel to use it in production for early notices those
+needs to go only to log files and currently each architecture decides
+which log level it prefers.
 
-	-ss
+And what's so complicated about this patches set? I see only side of the
+testing, but the build-testing is covered with 0day bot and cost nothing
+and any visible regression may be found during -next period.
+While introducing those printk-sections may subtly break things.
+
+I mean, I definitely know less about printk() and its internals than you
+- so my points may be a no-sense.
+
+What I'm going to do - is to fix all build and reported issues, I'll
+send v2 this week and feel free to NAK it, I will forget about those
+patches and won't be offended.
+I don't see many people those are "hey, we'll benefit from this".
+And doing this patches set was neither quite fun (dirty business), nor
+something I can be later proud of (hey, I've introduced the log level
+parameter to printing functions!).
+
+Thanks,
+          Dima
 
 
 _______________________________________________
