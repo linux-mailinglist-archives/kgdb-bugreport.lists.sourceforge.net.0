@@ -2,81 +2,66 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CEB63F6352
-	for <lists+kgdb-bugreport@lfdr.de>; Sun, 10 Nov 2019 03:51:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1EAB0F7034
+	for <lists+kgdb-bugreport@lfdr.de>; Mon, 11 Nov 2019 10:12:29 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1iTdKD-0006us-KL
-	for lists+kgdb-bugreport@lfdr.de; Sun, 10 Nov 2019 02:51:37 +0000
+	id 1iU5kJ-0008Hi-Su
+	for lists+kgdb-bugreport@lfdr.de; Mon, 11 Nov 2019 09:12:27 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1iTdKB-0006ul-RC
- for kgdb-bugreport@lists.sourceforge.net; Sun, 10 Nov 2019 02:51:35 +0000
+ (envelope-from <pmladek@suse.com>) id 1iU5kH-0008HZ-Nb
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 11 Nov 2019 09:12:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=c1dTncOSdr+IapvtHpk/fki/A0ZN+fTVObIzhZFP1HM=; b=ZbefZas4F2W2uHe7q1VKWzE44c
- JL86tzkJfA1jVKBxnTTOaEnbZBR8sj1YiJ0UTSXxrkiJnt+9AfvJegWF6OmRKBC7wwZdu/z52qrU4
- EZN8uetAiiveJREwJ67BJOM6sSQn+MbkJENHAL9ynaXVVPqZJvR0hh7yOyrdgRCQ2Dk4=;
+ bh=ckDLLBNybB00NN8bJ+zRvU0mCEzS1GZ+ad57vCEWPjg=; b=cQlpD23aP4bfKdyeyN7HiVAGoK
+ SflFeTgJLt+AxFRMLefuJ6Xc6DflclklBijDwv5eydJeO8EbgWW/ie/JpJ80vmyObiM9Y5GGTAn//
+ wyk1qSt1zx6JcwrVeI1WwxDGIXufOpIqARrNzBgwmx/8Wuk7CvYBBuIoemQm42UwSqtg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=c1dTncOSdr+IapvtHpk/fki/A0ZN+fTVObIzhZFP1HM=; b=E90b/l00ji2mATtcjMPjKjH1OL
- bp3L9bWn6YoT8lx58EzLfWV+P9tow7fbfRIQjtxm9p/xgkor0btxmPbCT8Go1WFckUttsq871VSVG
- TdRGxLlm2UWcI6kagBZ8hEi5UHSkrjdplSSGPeGIRmjm1v7gIBRVfcsbxEsMDe4UTqEc=;
-Received: from mail.kernel.org ([198.145.29.99])
+ bh=ckDLLBNybB00NN8bJ+zRvU0mCEzS1GZ+ad57vCEWPjg=; b=Tmc8UAHLOAuFi2NDkHEwALRMzt
+ UKbkwF8x9kOmqxZ70/oIK3a5kFFbFiQaEdfQGv5Xhhtzq+6LEyF4Kt8XGX50MOdc+4T1grhMYKI2c
+ iODFCXmCsuXTPCRhY3j8yjmNndBWhpvmXY7Ck4stJnaNLIVazdrJkVloKnjVnJzbODto=;
+Received: from mx2.suse.de ([195.135.220.15] helo=mx1.suse.de)
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iTdKA-00AASl-OR
- for kgdb-bugreport@lists.sourceforge.net; Sun, 10 Nov 2019 02:51:35 +0000
-Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
- [73.47.72.35])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 096FF22595;
- Sun, 10 Nov 2019 02:51:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1573354288;
- bh=BpAp6XH2uSlXE1JsPhrWmKuprZOOpZwsT4hO8c9rf1g=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=ZHdwmJIpTwkONjtWhQeqtQ4KkoVC+y49y0dWZ2AZ10uxgOJ9nwrMVHVyxOEVfQGfq
- s0MKQpWz+q0Pn8hnvRnyKbjBeRGzdi0QnS3TI1B4drveggjb9XIfdzqqakNfjIlxpS
- JebYjxvnsrgMhWDZfr2v4SB2VmWxwsb8HvCyxclQ=
-From: Sasha Levin <sashal@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Date: Sat,  9 Nov 2019 21:50:22 -0500
-Message-Id: <20191110025032.827-30-sashal@kernel.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20191110025032.827-1-sashal@kernel.org>
-References: <20191110025032.827-1-sashal@kernel.org>
+ id 1iU5kF-00Bprl-7p
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 11 Nov 2019 09:12:25 +0000
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx1.suse.de (Postfix) with ESMTP id 54EB2ACA3;
+ Mon, 11 Nov 2019 09:12:15 +0000 (UTC)
+Date: Mon, 11 Nov 2019 10:12:07 +0100
+From: Petr Mladek <pmladek@suse.com>
+To: Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>
+Message-ID: <20191111091207.u3lrd6cmumnx4czr@pathway.suse.cz>
+References: <20191106030542.868541-1-dima@arista.com>
+ <20191106083538.z5nlpuf64cigxigh@pathway.suse.cz>
+ <20191108103719.GB175344@google.com>
+ <20191108130447.h3wfgo4efjkto56f@pathway.suse.cz>
+ <20191111012336.GA85185@google.com>
 MIME-Version: 1.0
-X-stable: review
-X-Patchwork-Hint: Ignore
-X-Spam-Score: -0.5 (/)
+Content-Disposition: inline
+In-Reply-To: <20191111012336.GA85185@google.com>
+User-Agent: NeoMutt/20170912 (1.9.0)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iTdKA-00AASl-OR
-Subject: [Kgdb-bugreport] [PATCH AUTOSEL 4.4 30/40] misc: kgdbts: Fix
- restrict error
+X-Headers-End: 1iU5kF-00Bprl-7p
+Subject: Re: [Kgdb-bugreport] [PATCH 00/50] Add log level to show_stack()
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -88,46 +73,120 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: Sasha Levin <sashal@kernel.org>,
+Cc: Juri Lelli <juri.lelli@redhat.com>, linux-sh@vger.kernel.org,
+ Catalin Marinas <catalin.marinas@arm.com>, Ben Segall <bsegall@google.com>,
+ Guo Ren <guoren@kernel.org>, Pavel Machek <pavel@ucw.cz>,
+ Vincent Guittot <vincent.guittot@linaro.org>,
+ Paul Burton <paulburton@kernel.org>, Dmitry Safonov <dima@arista.com>,
+ Michael Ellerman <mpe@ellerman.id.au>,
+ Geert Uytterhoeven <geert@linux-m68k.org>, Mel Gorman <mgorman@suse.de>,
+ Jiri Slaby <jslaby@suse.com>, Matt Turner <mattst88@gmail.com>,
+ uclinux-h8-devel@lists.sourceforge.jp, Len Brown <len.brown@intel.com>,
+ linux-pm@vger.kernel.org, Heiko Carstens <heiko.carstens@de.ibm.com>,
+ linux-um@lists.infradead.org, Thomas Gleixner <tglx@linutronix.de>,
+ Dietmar Eggemann <dietmar.eggemann@arm.com>,
+ Richard Henderson <rth@twiddle.net>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ "Rafael J. Wysocki" <rjw@rjwysocki.net>, linux-kernel@vger.kernel.org,
+ Ralf Baechle <ralf@linux-mips.org>, Paul Mackerras <paulus@samba.org>,
+ Andrew Morton <akpm@linux-foundation.org>, linux-ia64@vger.kernel.org,
+ Tetsuo Handa <penguin-kernel@I-love.SAKURA.ne.jp>,
+ James Hogan <jhogan@kernel.org>,
+ "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+ Max Filippov <jcmvbkbc@gmail.com>, Vincent Chen <deanbo422@gmail.com>,
+ Ingo Molnar <mingo@kernel.org>, linux-s390@vger.kernel.org,
+ linux-c6x-dev@linux-c6x.org, Yoshinori Sato <ysato@users.sourceforge.jp>,
+ linux-hexagon@vger.kernel.org, Helge Deller <deller@gmx.de>,
+ linux-xtensa@linux-xtensa.org, Vasily Gorbik <gor@linux.ibm.com>,
+ Aurelien Jacquiot <jacquiot.aurelien@gmail.com>,
+ linux-m68k@lists.linux-m68k.org, Stafford Horne <shorne@gmail.com>,
+ linux-arm-kernel@lists.infradead.org, Chris Zankel <chris@zankel.net>,
+ Tony Luck <tony.luck@intel.com>,
+ Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+ Dmitry Safonov <0x7f454c46@gmail.com>, Will Deacon <will@kernel.org>,
  Daniel Thompson <daniel.thompson@linaro.org>,
- Laura Abbott <labbott@redhat.com>, kgdb-bugreport@lists.sourceforge.net
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ Brian Cain <bcain@codeaurora.org>,
+ Christian Borntraeger <borntraeger@de.ibm.com>,
+ kgdb-bugreport@lists.sourceforge.net, linux-snps-arc@lists.infradead.org,
+ Fenghua Yu <fenghua.yu@intel.com>, Borislav Petkov <bp@alien8.de>,
+ Jeff Dike <jdike@addtoit.com>, Steven Rostedt <rostedt@goodmis.org>,
+ Ivan Kokshaysky <ink@jurassic.park.msu.ru>, Greentime Hu <green.hu@gmail.com>,
+ Guan Xuetao <gxt@pku.edu.cn>, linux-parisc@vger.kernel.org,
+ linux-alpha@vger.kernel.org, Ley Foon Tan <lftan@altera.com>,
+ "David S. Miller" <davem@davemloft.net>, Rich Felker <dalias@libc.org>,
+ Peter Zijlstra <peterz@infradead.org>, "H. Peter Anvin" <hpa@zytor.com>,
+ sparclinux@vger.kernel.org, linux-riscv@lists.infradead.org,
+ Anton Ivanov <anton.ivanov@cambridgegreys.com>,
+ Jonas Bonn <jonas@southpole.se>, Richard Weinberger <richard@nod.at>,
+ x86@kernel.org, Russell King <linux@armlinux.org.uk>,
+ clang-built-linux@googlegroups.com, Ingo Molnar <mingo@redhat.com>,
+ Mark Salter <msalter@redhat.com>, Albert Ou <aou@eecs.berkeley.edu>,
+ Stefan Kristiansson <stefan.kristiansson@saunalahti.fi>,
+ openrisc@lists.librecores.org, Paul Walmsley <paul.walmsley@sifive.com>,
+ Michal Simek <monstr@monstr.eu>, Vineet Gupta <vgupta@synopsys.com>,
+ linux-mips@vger.kernel.org, Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Jason Wessel <jason.wessel@windriver.com>,
+ nios2-dev@lists.rocketboards.org, linuxppc-dev@lists.ozlabs.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-RnJvbTogTGF1cmEgQWJib3R0IDxsYWJib3R0QHJlZGhhdC5jb20+CgpbIFVwc3RyZWFtIGNvbW1p
-dCBmYTAyMThlZjczM2U2ZjI0N2ExYTM5ODZlM2ViMTI0NjAwNjRhYzc3IF0KCmtnZGJ0cyBjdXJy
-ZW50IGZhaWxzIHdoZW4gY29tcGlsZWQgd2l0aCByZXN0cmljdDoKCmRyaXZlcnMvbWlzYy9rZ2Ri
-dHMuYzogSW4gZnVuY3Rpb24g4oCYY29uZmlndXJlX2tnZGJ0c+KAmToKZHJpdmVycy9taXNjL2tn
-ZGJ0cy5jOjEwNzA6MjogZXJyb3I6IOKAmHN0cmNweeKAmSBzb3VyY2UgYXJndW1lbnQgaXMgdGhl
-IHNhbWUgYXMgZGVzdGluYXRpb24gWy1XZXJyb3I9cmVzdHJpY3RdCiAgc3RyY3B5KGNvbmZpZywg
-b3B0KTsKICBefn5+fn5+fn5+fn5+fn5+fn5+CgpBcyB0aGUgZXJyb3Igc2F5cywgY29uZmlnIGlz
-IGJlaW5nIHVzZWQgaW4gYm90aCB0aGUgc291cmNlIGFuZCBkZXN0aW5hdGlvbi4KUmVmYWN0b3Ig
-dGhlIGNvZGUgdG8gYXZvaWQgdGhlIGV4dHJhIGNvcHkgYW5kIHB1dCB0aGUgcGFyc2luZyBjbG9z
-ZXIgdG8KdGhlIGFjdHVhbCBsb2NhdGlvbi4KClNpZ25lZC1vZmYtYnk6IExhdXJhIEFiYm90dCA8
-bGFiYm90dEByZWRoYXQuY29tPgpBY2tlZC1ieTogRGFuaWVsIFRob21wc29uIDxkYW5pZWwudGhv
-bXBzb25AbGluYXJvLm9yZz4KU2lnbmVkLW9mZi1ieTogR3JlZyBLcm9haC1IYXJ0bWFuIDxncmVn
-a2hAbGludXhmb3VuZGF0aW9uLm9yZz4KU2lnbmVkLW9mZi1ieTogU2FzaGEgTGV2aW4gPHNhc2hh
-bEBrZXJuZWwub3JnPgotLS0KIGRyaXZlcnMvbWlzYy9rZ2RidHMuYyB8IDE2ICsrKysrKy0tLS0t
-LS0tLS0KIDEgZmlsZSBjaGFuZ2VkLCA2IGluc2VydGlvbnMoKyksIDEwIGRlbGV0aW9ucygtKQoK
-ZGlmZiAtLWdpdCBhL2RyaXZlcnMvbWlzYy9rZ2RidHMuYyBiL2RyaXZlcnMvbWlzYy9rZ2RidHMu
-YwppbmRleCBiYjNhNzZhZDgwZGEyLi5mYzhjYjg1NWM2ZTY2IDEwMDY0NAotLS0gYS9kcml2ZXJz
-L21pc2Mva2dkYnRzLmMKKysrIGIvZHJpdmVycy9taXNjL2tnZGJ0cy5jCkBAIC05NzksNiArOTc5
-LDEyIEBAIHN0YXRpYyB2b2lkIGtnZGJ0c19ydW5fdGVzdHModm9pZCkKIAlpbnQgbm1pX3NsZWVw
-ID0gMDsKIAlpbnQgaTsKIAorCXZlcmJvc2UgPSAwOworCWlmIChzdHJzdHIoY29uZmlnLCAiVjEi
-KSkKKwkJdmVyYm9zZSA9IDE7CisJaWYgKHN0cnN0cihjb25maWcsICJWMiIpKQorCQl2ZXJib3Nl
-ID0gMjsKKwogCXB0ciA9IHN0cmNocihjb25maWcsICdGJyk7CiAJaWYgKHB0cikKIAkJZm9ya190
-ZXN0ID0gc2ltcGxlX3N0cnRvbChwdHIgKyAxLCBOVUxMLCAxMCk7CkBAIC0xMDYyLDEzICsxMDY4
-LDYgQEAgc3RhdGljIGludCBrZ2RidHNfb3B0aW9uX3NldHVwKGNoYXIgKm9wdCkKIAkJcmV0dXJu
-IC1FTk9TUEM7CiAJfQogCXN0cmNweShjb25maWcsIG9wdCk7Ci0KLQl2ZXJib3NlID0gMDsKLQlp
-ZiAoc3Ryc3RyKGNvbmZpZywgIlYxIikpCi0JCXZlcmJvc2UgPSAxOwotCWlmIChzdHJzdHIoY29u
-ZmlnLCAiVjIiKSkKLQkJdmVyYm9zZSA9IDI7Ci0KIAlyZXR1cm4gMDsKIH0KIApAQCAtMTA4MCw5
-ICsxMDc5LDYgQEAgc3RhdGljIGludCBjb25maWd1cmVfa2dkYnRzKHZvaWQpCiAKIAlpZiAoIXN0
-cmxlbihjb25maWcpIHx8IGlzc3BhY2UoY29uZmlnWzBdKSkKIAkJZ290byBub2NvbmZpZzsKLQll
-cnIgPSBrZ2RidHNfb3B0aW9uX3NldHVwKGNvbmZpZyk7Ci0JaWYgKGVycikKLQkJZ290byBub2Nv
-bmZpZzsKIAogCWZpbmFsX2FjayA9IDA7CiAJcnVuX3BsYW50X2FuZF9kZXRhY2hfdGVzdCgxKTsK
-LS0gCjIuMjAuMQoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpLZ2RiLWJ1Z3JlcG9ydCBtYWlsaW5nIGxpc3QKS2dkYi1idWdyZXBvcnRAbGlzdHMuc291
-cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZv
-L2tnZGItYnVncmVwb3J0Cg==
+On Mon 2019-11-11 10:23:36, Sergey Senozhatsky wrote:
+> On (19/11/08 14:04), Petr Mladek wrote:
+> [..]
+> > I agree that it is complicated to pass the loglevel as
+> > a parameter. It would be better define the default
+> > log level for a given code section. It might be stored
+> > in task_struct for the normal context and in per-CPU
+> > variables for interrupt contexts.
+> 
+> I do recall that we talked about per-CPU printk state bit which would
+> start/end "just print it" section. We probably can extend it to "just
+> log_store" type of functionality. Doesn't look like a very bad idea.
+
+The problem with per-CPU printk is that we would need to disable
+interrupts. It is not always wanted. Also people might not expect
+this from a printk() API.
+
+
+> "This task/context is in trouble, whatever it printk()-s is important".
+
+It might be a minimal loglevel. More important messages would still
+be printed() with the higher loglevel.
+
+But yes, this per-code-section loglevel is problematic. The feedback
+against the patchset shows that people want it also the other way.
+I mean to keep pr_debug() as pr_debug().
+
+A solution might be to use the per-code-section loglevel only instead
+of some special loglevel.
+
+
+> Per-console loglevel also might help sometimes. Slower consoles would
+> ->write() only critical messages, faster consoles everything.
+
+This looks like another problem to me. Anyway, this filtering will
+work better when the loglevel will be consistent across the related
+lines.
+
+> Passing log_level as part of message payload, which printk machinery
+> magically hides is not entirely exciting. What we have in the code
+> now - printk("%s blah\n", lvl) - is not what we see in the logs.
+> Because the leading '%s' becomes special. And printk()/sprintf()
+> documentation should reflect that: '%s' prints a string, but sometimes
+> it doesn't.
+
+I personally do not see this as a big problem.
+
+The explicitly passed loglevel makes me feel more confident that
+all needed printk() calls were updated. But it might be a false
+feeling. I do not really have any strong preference.
+
+Best Regards,
+Petr
+
+
+_______________________________________________
+Kgdb-bugreport mailing list
+Kgdb-bugreport@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport
