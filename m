@@ -2,28 +2,28 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1D1C5F875E
-	for <lists+kgdb-bugreport@lfdr.de>; Tue, 12 Nov 2019 05:26:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0EE38F8791
+	for <lists+kgdb-bugreport@lfdr.de>; Tue, 12 Nov 2019 05:45:01 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1iUNkc-0007wx-PQ
-	for lists+kgdb-bugreport@lfdr.de; Tue, 12 Nov 2019 04:25:58 +0000
+	id 1iUO31-0000Hv-Qw
+	for lists+kgdb-bugreport@lfdr.de; Tue, 12 Nov 2019 04:44:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from <sergey.senozhatsky.work@gmail.com>)
- id 1iUNkb-0007wk-Fo
- for kgdb-bugreport@lists.sourceforge.net; Tue, 12 Nov 2019 04:25:57 +0000
+ id 1iUO30-0000Hg-DC
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 12 Nov 2019 04:44:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9VefD4i9ErvjrjSu5lBHBfa2VMuQnRlhyfcHWoSsFGA=; b=EjgC5PWyPUQTmDaG2FeNdrVfLO
- 3Ao+0yhF8zLyCXpNkBM3x/g/WryUBJYhb7VdpAJ9v/RuQt2dDi6IhIcCiY/BmekcuXxMoqWUS15jY
- 9UBioMkzbbETYqBtYZSXjwJcCkhVq/kju+tyBHj7K9XvTZW8Or79NwUBkLKZfckIAWQg=;
+ bh=z6L3+hI6K7wkMCOOKfC6B5htW9e/NujoD4rmfI82OVU=; b=VYSYNC648TdLRgeyIVhudzK9Dg
+ xkdoJESiijiw+kzyjcR5dCm0XSintpfSJuvZ27FtmevqlN3n5ax64Tvoqj8pDzYBBnEp/2sUNPRsP
+ mnDUejchEJiLktITEXDQjkKQqH2CNFoVEzNEkVpoy7BK1xVZKVLyjUXYpkba/POL5dSE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,73 +31,70 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=9VefD4i9ErvjrjSu5lBHBfa2VMuQnRlhyfcHWoSsFGA=; b=JAoL01mUB85fmiWW5XZPlyrPso
- Mja4Td1uK4OKctHp9UOXeltavdCbPgb8/T6hqtGakrzGCQDLdWQbcEsXVKMGyeM4ASqJtp+wAyMyU
- XbthbFYAnOYc0gLVNC6rQwLhiyX9v2z6WxjZ2YYBNjGdVi5RS033Ni0uEF3P/ayIRjwA=;
-Received: from mail-pl1-f193.google.com ([209.85.214.193])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ bh=z6L3+hI6K7wkMCOOKfC6B5htW9e/NujoD4rmfI82OVU=; b=Fi/UlthHqzJ+AC3G0z53ezMVFu
+ tosPsg8xBpqkWaH+hTQdtPjhF2YS7u3F9L3fDZ5oLNYHn8vxVstVcMbLM8wxYCSv3A6hf9spG3W6m
+ 38JrmGabYhCWGgskIWqTtxi7G0a6LzCdFq+cBfHWI6jp0qD13cNarpa75jF9UJEgEnZg=;
+Received: from mail-pf1-f193.google.com ([209.85.210.193])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1iUNkZ-00CoNo-93
- for kgdb-bugreport@lists.sourceforge.net; Tue, 12 Nov 2019 04:25:57 +0000
-Received: by mail-pl1-f193.google.com with SMTP id f4so134346plr.12
+ id 1iUO2y-00GCfp-HG
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 12 Nov 2019 04:44:58 +0000
+Received: by mail-pf1-f193.google.com with SMTP id q26so12409085pfn.11
  for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 11 Nov 2019 20:25:55 -0800 (PST)
+ Mon, 11 Nov 2019 20:44:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to:user-agent;
- bh=9VefD4i9ErvjrjSu5lBHBfa2VMuQnRlhyfcHWoSsFGA=;
- b=cdGWTYNC6NHRu+kvA4I6kS1Y2LfiO2jKF0r2reR+0mRqcG8yKudKBCw9I9DOXABIX4
- /3TUFbNC4J3e6CiNMFB22KOrjhFeNSMw6A4f5zE4eujUVPhwdAy4UE6JiknhjlsRGWe7
- RTgQRbIczKqjQpk9q9jHQE31BO+69ykoGYVcUuJlUop2q+ad5Zn3tErki59ff20RUtZo
- yWETgjDNltG315ymhYBMnymIi7dXr1HTD7KD2QIijuj5xF7vcEzw9cliyVtugI35e748
- tq7YxpziGywkq1lpdx1pl1YBrcMuX71SP1knncXeWdL4sRO4vx39eBLBEYWFTo///pwr
- NCHA==
+ bh=z6L3+hI6K7wkMCOOKfC6B5htW9e/NujoD4rmfI82OVU=;
+ b=D8FdqJ91C9CViimFs5HkqTNzLfTnpza7YcDlJMaUW/GYDtbpWN+jf3gagVp5Pb54ut
+ pJnpc/x6Rud5mFzPf0ZReA35hd11ljJ6cO/5F7Ue3e6hQ2TSEJ94YRDSGLm6NhnyCdqt
+ CzzD2BCnxTXK5GtYHwa3Uusyd8eoRKj//LeZNogwczP3XkHhZ0DhI0uDpEhLu6Pcihhn
+ H3BS+MU+Nl1Oowf4/jk8zWm4nc12KVZM+ffZ6sfZ7WtTjgYJy574lkrjNaKPgYx+dzhc
+ p2jV1Cc9pO8ZsG8xspjchyhzIZQ4FAt5l5TNSRCxJncAjNaATr8g0kc1uRTSgUAVAp1B
+ 466Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to:user-agent;
- bh=9VefD4i9ErvjrjSu5lBHBfa2VMuQnRlhyfcHWoSsFGA=;
- b=HcONeXLaIZSKmnV7aE0nWQDjikkE61p8Ov0y/N19eftwtZXDo+Cvs7sKI1/KTc4fTX
- KXYuVOzK0+fBattXPt4zbIn00dsBpPPbu2fi4vfpdnpWuPLXr6qSpXD9v3qVp72InRdc
- xGD2vJ9tia5C+UXUfxk9vNu6/jvGoJuhmYt0jey/DAupsc1DGR9nmCckm5T4bDGNLRap
- lk1/NT1Mi3tDcoBwHUpUcBHAPHioxsIerZuNBVq9d7Q5EAf+KVH36BaDTv20H9Z2/BXx
- 11dtfi9hIqcy5aopHRJIB2tJKAsRcWf1STpPlODLb6lgW+B0vbj9zr2kIyZjG0AmAO9Q
- KqjA==
-X-Gm-Message-State: APjAAAXj2C19FzztogcZmSxNmFgdQ7WCBkadzt9S7T669dn382cGrirJ
- h0tTa91+eur7Pb6qMG6kH/E=
-X-Google-Smtp-Source: APXvYqyjkigrHz92j3yARMh7vwLk0eQQU3iBJc8XJ3FFSXhKkmIaB79Wx/YFJE8etx6MkatMc7zyFg==
-X-Received: by 2002:a17:902:246:: with SMTP id
- 64mr28628529plc.339.1573532749511; 
- Mon, 11 Nov 2019 20:25:49 -0800 (PST)
+ bh=z6L3+hI6K7wkMCOOKfC6B5htW9e/NujoD4rmfI82OVU=;
+ b=nKi9pT6nElRxjsqlzgKPiZIMil7a2dH+ZXIk79GPL3uy0KTyzrApBr72oZJd8/VRwE
+ OqaTUUr1cueYAr9bnf++W5MYEZ++aKJ0baGYyLHQ4nxvfztCAO1nlv+whmbsb/gwXVGi
+ t143X5IY8wjsTEJqoJKqKW9lPoT81Am0vJRZaAk5fzA+4P2ShWbi0EgJYHJiS4xC4msq
+ UPWwcVPt3kKFCvfP5a8dtcwIdLp4rq52W6ZTWubK+5iv/NCI8ap9t3bfBFrxc4ZuwpL5
+ lflBvHIApIZ2V6KhpYMeqH4UAbxnJyTTU469RgcAtv6thZqS0gCvS0XbjLjDHuS0GjQG
+ htUg==
+X-Gm-Message-State: APjAAAU381h/5mCCLLCpUgbwlyxa3zgoC149mIr/eC5cEH5sCJ1IW4T2
+ Q5BuWN1F0wotghmAnG9d4IY=
+X-Google-Smtp-Source: APXvYqwNPlyjQTahvdEBWCuI4Zd+Adrk+027CcV4KySo2l3EKHcRsdH9n54f0hJl6o3TjoADo67N4w==
+X-Received: by 2002:a63:d802:: with SMTP id b2mr32909872pgh.414.1573533890747; 
+ Mon, 11 Nov 2019 20:44:50 -0800 (PST)
 Received: from localhost ([2401:fa00:8f:203:250d:e71d:5a0a:9afe])
- by smtp.gmail.com with ESMTPSA id 186sm23754823pfb.99.2019.11.11.20.25.47
+ by smtp.gmail.com with ESMTPSA id l62sm18583061pgl.24.2019.11.11.20.44.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Nov 2019 20:25:48 -0800 (PST)
-Date: Tue, 12 Nov 2019 13:25:46 +0900
+ Mon, 11 Nov 2019 20:44:49 -0800 (PST)
+Date: Tue, 12 Nov 2019 13:44:47 +0900
 From: Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>
-To: Dmitry Safonov <dima@arista.com>
-Message-ID: <20191112042546.GA119579@google.com>
+To: Petr Mladek <pmladek@suse.com>
+Message-ID: <20191112044447.GA121272@google.com>
 References: <20191106030542.868541-1-dima@arista.com>
  <20191106083538.z5nlpuf64cigxigh@pathway.suse.cz>
  <20191108103719.GB175344@google.com>
  <20191108130447.h3wfgo4efjkto56f@pathway.suse.cz>
  <20191111012336.GA85185@google.com>
- <13e72b62-c842-8ed5-5b41-bc1692b28f53@arista.com>
- <20191112021747.GA68506@google.com>
- <25cb9647-007a-9c18-4784-49c0aef4f54b@arista.com>
+ <20191111091207.u3lrd6cmumnx4czr@pathway.suse.cz>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <25cb9647-007a-9c18-4784-49c0aef4f54b@arista.com>
+In-Reply-To: <20191111091207.u3lrd6cmumnx4czr@pathway.suse.cz>
 User-Agent: Mutt/1.10.1 (2018-07-13)
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.210.193 listed in list.dnswl.org]
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
  (sergey.senozhatsky.work[at]gmail.com)
- -0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.214.193 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.214.193 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.210.193 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -105,8 +102,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1iUNkZ-00CoNo-93
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1iUO2y-00GCfp-HG
 Subject: Re: [Kgdb-bugreport] [PATCH 00/50] Add log level to show_stack()
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -124,10 +122,11 @@ Cc: Juri Lelli <juri.lelli@redhat.com>,
  linux-sh@vger.kernel.org, Catalin Marinas <catalin.marinas@arm.com>,
  Ben Segall <bsegall@google.com>, Guo Ren <guoren@kernel.org>,
  Pavel Machek <pavel@ucw.cz>, Vincent Guittot <vincent.guittot@linaro.org>,
- Paul Burton <paulburton@kernel.org>, Michael Ellerman <mpe@ellerman.id.au>,
+ Paul Burton <paulburton@kernel.org>, Dmitry Safonov <dima@arista.com>,
+ Michael Ellerman <mpe@ellerman.id.au>,
  Geert Uytterhoeven <geert@linux-m68k.org>, Mel Gorman <mgorman@suse.de>,
  Jiri Slaby <jslaby@suse.com>, Matt Turner <mattst88@gmail.com>,
- uclinux-h8-devel@lists.sourceforge.jp, Petr Mladek <pmladek@suse.com>,
+ uclinux-h8-devel@lists.sourceforge.jp, Len Brown <len.brown@intel.com>,
  linux-pm@vger.kernel.org, Heiko Carstens <heiko.carstens@de.ibm.com>,
  linux-um@lists.infradead.org, Thomas Gleixner <tglx@linutronix.de>,
  Dietmar Eggemann <dietmar.eggemann@arm.com>,
@@ -160,9 +159,8 @@ Cc: Juri Lelli <juri.lelli@redhat.com>,
  Guan Xuetao <gxt@pku.edu.cn>, linux-parisc@vger.kernel.org,
  linux-alpha@vger.kernel.org, Ley Foon Tan <lftan@altera.com>,
  "David S. Miller" <davem@davemloft.net>, Rich Felker <dalias@libc.org>,
- Len Brown <len.brown@intel.com>, Peter Zijlstra <peterz@infradead.org>,
- "H. Peter Anvin" <hpa@zytor.com>, sparclinux@vger.kernel.org,
- linux-riscv@lists.infradead.org,
+ Peter Zijlstra <peterz@infradead.org>, "H. Peter Anvin" <hpa@zytor.com>,
+ sparclinux@vger.kernel.org, linux-riscv@lists.infradead.org,
  Anton Ivanov <anton.ivanov@cambridgegreys.com>,
  Jonas Bonn <jonas@southpole.se>, Richard Weinberger <richard@nod.at>,
  x86@kernel.org, Russell King <linux@armlinux.org.uk>,
@@ -178,35 +176,42 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On (19/11/12 02:40), Dmitry Safonov wrote:
+On (19/11/11 10:12), Petr Mladek wrote:
 [..]
-> In my point of view the cost of one-time [mostly build] testing every
-> architecture is cheaper than introducing some new smart code that will
-> live forever.
+> > I do recall that we talked about per-CPU printk state bit which would
+> > start/end "just print it" section. We probably can extend it to "just
+> > log_store" type of functionality. Doesn't look like a very bad idea.
+> 
+> The problem with per-CPU printk is that we would need to disable
+> interrupts.
 
-Well, there may be the need to pass loglevel deeper due to "hey __show_stack()
-on that arch invokes bar(), which invokes foo() and now foo() does printk(),
-but we don't see it". The context which decided to backtaraces decided
-to do so for a reason, probably, so I guess we can look at it as "a special
-error reporting code block".
+Or disable preemption and have loglevel per-CPU and per-context.
+preempt_count can navigate us to the right context loglevel on
+particular CPU. I'm talking here only about backtrace (error)
+reporting contexts. Those can be atomic perfectly fine.
 
-The proposed patch set passes loglevel via slightly unusual channel -
-via sprintf(). We probably can do it, but I would prefer to minimize
-the number of such printk-s in the kernel. The code snippet which I
-posted also does pretty unusual thing w.r.t loglevel. Both approaches
-are "non-standard" from that POV.
+I posted a silly code snippet.
 
-> I'll reply to your suggestion tomorrow, it's a bit late in my tz.
+[..]
+> But yes, this per-code-section loglevel is problematic. The feedback
+> against the patchset shows that people want it also the other way.
+> I mean to keep pr_debug() as pr_debug().
 
-Sure.
+Hmm. Right.
 
-To anyone who will comment on that code snippet - this is not a
-"look, here is what you need to do" type of proposal. Just an
-alternative approach with its pros and cons.
+> A solution might be to use the per-code-section loglevel only instead
+> of some special loglevel.
 
-We had several requests over the years to have something like "forcibly
-allow all underlying printk-s from here to here" or "forcibly suppress
-or postpone underlying printk-s from here to here", etc.
+So maybe we can "overwrite" only KERN_DEFAULT loglevels?
+We certainly should not mess with SCHED or with anything in between
+EMERG and ERR.
+
+> The explicitly passed loglevel makes me feel more confident that
+> all needed printk() calls were updated. But it might be a false
+> feeling. I do not really have any strong preference.
+
+I'm not like really objecting, just trying to explore some other
+options.
 
 	-ss
 
