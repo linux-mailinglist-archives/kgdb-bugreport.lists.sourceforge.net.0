@@ -2,70 +2,72 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E799CFAC36
-	for <lists+kgdb-bugreport@lfdr.de>; Wed, 13 Nov 2019 09:47:44 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id BAA16FB3C3
+	for <lists+kgdb-bugreport@lfdr.de>; Wed, 13 Nov 2019 16:32:32 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1iUoJT-0006V7-Nr
-	for lists+kgdb-bugreport@lfdr.de; Wed, 13 Nov 2019 08:47:43 +0000
+	id 1iUudD-0003rR-Is
+	for lists+kgdb-bugreport@lfdr.de; Wed, 13 Nov 2019 15:32:31 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <pmladek@suse.com>) id 1iUoJS-0006V0-CW
- for kgdb-bugreport@lists.sourceforge.net; Wed, 13 Nov 2019 08:47:42 +0000
+ (envelope-from <SRS0=n35v=ZF=goodmis.org=rostedt@kernel.org>)
+ id 1iUudC-0003rH-Tp
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 13 Nov 2019 15:32:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=KkOjqC3Ll9E7U01lXZ2bnQJUC/aAPuEK/i8AYPo7ync=; b=lwuFVvmEUPIA7GR/AHZQ1Kstsc
- t4uTt+APgJGsg+tnAcRsDQC5goBpkrgdUYe7TUeOPWUrOxcOqbxLTUl8QWFz3CVXbb0S8UH865Tdt
- uqcHjfvfCiYOockViiMN3E4kzWUgrf6bH85lO10NZ1RdElkGhmdJtgGSfzOyhPVzm6Dw=;
+ bh=e5rvMICZAsQwI1I30ZpWQ1rTleXP19y89+IzS9q5pJ8=; b=JuZhUMjlT2/1cgNtCTsDpPgnDR
+ BdcyZ3wSTCdP119Z+yz31AUZYXsKyIiO+b7ySZ8SQqwZaCYADeB70rwnJ9O72ow2yxTLL79q3l+OB
+ xSsX9MxXyKLRVK3/onVUaUnvIPDjxMQctAOn3jv3ydcxlokTwo2IqrFSEM05EK9Lxa0k=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:References:
+ In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=KkOjqC3Ll9E7U01lXZ2bnQJUC/aAPuEK/i8AYPo7ync=; b=Sr8Zi3VOjhJNXav+ke3jtjz24F
- pO0gQn20+dlNJLlJMSZCLeFNcNEv9p730ctuMYA+MdWmbAEZNgkebZ8irwhnspiWcZmM/bB1oY9cp
- jl6eUNBPxoOqKyTRjR8afSY2DezvgokoStMxos0zc+l5Zbx48PLy+9dILUN8bPpRskrA=;
-Received: from mx2.suse.de ([195.135.220.15] helo=mx1.suse.de)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=e5rvMICZAsQwI1I30ZpWQ1rTleXP19y89+IzS9q5pJ8=; b=OACTpY34XFfPL2PuvhUfj4XXU/
+ PKcMJJLv2SRnuD7IORIRjsDYjRVI5BoXNp8ibl9u1nUhOZWU1zPAc+V403i2OQQAmeWSPuR7nPQBW
+ t7ga0HKiIzCmRCP8KMKZzO7V5Vu9tf1v3jCp/Gtgm1Qac9FudV5c7Wpq9cMnqSq8RmVY=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iUoJP-000xA1-Ob
- for kgdb-bugreport@lists.sourceforge.net; Wed, 13 Nov 2019 08:47:42 +0000
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx1.suse.de (Postfix) with ESMTP id 06A25AEA4;
- Wed, 13 Nov 2019 08:47:31 +0000 (UTC)
-Date: Wed, 13 Nov 2019 09:47:22 +0100
-From: Petr Mladek <pmladek@suse.com>
+ id 1iUudB-00FQBV-6Q
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 13 Nov 2019 15:32:30 +0000
+Received: from gandalf.local.home (cpe-66-24-58-225.stny.res.rr.com
+ [66.24.58.225])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id BEBEA20679;
+ Wed, 13 Nov 2019 15:32:15 +0000 (UTC)
+Date: Wed, 13 Nov 2019 10:32:14 -0500
+From: Steven Rostedt <rostedt@goodmis.org>
 To: Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>
-Message-ID: <20191113084722.emzee7g34zki4kkl@pathway.suse.cz>
-References: <20191108130447.h3wfgo4efjkto56f@pathway.suse.cz>
+Message-ID: <20191113103214.1585923c@gandalf.local.home>
+In-Reply-To: <20191112044447.GA121272@google.com>
+References: <20191106030542.868541-1-dima@arista.com>
+ <20191106083538.z5nlpuf64cigxigh@pathway.suse.cz>
+ <20191108103719.GB175344@google.com>
+ <20191108130447.h3wfgo4efjkto56f@pathway.suse.cz>
  <20191111012336.GA85185@google.com>
  <20191111091207.u3lrd6cmumnx4czr@pathway.suse.cz>
  <20191112044447.GA121272@google.com>
- <20191112045704.GA138013@google.com>
- <20191112083509.gmgjpkjffsfaw5lm@pathway.suse.cz>
- <20191112101229.GA201294@google.com>
- <20191113012337.GA70781@google.com>
- <25ff45f0-6420-f660-55a8-637f11ab5ab4@arista.com>
- <20191113063334.GA147997@google.com>
+X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20191113063334.GA147997@google.com>
-User-Agent: NeoMutt/20170912 (1.9.0)
-X-Spam-Score: 0.0 (/)
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
+ domains are different
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1iUoJP-000xA1-Ob
+ -0.5 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1iUudB-00FQBV-6Q
 Subject: Re: [Kgdb-bugreport] [PATCH 00/50] Add log level to show_stack()
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -96,8 +98,8 @@ Cc: Juri Lelli <juri.lelli@redhat.com>, linux-sh@vger.kernel.org,
  Ralf Baechle <ralf@linux-mips.org>, Paul Mackerras <paulus@samba.org>,
  Andrew Morton <akpm@linux-foundation.org>, linux-ia64@vger.kernel.org,
  Tetsuo Handa <penguin-kernel@I-love.SAKURA.ne.jp>,
- James Hogan <jhogan@kernel.org>,
- "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+ James Hogan <jhogan@kernel.org>, "James E.J.
+ Bottomley" <James.Bottomley@HansenPartnership.com>,
  Max Filippov <jcmvbkbc@gmail.com>, Vincent Chen <deanbo422@gmail.com>,
  Ingo Molnar <mingo@kernel.org>, linux-s390@vger.kernel.org,
  linux-c6x-dev@linux-c6x.org, Yoshinori Sato <ysato@users.sourceforge.jp>,
@@ -114,11 +116,11 @@ Cc: Juri Lelli <juri.lelli@redhat.com>, linux-sh@vger.kernel.org,
  Christian Borntraeger <borntraeger@de.ibm.com>,
  kgdb-bugreport@lists.sourceforge.net, linux-snps-arc@lists.infradead.org,
  Fenghua Yu <fenghua.yu@intel.com>, Borislav Petkov <bp@alien8.de>,
- Jeff Dike <jdike@addtoit.com>, Steven Rostedt <rostedt@goodmis.org>,
- Ivan Kokshaysky <ink@jurassic.park.msu.ru>, Greentime Hu <green.hu@gmail.com>,
- Guan Xuetao <gxt@pku.edu.cn>, linux-parisc@vger.kernel.org,
- linux-alpha@vger.kernel.org, Ley Foon Tan <lftan@altera.com>,
- "David S. Miller" <davem@davemloft.net>, Rich Felker <dalias@libc.org>,
+ Jeff Dike <jdike@addtoit.com>, Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
+ Greentime Hu <green.hu@gmail.com>, Guan Xuetao <gxt@pku.edu.cn>,
+ linux-parisc@vger.kernel.org, linux-alpha@vger.kernel.org,
+ Ley Foon Tan <lftan@altera.com>, "David S. Miller" <davem@davemloft.net>,
+ Rich Felker <dalias@libc.org>, Petr Mladek <pmladek@suse.com>,
  Peter Zijlstra <peterz@infradead.org>, "H. Peter Anvin" <hpa@zytor.com>,
  sparclinux@vger.kernel.org, linux-riscv@lists.infradead.org,
  Anton Ivanov <anton.ivanov@cambridgegreys.com>,
@@ -136,53 +138,25 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Wed 2019-11-13 15:33:34, Sergey Senozhatsky wrote:
-> On (19/11/13 02:25), Dmitry Safonov wrote:
-> > I guess I've pointed that in my point of view price for one-time testing
-> > code is cheaper than adding a new printk feature to swap log levels on
-> > the fly.
-> [..]
-> > I've gone through functions used by sysrq driver and the same changes
-> > introducing log level parameter would be needed for: sched_show_task(),
-> > debug_show_all_locks(), show_regs(), show_state(), show_mem(). Some of
-> > them don't need any platform changes, but at least show_regs() needs.
+On Tue, 12 Nov 2019 13:44:47 +0900
+Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com> wrote:
+
+> > > I do recall that we talked about per-CPU printk state bit which would
+> > > start/end "just print it" section. We probably can extend it to "just
+> > > log_store" type of functionality. Doesn't look like a very bad idea.  
+> > 
+> > The problem with per-CPU printk is that we would need to disable
+> > interrupts.  
 > 
-> Good points and nice conclusion.
-> 
-> Well, here we go. There is a number of generally useful functions that
-> print nice data and where people might want to have better loglevel control
-> (for debugging purposes). show_stack() is just one of them.
+> Or disable preemption and have loglevel per-CPU and per-context.
+> preempt_count can navigate us to the right context loglevel on
+> particular CPU. I'm talking here only about backtrace (error)
+> reporting contexts. Those can be atomic perfectly fine.
 
-Could you please provide some examples so that we get an idea about
-the scope, usefulness, and requirements?
+With my real-time hat on, I'm totally against disabling of preemption
+for this purpose.
 
-> Patching all
-> those functions, which you have mentioned above, is hardly a fun task to do.
-> Hence the printk() per-CPU per-context loglevel proposition. The code there
-> is not clever or complicated and is meant for debugging purposes only, but
-> with just 3 lines of code one can do some stuff:
-> 
-> 	/* @BTW you can't do this with "%s" KERN_FOO ;P */
-> +	printk_emergency_enter(LOGLEVEL_SCHED);
-> +	debug_show_all_locks();
-> +	printk_emergency_exit();
-
-But this will not solve situations where the original loglevel should
-stay from any reason. It happened in this patchset, see
-
-https://lkml.kernel.org/r/20191106091258.GS25745@shell.armlinux.org.uk
-https://lkml.kernel.org/r/20191106132516.GC5808@willie-the-truck
-
-We would need to investigate more potential users of this feature to
-see eventual requirements. If there are too many exceptions and modes
-then the generic API might get pretty complicated.
-
-At the moment, I am in favor of this patchset. It is huge and
-needed a lot of manual work. But the result is straightforward and
-easy to understand.
-
-Best Regards,
-Petr
+-- Steve
 
 
 _______________________________________________
