@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5CC4413E9A6
-	for <lists+kgdb-bugreport@lfdr.de>; Thu, 16 Jan 2020 18:39:21 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0E72513EA94
+	for <lists+kgdb-bugreport@lfdr.de>; Thu, 16 Jan 2020 18:45:12 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1is972-0004VE-7D
-	for lists+kgdb-bugreport@lfdr.de; Thu, 16 Jan 2020 17:39:20 +0000
+	id 1is9Cg-0003rL-Rb
+	for lists+kgdb-bugreport@lfdr.de; Thu, 16 Jan 2020 17:45:10 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1is96u-0004Us-To
- for kgdb-bugreport@lists.sourceforge.net; Thu, 16 Jan 2020 17:39:12 +0000
+ (envelope-from <sashal@kernel.org>) id 1is9Cf-0003qw-AW
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 16 Jan 2020 17:45:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=UFribP/89ZELECvdDU4XwlKhaQjSGkGsGBeqf6iVSZc=; b=TKASQI7hmFEnXfDZR6tG7DSj1I
- xNfrTkSUuYOVy+ULCdv566rtSPIw7lQWhNFbsWvILdaGpMv4kQzeoc+rdtWKeZd8/e4dQ+a/ajAwE
- TPx5BYUuxLzXQ2mMzhhZ3AeMeys2u6Iew4fGo8d25xIHH+4caIefLIBppIPtulVMZcHU=;
+ bh=7uFRwd4He188p0SGFx9jPVoMxLaArelPQg5m1dbjIVA=; b=IZUOZ6oXgclw53AyEsfNxXhK1d
+ MaiTJcFdMob1rzWbs5yhqYi8kVnR4vdWqi2CdS3t7h2DXTFgIbFINppNHNum7Sw/LeN+fsVxjbJ3+
+ i/dDWWDjx6lXm0J8Iwl44JrC3HxtVqJTGM1viST+4vC2/oQZwQdGQ+tnidL91QOftI1c=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -30,39 +30,39 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=UFribP/89ZELECvdDU4XwlKhaQjSGkGsGBeqf6iVSZc=; b=U4wcnuGliz+U3Hb1FpEZGjmTc/
- sP4lujgiwZj+rgdsk4WrPc79fkVDXbxjaDvbw4kI6rlG1HgORY2zTLT5CnR3jOnJ98ILxiYeuOEDt
- k09rb8lNHy5KwEC78U+GPrY6J2rlLK1XwSaSjakFcYjBpGG+zqe9bpjAElaC2zQ41cbE=;
+ bh=7uFRwd4He188p0SGFx9jPVoMxLaArelPQg5m1dbjIVA=; b=BPsJLfgV/xWALmo7pbC603Y5/2
+ +/JVz3In0smyX2UaZ/jDK0oiMB7NT2krYBdhgF00kin65EON4vXD49u9ZSHm+0n4PhYu7iEseE0Q+
+ 4m/ST5/arZK1+DDVhCtF7IZtHx9lGtI1gv1a7byFfAfI1quv3tGXfsjKGtJlIvIk/8Y0=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1is96r-006nkf-HX
- for kgdb-bugreport@lists.sourceforge.net; Thu, 16 Jan 2020 17:39:10 +0000
+ id 1is9CZ-006m38-Ck
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 16 Jan 2020 17:45:09 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 2A021246D5;
- Thu, 16 Jan 2020 17:39:03 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id EFC142474F;
+ Thu, 16 Jan 2020 17:44:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1579196344;
- bh=5KK9hVvP7HtS8Nhi7+wZ7prpIoAH8W+uEaDpuuwJxjc=;
+ s=default; t=1579196697;
+ bh=yp0F98OmhMsKsx1f6hdNCNK4M6cdG4rAL/11lR/bv5Y=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=hGgR8rjEwWhZNbq+9/CxhhD+hRW89aA1/58j2S7o0qD4Ts8LLnrUnhAn0+SG2Tb9a
- 67P/mtEmrQmjAj9NP+p3DNMYpklyQWSwgiIVh2OrRbfp8oULcWXBJYbvausi23F4Ue
- 1otD4HC4PNPCsYkCOXEit02KDtl+M01JazjfPD1o=
+ b=SK9q/vvS7DD20dz7TMkcAn/HKWXxgVV7TcQMd5mq2OSCjTYTXgQWx49zCEfEbSbFv
+ 8NgV0CncQ1ycrjDf2EKdIIpk35DmhYkoewDZK+nPWnK3iSh4CccieTFTu+2BwCJoIV
+ tBdHeU/Xzm7mc7Y0dX4C7MdI5r4jiYXyfcFJXCFk=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Thu, 16 Jan 2020 12:34:49 -0500
-Message-Id: <20200116173641.22137-100-sashal@kernel.org>
+Date: Thu, 16 Jan 2020 12:41:28 -0500
+Message-Id: <20200116174251.24326-91-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200116173641.22137-1-sashal@kernel.org>
-References: <20200116173641.22137-1-sashal@kernel.org>
+In-Reply-To: <20200116174251.24326-1-sashal@kernel.org>
+References: <20200116174251.24326-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-X-Spam-Score: -0.5 (/)
+X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
@@ -77,9 +77,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1is96r-006nkf-HX
-Subject: [Kgdb-bugreport] [PATCH AUTOSEL 4.9 140/251] kdb: do a sanity check
+ -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1is9CZ-006m38-Ck
+Subject: [Kgdb-bugreport] [PATCH AUTOSEL 4.4 091/174] kdb: do a sanity check
  on the cpu in kdb_per_cpu()
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -117,7 +117,7 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/kernel/debug/kdb/kdb_main.c b/kernel/debug/kdb/kdb_main.c
-index 5a58421d7e2d..a52a6da8c3d0 100644
+index ebc52c7bd8a6..cba287a5c976 100644
 --- a/kernel/debug/kdb/kdb_main.c
 +++ b/kernel/debug/kdb/kdb_main.c
 @@ -2632,7 +2632,7 @@ static int kdb_per_cpu(int argc, const char **argv)
