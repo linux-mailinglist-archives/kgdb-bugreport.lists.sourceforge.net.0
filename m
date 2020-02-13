@@ -2,100 +2,95 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B0216154964
-	for <lists+kgdb-bugreport@lfdr.de>; Thu,  6 Feb 2020 17:39:55 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id D4C6615C101
+	for <lists+kgdb-bugreport@lfdr.de>; Thu, 13 Feb 2020 16:06:21 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1izkC2-0002kk-1r
-	for lists+kgdb-bugreport@lfdr.de; Thu, 06 Feb 2020 16:39:54 +0000
+	id 1j2G4K-0005Bn-Kr
+	for lists+kgdb-bugreport@lfdr.de; Thu, 13 Feb 2020 15:06:20 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <dianders@chromium.org>) id 1izkBz-0002ka-Tz
- for kgdb-bugreport@lists.sourceforge.net; Thu, 06 Feb 2020 16:39:51 +0000
+ (envelope-from <daniel.thompson@linaro.org>) id 1j2G4J-0005Bg-EH
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 13 Feb 2020 15:06:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=khdAdINHrbF0yvYt+hGIc2ksicOYuTBGDLSCy6ujc8Q=; b=PVgFkRAkZooviwpkh4YKCjRWJm
- lCwV6EKVWIr9tftgu5jhO9SlXKWOqDO89dabFgofYsWmXwimzfiupIHtLNrMhsHQgc+zP60xFyiyC
- 2X/XmvlwZ4LarJBkFmgXa1qPcfIK9gk+DLHoGP8iUu9upMZOKftI76ouB7h4PCfyKXAE=;
+ bh=ljdX2toI1glkUCHAbgskAX4FstAA5OW+os6LVO25kAo=; b=GXLvylUwXnlXwAPHyWSIRCyC1x
+ nQr1ZxOSAXbMqrPZpqlJF11/JlWO9tvin/KWRPCI8OnjsYZxR7EEjrcbZQDcC9Jdonj+sqJBKVKuE
+ 25q8SPZbMshEaqNLFd7JuJtrCKjDv+98MBJ9tOIkueJ3ft6LUpYy9b635sczzfnWH2VY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=khdAdINHrbF0yvYt+hGIc2ksicOYuTBGDLSCy6ujc8Q=; b=hKeekzmYw15+I7Zr3wLxN5TnsX
- apTR3iFCsagpaJpDfm5QjGcFJInAmr3otEKpPOff1i1oiBlHR/GLf9VjcCx4lImZ8X6ZXZgfv7zr0
- SVQpfE9QkeDaXxVfwW7cwFd6whIfNBlch7NHtEIAFP34zalmShlL9RLZ/IUYOMtEioNk=;
-Received: from mail-qv1-f68.google.com ([209.85.219.68])
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=ljdX2toI1glkUCHAbgskAX4FstAA5OW+os6LVO25kAo=; b=H
+ 4fEW+QePkuoPoOCiUUi2yjGoayiPC8H0ais/Ax6Pt853vqM0A1czNxcVtsLNYhTGb9Qfe8tvzP2ew
+ in+TQ4e8Vd85rhVFcHR0F7/TKQApkEYt9ShA98bgUldQ/2KB0yz657tbivDy34fOPBOFgF4WN/f/B
+ 3N0uAHBop/oP4sK0=;
+Received: from mail-wr1-f68.google.com ([209.85.221.68])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1izkBv-001YEt-RE
- for kgdb-bugreport@lists.sourceforge.net; Thu, 06 Feb 2020 16:39:51 +0000
-Received: by mail-qv1-f68.google.com with SMTP id o18so3153876qvf.1
+ id 1j2G4F-00BXSp-7k
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 13 Feb 2020 15:06:19 +0000
+Received: by mail-wr1-f68.google.com with SMTP id z7so7067018wrl.13
  for <kgdb-bugreport@lists.sourceforge.net>;
- Thu, 06 Feb 2020 08:39:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=khdAdINHrbF0yvYt+hGIc2ksicOYuTBGDLSCy6ujc8Q=;
- b=EIzYnnnQa8E7suKKVeTQY2aMwT8WhXZwnuzb0SDixpYBjgkX1W7WuCrwO+41Hpmqpp
- OCd8RlKKrN4JpSsgPxwBO7Hy81KVa/X678GlNgbQuzTTnNtQL+2yD02IDtKvFt0lR1aJ
- Y5ORYF+7c15kuUTy+ooKE1uipKe0LMrLgaDds=
+ Thu, 13 Feb 2020 07:06:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=ljdX2toI1glkUCHAbgskAX4FstAA5OW+os6LVO25kAo=;
+ b=xIThK0kuWRRu5Y/bTutWxrzpIW+BSCNi0v8BmUX+XuR5+Ft7S3ZZCcvzk6P/neUQ70
+ VjqW+5MupHA0wCCA4rVskUR1a/9n79Jd5MtHw1ofG5qF+24seGbyfRkAx6SNTQdgHSkc
+ cJLcT3fqoJhU2hvbFuOUfReP6NWnGD+vhSk5d4wtsamH3/+hQspt4IlCNTwleMs+KKyq
+ ImjrTLR/wyrXE+P8ar9XkOjLTVUEJelIi8xWuhyWFx9hIWXwCM28ndOv7DWlJSVY0VqG
+ /giR5bIHISKcVY0xbBMxojHvxSKEIbm5K30TRELmiDY9yaFwAE8VKpeU/NUxyDWQVWAc
+ B8FQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=khdAdINHrbF0yvYt+hGIc2ksicOYuTBGDLSCy6ujc8Q=;
- b=RNuZ/AR/aREYOZnOxQ6IoyI2yz9ujmZ+yL/jzeq8e+X+dlAq2E9cuNNe9BV0Nbrgxq
- n6E8nBT5UMaihJLnFIxx2ie/urtbOft4Ro0LobPGdcVHR+VU6FKciJwkVEFG47G+YBgq
- bPa+PAo09cob5IiHca+DUeJlIG/3BvEZh/smtHL1zktFU15Y2cezz8/6wNzd1NQVpHc/
- n33/N/neC9VskpkZBVh1OTMpR+BLH21UgclsJvQ3KZ/SjpOivfpvpdiKsIJYMiEJaJDE
- p/NDWRiOHt1k+xoXFjZRH0yzqTHdw7dY6K9f44wQ6lcDiHeYj+fmntVzAnMZUHmHQGvm
- zqqw==
-X-Gm-Message-State: APjAAAV0Arc9x+XncXt1v4KC+PKtVr3EgFAZch0kQBn63dC9kYK7CiTP
- 23XHQ2M3etRA+/4OnpQkcpmrrBerNW0=
-X-Google-Smtp-Source: APXvYqx/v6L/6iXZnstn95HdF2fWc9SZcRfj14TPQprFAFg9EpmKmh7gd7btucp509i5tos/i227cQ==
-X-Received: by 2002:a1f:fe4e:: with SMTP id l75mr2251166vki.18.1581005772044; 
- Thu, 06 Feb 2020 08:16:12 -0800 (PST)
-Received: from mail-vk1-f177.google.com (mail-vk1-f177.google.com.
- [209.85.221.177])
- by smtp.gmail.com with ESMTPSA id o36sm1165375uao.15.2020.02.06.08.16.10
- for <kgdb-bugreport@lists.sourceforge.net>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 06 Feb 2020 08:16:11 -0800 (PST)
-Received: by mail-vk1-f177.google.com with SMTP id i78so1776435vke.0
- for <kgdb-bugreport@lists.sourceforge.net>;
- Thu, 06 Feb 2020 08:16:10 -0800 (PST)
-X-Received: by 2002:ac5:c807:: with SMTP id y7mr2201558vkl.92.1581005770288;
- Thu, 06 Feb 2020 08:16:10 -0800 (PST)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=ljdX2toI1glkUCHAbgskAX4FstAA5OW+os6LVO25kAo=;
+ b=suA0XqSp/plDfA5xiZOnVbqqwsOmDP18/74pQjZFkdwMxzVm7TGFcYUsjzpEdf/zRi
+ geud8UZ505sHqAPfit2cb9sVOtSzCCqQ8lztr8N29IVSCW97WZBS08FpcfTUGVjgyXIl
+ zNklbylbyQ7M6rImz3bMjTA3Y45T6G9tDWWHE4WxDKCpLSlrejkIP6jv6EQemUnZziqz
+ /ObDVZQoDwD61EywpgixDPMhShuWsrmJmcV1MNLlHjH5j6LUmlpQTpVn1LW5HP+BhVRk
+ gGDaA7WsqyxjSmaOuljVWJJ6AXMVXGxFaGanVUzAMjutGV+mZf3gAqvUYNeWb2clk/3K
+ 8KPw==
+X-Gm-Message-State: APjAAAWkvLgINFjZA2qojnGuEwymI0JtmGUcvqktE/+r7fbDOAGHXOeA
+ b6/SrZ6ryzKu6JTFQyK/K+ovXg==
+X-Google-Smtp-Source: APXvYqxlbxmp9sQUBchL7xCXNDeCu6p5vWmmPGNO5ZyJ0If8Armv9gfRQLVqlWf476Igqo9LNYFNbA==
+X-Received: by 2002:adf:9c8c:: with SMTP id d12mr21750911wre.404.1581606368580; 
+ Thu, 13 Feb 2020 07:06:08 -0800 (PST)
+Received: from wychelm.lan
+ (cpc141214-aztw34-2-0-cust773.18-1.cable.virginm.net. [86.9.19.6])
+ by smtp.gmail.com with ESMTPSA id m9sm3162376wrx.55.2020.02.13.07.06.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 13 Feb 2020 07:06:08 -0800 (PST)
+From: Daniel Thompson <daniel.thompson@linaro.org>
+To: Jason Wessel <jason.wessel@windriver.com>,
+ Daniel Thompson <daniel.thompson@linaro.org>,
+ Douglas Anderson <dianders@chromium.org>
+Date: Thu, 13 Feb 2020 15:05:53 +0000
+Message-Id: <20200213150553.313596-1-daniel.thompson@linaro.org>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-References: <20200204141219.1.Ief3f3a7edbbd76165901b14813e90381c290786d@changeid>
- <20200205173042.chqij5i53mncfzar@holly.lan>
- <CAD=FV=V6ovmi-zCUYyFdiyf0pG4g=i5N4hUC8JjvrWDRUzPnqQ@mail.gmail.com>
- <20200206115826.oeltu56pp6w5jwvs@holly.lan>
-In-Reply-To: <20200206115826.oeltu56pp6w5jwvs@holly.lan>
-From: Doug Anderson <dianders@chromium.org>
-Date: Thu, 6 Feb 2020 08:15:52 -0800
-X-Gmail-Original-Message-ID: <CAD=FV=XpUwWyxoEOdOGf=hDQSmQgU7VV0gOPHdvN1L4AqGok1A@mail.gmail.com>
-Message-ID: <CAD=FV=XpUwWyxoEOdOGf=hDQSmQgU7VV0gOPHdvN1L4AqGok1A@mail.gmail.com>
-To: Daniel Thompson <daniel.thompson@linaro.org>
-X-Spam-Score: -0.3 (/)
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: chromium.org]
+ for more information. [URIs: linaro.org]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.219.68 listed in list.dnswl.org]
+ trust [209.85.221.68 listed in list.dnswl.org]
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.219.68 listed in wl.mailspike.net]
+ [209.85.221.68 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -103,11 +98,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1izkBv-001YEt-RE
-Subject: Re: [Kgdb-bugreport] [PATCH] kdb: Fix compiling on architectures
- w/out DBG_MAX_REG_NUM defined
+X-Headers-End: 1j2G4F-00BXSp-7k
+Subject: [Kgdb-bugreport] [PATCH] kdb: Eliminate strncpy() warnings by
+ replacing with strscpy()
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -119,125 +112,72 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: Anatoly Pugachev <matorola@gmail.com>,
- Jason Wessel <jason.wessel@windriver.com>, Chuhong Yuan <hslester96@gmail.com>,
- LKML <linux-kernel@vger.kernel.org>,
- Masahiro Yamada <yamada.masahiro@socionext.com>,
- kgdb-bugreport@lists.sourceforge.net,
- Sparc kernel list <sparclinux@vger.kernel.org>,
- Dan Carpenter <dan.carpenter@oracle.com>
+Cc: kgdb-bugreport@lists.sourceforge.net, linux-kernel@vger.kernel.org,
+ patches@linaro.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Hi,
+Currently the code to manage the kdb history buffer uses strncpy() to
+copy strings to/and from the history and exhibits the classic "but
+nobody ever told me that strncpy() doesn't always terminate strings"
+bug. Modern gcc compilers recognise this bug and issue a warning.
 
-On Thu, Feb 6, 2020 at 3:58 AM Daniel Thompson
-<daniel.thompson@linaro.org> wrote:
->
-> On Wed, Feb 05, 2020 at 10:01:17AM -0800, Doug Anderson wrote:
-> > Hi,
-> >
-> > On Wed, Feb 5, 2020 at 9:30 AM Daniel Thompson
-> > <daniel.thompson@linaro.org> wrote:
-> > >
-> > > On Tue, Feb 04, 2020 at 02:12:25PM -0800, Douglas Anderson wrote:
-> > > > In commit bbfceba15f8d ("kdb: Get rid of confusing diag msg from "rd"
-> > > > if current task has no regs") I tried to clean things up by using "if"
-> > > > instead of "#ifdef".  Turns out we really need "#ifdef" since not all
-> > > > architectures define some of the structures that the code is referring
-> > > > to.
-> > > >
-> > > > Let's switch to #ifdef again, but at least avoid using it inside of
-> > > > the function.
-> > > >
-> > > > Fixes: bbfceba15f8d ("kdb: Get rid of confusing diag msg from "rd" if current task has no regs")
-> > > > Reported-by: Anatoly Pugachev <matorola@gmail.com>
-> > > > Signed-off-by: Douglas Anderson <dianders@chromium.org>
-> > >
-> > > Thanks for being so quick with this (especially when if I had been less
-> > > delinquent with linux-next it might have been spotted sooner).
-> > >
-> > >
-> > > > ---
-> > > > I don't have a sparc64 compiler but I'm pretty sure this should work.
-> > > > Testing appreciated.
-> > >
-> > > I've just add sparc64 into my pre-release testing (although I have had to
-> > > turn off a bunch of additional compiler warnings in order to do so).
-> > >
-> > >
-> > > >  kernel/debug/kdb/kdb_main.c | 17 +++++++++++------
-> > > >  1 file changed, 11 insertions(+), 6 deletions(-)
-> > > >
-> > > > diff --git a/kernel/debug/kdb/kdb_main.c b/kernel/debug/kdb/kdb_main.c
-> > > > index b22292b649c4..c84e61747267 100644
-> > > > --- a/kernel/debug/kdb/kdb_main.c
-> > > > +++ b/kernel/debug/kdb/kdb_main.c
-> > > > @@ -1833,6 +1833,16 @@ static int kdb_go(int argc, const char **argv)
-> > > >  /*
-> > > >   * kdb_rd - This function implements the 'rd' command.
-> > > >   */
-> > > > +
-> > > > +/* Fallback to Linux showregs() if we don't have DBG_MAX_REG_NUM */
-> > > > +#if DBG_MAX_REG_NUM <= 0
-> > > > +static int kdb_rd(int argc, const char **argv)
-> > > > +{
-> > > > +     if (!kdb_check_regs())
-> > > > +             kdb_dumpregs(kdb_current_regs);
-> > > > +     return 0;
-> > > > +}
-> > > > +#else
-> > >
-> > > The original kdb_rd (and kdb_rm which still exists in this file) place
-> > > the #if inside the function and users > 0 so the common case was
-> > > covered at the top and the fallback at the bottom.
-> > >
-> > > Why change style when re-introducing this code?
-> >
-> > My opinion is that #if / #ifdef leads to hard-to-follow code, so I
-> > have always taken the policy that #if / #ifdef don't belong anywhere
-> > inside a function if it can be avoided.  This seems to be the policy
-> > in Linux in general, though not as much in the existing kgdb code.
-> > IMO kgdb should be working to reduce #if / #ifdef inside functions.
->
-> I definitely agree that reducing #if and its shortcuts is a good thing.
->
-> However I would characterize the dominant pattern as using #if[def]
-> to replace disabled functionality with an inline nop version. Other
-> cases are, I think, less clear cut.
->
->
-> > In this case, the duplicated code is 1 line: the call to
-> > kdb_check_regs().  It seemed better to duplicate.  Another option that
-> > would avoid the #if / #ifdef in the function would be as follows.
-> > Happy to change my patch like this if you prefer:
->
-> I wasn't really the duplicated code that bothered me.
->
-> More that this test of DBG_MAX_REG_NUM is following a different pattern
-> to all other instances in the code case (for a start all others use a
-> DBG_MAX_REG_NUM > 0 test and put the fallback code at the bottom).
+In reality these calls will only abridge the copied string if kdb_read()
+has *already* overflowed the command buffer. Thus the use of counted
+copies here is only used to reduce the secondary effects of a bug
+elsewhere in the code.
 
-Ah, got it.  I'll give a shot at a new version then.
+Therefore transitioning these calls into strscpy() (without checking
+the return code) is appropriate.
+
+Signed-off-by: Daniel Thompson <daniel.thompson@linaro.org>
+---
+ kernel/debug/kdb/kdb_main.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/kernel/debug/kdb/kdb_main.c b/kernel/debug/kdb/kdb_main.c
+index ba12e9f4661e..a4641be4123c 100644
+--- a/kernel/debug/kdb/kdb_main.c
++++ b/kernel/debug/kdb/kdb_main.c
+@@ -1102,12 +1102,12 @@ static int handle_ctrl_cmd(char *cmd)
+ 	case CTRL_P:
+ 		if (cmdptr != cmd_tail)
+ 			cmdptr = (cmdptr-1) % KDB_CMD_HISTORY_COUNT;
+-		strncpy(cmd_cur, cmd_hist[cmdptr], CMD_BUFLEN);
++		strscpy(cmd_cur, cmd_hist[cmdptr], CMD_BUFLEN);
+ 		return 1;
+ 	case CTRL_N:
+ 		if (cmdptr != cmd_head)
+ 			cmdptr = (cmdptr+1) % KDB_CMD_HISTORY_COUNT;
+-		strncpy(cmd_cur, cmd_hist[cmdptr], CMD_BUFLEN);
++		strscpy(cmd_cur, cmd_hist[cmdptr], CMD_BUFLEN);
+ 		return 1;
+ 	}
+ 	return 0;
+@@ -1314,7 +1314,7 @@ static int kdb_local(kdb_reason_t reason, int error, struct pt_regs *regs,
+ 		if (*cmdbuf != '\n') {
+ 			if (*cmdbuf < 32) {
+ 				if (cmdptr == cmd_head) {
+-					strncpy(cmd_hist[cmd_head], cmd_cur,
++					strscpy(cmd_hist[cmd_head], cmd_cur,
+ 						CMD_BUFLEN);
+ 					*(cmd_hist[cmd_head] +
+ 					  strlen(cmd_hist[cmd_head])-1) = '\0';
+@@ -1324,7 +1324,7 @@ static int kdb_local(kdb_reason_t reason, int error, struct pt_regs *regs,
+ 				cmdbuf = cmd_cur;
+ 				goto do_full_getstr;
+ 			} else {
+-				strncpy(cmd_hist[cmd_head], cmd_cur,
++				strscpy(cmd_hist[cmd_head], cmd_cur,
+ 					CMD_BUFLEN);
+ 			}
 
 
-> > ...or if you just want to get something quickly so we have time to
-> > debate the finer points, I wouldn't object to a simple Revert and I
-> > can put it on my plate to resubmit the patch later.
->
-> There's a degree of bikeshedding in the above (and as we both know this
-> are larger bits of tidying up that kdb, in particular, could benefit
-> from) but nevertheless I think a revert is better at this point.
->
-> I hope you don't mind but I shall interpret the above paragraph as an
-> Acked-by: since I'd like the record to show your diligence in jumping
-> on this!
+base-commit: bb6d3fb354c5ee8d6bde2d576eb7220ea09862b9
+--
+2.23.0
 
-Sounds perfect.  Thanks for the revert and adding exra tests for the
-future to keep me from shooting myself in the foot.
-
--Doug
 
 
 _______________________________________________
