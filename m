@@ -2,87 +2,93 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8CD111A4C33
-	for <lists+kgdb-bugreport@lfdr.de>; Sat, 11 Apr 2020 00:46:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CFD031A4C35
+	for <lists+kgdb-bugreport@lfdr.de>; Sat, 11 Apr 2020 00:47:43 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jN2Ps-00080N-CB
-	for lists+kgdb-bugreport@lfdr.de; Fri, 10 Apr 2020 22:46:28 +0000
+	id 1jN2R4-0008BE-Kw
+	for lists+kgdb-bugreport@lfdr.de; Fri, 10 Apr 2020 22:47:42 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <dianders@chromium.org>) id 1jN2Pr-00080B-47
- for kgdb-bugreport@lists.sourceforge.net; Fri, 10 Apr 2020 22:46:27 +0000
+ (envelope-from <dianders@chromium.org>) id 1jN2R2-0008Aw-Sh
+ for kgdb-bugreport@lists.sourceforge.net; Fri, 10 Apr 2020 22:47:40 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=zWmbbFUQQjeDm+gMt8s5CKmqbSjpsn0Bs7Vf6igbDN0=; b=Yb0XM2RirbKZzk42k7O08d3lph
- BH2oCCdQB0U9ZeFZXeZS7isDTBDupYu/RUv+lPWQ4ytXpAMCIpwpgbnvuTxprxJd6gNYntWmSLzjA
- UPgw9SHKPuObQKw/OOhlD+rck4rRACv1lnM49/mHTNBKKZMOi4waVCS/Nq0nXw1P7RLc=;
+ bh=3LahRNEc8NZpH6NlGKTJK2B5A2bd6uVChU8p3hPZnzw=; b=lEOJVjIaiN5LKS9//l/G5SQJhc
+ aNrus9gIyh/F2pgInK4RRaAUt1xR8L/gyXwPfNkN2B/Nz5zgWvEwJ4Dza1j/Bfw8+Vh+eDaQFJwTL
+ 4uPrgJ0c+YPj4L0tQddobIp1CtHXf7oFBni6iXkezfeYRCgl86ltvmkfAZ8Sc2xv2cVQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=zWmbbFUQQjeDm+gMt8s5CKmqbSjpsn0Bs7Vf6igbDN0=; b=K
- 24t//eVbK19HUXCclw40sNlzKtaE8tLtE7bimwlFp7uxS0QZGOiqsjQzzUk9R4H1EhzqHPY/uUbaX
- iYwdFyUuDqMrr4REisHPYKXmydo6LQhzFgTuBO3ICSlomVFKHE/SirSmcP6hxeVY1sSv9uLI3YXPn
- zd8dj9sGuVXtWyTk=;
-Received: from mail-pf1-f195.google.com ([209.85.210.195])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=3LahRNEc8NZpH6NlGKTJK2B5A2bd6uVChU8p3hPZnzw=; b=NIYG/fIc7JWUvGm2rgG3/keZvl
+ hQhwfxm1gwZ3hWf6ck2IikI0ZJrh6sGrk1NMRNtKxJ8n0ibGhxStHV1Skfr338e2ElJdmL+WThj/L
+ 7Y0qhtLy/GBMYZ5NW0mM0aecr9DSuKmEhHlLbIvW42/+UdT/jJvte7QMj6x0n/ykWuTM=;
+Received: from mail-io1-f65.google.com ([209.85.166.65])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jN2Pm-00B3pD-NN
- for kgdb-bugreport@lists.sourceforge.net; Fri, 10 Apr 2020 22:46:26 +0000
-Received: by mail-pf1-f195.google.com with SMTP id k15so1622730pfh.6
+ id 1jN2R0-00Ek2w-CV
+ for kgdb-bugreport@lists.sourceforge.net; Fri, 10 Apr 2020 22:47:40 +0000
+Received: by mail-io1-f65.google.com with SMTP id h6so3229090iok.11
  for <kgdb-bugreport@lists.sourceforge.net>;
- Fri, 10 Apr 2020 15:46:22 -0700 (PDT)
+ Fri, 10 Apr 2020 15:47:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=zWmbbFUQQjeDm+gMt8s5CKmqbSjpsn0Bs7Vf6igbDN0=;
- b=e3lTJwDeR+Nav+528OsUsNEAU/mQAvnOqDzBkyDMHmonykZKMLV0VVtUTENE3pD7Q6
- GnFU+SMC26o3A55F4t3Tt68x4vLPjqJkRXN3RzuTpsdN8C5J50qTnKOpIr9VsyCZ+cLV
- i9mbvKSAC+qjGIAx9O/tI70iccionOxKrTrQw=
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=3LahRNEc8NZpH6NlGKTJK2B5A2bd6uVChU8p3hPZnzw=;
+ b=STTfAg/5L1KOesfw7jIs6oFNooK9Uk19XuSGpBvcQqc/azMYWEFgleBbD3sjcN/bwf
+ s7FvIKlaHfR38aKmYxpOBfhKK8pGSdFuZ0UPWiniE9vFXmpojXdwSd/DiZl7vrB8FCaZ
+ N5Ioc4gW4S+wBKII3cqGgoJSfAOQABzaIYv9w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=zWmbbFUQQjeDm+gMt8s5CKmqbSjpsn0Bs7Vf6igbDN0=;
- b=FQJxpIBdFdynpPApofgWZ2kDhITxsRRjSd5P3BpCRDmzLwaxdEthe5n2hCDbQn54MP
- bKx3LWhpL6yzZIfmiShHnBQWw/xHprc3Acl1Zqwo0S5V7XhpxEAi4NzAR08MRwrNQcm5
- sNUkntpvKpXCrzLavG/6ac3y/nUk6MFVxM5cLjQLbvodqBPs7xNAB8jXWUuMP4xXDoFS
- ZWKkZeoUPABlwkunqxQ4yeS2UVIQhSx0X1Y7Ylp9Zn/WC0ADBTQZzGvsUgLo/AzpM7qO
- O3Z8VzTuE8jhDs2A3yPhE4SxiIEoiwcibiepNzfn9Muw2/EHXE0kikWufQC1rJkSl+51
- dccw==
-X-Gm-Message-State: AGi0PuaEtt/e/Zpb7vn+QhoZQbHOWxd+75gXVhsGyMQ6afX0jTMNpD+L
- ENBTRr7YMb8EcSGL2jA9Cd3Ik1sEs8MAog==
-X-Google-Smtp-Source: APiQypL5THpk7QNDWCyORXPdUOyrfq0oJPG9LZXBe4qj/CEWRQMdNwTa2WA43xoyV7Mu3AgOv45XPQ==
-X-Received: by 2002:a65:5b4f:: with SMTP id y15mr6701497pgr.134.1586557099575; 
- Fri, 10 Apr 2020 15:18:19 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=3LahRNEc8NZpH6NlGKTJK2B5A2bd6uVChU8p3hPZnzw=;
+ b=n+/+pYyXI9xFSQJKbL2hgNiuOVAFzlbTnEjtTHieg+8Ca2A0V2SClgw5SAvjp7V80s
+ MXxhWAgYyg4eBX/OCuiTWs3Nszp16LyH+VDF4k9BwBsupidDSZsRsqcQTPVxisuoQuF2
+ 2tzDypnLCW1wFM2bgIaJG+/6zvkms1qDAHIXsq2FxHg22AdiL/WRi/1J4wqp5s22kNbi
+ adg3aj28MoCeKnNH8vHelfu+S2xqoTXyIlL3h90yu5/URe0j+jGBQnu0bL1KjVj+5u6x
+ bsZVvdGQ2twno87q9VCqG2yz6gqjNO9qiYev2xe6INqUQqdg1gLmfVvRexDnH5mz30dv
+ 3ptA==
+X-Gm-Message-State: AGi0PuZky8jvQCfCma9XvPz/Ah48K1DKgJSs72eti64iMOmK3Z1ki7yJ
+ pndAV+j6jZ/wcH84Gendi+ZTG2TXb9flTA==
+X-Google-Smtp-Source: APiQypIiuN6UDZ0FydqXjZJ8s/J+IS48bp/hUfvF47JjI/mnhBmAWeU118kPEebv28h1d2XKICDUTw==
+X-Received: by 2002:a65:4107:: with SMTP id w7mr6124188pgp.438.1586557100792; 
+ Fri, 10 Apr 2020 15:18:20 -0700 (PDT)
 Received: from tictac2.mtv.corp.google.com
  ([2620:15c:202:1:24fa:e766:52c9:e3b2])
- by smtp.gmail.com with ESMTPSA id x2sm2646600pfq.92.2020.04.10.15.18.18
+ by smtp.gmail.com with ESMTPSA id x2sm2646600pfq.92.2020.04.10.15.18.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Apr 2020 15:18:19 -0700 (PDT)
+ Fri, 10 Apr 2020 15:18:20 -0700 (PDT)
 From: Douglas Anderson <dianders@chromium.org>
 To: jason.wessel@windriver.com, daniel.thompson@linaro.org,
  gregkh@linuxfoundation.org
-Date: Fri, 10 Apr 2020 15:17:19 -0700
-Message-Id: <20200410221726.36442-1-dianders@chromium.org>
+Date: Fri, 10 Apr 2020 15:17:20 -0700
+Message-Id: <20200410151632.1.I4a493cfb0f9f740ce8fd2ab58e62dc92d18fed30@changeid>
 X-Mailer: git-send-email 2.26.0.110.g2183baf09c-goog
+In-Reply-To: <20200410221726.36442-1-dianders@chromium.org>
+References: <20200410221726.36442-1-dianders@chromium.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: chromium.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.166.65 listed in wl.mailspike.net]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.210.195 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.210.195 listed in wl.mailspike.net]
+ trust [209.85.166.65 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -90,12 +96,11 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jN2Pm-00B3pD-NN
-Subject: [Kgdb-bugreport] [PATCH 0/7] kgdb: Support late serial drivers;
- enable early debug w/ boot consoles
+X-Headers-End: 1jN2R0-00Ek2w-CV
+Subject: [Kgdb-bugreport] [PATCH 1/7] kgdboc: Use a platform device to
+ handle tty drivers showing up late
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,136 +112,275 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: Mark Rutland <mark.rutland@arm.com>, linux-doc@vger.kernel.org,
- Peter Zijlstra <peterz@infradead.org>, catalin.marinas@arm.com,
- bjorn.andersson@linaro.org, Nadav Amit <namit@vmware.com>, hpa@zytor.com,
- Mauro Carvalho Chehab <mchehab+samsung@kernel.org>, will@kernel.org,
- Matt Mullins <mmullins@fb.com>, corbet@lwn.net, x86@kernel.org,
- jinho lim <jordan.lim@samsung.com>, agross@kernel.org,
- Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
- linux-arm-kernel@lists.infradead.org, linux-serial@vger.kernel.org,
- kgdb-bugreport@lists.sourceforge.net, Dave Martin <Dave.Martin@arm.com>,
- Masami Hiramatsu <mhiramat@kernel.org>, linux-arm-msm@vger.kernel.org,
- jslaby@suse.com, Alexios Zavras <alexios.zavras@intel.com>, bp@alien8.de,
- Josh Poimboeuf <jpoimboe@redhat.com>, tglx@linutronix.de, mingo@redhat.com,
- Allison Randal <allison@lohutok.net>, Juergen Gross <jgross@suse.com>,
- Oliver Neukum <oneukum@suse.com>, linux-kernel@vger.kernel.org,
- James Morse <james.morse@arm.com>, "Eric W. Biederman" <ebiederm@xmission.com>,
- Andrew Morton <akpm@linux-foundation.org>, Enrico Weigelt <info@metux.net>
+Cc: catalin.marinas@arm.com, will@kernel.org, corbet@lwn.net,
+ kgdb-bugreport@lists.sourceforge.net, hpa@zytor.com, agross@kernel.org,
+ bjorn.andersson@linaro.org, mingo@redhat.com, bp@alien8.de,
+ linux-serial@vger.kernel.org, jslaby@suse.com, tglx@linutronix.de,
+ linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-This whole pile of patches was motivated by me trying to get kgdb to
-work properly on a platform where my serial driver ended up being hit
-by the -EPROBE_DEFER virus (it wasn't practicing social distancing
-from other drivers).  Specifically my serial driver's parent device
-depended on a resource that wasn't available when its probe was first
-called.  It returned -EPROBE_DEFER which meant that when "kgdboc"
-tried to run its setup the serial driver wasn't there.  Unfortunately
-"kgdboc" never tried again, so that meant that kgdb was disabled until
-I manually enalbed it via sysfs.
+If you build CONFIG_KGDB_SERIAL_CONSOLE into the kernel then you
+should be able to have KGDB init itself at bootup by specifying the
+"kgdboc=..." kernel command line parameter.  This has worked OK for me
+for many years, but on a new device I switched to it stopped working.
 
-While I could try to figure out how to get around the -EPROBE_DEFER
-somehow, the above problems could happen to anyone and -EPROBE_DEFER
-is generally considered something you just have to live with.  In any
-case the current "kgdboc" setup is a bit of a race waiting to happen.
-I _think_ I saw during early testing that even adding a msleep() in
-the typical serial driver's probe() is enough to trigger similar
-issues.
+The problem is that on this new device the serial driver gets its
+probe deferred.  Now when kgdb initializes it can't find the tty
+driver and when it gives up it never tries again.
 
-I decided that for the above race the best attitude to get kgdb to
-register at boot was probably "if you can't beat 'em, join 'em".
-Thus, "kgdboc" now jumps on the -EPROBE_DEFER bandwagon (now that my
-driver uses it it's no longer a virus).  It does so a little awkwardly
-because "kgdboc" hasn't normally had a "struct device" associated with
-it, but it's really not _that_ ugly to make a platform device and
-seems less ugly than alternatives.
+We could try to find ways to move up the initialization of the serial
+driver and such a thing might be worthwhile, but it's nice to be
+robust against serial drivers that load late.  We could move kgdb to
+init itself later but that penalizes our ability to debug early boot
+code on systems where the driver inits early.  We could roll our own
+system of detecting when new tty drivers get loaded and then use that
+to figure out when kgdb can init, but that's ugly.
 
-Unfortunately now on my system the debugger is one of the last things
-to register at boot.  That's OK for debugging problems that show up
-significantly after boot, but isn't so hot for all the boot problems
-that I end up debugging.  This motivated me to try to get something
-working a little earlier.
+Instead, let's jump on the -EPROBE_DEFER bandwagon.  We'll create a
+singleton instance of a "kgdboc" platform device.  If we can't find
+our tty device when the singleton "kgdboc" probes we'll return
+-EPROBE_DEFER which means that the system will call us back later to
+try again when the tty device might be there.
 
-My first attempt was to try to get the existing "ekgdboc" to work
-earlier.  I tried that for a bit until I realized that it needed to
-work at the tty layer and I couldn't find any serial drivers that
-managed to register themselves to the tty layer super early at boot.
-The only documented use of "ekgdboc" is "ekgdboc=kbd" and that's a bit
-of a special snowflake.  Trying to get my serial driver and all its
-dependencies to probe normally and register the tty driver super early
-at boot seemed like a bad way to go.  In fact, all the complexity
-needed to do something like this is why the system already has a
-special concept of a "boot console" that lives only long enough to
-transition to the normal console.
+We won't fully transition all of the kgdboc to a platform device
+because early kgdb initialization (via the "ekgdboc" kernel command
+line parameter) still runs before the platform device has been
+created.  The kgdb platform device is merely used as a convenient way
+to hook into the system's normal probe deferral mechanisms.
 
-Leveraging the boot console seemed like a good way to go and that's
-what this series does.  I found that consoles could have a read()
-function, though I couldn't find anyone who implemented it.  I
-implemented it for two serial drivers for the devices I had easy
-access to, making the assumption that for boot consoles that we could
-assume read() and write() were polling-compatible (seems sane I
-think).
+As part of this, we'll ever-so-slightly change how the "kgdboc=..."
+kernel command line parameter works.  Previously if you booted up and
+kgdb couldn't find the tty driver then later reading
+'/sys/module/kgdboc/parameters/kgdboc' would return a blank string.
+Now kgdb will keep track of the string that came as part of the
+command line and give it back to you.  It's expected that this should
+be an OK change.
 
-Now anyone who makes a small change to their serial driver can easily
-enable early kgdb debugging!
+Signed-off-by: Douglas Anderson <dianders@chromium.org>
+---
 
-The devices I had for testing were:
-- arm32: rk3288-veyron-jerry
-- arm64: rk3399-gru-kevin
-- arm64: qcom-sc7180-trogdor (not mainline yet)
+ drivers/tty/serial/kgdboc.c | 126 +++++++++++++++++++++++++++++-------
+ 1 file changed, 101 insertions(+), 25 deletions(-)
 
-These are the devices I tested this series on.  I tried to test
-various combinations of enabling/disabling various options and I
-hopefully caught the corner cases, but I'd appreciate any extra
-testing people can do.  Notably I didn't test on x86, but (I think) I
-didn't touch much there so I shouldn't have broken anything.
-
-When testing I found a few problems with actually dropping into the
-debugger super early on arm and arm64 devices.  Patches in this series
-should help with this.  For arm I just avoid dropping into the
-debugger until a little later and for arm64 I actually enable
-debugging super early.
-
-I realize that bits of this series might feel a little hacky, though
-I've tried to do things in the cleanest way I could without overly
-interferring with the rest of the kernel.  If you hate the way I
-solved a problem I would love it if you could provide guidance on how
-you think I could solve the problem better.
-
-This series (and my comments / documentation / commit messages) are
-now long enough that my eyes glaze over when I try to read it all over
-to double-check.  I've nontheless tried to double-check it, but I'm
-pretty sure I did something stupid.  Thank you ahead of time for
-pointing it out to me so I can fix it in v2.  If somehow I managed to
-not do anything stupid (really?) then thank you for double-checking me
-anyway.
-
-
-Douglas Anderson (7):
-  kgdboc: Use a platform device to handle tty drivers showing up late
-  kgdb: Delay "kgdbwait" to dbg_late_init() by default
-  arm64: Add call_break_hook() to early_brk64() for early kgdb
-  kgdboc: Add earlycon_kgdboc to support early kgdb using boot consoles
-  Documentation: kgdboc: Document new earlycon_kgdboc parameter
-  serial: qcom_geni_serial: Support earlycon_kgdboc
-  serial: 8250_early: Support earlycon_kgdboc
-
- .../admin-guide/kernel-parameters.txt         |  20 ++
- Documentation/dev-tools/kgdb.rst              |  14 +
- arch/arm64/include/asm/debug-monitors.h       |   2 +
- arch/arm64/kernel/debug-monitors.c            |   2 +-
- arch/arm64/kernel/kgdb.c                      |   5 +
- arch/arm64/kernel/traps.c                     |   3 +
- arch/x86/kernel/kgdb.c                        |   5 +
- drivers/tty/serial/8250/8250_early.c          |  23 ++
- drivers/tty/serial/kgdboc.c                   | 266 ++++++++++++++++--
- drivers/tty/serial/qcom_geni_serial.c         |  32 +++
- include/linux/kgdb.h                          |  25 +-
- kernel/debug/debug_core.c                     |  44 ++-
- 12 files changed, 401 insertions(+), 40 deletions(-)
-
+diff --git a/drivers/tty/serial/kgdboc.c b/drivers/tty/serial/kgdboc.c
+index c7d51b51898f..9ace39fc4f95 100644
+--- a/drivers/tty/serial/kgdboc.c
++++ b/drivers/tty/serial/kgdboc.c
+@@ -20,6 +20,7 @@
+ #include <linux/vt_kern.h>
+ #include <linux/input.h>
+ #include <linux/module.h>
++#include <linux/platform_device.h>
+ 
+ #define MAX_CONFIG_LEN		40
+ 
+@@ -27,6 +28,7 @@ static struct kgdb_io		kgdboc_io_ops;
+ 
+ /* -1 = init not run yet, 0 = unconfigured, 1 = configured. */
+ static int configured		= -1;
++DEFINE_MUTEX(config_mutex);
+ 
+ static char config[MAX_CONFIG_LEN];
+ static struct kparam_string kps = {
+@@ -38,6 +40,8 @@ static int kgdboc_use_kms;  /* 1 if we use kernel mode switching */
+ static struct tty_driver	*kgdb_tty_driver;
+ static int			kgdb_tty_line;
+ 
++static struct platform_device *kgdboc_pdev;
++
+ #ifdef CONFIG_KDB_KEYBOARD
+ static int kgdboc_reset_connect(struct input_handler *handler,
+ 				struct input_dev *dev,
+@@ -133,11 +137,13 @@ static void kgdboc_unregister_kbd(void)
+ 
+ static void cleanup_kgdboc(void)
+ {
++	if (configured != 1)
++		return;
++
+ 	if (kgdb_unregister_nmi_console())
+ 		return;
+ 	kgdboc_unregister_kbd();
+-	if (configured == 1)
+-		kgdb_unregister_io_module(&kgdboc_io_ops);
++	kgdb_unregister_io_module(&kgdboc_io_ops);
+ }
+ 
+ static int configure_kgdboc(void)
+@@ -200,20 +206,79 @@ static int configure_kgdboc(void)
+ 	kgdb_unregister_io_module(&kgdboc_io_ops);
+ noconfig:
+ 	kgdboc_unregister_kbd();
+-	config[0] = 0;
+ 	configured = 0;
+-	cleanup_kgdboc();
+ 
+ 	return err;
+ }
+ 
++static int kgdboc_probe(struct platform_device *pdev)
++{
++	int ret = 0;
++
++	mutex_lock(&config_mutex);
++	if (configured != 1) {
++		ret = configure_kgdboc();
++
++		/* Convert "no device" to "defer" so we'll keep trying */
++		if (ret == -ENODEV)
++			ret = -EPROBE_DEFER;
++	}
++	mutex_unlock(&config_mutex);
++
++	return ret;
++}
++
++static struct platform_driver kgdboc_platform_driver = {
++	.probe = kgdboc_probe,
++	.driver = {
++		.name = "kgdboc",
++		.suppress_bind_attrs = true,
++	},
++};
++
+ static int __init init_kgdboc(void)
+ {
+-	/* Already configured? */
+-	if (configured == 1)
++	int ret;
++
++	/*
++	 * kgdboc is a little bit of an odd "platform_driver".  It can be
++	 * up and running long before the platform_driver object is
++	 * created and thus doesn't actually store anything in it.  There's
++	 * only one instance of kgdb so anything is stored as global state.
++	 * The platform_driver is only created so that we can leverage the
++	 * kernel's mechanisms (like -EPROBE_DEFER) to call us when our
++	 * underlying tty is ready.  Here we init our platform driver and
++	 * then create the single kgdboc instance.
++	 */
++	ret = platform_driver_register(&kgdboc_platform_driver);
++	if (ret)
++		return ret;
++
++	kgdboc_pdev = platform_device_alloc("kgdboc", PLATFORM_DEVID_NONE);
++	if (!kgdboc_pdev) {
++		ret = -ENOMEM;
++		goto err_did_register;
++	}
++
++	ret = platform_device_add(kgdboc_pdev);
++	if (!ret)
+ 		return 0;
+ 
+-	return configure_kgdboc();
++	platform_device_put(kgdboc_pdev);
++
++err_did_register:
++	platform_driver_unregister(&kgdboc_platform_driver);
++	return ret;
++}
++
++static void exit_kgdboc(void)
++{
++	mutex_lock(&config_mutex);
++	cleanup_kgdboc();
++	mutex_unlock(&config_mutex);
++
++	platform_device_unregister(kgdboc_pdev);
++	platform_driver_unregister(&kgdboc_platform_driver);
+ }
+ 
+ static int kgdboc_get_char(void)
+@@ -236,24 +301,20 @@ static int param_set_kgdboc_var(const char *kmessage,
+ 				const struct kernel_param *kp)
+ {
+ 	size_t len = strlen(kmessage);
++	int ret = 0;
+ 
+ 	if (len >= MAX_CONFIG_LEN) {
+ 		pr_err("config string too long\n");
+ 		return -ENOSPC;
+ 	}
+ 
+-	/* Only copy in the string if the init function has not run yet */
+-	if (configured < 0) {
+-		strcpy(config, kmessage);
+-		return 0;
+-	}
+-
+ 	if (kgdb_connected) {
+ 		pr_err("Cannot reconfigure while KGDB is connected.\n");
+-
+ 		return -EBUSY;
+ 	}
+ 
++	mutex_lock(&config_mutex);
++
+ 	strcpy(config, kmessage);
+ 	/* Chop out \n char as a result of echo */
+ 	if (len && config[len - 1] == '\n')
+@@ -262,8 +323,30 @@ static int param_set_kgdboc_var(const char *kmessage,
+ 	if (configured == 1)
+ 		cleanup_kgdboc();
+ 
+-	/* Go and configure with the new params. */
+-	return configure_kgdboc();
++	/*
++	 * Configure with the new params as long as init already ran.
++	 * Note that we can get called before init if someone loads us
++	 * with "modprobe kgdboc kgdboc=..." or if they happen to use the
++	 * the odd syntax of "kgdboc.kgdboc=..." on the kernel command.
++	 */
++	if (configured >= 0)
++		ret = configure_kgdboc();
++
++	/*
++	 * If we couldn't configure then clear out the config.  Note that
++	 * specifying an invalid config on the kernel command line vs.
++	 * through sysfs have slightly different behaviors.  If we fail
++	 * to configure what was specified on the kernel command line
++	 * we'll leave it in the 'config' and return -EPROBE_DEFER from
++	 * our probe.  When specified through sysfs userspace is
++	 * responsible for loading the tty driver before setting up.
++	 */
++	if (ret)
++		config[0] = '\0';
++
++	mutex_unlock(&config_mutex);
++
++	return ret;
+ }
+ 
+ static int dbg_restore_graphics;
+@@ -326,15 +409,8 @@ __setup("kgdboc=", kgdboc_option_setup);
+ /* This is only available if kgdboc is a built in for early debugging */
+ static int __init kgdboc_early_init(char *opt)
+ {
+-	/* save the first character of the config string because the
+-	 * init routine can destroy it.
+-	 */
+-	char save_ch;
+-
+ 	kgdboc_option_setup(opt);
+-	save_ch = config[0];
+-	init_kgdboc();
+-	config[0] = save_ch;
++	configure_kgdboc();
+ 	return 0;
+ }
+ 
+@@ -342,7 +418,7 @@ early_param("ekgdboc", kgdboc_early_init);
+ #endif /* CONFIG_KGDB_SERIAL_CONSOLE */
+ 
+ module_init(init_kgdboc);
+-module_exit(cleanup_kgdboc);
++module_exit(exit_kgdboc);
+ module_param_call(kgdboc, param_set_kgdboc_var, param_get_string, &kps, 0644);
+ MODULE_PARM_DESC(kgdboc, "<serial_device>[,baud]");
+ MODULE_DESCRIPTION("KGDB Console TTY Driver");
 -- 
 2.26.0.110.g2183baf09c-goog
 
