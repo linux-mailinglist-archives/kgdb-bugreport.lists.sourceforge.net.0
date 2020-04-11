@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F01B21A4CBA
-	for <lists+kgdb-bugreport@lfdr.de>; Sat, 11 Apr 2020 01:56:44 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 678251A4D56
+	for <lists+kgdb-bugreport@lfdr.de>; Sat, 11 Apr 2020 03:45:47 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jN3Vq-0005Dj-P4
-	for lists+kgdb-bugreport@lfdr.de; Fri, 10 Apr 2020 23:56:42 +0000
+	id 1jN5DO-0004vB-6r
+	for lists+kgdb-bugreport@lfdr.de; Sat, 11 Apr 2020 01:45:46 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <lkp@intel.com>) id 1jN3Vp-0005DY-LQ
- for kgdb-bugreport@lists.sourceforge.net; Fri, 10 Apr 2020 23:56:41 +0000
+ (envelope-from <lkp@intel.com>) id 1jN5DL-0004uq-Lw
+ for kgdb-bugreport@lists.sourceforge.net; Sat, 11 Apr 2020 01:45:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Z0ZAx0bDfzBe2N8jVuhhTeFjEP2ygUANe9ZhNZv9Og8=; b=DWPqSez0WyQpYuoRUECjhziIUI
- 6rt3ZYQUnExrozqLKEg23xUlkynwdCbm3KYp/2wZRlJ3ePgsKWIVof/IE1m1s2ZwcKdtrA+u4GjiX
- k5YuV+6bVAThynQzXE8uYq+Wjee+DZamFQsS95iiQG5VmtnWUPg9uSNz0xiBBMFILpFc=;
+ bh=bhpUrVRYRqElxrHaP86qrlNJ0qeK1x0Xd4mUHwjWyz4=; b=AmmAgzdJiUEHzh2CB+kYn9Ib61
+ 1sLFt4+G8Z+ngYvkMi2f3TK6xPv8n9OSsNKafGoz3VTBp9rQS524m//yShRiKxgaWj6xYtHEqb/o6
+ G8lMqKlH7at7zZKLkmzu4ZQHdBMDsNPcbA1DbWmY+qCSo09BR8U2L5fqZIKftYVvaCKs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -30,53 +30,51 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Z0ZAx0bDfzBe2N8jVuhhTeFjEP2ygUANe9ZhNZv9Og8=; b=IbjU1nnk8eTuQ6Om+sCjx0oLdl
- 8Lu/pC/PQBwIQl+N0nRNgoEVisPdfk6q6k41l2gHl5qAZW38u0sUGM470e8rq0g5vm0N1UQ/5rk0X
- 31TrIw6Me0wPwKy90mi7+Zm3fbIcPfWdFoDEfBsgZ/7FNnu4SrXL+SiiQq3a5tFZZ5GQ=;
-Received: from mga02.intel.com ([134.134.136.20])
+ bh=bhpUrVRYRqElxrHaP86qrlNJ0qeK1x0Xd4mUHwjWyz4=; b=QhJ6UqSAlGbL6B1QeUaDKuE2xm
+ OLLk/j6lRl3lD1qO/vV6WNApbjElDwarAbUB6F+fwrsk/hXL9xtIHIFsZ78DiV2wmb2ZsKkKF7uTy
+ +bDFRQyX2lzIRU1fCWl0UO3Z5fFVjpIoFnhPT6TYdmYXjebASxzadn3crsNwvvmYrfr8=;
+Received: from mga18.intel.com ([134.134.136.126])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jN3Vi-00Em1U-Pu
- for kgdb-bugreport@lists.sourceforge.net; Fri, 10 Apr 2020 23:56:41 +0000
-IronPort-SDR: 7HpM0fTXW1cgiZXkwoDKYw3dilPbvpdAkQFqjl5ERrn/CezIrYj7AUbxj9N8tVffKr7DHqzgYN
- 4W60Ms4EHbdw==
+ id 1jN5DH-00Ep61-Rw
+ for kgdb-bugreport@lists.sourceforge.net; Sat, 11 Apr 2020 01:45:43 +0000
+IronPort-SDR: XU2ZTeihNz5jHc0k0m7xkcJMrjJFbtIrEJHtqfc9ARJ/25s3ET4mGBX58kUyL9wmVeEiDDxreA
+ Bi3B2jl6HT+A==
 X-Amp-Result: UNKNOWN
 X-Amp-Original-Verdict: FILE UNKNOWN
 X-Amp-File-Uploaded: False
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
- by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 10 Apr 2020 16:56:28 -0700
-IronPort-SDR: wBgQ2nVr1uE4WKxqrSNvhduGxgcOvGGeq6xYcEZCjZ2ulzCQKSZPYV/OJ2MIPCv3HVsNuxl0jY
- yhpON0u4w0Eg==
+Received: from orsmga005.jf.intel.com ([10.7.209.41])
+ by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 10 Apr 2020 18:45:33 -0700
+IronPort-SDR: s9cttaJxGUMc/++W8VQef1a2baIZatX1qPV2Q8wLG7pzgXvOHQOF2Cv2QvvLeJ7DOVIAmUga2w
+ 6eflmS/EIBew==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="5.72,368,1580803200"; 
- d="gz'50?scan'50,208,50";a="362580567"
+ d="gz'50?scan'50,208,50";a="426087418"
 Received: from lkp-server01.sh.intel.com (HELO lkp-server01) ([10.239.97.150])
- by fmsmga001.fm.intel.com with ESMTP; 10 Apr 2020 16:56:23 -0700
+ by orsmga005.jf.intel.com with ESMTP; 10 Apr 2020 18:45:28 -0700
 Received: from kbuild by lkp-server01 with local (Exim 4.89)
  (envelope-from <lkp@intel.com>)
- id 1jN3VW-000HeJ-Pw; Sat, 11 Apr 2020 07:56:22 +0800
-Date: Sat, 11 Apr 2020 07:56:16 +0800
+ id 1jN5D5-0001rg-Ra; Sat, 11 Apr 2020 09:45:27 +0800
+Date: Sat, 11 Apr 2020 09:44:40 +0800
 From: kbuild test robot <lkp@intel.com>
 To: Douglas Anderson <dianders@chromium.org>
-Message-ID: <202004110744.nPoRwmTD%lkp@intel.com>
+Message-ID: <202004110910.bzdcPg1o%lkp@intel.com>
 References: <20200410151632.4.I8fba5961bf452ab92350654aa61957f23ecf0100@changeid>
 MIME-Version: 1.0
 In-Reply-To: <20200410151632.4.I8fba5961bf452ab92350654aa61957f23ecf0100@changeid>
 User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Spam-Score: -0.4 (/)
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: githubusercontent.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [134.134.136.20 listed in wl.mailspike.net]
+ for more information. [URIs: windriver.com]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jN3Vi-00Em1U-Pu
+ -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jN5DH-00Ep61-Rw
 Content-Disposition: inline
 X-Content-Filtered-By: Mailman/MimeDel 2.1.21
 Subject: Re: [Kgdb-bugreport] [PATCH 4/7] kgdboc: Add earlycon_kgdboc to
@@ -115,64 +113,55 @@ base tree in git format-patch, please see https://stackoverflow.com/a/37406982]
 
 url:    https://github.com/0day-ci/linux/commits/Douglas-Anderson/kgdb-Support-late-serial-drivers-enable-early-debug-w-boot-consoles/20200411-062123
 base:   https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git for-next/core
-config: microblaze-mmu_defconfig (attached as .config)
-compiler: microblaze-linux-gcc (GCC) 9.3.0
+config: i386-allyesconfig (attached as .config)
+compiler: gcc-7 (Ubuntu 7.5.0-6ubuntu2) 7.5.0
 reproduce:
-        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
-        chmod +x ~/bin/make.cross
         # save the attached .config to linux build tree
-        GCC_VERSION=9.3.0 make.cross ARCH=microblaze 
+        make ARCH=i386 
 
 If you fix the issue, kindly add following tag as appropriate
 Reported-by: kbuild test robot <lkp@intel.com>
 
 All errors (new ones prefixed by >>):
 
-   drivers/misc/kgdbts.c: In function 'configure_kgdbts':
->> drivers/misc/kgdbts.c:1080:8: error: too few arguments to function 'kgdb_register_io_module'
-    1080 |  err = kgdb_register_io_module(&kgdbts_io_ops);
-         |        ^~~~~~~~~~~~~~~~~~~~~~~
-   In file included from drivers/misc/kgdbts.c:86:
+   drivers/usb/early/ehci-dbgp.c: In function 'kgdbdbgp_parse_config':
+>> drivers/usb/early/ehci-dbgp.c:1060:2: error: too few arguments to function 'kgdb_register_io_module'
+     kgdb_register_io_module(&kgdbdbgp_io_ops);
+     ^~~~~~~~~~~~~~~~~~~~~~~
+   In file included from drivers/usb/early/ehci-dbgp.c:24:0:
    include/linux/kgdb.h:326:12: note: declared here
-     326 | extern int kgdb_register_io_module(struct kgdb_io *new_dbg_io_ops,
-         |            ^~~~~~~~~~~~~~~~~~~~~~~
+    extern int kgdb_register_io_module(struct kgdb_io *new_dbg_io_ops,
+               ^~~~~~~~~~~~~~~~~~~~~~~
 
-vim +/kgdb_register_io_module +1080 drivers/misc/kgdbts.c
+vim +/kgdb_register_io_module +1060 drivers/usb/early/ehci-dbgp.c
 
-e8d31c204e36e0 Jason Wessel 2008-03-07  1069  
-e8d31c204e36e0 Jason Wessel 2008-03-07  1070  static int configure_kgdbts(void)
-e8d31c204e36e0 Jason Wessel 2008-03-07  1071  {
-e8d31c204e36e0 Jason Wessel 2008-03-07  1072  	int err = 0;
-e8d31c204e36e0 Jason Wessel 2008-03-07  1073  
-e8d31c204e36e0 Jason Wessel 2008-03-07  1074  	if (!strlen(config) || isspace(config[0]))
-e8d31c204e36e0 Jason Wessel 2008-03-07  1075  		goto noconfig;
-e8d31c204e36e0 Jason Wessel 2008-03-07  1076  
-e8d31c204e36e0 Jason Wessel 2008-03-07  1077  	final_ack = 0;
-e8d31c204e36e0 Jason Wessel 2008-03-07  1078  	run_plant_and_detach_test(1);
-e8d31c204e36e0 Jason Wessel 2008-03-07  1079  
-e8d31c204e36e0 Jason Wessel 2008-03-07 @1080  	err = kgdb_register_io_module(&kgdbts_io_ops);
-e8d31c204e36e0 Jason Wessel 2008-03-07  1081  	if (err) {
-e8d31c204e36e0 Jason Wessel 2008-03-07  1082  		configured = 0;
-e8d31c204e36e0 Jason Wessel 2008-03-07  1083  		return err;
-e8d31c204e36e0 Jason Wessel 2008-03-07  1084  	}
-e8d31c204e36e0 Jason Wessel 2008-03-07  1085  	configured = 1;
-e8d31c204e36e0 Jason Wessel 2008-03-07  1086  	kgdbts_run_tests();
-e8d31c204e36e0 Jason Wessel 2008-03-07  1087  
-e8d31c204e36e0 Jason Wessel 2008-03-07  1088  	return err;
-e8d31c204e36e0 Jason Wessel 2008-03-07  1089  
-e8d31c204e36e0 Jason Wessel 2008-03-07  1090  noconfig:
-e8d31c204e36e0 Jason Wessel 2008-03-07  1091  	config[0] = 0;
-e8d31c204e36e0 Jason Wessel 2008-03-07  1092  	configured = 0;
-e8d31c204e36e0 Jason Wessel 2008-03-07  1093  
-e8d31c204e36e0 Jason Wessel 2008-03-07  1094  	return err;
-e8d31c204e36e0 Jason Wessel 2008-03-07  1095  }
-e8d31c204e36e0 Jason Wessel 2008-03-07  1096  
+4fe1da4ebc18c4 Jason Wessel 2010-05-20  1046  
+4fe1da4ebc18c4 Jason Wessel 2010-05-20  1047  static int __init kgdbdbgp_parse_config(char *str)
+4fe1da4ebc18c4 Jason Wessel 2010-05-20  1048  {
+4fe1da4ebc18c4 Jason Wessel 2010-05-20  1049  	char *ptr;
+4fe1da4ebc18c4 Jason Wessel 2010-05-20  1050  
+4fe1da4ebc18c4 Jason Wessel 2010-05-20  1051  	if (!ehci_debug) {
+4fe1da4ebc18c4 Jason Wessel 2010-05-20  1052  		if (early_dbgp_init(str))
+4fe1da4ebc18c4 Jason Wessel 2010-05-20  1053  			return -1;
+4fe1da4ebc18c4 Jason Wessel 2010-05-20  1054  	}
+4fe1da4ebc18c4 Jason Wessel 2010-05-20  1055  	ptr = strchr(str, ',');
+4fe1da4ebc18c4 Jason Wessel 2010-05-20  1056  	if (ptr) {
+4fe1da4ebc18c4 Jason Wessel 2010-05-20  1057  		ptr++;
+4fe1da4ebc18c4 Jason Wessel 2010-05-20  1058  		kgdbdbgp_wait_time = simple_strtoul(ptr, &ptr, 10);
+4fe1da4ebc18c4 Jason Wessel 2010-05-20  1059  	}
+4fe1da4ebc18c4 Jason Wessel 2010-05-20 @1060  	kgdb_register_io_module(&kgdbdbgp_io_ops);
+4fe1da4ebc18c4 Jason Wessel 2010-05-20  1061  	kgdbdbgp_io_ops.is_console = early_dbgp_console.index != -1;
+4fe1da4ebc18c4 Jason Wessel 2010-05-20  1062  
+4fe1da4ebc18c4 Jason Wessel 2010-05-20  1063  	return 0;
+4fe1da4ebc18c4 Jason Wessel 2010-05-20  1064  }
+4fe1da4ebc18c4 Jason Wessel 2010-05-20  1065  early_param("kgdbdbgp", kgdbdbgp_parse_config);
+4fe1da4ebc18c4 Jason Wessel 2010-05-20  1066  
 
-:::::: The code at line 1080 was first introduced by commit
-:::::: e8d31c204e36e019b9134f2a11926cac0fcf9b19 kgdb: add kgdb internal test suite
+:::::: The code at line 1060 was first introduced by commit
+:::::: 4fe1da4ebc18c4c42fa56c228447f68033fce5f0 echi-dbgp: Add kernel debugger support for the usb debug port
 
 :::::: TO: Jason Wessel <jason.wessel@windriver.com>
-:::::: CC: Ingo Molnar <mingo@elte.hu>
+:::::: CC: Jason Wessel <jason.wessel@windriver.com>
 
 ---
 0-DAY CI Kernel Test Service, Intel Corporation
