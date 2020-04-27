@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9C2171BAA46
-	for <lists+kgdb-bugreport@lfdr.de>; Mon, 27 Apr 2020 18:46:34 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id E7DDE1BAA58
+	for <lists+kgdb-bugreport@lfdr.de>; Mon, 27 Apr 2020 18:48:32 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jT6tt-0004pC-EG
-	for lists+kgdb-bugreport@lfdr.de; Mon, 27 Apr 2020 16:46:33 +0000
+	id 1jT6vn-0004JT-O2
+	for lists+kgdb-bugreport@lfdr.de; Mon, 27 Apr 2020 16:48:31 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <daniel.thompson@linaro.org>) id 1jT6ts-0004p0-UL
- for kgdb-bugreport@lists.sourceforge.net; Mon, 27 Apr 2020 16:46:32 +0000
+ (envelope-from <daniel.thompson@linaro.org>) id 1jT6vm-0004JI-C4
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 27 Apr 2020 16:48:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=AFi2Ya3qM5IG+jnvqV1yuZyqNjUjwvEPZevqNfZVj0Y=; b=Gvj1EO2GiT+o0bGIzGr+Xihe11
- EQqsABmdRlhw4tPi45foK6tb8vUwaQ2NSxqJPs7Hq+Zahn8gbSvvmiO6ZaNBg0cIuhDbhUfoioSGV
- 5c9NhvwBnJ6/IICz/TMUpTkwhRGp6paZQbKxoIDOQcGd2cD71OHjzF66Do+VNxDSmx1k=;
+ bh=V2IKgBBGeWQaS3nKENTTI6oYzwqYmWY3/5vxajcyiRg=; b=AHnf+IBKEi6R7cxRMdxB8VI+it
+ bjLxpU9qeyeBJtlpbfLo7zi/t60OMOqOJhm8MDxoIlVzLIIULgeanmN/acrREaHdMF8qS8+DYouDi
+ 7punscnF1ddFq3Sc8oLaQYyHT0Bv3yMeYMGzvz/3AtmDRr0Jkt3DlFWYx2ykdQDfOOHY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -30,57 +30,57 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=AFi2Ya3qM5IG+jnvqV1yuZyqNjUjwvEPZevqNfZVj0Y=; b=Wf345Yao77WbPyxO/OM2+HLDdF
- oU4fPch6FQnP1lUfdETNkMmrBAEjRdyA19Z9rYyyhUQzl/VvVA8Jy5kqk66SeZNDnfvESuAflOTN6
- QgWjqlzLYN82Z0QvHu0gnrT+KzSHW0FyFHVNbYbJ6z0PiIwtBFp5RMzaCO9D+E7rzG68=;
-Received: from mail-wr1-f66.google.com ([209.85.221.66])
+ bh=V2IKgBBGeWQaS3nKENTTI6oYzwqYmWY3/5vxajcyiRg=; b=Z08ls8qQ1E9Awfah78OfVfHGrs
+ /ejXb9cFw9Vc0TPPL3wUMZwOTGdetf8a1xGtfEFoRYem4duY04R9LeOGAmuz1bvPUeG6dsv18ViOR
+ 3MbSaWj2bc7zEiqCVk/Tk0PwPSuNUCWB7ISKx6fa7yrLHdclQGSp1V9s6QjV7I1G0ZkA=;
+Received: from mail-wm1-f65.google.com ([209.85.128.65])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jT6tp-00D0PG-0C
- for kgdb-bugreport@lists.sourceforge.net; Mon, 27 Apr 2020 16:46:32 +0000
-Received: by mail-wr1-f66.google.com with SMTP id k1so21400987wrx.4
+ id 1jT6vh-00D0VH-8L
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 27 Apr 2020 16:48:30 +0000
+Received: by mail-wm1-f65.google.com with SMTP id r26so413630wmh.0
  for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 27 Apr 2020 09:46:28 -0700 (PDT)
+ Mon, 27 Apr 2020 09:48:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to;
- bh=AFi2Ya3qM5IG+jnvqV1yuZyqNjUjwvEPZevqNfZVj0Y=;
- b=h89b6fSsTBUeL/XipyElSwPh022ivI7iy5S/qxb+B/YEFMXucgbgOPMaB5I8zHmo3G
- LRWpG0yPHRoPm6hWulcNTa8EZpmSU1ehlxrUGamES39kPwX8I0j/A+0KZg7hPbEs+0ks
- HANPmqjxSzMVM627SPxh1zTvoq9vHdnqsYVlJLIsHlzUsz3AmLrZdNJaY2bMEyz4RN+E
- NUpREb4sDwp8b2vh1zjq7PTy4S4t+pYLtsg99Q5g3VduUeMbXnv7Nu100uduQeC6sixW
- KMe2/BjTYwmqPbUi0wUvp7QccKp6gT4ao065bGV2099c9BJ1ORrE1ANzXHHED1u/7sCf
- qvnw==
+ bh=V2IKgBBGeWQaS3nKENTTI6oYzwqYmWY3/5vxajcyiRg=;
+ b=PW927SF/uC1q91VoVVYQ+1pXnGZTfNMH4wSEMOjVR2xohzu4yp9PaN8dJxdTffySOX
+ Xg90snZYIfR+VLNbsD+aeBooFQY9hW3NEw/9WC8Ikg8Ua3CdX9GPiZdqolNYOZDjbOgW
+ 8nMoVwWgXPDSdBzjyuD773mLMsMK2wxXf5mig/QQUsR9SZEmYcZxvhi1gOQNi/fBDetD
+ M2sOiHVkryGE0+k9XDDGVVwPrq/CFRbfFGAFfPhRys7RrcFrr1jI8b4rEFcrFjBdPlG+
+ ClCJmIQPMDJNb+VxjUwfW0rLYaSZQtSlHUpG3wiJ9Of7PaDg2cLwtlVdadaEVGFXiIoU
+ E5bw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=AFi2Ya3qM5IG+jnvqV1yuZyqNjUjwvEPZevqNfZVj0Y=;
- b=HgNOF9UVR978vH/c3lSjqn9CC1MKQzLZmeQpfTxij0dbhgHdi2pg24Uea0xA1EY0TO
- DRpou45wxgR0aMCUxfnzZeiRwV9m5u0J2HdCtsnqOIOPHi6TQdHWdl2w1g8n0bX8cBrv
- XP9G4RsjbAfV6Q5PbnA35pucvmvMgedoLnPtcpoUDe6VTLC1K6o8Bqo/M9ImAW/YhcOt
- V6kyQPFhRtjwwqGAc3r3H/2mB5GwB0iGqSE8QW1M8v5WMUQKyy4CJFBVotKnuBA2RYkq
- 71w7HU3MT4QXBQ71Vdane3TEIJwpeFAJXQ0jvhloqQsbBPXIPhZxeGCDScjACHqaGSlC
- hmKQ==
-X-Gm-Message-State: AGi0Puadh2s3pdDRFZAjIb2eJI0nzdFW/ida9cg5mGmkqqy9ivxOQFDL
- uATFN51dr92ZmZrWO9niKUgPLQ==
-X-Google-Smtp-Source: APiQypJ51FxUeaZo6yUU8t+LqTak9jj4U50akJER7m2MFUmNuUtXtokVlL35B4R3u3x89HQbdmY3Ng==
-X-Received: by 2002:adf:e944:: with SMTP id m4mr27910229wrn.366.1588005982418; 
- Mon, 27 Apr 2020 09:46:22 -0700 (PDT)
+ bh=V2IKgBBGeWQaS3nKENTTI6oYzwqYmWY3/5vxajcyiRg=;
+ b=bS8EodRh1ooA6uk5Xj7wkqXX7UqjnlO21Y85XcnjbVPmU0pRnmVQKqQF4u6h6mcpNr
+ 5dzhDRcBeY2Xe1LoFZHlzyxg+3gLNiAKmRMJoXKQN/OlDwWc3m6J96kSihPefEI9BK9o
+ 2A2dUuZjf7e4NJEbaSb+Jb0dNLa5yoPMDAKwbAn8leEFxZ/SJ6l3FWVrtU6sDaCFmTmS
+ MsuyV0BKrKNbUNf2V15fyXphZ5Kr8EoDfT9S4lMCf7sut7Q8z9iJOwqi35PoUY9vXZuC
+ h0k51B+VD5pFjEH8gtiQOtWFLoNsIbijKYcLvELiWba///C8ecn+huJ853fKfBeuB6oB
+ UD4Q==
+X-Gm-Message-State: AGi0PuYxONjbjlZqv588mGpUvFMTp17QcqasxeRrhjVyQhhLJ2Lj7qaG
+ +xpxt4z1AteGF9OVfKtZ2Qkjeg==
+X-Google-Smtp-Source: APiQypKZLllr/ppZ5WEDGUG/MlZ92mT/85cNLs+v4f8ofGxIckLH3GUuN5fThqZIftzZJCB3DKPn+Q==
+X-Received: by 2002:a1c:ba09:: with SMTP id k9mr387758wmf.176.1588006098658;
+ Mon, 27 Apr 2020 09:48:18 -0700 (PDT)
 Received: from holly.lan (cpc141214-aztw34-2-0-cust773.18-1.cable.virginm.net.
  [86.9.19.6])
- by smtp.gmail.com with ESMTPSA id x18sm21079430wrs.11.2020.04.27.09.46.21
+ by smtp.gmail.com with ESMTPSA id r20sm15553355wmh.26.2020.04.27.09.48.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Apr 2020 09:46:21 -0700 (PDT)
-Date: Mon, 27 Apr 2020 17:46:19 +0100
+ Mon, 27 Apr 2020 09:48:18 -0700 (PDT)
+Date: Mon, 27 Apr 2020 17:48:16 +0100
 From: Daniel Thompson <daniel.thompson@linaro.org>
 To: Douglas Anderson <dianders@chromium.org>
-Message-ID: <20200427164619.kw4mihmoxmxzjk66@holly.lan>
+Message-ID: <20200427164816.j4xqw3vvlgoqkmx7@holly.lan>
 References: <20200421211447.193860-1-dianders@chromium.org>
- <20200421141234.v2.7.I7d5eb42c6180c831d47aef1af44d0b8be3fac559@changeid>
+ <20200421141234.v2.8.If2deff9679a62c1ce1b8f2558a8635dc837adf8c@changeid>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200421141234.v2.7.I7d5eb42c6180c831d47aef1af44d0b8be3fac559@changeid>
+In-Reply-To: <20200421141234.v2.8.If2deff9679a62c1ce1b8f2558a8635dc837adf8c@changeid>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -89,9 +89,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: chromium.org]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.221.66 listed in list.dnswl.org]
+ trust [209.85.128.65 listed in list.dnswl.org]
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.221.66 listed in wl.mailspike.net]
+ [209.85.128.65 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -100,9 +100,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jT6tp-00D0PG-0C
-Subject: Re: [Kgdb-bugreport] [PATCH v2 7/9] Documentation: kgdboc: Document
- new earlycon_kgdboc parameter
+X-Headers-End: 1jT6vh-00D0VH-8L
+Subject: Re: [Kgdb-bugreport] [PATCH v2 8/9] serial: qcom_geni_serial:
+ Support earlycon_kgdboc
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,119 +114,70 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-doc@vger.kernel.org, catalin.marinas@arm.com,
- bjorn.andersson@linaro.org, hpa@zytor.com,
- Mauro Carvalho Chehab <mchehab+samsung@kernel.org>, will@kernel.org,
- corbet@lwn.net, agross@kernel.org,
- Pawan Gupta <pawan.kumar.gupta@linux.intel.com>, linux-serial@vger.kernel.org,
- kgdb-bugreport@lists.sourceforge.net, Borislav Petkov <bp@suse.de>,
- jslaby@suse.com, bp@alien8.de, tglx@linutronix.de, mingo@redhat.com,
- Juergen Gross <jgross@suse.com>, gregkh@linuxfoundation.org,
- linux-kernel@vger.kernel.org, jason.wessel@windriver.com,
- Andrew Morton <akpm@linux-foundation.org>
+Cc: catalin.marinas@arm.com, will@kernel.org, corbet@lwn.net,
+ kgdb-bugreport@lists.sourceforge.net, linux-arm-msm@vger.kernel.org,
+ hpa@zytor.com, agross@kernel.org, bjorn.andersson@linaro.org,
+ jason.wessel@windriver.com, mingo@redhat.com, bp@alien8.de,
+ linux-serial@vger.kernel.org, gregkh@linuxfoundation.org, jslaby@suse.com,
+ tglx@linutronix.de, linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Tue, Apr 21, 2020 at 02:14:45PM -0700, Douglas Anderson wrote:
-> The recent patch ("kgdboc: Add earlycon_kgdboc to support early kgdb
-> using boot consoles") adds a new kernel command line parameter.
-> Document it.
+On Tue, Apr 21, 2020 at 02:14:46PM -0700, Douglas Anderson wrote:
+> Implement the read() function in the early console driver.  With
+> recent kgdb patches this allows you to use kgdb to debug fairly early
+> into the system boot.
 > 
-> Note that the patch adding the feature does some comparing/contrasting
-> of "earlycon_kgdboc" vs. the existing "ekgdboc".  See that patch for
-> more details, but briefly "ekgdboc" can be used _instead_ of "kgdboc"
-> and just makes "kgdboc" do its normal initialization early (only works
-> if your tty driver is already ready).  The new "earlycon_kgdboc" works
-> in combination with "kgdboc" and is backed by boot consoles.
+> We only bother implementing this if polling is enabled since kgdb
+> can't be enabled without that.
 > 
 > Signed-off-by: Douglas Anderson <dianders@chromium.org>
 > ---
 > 
 > Changes in v2: None
 > 
->  .../admin-guide/kernel-parameters.txt         | 20 +++++++++++++++++++
->  Documentation/dev-tools/kgdb.rst              | 14 +++++++++++++
->  2 files changed, 34 insertions(+)
+>  drivers/tty/serial/qcom_geni_serial.c | 32 +++++++++++++++++++++++++++
+>  1 file changed, 32 insertions(+)
 > 
-> diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-> index f2a93c8679e8..588625ec2993 100644
-> --- a/Documentation/admin-guide/kernel-parameters.txt
-> +++ b/Documentation/admin-guide/kernel-parameters.txt
-> @@ -1132,6 +1132,22 @@
->  			address must be provided, and the serial port must
->  			already be setup and configured.
+> diff --git a/drivers/tty/serial/qcom_geni_serial.c b/drivers/tty/serial/qcom_geni_serial.c
+> index 6119090ce045..4563d152b39e 100644
+> --- a/drivers/tty/serial/qcom_geni_serial.c
+> +++ b/drivers/tty/serial/qcom_geni_serial.c
+> @@ -1090,6 +1090,36 @@ static void qcom_geni_serial_earlycon_write(struct console *con,
+>  	__qcom_geni_serial_console_write(&dev->port, s, n);
+>  }
 >  
-> +	earlycon_kgdboc=	[KGDB,HW]
-> +			If the boot console provides the ability to read
-> +			characters and can work in polling mode, you can use
-> +			this parameter to tell kgdb to use it as a backend
-> +			until the normal console is registered. Intended to
-> +			be used together with the kgdboc parameter which
-> +			specifies the normal console to transition to.
+> +#ifdef CONFIG_CONSOLE_POLL
+> +static int qcom_geni_serial_earlycon_read(struct console *con,
+> +					  char *s, unsigned int n)
+> +{
+> +	struct earlycon_device *dev = con->data;
+> +	struct uart_port *uport = &dev->port;
+> +	int num_read = 0;
+> +	int ch;
 > +
-> +			The the name of the early console should be specified
-> +			as the value of this parameter. Note that the name of
-> +			the early console might be different than the tty
-> +			name passed to kgdboc. If only one boot console with
-> +			a read() function is enabled it's OK to leave the
-> +			value blank and the first boot console that implements
-> +			read() will be picked.
-
-There's no need for the "If only one boot console with a read()
-funcuiton is enabled" here,
-
-Seeing this in alphabetic order in this patch it also crosses my mind
-that kgdboc_earlycon might be a better name so that is sorts closer
-to the other kgdb options. This is a kgdboc feature that uses earlycon
-not an earlycon feature that uses kgdboc.
-
-
+> +	while (num_read < n) {
+> +		ch = qcom_geni_serial_get_char(uport);
+> +		if (ch == NO_POLL_CHAR)
+> +			break;
+> +		s[num_read++] = ch;
+> +	}
 > +
->  	earlyprintk=	[X86,SH,ARM,M68k,S390]
->  			earlyprintk=vga
->  			earlyprintk=sclp
-> @@ -1190,6 +1206,10 @@
->  			This is designed to be used in conjunction with
->  			the boot argument: earlyprintk=vga
->  
-> +			This parameter works in place of the kgdboc parameter
-> +			but can only be used if the backing tty is available
-> +			very early in the boot process.
+> +	return num_read;
+> +}
 > +
+> +static void __init qcom_geni_serial_enable_early_read(struct geni_se *se,
+> +						      struct console *con)
+> +{
+> +	geni_se_setup_s_cmd(se, UART_START_READ, 0);
+> +	con->read = qcom_geni_serial_earlycon_read;
+> +}
+> +#else
+> +static inline void qcom_geni_serial_enable_early_read(struct geni_se *se,
+> +						      struct console *con) { ; }
 
-I wonder if pragmatic advice is more useful:
-
-  For early debugging via a serial port see earlycon_kgdboc instead.
-
->  	edd=		[EDD]
->  			Format: {"off" | "on" | "skip[mbr]"}
->  
-> diff --git a/Documentation/dev-tools/kgdb.rst b/Documentation/dev-tools/kgdb.rst
-> index d38be58f872a..c0b321403d9a 100644
-> --- a/Documentation/dev-tools/kgdb.rst
-> +++ b/Documentation/dev-tools/kgdb.rst
-> @@ -274,6 +274,20 @@ don't like this are to hack gdb to send the :kbd:`SysRq-G` for you as well as
->  on the initial connect, or to use a debugger proxy that allows an
->  unmodified gdb to do the debugging.
->  
-> +Kernel parameter: ``earlycon_kgdboc``
-> +-------------------------------------
-> +
-> +If you specify the kernel parameter ``earlycon_kgdboc`` and your serial
-> +driver registers a boot console that supports polling (doesn't need
-> +interrupts and implements a nonblocking read() function) kgdb will attempt
-> +to work using the boot console until it can transition to the regular
-> +tty driver specified by the ``kgdboc`` parameter.
-> +
-> +Normally there is only one boot console (especially that implements the
-> +read() function) so just adding ``earlycon_kgdboc`` on its own is
-> +sufficient to make this work.  If you have more than one boot console you
-> +can add the boot console's name to differentiate.
-> +
-
-I think we need an example here. The example in the patch header for
-the previous patch was useful (at least for me).
+This is pure nitpicking but since I was passing... why the ; ?
 
 
 Daniel.
