@@ -2,98 +2,93 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9302E1C3D69
-	for <lists+kgdb-bugreport@lfdr.de>; Mon,  4 May 2020 16:43:23 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id EC6921C4D59
+	for <lists+kgdb-bugreport@lfdr.de>; Tue,  5 May 2020 06:40:24 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jVcJW-000408-Cd
-	for lists+kgdb-bugreport@lfdr.de; Mon, 04 May 2020 14:43:22 +0000
+	id 1jVpNX-0003se-Pv
+	for lists+kgdb-bugreport@lfdr.de; Tue, 05 May 2020 04:40:23 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <daniel.thompson@linaro.org>) id 1jVcJV-000400-86
- for kgdb-bugreport@lists.sourceforge.net; Mon, 04 May 2020 14:43:21 +0000
+ (envelope-from <sumit.garg@linaro.org>) id 1jVpNW-0003sR-NS
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 05 May 2020 04:40:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=IRCeHkqSilUjU3FHunFBHRyW1Y2SXfHm0MWEUqYs4/A=; b=SSmjdVIiICjuWBNZShwvQ+qp96
- YukzHTnuUsvCVc/JVb+y6p41kChw6GMPCM+rKMiWqloxTuGwNlNhQDxCSSdlkAfGcQZAt/3vLyaVr
- qU7KBRQMxhh6jO7aWI4HQnYixugA8tQKnBt+cbpCNQUPDqu/48KUHzUkokDi6E2liq2I=;
+ bh=jz2cSoqOGbsKqpbrYNnHYMttjY/bXQpYhBr6USfoRbY=; b=RpIU4AaGIvGkiKlqDN7GerZETF
+ lisXjXyIw2ia76W7jX/jaoLk08NYoEGFuk7AifdaM6zScUX1t3jON6XxObmXj7QCfVeJDWdmdN55V
+ dlmlWRdTwxVLwSAxYt7cvTnnazXq9CtVJeqLmCht9DN0CAapfqkBRLYpN+HoE9s/uzyk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=IRCeHkqSilUjU3FHunFBHRyW1Y2SXfHm0MWEUqYs4/A=; b=hJznPRWyrEU7Z4JE9AUaJkuEHx
- HPNp1TnAVgSwO1CjEgPKqjWypgp6BetesbucTpmj+AmuxQTR+BmorCFZPnEwzjeReI5LDrd1sjFCG
- Y9ldoB8r33p4SJYQcXGutHjJjurYTwyVkhx0uBzCceEzAhOVZc0DgAxjyIGAlDscOTfU=;
-Received: from mail-wr1-f67.google.com ([209.85.221.67])
+ bh=jz2cSoqOGbsKqpbrYNnHYMttjY/bXQpYhBr6USfoRbY=; b=KNOUIeWpTc+7DeMXn7tnPt+GuO
+ 4VqzoPDA9OW9+v3THLBdr5CDquYJrPltxEJQ7bxFHIOxvsuMkJQh7kQ2M//iQYLNWoM1/h0SKJpdD
+ LNu5UMo94nzI3gsgZSBOwT+Oxc4/G7aFjTZxXHVGWiEdecTuY4Zks0nouoRGHJvdWnoY=;
+Received: from mail-ej1-f68.google.com ([209.85.218.68])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jVcJP-006wpa-Pz
- for kgdb-bugreport@lists.sourceforge.net; Mon, 04 May 2020 14:43:21 +0000
-Received: by mail-wr1-f67.google.com with SMTP id s8so10960603wrt.9
+ id 1jVpNR-007nMc-Om
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 05 May 2020 04:40:22 +0000
+Received: by mail-ej1-f68.google.com with SMTP id rh22so531541ejb.12
  for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 04 May 2020 07:43:15 -0700 (PDT)
+ Mon, 04 May 2020 21:40:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=IRCeHkqSilUjU3FHunFBHRyW1Y2SXfHm0MWEUqYs4/A=;
- b=xcitaMAX9gw+29GendB+8mdnWfteLl6Rm11E72yMhQbVlvTkMInBBYhb4kQT/E0Ee2
- RpgEOuBQ9xT8A4YL7gTNTKJ5zh+TWrGPNuLh64057pVrkt7H7DWcmVQrKFXjQeDH3Z1G
- YCFsMQC8kQ9CMB/oF2OxkJCUhr8/5PDqbAhJ4ks+5YxBltonIWm/PSuzLJD4lbO5C8/X
- IVOJFT4D78B16tVPI1OguBr0sC8OyIjijzRgZWEz0zkNTW/iglAwowEqku4oyIjAVbwL
- ownV/fwyJUskK7lI4VXncd03/fUtqP6ly+MFZn69UW2qU+OO761P5e16fgXuwmKiQawd
- 5f1g==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=jz2cSoqOGbsKqpbrYNnHYMttjY/bXQpYhBr6USfoRbY=;
+ b=slCE0T5Gb03QdASe6JmzYMEexr63wsm23L+sdIHGtpinXdhAZFyVxcQHTeYtBQp4yD
+ y71qhKRv4heGuf2Wqxq+0+VlHrEBSaFB4Ye93hueiw+f7ytT0SkRwhxoE9XAV+jRpvZm
+ faQkCdyyjm3agluH/OCbAwqdc/gQ9IKPzCHrcyoX5K08xveCw2VZtYKLKyzhqUggdJNP
+ PPw9y1OcCESn9/cOfa/VlntjB98n9YahFhvKIxSA4Ye2AOVEKdByRcA6KsYKXcb54819
+ j1NEIrMrm6iOgGR6QN/l5yOjWNtfkYbN4Tdiwc0fvFelvgA/CSnblcMrW4hOnXz9V5qr
+ qskQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=IRCeHkqSilUjU3FHunFBHRyW1Y2SXfHm0MWEUqYs4/A=;
- b=glBtlwLqKVDeTqA5phQ7GEewf3JQ0ph9RcBltgJ032D6qiVBuInk/xzq+XFGhIp5oF
- qw9ZLOnmLLDqz7rrg0Rqsm0Xy1JZ4xd2PPUKdLxGBstLMhpyeNT/WSPga9ZwGgHgoKsc
- Z/C+raHSGp3UyL6GZeKEllWSoqC5ItYQVJk6m0SQtFF6uiorM41fKecAylDWdv+T8LVI
- dpLTI6Gggh18t+MPfy9ZaHWccwgcD54/RHvPDh8cb65wC7H6k+m48OxIpMcuxGyM/mnr
- ws8Q0AE7b0zOvhsrhx9ulBvCbrZiGJudAyWKR/oaWV2Zto50LbHVW2KZfzAnEp4gQvv6
- 6pwg==
-X-Gm-Message-State: AGi0PuaaSyJVYLfkOTmm5CKAjI7fdrSAUMNadtGEO4+h7Z/SjzuHPs6q
- kTAQBrszak/5mLWFeA3YGnBeIg==
-X-Google-Smtp-Source: APiQypI9FXPMW4DbDRyPEO7LTd72jUgL9qg/5tOovENDnJ/SlF3XQVeCCTh4GFIUY0luJFYiAVo+KA==
-X-Received: by 2002:a5d:658c:: with SMTP id q12mr21086345wru.128.1588603388730; 
- Mon, 04 May 2020 07:43:08 -0700 (PDT)
-Received: from holly.lan (cpc141214-aztw34-2-0-cust773.18-1.cable.virginm.net.
- [86.9.19.6])
- by smtp.gmail.com with ESMTPSA id t17sm18896607wro.2.2020.05.04.07.43.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 May 2020 07:43:08 -0700 (PDT)
-Date: Mon, 4 May 2020 15:43:06 +0100
-From: Daniel Thompson <daniel.thompson@linaro.org>
-To: Doug Anderson <dianders@chromium.org>
-Message-ID: <20200504144306.zwac2jdlltvhekqm@holly.lan>
-References: <20200428211351.85055-1-dianders@chromium.org>
- <20200428141218.v3.4.I3113aea1b08d8ce36dc3720209392ae8b815201b@changeid>
- <20200430154927.vhkhoffqwirb2fmm@holly.lan>
- <CAD=FV=Ut7kHr+V_+Yyk=+NC5qBrKEQ+O6Ra4HRHs5XoAHFcWeA@mail.gmail.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=jz2cSoqOGbsKqpbrYNnHYMttjY/bXQpYhBr6USfoRbY=;
+ b=ihIPx+i/SxXYH+1nfZzqW90gPkJF6qSmatBIjXa+hvqwSdmR8H8b7q2I3tya5/9Voc
+ 9HOSSOjvYX6i7CIBpcVtSxoMyJTgEBG7uMEB8ffHll3b0hpS4eDs8ja/Iu0bP4aHwKke
+ aJKvPbhpLeM2+fgXnPet6Lgaaxf+h5lOxEPgjUOP7cfv/PgeAQrWGEuXNA95+Vo+uPcP
+ OHP55gKiNZGZ/sMiW5G7B75Jwe8XWe+DPZi5jlO0xzPfNedQTn5RoC0k/MED3NMjcEXn
+ giI43SsiaMfxSIrtolrzOL5VLw+lmZss7KTmF3XYzeowMNBnjAUMM2zTZQHoZcBZV2WW
+ Vxww==
+X-Gm-Message-State: AGi0Pua1twiuxPLepJGeH2YPQciuxaBsR4YRuoGz5U7j2fj0NpHyhX9f
+ DIZfmoh9GXATmI/6ZTzPfo0MOmwCpXxg5INbOt1EKiWv
+X-Google-Smtp-Source: APiQypKwcPjJPBwPDyzfifsJ9SA8+fSBAfu1r/Lymm9Q4ODuue79UHwVFwqFxAtVSoJpSw4ipsyt3LIML681Ciwsf/c=
+X-Received: by 2002:a19:7418:: with SMTP id v24mr263376lfe.15.1588651803162;
+ Mon, 04 May 2020 21:10:03 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAD=FV=Ut7kHr+V_+Yyk=+NC5qBrKEQ+O6Ra4HRHs5XoAHFcWeA@mail.gmail.com>
-X-Spam-Score: -0.2 (/)
+References: <1587726554-32018-1-git-send-email-sumit.garg@linaro.org>
+ <1587726554-32018-3-git-send-email-sumit.garg@linaro.org>
+ <20200425112950.3a4815b6@why>
+ <6fd3d96181ec53f735ef1b6a79d28da1@kernel.org>
+ <CAFA6WYPNNNZeX5zpadayfiZ7P_mHmiREpUd5LZ3Jp+TjGVqoEw@mail.gmail.com>
+ <ac57cb4bbb6507ee98f199d68a514503@kernel.org>
+ <CAFA6WYMheJxeKVC_YWN9owNJhcWTBsaOCvZXxq=GVj5ROJ0cvg@mail.gmail.com>
+ <20200430101322.420e4052@why>
+ <CAFA6WYO+NGLfNkOah4YzXx5XuaDh=QtWHgnMBwwMFY1zRt15GQ@mail.gmail.com>
+ <CAFA6WYPxiwxpJitX7fCSESUvQSa9Dq89GwL4e3w33ooetV=ysw@mail.gmail.com>
+In-Reply-To: <CAFA6WYPxiwxpJitX7fCSESUvQSa9Dq89GwL4e3w33ooetV=ysw@mail.gmail.com>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Tue, 5 May 2020 09:39:50 +0530
+Message-ID: <CAFA6WYOn+DLf77C1+e5bq-NdT+o4=o32oPu2b3bxD_U+mLQ3WQ@mail.gmail.com>
+To: Marc Zyngier <maz@kernel.org>
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: chromium.org]
+ -0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.218.68 listed in wl.mailspike.net]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.221.67 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.221.67 listed in wl.mailspike.net]
+ trust [209.85.218.68 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -101,10 +96,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jVcJP-006wpa-Pz
-Subject: Re: [Kgdb-bugreport] [PATCH v3 04/11] kgdb: Delay "kgdbwait" to
- dbg_late_init() by default
+ -0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1jVpNR-007nMc-Om
+Subject: Re: [Kgdb-bugreport] [RFC Patch v1 2/4] irqchip/gic-v3: Add support
+ to handle SGI as pseudo NMI
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -116,100 +111,139 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: "H. Peter Anvin" <hpa@zytor.com>, Jonathan Corbet <corbet@lwn.net>,
- kgdb-bugreport@lists.sourceforge.net, x86@kernel.org,
- LKML <linux-kernel@vger.kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>,
- Bjorn Andersson <bjorn.andersson@linaro.org>,
- Jason Wessel <jason.wessel@windriver.com>, Ingo Molnar <mingo@redhat.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Andy Gross <agross@kernel.org>, bp@alien8.de, linux-serial@vger.kernel.org,
- Catalin Marinas <catalin.marinas@arm.com>, Jiri Slaby <jslaby@suse.com>,
- Andrew Morton <akpm@linux-foundation.org>, Will Deacon <will@kernel.org>,
- Thomas Gleixner <tglx@linutronix.de>
+Cc: Daniel Thompson <daniel.thompson@linaro.org>,
+ Jason Cooper <jason@lakedaemon.net>, Catalin Marinas <catalin.marinas@arm.com>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ julien.thierry.kdev@gmail.com, Jason Wessel <jason.wessel@windriver.com>,
+ kgdb-bugreport@lists.sourceforge.net, Thomas Gleixner <tglx@linutronix.de>,
+ Will Deacon <will@kernel.org>,
+ linux-arm-kernel <linux-arm-kernel@lists.infradead.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Thu, Apr 30, 2020 at 09:35:30AM -0700, Doug Anderson wrote:
-> Hi,
-> 
-> On Thu, Apr 30, 2020 at 8:49 AM Daniel Thompson
-> <daniel.thompson@linaro.org> wrote:
+On Fri, 1 May 2020 at 18:33, Sumit Garg <sumit.garg@linaro.org> wrote:
+>
+> Hi Marc,
+>
+> On Thu, 30 Apr 2020 at 17:43, Sumit Garg <sumit.garg@linaro.org> wrote:
 > >
-> > On Tue, Apr 28, 2020 at 02:13:44PM -0700, Douglas Anderson wrote:
-> > > Using kgdb requires at least some level of architecture-level
-> > > initialization.  If nothing else, it relies on the architecture to
-> > > pass breakpoints / crashes onto kgdb.
+> > On Thu, 30 Apr 2020 at 14:43, Marc Zyngier <maz@kernel.org> wrote:
 > > >
-> > > On some architectures this all works super early, specifically it
-> > > starts working at some point in time before Linux parses
-> > > early_params's.  On other architectures it doesn't.  A survey of a few
-> > > platforms:
+> > > On Thu, 30 Apr 2020 12:50:28 +0530
+> > > Sumit Garg <sumit.garg@linaro.org> wrote:
 > > >
-> > > a) x86: Presumably it all works early since "ekgdboc" is documented to
-> > >    work here.
-> > > b) arm64: Catching crashes works; with a simple patch breakpoints can
-> > >    also be made to work.
-> > > c) arm: Nothing in kgdb works until
-> > >    paging_init() -> devicemaps_init() -> early_trap_init()
+> > > > Hi Marc,
+> > > >
+> > > > On Wed, 29 Apr 2020 at 13:53, Marc Zyngier <maz@kernel.org> wrote:
 > > >
-> > > Let's be conservative and, by default, process "kgdbwait" (which tells
-> > > the kernel to drop into the debugger ASAP at boot) a bit later at
-> > > dbg_late_init() time.  If an architecture has tested it and wants to
-> > > re-enable super early debugging, they can select the
-> > > ARCH_HAS_EARLY_DEBUG KConfig option.  We'll do this for x86 to start.
-> > > It should be noted that dbg_late_init() is still called quite early in
-> > > the system.
+> > > [...]
 > > >
-> > > Note that this patch doesn't affect when kgdb runs its init.  If kgdb
-> > > is set to initialize early it will still initialize when parsing
-> > > early_param's.  This patch _only_ inhibits the initial breakpoint from
-> > > "kgdbwait".  This means:
+> > > > > What I would like is for the arch code to request these interrupts as
+> > > > > normal interrupts, for which there is one problem to solve: how do you
+> > > > > find out about the Linux IRQ number for a given IPI. Or rather, how
+> > > > > do you get rid of the requirement to have IPI numbers at all and just
+> > > > > say "give me a per-cpu interrupt that I can use as an IPI, and by the
+> > > > > way here's the handler you can call".
+> > > >
+> > > > I think what you are looking for here is something that could be
+> > > > sufficed via enabling "CONFIG_GENERIC_IRQ_IPI" framework for arm64/arm
+> > > > architectures. It's currently used for mips architecture. Looking at
+> > > > its implementation, I think it should be possible to hook up SGIs
+> > > > under new IPI irq_domain for GICv2/v3.
+> > > >
+> > > > So with this framework we should be able to dynamically allocate IPIs
+> > > > and use common APIs such as request_irq()/request_nmi() to tell IPI
+> > > > specific handlers.
+> > > >
+> > > > If this approach looks sane to you then I can start working on a PoC
+> > > > implementation for arm64.
 > > >
-> > > * Without any extra patches arm64 platforms will at least catch
-> > >   crashes after kgdb inits.
-> > > * arm platforms will catch crashes (and could handle a hardcoded
-> > >   kgdb_breakpoint()) any time after early_trap_init() runs, even
-> > >   before dbg_late_init().
+> > > I can't say I'm keen. This IPI framework doesn't really work for the
+> > > GIC:
 > > >
-> > > Signed-off-by: Douglas Anderson <dianders@chromium.org>
-> > > Cc: Thomas Gleixner <tglx@linutronix.de>
-> > > Cc: Ingo Molnar <mingo@redhat.com>
-> > > Cc: Borislav Petkov <bp@alien8.de>
-> > > Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+> > > - it requires a separate irqdomain to be able to guarantee that you
+> > >   allocate the hwirq in the SGI range. What is the point?
+> > > - it creates yet another level of indirection on IPI injection
+> > >
+> > > This framework was created to deal with two cases:
+> > > - systems that can't represent their IPI with a single hwirq spanning
+> > >   all the CPUs
+> > > - "accelerator cores" that don't run Linux
+> > >
+> > > The GIC architecture avoids the first point, and I don't even want to
+> > > think of the second one.
+> > >
+> > > Also, it doesn't solve the initial problem, which is to bootstrap the
+> > > whole thing. The IPI framework relies on an irqdomain to be created the
+> > > first place. This would mean teaching the arch code about the
+> > > intricacies of irqdomains, FW nodes and other terrible things. All
+> > > things which are better hidden in the GIC drivers (not to mention the
+> > > other horror stories that are the RPi-2/3 irqchip and the Huawei GIC
+> > > knock-off).
+> > >
+> > > What I have in mind is to replace the set_smp_cross_call() with
+> > > something that passes the required set of information (interrupt range,
+> > > at the very least). The only thing that I plan to reuse from the IPI
+> > > framework is the chip->ipi_send_mask() callback.
+> > >
 > >
-> > It looks like this patch is triggering some warnings from the existing
-> > defconfigs (both x86 and arm64). It looks like this:
+> > Fair enough, I will just pass the allocated interrupt range base
+> > instead of set_smp_cross_call() and use __ipi_send_mask() to invoke a
+> > particular IPI.
+>
+> Thinking more about this, there seems to be multiple irqchip drivers
+> registering softirq API via set_smp_cross_call(). So we need to
+> introduce a new API instead of replacing set_smp_cross_call() under
+> "CONFIG_GENERIC_IRQ_IPI" macro until all drivers switch to IPIs as
+> full interrupts.
+>
+> BTW, could we take up this generalization as follow-up work as it
+> seems to be independent of current IPI NMI work?
+>
 > >
-> > ---
-> > wychelm$ make defconfig
-> >   GEN     Makefile
-> > *** Default configuration is based on 'x86_64_defconfig'
-> >
-> > WARNING: unmet direct dependencies detected for ARCH_HAS_EARLY_DEBUG
-> >   Depends on [n]: KGDB [=n]
-> >   Selected by [y]:
-> >   - X86 [=y]
-> >
-> > WARNING: unmet direct dependencies detected for ARCH_HAS_EARLY_DEBUG
-> >   Depends on [n]: KGDB [=n]
-> >   Selected by [y]:
-> >   - X86 [=y]
-> 
-> Ah, thanks!  I hadn't noticed those.  I think it'd be easy to just
-> change the relevant patches to just "select ARCH_HAS_EARLY_DEBUG if
-> KGDB".  If you agree that's a good fix and are willing, I'd be happy
-> if you just added it to the relevant patches when applying.  If not, I
-> can post a v4.
+> > And to request an arch specific IPI as NMI, will use
+> > arch_get_ipinr_nmi() and in turn use request_percpu_nmi() to turn that
+> > particular IPI as NMI.
+>
+> I have updated the second patch [1] in my tree to incorporate these
+> changes. The updated commit log is as follows:
+>
+> commit 25c96663126264ec758c49a4a01a9c285f4ccc61
+> Author: Sumit Garg <sumit.garg@linaro.org>
+> Date:   Wed Apr 22 16:29:59 2020 +0530
+>
+>     irqchip/gic-v3: Setup arch specific IPI as pseudo NMI
+>
+>     Add support to mark arch specific IPI as pseudo NMI. Currently its used
+>     to allow arm64 specific IPI_CALL_NMI_FUNC to be marked as pseudo NMI.
+>
+>     Brief description of changes:
+>     - Update NMI setup/teardown routines for SGIs.
+>     - Enable NMI support prior to gic_smp_init().
+>     - Setup custom flow handler for SGI setup as NMI.
+>     - Request, prepare and enable arch specific IPI as per CPU NMI using
+>       common APIs.
+>
+>     Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+>
+> Please have a look and let me know if this is something you were looking for.
+>
 
-Happy with the approach to fix this.
+In case there are no major objections to this approach, I will post
+complete v2 patch-set (alongwith Marc's patches) for detailed review.
 
-Given the follow on discussion from the end of last week I suspect there
-probably needs to be a v4 anyway so perhaps the last question is
-applying a fix up is moot at this point?
+-Sumit
 
-
-Daniel.
+> [1] https://git.linaro.org/people/sumit.garg/linux.git/commit/?h=kgdb-nmi&id=25c96663126264ec758c49a4a01a9c285f4ccc61
+>
+> -Sumit
+>
+> > > Thanks,
+> > >
+> > >         M.
+> > > --
+> > > Jazz is not dead. It just smells funny...
 
 
 _______________________________________________
