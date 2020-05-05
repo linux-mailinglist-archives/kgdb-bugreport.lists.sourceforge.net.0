@@ -2,67 +2,75 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B9B941C5297
-	for <lists+kgdb-bugreport@lfdr.de>; Tue,  5 May 2020 12:08:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B63641C5473
+	for <lists+kgdb-bugreport@lfdr.de>; Tue,  5 May 2020 13:33:46 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jVuV7-0006fB-Di
-	for lists+kgdb-bugreport@lfdr.de; Tue, 05 May 2020 10:08:33 +0000
+	id 1jVvpZ-0001XW-IL
+	for lists+kgdb-bugreport@lfdr.de; Tue, 05 May 2020 11:33:45 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <maz@kernel.org>) id 1jVuV6-0006ev-Lm
- for kgdb-bugreport@lists.sourceforge.net; Tue, 05 May 2020 10:08:32 +0000
+ (envelope-from <sumit.garg@linaro.org>) id 1jVvpY-0001XB-B2
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 05 May 2020 11:33:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Message-ID:References:In-Reply-To:Subject:Cc:To:
- From:Date:Content-Transfer-Encoding:Content-Type:MIME-Version:Sender:Reply-To
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
  :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=dgOOp/Xydtz/LSVXGrCrUQ6rm09WF1pfyTe5EuziVxc=; b=YxCiE/kpg7u+7RaqjxfWTYyQoD
- aASZuGZbfCbFUlFDtuCaZFHHfHvo6YktXkt4JD95POD7xW3REvOV6uz/jhN/RCvixtiQlyAS0//kN
- TFw9/1tamQkeZoq8SxtPK4EKUym+hPZmTxMqt2SzWtpX20MGb6pH1uAZyZLDPfQh/NgA=;
+ bh=hupIsa73mYi5wqryxe4Qi42JysQkQpBvcd0iG3bDTIg=; b=V8ZRfOk4B1EfiH/iqxeGvMPl8c
+ Mu+wdthJpWTvEqXO+gpd5qnqbRaD0eW8EEPFTxEcEVhD+yLlkvW3yFXRX0PAEWG/ln3rHbhwkOnFm
+ nMfT0a/NpL5Okj3MZL+7Mth9lBaOgPoNaL3ykP/zzr/2aFTrkzT2MxHM2T13+U/h9qgM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ; h=Message-ID:References:In-Reply-To:Subject:Cc:To:From:Date:
- Content-Transfer-Encoding:Content-Type:MIME-Version:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=dgOOp/Xydtz/LSVXGrCrUQ6rm09WF1pfyTe5EuziVxc=; b=e8pPkIsq8ebSnvd5UBKRKyEga/
- WwS0uXweincMZh4QUu9GcKH5fCtVeBxC3C6zpti9Z2+keoWNnOSUQIBsHg9j9XRjyaZRyj79Yjlrs
- bphBaXrXKVTRgfvTIxKzU3M3eLp6RclteOMfKI/SxC1/24A46FSshrMWMmSNyuK9Osk0=;
-Received: from mail.kernel.org ([198.145.29.99])
+ ;
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=hupIsa73mYi5wqryxe4Qi42JysQkQpBvcd0iG3bDTIg=; b=mUyDudSRXb8jGO5a7B/EY834xL
+ NNfqqLCyWjxqrJg1AhyUQEjlI0ytGyecHjYJev7xEK4NSGk1JJWNt+0I2UO/6BZLUNaLUALnpqDB7
+ H29CbPrQ0EuAdXyQuNB4Dn9d93PEkm7zkKLwHA3oHngIkUemqj6jUT39+FVw2/XsWaRI=;
+Received: from mail-lf1-f66.google.com ([209.85.167.66])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jVuV3-00E7a1-W3
- for kgdb-bugreport@lists.sourceforge.net; Tue, 05 May 2020 10:08:32 +0000
-Received: from disco-boy.misterjones.org (disco-boy.misterjones.org
- [51.254.78.96])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 57C5E206B9;
- Tue,  5 May 2020 10:08:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1588673299;
- bh=S4OvD3THrqAQKuLduHlxBJEKdVeJl7/rqkq6RJ2Vb14=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=nrCuaVmZqjpy20leR1WT4PjlQ9kE8WDRu7+fFr4RhuykskZYI0e55I4MXJdRZxeco
- 6jWWb7nSu8p69wN7eCcB4Z4nOm3CIWG2zeHsOi0ocA44IkIM1y0tngbpcz4Ktjc6g+
- XAq6Kx1sgFMYvYaol/e1lFJ++q/nnXLlTQACm0EA=
-Received: from disco-boy.misterjones.org ([51.254.78.96] helo=www.loen.fr)
- by disco-boy.misterjones.org with esmtpsa
- (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <maz@kernel.org>)
- id 1jVuUr-009N59-OW; Tue, 05 May 2020 11:08:17 +0100
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1jVvpW-00ECJ4-F8
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 05 May 2020 11:33:44 +0000
+Received: by mail-lf1-f66.google.com with SMTP id 188so1054901lfa.10
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Tue, 05 May 2020 04:33:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=hupIsa73mYi5wqryxe4Qi42JysQkQpBvcd0iG3bDTIg=;
+ b=VH3NB1RZHEvs5K7gdOjwynz0XSk4hklChAwSnf9CBV0dqOMKufdJjyxgi+kZvX5uNZ
+ +oynGrV0QHSRGalM8tgG/rbkxVYT8F0cBFML/4yh0b8obwpoV2EwRk7T1x5Czne4EXu5
+ l5uw/K26uHeZS6VWJsGc7f5OjmRrmPWwevTr+TnDoyD2fSHoASkUOKfFhaclL3Oi3rfB
+ RBoM5NzMZSJtkRMwsAYIPgcAf6di6MPGj3PtIXwHnOQ0X3xLs1KYjdDogTLFWE5X/KBm
+ +m6A6Xe+SN8BnlU1uKncJpvfWoeRLE476mXu8gCUiXNZ4q+V+iA/qf7Mn3GUSl3H7h58
+ FI8g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=hupIsa73mYi5wqryxe4Qi42JysQkQpBvcd0iG3bDTIg=;
+ b=ZSvbt0JWkDc/pebSzRJ4sNVVNCqMVwqjXvUsCWu5BmQ0kWXj3TDKc73tcudc1r+sS/
+ HXdyrUf/ABWb/ONScXMuxg8wkuzBOivReezuDQqEVRKoCE3ASD/O//1nnUpv7D1UuuBe
+ KwOTWLxK5vmj/Hk7beCpSg58dvcqtX+U92IuOPCUxddx/eE3zcKG0cJxNeR29Bee8h7R
+ acFGWxhlziDEYbsASVwUMlPpqmf0CPb8wadvIaQUONXT9c8pwjaM6U4t6ZqSk32BksF1
+ o0QJ05H2/GHGkgAo60aBtIgmU29dfbGZAdCCB7ha0nmi064lUlNEj1Jc/41btbVLJrKp
+ j+UA==
+X-Gm-Message-State: AGi0PubhSAilbY81SB3wUl9cHQSUAH8Z+9CPOxSXsPwSm3ElzAQ8eD/n
+ YQQUhMCKVART56CwZGE23rYUYfzDsKc5eL1XLtEb9Q==
+X-Google-Smtp-Source: APiQypLU2m/D7oJWk9It8mtjKBIlV1BpWKwlq9Nc3PajJn78yBAiMiIjgK7Faej/USSOYk2Wxlaz7fdud7Qz/+U/Wfg=
+X-Received: by 2002:a19:7418:: with SMTP id v24mr1403778lfe.15.1588678415695; 
+ Tue, 05 May 2020 04:33:35 -0700 (PDT)
 MIME-Version: 1.0
-Date: Tue, 05 May 2020 11:08:17 +0100
-From: Marc Zyngier <maz@kernel.org>
-To: Sumit Garg <sumit.garg@linaro.org>
-In-Reply-To: <CAFA6WYOn+DLf77C1+e5bq-NdT+o4=o32oPu2b3bxD_U+mLQ3WQ@mail.gmail.com>
 References: <1587726554-32018-1-git-send-email-sumit.garg@linaro.org>
  <1587726554-32018-3-git-send-email-sumit.garg@linaro.org>
- <20200425112950.3a4815b6@why> <6fd3d96181ec53f735ef1b6a79d28da1@kernel.org>
+ <20200425112950.3a4815b6@why>
+ <6fd3d96181ec53f735ef1b6a79d28da1@kernel.org>
  <CAFA6WYPNNNZeX5zpadayfiZ7P_mHmiREpUd5LZ3Jp+TjGVqoEw@mail.gmail.com>
  <ac57cb4bbb6507ee98f199d68a514503@kernel.org>
  <CAFA6WYMheJxeKVC_YWN9owNJhcWTBsaOCvZXxq=GVj5ROJ0cvg@mail.gmail.com>
@@ -70,21 +78,19 @@ References: <1587726554-32018-1-git-send-email-sumit.garg@linaro.org>
  <CAFA6WYO+NGLfNkOah4YzXx5XuaDh=QtWHgnMBwwMFY1zRt15GQ@mail.gmail.com>
  <CAFA6WYPxiwxpJitX7fCSESUvQSa9Dq89GwL4e3w33ooetV=ysw@mail.gmail.com>
  <CAFA6WYOn+DLf77C1+e5bq-NdT+o4=o32oPu2b3bxD_U+mLQ3WQ@mail.gmail.com>
-User-Agent: Roundcube Webmail/1.4.3
-Message-ID: <306aecc560a9503e500fbf1f512c6d30@kernel.org>
-X-Sender: maz@kernel.org
-X-SA-Exim-Connect-IP: 51.254.78.96
-X-SA-Exim-Rcpt-To: sumit.garg@linaro.org, daniel.thompson@linaro.org,
- jason@lakedaemon.net, catalin.marinas@arm.com, dianders@chromium.org,
- linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- jason.wessel@windriver.com, kgdb-bugreport@lists.sourceforge.net,
- tglx@linutronix.de, will@kernel.org, julien.thierry.kdev@gmail.com
-X-SA-Exim-Mail-From: maz@kernel.org
-X-SA-Exim-Scanned: No (on disco-boy.misterjones.org);
- SAEximRunCond expanded to false
+ <306aecc560a9503e500fbf1f512c6d30@kernel.org>
+In-Reply-To: <306aecc560a9503e500fbf1f512c6d30@kernel.org>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Tue, 5 May 2020 17:03:24 +0530
+Message-ID: <CAFA6WYPHWP46TY_XdxVVrTr6AChU_1ATXu+p32vXCjkaXWPWOQ@mail.gmail.com>
+To: Marc Zyngier <maz@kernel.org>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.167.66 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.167.66 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -92,8 +98,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1jVuV3-00E7a1-W3
+ -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jVvpW-00ECJ4-F8
 Subject: Re: [Kgdb-bugreport] [RFC Patch v1 2/4] irqchip/gic-v3: Add support
  to handle SGI as pseudo NMI
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
@@ -114,30 +120,68 @@ Cc: Daniel Thompson <daniel.thompson@linaro.org>,
  kgdb-bugreport@lists.sourceforge.net, Thomas Gleixner <tglx@linutronix.de>,
  Will Deacon <will@kernel.org>,
  linux-arm-kernel <linux-arm-kernel@lists.infradead.org>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On 2020-05-05 05:09, Sumit Garg wrote:
-> On Fri, 1 May 2020 at 18:33, Sumit Garg <sumit.garg@linaro.org> wrote:
+On Tue, 5 May 2020 at 15:38, Marc Zyngier <maz@kernel.org> wrote:
+>
+> On 2020-05-05 05:09, Sumit Garg wrote:
+> > On Fri, 1 May 2020 at 18:33, Sumit Garg <sumit.garg@linaro.org> wrote:
+>
+> [...]
+>
+> > In case there are no major objections to this approach, I will post
+> > complete v2 patch-set (alongwith Marc's patches) for detailed review.
+>
+> As this is still a work in progress (I'm currently wrestling with
+> the stupid RPi driver), whatever you have is unlikely to apply on
+> top of the final series.
+>
+> I'm not going to stop you from posting the patches, it is just that
+> they will be obsolete by the end of the week...
 
-[...]
+Thanks for the heads up. Will wait for your final series.
 
-> In case there are no major objections to this approach, I will post
-> complete v2 patch-set (alongwith Marc's patches) for detailed review.
+But while working on an NMI request, I noticed a hack in common gic
+code [1] which basically enables all SGIs for every CPU by default.
+This hack is quite similar to mine initial hack to set priority for a
+particular SGI by default to act as pseudo NMI.
 
-As this is still a work in progress (I'm currently wrestling with
-the stupid RPi driver), whatever you have is unlikely to apply on
-top of the final series.
+Due to this hack I got following error message while configuring SGI as NMI:
 
-I'm not going to stop you from posting the patches, it is just that
-they will be obsolete by the end of the week...
+[    0.000000] GICv3: Cannot set NMI property of enabled IRQ 8
+[    0.000000] genirq: Failed to setup NMI delivery: irq 8
 
-Thanks,
+I think chained IRQs worked for you due to this hack only as it
+doesn't seem to enable SGIs per CPU.
 
-         M.
--- 
-Jazz is not dead. It just smells funny...
+IMO, as we shift to SGIs being standard interrupts, we should also
+rely on standard interrupt framework to enable SGIs. So it seems the
+correct way would be to use "request_percpu_irq()" and
+"enable_percpu_irq()" for configuring SGIs as demonstrated in updated
+commit here [2].
+
+Also, we should get rid of this hack as demonstrated via commit [3].
+
+Apart from above changes, there was a minor update needed for commit
+"irqchip/gic-v3: Describe the SGI range" [4].
+
+I hope these updates are useful for you while preparing the final series.
+
+[1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/irqchip/irq-gic-common.c#n155
+[2] https://git.linaro.org/people/sumit.garg/linux.git/commit/?h=kgdb-nmi&id=e208979b5165d753d144db57e0cb8646fdedc495
+[3] https://git.linaro.org/people/sumit.garg/linux.git/commit/?h=kgdb-nmi&id=cd6d0d7cea14ac16156f0dbd297940df382f8cea
+[4] https://git.linaro.org/people/sumit.garg/linux.git/commit/?h=kgdb-nmi&id=1180e9c54547ec05d96cc6b36c26005059c90d9a
+
+-Sumit
+
+>
+> Thanks,
+>
+>          M.
+> --
+> Jazz is not dead. It just smells funny...
 
 
 _______________________________________________
