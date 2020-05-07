@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DB6FA1C9BB3
-	for <lists+kgdb-bugreport@lfdr.de>; Thu,  7 May 2020 22:09:16 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id DC84C1C9BB7
+	for <lists+kgdb-bugreport@lfdr.de>; Thu,  7 May 2020 22:09:20 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jWmpX-0007yk-LR
-	for lists+kgdb-bugreport@lfdr.de; Thu, 07 May 2020 20:09:15 +0000
+	id 1jWmpb-0000en-Mb
+	for lists+kgdb-bugreport@lfdr.de; Thu, 07 May 2020 20:09:19 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <dianders@chromium.org>) id 1jWmpX-0007yQ-3g
- for kgdb-bugreport@lists.sourceforge.net; Thu, 07 May 2020 20:09:15 +0000
+ (envelope-from <dianders@chromium.org>) id 1jWmpZ-0000eW-Lq
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 07 May 2020 20:09:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=T9272gqaO+LckyRVgAqfebSkljgLEU7jgQEMbEqhbqA=; b=dLit4bzA2kkcqZmnmV21da8uWO
- Pescfly80qFeq19VAiXtF1c/W8O2+SdVk0s9lE3xBpbk1XmphVSjBV5JV/7FpbCvDAtNwT/OFpkbf
- 1rd0dQghdcgngHNGzlBnhfVhYOezbEFTFyhjabRpp1J0BlJ+d2YeNJLi5vji4hRPEEiA=;
+ bh=c/DsRm4g6gIbDNrt7b5XJT8F2ZdnzG78OB1C4FcIZRg=; b=aucR3qkUXVqSDwkw3pUzvhTlau
+ YRQOQ6zEI4BLE0Cas7c9bqdFlrnUgBwPZ3o70ARFE1KkHB2uQZ8JJaiSgR2c4UCsG2A7oNN2tXD7B
+ fGoMQDgONP1sgElPfDTKHP52j0yxM7MsBqnrd4LEDPUlyTuHJ308uzf3Whbl7s0jziBk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -30,50 +30,50 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=T9272gqaO+LckyRVgAqfebSkljgLEU7jgQEMbEqhbqA=; b=CVClw9DBlbdXSMAj5YT4jS9rMx
- u1KKEjpAoL6rmQRHfUlETvTY6AmHq2OpMo4josaG7Zph8jL8W7J2Geur58nC8gHDJoDGZSC4KFL/J
- RX0JuQE5jdWmoKQf5ZcIHzY4e9gOD+wD6jt4a5WAjGD8ND3lBSFOk0XJ9LgeufmYA4rE=;
-Received: from mail-pg1-f194.google.com ([209.85.215.194])
+ bh=c/DsRm4g6gIbDNrt7b5XJT8F2ZdnzG78OB1C4FcIZRg=; b=BsoeKeZIddHljfsrRHr1cpZw3H
+ 573HaYYGIix5VgC1bYDzKuI+a+xV0QaewICAUa6q9HXwjmPbU2usH6sXlsoEj8yaVT3jkCY1lFJIr
+ 6gGi7nreUUhzoAgM5ZMqoW1Lt7PTkkgDkrpymeVv8OGFTSS/zN6pOHmDZ8qancC+SFQY=;
+Received: from mail-pf1-f193.google.com ([209.85.210.193])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jWmpV-000hUH-Uc
- for kgdb-bugreport@lists.sourceforge.net; Thu, 07 May 2020 20:09:15 +0000
-Received: by mail-pg1-f194.google.com with SMTP id q124so2976138pgq.13
+ id 1jWmpX-000hUQ-HN
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 07 May 2020 20:09:17 +0000
+Received: by mail-pf1-f193.google.com with SMTP id x15so3553292pfa.1
  for <kgdb-bugreport@lists.sourceforge.net>;
- Thu, 07 May 2020 13:09:13 -0700 (PDT)
+ Thu, 07 May 2020 13:09:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=T9272gqaO+LckyRVgAqfebSkljgLEU7jgQEMbEqhbqA=;
- b=PwBWweDOmiGoPgQ6XskZuJKwOl5DVieYaqfy2Zxee+5GB88Ew09QMacIygXnq1RVdR
- dVFrvj58J8n+h+TTrKz7pVdsV1GhkEBJS8T8lo7xCoPxTPOBkdgwt2sDUWR5SMRvBLZ6
- 33tptodzxHomlW+7m6xOmJ9Jzqp0LiPbpI54Y=
+ bh=c/DsRm4g6gIbDNrt7b5XJT8F2ZdnzG78OB1C4FcIZRg=;
+ b=Wji61SIerY4A7CIjkXjeQbrgHiPO+IPz799kwT2t+CDnNp3fyN1ul6dEyGHysTzfpC
+ JZo5ah0CiyK9u/ZGlwjIyCE/GpmxmmZIYPu0KXJO2nZfLuj433mngzH/hie8b0wDBddz
+ NnCipZ1Khy+kmgpi29vWHoHozWaVMNYziA4dg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=T9272gqaO+LckyRVgAqfebSkljgLEU7jgQEMbEqhbqA=;
- b=VwX0Vh1QGP+r1wwGLDaYJJNT1Vf7/6VYkyuATilTaVslhpDhY0JDtOvwPY+pH/kFnU
- NdUt567RacBakzf/V7j+CpsKcrxz0KNwQA8cMSLSU1KP88AUM8gIG4ttR0rDXH8Nl1UV
- rDO48BP5HuyBmfnpsmQl+3BsI2/YQaugZWWRaDO2KvHvzzFo0umGkbOw7gzKoyYymXOQ
- IDex0TTkPHcEbOq0+hb1oOu5+tzpakDIppobwknC9Z1NPJ88HBBr9ReadQhEmMtSQbFv
- uLINTVrSL9WK9D8Ic9FlvfgcUmwhKLdYH/OyFP3EpDHwHwjOo+Y9BcjFLDiN2pEUYe9k
- VY2Q==
-X-Gm-Message-State: AGi0Pub742S2F2IqZH6644v11937zE7XuWA7b0NMa+SnMimkxs7MHL0l
- 2rxE5iQEF8b8dKEVnzdaCHOSMw==
-X-Google-Smtp-Source: APiQypLGdySvW1SVYn3nADJH+1U6Eb0qfgJ+/9rtUwTpLt4LPXYbz/b/X0kqeEDfmxy85fVHm3qYCg==
-X-Received: by 2002:a63:211d:: with SMTP id h29mr2875478pgh.231.1588882141068; 
- Thu, 07 May 2020 13:09:01 -0700 (PDT)
+ bh=c/DsRm4g6gIbDNrt7b5XJT8F2ZdnzG78OB1C4FcIZRg=;
+ b=mJMAAQqIXnkymsNsjat/U4LlBJVM3xUJS2CTo0w+2AY+39SGnhg+xrDsfa5/TYtX2R
+ IJMNE3VrIV7XPHmfnn8+5DDTlDUZJYJ3uT5fb9DOMViRYSXQFHlZtpphrB1Q2zgis7ZI
+ JT7Y6aDG7GrMprV15BfUyiHauZ0CxD1kqWtZZCoBikEdj26hczQtKl9QlRXGhdxRKory
+ JguocNctpP9cMq1HVZwWFc1cGVqE44OcNNmOyh6sj+8Ie0f4je7DWu3NEoVDRqYB5QTX
+ 1fTWH5IHfQSOL9s8QpYiHFTecCqsibdB/lbOgh88cfuFGQw2U9R3xGcBWT6PMEwQaHAm
+ uPRA==
+X-Gm-Message-State: AGi0Puaw0+rPP3HuSKDiyyaS0JuAaKH6Ff0cbSfmnitr/EHyMvrNh/+d
+ auxeuksw1je82KzU+y+ROYzfcw==
+X-Google-Smtp-Source: APiQypICIyZYq+Lw5KlpKjR4sb4ChoSHP4P4KSBPQc5p5Oha2jBsP7gH0oqRg+pBV+ShiYgjJnWVXQ==
+X-Received: by 2002:a63:200b:: with SMTP id g11mr1896922pgg.22.1588882142461; 
+ Thu, 07 May 2020 13:09:02 -0700 (PDT)
 Received: from tictac2.mtv.corp.google.com
  ([2620:15c:202:1:24fa:e766:52c9:e3b2])
- by smtp.gmail.com with ESMTPSA id d203sm5547601pfd.79.2020.05.07.13.08.59
+ by smtp.gmail.com with ESMTPSA id d203sm5547601pfd.79.2020.05.07.13.09.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 May 2020 13:09:00 -0700 (PDT)
+ Thu, 07 May 2020 13:09:01 -0700 (PDT)
 From: Douglas Anderson <dianders@chromium.org>
 To: jason.wessel@windriver.com, daniel.thompson@linaro.org,
  gregkh@linuxfoundation.org
-Date: Thu,  7 May 2020 13:08:39 -0700
-Message-Id: <20200507130644.v4.1.Ied2b058357152ebcc8bf68edd6f20a11d98d7d4e@changeid>
+Date: Thu,  7 May 2020 13:08:40 -0700
+Message-Id: <20200507130644.v4.2.I02258eee1497e55bcbe8dc477de90369c7c7c2c5@changeid>
 X-Mailer: git-send-email 2.26.2.645.ge9eca65c58-goog
 In-Reply-To: <20200507200850.60646-1-dianders@chromium.org>
 References: <20200507200850.60646-1-dianders@chromium.org>
@@ -82,11 +82,11 @@ X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.215.194 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.215.194 listed in wl.mailspike.net]
+ trust [209.85.210.193 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.210.193 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -95,9 +95,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jWmpV-000hUH-Uc
-Subject: [Kgdb-bugreport] [PATCH v4 01/12] kgdb: Disable
- WARN_CONSOLE_UNLOCKED for all kgdb
+X-Headers-End: 1jWmpX-000hUQ-HN
+Subject: [Kgdb-bugreport] [PATCH v4 02/12] Revert "kgdboc: disable the
+ console lock when in kgdb"
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -118,35 +118,11 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-In commit 81eaadcae81b ("kgdboc: disable the console lock when in
-kgdb") we avoided the WARN_CONSOLE_UNLOCKED() yell when we were in
-kgdboc.  That still works fine, but it turns out that we get a similar
-yell when using other I/O drivers.  One example is the "I/O driver"
-for the kgdb test suite (kgdbts).  When I enabled that I again got the
-same yells.
+This reverts commit 81eaadcae81b4c1bf01649a3053d1f54e2d81cf1.
 
-Even though "kgdbts" doesn't actually interact with the user over the
-console, using it still causes kgdb to print to the consoles.  That
-trips the same warning:
-  con_is_visible+0x60/0x68
-  con_scroll+0x110/0x1b8
-  lf+0x4c/0xc8
-  vt_console_print+0x1b8/0x348
-  vkdb_printf+0x320/0x89c
-  kdb_printf+0x68/0x90
-  kdb_main_loop+0x190/0x860
-  kdb_stub+0x2cc/0x3ec
-  kgdb_cpu_enter+0x268/0x744
-  kgdb_handle_exception+0x1a4/0x200
-  kgdb_compiled_brk_fn+0x34/0x44
-  brk_handler+0x7c/0xb8
-  do_debug_exception+0x1b4/0x228
-
-Let's increment/decrement the "ignore_console_lock_warning" variable
-all the time when we enter the debugger.
-
-This will allow us to later revert commit 81eaadcae81b ("kgdboc:
-disable the console lock when in kgdb").
+Commit 81eaadcae81b ("kgdboc: disable the console lock when in kgdb")
+is no longer needed now that we have the patch ("kgdb: Disable
+WARN_CONSOLE_UNLOCKED for all kgdb").  Revert it.
 
 Signed-off-by: Douglas Anderson <dianders@chromium.org>
 Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
@@ -156,33 +132,30 @@ Reviewed-by: Daniel Thompson <daniel.thompson@linaro.org>
 Changes in v4: None
 Changes in v3: None
 Changes in v2:
-- ("kgdb: Disable WARN_CONSOLE_UNLOCKED for all kgdb") new for v2.
+- ("Revert "kgdboc: disable the console lock when in kgdb"") new for v2.
 
- kernel/debug/debug_core.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ drivers/tty/serial/kgdboc.c | 4 ----
+ 1 file changed, 4 deletions(-)
 
-diff --git a/kernel/debug/debug_core.c b/kernel/debug/debug_core.c
-index 2b7c9b67931d..950dc667c823 100644
---- a/kernel/debug/debug_core.c
-+++ b/kernel/debug/debug_core.c
-@@ -668,6 +668,8 @@ static int kgdb_cpu_enter(struct kgdb_state *ks, struct pt_regs *regs,
- 	if (kgdb_skipexception(ks->ex_vector, ks->linux_regs))
- 		goto kgdb_restore;
+diff --git a/drivers/tty/serial/kgdboc.c b/drivers/tty/serial/kgdboc.c
+index c9f94fa82be4..8a1a4d1b6768 100644
+--- a/drivers/tty/serial/kgdboc.c
++++ b/drivers/tty/serial/kgdboc.c
+@@ -275,14 +275,10 @@ static void kgdboc_pre_exp_handler(void)
+ 	/* Increment the module count when the debugger is active */
+ 	if (!kgdb_connected)
+ 		try_module_get(THIS_MODULE);
+-
+-	atomic_inc(&ignore_console_lock_warning);
+ }
  
-+	atomic_inc(&ignore_console_lock_warning);
-+
- 	/* Call the I/O driver's pre_exception routine */
- 	if (dbg_io_ops->pre_exception)
- 		dbg_io_ops->pre_exception();
-@@ -740,6 +742,8 @@ static int kgdb_cpu_enter(struct kgdb_state *ks, struct pt_regs *regs,
- 	if (dbg_io_ops->post_exception)
- 		dbg_io_ops->post_exception();
- 
-+	atomic_dec(&ignore_console_lock_warning);
-+
- 	if (!kgdb_single_step) {
- 		raw_spin_unlock(&dbg_slave_lock);
- 		/* Wait till all the CPUs have quit from the debugger. */
+ static void kgdboc_post_exp_handler(void)
+ {
+-	atomic_dec(&ignore_console_lock_warning);
+-
+ 	/* decrement the module count when the debugger detaches */
+ 	if (!kgdb_connected)
+ 		module_put(THIS_MODULE);
 -- 
 2.26.2.645.ge9eca65c58-goog
 
