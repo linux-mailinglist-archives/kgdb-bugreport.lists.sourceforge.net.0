@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7E1491CDAC7
-	for <lists+kgdb-bugreport@lfdr.de>; Mon, 11 May 2020 15:09:14 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id D84FC1CDDF8
+	for <lists+kgdb-bugreport@lfdr.de>; Mon, 11 May 2020 16:59:32 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jY8BF-0002Ab-Az
-	for lists+kgdb-bugreport@lfdr.de; Mon, 11 May 2020 13:09:13 +0000
+	id 1jY9tz-0004A3-Lu
+	for lists+kgdb-bugreport@lfdr.de; Mon, 11 May 2020 14:59:31 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <daniel.thompson@linaro.org>) id 1jY8BD-0002AU-Jl
- for kgdb-bugreport@lists.sourceforge.net; Mon, 11 May 2020 13:09:11 +0000
+ (envelope-from <will@kernel.org>) id 1jY9tz-00049l-32
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 11 May 2020 14:59:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Dvv6tJzVeSp90KNaJF9Iza45Xb9aV8/SHy0QZUnd5+U=; b=DwuxZL8HbDJ/dFpjVp3rg29hUk
- Lxz1ye6cQ/Rq54I9nFsB3vS3vIC4oRmny6S8HHj90kx9GHPTXYuSBvCJnFOK53slVZKjSneSe4JVQ
- MfIvuJ7NzTq5CSrneyv0WTuptwrAIUPmopk2VvwSUnohXME7PJsUosuD9jCijaGA73f4=;
+ bh=wBjI6H3dpi9kVpVrZ65OufTBdZNABS94Y5SG1FJqpGU=; b=lnKDENkgN2ndmSI3wz+EEFWcDZ
+ oHXkQNZ5yZyzv0qNSZ93Zm9/tjC7jDP0Vs4FLqmB23AQ7vnGyzQ70vqHPU+IN7zMYWv0NAp3N3P5Y
+ YsVUW5d2rdCxay2Z+fPSBf3q1PlFapALMwNUhZ0FEr6zKFIw30QKUIkxMTYCfUwhBT0s=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -30,67 +30,39 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Dvv6tJzVeSp90KNaJF9Iza45Xb9aV8/SHy0QZUnd5+U=; b=ebXd/Od1VOQILAIajolCkPbeGL
- LfVlLn5qEJ3ZVa8VOJgXtlirEX/wgtYXN1Q8LDxM0DjgrCVEVFDeB/4lyOY8FDotPLCzlVuh02ebJ
- 6FcsyrW3dU6Cs8ZNkii+l/aHbYos2aLKjK7LJ1psSNtEsID35bH9ehQCEsgGV1FGhngY=;
-Received: from mail-wr1-f65.google.com ([209.85.221.65])
+ bh=wBjI6H3dpi9kVpVrZ65OufTBdZNABS94Y5SG1FJqpGU=; b=Mw1KLY3WiY5wRRQvb7jaW1l0Jk
+ +TNu/WbDPQRyQzxfeFj51GXf7EK71C1mnwblUFnC0D2xCZI5N0rmlrEm0MxEd4r7S1e5L1HXQP5yW
+ Ej0dbFZQw8RIGsnRFpybI2bNovOkzOlivYvaQDYOX8k6tsyfuLr6XuvzFEdTBb9rlsfU=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jY8B9-004Asn-Tk
- for kgdb-bugreport@lists.sourceforge.net; Mon, 11 May 2020 13:09:11 +0000
-Received: by mail-wr1-f65.google.com with SMTP id y16so3706018wrs.3
- for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 11 May 2020 06:09:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=Dvv6tJzVeSp90KNaJF9Iza45Xb9aV8/SHy0QZUnd5+U=;
- b=q44kjiiaaYaBbDkBcrfJCt7AWGhDC8EznfPHDU4j48RSdJmdY9PpTBBunwUCdjbUOR
- AzVWkWagGb/SMOCOMruhWmrtrfWmHVo9/iMRA/VkX/c1SJhRIm1EbY1g0sCxps4ybA3x
- NUselnnn4UfbaxQdcCcoq1bofN9xIOb0tcW3kBLrKAxmwa/geFItZ0kAfd8LVaEsIhgj
- Cvxy9v2Gz9loj8C6GUlIWCe7SrbCkskcqFR9JtBntGjKu/N8LAhvLZBm4vhP1/D7njQg
- mVpISTXAMNnC+DmGBotieInbAh/at6M5GpBVcVloauw1vp9BRc8m5V9P2z26G4IQcX+w
- Kniw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=Dvv6tJzVeSp90KNaJF9Iza45Xb9aV8/SHy0QZUnd5+U=;
- b=oJh2st38P9tGQCFRVFnvmNSZPNZzz+tkm3/U7RbYB1NnwuCTnVRsSbzIYizzzxCLA1
- 0WlLodD19BstXpJaBHymcRMX1t96tv0seaYqdvJjb19pe6Dhh/Z7k5UpjR4+tuHRNL3h
- 2jL72ulxyJfr2OU73bYlalCJ2Blj3yH03yz114r6qwhZLWoRabVEWDCKITAVUyiQpSIt
- vGXmoPm6E9O2kkFfYYh+shH066mql8UNOIM5xxfxk2z/X0Gwtq2hJHuAFZkKjCoA1ovE
- uWPFmY/dOb5GFB3NizKHnMyeWhVaj3BORWOKETv2jUUOzTwmhJ25kQGj6VHREAsjNwhx
- tPqA==
-X-Gm-Message-State: AGi0PuZs/jXXU3vbqGWGft8HL7FMQoKmHM8NCJ1nqetuZ1nV8ewIjmw4
- 6uTTqUtwDtpG2TO1thzRlxi+BQ==
-X-Google-Smtp-Source: APiQypJZ02WbEw5weH5Ix8Han9Dgv/v1PknkgFFgnmn2QEm8/t3C94crXZ+rubgdhhXDGPF2IADvdA==
-X-Received: by 2002:a5d:66c9:: with SMTP id k9mr16929992wrw.307.1589202541411; 
- Mon, 11 May 2020 06:09:01 -0700 (PDT)
-Received: from holly.lan (cpc141214-aztw34-2-0-cust773.18-1.cable.virginm.net.
- [86.9.19.6])
- by smtp.gmail.com with ESMTPSA id f123sm13589695wmf.44.2020.05.11.06.09.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 May 2020 06:09:00 -0700 (PDT)
-Date: Mon, 11 May 2020 14:08:59 +0100
-From: Daniel Thompson <daniel.thompson@linaro.org>
-To: Jason Yan <yanaijie@huawei.com>
-Message-ID: <20200511130859.hfbxuc2y54ih4kjf@holly.lan>
-References: <20200507110649.37426-1-yanaijie@huawei.com>
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1jY9tv-004NBm-Ds
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 11 May 2020 14:59:30 +0000
+Received: from willie-the-truck (236.31.169.217.in-addr.arpa [217.169.31.236])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id B959420643;
+ Mon, 11 May 2020 14:59:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1589209157;
+ bh=h6Ea4lLoHxX7Auk/jUvpA6sDRTJxI89bcfhFCCCylgg=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=wKZwMCRGb/qPVQrXagi72UbQrDDDpUCfscELhKXUCYWtWz/96oJ3TsTAVuOo9hq3N
+ OTup9e3bn90dJWWmHxlKrSdmxAXWW+8b1fClhGGt1d9f8pbz6odwWVeOYY4PQ/tUpC
+ Fx64l5wovGXZdTUhdEqOyQyid+5J32xaXo4AOdek=
+Date: Mon, 11 May 2020 15:59:09 +0100
+From: Will Deacon <will@kernel.org>
+To: Douglas Anderson <dianders@chromium.org>
+Message-ID: <20200511145908.GA22040@willie-the-truck>
+References: <20200428211351.85055-1-dianders@chromium.org>
+ <20200428141218.v3.5.I22067ad43e77ddfd4b64c2d49030628480f9e8d9@changeid>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200507110649.37426-1-yanaijie@huawei.com>
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <20200428141218.v3.5.I22067ad43e77ddfd4b64c2d49030628480f9e8d9@changeid>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Spam-Score: -0.6 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.221.65 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.221.65 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -98,10 +70,11 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jY8B9-004Asn-Tk
-Subject: Re: [Kgdb-bugreport] [PATCH] kgdb: Return true in
- kgdb_nmi_poll_knock()
+ -0.2 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+ -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jY9tv-004NBm-Ds
+Subject: Re: [Kgdb-bugreport] [PATCH v3 05/11] arm64: Add call_break_hook()
+ to early_brk64() for early kgdb
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,43 +86,55 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: kgdb-bugreport@lists.sourceforge.net, linux-kernel@vger.kernel.org,
+Cc: Mark Rutland <mark.rutland@arm.com>, catalin.marinas@arm.com,
+ bjorn.andersson@linaro.org, hpa@zytor.com, daniel.thompson@linaro.org,
+ corbet@lwn.net, jinho lim <jordan.lim@samsung.com>, agross@kernel.org,
+ linux-arm-kernel@lists.infradead.org, linux-serial@vger.kernel.org,
+ kgdb-bugreport@lists.sourceforge.net, Dave Martin <Dave.Martin@arm.com>,
+ Masami Hiramatsu <mhiramat@kernel.org>, jslaby@suse.com,
+ Alexios Zavras <alexios.zavras@intel.com>, bp@alien8.de, tglx@linutronix.de,
+ mingo@redhat.com, Allison Randal <allison@lohutok.net>,
+ gregkh@linuxfoundation.org, linux-kernel@vger.kernel.org,
+ James Morse <james.morse@arm.com>, "Eric W. Biederman" <ebiederm@xmission.com>,
  jason.wessel@windriver.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Thu, May 07, 2020 at 07:06:49PM +0800, Jason Yan wrote:
-> Fix the following coccicheck warning:
-> 
-> include/linux/kgdb.h:301:54-55: WARNING: return of 0/1 in function
-> 'kgdb_nmi_poll_knock' with return type bool
-> 
-> Signed-off-by: Jason Yan <yanaijie@huawei.com>
+Hi Doug,
 
-Applied, thanks.
-
-
-> ---
->  include/linux/kgdb.h | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/include/linux/kgdb.h b/include/linux/kgdb.h
-> index b072aeb1fd78..042828aeb73d 100644
-> --- a/include/linux/kgdb.h
-> +++ b/include/linux/kgdb.h
-> @@ -298,7 +298,7 @@ extern bool kgdb_nmi_poll_knock(void);
->  #else
->  static inline int kgdb_register_nmi_console(void) { return 0; }
->  static inline int kgdb_unregister_nmi_console(void) { return 0; }
-> -static inline bool kgdb_nmi_poll_knock(void) { return 1; }
-> +static inline bool kgdb_nmi_poll_knock(void) { return true; }
->  #endif
+On Tue, Apr 28, 2020 at 02:13:45PM -0700, Douglas Anderson wrote:
+> diff --git a/arch/arm64/kernel/debug-monitors.c b/arch/arm64/kernel/debug-monitors.c
+> index 48222a4760c2..59c353dfc8e9 100644
+> --- a/arch/arm64/kernel/debug-monitors.c
+> +++ b/arch/arm64/kernel/debug-monitors.c
+> @@ -297,7 +297,7 @@ void unregister_kernel_break_hook(struct break_hook *hook)
+>  	unregister_debug_hook(&hook->node);
+>  }
 >  
->  extern int kgdb_register_io_module(struct kgdb_io *local_kgdb_io_ops);
-> -- 
-> 2.21.1
-> 
+> -static int call_break_hook(struct pt_regs *regs, unsigned int esr)
+> +int call_break_hook(struct pt_regs *regs, unsigned int esr)
+>  {
+>  	struct break_hook *hook;
+>  	struct list_head *list;
+> diff --git a/arch/arm64/kernel/traps.c b/arch/arm64/kernel/traps.c
+> index cf402be5c573..a8173f0c1774 100644
+> --- a/arch/arm64/kernel/traps.c
+> +++ b/arch/arm64/kernel/traps.c
+> @@ -1044,6 +1044,9 @@ int __init early_brk64(unsigned long addr, unsigned int esr,
+>  	if ((comment & ~KASAN_BRK_MASK) == KASAN_BRK_IMM)
+>  		return kasan_handler(regs, esr) != DBG_HOOK_HANDLED;
+>  #endif
+> +	if (call_break_hook(regs, esr) == DBG_HOOK_HANDLED)
+> +		return 0;
+
+I think this just means we're not running debug_traps_init() early enough,
+and actually the KASAN early handler is unnecessary too.
+
+If we call debug_traps_init() directly from setup_arch() and drop the
+arch_initcall(), can we then drop early_brk64 entirely?
+
+Will
 
 
 _______________________________________________
