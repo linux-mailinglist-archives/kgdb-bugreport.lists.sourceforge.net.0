@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CABE51CDAC5
-	for <lists+kgdb-bugreport@lfdr.de>; Mon, 11 May 2020 15:08:58 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7E1491CDAC7
+	for <lists+kgdb-bugreport@lfdr.de>; Mon, 11 May 2020 15:09:14 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jY8Az-0004rk-K2
-	for lists+kgdb-bugreport@lfdr.de; Mon, 11 May 2020 13:08:57 +0000
+	id 1jY8BF-0002Ab-Az
+	for lists+kgdb-bugreport@lfdr.de; Mon, 11 May 2020 13:09:13 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <daniel.thompson@linaro.org>) id 1jY8Ay-0004rQ-MT
- for kgdb-bugreport@lists.sourceforge.net; Mon, 11 May 2020 13:08:56 +0000
+ (envelope-from <daniel.thompson@linaro.org>) id 1jY8BD-0002AU-Jl
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 11 May 2020 13:09:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=PUu6hchFEIrJdI0oCeTrEFb53Hh5HVTGkYwEEVHF3Do=; b=aXvqz4gsHovye17htQ+laUXHFz
- 1x3greE0/5Hp4Df8WMP3UrZsOZtg4j/bZrroyYp3QPIdcjR/xHJ+qTatfCPDgMnIZau3oxGIf0Jy5
- /4sS+Kzxnetam/KxDRKL/gPslzUcTS18to2ERlwWaLf7OxOeHHjyvU0xKRVvKqJMSVAM=;
+ bh=Dvv6tJzVeSp90KNaJF9Iza45Xb9aV8/SHy0QZUnd5+U=; b=DwuxZL8HbDJ/dFpjVp3rg29hUk
+ Lxz1ye6cQ/Rq54I9nFsB3vS3vIC4oRmny6S8HHj90kx9GHPTXYuSBvCJnFOK53slVZKjSneSe4JVQ
+ MfIvuJ7NzTq5CSrneyv0WTuptwrAIUPmopk2VvwSUnohXME7PJsUosuD9jCijaGA73f4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -30,77 +30,78 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=PUu6hchFEIrJdI0oCeTrEFb53Hh5HVTGkYwEEVHF3Do=; b=HNt59eXdUGmI/OwTdBDVQTETEh
- pU0UD5hcFAUlqjLv83VLfDFJ+iz1H1FTHk0LLBuU/oXPfeV9eKVbYecSi8GmHS3UR0M06IcS75k18
- ji6hyphhOTyxu2xqOy/9KSq6KWjzp7lSABxIVtstfzj55aPB5xPFu1saQG6QSQPqOzaM=;
-Received: from mail-wm1-f68.google.com ([209.85.128.68])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=Dvv6tJzVeSp90KNaJF9Iza45Xb9aV8/SHy0QZUnd5+U=; b=ebXd/Od1VOQILAIajolCkPbeGL
+ LfVlLn5qEJ3ZVa8VOJgXtlirEX/wgtYXN1Q8LDxM0DjgrCVEVFDeB/4lyOY8FDotPLCzlVuh02ebJ
+ 6FcsyrW3dU6Cs8ZNkii+l/aHbYos2aLKjK7LJ1psSNtEsID35bH9ehQCEsgGV1FGhngY=;
+Received: from mail-wr1-f65.google.com ([209.85.221.65])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jY8As-008sPl-ER
- for kgdb-bugreport@lists.sourceforge.net; Mon, 11 May 2020 13:08:56 +0000
-Received: by mail-wm1-f68.google.com with SMTP id y24so19203120wma.4
+ id 1jY8B9-004Asn-Tk
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 11 May 2020 13:09:11 +0000
+Received: by mail-wr1-f65.google.com with SMTP id y16so3706018wrs.3
  for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 11 May 2020 06:08:50 -0700 (PDT)
+ Mon, 11 May 2020 06:09:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to;
- bh=PUu6hchFEIrJdI0oCeTrEFb53Hh5HVTGkYwEEVHF3Do=;
- b=G5ZM0EN6fVpZzK/ENf3z+rsIGsnZK4hdGKUWHQ3rlX6yyq26RsyVi/Y9OYK9U65Pci
- letiQnItuDCJ9vjLTqMh+CIWkHjS6P3oYp8TqgKWMCLtiGF4wLUqe5DTnIcKgcJBa1zX
- l/c0qjvd4x8ogG5m5Ai+4Lu6fSBRUWH/vzaJk8CJoR+QPKRmnLG2T2BA4q0bdrrsOyLS
- vocHgnH8PvJtZrW9TWObrzyLJQSXCdTBLo49A65rBOYalLGhmoBgMZ9Z89nnQPyuu8GA
- 3NE2ev/h9mzkIW3F/3Gg/vMdc+zYRiiyke/B4pu1K86ouZ1cH/xzgmSbQSQYkOe15Dsu
- RJHg==
+ bh=Dvv6tJzVeSp90KNaJF9Iza45Xb9aV8/SHy0QZUnd5+U=;
+ b=q44kjiiaaYaBbDkBcrfJCt7AWGhDC8EznfPHDU4j48RSdJmdY9PpTBBunwUCdjbUOR
+ AzVWkWagGb/SMOCOMruhWmrtrfWmHVo9/iMRA/VkX/c1SJhRIm1EbY1g0sCxps4ybA3x
+ NUselnnn4UfbaxQdcCcoq1bofN9xIOb0tcW3kBLrKAxmwa/geFItZ0kAfd8LVaEsIhgj
+ Cvxy9v2Gz9loj8C6GUlIWCe7SrbCkskcqFR9JtBntGjKu/N8LAhvLZBm4vhP1/D7njQg
+ mVpISTXAMNnC+DmGBotieInbAh/at6M5GpBVcVloauw1vp9BRc8m5V9P2z26G4IQcX+w
+ Kniw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=PUu6hchFEIrJdI0oCeTrEFb53Hh5HVTGkYwEEVHF3Do=;
- b=LzyrGVBXfkROhr7Gs7v1lRSu6BUF5prW2mLMFvtYsoAW82k5bzUcXkxcgJvJLMeRo+
- CBrH1e01xrrL6ZeG+FdJe5XTq05p08ZsDLr5gGW/zKRh7vKpDTmFDd6nZdUhFsvO1yOg
- PL+/pi+mpklUya+CJ1mdu10VjbtBLj3b3WzTppZBu4E6CphOR2gBauQbeXgcKqprevEj
- 3BQn0e2WFU84U5r9sj0gtorS5NPcqn1NSPsrhDqZDHAKy8+RS6+kM1qoDocFw+XtUeB1
- 4QdFrYPkg6kKngAsMUgHHzYppQ0FH0PUnYWx3wvd+8MThRTIZTl1AU+5ppJlchKSDbT/
- L3rw==
-X-Gm-Message-State: AGi0PubaPDwVTh0a8rZ6HBjST/riOLecFGUiWyKMX2/d8a/0WeTlNJC5
- sC61Xywk8T3L8ldbaDSwFj0DQA==
-X-Google-Smtp-Source: APiQypJef6P49lDCGmIOlgArrRP3xYi0mJjvs+ThVbrNRYeM2vyJ/5DgJGsC7qnECyCgZBi24erYlA==
-X-Received: by 2002:a7b:cd10:: with SMTP id f16mr32836977wmj.21.1589202516663; 
- Mon, 11 May 2020 06:08:36 -0700 (PDT)
+ bh=Dvv6tJzVeSp90KNaJF9Iza45Xb9aV8/SHy0QZUnd5+U=;
+ b=oJh2st38P9tGQCFRVFnvmNSZPNZzz+tkm3/U7RbYB1NnwuCTnVRsSbzIYizzzxCLA1
+ 0WlLodD19BstXpJaBHymcRMX1t96tv0seaYqdvJjb19pe6Dhh/Z7k5UpjR4+tuHRNL3h
+ 2jL72ulxyJfr2OU73bYlalCJ2Blj3yH03yz114r6qwhZLWoRabVEWDCKITAVUyiQpSIt
+ vGXmoPm6E9O2kkFfYYh+shH066mql8UNOIM5xxfxk2z/X0Gwtq2hJHuAFZkKjCoA1ovE
+ uWPFmY/dOb5GFB3NizKHnMyeWhVaj3BORWOKETv2jUUOzTwmhJ25kQGj6VHREAsjNwhx
+ tPqA==
+X-Gm-Message-State: AGi0PuZs/jXXU3vbqGWGft8HL7FMQoKmHM8NCJ1nqetuZ1nV8ewIjmw4
+ 6uTTqUtwDtpG2TO1thzRlxi+BQ==
+X-Google-Smtp-Source: APiQypJZ02WbEw5weH5Ix8Han9Dgv/v1PknkgFFgnmn2QEm8/t3C94crXZ+rubgdhhXDGPF2IADvdA==
+X-Received: by 2002:a5d:66c9:: with SMTP id k9mr16929992wrw.307.1589202541411; 
+ Mon, 11 May 2020 06:09:01 -0700 (PDT)
 Received: from holly.lan (cpc141214-aztw34-2-0-cust773.18-1.cable.virginm.net.
  [86.9.19.6])
- by smtp.gmail.com with ESMTPSA id s17sm26036002wmc.48.2020.05.11.06.08.35
+ by smtp.gmail.com with ESMTPSA id f123sm13589695wmf.44.2020.05.11.06.09.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 May 2020 06:08:35 -0700 (PDT)
-Date: Mon, 11 May 2020 14:08:33 +0100
+ Mon, 11 May 2020 06:09:00 -0700 (PDT)
+Date: Mon, 11 May 2020 14:08:59 +0100
 From: Daniel Thompson <daniel.thompson@linaro.org>
-To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Message-ID: <20200511130833.2dxwsqosktlrmizb@holly.lan>
-References: <20200506151727.2960-1-andriy.shevchenko@linux.intel.com>
+To: Jason Yan <yanaijie@huawei.com>
+Message-ID: <20200511130859.hfbxuc2y54ih4kjf@holly.lan>
+References: <20200507110649.37426-1-yanaijie@huawei.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200506151727.2960-1-andriy.shevchenko@linux.intel.com>
+In-Reply-To: <20200507110649.37426-1-yanaijie@huawei.com>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: intel.com]
+ for more information. [URIs: huawei.com]
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.128.68 listed in wl.mailspike.net]
+ [209.85.221.65 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.221.65 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.128.68 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1jY8As-008sPl-ER
-Subject: Re: [Kgdb-bugreport] [PATCH v1] kgdb: Drop malformed kernel doc
- comment
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jY8B9-004Asn-Tk
+Subject: Re: [Kgdb-bugreport] [PATCH] kgdb: Return true in
+ kgdb_nmi_poll_knock()
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,47 +113,42 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: kgdb-bugreport@lists.sourceforge.net,
- Jason Wessel <jason.wessel@windriver.com>
+Cc: kgdb-bugreport@lists.sourceforge.net, linux-kernel@vger.kernel.org,
+ jason.wessel@windriver.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Wed, May 06, 2020 at 06:17:27PM +0300, Andy Shevchenko wrote:
-> Kernel doc does not understand POD variables to be referred to.
+On Thu, May 07, 2020 at 07:06:49PM +0800, Jason Yan wrote:
+> Fix the following coccicheck warning:
 > 
-> .../debug_core.c:73: warning: cannot understand function prototype:
-> 'int                             kgdb_connected; '
+> include/linux/kgdb.h:301:54-55: WARNING: return of 0/1 in function
+> 'kgdb_nmi_poll_knock' with return type bool
 > 
-> Convert kernel doc to pure comment.
-> 
-> Fixes: dc7d55270521 ("kgdb: core")
-> Cc: Jason Wessel <jason.wessel@windriver.com>
-> Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+> Signed-off-by: Jason Yan <yanaijie@huawei.com>
 
-Applied, thanks!
+Applied, thanks.
+
 
 > ---
->  kernel/debug/debug_core.c | 4 +---
->  1 file changed, 1 insertion(+), 3 deletions(-)
+>  include/linux/kgdb.h | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/kernel/debug/debug_core.c b/kernel/debug/debug_core.c
-> index 01bc3eea3d4db..cd28a17b49a03 100644
-> --- a/kernel/debug/debug_core.c
-> +++ b/kernel/debug/debug_core.c
-> @@ -67,9 +67,7 @@ static int kgdb_break_asap;
+> diff --git a/include/linux/kgdb.h b/include/linux/kgdb.h
+> index b072aeb1fd78..042828aeb73d 100644
+> --- a/include/linux/kgdb.h
+> +++ b/include/linux/kgdb.h
+> @@ -298,7 +298,7 @@ extern bool kgdb_nmi_poll_knock(void);
+>  #else
+>  static inline int kgdb_register_nmi_console(void) { return 0; }
+>  static inline int kgdb_unregister_nmi_console(void) { return 0; }
+> -static inline bool kgdb_nmi_poll_knock(void) { return 1; }
+> +static inline bool kgdb_nmi_poll_knock(void) { return true; }
+>  #endif
 >  
->  struct debuggerinfo_struct kgdb_info[NR_CPUS];
->  
-> -/**
-> - * kgdb_connected - Is a host GDB connected to us?
-> - */
-> +/* kgdb_connected - Is a host GDB connected to us? */
->  int				kgdb_connected;
->  EXPORT_SYMBOL_GPL(kgdb_connected);
->  
+>  extern int kgdb_register_io_module(struct kgdb_io *local_kgdb_io_ops);
 > -- 
-> 2.26.2
+> 2.21.1
 > 
 
 
