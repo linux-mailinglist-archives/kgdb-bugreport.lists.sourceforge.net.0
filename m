@@ -2,69 +2,86 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9AC4B1CEE37
-	for <lists+kgdb-bugreport@lfdr.de>; Tue, 12 May 2020 09:36:11 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id A5A4A1CEF76
+	for <lists+kgdb-bugreport@lfdr.de>; Tue, 12 May 2020 10:49:21 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jYPSU-0001Nu-Ev
-	for lists+kgdb-bugreport@lfdr.de; Tue, 12 May 2020 07:36:10 +0000
+	id 1jYQbI-00050s-Gd
+	for lists+kgdb-bugreport@lfdr.de; Tue, 12 May 2020 08:49:20 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <will@kernel.org>) id 1jYPSS-0001Nc-9m
- for kgdb-bugreport@lists.sourceforge.net; Tue, 12 May 2020 07:36:08 +0000
+ (envelope-from <sumit.garg@linaro.org>) id 1jYQbH-00050e-D3
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 12 May 2020 08:49:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=iuxyBRhcTAWti4uvr2GZ9BGzC4ldjBNr8rfTA9yCuOc=; b=Srdhy5aSZKN9YUIOOqklO0ETeS
- l5QHz+pCyBIyrXiBys2Xn2y3BEQTnDNmW7eorLPJI2QAmpcwIuhOrI4XliOy+nebifI5zHmZDOukJ
- NPELWPTrNM+9l9qB7LnSOSa+EVw7Uwr8oCndQcmC3cLnmTa0589t2Y7exVcMj6GxSNsg=;
+ bh=t97yRHpmHo8412WgRauzgIXQjp1lspYvNliDKxac5o8=; b=ADfU8VvvzeiwzMGWD2QOSiPspl
+ rqyRDG7jp98Fm9JpMiy3gX+HU5QCTwATAIBmmjZ6Vdsifqf3CKzRVAjF73+0tx4vL7a4zoyMWR/dF
+ fjcbMRSHhMEnhaHedmXfhI97Bm3eEUbqJ7buBAaYdofRjzw7xvXfxvxUd+tlSM1bQb2M=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version:
+ Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=iuxyBRhcTAWti4uvr2GZ9BGzC4ldjBNr8rfTA9yCuOc=; b=GoWeuUJMXW9XYEsOFsNomNgeE1
- pUUJgk04l1pFQ2uxk1U8jwJeEeZTY1tmReK19VZU4Ks0hBKsidyTE7iDDV8kTwxM13plVeKTnrUzG
- 9O9JVz7RqaEd3n0kWKBgzqSSP2h4BdW+pDZKnfAb+GjSXwF285V3iWdjlYjltnyn1KJM=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jYPSQ-00AfQJ-EH
- for kgdb-bugreport@lists.sourceforge.net; Tue, 12 May 2020 07:36:08 +0000
-Received: from willie-the-truck (236.31.169.217.in-addr.arpa [217.169.31.236])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id B5F32206B7;
- Tue, 12 May 2020 07:35:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1589268960;
- bh=mwdUCDRsQcd4tBUSrGY2SY7Tr80S7IIqcEq7gM+QFyo=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=t5R7cSJlDsOP/Rq15vISPrYY6nRgt0EcIH9XTuDyRC2GPJ6DWnRnmhKdfTiy4a30Y
- VJDL7O2w+OjJd6KbOlyAT9++Kn8lwIjNjkC+57eIGAzvYLg5+3SymfzalRlvTKRmLj
- Akz/XtkhIvyCU63jhozKZ3BdSOgowTXCmGBDg64I=
-Date: Tue, 12 May 2020 08:35:53 +0100
-From: Will Deacon <will@kernel.org>
-To: Doug Anderson <dianders@chromium.org>
-Message-ID: <20200512073552.GA1538@willie-the-truck>
-References: <20200428211351.85055-1-dianders@chromium.org>
- <20200428141218.v3.5.I22067ad43e77ddfd4b64c2d49030628480f9e8d9@changeid>
- <20200511145908.GA22040@willie-the-truck>
- <CAD=FV=W1F-B7SUwxebhhH2HS+fN4sYv4RHvvKud5a+00J0T=SA@mail.gmail.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAD=FV=W1F-B7SUwxebhhH2HS+fN4sYv4RHvvKud5a+00J0T=SA@mail.gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Spam-Score: -0.3 (/)
+ bh=t97yRHpmHo8412WgRauzgIXQjp1lspYvNliDKxac5o8=; b=nU6jSedn2EnWSETD2Rr16pAa8x
+ x2eAN38rkKvBe9DcMjCpOrAsRufwqO2mf5EXRqAwM99seHbAlAAdXwJUSYuiT3f0286Xo0Ojr/fzN
+ R9Qn1MddDLIb/KrDLWFopuhyo3zXH74wjHmlmUfSB4vt6gbeCiNfH+NRKPNn89s8cWSY=;
+Received: from mail-pg1-f196.google.com ([209.85.215.196])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1jYQbD-005rNf-9B
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 12 May 2020 08:49:19 +0000
+Received: by mail-pg1-f196.google.com with SMTP id p21so3112pgm.13
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Tue, 12 May 2020 01:49:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=from:to:cc:subject:date:message-id;
+ bh=t97yRHpmHo8412WgRauzgIXQjp1lspYvNliDKxac5o8=;
+ b=gr42BgPt6fH1p27tOaC1DScaH67NkLMkrYxnzMUkrwYYxLwiu82+rNiSSDGp3LwtAf
+ hbp0nI1k6l7eH5+YKzgzpxDEcKZlxPutlQxWNVN4Qucn/LIppB45rD9wuVYlDvTGoQJu
+ ndVN221ndSVWUvbDeG4Y79IeH2z6kM4dvFBw4QYVKWN6y+3AezfVpySHgx92JlXnhWlL
+ KszvYITck8HhhV+vrhuht1XSRcDsG+6irVnuQmdqhXe8UaUrmgPdHVBmnasfWeX8Y6gN
+ CuU8qoiZ7Kh3OwrURwe7lYJGIdVtdoTwCV5PANs0mlje4XGdNQ1JamoBm8AZ25pp/7Pa
+ pNig==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=t97yRHpmHo8412WgRauzgIXQjp1lspYvNliDKxac5o8=;
+ b=V30XqbqnELIF1aSosw4aumULPYEaY5UDHTnjmhC5t9v/VefK4eFpOFbH/5zrM2zKG7
+ VTfPYVOt92bedxdVIQy+R+vujR+IzpgSlL+ovHeiZOutwyTJDBiyCg6/Z2h3+juKzz/z
+ H5Oswn0QDvPcKNL7QCnlkCz1oKl1z2YAQ2O3RuiN7rHAIs8+OjdFamme5DnFNeRvpGEK
+ af9++7EPMspdDkX0goelNkhyC9A3SbDU/426Y+XyFrp7Zr+ANkdh6WEa7iz7Ssz35c7H
+ WGQxMwDup9YFn3cB9t0TD8vRJqSTfaE3pETsHafRgRNiF5270uDceHUTJUhVp1ERquYQ
+ TkqA==
+X-Gm-Message-State: AGi0PuYSXsBcklz6COrOqSXkPCgEnRpPxi4yfvo2uXxuA/dH4sq2uRYc
+ OJzlU1VCzSigbijLd1DOR7ZTTg==
+X-Google-Smtp-Source: APiQypKCDzca+eCTQuciTT43aXbflnxzTa53g95PcTkGD9z0CskYBxnkXGY5zeFv+78SchqWqu8zcw==
+X-Received: by 2002:a62:e80e:: with SMTP id c14mr19361183pfi.83.1589273349558; 
+ Tue, 12 May 2020 01:49:09 -0700 (PDT)
+Received: from localhost.localdomain ([117.196.230.85])
+ by smtp.gmail.com with ESMTPSA id 188sm11320866pfg.218.2020.05.12.01.49.05
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Tue, 12 May 2020 01:49:08 -0700 (PDT)
+From: Sumit Garg <sumit.garg@linaro.org>
+To: daniel.thompson@linaro.org, jason.wessel@windriver.com,
+ dianders@chromium.org
+Date: Tue, 12 May 2020 14:18:34 +0530
+Message-Id: <1589273314-12060-1-git-send-email-sumit.garg@linaro.org>
+X-Mailer: git-send-email 2.7.4
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.215.196 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.215.196 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -72,10 +89,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.2 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1jYPSQ-00AfQJ-EH
-Subject: Re: [Kgdb-bugreport] [PATCH v3 05/11] arm64: Add call_break_hook()
- to early_brk64() for early kgdb
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1jYQbD-005rNf-9B
+Subject: [Kgdb-bugreport] [PATCH] kgdb: Fix broken handling of printk() in
+ NMI context
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -87,72 +104,76 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: Mark Rutland <mark.rutland@arm.com>,
- Catalin Marinas <catalin.marinas@arm.com>,
- Bjorn Andersson <bjorn.andersson@linaro.org>, "H. Peter Anvin" <hpa@zytor.com>,
- Daniel Thompson <daniel.thompson@linaro.org>, Jonathan Corbet <corbet@lwn.net>,
- jinho lim <jordan.lim@samsung.com>, Andy Gross <agross@kernel.org>,
- Linux ARM <linux-arm-kernel@lists.infradead.org>, linux-serial@vger.kernel.org,
- kgdb-bugreport@lists.sourceforge.net, Dave Martin <Dave.Martin@arm.com>,
- Masami Hiramatsu <mhiramat@kernel.org>, Jiri Slaby <jslaby@suse.com>,
- Alexios Zavras <alexios.zavras@intel.com>, bp@alien8.de,
- Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
- Allison Randal <allison@lohutok.net>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- LKML <linux-kernel@vger.kernel.org>, James Morse <james.morse@arm.com>,
- "Eric W. Biederman" <ebiederm@xmission.com>,
- Jason Wessel <jason.wessel@windriver.com>
+Cc: kgdb-bugreport@lists.sourceforge.net, linux-kernel@vger.kernel.org
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Mon, May 11, 2020 at 03:45:02PM -0700, Doug Anderson wrote:
-> On Mon, May 11, 2020 at 7:59 AM Will Deacon <will@kernel.org> wrote:
-> > On Tue, Apr 28, 2020 at 02:13:45PM -0700, Douglas Anderson wrote:
-> > > diff --git a/arch/arm64/kernel/debug-monitors.c b/arch/arm64/kernel/debug-monitors.c
-> > > index 48222a4760c2..59c353dfc8e9 100644
-> > > --- a/arch/arm64/kernel/debug-monitors.c
-> > > +++ b/arch/arm64/kernel/debug-monitors.c
-> > > @@ -297,7 +297,7 @@ void unregister_kernel_break_hook(struct break_hook *hook)
-> > >       unregister_debug_hook(&hook->node);
-> > >  }
-> > >
-> > > -static int call_break_hook(struct pt_regs *regs, unsigned int esr)
-> > > +int call_break_hook(struct pt_regs *regs, unsigned int esr)
-> > >  {
-> > >       struct break_hook *hook;
-> > >       struct list_head *list;
-> > > diff --git a/arch/arm64/kernel/traps.c b/arch/arm64/kernel/traps.c
-> > > index cf402be5c573..a8173f0c1774 100644
-> > > --- a/arch/arm64/kernel/traps.c
-> > > +++ b/arch/arm64/kernel/traps.c
-> > > @@ -1044,6 +1044,9 @@ int __init early_brk64(unsigned long addr, unsigned int esr,
-> > >       if ((comment & ~KASAN_BRK_MASK) == KASAN_BRK_IMM)
-> > >               return kasan_handler(regs, esr) != DBG_HOOK_HANDLED;
-> > >  #endif
-> > > +     if (call_break_hook(regs, esr) == DBG_HOOK_HANDLED)
-> > > +             return 0;
-> >
-> > I think this just means we're not running debug_traps_init() early enough,
-> > and actually the KASAN early handler is unnecessary too.
-> >
-> > If we call debug_traps_init() directly from setup_arch() and drop the
-> > arch_initcall(), can we then drop early_brk64 entirely?
-> 
-> It seems to work in my testing.  ...but the worry I have is the
-> comment right before trap_init().  It says:
-> 
-> /* This registration must happen early, before debug_traps_init(). */
+Since commit 42a0bb3f7138 ("printk/nmi: generic solution for safe printk
+in NMI"), kgdb entry in NMI context defaults to use safe NMI printk()
+which involves CPU specific buffers and deferred printk() until exit from
+NMI context.
 
-I /think/ the reason for this is because debug_traps_init() replaces the
-BRK vector, so if that runs before the break hooks have been registered
-for e.g. BUG() then BUG() won't work during that window. Hmm, so dropping
-early_brk64 is problematic after all. Damn.
+But kgdb being a stop-the-world debugger, we don't want to defer printk()
+especially backtrace on corresponding CPUs. So instead switch to normal
+printk() mode in kgdb_cpu_enter() if entry is in NMI context.
 
-Is trap_init() early enough for you? If so, we could call debug_traps_init()
-from traps_init() after registering the break hooks.
+Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+---
 
-Will
+Similar change was posted earlier specific to arm64 here [1]. But after
+discussions it emerged out that this broken handling of printk() in NMI
+context should be a common problem that is relevant to other archs as well.
+So fix this handling in kgdb_cpu_enter() as there can be multiple entry
+points to kgdb in NMI context.
+
+[1] https://lkml.org/lkml/2020/4/24/328
+
+ kernel/debug/debug_core.c | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+
+diff --git a/kernel/debug/debug_core.c b/kernel/debug/debug_core.c
+index 2b7c9b6..ab2933f 100644
+--- a/kernel/debug/debug_core.c
++++ b/kernel/debug/debug_core.c
+@@ -567,6 +567,15 @@ static int kgdb_cpu_enter(struct kgdb_state *ks, struct pt_regs *regs,
+ 	kgdb_info[ks->cpu].enter_kgdb++;
+ 	kgdb_info[ks->cpu].exception_state |= exception_state;
+ 
++	/*
++	 * kgdb entry in NMI context defaults to use safe NMI printk() which
++	 * involves CPU specific buffers and deferred printk() until exit from
++	 * NMI context. But kgdb being a stop-the-world debugger, we don't want
++	 * to defer printk(). So instead switch to normal printk() mode here.
++	 */
++	if (in_nmi())
++		printk_nmi_exit();
++
+ 	if (exception_state == DCPU_WANT_MASTER)
+ 		atomic_inc(&masters_in_kgdb);
+ 	else
+@@ -635,6 +644,8 @@ static int kgdb_cpu_enter(struct kgdb_state *ks, struct pt_regs *regs,
+ 			atomic_dec(&slaves_in_kgdb);
+ 			dbg_touch_watchdogs();
+ 			local_irq_restore(flags);
++			if (in_nmi())
++				printk_nmi_enter();
+ 			return 0;
+ 		}
+ 		cpu_relax();
+@@ -772,6 +783,8 @@ static int kgdb_cpu_enter(struct kgdb_state *ks, struct pt_regs *regs,
+ 	raw_spin_unlock(&dbg_master_lock);
+ 	dbg_touch_watchdogs();
+ 	local_irq_restore(flags);
++	if (in_nmi())
++		printk_nmi_enter();
+ 
+ 	return kgdb_info[cpu].ret_state;
+ }
+-- 
+2.7.4
+
 
 
 _______________________________________________
