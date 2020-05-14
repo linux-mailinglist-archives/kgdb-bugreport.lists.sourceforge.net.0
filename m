@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 20FA01D2A86
-	for <lists+kgdb-bugreport@lfdr.de>; Thu, 14 May 2020 10:43:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 91ABA1D365B
+	for <lists+kgdb-bugreport@lfdr.de>; Thu, 14 May 2020 18:21:25 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jZ9Su-0005UN-TV
-	for lists+kgdb-bugreport@lfdr.de; Thu, 14 May 2020 08:43:40 +0000
+	id 1jZGbs-0002s6-DY
+	for lists+kgdb-bugreport@lfdr.de; Thu, 14 May 2020 16:21:24 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <pmladek@suse.com>) id 1jZ9St-0005UD-RR
- for kgdb-bugreport@lists.sourceforge.net; Thu, 14 May 2020 08:43:39 +0000
+ (envelope-from <daniel.thompson@linaro.org>) id 1jZGbr-0002rx-74
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 14 May 2020 16:21:23 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=5iSUz4RzShc46MC67Q/iaDq2PFyj21LilB84xi2bBaM=; b=BadcfaC46xAg4DzSKndZkX6Jrv
- Gr/8kgODx86uAN7Us0vdS+1e6uDwdQ3t3ihWU3skoMlOH/8m9k7biqGQ8ZGLnHacIH8/ht47L41GP
- xDWkczIjU4ejlUbSXuwd3A5r/ZNzJi77XpWWIUkoOCp2fLTriC9u4zyEdacPB6PXdvFg=;
+ bh=KV4BSoviEBOfIIyT+7Io9PqJ+AxGL6m4ncG0jX3R3Vg=; b=g5teJoXkrJJkE9pv6aCeU81ljg
+ mGCyqs04bvPf2e7AYOvxRGBtBcyg7wAogM/MYfOLwxhfXJJ0CNEliPHhm5XoGbsgLgGdKu/KO1m10
+ 89H2rMQIKgVPEFbxpy9LUPbLzwWhSqOBmdTEqy8R78Gu1aYgbJqyQPMzn4NBqgzJMMn0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -30,40 +30,73 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=5iSUz4RzShc46MC67Q/iaDq2PFyj21LilB84xi2bBaM=; b=mCl48qQ8XApfI8xfO0hwYQU120
- pGtv8WEXeQ7fbdHHUYXpxoGfn6qIE3Wfrog0ZFZSL+664tNn6dmmRHxjQYuNE/EGlg3HxwAc/yRMc
- 17NQIylVXS4gxm3VEMvIutZqRaK/FgmynpS3tIZPPQImPLZKX4oMRt2bvxxBKXGmoHwg=;
-Received: from mx2.suse.de ([195.135.220.15])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jZ9Ss-00FALb-4E
- for kgdb-bugreport@lists.sourceforge.net; Thu, 14 May 2020 08:43:39 +0000
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 99CA3AF48;
- Thu, 14 May 2020 08:43:24 +0000 (UTC)
-Date: Thu, 14 May 2020 10:42:36 +0200
-From: Petr Mladek <pmladek@suse.com>
-To: Sumit Garg <sumit.garg@linaro.org>
-Message-ID: <20200514084230.GO17734@linux-b0ei>
-References: <1589273314-12060-1-git-send-email-sumit.garg@linaro.org>
- <20200512142533.ta4uejwmq5gchtlx@holly.lan>
- <CAFA6WYOV7oPbYE=9fXueYMacb5wv0r9T6F8tmECt-Eafe-fctw@mail.gmail.com>
+ bh=KV4BSoviEBOfIIyT+7Io9PqJ+AxGL6m4ncG0jX3R3Vg=; b=Zw5nvc0mOomidTmwRvXJe8Zt3p
+ eE6NXQxjXlOOFml3Qe8tBHR5wxQQkfXdCM0x88p5ftv2VDdSrhD0+87xepIgU5aQWaDySBTQmFOrX
+ UlND2tsczwI7j7KFdmqQcFgESU3CX7bkwTHvzeF07UerYJAhi+Qge1fJkSQMpS8NgqKc=;
+Received: from mail-wm1-f65.google.com ([209.85.128.65])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1jZGbm-0077MA-HO
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 14 May 2020 16:21:23 +0000
+Received: by mail-wm1-f65.google.com with SMTP id w64so1253754wmg.4
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Thu, 14 May 2020 09:21:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=KV4BSoviEBOfIIyT+7Io9PqJ+AxGL6m4ncG0jX3R3Vg=;
+ b=iiHyiJ4q0+KsNNeDxvvCz9wtZO9sC8IuSU69MkWg6ukuylaAreG2+ufhhS2q0LvI4a
+ 9ZFBQEB3gresJbeadDdort7B7CJztVaOzd+imGLK9adisFs8l1EkEXwjPix6DMwXWpjX
+ /bCdQB8gtMafG88ExRQb7sOFOT2TnNJlqCmCoaS8LyHnYhBzplYGqcazpRuc/Byl/kdH
+ h8OE0uxsaWxjlIp/J8ewc/SWJUPpFj3CJfpjNNHOJYP6BbciN+6P7zMR4GQBICDm8oYj
+ m2m8J1vRn9sCMPHm5LZbqiU0px2GbT9jNPn6q/3jziLa6B8kfu211fXDrBPg+K08gUdF
+ P8BQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=KV4BSoviEBOfIIyT+7Io9PqJ+AxGL6m4ncG0jX3R3Vg=;
+ b=gcvPRVfeXg+icDVZx/YeG4KbBBXK2moSOhz0SMB/VSVzZm/rDyM0kN8u79jGtHt+Ha
+ TY/qA+MtUXEeLgldBaUWtZGPx+I2hrGlqQb8bak9N9SYeDlMBlk5v1LmQKUT5cU04nHE
+ FCds8F3E4Z6Hod4o5l9ojrXsBQ2ZDDH+pMNkDrVEt6ATVyCpjm/OUcmnV3yNcgBJIYx9
+ hBNdEs6A6LFg6KnjmhMQKIIQD7ec/oXAAmh4Np6PVo1yvgvlIE6tz27THqun84oBFiIl
+ z2KR4/B13FJ6Pu0BwOSVwEfaj+YjuZg860gRY2EL57j28LnQo79dst0CTiA9/ibPhqWp
+ QXgA==
+X-Gm-Message-State: AGi0Pua/2gLQdy92hKqfASdL7jij2MFXj6cXktWxl12ZPtZP8SA6S3LA
+ +kuRfih9pO2QD78BRS9Wwi0c8Q==
+X-Google-Smtp-Source: APiQypKzrysBhAd4T+CnYHlYyQM0grnydFJdjF31clt1OcgBcXllaYep5/9TgtCb41lshr5MEdxP5g==
+X-Received: by 2002:a1c:ed04:: with SMTP id l4mr49969579wmh.93.1589473272074; 
+ Thu, 14 May 2020 09:21:12 -0700 (PDT)
+Received: from holly.lan (cpc141214-aztw34-2-0-cust773.18-1.cable.virginm.net.
+ [86.9.19.6])
+ by smtp.gmail.com with ESMTPSA id b14sm29577880wmb.18.2020.05.14.09.21.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 May 2020 09:21:11 -0700 (PDT)
+Date: Thu, 14 May 2020 17:21:09 +0100
+From: Daniel Thompson <daniel.thompson@linaro.org>
+To: Douglas Anderson <dianders@chromium.org>
+Message-ID: <20200514162109.6qt5drd27hpilijh@holly.lan>
+References: <20200507200850.60646-1-dianders@chromium.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <CAFA6WYOV7oPbYE=9fXueYMacb5wv0r9T6F8tmECt-Eafe-fctw@mail.gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Spam-Score: 0.0 (/)
+In-Reply-To: <20200507200850.60646-1-dianders@chromium.org>
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [195.135.220.15 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.128.65 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.128.65 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1jZ9Ss-00FALb-4E
-Subject: Re: [Kgdb-bugreport] [PATCH] kgdb: Fix broken handling of printk()
- in NMI context
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+X-Headers-End: 1jZGbm-0077MA-HO
+Subject: Re: [Kgdb-bugreport] [PATCH v4 00/12] kgdb: Support late serial
+ drivers; enable early debug w/ boot consoles
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -75,147 +108,88 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daniel Thompson <daniel.thompson@linaro.org>, Arnd Bergmann <arnd@arndb.de>,
- Peter Zijlstra <peterz@infradead.org>, kgdb-bugreport@lists.sourceforge.net,
- Steven Rostedt <rostedt@goodmis.org>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Jason Wessel <jason.wessel@windriver.com>,
- Andrew Morton <akpm@linux-foundation.org>
+Cc: Mark Rutland <mark.rutland@arm.com>, linux-doc@vger.kernel.org,
+ catalin.marinas@arm.com, bjorn.andersson@linaro.org, hpa@zytor.com,
+ Mauro Carvalho Chehab <mchehab+samsung@kernel.org>, will@kernel.org,
+ corbet@lwn.net, x86@kernel.org, Russell King <linux@armlinux.org.uk>,
+ Krzysztof Kozlowski <krzk@kernel.org>, jinho lim <jordan.lim@samsung.com>,
+ agross@kernel.org, Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
+ linux-arm-kernel@lists.infradead.org, linux-serial@vger.kernel.org,
+ kgdb-bugreport@lists.sourceforge.net, Dave Martin <Dave.Martin@arm.com>,
+ Masami Hiramatsu <mhiramat@kernel.org>, linux-arm-msm@vger.kernel.org,
+ jslaby@suse.com, Alexios Zavras <alexios.zavras@intel.com>, bp@alien8.de,
+ tglx@linutronix.de, mingo@redhat.com, Allison Randal <allison@lohutok.net>,
+ Juergen Gross <jgross@suse.com>, gregkh@linuxfoundation.org,
+ linux-kernel@vger.kernel.org, James Morse <james.morse@arm.com>,
+ "Eric W. Biederman" <ebiederm@xmission.com>, jason.wessel@windriver.com,
+ Andrew Morton <akpm@linux-foundation.org>, Enrico Weigelt <info@metux.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Wed 2020-05-13 19:04:48, Sumit Garg wrote:
-> On Tue, 12 May 2020 at 19:55, Daniel Thompson
-> <daniel.thompson@linaro.org> wrote:
-> >
-> > On Tue, May 12, 2020 at 02:18:34PM +0530, Sumit Garg wrote:
-> > > Since commit 42a0bb3f7138 ("printk/nmi: generic solution for safe printk
-> > > in NMI"), kgdb entry in NMI context defaults to use safe NMI printk()
-> >
-> > I didn't see the author on Cc: nor any of the folks whose hands it
-> > passed through. It would definitely be good to involve them in this
-> > discussion.
-> >
+On Thu, May 07, 2020 at 01:08:38PM -0700, Douglas Anderson wrote:
+> <snip>
+>
+> My first attempt was to try to get the existing "ekgdboc" to work
+> earlier.  I tried that for a bit until I realized that it needed to
+> work at the tty layer and I couldn't find any serial drivers that
+> managed to register themselves to the tty layer super early at boot.
+> The only documented use of "ekgdboc" is "ekgdboc=kbd" and that's a bit
+> of a special snowflake.  Trying to get my serial driver and all its
+> dependencies to probe normally and register the tty driver super early
+> at boot seemed like a bad way to go.  In fact, all the complexity
+> needed to do something like this is why the system already has a
+> special concept of a "boot console" that lives only long enough to
+> transition to the normal console.
 > 
-> Thanks for updating the Cc: list.
+> <snip>
 > 
-> >
-> > > which involves CPU specific buffers and deferred printk() until exit from
-> > > NMI context.
-> > >
-> > > But kgdb being a stop-the-world debugger, we don't want to defer printk()
-> > > especially backtrace on corresponding CPUs. So instead switch to normal
-> > > printk() mode in kgdb_cpu_enter() if entry is in NMI context.
-> >
-> > So, firstly I should *definitely* take a mea cupla for not shouting
-> > about this at the time (I was on Cc:... twice). Only thing I can say
-> > confidently is that the test suite didn't yell about this and so I
-> > didn't look at this as closely as I should have done (and that it
-> > didn't yell is mostly because I'm still building out the test suite
-> > coverage).
-> >
-> > Anyhow...
-> >
-> > This feels a little like we are smearing the printk() interception logic
-> > across the kernel in ways that make things hard to read. If we accepted
-> > this patch we then have, the new NMI interception logic, the old kdb
-> > interception logic and some hacks in the kgdb trap handler to defang the
-> > NMI interception logic and force the kdb logic to kick in.
-> >
-> > Wouldn't it be better to migrate kdb interception logic up a couple of
-> > levels so that it continues to function even when we are in nmi printk
-> > mode. That way *all* the printk() interception code would end up in
-> > one place.
-> >
+> The devices I had for testing were:
+> - arm32: rk3288-veyron-jerry
+> - arm64: rk3399-gru-kevin
+> - arm64: qcom-sc7180-trogdor (not mainline yet)
 > 
-> Yes it would be better to have all printk() interception code at one
-> place. Let me see if I can come up with an integrated logic.
+> These are the devices I tested this series on.  I tried to test
+> various combinations of enabling/disabling various options and I
+> hopefully caught the corner cases, but I'd appreciate any extra
+> testing people can do.  Notably I didn't test on x86, but (I think) I
+> didn't touch much there so I shouldn't have broken anything.
 
-It might be enough to move the kdb_check from vprintk_default()
-to vprintk_func().
+I have tested a slightly earlier version using qemu and will test this
+set before it moves forwards.
 
-I have never used kdb. I did not know that it was able to stop
-kernel in any context.
 
-Would this work? It is only compile tested!
+>  .../admin-guide/kernel-parameters.txt         |  20 ++
+>  Documentation/dev-tools/kgdb.rst              |  24 ++
+>  arch/arm64/Kconfig                            |   1 +
+>  arch/arm64/include/asm/debug-monitors.h       |   2 +
+>  arch/arm64/kernel/debug-monitors.c            |   2 +-
+>  arch/arm64/kernel/traps.c                     |   3 +
+>  arch/x86/Kconfig                              |   1 +
+>  drivers/tty/serial/8250/8250_early.c          |  23 ++
+>  drivers/tty/serial/amba-pl011.c               |  32 +++
+>  drivers/tty/serial/kgdboc.c                   | 268 ++++++++++++++++--
+>  drivers/tty/serial/qcom_geni_serial.c         |  32 +++
+>  include/linux/kgdb.h                          |   4 +
+>  kernel/debug/debug_core.c                     |  52 +++-
+>  lib/Kconfig.kgdb                              |  18 ++
+>  14 files changed, 436 insertions(+), 46 deletions(-)
 
-From 14ae6c9f0cbd1479cb898c864c7ab46e20f3cf6f Mon Sep 17 00:00:00 2001
-From: Petr Mladek <pmladek@suse.com>
-Date: Thu, 14 May 2020 10:37:44 +0200
-Subject: [PATCH] printk/kdb: Redirect printk messages into kdb in any context
+Any thoughts on how best to land these changes?
 
-kdb is able to stop kernel even in NMI context where printk() is redirected
-to the printk_safe() lockless variant. Move the check and redirect to kdb
-even in this case.
+AFAICT the arm64 and 8250/amba-pl011/qcom_geni_serial code
+could be applied independently of the kgdb changes (though we must keep
+changes to drivers/tty/serial/kgdboc alongside the kgdb changes).
 
-Signed-off-by: Petr Mladek <pmladek@suse.com>
----
- kernel/printk/printk.c      | 14 +-------------
- kernel/printk/printk_safe.c |  8 ++++++++
- 2 files changed, 9 insertions(+), 13 deletions(-)
+I can hoover them up but I'd need a solid set of acks and
+I don't think we've got that yet.
 
-diff --git a/kernel/printk/printk.c b/kernel/printk/printk.c
-index 9a9b6156270b..63a1aa377cd9 100644
---- a/kernel/printk/printk.c
-+++ b/kernel/printk/printk.c
-@@ -35,7 +35,6 @@
- #include <linux/memblock.h>
- #include <linux/syscalls.h>
- #include <linux/crash_core.h>
--#include <linux/kdb.h>
- #include <linux/ratelimit.h>
- #include <linux/kmsg_dump.h>
- #include <linux/syslog.h>
-@@ -2036,18 +2035,7 @@ EXPORT_SYMBOL(vprintk);
- 
- int vprintk_default(const char *fmt, va_list args)
- {
--	int r;
--
--#ifdef CONFIG_KGDB_KDB
--	/* Allow to pass printk() to kdb but avoid a recursion. */
--	if (unlikely(kdb_trap_printk && kdb_printf_cpu < 0)) {
--		r = vkdb_printf(KDB_MSGSRC_PRINTK, fmt, args);
--		return r;
--	}
--#endif
--	r = vprintk_emit(0, LOGLEVEL_DEFAULT, NULL, 0, fmt, args);
--
--	return r;
-+	return vprintk_emit(0, LOGLEVEL_DEFAULT, NULL, 0, fmt, args);
- }
- EXPORT_SYMBOL_GPL(vprintk_default);
- 
-diff --git a/kernel/printk/printk_safe.c b/kernel/printk/printk_safe.c
-index d9a659a686f3..81734497c625 100644
---- a/kernel/printk/printk_safe.c
-+++ b/kernel/printk/printk_safe.c
-@@ -6,6 +6,7 @@
- #include <linux/preempt.h>
- #include <linux/spinlock.h>
- #include <linux/debug_locks.h>
-+#include <linux/kdb.h>
- #include <linux/smp.h>
- #include <linux/cpumask.h>
- #include <linux/irq_work.h>
-@@ -359,6 +360,13 @@ void __printk_safe_exit(void)
- 
- __printf(1, 0) int vprintk_func(const char *fmt, va_list args)
- {
-+#ifdef CONFIG_KGDB_KDB
-+	/* Allow to pass printk() to kdb but avoid a recursion. */
-+	if (unlikely(kdb_trap_printk && kdb_printf_cpu < 0)) {
-+		return vkdb_printf(KDB_MSGSRC_PRINTK, fmt, args);
-+	}
-+#endif
-+
- 	/*
- 	 * Try to use the main logbuf even in NMI. But avoid calling console
- 	 * drivers that might have their own locks.
--- 
-2.26.1
+I'd also be happy to ack where needed and let someone else pick it up
+(the other changes queued for kgdb this cycle are pretty small so we
+shouldn't see much conflict in kernel/debug/ ).
 
+
+Daniel.
 
 
 _______________________________________________
