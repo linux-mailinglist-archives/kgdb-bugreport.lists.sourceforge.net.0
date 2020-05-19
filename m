@@ -2,83 +2,101 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED6271D8B5A
-	for <lists+kgdb-bugreport@lfdr.de>; Tue, 19 May 2020 01:04:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E02F21D9474
+	for <lists+kgdb-bugreport@lfdr.de>; Tue, 19 May 2020 12:37:24 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jaooK-0002Cq-P2
-	for lists+kgdb-bugreport@lfdr.de; Mon, 18 May 2020 23:04:40 +0000
+	id 1jazch-00065m-Nx
+	for lists+kgdb-bugreport@lfdr.de; Tue, 19 May 2020 10:37:23 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <will@kernel.org>) id 1jaooJ-0002CZ-2P
- for kgdb-bugreport@lists.sourceforge.net; Mon, 18 May 2020 23:04:39 +0000
+ (envelope-from <daniel.thompson@linaro.org>) id 1jazcd-00064t-8j
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 19 May 2020 10:37:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bnphSAGifjXmfPeYoXi66a8/xXPkyYYmrjEgpMICBZA=; b=nAazi1AJnSd6mNdQ1YPXjf2zX5
- OudK55tOTjEIVr/dl3BqLddlDCTpwuFhzZrETji6fspgainGC1dk5IA/9zoCUL0Ipn+sPCMHszTCi
- pBnYfAsfxoTLNpsid153vrO0xevSm1GBpTdI+8Z1GTQoiF30tDP3FJVtlUmyheMxIeu8=;
+ bh=i9H4OZ10YdHZdhc7/rIrHtv9xR5CbfD8gzRd+3adHCg=; b=frFbH9oNnvVQw4jIPirekkK58p
+ hwGa78rTVLzuDDGzTQO/L2WGgrpySqwOHpQEcFlN0hY0sLwaCvOrZPoeNpqNlToTlfMQx5pCeY6gC
+ e1hCvWMQx1KADrXSvZ2Gc6kU8lCQtCV+cDSp8VnzXQSojSxwNhy9StGBH2Ri+ITwRGBg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=bnphSAGifjXmfPeYoXi66a8/xXPkyYYmrjEgpMICBZA=; b=mdac//HE4TEp2Pws3y7k3bXTXl
- xRiGoGSTdNU8ifpUIt4OoJxhpgtYpkb+jgtodC3wICVMr2U8FuknOkS1CF/PMW/EybmIU/YfNIhFe
- g1z/Ov1l6xVZH35eZW7gfBbuKE66+FvbrvxeRlWvEDFh58ntCKi7gADPzpGAt2FX7xDk=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jaooH-00HX2O-Qf
- for kgdb-bugreport@lists.sourceforge.net; Mon, 18 May 2020 23:04:39 +0000
-Received: from localhost.localdomain (236.31.169.217.in-addr.arpa
- [217.169.31.236])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 97D012081A;
- Mon, 18 May 2020 23:04:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1589843060;
- bh=FivWSGA5nKr+8BVNRlfId66BwqKvfngHdf0PvsDY1Gk=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=VHXwzWPUne9lNRLze2eVuRdHvkAB3cprbaBFfewEjJY46dL74bSD6c43meXBwefFz
- 8Ff13vNT0YVAVYK6ZuLCiCBb/hKd8p1jjr5DR7uackt2nEf7mrkdz1hmvgIJkixlww
- eBns6vIZvKw6GHKnaVdx54+jKGUPcy+BwXaxDiHs=
-From: Will Deacon <will@kernel.org>
-To: Daniel Thompson <daniel.thompson@linaro.org>,
- Douglas Anderson <dianders@chromium.org>,
- Jason Wessel <jason.wessel@windriver.com>
-Date: Tue, 19 May 2020 00:04:04 +0100
-Message-Id: <158982068109.260335.5582031208894337234.b4-ty@kernel.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200513160501.1.I0b5edf030cc6ebef6ab4829f8867cdaea42485d8@changeid>
-References: <20200513160501.1.I0b5edf030cc6ebef6ab4829f8867cdaea42485d8@changeid>
+ bh=i9H4OZ10YdHZdhc7/rIrHtv9xR5CbfD8gzRd+3adHCg=; b=MLLzUKXX2J9efQU5Y2nSYcaASf
+ 9rmRmF0QOVSEGzfPRCWS+JodPPBdjoebslD989A+Ce6qCeXGJnRid3Tz/PjPzqCNK4XDl/pIWxGuz
+ HJVGRwtxyjDQa0a2Ouyz/5dof3zYqldobF71MPHT5qqlYTY5QqjsHvlzP5MPFT8qIvI0=;
+Received: from mail-wr1-f65.google.com ([209.85.221.65])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1jazcY-00F8n4-IG
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 19 May 2020 10:37:19 +0000
+Received: by mail-wr1-f65.google.com with SMTP id 50so15258444wrc.11
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Tue, 19 May 2020 03:37:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=i9H4OZ10YdHZdhc7/rIrHtv9xR5CbfD8gzRd+3adHCg=;
+ b=XWeV8b7S4EVjZhJ79Ag3v5DEaPyKNzfmliI3RiiRpgwEJDw+Ncgl4tXOIDiPBN0ehm
+ YWZkEFKgex9Pc/rKjydVwahDLrwR8y6N2K4ijHy3Amx1ZdXZ2xBQgWhfRQABcJPNiNen
+ rvvr6M54m9ca8L0/CiltsnZCDTQWxVvjmvFJbUT1tWQqdCluvrPTvoiST9aq4ly+lBdO
+ 9EODHL0fC3KzWE7uHm51t4l8qTtDotOQL7iYLRSY1R7UA8NmexCH9vCLfXBsdeMPYMvj
+ 3T+qCgXK3atV0sLi8FiY4uh4nBrb+rXL92/CWmN5vPGLifpAvQMdAg7EhyCp2P4iaesc
+ Ek2w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=i9H4OZ10YdHZdhc7/rIrHtv9xR5CbfD8gzRd+3adHCg=;
+ b=SOW5UMOgb88PzJwWUDTCxBoDznr7hGx33lwk2OCbJXjBUcWYnzmpXBWK9yFNmOUvFk
+ tk3c+mZBzfKeVoAmTpNQq3oYVvvOIDmqbwQAl+zcbIJ4l7KlawO5aHMzvsEiiFC9yJio
+ mOYY87B1X2RY5j8kF6O+cAhG/Lb1IgvqE34u+sm62mKFa0MvrFn/7UckUeZMpLKQgAY/
+ 3bPRoPr6CMT5oLBtAY3vn69yxmpf5JCai2nb4D/bJ8ERFwJePIrqxgizwdIEhAdlOt6V
+ lrBlVKeGp9Z9aALFJ0IOjLa1LB7E1akM8hS7jKzo71+C9L/sB9qiIiDQq4LfhpMb+hQD
+ f9QQ==
+X-Gm-Message-State: AOAM532qwtpm2s32lN+cEPh187ttbft2ek2iUvHuRuezhrbRGKwhXZZL
+ DFp/EufjFsX+w3t6DGCRmk3pZQ==
+X-Google-Smtp-Source: ABdhPJzJiTwMyvVTnOctSw0HxZdkufYRwI8zQqI86F0CX4btXGOdMQMwWIBlYi+xtP8+zww/fzO92g==
+X-Received: by 2002:a5d:4dc9:: with SMTP id f9mr24784938wru.407.1589884621033; 
+ Tue, 19 May 2020 03:37:01 -0700 (PDT)
+Received: from holly.lan (cpc141214-aztw34-2-0-cust773.18-1.cable.virginm.net.
+ [86.9.19.6])
+ by smtp.gmail.com with ESMTPSA id l18sm3275536wmj.22.2020.05.19.03.36.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 19 May 2020 03:37:00 -0700 (PDT)
+Date: Tue, 19 May 2020 11:36:58 +0100
+From: Daniel Thompson <daniel.thompson@linaro.org>
+To: Douglas Anderson <dianders@chromium.org>
+Message-ID: <20200519103658.eha5zbmun4i56oml@holly.lan>
+References: <20200507200850.60646-1-dianders@chromium.org>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20200507200850.60646-1-dianders@chromium.org>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.221.65 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.221.65 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: arm64.dev]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1jaooH-00HX2O-Qf
-Subject: Re: [Kgdb-bugreport] [PATCH] arm64: Call debug_traps_init() from
- trap_init() to help early kgdb
+X-Headers-End: 1jazcY-00F8n4-IG
+Subject: Re: [Kgdb-bugreport] [PATCH v4 00/12] kgdb: Support late serial
+ drivers; enable early debug w/ boot consoles
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -90,47 +108,50 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: Mark Rutland <mark.rutland@arm.com>, liwei391@huawei.com,
- "Eric W. Biederman" <ebiederm@xmission.com>,
- "Paul E. McKenney" <paulmck@kernel.org>,
- Alexios Zavras <alexios.zavras@intel.com>, Enrico Weigelt <info@metux.net>,
- catalin.marinas@arm.com, linux-kernel@vger.kernel.org,
- jinho lim <jordan.lim@samsung.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- James Morse <james.morse@arm.com>, Masami Hiramatsu <mhiramat@kernel.org>,
- kgdb-bugreport@lists.sourceforge.net, Zenghui Yu <yuzenghui@huawei.com>,
- Thomas Gleixner <tglx@linutronix.de>, Will Deacon <will@kernel.org>,
- Dave Martin <Dave.Martin@arm.com>, Allison Randal <allison@lohutok.net>,
- linux-arm-kernel@lists.infradead.org
+Cc: Mark Rutland <mark.rutland@arm.com>, linux-doc@vger.kernel.org,
+ catalin.marinas@arm.com, bjorn.andersson@linaro.org, hpa@zytor.com,
+ Mauro Carvalho Chehab <mchehab+samsung@kernel.org>, will@kernel.org,
+ corbet@lwn.net, x86@kernel.org, Russell King <linux@armlinux.org.uk>,
+ Krzysztof Kozlowski <krzk@kernel.org>, jinho lim <jordan.lim@samsung.com>,
+ agross@kernel.org, Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
+ linux-arm-kernel@lists.infradead.org, linux-serial@vger.kernel.org,
+ kgdb-bugreport@lists.sourceforge.net, Dave Martin <Dave.Martin@arm.com>,
+ Masami Hiramatsu <mhiramat@kernel.org>, linux-arm-msm@vger.kernel.org,
+ jslaby@suse.com, Alexios Zavras <alexios.zavras@intel.com>, bp@alien8.de,
+ tglx@linutronix.de, mingo@redhat.com, Allison Randal <allison@lohutok.net>,
+ Juergen Gross <jgross@suse.com>, gregkh@linuxfoundation.org,
+ linux-kernel@vger.kernel.org, James Morse <james.morse@arm.com>,
+ "Eric W. Biederman" <ebiederm@xmission.com>, jason.wessel@windriver.com,
+ Andrew Morton <akpm@linux-foundation.org>, Enrico Weigelt <info@metux.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Wed, 13 May 2020 16:06:37 -0700, Douglas Anderson wrote:
-> A new kgdb feature will soon land (kgdb_earlycon) that lets us run
-> kgdb much earlier.  In order for everything to work properly it's
-> important that the break hook is setup by the time we process
-> "kgdbwait".
+On Thu, May 07, 2020 at 01:08:38PM -0700, Douglas Anderson wrote:
+> This whole pile of patches was motivated by me trying to get kgdb to
+> work properly on a platform where my serial driver ended up being hit
+> by the -EPROBE_DEFER virus (it wasn't practicing social distancing
+> from other drivers).  Specifically my serial driver's parent device
+> depended on a resource that wasn't available when its probe was first
+> called.  It returned -EPROBE_DEFER which meant that when "kgdboc"
+> tried to run its setup the serial driver wasn't there.  Unfortunately
+> "kgdboc" never tried again, so that meant that kgdb was disabled until
+> I manually enalbed it via sysfs.
 > 
-> Right now the break hook is setup in debug_traps_init() and that's
-> called from arch_initcall().  That's a bit too late since
-> kgdb_earlycon really needs things to be setup by the time the system
-> calls dbg_late_init().
+> <snip>
 > 
-> [...]
+> This series (and my comments / documentation / commit messages) are
+> now long enough that my eyes glaze over when I try to read it all over
+> to double-check.  I've nontheless tried to double-check it, but I'm
+> pretty sure I did something stupid.  Thank you ahead of time for
+> pointing it out to me so I can fix it in v5.  If somehow I managed to
+> not do anything stupid (really?) then thank you for double-checking me
+> anyway.
 
-Applied to arm64 (for-next/misc), thanks!
+Applied (minus the arm64 specific stuff), should be in the next linux-next.
 
-[1/1] arm64: Call debug_traps_init() from trap_init() to help early kgdb
-      https://git.kernel.org/arm64/c/b322c65f8ca3
 
-Cheers,
--- 
-Will
-
-https://fixes.arm64.dev
-https://next.arm64.dev
-https://will.arm64.dev
+Daniel.
 
 
 _______________________________________________
