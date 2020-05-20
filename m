@@ -2,91 +2,84 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 078631DB04A
-	for <lists+kgdb-bugreport@lfdr.de>; Wed, 20 May 2020 12:34:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AC64D1DB156
+	for <lists+kgdb-bugreport@lfdr.de>; Wed, 20 May 2020 13:18:44 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jbM3Q-0000Yz-RZ
-	for lists+kgdb-bugreport@lfdr.de; Wed, 20 May 2020 10:34:28 +0000
+	id 1jbMkF-0003JG-HC
+	for lists+kgdb-bugreport@lfdr.de; Wed, 20 May 2020 11:18:43 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <daniel.thompson@linaro.org>) id 1jbM3P-0000YV-AW
- for kgdb-bugreport@lists.sourceforge.net; Wed, 20 May 2020 10:34:27 +0000
+ (envelope-from <sumit.garg@linaro.org>) id 1jbMkE-0003Iz-EM
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 20 May 2020 11:18:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wHwuK554VhbEDUoapI14azPz8Hgjvi50lBlxsWiVKX8=; b=fHLnWuxW1AzjclQyjbwxbMsR8e
- 8JYizOWxnfY0R+AUQvbN2UMKDbu2IHFAYE4ed9uPMrpsOC5PgWexdJo59JvQ1BJNKmRD9Qwj0JA1V
- /Chh3sANUGfmxuPRmzbL4vApCPJUH1KJYtNZJmx4muU1gbQQcfWtICZ7A+UKO8Rtwutg=;
+ bh=05sWOFK6tuBIdg0teEFyYCPt+cVyW+PqgkCyuRv1w18=; b=XgqsFgK6wlYjsnY2orFv801zLr
+ 9PcE6HA9bNYCHiEDHnTfE74597UrYKEmY+semSdWnId5Ez2moLML961tebqdSLjFJsTjxHrg4ohjM
+ Wwt3VLQC3siIZECtl+CHkDjNGeIcEN7g3HOYNo2wBekmAtp8OclWGMMDwZ+N6LZazBbw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version:
+ Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=wHwuK554VhbEDUoapI14azPz8Hgjvi50lBlxsWiVKX8=; b=GUOu63ltlm/0ebNUezT3HxL0Wc
- liykctMsnsEY6sg3pIpQ5CEiZ1wEihTeXWobkcU3vnmAxDO01RMa6HlWtxyWHirBE+s/bX5V06bNg
- AfsypW/yB79TVgbb2Z9kRr/cctDcQwtekpnRO7b9JhF53nBkTCkagl7ma/JDkoxy9R6Y=;
-Received: from mail-wm1-f66.google.com ([209.85.128.66])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=05sWOFK6tuBIdg0teEFyYCPt+cVyW+PqgkCyuRv1w18=; b=YaDFwYU9/LXgkt9VLN3VLrfJic
+ 4BeLiizMl20GvAvx7Wly2KwjVDSnVsQnjJ3lkHT58pDsm16WX+sq0hBgi0jcWDooCR4k8RF3zrJtQ
+ illnKvwwZIwRga9MTOqmn62uUlGxD/DjqjdFpJZTe3RZYZuirZaUAfKH9D5N4KZXO32A=;
+Received: from mail-oi1-f193.google.com ([209.85.167.193])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jbM3L-008qcC-8K
- for kgdb-bugreport@lists.sourceforge.net; Wed, 20 May 2020 10:34:27 +0000
-Received: by mail-wm1-f66.google.com with SMTP id g14so4412167wme.1
+ id 1jbMk9-001yYB-NV
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 20 May 2020 11:18:42 +0000
+Received: by mail-oi1-f193.google.com with SMTP id o24so2612468oic.0
  for <kgdb-bugreport@lists.sourceforge.net>;
- Wed, 20 May 2020 03:34:23 -0700 (PDT)
+ Wed, 20 May 2020 04:18:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=wHwuK554VhbEDUoapI14azPz8Hgjvi50lBlxsWiVKX8=;
- b=dZNC1J5ypymn1jU6Byg8EPaBtx0iN/1DIHceCLtkm5ZN62pZaAM6qLFo69H93K051w
- nEFHjWsNPV4ljKXRdpDRbIC2GxHPUuneGdFOqCabJABeFbEy0qZNxTyUZWuFZXtPhR99
- wwdZQtudQd/cHlInsliGMRW2QUx7CzktPvTf+BuhU4jurkcIzEs5qbRiHA8AWZAEjp6C
- tUBhEENQN3hN8Ob/5r+eI+wuJ+/MghjTgXBB8HkB7aqzL8wuv8QiRuRJ3494heAyIw0a
- WPD4KXjtaKv/JogXTODnC/Ip+MHz5vriC1ArcAq5dOXkzYPPdHABKpYeRBZMRq57iYHR
- lgIg==
+ h=from:to:cc:subject:date:message-id;
+ bh=05sWOFK6tuBIdg0teEFyYCPt+cVyW+PqgkCyuRv1w18=;
+ b=TqVjp5354l9g1YsMnmiLHIjXurzKyt9dZu9rMhX+qNabLlTNIE6ll/SK69p9ELSwHb
+ HuIDMQdB8adG6bsECZCVjF6ESjyXInN9zVRWoK7m76v6WmBTs2VR4Ky643jLAM6gh8Q9
+ vJZzAU8MIsFMiG+WKtswEPNgfgeXmkv2k31LT6AXPJobmw8gSC4EGJXHXV/zZLSc7kjQ
+ j9M5acva6zU2GvPjWKZiCWaPnNNwDNV79FzECZ+56c5USFDAg0hizjdw23llsucwhdRY
+ o5Tg2VeRzxBngmGYQOCf9DrCKdUGxO6/Bu5iH1ApiTirZU7ZQ1blBuRj4Wi/anElVBX/
+ BidQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=wHwuK554VhbEDUoapI14azPz8Hgjvi50lBlxsWiVKX8=;
- b=jyj9iHuio+UHxwTSmIt7yTf11drLzLZz2KasU5FBdVbFMvlWTKEDC3+45IavLTWsQZ
- DaRfd9S89Jh65L05CCYTKJcfqzVoh52ajzCQK2Be8mSklI3e1dhhUF/oY26YV3qoXbMl
- lDF5yuT27u/BCzDWfVMDzGU97KJSY6vtpK37Sofae4OgpI5wBJg0zVinDdj5keuMBtKQ
- RflksKN0xHSN8QohVjtWmGL1idVDA+4DRnFHvd0Igc3JyHinWYQGUBbvMunM97ShbrzS
- MZE9M3EawmjRHHNvT9tn0WX8MuSKe/jC4KlLdr770NBtQibxvM0uBi5dnRLCb0uN3AqO
- tY2w==
-X-Gm-Message-State: AOAM532rxUlb8Qyo4SvhlxYjHE50tOi/A9walBOTgzxeaj/vFQCa7JM6
- cV8mw5WwKR6G60jocy4Xp1wZcg==
-X-Google-Smtp-Source: ABdhPJxo5njsQyNYOEuPCeVVUlNTJmBhexBhhghXeVryIeeckAHJiBoMUenYHQrPUA509KHduFahjg==
-X-Received: by 2002:a7b:ce08:: with SMTP id m8mr3869535wmc.97.1589970856782;
- Wed, 20 May 2020 03:34:16 -0700 (PDT)
-Received: from holly.lan (cpc141214-aztw34-2-0-cust773.18-1.cable.virginm.net.
- [86.9.19.6])
- by smtp.gmail.com with ESMTPSA id f8sm2314536wrm.8.2020.05.20.03.34.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 May 2020 03:34:16 -0700 (PDT)
-Date: Wed, 20 May 2020 11:34:14 +0100
-From: Daniel Thompson <daniel.thompson@linaro.org>
-To: Douglas Anderson <dianders@chromium.org>
-Message-ID: <20200520103414.bejflo3s4exrcyzk@holly.lan>
-References: <20200519084345.1.I91670accc8a5ddabab227eb63bb4ad3e2e9d2b58@changeid>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200519084345.1.I91670accc8a5ddabab227eb63bb4ad3e2e9d2b58@changeid>
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=05sWOFK6tuBIdg0teEFyYCPt+cVyW+PqgkCyuRv1w18=;
+ b=Da+Yj8heEgXhNk/lctA34kOmfnrcYcf/gLdCwBU6kD0ICz51ZIKmXOTCcbgzh2hiwd
+ yWxZdR9l9NU2LOjvnFaed1CRX0j0iDf0i7xBvHwouyKbe468ia5Y8Z4X5YUd2igkCgXS
+ LZbZalZc/FxIeGKrJg8A9NXm1llLJlAcLVJrHt+GwoEmR8a0Z5NyXa85c3l85/TaHw+X
+ 28QbN/iMVmnVNNALZCIBGAlJ7ShpSIP7HFmSLGaMieD4jYNjx2q86yGb+RQGigkjcAyc
+ qHbSdcUiZmkLhaizhOxDljy/+6eg0qlRzV373S/JNORpOIytPasGUghI/K41Ajv6uZII
+ cBOg==
+X-Gm-Message-State: AOAM5325vYUWv1J8kfk+v2kBRsH+pjyeCQIaKy5o0RAn51SsRGNu0waL
+ fNs39SrZ6A0ykxZP6ubgKWkoifUwLgA=
+X-Google-Smtp-Source: ABdhPJyaLwGf8TIiu+2wsx2Qxt0RIooE9jEihzhPvu8Fjah7GhQsku+h9APnrXOZSyeJeeClHe/oVQ==
+X-Received: by 2002:a17:90a:4d4a:: with SMTP id
+ l10mr4851457pjh.0.1589973161858; 
+ Wed, 20 May 2020 04:12:41 -0700 (PDT)
+Received: from localhost.localdomain ([117.252.68.136])
+ by smtp.gmail.com with ESMTPSA id q134sm2044974pfc.143.2020.05.20.04.12.34
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Wed, 20 May 2020 04:12:40 -0700 (PDT)
+From: Sumit Garg <sumit.garg@linaro.org>
+To: linux-arm-kernel@lists.infradead.org
+Date: Wed, 20 May 2020 16:41:51 +0530
+Message-Id: <1589973115-14757-1-git-send-email-sumit.garg@linaro.org>
+X-Mailer: git-send-email 2.7.4
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.128.66 listed in list.dnswl.org]
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.128.66 listed in wl.mailspike.net]
+ [209.85.167.193 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -94,10 +87,12 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.167.193 listed in list.dnswl.org]
  0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jbM3L-008qcC-8K
-Subject: Re: [Kgdb-bugreport] [PATCH] kgdboc: Disable all the early code
- when kgdboc is a module
+X-Headers-End: 1jbMk9-001yYB-NV
+Subject: [Kgdb-bugreport] [PATCH v2 0/4] arm64: Introduce new IPI as
+ IPI_CALL_NMI_FUNC
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,107 +104,95 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: Stephen Rothwell <sfr@canb.auug.org.au>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Jason Wessel <jason.wessel@windriver.com>, linux-kernel@vger.kernel.org,
- linux-next@vger.kernel.org, linux-serial@vger.kernel.org,
- Jiri Slaby <jslaby@suse.com>, kgdb-bugreport@lists.sourceforge.net
+Cc: daniel.thompson@linaro.org, jason@lakedaemon.net, catalin.marinas@arm.com,
+ jason.wessel@windriver.com, linux-kernel@vger.kernel.org, maz@kernel.org,
+ kgdb-bugreport@lists.sourceforge.net, tglx@linutronix.de, will@kernel.org,
+ julien.thierry.kdev@gmail.com
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Tue, May 19, 2020 at 08:44:02AM -0700, Douglas Anderson wrote:
-> When kgdboc is compiled as a module all of the "ekgdboc" and
-> "kgdb_earlycon" code isn't useful and, in fact, breaks compilation.
-> This is because early_param() isn't defined for modules and that's how
-> this code gets configured.
-> 
-> It turns out that this was broken by commit eae3e19ca930 ("kgdboc:
-> Remove useless #ifdef CONFIG_KGDB_SERIAL_CONSOLE in kgdboc") and then
-> made worse by commit 220995622da5 ("kgdboc: Add kgdboc_earlycon to
-> support early kgdb using boot consoles").  I guess the #ifdef wasn't
-> so useless, even if it wasn't obvious why it was useful.  When kgdboc
-> was compiled as a module only "CONFIG_KGDB_SERIAL_CONSOLE_MODULE" was
-> defined, not "CONFIG_KGDB_SERIAL_CONSOLE".  That meant that the old
-> module.
-> 
-> Let's basically do the same thing that the old code (pre-removal of
-> the #ifdef) did but use "IS_BUILTIN(CONFIG_KGDB_SERIAL_CONSOLE)" to
-> make it more obvious what the point of the check is.  We'll fix
-> kgdboc_earlycon in a similar way.
-> 
-> Fixes: 220995622da5 ("kgdboc: Add kgdboc_earlycon to support early kgdb using boot consoles")
-> Fixes: eae3e19ca930 ("kgdboc: Remove useless #ifdef CONFIG_KGDB_SERIAL_CONSOLE in kgdboc")
-> Reported-by: Stephen Rothwell <sfr@canb.auug.org.au>
-> Signed-off-by: Douglas Anderson <dianders@chromium.org>
+With pseudo NMIs support available its possible to configure SGIs to be
+triggered as pseudo NMIs running in NMI context. And kernel features
+such as kgdb relies on NMI support to round up CPUs which are stuck in
+hard lockup state with interrupts disabled.
 
-Applied, thanks!
+This patch-set adds support for IPI_CALL_NMI_FUNC which can be triggered
+as a pseudo NMI which in turn is leveraged via kgdb to round up CPUs.
 
+After this patch-set we should be able to get a backtrace for a CPU
+stuck in HARDLOCKUP. Have a look at an example below from a testcase run
+on Developerbox:
 
-Daniel.
+$ echo HARDLOCKUP > /sys/kernel/debug/provoke-crash/DIRECT
 
+# Enter kdb via Magic SysRq
 
-> ---
-> 
->  drivers/tty/serial/kgdboc.c | 15 ++++++++++++++-
->  1 file changed, 14 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/tty/serial/kgdboc.c b/drivers/tty/serial/kgdboc.c
-> index 34b5e91dd245..fa6f7a3e73b9 100644
-> --- a/drivers/tty/serial/kgdboc.c
-> +++ b/drivers/tty/serial/kgdboc.c
-> @@ -43,9 +43,11 @@ static int			kgdb_tty_line;
->  
->  static struct platform_device *kgdboc_pdev;
->  
-> +#if IS_BUILTIN(CONFIG_KGDB_SERIAL_CONSOLE)
->  static struct kgdb_io		kgdboc_earlycon_io_ops;
->  static struct console		*earlycon;
->  static int                      (*earlycon_orig_exit)(struct console *con);
-> +#endif /* IS_BUILTIN(CONFIG_KGDB_SERIAL_CONSOLE) */
->  
->  #ifdef CONFIG_KDB_KEYBOARD
->  static int kgdboc_reset_connect(struct input_handler *handler,
-> @@ -140,10 +142,19 @@ static void kgdboc_unregister_kbd(void)
->  #define kgdboc_restore_input()
->  #endif /* ! CONFIG_KDB_KEYBOARD */
->  
-> -static void cleanup_kgdboc(void)
-> +#if IS_BUILTIN(CONFIG_KGDB_SERIAL_CONSOLE)
-> +static void cleanup_earlycon(void)
->  {
->  	if (earlycon)
->  		kgdb_unregister_io_module(&kgdboc_earlycon_io_ops);
-> +}
-> +#else /* !IS_BUILTIN(CONFIG_KGDB_SERIAL_CONSOLE) */
-> +static inline void cleanup_earlycon(void) { }
-> +#endif /* !IS_BUILTIN(CONFIG_KGDB_SERIAL_CONSOLE) */
-> +
-> +static void cleanup_kgdboc(void)
-> +{
-> +	cleanup_earlycon();
->  
->  	if (configured != 1)
->  		return;
-> @@ -388,6 +399,7 @@ static struct kgdb_io kgdboc_io_ops = {
->  	.post_exception		= kgdboc_post_exp_handler,
->  };
->  
-> +#if IS_BUILTIN(CONFIG_KGDB_SERIAL_CONSOLE)
->  static int kgdboc_option_setup(char *opt)
->  {
->  	if (!opt) {
-> @@ -544,6 +556,7 @@ static int __init kgdboc_earlycon_init(char *opt)
->  }
->  
->  early_param("kgdboc_earlycon", kgdboc_earlycon_init);
-> +#endif /* IS_BUILTIN(CONFIG_KGDB_SERIAL_CONSOLE) */
->  
->  module_init(init_kgdboc);
->  module_exit(exit_kgdboc);
-> -- 
-> 2.26.2.761.g0e0b3e54be-goog
-> 
+[11]kdb> btc
+btc: cpu status: Currently on cpu 10
+Available cpus: 0-7(I), 8, 9(I), 10, 11-23(I)
+<snip>
+Stack traceback for pid 619
+0xffff000871bc9c00      619      618  1    8   R  0xffff000871bca5c0  bash
+CPU: 8 PID: 619 Comm: bash Not tainted 5.7.0-rc6-00762-g3804420 #77
+Hardware name: Socionext SynQuacer E-series DeveloperBox, BIOS build #73 Apr  6 2020
+Call trace:
+ dump_backtrace+0x0/0x198
+ show_stack+0x18/0x28
+ dump_stack+0xb8/0x100
+ kgdb_cpu_enter+0x5c0/0x5f8
+ kgdb_nmicallback+0xa0/0xa8
+ ipi_kgdb_nmicallback+0x24/0x30
+ ipi_handler+0x160/0x1b8
+ handle_percpu_devid_fasteoi_ipi+0x44/0x58
+ generic_handle_irq+0x30/0x48
+ handle_domain_nmi+0x44/0x80
+ gic_handle_irq+0x140/0x2a0
+ el1_irq+0xcc/0x180
+ lkdtm_HARDLOCKUP+0x10/0x18
+ direct_entry+0x124/0x1c0
+ full_proxy_write+0x60/0xb0
+ __vfs_write+0x1c/0x48
+ vfs_write+0xe4/0x1d0
+ ksys_write+0x6c/0xf8
+ __arm64_sys_write+0x1c/0x28
+ el0_svc_common.constprop.0+0x74/0x1f0
+ do_el0_svc+0x24/0x90
+ el0_sync_handler+0x178/0x2b8
+ el0_sync+0x158/0x180
+<snip>
+
+Changes since RFC version [1]:
+- Switch to use generic interrupt framework to turn an IPI as NMI.
+- Dependent on Marc's patch-set [2] which turns IPIs into normal
+  interrupts.
+- Addressed misc. comments from Doug on patch #4.
+- Posted kgdb NMI printk() fixup separately which has evolved since
+  to be solved using different approach via changing kgdb interception
+  of printk() in common printk() code (see patch [3]).
+
+[1] https://lkml.org/lkml/2020/4/24/328
+[2] https://lkml.org/lkml/2020/5/19/710
+[3] https://lkml.org/lkml/2020/5/20/418
+
+Sumit Garg (4):
+  arm64: smp: Introduce a new IPI as IPI_CALL_NMI_FUNC
+  irqchip/gic-v3: Enable support for SGIs to act as NMIs
+  arm64: smp: Setup IPI_CALL_NMI_FUNC as a pseudo NMI
+  arm64: kgdb: Round up cpus using IPI_CALL_NMI_FUNC
+
+ arch/arm64/include/asm/hardirq.h |  2 +-
+ arch/arm64/include/asm/kgdb.h    |  8 +++++++
+ arch/arm64/include/asm/smp.h     |  1 +
+ arch/arm64/kernel/kgdb.c         | 21 +++++++++++++++++
+ arch/arm64/kernel/smp.c          | 49 ++++++++++++++++++++++++++++++++--------
+ drivers/irqchip/irq-gic-v3.c     | 13 +++++++++--
+ 6 files changed, 81 insertions(+), 13 deletions(-)
+
+-- 
+2.7.4
+
 
 
 _______________________________________________
