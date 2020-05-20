@@ -2,80 +2,80 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 930DB1DB153
-	for <lists+kgdb-bugreport@lfdr.de>; Wed, 20 May 2020 13:17:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B03441DB8FC
+	for <lists+kgdb-bugreport@lfdr.de>; Wed, 20 May 2020 18:08:14 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jbMjU-00039t-Cg
-	for lists+kgdb-bugreport@lfdr.de; Wed, 20 May 2020 11:17:56 +0000
+	id 1jbRGP-0006qc-Fq
+	for lists+kgdb-bugreport@lfdr.de; Wed, 20 May 2020 16:08:13 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sergey.senozhatsky@gmail.com>) id 1jbMjT-00039c-Fx
- for kgdb-bugreport@lists.sourceforge.net; Wed, 20 May 2020 11:17:55 +0000
+ (envelope-from <daniel.thompson@linaro.org>) id 1jbRGO-0006q6-Oh
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 20 May 2020 16:08:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:Date:From:Sender:Reply-To:Content-Transfer-Encoding:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=G9jhMLSlbbRWBPFkiGcwNA69qHZJzJ0AW02rtZSNSek=; b=QMAbNiDd50KqafqUw6knl+mdL0
- wEBKbKE3HQ3J70aGKZwcHAflzQCtXtWxML/nauQZ9NLEFHsRXa4a2iXXeACcJG7xb2JOXNUE3nggc
- Ww7T/ZkZupqhdggXp0+6cMCYX3WUxbpq0bBReG9iv27gOJWSoP8QEi5UBJvsFILkbvsg=;
+ bh=9X29AKPgSRTeiMIz2DwlUf1mEfOfpjq4CbjeVik0R4o=; b=cEzu/bBw8oG0nkE7aOs+r4YpcE
+ /SW+zcrtFaN/K69/aHgTL81+KBmIxZNGt8/kwlVlmrP/Rc/sal+MDLmwtCwl+HURIO9680Lz19ed+
+ q7e4OhC41kM+o78RnsT/H0pMpU9NM+PxE+OfsbPDjUVpyY7AR03OnWVtV/RKC7hCB99Q=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :Date:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=G9jhMLSlbbRWBPFkiGcwNA69qHZJzJ0AW02rtZSNSek=; b=FEmstYAIsUKPfHcPYKrWFGNN1n
- EBR2eiKBGPtnTzhd6RoDi+er6LpMVdj7vYupbmiC87rZutRMQazagGzHYuz+2QF8gOBaza9tEPKNa
- YSI8jZhl+RIniQRL90TVbOhKJeZ+CW8HpjI4FDnyek19ypuflVQxM8tU1dUZf6fWC//c=;
-Received: from mail-pg1-f193.google.com ([209.85.215.193])
+ bh=9X29AKPgSRTeiMIz2DwlUf1mEfOfpjq4CbjeVik0R4o=; b=LUA9edJZLmGV4lEPMx1fZWphbz
+ ArOVoeO/9L8+dsUI9sq757hUlGT1jPQcgHmaa6cvKI38JW3uPvaAmcEUxAWRKjBIWcTc6OUNcW9ee
+ WVKtpTCRD7Yq6rhAMeOtR8AfZ2p4l43RO+1ribFOIfBU0kIN9YYwN4uoI1kD+Q8L7hGA=;
+Received: from mail-wr1-f67.google.com ([209.85.221.67])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jbMjS-00GXR9-9K
- for kgdb-bugreport@lists.sourceforge.net; Wed, 20 May 2020 11:17:55 +0000
-Received: by mail-pg1-f193.google.com with SMTP id u35so1279940pgk.6
+ id 1jbRGK-00GoZ0-ST
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 20 May 2020 16:08:12 +0000
+Received: by mail-wr1-f67.google.com with SMTP id s8so3699926wrt.9
  for <kgdb-bugreport@lists.sourceforge.net>;
- Wed, 20 May 2020 04:17:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:date:to:cc:subject:message-id:references:mime-version
+ Wed, 20 May 2020 09:08:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to;
- bh=G9jhMLSlbbRWBPFkiGcwNA69qHZJzJ0AW02rtZSNSek=;
- b=HrWi5oHJs6KG0TnjQSTOJ04Qm8KbWmxtVcZBF5c3JhUMZljPumg7wlWtu1EQ2ff2ht
- THAOlS5+DB9E9yy2+PSvNvTVKUbHSGfzo07tr2CCCE8heT/cQUrLzll+kvrKdclThJIL
- q2LtnI5Cj81ZgJXMwt28k3gfzCenwzUr0nNrBr2J5LoUsLsdhaq6ziDgdo+E47vhGEi7
- AAOUewCCwVkCtQ7tWlDu4NWo6Wl03kRXAVcRfv0IAwjaIyQSOPPsjXTeasjYVs1N1cYg
- PLJ3+lB5K4RMqHe0Md7C9BYx7xGQr2bJo2m3eOl+aTdqd97v9Sr5cLMNj/TriqWwpY0Z
- PPYQ==
+ bh=9X29AKPgSRTeiMIz2DwlUf1mEfOfpjq4CbjeVik0R4o=;
+ b=Iw+6J6FgX1lHR29lNCdTgOctq5/M7Gc0d38gi8K7OqpVloK49QPxDCTKzIY/SHf3pA
+ NR86MiOyzSa5vRCPbMbvLcxjJArIpH2gSYW1aS17shpcS5qAvwCKuWYkI+ji3KfLFwoA
+ uHzaoVbgnYn5ChYIsKYqAlTMC35pEzunaBn6WqVgps/MxaSOu75nxh49qsBaDBH3nZRh
+ 2s4AgH6/jqE+uf3uCiY4nVMio7e0R9wVv3VenxJBHdb6KZ2u9pXQPG5D+0UojobEU8YZ
+ FsqHotBSEBi8gOYOwH4hElS8aCTxk0CRVP9HTbxMBPB/BdEBZM2driwhM3f1J8vUPFk/
+ rHaA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=G9jhMLSlbbRWBPFkiGcwNA69qHZJzJ0AW02rtZSNSek=;
- b=Y/0LNk5mk5n1t/mfrU9gaB88vvObg5juPIFo0w/G8au4BRjheyV/mI8WezA+r7UJyT
- aGUmT3FNCuBQyn+q0a5ARaaT76FjtzwQEWIqc8/VQKpRayrgd0dYkjuZWz9+m/KyRXgq
- 3kJz/vB7v3eTPKSg0ALKH68LKTFf+Ze4uBl4UxCGHgpK+Kk7KvNPd+F3BMqWLd23JTWN
- aktubPvcsZQ/00uIcQx6IHA0VVkQ9a+/b0YXujtcU70BF/yFVPGMxTWVnmM0BhGk0Ml3
- 4kTJ7K6a3SoomXTi6+kRsNcfYadWzqtcO6Yz3odGhD6143BHCzTJDnX0OPjp+4RVWEre
- 5O7A==
-X-Gm-Message-State: AOAM530vZMw+NyUVR2ICymTNf2QzWyoWCtMv8yw5LziV+J+AfrWG5xhU
- SPcYluvJS86qnfLjgADEakI=
-X-Google-Smtp-Source: ABdhPJyX44rVAqEouWz5zdqFz0iyoiBYEjg0TYxUEUAoXZr9buZWGPmsQvjC9HGlkPRy7cTN8md9Bw==
-X-Received: by 2002:a63:7d58:: with SMTP id m24mr3500311pgn.81.1589973468726; 
- Wed, 20 May 2020 04:17:48 -0700 (PDT)
-Received: from localhost ([2409:10:2e40:5100:6e29:95ff:fe2d:8f34])
- by smtp.gmail.com with ESMTPSA id q7sm1709586pgs.13.2020.05.20.04.17.47
+ bh=9X29AKPgSRTeiMIz2DwlUf1mEfOfpjq4CbjeVik0R4o=;
+ b=PZP/YHE8KGz8XTusNXK4x+vqRFvt31ifJWd5zcuogjp+qMeA/A4HhtnyEPRUrAym/w
+ Njanw/4Utt5W+7viTA+R5Q8zHZbI3vReCZ1i+lO6dcK4xTm6rPNzSXGq0f78EqiyySJ+
+ uqhCiBdXv7eyfkI4E9dHh08Tx5wtjfSUEwI05pa9tEqMlvXODE8erdhRFCoyIJKHemJr
+ X3vvPwP+qOVK7NH4BTgsZpVNdp9nVbbbAybREqdwvEjFiPJqWXgZDMziOyViX2aLg5rC
+ P6vAdo+Q8Fwy4R4nhAXVxxYPEUtKsc59XmH5QPldJnekUP+VVBc9VqrWH458lCxcH7fC
+ tAAQ==
+X-Gm-Message-State: AOAM5308j1aBN97UOrUTiOwd1oUhUKXvFHUKMT6g4OX8jXNzpX5aDiSm
+ xG1o1lxSAYy2+ikkQafCDMcrbA==
+X-Google-Smtp-Source: ABdhPJz2yVFKYuqNnJ26jFSxpfcPQbqW+whz1hqMQpRBZTL5U//k/1XfaOG637uqQhysPk2gnnuEMQ==
+X-Received: by 2002:adf:a151:: with SMTP id r17mr4676896wrr.161.1589990875413; 
+ Wed, 20 May 2020 09:07:55 -0700 (PDT)
+Received: from holly.lan (cpc141214-aztw34-2-0-cust773.18-1.cable.virginm.net.
+ [86.9.19.6])
+ by smtp.gmail.com with ESMTPSA id j16sm3292414wru.13.2020.05.20.09.07.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 May 2020 04:17:48 -0700 (PDT)
-From: Sergey Senozhatsky <sergey.senozhatsky@gmail.com>
-X-Google-Original-From: Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>
-Date: Wed, 20 May 2020 20:17:46 +0900
+ Wed, 20 May 2020 09:07:54 -0700 (PDT)
+Date: Wed, 20 May 2020 17:07:52 +0100
+From: Daniel Thompson <daniel.thompson@linaro.org>
 To: Petr Mladek <pmladek@suse.com>
-Message-ID: <20200520111746.GB520@jagdpanzerIV.localdomain>
+Message-ID: <20200520160752.mnkpptc2efscolcs@holly.lan>
 References: <CAFA6WYOV7oPbYE=9fXueYMacb5wv0r9T6F8tmECt-Eafe-fctw@mail.gmail.com>
  <20200514084230.GO17734@linux-b0ei>
  <CAFA6WYPSsgdAB-wJC0e2YkVkW0XsqQsu5wrn4iB4M-cwvS7z2g@mail.gmail.com>
@@ -93,11 +93,9 @@ X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.215.193 listed in list.dnswl.org]
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (sergey.senozhatsky[at]gmail.com)
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.215.193 listed in wl.mailspike.net]
+ trust [209.85.221.67 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.221.67 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -105,8 +103,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1jbMjS-00GXR9-9K
+ -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jbRGK-00GoZ0-ST
 Subject: Re: [Kgdb-bugreport] [PATCH v2] printk/kdb: Redirect printk
  messages into kdb in any context
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
@@ -120,8 +118,7 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daniel Thompson <daniel.thompson@linaro.org>,
- John Ogness <john.ogness@linutronix.de>, Arnd Bergmann <arnd@arndb.de>,
+Cc: John Ogness <john.ogness@linutronix.de>, Arnd Bergmann <arnd@arndb.de>,
  Peter Zijlstra <peterz@infradead.org>, kgdb-bugreport@lists.sourceforge.net,
  Steven Rostedt <rostedt@goodmis.org>,
  Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
@@ -132,7 +129,7 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On (20/05/20 12:22), Petr Mladek wrote:
+On Wed, May 20, 2020 at 12:22:33PM +0200, Petr Mladek wrote:
 > kdb has to get messages on consoles even when the system is stopped.
 > It uses kdb_printf() internally and calls console drivers on its own.
 > 
@@ -152,9 +149,78 @@ On (20/05/20 12:22), Petr Mladek wrote:
 > Tested-by: Sumit Garg <sumit.garg@linaro.org>
 > Signed-off-by: Petr Mladek <pmladek@suse.com>
 
-Acked-by: Sergey Senozhatsky <sergey.senozhatsky@gmail.com>
+Reviewed-by: Daniel Thompson <daniel.thompson@linaro.org>
 
-	-ss
+
+> ---
+> Changes in v2:
+> 
+>    + more detailed commit message
+> 
+>  kernel/printk/printk.c      | 14 +-------------
+>  kernel/printk/printk_safe.c |  7 +++++++
+>  2 files changed, 8 insertions(+), 13 deletions(-)
+> 
+> diff --git a/kernel/printk/printk.c b/kernel/printk/printk.c
+> index 9a9b6156270b..63a1aa377cd9 100644
+> --- a/kernel/printk/printk.c
+> +++ b/kernel/printk/printk.c
+> @@ -35,7 +35,6 @@
+>  #include <linux/memblock.h>
+>  #include <linux/syscalls.h>
+>  #include <linux/crash_core.h>
+> -#include <linux/kdb.h>
+>  #include <linux/ratelimit.h>
+>  #include <linux/kmsg_dump.h>
+>  #include <linux/syslog.h>
+> @@ -2036,18 +2035,7 @@ EXPORT_SYMBOL(vprintk);
+>  
+>  int vprintk_default(const char *fmt, va_list args)
+>  {
+> -	int r;
+> -
+> -#ifdef CONFIG_KGDB_KDB
+> -	/* Allow to pass printk() to kdb but avoid a recursion. */
+> -	if (unlikely(kdb_trap_printk && kdb_printf_cpu < 0)) {
+> -		r = vkdb_printf(KDB_MSGSRC_PRINTK, fmt, args);
+> -		return r;
+> -	}
+> -#endif
+> -	r = vprintk_emit(0, LOGLEVEL_DEFAULT, NULL, 0, fmt, args);
+> -
+> -	return r;
+> +	return vprintk_emit(0, LOGLEVEL_DEFAULT, NULL, 0, fmt, args);
+>  }
+>  EXPORT_SYMBOL_GPL(vprintk_default);
+>  
+> diff --git a/kernel/printk/printk_safe.c b/kernel/printk/printk_safe.c
+> index d9a659a686f3..7ccb821d0bfe 100644
+> --- a/kernel/printk/printk_safe.c
+> +++ b/kernel/printk/printk_safe.c
+> @@ -6,6 +6,7 @@
+>  #include <linux/preempt.h>
+>  #include <linux/spinlock.h>
+>  #include <linux/debug_locks.h>
+> +#include <linux/kdb.h>
+>  #include <linux/smp.h>
+>  #include <linux/cpumask.h>
+>  #include <linux/irq_work.h>
+> @@ -359,6 +360,12 @@ void __printk_safe_exit(void)
+>  
+>  __printf(1, 0) int vprintk_func(const char *fmt, va_list args)
+>  {
+> +#ifdef CONFIG_KGDB_KDB
+> +	/* Allow to pass printk() to kdb but avoid a recursion. */
+> +	if (unlikely(kdb_trap_printk && kdb_printf_cpu < 0))
+> +		return vkdb_printf(KDB_MSGSRC_PRINTK, fmt, args);
+> +#endif
+> +
+>  	/*
+>  	 * Try to use the main logbuf even in NMI. But avoid calling console
+>  	 * drivers that might have their own locks.
+> -- 
+> 2.26.1
+> 
 
 
 _______________________________________________
