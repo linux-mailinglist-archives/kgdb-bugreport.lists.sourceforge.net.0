@@ -2,90 +2,91 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 038E21DEA6D
-	for <lists+kgdb-bugreport@lfdr.de>; Fri, 22 May 2020 16:55:29 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0511D1DEA6C
+	for <lists+kgdb-bugreport@lfdr.de>; Fri, 22 May 2020 16:55:28 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jc955-0006np-QY
-	for lists+kgdb-bugreport@lfdr.de; Fri, 22 May 2020 14:55:27 +0000
+	id 1jc954-0005yL-R3
+	for lists+kgdb-bugreport@lfdr.de; Fri, 22 May 2020 14:55:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <daniel.thompson@linaro.org>) id 1jc953-0006ng-F6
+ (envelope-from <daniel.thompson@linaro.org>) id 1jc953-0005xy-DT
  for kgdb-bugreport@lists.sourceforge.net; Fri, 22 May 2020 14:55:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=lgzE6vmodHXJVgkKRydSUcePpApP1sHs6gyeaxLAapY=; b=ThFsiGqYXeIX0Vn9M6b7DHliLj
- TSMQtVC78oiYqilaFaRglPcguW+LHov4kW8lA+Ai/kU0yzhMCVS4vgZcJs+2X6eyEKUF8e9kfN3E7
- n6pIyO1QbnIiAoq7s6qy3LqYnx2uuvWYfphstJhiy6HxPGnJ+GryTyzn91qnWs+0WCTk=;
+ bh=Z2JTvHuqFiAH+e0uHvAv7QUdItZgp1++hBsH29TGAGE=; b=BcbDk2NPapDYzdGmAfFj6nkANi
+ fIdBBDFa+oXV2VLSF198RUSM9flu5DxKqQwXtWNPaviRyjRAX1jG/Fvuvw1ystFpSbPu20+NC/bzZ
+ dAIvv0byZVf45L8TJK35ynkoR+vKFKy490fsBP0bCzVjSJliEVbHs7Rx5HBVi2LYY5KQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=lgzE6vmodHXJVgkKRydSUcePpApP1sHs6gyeaxLAapY=; b=Z
- sDR9QXqHZMG1j7XLLRGD2vmQD9vEuSDXnGbDnSYQnuu+bTUs2fLYjjnuN4YkLgWyhQwtLbfmShdGp
- dg4x/PkG/Uf1HwcQwCA5BbHBzjxnqxbu37Pr5uFoaXw33/0wZHYfsj2jBFcjTz7a3j7bCVNa87BNR
- REbN1qJp0RxbcGvM=;
-Received: from mail-wm1-f68.google.com ([209.85.128.68])
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=Z2JTvHuqFiAH+e0uHvAv7QUdItZgp1++hBsH29TGAGE=; b=F9okVhJolApX7u1IehMaVBgtHg
+ qXWvuVzdnPwBtGJF8/jZjSR5s69Y0cdRJlc9oBCMx1wotdBLQ45mFsS6UoJi14t/HCiQA54OPgFNi
+ 7/cZ+TtBBSzDCcvw3M3kgIpAphgbquycawReKmr/+2x4XziMAleVSRMo3WH9YhFUNGPI=;
+Received: from mail-wr1-f66.google.com ([209.85.221.66])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jc94y-00CzpT-So
+ id 1jc950-00CzpX-5T
  for kgdb-bugreport@lists.sourceforge.net; Fri, 22 May 2020 14:55:25 +0000
-Received: by mail-wm1-f68.google.com with SMTP id v19so3114682wmj.0
+Received: by mail-wr1-f66.google.com with SMTP id l17so10467465wrr.4
  for <kgdb-bugreport@lists.sourceforge.net>;
- Fri, 22 May 2020 07:55:20 -0700 (PDT)
+ Fri, 22 May 2020 07:55:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=lgzE6vmodHXJVgkKRydSUcePpApP1sHs6gyeaxLAapY=;
- b=nlECE+b5yqlKJA6jFTmww2E3QJ5WbURdCUstW1I6PIZDCOg7WHcBF8kQGWXownwX8q
- cx47KBJ7D3Kpgz7C/7gSay4yxudmJQeS0U6UpnN8yikGE80+hrwjyvSeR1qtaT3ZgFKE
- ieRGgX9H7LAdv95xfmKHwW8jV2ZRnxqpjjBf4NZx4nvPLuUu/BJTHWw7eqV6Koa9/qkr
- JB0fkVDznqDDtD+xlGCIU0gIk7VJ0Xuww0a46q46q0i/o3SnK7lYEd4BfRs87OX6KBp/
- Ym+angsnPVjD1w6IrheE1cC8TpDgg2vBCMdQt6/wtp8Cdjk+KOybz62XMS/vl1SaHje7
- ZRuA==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=Z2JTvHuqFiAH+e0uHvAv7QUdItZgp1++hBsH29TGAGE=;
+ b=RH3hJubUWGtSNW24GhTx6ufaJ6TRraOrbbB6edaZ1SxjVy3F3fER9ye7M9DV2/koq2
+ WolLZoTDKPlKaRDouJvsUsCVShp5GvsPjxVf/vBlD/kFDBl2QP/5obzIUP+C/DliXKFe
+ vWBbx3oaBCHHqGyG00lPrlsfgZua0ucfU7gneN0OBBm88TXXdm3WRzT32ng9qk+9ZzFh
+ UvzEk05phTl5Vurl2f8gX/swSGoyVuEc8AtTZnZIAfWIo53XvjMUP16u91mtv7nQ5Dsd
+ C/dtaKrFdXg8UuWpnXiR/uEA3LADGd0mTIdfzp1TkIHIRHLFSVWLPTxxG9wU5PP1z82f
+ I9EA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=lgzE6vmodHXJVgkKRydSUcePpApP1sHs6gyeaxLAapY=;
- b=hAgvD5AUQdfHiVQECNJkdUk+7aMDV8HTajsZYjabPtvC9ar1/l3ZSAABhvh3hzsgJG
- 9me3ReWIeAAG2h38fQr4GvvM81YIXEXdzEuM/A1U/iIn9QIz1KzTH0h9hKe/VPOzMTIf
- biTFrLhx8Jai1xRP+uIXuELkvJQAGCJESzTT+xoxrsy1dm7t7tQyD6DGD1ietFPGK3Gl
- 8Sp4+N/TFowqHeY9idPjEWz0vn2QXrdzFn2EeR0Sp8DySobe+aYjTywVDqgh0ECb7mEB
- PNplqm65vND503/XBAvQJ9i18SFtPa7stAnibN/BBQscoqfRqxs3BMoTojAGdAgkHmnI
- 93sQ==
-X-Gm-Message-State: AOAM531f7Y8/tKiHW0WbILSegeWDp0fdoZCc7IDCn9Qbfndu3hvtXjc7
- L3cAK6fvD1tRhlywREUqvEFuBg==
-X-Google-Smtp-Source: ABdhPJx3E/Vjh2T3jdWf3YQgn4TzMfj6PDDxH6vq8U6IEpR89l/Y7afo7n+52RmZLhGuPaW2lu7RlA==
-X-Received: by 2002:a1c:6583:: with SMTP id
- z125mr13863329wmb.102.1590159314476; 
- Fri, 22 May 2020 07:55:14 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=Z2JTvHuqFiAH+e0uHvAv7QUdItZgp1++hBsH29TGAGE=;
+ b=ubgzdxcUZO1LHooM7+8fWLTyn9br/aovUixgT07CaGDh2IBgeq4mxAl5R5El1EM4CS
+ 3W9UOrQBJ2vXrmB3jFgUgzrKNihNSILWtD04bkdj+BE0DCWFOIp5FFVSUHMY52aF3ndE
+ xtO7A2wpjp/E7vwQ4ba8geVWbRQjBwNdx7ZqvZNN0oTOdIChENQZt+L4xjT72g/rNYtO
+ 7+f44gZMmhQNu820D9FG1CGXPldQL6yHJmQYBOw76jwDz6oWHwYrUJdr9T49YqKgqJVb
+ zVoq4GGGFLYDwZ+t0Y0uUn/MXA/uMyXhhHX2G0HnNCJMgmZvKVaQSOe08qNz9E2u4DGZ
+ LvJA==
+X-Gm-Message-State: AOAM531LfxJG2L5fjWWWcnOCVfq/0jBmmSkCZj+jsLMuCSZD0F/b0Wma
+ zpkByq+XwiOWRPbetK9dv3Psww==
+X-Google-Smtp-Source: ABdhPJzVBNmBWWvQ9nOtr1g+uNGIt9/otWbCh5kkWpEi6Kn9nuax/sD2PRXbA3VTqgPQqIPvlzBrKA==
+X-Received: by 2002:adf:eb08:: with SMTP id s8mr3721175wrn.361.1590159315732; 
+ Fri, 22 May 2020 07:55:15 -0700 (PDT)
 Received: from wychelm.lan
  (cpc141214-aztw34-2-0-cust773.18-1.cable.virginm.net. [86.9.19.6])
- by smtp.gmail.com with ESMTPSA id i21sm9746911wml.5.2020.05.22.07.55.13
+ by smtp.gmail.com with ESMTPSA id i21sm9746911wml.5.2020.05.22.07.55.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 May 2020 07:55:13 -0700 (PDT)
+ Fri, 22 May 2020 07:55:15 -0700 (PDT)
 From: Daniel Thompson <daniel.thompson@linaro.org>
 To: sumit.garg@linaro.org, jason.wessel@windriver.com, dianders@chromium.org
-Date: Fri, 22 May 2020 15:55:08 +0100
-Message-Id: <20200522145510.2109799-1-daniel.thompson@linaro.org>
+Date: Fri, 22 May 2020 15:55:09 +0100
+Message-Id: <20200522145510.2109799-2-daniel.thompson@linaro.org>
 X-Mailer: git-send-email 2.25.4
+In-Reply-To: <20200522145510.2109799-1-daniel.thompson@linaro.org>
+References: <20200522145510.2109799-1-daniel.thompson@linaro.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.128.68 listed in list.dnswl.org]
+ trust [209.85.221.66 listed in list.dnswl.org]
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.128.68 listed in wl.mailspike.net]
+ [209.85.221.66 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -94,8 +95,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jc94y-00CzpT-So
-Subject: [Kgdb-bugreport] [RFC PATCH 0/2] Introduce KGDB_DEBUG_SPINLOCKS
+X-Headers-End: 1jc950-00CzpX-5T
+Subject: [Kgdb-bugreport] [RFC PATCH 1/2] debug: Convert dbg_slave_lock to
+ an atomic
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -116,42 +118,67 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-The execution context for kgdb/kdb is pretty much unique. We are running
-a debug trap handler with all CPUs parked in a holding loop and with
-interrupts disabled. At least one CPU is in an unknowable execution
-state (could be NMI, IRQ, irqs disabled, etc) and the others are either
-servicing an IRQ or NMI depending on architecture.
+Currently the debug core takes and releases dbg_slave_lock, knowing it to
+be uncontended, as a means to set and clear a flag that it uses to herd
+the other cores in to or out of a holding pen.
 
-Breakpoints (including some implicit breakpoints when serious errors
-are detected) can happen on more or less any context, including when we
-own important spin locks.
+Let's convert this to a regular atomic instead. This change is worthwhile
+simply for the subtle increase in clarity in a very tangled bit of code.
+It is also useful because it removes a raw_spin_lock() from within the
+debug trap, which will make it easier to introduce spin lock debugging
+code for the debug trap handler.
 
-As such spin lock waits should never happen whilst we are executing the
-kgdb trap handler used except, occasionally, via an explicit command
-from a (forewarned?) local operator.
+Signed-off-by: Daniel Thompson <daniel.thompson@linaro.org>
+---
+ kernel/debug/debug_core.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-Currently kdb doesn't meet this criteria (although I think kgdb does)
-so I started thinking about what tooling we could employ to reinforce
-code review and bring problems to the surface.
-
-The result is a patch that extends DEBUG_SPINLOCKS and checks whether
-the execution context is safe. The "except via an explicit command"
-aspect (mentioned above) convinced me to make the checks conditional
-on KGDB_DEBUG_SPINLOCKS.
-
-Daniel Thompson (2):
-  debug: Convert dbg_slave_lock to an atomic
-  locking/spinlock/debug: Add checks for kgdb trap safety
-
- include/linux/kgdb.h            | 16 ++++++++++++++++
- kernel/debug/debug_core.c       |  8 ++++----
- kernel/locking/spinlock_debug.c |  4 ++++
- lib/Kconfig.kgdb                | 11 +++++++++++
- 4 files changed, 35 insertions(+), 4 deletions(-)
-
-
-base-commit: 6a8b55ed4056ea5559ebe4f6a4b247f627870d4c
---
+diff --git a/kernel/debug/debug_core.c b/kernel/debug/debug_core.c
+index 2b7c9b67931d..8f43171ddeac 100644
+--- a/kernel/debug/debug_core.c
++++ b/kernel/debug/debug_core.c
+@@ -121,12 +121,12 @@ static struct kgdb_bkpt		kgdb_break[KGDB_MAX_BREAKPOINTS] = {
+ atomic_t			kgdb_active = ATOMIC_INIT(-1);
+ EXPORT_SYMBOL_GPL(kgdb_active);
+ static DEFINE_RAW_SPINLOCK(dbg_master_lock);
+-static DEFINE_RAW_SPINLOCK(dbg_slave_lock);
+ 
+ /*
+  * We use NR_CPUs not PERCPU, in case kgdb is used to debug early
+  * bootup code (which might not have percpu set up yet):
+  */
++static atomic_t			slaves_must_spin;
+ static atomic_t			masters_in_kgdb;
+ static atomic_t			slaves_in_kgdb;
+ static atomic_t			kgdb_break_tasklet_var;
+@@ -615,7 +615,7 @@ static int kgdb_cpu_enter(struct kgdb_state *ks, struct pt_regs *regs,
+ 			dump_stack();
+ 			kgdb_info[cpu].exception_state &= ~DCPU_WANT_BT;
+ 		} else if (kgdb_info[cpu].exception_state & DCPU_IS_SLAVE) {
+-			if (!raw_spin_is_locked(&dbg_slave_lock))
++			if (!atomic_read(&slaves_must_spin))
+ 				goto return_normal;
+ 		} else {
+ return_normal:
+@@ -677,7 +677,7 @@ static int kgdb_cpu_enter(struct kgdb_state *ks, struct pt_regs *regs,
+ 	 * CPU in a spin state while the debugger is active
+ 	 */
+ 	if (!kgdb_single_step)
+-		raw_spin_lock(&dbg_slave_lock);
++		atomic_set(&slaves_must_spin, 1);
+ 
+ #ifdef CONFIG_SMP
+ 	/* If send_ready set, slaves are already waiting */
+@@ -741,7 +741,7 @@ static int kgdb_cpu_enter(struct kgdb_state *ks, struct pt_regs *regs,
+ 		dbg_io_ops->post_exception();
+ 
+ 	if (!kgdb_single_step) {
+-		raw_spin_unlock(&dbg_slave_lock);
++		atomic_set(&slaves_must_spin, 0);
+ 		/* Wait till all the CPUs have quit from the debugger. */
+ 		while (kgdb_do_roundup && atomic_read(&slaves_in_kgdb))
+ 			cpu_relax();
+-- 
 2.25.4
 
 
