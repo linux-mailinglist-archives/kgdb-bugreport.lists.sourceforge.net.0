@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 067851E3928
-	for <lists+kgdb-bugreport@lfdr.de>; Wed, 27 May 2020 08:26:58 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2C02A1E392A
+	for <lists+kgdb-bugreport@lfdr.de>; Wed, 27 May 2020 08:26:59 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jdpWi-0007WI-R8
-	for lists+kgdb-bugreport@lfdr.de; Wed, 27 May 2020 06:26:56 +0000
+	id 1jdpWj-00069n-Vp
+	for lists+kgdb-bugreport@lfdr.de; Wed, 27 May 2020 06:26:57 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sumit.garg@linaro.org>) id 1jdpWh-0007W3-9g
- for kgdb-bugreport@lists.sourceforge.net; Wed, 27 May 2020 06:26:55 +0000
+ (envelope-from <sumit.garg@linaro.org>) id 1jdpWi-00069W-TQ
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 27 May 2020 06:26:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:
  To:From:Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=5F8AuAdD6vIH5WTUv671XyQbSMrH4wURkSBRo5DqQ6I=; b=l4Qt7Y06tUTEGalYIEnaEMgt+G
- zsfc1giwrHwMGjrn+WaBrsm04uNtR2OI+rySVilascva4fKRJLP9FaR7BsCUgwITCafn35WAstf2y
- ch9Nud02JvFXs9IT+sY7EfrI9TSVKdJNPQlhUdbj1tkdQFnO+F7mq1O7kRubOZoopXbc=;
+ bh=tSNP35QYp6xethZiWpN7Amg3X+LW4hgKA/e4KGUMccc=; b=Sfn/jUTatMGKDYNWKW9onrfFtM
+ zS8sH3SMT0BLEwfw2QdqittxZOYVgzufRAvNmDpIFJ+hpySfZWRiLerKCFpIBj0Dp5U+Wd+/hqlaI
+ e+bvLTjeVTu8fGZBhW+9m+1lOVtHkYpBvne72jfkfwU1nVlE4TU1jSXRTdrb59aZjE1Y=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To
@@ -30,75 +30,77 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=5F8AuAdD6vIH5WTUv671XyQbSMrH4wURkSBRo5DqQ6I=; b=KMD8kM21kXvviV1zxkl9wtsyKn
- 0CkeE4Tii+lJxurTYdiLdSmm9kvif/Xp7s+Cg6A4LG9DhV2dfLN4vVx7USxpkaXyvbq7jhU73IT9a
- UXqgN72CvtHMvGSd/n1rzeyVCQYSt/TT8ODsYw0oE3fCuXhwAW2XE5eXvRpCq9dTI02I=;
-Received: from mail-pf1-f193.google.com ([209.85.210.193])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=tSNP35QYp6xethZiWpN7Amg3X+LW4hgKA/e4KGUMccc=; b=iynZ3LXE0H/AFjmX6y3+lwSUN8
+ NPaVFiNdD4GeFcHWcF+I/ho9knTXPLpe2i8mUsbKhQfUa7WdalAA4njtLlExJfdtvv8epZ6N/om8f
+ rAq1XypCTbbluot8X6g5qnLd9jPwjjHGk56BCVURaVhSz0+EIiOT58/CtugHcqbUU0Ao=;
+Received: from mail-pj1-f66.google.com ([209.85.216.66])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jdpWc-008pkK-Nx
- for kgdb-bugreport@lists.sourceforge.net; Wed, 27 May 2020 06:26:55 +0000
-Received: by mail-pf1-f193.google.com with SMTP id y198so11399860pfb.4
+ id 1jdpWh-00EU7k-Ln
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 27 May 2020 06:26:56 +0000
+Received: by mail-pj1-f66.google.com with SMTP id cx22so1111442pjb.1
  for <kgdb-bugreport@lists.sourceforge.net>;
- Tue, 26 May 2020 23:26:50 -0700 (PDT)
+ Tue, 26 May 2020 23:26:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=5F8AuAdD6vIH5WTUv671XyQbSMrH4wURkSBRo5DqQ6I=;
- b=VCMH9aJZEMUKwdWpD907O6d8TMaPjL4JJT4vpgHMwChl2TQh+0cIkUtMSXgS2ZH6aN
- bvMDRnH156mxfIHNj/zo6p7qGmmMeqaaUhEVvaFikc4qGaCK1koc7PLRxw5tNNHdY2Mb
- jtIwF/7tRuPFWH5QwPRZ7KyTU+s9nBN9h2e0GSy3ObZyqPkqHNmMHICCJQ42Jlcj9xLI
- 8lgYj2RjFBgVwqk7nyzvyNNZb8S8eNqrKSf52wkkVDL0c+AlKll1IyK77BFOPAYYWyTC
- YgMZz2JkmOl42xHfxOV7PDWHf9Elfa3KofSAP08d2xpMV9jDgUlNFwAn4bjEc3bcOEhO
- cFsw==
+ bh=tSNP35QYp6xethZiWpN7Amg3X+LW4hgKA/e4KGUMccc=;
+ b=G85xHZqLsrWZHmuuol1ub48HKxIZv5mdMUnm3b8yhDQMn6qJH4go9eNLKJHEduMHCw
+ 5oWiGqTR6R3Lvvs162rEhlcPapcPlp9s1LdpwgUxegA0hZkPCEEbHUlFw2/3jL0Cal8c
+ Ald7vkGE8pEFiTwJftEVdcJnU4Bos8caP5Pi18190rIeTGVdbLLnGPZUA3+MpI6z86xe
+ Axtl7GI6AkUDP+XLxRcgRSMd5a4tL7OlEiOnSwRh0YujnzdzkRNCN47W+u75SD8ENOcY
+ 4VahJAFqcN3JceEn3SOat3kt7OqkIjCpofGgPZ+LlmUX2Fp+nhYGTkuIqsGUvUMoeVco
+ y81w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=5F8AuAdD6vIH5WTUv671XyQbSMrH4wURkSBRo5DqQ6I=;
- b=VlPf8NyXXZ8BVuzQUExgPVCBFnaZbIQUSIp/LaOn2cw6bBr7kXJ9QjV5K2rRiGPhi4
- L0VjnLz7zGHarBJBeittbUzEmarnAfziLzqACoTx+T6+NiB+diFFx3sp5Z27jY5mIlYv
- 27ZwvQ5fKLBdQSuzOINJnQHzuGS346vKZVPo0YcK6WZFR9+c9jxyS5rEtLKOlMApL9Xx
- pd35MgBVXAqkE6j0mrazi2W18+yT3bJuBwnLhpF0CDW6U9bKcBguAyXrLV/gNrKzxcY5
- Xtt4iJ9/OUZJISlCCIlpIliYZVT5n8VVmHIW6h5LCH0zSBCj6y5NLCp/7ZeQZt6BFyh7
- ZoDQ==
-X-Gm-Message-State: AOAM531shB3Zwo1iOSj3MUYP6IyWK9fdI6nd6m//Hp66iDkKhw7lLS43
- jsHIj5+MqVI4iqVv6osoMeFQyw==
-X-Google-Smtp-Source: ABdhPJyeT+KxjyC94j5N+rfQfDyWTDiqqHSfAO3JO/MYUToUrCmwpPVeBGCcFCYe1rG45lq2kx/2Tw==
-X-Received: by 2002:a63:689:: with SMTP id 131mr2278235pgg.401.1590560805099; 
- Tue, 26 May 2020 23:26:45 -0700 (PDT)
+ bh=tSNP35QYp6xethZiWpN7Amg3X+LW4hgKA/e4KGUMccc=;
+ b=LdMpGrjS2CZUWgwc+NU7fIeLi+Wze/SpToXQUNCJoXckdfsaOuVG2lIgbde/JRM2P+
+ hxRidgzHveDfAg8nKMUBH+RnraxOlssXczKVtWHwEOGZu+U/EmLGZfTV5uFw9LqG2NVT
+ cXm+96+/Gs/TkgKfHOJk7SS8PUYpT1QvaoFnaz8+4YQJ7/Gs2gcZEfztUvlk9cHoRDFD
+ Zhu8Gi7begcXSgejZLFVAZQ1kLC8MJ6otX+1I1PG+iJASdSSDPkTBcBUtn8Vdeqja+3w
+ /mQxxBbj9Vbbf2m0HUP7BgKR6lKVc14kYfCe8muXHH8OygNHmeGp3XYrHfUuU61n96ha
+ +v+w==
+X-Gm-Message-State: AOAM530BXWjz724/SLZiJvrB8k1eYofM+9jkWYZRmxx2x9SfQR9tgzqR
+ RTnzenBjB46LkqzGiDpaHu5pLXJsm8A=
+X-Google-Smtp-Source: ABdhPJzEHo4EV0Nw7baAgnSJBBSDsFWrG9xwKApSsxlEfzYi9UM/tqokhAtut1Lf1zGSTCSpFgSJjA==
+X-Received: by 2002:a17:902:b904:: with SMTP id
+ bf4mr4500929plb.89.1590560810119; 
+ Tue, 26 May 2020 23:26:50 -0700 (PDT)
 Received: from localhost.localdomain ([117.252.68.136])
- by smtp.gmail.com with ESMTPSA id m12sm1239121pjs.41.2020.05.26.23.26.40
+ by smtp.gmail.com with ESMTPSA id m12sm1239121pjs.41.2020.05.26.23.26.45
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Tue, 26 May 2020 23:26:44 -0700 (PDT)
+ Tue, 26 May 2020 23:26:49 -0700 (PDT)
 From: Sumit Garg <sumit.garg@linaro.org>
 To: daniel.thompson@linaro.org
-Date: Wed, 27 May 2020 11:55:57 +0530
-Message-Id: <1590560759-21453-3-git-send-email-sumit.garg@linaro.org>
+Date: Wed, 27 May 2020 11:55:58 +0530
+Message-Id: <1590560759-21453-4-git-send-email-sumit.garg@linaro.org>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1590560759-21453-1-git-send-email-sumit.garg@linaro.org>
 References: <1590560759-21453-1-git-send-email-sumit.garg@linaro.org>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.210.193 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: linaro.org]
+ for more information. [URIs: suse.com]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.216.66 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.216.66 listed in wl.mailspike.net]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.210.193 listed in wl.mailspike.net]
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1jdpWc-008pkK-Nx
-Subject: [Kgdb-bugreport] [PATCH v3 2/4] kdb: Check status of console prior
- to invoking handlers
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jdpWh-00EU7k-Ln
+Subject: [Kgdb-bugreport] [PATCH v3 3/4] kdb: Make kdb_printf robust to run
+ in NMI context
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -118,28 +120,40 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Check if a console is enabled prior to invoking corresponding write
-handler.
+While rounding up CPUs via NMIs, its possible that a rounded up CPU
+maybe holding a console port lock leading to kgdb master CPU stuck in
+a deadlock during invocation of console write operations. So in order
+to avoid such a deadlock, enable oops_in_progress prior to invocation
+of console handlers.
 
-Suggested-by: Sergey Senozhatsky <sergey.senozhatsky@gmail.com>
+Suggested-by: Petr Mladek <pmladek@suse.com>
 Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 ---
- kernel/debug/kdb/kdb_io.c | 2 ++
- 1 file changed, 2 insertions(+)
+ kernel/debug/kdb/kdb_io.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
 diff --git a/kernel/debug/kdb/kdb_io.c b/kernel/debug/kdb/kdb_io.c
-index f6b4d47..349dfcc 100644
+index 349dfcc..f848482 100644
 --- a/kernel/debug/kdb/kdb_io.c
 +++ b/kernel/debug/kdb/kdb_io.c
-@@ -564,6 +564,8 @@ static void kdb_msg_write(char *msg, int msg_len)
- 		kdb_io_write(msg, msg_len, dbg_io_ops->write_char);
- 
+@@ -566,7 +566,17 @@ static void kdb_msg_write(char *msg, int msg_len)
  	for_each_console(c) {
-+		if (!(c->flags & CON_ENABLED))
-+			continue;
+ 		if (!(c->flags & CON_ENABLED))
+ 			continue;
++		/*
++		 * While rounding up CPUs via NMIs, its possible that
++		 * a rounded up CPU maybe holding a console port lock
++		 * leading to kgdb master CPU stuck in a deadlock during
++		 * invocation of console write operations. So in order
++		 * to avoid such a deadlock, enable oops_in_progress
++		 * prior to invocation of console handlers.
++		 */
++		++oops_in_progress;
  		c->write(c, msg, msg_len);
++		--oops_in_progress;
  		touch_nmi_watchdog();
  	}
+ }
 -- 
 2.7.4
 
