@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 83AD31E43B3
-	for <lists+kgdb-bugreport@lfdr.de>; Wed, 27 May 2020 15:31:32 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3F72D1E45CB
+	for <lists+kgdb-bugreport@lfdr.de>; Wed, 27 May 2020 16:26:33 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jdw9b-0003fb-BB
-	for lists+kgdb-bugreport@lfdr.de; Wed, 27 May 2020 13:31:31 +0000
+	id 1jdx0q-0003F3-2h
+	for lists+kgdb-bugreport@lfdr.de; Wed, 27 May 2020 14:26:32 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <daniel.thompson@linaro.org>) id 1jdw9a-0003fT-Fa
- for kgdb-bugreport@lists.sourceforge.net; Wed, 27 May 2020 13:31:30 +0000
+ (envelope-from <daniel.thompson@linaro.org>) id 1jdx0o-0003Ee-6l
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 27 May 2020 14:26:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8VOMGwKeWb18yJy6AqbiOJrTJsddSTvU5Ozfrp1ZV/E=; b=WKaAjjJg88qjVVgKli3sk1/kyq
- AbgppERYxfJMA+MR1f+C4Cd8rDd82ae8KRnD6iR3Bq//1zIG3pHtzsRXQ/p6eLvIjhY1/n/Wkd2WB
- OMYWY2L3cTQiQ0qichgFFnuSrEw+xN+HwDpxP5I4T7i8e6f1flSN0fNBYO+tgaloT5bM=;
+ bh=Mly88rOWldb2hn6ZUpBbudlq0QPli1OI+xak074b4r4=; b=Be+Rx5gzWCFG1qANGxZ5YNB4H5
+ y9Z3bJDE4EKyVYyUlf4SUnE2f3Eh0p0lHfNXPXyJrGerqiweeOLA87YKABJX3mkSexVnbAPfZqKQL
+ EQVUNT+sYCll+gQk4gtNmrOqVpeVAJP0oE6QVlTlMrLNzBJbiJz9MpQsQRkBl/NaQ4G4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -30,68 +30,68 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=8VOMGwKeWb18yJy6AqbiOJrTJsddSTvU5Ozfrp1ZV/E=; b=d1P14mfzKgV/ZYoWvV6M2nlQuK
- wqRlkXml6S47ZxDhXzVbzl/pEyCxQ7wh9Nw3ZR/E6XcDzxpE+rguSAJtc7ALcUG7++xROBoNztsGD
- 1G0jyaHj9BAz9r5Qkgf6rMVLe6IN3BnB3uwf2BMts2V5e7H2XGtv9W6co+/rT1tRhvMs=;
-Received: from mail-wm1-f65.google.com ([209.85.128.65])
+ bh=Mly88rOWldb2hn6ZUpBbudlq0QPli1OI+xak074b4r4=; b=Bbsxwzk9ZyOUvJUVI+pwD6cCed
+ Eh7xtPUKL895J12BgfO3KFbYSIqGuOrDUHcDw9iwtTt3ghKJULgP7ni4ava3Ye74J5iG+D1P0/dP4
+ H8viA9NJw1PpLsM7sl483tvgzvNXFtB5cQmqXt1rqq2jmJkvESPlNofZj3qABjKSda2Y=;
+Received: from mail-wm1-f67.google.com ([209.85.128.67])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jdw9X-00ErIG-6m
- for kgdb-bugreport@lists.sourceforge.net; Wed, 27 May 2020 13:31:30 +0000
-Received: by mail-wm1-f65.google.com with SMTP id r9so3064623wmh.2
+ id 1jdx0k-00Eup0-Kt
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 27 May 2020 14:26:30 +0000
+Received: by mail-wm1-f67.google.com with SMTP id u26so2396664wmn.1
  for <kgdb-bugreport@lists.sourceforge.net>;
- Wed, 27 May 2020 06:31:27 -0700 (PDT)
+ Wed, 27 May 2020 07:26:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to;
- bh=8VOMGwKeWb18yJy6AqbiOJrTJsddSTvU5Ozfrp1ZV/E=;
- b=trZP+/A35rUQ4kCjblhiYs3jDK5gxP1zy9rLpoTtXRQD7Ii9S420UYJ1TgJS9ETj1U
- Y+OHFbtXknQegRe3rxLmQH6chJ9a3hcx2DmOmflp/NkCYkVI5ndYnnXOSWW2/JzwsdW/
- QqfCbaO6rnYamRvnBDDXJcklcyonCSyXzy1qO5VCBs6iPQlWb3hmlfrmVSuDWPJu1v3F
- Uw4kStSLIxmlij4BX5UyJT7v414DF747zSd/RP3CsUYXv5tWE9ZkOFp/cs/ETtWysv+x
- ZDpu+qMt2nETDc8uD1Y6p/nvdXPou/JaaYOSLM07Wi7I335ypk32VVnQwOXjCCRiMgsH
- CH2g==
+ bh=Mly88rOWldb2hn6ZUpBbudlq0QPli1OI+xak074b4r4=;
+ b=lAj3+1b/p3m/ElrnylWgfn/5vAM5qlt1rTY6GYJMqKlpy+5swWInxuNIz8ay89ysVX
+ hc8Pzyf7c0E+jRldyVyLLE8rScc7piJOSxcjE8PLU1GH0bXHL0rfcGhfwDFAVn7FKZ94
+ f3HVHC9HU1SoQHT7yZOoYKcHdZWZL70//b9+xYaGv5rwmkxCyLnRWFHLChSXU3dsBxNV
+ tPNC8prFGFq+u/6YnTni0cBmAkN2MQc5sSCySaBzuOkCenirCZgX4UP9Q0EoxKOd5nzv
+ keB2wPsIVLoFf0Y5FLqgvswggZtbokmEZQP7V5VJJTCJ0soabWSO4axKZgomC8qEW/T1
+ /lMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=8VOMGwKeWb18yJy6AqbiOJrTJsddSTvU5Ozfrp1ZV/E=;
- b=ezJ4a7Vme2X/GMzlg0PNlfv/OTMqph7j8j1LOXAvBAD12n4OcD8z8CBfmpLh5sQ7QY
- 51tSqXPc1zs4FrKNZSTwfKax8dGObv28DWu9VXYpM6DAe1l4CKUkcsvgIm9leY9nndY8
- giBGZGxwbctoFseKLRSO3g9xkffmFyyEllVRXeuku66rgnoKw+n26K1KknQyECVJgjzg
- YEYQkudH5NcxjiyCUMMEUHxPyXbmcPknlHyo62xJu/CVsTKn6PUX5J+AxQSijkxRk2qH
- H3lttZfb4v/q/xYaLTxiT8B6ykaAPed+K1h1kY5VytR+m5P54zPHUpIkn9gs0XgAIhnA
- Q+DQ==
-X-Gm-Message-State: AOAM533RDecsj8f/doLxSewQoBdElg1Lz5ycj+OWUE3nHbVSyELabo9/
- HToNveT4lYMshuektVuwDKFYlw==
-X-Google-Smtp-Source: ABdhPJxS6bZTcBJRZZ7joVe6qjjBOt3/2Zd12k5hGkE0YrYOG/RMuE5BdrZ89ccVCryykcyX5evC3g==
-X-Received: by 2002:a1c:a901:: with SMTP id s1mr4590509wme.66.1590586278184;
- Wed, 27 May 2020 06:31:18 -0700 (PDT)
+ bh=Mly88rOWldb2hn6ZUpBbudlq0QPli1OI+xak074b4r4=;
+ b=O3CnvHp8oGHpAZa7cKOefY31xyHOgrbytXeRQThylI+wbCjSh4NZY5vuLzT3BD24x7
+ jJc5loX8GtvTlENlobbmQav5Ky7HrNQtUoZPY8KDG5QKxsguazKrV8HpbHz0QFiDsH9r
+ 0UC+r5K44bWIGPA2PxdSJBMAikRFkAN24ZkMmhS7LSJXM8NfbYCgQ3BQRpc3uy1IU8+F
+ okbTw33J4EgdYDJnbrxiZb7KSeCYIPWJCLwm9daBAYe3oE5YdaJuXdvzOVgd+hUlvaBY
+ g8xXj5rTjP3qxdqwJBUJAmvWObrU2HPoqsHrUnf6lQfbdrG4Z1iaJ4k6YlDHu+j8uepY
+ NVOA==
+X-Gm-Message-State: AOAM532+pP9Qj2ePMm59pZBPV7t/z2xtrlPM2ZCsfSzS9/zQVqaCPjDS
+ LtV/1f1cL8PIZCEH2hI/TDvCn8agDQw=
+X-Google-Smtp-Source: ABdhPJwSEI2N+Z0JrEzzTe6BWOigRZOSAIjRwq1zxP+KiTxFgPixzdvK7ac/pvk3MQ7iCOeGdGApOQ==
+X-Received: by 2002:a1c:f315:: with SMTP id q21mr4299691wmq.114.1590589580237; 
+ Wed, 27 May 2020 07:26:20 -0700 (PDT)
 Received: from holly.lan (cpc141214-aztw34-2-0-cust773.18-1.cable.virginm.net.
  [86.9.19.6])
- by smtp.gmail.com with ESMTPSA id b185sm4067484wmd.3.2020.05.27.06.31.16
+ by smtp.gmail.com with ESMTPSA id s2sm2777668wmh.11.2020.05.27.07.26.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 May 2020 06:31:17 -0700 (PDT)
-Date: Wed, 27 May 2020 14:31:15 +0100
+ Wed, 27 May 2020 07:26:19 -0700 (PDT)
+Date: Wed, 27 May 2020 15:26:17 +0100
 From: Daniel Thompson <daniel.thompson@linaro.org>
 To: Sumit Garg <sumit.garg@linaro.org>
-Message-ID: <20200527133115.x5hqzttsg73saiky@holly.lan>
+Message-ID: <20200527142617.t7dzal7ok5i3exra@holly.lan>
 References: <1590560759-21453-1-git-send-email-sumit.garg@linaro.org>
- <1590560759-21453-5-git-send-email-sumit.garg@linaro.org>
+ <1590560759-21453-4-git-send-email-sumit.garg@linaro.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <1590560759-21453-5-git-send-email-sumit.garg@linaro.org>
+In-Reply-To: <1590560759-21453-4-git-send-email-sumit.garg@linaro.org>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.128.65 listed in list.dnswl.org]
+ trust [209.85.128.67 listed in list.dnswl.org]
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: linaro.org]
+ for more information. [URIs: suse.com]
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.128.65 listed in wl.mailspike.net]
+ [209.85.128.67 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -99,10 +99,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jdw9X-00ErIG-6m
-Subject: Re: [Kgdb-bugreport] [PATCH v3 4/4] kdb: Switch kdb_msg_write() to
- use safer polling I/O
+X-Headers-End: 1jdx0k-00Eup0-Kt
+Subject: Re: [Kgdb-bugreport] [PATCH v3 3/4] kdb: Make kdb_printf robust to
+ run in NMI context
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -121,203 +120,64 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Wed, May 27, 2020 at 11:55:59AM +0530, Sumit Garg wrote:
-> In kgdb NMI context, calling console handlers isn't safe due to locks
-> used in those handlers which could lead to a deadlock. Although, using
-> oops_in_progress increases the chance to bypass locks in most console
-> handlers but it might not be sufficient enough in case a console uses
-> more locks (VT/TTY is good example).
+On Wed, May 27, 2020 at 11:55:58AM +0530, Sumit Garg wrote:
+> While rounding up CPUs via NMIs, its possible that a rounded up CPU
+
+This problem does not just impact NMI roundup (breakpoints, including
+implicit breakpoint-on-oops can have the same effect).
+
+
+> maybe holding a console port lock leading to kgdb master CPU stuck in
+> a deadlock during invocation of console write operations. So in order
+> to avoid such a deadlock, enable oops_in_progress prior to invocation
+> of console handlers.
 > 
-> Currently when a driver provides both polling I/O and a console then kdb
-> will output using the console. We can increase robustness by using the
-> currently active polling I/O driver (which should be lockless) instead
-> of the corresponding console. For several common cases (e.g. an
-> embedded system with a single serial port that is used both for console
-> output and debugger I/O) this will result in no console handler being
-> used.
-
-Not sure I would have predicted all those changes to kgdboc.c based on
-this patch description. I assume this is to help identify which console
-matches our dbg_io_ops but it would be good to spell this out.
-
-
-> Suggested-by: Daniel Thompson <daniel.thompson@linaro.org>
+> Suggested-by: Petr Mladek <pmladek@suse.com>
 > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 > ---
->  drivers/tty/serial/kgdboc.c | 17 ++++++++---------
->  include/linux/kgdb.h        |  2 ++
->  kernel/debug/kdb/kdb_io.c   | 46 +++++++++++++++++++++++++++++++--------------
->  3 files changed, 42 insertions(+), 23 deletions(-)
+>  kernel/debug/kdb/kdb_io.c | 10 ++++++++++
+>  1 file changed, 10 insertions(+)
 > 
-> diff --git a/drivers/tty/serial/kgdboc.c b/drivers/tty/serial/kgdboc.c
-> index c9f94fa..6199fe1 100644
-> --- a/drivers/tty/serial/kgdboc.c
-> +++ b/drivers/tty/serial/kgdboc.c
-> @@ -35,7 +35,6 @@ static struct kparam_string kps = {
->  };
->  
->  static int kgdboc_use_kms;  /* 1 if we use kernel mode switching */
-> -static struct tty_driver	*kgdb_tty_driver;
->  static int			kgdb_tty_line;
->  
->  #ifdef CONFIG_KDB_KEYBOARD
-> @@ -154,7 +153,7 @@ static int configure_kgdboc(void)
->  	}
->  
->  	kgdboc_io_ops.is_console = 0;
-> -	kgdb_tty_driver = NULL;
-> +	kgdboc_io_ops.tty_drv = NULL;
->  
->  	kgdboc_use_kms = 0;
->  	if (strncmp(cptr, "kms,", 4) == 0) {
-> @@ -178,7 +177,7 @@ static int configure_kgdboc(void)
->  		}
->  	}
->  
-> -	kgdb_tty_driver = p;
-> +	kgdboc_io_ops.tty_drv = p;
->  	kgdb_tty_line = tty_line;
->  
->  do_register:
-> @@ -216,18 +215,18 @@ static int __init init_kgdboc(void)
->  
->  static int kgdboc_get_char(void)
->  {
-> -	if (!kgdb_tty_driver)
-> +	if (!kgdboc_io_ops.tty_drv)
->  		return -1;
-> -	return kgdb_tty_driver->ops->poll_get_char(kgdb_tty_driver,
-> -						kgdb_tty_line);
-> +	return kgdboc_io_ops.tty_drv->ops->poll_get_char(kgdboc_io_ops.tty_drv,
-> +							 kgdb_tty_line);
->  }
->  
->  static void kgdboc_put_char(u8 chr)
->  {
-> -	if (!kgdb_tty_driver)
-> +	if (!kgdboc_io_ops.tty_drv)
->  		return;
-> -	kgdb_tty_driver->ops->poll_put_char(kgdb_tty_driver,
-> -					kgdb_tty_line, chr);
-> +	kgdboc_io_ops.tty_drv->ops->poll_put_char(kgdboc_io_ops.tty_drv,
-> +						  kgdb_tty_line, chr);
->  }
->  
->  static int param_set_kgdboc_var(const char *kmessage,
-> diff --git a/include/linux/kgdb.h b/include/linux/kgdb.h
-> index b072aeb..05d165d 100644
-> --- a/include/linux/kgdb.h
-> +++ b/include/linux/kgdb.h
-> @@ -275,6 +275,7 @@ struct kgdb_arch {
->   * for the I/O driver.
->   * @is_console: 1 if the end device is a console 0 if the I/O device is
->   * not a console
-> + * @tty_drv: Pointer to polling tty driver.
->   */
->  struct kgdb_io {
->  	const char		*name;
-> @@ -285,6 +286,7 @@ struct kgdb_io {
->  	void			(*pre_exception) (void);
->  	void			(*post_exception) (void);
->  	int			is_console;
-> +	struct tty_driver	*tty_drv;
-
-Should this be a struct tty_driver or a struct console?
-
-In other words if the lifetime the console structure is the same as the
-tty_driver then isn't it better to capture the console instead
-(easier to compare and works with non-tty devices such as the
-USB debug mode).
-
-
->  };
->  
->  extern const struct kgdb_arch		arch_kgdb_ops;
 > diff --git a/kernel/debug/kdb/kdb_io.c b/kernel/debug/kdb/kdb_io.c
-> index f848482..c2efa52 100644
+> index 349dfcc..f848482 100644
 > --- a/kernel/debug/kdb/kdb_io.c
 > +++ b/kernel/debug/kdb/kdb_io.c
-> @@ -24,6 +24,7 @@
->  #include <linux/kgdb.h>
->  #include <linux/kdb.h>
->  #include <linux/kallsyms.h>
-> +#include <linux/tty_driver.h>
->  #include "kdb_private.h"
->  
->  #define CMD_BUFLEN 256
-> @@ -542,13 +543,18 @@ static int kdb_search_string(char *searched, char *searchfor)
->  	return 0;
->  }
->  
-> -static void kdb_io_write(char *cp, int len, void (*io_put_char)(u8 ch))
-> +static void kdb_io_write(char *cp, int len, void (*io_put_char)(u8),
-> +			 struct tty_driver *p, int line,
-> +			 void (*poll_put_char)(struct tty_driver *, int, char))
+> @@ -566,7 +566,17 @@ static void kdb_msg_write(char *msg, int msg_len)
+>  	for_each_console(c) {
+>  		if (!(c->flags & CON_ENABLED))
+>  			continue;
+> +		/*
+> +		 * While rounding up CPUs via NMIs, its possible that
 
-Judging from your reply to comment 1 I guess this is already on the list
-to eliminate ;-).
+Ditto.
+
+> +		 * a rounded up CPU maybe holding a console port lock
+> +		 * leading to kgdb master CPU stuck in a deadlock during
+> +		 * invocation of console write operations. So in order
+> +		 * to avoid such a deadlock, enable oops_in_progress
+> +		 * prior to invocation of console handlers.
+
+Actually looking at this comment as a whole I think it spends to many
+words on what and not enough on why (e.g. what the tradeoffs are and
+why we are not using bust_spinlocks() which would be a more obvious
+approach).
+
+  Set oops_in_progress to encourage the console drivers to disregard
+  their internal spin locks: in the current calling context
+  the risk of deadlock is a bigger problem than risks due to
+  re-entering the console driver. We operate directly on
+  oops_in_progress rather than using bust_spinlocks() because
+  the calls bust_spinlocks() makes on exit are not appropriate
+  for this calling context.
 
 
 Daniel.
 
 
->  {
->  	if (len <= 0)
->  		return;
->  
->  	while (len--) {
-> -		io_put_char(*cp);
-> +		if (io_put_char)
-> +			io_put_char(*cp);
-> +		if (poll_put_char)
-> +			poll_put_char(p, line, *cp);
->  		cp++;
->  	}
->  }
-> @@ -561,22 +567,34 @@ static void kdb_msg_write(char *msg, int msg_len)
->  		return;
->  
->  	if (dbg_io_ops && !dbg_io_ops->is_console)
-> -		kdb_io_write(msg, msg_len, dbg_io_ops->write_char);
-> +		kdb_io_write(msg, msg_len, dbg_io_ops->write_char,
-> +			     NULL, 0, NULL);
->  
->  	for_each_console(c) {
-> +		int line;
-> +		struct tty_driver *p;
-> +
->  		if (!(c->flags & CON_ENABLED))
->  			continue;
-> -		/*
-> -		 * While rounding up CPUs via NMIs, its possible that
-> -		 * a rounded up CPU maybe holding a console port lock
-> -		 * leading to kgdb master CPU stuck in a deadlock during
-> -		 * invocation of console write operations. So in order
-> -		 * to avoid such a deadlock, enable oops_in_progress
-> -		 * prior to invocation of console handlers.
-> -		 */
-> -		++oops_in_progress;
-> -		c->write(c, msg, msg_len);
-> -		--oops_in_progress;
-> +
-> +		p = c->device ? c->device(c, &line) : NULL;
-> +		if (p && dbg_io_ops && p == dbg_io_ops->tty_drv && p->ops &&
-> +		    p->ops->poll_put_char) {
-> +			kdb_io_write(msg, msg_len, NULL, p, line,
-> +				     p->ops->poll_put_char);
-> +		} else {
-> +			/*
-> +			 * While rounding up CPUs via NMIs, its possible that
-> +			 * a rounded up CPU maybe holding a console port lock
-> +			 * leading to kgdb master CPU stuck in a deadlock during
-> +			 * invocation of console write operations. So in order
-> +			 * to avoid such a deadlock, enable oops_in_progress
-> +			 * prior to invocation of console handlers.
-> +			 */
-> +			++oops_in_progress;
-> +			c->write(c, msg, msg_len);
-> +			--oops_in_progress;
-> +		}
+> +		 */
+> +		++oops_in_progress;
+>  		c->write(c, msg, msg_len);
+> +		--oops_in_progress;
 >  		touch_nmi_watchdog();
 >  	}
 >  }
