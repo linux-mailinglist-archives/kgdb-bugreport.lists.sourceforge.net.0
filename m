@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 804FD1E520C
-	for <lists+kgdb-bugreport@lfdr.de>; Thu, 28 May 2020 02:02:58 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id E2A361E5771
+	for <lists+kgdb-bugreport@lfdr.de>; Thu, 28 May 2020 08:19:14 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1je60f-0006yo-BT
-	for lists+kgdb-bugreport@lfdr.de; Thu, 28 May 2020 00:02:57 +0000
+	id 1jeBsn-0008An-N3
+	for lists+kgdb-bugreport@lfdr.de; Thu, 28 May 2020 06:19:13 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <dianders@chromium.org>) id 1je60d-0006yY-My
- for kgdb-bugreport@lists.sourceforge.net; Thu, 28 May 2020 00:02:55 +0000
+ (envelope-from <sumit.garg@linaro.org>) id 1jeBsl-0008AY-TE
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 28 May 2020 06:19:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
  In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
  :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=okC+75ZCtKbM15r3x670gRBve7kChxs6sV2debOxPB0=; b=OcVBZhnfwii3w3wFCEWIUbXBpZ
- SrD57Rt5cTeKUkoJpN7E2lFt3I6mXGGLjCijZ0vioKUx7q0vLENaLUdx+mKC06mgLdlSWh8mAs7GQ
- OC3EoRW/uiIJHds49xdxUrrgy/zmAsC4Cap/OYBGx6H8lYNr4w4qGSn3lrheOM2wTGg8=;
+ bh=D6wzGSWAzO6Y9V94w6NjURnljaOZPM/kHqxn4LN53UU=; b=KGderUSqra86WmCjoVqww5baTS
+ +PXp+DhG2uG4qes1zLiRrekTT5aCiDiX7jvdt5AvupEOcrGhahGE5lGnTPtjFMQ70JTxgmJ9MeYQS
+ P6FL+AIt6IGVF/GzJIMUB4qjVjcdo9DNXfyhLRFM8yKSpdHlSDaQr4k1K2F8mk6tN2Vc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
@@ -30,70 +30,62 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=okC+75ZCtKbM15r3x670gRBve7kChxs6sV2debOxPB0=; b=QHI6hHe5StbCRTdns62p90zVz6
- xALL6RNcIa1E2z6/cPBqXOSvoWKsRCFc1YPmVr8LLtWAEAmMnI9fIRt9lXC4FnXDWSG9dUJfwxnTu
- k9KgwBXdjXARGIvRkl2XUQJFQeB51YqaSMmltNXWGc8Wg/Pv+IJfLxQCF3/1DP+Z7Hyg=;
-Received: from mail-ua1-f67.google.com ([209.85.222.67])
+ bh=D6wzGSWAzO6Y9V94w6NjURnljaOZPM/kHqxn4LN53UU=; b=G4wa9fzvtMcDAJfVCunosCq/Mv
+ OlxlEZcCzbmEkqROKM2XKXQKpz1kxaJykf9F7qIGFRliN79SS0Ycb0kPmjgNAjtae7J8KW9Q6/DrV
+ ZYpKK5x4fadpHsFdOjZKiginCGQnutZk38xFMO60jplGjSfP87WLZeurS+HkTdFuA9/o=;
+Received: from mail-lj1-f195.google.com ([209.85.208.195])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1je60b-00A0WL-RN
- for kgdb-bugreport@lists.sourceforge.net; Thu, 28 May 2020 00:02:55 +0000
-Received: by mail-ua1-f67.google.com with SMTP id b13so9086990uav.3
+ id 1jeBsg-00AMpJ-Km
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 28 May 2020 06:19:11 +0000
+Received: by mail-lj1-f195.google.com with SMTP id z18so31864192lji.12
  for <kgdb-bugreport@lists.sourceforge.net>;
- Wed, 27 May 2020 17:02:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ Wed, 27 May 2020 23:19:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=okC+75ZCtKbM15r3x670gRBve7kChxs6sV2debOxPB0=;
- b=kwQn58I6KeEnpxDEukm9xPGz2qfO5MESqkwTzLFeIX7J+dgM+ZV5QNN+lC+OhzIS6/
- 96qBokhRcNk/JSx/rvGCUB4rIcTSWxyujirTeUBc8+5OBTrU8vvBdnCKLujPdEXA1HVh
- nxigoKotEtS8ni6ue0pj3Jeo723HpsQl8aLkQ=
+ :cc; bh=D6wzGSWAzO6Y9V94w6NjURnljaOZPM/kHqxn4LN53UU=;
+ b=kDlnELRVL1kkiXCkL9OsgTrT6K7LhmaWGvzinLnJhCOfWjepFEAIZx+YESCtX3YZYi
+ cBRBAQPpx3CbsqRNhZ3WNyOnWzYcjevglEjYJ1qdyWT7xtJ9ffm6majXh9UtFFBVBQlD
+ IAubNEa3IPU9Ha8xzHrb8UX2xWObvVjMWpogKNU+/3aq2Rqvqfn1YRkljwlxvhN1Qbuh
+ Dy/rlWe7w1uphNYGhp/HPmR85P8unuQqLai4N/IMbNlpjsOJ7kavFuKhR3QH1Rz88HrZ
+ xts+STY8/GTa+Xwf9IzW11NsPrTOokH5dTkFv+J/AdoL7RNegZzNEvHzE9YXA+4biAHN
+ 3Xkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=okC+75ZCtKbM15r3x670gRBve7kChxs6sV2debOxPB0=;
- b=kTeqxzCm28HksZMXsUwX60H3+aMld6pgHlnkx1Lc3J+TTU0dUQIO6VgrIYe/8baVnW
- M/him1rnuTWfGIBrti2FxcnJcEo3UurJ+1Nd3j0t+llmUlrEaxvVqog7azmN/YNvsEID
- tAmpdDKeyqQWiKxA6LQQIg61mHX2ATwUxs/BKbJtBd8QmEBAgsXkewf+fAcuKvF8zMg8
- 54xyi0eOr2Zxrusm2VXSc3XeEFruUNas6C0pJCny7V1miOhidOMH8WzsnoQ78I5a4c4z
- l2j2KxPJFonZnVxhOy+G9ALeD2ZW5Np5NOBbfR/3LUB5QFbfi/BA2aMDORV5TqH/BUQR
- CJuw==
-X-Gm-Message-State: AOAM532STzkSz41Vp43wzcDnAwNz0KoxEJGQJpdvzQQHjTv9YCU7tRwH
- bBThiDX7DM5NqlnhEYL9VNKg7+ppo3k=
-X-Google-Smtp-Source: ABdhPJzTfqO+9RNf2Urmd99aZp02ZaGmgQEh4w/DdjaM8GviC+SIJd8iaFG/COrBHIz2Gzocm7u8+w==
-X-Received: by 2002:ab0:6ed0:: with SMTP id c16mr294258uav.62.1590624160419;
- Wed, 27 May 2020 17:02:40 -0700 (PDT)
-Received: from mail-ua1-f54.google.com (mail-ua1-f54.google.com.
- [209.85.222.54])
- by smtp.gmail.com with ESMTPSA id 188sm313267vso.26.2020.05.27.17.02.39
- for <kgdb-bugreport@lists.sourceforge.net>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 27 May 2020 17:02:39 -0700 (PDT)
-Received: by mail-ua1-f54.google.com with SMTP id 14so9048024uaq.11
- for <kgdb-bugreport@lists.sourceforge.net>;
- Wed, 27 May 2020 17:02:39 -0700 (PDT)
-X-Received: by 2002:ab0:1684:: with SMTP id e4mr240126uaf.22.1590624158874;
- Wed, 27 May 2020 17:02:38 -0700 (PDT)
+ bh=D6wzGSWAzO6Y9V94w6NjURnljaOZPM/kHqxn4LN53UU=;
+ b=IOz1MSR6kSwoBektLi+J1tgoK0O4a3kE7vMAlLqN2kKD0KcCJ5+nc0eWxTsvPEond3
+ AoTJXj68q3+IDjLTNAl2oyJIGhg2WoMI3/I1Z5RIKYQF+4nLIqydNwZO9ScRXj1PG8JP
+ qWM/im6A/mQhHzTN8CizZDQE82wRDYK7F2LwbnEBIVpDQUdlOSqVS+ixIg0vhF62zdh8
+ T+k9j+rWqdtx85KByPobxECQbcI0NTFrAcyWCC2K/QfAkSI/4UU0PbGxYPyvYECfrL2R
+ J1I9Fm9Ylbm7DhpkhX/C0d67rP9ucuF4SQG7ylL3EmHgaHQwJuk6iVXT/I0uQg7xcuLo
+ A4ew==
+X-Gm-Message-State: AOAM531vMNgMdH3buzdioPk9BkY31b99eDnM8KHYky35XvgvSCFITyUb
+ 2fad+sJN8O97qJdqowGbg08yL7o2aRogsIDFsSsMFg==
+X-Google-Smtp-Source: ABdhPJylWSoKAJTE57FP7FadAVGNn54Dte/EGhBccUu5jav28TYTjig9BOGV8hdW3KpAPu2aqAm86PxkkikGD7E6MR0=
+X-Received: by 2002:a2e:a16e:: with SMTP id u14mr613038ljl.427.1590646739924; 
+ Wed, 27 May 2020 23:18:59 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200507153444.1.I70e0d4fd46d5ed2aaf0c98a355e8e1b7a5bb7e4e@changeid>
- <20200519104151.6evv3hizm5dbjjq2@holly.lan>
-In-Reply-To: <20200519104151.6evv3hizm5dbjjq2@holly.lan>
-From: Doug Anderson <dianders@chromium.org>
-Date: Wed, 27 May 2020 17:02:27 -0700
-X-Gmail-Original-Message-ID: <CAD=FV=XCFxgO-s--jw9CTgQUxtQfteoQ4XSL_bbjW4s82Wd3pg@mail.gmail.com>
-Message-ID: <CAD=FV=XCFxgO-s--jw9CTgQUxtQfteoQ4XSL_bbjW4s82Wd3pg@mail.gmail.com>
+References: <1590560759-21453-1-git-send-email-sumit.garg@linaro.org>
+ <1590560759-21453-5-git-send-email-sumit.garg@linaro.org>
+ <20200527133115.x5hqzttsg73saiky@holly.lan>
+In-Reply-To: <20200527133115.x5hqzttsg73saiky@holly.lan>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Thu, 28 May 2020 11:48:48 +0530
+Message-ID: <CAFA6WYNeBDRdRqb8dB5HA923ujD3zq7JEQQnV4WJr_fthCc=GQ@mail.gmail.com>
 To: Daniel Thompson <daniel.thompson@linaro.org>
-X-Spam-Score: -0.3 (/)
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.208.195 listed in list.dnswl.org]
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: chromium.org]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.222.67 listed in list.dnswl.org]
+ for more information. [URIs: linaro.org]
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.222.67 listed in wl.mailspike.net]
+ [209.85.208.195 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -101,11 +93,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1je60b-00A0WL-RN
-Subject: Re: [Kgdb-bugreport] [PATCH] kgdb: Avoid suspicious RCU usage
- warning
+X-Headers-End: 1jeBsg-00AMpJ-Km
+Subject: Re: [Kgdb-bugreport] [PATCH v3 4/4] kdb: Switch kdb_msg_write() to
+ use safer polling I/O
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,136 +107,234 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: kgdb-bugreport@lists.sourceforge.net, LKML <linux-kernel@vger.kernel.org>,
+Cc: Petr Mladek <pmladek@suse.com>, kgdb-bugreport@lists.sourceforge.net,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
  Jason Wessel <jason.wessel@windriver.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Hi,
-
-On Tue, May 19, 2020 at 3:41 AM Daniel Thompson
+On Wed, 27 May 2020 at 19:01, Daniel Thompson
 <daniel.thompson@linaro.org> wrote:
 >
-> On Thu, May 07, 2020 at 03:53:58PM -0700, Douglas Anderson wrote:
-> > At times when I'm using kgdb I see a splat on my console about
-> > suspicious RCU usage.  I managed to come up with a case that could
-> > reproduce this that looked like this:
+> On Wed, May 27, 2020 at 11:55:59AM +0530, Sumit Garg wrote:
+> > In kgdb NMI context, calling console handlers isn't safe due to locks
+> > used in those handlers which could lead to a deadlock. Although, using
+> > oops_in_progress increases the chance to bypass locks in most console
+> > handlers but it might not be sufficient enough in case a console uses
+> > more locks (VT/TTY is good example).
 > >
-> >   WARNING: suspicious RCU usage
-> >   5.7.0-rc4+ #609 Not tainted
-> >   -----------------------------
-> >   kernel/pid.c:395 find_task_by_pid_ns() needs rcu_read_lock() protection!
-> >
-> >   other info that might help us debug this:
-> >
-> >     rcu_scheduler_active = 2, debug_locks = 1
-> >   3 locks held by swapper/0/1:
-> >    #0: ffffff81b6b8e988 (&dev->mutex){....}-{3:3}, at: __device_attach+0x40/0x13c
-> >    #1: ffffffd01109e9e8 (dbg_master_lock){....}-{2:2}, at: kgdb_cpu_enter+0x20c/0x7ac
-> >    #2: ffffffd01109ea90 (dbg_slave_lock){....}-{2:2}, at: kgdb_cpu_enter+0x3ec/0x7ac
-> >
-> >   stack backtrace:
-> >   CPU: 7 PID: 1 Comm: swapper/0 Not tainted 5.7.0-rc4+ #609
-> >   Hardware name: Google Cheza (rev3+) (DT)
-> >   Call trace:
-> >    dump_backtrace+0x0/0x1b8
-> >    show_stack+0x1c/0x24
-> >    dump_stack+0xd4/0x134
-> >    lockdep_rcu_suspicious+0xf0/0x100
-> >    find_task_by_pid_ns+0x5c/0x80
-> >    getthread+0x8c/0xb0
-> >    gdb_serial_stub+0x9d4/0xd04
-> >    kgdb_cpu_enter+0x284/0x7ac
-> >    kgdb_handle_exception+0x174/0x20c
-> >    kgdb_brk_fn+0x24/0x30
-> >    call_break_hook+0x6c/0x7c
-> >    brk_handler+0x20/0x5c
-> >    do_debug_exception+0x1c8/0x22c
-> >    el1_sync_handler+0x3c/0xe4
-> >    el1_sync+0x7c/0x100
-> >    rpmh_rsc_probe+0x38/0x420
-> >    platform_drv_probe+0x94/0xb4
-> >    really_probe+0x134/0x300
-> >    driver_probe_device+0x68/0x100
-> >    __device_attach_driver+0x90/0xa8
-> >    bus_for_each_drv+0x84/0xcc
-> >    __device_attach+0xb4/0x13c
-> >    device_initial_probe+0x18/0x20
-> >    bus_probe_device+0x38/0x98
-> >    device_add+0x38c/0x420
-> >
-> > If I understand properly we should just be able to blanket kgdb under
-> > one big RCU read lock and the problem should go away.  We'll add it to
-> > the beast-of-a-function known as kgdb_cpu_enter().
-> >
-> > With this I no longer get any splats and things seem to work fine.
-> >
-> > Signed-off-by: Douglas Anderson <dianders@chromium.org>
+> > Currently when a driver provides both polling I/O and a console then kdb
+> > will output using the console. We can increase robustness by using the
+> > currently active polling I/O driver (which should be lockless) instead
+> > of the corresponding console. For several common cases (e.g. an
+> > embedded system with a single serial port that is used both for console
+> > output and debugger I/O) this will result in no console handler being
+> > used.
 >
-> In principle this looks OK but I'm curious why we don't cuddle these
-> calls up to the local interrupt locking (and also whether we want to
-> keep hold of the lock during stepping). If nothing else that would make
-> review easier.
+> Not sure I would have predicted all those changes to kgdboc.c based on
+> this patch description. I assume this is to help identify which console
+> matches our dbg_io_ops but it would be good to spell this out.
+>
 
-It probably wouldn't hurt to keep hold of the lock during single
-stepping but I don't think there's any real reason we'd want to.
-Specifically the only real reason we're calling rcu_read_lock() is to
-avoid the warning.  Since we're a stop-the-world debugger it's not
-like something else could be messing with state at the same time.
+Okay, will add the corresponding description.
 
-I'm looking at the whole function though and I don't really understand
-all the comments about interrupts being restored by the 'trap return'
-code, do you?  Specifically: as far as I can tell we _always_ restore
-interrupts when exiting the function.  There are only two return
-statements and both have "local_irq_restore(flags);" right before
-them.  We never modify the flags directly and the one other usage of
-"flags" is effectively the statement "local_irq_restore(flags);
-local_irq_save(flags);" which will, I guess, allow any interrupts that
-were already pending to take place.  Are you saying that you want me
-to match that and do a "rcu_read_unlock(); rcu_read_lock()" there?
+>
+> > Suggested-by: Daniel Thompson <daniel.thompson@linaro.org>
+> > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> > ---
+> >  drivers/tty/serial/kgdboc.c | 17 ++++++++---------
+> >  include/linux/kgdb.h        |  2 ++
+> >  kernel/debug/kdb/kdb_io.c   | 46 +++++++++++++++++++++++++++++++--------------
+> >  3 files changed, 42 insertions(+), 23 deletions(-)
+> >
+> > diff --git a/drivers/tty/serial/kgdboc.c b/drivers/tty/serial/kgdboc.c
+> > index c9f94fa..6199fe1 100644
+> > --- a/drivers/tty/serial/kgdboc.c
+> > +++ b/drivers/tty/serial/kgdboc.c
+> > @@ -35,7 +35,6 @@ static struct kparam_string kps = {
+> >  };
+> >
+> >  static int kgdboc_use_kms;  /* 1 if we use kernel mode switching */
+> > -static struct tty_driver     *kgdb_tty_driver;
+> >  static int                   kgdb_tty_line;
+> >
+> >  #ifdef CONFIG_KDB_KEYBOARD
+> > @@ -154,7 +153,7 @@ static int configure_kgdboc(void)
+> >       }
+> >
+> >       kgdboc_io_ops.is_console = 0;
+> > -     kgdb_tty_driver = NULL;
+> > +     kgdboc_io_ops.tty_drv = NULL;
+> >
+> >       kgdboc_use_kms = 0;
+> >       if (strncmp(cptr, "kms,", 4) == 0) {
+> > @@ -178,7 +177,7 @@ static int configure_kgdboc(void)
+> >               }
+> >       }
+> >
+> > -     kgdb_tty_driver = p;
+> > +     kgdboc_io_ops.tty_drv = p;
+> >       kgdb_tty_line = tty_line;
+> >
+> >  do_register:
+> > @@ -216,18 +215,18 @@ static int __init init_kgdboc(void)
+> >
+> >  static int kgdboc_get_char(void)
+> >  {
+> > -     if (!kgdb_tty_driver)
+> > +     if (!kgdboc_io_ops.tty_drv)
+> >               return -1;
+> > -     return kgdb_tty_driver->ops->poll_get_char(kgdb_tty_driver,
+> > -                                             kgdb_tty_line);
+> > +     return kgdboc_io_ops.tty_drv->ops->poll_get_char(kgdboc_io_ops.tty_drv,
+> > +                                                      kgdb_tty_line);
+> >  }
+> >
+> >  static void kgdboc_put_char(u8 chr)
+> >  {
+> > -     if (!kgdb_tty_driver)
+> > +     if (!kgdboc_io_ops.tty_drv)
+> >               return;
+> > -     kgdb_tty_driver->ops->poll_put_char(kgdb_tty_driver,
+> > -                                     kgdb_tty_line, chr);
+> > +     kgdboc_io_ops.tty_drv->ops->poll_put_char(kgdboc_io_ops.tty_drv,
+> > +                                               kgdb_tty_line, chr);
+> >  }
+> >
+> >  static int param_set_kgdboc_var(const char *kmessage,
+> > diff --git a/include/linux/kgdb.h b/include/linux/kgdb.h
+> > index b072aeb..05d165d 100644
+> > --- a/include/linux/kgdb.h
+> > +++ b/include/linux/kgdb.h
+> > @@ -275,6 +275,7 @@ struct kgdb_arch {
+> >   * for the I/O driver.
+> >   * @is_console: 1 if the end device is a console 0 if the I/O device is
+> >   * not a console
+> > + * @tty_drv: Pointer to polling tty driver.
+> >   */
+> >  struct kgdb_io {
+> >       const char              *name;
+> > @@ -285,6 +286,7 @@ struct kgdb_io {
+> >       void                    (*pre_exception) (void);
+> >       void                    (*post_exception) (void);
+> >       int                     is_console;
+> > +     struct tty_driver       *tty_drv;
+>
+> Should this be a struct tty_driver or a struct console?
+>
+> In other words if the lifetime the console structure is the same as the
+> tty_driver then isn't it better to capture the console instead
+> (easier to compare and works with non-tty devices such as the
+> USB debug mode).
+>
 
-If I understand things correctly (and there's maybe a better chance
-after I read Wei Li's recent patches) the disabling of IRQs for single
-stepping happens in a different way.  It looks like we update the
-"struct pt_regs" of the task we're stepping so that when we exit kgdb
-and start running the task again that the interrupts are off.  That
-seems reasonable to me and this function has nothing to do with it.
+IIUC, you mean to say we can easily replace "is_console" with "struct
+console". This sounds feasible and should be a straightforward
+comparison in order to prefer "dbg_io_ops" over console handlers. So I
+will switch to use "struct console" instead.
 
-...and further confusion on my part: does the whole saving / restoring
-of interrupts in kgdb_cpu_enter() make any sense anyway?  Is this
-function ever called from a context that's not an interrupt context?
-How do we get the pt_regs in that case?  Just for fun, I tried doing
-this:
+>
+> >  };
+> >
+> >  extern const struct kgdb_arch                arch_kgdb_ops;
+> > diff --git a/kernel/debug/kdb/kdb_io.c b/kernel/debug/kdb/kdb_io.c
+> > index f848482..c2efa52 100644
+> > --- a/kernel/debug/kdb/kdb_io.c
+> > +++ b/kernel/debug/kdb/kdb_io.c
+> > @@ -24,6 +24,7 @@
+> >  #include <linux/kgdb.h>
+> >  #include <linux/kdb.h>
+> >  #include <linux/kallsyms.h>
+> > +#include <linux/tty_driver.h>
+> >  #include "kdb_private.h"
+> >
+> >  #define CMD_BUFLEN 256
+> > @@ -542,13 +543,18 @@ static int kdb_search_string(char *searched, char *searchfor)
+> >       return 0;
+> >  }
+> >
+> > -static void kdb_io_write(char *cp, int len, void (*io_put_char)(u8 ch))
+> > +static void kdb_io_write(char *cp, int len, void (*io_put_char)(u8),
+> > +                      struct tty_driver *p, int line,
+> > +                      void (*poll_put_char)(struct tty_driver *, int, char))
+>
+> Judging from your reply to comment 1 I guess this is already on the list
+> to eliminate ;-).
+>
 
-    local_irq_save(flags);
-+   if (!arch_irqs_disabled_flags(flags))
-+           pr_warn("I was wrong\n");
+Yeah.
 
-...and I never saw "I was wrong" on my system.  Maybe it matters for
-something not arm64?  ...or, maybe, this is from when kgdb worked in a
-completely different way?
+-Sumit
 
-
-In general I made my patch by:
-* Calling rcu_read_lock() at the start of the function.
-* Calling rcu_read_unlock() right before all 2 of the "return" calls of
-  the function.
-
-...I was hoping that would actually make it easier to reason about
-even if the function is a beast.
-
-
-Hopefully the above makes sense.  I wouldn't rule out me just being
-utterly confused, but I _think_ I reasoned through it all.  ;-)  If it
-all makes sense, I'm inclined to:
-
-1. Leave my patch the way it is.
-
-2. Perhaps remove the whole irq saving / restoring in kgdb_cpu_enter().
-
-
--Doug
+>
+> Daniel.
+>
+>
+> >  {
+> >       if (len <= 0)
+> >               return;
+> >
+> >       while (len--) {
+> > -             io_put_char(*cp);
+> > +             if (io_put_char)
+> > +                     io_put_char(*cp);
+> > +             if (poll_put_char)
+> > +                     poll_put_char(p, line, *cp);
+> >               cp++;
+> >       }
+> >  }
+> > @@ -561,22 +567,34 @@ static void kdb_msg_write(char *msg, int msg_len)
+> >               return;
+> >
+> >       if (dbg_io_ops && !dbg_io_ops->is_console)
+> > -             kdb_io_write(msg, msg_len, dbg_io_ops->write_char);
+> > +             kdb_io_write(msg, msg_len, dbg_io_ops->write_char,
+> > +                          NULL, 0, NULL);
+> >
+> >       for_each_console(c) {
+> > +             int line;
+> > +             struct tty_driver *p;
+> > +
+> >               if (!(c->flags & CON_ENABLED))
+> >                       continue;
+> > -             /*
+> > -              * While rounding up CPUs via NMIs, its possible that
+> > -              * a rounded up CPU maybe holding a console port lock
+> > -              * leading to kgdb master CPU stuck in a deadlock during
+> > -              * invocation of console write operations. So in order
+> > -              * to avoid such a deadlock, enable oops_in_progress
+> > -              * prior to invocation of console handlers.
+> > -              */
+> > -             ++oops_in_progress;
+> > -             c->write(c, msg, msg_len);
+> > -             --oops_in_progress;
+> > +
+> > +             p = c->device ? c->device(c, &line) : NULL;
+> > +             if (p && dbg_io_ops && p == dbg_io_ops->tty_drv && p->ops &&
+> > +                 p->ops->poll_put_char) {
+> > +                     kdb_io_write(msg, msg_len, NULL, p, line,
+> > +                                  p->ops->poll_put_char);
+> > +             } else {
+> > +                     /*
+> > +                      * While rounding up CPUs via NMIs, its possible that
+> > +                      * a rounded up CPU maybe holding a console port lock
+> > +                      * leading to kgdb master CPU stuck in a deadlock during
+> > +                      * invocation of console write operations. So in order
+> > +                      * to avoid such a deadlock, enable oops_in_progress
+> > +                      * prior to invocation of console handlers.
+> > +                      */
+> > +                     ++oops_in_progress;
+> > +                     c->write(c, msg, msg_len);
+> > +                     --oops_in_progress;
+> > +             }
+> >               touch_nmi_watchdog();
+> >       }
+> >  }
+> > --
+> > 2.7.4
+> >
 
 
 _______________________________________________
