@@ -2,104 +2,86 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 94CB01E7BBA
-	for <lists+kgdb-bugreport@lfdr.de>; Fri, 29 May 2020 13:27:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 87C1E1E95CA
+	for <lists+kgdb-bugreport@lfdr.de>; Sun, 31 May 2020 07:28:27 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jedB6-0005fV-E0
-	for lists+kgdb-bugreport@lfdr.de; Fri, 29 May 2020 11:27:56 +0000
+	id 1jfGWI-0000hd-7F
+	for lists+kgdb-bugreport@lfdr.de; Sun, 31 May 2020 05:28:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sumit.garg@linaro.org>) id 1jedB1-0005e2-GQ
- for kgdb-bugreport@lists.sourceforge.net; Fri, 29 May 2020 11:27:51 +0000
+ (envelope-from <lkp@intel.com>) id 1jfGWG-0000hR-T5
+ for kgdb-bugreport@lists.sourceforge.net; Sun, 31 May 2020 05:28:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:
- To:From:Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=mmVANo270ZVKU00Ntn1LhIr6gWxMXan2SJfCFjNoHEo=; b=CCqkc1HeRJdNaRyf2HNQBJLyc3
- 9B2CZs+J9rOJlaYdhLdDlmQSDC5rgPT8q5UoS4uA+mlciBZPcTmmyQ694JpBdkKdy8I+qSZxUcXzo
- Jj+5Jx3b8OmGtYDcs/3gaxFP31EHf2TaUzlbiGiMDUJoCh088I4EDw9HKr/a9SgAcydY=;
+ bh=7JUjzD4aCHrk9BIkBOar6gKGT1vU/Q9tunXwlOHPII0=; b=brWkc9WAgyDKhBgNnastxTnxUC
+ ZSE9Bv2cRo+D8PJACIqGagjOuqWm16JFisPByWLXh1Ogx4cJXav9F/17QCFRlvGIxfYkB2joQ+2w+
+ sPZmL+U85zkqzNC4xUWzgaMHObyGaHAJCXqK+vxjp8+VdlyMaET1OhgMdsFho7L1X+O4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To
- :MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=mmVANo270ZVKU00Ntn1LhIr6gWxMXan2SJfCFjNoHEo=; b=OVUQfu/S/8Rp0yo/MDCQ3sCZiL
- a4NmyRCiDwTmLDYsWRxroLcwNBwskuQSKEqCLPbZfQVDaNNcny/zjgMHapNcjd4V5ythtG7tYry0A
- MCOG2Oxm+gEZFr6q9zRWBkVTtKwE8gYZ3W/I27Kyr4B8rMiZZHTO70gYcHPsZWYDkCOI=;
-Received: from mail-pf1-f196.google.com ([209.85.210.196])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jedAy-002d2y-3b
- for kgdb-bugreport@lists.sourceforge.net; Fri, 29 May 2020 11:27:49 +0000
-Received: by mail-pf1-f196.google.com with SMTP id 131so1235301pfv.13
- for <kgdb-bugreport@lists.sourceforge.net>;
- Fri, 29 May 2020 04:27:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=mmVANo270ZVKU00Ntn1LhIr6gWxMXan2SJfCFjNoHEo=;
- b=aZK2+XXMoRhPCXVUxsDPkb9kSqkhrNLxdLS+VK2l0Him6ssCZoZ21SrepRXjgt/lH1
- wPjs4bZldxfBqAaXCCEOgOuDzZIo90LTmU1RT/71D8xO0wPNCIUzGGSYGdQ/YlanXpD5
- tymc4udXM1EAeCFRdG9SjmTIW5McowgBQ5xdltp87Mjr/9ZLzv6N3NqTBvAjgtCeoxsu
- v4PFPvGPqrYUCHiSh9M2l/R3XrNtZKY6OAI+2/ACo4+9Duzf3wYHSifzOX1jZu6qukFL
- /EKSR23Jf8Bwkh8PskSWU0NwhMmi3NCwCZz4IMTmvf/+sWcAWs4bWG8i+OfY2epqOy06
- S+Zw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references;
- bh=mmVANo270ZVKU00Ntn1LhIr6gWxMXan2SJfCFjNoHEo=;
- b=Q08nAzAv5CrEhh48cs6i56Z/SYnGf9d6BuBM89LgAmabB+oeNjlN6W0E2XbA7Aa2rP
- 0r0F4w4EFPeWb+XkU/44apuzNfKruX/L8JfGYGda/5dveik3s4rLAxhfQU3I0y3Ihetw
- 1O5BaxoFcQjHtfEg2xaBU2b6v192+Lu2o5BuMtvfCYfOlRiI/a4AXMb9yR9qUp32AFgb
- C81DWpXOKWX0QUCiJe3w6k2cQsHGA+oWQOY3HPCIzZ4fjG4BYw7TuqxaWq7KtSYXJO/U
- sn2ylXAopn9h8lIbeBlr6qIzm1o9ho66e6enKITzA72P6f8ozEP++8VA9Kpz834niyqs
- rMyQ==
-X-Gm-Message-State: AOAM533zETqB1I4xnsLLyvyc2cUxL0cQlBGnropCNhSl4GaPWPAQiekr
- iCqscmAx/jvpmGVduppgqGnqEg==
-X-Google-Smtp-Source: ABdhPJzS/gqMxxiyYyZH1I3fTV851M9JRdWhE5v8GMU+1CdSJsblvJLl+ZsTF6SL8JmpR+LIeAWx2w==
-X-Received: by 2002:a62:2ad1:: with SMTP id q200mr8012952pfq.225.1590751661689; 
- Fri, 29 May 2020 04:27:41 -0700 (PDT)
-Received: from localhost.localdomain ([117.252.66.248])
- by smtp.gmail.com with ESMTPSA id w190sm7016741pfw.35.2020.05.29.04.27.36
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Fri, 29 May 2020 04:27:40 -0700 (PDT)
-From: Sumit Garg <sumit.garg@linaro.org>
-To: daniel.thompson@linaro.org
-Date: Fri, 29 May 2020 16:56:47 +0530
-Message-Id: <1590751607-29676-5-git-send-email-sumit.garg@linaro.org>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1590751607-29676-1-git-send-email-sumit.garg@linaro.org>
-References: <1590751607-29676-1-git-send-email-sumit.garg@linaro.org>
-X-Spam-Score: -0.1 (/)
+ bh=7JUjzD4aCHrk9BIkBOar6gKGT1vU/Q9tunXwlOHPII0=; b=KKqQOP+O1R8dl5WDGou7oevVpd
+ XF4gPVgTaqoFyew96NEIBKI9RvowaxrbHbwQkpkBwBuzVTc+4plP34c+iAsEZayvXfgeqqGeVdj98
+ fmK2G9eCgJGs/SiQRCTXlCTCx6gTUvvu/FezktGpkhxZ8vh3x5aoCBE/eJ8LNE2fOQk8=;
+Received: from mga01.intel.com ([192.55.52.88])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1jfGWE-00Ec0l-E0
+ for kgdb-bugreport@lists.sourceforge.net; Sun, 31 May 2020 05:28:24 +0000
+IronPort-SDR: 9+q60eCF1uEV044ysUvvMLjQlfl/0oKR+YsnL7x7etuDEfO3CUsazMS0rmV7R47HKsU6x6+sFv
+ 2VR31XePU2dg==
+X-Amp-Result: UNKNOWN
+X-Amp-Original-Verdict: FILE UNKNOWN
+X-Amp-File-Uploaded: False
+Received: from fmsmga007.fm.intel.com ([10.253.24.52])
+ by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 30 May 2020 22:28:15 -0700
+IronPort-SDR: CejDs0tYI6S3WK/c04hFxtkhUTSgdYepO09j63hCLq47NaYnk1F5yNXdF7iXB6HB27sydp93oS
+ OGiyCa0CFYbQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.73,455,1583222400"; 
+ d="gz'50?scan'50,208,50";a="256457529"
+Received: from lkp-server01.sh.intel.com (HELO 9f9df8056aac) ([10.239.97.150])
+ by fmsmga007.fm.intel.com with ESMTP; 30 May 2020 22:28:12 -0700
+Received: from kbuild by 9f9df8056aac with local (Exim 4.92)
+ (envelope-from <lkp@intel.com>)
+ id 1jfGW3-0000ts-DP; Sun, 31 May 2020 05:28:11 +0000
+Date: Sun, 31 May 2020 13:27:23 +0800
+From: kbuild test robot <lkp@intel.com>
+To: Sumit Garg <sumit.garg@linaro.org>, daniel.thompson@linaro.org
+Message-ID: <202005311324.We2amqkp%lkp@intel.com>
+References: <1590751607-29676-5-git-send-email-sumit.garg@linaro.org>
+MIME-Version: 1.0
+In-Reply-To: <1590751607-29676-5-git-send-email-sumit.garg@linaro.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [192.55.52.88 listed in wl.mailspike.net]
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: linaro.org]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.210.196 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.210.196 listed in wl.mailspike.net]
+ for more information. [URIs: stackoverflow.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jedAy-002d2y-3b
-Subject: [Kgdb-bugreport] [PATCH v4 4/4] kdb: Switch to use safer dbg_io_ops
- over console APIs
+ -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jfGWE-00Ec0l-E0
+Content-Disposition: inline
+X-Content-Filtered-By: Mailman/MimeDel 2.1.21
+Subject: Re: [Kgdb-bugreport] [PATCH v4 4/4] kdb: Switch to use safer
+ dbg_io_ops over console APIs
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,141 +93,76 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: pmladek@suse.com, kgdb-bugreport@lists.sourceforge.net,
- jason.wessel@windriver.com, linux-kernel@vger.kernel.org,
- sergey.senozhatsky@gmail.com, gregkh@linuxfoundation.org, jslaby@suse.com
-MIME-Version: 1.0
+Cc: pmladek@suse.com, kbuild-all@lists.01.org, sergey.senozhatsky@gmail.com,
+ kgdb-bugreport@lists.sourceforge.net, jslaby@suse.com,
+ linux-kernel@vger.kernel.org, clang-built-linux@googlegroups.com,
+ gregkh@linuxfoundation.org, jason.wessel@windriver.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-In kgdb context, calling console handlers aren't safe due to locks used
-in those handlers which could in turn lead to a deadlock. Although, using
-oops_in_progress increases the chance to bypass locks in most console
-handlers but it might not be sufficient enough in case a console uses
-more locks (VT/TTY is good example).
+Hi Sumit,
 
-Currently when a driver provides both polling I/O and a console then kdb
-will output using the console. We can increase robustness by using the
-currently active polling I/O driver (which should be lockless) instead
-of the corresponding console. For several common cases (e.g. an
-embedded system with a single serial port that is used both for console
-output and debugger I/O) this will result in no console handler being
-used.
+I love your patch! Yet something to improve:
 
-In order to achieve this we need to reverse the order of preference to
-use dbg_io_ops (uses polling I/O mode) over console APIs. So we just
-store "struct console" that represents debugger I/O in dbg_io_ops and
-while emitting kdb messages, skip console that matches dbg_io_ops
-console in order to avoid duplicate messages. After this change,
-"is_console" param becomes redundant and hence removed.
+[auto build test ERROR on tty/tty-testing]
+[also build test ERROR on usb/usb-testing v5.7-rc7 next-20200529]
+[cannot apply to kgdb/kgdb-next]
+[if your patch is applied to the wrong git tree, please drop us a note to help
+improve the system. BTW, we also suggest to use '--base' option to specify the
+base tree in git format-patch, please see https://stackoverflow.com/a/37406982]
 
-Suggested-by: Daniel Thompson <daniel.thompson@linaro.org>
-Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+url:    https://github.com/0day-ci/linux/commits/Sumit-Garg/kdb-Improve-console-handling/20200531-075431
+base:   https://git.kernel.org/pub/scm/linux/kernel/git/gregkh/tty.git tty-testing
+config: x86_64-allyesconfig (attached as .config)
+compiler: clang version 11.0.0 (https://github.com/llvm/llvm-project 2388a096e7865c043e83ece4e26654bd3d1a20d5)
+reproduce (this is a W=1 build):
+        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
+        chmod +x ~/bin/make.cross
+        # install x86_64 cross compiling tool for clang build
+        # apt-get install binutils-x86-64-linux-gnu
+        # save the attached .config to linux build tree
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross ARCH=x86_64 
+
+If you fix the issue, kindly add following tag as appropriate
+Reported-by: kbuild test robot <lkp@intel.com>
+
+All errors (new ones prefixed by >>, old ones prefixed by <<):
+
+>> drivers/usb/early/ehci-dbgp.c:1062:24: error: assigning to 'struct console *' from incompatible type 'struct console'; take the address with &
+kgdbdbgp_io_ops.cons = early_dbgp_console;
+^ ~~~~~~~~~~~~~~~~~~
+&
+1 error generated.
+
+vim +1062 drivers/usb/early/ehci-dbgp.c
+
+  1046	
+  1047	static int __init kgdbdbgp_parse_config(char *str)
+  1048	{
+  1049		char *ptr;
+  1050	
+  1051		if (!ehci_debug) {
+  1052			if (early_dbgp_init(str))
+  1053				return -1;
+  1054		}
+  1055		ptr = strchr(str, ',');
+  1056		if (ptr) {
+  1057			ptr++;
+  1058			kgdbdbgp_wait_time = simple_strtoul(ptr, &ptr, 10);
+  1059		}
+  1060		kgdb_register_io_module(&kgdbdbgp_io_ops);
+  1061		if (early_dbgp_console.index != -1)
+> 1062			kgdbdbgp_io_ops.cons = early_dbgp_console;
+  1063	
+  1064		return 0;
+  1065	}
+  1066	early_param("kgdbdbgp", kgdbdbgp_parse_config);
+  1067	
+
 ---
- drivers/tty/serial/kgdb_nmi.c | 2 +-
- drivers/tty/serial/kgdboc.c   | 4 ++--
- drivers/usb/early/ehci-dbgp.c | 3 ++-
- include/linux/kgdb.h          | 5 ++---
- kernel/debug/kdb/kdb_io.c     | 4 +++-
- 5 files changed, 10 insertions(+), 8 deletions(-)
-
-diff --git a/drivers/tty/serial/kgdb_nmi.c b/drivers/tty/serial/kgdb_nmi.c
-index 5022447..6004c0c 100644
---- a/drivers/tty/serial/kgdb_nmi.c
-+++ b/drivers/tty/serial/kgdb_nmi.c
-@@ -50,7 +50,7 @@ static int kgdb_nmi_console_setup(struct console *co, char *options)
- 	 * I/O utilities that messages sent to the console will automatically
- 	 * be displayed on the dbg_io.
- 	 */
--	dbg_io_ops->is_console = true;
-+	dbg_io_ops->cons = co;
- 
- 	return 0;
- }
-diff --git a/drivers/tty/serial/kgdboc.c b/drivers/tty/serial/kgdboc.c
-index c9f94fa..c7ffa87 100644
---- a/drivers/tty/serial/kgdboc.c
-+++ b/drivers/tty/serial/kgdboc.c
-@@ -153,7 +153,7 @@ static int configure_kgdboc(void)
- 		goto noconfig;
- 	}
- 
--	kgdboc_io_ops.is_console = 0;
-+	kgdboc_io_ops.cons = NULL;
- 	kgdb_tty_driver = NULL;
- 
- 	kgdboc_use_kms = 0;
-@@ -173,7 +173,7 @@ static int configure_kgdboc(void)
- 		int idx;
- 		if (cons->device && cons->device(cons, &idx) == p &&
- 		    idx == tty_line) {
--			kgdboc_io_ops.is_console = 1;
-+			kgdboc_io_ops.cons = cons;
- 			break;
- 		}
- 	}
-diff --git a/drivers/usb/early/ehci-dbgp.c b/drivers/usb/early/ehci-dbgp.c
-index ea0d531..8c32d1a 100644
---- a/drivers/usb/early/ehci-dbgp.c
-+++ b/drivers/usb/early/ehci-dbgp.c
-@@ -1058,7 +1058,8 @@ static int __init kgdbdbgp_parse_config(char *str)
- 		kgdbdbgp_wait_time = simple_strtoul(ptr, &ptr, 10);
- 	}
- 	kgdb_register_io_module(&kgdbdbgp_io_ops);
--	kgdbdbgp_io_ops.is_console = early_dbgp_console.index != -1;
-+	if (early_dbgp_console.index != -1)
-+		kgdbdbgp_io_ops.cons = early_dbgp_console;
- 
- 	return 0;
- }
-diff --git a/include/linux/kgdb.h b/include/linux/kgdb.h
-index b072aeb..bc0face3 100644
---- a/include/linux/kgdb.h
-+++ b/include/linux/kgdb.h
-@@ -273,8 +273,7 @@ struct kgdb_arch {
-  * the I/O driver.
-  * @post_exception: Pointer to a function that will do any cleanup work
-  * for the I/O driver.
-- * @is_console: 1 if the end device is a console 0 if the I/O device is
-- * not a console
-+ * @cons: valid if the I/O device is a console.
-  */
- struct kgdb_io {
- 	const char		*name;
-@@ -284,7 +283,7 @@ struct kgdb_io {
- 	int			(*init) (void);
- 	void			(*pre_exception) (void);
- 	void			(*post_exception) (void);
--	int			is_console;
-+	struct console		*cons;
- };
- 
- extern const struct kgdb_arch		arch_kgdb_ops;
-diff --git a/kernel/debug/kdb/kdb_io.c b/kernel/debug/kdb/kdb_io.c
-index 9e5a40d..5e00bc8 100644
---- a/kernel/debug/kdb/kdb_io.c
-+++ b/kernel/debug/kdb/kdb_io.c
-@@ -560,12 +560,14 @@ static void kdb_msg_write(char *msg, int msg_len)
- 	if (msg_len == 0)
- 		return;
- 
--	if (dbg_io_ops && !dbg_io_ops->is_console)
-+	if (dbg_io_ops)
- 		kdb_io_write(msg, msg_len);
- 
- 	for_each_console(c) {
- 		if (!(c->flags & CON_ENABLED))
- 			continue;
-+		if (c == dbg_io_ops->cons)
-+			continue;
- 		/*
- 		 * Set oops_in_progress to encourage the console drivers to
- 		 * disregard their internal spin locks: in the current calling
--- 
-2.7.4
-
-
+0-DAY CI Kernel Test Service, Intel Corporation
+https://lists.01.org/hyperkitty/list/kbuild-all@lists.01.org
 
 _______________________________________________
 Kgdb-bugreport mailing list
