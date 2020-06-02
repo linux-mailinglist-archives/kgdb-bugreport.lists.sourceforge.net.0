@@ -2,88 +2,96 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CD33C1EC540
-	for <lists+kgdb-bugreport@lfdr.de>; Wed,  3 Jun 2020 00:48:06 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 123EF1EC55A
+	for <lists+kgdb-bugreport@lfdr.de>; Wed,  3 Jun 2020 00:57:04 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jgFhV-0001Di-L7
-	for lists+kgdb-bugreport@lfdr.de; Tue, 02 Jun 2020 22:48:05 +0000
+	id 1jgFqA-0007mV-T3
+	for lists+kgdb-bugreport@lfdr.de; Tue, 02 Jun 2020 22:57:02 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <dianders@chromium.org>) id 1jgFhU-0001DD-BU
- for kgdb-bugreport@lists.sourceforge.net; Tue, 02 Jun 2020 22:48:04 +0000
+ (envelope-from <dianders@chromium.org>) id 1jgFq9-0007lq-3e
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 02 Jun 2020 22:57:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=x1KXljua1G5hAoel7DwUEO0U9O2u7J2/xCv2Bo1SECA=; b=YCutAAF4GwpHjF8qzc/CpCrENx
- mTVgYQTVNcQ3+boV7wzTBb0pxWF5pOaFqsXV+am0LAd5JKKESfUhNFl9yjddRKExqxe5/D57vuG52
- g7Uume75dJoS9z75pwfKp+lh1yKHKdRJWL3ce4WNDJEk0H1NgN6VyRwvhL5OWK+v142E=;
+ bh=cWtHJtfLC9d0nEIoWT/oO21JE7/zvhk7ZTs2Y4u9vW8=; b=VNsM4twPObRjPBrMumtVDooVQb
+ irUtpBZOgJYrCaAtILe2lgVVS4QGxpND0+CDGKVb14EVKaq2hfJYxgbaAjAl3G6qd8NE8wrQaEWay
+ 4nbetHFSmP0UeNNx2aFQJKQnXteh8ICfIylWUZqbjtOoFNhRuhP7Rv8krwXJ5P5r7AF8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=x1KXljua1G5hAoel7DwUEO0U9O2u7J2/xCv2Bo1SECA=; b=E
- AhMCfnKwCRs2ebCwYjSnYQM5e+cre1fwGQQFopkF7x7gZ3P5/gYo7Lp0kQl0k+P7tKsOZzEDVO+li
- k0TJH88I1iNBMGj5X07tWd5H1hzws2+DQJm6L165T9Ul+VKg8EnPSZMfdJPDwYyi3AHYRoCposskq
- AlpRyXjEW2TN5QPE=;
-Received: from mail-pg1-f196.google.com ([209.85.215.196])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=cWtHJtfLC9d0nEIoWT/oO21JE7/zvhk7ZTs2Y4u9vW8=; b=GfaNC5EutT0i5zJtI/06fPsZJV
+ Ig8pfjLdgNmtTXHMW37+ZatXhuqieYQPv0y38S4lYyU56EHuYrs31OcIORhxlN0N90oPOCkLXyRbf
+ pjoFy2r/HIhbQZ+VrkvWgDSS6j+ctSqnyCy8PO16AwJ2dLCZc+AZ8FRYRhHZdVs9+fEM=;
+Received: from mail-vs1-f65.google.com ([209.85.217.65])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jgFhS-009thH-V8
- for kgdb-bugreport@lists.sourceforge.net; Tue, 02 Jun 2020 22:48:04 +0000
-Received: by mail-pg1-f196.google.com with SMTP id u5so313504pgn.5
+ id 1jgFq7-003BnN-Ld
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 02 Jun 2020 22:57:01 +0000
+Received: by mail-vs1-f65.google.com with SMTP id k13so240235vsm.13
  for <kgdb-bugreport@lists.sourceforge.net>;
- Tue, 02 Jun 2020 15:48:02 -0700 (PDT)
+ Tue, 02 Jun 2020 15:56:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=x1KXljua1G5hAoel7DwUEO0U9O2u7J2/xCv2Bo1SECA=;
- b=iWF16kqpdpIGtjp4xjBjKqaVpGDpxlLCroVAwhliDtYhWFf8MY/3vyqEG5n6Il9+Fo
- DerUOVLmdU+EKOQVPAeoRrJ1q1Pl0K+eS/qIqC/KUhRbmQXRl9nk4Ug9huZC/rpqTPr2
- 9ZCZ+7Go9nue5fKbjPKA8SLvQO9EfzUOER4NY=
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=cWtHJtfLC9d0nEIoWT/oO21JE7/zvhk7ZTs2Y4u9vW8=;
+ b=GzRCg9rKNU+yxFhyt7Y94K3FE2nuBuYPKzRDH2BJGAhhjYp498XAOeyMFqILCZ0Cv4
+ IFaNmedGfSHxonbdWaA3cCPKu6XLaiG02Mg3haTRA/UJJyMh9/X/3W8txu3ePl+MWGVL
+ jmwWzG/gLFVKYJFLjOUhynMQAKW3O9ibF8HUU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=x1KXljua1G5hAoel7DwUEO0U9O2u7J2/xCv2Bo1SECA=;
- b=oQuJ8UpgBo7wqstw+u0lq3bypEAxcKr9zCbOd/tahemxgwaRNdO1sJlhgn6BPNCmQp
- StEzqpbC8FSGls0obwtGI4xDY2JqtqVTmrz8chodqy0V7n4dfmvqu8075kjqnvJPut77
- EQktFlhaPg1P0VV05YOzWnPiydYTwrdtC9UU5gSNfKYi2cvCArbJjyKFTPplEVsAtEFd
- VyyqmbU6XqRy068e77YJbna/z3UHqtEQeZh3nggGAd2nP8wvyIm47FQqpwcDCE9HniUW
- XlyALRMoeAhRXZf0GD5f8CXqB1jzCHdg42PeM53jzqngrqR9ghDnH7QG9uilymav/S9w
- miVg==
-X-Gm-Message-State: AOAM532r35nT7W3fWZNcDhoLQGF+K2+Lt2vFtiJsjh94HKtkHjUvYg6i
- bjcpe0pfnAmhdSP//Y+Sh7pbeQ==
-X-Google-Smtp-Source: ABdhPJyunawwPk6QVYIip344J3GUrogqxyNoIrIxPW+q87l4LTgEH9YrcHGEx+smIuSrHsQ69HWQ6g==
-X-Received: by 2002:a17:90a:ce05:: with SMTP id
- f5mr1707468pju.32.1591138077291; 
- Tue, 02 Jun 2020 15:47:57 -0700 (PDT)
-Received: from tictac2.mtv.corp.google.com
- ([2620:15c:202:1:24fa:e766:52c9:e3b2])
- by smtp.gmail.com with ESMTPSA id j10sm88789pjf.9.2020.06.02.15.47.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Jun 2020 15:47:56 -0700 (PDT)
-From: Douglas Anderson <dianders@chromium.org>
-To: Jason Wessel <jason.wessel@windriver.com>,
- Daniel Thompson <daniel.thompson@linaro.org>
-Date: Tue,  2 Jun 2020 15:47:39 -0700
-Message-Id: <20200602154729.v2.1.I70e0d4fd46d5ed2aaf0c98a355e8e1b7a5bb7e4e@changeid>
-X-Mailer: git-send-email 2.27.0.rc2.251.g90737beb825-goog
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=cWtHJtfLC9d0nEIoWT/oO21JE7/zvhk7ZTs2Y4u9vW8=;
+ b=uB/3iLUrldDBkypHLim/TUqq5tHt9t56b+NDm2LsSUp5jmDKURr7GcdggcLgBj4XUX
+ CkM20XmR5G1sxZbXTPTy1r9NjUoWFc5QtmjTyRYrMfeBM5JizACnYI3xpzZAS94JohKJ
+ K7YqmyQHdFW4bhXMUOhGBjZKZEHSNgeIb4D6nEiuVVkxQhnfZXWfBB7FLD/hKWSCz3ra
+ hTzly5Vawbn15357X2VnS/CY79mM5r+AfYXz3y9QNBwfZedFCsAVdYjaidRBGqSTpH5r
+ xU5zJrKmRqW7pAng7lcAKPPGXrsPpDJFfa/EaTYduDHUzFE6JsgXObqEJDg9n0oS8YtX
+ KM2A==
+X-Gm-Message-State: AOAM532EvIpB/gezq0ZynfGjesVqBjoaD/HyRt6soDTFAAFDD6FojL/6
+ NXmPUZET4fzQOseoaC5FdQt0Uofpv4A=
+X-Google-Smtp-Source: ABdhPJynfRyLWQobKY7rg6+VhK/VPPcVuSopl9EBEf5iZWmdmTtOSAj56NFPmyPQwCBlY/+O7YsMuw==
+X-Received: by 2002:a67:1245:: with SMTP id 66mr8690669vss.144.1591138606216; 
+ Tue, 02 Jun 2020 15:56:46 -0700 (PDT)
+Received: from mail-vs1-f53.google.com (mail-vs1-f53.google.com.
+ [209.85.217.53])
+ by smtp.gmail.com with ESMTPSA id r134sm54686vkd.52.2020.06.02.15.56.45
+ for <kgdb-bugreport@lists.sourceforge.net>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 02 Jun 2020 15:56:45 -0700 (PDT)
+Received: by mail-vs1-f53.google.com with SMTP id 1so251527vsl.9
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Tue, 02 Jun 2020 15:56:45 -0700 (PDT)
+X-Received: by 2002:a67:1703:: with SMTP id 3mr20541485vsx.169.1591138604810; 
+ Tue, 02 Jun 2020 15:56:44 -0700 (PDT)
 MIME-Version: 1.0
-X-Spam-Score: 1.1 (+)
+References: <20200507153444.1.I70e0d4fd46d5ed2aaf0c98a355e8e1b7a5bb7e4e@changeid>
+ <20200519104151.6evv3hizm5dbjjq2@holly.lan>
+ <CAD=FV=XCFxgO-s--jw9CTgQUxtQfteoQ4XSL_bbjW4s82Wd3pg@mail.gmail.com>
+ <20200601161952.3hx6sv5hzdnjnvtj@holly.lan>
+In-Reply-To: <20200601161952.3hx6sv5hzdnjnvtj@holly.lan>
+From: Doug Anderson <dianders@chromium.org>
+Date: Tue, 2 Jun 2020 15:56:33 -0700
+X-Gmail-Original-Message-ID: <CAD=FV=UJLTuMp0uvTY0rC51ir_GgRKYxiPCK_w8TY+MBzkqjeA@mail.gmail.com>
+Message-ID: <CAD=FV=UJLTuMp0uvTY0rC51ir_GgRKYxiPCK_w8TY+MBzkqjeA@mail.gmail.com>
+To: Daniel Thompson <daniel.thompson@linaro.org>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.215.196 listed in wl.mailspike.net]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.215.196 listed in list.dnswl.org]
+ trust [209.85.217.65 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.217.65 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -91,11 +99,11 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- 1.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jgFhS-009thH-V8
-Subject: [Kgdb-bugreport] [PATCH v2] kgdb: Avoid suspicious RCU usage warning
+ -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jgFq7-003BnN-Ld
+Subject: Re: [Kgdb-bugreport] [PATCH] kgdb: Avoid suspicious RCU usage
+ warning
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,112 +115,189 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, kgdb-bugreport@lists.sourceforge.net
+Cc: kgdb-bugreport@lists.sourceforge.net, LKML <linux-kernel@vger.kernel.org>,
+ Jason Wessel <jason.wessel@windriver.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-At times when I'm using kgdb I see a splat on my console about
-suspicious RCU usage.  I managed to come up with a case that could
-reproduce this that looked like this:
+Hi,
 
-  WARNING: suspicious RCU usage
-  5.7.0-rc4+ #609 Not tainted
-  -----------------------------
-  kernel/pid.c:395 find_task_by_pid_ns() needs rcu_read_lock() protection!
+On Mon, Jun 1, 2020 at 9:20 AM Daniel Thompson
+<daniel.thompson@linaro.org> wrote:
+>
+> On Wed, May 27, 2020 at 05:02:27PM -0700, Doug Anderson wrote:
+> > Hi,
+> >
+> > On Tue, May 19, 2020 at 3:41 AM Daniel Thompson
+> > <daniel.thompson@linaro.org> wrote:
+> > >
+> > > On Thu, May 07, 2020 at 03:53:58PM -0700, Douglas Anderson wrote:
+> > > > At times when I'm using kgdb I see a splat on my console about
+> > > > suspicious RCU usage.  I managed to come up with a case that could
+> > > > reproduce this that looked like this:
+> > > >
+> > > >   WARNING: suspicious RCU usage
+> > > >   5.7.0-rc4+ #609 Not tainted
+> > > >   -----------------------------
+> > > >   kernel/pid.c:395 find_task_by_pid_ns() needs rcu_read_lock() protection!
+> > > >
+> > > >   other info that might help us debug this:
+> > > >
+> > > >     rcu_scheduler_active = 2, debug_locks = 1
+> > > >   3 locks held by swapper/0/1:
+> > > >    #0: ffffff81b6b8e988 (&dev->mutex){....}-{3:3}, at: __device_attach+0x40/0x13c
+> > > >    #1: ffffffd01109e9e8 (dbg_master_lock){....}-{2:2}, at: kgdb_cpu_enter+0x20c/0x7ac
+> > > >    #2: ffffffd01109ea90 (dbg_slave_lock){....}-{2:2}, at: kgdb_cpu_enter+0x3ec/0x7ac
+> > > >
+> > > >   stack backtrace:
+> > > >   CPU: 7 PID: 1 Comm: swapper/0 Not tainted 5.7.0-rc4+ #609
+> > > >   Hardware name: Google Cheza (rev3+) (DT)
+> > > >   Call trace:
+> > > >    dump_backtrace+0x0/0x1b8
+> > > >    show_stack+0x1c/0x24
+> > > >    dump_stack+0xd4/0x134
+> > > >    lockdep_rcu_suspicious+0xf0/0x100
+> > > >    find_task_by_pid_ns+0x5c/0x80
+> > > >    getthread+0x8c/0xb0
+> > > >    gdb_serial_stub+0x9d4/0xd04
+> > > >    kgdb_cpu_enter+0x284/0x7ac
+> > > >    kgdb_handle_exception+0x174/0x20c
+> > > >    kgdb_brk_fn+0x24/0x30
+> > > >    call_break_hook+0x6c/0x7c
+> > > >    brk_handler+0x20/0x5c
+> > > >    do_debug_exception+0x1c8/0x22c
+> > > >    el1_sync_handler+0x3c/0xe4
+> > > >    el1_sync+0x7c/0x100
+> > > >    rpmh_rsc_probe+0x38/0x420
+> > > >    platform_drv_probe+0x94/0xb4
+> > > >    really_probe+0x134/0x300
+> > > >    driver_probe_device+0x68/0x100
+> > > >    __device_attach_driver+0x90/0xa8
+> > > >    bus_for_each_drv+0x84/0xcc
+> > > >    __device_attach+0xb4/0x13c
+> > > >    device_initial_probe+0x18/0x20
+> > > >    bus_probe_device+0x38/0x98
+> > > >    device_add+0x38c/0x420
+> > > >
+> > > > If I understand properly we should just be able to blanket kgdb under
+> > > > one big RCU read lock and the problem should go away.  We'll add it to
+> > > > the beast-of-a-function known as kgdb_cpu_enter().
+> > > >
+> > > > With this I no longer get any splats and things seem to work fine.
+> > > >
+> > > > Signed-off-by: Douglas Anderson <dianders@chromium.org>
+> > >
+> > > In principle this looks OK but I'm curious why we don't cuddle these
+> > > calls up to the local interrupt locking (and also whether we want to
+> > > keep hold of the lock during stepping). If nothing else that would make
+> > > review easier.
+> >
+> > It probably wouldn't hurt to keep hold of the lock during single
+> > stepping but I don't think there's any real reason we'd want to.
+> > Specifically the only real reason we're calling rcu_read_lock() is to
+> > avoid the warning.  Since we're a stop-the-world debugger it's not
+> > like something else could be messing with state at the same time.
+> >
+> > I'm looking at the whole function though and I don't really understand
+> > all the comments about interrupts being restored by the 'trap return'
+> > code, do you?
+>
+> Not as much as I'd like but, in principle at least, I think the trap
+> handler is written to make it an architecture decision to whether it
+> will be entered with interrupt disabled or not (which would in turn
+> depend on how the architecture manages exception stacks and what else
+> it uses the breakpoint machinery for).
+>
+>
+> > Specifically: as far as I can tell we _always_ restore
+> > interrupts when exiting the function.  There are only two return
+> > statements and both have "local_irq_restore(flags);" right before
+> > them.  We never modify the flags directly and the one other usage of
+> > "flags" is effectively the statement "local_irq_restore(flags);
+> > local_irq_save(flags);" which will, I guess, allow any interrupts that
+> > were already pending to take place.  Are you saying that you want me
+> > to match that and do a "rcu_read_unlock(); rcu_read_lock()" there?
+> >
+> > If I understand things correctly (and there's maybe a better chance
+> > after I read Wei Li's recent patches) the disabling of IRQs for single
+> > stepping happens in a different way.  It looks like we update the
+> > "struct pt_regs" of the task we're stepping so that when we exit kgdb
+> > and start running the task again that the interrupts are off.  That
+> > seems reasonable to me and this function has nothing to do with it.
+> >
+> > ...and further confusion on my part: does the whole saving / restoring
+> > of interrupts in kgdb_cpu_enter() make any sense anyway?  Is this
+> > function ever called from a context that's not an interrupt context?
+> > How do we get the pt_regs in that case?  Just for fun, I tried doing
+> > this:
+> >
+> >     local_irq_save(flags);
+> > +   if (!arch_irqs_disabled_flags(flags))
+> > +           pr_warn("I was wrong\n");
+> >
+> > ...and I never saw "I was wrong" on my system.  Maybe it matters for
+> > something not arm64?  ...or, maybe, this is from when kgdb worked in a
+> > completely different way?
+>
+> I'm not yet in a position to test kgdb on all architectures. Mostly
+> this is because it can be hard to discover suitable qemu stanzas to
+> launch an emulator... and in one case because buildroot doesn't support
+> cross-gdb yet. Anyhow, right now, it is difficult to tour the niche
+> architectures to give a definitive answer.
 
-  other info that might help us debug this:
+OK, fair enough.  I guess I just really don't understand how it could
+work if an architecture didn't do this, but perhaps it would be clear
+if there was code demonstrating it.  ;-)
 
-    rcu_scheduler_active = 2, debug_locks = 1
-  3 locks held by swapper/0/1:
-   #0: ffffff81b6b8e988 (&dev->mutex){....}-{3:3}, at: __device_attach+0x40/0x13c
-   #1: ffffffd01109e9e8 (dbg_master_lock){....}-{2:2}, at: kgdb_cpu_enter+0x20c/0x7ac
-   #2: ffffffd01109ea90 (dbg_slave_lock){....}-{2:2}, at: kgdb_cpu_enter+0x3ec/0x7ac
 
-  stack backtrace:
-  CPU: 7 PID: 1 Comm: swapper/0 Not tainted 5.7.0-rc4+ #609
-  Hardware name: Google Cheza (rev3+) (DT)
-  Call trace:
-   dump_backtrace+0x0/0x1b8
-   show_stack+0x1c/0x24
-   dump_stack+0xd4/0x134
-   lockdep_rcu_suspicious+0xf0/0x100
-   find_task_by_pid_ns+0x5c/0x80
-   getthread+0x8c/0xb0
-   gdb_serial_stub+0x9d4/0xd04
-   kgdb_cpu_enter+0x284/0x7ac
-   kgdb_handle_exception+0x174/0x20c
-   kgdb_brk_fn+0x24/0x30
-   call_break_hook+0x6c/0x7c
-   brk_handler+0x20/0x5c
-   do_debug_exception+0x1c8/0x22c
-   el1_sync_handler+0x3c/0xe4
-   el1_sync+0x7c/0x100
-   rpmh_rsc_probe+0x38/0x420
-   platform_drv_probe+0x94/0xb4
-   really_probe+0x134/0x300
-   driver_probe_device+0x68/0x100
-   __device_attach_driver+0x90/0xa8
-   bus_for_each_drv+0x84/0xcc
-   __device_attach+0xb4/0x13c
-   device_initial_probe+0x18/0x20
-   bus_probe_device+0x38/0x98
-   device_add+0x38c/0x420
+> > In general I made my patch by:
+> > * Calling rcu_read_lock() at the start of the function.
+> > * Calling rcu_read_unlock() right before all 2 of the "return" calls of
+> >   the function.
+> >
+> > ...I was hoping that would actually make it easier to reason about
+> > even if the function is a beast.
+> >
+> >
+> > Hopefully the above makes sense.  I wouldn't rule out me just being
+> > utterly confused, but I _think_ I reasoned through it all.  ;-)  If it
+> > all makes sense, I'm inclined to:
+> >
+> > 1. Leave my patch the way it is.
+>
+> I'm still a little reluctant on this.
+>
+> It's not that I think the current patch is buggy, more that I view the
+> interrupt locks as the place in the function that we start to "assert"
+> what our execution context is going to be. Seeing all the entry/exit
+> logic in one place makes reasoning easier and should make the eventual
+> refactoring of "the beast" a little easier too.
 
-If I understand properly we should just be able to blanket kgdb under
-one big RCU read lock and the problem should go away.  We'll add it to
-the beast-of-a-function known as kgdb_cpu_enter().
+OK, I give in.  Posted v2 doing it how I think you want it.
 
-With this I no longer get any splats and things seem to work fine.
 
-Signed-off-by: Douglas Anderson <dianders@chromium.org>
----
+> > 2. Perhaps remove the whole irq saving / restoring in kgdb_cpu_enter().
+>
+> Are you feeling lucky?
+>
+> I think there will come a time when bravery is called for but I'd rather
+> see this as part of a bigger rewrite instead of a single high risk
+> change.
 
-Changes in v2:
-- Cuddle up to the local interrupt locking code.
+Hrm, maybe.  I guess it depends on whether we want to take baby steps
+there or try to do it all at once.  If we take baby steps we will
+occasionally fall down but we'll slowly start getting things cleaned
+up.  If we wait for a full rewrite then we might be waiting for a long
+time.  It'll also be harder to figure out which of the big changes in
+the major rewrite broken someone.  ...or if the major rewrite comes in
+20 small/bisectable patches it may be hard to revert patch 2 out of 20
+if the future patches all build upon it.  If we do one small high-risk
+change and then wait before building upon it then it'll be easy for
+someone to bisect and then yell for a revert.
 
- kernel/debug/debug_core.c | 4 ++++
- 1 file changed, 4 insertions(+)
 
-diff --git a/kernel/debug/debug_core.c b/kernel/debug/debug_core.c
-index ef94e906f05a..c9748f454fb7 100644
---- a/kernel/debug/debug_core.c
-+++ b/kernel/debug/debug_core.c
-@@ -575,6 +575,7 @@ static int kgdb_cpu_enter(struct kgdb_state *ks, struct pt_regs *regs,
- 		arch_kgdb_ops.disable_hw_break(regs);
- 
- acquirelock:
-+	rcu_read_lock();
- 	/*
- 	 * Interrupts will be restored by the 'trap return' code, except when
- 	 * single stepping.
-@@ -634,6 +635,7 @@ static int kgdb_cpu_enter(struct kgdb_state *ks, struct pt_regs *regs,
- 			atomic_dec(&slaves_in_kgdb);
- 			dbg_touch_watchdogs();
- 			local_irq_restore(flags);
-+			rcu_read_unlock();
- 			return 0;
- 		}
- 		cpu_relax();
-@@ -652,6 +654,7 @@ static int kgdb_cpu_enter(struct kgdb_state *ks, struct pt_regs *regs,
- 		raw_spin_unlock(&dbg_master_lock);
- 		dbg_touch_watchdogs();
- 		local_irq_restore(flags);
-+		rcu_read_unlock();
- 
- 		goto acquirelock;
- 	}
-@@ -775,6 +778,7 @@ static int kgdb_cpu_enter(struct kgdb_state *ks, struct pt_regs *regs,
- 	raw_spin_unlock(&dbg_master_lock);
- 	dbg_touch_watchdogs();
- 	local_irq_restore(flags);
-+	rcu_read_unlock();
- 
- 	return kgdb_info[cpu].ret_state;
- }
--- 
-2.27.0.rc2.251.g90737beb825-goog
-
+-Doug
 
 
 _______________________________________________
