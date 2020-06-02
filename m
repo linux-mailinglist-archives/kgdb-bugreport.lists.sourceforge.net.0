@@ -2,106 +2,100 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 79BFB1EC460
-	for <lists+kgdb-bugreport@lfdr.de>; Tue,  2 Jun 2020 23:33:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CD33C1EC540
+	for <lists+kgdb-bugreport@lfdr.de>; Wed,  3 Jun 2020 00:48:06 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jgEX6-00067J-9t
-	for lists+kgdb-bugreport@lfdr.de; Tue, 02 Jun 2020 21:33:16 +0000
+	id 1jgFhV-0001Di-L7
+	for lists+kgdb-bugreport@lfdr.de; Tue, 02 Jun 2020 22:48:05 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <dianders@chromium.org>) id 1jgEWr-00066Q-RJ
- for kgdb-bugreport@lists.sourceforge.net; Tue, 02 Jun 2020 21:33:01 +0000
+ (envelope-from <dianders@chromium.org>) id 1jgFhU-0001DD-BU
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 02 Jun 2020 22:48:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=2rCy6JhciRmnrRJ+3cwFrQGHFe5sBy1qAr/EQNm0QcM=; b=E9NlScL4n4Y+QuumdDYinCK1GC
- lRHTgeOfjHunkeh19BCY77UJUygcZQdyPFrulm6OkTkP2+fgk1QPqosN+mBUZZo3UOtKu27T0O0Jq
- IQ/wXITHiK5CW1jRQ1ejl+GV6Sanm9evK2fnoyByUfsHlJ8j4hXJNWW0Mr37W0mSSkTw=;
+ bh=x1KXljua1G5hAoel7DwUEO0U9O2u7J2/xCv2Bo1SECA=; b=YCutAAF4GwpHjF8qzc/CpCrENx
+ mTVgYQTVNcQ3+boV7wzTBb0pxWF5pOaFqsXV+am0LAd5JKKESfUhNFl9yjddRKExqxe5/D57vuG52
+ g7Uume75dJoS9z75pwfKp+lh1yKHKdRJWL3ce4WNDJEk0H1NgN6VyRwvhL5OWK+v142E=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=2rCy6JhciRmnrRJ+3cwFrQGHFe5sBy1qAr/EQNm0QcM=; b=bNKim1FcLGsgne6NJX5jmcy8a6
- HNmOQgaPNliKfYVbB+MttbtZvqDo+UipXlIpQFGNu3XAlLCRVQIiXEV/5BmVO5Qv/M+4xh3uEl71s
- ITJ0UL76H6f8gMOojYvxLQOMiF291x35bO8fRPmDapjSfBohgjrw0VBoHvmGxFWutI9w=;
-Received: from mail-ua1-f66.google.com ([209.85.222.66])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=x1KXljua1G5hAoel7DwUEO0U9O2u7J2/xCv2Bo1SECA=; b=E
+ AhMCfnKwCRs2ebCwYjSnYQM5e+cre1fwGQQFopkF7x7gZ3P5/gYo7Lp0kQl0k+P7tKsOZzEDVO+li
+ k0TJH88I1iNBMGj5X07tWd5H1hzws2+DQJm6L165T9Ul+VKg8EnPSZMfdJPDwYyi3AHYRoCposskq
+ AlpRyXjEW2TN5QPE=;
+Received: from mail-pg1-f196.google.com ([209.85.215.196])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jgEWq-0037Vc-3q
- for kgdb-bugreport@lists.sourceforge.net; Tue, 02 Jun 2020 21:33:01 +0000
-Received: by mail-ua1-f66.google.com with SMTP id q15so127346uaa.5
+ id 1jgFhS-009thH-V8
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 02 Jun 2020 22:48:04 +0000
+Received: by mail-pg1-f196.google.com with SMTP id u5so313504pgn.5
  for <kgdb-bugreport@lists.sourceforge.net>;
- Tue, 02 Jun 2020 14:33:00 -0700 (PDT)
+ Tue, 02 Jun 2020 15:48:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=2rCy6JhciRmnrRJ+3cwFrQGHFe5sBy1qAr/EQNm0QcM=;
- b=ciixlNC0q8jiB9c1y5NKtCxgjskcRH5ZADVDSGiuv1LafL24gHJAWjAAOzHUwhxFaP
- yuVuXTSwK7lwK5QiEtlqu46S7j17gkm8Ki1FB/8j7VTmrdi57wfGjUZ74VcpqclUvGbU
- 8N9UENxO7x0eTZsNRlRFUZLK5q7WoDrzvPCIQ=
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=x1KXljua1G5hAoel7DwUEO0U9O2u7J2/xCv2Bo1SECA=;
+ b=iWF16kqpdpIGtjp4xjBjKqaVpGDpxlLCroVAwhliDtYhWFf8MY/3vyqEG5n6Il9+Fo
+ DerUOVLmdU+EKOQVPAeoRrJ1q1Pl0K+eS/qIqC/KUhRbmQXRl9nk4Ug9huZC/rpqTPr2
+ 9ZCZ+7Go9nue5fKbjPKA8SLvQO9EfzUOER4NY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=2rCy6JhciRmnrRJ+3cwFrQGHFe5sBy1qAr/EQNm0QcM=;
- b=cs6CGGPAL01QECkJsmR8Z1v6TFv6OmYT/Q0/i87ei5+wlShOmmooGPkumpwuCIemQb
- ZHtqP2pHGDB18QdjyyNhOAR5r0Rc7jG22im4UXec00yHpetCJ9b1sRudrCzVsedUmt7y
- 66PjQHqjRvntBndMC7KHxtwJk2Vbd+95NbcdOBkW+Iv3R9EHUj9XSGSZAFgDvjuTSHwu
- +KEsSa5dn8SwEBmUtgAGsw7cfB0726nuCTqgufKJQupwh8Mox4/YoBd4Xw7YEQ7hiyBW
- zq7mRA5VsKs2nFV25MlEtn/vlb0YyMjL2eZWyHphyO0FDRRzImQTcMR+U3X4BI+jmWeC
- vpSg==
-X-Gm-Message-State: AOAM532dMpjHaral7K3AArRsu3cRpUYBI1i48mtbr+16V4xZSOT1DENa
- 8g44WAYBXkE6JEo5QH1cc9LkvTAQ9Pk=
-X-Google-Smtp-Source: ABdhPJzmuVpWHOfi9I0CQLYD1cBuZEC9pIPv/aoG4SXdkTih51g/6lfWTZasycty7wBtj2v4PPI6/w==
-X-Received: by 2002:ab0:7619:: with SMTP id o25mr5930370uap.109.1591133574133; 
- Tue, 02 Jun 2020 14:32:54 -0700 (PDT)
-Received: from mail-ua1-f53.google.com (mail-ua1-f53.google.com.
- [209.85.222.53])
- by smtp.gmail.com with ESMTPSA id x136sm29912vkx.13.2020.06.02.14.32.53
- for <kgdb-bugreport@lists.sourceforge.net>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 02 Jun 2020 14:32:53 -0700 (PDT)
-Received: by mail-ua1-f53.google.com with SMTP id b13so131179uav.3
- for <kgdb-bugreport@lists.sourceforge.net>;
- Tue, 02 Jun 2020 14:32:53 -0700 (PDT)
-X-Received: by 2002:ab0:6e8e:: with SMTP id b14mr22707773uav.0.1591133572856; 
- Tue, 02 Jun 2020 14:32:52 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=x1KXljua1G5hAoel7DwUEO0U9O2u7J2/xCv2Bo1SECA=;
+ b=oQuJ8UpgBo7wqstw+u0lq3bypEAxcKr9zCbOd/tahemxgwaRNdO1sJlhgn6BPNCmQp
+ StEzqpbC8FSGls0obwtGI4xDY2JqtqVTmrz8chodqy0V7n4dfmvqu8075kjqnvJPut77
+ EQktFlhaPg1P0VV05YOzWnPiydYTwrdtC9UU5gSNfKYi2cvCArbJjyKFTPplEVsAtEFd
+ VyyqmbU6XqRy068e77YJbna/z3UHqtEQeZh3nggGAd2nP8wvyIm47FQqpwcDCE9HniUW
+ XlyALRMoeAhRXZf0GD5f8CXqB1jzCHdg42PeM53jzqngrqR9ghDnH7QG9uilymav/S9w
+ miVg==
+X-Gm-Message-State: AOAM532r35nT7W3fWZNcDhoLQGF+K2+Lt2vFtiJsjh94HKtkHjUvYg6i
+ bjcpe0pfnAmhdSP//Y+Sh7pbeQ==
+X-Google-Smtp-Source: ABdhPJyunawwPk6QVYIip344J3GUrogqxyNoIrIxPW+q87l4LTgEH9YrcHGEx+smIuSrHsQ69HWQ6g==
+X-Received: by 2002:a17:90a:ce05:: with SMTP id
+ f5mr1707468pju.32.1591138077291; 
+ Tue, 02 Jun 2020 15:47:57 -0700 (PDT)
+Received: from tictac2.mtv.corp.google.com
+ ([2620:15c:202:1:24fa:e766:52c9:e3b2])
+ by smtp.gmail.com with ESMTPSA id j10sm88789pjf.9.2020.06.02.15.47.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 02 Jun 2020 15:47:56 -0700 (PDT)
+From: Douglas Anderson <dianders@chromium.org>
+To: Jason Wessel <jason.wessel@windriver.com>,
+ Daniel Thompson <daniel.thompson@linaro.org>
+Date: Tue,  2 Jun 2020 15:47:39 -0700
+Message-Id: <20200602154729.v2.1.I70e0d4fd46d5ed2aaf0c98a355e8e1b7a5bb7e4e@changeid>
+X-Mailer: git-send-email 2.27.0.rc2.251.g90737beb825-goog
 MIME-Version: 1.0
-References: <1590751607-29676-1-git-send-email-sumit.garg@linaro.org>
- <1590751607-29676-5-git-send-email-sumit.garg@linaro.org>
-In-Reply-To: <1590751607-29676-5-git-send-email-sumit.garg@linaro.org>
-From: Doug Anderson <dianders@chromium.org>
-Date: Tue, 2 Jun 2020 14:32:41 -0700
-X-Gmail-Original-Message-ID: <CAD=FV=WZwUx0SKO96g6vqh3qgwq5xeaAOoT-Qgx3JnEB3c1AkQ@mail.gmail.com>
-Message-ID: <CAD=FV=WZwUx0SKO96g6vqh3qgwq5xeaAOoT-Qgx3JnEB3c1AkQ@mail.gmail.com>
-To: Sumit Garg <sumit.garg@linaro.org>
-X-Spam-Score: -0.2 (/)
+X-Spam-Score: 1.1 (+)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.215.196 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.215.196 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.222.66 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.222.66 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jgEWq-0037Vc-3q
-Subject: Re: [Kgdb-bugreport] [PATCH v4 4/4] kdb: Switch to use safer
- dbg_io_ops over console APIs
+ 1.2 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jgFhS-009thH-V8
+Subject: [Kgdb-bugreport] [PATCH v2] kgdb: Avoid suspicious RCU usage warning
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,82 +107,112 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: Petr Mladek <pmladek@suse.com>,
- Daniel Thompson <daniel.thompson@linaro.org>,
- kgdb-bugreport@lists.sourceforge.net,
- Jason Wessel <jason.wessel@windriver.com>, LKML <linux-kernel@vger.kernel.org>,
- Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Jiri Slaby <jslaby@suse.com>
+Cc: linux-kernel@vger.kernel.org, kgdb-bugreport@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Hi,
+At times when I'm using kgdb I see a splat on my console about
+suspicious RCU usage.  I managed to come up with a case that could
+reproduce this that looked like this:
 
-On Fri, May 29, 2020 at 4:27 AM Sumit Garg <sumit.garg@linaro.org> wrote:
->
-> In kgdb context, calling console handlers aren't safe due to locks used
-> in those handlers which could in turn lead to a deadlock. Although, using
-> oops_in_progress increases the chance to bypass locks in most console
-> handlers but it might not be sufficient enough in case a console uses
-> more locks (VT/TTY is good example).
->
-> Currently when a driver provides both polling I/O and a console then kdb
-> will output using the console. We can increase robustness by using the
-> currently active polling I/O driver (which should be lockless) instead
-> of the corresponding console. For several common cases (e.g. an
-> embedded system with a single serial port that is used both for console
-> output and debugger I/O) this will result in no console handler being
-> used.
->
-> In order to achieve this we need to reverse the order of preference to
-> use dbg_io_ops (uses polling I/O mode) over console APIs. So we just
-> store "struct console" that represents debugger I/O in dbg_io_ops and
-> while emitting kdb messages, skip console that matches dbg_io_ops
-> console in order to avoid duplicate messages. After this change,
-> "is_console" param becomes redundant and hence removed.
->
-> Suggested-by: Daniel Thompson <daniel.thompson@linaro.org>
-> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> ---
->  drivers/tty/serial/kgdb_nmi.c | 2 +-
->  drivers/tty/serial/kgdboc.c   | 4 ++--
+  WARNING: suspicious RCU usage
+  5.7.0-rc4+ #609 Not tainted
+  -----------------------------
+  kernel/pid.c:395 find_task_by_pid_ns() needs rcu_read_lock() protection!
 
-I don't think this will compile against the "kgdboc_earlycon" patches
-that landed, will it?  Specifically when I apply your patch I still
-see "is_console" in:
+  other info that might help us debug this:
 
-static struct kgdb_io kgdboc_earlycon_io_ops = {
-  .name = "kgdboc_earlycon",
-  .read_char = kgdboc_earlycon_get_char,
-  .write_char = kgdboc_earlycon_put_char,
-  .pre_exception = kgdboc_earlycon_pre_exp_handler,
-  .deinit = kgdboc_earlycon_deinit,
-  .is_console = true,
-};
+    rcu_scheduler_active = 2, debug_locks = 1
+  3 locks held by swapper/0/1:
+   #0: ffffff81b6b8e988 (&dev->mutex){....}-{3:3}, at: __device_attach+0x40/0x13c
+   #1: ffffffd01109e9e8 (dbg_master_lock){....}-{2:2}, at: kgdb_cpu_enter+0x20c/0x7ac
+   #2: ffffffd01109ea90 (dbg_slave_lock){....}-{2:2}, at: kgdb_cpu_enter+0x3ec/0x7ac
 
+  stack backtrace:
+  CPU: 7 PID: 1 Comm: swapper/0 Not tainted 5.7.0-rc4+ #609
+  Hardware name: Google Cheza (rev3+) (DT)
+  Call trace:
+   dump_backtrace+0x0/0x1b8
+   show_stack+0x1c/0x24
+   dump_stack+0xd4/0x134
+   lockdep_rcu_suspicious+0xf0/0x100
+   find_task_by_pid_ns+0x5c/0x80
+   getthread+0x8c/0xb0
+   gdb_serial_stub+0x9d4/0xd04
+   kgdb_cpu_enter+0x284/0x7ac
+   kgdb_handle_exception+0x174/0x20c
+   kgdb_brk_fn+0x24/0x30
+   call_break_hook+0x6c/0x7c
+   brk_handler+0x20/0x5c
+   do_debug_exception+0x1c8/0x22c
+   el1_sync_handler+0x3c/0xe4
+   el1_sync+0x7c/0x100
+   rpmh_rsc_probe+0x38/0x420
+   platform_drv_probe+0x94/0xb4
+   really_probe+0x134/0x300
+   driver_probe_device+0x68/0x100
+   __device_attach_driver+0x90/0xa8
+   bus_for_each_drv+0x84/0xcc
+   __device_attach+0xb4/0x13c
+   device_initial_probe+0x18/0x20
+   bus_probe_device+0x38/0x98
+   device_add+0x38c/0x420
 
-> diff --git a/include/linux/kgdb.h b/include/linux/kgdb.h
-> index b072aeb..bc0face3 100644
-> --- a/include/linux/kgdb.h
-> +++ b/include/linux/kgdb.h
-> @@ -273,8 +273,7 @@ struct kgdb_arch {
->   * the I/O driver.
->   * @post_exception: Pointer to a function that will do any cleanup work
->   * for the I/O driver.
-> - * @is_console: 1 if the end device is a console 0 if the I/O device is
-> - * not a console
-> + * @cons: valid if the I/O device is a console.
+If I understand properly we should just be able to blanket kgdb under
+one big RCU read lock and the problem should go away.  We'll add it to
+the beast-of-a-function known as kgdb_cpu_enter().
 
-optional nit: add "; else NULL"
+With this I no longer get any splats and things seem to work fine.
 
+Signed-off-by: Douglas Anderson <dianders@chromium.org>
+---
 
-Other than that this looks great.  Feel free to add my Reviewed-by:
-tag once you've fixed the error that the bot found and resolved with
-kgdb_earlycon.
+Changes in v2:
+- Cuddle up to the local interrupt locking code.
 
+ kernel/debug/debug_core.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
--Doug
+diff --git a/kernel/debug/debug_core.c b/kernel/debug/debug_core.c
+index ef94e906f05a..c9748f454fb7 100644
+--- a/kernel/debug/debug_core.c
++++ b/kernel/debug/debug_core.c
+@@ -575,6 +575,7 @@ static int kgdb_cpu_enter(struct kgdb_state *ks, struct pt_regs *regs,
+ 		arch_kgdb_ops.disable_hw_break(regs);
+ 
+ acquirelock:
++	rcu_read_lock();
+ 	/*
+ 	 * Interrupts will be restored by the 'trap return' code, except when
+ 	 * single stepping.
+@@ -634,6 +635,7 @@ static int kgdb_cpu_enter(struct kgdb_state *ks, struct pt_regs *regs,
+ 			atomic_dec(&slaves_in_kgdb);
+ 			dbg_touch_watchdogs();
+ 			local_irq_restore(flags);
++			rcu_read_unlock();
+ 			return 0;
+ 		}
+ 		cpu_relax();
+@@ -652,6 +654,7 @@ static int kgdb_cpu_enter(struct kgdb_state *ks, struct pt_regs *regs,
+ 		raw_spin_unlock(&dbg_master_lock);
+ 		dbg_touch_watchdogs();
+ 		local_irq_restore(flags);
++		rcu_read_unlock();
+ 
+ 		goto acquirelock;
+ 	}
+@@ -775,6 +778,7 @@ static int kgdb_cpu_enter(struct kgdb_state *ks, struct pt_regs *regs,
+ 	raw_spin_unlock(&dbg_master_lock);
+ 	dbg_touch_watchdogs();
+ 	local_irq_restore(flags);
++	rcu_read_unlock();
+ 
+ 	return kgdb_info[cpu].ret_state;
+ }
+-- 
+2.27.0.rc2.251.g90737beb825-goog
+
 
 
 _______________________________________________
