@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 58B5B1ECA73
-	for <lists+kgdb-bugreport@lfdr.de>; Wed,  3 Jun 2020 09:23:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5F01F1ECA75
+	for <lists+kgdb-bugreport@lfdr.de>; Wed,  3 Jun 2020 09:23:11 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jgNjw-0003oD-5M
-	for lists+kgdb-bugreport@lfdr.de; Wed, 03 Jun 2020 07:23:08 +0000
+	id 1jgNjy-0003op-73
+	for lists+kgdb-bugreport@lfdr.de; Wed, 03 Jun 2020 07:23:10 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sumit.garg@linaro.org>) id 1jgNjv-0003mz-1f
- for kgdb-bugreport@lists.sourceforge.net; Wed, 03 Jun 2020 07:23:07 +0000
+ (envelope-from <sumit.garg@linaro.org>) id 1jgNjw-0003oT-Hi
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 03 Jun 2020 07:23:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:
  To:From:Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=epHTx4WtH5eVO53u9vYRGtnDvl2Fou6agb9RgeFaY18=; b=mxy7udo5W6tIaILSRIFbA0+xnB
- sE15Hw7a2o4mCPmC6c5wlHUpEkSV4BLHvRL7wWwWvHQmKsrzoj3njzNtQDb3A8VIAIjw/xnuSBhAP
- sfSn6oH1LdbRsILtXm/h4KVKJ9YIKsjdOEXaHUGRiAj8S7IELAbX+KaIxzRwHDv6OyCk=;
+ bh=jZZiPsh1/1zA6921CY7D2bWjWgixKjYO5KIMajFrFQ8=; b=Z1lOuEkNg0I7KvW1bKqER7+TB3
+ vs++xeS4NP2pKwzVHPejqfPxMiwjADiZ7l6xEAoAGQJkbG/tpcPgh5Qo5v0R8e3ZQPB4WX4QrJtDY
+ XrHZwbv4fP+83h8/VgCP7G4SSIXA5C1njB+/POacbdPOe4rWVzFfKJ/T2u+W6kNMPIKA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To
@@ -30,73 +30,72 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=epHTx4WtH5eVO53u9vYRGtnDvl2Fou6agb9RgeFaY18=; b=b4teqsCzoxC4X2154rf69yFMSr
- vLw2Xh8NMSuYLo/07Rnbv2PqzYafJLAng4OTAvWytr6iPoOVk9jTw5JI54fNL7KSLghrPBxVeLr0S
- Xt6T3NEEXCAbUiKENHutrhSHI0nc/Acoi3QrYYed6TfnE2SvDg/sc9t00sJrqnHIzGdw=;
-Received: from mail-pg1-f196.google.com ([209.85.215.196])
+ bh=jZZiPsh1/1zA6921CY7D2bWjWgixKjYO5KIMajFrFQ8=; b=CC7CE1AMzURlyp/57ZKU9gFgBP
+ 4xTfLLRMBhXTAEDLXoyE1dYHYXUvLF1Ko942Z3qEEfqbVawjkqyDFnPEH9doNixs5taNklAu5c0jt
+ 5eQVqCjhrRTzOkBnOLaWLJCK+k7WGDNsk3bxLv3dlrbU7Iro1YmNcPeVxfthUQTO6ki8=;
+Received: from mail-pf1-f195.google.com ([209.85.210.195])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jgNjm-003bCr-G3
- for kgdb-bugreport@lists.sourceforge.net; Wed, 03 Jun 2020 07:23:00 +0000
-Received: by mail-pg1-f196.google.com with SMTP id p30so1129842pgl.11
+ id 1jgNjs-003bDA-V0
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 03 Jun 2020 07:23:08 +0000
+Received: by mail-pf1-f195.google.com with SMTP id 64so1017599pfg.8
  for <kgdb-bugreport@lists.sourceforge.net>;
- Wed, 03 Jun 2020 00:22:58 -0700 (PDT)
+ Wed, 03 Jun 2020 00:23:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=epHTx4WtH5eVO53u9vYRGtnDvl2Fou6agb9RgeFaY18=;
- b=CDPwO3olv9s5zteGYUfVc+sp3PPPJPLARUW/0rVxq1+Ly8PTZYNTR2mW3V2vZmsLiT
- 3oAMpGGkbkfHTmeJlqmXYWVqv+T3LSm8sk0Qx1h+VYo3kBBoWeyhjdKvwlQo/3jUlCrW
- 0ttOmubv94mXOn3Yyl/JahnMEW2Sk4SvsuahvpEihKkHm1Ci7nGsbhs2eWHxRWT3ar8H
- lAoF0PK0LLTzSTDLIX0NKc4v3lVMpP9I7hfAR1t57cPwBtKiglm+xeqlwoEkpzgF2Lmi
- QPCkwbuBYt7tpDeHN7sZa2qWc3ua/uLsB+hsIW6e0xDasBj+32acrZyV0pl5oMp0Ba/Z
- u3LA==
+ bh=jZZiPsh1/1zA6921CY7D2bWjWgixKjYO5KIMajFrFQ8=;
+ b=DDKk6u1fPNb/T0ZtwX3dMrmOO5bXn9bW/74ghMD/pXRmyCkw7jHbkdxMetszKJfWtK
+ veXD6gwYd4eg1cWIEvLDloPzbUZaYGBSDa+Re77ULD/sE8UNM1yQnk5bSSUyDMwpVy0T
+ Y7/j995qyxR8dwC/OLtn2FZ/EM4qAtf/zb/7k5oZco0ZQ9nkQ7WZKn7LYnnaj6Pb7F+0
+ M+ufUnZY6LcZTwV9NRv33/1uMEfH8VN+TfqVcRO9atsUTTAg8vCmPmZx5ULTBcffYe/w
+ 8UTxAfx3zUaZYcK2HxYcqge/Iahepaoo71EcX3albVDPYSOZDayyVb0cDQJgK8dhIluc
+ M8Bw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=epHTx4WtH5eVO53u9vYRGtnDvl2Fou6agb9RgeFaY18=;
- b=pfEv3vvoP5WPSYEnLL/eBrJ0gSvcj/V63+KZNFoG079fSUBiQFF9/AjTRZZ/jaGfNM
- tViLrdkZ1Cdm3mQIVwh2UDK75hjlhc4dGULtIks8697yH0rggOfEmIKF9RuLjMc4UzRz
- 4g2iwEJgfDOLJhf+mKMj7/2GGlFrPM4EaJ9hbQudfa/HvEAZtalKsBFUc3eExW+oalwp
- iezeKEb0T3caKt7iCdhHklW/7VENAkWVnRaH/3ybvluvSN0PjUgHOr/dPHkaJVdEu8Up
- 3Tt69YyJXMezaCPgQV01KclQIDMwSr05IV7YxbIrMEs0OQXmYv+5vF38ok8iP95ccxHo
- PmMA==
-X-Gm-Message-State: AOAM532HP0mFVD3rzXQDndUPcc8Eyg9i+0Mm04JMCICDsmOgGSQstjAw
- MCLsP/KwSeQHS6VRHyh4Jjw3vA==
-X-Google-Smtp-Source: ABdhPJxq6b+TRxfiJi4+MW8+OSaaHBj+RxXJSsUHooYPQOdqGK6CI23+Yc+zOpHUP8us0rlfL65g2g==
-X-Received: by 2002:a17:90a:2686:: with SMTP id
- m6mr4101227pje.11.1591168972877; 
- Wed, 03 Jun 2020 00:22:52 -0700 (PDT)
+ bh=jZZiPsh1/1zA6921CY7D2bWjWgixKjYO5KIMajFrFQ8=;
+ b=hXvg8xNv1GL+jeJ5x3XBG9XAAUxZSMptTLbyo90RZb/04ri7h4nL/xcXtGLqhXM1xs
+ n5Psx56B9pPqG01YTLKXthb2o4Omji/VrVIP41LLR6yPM8bSNxpURe9QCHW+AS45AfOD
+ 60fQecv1Fen0G9UZ6xKQnLpNfWtDcNXCWRE0+q4b8FYIUUboAYfM14zK9Ino7Lsbx6vB
+ cQ0+PVdaHRcxuQSLv71as40KIB7Pi61ZRsrIVyhNpXlmDnCEGkc/8mgw8lBlE7r2wIBo
+ JTnSTF46uRBETQAjfg6kBEUK38bF+5F+n/8PjwbbCFqFFryMAc9Kme0Xz1q7twmsEV2Z
+ O2Dw==
+X-Gm-Message-State: AOAM530LN+RFmKp5MEecM64KYmweI3r+8AbT3e3wUxaC64p8jVwCklBq
+ RNO7AxiSB4auVzbeF8b8XI7rwxw+BgM=
+X-Google-Smtp-Source: ABdhPJxe75iTddF1frjRbkTFjkRx0tyZwI/mCeAnINWyuHqzShSQl2ELt84iMQB4pkOjXgqZEA/mqw==
+X-Received: by 2002:a05:6a00:14d4:: with SMTP id
+ w20mr15187904pfu.279.1591168979274; 
+ Wed, 03 Jun 2020 00:22:59 -0700 (PDT)
 Received: from localhost.localdomain ([117.252.66.248])
- by smtp.gmail.com with ESMTPSA id j17sm1407272pjy.22.2020.06.03.00.22.47
+ by smtp.gmail.com with ESMTPSA id j17sm1407272pjy.22.2020.06.03.00.22.53
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Wed, 03 Jun 2020 00:22:52 -0700 (PDT)
+ Wed, 03 Jun 2020 00:22:58 -0700 (PDT)
 From: Sumit Garg <sumit.garg@linaro.org>
 To: daniel.thompson@linaro.org
-Date: Wed,  3 Jun 2020 12:52:14 +0530
-Message-Id: <1591168935-6382-4-git-send-email-sumit.garg@linaro.org>
+Date: Wed,  3 Jun 2020 12:52:15 +0530
+Message-Id: <1591168935-6382-5-git-send-email-sumit.garg@linaro.org>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1591168935-6382-1-git-send-email-sumit.garg@linaro.org>
 References: <1591168935-6382-1-git-send-email-sumit.garg@linaro.org>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.215.196 listed in wl.mailspike.net]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.215.196 listed in list.dnswl.org]
+ trust [209.85.210.195 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.210.195 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jgNjm-003bCr-G3
-Subject: [Kgdb-bugreport] [PATCH v5 3/4] kdb: Make kdb_printf() console
- handling more robust
+X-Headers-End: 1jgNjs-003bDA-V0
+Subject: [Kgdb-bugreport] [PATCH v5 4/4] kdb: Switch to use safer dbg_io_ops
+ over console APIs
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -116,49 +115,148 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-While rounding up CPUs via NMIs, its possible that a rounded up CPU
-maybe holding a console port lock leading to kgdb master CPU stuck in
-a deadlock during invocation of console write operations. A similar
-deadlock could also be possible while using synchronous breakpoints.
+In kgdb context, calling console handlers aren't safe due to locks used
+in those handlers which could in turn lead to a deadlock. Although, using
+oops_in_progress increases the chance to bypass locks in most console
+handlers but it might not be sufficient enough in case a console uses
+more locks (VT/TTY is good example).
 
-So in order to avoid such a deadlock, set oops_in_progress to encourage
-the console drivers to disregard their internal spin locks: in the
-current calling context the risk of deadlock is a bigger problem than
-risks due to re-entering the console driver. We operate directly on
-oops_in_progress rather than using bust_spinlocks() because the calls
-bust_spinlocks() makes on exit are not appropriate for this calling
-context.
+Currently when a driver provides both polling I/O and a console then kdb
+will output using the console. We can increase robustness by using the
+currently active polling I/O driver (which should be lockless) instead
+of the corresponding console. For several common cases (e.g. an
+embedded system with a single serial port that is used both for console
+output and debugger I/O) this will result in no console handler being
+used.
 
-Suggested-by: Petr Mladek <pmladek@suse.com>
+In order to achieve this we need to reverse the order of preference to
+use dbg_io_ops (uses polling I/O mode) over console APIs. So we just
+store "struct console" that represents debugger I/O in dbg_io_ops and
+while emitting kdb messages, skip console that matches dbg_io_ops
+console in order to avoid duplicate messages. After this change,
+"is_console" param becomes redundant and hence removed.
+
+Suggested-by: Daniel Thompson <daniel.thompson@linaro.org>
 Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 Reviewed-by: Douglas Anderson <dianders@chromium.org>
 ---
- kernel/debug/kdb/kdb_io.c | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+ drivers/tty/serial/kgdb_nmi.c | 2 +-
+ drivers/tty/serial/kgdboc.c   | 6 +++---
+ drivers/usb/early/ehci-dbgp.c | 3 ++-
+ include/linux/kgdb.h          | 5 ++---
+ kernel/debug/kdb/kdb_io.c     | 4 +++-
+ 5 files changed, 11 insertions(+), 9 deletions(-)
 
+diff --git a/drivers/tty/serial/kgdb_nmi.c b/drivers/tty/serial/kgdb_nmi.c
+index 5022447..6004c0c 100644
+--- a/drivers/tty/serial/kgdb_nmi.c
++++ b/drivers/tty/serial/kgdb_nmi.c
+@@ -50,7 +50,7 @@ static int kgdb_nmi_console_setup(struct console *co, char *options)
+ 	 * I/O utilities that messages sent to the console will automatically
+ 	 * be displayed on the dbg_io.
+ 	 */
+-	dbg_io_ops->is_console = true;
++	dbg_io_ops->cons = co;
+ 
+ 	return 0;
+ }
+diff --git a/drivers/tty/serial/kgdboc.c b/drivers/tty/serial/kgdboc.c
+index 4139698..6e182aa 100644
+--- a/drivers/tty/serial/kgdboc.c
++++ b/drivers/tty/serial/kgdboc.c
+@@ -178,7 +178,7 @@ static int configure_kgdboc(void)
+ 		goto noconfig;
+ 	}
+ 
+-	kgdboc_io_ops.is_console = 0;
++	kgdboc_io_ops.cons = NULL;
+ 	kgdb_tty_driver = NULL;
+ 
+ 	kgdboc_use_kms = 0;
+@@ -198,7 +198,7 @@ static int configure_kgdboc(void)
+ 		int idx;
+ 		if (cons->device && cons->device(cons, &idx) == p &&
+ 		    idx == tty_line) {
+-			kgdboc_io_ops.is_console = 1;
++			kgdboc_io_ops.cons = cons;
+ 			break;
+ 		}
+ 	}
+@@ -511,7 +511,6 @@ static struct kgdb_io kgdboc_earlycon_io_ops = {
+ 	.write_char		= kgdboc_earlycon_put_char,
+ 	.pre_exception		= kgdboc_earlycon_pre_exp_handler,
+ 	.deinit			= kgdboc_earlycon_deinit,
+-	.is_console		= true,
+ };
+ 
+ #define MAX_CONSOLE_NAME_LEN (sizeof((struct console *) 0)->name)
+@@ -558,6 +557,7 @@ static int __init kgdboc_earlycon_init(char *opt)
+ 	}
+ 
+ 	earlycon = con;
++	kgdboc_earlycon_io_ops.cons = con;
+ 	pr_info("Going to register kgdb with earlycon '%s'\n", con->name);
+ 	if (kgdb_register_io_module(&kgdboc_earlycon_io_ops) != 0) {
+ 		earlycon = NULL;
+diff --git a/drivers/usb/early/ehci-dbgp.c b/drivers/usb/early/ehci-dbgp.c
+index ea0d531..775cf70 100644
+--- a/drivers/usb/early/ehci-dbgp.c
++++ b/drivers/usb/early/ehci-dbgp.c
+@@ -1058,7 +1058,8 @@ static int __init kgdbdbgp_parse_config(char *str)
+ 		kgdbdbgp_wait_time = simple_strtoul(ptr, &ptr, 10);
+ 	}
+ 	kgdb_register_io_module(&kgdbdbgp_io_ops);
+-	kgdbdbgp_io_ops.is_console = early_dbgp_console.index != -1;
++	if (early_dbgp_console.index != -1)
++		kgdbdbgp_io_ops.cons = &early_dbgp_console;
+ 
+ 	return 0;
+ }
+diff --git a/include/linux/kgdb.h b/include/linux/kgdb.h
+index c62d764..529116b 100644
+--- a/include/linux/kgdb.h
++++ b/include/linux/kgdb.h
+@@ -276,8 +276,7 @@ struct kgdb_arch {
+  * the I/O driver.
+  * @post_exception: Pointer to a function that will do any cleanup work
+  * for the I/O driver.
+- * @is_console: 1 if the end device is a console 0 if the I/O device is
+- * not a console
++ * @cons: valid if the I/O device is a console; else NULL.
+  */
+ struct kgdb_io {
+ 	const char		*name;
+@@ -288,7 +287,7 @@ struct kgdb_io {
+ 	void			(*deinit) (void);
+ 	void			(*pre_exception) (void);
+ 	void			(*post_exception) (void);
+-	int			is_console;
++	struct console		*cons;
+ };
+ 
+ extern const struct kgdb_arch		arch_kgdb_ops;
 diff --git a/kernel/debug/kdb/kdb_io.c b/kernel/debug/kdb/kdb_io.c
-index 58b7d25..0e4f2ed 100644
+index 0e4f2ed..683a799 100644
 --- a/kernel/debug/kdb/kdb_io.c
 +++ b/kernel/debug/kdb/kdb_io.c
-@@ -562,7 +562,18 @@ static void kdb_msg_write(const char *msg, int msg_len)
+@@ -549,7 +549,7 @@ static void kdb_msg_write(const char *msg, int msg_len)
+ 	if (msg_len == 0)
+ 		return;
+ 
+-	if (dbg_io_ops && !dbg_io_ops->is_console) {
++	if (dbg_io_ops) {
+ 		const char *cp = msg;
+ 		int len = msg_len;
+ 
+@@ -562,6 +562,8 @@ static void kdb_msg_write(const char *msg, int msg_len)
  	for_each_console(c) {
  		if (!(c->flags & CON_ENABLED))
  			continue;
-+		/*
-+		 * Set oops_in_progress to encourage the console drivers to
-+		 * disregard their internal spin locks: in the current calling
-+		 * context the risk of deadlock is a bigger problem than risks
-+		 * due to re-entering the console driver. We operate directly on
-+		 * oops_in_progress rather than using bust_spinlocks() because
-+		 * the calls bust_spinlocks() makes on exit are not appropriate
-+		 * for this calling context.
-+		 */
-+		++oops_in_progress;
- 		c->write(c, msg, msg_len);
-+		--oops_in_progress;
- 		touch_nmi_watchdog();
- 	}
- }
++		if (c == dbg_io_ops->cons)
++			continue;
+ 		/*
+ 		 * Set oops_in_progress to encourage the console drivers to
+ 		 * disregard their internal spin locks: in the current calling
 -- 
 2.7.4
 
