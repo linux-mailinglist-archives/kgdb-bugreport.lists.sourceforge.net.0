@@ -2,95 +2,99 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 004BD1ECA69
-	for <lists+kgdb-bugreport@lfdr.de>; Wed,  3 Jun 2020 09:22:46 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 43F241ECA6C
+	for <lists+kgdb-bugreport@lfdr.de>; Wed,  3 Jun 2020 09:22:53 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jgNjZ-0007Bq-PI
-	for lists+kgdb-bugreport@lfdr.de; Wed, 03 Jun 2020 07:22:45 +0000
+	id 1jgNjg-0003lc-3D
+	for lists+kgdb-bugreport@lfdr.de; Wed, 03 Jun 2020 07:22:52 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sumit.garg@linaro.org>) id 1jgNjY-0007Bi-Os
- for kgdb-bugreport@lists.sourceforge.net; Wed, 03 Jun 2020 07:22:44 +0000
+ (envelope-from <sumit.garg@linaro.org>) id 1jgNjb-0003l5-OZ
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 03 Jun 2020 07:22:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
- MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:
+ To:From:Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=sFHwcYSPIAh2Jj0qa/cpOPKVZENd3AGMzBBQqYwi8fI=; b=iq+esER9vUXfnkeR6Pfob8V3Fv
- qN5NlNazun8+/Sey4HiaiPwbHgMwlowxw3bGeq859QjslBDLjg5IIO+XIUaobW3gFotbJ8rwIj5CR
- g9/KVe+w7JhWAjpUe8tcDgMRY0iEX92/gY/c0TytL7qWtuxYaDQu+RPy1XGtwf6zfIn4=;
+ bh=nS87rNXwinnHDsGB1oC64mLmKOn8axqbhCBxaNZelVE=; b=CEqYF/jIiIfdzHbMPv+RZRWLfg
+ Bk1GrLAEqKvFCIGjzWEVbZ2UPKUvT8MD3vAmn3BE+WoO8Xd05+oMHZBIcMSndZCdnOPT3H2WoPA0k
+ lzNSw4HUpWBuNQpE5Jv69pTcVWB7LvBX9uWgVNsggsvV1yMCG82kcZwqhQKyFd8l2vjk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version:
- Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To
+ :MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=sFHwcYSPIAh2Jj0qa/cpOPKVZENd3AGMzBBQqYwi8fI=; b=e5bkGayZZZy0EbABLsPQtUi2tO
- xvN2uvI+WYjkeqnAMjRXwRMSXLLO7srQZYaHtD1cif+zMsHNavywlT5vvBeYseIsmJznf84AERVdI
- V/EqvTUVNDdWUSGP6W7MKaEswmd/rZIHEEMHuLc9S0AsJK6KVo59ShUVSXuWV7uSmsSE=;
-Received: from mail-pg1-f194.google.com ([209.85.215.194])
+ bh=nS87rNXwinnHDsGB1oC64mLmKOn8axqbhCBxaNZelVE=; b=jPeLuW3cyQ8MY/TK10nqO/eY+g
+ UINIPJyiYYixQfDelr3wlzxVEQbsgXXndFtUhcjVh00+BldBAsah8rDjzjWY7rUGMHZfsqZMgifjJ
+ NM+TUmUjF8cOSLemDQNDzG5wHGLSDa4r0But2L8ddSm5xUzNSQiZNF2p3XOlqiuIH0bU=;
+Received: from mail-pf1-f194.google.com ([209.85.210.194])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jgNjU-003bBx-A8
- for kgdb-bugreport@lists.sourceforge.net; Wed, 03 Jun 2020 07:22:44 +0000
-Received: by mail-pg1-f194.google.com with SMTP id w20so1149562pga.6
+ id 1jgNjZ-003bCE-P5
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 03 Jun 2020 07:22:47 +0000
+Received: by mail-pf1-f194.google.com with SMTP id a127so1003318pfa.12
  for <kgdb-bugreport@lists.sourceforge.net>;
- Wed, 03 Jun 2020 00:22:40 -0700 (PDT)
+ Wed, 03 Jun 2020 00:22:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=from:to:cc:subject:date:message-id;
- bh=sFHwcYSPIAh2Jj0qa/cpOPKVZENd3AGMzBBQqYwi8fI=;
- b=qZkL/mXJwIrnssnR3nwvS3ogWwJlwkBYYLFqCM55iFXgsyN7HTcPXZUnnPva+TApSP
- bA7x95Rvwp4TX/juPI2tBvWmKu5YF3jxWj/gSA58Lr7mHnqWVYVdNgJhn6nE3o8Ecfwr
- npProNTKjX/dsjTkgGDDvqTHTqoyhLRBIErCIUSRLB2werNOi08K4tcchexeQ8f1471y
- f1YNmAy/Rio8g/eW0AJCxZUvtyW3fCbR2hPzNOI6klOs66EInWZMwShTRclGqgqOGLg8
- Mh3WWS0EMOYFeTVkywYELtS4khgEN4MsB/rWhXIR/pt5DjaG3AD/7ke852VtjS41H0fb
- aZgg==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references;
+ bh=nS87rNXwinnHDsGB1oC64mLmKOn8axqbhCBxaNZelVE=;
+ b=bUg/amR6dUGFEel35oo/78r5Yt5+WBc6ZWXun66sFPubpQg6pHyd3IcxzKPe139OrB
+ 00IAwmsdkfpsic3xI7r7pVSqJ5zkop0ag9pKt1ZR98hL8SaiyFMZg+aunIdAlnYiAApH
+ W8zgHMe/XNv1qlr3EzsOoA8NT7IPxKbsanzhFVkj1nWuycfvcQAUvRJSpwVUTj+XGdRd
+ YaoBvmPoQhRcVi6IHElQXrazKZa/2YztF9rM2FA6ea+BET5gHz+tT216iVm7aWut4+PE
+ xBXtZhTgy9xaPCsrvfLsBd1PZocQI1357oPPjGgaoMJKZCXMhNgsYMzhiHkVYrqNjdb4
+ nOKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id;
- bh=sFHwcYSPIAh2Jj0qa/cpOPKVZENd3AGMzBBQqYwi8fI=;
- b=smGaU8El2Wamyu4JQcH0udTc0nykQffiQlBIeJosfu3Ygkzn+zxVk6XaxhWZzSUu3o
- VIbKckQgVbDs3go/L0oXdJkwVIJaw30+tf4ceTXFgafLehEjsTzZhneBXH/d6dYuJzk7
- TK4JTQcxPqYVCSXhXP1yj5t9blSIpwH8PXxqJQpr7hHvHfjS7S0rTrpJBJCh22mazWDs
- 7FPxSsQ9W61N4gyQYnkmCkfG5X+BYMFqVdzADSdrCpEbgyucgvT5EA71HiOB1glzoH/1
- z5oZl/8N3I8ooP4Agwz4KMrN4rCMiBrZMUYJc0X2uPBcQzJhGCPwDYe0cTwyZSYghgV7
- vr8g==
-X-Gm-Message-State: AOAM533tijay3tGvph0D6HGn/clCVIWg4CykZgY5FoCM9mbppttSzmME
- tjmG9+hpk4yz5QsOv1EowNQHSg==
-X-Google-Smtp-Source: ABdhPJzYrtSuBzWBxQeHuhyPGoIWSMJmm2YZ33qvTuLmq1Kfeq7Iqz/43WDaMW+sx+et84376Qck9g==
-X-Received: by 2002:a63:4c1f:: with SMTP id z31mr26862932pga.143.1591168954526; 
- Wed, 03 Jun 2020 00:22:34 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references;
+ bh=nS87rNXwinnHDsGB1oC64mLmKOn8axqbhCBxaNZelVE=;
+ b=A0vVZEVowADsAlalDzku021feWw/fRQpfGjMg3jAD7sJkqX348Vvqhln14KRDlSOz/
+ HO8sGDz2wYQnGFbsr1SnvrbduKOKgKCHIRO8CBTiliNTW4TZX0ZnDFP/+jHV8ZMW+f86
+ soK8VteJWORyCOV6DitJ5NXq7HdxSPIgGImHMHnAdG3xW4A17U/qEQhuLQHqqkfYjSWL
+ Y/xWEQ5KwV60oM0lE3bKY+Pww2E/UDk1CmLfsrKygaGYqgKHilLD7C1eHKwlZkqS+JVQ
+ p7RntLB7G7xrsTUUk8Z1Ww9/hCdM60DpHVf5Od1Y2GgkErMkwrhLdaeL94+l0+BgTUJC
+ FNkg==
+X-Gm-Message-State: AOAM532T3+Vu+OKNlnJgN/1al3bKwN4FqGmlryDJ3mQOwyyG5RhQ00wz
+ wuEdQ6iW0imkj8SOlwc/ZwcybA==
+X-Google-Smtp-Source: ABdhPJxcYCJw8NIGR/pP1ssdZ6dnNo4HHzOY2wq0rXT4XquUDuO/aanzpIG61NaJdmTMUrYjzlKuGg==
+X-Received: by 2002:a62:7e8d:: with SMTP id z135mr6428446pfc.251.1591168960181; 
+ Wed, 03 Jun 2020 00:22:40 -0700 (PDT)
 Received: from localhost.localdomain ([117.252.66.248])
- by smtp.gmail.com with ESMTPSA id j17sm1407272pjy.22.2020.06.03.00.22.29
+ by smtp.gmail.com with ESMTPSA id j17sm1407272pjy.22.2020.06.03.00.22.35
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Wed, 03 Jun 2020 00:22:33 -0700 (PDT)
+ Wed, 03 Jun 2020 00:22:39 -0700 (PDT)
 From: Sumit Garg <sumit.garg@linaro.org>
 To: daniel.thompson@linaro.org
-Date: Wed,  3 Jun 2020 12:52:11 +0530
-Message-Id: <1591168935-6382-1-git-send-email-sumit.garg@linaro.org>
+Date: Wed,  3 Jun 2020 12:52:12 +0530
+Message-Id: <1591168935-6382-2-git-send-email-sumit.garg@linaro.org>
 X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1591168935-6382-1-git-send-email-sumit.garg@linaro.org>
+References: <1591168935-6382-1-git-send-email-sumit.garg@linaro.org>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.215.194 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.215.194 listed in wl.mailspike.net]
+ trust [209.85.210.194 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.210.194 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1jgNjU-003bBx-A8
-Subject: [Kgdb-bugreport] [PATCH v5 0/4] kdb: Improve console handling
+X-Headers-End: 1jgNjZ-003bCE-P5
+Subject: [Kgdb-bugreport] [PATCH v5 1/4] kdb: Re-factor kdb_printf() message
+ write code
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,53 +114,105 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-This patch-set is aimed to improve console handling especially when kdb
-operates in NMI context.
+Re-factor kdb_printf() message write code in order to avoid duplication
+of code and thereby increase readability.
 
-Brief description of enhancements:
-- Add status check for console prior to invoking corresponding handler.
-- Fixup to avoid possible deadlock in NMI context due to usage of locks
-  in the console handlers.
-- Prefer usage of polling I/O driver mode (lockless APIs) over invocation
-  of console handlers.
+Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+Reviewed-by: Douglas Anderson <dianders@chromium.org>
+---
+ kernel/debug/kdb/kdb_io.c | 57 +++++++++++++++++++++++------------------------
+ 1 file changed, 28 insertions(+), 29 deletions(-)
 
-Changes in v5:
-- Rebased on top of tags/kgdb-5.8-rc1.
-- Get rid of kdb_io_write().
-- Fixed issue reported by kbuild test robot.
-- Remove is_console from kgdboc_earlycon_io_ops as well.
-- Misc. comments.
-- Added Doug's review tag.
-
-Changes in v4:
-- Use dbg_io_ops->write_char() directly instead of passing it as a
-  function pointer.
-- Use "struct console" rather than "struct tty_driver" for comparison.
-- Make commit descriptions and comments more informative.
-- Add review tag for patch #2.
-
-Changes in v3:
-- Split patch to have separate patch for console status check.
-- New patch to re-factor kdb message emit code.
-- New patch to prefer polling I/O over console mode.
-- Add code comments to describe usage of oops_in_progress.
-
-Changes in v2:
-- Use oops_in_progress directly instead of bust_spinlocks().
-
-Sumit Garg (4):
-  kdb: Re-factor kdb_printf() message write code
-  kdb: Check status of console prior to invoking handlers
-  kdb: Make kdb_printf() console handling more robust
-  kdb: Switch to use safer dbg_io_ops over console APIs
-
- drivers/tty/serial/kgdb_nmi.c |  2 +-
- drivers/tty/serial/kgdboc.c   |  6 ++--
- drivers/usb/early/ehci-dbgp.c |  3 +-
- include/linux/kgdb.h          |  5 ++-
- kernel/debug/kdb/kdb_io.c     | 72 ++++++++++++++++++++++++++-----------------
- 5 files changed, 51 insertions(+), 37 deletions(-)
-
+diff --git a/kernel/debug/kdb/kdb_io.c b/kernel/debug/kdb/kdb_io.c
+index 924bc92..2d42a02 100644
+--- a/kernel/debug/kdb/kdb_io.c
++++ b/kernel/debug/kdb/kdb_io.c
+@@ -542,6 +542,29 @@ static int kdb_search_string(char *searched, char *searchfor)
+ 	return 0;
+ }
+ 
++static void kdb_msg_write(const char *msg, int msg_len)
++{
++	struct console *c;
++
++	if (msg_len == 0)
++		return;
++
++	if (dbg_io_ops && !dbg_io_ops->is_console) {
++		const char *cp = msg;
++		int len = msg_len;
++
++		while (len--) {
++			dbg_io_ops->write_char(*cp);
++			cp++;
++		}
++	}
++
++	for_each_console(c) {
++		c->write(c, msg, msg_len);
++		touch_nmi_watchdog();
++	}
++}
++
+ int vkdb_printf(enum kdb_msgsrc src, const char *fmt, va_list ap)
+ {
+ 	int diag;
+@@ -553,7 +576,6 @@ int vkdb_printf(enum kdb_msgsrc src, const char *fmt, va_list ap)
+ 	int this_cpu, old_cpu;
+ 	char *cp, *cp2, *cphold = NULL, replaced_byte = ' ';
+ 	char *moreprompt = "more> ";
+-	struct console *c;
+ 	unsigned long uninitialized_var(flags);
+ 
+ 	/* Serialize kdb_printf if multiple cpus try to write at once.
+@@ -687,22 +709,11 @@ int vkdb_printf(enum kdb_msgsrc src, const char *fmt, va_list ap)
+ 	 */
+ 	retlen = strlen(kdb_buffer);
+ 	cp = (char *) printk_skip_headers(kdb_buffer);
+-	if (!dbg_kdb_mode && kgdb_connected) {
++	if (!dbg_kdb_mode && kgdb_connected)
+ 		gdbstub_msg_write(cp, retlen - (cp - kdb_buffer));
+-	} else {
+-		if (dbg_io_ops && !dbg_io_ops->is_console) {
+-			len = retlen - (cp - kdb_buffer);
+-			cp2 = cp;
+-			while (len--) {
+-				dbg_io_ops->write_char(*cp2);
+-				cp2++;
+-			}
+-		}
+-		for_each_console(c) {
+-			c->write(c, cp, retlen - (cp - kdb_buffer));
+-			touch_nmi_watchdog();
+-		}
+-	}
++	else
++		kdb_msg_write(cp, retlen - (cp - kdb_buffer));
++
+ 	if (logging) {
+ 		saved_loglevel = console_loglevel;
+ 		console_loglevel = CONSOLE_LOGLEVEL_SILENT;
+@@ -751,19 +762,7 @@ int vkdb_printf(enum kdb_msgsrc src, const char *fmt, va_list ap)
+ 			moreprompt = "more> ";
+ 
+ 		kdb_input_flush();
+-
+-		if (dbg_io_ops && !dbg_io_ops->is_console) {
+-			len = strlen(moreprompt);
+-			cp = moreprompt;
+-			while (len--) {
+-				dbg_io_ops->write_char(*cp);
+-				cp++;
+-			}
+-		}
+-		for_each_console(c) {
+-			c->write(c, moreprompt, strlen(moreprompt));
+-			touch_nmi_watchdog();
+-		}
++		kdb_msg_write(moreprompt, strlen(moreprompt));
+ 
+ 		if (logging)
+ 			printk("%s", moreprompt);
 -- 
 2.7.4
 
