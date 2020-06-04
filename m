@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D7C9C1EEA23
-	for <lists+kgdb-bugreport@lfdr.de>; Thu,  4 Jun 2020 20:16:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 431061EED22
+	for <lists+kgdb-bugreport@lfdr.de>; Thu,  4 Jun 2020 23:12:45 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jguPo-0001Qa-CE
-	for lists+kgdb-bugreport@lfdr.de; Thu, 04 Jun 2020 18:16:32 +0000
+	id 1jgxAK-00013c-37
+	for lists+kgdb-bugreport@lfdr.de; Thu, 04 Jun 2020 21:12:44 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <dianders@chromium.org>) id 1jguPn-0001QT-3Y
- for kgdb-bugreport@lists.sourceforge.net; Thu, 04 Jun 2020 18:16:31 +0000
+ (envelope-from <dianders@chromium.org>) id 1jgxAI-00013Q-QF
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 04 Jun 2020 21:12:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
  In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
  :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=I+DfKN1U5A03BOeIRGNtGiuZF8U9fpy/yodWoM58tKM=; b=WwMTRH11d/6jvnsm1KigA6gdXE
- 4ta31fMsisf/lLWzI3kTUdHYSFF38ARvaAzdlYn8JboRWXaHCb6lkyvT62emXsS1O/uQulY/ru25f
- BS5n4OAodKQBt0gO9gNW0SSmXbZWM3ROHZcUMOVF1SJh8/lDwp/i6rgycWEMUjpOZmO0=;
+ bh=2/2vvNqjDrDfa9zj4WkpMzbskQTo3mnO0g8KBrFA7s8=; b=FalgjOQc6IVgZXxnIaH+NQ6puB
+ gr7dpdRGW1JtUzbTrqV7mRdxX9vfgRqDbyHLtb3J9O0HZvPLpjbzPowNs/ol9TRhUMRBm5SBUvEX+
+ yvHTOXXzqv726DO5MxWS1sfgtecuGy+01yNQPVtVuzQrXfANgz6FDu4Bb+HD+bFM/uqI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
@@ -30,70 +30,66 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=I+DfKN1U5A03BOeIRGNtGiuZF8U9fpy/yodWoM58tKM=; b=jH3sSZ9AERXlu+MlKtONFQyjl2
- SN5p8q79lHBz4c7Pp1f/9VZQi/5WbeON0u5MYTWVSJwGQK7UPgi+gShWD5gRDbrFMJBTEAuMbZZpz
- KQeMKrH9/V6r/tM30p88siWQNmG63PBfVG33NhMiLv1EFGIbkKjh4Z6cDkQjs8Pm1dXc=;
-Received: from mail-pj1-f66.google.com ([209.85.216.66])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=2/2vvNqjDrDfa9zj4WkpMzbskQTo3mnO0g8KBrFA7s8=; b=A/ei/9N2ZfDj771GCK2FJvWxG3
+ GOZZdF/0HvuS3yXcTakQ6NmhuGV7/6MedF3z5X4aWLzODOSdYpDwe0Q6Lly4IL7drA+sIeG1hYxJq
+ OB0BQO906z+y2CL5qYGPYlrpfvPoOEugWhIILJCUjIX8friPkiKuJM6Ug4zoHdgr8XBY=;
+Received: from mail-vs1-f66.google.com ([209.85.217.66])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jguPl-005oww-8m
- for kgdb-bugreport@lists.sourceforge.net; Thu, 04 Jun 2020 18:16:31 +0000
-Received: by mail-pj1-f66.google.com with SMTP id i12so1479030pju.3
+ id 1jgxAH-00C7XP-HG
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 04 Jun 2020 21:12:42 +0000
+Received: by mail-vs1-f66.google.com with SMTP id r11so4394846vsj.5
  for <kgdb-bugreport@lists.sourceforge.net>;
- Thu, 04 Jun 2020 11:16:29 -0700 (PDT)
+ Thu, 04 Jun 2020 14:12:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=I+DfKN1U5A03BOeIRGNtGiuZF8U9fpy/yodWoM58tKM=;
- b=MeStlUVuDIDY8xlSqAdqiPbvepR4yUM08hcSMfi+Bf9woO4keQy4f9hJFgaegH3vn9
- QfqNz8NGOOVFillN/77/HKy930Ycko1/D1/85dJ3VnTUyDq0l8r4IUcREybotGncf836
- Kdd/d1vBIM9HazX5nDs8lehudmCBjs2RicpWw=
+ :cc; bh=2/2vvNqjDrDfa9zj4WkpMzbskQTo3mnO0g8KBrFA7s8=;
+ b=CUAua5qV8xF2sA5jNCA2iEaVCwy8+VpWn+NmTfcE6rq0kqEpaokEJWOgU5rdPmU2g7
+ 1Vv5n3TRANrrPNT8DQXFfzcsyspUq7QIQNzjXHwb51Ovp3FYXom9Bk6Tt9wDXsmFiYI3
+ sQsGqUR7iG/5s865l6vTA02WgDgK6RP0D8h7w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=I+DfKN1U5A03BOeIRGNtGiuZF8U9fpy/yodWoM58tKM=;
- b=VwJJsVNsx8tXT4/tqNTQJ9e0fNnSSgi6W5+xo6xPtXlELsNLGGhhrAFt6EBm6fCjWe
- lTHjV6DHmfizHJK4LFVU9hkWFaP53MofTUwHFpPniaJobbK9GpGOdxBFMScwVHN6mOuD
- CXzEnpdti8HUhMQ3rcVuGrebNwQcMbAn7Lu3lBZiB9SnyoPNWJ91RmFsOAW1mm8GzcfW
- HhJgCvMiX+aIKg8OAcnQ3bAxzoOYI2VBAyp2h/LzaOfurgSxLp1MpyTFmd91WpeRg6YH
- bRwEcAOExg5TIL+QvzJRlONOqmDWC5daGqYPtO7PpiuY/qYTMN8i4MTk5SPv/VbOSmCT
- RADw==
-X-Gm-Message-State: AOAM531TdApe2NHzvr9rY3HNzCVcqBtPaEqZ8vMEW38NEV3ob7htZ6xy
- FJYf/ymMTB+sKp+iSrmtgIg6oexHEA0=
-X-Google-Smtp-Source: ABdhPJw70QwAcJ1Twv+1wWtDwh9F6w0hpv1IdR2vw9t1W3ttCu72rAm3l4CJ/aihqUVjcYqcHJMZLg==
-X-Received: by 2002:a1f:3655:: with SMTP id d82mr4298792vka.1.1591292799259;
- Thu, 04 Jun 2020 10:46:39 -0700 (PDT)
-Received: from mail-ua1-f48.google.com (mail-ua1-f48.google.com.
- [209.85.222.48])
- by smtp.gmail.com with ESMTPSA id b85sm630511vka.39.2020.06.04.10.46.38
+ bh=2/2vvNqjDrDfa9zj4WkpMzbskQTo3mnO0g8KBrFA7s8=;
+ b=iooE1zrosYoggUgWrHxYNstAKGNChxEIUAlV7Xq8dE5Xl2ieRc2GvYxjTWRS+wSpci
+ RlyxM+BYWKxHtXxuiQ8W854Gh0zekquZg7/eDHPQs2OvbHDH0zj3VYSxuCu6eeKI06xH
+ fc8ts24uAg5FMRVxCenBcaFfUeUCJQBdxDAKTclu1N76rt2TB1KXWTPdAEJ4SS8WQaMt
+ ZpJDS8fPCK1uQZJ8WEG5KQ4FEl0FKvNRusKEvViJLb+qaLCyh2kwR/t08O6p15UEPtcr
+ hQWd9FFW5+STdHorYx0k7LrCRSCWCER9A94hh1d+5FHMeZ+e3D6BNdlnFNz8XSuJ87DO
+ QHKQ==
+X-Gm-Message-State: AOAM533Nl1Xc1SjULi+IehyrOvFdV+HRWfMFuxhFtTDMbeVkAVxFVVR8
+ dAKxcHU8dNVT9vi/TXHkwdJ8yuFkuV0=
+X-Google-Smtp-Source: ABdhPJyfjFPc+YLvKDMUoxV8S9SKRZlbPVPWznQgmva60EbOi3P066Hu3wDXGeuGJtsn0JYAUXGlbg==
+X-Received: by 2002:a67:3c6:: with SMTP id 189mr5266628vsd.71.1591305155387;
+ Thu, 04 Jun 2020 14:12:35 -0700 (PDT)
+Received: from mail-ua1-f45.google.com (mail-ua1-f45.google.com.
+ [209.85.222.45])
+ by smtp.gmail.com with ESMTPSA id c68sm864550vkc.34.2020.06.04.14.12.34
  for <kgdb-bugreport@lists.sourceforge.net>
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 04 Jun 2020 10:46:38 -0700 (PDT)
-Received: by mail-ua1-f48.google.com with SMTP id r9so2373044ual.1
+ Thu, 04 Jun 2020 14:12:34 -0700 (PDT)
+Received: by mail-ua1-f45.google.com with SMTP id c9so2560341uao.11
  for <kgdb-bugreport@lists.sourceforge.net>;
- Thu, 04 Jun 2020 10:46:38 -0700 (PDT)
-X-Received: by 2002:ab0:1684:: with SMTP id e4mr4429632uaf.22.1591292797964;
- Thu, 04 Jun 2020 10:46:37 -0700 (PDT)
+ Thu, 04 Jun 2020 14:12:34 -0700 (PDT)
+X-Received: by 2002:a9f:2804:: with SMTP id c4mr5242531uac.8.1591305153580;
+ Thu, 04 Jun 2020 14:12:33 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200507153444.1.I70e0d4fd46d5ed2aaf0c98a355e8e1b7a5bb7e4e@changeid>
- <20200519104151.6evv3hizm5dbjjq2@holly.lan>
- <CAD=FV=XCFxgO-s--jw9CTgQUxtQfteoQ4XSL_bbjW4s82Wd3pg@mail.gmail.com>
- <20200601161952.3hx6sv5hzdnjnvtj@holly.lan>
- <CAD=FV=UJLTuMp0uvTY0rC51ir_GgRKYxiPCK_w8TY+MBzkqjeA@mail.gmail.com>
- <20200603120051.dxpavvsxvsxnvuct@holly.lan>
-In-Reply-To: <20200603120051.dxpavvsxvsxnvuct@holly.lan>
+References: <1591264879-25920-1-git-send-email-sumit.garg@linaro.org>
+ <1591264879-25920-5-git-send-email-sumit.garg@linaro.org>
+In-Reply-To: <1591264879-25920-5-git-send-email-sumit.garg@linaro.org>
 From: Doug Anderson <dianders@chromium.org>
-Date: Thu, 4 Jun 2020 10:46:26 -0700
-X-Gmail-Original-Message-ID: <CAD=FV=ULq602hW2cvzfCN+QK_kcrd=wZUXfRJDLMzqJted4fog@mail.gmail.com>
-Message-ID: <CAD=FV=ULq602hW2cvzfCN+QK_kcrd=wZUXfRJDLMzqJted4fog@mail.gmail.com>
-To: Daniel Thompson <daniel.thompson@linaro.org>
+Date: Thu, 4 Jun 2020 14:12:22 -0700
+X-Gmail-Original-Message-ID: <CAD=FV=URj6UiZgH_g3twcYgv=USGr7YUV5SkW3J-WYR1vs+MDw@mail.gmail.com>
+Message-ID: <CAD=FV=URj6UiZgH_g3twcYgv=USGr7YUV5SkW3J-WYR1vs+MDw@mail.gmail.com>
+To: Sumit Garg <sumit.garg@linaro.org>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.217.66 listed in wl.mailspike.net]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.216.66 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.216.66 listed in wl.mailspike.net]
+ trust [209.85.217.66 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -101,12 +97,11 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jguPl-005oww-8m
-Subject: Re: [Kgdb-bugreport] [PATCH] kgdb: Avoid suspicious RCU usage
- warning
+X-Headers-End: 1jgxAH-00C7XP-HG
+Subject: Re: [Kgdb-bugreport] [PATCH v6 4/4] kdb: Switch to use safer
+ dbg_io_ops over console APIs
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -118,72 +113,49 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: kgdb-bugreport@lists.sourceforge.net, LKML <linux-kernel@vger.kernel.org>,
- Jason Wessel <jason.wessel@windriver.com>
+Cc: Petr Mladek <pmladek@suse.com>,
+ Daniel Thompson <daniel.thompson@linaro.org>,
+ kgdb-bugreport@lists.sourceforge.net,
+ Jason Wessel <jason.wessel@windriver.com>, LKML <linux-kernel@vger.kernel.org>,
+ Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Jiri Slaby <jslaby@suse.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
 Hi,
 
-On Wed, Jun 3, 2020 at 5:00 AM Daniel Thompson
-<daniel.thompson@linaro.org> wrote:
+On Thu, Jun 4, 2020 at 3:02 AM Sumit Garg <sumit.garg@linaro.org> wrote:
 >
-> On Tue, Jun 02, 2020 at 03:56:33PM -0700, Doug Anderson wrote:
-> > > > 2. Perhaps remove the whole irq saving / restoring in kgdb_cpu_enter().
-> > >
-> > > Are you feeling lucky?
-> > >
-> > > I think there will come a time when bravery is called for but I'd rather
-> > > see this as part of a bigger rewrite instead of a single high risk
-> > > change.
-> >
-> > Hrm, maybe.  I guess it depends on whether we want to take baby steps
-> > there or try to do it all at once.  If we take baby steps we will
-> > occasionally fall down but we'll slowly start getting things cleaned
-> > up.  If we wait for a full rewrite then we might be waiting for a long
-> > time.  It'll also be harder to figure out which of the big changes in
-> > the major rewrite broken someone.  ...or if the major rewrite comes in
-> > 20 small/bisectable patches it may be hard to revert patch 2 out of 20
-> > if the future patches all build upon it.  If we do one small high-risk
-> > change and then wait before building upon it then it'll be easy for
-> > someone to bisect and then yell for a revert.
+> @@ -433,7 +432,8 @@ static int kgdboc_earlycon_get_char(void)
+>  {
+>         char c;
 >
-> My views are a bit too nuanced for me to agree or disagree with this.
-> I'm not against baby steps and I definitely *don't* want kgdb to
-> continue to be preserved in aspic.
+> -       if (!earlycon->read(earlycon, &c, 1))
+> +       if (!kgdboc_earlycon_io_ops.cons->read(kgdboc_earlycon_io_ops.cons,
+> +                                              &c, 1))
+>                 return NO_POLL_CHAR;
 >
-> However I'm still reluctant to start our baby steps with a "let's see
-> if this breaks something" patch given we know it could be a very large
-> number of kernel cycles before we get an answer.
+>         return c;
+> @@ -441,7 +441,8 @@ static int kgdboc_earlycon_get_char(void)
+>
+>  static void kgdboc_earlycon_put_char(u8 chr)
+>  {
+> -       earlycon->write(earlycon, &chr, 1);
+> +       kgdboc_earlycon_io_ops.cons->write(kgdboc_earlycon_io_ops.cons, &chr,
+> +                                          1);
+>  }
 
-Yeah, it's kinda amazing how much of a delay there is sometimes.
-Perhaps all of the kgdb users are off on downstream kernels so they
-only notice changes when they re-sync up.
+The get_char / put_char functions are pretty unwieldy now.  If it were
+me I would have done:
 
+struct console *con =  kgdboc_earlycon_io_ops.cons;
 
-> I would be much
-> happier if those baby steps started, for example, with refactoring to
-> decompose the beast into clearer (and dare I say better documented)
-> functions.
+...and then used it so the lines didn't wrap in such a terrible way.  ;-)
 
-OK, makes sense.
+I'm not sure if I'd spin just for that, though.
 
-
-> Or put another way, even if someone sent me 20 small bisectable patches
-> in a single kernel cycle I'd still want the high risk bits to be
-> towards the end of the patch set.
-
-OK, fair enough.  You're the maintainer so it's your view on the
-matter that's the most important.  I guess one worry I have is that if
-neither you nor I really understand the code path that a theoretical
-system would take if it didn't already have its interrupts disabled
-it'll be hard to keep from breaking it in making other changes to kgdb
-in the future.
-
-Anyway, enough discussion for now.  ;-)  My v2 should work like you
-suggested and I'm not planning on any other short term changes to this
-function, so we should be all good right now.
+Reviewed-by: Douglas Anderson <dianders@chromium.org>
 
 -Doug
 
