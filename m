@@ -2,103 +2,67 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EBEB71EF020
-	for <lists+kgdb-bugreport@lfdr.de>; Fri,  5 Jun 2020 05:58:01 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id ABCF91EF4B4
+	for <lists+kgdb-bugreport@lfdr.de>; Fri,  5 Jun 2020 11:54:09 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jh3UW-0002vz-Ok
-	for lists+kgdb-bugreport@lfdr.de; Fri, 05 Jun 2020 03:58:00 +0000
+	id 1jh93A-0008Mx-Gg
+	for lists+kgdb-bugreport@lfdr.de; Fri, 05 Jun 2020 09:54:08 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sergey.senozhatsky@gmail.com>) id 1jh3UV-0002vl-Rq
- for kgdb-bugreport@lists.sourceforge.net; Fri, 05 Jun 2020 03:57:59 +0000
+ (envelope-from <pmladek@suse.com>) id 1jh939-0008Ma-KL
+ for kgdb-bugreport@lists.sourceforge.net; Fri, 05 Jun 2020 09:54:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:Date:From:Sender:Reply-To:Content-Transfer-Encoding:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=6O/8gP+vgsM1SKUrwazGqcFhGPsWzja2ClLLpPozZZ0=; b=Nv35/A+INnRwd1pErXalLfQx3p
- SPNPjPkbknH7Qtu62R4caVSkd7SisvVcSqDv1sii6vWlbLaNOk08VfUgjDfdKuhA1inKxbiyX4sLG
- WWnO4oSH2Eo8MFoRlzJFAj9jufUG6JkMW8F0cuCWSJjhaHHn8pT+2ad4qVRSizMfmezc=;
+ bh=jUJkC/SuRr838AEeaw5WbV9wUNr+Qv/thQfLDRdjjfs=; b=Ay9tCgsWM92CqoAnZFse5Smqan
+ xlk23wDQ8Bjn24/FseS39H9JbRyHvHUcdkTV0px1HrrHQ/h6ibNSz4RwQwLhV2agpmU8KKr+vRYmK
+ jLYEiED74clIaCIaPnRImYnfBM9/a0BFcBkm+YxQaeqD/liCiKLFwrn25CRw/6JANd6k=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :Date:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=6O/8gP+vgsM1SKUrwazGqcFhGPsWzja2ClLLpPozZZ0=; b=l8tFW08MBK3KcqEHjyxTVQaRhO
- DwJZTItj5FqNYFxjuPvY2iggZFxOEYqE4fr3/em5PRsLKMd1Trc2g/ReZGlUXbZy+MUBiOVNBN9g4
- o+qT+PRY1ZxOIumn5cs/uz4veAZRVsc7SP/yYVRs9EJSKsBq/LLLj5b3axM72q3CK/u4=;
-Received: from mail-pf1-f194.google.com ([209.85.210.194])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jh3UR-00COTY-DW
- for kgdb-bugreport@lists.sourceforge.net; Fri, 05 Jun 2020 03:57:59 +0000
-Received: by mail-pf1-f194.google.com with SMTP id x22so4294331pfn.3
- for <kgdb-bugreport@lists.sourceforge.net>;
- Thu, 04 Jun 2020 20:57:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:date:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=6O/8gP+vgsM1SKUrwazGqcFhGPsWzja2ClLLpPozZZ0=;
- b=ijpJNkg9fDCN3j5YOJyLDE7fBzvOwycQs3qssuh7zjEQEU6gYyIcf2y5TH51eY9Ptt
- Rn0+SL7laU1try4AFFixoqpU4IESfaOZbxku2+d1FAUbw7j8WPF4AIIIZNO0JNurjEuh
- Q/aMTXW+pakQr0XBUMVoGOv6NlRDBkuANKe/PtkVyp0JVsoROOW/iZM468gGS7uHRy6v
- r5KBDmazwTmr5MdRz4uj9Pcq428NX9q4X9kKDGAa1tuw2gAzgPkFXyeijSgAUgHCnex0
- 3ObylMcwSjpnHVwlzVydaVMYlf9HpRJxHF2pdVeLpHaodptmFXecR5+dG5od8xlJOuAb
- aTOA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:date:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=6O/8gP+vgsM1SKUrwazGqcFhGPsWzja2ClLLpPozZZ0=;
- b=Q7SELGqIbY06tHI6WbhT+gSbZY0CRYPyrG/1U/yMGh1qrQ1wWvBQpGq1z/kLjZCcYH
- 1xdEgYhCGTBZyuykGi5CKvHLADrHi6pu4amzm0KUKlhQ3Hg5rRmtgQmRMbelqil/SYHq
- WXQG9sKsVDg8lDCHQxHCq4aSeZQN5LzssHKlu++YCsNpmF6q0TCS/OQ0R25gRLlMif1S
- +obgXlfBChtBohOfDy6/vn4HjxEStVnBJqCyXVXzRv7i1m1EsQO9HRbtGgu7zZ+mycw2
- 8i5w58ZcMzONDJUVdtEdIJheyYY/CpLzt6eVicEE1jkLjuhCh9qIMWFk1zVLgnwjA0eV
- BiIQ==
-X-Gm-Message-State: AOAM532oFf0tm0XmQLHRO4vrs5ADlcNeSHJSAy5M6bvmYSo2YynUTByi
- hQ1H5S4+O/vpc0i5EolTY40=
-X-Google-Smtp-Source: ABdhPJzzTafB2YWWaTrbUBiaJU7TnJmGUJpOILTnnW8ul9uoHfUzDLABsGjVW7jGHUBGYup9clzaqQ==
-X-Received: by 2002:a65:458e:: with SMTP id o14mr4678079pgq.87.1591329462561; 
- Thu, 04 Jun 2020 20:57:42 -0700 (PDT)
-Received: from localhost ([2409:10:2e40:5100:6e29:95ff:fe2d:8f34])
- by smtp.gmail.com with ESMTPSA id n189sm3853211pfn.108.2020.06.04.20.57.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Jun 2020 20:57:41 -0700 (PDT)
-From: Sergey Senozhatsky <sergey.senozhatsky@gmail.com>
-X-Google-Original-From: Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>
-Date: Fri, 5 Jun 2020 12:57:39 +0900
+ bh=jUJkC/SuRr838AEeaw5WbV9wUNr+Qv/thQfLDRdjjfs=; b=Q06U4hwawL+ysQFGq/0AR3zo1/
+ LpDfqqdci+IsWnoy8hWqe8u82j0TEL26ZPLsym4nMwEV0IoEGRtKQNSN1ZjHJLzChLVXqx3qRhNUt
+ KA0+H70qitqD8evZmk6mmAzFL1/65JuJSyZFZjWEG542i1eF7K34bZjbydxSnF5Sw8PM=;
+Received: from mx2.suse.de ([195.135.220.15])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1jh937-009jFS-Ks
+ for kgdb-bugreport@lists.sourceforge.net; Fri, 05 Jun 2020 09:54:07 +0000
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 34AA6ACCC;
+ Fri,  5 Jun 2020 09:54:01 +0000 (UTC)
+Date: Fri, 5 Jun 2020 11:53:56 +0200
+From: Petr Mladek <pmladek@suse.com>
 To: Sumit Garg <sumit.garg@linaro.org>
-Message-ID: <20200605035739.GA525@jagdpanzerIV.localdomain>
+Message-ID: <20200605095356.GK22497@linux-b0ei>
 References: <1591264879-25920-1-git-send-email-sumit.garg@linaro.org>
+ <1591264879-25920-5-git-send-email-sumit.garg@linaro.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <1591264879-25920-1-git-send-email-sumit.garg@linaro.org>
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <1591264879-25920-5-git-send-email-sumit.garg@linaro.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (sergey.senozhatsky[at]gmail.com)
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.210.194 listed in list.dnswl.org]
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.210.194 listed in wl.mailspike.net]
+ [195.135.220.15 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1jh3UR-00COTY-DW
-Subject: Re: [Kgdb-bugreport] [PATCH v6 0/4] kdb: Improve console handling
+X-Headers-End: 1jh937-009jFS-Ks
+Subject: Re: [Kgdb-bugreport] [PATCH v6 4/4] kdb: Switch to use safer
+ dbg_io_ops over console APIs
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,26 +74,44 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: pmladek@suse.com, daniel.thompson@linaro.org, gregkh@linuxfoundation.org,
- kgdb-bugreport@lists.sourceforge.net, jslaby@suse.com,
- linux-kernel@vger.kernel.org, sergey.senozhatsky@gmail.com,
- jason.wessel@windriver.com
+Cc: daniel.thompson@linaro.org, kgdb-bugreport@lists.sourceforge.net,
+ jason.wessel@windriver.com, linux-kernel@vger.kernel.org,
+ sergey.senozhatsky@gmail.com, gregkh@linuxfoundation.org, jslaby@suse.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On (20/06/04 15:31), Sumit Garg wrote:
+On Thu 2020-06-04 15:31:19, Sumit Garg wrote:
+> In kgdb context, calling console handlers aren't safe due to locks used
+> in those handlers which could in turn lead to a deadlock. Although, using
+> oops_in_progress increases the chance to bypass locks in most console
+> handlers but it might not be sufficient enough in case a console uses
+> more locks (VT/TTY is good example).
 > 
->  drivers/tty/serial/kgdb_nmi.c |  2 +-
->  drivers/tty/serial/kgdboc.c   | 32 +++++++++----------
->  drivers/usb/early/ehci-dbgp.c |  3 +-
->  include/linux/kgdb.h          |  5 ++-
->  kernel/debug/kdb/kdb_io.c     | 72 ++++++++++++++++++++++++++-----------------
->  5 files changed, 64 insertions(+), 50 deletions(-)
+> Currently when a driver provides both polling I/O and a console then kdb
+> will output using the console. We can increase robustness by using the
+> currently active polling I/O driver (which should be lockless) instead
+> of the corresponding console. For several common cases (e.g. an
+> embedded system with a single serial port that is used both for console
+> output and debugger I/O) this will result in no console handler being
+> used.
+> 
+> In order to achieve this we need to reverse the order of preference to
+> use dbg_io_ops (uses polling I/O mode) over console APIs. So we just
+> store "struct console" that represents debugger I/O in dbg_io_ops and
+> while emitting kdb messages, skip console that matches dbg_io_ops
+> console in order to avoid duplicate messages. After this change,
+> "is_console" param becomes redundant and hence removed.
+> 
+> Suggested-by: Daniel Thompson <daniel.thompson@linaro.org>
+> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 
-Reviewed-by: Sergey Senozhatsky <sergey.senozhatsky@gmail.com>
+Looks good to me now:
 
-	-ss
+Reviewed-by: Petr Mladek <pmladek@suse.com>
+
+Best Regards,
+Petr
 
 
 _______________________________________________
