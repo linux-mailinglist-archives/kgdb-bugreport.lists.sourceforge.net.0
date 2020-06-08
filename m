@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0D0F21F2238
-	for <lists+kgdb-bugreport@lfdr.de>; Tue,  9 Jun 2020 01:07:35 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 50EF01F223B
+	for <lists+kgdb-bugreport@lfdr.de>; Tue,  9 Jun 2020 01:07:36 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jiQrd-0004HB-Fg
-	for lists+kgdb-bugreport@lfdr.de; Mon, 08 Jun 2020 23:07:33 +0000
+	id 1jiQre-0002P5-M4
+	for lists+kgdb-bugreport@lfdr.de; Mon, 08 Jun 2020 23:07:34 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1jiQrb-0004H3-Ch
- for kgdb-bugreport@lists.sourceforge.net; Mon, 08 Jun 2020 23:07:31 +0000
+ (envelope-from <sashal@kernel.org>) id 1jiQrd-0002Oo-1k
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 08 Jun 2020 23:07:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=qE+4hyAP28DMMJHyJe1fsiLs5690QFjQ/Y0GCYK+9UU=; b=DeSnGWtMyp7JxZgnykhVk1Qx7X
- CCPg5MhcpkzoQn/OQjkaJqAvyMzbLVvsewHgBWRvdY1H5B4Bn0LXijsOty8dt0ygU4IwWouy3em+U
- X5ZMkZQm8KqMaWPw+VBdgW0Y+nFkC6WeG2fUBDbcRLgAt7zwQtFG1DLI7ajfgY/3qK8A=;
+ bh=nJu5LhfbL/VsaU8ienkoSTQWStTmJ6j+jDE3oJYXfoA=; b=lLFoy5UQPGnBkOzF4bmF/a61iF
+ DFA/tey8i8LXN7H1Li6x5WnPqGy5K1goP2xSMDkQmlgsPkMmverPpw1hx7SeMH5+WqIX2qT83UmV2
+ t7/+7WWM4GvMXli62p+SUbatIxCtMkuOWDjZnve+J+BQGdYSIcmOHIDbch1mSSwNxhec=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -30,32 +30,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=qE+4hyAP28DMMJHyJe1fsiLs5690QFjQ/Y0GCYK+9UU=; b=dodMQw1gqAVC0zj1e7ramkzua+
- mLU6Nkl57/8gi/z+emJQJVGoinew5g4nNfWlRCXtfr5ne2MKhm24tJkJcZNWLfgvuKZGqgqveqyMj
- p50QRGAUd5di2yolWZAV+zwHaHKY+zf9rZgBX4otnWcioKv30d05SaGgUq+tFKxSJbHU=;
+ bh=nJu5LhfbL/VsaU8ienkoSTQWStTmJ6j+jDE3oJYXfoA=; b=J2PAwBplbJeLtF6ozuMVLcjvlZ
+ w2MpA2J4kNsGn2NWqF/0a+x88+lOhLBrbuEf30Pzih5/oPGnW8UGRDIF2XzqLFrVFuiWNut4U/nlb
+ 6ADOYYm9GFSTKB/dTGhQlGFl+OHoRJvBgRZQdxDyVb6MOaewuupmwqaISdfhkb55tmqs=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jiQrZ-00Gzd2-VM
- for kgdb-bugreport@lists.sourceforge.net; Mon, 08 Jun 2020 23:07:31 +0000
+ id 1jiQrb-00C2hZ-Rz
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 08 Jun 2020 23:07:32 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id A716A20801;
- Mon,  8 Jun 2020 23:07:16 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id C833220897;
+ Mon,  8 Jun 2020 23:07:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1591657637;
- bh=DzD4va/Hk/n7WxJe3FSL15iUlyqcjWKqD3ZeXFNRTaA=;
+ s=default; t=1591657638;
+ bh=5Ku1WPXj1uoC+3mWt0Zai9p6vknK3/wtHVVZgtl6akY=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Xsprg4crwovuqNqeDGb6qZdZ6ds6ZbhmXJiNlLV7RP1JRu4N/bM3GiJR4h/Lxy6rb
- hhtAUhN6EIFl21QovstmCSgF4yLcB8VsfvNf6VmgUo37SD0gmYesbs+JUVYXK5MrYc
- B3b3FM2dQ5JKXpsYzxXYd4u3RfZLVl775pQh6Mpw=
+ b=ZjKqVt3QAuH6HFxBh1A1wLsSxcyA8sc9uFXuYuQyZwTn7jetmWcdmxdHcoXtzgilX
+ ZDH7/hx/DOuNf9TYmUSzjsPtXmVcFXziTKy18wvKM2EOSItGcurviivcVB+nDIetRT
+ dVuStyQ9OG7rqdfBdUeoJGez3Q/qDWnOcv2lBBGU=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Mon,  8 Jun 2020 19:02:28 -0400
-Message-Id: <20200608230607.3361041-55-sashal@kernel.org>
+Date: Mon,  8 Jun 2020 19:02:29 -0400
+Message-Id: <20200608230607.3361041-56-sashal@kernel.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20200608230607.3361041-1-sashal@kernel.org>
 References: <20200608230607.3361041-1-sashal@kernel.org>
@@ -78,9 +78,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jiQrZ-00Gzd2-VM
-Subject: [Kgdb-bugreport] [PATCH AUTOSEL 5.7 055/274] kgdb: Disable
- WARN_CONSOLE_UNLOCKED for all kgdb
+X-Headers-End: 1jiQrb-00C2hZ-Rz
+Subject: [Kgdb-bugreport] [PATCH AUTOSEL 5.7 056/274] kgdb: Prevent infinite
+ recursive entries to the debugger
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -92,80 +92,42 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: Sasha Levin <sashal@kernel.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Daniel Thompson <daniel.thompson@linaro.org>,
- kgdb-bugreport@lists.sourceforge.net
+Cc: Sasha Levin <sashal@kernel.org>, kgdb-bugreport@lists.sourceforge.net,
+ Daniel Thompson <daniel.thompson@linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
 From: Douglas Anderson <dianders@chromium.org>
 
-[ Upstream commit 202164fbfa2b2ffa3e66b504e0f126ba9a745006 ]
+[ Upstream commit 3ca676e4ca60d1834bb77535dafe24169cadacef ]
 
-In commit 81eaadcae81b ("kgdboc: disable the console lock when in
-kgdb") we avoided the WARN_CONSOLE_UNLOCKED() yell when we were in
-kgdboc.  That still works fine, but it turns out that we get a similar
-yell when using other I/O drivers.  One example is the "I/O driver"
-for the kgdb test suite (kgdbts).  When I enabled that I again got the
-same yells.
-
-Even though "kgdbts" doesn't actually interact with the user over the
-console, using it still causes kgdb to print to the consoles.  That
-trips the same warning:
-  con_is_visible+0x60/0x68
-  con_scroll+0x110/0x1b8
-  lf+0x4c/0xc8
-  vt_console_print+0x1b8/0x348
-  vkdb_printf+0x320/0x89c
-  kdb_printf+0x68/0x90
-  kdb_main_loop+0x190/0x860
-  kdb_stub+0x2cc/0x3ec
-  kgdb_cpu_enter+0x268/0x744
-  kgdb_handle_exception+0x1a4/0x200
-  kgdb_compiled_brk_fn+0x34/0x44
-  brk_handler+0x7c/0xb8
-  do_debug_exception+0x1b4/0x228
-
-Let's increment/decrement the "ignore_console_lock_warning" variable
-all the time when we enter the debugger.
-
-This will allow us to later revert commit 81eaadcae81b ("kgdboc:
-disable the console lock when in kgdb").
+If we detect that we recursively entered the debugger we should hack
+our I/O ops to NULL so that the panic() in the next line won't
+actually cause another recursion into the debugger.  The first line of
+kgdb_panic() will check this and return.
 
 Signed-off-by: Douglas Anderson <dianders@chromium.org>
-Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 Reviewed-by: Daniel Thompson <daniel.thompson@linaro.org>
-Link: https://lore.kernel.org/r/20200507130644.v4.1.Ied2b058357152ebcc8bf68edd6f20a11d98d7d4e@changeid
+Link: https://lore.kernel.org/r/20200507130644.v4.6.I89de39f68736c9de610e6f241e68d8dbc44bc266@changeid
 Signed-off-by: Daniel Thompson <daniel.thompson@linaro.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- kernel/debug/debug_core.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ kernel/debug/debug_core.c | 1 +
+ 1 file changed, 1 insertion(+)
 
 diff --git a/kernel/debug/debug_core.c b/kernel/debug/debug_core.c
-index 2b7c9b67931d..950dc667c823 100644
+index 950dc667c823..d47c7d6656cd 100644
 --- a/kernel/debug/debug_core.c
 +++ b/kernel/debug/debug_core.c
-@@ -668,6 +668,8 @@ static int kgdb_cpu_enter(struct kgdb_state *ks, struct pt_regs *regs,
- 	if (kgdb_skipexception(ks->ex_vector, ks->linux_regs))
- 		goto kgdb_restore;
+@@ -532,6 +532,7 @@ static int kgdb_reenter_check(struct kgdb_state *ks)
  
-+	atomic_inc(&ignore_console_lock_warning);
-+
- 	/* Call the I/O driver's pre_exception routine */
- 	if (dbg_io_ops->pre_exception)
- 		dbg_io_ops->pre_exception();
-@@ -740,6 +742,8 @@ static int kgdb_cpu_enter(struct kgdb_state *ks, struct pt_regs *regs,
- 	if (dbg_io_ops->post_exception)
- 		dbg_io_ops->post_exception();
+ 	if (exception_level > 1) {
+ 		dump_stack();
++		kgdb_io_module_registered = false;
+ 		panic("Recursive entry to debugger");
+ 	}
  
-+	atomic_dec(&ignore_console_lock_warning);
-+
- 	if (!kgdb_single_step) {
- 		raw_spin_unlock(&dbg_slave_lock);
- 		/* Wait till all the CPUs have quit from the debugger. */
 -- 
 2.25.1
 
