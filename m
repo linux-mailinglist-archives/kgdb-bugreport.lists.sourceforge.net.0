@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E65A31EFBBA
-	for <lists+kgdb-bugreport@lfdr.de>; Fri,  5 Jun 2020 16:45:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 485131F18F4
+	for <lists+kgdb-bugreport@lfdr.de>; Mon,  8 Jun 2020 14:43:56 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jhDb0-0007KL-Nx
-	for lists+kgdb-bugreport@lfdr.de; Fri, 05 Jun 2020 14:45:22 +0000
+	id 1jiH87-0000hD-3U
+	for lists+kgdb-bugreport@lfdr.de; Mon, 08 Jun 2020 12:43:55 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <peterz@infradead.org>) id 1jhDaz-0007KC-MP
- for kgdb-bugreport@lists.sourceforge.net; Fri, 05 Jun 2020 14:45:21 +0000
+ (envelope-from <daniel.thompson@linaro.org>) id 1jiH85-0000gz-Mb
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 08 Jun 2020 12:43:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=2KqS9GDLfei9p1sb6woUsx+zVR7cGlA+3c0QP7ohtJE=; b=dBXZo1Wk/rKc70L+WJOE8XQZhk
- 8KMV/BnykSx9XN/PDsdaWa0fqdQnIcSDSjPSVtyUvq604QYY7bPZDyvjt/cxq2v6gJ5m3iJyMPe3E
- JS9cxXdTl1Ivcl7LrXusdDyS/JnfTuE8b5jNPfu5daPWJQbEYQuiJDDtg7LEXFdDVOgM=;
+ bh=OnT205P+Q9ExcEEivUSebKDFNf0i4UfVrNiNXILSir4=; b=YYera2m7Gneh2k/FgR15C/hala
+ Te7sd2fg+DlJkb13Mfjnwq9TPiPkMfO+rxrJwFBz/a5SvLF0zwkKyn0vkYHcTa7NBs4/ioirr19yE
+ 55LnQEp1gnDEO9Y69WgS8BTWz+JA2Isqi6/pv/G9jIz0YTlMBYsTSsKGNN+uGWp3sk9M=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -30,40 +30,52 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=2KqS9GDLfei9p1sb6woUsx+zVR7cGlA+3c0QP7ohtJE=; b=DPKGkwdADmi2wHOQ71LsrcJdHy
- 7AB5Q5rfpfWgnLatSLGjNeW9d7n2NHW0ZI1ya95tU4B12Jh0fctjOJyfJolPPCykxQysgsFyz/DjZ
- tJDzWcceJk8NoKD0EgVvObBNMuj7HfiaALV2Z16ScV1TpLWbhj0Yk6VS8VdIYIIM56SM=;
-Received: from merlin.infradead.org ([205.233.59.134])
+ bh=OnT205P+Q9ExcEEivUSebKDFNf0i4UfVrNiNXILSir4=; b=Cg+0fAfYQS1w3zKfgVsLx/HVu/
+ KwFPqYcDeOwGn1u7IDHsY3ujNlxY6MBE7BPmp+nzvMDmwP9t3b8H99HyjDcHFy+2d4oXdhZWnY8Zw
+ Sv7GZgzKz0UudgPVkkNfADSlY4R1oortsGQJrCvIrQgNWYFg1p+G+tzOtEnLM+ASC6Qw=;
+Received: from mail-wm1-f65.google.com ([209.85.128.65])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jhDav-009wVf-OE
- for kgdb-bugreport@lists.sourceforge.net; Fri, 05 Jun 2020 14:45:21 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=merlin.20170209; h=In-Reply-To:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=2KqS9GDLfei9p1sb6woUsx+zVR7cGlA+3c0QP7ohtJE=; b=eGAfBDDR7VUNIJzUpO+py0WWxs
- BZuhWABbN4umtgrUOxi0KQDThDNapT2Y1yAdhk3iFtrsXKYHw/WUrd4VIEdLR+nl+sj/NMFPTHclo
- Tzsf+CuoDXhf8R3h8hX01pjeC7EQEnF0xUk+YjSs641SLUg/TjCKTkkpg1NJYj7RMtvidKG048JC+
- c7mb8z+X8AGcls8wVUy01BRpMh+uTth0oq9WQy/ammynLRuK7vkPMB3CtEm8bMU39GJz5gNyAqQeo
- TruqEvcTdD8xVNDN7AMnFDMbf8aUFd4pcqOML6X7ulX/hZJQVRMRJ4h3QXrOunvTUGgO4l3PLtmPM
- 9Bcb+IMA==;
-Received: from j217100.upc-j.chello.nl ([24.132.217.100]
- helo=noisy.programming.kicks-ass.net)
- by merlin.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1jhDac-0004EE-OP; Fri, 05 Jun 2020 14:44:58 +0000
-Received: from hirez.programming.kicks-ass.net
- (hirez.programming.kicks-ass.net [192.168.1.225])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 3D3D8301ABC;
- Fri,  5 Jun 2020 16:44:57 +0200 (CEST)
-Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
- id 27DB921A74B41; Fri,  5 Jun 2020 16:44:57 +0200 (CEST)
-Date: Fri, 5 Jun 2020 16:44:57 +0200
-From: Peter Zijlstra <peterz@infradead.org>
-To: Daniel Thompson <daniel.thompson@linaro.org>
-Message-ID: <20200605144457.GD2948@hirez.programming.kicks-ass.net>
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1jiH81-00DS92-9s
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 08 Jun 2020 12:43:53 +0000
+Received: by mail-wm1-f65.google.com with SMTP id r9so15177804wmh.2
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Mon, 08 Jun 2020 05:43:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=OnT205P+Q9ExcEEivUSebKDFNf0i4UfVrNiNXILSir4=;
+ b=S1ULEvkPVLdl7+HUPl+/XXL5M1NFP/GaiAuNCbCi57rh3L6BKfVw6ceUIPW2qrC4UZ
+ 3duKjga+IN3TmxRo8schydvUJ3X3maD5P8eU2C9vbYcYlGhARdUAHSwXB37O046n7Ucw
+ taGXyrZoNAwtnc/zKdtbW+83nurquibXu8b8TCjEaira/VpoOuakEA7Kn6QoPmmhiBIk
+ 73bqZaYgJbRIyva9gUbJG8IhhrNjiWdOgJkuJhEKelzcnGPwLa3XY9vYDtqd50diaNH/
+ 7E4wQmACp5f5AcRWKf9JTvuwzh+NNDp0QKe8XIe1gNveRK3+VJVX/NXRzzZHhH/h1nUe
+ nbmw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=OnT205P+Q9ExcEEivUSebKDFNf0i4UfVrNiNXILSir4=;
+ b=tYj4L9JlQIsFoBwYZTyo8ySL/vVgW3bsFVnYW8lR1KofgRLji3j5Nogaz2kLppFn0H
+ kYdHyIREmn761cbh8fgTzH3yCKjTYG615BkFSLq68FP+KhVVAiLV2j/2aTEoYOQw5fNt
+ rEFWeAeq4Pv/43EPzFoYlR4G2lSDfGwU2SO5vbduv9Ct/p88wPkSRI1zL4WW6mZQPyej
+ OdZz8nUGE4AUY/8KwBNDk1iVixLC+wZcFhHQUxSIsngDyXFxW9RgvJGbDE2vYjxABLaS
+ FVEzx/8bCx5I9ShCikBxalg1xMp+VNRxgAr9gfMdyzfxU88Zu841ycqj4jU8rSR5Tzi0
+ L0Dw==
+X-Gm-Message-State: AOAM531TTlAY5l3mFY0NTz/JdNXpqTAGGg5Ea/JoTiRyFWfgZlGZgcTe
+ 6AomxUAESykHsoImRH6uRGrbIg==
+X-Google-Smtp-Source: ABdhPJx+7QzV+Jtitmm3hlNM56KPb2eBH9iZ9cIJDY4H4CUVnxl+GEds1CPcDVPg+D3E5Mfdwdb4ZA==
+X-Received: by 2002:a1c:6006:: with SMTP id u6mr15373622wmb.39.1591620215530; 
+ Mon, 08 Jun 2020 05:43:35 -0700 (PDT)
+Received: from holly.lan (cpc141214-aztw34-2-0-cust773.18-1.cable.virginm.net.
+ [86.9.19.6])
+ by smtp.gmail.com with ESMTPSA id l17sm23442506wrq.17.2020.06.08.05.43.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 08 Jun 2020 05:43:34 -0700 (PDT)
+Date: Mon, 8 Jun 2020 13:43:32 +0100
+From: Daniel Thompson <daniel.thompson@linaro.org>
+To: Peter Zijlstra <peterz@infradead.org>
+Message-ID: <20200608124332.mzamwmdowu6dlh6k@holly.lan>
 References: <20200605132130.1411255-1-daniel.thompson@linaro.org>
  <20200605142953.GP2750@hirez.programming.kicks-ass.net>
 MIME-Version: 1.0
@@ -72,18 +84,18 @@ In-Reply-To: <20200605142953.GP2750@hirez.programming.kicks-ass.net>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [205.233.59.134 listed in wl.mailspike.net]
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.128.65 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.128.65 listed in list.dnswl.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jhDav-009wVf-OE
+X-Headers-End: 1jiH81-00DS92-9s
 Subject: Re: [Kgdb-bugreport] [RFC PATCH 0/4] kgdb: Honour the kprobe
  blacklist when setting breakpoints
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
@@ -144,15 +156,11 @@ On Fri, Jun 05, 2020 at 04:29:53PM +0200, Peter Zijlstra wrote:
 > I've taken the liberty to bounce the entire set to Masami-San, who is
 > the kprobes maintainer for comments as well.
 
-OK, after having had a second look, one thing we can perhaps address
-with the last patch, or perhaps on top of that, is extending the
-kprobes_blacklist() with data regions.
-
-Because these patches only exclude kgdb from setting breakpoints on
-code; data breakpoints do not match what we do with
-arch_build_bp_info().
+Not a liberty... leaving out Masami-san was an oversight on my part.
+Thanks for connecting!
 
 
+Daniel.
 
 
 _______________________________________________
