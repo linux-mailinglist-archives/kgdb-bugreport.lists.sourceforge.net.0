@@ -2,97 +2,73 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 59E201F1A66
-	for <lists+kgdb-bugreport@lfdr.de>; Mon,  8 Jun 2020 15:50:32 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0D0F21F2238
+	for <lists+kgdb-bugreport@lfdr.de>; Tue,  9 Jun 2020 01:07:35 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jiIAZ-0002KV-0b
-	for lists+kgdb-bugreport@lfdr.de; Mon, 08 Jun 2020 13:50:31 +0000
+	id 1jiQrd-0004HB-Fg
+	for lists+kgdb-bugreport@lfdr.de; Mon, 08 Jun 2020 23:07:33 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <daniel.thompson@linaro.org>) id 1jiIAX-0002KA-Pr
- for kgdb-bugreport@lists.sourceforge.net; Mon, 08 Jun 2020 13:50:29 +0000
+ (envelope-from <sashal@kernel.org>) id 1jiQrb-0004H3-Ch
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 08 Jun 2020 23:07:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=uvwgW89KNJaCpkAay5Bmt5Q5u2ENn3zZzl6ZGX4sCzs=; b=k3yqpqpWUgd5iWg8AFX35gG+L5
- ThjhmZ5vqIpcyIecTVki6IDwUSduhoqyI8a54XnDjkJ+yln88fcx31DOVd/7wq6+c4toEUKmAyPh1
- SzP9QO1whiGoe1nXG57GA7zLFd4Jc+indkszqWroxH1Qpa/PFK82oJAsE9G33IpXpu7E=;
+ bh=qE+4hyAP28DMMJHyJe1fsiLs5690QFjQ/Y0GCYK+9UU=; b=DeSnGWtMyp7JxZgnykhVk1Qx7X
+ CCPg5MhcpkzoQn/OQjkaJqAvyMzbLVvsewHgBWRvdY1H5B4Bn0LXijsOty8dt0ygU4IwWouy3em+U
+ X5ZMkZQm8KqMaWPw+VBdgW0Y+nFkC6WeG2fUBDbcRLgAt7zwQtFG1DLI7ajfgY/3qK8A=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=uvwgW89KNJaCpkAay5Bmt5Q5u2ENn3zZzl6ZGX4sCzs=; b=PtaAtzhULINvfu/5uCgLl63peb
- MLWd7YIerBn7Kk+LS/OlcU+72Z80G6Pb4DhXHPij5EvHDz0HPsgDrSx0ZsRyBN6eAoHZfAzizsyCK
- 1OcwqJ8otQYSzdHJTRLExRu+0hC3kgtG0qftpqXDoDqCkVZKj7UHyvU9GfnJJNIFUUm8=;
-Received: from mail-wr1-f67.google.com ([209.85.221.67])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jiIAT-00DWSr-M2
- for kgdb-bugreport@lists.sourceforge.net; Mon, 08 Jun 2020 13:50:29 +0000
-Received: by mail-wr1-f67.google.com with SMTP id x6so17426447wrm.13
- for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 08 Jun 2020 06:50:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=uvwgW89KNJaCpkAay5Bmt5Q5u2ENn3zZzl6ZGX4sCzs=;
- b=QdtkN0Q9RhALxTt6SR7EAnfG+MxLms9iFM1XlfFaX0Xwax8Yy7wnlMt9Q4uqkWNiNO
- yQcijaXgdzVVThzSCn1F39bQPrgg8Epv3ZU/I9X2WPoqLaobrA/VXlhp7L5Wpo+mZEzk
- umMCiPHVf3iLmTUC9l6VPIRYd/3wlECWqnFKKO2yQ24XXVWUmu4KJaLZ9vLeNXXBX8qt
- Z1xEpquBVDkr2nAeHkeNe2k3DoSeeM5/eif9NWZvMF0cDrH9pAe6xOLbr33B5mP9goDa
- 3WcenuwKEHCmcNsaARbkiGPI3ePRu8Y/5rcenAcFP0bd6IQzgXUrCS//aYArpnR4jmLH
- /2tw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=uvwgW89KNJaCpkAay5Bmt5Q5u2ENn3zZzl6ZGX4sCzs=;
- b=KJbAXI1KPWaucBPdADSqG1bHq7XNKd8NJlOzeetU34bUFuKugi4hB35z29ZCyKCkgF
- Rco6wOuk/SeViHZmPVn7jrfjkB21xU4t7RMTkEt6UuJ2jg4G8pN+0VMBPBjVAi4k6IY7
- JtOzP5XIZFImMg0lkmIpLczfUbBIv1AW2XrDFx9TbDJ/rFtCgTJ9b+J/M6XvzGYAqIcX
- hX2I6eeKDPYfHS7tcfCoueMl9+JWtqBjeUrZIM6kPubD+Z7Xnu2OySa6rGwfBaDk3RgU
- X+yrjD0Q9aEShMnM0+Wqq41tuA8FXZDNNiPK8w0Q5Wrmcrsb8Cm9nsW2gPw+LdBeoYDm
- w2AQ==
-X-Gm-Message-State: AOAM53285zL0//QDLAECMyEkq6Uz79EGvwFZ+eI17xyrvhfruZjEsutC
- XDLt1Ald4eGnqE4oyZg3ezSOBw==
-X-Google-Smtp-Source: ABdhPJwXhuwBVRp078X1AQ9dwW6AAdWmm8G4+q5L37eauA5bHgAS+mkxL5jmNO0JlGeaG6UMB4wowg==
-X-Received: by 2002:a5d:4385:: with SMTP id i5mr23168437wrq.420.1591624219092; 
- Mon, 08 Jun 2020 06:50:19 -0700 (PDT)
-Received: from holly.lan (cpc141214-aztw34-2-0-cust773.18-1.cable.virginm.net.
- [86.9.19.6])
- by smtp.gmail.com with ESMTPSA id h15sm22724547wrt.73.2020.06.08.06.50.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jun 2020 06:50:18 -0700 (PDT)
-Date: Mon, 8 Jun 2020 14:50:16 +0100
-From: Daniel Thompson <daniel.thompson@linaro.org>
-To: Peter Zijlstra <peterz@infradead.org>
-Message-ID: <20200608135016.5pdxidpepjujqw6b@holly.lan>
-References: <20200605132130.1411255-1-daniel.thompson@linaro.org>
- <20200605142953.GP2750@hirez.programming.kicks-ass.net>
- <20200605144457.GD2948@hirez.programming.kicks-ass.net>
+ bh=qE+4hyAP28DMMJHyJe1fsiLs5690QFjQ/Y0GCYK+9UU=; b=dodMQw1gqAVC0zj1e7ramkzua+
+ mLU6Nkl57/8gi/z+emJQJVGoinew5g4nNfWlRCXtfr5ne2MKhm24tJkJcZNWLfgvuKZGqgqveqyMj
+ p50QRGAUd5di2yolWZAV+zwHaHKY+zf9rZgBX4otnWcioKv30d05SaGgUq+tFKxSJbHU=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1jiQrZ-00Gzd2-VM
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 08 Jun 2020 23:07:31 +0000
+Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
+ [73.47.72.35])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id A716A20801;
+ Mon,  8 Jun 2020 23:07:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1591657637;
+ bh=DzD4va/Hk/n7WxJe3FSL15iUlyqcjWKqD3ZeXFNRTaA=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=Xsprg4crwovuqNqeDGb6qZdZ6ds6ZbhmXJiNlLV7RP1JRu4N/bM3GiJR4h/Lxy6rb
+ hhtAUhN6EIFl21QovstmCSgF4yLcB8VsfvNf6VmgUo37SD0gmYesbs+JUVYXK5MrYc
+ B3b3FM2dQ5JKXpsYzxXYd4u3RfZLVl775pQh6Mpw=
+From: Sasha Levin <sashal@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Date: Mon,  8 Jun 2020 19:02:28 -0400
+Message-Id: <20200608230607.3361041-55-sashal@kernel.org>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20200608230607.3361041-1-sashal@kernel.org>
+References: <20200608230607.3361041-1-sashal@kernel.org>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200605144457.GD2948@hirez.programming.kicks-ass.net>
-X-Spam-Score: -0.1 (/)
+X-stable: review
+X-Patchwork-Hint: Ignore
+X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: hw.info]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.221.67 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.221.67 listed in list.dnswl.org]
+ for more information. [URIs: chromium.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -100,9 +76,11 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1jiIAT-00DWSr-M2
-Subject: Re: [Kgdb-bugreport] [RFC PATCH 0/4] kgdb: Honour the kprobe
- blacklist when setting breakpoints
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+ -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jiQrZ-00Gzd2-VM
+Subject: [Kgdb-bugreport] [PATCH AUTOSEL 5.7 055/274] kgdb: Disable
+ WARN_CONSOLE_UNLOCKED for all kgdb
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,125 +92,83 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: pmladek@suse.com, kgdb-bugreport@lists.sourceforge.net, patches@linaro.org,
- linux-kernel@vger.kernel.org, sergey.senozhatsky@gmail.com,
- Masami Hiramatsu <mhiramat@kernel.org>,
- Jason Wessel <jason.wessel@windriver.com>, will@kernel.org
+Cc: Sasha Levin <sashal@kernel.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Daniel Thompson <daniel.thompson@linaro.org>,
+ kgdb-bugreport@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Fri, Jun 05, 2020 at 04:44:57PM +0200, Peter Zijlstra wrote:
-> On Fri, Jun 05, 2020 at 04:29:53PM +0200, Peter Zijlstra wrote:
-> > On Fri, Jun 05, 2020 at 02:21:26PM +0100, Daniel Thompson wrote:
-> > > kgdb has traditionally adopted a no safety rails approach to breakpoint
-> > > placement. If the debugger is commanded to place a breakpoint at an
-> > > address then it will do so even if that breakpoint results in kgdb
-> > > becoming inoperable.
-> > > 
-> > > A stop-the-world debugger with memory peek/poke does intrinsically
-> > > provide its operator with the means to hose their system in all manner
-> > > of exciting ways (not least because stopping-the-world is already a DoS
-> > > attack ;-) ) but the current no safety rail approach is not easy to
-> > > defend, especially given kprobes provides us with plenty of machinery to
-> > > mark parts of the kernel where breakpointing is discouraged.
-> > > 
-> > > This patchset introduces some safety rails by using the existing
-> > > kprobes infrastructure. It does not cover all locations where
-> > > breakpoints can cause trouble but it will definitely block off several
-> > > avenues, including the architecture specific parts that are handled by
-> > > arch_within_kprobe_blacklist().
-> > > 
-> > > This patch is an RFC because:
-> > > 
-> > > 1. My workstation is still chugging through the compile testing.
-> > > 
-> > > 2. Patch 4 needs more runtime testing.
-> > > 
-> > > 3. The code to extract the kprobe blacklist code (patch 4 again) needs
-> > >    more review especially for its impact on arch specific code.
-> > > 
-> > > To be clear I do plan to do the detailed review of the kprobe blacklist
-> > > stuff but would like to check the direction of travel first since the
-> > > change is already surprisingly big and maybe there's a better way to
-> > > organise things.
-> > 
-> > Thanks for doing these patches, esp 1-3 look very good to me.
-> > 
-> > I've taken the liberty to bounce the entire set to Masami-San, who is
-> > the kprobes maintainer for comments as well.
-> 
-> OK, after having had a second look, one thing we can perhaps address
-> with the last patch, or perhaps on top of that, is extending the
-> kprobes_blacklist() with data regions.
-> 
-> Because these patches only exclude kgdb from setting breakpoints on
-> code; data breakpoints do not match what we do with
-> arch_build_bp_info().
+From: Douglas Anderson <dianders@chromium.org>
 
-Right, my patches will only affect the code paths where kgdb sets
-software breakpoints.
+[ Upstream commit 202164fbfa2b2ffa3e66b504e0f126ba9a745006 ]
 
-In principle h/w breakpoints, whether they are code or data, should be
-able to rely on hw_breakpoint_arch_parse() and any errors from the hw
-breakpoint API will propagate into the kgdb core and do the right
-thing.
+In commit 81eaadcae81b ("kgdboc: disable the console lock when in
+kgdb") we avoided the WARN_CONSOLE_UNLOCKED() yell when we were in
+kgdboc.  That still works fine, but it turns out that we get a similar
+yell when using other I/O drivers.  One example is the "I/O driver"
+for the kgdb test suite (kgdbts).  When I enabled that I again got the
+same yells.
 
-In practice it looks like kgdb/x86/hw_breakpoint have plumbed together
-in a manner that circumvents the parse (and therefore#
-arch_build_bp_info() never runs). Rather the h/w/ break problem using
-the kprobe blacklist I think we could just fix these code paths.
+Even though "kgdbts" doesn't actually interact with the user over the
+console, using it still causes kgdb to print to the consoles.  That
+trips the same warning:
+  con_is_visible+0x60/0x68
+  con_scroll+0x110/0x1b8
+  lf+0x4c/0xc8
+  vt_console_print+0x1b8/0x348
+  vkdb_printf+0x320/0x89c
+  kdb_printf+0x68/0x90
+  kdb_main_loop+0x190/0x860
+  kdb_stub+0x2cc/0x3ec
+  kgdb_cpu_enter+0x268/0x744
+  kgdb_handle_exception+0x1a4/0x200
+  kgdb_compiled_brk_fn+0x34/0x44
+  brk_handler+0x7c/0xb8
+  do_debug_exception+0x1b4/0x228
 
-The following is 100% untested (not even compile) and I copied a line
-or two from register_perf_hw_breakpoint() without checking what they
-do ;-). Nevertheless I hope it gives a clear idea about what I am
-talking about! If this was developed into a "real" patch then I think
-dbg_release_bp_slot() should perhaps be replaced with a better API that
-doesn't bypass the checks rather than solving everything in kgdb.c .
+Let's increment/decrement the "ignore_console_lock_warning" variable
+all the time when we enter the debugger.
 
+This will allow us to later revert commit 81eaadcae81b ("kgdboc:
+disable the console lock when in kgdb").
 
-Daniel.
+Signed-off-by: Douglas Anderson <dianders@chromium.org>
+Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Reviewed-by: Daniel Thompson <daniel.thompson@linaro.org>
+Link: https://lore.kernel.org/r/20200507130644.v4.1.Ied2b058357152ebcc8bf68edd6f20a11d98d7d4e@changeid
+Signed-off-by: Daniel Thompson <daniel.thompson@linaro.org>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
+ kernel/debug/debug_core.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-
-diff --git a/arch/x86/kernel/kgdb.c b/arch/x86/kernel/kgdb.c
-index c44fe7d8d9a4..64ac0ee9b55c 100644
---- a/arch/x86/kernel/kgdb.c
-+++ b/arch/x86/kernel/kgdb.c
-@@ -223,11 +223,12 @@ static void kgdb_correct_hw_break(void)
- 		hw_breakpoint_restore();
- }
+diff --git a/kernel/debug/debug_core.c b/kernel/debug/debug_core.c
+index 2b7c9b67931d..950dc667c823 100644
+--- a/kernel/debug/debug_core.c
++++ b/kernel/debug/debug_core.c
+@@ -668,6 +668,8 @@ static int kgdb_cpu_enter(struct kgdb_state *ks, struct pt_regs *regs,
+ 	if (kgdb_skipexception(ks->ex_vector, ks->linux_regs))
+ 		goto kgdb_restore;
  
--static int hw_break_reserve_slot(int breakno)
-+static int kgdb_register_hw_break(int breakno)
- {
- 	int cpu;
- 	int cnt = 0;
- 	struct perf_event **pevent;
-+        struct arch_hw_breakpoint hw = { };
++	atomic_inc(&ignore_console_lock_warning);
++
+ 	/* Call the I/O driver's pre_exception routine */
+ 	if (dbg_io_ops->pre_exception)
+ 		dbg_io_ops->pre_exception();
+@@ -740,6 +742,8 @@ static int kgdb_cpu_enter(struct kgdb_state *ks, struct pt_regs *regs,
+ 	if (dbg_io_ops->post_exception)
+ 		dbg_io_ops->post_exception();
  
- 	if (dbg_is_early)
- 		return 0;
-@@ -237,6 +238,11 @@ static int hw_break_reserve_slot(int breakno)
- 		pevent = per_cpu_ptr(breakinfo[breakno].pev, cpu);
- 		if (dbg_reserve_bp_slot(*pevent))
- 			goto fail;
-+		if (hw_breakpoint_arch_parse(*pevent, &(*pevent)->attr, hw)) {
-+			cnt++;
-+			goto fail;
-+		}
-+		(*pevent)->hw.info = hw;
- 	}
- 
- 	return 0;
-@@ -361,7 +367,7 @@ kgdb_set_hw_break(unsigned long addr, int len, enum kgdb_bptype bptype)
- 		return -1;
- 	}
- 	breakinfo[i].addr = addr;
--	if (hw_break_reserve_slot(i)) {
-+	if (kgdb_register_hw_break(i)) {
- 		breakinfo[i].addr = 0;
- 		return -1;
- 	}
++	atomic_dec(&ignore_console_lock_warning);
++
+ 	if (!kgdb_single_step) {
+ 		raw_spin_unlock(&dbg_slave_lock);
+ 		/* Wait till all the CPUs have quit from the debugger. */
+-- 
+2.25.1
+
 
 
 _______________________________________________
