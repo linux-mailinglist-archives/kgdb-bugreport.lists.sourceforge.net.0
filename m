@@ -2,80 +2,50 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B7AF21F6244
-	for <lists+kgdb-bugreport@lfdr.de>; Thu, 11 Jun 2020 09:27:50 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6BE371F6311
+	for <lists+kgdb-bugreport@lfdr.de>; Thu, 11 Jun 2020 09:58:32 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jjHcr-0004cF-Hp
-	for lists+kgdb-bugreport@lfdr.de; Thu, 11 Jun 2020 07:27:49 +0000
+	id 1jjI6Z-0005kW-7w
+	for lists+kgdb-bugreport@lfdr.de; Thu, 11 Jun 2020 07:58:31 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sergey.senozhatsky@gmail.com>) id 1jjHck-0004by-82
- for kgdb-bugreport@lists.sourceforge.net; Thu, 11 Jun 2020 07:27:42 +0000
+ (envelope-from <pmladek@suse.com>) id 1jjI6Y-0005kP-Le
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 11 Jun 2020 07:58:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:Date:From:Sender:Reply-To:Content-Transfer-Encoding:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=F9YRyl1QH8nNLxQb6YLXx+y0EshlCzJxB+jfKLjlAqM=; b=cvfGBp3JpuF1YdAS/vtU8OlkWs
- H+KViB0N1kJvmZC3RX3MaxuJvJ0FQInN4uTuJrv9x2BNCoCvncUrr3IYV4UTKyGhpgxpI9mhr+6A9
- ZM0G+xEZvQTptYNp1OeECmIgCjD3JEHnKGPLZn7KHsQ/4iIIGmR5IqC7GrAFmevXciFI=;
+ bh=J9KeEO9nXTH4wlQRy4lLzmAxeIVSxlpsHbubuSb/JnA=; b=iX76HR2PsWSb/p+qWzbcfC/0aw
+ +2RAI9IzoWZnhTxE00wUQjJ8bCpurzLLKttPVCHgkId1GMVAu3+VWRpqFftMSpJIjhWLI0oI5jFli
+ E8mbBHXK3XBHuFhDgCo/Pd2xRvpLgInGsJkJbqZVrOwpDgPEqBvuMfXgXL63WmoZiuhg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :Date:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=F9YRyl1QH8nNLxQb6YLXx+y0EshlCzJxB+jfKLjlAqM=; b=NEE0oVAKZ2C2IdRsrQ0BKXM78/
- C+aLnqFcvUlQ56Jk1wqoCT0ocY+PLKqCpeEEXLal/hB+WGg4LJ90aOaU9AtRvK542jVvnLAcv3mGk
- CBIQArAgApWgg357yr82vjIKvWukwYzU0tc44wiiLKKpIYd9fJV8tvWq56R5dKsVxW04=;
-Received: from mail-pf1-f194.google.com ([209.85.210.194])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jjHcj-00F6AZ-25
- for kgdb-bugreport@lists.sourceforge.net; Thu, 11 Jun 2020 07:27:42 +0000
-Received: by mail-pf1-f194.google.com with SMTP id b201so2315244pfb.0
- for <kgdb-bugreport@lists.sourceforge.net>;
- Thu, 11 Jun 2020 00:27:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:date:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=F9YRyl1QH8nNLxQb6YLXx+y0EshlCzJxB+jfKLjlAqM=;
- b=TxQNPxCdxCFIlxp1IRQ0D8Vg8XFC00Bg44uvyzsUqyx/qoeEbJWb3Mnt5q6gUimqT7
- T25vKLwTHkwlPT/ja4Cfdhlny+1HZBqfBwTnX1lgltBfscYNxT8xBAX2YQAgzwhDEa60
- GdfWj4jhMDxUKdQMlK62NwFZ0n6OlvWmEkeHonIv3Qq3NZOe2gkw38y8cEhu69qalJjl
- FGq2+yPg3xe7Wh47U9W/R8HuIlY6E2ELpAezBXHuvX4HVM1Adz+bBpEIBBHizDPmDExV
- Wi/JAI/TmK9L5DuunYFH56e6fG3wJEPkeC68iUkcKc7s3+m5RCT0RrILg4QdEEysMndO
- 8qpQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:date:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=F9YRyl1QH8nNLxQb6YLXx+y0EshlCzJxB+jfKLjlAqM=;
- b=dKcksJP9WngKrS8r+/XbnGRd/w1gyPl8a824ar0TBBUMhbd5C6a520s0IlDgLuz+2F
- P9HM/lwCGBH0F1/RAVdDlTrS6QVd1teJ/NS9F0XtpZs82X5iwtzOkUEMlSRbwrys8qNA
- tZ2uYmWVqrQWOBURGiyAv3wDZEmt9yZIP8OeSrvP+qPqXxGHrwYnCwAF4LXgCdsR9vd3
- ZJ6QG0e/nC28FXgNVw9evxZNZn4Bwwr728mU6LjE6GY7OE8T4XTngHeKVjjIq82bTwCl
- jqyp7cUJAfrR4S15t3+NQLzKC2yQCf7dyKAnxxZXk+YjXsqwxTkNE7lEuS1ROVeIza9p
- C+Hw==
-X-Gm-Message-State: AOAM530z4Y29VnDa5u2oJgj+jr/DaeORP2WmlmrAFRE8/z9DM/fMQbnn
- v31lKLzeCjnFq15IhiHwOxI=
-X-Google-Smtp-Source: ABdhPJwhkrcAHfXYK9Qyr3n+8oV1pTLg7pFg4+NYq8gkVla26gxDRMXpFWipLKzcxbjwfYs46M449A==
-X-Received: by 2002:a62:5ec2:: with SMTP id s185mr2426106pfb.0.1591860455453; 
- Thu, 11 Jun 2020 00:27:35 -0700 (PDT)
-Received: from localhost ([2409:10:2e40:5100:6e29:95ff:fe2d:8f34])
- by smtp.gmail.com with ESMTPSA id 15sm2152353pfw.189.2020.06.11.00.27.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Jun 2020 00:27:34 -0700 (PDT)
-From: Sergey Senozhatsky <sergey.senozhatsky@gmail.com>
-X-Google-Original-From: Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>
-Date: Thu, 11 Jun 2020 16:27:32 +0900
+ bh=J9KeEO9nXTH4wlQRy4lLzmAxeIVSxlpsHbubuSb/JnA=; b=FxFsog/P28t+APHxLZaNw34qPh
+ yR+5iEm2vVEVm8cMSrMWEEpsCFCu9+u7DgojZAh1Am9SYqdeCqJ9j6/v6g6wJW2GpgZXe9BB/Xj0s
+ SMSmZhhwOo/kppIUl36M1pyxaGVxRPhkrtoP0BAeK3dXf0lQ8HAWUQ8NCz9Olo/zmHLQ=;
+Received: from mx2.suse.de ([195.135.220.15])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1jjI6X-001ng0-0D
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 11 Jun 2020 07:58:30 +0000
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id D33BBACF9;
+ Thu, 11 Jun 2020 07:58:23 +0000 (UTC)
+Date: Thu, 11 Jun 2020 09:58:18 +0200
+From: Petr Mladek <pmladek@suse.com>
 To: Daniel Thompson <daniel.thompson@linaro.org>
-Message-ID: <20200611072732.GA429@jagdpanzerIV.localdomain>
+Message-ID: <20200611075818.GC6581@linux-b0ei>
 References: <1589273314-12060-1-git-send-email-sumit.garg@linaro.org>
  <20200512142533.ta4uejwmq5gchtlx@holly.lan>
  <CAFA6WYOV7oPbYE=9fXueYMacb5wv0r9T6F8tmECt-Eafe-fctw@mail.gmail.com>
@@ -89,24 +59,21 @@ References: <1589273314-12060-1-git-send-email-sumit.garg@linaro.org>
 MIME-Version: 1.0
 Content-Disposition: inline
 In-Reply-To: <20200610164140.tgzcn5oip2gzgmze@holly.lan>
-X-Spam-Score: -0.1 (/)
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.210.194 listed in list.dnswl.org]
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (sergey.senozhatsky[at]gmail.com)
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: lkml.org]
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.210.194 listed in wl.mailspike.net]
+ [195.135.220.15 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1jjHcj-00F6AZ-25
+ -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jjI6X-001ng0-0D
 Subject: Re: [Kgdb-bugreport] [PATCH] printk/kdb: Redirect printk messages
  into kdb in any context
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
@@ -120,9 +87,9 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: Petr Mladek <pmladek@suse.com>, John Ogness <john.ogness@linutronix.de>,
- Arnd Bergmann <arnd@arndb.de>, Peter Zijlstra <peterz@infradead.org>,
- kgdb-bugreport@lists.sourceforge.net, Steven Rostedt <rostedt@goodmis.org>,
+Cc: John Ogness <john.ogness@linutronix.de>, Arnd Bergmann <arnd@arndb.de>,
+ Peter Zijlstra <peterz@infradead.org>, kgdb-bugreport@lists.sourceforge.net,
+ Steven Rostedt <rostedt@goodmis.org>,
  Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
  Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
  Jason Wessel <jason.wessel@windriver.com>,
@@ -131,7 +98,17 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On (20/06/10 17:41), Daniel Thompson wrote:
+On Wed 2020-06-10 17:41:40, Daniel Thompson wrote:
+> On Sat, May 16, 2020 at 01:36:38AM +0900, Sergey Senozhatsky wrote:
+> > On (20/05/15 17:32), Sumit Garg wrote:
+> > > > Can I please have some context what problem does this solve?
+> > > 
+> > > You can find the problem description here [1] which leads to this fix.
+> > 
+> > [..]
+> > 
+> > > [1] https://lkml.org/lkml/2020/5/12/213
+> > 
 > > Thanks for the link. I'm slightly surprised it took so many years
 > > to notice the addition of printk_nmi/printk_safe :)
 > 
@@ -143,10 +120,19 @@ On (20/06/10 17:41), Daniel Thompson wrote:
 > that takes a breakpoint, and where almost all of the kdb printk() calls
 > take place, will now unconditionally have printk() interception enabled.
 
-Interesting. Feels like ist_enter() should have been using
-printk_nmi_enter/exit() in the first place.
+Mea culpa. I have marked this patch as proceed by mistake. It has got
+enough acks and is ready for 5.8.
 
-	-ss
+I have just commited the patch into printk/linux.git,
+branch for-5.8-kdb-nmi.
+
+I am going to push it to Linus when it passes linux-next integration,
+hopefully tomorrow.
+
+Thanks a lot for poking me.
+
+Best Regards,
+Petr
 
 
 _______________________________________________
