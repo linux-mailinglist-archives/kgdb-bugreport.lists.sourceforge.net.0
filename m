@@ -2,96 +2,96 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F3754203A02
-	for <lists+kgdb-bugreport@lfdr.de>; Mon, 22 Jun 2020 16:52:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1A6E7203BA7
+	for <lists+kgdb-bugreport@lfdr.de>; Mon, 22 Jun 2020 17:56:48 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jnNob-00007x-Pe
-	for lists+kgdb-bugreport@lfdr.de; Mon, 22 Jun 2020 14:52:53 +0000
+	id 1jnOoQ-0001sC-Sw
+	for lists+kgdb-bugreport@lfdr.de; Mon, 22 Jun 2020 15:56:46 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sumit.garg@linaro.org>) id 1jnNoa-00007l-UV
- for kgdb-bugreport@lists.sourceforge.net; Mon, 22 Jun 2020 14:52:52 +0000
+ (envelope-from <daniel.thompson@linaro.org>) id 1jnOoQ-0001s3-8Y
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 22 Jun 2020 15:56:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:
- To:From:Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=M9KwMzs626zZhBtIoTQs5efdkplmNJ79hSzl8cSVNjw=; b=gTP6mcmV0fT19IwHEOo+e+M5WZ
- oBBc9G9ZeWfKsNyju86J5A9Kh3G/NDcJ4lsejt3WOCFTiXhLRIcyr5I6Q6CWpPpFBhjBqLxE8US0e
- /H0IeqebFAN3TTZibFE3yMiFbf/fO8T7d/UA7bt5r8laSkAEsXhezohqYEc8otW/AKlc=;
+ bh=kSMspTFGxKNsReoFaFuGJU3LuXpebLrE7bbL0ZZt+X8=; b=d+x+5/DH2YNH5+SnIOQjvJOEMH
+ gAY/lHOQS9pF4NIxWeiEyDERlL3OD4Abq0I9SNbu+VynEpAIqXMZ2v+4MBrucCvgopsPGWOE2HZs5
+ k1T/S7la3T7Dc306xuOaTPZtSTbR/XSB3xndfTogfKfUrKXzyoNkiV3V2+acO8GsJmcA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To
- :MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=M9KwMzs626zZhBtIoTQs5efdkplmNJ79hSzl8cSVNjw=; b=aHbSwiieoyDhg7zlqa3S27KP52
- I+59jWd33tKG4rJePmX0+ywFmAjhKD2pIfnn2DAwFegfr71qHssNjwljOqkKVpAXkkvVwXmZ/JFhz
- x3XFB8zDgjHGjC/xvC2NGezBHqMswZ3SqyNpcnHl4UmyehPyr7WCmviYa/WPYUu6sXpo=;
-Received: from mail-vs1-f67.google.com ([209.85.217.67])
+ bh=kSMspTFGxKNsReoFaFuGJU3LuXpebLrE7bbL0ZZt+X8=; b=HeNbcgt52gO2WtnDikZvJjyYEy
+ t3KCaIPaprDzCZQXn47Uen6PBUwJYjWnFK4R3vd8XECQgFOU//v2P3kNeBFyK/+Rrq4OV11Y4rjKD
+ Nfv41IpFc/wEw5tA00K0/RKCwwHW4uhVyX65oXtEU0sp7hXepVNsKVaFK1lAC/QY8RLw=;
+Received: from mail-wr1-f67.google.com ([209.85.221.67])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jnNoZ-00C1cT-8Q
- for kgdb-bugreport@lists.sourceforge.net; Mon, 22 Jun 2020 14:52:52 +0000
-Received: by mail-vs1-f67.google.com with SMTP id j13so9800484vsn.3
+ id 1jnOoL-00C4hd-RV
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 22 Jun 2020 15:56:46 +0000
+Received: by mail-wr1-f67.google.com with SMTP id l11so17245527wru.0
  for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 22 Jun 2020 07:52:51 -0700 (PDT)
+ Mon, 22 Jun 2020 08:56:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=M9KwMzs626zZhBtIoTQs5efdkplmNJ79hSzl8cSVNjw=;
- b=fcYOxIUyQqvxk/LMxj5k2PcHWbKksWlVM0RADhm7nGAokdEUmwV3EEiZC6qY8FZN+u
- MXoiD9Bl8uV3mE4dflId5Ysj9kk2DyS+ixwUWTwMxgQNlEF/UXTDXHxh7aeIfq/mou+U
- eOEgNlbrFUBNwfhMfJmEyGzg5fmJfkUD5+UTEteGBQmEZK7I1tsSoxz7idIIF4PWOgEv
- 3wQpxAZvdSHhEhomUs3Z4VP2UfDdFTNS9ukNUxnLQOoybV0TbZMI9blZV8rUJ1CsWUdM
- EJwzGZlCgI6Rtzeeiy5wd0ZheSlc3cyB8kuXh84pgLq/xOC7zPeMMPf0jJb4+LZ6QsuT
- hT8A==
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=kSMspTFGxKNsReoFaFuGJU3LuXpebLrE7bbL0ZZt+X8=;
+ b=GXv2ZNEabhbhSf7vXvuVC7lyGiiOvUukOmdBQvekLZ+qdVz/B7mzEhE04wmtCu7H94
+ qIYOIUGV8F0dtRgrSLsr5rKqVlXaYQeBBZrf9wZ9PJN6A9Nc0s2NntSKKdDrCaAXsiPO
+ gVRzXm592POsuRnrI3XFZcTrUI1TNYtkaMy8bYiGeIXhsa1o9OU7zUjkuC8AWYv5l6UL
+ 2u2zSVTcVV8UJaFoj1wyD6ulvLAYuXpFag7UrU8M8CwMng4DJf9jLc2eIqyYQHcrX4ki
+ 7U28cjIKDC29qqaXZxSSwbAS4nbEHpM0OBtChPCL6D+4OID6G3V3HXXXg7paO8R3kaoo
+ ZEjg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references;
- bh=M9KwMzs626zZhBtIoTQs5efdkplmNJ79hSzl8cSVNjw=;
- b=SFcGHTHa7ac4l48ksE3hkGcZ983BITfgSPXM3s4DRPPELbBLFWiqs0WNZ50ydwJ9wO
- 7L6pigKaRMoiX2JUjQloZgBdCL7Zpp61d93bwlX54UuMNIfEMec7pwfIxS7zjh7+nw/J
- lo9RYY8lv3kahmnFdsLAvB3qbUfOJgGia2rJ1YutYcHXfmqn9UJ1/jqWGFcw+W+9IoOw
- wE86NJph+XclaXxYxVzCLmhkq0ytZ+B9FCfpe+BjPPPc0S25hyZ8tMbgvvUixDBMzKXY
- h27EKYt49cdXOZt58/w0vw595/oR4xacaoWwiGtecMxoI4WPYoZF1Oggyl6a5RAzpCwr
- BWtw==
-X-Gm-Message-State: AOAM530GpGLfHdb+odq2PvUs65l6r8cfpMeZaoOfkE0XDbbrhuxu0qnd
- hhoyA9bwe62L6p4bkt9INHk9URNkRLQ=
-X-Google-Smtp-Source: ABdhPJxdk4/xczBSB9mmZ7kd/CjrWcQEW1E+5kTeVyzPqHBNPaFgJntiHv8R1qUiKMAh8yK0vGiMnA==
-X-Received: by 2002:a17:902:d903:: with SMTP id
- c3mr18839486plz.229.1592836070328; 
- Mon, 22 Jun 2020 07:27:50 -0700 (PDT)
-Received: from localhost.localdomain ([117.252.67.186])
- by smtp.gmail.com with ESMTPSA id d6sm14547939pjh.5.2020.06.22.07.27.45
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 22 Jun 2020 07:27:49 -0700 (PDT)
-From: Sumit Garg <sumit.garg@linaro.org>
-To: kgdb-bugreport@lists.sourceforge.net,
-	linux-serial@vger.kernel.org
-Date: Mon, 22 Jun 2020 19:56:23 +0530
-Message-Id: <1592835984-28613-7-git-send-email-sumit.garg@linaro.org>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1592835984-28613-1-git-send-email-sumit.garg@linaro.org>
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=kSMspTFGxKNsReoFaFuGJU3LuXpebLrE7bbL0ZZt+X8=;
+ b=DSnf/v5LSpKL0R0oAgwo4erttv96H2ZTxRYMJCrW5+vRyaVOGmpqyD+C8f9qlfBpM+
+ x4FdMrkHj9gDr71sIiuwS07MDzXdq2xTijBerNv2C5+YP0cUYGQ26+qif1WKADGYVebG
+ dkPL3UTVCQi1Asjpa873x1xIl89QTA9X4jZvAZ5lzeQ6M+QqGiQUhE9n+IDuBE1gUyiI
+ 5JGU2fT1AzHD/8vovPZajQzY1HUN8rt34nGVMHzuTzLah2aoyk3D2US3HJ+i36lxIwkm
+ s507c3M7rUhs3fQ5lDrqn230/ISauR7U8AS46J7p3WYHcN/pvK6oUc9chsfYGLSz+8Sh
+ ZfFA==
+X-Gm-Message-State: AOAM531+KmZ6Zk0nKSggjhWg2QmG9ZE/Aquim+j2IZSP77vd+7OrdCF9
+ 0ekbsYZOHNU+kvh01DARQPAz2A==
+X-Google-Smtp-Source: ABdhPJxxJgkt35ckzF3UHxiybAvxxwtheduC5J/trxrNa8yKhlixDpRotx+E7cZGBlOIIJi0HzSYDA==
+X-Received: by 2002:adf:f34e:: with SMTP id e14mr19735827wrp.299.1592841387421; 
+ Mon, 22 Jun 2020 08:56:27 -0700 (PDT)
+Received: from holly.lan (cpc141214-aztw34-2-0-cust773.18-1.cable.virginm.net.
+ [86.9.19.6])
+ by smtp.gmail.com with ESMTPSA id n8sm15375134wrj.44.2020.06.22.08.56.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 22 Jun 2020 08:56:26 -0700 (PDT)
+Date: Mon, 22 Jun 2020 16:56:24 +0100
+From: Daniel Thompson <daniel.thompson@linaro.org>
+To: Sumit Garg <sumit.garg@linaro.org>
+Message-ID: <20200622155624.he2vs2r3e5yzf3sl@holly.lan>
 References: <1592835984-28613-1-git-send-email-sumit.garg@linaro.org>
-X-Spam-Score: 1.4 (+)
+ <1592835984-28613-3-git-send-email-sumit.garg@linaro.org>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <1592835984-28613-3-git-send-email-sumit.garg@linaro.org>
+X-Spam-Score: -0.5 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.221.67 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.221.67 listed in wl.mailspike.net]
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: linaro.org]
- 1.5 RCVD_IN_SORBS_WEB      RBL: SORBS: sender is an abusable web server
- [117.252.67.186 listed in dnsbl.sorbs.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.217.67 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.217.67 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -99,10 +99,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jnNoZ-00C1cT-8Q
-Subject: [Kgdb-bugreport] [PATCH 6/7] serial: amba-pl011: Implement
- poll_get_irq() interface
+ -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jnOoL-00C4hd-RV
+Subject: Re: [Kgdb-bugreport] [PATCH 2/7] tty: serial: Add poll_get_irq() to
+ the polling interface
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,63 +114,120 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: daniel.thompson@linaro.org, gregkh@linuxfoundation.org,
- jason.wessel@windriver.com, linux@armlinux.org.uk, jslaby@suse.com,
- linux-kernel@vger.kernel.org
-MIME-Version: 1.0
+Cc: gregkh@linuxfoundation.org, kgdb-bugreport@lists.sourceforge.net,
+ jason.wessel@windriver.com, linux@armlinux.org.uk,
+ linux-serial@vger.kernel.org, jslaby@suse.com, linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Support kgdb NMI console feature via implementing poll_get_irq()
-interface. This will allow usage of RX interrupts to support kgdb entry
-while serial device is operating in polling mode.
+On Mon, Jun 22, 2020 at 07:56:19PM +0530, Sumit Garg wrote:
+> From: Daniel Thompson <daniel.thompson@linaro.org>
 
-Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
----
- drivers/tty/serial/amba-pl011.c | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+Sumit, to some extent this mail is me yelling at myself two years ago
+although, in my defence, at the time I choose not to post it because I
+knew it wasn't right.
 
-diff --git a/drivers/tty/serial/amba-pl011.c b/drivers/tty/serial/amba-pl011.c
-index c010f63..d620d12 100644
---- a/drivers/tty/serial/amba-pl011.c
-+++ b/drivers/tty/serial/amba-pl011.c
-@@ -1637,6 +1637,16 @@ static void pl011_put_poll_char(struct uart_port *port,
- 	pl011_write(ch, uap, REG_DR);
- }
- 
-+static int pl011_get_poll_irq(struct uart_port *port)
-+{
-+	struct uart_amba_port *uap =
-+	    container_of(port, struct uart_amba_port, port);
-+
-+	pl011_write(UART011_RTIM | UART011_RXIM, uap, REG_IMSC);
-+
-+	return uap->port.irq;
-+}
-+
- #endif /* CONFIG_CONSOLE_POLL */
- 
- static int pl011_hwinit(struct uart_port *port)
-@@ -2145,6 +2155,7 @@ static const struct uart_ops amba_pl011_pops = {
- 	.poll_init     = pl011_hwinit,
- 	.poll_get_char = pl011_get_poll_char,
- 	.poll_put_char = pl011_put_poll_char,
-+	.poll_get_irq  = pl011_get_poll_irq,
- #endif
- };
- 
-@@ -2176,6 +2187,7 @@ static const struct uart_ops sbsa_uart_pops = {
- 	.poll_init     = pl011_hwinit,
- 	.poll_get_char = pl011_get_poll_char,
- 	.poll_put_char = pl011_put_poll_char,
-+	.poll_get_irq  = pl011_get_poll_irq,
- #endif
- };
- 
--- 
-2.7.4
+I'm a bit concerned to see the TODO: comment critiquing this interface
+being removed (from patch 3) without this patch being changed to
+address that comment.
 
+
+> Add new API: poll_get_irq() to the polling interface in order for user
+> of polling interface to retrieve allocated IRQ corresponding to
+> underlying serial device.
+> 
+> Although, serial interface still works in polling mode but interrupt
+> associated with serial device can be leveraged for special purposes like
+> debugger(kgdb) entry.
+> 
+> Signed-off-by: Daniel Thompson <daniel.thompson@linaro.org>
+> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> ---
+>  drivers/tty/serial/serial_core.c | 18 ++++++++++++++++++
+>  include/linux/serial_core.h      |  1 +
+>  include/linux/tty_driver.h       |  1 +
+>  3 files changed, 20 insertions(+)
+> 
+> diff --git a/drivers/tty/serial/serial_core.c b/drivers/tty/serial/serial_core.c
+> index 66a5e2f..1bb033c 100644
+> --- a/drivers/tty/serial/serial_core.c
+> +++ b/drivers/tty/serial/serial_core.c
+> @@ -2470,6 +2470,23 @@ static void uart_poll_put_char(struct tty_driver *driver, int line, char ch)
+>  	port->ops->poll_put_char(port, ch);
+>  	uart_port_deref(port);
+>  }
+> +
+> +static int uart_poll_get_irq(struct tty_driver *driver, int line)
+> +{
+> +	struct uart_driver *drv = driver->driver_state;
+> +	struct uart_state *state = drv->state + line;
+> +	struct uart_port *port;
+> +	int ret = -ENODEV;
+> +
+> +	port = uart_port_ref(state);
+> +	if (port && port->ops->poll_get_irq) {
+> +		ret = port->ops->poll_get_irq(port);
+> +		uart_port_deref(port);
+> +	}
+> +
+> +	return ret;
+> +}
+> +
+>  #endif
+>  
+>  static const struct tty_operations uart_ops = {
+> @@ -2505,6 +2522,7 @@ static const struct tty_operations uart_ops = {
+>  	.poll_init	= uart_poll_init,
+>  	.poll_get_char	= uart_poll_get_char,
+>  	.poll_put_char	= uart_poll_put_char,
+> +	.poll_get_irq	= uart_poll_get_irq,
+
+The TODO comments claimed this API was bogus because it doesn't permit
+a free and that can cause interoperation problems with the real serial
+driver. I'll cover some of that in a reply to patch 3 but for now.
+
+Anyhow, for this patch, what are the expected semantics for
+uart_poll_get_irq().
+
+In particular how do they ensure correct interlocking with the real
+serial driver underlying it (if kgdb_nmi is active on a serial port
+then the underlying driver better not be active at the same time).
+
+
+Daniel.
+
+
+>  #endif
+>  };
+>  
+> diff --git a/include/linux/serial_core.h b/include/linux/serial_core.h
+> index 92f5eba..8b132e6 100644
+> --- a/include/linux/serial_core.h
+> +++ b/include/linux/serial_core.h
+> @@ -78,6 +78,7 @@ struct uart_ops {
+>  	int		(*poll_init)(struct uart_port *);
+>  	void		(*poll_put_char)(struct uart_port *, unsigned char);
+>  	int		(*poll_get_char)(struct uart_port *);
+> +	int		(*poll_get_irq)(struct uart_port *);
+>  #endif
+>  };
+>  
+> diff --git a/include/linux/tty_driver.h b/include/linux/tty_driver.h
+> index 3584462..d6da5c5 100644
+> --- a/include/linux/tty_driver.h
+> +++ b/include/linux/tty_driver.h
+> @@ -295,6 +295,7 @@ struct tty_operations {
+>  	int (*poll_init)(struct tty_driver *driver, int line, char *options);
+>  	int (*poll_get_char)(struct tty_driver *driver, int line);
+>  	void (*poll_put_char)(struct tty_driver *driver, int line, char ch);
+> +	int (*poll_get_irq)(struct tty_driver *driver, int line);
+>  #endif
+>  	int (*proc_show)(struct seq_file *, void *);
+>  } __randomize_layout;
+> -- 
+> 2.7.4
+> 
 
 
 _______________________________________________
