@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E4ECC20399E
-	for <lists+kgdb-bugreport@lfdr.de>; Mon, 22 Jun 2020 16:35:45 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id F3754203A02
+	for <lists+kgdb-bugreport@lfdr.de>; Mon, 22 Jun 2020 16:52:54 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jnNY0-0004SN-NO
-	for lists+kgdb-bugreport@lfdr.de; Mon, 22 Jun 2020 14:35:44 +0000
+	id 1jnNob-00007x-Pe
+	for lists+kgdb-bugreport@lfdr.de; Mon, 22 Jun 2020 14:52:53 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sumit.garg@linaro.org>) id 1jnNXz-0004SC-It
- for kgdb-bugreport@lists.sourceforge.net; Mon, 22 Jun 2020 14:35:43 +0000
+ (envelope-from <sumit.garg@linaro.org>) id 1jnNoa-00007l-UV
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 22 Jun 2020 14:52:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:
  To:From:Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Q8XZGlRV/H7ipjUMwZ0R6upcC6zi/GhiQnizl6ayNWQ=; b=BTJxbcslSn/fg17me9BlHLSzd1
- jbJfDPpbsxO8mS4Zf4V93YhJcm2AiQF2iwpRrI6ItWWJj8lQZt5BmbFDkylklBIGGfa0+zXGjnfnc
- BWIE1CJoeTzlgaiq2yK79B0V0SumfWNfVMjhIo7awqlB+yBqTlDLqsSc2GW0xrWcgB7k=;
+ bh=M9KwMzs626zZhBtIoTQs5efdkplmNJ79hSzl8cSVNjw=; b=gTP6mcmV0fT19IwHEOo+e+M5WZ
+ oBBc9G9ZeWfKsNyju86J5A9Kh3G/NDcJ4lsejt3WOCFTiXhLRIcyr5I6Q6CWpPpFBhjBqLxE8US0e
+ /H0IeqebFAN3TTZibFE3yMiFbf/fO8T7d/UA7bt5r8laSkAEsXhezohqYEc8otW/AKlc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To
@@ -30,52 +30,52 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Q8XZGlRV/H7ipjUMwZ0R6upcC6zi/GhiQnizl6ayNWQ=; b=UKmV8GyXGBFV2fAJGr5ylX00cv
- LwjwNf/RdGomnY2GaPcPYb3z4QchY6rtMYSFVpNkF8wXXTp561thCeozLpRZ/cP89W9JX55v7d2xs
- k0jiOz5YyuvCi1bA2AsJMpQ2UctM+TzHbT+QFVTK8tQp2LXATVUQvLQnoLk9ABeqS9bs=;
-Received: from mail-oi1-f196.google.com ([209.85.167.196])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ bh=M9KwMzs626zZhBtIoTQs5efdkplmNJ79hSzl8cSVNjw=; b=aHbSwiieoyDhg7zlqa3S27KP52
+ I+59jWd33tKG4rJePmX0+ywFmAjhKD2pIfnn2DAwFegfr71qHssNjwljOqkKVpAXkkvVwXmZ/JFhz
+ x3XFB8zDgjHGjC/xvC2NGezBHqMswZ3SqyNpcnHl4UmyehPyr7WCmviYa/WPYUu6sXpo=;
+Received: from mail-vs1-f67.google.com ([209.85.217.67])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jnNXx-00F0nk-CS
- for kgdb-bugreport@lists.sourceforge.net; Mon, 22 Jun 2020 14:35:43 +0000
-Received: by mail-oi1-f196.google.com with SMTP id a3so15809068oid.4
+ id 1jnNoZ-00C1cT-8Q
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 22 Jun 2020 14:52:52 +0000
+Received: by mail-vs1-f67.google.com with SMTP id j13so9800484vsn.3
  for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 22 Jun 2020 07:35:41 -0700 (PDT)
+ Mon, 22 Jun 2020 07:52:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=Q8XZGlRV/H7ipjUMwZ0R6upcC6zi/GhiQnizl6ayNWQ=;
- b=iES2Z3LS/+1ufp5YulU7Lewvw1bchggk2aWycD2ouwUfDqw/J2BDmhkYLoA5Q8Xi1/
- czE87Id/eTsr/WIJUHU8BJT+s05ule9+LYv0Ido5T4GknU8qZXkBGUNrJUw9Yoc9s4/b
- GbKx6DlF9lfyzRTu+u41x/JFhfpsQDL13xVlQtBdo9b5QcM3gFxunzDEApVgBt2ZCiMC
- fe4kGGgabD666+6T0pGDqHa2rTr0hbLHGBP9dQ91Z9MHTbd+skiPXa44ljD14bUyQwDe
- IqyvhXNM6ncGGDSSPex+2Zmrr3VIqDY+mSqst1UwK3XIJ5tQNVugk+49gE/f2ylISQlv
- Zfzw==
+ bh=M9KwMzs626zZhBtIoTQs5efdkplmNJ79hSzl8cSVNjw=;
+ b=fcYOxIUyQqvxk/LMxj5k2PcHWbKksWlVM0RADhm7nGAokdEUmwV3EEiZC6qY8FZN+u
+ MXoiD9Bl8uV3mE4dflId5Ysj9kk2DyS+ixwUWTwMxgQNlEF/UXTDXHxh7aeIfq/mou+U
+ eOEgNlbrFUBNwfhMfJmEyGzg5fmJfkUD5+UTEteGBQmEZK7I1tsSoxz7idIIF4PWOgEv
+ 3wQpxAZvdSHhEhomUs3Z4VP2UfDdFTNS9ukNUxnLQOoybV0TbZMI9blZV8rUJ1CsWUdM
+ EJwzGZlCgI6Rtzeeiy5wd0ZheSlc3cyB8kuXh84pgLq/xOC7zPeMMPf0jJb4+LZ6QsuT
+ hT8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=Q8XZGlRV/H7ipjUMwZ0R6upcC6zi/GhiQnizl6ayNWQ=;
- b=tE41n5Jlejl3tbT41bzs2YwlNMgMjYhGZ5x8dT3ymlW1YfxWvxogYpVN6Z0Cw5sc/A
- ywgwS0orRZZ4ET7P2jO+V7bYOpGsb+TKJEveBOQIsmVYqfOG7WLU8mrWVHWqeziMl099
- j4XWDgysLUA5p7+MOhSZTghF9nTYEfumqqm2EjE4P+XEivkeQdQMrIQTL2JyBBNiVpYU
- 6S3qvSyniKFjgWJpNS7zzddcIi+FyhDmfqA9s6glr6oMRhi5vS4e1JaIUf+4FStTZQ49
- 9rqJ7CzKCTi1bWDvgnVS/X/lfpJjSjf+iYljCEpCuErPv5sRnB6zge4ubz23Di5VO/Pf
- 96KA==
-X-Gm-Message-State: AOAM531uHf1a0+KouNtbxsea+IzaRzWSC32IRjSwnfNNnGDpMHvUFAqm
- 8HukrTuw8AWx+xS7De17RvgIMhlSCko=
-X-Google-Smtp-Source: ABdhPJwTKZ4S3rwJvAgQzJ9r2GZApOT49IPaauL4XH7I7OZbzqclPlcDPAUZnlz4ECuEmfHBSCn8JQ==
-X-Received: by 2002:a17:90a:36cf:: with SMTP id
- t73mr19089365pjb.100.1592836065367; 
- Mon, 22 Jun 2020 07:27:45 -0700 (PDT)
+ bh=M9KwMzs626zZhBtIoTQs5efdkplmNJ79hSzl8cSVNjw=;
+ b=SFcGHTHa7ac4l48ksE3hkGcZ983BITfgSPXM3s4DRPPELbBLFWiqs0WNZ50ydwJ9wO
+ 7L6pigKaRMoiX2JUjQloZgBdCL7Zpp61d93bwlX54UuMNIfEMec7pwfIxS7zjh7+nw/J
+ lo9RYY8lv3kahmnFdsLAvB3qbUfOJgGia2rJ1YutYcHXfmqn9UJ1/jqWGFcw+W+9IoOw
+ wE86NJph+XclaXxYxVzCLmhkq0ytZ+B9FCfpe+BjPPPc0S25hyZ8tMbgvvUixDBMzKXY
+ h27EKYt49cdXOZt58/w0vw595/oR4xacaoWwiGtecMxoI4WPYoZF1Oggyl6a5RAzpCwr
+ BWtw==
+X-Gm-Message-State: AOAM530GpGLfHdb+odq2PvUs65l6r8cfpMeZaoOfkE0XDbbrhuxu0qnd
+ hhoyA9bwe62L6p4bkt9INHk9URNkRLQ=
+X-Google-Smtp-Source: ABdhPJxdk4/xczBSB9mmZ7kd/CjrWcQEW1E+5kTeVyzPqHBNPaFgJntiHv8R1qUiKMAh8yK0vGiMnA==
+X-Received: by 2002:a17:902:d903:: with SMTP id
+ c3mr18839486plz.229.1592836070328; 
+ Mon, 22 Jun 2020 07:27:50 -0700 (PDT)
 Received: from localhost.localdomain ([117.252.67.186])
- by smtp.gmail.com with ESMTPSA id d6sm14547939pjh.5.2020.06.22.07.27.40
+ by smtp.gmail.com with ESMTPSA id d6sm14547939pjh.5.2020.06.22.07.27.45
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 22 Jun 2020 07:27:44 -0700 (PDT)
+ Mon, 22 Jun 2020 07:27:49 -0700 (PDT)
 From: Sumit Garg <sumit.garg@linaro.org>
 To: kgdb-bugreport@lists.sourceforge.net,
 	linux-serial@vger.kernel.org
-Date: Mon, 22 Jun 2020 19:56:22 +0530
-Message-Id: <1592835984-28613-6-git-send-email-sumit.garg@linaro.org>
+Date: Mon, 22 Jun 2020 19:56:23 +0530
+Message-Id: <1592835984-28613-7-git-send-email-sumit.garg@linaro.org>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1592835984-28613-1-git-send-email-sumit.garg@linaro.org>
 References: <1592835984-28613-1-git-send-email-sumit.garg@linaro.org>
@@ -89,7 +89,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  1.5 RCVD_IN_SORBS_WEB      RBL: SORBS: sender is an abusable web server
  [117.252.67.186 listed in dnsbl.sorbs.net]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.167.196 listed in list.dnswl.org]
+ trust [209.85.217.67 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.217.67 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -97,12 +99,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.167.196 listed in wl.mailspike.net]
  -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jnNXx-00F0nk-CS
-Subject: [Kgdb-bugreport] [PATCH 5/7] serial: 8250: Implement poll_get_irq()
- interface
+X-Headers-End: 1jnNoZ-00C1cT-8Q
+Subject: [Kgdb-bugreport] [PATCH 6/7] serial: amba-pl011: Implement
+ poll_get_irq() interface
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -122,49 +122,49 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-From: Daniel Thompson <daniel.thompson@linaro.org>
-
 Support kgdb NMI console feature via implementing poll_get_irq()
 interface. This will allow usage of RX interrupts to support kgdb entry
 while serial device is operating in polling mode.
 
-Signed-off-by: Daniel Thompson <daniel.thompson@linaro.org>
 Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 ---
- drivers/tty/serial/8250/8250_port.c | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
+ drivers/tty/serial/amba-pl011.c | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
-diff --git a/drivers/tty/serial/8250/8250_port.c b/drivers/tty/serial/8250/8250_port.c
-index f77bf82..1473b1a 100644
---- a/drivers/tty/serial/8250/8250_port.c
-+++ b/drivers/tty/serial/8250/8250_port.c
-@@ -2138,6 +2138,21 @@ static void serial8250_put_poll_char(struct uart_port *port,
- 	serial8250_rpm_put(up);
+diff --git a/drivers/tty/serial/amba-pl011.c b/drivers/tty/serial/amba-pl011.c
+index c010f63..d620d12 100644
+--- a/drivers/tty/serial/amba-pl011.c
++++ b/drivers/tty/serial/amba-pl011.c
+@@ -1637,6 +1637,16 @@ static void pl011_put_poll_char(struct uart_port *port,
+ 	pl011_write(ch, uap, REG_DR);
  }
  
-+static int serial8250_get_poll_irq(struct uart_port *port)
++static int pl011_get_poll_irq(struct uart_port *port)
 +{
-+	unsigned int ier;
-+	struct uart_8250_port *up = up_to_u8250p(port);
++	struct uart_amba_port *uap =
++	    container_of(port, struct uart_amba_port, port);
 +
-+	serial8250_rpm_get(up);
++	pl011_write(UART011_RTIM | UART011_RXIM, uap, REG_IMSC);
 +
-+	ier = serial_port_in(port, UART_IER);
-+	ier |= UART_IER_RLSI | UART_IER_RDI;
-+	serial_port_out(port, UART_IER, ier);
-+
-+	serial8250_rpm_put(up);
-+	return port->irq;
++	return uap->port.irq;
 +}
 +
  #endif /* CONFIG_CONSOLE_POLL */
  
- int serial8250_do_startup(struct uart_port *port)
-@@ -3141,6 +3156,7 @@ static const struct uart_ops serial8250_pops = {
- #ifdef CONFIG_CONSOLE_POLL
- 	.poll_get_char = serial8250_get_poll_char,
- 	.poll_put_char = serial8250_put_poll_char,
-+	.poll_get_irq  = serial8250_get_poll_irq,
+ static int pl011_hwinit(struct uart_port *port)
+@@ -2145,6 +2155,7 @@ static const struct uart_ops amba_pl011_pops = {
+ 	.poll_init     = pl011_hwinit,
+ 	.poll_get_char = pl011_get_poll_char,
+ 	.poll_put_char = pl011_put_poll_char,
++	.poll_get_irq  = pl011_get_poll_irq,
+ #endif
+ };
+ 
+@@ -2176,6 +2187,7 @@ static const struct uart_ops sbsa_uart_pops = {
+ 	.poll_init     = pl011_hwinit,
+ 	.poll_get_char = pl011_get_poll_char,
+ 	.poll_put_char = pl011_put_poll_char,
++	.poll_get_irq  = pl011_get_poll_irq,
  #endif
  };
  
