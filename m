@@ -2,103 +2,101 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E08C620CFBA
-	for <lists+kgdb-bugreport@lfdr.de>; Mon, 29 Jun 2020 17:38:11 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id BBC4820D053
+	for <lists+kgdb-bugreport@lfdr.de>; Mon, 29 Jun 2020 19:15:58 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jpvrG-00084P-O5
-	for lists+kgdb-bugreport@lfdr.de; Mon, 29 Jun 2020 15:38:10 +0000
+	id 1jpxNt-0004Ud-I3
+	for lists+kgdb-bugreport@lfdr.de; Mon, 29 Jun 2020 17:15:57 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <daniel.thompson@linaro.org>) id 1jpvrF-00084C-8C
- for kgdb-bugreport@lists.sourceforge.net; Mon, 29 Jun 2020 15:38:09 +0000
+ (envelope-from <daniel.thompson@linaro.org>) id 1jpxNs-0004UT-Th
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 29 Jun 2020 17:15:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ShhE7g5SJz1A2LdeoWPLePC7l35fgsx0zx/wDQfKJTI=; b=LvROQi8BR9yLKaKOzxEAYbg1oM
- OWvfJQlesjRdVwCAtGpyjLKFmaE1PPDqhsFwl8WivCsxr96EOwVSfvwKBIkyleAumMWZ1V4zv5GnR
- eXJsiv1CpfPdVF5AbXjSLNERILjJYNVGZccHnPhYQffcwVK90f9Ws3xyQqZmfs0hgqBQ=;
+ bh=LdmyDXtA8EIM1jxYalqYHcGVicYKfXEl1rpwhzYY7yY=; b=j4jdzeehjEp6IG6eIoz2NJUrHb
+ zLzIsCGea5xKND78QsITEbxllppsF2IJKC8pFk25taKbQfe5OviGVCEWlb2k2usLK5b+VMBa4TFHk
+ 1muxCsbhHAHXjX2y0zF7xkXmKF9wGIQHZRieQcG13YETdX0LnFNx7kh9jqw09YIO73sY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=ShhE7g5SJz1A2LdeoWPLePC7l35fgsx0zx/wDQfKJTI=; b=jBSGf0DW2Re3TbvMoCEb7mdfeA
- YGFX7229KAM09liCRzP3Dd1KuFg3MAW1TWZ5j62jKhZbfebQGVvW6y6tKGYdSynFCaO/HwH2MVr9+
- 6ogyEju12QJ8m8lGCWO4XBtlyciSOdv6MIXn7SsO1Q0yNJEt1msf7DnL5w7lDrBkzg6Q=;
-Received: from mail-wr1-f65.google.com ([209.85.221.65])
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=LdmyDXtA8EIM1jxYalqYHcGVicYKfXEl1rpwhzYY7yY=; b=U
+ yKXRzMHnmIRylrbYoUdyAaSd5dkm1XmvV0BP3Fuc4iAipwt07qculO6LcyvrGXwV2srjKLXx1D9Ph
+ cr4fdNOUoTdIV7pvVogt41eS2gCtAcO9MpliLlRx9bBzo4TwaNu64CClP346OMpydZXSU5CTmORDK
+ otPx525jZ52RANi0=;
+Received: from mail-wr1-f66.google.com ([209.85.221.66])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jpvrB-002BAr-2C
- for kgdb-bugreport@lists.sourceforge.net; Mon, 29 Jun 2020 15:38:09 +0000
-Received: by mail-wr1-f65.google.com with SMTP id f7so14002774wrw.1
+ id 1jpxNl-002FIy-RH
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 29 Jun 2020 17:15:56 +0000
+Received: by mail-wr1-f66.google.com with SMTP id b6so17282781wrs.11
  for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 29 Jun 2020 08:38:04 -0700 (PDT)
+ Mon, 29 Jun 2020 10:15:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=ShhE7g5SJz1A2LdeoWPLePC7l35fgsx0zx/wDQfKJTI=;
- b=xabakTlTYmtpEyDxEa7yDPe7DMOMxN6AqQMck23F6MmQi9YTgUxfraCYFu3KPQ6uEA
- Nzx5KBfZrhmF1SeYQT4keNVs3KIGJgsAO1wgjGE1ivCJ5Zk4OLRKDiv3SFXo716cfv/c
- ijch2hqp6P7/zzg06QYa5s+GF+US5RChmsNGKhdxI6sXjB3DL5SEtIX08aSAsOHEfAph
- Qf5L18elCCk1rY2JVhBJ3DCM9GYN/WWvTApmKdlO88JWK6SRzXr0nmP0/opCQPi0EUKg
- MVydtly7U8O3gokNeY3QDC1FhZj9TCINr5JntGlRrd8mc9X5Ym2p17ZeQuVSl8xRmDol
- L32w==
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=LdmyDXtA8EIM1jxYalqYHcGVicYKfXEl1rpwhzYY7yY=;
+ b=c9p9Gar7D2nXzpz2YR/ib39Abgv4y6hEa91cr786gH8hhBcc2XHPgejdMauKVSCXyw
+ EgAsOWswu0yM60MBbUpqEjXeok6FXbZK3cY12YvSpijtvD0BGihf4HyPCLh9I970OF+w
+ 78MwbI9PqGOns9VkUov0ZQ9RbuCV+fwXeAcEtPspxUT9Uk7UyYJvZDXRhVlIPAhOgy1r
+ 0ebCtAluvcdaAZtdvp/iG7aZAmwyeaGzf8o6royVXgBp6bmZYTZ+EEf7K6vitzPvHvWn
+ wVU1xmaE5kyGW65gr+wCRjIx7La2Aae9t0Re8V+Heu0ZC4EarsLzwXx5hOPENYGaf8DM
+ nFPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=ShhE7g5SJz1A2LdeoWPLePC7l35fgsx0zx/wDQfKJTI=;
- b=kvEAuNmE409DT09uFepbgZg/67Ydry7rgWVcNwkoJWAqEaXgJnefTXQcMWHImXQ733
- Qm1RhKlfyxBIuUY5Q4jj1AhzfTuSz5oT+VZ0iUN544L+jmnGUZ2QC/nvBOGF7atdzgEv
- 8t23N2feHct+Ua9fx+4jWm0J8kbjaWgIm9qn6okxGhWRuZB6UanzLDZhi4z6RkaPVbXw
- RGGwm3t5LyMxJ4P8RF843ZrBsI5gusudv/h+vMmdKVCeiRpkhHumM8JHfnndQQrSNcsP
- QktlgKvVVt0ZKHiGgyvLb+FSN599oWEpnaWnah0pdMRtRl1WyGL/whtX/s5fL5myWu2v
- lVfQ==
-X-Gm-Message-State: AOAM532fhm6naGnlMLTSyT+AbyHVVsg6MaEcGiRXjRPmh+3vWD+aMmrj
- uwIwsePONSfQPNp8fAE2aWQh5w==
-X-Google-Smtp-Source: ABdhPJzWB6poC4LpTU3NkcmJJ1oY9B/oljvOMDKa4t38dBstjpwMNtrI5BzUy3wr3kxD0q7Ug0kRnw==
-X-Received: by 2002:a5d:4051:: with SMTP id w17mr16754914wrp.183.1593445078758; 
- Mon, 29 Jun 2020 08:37:58 -0700 (PDT)
-Received: from holly.lan (cpc141214-aztw34-2-0-cust773.18-1.cable.virginm.net.
- [86.9.19.6])
- by smtp.gmail.com with ESMTPSA id v18sm105056wrv.49.2020.06.29.08.37.58
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=LdmyDXtA8EIM1jxYalqYHcGVicYKfXEl1rpwhzYY7yY=;
+ b=XovnD9ZZOnwD7vO6P7E4bKZ5unRgjZT96buLUeZdGGZ0y/PxcE5Ga68YK6J4M1GG/W
+ Js2ntRl/Wp7i+RFQYNcAW4Q+rO1/bMEXYSizO12DL2YtqI+LLDO0WBFuTY9O23+knaTm
+ 7zg0M0Jf7TZH1vuo/84q3PuiwO4ReJn0qODz4J/Nb0TijG86cXD65q40/AnE97lBJVRM
+ MiV9Er+1usdABTgLQotj++OKFEGcFCbCe0EhHpcwsRMPYtZT6Mn/R+EkPK1nFolH79Y4
+ ETaMroHPg4CvECL2RGGa5lZ9hD5bFFq/KtoR6/KlmkyvTSs036Tyu88pK63XzA3ylbZH
+ b1gw==
+X-Gm-Message-State: AOAM531ribzOg3Ek5gVpm70TiwUTgqSLG+V+sl7ZmCPU2rMW0nxBTLd2
+ Dk9exiCd07tBLL89cOXAb5XpEw==
+X-Google-Smtp-Source: ABdhPJzs30159xRqcvLpbN8z4ChYHhI0ngFXg57huo/LOl0+OMOWqLHYtRb1FBzKVGwD5ZJ8obYgyw==
+X-Received: by 2002:a5d:66ca:: with SMTP id k10mr7472015wrw.244.1593450943526; 
+ Mon, 29 Jun 2020 10:15:43 -0700 (PDT)
+Received: from wychelm.lan
+ (cpc141214-aztw34-2-0-cust773.18-1.cable.virginm.net. [86.9.19.6])
+ by smtp.gmail.com with ESMTPSA id g195sm517482wme.38.2020.06.29.10.15.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Jun 2020 08:37:58 -0700 (PDT)
-Date: Mon, 29 Jun 2020 16:37:56 +0100
+ Mon, 29 Jun 2020 10:15:42 -0700 (PDT)
 From: Daniel Thompson <daniel.thompson@linaro.org>
-To: Petr Mladek <pmladek@suse.com>
-Message-ID: <20200629153756.cxg74nec3repa4lu@holly.lan>
-References: <20200629135923.14912-1-cengiz@kernel.wtf>
- <20200629145020.GL6156@alley>
+To: Jason Wessel <jason.wessel@windriver.com>,
+ Douglas Anderson <dianders@chromium.org>
+Date: Mon, 29 Jun 2020 18:15:29 +0100
+Message-Id: <20200629171529.558003-1-daniel.thompson@linaro.org>
+X-Mailer: git-send-email 2.25.4
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200629145020.GL6156@alley>
-X-Spam-Score: -0.4 (/)
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.221.66 listed in wl.mailspike.net]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.221.65 listed in list.dnswl.org]
+ trust [209.85.221.66 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.221.65 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jpvrB-002BAr-2C
-Subject: Re: [Kgdb-bugreport] [PATCH] kdb: prevent possible null deref in
- kdb_msg_write
+ -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jpxNl-002FIy-RH
+Subject: [Kgdb-bugreport] [PATCH] kgdb: Resolve races during
+ kgdb_io_register/unregister_module
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,118 +108,73 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: kgdb-bugreport@lists.sourceforge.net, linux-kernel@vger.kernel.org,
- Jason Wessel <jason.wessel@windriver.com>, Cengiz Can <cengiz@kernel.wtf>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Cc: pmladek@suse.com, Daniel Thompson <daniel.thompson@linaro.org>,
+ patches@linaro.org, linux-kernel@vger.kernel.org,
+ kgdb-bugreport@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Mon, Jun 29, 2020 at 04:50:20PM +0200, Petr Mladek wrote:
-> On Mon 2020-06-29 16:59:24, Cengiz Can wrote:
-> > `kdb_msg_write` operates on a global `struct kgdb_io *` called
-> > `dbg_io_ops`.
-> > 
-> > Although it is initialized in `debug_core.c`, there's a null check in
-> > `kdb_msg_write` which implies that it can be null whenever we dereference
-> > it in this function call.
-> > 
-> > Coverity scanner caught this as CID 1465042.
-> > 
-> > I have modified the function to bail out if `dbg_io_ops` is not properly
-> > initialized.
-> > 
-> > Signed-off-by: Cengiz Can <cengiz@kernel.wtf>
-> > ---
-> >  kernel/debug/kdb/kdb_io.c | 15 ++++++++-------
-> >  1 file changed, 8 insertions(+), 7 deletions(-)
-> > 
-> > diff --git a/kernel/debug/kdb/kdb_io.c b/kernel/debug/kdb/kdb_io.c
-> > index 683a799618ad..85e579812458 100644
-> > --- a/kernel/debug/kdb/kdb_io.c
-> > +++ b/kernel/debug/kdb/kdb_io.c
-> > @@ -549,14 +549,15 @@ static void kdb_msg_write(const char *msg, int msg_len)
-> >  	if (msg_len == 0)
-> >  		return;
-> >  
-> > -	if (dbg_io_ops) {
-> > -		const char *cp = msg;
-> > -		int len = msg_len;
-> > +	if (!dbg_io_ops)
-> > +		return;
-> 
-> This looks wrong. The message should be printed to the consoles
-> even when dbg_io_ops is NULL. I mean that the for_each_console(c)
-> cycle should always get called.
-> 
-> Well, the code really looks racy. dbg_io_ops is set under
-> kgdb_registration_lock. IMHO, it should also get accessed under this lock.
-> 
-> It seems that the race is possible. kdb_msg_write() is called from
-> vkdb_printf(). This function is serialized on more CPUs using
-> kdb_printf_cpu lock. But it is not serialized with
-> kgdb_register_io_module() and kgdb_unregister_io_module() calls.
+Currently kgdb_register_callbacks() and kgdb_unregister_callbacks()
+are called outside the scope of the kgdb_registration_lock. This
+allows them to race with each other. This could do all sorts of crazy
+things up to and including dbg_io_ops becoming NULL partway through the
+execution of the kgdb trap handler (which isn't allowed and would be
+fatal).
 
-We can't take the lock from the trap handler itself since we cannot
-have spinlocks contended between regular threads and the debug trap
-(which could be an NMI).
+Fix this by bringing the trap handler setup and teardown into the scope
+of the registration lock.
 
-Instead, the call to kgdb_unregister_callbacks() at the beginning
-of kgdb_unregister_io_module() should render kdb_msg_write()
-unreachable prior to dbg_io_ops becoming NULL.
+Signed-off-by: Daniel Thompson <daniel.thompson@linaro.org>
+---
+ kernel/debug/debug_core.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
-As it happens I am starting to believe there is a race in this area but
-the race is between register/unregister calls rather than against the
-trap handler (if there were register/unregister races then the trap
-handler is be a potential victim of the race though).
+diff --git a/kernel/debug/debug_core.c b/kernel/debug/debug_core.c
+index 9e5934780f41..9799f2c6dc94 100644
+--- a/kernel/debug/debug_core.c
++++ b/kernel/debug/debug_core.c
+@@ -1117,9 +1117,8 @@ int kgdb_register_io_module(struct kgdb_io *new_dbg_io_ops)
 
+ 	dbg_io_ops = new_dbg_io_ops;
 
-> But I might miss something. dbg_io_ops is dereferenced on many other
-> locations without any check.
+-	spin_unlock(&kgdb_registration_lock);
+-
+ 	if (old_dbg_io_ops) {
++		spin_unlock(&kgdb_registration_lock);
+ 		old_dbg_io_ops->deinit();
+ 		return 0;
+ 	}
+@@ -1129,6 +1128,8 @@ int kgdb_register_io_module(struct kgdb_io *new_dbg_io_ops)
+ 	/* Arm KGDB now. */
+ 	kgdb_register_callbacks();
 
-There is already a paranoid "just in case there are bugs" check in
-kgdb_io_ready() so in any case I think the check in kdb_msg_write() can
-simply be removed.
++	spin_unlock(&kgdb_registration_lock);
++
+ 	if (kgdb_break_asap &&
+ 	    (!dbg_is_early || IS_ENABLED(CONFIG_ARCH_HAS_EARLY_DEBUG)))
+ 		kgdb_initial_breakpoint();
+@@ -1147,13 +1148,14 @@ void kgdb_unregister_io_module(struct kgdb_io *old_dbg_io_ops)
+ {
+ 	BUG_ON(kgdb_connected);
 
-As I said in my other post, if dbg_io_ops were ever NULL then the
-system is completely hosed anyway: we can never receive the keystroke
-needed to leave the debugger... and may not be able to tell anybody
-why.
++	spin_lock(&kgdb_registration_lock);
++
+ 	/*
+ 	 * KGDB is no longer able to communicate out, so
+ 	 * unregister our callbacks and reset state.
+ 	 */
+ 	kgdb_unregister_callbacks();
 
+-	spin_lock(&kgdb_registration_lock);
 
-> >  
-> > -		while (len--) {
-> > -			dbg_io_ops->write_char(*cp);
-> > -			cp++;
-> > -		}
-> > +	const char *cp = msg;
-> > +	int len = msg_len;
-> > +
-> > +	while (len--) {
-> > +		dbg_io_ops->write_char(*cp);
-> > +		cp++;
-> >  	}
-> >  
-> >  	for_each_console(c) {
-> 
-> You probably got confused by this new code:
-> 
-> 		if (c == dbg_io_ops->cons)
-> 			continue;
-> 
-> It dereferences dbg_io_ops without NULL check. It should probably
-> get replaced by:
-> 
-> 		if (dbg_io_ops && c == dbg_io_ops->cons)
-> 			continue;
-> 
-> Daniel, Sumit, could you please put some light on this?
+ 	WARN_ON_ONCE(dbg_io_ops != old_dbg_io_ops);
+ 	dbg_io_ops = NULL;
 
-As above, I think the NULL check that confuses coverity can simply be
-removed.
+base-commit: 9ebcfadb0610322ac537dd7aa5d9cbc2b2894c68
+--
+2.25.4
 
-
-Daniel.
 
 
 _______________________________________________
