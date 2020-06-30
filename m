@@ -2,110 +2,104 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BAD6720FB01
-	for <lists+kgdb-bugreport@lfdr.de>; Tue, 30 Jun 2020 19:50:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1E24120FFE1
+	for <lists+kgdb-bugreport@lfdr.de>; Wed,  1 Jul 2020 00:08:00 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jqKOT-0003iL-Hy
-	for lists+kgdb-bugreport@lfdr.de; Tue, 30 Jun 2020 17:50:05 +0000
+	id 1jqOQ2-0006P1-UZ
+	for lists+kgdb-bugreport@lfdr.de; Tue, 30 Jun 2020 22:07:58 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <dan.carpenter@oracle.com>) id 1jqKOR-0003iC-Jx
- for kgdb-bugreport@lists.sourceforge.net; Tue, 30 Jun 2020 17:50:03 +0000
+ (envelope-from <dianders@chromium.org>) id 1jqOQ1-0006Ou-NI
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 30 Jun 2020 22:07:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:
- From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=47oPIkAoYGINH/ZlK07IBm8ApOnTX4Rfb2I0F9A7Bsk=; b=BZrEYHiQbHfGHW4cnVc1AhzqAe
- 6Dq1gpf+oQZekWJwamy0ZM3SaOlP/o7JzOZ3nD39kb8uB7Wq/Ia45B0vuHb6DF9K2kdK5DTSWmCEO
- I9x8YIzIIGlE48DOoD3URfm16pbNNe3puW1sMZsnH0nuZhP9Rcp6dVdX8CkFe5ARCMAA=;
+ bh=vsVPUs6oOpXrACcVe8J7okfB5Na/aATuG3ZrUARrR+o=; b=DNCs3fi+QidMHLvk8AXCw25wNl
+ GGCtkNgmcZTrO1AzH4MY2MbrMnSX/U80CQAF/bKL7Vrb2o3aZR7XKOpNxlOZW7WUFxxRd7fSSf+qB
+ Y9cElEANW8h9toX2psL89AqhA4SNAXm8JSO8xS6l9pqggzx+8A/Lly4UHw3TF8mBlq6M=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=47oPIkAoYGINH/ZlK07IBm8ApOnTX4Rfb2I0F9A7Bsk=; b=k
- CwTLNKs0Lp95YW7QDF3ZVSvvTSrXiPkfi4acGaYzKjMXkiplUUtHGOBUHPxe12p4P/Kk32mjRi3mS
- wfK0KTr2th7JWIeHGP+IpHutZGjuny+XockIuJXBxVTmcnBjX5tB9g820tE38kkuDT/w9F8HWluxQ
- gPhFYssSeKckSrj8=;
-Received: from userp2120.oracle.com ([156.151.31.85])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jqKOO-003LkB-84
- for kgdb-bugreport@lists.sourceforge.net; Tue, 30 Jun 2020 17:50:03 +0000
-Received: from pps.filterd (userp2120.oracle.com [127.0.0.1])
- by userp2120.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 05UHmAls029071;
- Tue, 30 Jun 2020 17:49:50 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
- h=date : from : to : cc
- : subject : message-id : mime-version : content-type; s=corp-2020-01-29;
- bh=47oPIkAoYGINH/ZlK07IBm8ApOnTX4Rfb2I0F9A7Bsk=;
- b=kPWPVd46qSNJNM3kpU3nZ5cmegMXkRmUwXlNkkIrEsZLiK4IkWrcH4P96xveXE+nF5Ps
- GWqHSDwrryYH1sO9/CMHnoqJaBQDOGG2zm7Qj5qYpAUBizI8FLeKlOkahHEQFUDzXfpP
- 69OtpTcJQ44OGCqZ3T1YFYJ0k/X3RVQYgXqGJitpjS5ToVrJVzhcdbrZYlkpHrCBhaHW
- RNLCI3FJLZdWBRiYjc7BvLHNyb7b30W+qG/jebEckRgDlVJDcGN0zTgWwUyArqp1/4kl
- W9KdGdEzUNTcGJ7+442tll4hkxpLpxSgCSIRoZT17Jo4cfZ3Kbo1mc7+qyvGA1qYXDJM Aw== 
-Received: from aserp3020.oracle.com (aserp3020.oracle.com [141.146.126.70])
- by userp2120.oracle.com with ESMTP id 31wxrn60p1-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 30 Jun 2020 17:49:50 +0000
-Received: from pps.filterd (aserp3020.oracle.com [127.0.0.1])
- by aserp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 05UHmmWo166942;
- Tue, 30 Jun 2020 17:49:49 GMT
-Received: from aserv0122.oracle.com (aserv0122.oracle.com [141.146.126.236])
- by aserp3020.oracle.com with ESMTP id 31xg140fyv-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 30 Jun 2020 17:49:49 +0000
-Received: from abhmp0006.oracle.com (abhmp0006.oracle.com [141.146.116.12])
- by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 05UHnnXV031237;
- Tue, 30 Jun 2020 17:49:49 GMT
-Received: from mwanda (/41.57.98.10) by default (Oracle Beehive Gateway v4.0)
- with ESMTP ; Tue, 30 Jun 2020 17:49:48 +0000
-Date: Tue, 30 Jun 2020 20:49:43 +0300
-From: Dan Carpenter <dan.carpenter@oracle.com>
-To: sumit.garg@linaro.org
-Message-ID: <20200630174943.GA34614@mwanda>
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=vsVPUs6oOpXrACcVe8J7okfB5Na/aATuG3ZrUARrR+o=; b=mTZAsJMHJt+yAGyGpVrtGW7b4R
+ 2Eu9jJiX2sdJ3E5y6pSGFv7ik9w0dMXlkVlUZ+i1QljipPDF5N8nf0CbN+cXPWcXLY6WrK/WyHL+1
+ zWpBIlJSvUDlx1hU3tN4CCZ3pEwiRWIYf/aVkKDqM7dI5TrevSgaLxpypkFIA7KZpXdg=;
+Received: from mail-ua1-f68.google.com ([209.85.222.68])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1jqOQ0-006VLi-CS
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 30 Jun 2020 22:07:57 +0000
+Received: by mail-ua1-f68.google.com with SMTP id c7so5561918uap.0
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Tue, 30 Jun 2020 15:07:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=vsVPUs6oOpXrACcVe8J7okfB5Na/aATuG3ZrUARrR+o=;
+ b=OaWmz2OxVFNRTx41A5fhDgQEfJWIZ3icsae1NZWDkZ53+d5YIklVehWkJbuWmmc4Cj
+ p9OrDN8JvscQL+sOQgSJqBmo1il96akLXLRI4UhKlf9GaYzUag6wqH8HlHcOh0f/ft3Y
+ 9L7aGqXZ1DHCXIBehmOUl2ZwO8o2Ft+iAvd7A=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=vsVPUs6oOpXrACcVe8J7okfB5Na/aATuG3ZrUARrR+o=;
+ b=APH/WEveZD5CcRAew2oUtKf2rJigX/VJ0aXxsLKR6u4x4acLVLYkHC4YourknjAcu3
+ /YNiHp/DWkP6uFAnOez13YIdz9a3l8AQdm4CWkVjuIVK+/RQa5ALGTMoQIb/VZvPMh5x
+ SjuHmjGJ1lgSo6Xewa0YL8a4qqBmxoHB+3rjQBJtUs10WFJ1NbKdXTtk4D7x2gtcdJov
+ +B6EvS0HuQ4WD8YSEQcWyFEWe0cNvh/zQHDxfLUMg4GEX7YL4XjJ2BndVvB4GQUS02FB
+ ikmdYUC/XM9rJMxhx3tAg+A8yF5eWnLM2O3+qqaSG1RhDzoThw+Cw1vvC5Dx5J76Xzmo
+ 5oew==
+X-Gm-Message-State: AOAM531dyXumcQc2DXvoVQDpdG2+HXnBCVLxUclPXaWJhS7LUenYq7xC
+ s+bs9EGfcYGJQek3ancTKRetS9i4ptM=
+X-Google-Smtp-Source: ABdhPJww0VJBdSbxLaiicMbZQzda2OTJ7H8xhxTKFp+i4P/3SCgXsTa71iZphoQl1QyQQ4HcklUzTA==
+X-Received: by 2002:a9f:30c8:: with SMTP id k8mr15265676uab.130.1593554870361; 
+ Tue, 30 Jun 2020 15:07:50 -0700 (PDT)
+Received: from mail-vs1-f42.google.com (mail-vs1-f42.google.com.
+ [209.85.217.42])
+ by smtp.gmail.com with ESMTPSA id t76sm645458vkt.56.2020.06.30.15.07.49
+ for <kgdb-bugreport@lists.sourceforge.net>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 30 Jun 2020 15:07:49 -0700 (PDT)
+Received: by mail-vs1-f42.google.com with SMTP id k7so10810297vso.2
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Tue, 30 Jun 2020 15:07:49 -0700 (PDT)
+X-Received: by 2002:a67:6546:: with SMTP id z67mr9645652vsb.169.1593554869192; 
+ Tue, 30 Jun 2020 15:07:49 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9668
- signatures=668680
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
- malwarescore=0
- mlxlogscore=589 suspectscore=3 bulkscore=0 mlxscore=0 adultscore=0
- phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2004280000 definitions=main-2006300122
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9667
- signatures=668680
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxscore=0
- mlxlogscore=600
- priorityscore=1501 impostorscore=0 bulkscore=0 clxscore=1011
- malwarescore=0 phishscore=0 adultscore=0 cotscore=-2147483648
- lowpriorityscore=0 suspectscore=3 spamscore=0 classifier=spam adjust=0
- reason=mlx scancount=1 engine=8.12.0-2004280000
- definitions=main-2006300122
-X-Spam-Score: -0.6 (/)
+References: <20200630174943.GA34614@mwanda>
+In-Reply-To: <20200630174943.GA34614@mwanda>
+From: Doug Anderson <dianders@chromium.org>
+Date: Tue, 30 Jun 2020 15:07:38 -0700
+X-Gmail-Original-Message-ID: <CAD=FV=U_c8Nr1E0-q56sfxk20SPpBDMW3HifGb7zpa5the7MDw@mail.gmail.com>
+Message-ID: <CAD=FV=U_c8Nr1E0-q56sfxk20SPpBDMW3HifGb7zpa5the7MDw@mail.gmail.com>
+To: Dan Carpenter <dan.carpenter@oracle.com>
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.222.68 listed in list.dnswl.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [156.151.31.85 listed in wl.mailspike.net]
+ [209.85.222.68 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.5 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jqKOO-003LkB-84
-Subject: [Kgdb-bugreport] [bug report] kdb: Switch to use safer dbg_io_ops
- over console APIs
+X-Headers-End: 1jqOQ0-006VLi-CS
+Subject: Re: [Kgdb-bugreport] [bug report] kdb: Switch to use safer
+ dbg_io_ops over console APIs
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -122,44 +116,48 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Hello Sumit Garg,
+Hi,
 
-This is a semi-automatic email about new static checker warnings.
+On Tue, Jun 30, 2020 at 10:49 AM Dan Carpenter <dan.carpenter@oracle.com> wrote:
+>
+> Hello Sumit Garg,
+>
+> This is a semi-automatic email about new static checker warnings.
+>
+> The patch 5946d1f5b309: "kdb: Switch to use safer dbg_io_ops over
+> console APIs" from Jun 4, 2020, leads to the following Smatch
+> complaint:
+>
+>     kernel/debug/kdb/kdb_io.c:565 kdb_msg_write()
+>     error: we previously assumed 'dbg_io_ops' could be null (see line 552)
+>
+> kernel/debug/kdb/kdb_io.c
+>    551
+>    552          if (dbg_io_ops) {
+>                     ^^^^^^^^^^
+> Check for NULL
+>
+>    553                  const char *cp = msg;
+>    554                  int len = msg_len;
+>    555
+>    556                  while (len--) {
+>    557                          dbg_io_ops->write_char(*cp);
+>    558                          cp++;
+>    559                  }
+>    560          }
+>    561
+>    562          for_each_console(c) {
+>    563                  if (!(c->flags & CON_ENABLED))
+>    564                          continue;
+>    565                  if (c == dbg_io_ops->cons)
+>                                  ^^^^^^^^^^
+> New unchecked dereference.
 
-The patch 5946d1f5b309: "kdb: Switch to use safer dbg_io_ops over 
-console APIs" from Jun 4, 2020, leads to the following Smatch 
-complaint:
+Thanks for the report!  Someone else already noticed and so we have:
 
-    kernel/debug/kdb/kdb_io.c:565 kdb_msg_write()
-    error: we previously assumed 'dbg_io_ops' could be null (see line 552)
+https://lore.kernel.org/r/20200630082922.28672-1-cengiz@kernel.wtf
 
-kernel/debug/kdb/kdb_io.c
-   551	
-   552		if (dbg_io_ops) {
-                    ^^^^^^^^^^
-Check for NULL
-
-   553			const char *cp = msg;
-   554			int len = msg_len;
-   555	
-   556			while (len--) {
-   557				dbg_io_ops->write_char(*cp);
-   558				cp++;
-   559			}
-   560		}
-   561	
-   562		for_each_console(c) {
-   563			if (!(c->flags & CON_ENABLED))
-   564				continue;
-   565			if (c == dbg_io_ops->cons)
-                                 ^^^^^^^^^^
-New unchecked dereference.
-
-   566				continue;
-   567			/*
-
-regards,
-dan carpenter
+-Doug
 
 
 _______________________________________________
