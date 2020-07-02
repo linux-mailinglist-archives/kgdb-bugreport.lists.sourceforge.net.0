@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8D9AA2117DB
-	for <lists+kgdb-bugreport@lfdr.de>; Thu,  2 Jul 2020 03:27:27 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 02E1F2117DD
+	for <lists+kgdb-bugreport@lfdr.de>; Thu,  2 Jul 2020 03:27:46 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jqo0c-0001pD-Cw
-	for lists+kgdb-bugreport@lfdr.de; Thu, 02 Jul 2020 01:27:26 +0000
+	id 1jqo0u-00034D-PW
+	for lists+kgdb-bugreport@lfdr.de; Thu, 02 Jul 2020 01:27:44 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1jqo0b-0001p6-F7
- for kgdb-bugreport@lists.sourceforge.net; Thu, 02 Jul 2020 01:27:25 +0000
+ (envelope-from <sashal@kernel.org>) id 1jqo0t-00033x-Fb
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 02 Jul 2020 01:27:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=kEGN28PDJOxqn6TpfCfxw9wA5wp5FU9dzp5h5bjxyNM=; b=UEDM3luzYI9d20sHQoNwpunV0L
- JEJrxSTVW/kYgucpM56wF5dt26T1KiJdY0SDy9FbyG1Leg/gsAD1o/DG7fBCT3bBKUeWTIouwwq7C
- rm8tt0H0rXzk1jzLQaHelDnUELNwBQj+mjsBceCuwWt4Pve+J98DoNmjP/8FSDryOlTk=;
+ bh=Y3pwKQ2lDOwxzU8+rDjKeTInGn8inJIhX+PtgwL3TtQ=; b=SfgEbYL6iMq9/ChM61q1+Elwm6
+ mxzX8fE1B4EbyrL9/R1Qq0s1tkspvHKBpxS6zbLG2NfFzMZuIn03o5CvI/QQbO+vvPAO3t3efjPAC
+ P5WjTQ2zoL2cCi9lM5Mlyw38lYTGskZ8n1ROV9Kb1eAFaaR4Jy3YCRO2DLXtJ9/PlJzg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -30,35 +30,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=kEGN28PDJOxqn6TpfCfxw9wA5wp5FU9dzp5h5bjxyNM=; b=dnjKawjtGLTpgeq3oqtx6JEuqO
- ECPp9dLLtD285KwSDfBhVQxFu1v+uf1Lxv0GscUyCU+G2/c6jHk2wrC6ZVk36dwoHPDR/bXPnlkIF
- bDYILBOryXhJw0TtmluNdXk7hFSE7VFGN40nX6+WcxXmw5v5z8kl6NzirhqFUQz23PCk=;
+ bh=Y3pwKQ2lDOwxzU8+rDjKeTInGn8inJIhX+PtgwL3TtQ=; b=WJwYHoTzyQqH3HI9KK3o0WWX/s
+ NBWD+IYgIDP/syLZWD+/LpcP8t3LN3gPOOk19wPgnmp5mTj0ki/FPzFnWHX2osMIsTv1MSK2f9vLK
+ F9HkIhp4wx1YK8fOWJtcQbshlEmw/MACriuvBa2ItgYGhn9WUFfaGPlQ6gW7UkziYyds=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jqo0Z-009Gd7-V5
- for kgdb-bugreport@lists.sourceforge.net; Thu, 02 Jul 2020 01:27:25 +0000
+ id 1jqo0r-004VsU-Bx
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 02 Jul 2020 01:27:42 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 956B320C56;
- Thu,  2 Jul 2020 01:27:10 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 1AB3E20899;
+ Thu,  2 Jul 2020 01:27:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1593653231;
- bh=ZHlUOK9zLspfvDv2JI4xS0q6GdpneiNVoKtvVGycwso=;
+ s=default; t=1593653248;
+ bh=BKDfyG9iI5w/CsTBdkXPgua6e2lQjWnLmHqiGKG3ANg=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=0Ge9+3Db/QGMWTeynqS5mTQV/wW4hJjuWPVLIjlHAyt8ee0P/bM1Pxax/r8+4Jgho
- IHjsVB6TAKsUR+7THX9KHfHLcmRQnsszwmJo2+zipKFqi3+A2faj/zhp8nYlylA45q
- /vcSOq8Wh1ZdZsLv4w2ifHO4wPe0DUrPXCBzpbms=
+ b=1tcvWO5QiPViwFyPe6PlCWAMtRXPx9iHoWcvesb2yDHCOYmCEIgYCkdRRizQDFqfu
+ y+hQpqXFqY9a6OBQLKd3CMfFtig2Ftha5w/F/+bCdeqfcLePo1zelKIET4Tu4mPwo0
+ F6xxphaKBUgKdLLBZmF7sw3eVzbnJ2cUALKAVgro=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Wed,  1 Jul 2020 21:26:49 -0400
-Message-Id: <20200702012649.2701799-17-sashal@kernel.org>
+Date: Wed,  1 Jul 2020 21:27:12 -0400
+Message-Id: <20200702012712.2701986-13-sashal@kernel.org>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200702012649.2701799-1-sashal@kernel.org>
-References: <20200702012649.2701799-1-sashal@kernel.org>
+In-Reply-To: <20200702012712.2701986-1-sashal@kernel.org>
+References: <20200702012712.2701986-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -78,8 +78,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jqo0Z-009Gd7-V5
-Subject: [Kgdb-bugreport] [PATCH AUTOSEL 4.14 17/17] kgdb: Avoid suspicious
+X-Headers-End: 1jqo0r-004VsU-Bx
+Subject: [Kgdb-bugreport] [PATCH AUTOSEL 4.9 13/13] kgdb: Avoid suspicious
  RCU usage warning
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -164,10 +164,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 4 insertions(+)
 
 diff --git a/kernel/debug/debug_core.c b/kernel/debug/debug_core.c
-index 159a53ff27162..694fcd0492827 100644
+index 9c939c6bf21cb..321ccdbb73649 100644
 --- a/kernel/debug/debug_core.c
 +++ b/kernel/debug/debug_core.c
-@@ -489,6 +489,7 @@ static int kgdb_cpu_enter(struct kgdb_state *ks, struct pt_regs *regs,
+@@ -488,6 +488,7 @@ static int kgdb_cpu_enter(struct kgdb_state *ks, struct pt_regs *regs,
  		arch_kgdb_ops.disable_hw_break(regs);
  
  acquirelock:
@@ -175,7 +175,7 @@ index 159a53ff27162..694fcd0492827 100644
  	/*
  	 * Interrupts will be restored by the 'trap return' code, except when
  	 * single stepping.
-@@ -545,6 +546,7 @@ static int kgdb_cpu_enter(struct kgdb_state *ks, struct pt_regs *regs,
+@@ -542,6 +543,7 @@ static int kgdb_cpu_enter(struct kgdb_state *ks, struct pt_regs *regs,
  			atomic_dec(&slaves_in_kgdb);
  			dbg_touch_watchdogs();
  			local_irq_restore(flags);
@@ -183,7 +183,7 @@ index 159a53ff27162..694fcd0492827 100644
  			return 0;
  		}
  		cpu_relax();
-@@ -563,6 +565,7 @@ static int kgdb_cpu_enter(struct kgdb_state *ks, struct pt_regs *regs,
+@@ -560,6 +562,7 @@ static int kgdb_cpu_enter(struct kgdb_state *ks, struct pt_regs *regs,
  		raw_spin_unlock(&dbg_master_lock);
  		dbg_touch_watchdogs();
  		local_irq_restore(flags);
@@ -191,7 +191,7 @@ index 159a53ff27162..694fcd0492827 100644
  
  		goto acquirelock;
  	}
-@@ -682,6 +685,7 @@ static int kgdb_cpu_enter(struct kgdb_state *ks, struct pt_regs *regs,
+@@ -677,6 +680,7 @@ static int kgdb_cpu_enter(struct kgdb_state *ks, struct pt_regs *regs,
  	raw_spin_unlock(&dbg_master_lock);
  	dbg_touch_watchdogs();
  	local_irq_restore(flags);
