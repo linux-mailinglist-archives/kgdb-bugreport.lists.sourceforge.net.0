@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 02E1F2117DD
-	for <lists+kgdb-bugreport@lfdr.de>; Thu,  2 Jul 2020 03:27:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0F3632117DE
+	for <lists+kgdb-bugreport@lfdr.de>; Thu,  2 Jul 2020 03:27:48 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jqo0u-00034D-PW
-	for lists+kgdb-bugreport@lfdr.de; Thu, 02 Jul 2020 01:27:44 +0000
+	id 1jqo0w-00034m-Rf
+	for lists+kgdb-bugreport@lfdr.de; Thu, 02 Jul 2020 01:27:46 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1jqo0t-00033x-Fb
- for kgdb-bugreport@lists.sourceforge.net; Thu, 02 Jul 2020 01:27:43 +0000
+ (envelope-from <sashal@kernel.org>) id 1jqo0v-00034S-B6
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 02 Jul 2020 01:27:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Y3pwKQ2lDOwxzU8+rDjKeTInGn8inJIhX+PtgwL3TtQ=; b=SfgEbYL6iMq9/ChM61q1+Elwm6
- mxzX8fE1B4EbyrL9/R1Qq0s1tkspvHKBpxS6zbLG2NfFzMZuIn03o5CvI/QQbO+vvPAO3t3efjPAC
- P5WjTQ2zoL2cCi9lM5Mlyw38lYTGskZ8n1ROV9Kb1eAFaaR4Jy3YCRO2DLXtJ9/PlJzg=;
+ bh=Y3pwKQ2lDOwxzU8+rDjKeTInGn8inJIhX+PtgwL3TtQ=; b=dNKly3BVaDoHVsqme63UerxGgm
+ RXWPfUhGSmMcabBRPlCnk3chlkC2PT+DNVuEKI/yWNKzlRVqRlkonOcGAwDPJ64VaG2AnOUH3ZfHR
+ r1AsnlxQsigSF8jYNsiZua1vHvTQy8PCVOG8Lm+9qXDnHHNouepGPPyiMVyahz2FHxZE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -30,35 +30,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Y3pwKQ2lDOwxzU8+rDjKeTInGn8inJIhX+PtgwL3TtQ=; b=WJwYHoTzyQqH3HI9KK3o0WWX/s
- NBWD+IYgIDP/syLZWD+/LpcP8t3LN3gPOOk19wPgnmp5mTj0ki/FPzFnWHX2osMIsTv1MSK2f9vLK
- F9HkIhp4wx1YK8fOWJtcQbshlEmw/MACriuvBa2ItgYGhn9WUFfaGPlQ6gW7UkziYyds=;
+ bh=Y3pwKQ2lDOwxzU8+rDjKeTInGn8inJIhX+PtgwL3TtQ=; b=kSmWl6SAdaUgpnQjgMAdfLF5cH
+ ueYjwR61ri2XGJ+dJBcxZRgLWxBWV4Sv7jiP0RD+Gwvxt3Tg8mafaSo3tVytvLPE5NePTdD3wmRb1
+ AnHKyRfbrxmd2KDxdZBsdzPUAAo5CUWMTjqVyUqp0Y/DjuQUavXwFFZH6Z/EaMFS8BkY=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jqo0r-004VsU-Bx
- for kgdb-bugreport@lists.sourceforge.net; Thu, 02 Jul 2020 01:27:42 +0000
+ id 1jqo0t-007TrB-V0
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 02 Jul 2020 01:27:45 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 1AB3E20899;
- Thu,  2 Jul 2020 01:27:28 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id DDED92083E;
+ Thu,  2 Jul 2020 01:27:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1593653248;
+ s=default; t=1593653258;
  bh=BKDfyG9iI5w/CsTBdkXPgua6e2lQjWnLmHqiGKG3ANg=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=1tcvWO5QiPViwFyPe6PlCWAMtRXPx9iHoWcvesb2yDHCOYmCEIgYCkdRRizQDFqfu
- y+hQpqXFqY9a6OBQLKd3CMfFtig2Ftha5w/F/+bCdeqfcLePo1zelKIET4Tu4mPwo0
- F6xxphaKBUgKdLLBZmF7sw3eVzbnJ2cUALKAVgro=
+ b=P2a+npteE8c247FxGSE+XnL8KehQQQGqzMfZ1m9F/9N9DiZ0cRkMEczQla2OG3vJX
+ NakD1XnekCZDlYSgCy7ZnSVd8bMEcnsqvbnoG7gIPwBjAE9t8spz1T2jqK0b6UPz3Q
+ 6T+yNEHQUkj0BeDlwZY9BU+KPdvJCMNaXphu0DQ4=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Wed,  1 Jul 2020 21:27:12 -0400
-Message-Id: <20200702012712.2701986-13-sashal@kernel.org>
+Date: Wed,  1 Jul 2020 21:27:29 -0400
+Message-Id: <20200702012729.2702141-7-sashal@kernel.org>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200702012712.2701986-1-sashal@kernel.org>
-References: <20200702012712.2701986-1-sashal@kernel.org>
+In-Reply-To: <20200702012729.2702141-1-sashal@kernel.org>
+References: <20200702012729.2702141-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -78,9 +78,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jqo0r-004VsU-Bx
-Subject: [Kgdb-bugreport] [PATCH AUTOSEL 4.9 13/13] kgdb: Avoid suspicious
- RCU usage warning
+X-Headers-End: 1jqo0t-007TrB-V0
+Subject: [Kgdb-bugreport] [PATCH AUTOSEL 4.4 7/7] kgdb: Avoid suspicious RCU
+ usage warning
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
