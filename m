@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 146382175DA
-	for <lists+kgdb-bugreport@lfdr.de>; Tue,  7 Jul 2020 20:05:59 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9C0072175DB
+	for <lists+kgdb-bugreport@lfdr.de>; Tue,  7 Jul 2020 20:06:15 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jsryf-0007eb-SA
-	for lists+kgdb-bugreport@lfdr.de; Tue, 07 Jul 2020 18:05:57 +0000
+	id 1jsryw-0007zu-Dj
+	for lists+kgdb-bugreport@lfdr.de; Tue, 07 Jul 2020 18:06:14 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <rdunlap@infradead.org>) id 1jsrye-0007eR-Ft
- for kgdb-bugreport@lists.sourceforge.net; Tue, 07 Jul 2020 18:05:56 +0000
+ (envelope-from <rdunlap@infradead.org>) id 1jsryv-0007zV-0G
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 07 Jul 2020 18:06:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=3MXCz5n944OUWtN7L6ZR0Zd5nlp06oEeDxmjjhzssic=; b=NUtbvkaZMgyPhqt2mv0RExQhx0
- KfJ033PKPWOo5W3ir4zCSRVTfbavNrPKxq3EhbdA3mwuKJ2WIdQ3bhWyxl9y43tq2s1/ysFSML8uX
- GomvGYboDrvpsFeGoymFzegZLw31MZSjG843gT2T8wfAfSZXTkOqKAy8/+1pOUlF4zu0=;
+ bh=n0r3AeJBdJxrkDj2u02K2i7+nW9Oe1yMWegqEZLyJYA=; b=g8MXViRNKKxt1w1inOHGXUOnKA
+ EfG4st5b4ouV0Fbko3IqYR8rz2zWkUKbIPD3QdUb8Kio3tB1YTJ5z7UoOWcNZIh88n1VI0ledJBD5
+ lv2WG+hVbylTniPkencGdt4Sh27jmExmNjYzD0GXPRBER4kxunkK/DYr1MPeoXBpDuzQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -30,32 +30,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=3MXCz5n944OUWtN7L6ZR0Zd5nlp06oEeDxmjjhzssic=; b=l/+ccAKViBJgz5XWS9Fp01jOdF
- 6GnhkoJHUhRnxvDEQctUezNIPnhKnFCRv84wdXrvqXeuQJLaU1eHKGgwYxm3hPb5QTEurEjgnZTfr
- rThAEf9DJLIJvZB+15Lk2go2MDecnEk/8h5ec8lI6i/AYfq1/GjgeJBRCZ2zZE5Oc+LI=;
+ bh=n0r3AeJBdJxrkDj2u02K2i7+nW9Oe1yMWegqEZLyJYA=; b=hNlw6yxXnFFfyjnbcUnQvHc5x1
+ qV9lRLj8jeItsRTg8XgkoF2QOz6tz4K6pxWUNdmf9Ygz/Iq2OwSmAqJfOU2qnI2L/91mpQHUFHACw
+ COXQ823pA+OSAFTkJThRvV+rFYZ3B7fgsHp5X4EXN7hqnhbVautuABSZcOltFBsqA02o=;
 Received: from casper.infradead.org ([90.155.50.34])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jsryd-00GRHc-9L
- for kgdb-bugreport@lists.sourceforge.net; Tue, 07 Jul 2020 18:05:56 +0000
+ id 1jsryn-00DRWd-9P
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 07 Jul 2020 18:06:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description;
- bh=3MXCz5n944OUWtN7L6ZR0Zd5nlp06oEeDxmjjhzssic=; b=OQFeo3ag5lXCLGC6k9UcAyRTb4
- /Q9gq9VkvMyptGfnXC6dr+8JSy8ey2aDpG9sKw8/XAfOgDmpnd6qTid+/ugED4x5OOPzHMdLzx+SK
- dqY30Bng10xRd6zB9Ud/723dGs8bV5RivA8Fqf6mlcxMGYAjkRnyqb64LTymY4WWmIGfQMb+g7tbf
- 1Nvgd079VjOwEFQV9e9K4S8zCL3GPFRNIHxgKWhGYWtertC9Gu+JXvm0x/W13WIxEa7QGjlIZtpUw
- 0odQYtrKVQCg05Qb7aTrpj2UazL5KowW91DuGBTfDEzWTK/rP22BxDGWjOxY24jtI7iq0EB8DidkR
- aHXEivPA==;
+ bh=n0r3AeJBdJxrkDj2u02K2i7+nW9Oe1yMWegqEZLyJYA=; b=uuz7HtSBptzUF27iBREMdSAt/K
+ jfqJyCiVvgKlk9ybByqRGqvz3SwIk8OhwWGYyebsPQyiZHV1dnlEZ5iCS8LFdwrQlrxxamCtUD4p+
+ 9AW48pApfvdRO6OgxOdYCEVDYwMmAIdkIPgj4Q9uXPW9Z82cidbTJj2IkTlgE6eQqIxLRahVyPOsx
+ JNaImE3V1R4jXAei4SIfKfLSbHOQbPehn9XqQfa84PTiCT2c0czIRdbHQTHtwoAsPoskeV+1f0TjF
+ eevgAL4lPl5KDDTGkrpVnGbvdcEheR6NwmxP4l7PP2ltq4bov7OhlHCrx8NO2IEJzqEVlWVqhi0wL
+ 2Bi9Jd2A==;
 Received: from [2601:1c0:6280:3f0:897c:6038:c71d:ecac]
  (helo=smtpauth.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1jsryR-0004JY-57; Tue, 07 Jul 2020 18:05:43 +0000
+ id 1jsryc-0004JY-0j; Tue, 07 Jul 2020 18:05:54 +0000
 From: Randy Dunlap <rdunlap@infradead.org>
 To: linux-kernel@vger.kernel.org
-Date: Tue,  7 Jul 2020 11:04:01 -0700
-Message-Id: <20200707180414.10467-8-rdunlap@infradead.org>
+Date: Tue,  7 Jul 2020 11:04:02 -0700
+Message-Id: <20200707180414.10467-9-rdunlap@infradead.org>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200707180414.10467-1-rdunlap@infradead.org>
 References: <20200707180414.10467-1-rdunlap@infradead.org>
@@ -66,7 +66,7 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: infradead.org]
+ for more information. [URIs: intel.com]
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -75,8 +75,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jsryd-00GRHc-9L
-Subject: [Kgdb-bugreport] [PATCH 07/20] Documentation: gpu/drm-uapi:
+X-Headers-End: 1jsryn-00DRWd-9P
+Subject: [Kgdb-bugreport] [PATCH 08/20] Documentation: hid/intel-ish-hid:
  eliminate duplicated word
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -125,29 +125,29 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Drop the doubled word "when".
+Drop the doubled word "the".
 
 Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
 Cc: Jonathan Corbet <corbet@lwn.net>
 Cc: linux-doc@vger.kernel.org
-Cc: David Airlie <airlied@linux.ie>
-Cc: Daniel Vetter <daniel@ffwll.ch>
-Cc: dri-devel@lists.freedesktop.org
+Cc: Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>
+Cc: Jiri Kosina <jikos@kernel.org>
+Cc: linux-input@vger.kernel.org
 ---
- Documentation/gpu/drm-uapi.rst |    2 +-
+ Documentation/hid/intel-ish-hid.rst |    2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
---- linux-next-20200701.orig/Documentation/gpu/drm-uapi.rst
-+++ linux-next-20200701/Documentation/gpu/drm-uapi.rst
-@@ -195,7 +195,7 @@ ENOSPC:
- EPERM/EACCES:
-         Returned for an operation that is valid, but needs more privileges.
-         E.g. root-only or much more common, DRM master-only operations return
--        this when when called by unpriviledged clients. There's no clear
-+        this when called by unpriviledged clients. There's no clear
-         difference between EACCES and EPERM.
+--- linux-next-20200701.orig/Documentation/hid/intel-ish-hid.rst
++++ linux-next-20200701/Documentation/hid/intel-ish-hid.rst
+@@ -235,7 +235,7 @@ There can be multiple sensor clients and
  
- ENODEV:
+ To ease in implantation and allow independent driver handle each client
+ this transport layer takes advantage of Linux Bus driver model. Each
+-client is registered as device on the the transport bus (ishtp bus).
++client is registered as device on the transport bus (ishtp bus).
+ 
+ Enumeration sequence of messages:
+ 
 
 
 _______________________________________________
