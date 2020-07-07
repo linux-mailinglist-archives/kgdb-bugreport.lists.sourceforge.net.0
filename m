@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CEDF92175E2
-	for <lists+kgdb-bugreport@lfdr.de>; Tue,  7 Jul 2020 20:07:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DCE162175E4
+	for <lists+kgdb-bugreport@lfdr.de>; Tue,  7 Jul 2020 20:07:13 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jsrzp-000831-KV
-	for lists+kgdb-bugreport@lfdr.de; Tue, 07 Jul 2020 18:07:09 +0000
+	id 1jsrzs-00083X-N9
+	for lists+kgdb-bugreport@lfdr.de; Tue, 07 Jul 2020 18:07:12 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <rdunlap@infradead.org>) id 1jsrzo-00082t-Jx
- for kgdb-bugreport@lists.sourceforge.net; Tue, 07 Jul 2020 18:07:08 +0000
+ (envelope-from <rdunlap@infradead.org>) id 1jsrzr-00083O-Nh
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 07 Jul 2020 18:07:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=2/YCmGUemc+wOLv/5ELjphBnftis9IDqZDEkf1/jsf8=; b=TM6C4r6t8tB8TOm2PplP/cn88A
- DkPSLpDBClvUKSjhjBf0czmRrqUfovr8gvtdzTUwXovCA+9hwaL5pIq0g4eyWcNfB6yZL4ZYfVyG/
- o+rMuk7xVbgecg1s4Sv+vrOuv576AGxkYV1WQwged26cMQYBUFzDLHeiC9wMUS0iJ/zE=;
+ bh=GK3KFML4MxD5gHuavmBx6F3vOAf3v6AFw7esO0+/EUc=; b=dNP8FHAITl0TeKkhhYHu44bOCQ
+ WaBIMd8QyGvfHpXI8ifIjFSIg66TRQqx4HXSk+n2B6hT5Qwob6qTt1FGvruwSHhEyvpgv/yqjWsti
+ MrdCW1dKFRMyCYj01haHxWZWcq/Lm9ReZcBFdEqj2Omz0PWyH05DWo/otvG9F4qLVLZs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -30,32 +30,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=2/YCmGUemc+wOLv/5ELjphBnftis9IDqZDEkf1/jsf8=; b=GOdPuVjWA4vTaMyN9/xsFVg1CO
- VQE/qfJBZmaEx+laNoGzECpX/Jev0xoOV9lF4Yi8kii4XY47IY4/0DzPmvyawpAkNtF063zrvDE+f
- ET1q0nKXZItTH5ulkxCkrDNcaJxh5lV7gCvjak/egIKlERkANCEeCk4Q52nFeXGjwZgM=;
+ bh=GK3KFML4MxD5gHuavmBx6F3vOAf3v6AFw7esO0+/EUc=; b=lr2CtPftuueWqbQY891nwydz2C
+ IkCkWLXnQ/i0/dD+N/Kcoq+NCwhecS/7bN2cm5AuI7+F93JJzONOVdNxKlz39uAZbWWC5pl/bhK/R
+ O0k0qtAdpgKdzFcSSFdI/TAYVybzgYN6ilmfo13l/BYnoMKOTK2v9TPQinfK7s/8+dYM=;
 Received: from casper.infradead.org ([90.155.50.34])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jsrzn-00DRa2-FF
- for kgdb-bugreport@lists.sourceforge.net; Tue, 07 Jul 2020 18:07:08 +0000
+ id 1jsrzq-00GRMS-J6
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 07 Jul 2020 18:07:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description;
- bh=2/YCmGUemc+wOLv/5ELjphBnftis9IDqZDEkf1/jsf8=; b=hcwO0h7eMdRn9rDomQi8lZ2Jrt
- q36N6MZo2lW8v7E1Yeq8vm3UNGtKd+ocnn7uw5lP/6ZL+JzqoWMaG3AVp9D7qDEvJwM17EcJwr1tq
- ZFSR5pOZCCS3pNGN84VQRedpoe9ILutFjXP4bdiscjJUsJrjJRVtFdUsqUYDpSeVYg4EwKahPkPoB
- l7uCqz8UDA8OxxqevReZFv4r5hnxo/JZ6Ht/1CaFRFMaQ57vC6S8bGZuvqlendpdSVVu+4swXZTjV
- jBNoOaJy3LAUWQ3ckl1KJkwWIwEyRZXnp6/F1QjXAt5ykADI/MuwSUOu+3Fl6FD8F14DIgOGfgCft
- uL0V1V+A==;
+ bh=GK3KFML4MxD5gHuavmBx6F3vOAf3v6AFw7esO0+/EUc=; b=gllBHkH4lvcDqqVtERqT1cTaJt
+ 5B01vgWc1X6miMUc6A421VUkZRzHfhwsGkXukEFjFJR6BzVcublNEyRF5c0+6QvOc8oq6+2TOFBqc
+ bNZHAZzqTN4uqIsa4n5RiIorKiEAwRj22qXpe5JEFBtU5jxQTePkCW+3NRPFmFcGiIzK43CS6ksij
+ AHTfJeRS2Fg+A0eMNDAH+CK2unEMTsk92balEkUFd1GAAiPD247hFJhfCdOiDgfFSWxfHtsgbg1me
+ py40gAIHuf0xSl4mVeVjcNjBKTc8kdjHDEjaY9oBQMN2XoOzBuMEFkxxyYS3o1XEia770z2srexDp
+ YjFBVR9Q==;
 Received: from [2601:1c0:6280:3f0:897c:6038:c71d:ecac]
  (helo=smtpauth.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1jsrzU-0004JY-Dh; Tue, 07 Jul 2020 18:06:48 +0000
+ id 1jsrzf-0004JY-8g; Tue, 07 Jul 2020 18:06:59 +0000
 From: Randy Dunlap <rdunlap@infradead.org>
 To: linux-kernel@vger.kernel.org
-Date: Tue,  7 Jul 2020 11:04:07 -0700
-Message-Id: <20200707180414.10467-14-rdunlap@infradead.org>
+Date: Tue,  7 Jul 2020 11:04:08 -0700
+Message-Id: <20200707180414.10467-15-rdunlap@infradead.org>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200707180414.10467-1-rdunlap@infradead.org>
 References: <20200707180414.10467-1-rdunlap@infradead.org>
@@ -66,7 +66,7 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: franken.de]
+ for more information. [URIs: infradead.org]
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -75,8 +75,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jsrzn-00DRa2-FF
-Subject: [Kgdb-bugreport] [PATCH 13/20] Documentation: mips/ingenic-tcu:
+X-Headers-End: 1jsrzq-00GRMS-J6
+Subject: [Kgdb-bugreport] [PATCH 14/20] Documentation: misc/xilinx_sdfec:
  eliminate duplicated word
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -125,29 +125,28 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Drop the doubled word "to".
+Drop the doubled word "the".
 
 Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
 Cc: Jonathan Corbet <corbet@lwn.net>
 Cc: linux-doc@vger.kernel.org
-Cc: Paul Cercueil <paul@crapouillou.net>
-Cc: Thomas Bogendoerfer <tsbogend@alpha.franken.de>
-Cc: linux-mips@vger.kernel.org
+Cc: Derek Kiernan <derek.kiernan@xilinx.com>
+Cc: Dragan Cvetic <dragan.cvetic@xilinx.com>
 ---
- Documentation/mips/ingenic-tcu.rst |    2 +-
+ Documentation/misc-devices/xilinx_sdfec.rst |    2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
---- linux-next-20200701.orig/Documentation/mips/ingenic-tcu.rst
-+++ linux-next-20200701/Documentation/mips/ingenic-tcu.rst
-@@ -5,7 +5,7 @@ Ingenic JZ47xx SoCs Timer/Counter Unit h
- ===============================================
+--- linux-next-20200701.orig/Documentation/misc-devices/xilinx_sdfec.rst
++++ linux-next-20200701/Documentation/misc-devices/xilinx_sdfec.rst
+@@ -78,7 +78,7 @@ application interfaces:
+   - open: Implements restriction that only a single file descriptor can be open per SD-FEC instance at any time
+   - release: Allows another file descriptor to be open, that is after current file descriptor is closed
+   - poll: Provides a method to monitor for SD-FEC Error events
+-  - unlocked_ioctl: Provides the the following ioctl commands that allows the application configure the SD-FEC core:
++  - unlocked_ioctl: Provides the following ioctl commands that allows the application configure the SD-FEC core:
  
- The Timer/Counter Unit (TCU) in Ingenic JZ47xx SoCs is a multi-function
--hardware block. It features up to to eight channels, that can be used as
-+hardware block. It features up to eight channels, that can be used as
- counters, timers, or PWM.
- 
- - JZ4725B, JZ4750, JZ4755 only have six TCU channels. The other SoCs all
+ 		- :c:macro:`XSDFEC_START_DEV`
+ 		- :c:macro:`XSDFEC_STOP_DEV`
 
 
 _______________________________________________
