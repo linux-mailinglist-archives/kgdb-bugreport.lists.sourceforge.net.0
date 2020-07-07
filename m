@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B9F8F2175ED
-	for <lists+kgdb-bugreport@lfdr.de>; Tue,  7 Jul 2020 20:08:09 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id BCE1A2175EE
+	for <lists+kgdb-bugreport@lfdr.de>; Tue,  7 Jul 2020 20:08:19 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jss0m-0000tL-GR
-	for lists+kgdb-bugreport@lfdr.de; Tue, 07 Jul 2020 18:08:08 +0000
+	id 1jss0w-0007ma-Hc
+	for lists+kgdb-bugreport@lfdr.de; Tue, 07 Jul 2020 18:08:18 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <rdunlap@infradead.org>) id 1jss0k-0000tD-UC
- for kgdb-bugreport@lists.sourceforge.net; Tue, 07 Jul 2020 18:08:06 +0000
+ (envelope-from <rdunlap@infradead.org>) id 1jss0v-0007mT-F3
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 07 Jul 2020 18:08:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=K5P4I52OmjG0Sl6pNIztAMb1sxWsy+0tk7m8cTC1PU4=; b=a4B1fLYS/n32XdGuZkG+2Iwr5b
- AjsQu2YtYk/VZhwIt7/LQNpzyLvk/wd6BbwBWSlq/2DuVYblrsyT7wmQkOf60nBRb/RPLcDu8PxkG
- gmijlBT1OMjIXzPGzzJ8C0ycxv6O6uKSWUbeHiACm5EH3cDOObH4AFmqLRUnXAozRCnI=;
+ bh=8wfZDtgdUoXKGihiBP/1w1LPLu4vuzlYcFEiq+Cintc=; b=RdmUfUiZNPEPHdsNRzRJ0TyFu7
+ sI0yAlvKybsc44FwB9dxIvRn9skgCoYPmxP76KUkx4gqJe6VN8J5zeQU6Ca8Vz2kDHfw/KBSIBMqV
+ baWAxVS9etO57p/df2HHf4orVZSPLFP2ep4t+5ob2uWD1SbH5xXgLPep+xs32UIk5m84=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -30,32 +30,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=K5P4I52OmjG0Sl6pNIztAMb1sxWsy+0tk7m8cTC1PU4=; b=hd8qJ9Gbrm5ZRv/Em0u4kKhNkx
- xqFlj/zQnsSAIToQTXn5svLTWjijUHHejdhlogoRoIvv9OnHzlisMu503ePH6vAGN95PYBxeRejqK
- Q9MrRaraCHLQQXfZaD0/6KGm+5jZWx8BI3MT6xryH+0t1pDmpUdbuV+j25kY4ii7cFlc=;
+ bh=8wfZDtgdUoXKGihiBP/1w1LPLu4vuzlYcFEiq+Cintc=; b=kR4VEqb00e+TEB5SLB6VnyHxjN
+ Ztfa2RhN6uNcSLWmUBcJiNkY2eIr773b6bqQJAk/EhDRH+BmJfjk4TMMg7u294DDx0HZMEAdjSk3s
+ tPRpfL904kCjc2p6b3gy4aw7KS2Cv/x6KLNnHORXW2UB+SYFoVIqmudZLdjZUDTycO+E=;
 Received: from casper.infradead.org ([90.155.50.34])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jss0j-00DRdb-KK
- for kgdb-bugreport@lists.sourceforge.net; Tue, 07 Jul 2020 18:08:06 +0000
+ id 1jss0u-00DReH-9A
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 07 Jul 2020 18:08:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description;
- bh=K5P4I52OmjG0Sl6pNIztAMb1sxWsy+0tk7m8cTC1PU4=; b=Z1WekKlxFVdnZGsAJR+/c8fv4z
- pLlP0fDHe0D0I1Ads9xVF93NZUe8X9+r51YmEyXSXlQTBQpi+BrzZLChovSUm2rAPdYwrJ1FeRkOw
- LLi1R2rRN0Z5hHRMsXYTxwfXkWgDStvhzhV2bspd6ddrZTpmxMJdxXcIcS42+C4oCFtPtpxG+aSNw
- TtEKBsokrzD2hCL/WeMkHvPMGuFDQepau4i4BxI51wHJWRJO/nUTNHz/uACsBU3NSbRzYL0r/dq7i
- WYDSvoKho26VE+A7oLydro/T/5L7+x8roGd0fb3QDX9bHa0jJWG0osdPFyECP7OxtqjMxL0Y36h1s
- qQow6Ksg==;
+ bh=8wfZDtgdUoXKGihiBP/1w1LPLu4vuzlYcFEiq+Cintc=; b=Hs+eVVPRDZbmHqxw4R6tGr0SKX
+ B1jecmarAFXmmj+WjfDO+ShabgqA4fXiBU/J/di2EQpOAjQz23qTPBMlsUAuRDQkt/YL9U74yyFRQ
+ RIEB0PP25Vw/gk0PU9Z5gJFSsCISdrx/51Gh5+8rsdtMw1j3uRyZYwL2HzJdtqsl89a9Ag2fF5hpn
+ HC5XYOTb6nyMr5f9GzmPWZyZjd/qHGzeZr3n0H+eqtJQcp3MNOsHOT363PfFxdTgqUMOmiy1HJECs
+ 1Lb2+hizWUjzDvcMWjHptnTa87zX+XN15ku/tUq0XO1BzzhYzLy6wzP9s/yBt+to7hmahAZ59gwBh
+ ZT+DuZqw==;
 Received: from [2601:1c0:6280:3f0:897c:6038:c71d:ecac]
  (helo=smtpauth.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1jss0X-0004JY-Up; Tue, 07 Jul 2020 18:07:54 +0000
+ id 1jss0i-0004JY-SL; Tue, 07 Jul 2020 18:08:05 +0000
 From: Randy Dunlap <rdunlap@infradead.org>
 To: linux-kernel@vger.kernel.org
-Date: Tue,  7 Jul 2020 11:04:13 -0700
-Message-Id: <20200707180414.10467-20-rdunlap@infradead.org>
+Date: Tue,  7 Jul 2020 11:04:14 -0700
+Message-Id: <20200707180414.10467-21-rdunlap@infradead.org>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200707180414.10467-1-rdunlap@infradead.org>
 References: <20200707180414.10467-1-rdunlap@infradead.org>
@@ -75,8 +75,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jss0j-00DRdb-KK
-Subject: [Kgdb-bugreport] [PATCH 20/20] Documentation: vm/memory-model:
+X-Headers-End: 1jss0u-00DReH-9A
+Subject: [Kgdb-bugreport] [PATCH 19/20] Documentation: virt/kvm/api:
  eliminate duplicated word
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -94,9 +94,8 @@ Cc: Benjamin Herrenschmidt <benh@kernel.crashing.org>, kvm@vger.kernel.org,
  kgdb-bugreport@lists.sourceforge.net, linux-fpga@vger.kernel.org,
  Liviu Dudau <liviu.dudau@arm.com>, dri-devel@lists.freedesktop.org,
  linux-mips@vger.kernel.org, Paul Cercueil <paul@crapouillou.net>,
- linux-mm@kvack.org, keyrings@vger.kernel.org,
- Paul Mackerras <paulus@samba.org>, linux-i2c@vger.kernel.org,
- Pavel Machek <pavel@ucw.cz>,
+ keyrings@vger.kernel.org, Paul Mackerras <paulus@samba.org>,
+ linux-i2c@vger.kernel.org, Pavel Machek <pavel@ucw.cz>,
  Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>,
  Mihail Atanassov <mihail.atanassov@arm.com>, linux-leds@vger.kernel.org,
  linux-s390@vger.kernel.org, Daniel Thompson <daniel.thompson@linaro.org>,
@@ -126,28 +125,28 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Drop the doubled word "the".
+Drop the duplicated word "struct".
 
 Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
 Cc: Jonathan Corbet <corbet@lwn.net>
 Cc: linux-doc@vger.kernel.org
-Cc: Andrew Morton <akpm@linux-foundation.org>
-Cc: linux-mm@kvack.org
+Cc: Paolo Bonzini <pbonzini@redhat.com>
+Cc: kvm@vger.kernel.org
 ---
- Documentation/vm/memory-model.rst |    2 +-
+ Documentation/virt/kvm/api.rst |    2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
---- linux-next-20200701.orig/Documentation/vm/memory-model.rst
-+++ linux-next-20200701/Documentation/vm/memory-model.rst
-@@ -159,7 +159,7 @@ frame. Inside a section, the PFN is the
- The sparse vmemmap uses a virtually mapped memory map to optimize
- pfn_to_page and page_to_pfn operations. There is a global `struct
- page *vmemmap` pointer that points to a virtually contiguous array of
--`struct page` objects. A PFN is an index to that array and the the
-+`struct page` objects. A PFN is an index to that array and the
- offset of the `struct page` from `vmemmap` is the PFN of that
- page.
+--- linux-5.8-rc3.orig/Documentation/virt/kvm/api.rst
++++ linux-5.8-rc3/Documentation/virt/kvm/api.rst
+@@ -3147,7 +3147,7 @@ Possible features:
+ :Capability: basic
+ :Architectures: arm, arm64
+ :Type: vm ioctl
+-:Parameters: struct struct kvm_vcpu_init (out)
++:Parameters: struct kvm_vcpu_init (out)
+ :Returns: 0 on success; -1 on error
  
+ Errors:
 
 
 _______________________________________________
