@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9C0072175DB
-	for <lists+kgdb-bugreport@lfdr.de>; Tue,  7 Jul 2020 20:06:15 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 441D02175DD
+	for <lists+kgdb-bugreport@lfdr.de>; Tue,  7 Jul 2020 20:06:21 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jsryw-0007zu-Dj
-	for lists+kgdb-bugreport@lfdr.de; Tue, 07 Jul 2020 18:06:14 +0000
+	id 1jsrz2-0000nP-1n
+	for lists+kgdb-bugreport@lfdr.de; Tue, 07 Jul 2020 18:06:20 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <rdunlap@infradead.org>) id 1jsryv-0007zV-0G
- for kgdb-bugreport@lists.sourceforge.net; Tue, 07 Jul 2020 18:06:13 +0000
+ (envelope-from <rdunlap@infradead.org>) id 1jsryz-0000n9-L9
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 07 Jul 2020 18:06:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=n0r3AeJBdJxrkDj2u02K2i7+nW9Oe1yMWegqEZLyJYA=; b=g8MXViRNKKxt1w1inOHGXUOnKA
- EfG4st5b4ouV0Fbko3IqYR8rz2zWkUKbIPD3QdUb8Kio3tB1YTJ5z7UoOWcNZIh88n1VI0ledJBD5
- lv2WG+hVbylTniPkencGdt4Sh27jmExmNjYzD0GXPRBER4kxunkK/DYr1MPeoXBpDuzQ=;
+ bh=ncrUf+tMkKNDQi5/EmoipCE+MeRd0JYdh5qBYgZcQsY=; b=PbPIMHJMtqSDOAVVBZKNNAwzp8
+ 9paseHDhsCfu+LzsoNo5BKfiDuxcUaPNS/ntHCT2BW3iQlX+ISnayxrN7h87Q82L73UNoPMpNCmwf
+ MIQdLPJ67QWpwHENU6BTh7TvOLeHF9Ooe6fvHgsAt9CSpE3RY4A28QpxbR18+fmMIfJQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -30,32 +30,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=n0r3AeJBdJxrkDj2u02K2i7+nW9Oe1yMWegqEZLyJYA=; b=hNlw6yxXnFFfyjnbcUnQvHc5x1
- qV9lRLj8jeItsRTg8XgkoF2QOz6tz4K6pxWUNdmf9Ygz/Iq2OwSmAqJfOU2qnI2L/91mpQHUFHACw
- COXQ823pA+OSAFTkJThRvV+rFYZ3B7fgsHp5X4EXN7hqnhbVautuABSZcOltFBsqA02o=;
+ bh=ncrUf+tMkKNDQi5/EmoipCE+MeRd0JYdh5qBYgZcQsY=; b=P20kBOBYqc98wguo/uB0jxnCHL
+ Bm9VTgLXZ8rHApIgszkVV9AxdJ3B0ExGP2HIdBeiqno/nWlIzBDsuyf1I5rO/OqOcEYMCUG9sAAto
+ WgXkbwJVZ7gqJXE6QU6MP2WaeUeKo0eXj6ySCnhAMwgLK4/wqsxjO/S9IhZPdQHR+Cfo=;
 Received: from casper.infradead.org ([90.155.50.34])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jsryn-00DRWd-9P
- for kgdb-bugreport@lists.sourceforge.net; Tue, 07 Jul 2020 18:06:06 +0000
+ id 1jsryy-00DRXH-JE
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 07 Jul 2020 18:06:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description;
- bh=n0r3AeJBdJxrkDj2u02K2i7+nW9Oe1yMWegqEZLyJYA=; b=uuz7HtSBptzUF27iBREMdSAt/K
- jfqJyCiVvgKlk9ybByqRGqvz3SwIk8OhwWGYyebsPQyiZHV1dnlEZ5iCS8LFdwrQlrxxamCtUD4p+
- 9AW48pApfvdRO6OgxOdYCEVDYwMmAIdkIPgj4Q9uXPW9Z82cidbTJj2IkTlgE6eQqIxLRahVyPOsx
- JNaImE3V1R4jXAei4SIfKfLSbHOQbPehn9XqQfa84PTiCT2c0czIRdbHQTHtwoAsPoskeV+1f0TjF
- eevgAL4lPl5KDDTGkrpVnGbvdcEheR6NwmxP4l7PP2ltq4bov7OhlHCrx8NO2IEJzqEVlWVqhi0wL
- 2Bi9Jd2A==;
+ bh=ncrUf+tMkKNDQi5/EmoipCE+MeRd0JYdh5qBYgZcQsY=; b=mme0HOW3OP1d6nVxPOMb08I+xp
+ 9KU6f29dA2Fhjkm+pEYvD74FIxW4W6EzHy24/QP5lM8xYogNQvISiymqSra6o7a2KKiL7HbSmLKXn
+ Qdb/me1RLhW/kuNfec7xzzGbs6ajVBTEy9eFTsIse1sluOcYa4BgLMYdeEiGx1X76VxfOgCnBeQcO
+ uPqa54NfyePc2xrB3O/qdBA7MvASSldnbwblhmjlHJ6pbdjcGh060F3oWuQOZoplksxx3v69cs4sO
+ 3LzqR+ReMqWljAVqbID9PxeyCsXV2+fj0IuNof2jDxQ77IGZXtAfnElPN/E2GZVPUEoTERRE/J2JR
+ el85VwiA==;
 Received: from [2601:1c0:6280:3f0:897c:6038:c71d:ecac]
  (helo=smtpauth.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1jsryc-0004JY-0j; Tue, 07 Jul 2020 18:05:54 +0000
+ id 1jsrym-0004JY-TZ; Tue, 07 Jul 2020 18:06:05 +0000
 From: Randy Dunlap <rdunlap@infradead.org>
 To: linux-kernel@vger.kernel.org
-Date: Tue,  7 Jul 2020 11:04:02 -0700
-Message-Id: <20200707180414.10467-9-rdunlap@infradead.org>
+Date: Tue,  7 Jul 2020 11:04:03 -0700
+Message-Id: <20200707180414.10467-10-rdunlap@infradead.org>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200707180414.10467-1-rdunlap@infradead.org>
 References: <20200707180414.10467-1-rdunlap@infradead.org>
@@ -66,7 +66,7 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: intel.com]
+ for more information. [URIs: infradead.org]
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -75,9 +75,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jsryn-00DRWd-9P
-Subject: [Kgdb-bugreport] [PATCH 08/20] Documentation: hid/intel-ish-hid:
- eliminate duplicated word
+X-Headers-End: 1jsryy-00DRXH-JE
+Subject: [Kgdb-bugreport] [PATCH 09/20] Documentation: i2c: eliminate
+ duplicated word
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -125,29 +125,28 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Drop the doubled word "the".
+Drop doubled word "new".
 
 Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
 Cc: Jonathan Corbet <corbet@lwn.net>
 Cc: linux-doc@vger.kernel.org
-Cc: Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>
-Cc: Jiri Kosina <jikos@kernel.org>
-Cc: linux-input@vger.kernel.org
+Cc: Wolfram Sang <wsa@kernel.org>
+Cc: linux-i2c@vger.kernel.org
 ---
- Documentation/hid/intel-ish-hid.rst |    2 +-
+ Documentation/i2c/upgrading-clients.rst |    2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
---- linux-next-20200701.orig/Documentation/hid/intel-ish-hid.rst
-+++ linux-next-20200701/Documentation/hid/intel-ish-hid.rst
-@@ -235,7 +235,7 @@ There can be multiple sensor clients and
+--- linux-next-20200701.orig/Documentation/i2c/upgrading-clients.rst
++++ linux-next-20200701/Documentation/i2c/upgrading-clients.rst
+@@ -8,7 +8,7 @@ Introduction
+ ------------
  
- To ease in implantation and allow independent driver handle each client
- this transport layer takes advantage of Linux Bus driver model. Each
--client is registered as device on the the transport bus (ishtp bus).
-+client is registered as device on the transport bus (ishtp bus).
+ This guide outlines how to alter existing Linux 2.6 client drivers from
+-the old to the new new binding methods.
++the old to the new binding methods.
  
- Enumeration sequence of messages:
  
+ Example old-style driver
 
 
 _______________________________________________
