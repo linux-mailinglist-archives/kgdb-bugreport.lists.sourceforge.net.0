@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7B8992175D7
-	for <lists+kgdb-bugreport@lfdr.de>; Tue,  7 Jul 2020 20:05:28 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id F39E22175D8
+	for <lists+kgdb-bugreport@lfdr.de>; Tue,  7 Jul 2020 20:05:35 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jsryB-0007wx-9G
-	for lists+kgdb-bugreport@lfdr.de; Tue, 07 Jul 2020 18:05:27 +0000
+	id 1jsryI-0007ci-OP
+	for lists+kgdb-bugreport@lfdr.de; Tue, 07 Jul 2020 18:05:34 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <rdunlap@infradead.org>) id 1jsry9-0007wc-21
- for kgdb-bugreport@lists.sourceforge.net; Tue, 07 Jul 2020 18:05:25 +0000
+ (envelope-from <rdunlap@infradead.org>) id 1jsryH-0007ca-Pm
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 07 Jul 2020 18:05:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=j37n6ua73QzolTqHDVXK3ji/x5ynN2aQbXjX8l+i7HM=; b=jlSYO7VjJABKsuIs/4KaqvgHdd
- Rpss7w8O3jopJy+0fmvcpCLB0K//wMnB1W1h6sOD6IKnBRO4249rVudqA1CPpZKh8vwXxdIER/Sqt
- 31OxfAqEvb1+95bE3MlZHbg9M295wpzmcxeu9Rn2NF9FIATx8nVMODId8/KZgDe7CrAg=;
+ bh=eaqfaebmOSOj0mbjpn+DosDS2INVUNao8Fb7NVppBZM=; b=etTL3R71l5HOKEUtqS19mTSkQr
+ +3HEnpl/sdZE9xNWATEXLg/dKx4Qv9ISNcczTUmfTi2PzsiJeYTUjIpkeUP48uAJIIIr6EIEG8WrT
+ F8XMW+Wm9XjmBv30aIUBpxzfC74zLcDGFCJ/ZBTjF3NF3chdN8+FMY3F8ZXJ3kknRuwU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -30,32 +30,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=j37n6ua73QzolTqHDVXK3ji/x5ynN2aQbXjX8l+i7HM=; b=Fuc2/6XnLSGk9ksPGB8LVIXaEo
- mp1FoA0Pnnl8BaSZdWp+HVBJJ3olTLK6mYOusQVjMfZqCL1IiTpWf62ibtJq+FSUPH1CKthje7/OQ
- oHP88fbXTeN84eoJwNRDOY3Wv8YXo5fDCfpv1VAvbM2BvGlbmbx6nzL9MGCbwQCmB1fc=;
+ bh=eaqfaebmOSOj0mbjpn+DosDS2INVUNao8Fb7NVppBZM=; b=J4HHCvhfYRVLaqzJ0sGTB4F55O
+ SKVHv+xdF0HyfHRTq907g/X3cpZ4DC9OP1toqF8hig6Dyd2Y0NQ14Ccba8Gor3lq4Qi1+/TaHoLvI
+ xhVyCKkdOXB3tj7Dw2Q7ya16YrwQxCiK2/QcNZSAibilSlNrIWMxidWQN/TA/U2uIwAw=;
 Received: from casper.infradead.org ([90.155.50.34])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jsry6-00ARCs-6L
- for kgdb-bugreport@lists.sourceforge.net; Tue, 07 Jul 2020 18:05:25 +0000
+ id 1jsryG-00GRFx-Fu
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 07 Jul 2020 18:05:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description;
- bh=j37n6ua73QzolTqHDVXK3ji/x5ynN2aQbXjX8l+i7HM=; b=pCq9qSPC51QMPdOaPC5R+Qke2m
- Bfy7HZMSLQpI+AqQeJ6RTeLRQpjAauXQQ3FLIHQh6NdnMG4euXUy5T1myb35mutGzBed7/K/8gyxv
- tZgtB2vjbe3b5g3KTr0XtzEcKnt4UksteGhBpRaxkAcnyZS+8qZ4aCuEdEB08mwoHkVGB1aO2MlD6
- fr1btWMIPNJ8WxKOeF8UPFW/A1Z3pwxPBPaAFkYyiTa8bsL+uPysMd2ZGzB5Dw4/i+LhT9y7AtK2V
- 72W/fDQ62iMkYDGnK5RW50dMIeUfKWry9ZExrLWPc0sT0BhikpZy2OKEhull6ugckZ76R8UCzUi0f
- Ofl08UTA==;
+ bh=eaqfaebmOSOj0mbjpn+DosDS2INVUNao8Fb7NVppBZM=; b=kcpmxaf84w5Oxc9kFP/sAP+GmO
+ 6lV4TU5zNTj3L1bN6Zwx+HdFoqLf70UyzHzCSZpmcBQX/dy+7sLG+9Yoa+ZfUNwuVDcsB4457DDJl
+ iplwMOaNhaunyzNJEcxkhTi9JeC+SOvWZw8iIyQT9cHOXCrdM2XJY9yBgd+jyccEKzU78VUX7X1p8
+ pU7YkIL5aRW5Kwja+rB4Naf4Xlx4O8teEDyiWxzRiZX/nR6JkGjKIuPUtNU/wWjCP3Mgv2MCIwYrF
+ byZA29CM+hm5P6E0M+pWNzKBL1Q6Dz8F4gXil4SH8FggjkUBWmXcpB7MQ28asjiGyWHaqJ/FmbRYw
+ 81z6v4ng==;
 Received: from [2601:1c0:6280:3f0:897c:6038:c71d:ecac]
  (helo=smtpauth.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1jsrxu-0004JY-Jy; Tue, 07 Jul 2020 18:05:11 +0000
+ id 1jsry5-0004JY-Av; Tue, 07 Jul 2020 18:05:21 +0000
 From: Randy Dunlap <rdunlap@infradead.org>
 To: linux-kernel@vger.kernel.org
-Date: Tue,  7 Jul 2020 11:03:58 -0700
-Message-Id: <20200707180414.10467-5-rdunlap@infradead.org>
+Date: Tue,  7 Jul 2020 11:03:59 -0700
+Message-Id: <20200707180414.10467-6-rdunlap@infradead.org>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200707180414.10467-1-rdunlap@infradead.org>
 References: <20200707180414.10467-1-rdunlap@infradead.org>
@@ -66,7 +66,7 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: chromium.org]
+ for more information. [URIs: infradead.org]
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -75,8 +75,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jsry6-00ARCs-6L
-Subject: [Kgdb-bugreport] [PATCH 04/20] Documentation: kgdb: eliminate
+X-Headers-End: 1jsryG-00GRFx-Fu
+Subject: [Kgdb-bugreport] [PATCH 05/20] Documentation: fpga: eliminate
  duplicated word
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -125,30 +125,28 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Drop the doubled word "driver".
+Drop the doubled word "this".
 
 Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
 Cc: Jonathan Corbet <corbet@lwn.net>
 Cc: linux-doc@vger.kernel.org
-Cc: Jason Wessel <jason.wessel@windriver.com>
-Cc: Daniel Thompson <daniel.thompson@linaro.org>
-Cc: Douglas Anderson <dianders@chromium.org>
-Cc: kgdb-bugreport@lists.sourceforge.net
+Cc: Wu Hao <hao.wu@intel.com>
+Cc: linux-fpga@vger.kernel.org
 ---
- Documentation/dev-tools/kgdb.rst |    2 +-
+ Documentation/fpga/dfl.rst |    2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
---- linux-next-20200701.orig/Documentation/dev-tools/kgdb.rst
-+++ linux-next-20200701/Documentation/dev-tools/kgdb.rst
-@@ -872,7 +872,7 @@ The kgdboc driver contains logic to conf
- attached keyboard. The keyboard infrastructure is only compiled into the
- kernel when ``CONFIG_KDB_KEYBOARD=y`` is set in the kernel configuration.
+--- linux-next-20200701.orig/Documentation/fpga/dfl.rst
++++ linux-next-20200701/Documentation/fpga/dfl.rst
+@@ -8,7 +8,7 @@ Authors:
+ - Xiao Guangrong <guangrong.xiao@linux.intel.com>
+ - Wu Hao <hao.wu@intel.com>
  
--The core polled keyboard driver driver for PS/2 type keyboards is in
-+The core polled keyboard driver for PS/2 type keyboards is in
- ``drivers/char/kdb_keyboard.c``. This driver is hooked into the debug core
- when kgdboc populates the callback in the array called
- :c:type:`kdb_poll_funcs[]`. The :c:func:`kdb_get_kbd_char` is the top-level
+-The Device Feature List (DFL) FPGA framework (and drivers according to this
++The Device Feature List (DFL) FPGA framework (and drivers according to
+ this framework) hides the very details of low layer hardwares and provides
+ unified interfaces to userspace. Applications could use these interfaces to
+ configure, enumerate, open and access FPGA accelerators on platforms which
 
 
 _______________________________________________
