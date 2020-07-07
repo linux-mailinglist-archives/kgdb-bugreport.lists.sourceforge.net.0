@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B6D162175E5
-	for <lists+kgdb-bugreport@lfdr.de>; Tue,  7 Jul 2020 20:07:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 96A732175E6
+	for <lists+kgdb-bugreport@lfdr.de>; Tue,  7 Jul 2020 20:07:38 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jss04-0007j0-4N
-	for lists+kgdb-bugreport@lfdr.de; Tue, 07 Jul 2020 18:07:24 +0000
+	id 1jss0H-0007k2-D4
+	for lists+kgdb-bugreport@lfdr.de; Tue, 07 Jul 2020 18:07:37 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <rdunlap@infradead.org>) id 1jss02-0007it-Ph
- for kgdb-bugreport@lists.sourceforge.net; Tue, 07 Jul 2020 18:07:22 +0000
+ (envelope-from <rdunlap@infradead.org>) id 1jss0E-0007jt-FG
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 07 Jul 2020 18:07:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=mPS72WgNYkKywllLGpTOm1li0E5rJutzPsTWs0NA3MU=; b=k+Vl9Pqxdk1Kk3BQjkWjFzULPD
- GKtgFnI7awv+fnyTXaX4Yo5B8J9nNeLlAvIRECN34eWaK+poYc82dDOSl6jH2g2FLJawtOuGSJien
- xwHnbce0JB9FOzuAVOsqxxLnv4u7v7+b98F465sfdRmZrxJ9LN43BcBogLuLwxRewxNk=;
+ bh=NhnjZY5aHnB09fvA8u8Semk18ol/DXhb2U3kmzg57F0=; b=GeZyx4N/BBXynsbgQfrljXSYxq
+ Hb3kzNRLMWkOvF6UX1V3gAqA0h6XE92dx97jkammyHYZyhbkDx/DChLx4+aliL4L/BO9yFif458XJ
+ 48xB3oz6n7lIV2Alfmuq13Azj9Qd5QRaIZvFpiYjPayNIOneRnn+epzyr+XAc4fo5+04=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -30,32 +30,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=mPS72WgNYkKywllLGpTOm1li0E5rJutzPsTWs0NA3MU=; b=ZP/F+P263PtBc3sN3nOH0Ze5Ee
- YNuhLWFXltVAZKLGf6RTXbYLY+vuqrLZUclYKlrxVxRjkmKloh/5gmgxlDYso+kUiLKGO6rK6drui
- 01j7cCKTN22Z/P50+m27IFOW6aImtVvi2YnN3Lbr1LWa74NMpgHJuln+RY0UOTKQu308=;
+ bh=NhnjZY5aHnB09fvA8u8Semk18ol/DXhb2U3kmzg57F0=; b=L5XEEoSNNEqGfqaivnpxy0xKo3
+ Yl6DLezuBgleGjUgRfjDKVZwlyhIPsRHWZEGbWEn5RnY8tZXDwmtjLaiDYS5q67YbzAMzItK8FrdN
+ DnjpzOx+Zc9Vehsqp6id/cXwrDn0zDzMw8qteuT4/+E1oYMM9DM2hq3U1haLSn8IXuAA=;
 Received: from casper.infradead.org ([90.155.50.34])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jss01-00ARIy-H6
- for kgdb-bugreport@lists.sourceforge.net; Tue, 07 Jul 2020 18:07:22 +0000
+ id 1jss0D-00GRNz-8i
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 07 Jul 2020 18:07:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description;
- bh=mPS72WgNYkKywllLGpTOm1li0E5rJutzPsTWs0NA3MU=; b=irAVrD/fzbik6cd0AMxD/aALiP
- BnVWmuEH0TDL7mcrAZT9ozsymcEnjv6430h369oAEGC1S55lQxuH58cQCCVhxuC9QNc28hYGGmMFz
- h7/ZY5whyhiatpbN6vpz9TRUfmhRYrzgnes7yY6SGqS0XQgk84ic4jfYJgRzwpKCTIcx6PayaQqic
- kDH1a7oS/i+vpknni2Fs43lWnDBGUTz8KIU8fYjmUExyXFBuj6Iukq0c5sYSLCgzGnlMFMu5NaohS
- GMORhffy08BY2VsbPREx+iBLWl3V/w3hMa4PBmGDkW8wE6ObTNCactvdX6It9H4VAtfcdoB5mkSMC
- 1pLgQqoA==;
+ bh=NhnjZY5aHnB09fvA8u8Semk18ol/DXhb2U3kmzg57F0=; b=EjAA5UZfaDPzZqAQXMWx3KOWFk
+ 4PSdxFn2HK4IilD2Y0qdarnW7N3/fI3OYSkAPDGEC3SAn7ZtsdSjMngg4Yova8dXgJdNTFlzM16R2
+ FRbKTihySD2OO8rYcOLuv1YGxmfFdkNrHKtIZbY7UMQV6x2BdioJ71hmblPIrmU+9xRUwc7PGAfYv
+ CZRQobq0JUjaBGRvvBPdFCbH+LA/5Q1hxXBztZb9SxptHMLnupzaQVS2qPz7CZn87BGUOYznGeUxj
+ HkfEv0tMkvfF0q/dRDxwGqvCT24bagz/ir72XInRBuj0P11LxE4EwXdLoKFzfRL/FnST3lpu299NN
+ Bunqqoqg==;
 Received: from [2601:1c0:6280:3f0:897c:6038:c71d:ecac]
  (helo=smtpauth.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1jsrzp-0004JY-Si; Tue, 07 Jul 2020 18:07:10 +0000
+ id 1jss01-0004JY-1q; Tue, 07 Jul 2020 18:07:21 +0000
 From: Randy Dunlap <rdunlap@infradead.org>
 To: linux-kernel@vger.kernel.org
-Date: Tue,  7 Jul 2020 11:04:09 -0700
-Message-Id: <20200707180414.10467-16-rdunlap@infradead.org>
+Date: Tue,  7 Jul 2020 11:04:10 -0700
+Message-Id: <20200707180414.10467-17-rdunlap@infradead.org>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200707180414.10467-1-rdunlap@infradead.org>
 References: <20200707180414.10467-1-rdunlap@infradead.org>
@@ -75,8 +75,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jss01-00ARIy-H6
-Subject: [Kgdb-bugreport] [PATCH 15/20] Documentation: powerpc/vas-api:
+X-Headers-End: 1jss0D-00GRNz-8i
+Subject: [Kgdb-bugreport] [PATCH 16/20] Documentation: s390/vfio-ap:
  eliminate duplicated word
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -130,25 +130,25 @@ Drop the doubled word "the".
 Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
 Cc: Jonathan Corbet <corbet@lwn.net>
 Cc: linux-doc@vger.kernel.org
-Cc: Michael Ellerman <mpe@ellerman.id.au>
-Cc: Benjamin Herrenschmidt <benh@kernel.crashing.org>
-Cc: Paul Mackerras <paulus@samba.org>
-Cc: linuxppc-dev@lists.ozlabs.org
+Cc: Tony Krowiak <akrowiak@linux.ibm.com>
+Cc: Pierre Morel <pmorel@linux.ibm.com>
+Cc: Halil Pasic <pasic@linux.ibm.com>
+Cc: linux-s390@vger.kernel.org
 ---
- Documentation/powerpc/vas-api.rst |    2 +-
+ Documentation/s390/vfio-ap.rst |    2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
---- linux-next-20200701.orig/Documentation/powerpc/vas-api.rst
-+++ linux-next-20200701/Documentation/powerpc/vas-api.rst
-@@ -43,7 +43,7 @@ engine for this process. Once a connecti
- should use the mmap() system call to map the hardware address of engine's
- request queue into the application's virtual address space.
- 
--The application can then submit one or more requests to the the engine by
-+The application can then submit one or more requests to the engine by
- using copy/paste instructions and pasting the CRBs to the virtual address
- (aka paste_address) returned by mmap(). User space can close the
- established connection or send window by closing the file descriptior
+--- linux-next-20200701.orig/Documentation/s390/vfio-ap.rst
++++ linux-next-20200701/Documentation/s390/vfio-ap.rst
+@@ -361,7 +361,7 @@ matrix device.
+     assign_domain / unassign_domain:
+       Write-only attributes for assigning/unassigning an AP usage domain to/from
+       the mediated matrix device. To assign/unassign a domain, the domain
+-      number of the the usage domain is echoed to the respective attribute
++      number of the usage domain is echoed to the respective attribute
+       file.
+     matrix:
+       A read-only file for displaying the APQNs derived from the cross product
 
 
 _______________________________________________
