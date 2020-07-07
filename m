@@ -2,63 +2,65 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E9DFF2175D2
-	for <lists+kgdb-bugreport@lfdr.de>; Tue,  7 Jul 2020 20:05:02 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4BB4D2175D3
+	for <lists+kgdb-bugreport@lfdr.de>; Tue,  7 Jul 2020 20:05:05 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jsrxl-0000jO-MX
-	for lists+kgdb-bugreport@lfdr.de; Tue, 07 Jul 2020 18:05:01 +0000
+	id 1jsrxo-0007vC-3v
+	for lists+kgdb-bugreport@lfdr.de; Tue, 07 Jul 2020 18:05:04 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <rdunlap@infradead.org>) id 1jsrxk-0000j9-0y
+ (envelope-from <rdunlap@infradead.org>) id 1jsrxk-0007uT-Dl
  for kgdb-bugreport@lists.sourceforge.net; Tue, 07 Jul 2020 18:05:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ljom0Anfyg1biDMYz87so/NXDLxx9+qjBdkF8XNueFk=; b=E5Ss++5B1RjbsR654naamD97dr
- /4OdDRdZSayMW643s6h1ta57gwnTxOVXcjyzfHRiac3CLGQ/mqy2I6Iz+z7aincUm39A2zqYRDaCl
- dBK71wSxALP43bW13VCxtx6xIUffdUjONqb9HJGU1tc9PGWr1i8OTmJQttgfWEGBZPCA=;
+ bh=RqyRnPkRTOc/R3lqbrT2rduELR3dheWkm530I4YPdjk=; b=XGkZ5jqPjpsaKny7yFX1ibbG6h
+ YDNHXHEab2oE7UbcACTyXn5sgsEIFuLYNlCSzKsNcil0aJ8G7DTroLDjKkF0KK2Hfi26Q55/5J7w3
+ Ks7baEMm+CLkhy1TH8JhtmIY4jgZZQtaODKPD7q1C2mj8MbW2Gcsvf6GT8dHTn8vpUhU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=ljom0Anfyg1biDMYz87so/NXDLxx9+qjBdkF8XNueFk=; b=E
- QuxrT/5Vva468qTKkItKg7PTpCpeSPEm3mdw8Lf7Tz/eyNyRfh5AQKLUiU8vsioxPggwxwN9jYZF0
- YPWPxMPDrvPbsr5Xdr8JT/EhiTEXdI3/1/BdKCpJdQhCl6Pe64SvdiQpKioXSM7Y5V6P0V+S4Sorg
- EBDSIGJmI2dfV/Jg=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=RqyRnPkRTOc/R3lqbrT2rduELR3dheWkm530I4YPdjk=; b=eChnaxOkaL1X0WkxquzD1KsSIG
+ Ly04XTEipBFo+E47sZ2pJv29dflUefR66qP/m5TawsvJ4JkYd8WMnatjTiUa88JyZ4CsZ0a2doEcA
+ xcP8N/LJmgeGeanL6W53CfaAoD3IlSCysQmQfWZKEGgO893I0otl1kLTi5WaVB0RFQQk=;
 Received: from casper.infradead.org ([90.155.50.34])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jsrxg-00GRDI-MD
- for kgdb-bugreport@lists.sourceforge.net; Tue, 07 Jul 2020 18:04:59 +0000
+ id 1jsrxg-00GRDd-MD
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 07 Jul 2020 18:05:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
- Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:In-Reply-To:References;
- bh=ljom0Anfyg1biDMYz87so/NXDLxx9+qjBdkF8XNueFk=; b=XPmbzEYSKiY23UCv9H7rAcJy2R
- M7f7R8q2JHTzLF3fw5HDgcGaxp50+pOpgQn9qzOfGc74gtagEHV6Q7icIU0zjblMzjT37udLesnhL
- t6zRDl4JbRnBH5eM4X4N08FrnDesy4TICQvkIVYNQ8qvb6PGJ54hisXDryvCJ2pZ7yLDPk64h4NLJ
- DKL+uTadTIlOv1Xkb55ANjt9sGtxhzSXyjNGbdgi4aMS6aiS0LxO0yhgK/hKDfFkwdaZv9KA85XN0
- CQPh5QhdrPKTQrQWVmG8u7dBe25NlxmYEqNYA8r1RB15O4/YZf2A/GsS1D5msHGoGj7fh08TONrvJ
- T0Hln73w==;
+ References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ Content-Type:Content-ID:Content-Description;
+ bh=RqyRnPkRTOc/R3lqbrT2rduELR3dheWkm530I4YPdjk=; b=E8lX9mtcOkU5sxWkqKrby7vT6X
+ 5ObbPzq0n/nZnOwOYtF74Cr7SN3yxm514gKhyVaZUUUjtlTaQ0itgsX3nHoswyVD4UmaTgA//RkGd
+ hvfDxg4ilL1ditN2h4e6MpEaTh9+uZVLLCmflEb+QJrpazHWc68oCEnKKXgAJXcdVvONPVASRYIRN
+ xckpp0j/x86CuDTrXA76oJ0NvGhgewWZ4YuxJQviNJ7QaorsSgE9nl8/3+iiJJrloP4tyqaY/qsEx
+ jfcCDtiWAugmrDCXyC4rQ8aU+XxnprdVwqmDNbWpGNcYSxbzkCwNQMWACuWFTIkIAg5fIK3u/Gqmy
+ FVlYQHfw==;
 Received: from [2601:1c0:6280:3f0:897c:6038:c71d:ecac]
  (helo=smtpauth.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1jsrxD-0004JY-KG; Tue, 07 Jul 2020 18:04:28 +0000
+ id 1jsrxO-0004JY-HM; Tue, 07 Jul 2020 18:04:39 +0000
 From: Randy Dunlap <rdunlap@infradead.org>
 To: linux-kernel@vger.kernel.org
-Date: Tue,  7 Jul 2020 11:03:54 -0700
-Message-Id: <20200707180414.10467-1-rdunlap@infradead.org>
+Date: Tue,  7 Jul 2020 11:03:55 -0700
+Message-Id: <20200707180414.10467-2-rdunlap@infradead.org>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20200707180414.10467-1-rdunlap@infradead.org>
+References: <20200707180414.10467-1-rdunlap@infradead.org>
 MIME-Version: 1.0
-X-Spam-Score: -0.4 (/)
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
@@ -72,10 +74,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jsrxg-00GRDI-MD
-Subject: [Kgdb-bugreport] [PATCH 00/20] Documentation: eliminate duplicated
- words
+ -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jsrxg-00GRDd-MD
+Subject: [Kgdb-bugreport] [PATCH 01/20] Documentation: numaperf: eliminate
+ duplicated word
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -123,90 +125,28 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Drop doubled words in various parts of Documentation/.
+Drop the duplicated word "not".
 
-
+Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
 Cc: Jonathan Corbet <corbet@lwn.net>
 Cc: linux-doc@vger.kernel.org
 Cc: linux-mm@vger.kernel.org
 Cc: Mike Rapoport <rppt@kernel.org>
-Cc: Jens Axboe <axboe@kernel.dk>
-Cc: linux-block@vger.kernel.org
-Cc: Jason Wessel <jason.wessel@windriver.com>
-Cc: Daniel Thompson <daniel.thompson@linaro.org>
-Cc: Douglas Anderson <dianders@chromium.org>
-Cc: kgdb-bugreport@lists.sourceforge.net
-Cc: Wu Hao <hao.wu@intel.com>
-Cc: linux-fpga@vger.kernel.org
-Cc: James (Qian) Wang <james.qian.wang@arm.com>
-Cc: Liviu Dudau <liviu.dudau@arm.com>
-Cc: Mihail Atanassov <mihail.atanassov@arm.com>
-Cc: Mali DP Maintainers <malidp@foss.arm.com>
-Cc: David Airlie <airlied@linux.ie>
-Cc: Daniel Vetter <daniel@ffwll.ch>
-Cc: dri-devel@lists.freedesktop.org
-Cc: Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>
-Cc: Jiri Kosina <jikos@kernel.org>
-Cc: linux-input@vger.kernel.org
-Cc: Wolfram Sang <wsa@kernel.org>
-Cc: linux-i2c@vger.kernel.org
-Cc: Masahiro Yamada <masahiroy@kernel.org>
-Cc: Michal Marek <michal.lkml@markovi.net>
-Cc: linux-kbuild@vger.kernel.org
-Cc: Jacek Anaszewski <jacek.anaszewski@gmail.com>
-Cc: Pavel Machek <pavel@ucw.cz>
-Cc: Dan Murphy <dmurphy@ti.com>
-Cc: linux-leds@vger.kernel.org
-Cc: Dan Williams <dan.j.williams@intel.com>
-Cc: Paul Cercueil <paul@crapouillou.net>
-Cc: Thomas Bogendoerfer <tsbogend@alpha.franken.de>
-Cc: linux-mips@vger.kernel.org
-Cc: Derek Kiernan <derek.kiernan@xilinx.com>
-Cc: Dragan Cvetic <dragan.cvetic@xilinx.com>
-Cc: Michael Ellerman <mpe@ellerman.id.au>
-Cc: Benjamin Herrenschmidt <benh@kernel.crashing.org>
-Cc: Paul Mackerras <paulus@samba.org>
-Cc: linuxppc-dev@lists.ozlabs.org
-Cc: Tony Krowiak <akrowiak@linux.ibm.com>
-Cc: Pierre Morel <pmorel@linux.ibm.com>
-Cc: Halil Pasic <pasic@linux.ibm.com>
-Cc: linux-s390@vger.kernel.org
-Cc: Matthew Wilcox <willy@infradead.org>
-Cc: Hannes Reinecke <hare@suse.com>
-Cc: linux-scsi@vger.kernel.org
-Cc: "James E.J. Bottomley" <jejb@linux.ibm.com>
-Cc: "Martin K. Petersen" <martin.petersen@oracle.com>
-Cc: James Bottomley <jejb@linux.ibm.com>
-Cc: Jarkko Sakkinen <jarkko.sakkinen@linux.intel.com>
-Cc: Mimi Zohar <zohar@linux.ibm.com>
-Cc: linux-integrity@vger.kernel.org
-Cc: keyrings@vger.kernel.org
-Cc: Paolo Bonzini <pbonzini@redhat.com>
-Cc: kvm@vger.kernel.org
-Cc: Andrew Morton <akpm@linux-foundation.org>
+---
+ Documentation/admin-guide/mm/numaperf.rst |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-
- Documentation/admin-guide/mm/numaperf.rst             |    2 +-
- Documentation/block/pr.rst                            |    2 +-
- Documentation/core-api/printk-basics.rst              |    2 +-
- Documentation/dev-tools/kgdb.rst                      |    2 +-
- Documentation/fpga/dfl.rst                            |    2 +-
- Documentation/gpu/drm-uapi.rst                        |    2 +-
- Documentation/gpu/komeda-kms.rst                      |    2 +-
- Documentation/hid/intel-ish-hid.rst                   |    2 +-
- Documentation/i2c/upgrading-clients.rst               |    2 +-
- Documentation/kbuild/kconfig-language.rst             |    2 +-
- Documentation/leds/ledtrig-transient.rst              |    2 +-
- Documentation/maintainer/maintainer-entry-profile.rst |    2 +-
- Documentation/mips/ingenic-tcu.rst                    |    2 +-
- Documentation/misc-devices/xilinx_sdfec.rst           |    2 +-
- Documentation/powerpc/vas-api.rst                     |    2 +-
- Documentation/s390/vfio-ap.rst                        |    2 +-
- Documentation/scsi/advansys.rst                       |    2 +-
- Documentation/security/keys/trusted-encrypted.rst     |    2 +-
- Documentation/virt/kvm/api.rst                        |    2 +-
- Documentation/vm/memory-model.rst                     |    2 +-
- 20 files changed, 20 insertions(+), 20 deletions(-)
+--- linux-5.8-rc3.orig/Documentation/admin-guide/mm/numaperf.rst
++++ linux-5.8-rc3/Documentation/admin-guide/mm/numaperf.rst
+@@ -129,7 +129,7 @@ will create the following directory::
+ 
+ 	/sys/devices/system/node/nodeX/memory_side_cache/
+ 
+-If that directory is not present, the system either does not not provide
++If that directory is not present, the system either does not provide
+ a memory-side cache, or that information is not accessible to the kernel.
+ 
+ The attributes for each level of cache is provided under its cache
 
 
 _______________________________________________
