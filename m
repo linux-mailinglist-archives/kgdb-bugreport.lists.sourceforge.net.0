@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A9C672175EC
-	for <lists+kgdb-bugreport@lfdr.de>; Tue,  7 Jul 2020 20:07:59 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0B3F12175EB
+	for <lists+kgdb-bugreport@lfdr.de>; Tue,  7 Jul 2020 20:07:58 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jss0c-0007lX-FU
-	for lists+kgdb-bugreport@lfdr.de; Tue, 07 Jul 2020 18:07:58 +0000
+	id 1jss0a-00085h-Qw
+	for lists+kgdb-bugreport@lfdr.de; Tue, 07 Jul 2020 18:07:56 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <rdunlap@infradead.org>) id 1jss0a-0007lN-UW
- for kgdb-bugreport@lists.sourceforge.net; Tue, 07 Jul 2020 18:07:56 +0000
+ (envelope-from <rdunlap@infradead.org>) id 1jss0Z-00085V-IL
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 07 Jul 2020 18:07:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ftWJYb+ebG3hkH4rn/C4w1aCN9XfHN7hckzpJGArE4k=; b=SA2YcMFGYgvWgClGPPQXnssJrd
- OQzp0xNVvQV8TQf/CEd6ZScgFTgcKAAgzN9YZ+RsGws05XLJViMRZPf3WNTPjVAvUfIAHnRcfsy9b
- LSOzC5E0PpyRQGWYqqCc2vYvoW++QNIztyExP/i/s8JnIIVXMSygAtU7GFFoNNM14l8c=;
+ bh=tPwwCvf342z6zeuNFfuY5usY2zScx9Hl+AJvysbkDIU=; b=M3kDXAowfMbpIw5huML9ZEWsbt
+ imCIrHzwfYqv+JfHHVkIt622Z0w/ls25xdw6W4aGW1CFjnKNK6AOMYIGE0acv4xh2hAJywv5hq5xo
+ kMmCzzuHb8D4wjZ0/6Af6mDlRJBnBXNDL6C9xnW52IoI42o9d3j9u+0kasJ630dGL91Y=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -30,32 +30,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ftWJYb+ebG3hkH4rn/C4w1aCN9XfHN7hckzpJGArE4k=; b=KICInrSxZTbFxMCDQOCgCdIUvk
- we+YI+1uBiiLV5baCsg7t1RvdbGDxFeCgeI9KZfgNVy3an6o6iWgys3d8t4hmmbVXvvWvjL+gQy5V
- ph4h8zLu+KPzsYHcBF3Er0m09PJoEbvdGixBTfSK/xevOuG/pwQ+0B3Dff9yfFlUYabU=;
+ bh=tPwwCvf342z6zeuNFfuY5usY2zScx9Hl+AJvysbkDIU=; b=kRa+m6OZSYa5tlOIMHHZp+zmvh
+ /wusY9TXXIm9EfCtfBfaNuIa1F0S3oQtSN1o3PwPoTulI+1EtbNsqma00/PdxFXNPkpnwdUmVbuup
+ ZreRUgETVK+TcV6husDgyJMrPIkebukQmiISU0V/O89EvdDm+InHalJW1+EBCKxwmt7I=;
 Received: from casper.infradead.org ([90.155.50.34])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jss0V-00DRcb-E1
- for kgdb-bugreport@lists.sourceforge.net; Tue, 07 Jul 2020 18:07:56 +0000
+ id 1jss0Y-00GRPG-AM
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 07 Jul 2020 18:07:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description;
- bh=ftWJYb+ebG3hkH4rn/C4w1aCN9XfHN7hckzpJGArE4k=; b=ba1U5pKklMQwDBRmxBWVpCbQly
- 5SNKMlilGuz2wSU3g5V2tk67V3XL104GbnHUYQOh9N0qVIFX2Z/6dzRhLypafHSpI0Yse6/ctKOes
- +cXh/trodpowugxP5JYG0GmgSkLXrlByutTLXGUl4sihv9IRg34bh56uCR7B1jHW8upWIz5XCjd85
- OQJjcByclJluRM0vGODErLG3a/2zNTgqcfHmwyrIp1IMMPSScHHgJEq0jkKgHjjvu1Qwe15Dvkzjx
- q5Nkpu0m9MjccsxH/b2MHCcwY28n4eEUcMvRNg1AkbfJLBJ/lq2IceTZiftZNC4Cc63wYjahcni3T
- 2bvsLpzQ==;
+ bh=tPwwCvf342z6zeuNFfuY5usY2zScx9Hl+AJvysbkDIU=; b=f7ohGBtS6/FTaOWSZJnKjLpqpr
+ ajWcwxdymujTQPeTQ6sYri3e9ZRw9klUBkpu+kCnwE+4+cQlo/AOoiz+xrT9RK0b3oXtfsxCCQpF6
+ MpJhpvuBlE2bqoTfrsWmPrCYxbfJVWYPO+kLbpmZC67XnBqB+v7sHK1CXrKdg+6m8QksTnBCXAmgH
+ o+JXRgM01RG04D1UJWPpesRYuB8y4f61y1zfzUV0JuSuitDE+V8bS2SqsnP7v0xeaTTqVQvXBC358
+ 3rVgL9fCtD0YP7/mcF4IdSOzKVN169+bMJeTKzhJY3xt/4ok/elUGmc7zB6TQANJAZS1x0qJtmZKw
+ D7N9DblA==;
 Received: from [2601:1c0:6280:3f0:897c:6038:c71d:ecac]
  (helo=smtpauth.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1jss0B-0004JY-QI; Tue, 07 Jul 2020 18:07:32 +0000
+ id 1jss0M-0004JY-Kq; Tue, 07 Jul 2020 18:07:43 +0000
 From: Randy Dunlap <rdunlap@infradead.org>
 To: linux-kernel@vger.kernel.org
-Date: Tue,  7 Jul 2020 11:04:11 -0700
-Message-Id: <20200707180414.10467-18-rdunlap@infradead.org>
+Date: Tue,  7 Jul 2020 11:04:12 -0700
+Message-Id: <20200707180414.10467-19-rdunlap@infradead.org>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200707180414.10467-1-rdunlap@infradead.org>
 References: <20200707180414.10467-1-rdunlap@infradead.org>
@@ -75,8 +75,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jss0V-00DRcb-E1
-Subject: [Kgdb-bugreport] [PATCH 17/20] Documentation: scsi/advansys:
+X-Headers-End: 1jss0Y-00GRPG-AM
+Subject: [Kgdb-bugreport] [PATCH 18/20] Documentation: security/keys:
  eliminate duplicated word
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -125,31 +125,31 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Drop the doubled word "be".
+Drop the doubled word "in".
 
 Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
 Cc: Jonathan Corbet <corbet@lwn.net>
 Cc: linux-doc@vger.kernel.org
-Cc: Matthew Wilcox <willy@infradead.org>
-Cc: Hannes Reinecke <hare@suse.com>
-Cc: linux-scsi@vger.kernel.org
-Cc: "James E.J. Bottomley" <jejb@linux.ibm.com>
-Cc: "Martin K. Petersen" <martin.petersen@oracle.com>
+Cc: James Bottomley <jejb@linux.ibm.com>
+Cc: Jarkko Sakkinen <jarkko.sakkinen@linux.intel.com>
+Cc: Mimi Zohar <zohar@linux.ibm.com>
+Cc: linux-integrity@vger.kernel.org
+Cc: keyrings@vger.kernel.org
 ---
- Documentation/scsi/advansys.rst |    2 +-
+ Documentation/security/keys/trusted-encrypted.rst |    2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
---- linux-next-20200701.orig/Documentation/scsi/advansys.rst
-+++ linux-next-20200701/Documentation/scsi/advansys.rst
-@@ -125,7 +125,7 @@ The following constants can be defined i
-    c. klogd is started with the appropriate -c parameter
-       (e.g. klogd -c 8)
+--- linux-next-20200701.orig/Documentation/security/keys/trusted-encrypted.rst
++++ linux-next-20200701/Documentation/security/keys/trusted-encrypted.rst
+@@ -200,7 +200,7 @@ Load an encrypted key "evm" from saved b
+     24717c64 5972dcb82ab2dde83376d82b2e3c09ffc
  
--   This will cause printk() messages to be be displayed on the
-+   This will cause printk() messages to be displayed on the
-    current console. Refer to the klogd(8) and syslogd(8) man pages
-    for details.
- 
+ Other uses for trusted and encrypted keys, such as for disk and file encryption
+-are anticipated.  In particular the new format 'ecryptfs' has been defined in
++are anticipated.  In particular the new format 'ecryptfs' has been defined
+ in order to use encrypted keys to mount an eCryptfs filesystem.  More details
+ about the usage can be found in the file
+ ``Documentation/security/keys/ecryptfs.rst``.
 
 
 _______________________________________________
