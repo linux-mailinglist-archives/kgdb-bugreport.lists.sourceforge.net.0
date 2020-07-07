@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F39E22175D8
-	for <lists+kgdb-bugreport@lfdr.de>; Tue,  7 Jul 2020 20:05:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 081492175D9
+	for <lists+kgdb-bugreport@lfdr.de>; Tue,  7 Jul 2020 20:05:48 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jsryI-0007ci-OP
-	for lists+kgdb-bugreport@lfdr.de; Tue, 07 Jul 2020 18:05:34 +0000
+	id 1jsryU-0007dQ-QG
+	for lists+kgdb-bugreport@lfdr.de; Tue, 07 Jul 2020 18:05:46 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <rdunlap@infradead.org>) id 1jsryH-0007ca-Pm
- for kgdb-bugreport@lists.sourceforge.net; Tue, 07 Jul 2020 18:05:33 +0000
+ (envelope-from <rdunlap@infradead.org>) id 1jsryT-0007dJ-Oj
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 07 Jul 2020 18:05:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=eaqfaebmOSOj0mbjpn+DosDS2INVUNao8Fb7NVppBZM=; b=etTL3R71l5HOKEUtqS19mTSkQr
- +3HEnpl/sdZE9xNWATEXLg/dKx4Qv9ISNcczTUmfTi2PzsiJeYTUjIpkeUP48uAJIIIr6EIEG8WrT
- F8XMW+Wm9XjmBv30aIUBpxzfC74zLcDGFCJ/ZBTjF3NF3chdN8+FMY3F8ZXJ3kknRuwU=;
+ bh=M80BHus9hyLsqPgKepEifdkgrljPnRgGnyYqCcQQ+Qw=; b=ejqg/Iup/6XWfjH3Yyd1ia5OAW
+ BHIga5m/6C8phaHphhVNzNYxZoKLp30OPUV82LNQQWzLnmYDojQ8e25KW0zmQMLTLz6/aWv1dZXbU
+ NyTG9NqFT8IYF3W5sk9QeSJ5s2CLiLT+L7dSALAI46iCXtkAWyy87VataOoDd5a33P0Q=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -30,32 +30,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=eaqfaebmOSOj0mbjpn+DosDS2INVUNao8Fb7NVppBZM=; b=J4HHCvhfYRVLaqzJ0sGTB4F55O
- SKVHv+xdF0HyfHRTq907g/X3cpZ4DC9OP1toqF8hig6Dyd2Y0NQ14Ccba8Gor3lq4Qi1+/TaHoLvI
- xhVyCKkdOXB3tj7Dw2Q7ya16YrwQxCiK2/QcNZSAibilSlNrIWMxidWQN/TA/U2uIwAw=;
+ bh=M80BHus9hyLsqPgKepEifdkgrljPnRgGnyYqCcQQ+Qw=; b=f1H0bhAzwW1Zs3I8D9iwpTvez/
+ byOB+GNj7p02pSQ6btI3QCXFNG1UKnh6vCbya4EjF6x004DORHqEzsLnBuW7cRzuET46/+6g3nx70
+ 5o3Y/mMVsWIFbGgvzEX4V2tTMjVNGOY9vBSzaguKLXzgtvVYajyBUo1EdYlSt7Y+xr7s=;
 Received: from casper.infradead.org ([90.155.50.34])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jsryG-00GRFx-Fu
- for kgdb-bugreport@lists.sourceforge.net; Tue, 07 Jul 2020 18:05:33 +0000
+ id 1jsryS-00GRGm-OV
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 07 Jul 2020 18:05:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description;
- bh=eaqfaebmOSOj0mbjpn+DosDS2INVUNao8Fb7NVppBZM=; b=kcpmxaf84w5Oxc9kFP/sAP+GmO
- 6lV4TU5zNTj3L1bN6Zwx+HdFoqLf70UyzHzCSZpmcBQX/dy+7sLG+9Yoa+ZfUNwuVDcsB4457DDJl
- iplwMOaNhaunyzNJEcxkhTi9JeC+SOvWZw8iIyQT9cHOXCrdM2XJY9yBgd+jyccEKzU78VUX7X1p8
- pU7YkIL5aRW5Kwja+rB4Naf4Xlx4O8teEDyiWxzRiZX/nR6JkGjKIuPUtNU/wWjCP3Mgv2MCIwYrF
- byZA29CM+hm5P6E0M+pWNzKBL1Q6Dz8F4gXil4SH8FggjkUBWmXcpB7MQ28asjiGyWHaqJ/FmbRYw
- 81z6v4ng==;
+ bh=M80BHus9hyLsqPgKepEifdkgrljPnRgGnyYqCcQQ+Qw=; b=JxrM/LYDi1fPXsL0UBFZq3X2P6
+ nf9Q1La85N8JvfLjmdhMtKaUDAaIAmZ11w449X5DopcBEO0wKjTyTJfLlikaIrx0v32PD8323n2LK
+ yOl9K4zVE+02BYfSPSc5uxUvK4DQjqOxT+viBBT/aXwdpoVptdzIaJndvOEl3XowSHZGW/wMioCFA
+ 7MlEM7YBtCGWRicVuNGkd06FzFky1ofY+6wmuSolEaEa+ZvRWThG3AxULlCDY5+1vIKouPS7XwutU
+ nnizUSFwo0x9gsrIocPNS6PFencp9mjoxUXL/PpNZiEnXpbryHMgs6YT6eLxTwrY0Buq+BA7GPjnL
+ MlCDoNRA==;
 Received: from [2601:1c0:6280:3f0:897c:6038:c71d:ecac]
  (helo=smtpauth.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1jsry5-0004JY-Av; Tue, 07 Jul 2020 18:05:21 +0000
+ id 1jsryG-0004JY-1j; Tue, 07 Jul 2020 18:05:32 +0000
 From: Randy Dunlap <rdunlap@infradead.org>
 To: linux-kernel@vger.kernel.org
-Date: Tue,  7 Jul 2020 11:03:59 -0700
-Message-Id: <20200707180414.10467-6-rdunlap@infradead.org>
+Date: Tue,  7 Jul 2020 11:04:00 -0700
+Message-Id: <20200707180414.10467-7-rdunlap@infradead.org>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200707180414.10467-1-rdunlap@infradead.org>
 References: <20200707180414.10467-1-rdunlap@infradead.org>
@@ -66,7 +66,7 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: infradead.org]
+ for more information. [URIs: arm.com]
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -75,9 +75,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jsryG-00GRFx-Fu
-Subject: [Kgdb-bugreport] [PATCH 05/20] Documentation: fpga: eliminate
- duplicated word
+X-Headers-End: 1jsryS-00GRGm-OV
+Subject: [Kgdb-bugreport] [PATCH 06/20] Documentation: gpu/komeda-kms:
+ eliminate duplicated word
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -125,28 +125,30 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Drop the doubled word "this".
+Drop the doubled word "and".
 
 Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
 Cc: Jonathan Corbet <corbet@lwn.net>
 Cc: linux-doc@vger.kernel.org
-Cc: Wu Hao <hao.wu@intel.com>
-Cc: linux-fpga@vger.kernel.org
+Cc: James (Qian) Wang <james.qian.wang@arm.com>
+Cc: Liviu Dudau <liviu.dudau@arm.com>
+Cc: Mihail Atanassov <mihail.atanassov@arm.com>
+Cc: Mali DP Maintainers <malidp@foss.arm.com>
 ---
- Documentation/fpga/dfl.rst |    2 +-
+ Documentation/gpu/komeda-kms.rst |    2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
---- linux-next-20200701.orig/Documentation/fpga/dfl.rst
-+++ linux-next-20200701/Documentation/fpga/dfl.rst
-@@ -8,7 +8,7 @@ Authors:
- - Xiao Guangrong <guangrong.xiao@linux.intel.com>
- - Wu Hao <hao.wu@intel.com>
+--- linux-next-20200701.orig/Documentation/gpu/komeda-kms.rst
++++ linux-next-20200701/Documentation/gpu/komeda-kms.rst
+@@ -41,7 +41,7 @@ Compositor blends multiple layers or pix
+ frame. its output frame can be fed into post image processor for showing it on
+ the monitor or fed into wb_layer and written to memory at the same time.
+ user can also insert a scaler between compositor and wb_layer to down scale
+-the display frame first and and then write to memory.
++the display frame first and then write to memory.
  
--The Device Feature List (DFL) FPGA framework (and drivers according to this
-+The Device Feature List (DFL) FPGA framework (and drivers according to
- this framework) hides the very details of low layer hardwares and provides
- unified interfaces to userspace. Applications could use these interfaces to
- configure, enumerate, open and access FPGA accelerators on platforms which
+ Writeback Layer (wb_layer)
+ --------------------------
 
 
 _______________________________________________
