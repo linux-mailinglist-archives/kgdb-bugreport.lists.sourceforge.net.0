@@ -2,97 +2,114 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1E9CC21B2CD
+	by mail.lfdr.de (Postfix) with ESMTPS id 3817C21B2CE
 	for <lists+kgdb-bugreport@lfdr.de>; Fri, 10 Jul 2020 11:58:19 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jtpnN-0000rn-GU
+	id 1jtpnN-0000s4-Vx
 	for lists+kgdb-bugreport@lfdr.de; Fri, 10 Jul 2020 09:58:17 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <masahiroy@kernel.org>) id 1jtYpl-0002fO-Sg
- for kgdb-bugreport@lists.sourceforge.net; Thu, 09 Jul 2020 15:51:37 +0000
+ (envelope-from <jacek.anaszewski@gmail.com>) id 1jtcji-0005a4-H0
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 09 Jul 2020 20:01:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=OtxKPGTO/pZbwYh7E0pVV6aQCW7rvgzMKyprc/l7uvw=; b=a1yHbEMyZQw5/JDElrD2afDhLs
- 7E06Q1w1p3S3pWPHNC9nactOR93dc5g9ITs4RhhWXUTNqr8l/8eY6YNMp+Nt8yVpCIvDI157ssgnc
- b1Ff2W13bC3cNh7RP5f7dPg++Qec2g1j1N9MxE6uGVAtvVwsWQLHKiAhtHzv5pJ+zbdw=;
+ bh=d0gYY+wvsRxBQmwzqJnWeCjIuXvxeaWsWRCnx0ubZOg=; b=AHI+v4R1TwFa34TwdAH7jwzkvT
+ 5Gd6KtOdlqOh7tCh2cjJkbqum16p8aOrKPVdqOpY48Hbaw0WVrB84F3sBf0aEK+5+YmL0Vq2Q0e+e
+ yL6qbKvDbGE1gQU0xCVWD/kRFtZ7Emq3sBf/B3LKLWIj4efiWAg0gJ+IGFcrcML/NQ8M=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=OtxKPGTO/pZbwYh7E0pVV6aQCW7rvgzMKyprc/l7uvw=; b=QJFK9FLFHQd7gF0NfoYZ0XxhxO
- 6t96piJdJeNhbG0HO3ltTXtACgMWFniUD9oypEJJwUQign6u2XGof/4fH2DSo3UbYU6Nkf29LMDvV
- tHlU8Zc2YhJO6Yaf2CuizfJyW8wTTcwOExUS7YoWJovLI6Jc5nSmYWX7zeQZBS/tSAzU=;
-Received: from condef-06.nifty.com ([202.248.20.71])
+ bh=d0gYY+wvsRxBQmwzqJnWeCjIuXvxeaWsWRCnx0ubZOg=; b=RM11AsQJDh+hHcaB2O7tTDcUDa
+ zmVlvckFilP4eT50F+m5+i5hF5S2ngvW4RWP6aLq36eeo0jigh5KbZTsl+oJRB+byWQpTxjJBgAvU
+ ksF9G53n/x8Vek9Cmujg27NMnr9FMkJZM3wO4O9vJ19MPX6I7H02uXsBS/E/P326kDgI=;
+Received: from mail-ej1-f66.google.com ([209.85.218.66])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jtYpj-00CHXc-Cj
- for kgdb-bugreport@lists.sourceforge.net; Thu, 09 Jul 2020 15:51:37 +0000
-Received: from conssluserg-01.nifty.com ([10.126.8.80])by condef-06.nifty.com
- with ESMTP id 069FW1Nc021605
- for <kgdb-bugreport@lists.sourceforge.net>; Fri, 10 Jul 2020 00:32:01 +0900
-Received: from mail-ua1-f53.google.com (mail-ua1-f53.google.com
- [209.85.222.53]) (authenticated)
- by conssluserg-01.nifty.com with ESMTP id 069FVm0v018248
- for <kgdb-bugreport@lists.sourceforge.net>; Fri, 10 Jul 2020 00:31:48 +0900
-DKIM-Filter: OpenDKIM Filter v2.10.3 conssluserg-01.nifty.com 069FVm0v018248
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nifty.com;
- s=dec2015msa; t=1594308708;
- bh=OtxKPGTO/pZbwYh7E0pVV6aQCW7rvgzMKyprc/l7uvw=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=Zm05RQOKC4UC9n7Xn1ZXjbCqDmkS1TdKFlXP6HiaUyy8+P271atINtnP5ZMkoKA/I
- dKdB8AqlMTXV/IhPEiGfkV+MbBtccqvbt2rPj+6JBq85vK2vd4wMCE6iyCDwG0yIQR
- BpRbrz6NawuDmo+bfDRGercgEe8Y8igi5wmYqOkK58b0JNw19pNRLoHsob8kyqESP5
- pxiIRDy6QyDHgtv8T0TKdzMO2ShaRs+ILfMw2UrYKqjSEwI63lKn49rsBUpa3Ki4gw
- znnyKl9VA4WZyZ6QdfOV7khrO36QOGxJNYmS0V49ktOjdNCICWDXkOUGT1TfqkSUs1
- wjwCRksM9ApSQ==
-X-Nifty-SrcIP: [209.85.222.53]
-Received: by mail-ua1-f53.google.com with SMTP id h18so852484uao.6
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1jtcjg-00CUtZ-Nv
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 09 Jul 2020 20:01:38 +0000
+Received: by mail-ej1-f66.google.com with SMTP id y10so3621512eje.1
  for <kgdb-bugreport@lists.sourceforge.net>;
- Thu, 09 Jul 2020 08:31:48 -0700 (PDT)
-X-Gm-Message-State: AOAM530sZytc2mYaHwwdX8d9S2iQgTCh2g/zdq7kGDBzMUDVfWHyaSL0
- W/34zDOIGcMnCkB5xLT4EPl84HYiZxwREIYMb78=
-X-Google-Smtp-Source: ABdhPJxAnxTJNTtnQtFovYQkrUal1o80dMPa969JqVz6oQaG8jBDcy1jbc08IXGNVNtiEaHsg2cPflWUKNAmtElJid0=
-X-Received: by 2002:ab0:71d3:: with SMTP id n19mr46109137uao.25.1594308707342; 
- Thu, 09 Jul 2020 08:31:47 -0700 (PDT)
-MIME-Version: 1.0
+ Thu, 09 Jul 2020 13:01:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=d0gYY+wvsRxBQmwzqJnWeCjIuXvxeaWsWRCnx0ubZOg=;
+ b=GkZHcqMUxKmjdVenudvdvqrkXbo+JquPTX2QSgtNobUDUV+vraMZmE9cpIcAdHZJUq
+ BsNZoufFprGyxI+wF74biz7ZS11pt7kce+6MsuFWiTDxGPiFDCBKH/FQV0TSZY+pJnKZ
+ aQgYU21P8pRSAHEIpMjQaSk+/2UWcXpEmWTHqU2pnGGc+WJE2vTWQaeOqT9pS6Wvbnc+
+ FHkBOL1YGb2IRejD/iE8bAHlYDJJb7i6xs3ZqMC0TUpFxaYPBos1PzAaPH3oFvaWN425
+ C2K8MZOf+/7LZ1SzGQPQTHQjCyQFHQkVSe9p2Uwwgk+FPt9rtQwguKi6C2OAdfptqC2j
+ oImw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=d0gYY+wvsRxBQmwzqJnWeCjIuXvxeaWsWRCnx0ubZOg=;
+ b=E/hfxTztku+Qr/sz9E9h5eVRWMaTZpWrEfxObgSYmTbzzyfk6n8d8D6AVxG68LVqfx
+ lolrFxvh7bZ5nBFP7HUnUzdk4FehP/c/4C2fzYYQjq+NmHjisiS2iJ2wZWD4eOTMnBko
+ qA07C3TGrT5g2sLIz0kF5sjYRiZ8mIWok8ecLkmDAWT+e29oSQI/eTVGAzTP57x6RB+U
+ +Hvp97Oo7yLmSiddwFzMYT9u+uEpguGf4AZvi6SQ4j8oJm1BxY6p99zNlyAGWvgQo6m8
+ Nm7jdQev3dAnJUC/DnyAO198vhBbF8umvFYE3OHhNEIDPDYmknT8qSI6gjoxHJ41fL57
+ S01A==
+X-Gm-Message-State: AOAM533BwgVRGKECTbl61PQ0th1SyjNSuSdWCJ7/4IQeM8bZjzwn4vUV
+ jrqaESWGQ0ZLaF1X2VHBV50=
+X-Google-Smtp-Source: ABdhPJxPlnTPprrTFBMP+KVIniKNlWppnSrNKOcRmi8sX8QVrNf9GjrPlFc+WTiAQakw0xXsLbAzEQ==
+X-Received: by 2002:a17:906:3a04:: with SMTP id
+ z4mr51246240eje.441.1594324883183; 
+ Thu, 09 Jul 2020 13:01:23 -0700 (PDT)
+Received: from ?IPv6:2a01:110f:b59:fd00:2066:8db:696f:8073?
+ ([2a01:110f:b59:fd00:2066:8db:696f:8073])
+ by smtp.gmail.com with ESMTPSA id t2sm2728139eds.60.2020.07.09.13.01.18
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 09 Jul 2020 13:01:22 -0700 (PDT)
+To: Randy Dunlap <rdunlap@infradead.org>, linux-kernel@vger.kernel.org
 References: <20200707180414.10467-1-rdunlap@infradead.org>
- <20200707180414.10467-11-rdunlap@infradead.org>
-In-Reply-To: <20200707180414.10467-11-rdunlap@infradead.org>
-From: Masahiro Yamada <masahiroy@kernel.org>
-Date: Fri, 10 Jul 2020 00:31:10 +0900
-X-Gmail-Original-Message-ID: <CAK7LNAQB6DCw3CZyViCOWCZURfHQKm2JFx0Ypfhai9ecX6T9GQ@mail.gmail.com>
-Message-ID: <CAK7LNAQB6DCw3CZyViCOWCZURfHQKm2JFx0Ypfhai9ecX6T9GQ@mail.gmail.com>
-To: Randy Dunlap <rdunlap@infradead.org>
-X-Spam-Score: 0.1 (/)
+ <20200707180414.10467-12-rdunlap@infradead.org>
+From: Jacek Anaszewski <jacek.anaszewski@gmail.com>
+Message-ID: <16035116-2154-d0fe-6655-a829a9d36ceb@gmail.com>
+Date: Thu, 9 Jul 2020 22:01:17 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
+MIME-Version: 1.0
+In-Reply-To: <20200707180414.10467-12-rdunlap@infradead.org>
+Content-Language: en-US
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: markovi.net]
+ for more information. [URIs: ti.com]
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (jacek.anaszewski[at]gmail.com)
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [202.248.20.71 listed in list.dnswl.org]
- 1.0 SPF_SOFTFAIL           SPF: sender does not match SPF record (softfail)
+ trust [209.85.218.66 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.218.66 listed in wl.mailspike.net]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.8 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jtYpj-00CHXc-Cj
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1jtcjg-00CUtZ-Nv
 X-Mailman-Approved-At: Fri, 10 Jul 2020 09:58:16 +0000
-Subject: Re: [Kgdb-bugreport] [PATCH 10/20] Documentation:
- kbuild/kconfig-language: eliminate duplicated word
+Subject: Re: [Kgdb-bugreport] [PATCH 11/20] Documentation:
+ leds/ledtrig-transient: eliminate duplicated word
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,90 +122,71 @@ List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
 Cc: Benjamin Herrenschmidt <benh@kernel.crashing.org>, kvm@vger.kernel.org,
- "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
- David Airlie <airlied@linux.ie>, kgdb-bugreport@lists.sourceforge.net,
- linux-fpga@vger.kernel.org, Liviu Dudau <liviu.dudau@arm.com>,
- dri-devel <dri-devel@lists.freedesktop.org>,
- Paul Cercueil <paul@crapouillou.net>, keyrings@vger.kernel.org,
- Paul Mackerras <paulus@samba.org>, linux-i2c@vger.kernel.org,
- Pavel Machek <pavel@ucw.cz>,
+ linux-doc@vger.kernel.org, David Airlie <airlied@linux.ie>,
+ kgdb-bugreport@lists.sourceforge.net, linux-fpga@vger.kernel.org,
+ Liviu Dudau <liviu.dudau@arm.com>, dri-devel@lists.freedesktop.org,
+ linux-mips@vger.kernel.org, Paul Cercueil <paul@crapouillou.net>,
+ keyrings@vger.kernel.org, Paul Mackerras <paulus@samba.org>,
+ linux-i2c@vger.kernel.org, Pavel Machek <pavel@ucw.cz>,
  Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>,
  Mihail Atanassov <mihail.atanassov@arm.com>, linux-leds@vger.kernel.org,
- linux-s390 <linux-s390@vger.kernel.org>,
- Daniel Thompson <daniel.thompson@linaro.org>,
- linux-scsi <linux-scsi@vger.kernel.org>, Jonathan Corbet <corbet@lwn.net>,
- Michael Ellerman <mpe@ellerman.id.au>, Matthew Wilcox <willy@infradead.org>,
- Halil Pasic <pasic@linux.ibm.com>,
+ linux-s390@vger.kernel.org, Daniel Thompson <daniel.thompson@linaro.org>,
+ linux-scsi@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+ Michael Ellerman <mpe@ellerman.id.au>, Masahiro Yamada <masahiroy@kernel.org>,
+ Matthew Wilcox <willy@infradead.org>, Halil Pasic <pasic@linux.ibm.com>,
  Jarkko Sakkinen <jarkko.sakkinen@linux.intel.com>,
  James Wang <james.qian.wang@arm.com>, linux-input@vger.kernel.org,
  Mali DP Maintainers <malidp@foss.arm.com>,
- Derek Kiernan <derek.kiernan@xilinx.com>, linux-mips@vger.kernel.org,
+ Derek Kiernan <derek.kiernan@xilinx.com>,
  Dragan Cvetic <dragan.cvetic@xilinx.com>, Wu Hao <hao.wu@intel.com>,
- Tony Krowiak <akrowiak@linux.ibm.com>,
- Linux Kbuild mailing list <linux-kbuild@vger.kernel.org>,
+ Tony Krowiak <akrowiak@linux.ibm.com>, linux-kbuild@vger.kernel.org,
  "James E.J. Bottomley" <jejb@linux.ibm.com>, Jiri Kosina <jikos@kernel.org>,
  Hannes Reinecke <hare@suse.com>, linux-block@vger.kernel.org,
- Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
- Jacek Anaszewski <jacek.anaszewski@gmail.com>, linux-mm@vger.kernel.org,
- Dan Williams <dan.j.williams@intel.com>,
+ Thomas Bogendoerfer <tsbogend@alpha.franken.de>, Dan Murphy <dmurphy@ti.com>,
+ linux-mm@vger.kernel.org, Dan Williams <dan.j.williams@intel.com>,
  Andrew Morton <akpm@linux-foundation.org>, Mimi Zohar <zohar@linux.ibm.com>,
  Jens Axboe <axboe@kernel.dk>, Michal Marek <michal.lkml@markovi.net>,
  "Martin K. Petersen" <martin.petersen@oracle.com>,
- Pierre Morel <pmorel@linux.ibm.com>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Wolfram Sang <wsa@kernel.org>, Daniel Vetter <daniel@ffwll.ch>,
- Jason Wessel <jason.wessel@windriver.com>, Paolo Bonzini <pbonzini@redhat.com>,
- linux-integrity@vger.kernel.org, linuxppc-dev <linuxppc-dev@lists.ozlabs.org>,
- Mike Rapoport <rppt@kernel.org>, Dan Murphy <dmurphy@ti.com>
-Content-Type: text/plain; charset="us-ascii"
+ Pierre Morel <pmorel@linux.ibm.com>, Wolfram Sang <wsa@kernel.org>,
+ Daniel Vetter <daniel@ffwll.ch>, Jason Wessel <jason.wessel@windriver.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, linux-integrity@vger.kernel.org,
+ linuxppc-dev@lists.ozlabs.org, Mike Rapoport <rppt@kernel.org>
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Wed, Jul 8, 2020 at 3:06 AM Randy Dunlap <rdunlap@infradead.org> wrote:
->
-> Drop the doubled word "the".
->
+On 7/7/20 8:04 PM, Randy Dunlap wrote:
+> Drop the doubled word "for".
+> 
 > Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
 > Cc: Jonathan Corbet <corbet@lwn.net>
 > Cc: linux-doc@vger.kernel.org
-> Cc: Masahiro Yamada <masahiroy@kernel.org>
-
-
-
-I guess this series will go in via the doc sub-system.
-
-If so, please feel free to add:
-
-Acked-by: Masahiro Yamada <masahiroy@kernel.org>
-
-
-
-
-
-
-> Cc: Michal Marek <michal.lkml@markovi.net>
-> Cc: linux-kbuild@vger.kernel.org
+> Cc: Jacek Anaszewski <jacek.anaszewski@gmail.com>
+> Cc: Pavel Machek <pavel@ucw.cz>
+> Cc: Dan Murphy <dmurphy@ti.com>
+> Cc: linux-leds@vger.kernel.org
 > ---
->  Documentation/kbuild/kconfig-language.rst |    2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> --- linux-next-20200701.orig/Documentation/kbuild/kconfig-language.rst
-> +++ linux-next-20200701/Documentation/kbuild/kconfig-language.rst
-> @@ -681,7 +681,7 @@ translate Kconfig logic into boolean for
->  find dead code / features (always inactive), 114 dead features were found in
->  Linux using this methodology [1]_ (Section 8: Threats to validity).
->
-> -Confirming this could prove useful as Kconfig stands as one of the the leading
-> +Confirming this could prove useful as Kconfig stands as one of the leading
->  industrial variability modeling languages [1]_ [2]_. Its study would help
->  evaluate practical uses of such languages, their use was only theoretical
->  and real world requirements were not well understood. As it stands though
+>   Documentation/leds/ledtrig-transient.rst |    2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> --- linux-next-20200701.orig/Documentation/leds/ledtrig-transient.rst
+> +++ linux-next-20200701/Documentation/leds/ledtrig-transient.rst
+> @@ -157,7 +157,7 @@ repeat the following step as needed::
+>   	echo 1 > activate - start timer = duration to run once
+>   	echo none > trigger
+>   
+> -This trigger is intended to be used for for the following example use cases:
+> +This trigger is intended to be used for the following example use cases:
+>   
+>    - Control of vibrate (phones, tablets etc.) hardware by user space app.
+>    - Use of LED by user space app as activity indicator.
+> 
 
+Acked-by: Jacek Anaszewski <jacek.anaszewski@gmail.com>
 
-
---
-Best Regards
-Masahiro Yamada
+-- 
+Best regards,
+Jacek Anaszewski
 
 
 _______________________________________________
