@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF4C6219E8F
-	for <lists+kgdb-bugreport@lfdr.de>; Thu,  9 Jul 2020 13:01:21 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5A93C21B2CC
+	for <lists+kgdb-bugreport@lfdr.de>; Fri, 10 Jul 2020 11:58:18 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jtUIq-0000ak-7j
-	for lists+kgdb-bugreport@lfdr.de; Thu, 09 Jul 2020 11:01:20 +0000
+	id 1jtpnN-0000re-2t
+	for lists+kgdb-bugreport@lfdr.de; Fri, 10 Jul 2020 09:58:17 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <hao.wu@intel.com>) id 1jtQ51-0002jZ-QS
- for kgdb-bugreport@lists.sourceforge.net; Thu, 09 Jul 2020 06:30:47 +0000
+ (envelope-from <draganc@xilinx.com>) id 1jtYDR-0003ZY-Sz
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 09 Jul 2020 15:12:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
  :In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=t/H8Sgc4MMobIlv4RQ3icoUi+h/rlKK4LSDg79C9pE0=; b=KoEREuoXWv3jh/8KWBi2t1C8NH
- ZnrZ+fJhjxwJwPe5oTRYvnj8AQcYFD7h2J4n7nTtPsmlNljGFxTAPNDNxs/ERmXT5XDUmkATV61oW
- RmWDhX1AvjPAT9eqsJ0DgpZ+HlNDv5srgG8rQBXbZGJ7lnq6b1XTAwpldhaq5NpuUEAU=;
+ bh=PtPwyE17w23Xtepx41hpf1jPV+4WEloaCDZ/u/gOBJE=; b=PavZqxKvMMltRfqVUyPWNy9JMZ
+ iOBZsZLGPVtN0pFKvnh5QjGAlvJpwfLmLUGOX+zWlYGHQGZdP1xN/hUvu6bV5RDbUbaIIxade8/L2
+ 7zeFZiyrLWxkNY7Y0PSJVNIC8k+MaCAaFuXYcsJCZh/iqEoOzpGSnVfrvKqrIpTCT+Nk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Transfer-Encoding:Content-Type:In-Reply-To:
@@ -30,124 +30,103 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=t/H8Sgc4MMobIlv4RQ3icoUi+h/rlKK4LSDg79C9pE0=; b=alyHMzqilBkkVDwnhjV5wv76xW
- cbYqMSq7rKkI5j+nQRT4yx5LLyFzASyqi/ngyd/jocrtx+CIJED3EJMlrTc1j8YZOrRD4eJo6n13Y
- 4vBWdmQeVpvW8AcVOzmn9ZkTE7dI4pg0EmY7STTZwONa1GRUE9DdtH4kw+6ZsLunUH+c=;
-Received: from mga18.intel.com ([134.134.136.126])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ bh=PtPwyE17w23Xtepx41hpf1jPV+4WEloaCDZ/u/gOBJE=; b=LmFz3I7/LgcFkIrtqmAv95QfKw
+ Zy+UTzFpI1B54ZRZplwPJNnI9TfeJXOwOXuhz7OCK154RqtY18aWERBpTT/Zi6SAtOH6cepIFrZjF
+ OW+I+oaPUZxfHlUoUj4xPypxEE3e2uEkAwAOrW4TKs3Uj4AHEW61Oct15eAg6S3khsFg=;
+Received: from mail-bn7nam10on2087.outbound.protection.outlook.com
+ ([40.107.92.87] helo=NAM10-BN7-obe.outbound.protection.outlook.com)
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jtQ4x-00EpTe-B2
- for kgdb-bugreport@lists.sourceforge.net; Thu, 09 Jul 2020 06:30:47 +0000
-IronPort-SDR: GW5q3P4JSOEE9KbZfNlz3/6l2wA4qiov0z3Ns8vnSlb7lDJU+UcmlltR3LokN6F6328pLgJlMR
- a3WAL794o4dA==
-X-IronPort-AV: E=McAfee;i="6000,8403,9676"; a="135400730"
-X-IronPort-AV: E=Sophos;i="5.75,330,1589266800"; d="scan'208";a="135400730"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
- by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 08 Jul 2020 23:30:37 -0700
-IronPort-SDR: fd+xd7pNKpQFW51UL1k7PO+0KbxsMPtAVVY6SG8YdnWYDUMt/yehfz276pXVdKHwBiVOoWocHY
- ro+hVNgKuwZw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.75,330,1589266800"; d="scan'208";a="323148287"
-Received: from fmsmsx105.amr.corp.intel.com ([10.18.124.203])
- by FMSMGA003.fm.intel.com with ESMTP; 08 Jul 2020 23:30:36 -0700
-Received: from fmsmsx102.amr.corp.intel.com (10.18.124.200) by
- FMSMSX105.amr.corp.intel.com (10.18.124.203) with Microsoft SMTP Server (TLS)
- id 14.3.439.0; Wed, 8 Jul 2020 23:30:36 -0700
-Received: from FMSEDG001.ED.cps.intel.com (10.1.192.133) by
- FMSMSX102.amr.corp.intel.com (10.18.124.200) with Microsoft SMTP Server (TLS)
- id 14.3.439.0; Wed, 8 Jul 2020 23:30:35 -0700
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com (104.47.58.175)
- by edgegateway.intel.com (192.55.55.68) with Microsoft SMTP Server (TLS) id
- 14.3.439.0; Wed, 8 Jul 2020 23:30:36 -0700
+ id 1jtYDI-00CFJG-9M
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 09 Jul 2020 15:12:01 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=SN3VibjvDDGQ0140HefRhJAlzrQ9dYAQv39DTb6Q3preXyBUp9qqbFuQ7Jb/aJ1+OWb2qd668cxoZoNV8yYbRszq6Z+HuSGXC+r9f5UT12s31wIlccOPdGR7pcexQpH1kMegGeJ29XSCwhRLb19e0YLKIXwHZ9xe0EStmjogt4129m1axXMiCJKZ8yPYhIpxgw434B1xEt4jxAjM4L8Nm1fdO3QPo0l/T+vUGwWtiLSfSGlxPeczuyR59buvCQFQ5GoLVW9siX06ruFg4dhuY70kkDKDUGiXgl+/rNX/Wxkh7ilwIAmIDLikhyPu2lHbDwa10Jcs6C0T8PxUobT2Wg==
+ b=iWmjRlrltMhXgWEPhzLT1CVjQLHQ+ft2kanwk2l0GW75ozuiitMreZ9a9Kv2BvXBAATW6gWJv8diAFG3MwfdP4saFgOhnZBnPsFRusXVwiR2pIO6qLOaxQGQVKD66mD/qoKFHBAGax2t6T0LIwEeXK4z3xH7DoI9RApnpVaE5W+QK6F4Fw1XVwu4NUNW5GuMQoHBrLSFzaiKIWS6wL+ClfBoBnO/doF+ksJSvV+TJQp4UBzhBBWtdN6zZnkq+ckGj28HPHpTQLcgTwe1KlbgwXvWZala4Zm5z48zBcvuLIPpkVqp00POblSuyvACQQZIDApOpihps4D+js10NbZ+1w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=t/H8Sgc4MMobIlv4RQ3icoUi+h/rlKK4LSDg79C9pE0=;
- b=DV46YXwtfn7Sk6iUQUGZDTIBQ42/sTzE2IeRczywn778weSGqKuNgoeKXfs/vKMHq0QNm5WyloGFQ9jBNf5jW5VzDGwm/uHy0rtEz6pRfixU1RucRR7+ennaSx4+OSN1MfR4L8SCa7Jg0MhtfNu/C2cz7bivEsaQcT/lNPvx6TH1Fpn5gXXRaZAAXqPKb4g9kM4rmy3T35RUBIjxjXedfWb19I1fCS9Qapy5Csqa6HE0OkJ3rwZeiZdariHzKA2ABw67lG96rkcPWbIaLBGIMQmInthoGwx2E5ZZymOnoNdXFwFCaBMdcpY5kZZc1Jicw49ghcQyVvo4r6if030gKg==
+ bh=PtPwyE17w23Xtepx41hpf1jPV+4WEloaCDZ/u/gOBJE=;
+ b=K0gAWNdrNp59Xkv6LArah6Byvk4SJw6sPyJ6kk3G0dXI9SGEBMHc9FrmUBkZ3iQW1coBJn2fEF7djSDMCpLfJzUAI+8KYAsFYPMO3/NE/SGFtoqRB9DL1BY+wnAmADeFg0gQV/u3X6qoNzu+M9Kuf57H57SpnNAhs0rXalntgee6ygIuvZ14zuwRk+b3Boai8pTjLKMqTSbTUb96542dF9NMdktqN0GbG7tuYx7apQgIU0VwwfquYp0jjzb2CQmWouXG78BaVTLrQBZnfaAqB69bFj9nSWcM4JfhxjmnENcZA2mt2AhLEgn9IaEJ/S19vQXyCRY5NyVowPSy3u8maQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=intel.onmicrosoft.com; 
- s=selector2-intel-onmicrosoft-com;
+ smtp.mailfrom=xilinx.com; dmarc=pass action=none header.from=xilinx.com;
+ dkim=pass header.d=xilinx.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=xilinx.onmicrosoft.com; s=selector2-xilinx-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=t/H8Sgc4MMobIlv4RQ3icoUi+h/rlKK4LSDg79C9pE0=;
- b=r44G/c0teybHmOaJV4L1yTv30Gq0NRMfmyPRJTUX65pqRedz3zMGnEDzgvnl+g8zYAG1GeKV8gQMpStm+BIJbvjbhE0jQl7uw4j9qJ2uYjBmBy71hcXY+709voPmphjuiZKSAamcIHuLyALqaBVM+97WTj8ecO4JNHIzWg+Yc3Q=
-Received: from DM6PR11MB3819.namprd11.prod.outlook.com (20.178.231.223) by
- DM6PR11MB3913.namprd11.prod.outlook.com (20.176.125.33) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3174.20; Thu, 9 Jul 2020 06:30:34 +0000
-Received: from DM6PR11MB3819.namprd11.prod.outlook.com
- ([fe80::c1c1:6930:f17d:a80a]) by DM6PR11MB3819.namprd11.prod.outlook.com
- ([fe80::c1c1:6930:f17d:a80a%4]) with mapi id 15.20.3153.031; Thu, 9 Jul 2020
- 06:30:34 +0000
-From: "Wu, Hao" <hao.wu@intel.com>
+ bh=PtPwyE17w23Xtepx41hpf1jPV+4WEloaCDZ/u/gOBJE=;
+ b=QLje5vTvGXjqB9Z/vM5fs0kZw3xZLUoM+4els9ImX/ngHmWtRd4bJGYeHIvb4HbMzG1X/TU6+LPiN/Lp58rF9SKA5zdTl1XacQxHvyob3xlkPDCcMPQhaO8XJUe48Ej82xVF0AosIgbS0oJk8CqVvXJ3EV2p0AU3iilVgyt/6iU=
+Received: from DM6PR02MB4140.namprd02.prod.outlook.com (2603:10b6:5:97::21) by
+ DM5PR02MB3720.namprd02.prod.outlook.com (2603:10b6:4:b2::26) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3174.21; Thu, 9 Jul 2020 11:38:51 +0000
+Received: from DM6PR02MB4140.namprd02.prod.outlook.com
+ ([fe80::7885:10b5:7055:2ae8]) by DM6PR02MB4140.namprd02.prod.outlook.com
+ ([fe80::7885:10b5:7055:2ae8%7]) with mapi id 15.20.3153.030; Thu, 9 Jul 2020
+ 11:38:51 +0000
+From: Dragan Cvetic <draganc@xilinx.com>
 To: Randy Dunlap <rdunlap@infradead.org>, "linux-kernel@vger.kernel.org"
  <linux-kernel@vger.kernel.org>
-Thread-Topic: [PATCH 05/20] Documentation: fpga: eliminate duplicated word
-Thread-Index: AQHWVIk/Y5bHJrxi50qxAV1FkuxBtKj+yfCA
-Date: Thu, 9 Jul 2020 06:30:33 +0000
-Message-ID: <DM6PR11MB3819644AEB6E18E466B06FD785640@DM6PR11MB3819.namprd11.prod.outlook.com>
+Thread-Topic: [PATCH 14/20] Documentation: misc/xilinx_sdfec: eliminate
+ duplicated word
+Thread-Index: AQHWVIl01j2WA8nZ+0qkTNSLOgAd4qj/IPtQ
+Date: Thu, 9 Jul 2020 11:38:51 +0000
+Message-ID: <DM6PR02MB4140D40A07411B0FA50A3913CB640@DM6PR02MB4140.namprd02.prod.outlook.com>
 References: <20200707180414.10467-1-rdunlap@infradead.org>
- <20200707180414.10467-6-rdunlap@infradead.org>
-In-Reply-To: <20200707180414.10467-6-rdunlap@infradead.org>
+ <20200707180414.10467-15-rdunlap@infradead.org>
+In-Reply-To: <20200707180414.10467-15-rdunlap@infradead.org>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
+X-Auto-Response-Suppress: DR, RN, NRN, OOF, AutoReply
 X-MS-TNEF-Correlator: 
-dlp-product: dlpe-windows
-dlp-reaction: no-action
-dlp-version: 11.2.0.6
 authentication-results: infradead.org; dkim=none (message not signed)
- header.d=none;infradead.org; dmarc=none action=none header.from=intel.com;
-x-originating-ip: [192.198.147.192]
+ header.d=none;infradead.org; dmarc=none action=none header.from=xilinx.com;
+x-originating-ip: [149.199.80.133]
 x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: d472f182-d741-43ed-5e61-08d823d195be
-x-ms-traffictypediagnostic: DM6PR11MB3913:
-x-ld-processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr,ExtFwd
+x-ms-office365-filtering-ht: Tenant
+x-ms-office365-filtering-correlation-id: b99db2df-7741-4c88-9845-08d823fca72b
+x-ms-traffictypediagnostic: DM5PR02MB3720:
 x-ms-exchange-transport-forked: True
-x-microsoft-antispam-prvs: <DM6PR11MB39136E0DF4CB3618FA57E1F485640@DM6PR11MB3913.namprd11.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:1360;
+x-microsoft-antispam-prvs: <DM5PR02MB372060AA596D7BF97137A8F8CB640@DM5PR02MB3720.namprd02.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:5236;
 x-ms-exchange-senderadcheck: 1
 x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: SF7WdkEBnMlEIjKRKa7/JeoUarsmTo0ifWfwdYZnwNiIqC8ERMS0Bevrxha6mxIhuHM98vRQFWJr77z92wHA7P0TGlgmHHhrZZwu6agv0s4kLnctWmYoq11vk3t7CsuZ8vth7HspgFP03GQ0BB5PgqXRZk9b8nDzRZKbBE3ULGB6Q0PBzROwJvNStiY6+pZbWQw0KT6QfPPEc4Qav3YvLA/YlhPaeFztNZG8ucTFizMc15vyX2KqaxMHEeDFJNoIPog0yKo5rGkov5DxX5cv/kfz/ybnE08Y9ltGwIpdVmxhhDaf0WzbPjfxrB3rWVLJbTQFdYfw+2BI8ItJ1YDTnA==
+x-microsoft-antispam-message-info: qR+CT0TDr1hEwjC4JBQRtqtPfgA/sC5N4CmnJYREhBvJ7X7HQ9viUvQ2nEScuw7SMhOdq2b15tm6YR7ClyT2nWwe7ZiHimM/AIloSvl2mP/iWO7q7DVePjI17TVzEBMEv+fIcOuZqWNpJD53uSnc5Z03pFtdidFyt8lsJ0bKHhBUyE/P52fcteYiVnZhVxxqj85X6/jp7h8/A9hLCqfQwYGa/RlrFyIxrL98hMb4eYNyrppxEjO8QWYCEMulD5kMKfW6TWWcLJiqcHzYTj//98FU4wXM23GNqc2ypvg0Y79z6eSqAWQlICsaJTx2Z9kV1EMMSIao871x01XPoN9pPQ==
 x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DM6PR11MB3819.namprd11.prod.outlook.com; PTR:; CAT:NONE;
+ IPV:NLI; SFV:NSPM; H:DM6PR02MB4140.namprd02.prod.outlook.com; PTR:; CAT:NONE;
  SFTY:;
- SFS:(4636009)(136003)(366004)(396003)(376002)(346002)(39860400002)(66446008)(66476007)(64756008)(66556008)(26005)(2906002)(186003)(86362001)(8676002)(558084003)(478600001)(55016002)(9686003)(33656002)(8936002)(7406005)(7416002)(6506007)(71200400001)(7696005)(52536014)(66946007)(76116006)(54906003)(4326008)(7366002)(110136005)(5660300002)(316002);
- DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata: InmuQg4JNVwe7fxm/sb5gHuqzfy3VyOS6So92RDyrC/Vndot1NMAtvVt0IuPfL+hVyji85rnoIT328ih2uIXsY0MZW5K0WYoMTmc1Fiiv1tHoE4ilsG/GZcH31HTEiwcuiAsjqS5dARVdK3/9UTKWaEZ3kDXmUfA1uiik6ahK8PU18JoJYQw2AKIKWDlsKRh52aeSboYfTTFV7L3k/1yptlKx06QdtpuzLQyfsSuSjilmu+WqJRJBunjzHL+I/PNFAfgWxHj8UQstmjNg4aryffDxlFO5sD1WP7kXt8a/18oUhPLz9OQAL3cPVtiOJl8rFq45kimaqT9Zaw9xq9eq3D8gYTr2LPhVrto6IXQG5xPTB/W296G/qheSqKbe7c8alGUUKvS+QzBgKwkGk9u9gyVghQkVwV33rNpIg2v2Vbpkl4M+RrSLCalXX5u17T+84HrL9nN/bxy/xwpFSvbn0QFS5tgx96IWKasKVGLZ01oWMSEc/TyKPkonkmTzHcb
+ SFS:(346002)(366004)(396003)(136003)(376002)(39860400002)(6506007)(86362001)(71200400001)(4326008)(26005)(55016002)(52536014)(7696005)(186003)(64756008)(66556008)(66476007)(66446008)(76116006)(66946007)(5660300002)(8676002)(7366002)(7406005)(7416002)(2906002)(53546011)(83380400001)(316002)(110136005)(54906003)(33656002)(478600001)(8936002)(9686003);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata: yxDppt/H2ZM0nUizdJqLLgKHlViRAEOvc1OPAK+znjO+8f1XTKm7UWh30LQuj3xgaq7XNAbkoc1zF/IYumIg11lPBqod9GoYzN4x9WfO8oLqW1+Gd1YvC/wmpEx7tAcGq2i4l0fu+0mWZ3IRssqU7z0CQJibKFmWnM1L7GjAiAI3xvL+m8NYL9ePm0UaP8x7IbFpLqNolvIe9m7NgFD0MeCohqAkTrwuv5rxAvTan8Ca1fXRH2BbkwpX/lIifahd5/QpAUB4HsOlx4fPVl1Ijsqukd3nPh40irZfDqVI3BY8dy5jhc2Yza+ZjI7tM+IrKPLKOVJ0wokB6hs5JSzVRZQHIdDRalAS5yG1DpPrpqZXLtyd32kI70aTL0zoy1eOCayTjV6Mr6vIHMX5LeG1Edoj7QSYaF9kwwZGrYC/i/wGoNCP7N/wILfPhu6HDzUeL/3pZpKajfyTJ8Mt4zUQuJw/WMj2mZyP6L3x0mMHX70kBDp0OVOYnY2PLd3jqQng
 MIME-Version: 1.0
+X-OriginatorOrg: xilinx.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DM6PR11MB3819.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d472f182-d741-43ed-5e61-08d823d195be
-X-MS-Exchange-CrossTenant-originalarrivaltime: 09 Jul 2020 06:30:33.9294 (UTC)
+X-MS-Exchange-CrossTenant-AuthSource: DM6PR02MB4140.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b99db2df-7741-4c88-9845-08d823fca72b
+X-MS-Exchange-CrossTenant-originalarrivaltime: 09 Jul 2020 11:38:51.4539 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-id: 657af505-d5df-48d0-8300-c31994686c5c
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: xEHZds5rLvF+AAF1b0psG0b62s4Hv2Sp28ndkLtmZlJVbyUdrDmYHnh7elldVafAYLTuUS/3D28eMrHKqXiDjw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR11MB3913
-X-OriginatorOrg: intel.com
-X-Spam-Score: 0.0 (/)
+X-MS-Exchange-CrossTenant-userprincipalname: zIfGVOCbBOp1mCjikYmTLat4R47fO8DM122rmCjbuAmLOkNMkzeszU/83YLFYmhoPdnI4mpER/bRNJrN1/HL/g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR02MB3720
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: lwn.net]
+ for more information. [URIs: freedesktop.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [40.107.92.87 listed in wl.mailspike.net]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1jtQ4x-00EpTe-B2
-X-Mailman-Approved-At: Thu, 09 Jul 2020 11:01:11 +0000
-Subject: Re: [Kgdb-bugreport] [PATCH 05/20] Documentation: fpga: eliminate
- duplicated word
+X-Headers-End: 1jtYDI-00CFJG-9M
+X-Mailman-Approved-At: Fri, 10 Jul 2020 09:58:16 +0000
+Subject: Re: [Kgdb-bugreport] [PATCH 14/20] Documentation:
+ misc/xilinx_sdfec: eliminate duplicated word
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -164,8 +143,8 @@ Cc: Benjamin Herrenschmidt <benh@kernel.crashing.org>,
  "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
  David Airlie <airlied@linux.ie>,
  "kgdb-bugreport@lists.sourceforge.net" <kgdb-bugreport@lists.sourceforge.net>,
- "linux-fpga@vger.kernel.org" <linux-fpga@vger.kernel.org>, Liviu
- Dudau <liviu.dudau@arm.com>,
+ "linux-fpga@vger.kernel.org" <linux-fpga@vger.kernel.org>,
+ Liviu Dudau <liviu.dudau@arm.com>,
  "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
  "linux-mips@vger.kernel.org" <linux-mips@vger.kernel.org>,
  Paul Cercueil <paul@crapouillou.net>,
@@ -185,9 +164,7 @@ Cc: Benjamin Herrenschmidt <benh@kernel.crashing.org>,
  Jarkko Sakkinen <jarkko.sakkinen@linux.intel.com>,
  James Wang <james.qian.wang@arm.com>,
  "linux-input@vger.kernel.org" <linux-input@vger.kernel.org>,
- Mali DP Maintainers <malidp@foss.arm.com>,
- Derek Kiernan <derek.kiernan@xilinx.com>,
- Dragan Cvetic <dragan.cvetic@xilinx.com>,
+ Mali DP Maintainers <malidp@foss.arm.com>, Wu Hao <hao.wu@intel.com>,
  Tony Krowiak <akrowiak@linux.ibm.com>,
  "linux-kbuild@vger.kernel.org" <linux-kbuild@vger.kernel.org>,
  "James E.J. Bottomley" <jejb@linux.ibm.com>, Jiri Kosina <jikos@kernel.org>,
@@ -195,14 +172,14 @@ Cc: Benjamin Herrenschmidt <benh@kernel.crashing.org>,
  "linux-block@vger.kernel.org" <linux-block@vger.kernel.org>,
  Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
  Jacek Anaszewski <jacek.anaszewski@gmail.com>,
- "linux-mm@vger.kernel.org" <linux-mm@vger.kernel.org>, "Williams,
- Dan J" <dan.j.williams@intel.com>, Andrew
- Morton <akpm@linux-foundation.org>, Mimi Zohar <zohar@linux.ibm.com>,
+ "linux-mm@vger.kernel.org" <linux-mm@vger.kernel.org>,
+ Dan Williams <dan.j.williams@intel.com>,
+ Andrew Morton <akpm@linux-foundation.org>, Mimi Zohar <zohar@linux.ibm.com>,
  Jens Axboe <axboe@kernel.dk>, Michal Marek <michal.lkml@markovi.net>,
  "Martin K. Petersen" <martin.petersen@oracle.com>,
  Pierre Morel <pmorel@linux.ibm.com>, Wolfram Sang <wsa@kernel.org>,
- Daniel Vetter <daniel@ffwll.ch>, Jason Wessel <jason.wessel@windriver.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
+ Derek Kiernan <dkiernan@xilinx.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Jason Wessel <jason.wessel@windriver.com>, Paolo Bonzini <pbonzini@redhat.com>,
  "linux-integrity@vger.kernel.org" <linux-integrity@vger.kernel.org>,
  "linuxppc-dev@lists.ozlabs.org" <linuxppc-dev@lists.ozlabs.org>,
  Mike Rapoport <rppt@kernel.org>, Dan Murphy <dmurphy@ti.com>
@@ -210,21 +187,58 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-> Subject: [PATCH 05/20] Documentation: fpga: eliminate duplicated word
+
+> -----Original Message-----
+> From: Randy Dunlap <rdunlap@infradead.org>
+> Sent: Tuesday 7 July 2020 19:04
+> To: linux-kernel@vger.kernel.org
+> Cc: Randy Dunlap <rdunlap@infradead.org>; Jonathan Corbet <corbet@lwn.net>; linux-doc@vger.kernel.org; linux-
+> mm@vger.kernel.org; Mike Rapoport <rppt@kernel.org>; Jens Axboe <axboe@kernel.dk>; linux-block@vger.kernel.org; Jason
+> Wessel <jason.wessel@windriver.com>; Daniel Thompson <daniel.thompson@linaro.org>; Douglas Anderson
+> <dianders@chromium.org>; kgdb-bugreport@lists.sourceforge.net; Wu Hao <hao.wu@intel.com>; linux-fpga@vger.kernel.org;
+> James Wang <james.qian.wang@arm.com>; Liviu Dudau <liviu.dudau@arm.com>; Mihail Atanassov <mihail.atanassov@arm.com>;
+> Mali DP Maintainers <malidp@foss.arm.com>; David Airlie <airlied@linux.ie>; Daniel Vetter <daniel@ffwll.ch>; dri-
+> devel@lists.freedesktop.org; Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>; Jiri Kosina <jikos@kernel.org>; linux-
+> input@vger.kernel.org; Wolfram Sang <wsa@kernel.org>; linux-i2c@vger.kernel.org; Masahiro Yamada <masahiroy@kernel.org>;
+> Michal Marek <michal.lkml@markovi.net>; linux-kbuild@vger.kernel.org; Jacek Anaszewski <jacek.anaszewski@gmail.com>; Pavel
+> Machek <pavel@ucw.cz>; Dan Murphy <dmurphy@ti.com>; linux-leds@vger.kernel.org; Dan Williams <dan.j.williams@intel.com>;
+> Paul Cercueil <paul@crapouillou.net>; Thomas Bogendoerfer <tsbogend@alpha.franken.de>; linux-mips@vger.kernel.org; Derek
+> Kiernan <dkiernan@xilinx.com>; Dragan Cvetic <draganc@xilinx.com>; Michael Ellerman <mpe@ellerman.id.au>; Benjamin
+> Herrenschmidt <benh@kernel.crashing.org>; Paul Mackerras <paulus@samba.org>; linuxppc-dev@lists.ozlabs.org; Tony Krowiak
+> <akrowiak@linux.ibm.com>; Pierre Morel <pmorel@linux.ibm.com>; Halil Pasic <pasic@linux.ibm.com>; linux-s390@vger.kernel.org;
+> Matthew Wilcox <willy@infradead.org>; Hannes Reinecke <hare@suse.com>; linux-scsi@vger.kernel.org; James E.J. Bottomley
+> <jejb@linux.ibm.com>; Martin K. Petersen <martin.petersen@oracle.com>; Jarkko Sakkinen <jarkko.sakkinen@linux.intel.com>;
+> Mimi Zohar <zohar@linux.ibm.com>; linux-integrity@vger.kernel.org; keyrings@vger.kernel.org; Paolo Bonzini
+> <pbonzini@redhat.com>; kvm@vger.kernel.org; Andrew Morton <akpm@linux-foundation.org>
+> Subject: [PATCH 14/20] Documentation: misc/xilinx_sdfec: eliminate duplicated word
 > 
-> Drop the doubled word "this".
+> Drop the doubled word "the".
 > 
 > Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
 > Cc: Jonathan Corbet <corbet@lwn.net>
 > Cc: linux-doc@vger.kernel.org
-> Cc: Wu Hao <hao.wu@intel.com>
-> Cc: linux-fpga@vger.kernel.org
+> Cc: Derek Kiernan <derek.kiernan@xilinx.com>
+> Cc: Dragan Cvetic <dragan.cvetic@xilinx.com>
+> ---
+>  Documentation/misc-devices/xilinx_sdfec.rst |    2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> --- linux-next-20200701.orig/Documentation/misc-devices/xilinx_sdfec.rst
+> +++ linux-next-20200701/Documentation/misc-devices/xilinx_sdfec.rst
+> @@ -78,7 +78,7 @@ application interfaces:
+>    - open: Implements restriction that only a single file descriptor can be open per SD-FEC instance at any time
+>    - release: Allows another file descriptor to be open, that is after current file descriptor is closed
+>    - poll: Provides a method to monitor for SD-FEC Error events
+> -  - unlocked_ioctl: Provides the the following ioctl commands that allows the application configure the SD-FEC core:
+> +  - unlocked_ioctl: Provides the following ioctl commands that allows the application configure the SD-FEC core:
+> 
+>  		- :c:macro:`XSDFEC_START_DEV`
+>  		- :c:macro:`XSDFEC_STOP_DEV`
 
-Acked-by: Wu Hao <hao.wu@intel.com>
+Acked-by: Dragan Cvetic <dragan.cvetic@xilinx.com>
+Thanks Randy
 
-Thanks Randy.
-
-Hao
+Dragan
 
 
 _______________________________________________
