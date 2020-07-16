@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 25219222BB9
-	for <lists+kgdb-bugreport@lfdr.de>; Thu, 16 Jul 2020 21:16:28 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 49BBF222BCB
+	for <lists+kgdb-bugreport@lfdr.de>; Thu, 16 Jul 2020 21:22:34 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jw9Mo-0001SC-Us
-	for lists+kgdb-bugreport@lfdr.de; Thu, 16 Jul 2020 19:16:26 +0000
+	id 1jw9Sj-0001Yw-43
+	for lists+kgdb-bugreport@lfdr.de; Thu, 16 Jul 2020 19:22:33 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <keescook@chromium.org>) id 1jw9Mn-0001S1-OE
- for kgdb-bugreport@lists.sourceforge.net; Thu, 16 Jul 2020 19:16:25 +0000
+ (envelope-from <keescook@chromium.org>) id 1jw9Sh-0001Yi-B2
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 16 Jul 2020 19:22:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=2R0hcRnXsJS4VXyiriDanEq/mQczbWkrFO+xv3Ye6s4=; b=Fx8/+iT6jirM5LBAbAq80dicSz
- Hl5kn0wwjviEkrdcZTATHWtWnuxQa7qvNIZ8IzCXqAaB/yqni7mwF3tuzXfx46C/uOx2jrFqIGtMN
- Y17Q+Q1gJRByiHBNi+3jXn5w1+svz31Bq+kNeTtqrj5+o9VpenIkeDYZQYwPTUvzvVss=;
+ bh=JkQIL6u1DfVeBakkxVv5TexNPiL0IlLMXUBOxPWyZ5M=; b=Rb21GWp+yaWsmfPaCjW1PriaRM
+ sLRl1hhJ9Gs67Gnhm4dvZYU4feguD9rrmCjK28OVM8y6F7tRIhgicW8+hm8J9HFMKlDYVZEIk5GUE
+ bRy/775rUFdfmGWAyJLR7WX3ftudZivnxsTxssgjwypcNcjZGa3qb+cqS14tJwSsYoxU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -30,68 +30,72 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=2R0hcRnXsJS4VXyiriDanEq/mQczbWkrFO+xv3Ye6s4=; b=c+s5MxtliGVjfaek7zPoW+Kvsd
- gt4DNXBFE8V+SR2LNhw9cffQ9sdabBSFtulhArSFykPajUntrYTN4CQKQ8GWSYHq3/yMDBBLIRRyg
- RzkUSs77pQoabShU5Kt+AiT707Ae4yNeXpQy8cekqfy9mlKvC4OcGQTjv3fqrzFvxpX8=;
-Received: from mail-pf1-f193.google.com ([209.85.210.193])
+ bh=JkQIL6u1DfVeBakkxVv5TexNPiL0IlLMXUBOxPWyZ5M=; b=ZK/qBlWuUBZDE8Bkurm2LJBbRZ
+ Rbud79P5hxZrb4CoBFT3WIKR+pZMhgHN60v/w4cnNi0mFvhGTbJl6pVf8L40beiZGOTj5VY0udAzQ
+ ghYErkRTLuiwAk6JfjlILi9QgSVpSszN/kjX/TLK8kCOsQqUce/LIXzsY5yxxFzmCEcA=;
+Received: from mail-pl1-f193.google.com ([209.85.214.193])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jw9MY-00AwiX-5d
- for kgdb-bugreport@lists.sourceforge.net; Thu, 16 Jul 2020 19:16:25 +0000
-Received: by mail-pf1-f193.google.com with SMTP id 207so4145394pfu.3
+ id 1jw9Sb-00AxJq-01
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 16 Jul 2020 19:22:31 +0000
+Received: by mail-pl1-f193.google.com with SMTP id x8so4283838plm.10
  for <kgdb-bugreport@lists.sourceforge.net>;
- Thu, 16 Jul 2020 12:16:10 -0700 (PDT)
+ Thu, 16 Jul 2020 12:22:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to;
- bh=2R0hcRnXsJS4VXyiriDanEq/mQczbWkrFO+xv3Ye6s4=;
- b=ZBulK0WZzf/Y2plsJIiBiP9vBDDMB7cKE4nNyO7pI4jhAiFahLl13+wjjYl4AYx5BB
- otJeoT7KMXmj//B0s5TndSWJM7ep3jPNHzKSwrpR80GkT/ENBrVdogHDfc7FSXQgqchK
- la7hTG8ks3MzuTa72KfZtSagY7XpH9MYfx1mQ=
+ bh=JkQIL6u1DfVeBakkxVv5TexNPiL0IlLMXUBOxPWyZ5M=;
+ b=IdV9MqF3NgA5zvwc0WHh4MUmPJhoVdGBqF7mZzHR1z6W9+79kwebX37Odvx1RFYyD5
+ TIcAItmVFebIbr0UGDR1VqZORhkkWg5GO3jP9SrAYBb/J9j1gAl6NCCYq5DxGfdZceJ5
+ eJbQvOJJgIUB/uLUSvyqfC/7mWDvVcN1kqTj8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=2R0hcRnXsJS4VXyiriDanEq/mQczbWkrFO+xv3Ye6s4=;
- b=hVvpAyEvZSqXRUEqGYmCQ0HLaTvZbW1idm/dx4kSiCtGaUylO1QjnlUf5oKe7c67ka
- aS8McK7gwqU28oZWDbzQ3XAHYBYDQzCkV5PB9m+l+W8oxOoWymC1RjH2xvrFee5xWaSj
- GOoBJOgonU4tfSC6VyI/mMP+XDFEz9FNl6wiTLGZeB3a3S5ga1w4kr9DN1QT7sH6XFkn
- PSWp9s/vWwvAXaCwwFWx9M1mo3jZvoYP9rzTA/3ak/11/1zcu0XWmmu6fS6Fj69Oqfgm
- Zmtw9t2DxxY1tg6tw+9LwqK36O3Iju+RpySuFCxnqpzJ6bIurLrmUqbEKzkYv0CxMJ2d
- BWGw==
-X-Gm-Message-State: AOAM530KmVPrgD/8Of0qlsC3Bxa8tArOqwhZkwc4fvtalhtnRfM4oxv2
- Mi3+uyPasYIWn56Q9DuwtHK7JQ==
-X-Google-Smtp-Source: ABdhPJz1hoi+gTw0MHgO0dM+96Dp9MZSCNtNi6/yuZgpSobcItifHoGm+Bd2+MNyMCABANHPmkEEMg==
-X-Received: by 2002:a65:664a:: with SMTP id z10mr5423029pgv.352.1594926957331; 
- Thu, 16 Jul 2020 12:15:57 -0700 (PDT)
+ bh=JkQIL6u1DfVeBakkxVv5TexNPiL0IlLMXUBOxPWyZ5M=;
+ b=hRSCSsILv2Au1nhqhgWGC+OFOuD2Pg3VOZ9N3KSxZrkso+hrEF3K4pkP0xeodqsmlZ
+ WZqj6H5LBtEKwVfurRAdG+Np/eekQV4CY3XGFZ5s8pL5N6J2P0+9te9lCEikrbeoQ7Qx
+ 6W4jdxqKXIBPVq3Keq7tUtEF5KTWqOsBhmHuHzduAorqET5LdbUcVWqMiVyLwhYFIw7K
+ VjogqhwwZknquvC8zQYlZfo5+w+JKhX62Ig/lpq7wiUB2NIeuS2+5J5AaUnkb3mtAwu7
+ u/twQc7v4eVTqRBnbIIgdWiyDai+OgnRxpPoHF88LhNKF/J0lXvzM1temgg6wghOBZe4
+ 1u7A==
+X-Gm-Message-State: AOAM533PlQH3MPi0K49nnwEt6UVfFKX8qBZRvU0Z1+MRwVOjcDLAX13Z
+ e8zTUphYE5rQLC0KvT5sbOKpdw==
+X-Google-Smtp-Source: ABdhPJxnO0DLJTMuJCiKhGS2H/q0Dgh7D9XNeLpL7v+ETZT1fO0LQZze/EzzJLe1PvzD9lREJpkfEA==
+X-Received: by 2002:a17:90a:1901:: with SMTP id
+ 1mr6710009pjg.199.1594927339413; 
+ Thu, 16 Jul 2020 12:22:19 -0700 (PDT)
 Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
- by smtp.gmail.com with ESMTPSA id h15sm5618413pfo.192.2020.07.16.12.15.55
+ by smtp.gmail.com with ESMTPSA id q24sm5641236pfg.95.2020.07.16.12.22.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Jul 2020 12:15:56 -0700 (PDT)
-Date: Thu, 16 Jul 2020 12:15:55 -0700
+ Thu, 16 Jul 2020 12:22:18 -0700 (PDT)
+Date: Thu, 16 Jul 2020 12:22:17 -0700
 From: Kees Cook <keescook@chromium.org>
 To: Matthew Wilcox <willy@infradead.org>
-Message-ID: <202007161215.5C0CE54AB@keescook>
+Message-ID: <202007161216.9C9784FEBE@keescook>
 References: <20200716030847.1564131-1-keescook@chromium.org>
- <20200716030847.1564131-3-keescook@chromium.org>
- <20200716112914.GK12769@casper.infradead.org>
+ <20200716030847.1564131-4-keescook@chromium.org>
+ <20200716153704.GM12769@casper.infradead.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200716112914.GK12769@casper.infradead.org>
-X-Spam-Score: 0.0 (/)
+In-Reply-To: <20200716153704.GM12769@casper.infradead.org>
+X-Spam-Score: -0.5 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: chromium.org]
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.210.193 listed in wl.mailspike.net]
+ [209.85.214.193 listed in wl.mailspike.net]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 TIME_LIMIT_EXCEEDED    Exceeded time limit / deadline
-X-Headers-End: 1jw9MY-00AwiX-5d
-Subject: Re: [Kgdb-bugreport] [PATCH 2/3] treewide: Replace
- DECLARE_TASKLET() with DECLARE_TASKLET_OLD()
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+ -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jw9Sb-00AxJq-01
+Subject: Re: [Kgdb-bugreport] [PATCH 3/3] tasklet: Introduce new
+ initialization API
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -136,24 +140,55 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Thu, Jul 16, 2020 at 12:29:14PM +0100, Matthew Wilcox wrote:
-> On Wed, Jul 15, 2020 at 08:08:46PM -0700, Kees Cook wrote:
-> > This converts all the existing DECLARE_TASKLET() (and ...DISABLED)
-> > macros with DECLARE_TASKLET_OLD() in preparation for refactoring the
-> > tasklet callback type. All existing DECLARE_TASKLET() users had a "0"
-> > data argument, it has been removed here as well.
-> > 
-> > Signed-off-by: Kees Cook <keescook@chromium.org>
-> [...]
-> >  16 files changed, 26 insertions(+), 21 deletions(-)
+On Thu, Jul 16, 2020 at 04:37:04PM +0100, Matthew Wilcox wrote:
+> On Wed, Jul 15, 2020 at 08:08:47PM -0700, Kees Cook wrote:
+> > +#define DECLARE_TASKLET(name, _callback)		\
+> > +struct tasklet_struct name = {				\
+> > +	.count = ATOMIC_INIT(0),			\
+> > +	.callback = _callback,				\
+> > +	.use_callback = true,				\
+> > +}
+> > +
+> > +#define DECLARE_TASKLET_DISABLED(name, _callback)	\
+> > +struct tasklet_struct name = {				\
+> > +	.count = ATOMIC_INIT(1),			\
+> > +	.callback = _callback,				\
+> > +}
 > 
-> This is about 5% of what needs to change.  There are 350 callers of
-> tasklet_init(), and that still takes a 'data' argument.
+> You forgot to set use_callback here.
 
-Yup, please see the referenced tree. This "series" is just the
-ground-work for allowing the rest of the 350 patches to land with calls
-to the new tasklet_setup() API, and associated prototype and
-container_of() changes.
+Eek; thank you.
+
+> > @@ -547,7 +547,10 @@ static void tasklet_action_common(struct softirq_action *a,
+> >  				if (!test_and_clear_bit(TASKLET_STATE_SCHED,
+> >  							&t->state))
+> >  					BUG();
+> > -				t->func(t->data);
+> > +				if (t->use_callback)
+> > +					t->callback(t);
+> > +				else
+> > +					t->func(t->data);
+> 
+> I think this is the wrong way to do the conversion.  Start out by setting
+> t->data to (unsigned long)t in the new initialisers.  Then convert the
+> drivers (all 350 of them) to the new API.  Then you can get rid of 'data'
+> from the tasklet_struct.
+
+That's what I did when I converted timer_struct, and it ended up creating
+a mess for Control Flow Integrity checking. (The problem isn't actually
+casting .data, but rather in how the callsite calls the callback --
+casting the callback assignments doesn't fix the mismatch between the
+caller and the callback's expectation about the function prototype
+under CFI.) I got lucky with timer_struct (in v4.14) in that not much
+had been converted, and I was able to do the entire conversion in the
+next kernel release.
+
+So, this time, I'm trying to avoid the prototype mismatch mess by
+providing a selector to determine which prototype the callback should
+be called through, and I was happy to discover I could do it without
+growing the tasklet structure. Obviously the memory corruption safety
+improvement won't be realized until both .data, .use_callback, and .func
+are removed, but that was true even with the earlier style of conversion.
 
 -- 
 Kees Cook
