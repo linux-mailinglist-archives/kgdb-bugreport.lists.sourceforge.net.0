@@ -2,82 +2,84 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DC87B227FA8
-	for <lists+kgdb-bugreport@lfdr.de>; Tue, 21 Jul 2020 14:11:00 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3B7B7227FB0
+	for <lists+kgdb-bugreport@lfdr.de>; Tue, 21 Jul 2020 14:11:17 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1jxr6p-0001Kw-M7
-	for lists+kgdb-bugreport@lfdr.de; Tue, 21 Jul 2020 12:10:59 +0000
+	id 1jxr73-0008HU-Ed
+	for lists+kgdb-bugreport@lfdr.de; Tue, 21 Jul 2020 12:11:13 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sumit.garg@linaro.org>) id 1jxr6o-0001Km-D7
- for kgdb-bugreport@lists.sourceforge.net; Tue, 21 Jul 2020 12:10:58 +0000
+ (envelope-from <sumit.garg@linaro.org>) id 1jxr71-0008Fo-5c
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 21 Jul 2020 12:11:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
- MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:
+ To:From:Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=DUhxoUHdk/G5hcIoHHmedsybYx4YWFvLP5ZmToBFcQA=; b=kgjulztc+mX5COHD83Ff8Jvfq7
- jnWtA1gtJ7XXfb6lT97NvKm7ZPiQaNrS0Y4oqcftTtu7/+2fwB/c8U6ghsfLLD+92RYb+rC0Q5zGN
- EXf1djOgXgiW+sBoDH5TFbblFcc/Im9rnGbNJIedJZya6lm7gNmHMq9yUz+is3dexhyg=;
+ bh=bmoIA6JVwOy+6GP1zUPLm+Haa8V9hMBSF82Ea7A25DQ=; b=A7y30kjhyC2RLfWFSI6Y8W8muq
+ oZgQwT0AE8XdSz5UrGMZpVOZdToDZI0vkKKhMhOWLMV5alLU6fXqDHJYUJE+N3N67fegYxKX9WoHO
+ TY9VJMREOFy/PaFRMdz2cCUDxfr9CBBO1/uLfjTz3SAzu1YtXHL1zq45VNxDIvwwuYFM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version:
- Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To
+ :MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=DUhxoUHdk/G5hcIoHHmedsybYx4YWFvLP5ZmToBFcQA=; b=T1UQOXIwdYczWaxEMeI0ucXq7E
- zmVg5JqxAqE/JG1qEwypJUy7uUi7LdnbTyOHQIgEsOI9Kp/miHNdY9/H+TAOD8XV7EhYofUIVx/p+
- uQINi2Vpgw4qnBgpXs74ilb359Zao3m2qs7mCM0+XjMOQhVZCmo4xAIvia9K2JvTudRs=;
-Received: from mail-pj1-f66.google.com ([209.85.216.66])
+ bh=bmoIA6JVwOy+6GP1zUPLm+Haa8V9hMBSF82Ea7A25DQ=; b=nVovLRmVomO/RQk+C+9OGCLHcv
+ PstrA5UOqIBfYMB2ANUD3GIevqRjABBnmFOdzcJcdPF4X2uTU/XLItICcfE8XJI+ZnHYDegI2S9YA
+ 7toQ5hf1WPL1KdAHmIeL5ubhZq/1qtyZliwsS/9NGhDlI9XDWjCw/PnIXTYVIzhcNIQY=;
+Received: from mail-pf1-f194.google.com ([209.85.210.194])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jxr6j-00C1vL-ME
- for kgdb-bugreport@lists.sourceforge.net; Tue, 21 Jul 2020 12:10:58 +0000
-Received: by mail-pj1-f66.google.com with SMTP id k5so1578697pjg.3
+ id 1jxr6w-00C1wA-Tu
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 21 Jul 2020 12:11:08 +0000
+Received: by mail-pf1-f194.google.com with SMTP id m9so10645446pfh.0
  for <kgdb-bugreport@lists.sourceforge.net>;
- Tue, 21 Jul 2020 05:10:53 -0700 (PDT)
+ Tue, 21 Jul 2020 05:11:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=from:to:cc:subject:date:message-id;
- bh=DUhxoUHdk/G5hcIoHHmedsybYx4YWFvLP5ZmToBFcQA=;
- b=jcbCCb7hQJlHIsdcZ51dQFHY/9ZAio9o8npqoAFikBjrRS5rSX8azSndpIfoxx4pB+
- 36zJ9XHfNsZaRy7DSN1DP/aiQPS1wdywIz2HH7ZUeQPS9pMnDDMBFScXUX8tkATs9D3Q
- AgbIybVi4CKkW8frVqni9KeOc3TfJHu2wgPhSRbqmU1CzyLw2BnPvo3mq5J7vWHydhVG
- ykZd7ucwFth+Pedeigm9B3p8zNkoO+gfshaZ2vqKoy3ykznGytstafoT6n4A86ml+rYT
- oMyEtsd0jdPbtn+jYCfaazIcKecvvJ9MCT/0T4bbqk2TDYe3Ou5Vdbc5vVEP2p1XGntN
- aHHg==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references;
+ bh=bmoIA6JVwOy+6GP1zUPLm+Haa8V9hMBSF82Ea7A25DQ=;
+ b=TyepKXn7OaYUQtt4hFJbFIHF5h+u+fprOJj4OSkj62VZU3n8u0j9yYrT7NHtWxi/an
+ 1b6b+9jU7D0O5dJMcoD2rqrFEj6sjq4HohRlHi1aWwa0ExNHUO6Az2x8gABX2q50szu/
+ ZxKtmbi++l+NcrXL+hJgpevYLiU+XRaZ6UD2IzAUwrWQg9q1I4XAONLFu92YCQHfqU/Q
+ dQ5tPt9ebLwtmoiVmPkO6qOOZKyJ7NpqggfM5bR/3nR8jSIxytunTjxLTpQCnIVdMlpr
+ 9/bIAOd1nr6zAEsHFPnA7mnoQ64IyInDUaDo159KyWXHggP9Q/+yfjHhXGangDK7tsJh
+ MPug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id;
- bh=DUhxoUHdk/G5hcIoHHmedsybYx4YWFvLP5ZmToBFcQA=;
- b=twQwMeKZwS04hnyvwdPa+Rs1sEsVHJwxylUHiZC0c05JLtt7us2lgJlRiDVxXy8Ruq
- Dd+pwIHiHaVBga8tMZNZAEP3T+JplTCz0hF99vLu2prCpGEgmhsQ2s7J4Cw7uzdifC9R
- CJPg+Pyk8oLYm9NS7s2Xw9DPUxbTDIofxrzEGwErBxrok8aR0uD6itE+moymS0/M/DV7
- KFv94bd6w8ZNLvfJlhqDmxjPzAbuzye2h9KivzA3wLDDMUvQo6+pNcDHmTjzmHXahzaK
- gkM+BJJdlatD5WFelKdOl+vneT58FZTVNQppQ8/fyFBLaSg+n6cWepPflYj48bcl+vt9
- xWPA==
-X-Gm-Message-State: AOAM533eNCnY9IzW+thJXMdQR3Hlob4jAlOAQ+budSRQXoBUR+FMh5+Y
- EYPBU58u7dish2Rf0Mv4jJz73A==
-X-Google-Smtp-Source: ABdhPJyRExe3Qfy877FM+lq0KPlLWXAqsMqBIE5QqFOrqY5bkLpSCnvsNe2TWxlOTPk4HSLRIyix+g==
-X-Received: by 2002:a17:902:d698:: with SMTP id
- v24mr21585075ply.163.1595333447996; 
- Tue, 21 Jul 2020 05:10:47 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references;
+ bh=bmoIA6JVwOy+6GP1zUPLm+Haa8V9hMBSF82Ea7A25DQ=;
+ b=FA2uuAxSeE/iDzeN1Auaa3dFGwBK0pIcJE0wC73Vua9xC6dmtY0Q4qiXNCxoZ/wmR6
+ YmI3InOyC40dtY4L0bkTrYMPWlNNjsYFjNDqJ1msnzXmwGDzBcTqsZTs/zYieKtnScEp
+ A0TWGYDblkdBexqTt+PF9MsP/g4L9eMN6QOVPyS7DWxwvBSbQI6BwUiyd6713liwOlQ2
+ 1oTGWOP1kuSq6N6k2xfwe5GcPUZYCv+dN7snxWruKqkLD/KctSYZ5VKmI02UB9bgRCP5
+ VZWGpOgOAoRhK5A65cOOUFCXi1VKjgU6hSfPMxMAxr3R2SlZJtQC630FseqxIiXvw+0B
+ XCRg==
+X-Gm-Message-State: AOAM5319NZiCOeCZilb2uJUBwkrUszbqeQpZQQTUaAmLF3JUVYoEtjYw
+ btF7jbGwKqK8+5tbwcrO80cWSA==
+X-Google-Smtp-Source: ABdhPJx//Ilc8MIFF8alHzz3aukyRgaFhVVxqz29Ai3h7DB0QotUS2/ezSTlrD7mrAWkwoDkQznv6Q==
+X-Received: by 2002:aa7:9a07:: with SMTP id w7mr22724654pfj.251.1595333454186; 
+ Tue, 21 Jul 2020 05:10:54 -0700 (PDT)
 Received: from localhost.localdomain ([117.210.211.74])
- by smtp.gmail.com with ESMTPSA id w9sm20601992pfq.178.2020.07.21.05.10.42
+ by smtp.gmail.com with ESMTPSA id w9sm20601992pfq.178.2020.07.21.05.10.48
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Tue, 21 Jul 2020 05:10:47 -0700 (PDT)
+ Tue, 21 Jul 2020 05:10:53 -0700 (PDT)
 From: Sumit Garg <sumit.garg@linaro.org>
 To: gregkh@linuxfoundation.org, daniel.thompson@linaro.org,
  dianders@chromium.org, linux-serial@vger.kernel.org,
  kgdb-bugreport@lists.sourceforge.net
-Date: Tue, 21 Jul 2020 17:40:08 +0530
-Message-Id: <1595333413-30052-1-git-send-email-sumit.garg@linaro.org>
+Date: Tue, 21 Jul 2020 17:40:09 +0530
+Message-Id: <1595333413-30052-2-git-send-email-sumit.garg@linaro.org>
 X-Mailer: git-send-email 2.7.4
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <1595333413-30052-1-git-send-email-sumit.garg@linaro.org>
+References: <1595333413-30052-1-git-send-email-sumit.garg@linaro.org>
+X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
@@ -85,9 +87,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: linaro.org]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.216.66 listed in list.dnswl.org]
+ trust [209.85.210.194 listed in list.dnswl.org]
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.216.66 listed in wl.mailspike.net]
+ [209.85.210.194 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -96,8 +98,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1jxr6j-00C1vL-ME
-Subject: [Kgdb-bugreport] [RFC 0/5] Introduce NMI aware serial drivers
+ -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jxr6w-00C1wA-Tu
+Subject: [Kgdb-bugreport] [RFC 1/5] tty/sysrq: Make sysrq handler NMI aware
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -116,108 +119,150 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Make it possible for UARTs to trigger magic sysrq from an NMI. With the
-advent of pseudo NMIs on arm64 it became quite generic to request serial
-device interrupt as an NMI rather than IRQ. And having NMI driven serial
-RX will allow us to trigger magic sysrq as an NMI and hence drop into
-kernel debugger in NMI context.
+In a future patch we will add support to the serial core to make it
+possible to trigger a magic sysrq from an NMI context. Prepare for this
+by marking some sysrq actions as NMI safe. Safe actions will be allowed
+to run from NMI context whilst that cannot run from an NMI will be queued
+as irq_work for later processing.
 
-The major use-case is to add NMI debugging capabilities to the kernel
-in order to debug scenarios such as:
-- Primary CPU is stuck in deadlock with interrupts disabled and hence
-  doesn't honor serial device interrupt. So having magic sysrq triggered
-  as an NMI is helpful for debugging.
-- Always enabled NMI based magic sysrq irrespective of whether the serial
-  TTY port is active or not.
+A particular sysrq handler is only marked as NMI safe in case the handler
+isn't contending for any synchronization primitives as in NMI context
+they are expected to cause deadlocks. Note that the debug sysrq do not
+contend for any synchronization primitives. It does call kgdb_breakpoint()
+to provoke a trap but that trap handler should be NMI safe on
+architectures that implement an NMI.
 
-Currently there is an existing kgdb NMI serial driver which provides
-partial implementation in upstream to have a separate ttyNMI0 port but
-that remained in silos with the serial core/drivers which made it a bit
-odd to enable using serial device interrupt and hence remained unused. It
-seems to be clearly intended to avoid almost all custom NMI changes to
-the UART driver.
+Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+---
+ drivers/tty/sysrq.c       | 33 ++++++++++++++++++++++++++++++++-
+ include/linux/sysrq.h     |  1 +
+ kernel/debug/debug_core.c |  1 +
+ 3 files changed, 34 insertions(+), 1 deletion(-)
 
-But this patch-set allows the serial core/drivers to be NMI aware which
-in turn provides NMI debugging capabilities via magic sysrq and hence
-there is no specific reason to keep this special driver. So remove it
-instead.
-
-Approach:
----------
-
-The overall idea is to intercept serial RX characters in NMI context, if
-those are specific to magic sysrq then allow corresponding handler to run
-in NMI context. Otherwise, defer all other RX and TX operations onto IRQ
-work queue in order to run those in normal interrupt context.
-
-This approach is demonstrated using amba-pl011 driver.
-
-Patch-wise description:
------------------------
-
-Patch #1 prepares magic sysrq handler to be NMI aware.
-Patch #2 adds NMI framework to serial core.
-Patch #3 and #4 demonstrates NMI aware uart port using amba-pl011 driver.
-Patch #5 removes kgdb NMI serial driver.
-
-Goal of this RFC:
------------------
-
-My main reason for sharing this as an RFC is to help decide whether or
-not to continue with this approach. The next step for me would to port
-the work to a system with an 8250 UART.
-
-Usage:
-------
-
-This RFC has been developed on top of 5.8-rc3 and if anyone is interested
-to give this a try on QEMU, just enable following config options
-additional to arm64 defconfig:
-
-CONFIG_KGDB=y
-CONFIG_KGDB_KDB=y
-CONFIG_ARM64_PSEUDO_NMI=y
-
-Qemu command line to test:
-
-$ qemu-system-aarch64 -nographic -machine virt,gic-version=3 -cpu cortex-a57 \
-  -smp 2 -kernel arch/arm64/boot/Image -append 'console=ttyAMA0,38400 \
-  keep_bootcon root=/dev/vda2 irqchip.gicv3_pseudo_nmi=1 kgdboc=ttyAMA0' \
-  -initrd rootfs-arm64.cpio.gz
-
-NMI entry into kgdb via sysrq:
-- Ctrl a + b + g
-
-Reference:
-----------
-
-For more details about NMI/FIQ debugger, refer to this blog post [1].
-
-[1] https://www.linaro.org/blog/debugging-arm-kernels-using-nmifiq/
-
-I do look forward to your comments and feedback.
-
-Sumit Garg (5):
-  tty/sysrq: Make sysrq handler NMI aware
-  serial: core: Add framework to allow NMI aware serial drivers
-  serial: amba-pl011: Re-order APIs definition
-  serial: amba-pl011: Enable NMI aware uart port
-  serial: Remove KGDB NMI serial driver
-
- drivers/tty/serial/Kconfig       |  19 --
- drivers/tty/serial/Makefile      |   1 -
- drivers/tty/serial/amba-pl011.c  | 232 +++++++++++++++++-------
- drivers/tty/serial/kgdb_nmi.c    | 383 ---------------------------------------
- drivers/tty/serial/kgdboc.c      |   8 -
- drivers/tty/serial/serial_core.c | 120 +++++++++++-
- drivers/tty/sysrq.c              |  33 +++-
- include/linux/kgdb.h             |  10 -
- include/linux/serial_core.h      |  67 +++++++
- include/linux/sysrq.h            |   1 +
- kernel/debug/debug_core.c        |   1 +
- 11 files changed, 386 insertions(+), 489 deletions(-)
- delete mode 100644 drivers/tty/serial/kgdb_nmi.c
-
+diff --git a/drivers/tty/sysrq.c b/drivers/tty/sysrq.c
+index 7c95afa9..8017e33 100644
+--- a/drivers/tty/sysrq.c
++++ b/drivers/tty/sysrq.c
+@@ -50,6 +50,8 @@
+ #include <linux/syscalls.h>
+ #include <linux/of.h>
+ #include <linux/rcupdate.h>
++#include <linux/irq_work.h>
++#include <linux/kfifo.h>
+ 
+ #include <asm/ptrace.h>
+ #include <asm/irq_regs.h>
+@@ -111,6 +113,7 @@ static const struct sysrq_key_op sysrq_loglevel_op = {
+ 	.help_msg	= "loglevel(0-9)",
+ 	.action_msg	= "Changing Loglevel",
+ 	.enable_mask	= SYSRQ_ENABLE_LOG,
++	.nmi_safe	= true,
+ };
+ 
+ #ifdef CONFIG_VT
+@@ -157,6 +160,7 @@ static const struct sysrq_key_op sysrq_crash_op = {
+ 	.help_msg	= "crash(c)",
+ 	.action_msg	= "Trigger a crash",
+ 	.enable_mask	= SYSRQ_ENABLE_DUMP,
++	.nmi_safe	= true,
+ };
+ 
+ static void sysrq_handle_reboot(int key)
+@@ -170,6 +174,7 @@ static const struct sysrq_key_op sysrq_reboot_op = {
+ 	.help_msg	= "reboot(b)",
+ 	.action_msg	= "Resetting",
+ 	.enable_mask	= SYSRQ_ENABLE_BOOT,
++	.nmi_safe	= true,
+ };
+ 
+ const struct sysrq_key_op *__sysrq_reboot_op = &sysrq_reboot_op;
+@@ -217,6 +222,7 @@ static const struct sysrq_key_op sysrq_showlocks_op = {
+ 	.handler	= sysrq_handle_showlocks,
+ 	.help_msg	= "show-all-locks(d)",
+ 	.action_msg	= "Show Locks Held",
++	.nmi_safe	= true,
+ };
+ #else
+ #define sysrq_showlocks_op (*(const struct sysrq_key_op *)NULL)
+@@ -289,6 +295,7 @@ static const struct sysrq_key_op sysrq_showregs_op = {
+ 	.help_msg	= "show-registers(p)",
+ 	.action_msg	= "Show Regs",
+ 	.enable_mask	= SYSRQ_ENABLE_DUMP,
++	.nmi_safe	= true,
+ };
+ 
+ static void sysrq_handle_showstate(int key)
+@@ -326,6 +333,7 @@ static const struct sysrq_key_op sysrq_ftrace_dump_op = {
+ 	.help_msg	= "dump-ftrace-buffer(z)",
+ 	.action_msg	= "Dump ftrace buffer",
+ 	.enable_mask	= SYSRQ_ENABLE_DUMP,
++	.nmi_safe	= true,
+ };
+ #else
+ #define sysrq_ftrace_dump_op (*(const struct sysrq_key_op *)NULL)
+@@ -538,6 +546,23 @@ static void __sysrq_put_key_op(int key, const struct sysrq_key_op *op_p)
+                 sysrq_key_table[i] = op_p;
+ }
+ 
++#define SYSRQ_NMI_FIFO_SIZE	64
++static DEFINE_KFIFO(sysrq_nmi_fifo, int, SYSRQ_NMI_FIFO_SIZE);
++
++static void sysrq_do_nmi_work(struct irq_work *work)
++{
++	const struct sysrq_key_op *op_p;
++	int key;
++
++	while (kfifo_out(&sysrq_nmi_fifo, &key, 1)) {
++		op_p = __sysrq_get_key_op(key);
++		if (op_p)
++			op_p->handler(key);
++	}
++}
++
++static DEFINE_IRQ_WORK(sysrq_nmi_work, sysrq_do_nmi_work);
++
+ void __handle_sysrq(int key, bool check_mask)
+ {
+ 	const struct sysrq_key_op *op_p;
+@@ -568,7 +593,13 @@ void __handle_sysrq(int key, bool check_mask)
+ 		if (!check_mask || sysrq_on_mask(op_p->enable_mask)) {
+ 			pr_info("%s\n", op_p->action_msg);
+ 			console_loglevel = orig_log_level;
+-			op_p->handler(key);
++
++			if (in_nmi() && !op_p->nmi_safe) {
++				kfifo_in(&sysrq_nmi_fifo, &key, 1);
++				irq_work_queue(&sysrq_nmi_work);
++			} else {
++				op_p->handler(key);
++			}
+ 		} else {
+ 			pr_info("This sysrq operation is disabled.\n");
+ 			console_loglevel = orig_log_level;
+diff --git a/include/linux/sysrq.h b/include/linux/sysrq.h
+index 3a582ec..630b5b9 100644
+--- a/include/linux/sysrq.h
++++ b/include/linux/sysrq.h
+@@ -34,6 +34,7 @@ struct sysrq_key_op {
+ 	const char * const help_msg;
+ 	const char * const action_msg;
+ 	const int enable_mask;
++	const bool nmi_safe;
+ };
+ 
+ #ifdef CONFIG_MAGIC_SYSRQ
+diff --git a/kernel/debug/debug_core.c b/kernel/debug/debug_core.c
+index 9e59347..2b51173 100644
+--- a/kernel/debug/debug_core.c
++++ b/kernel/debug/debug_core.c
+@@ -943,6 +943,7 @@ static const struct sysrq_key_op sysrq_dbg_op = {
+ 	.handler	= sysrq_handle_dbg,
+ 	.help_msg	= "debug(g)",
+ 	.action_msg	= "DEBUG",
++	.nmi_safe	= true,
+ };
+ #endif
+ 
 -- 
 2.7.4
 
