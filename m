@@ -2,101 +2,89 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F13D6241F04
-	for <lists+kgdb-bugreport@lfdr.de>; Tue, 11 Aug 2020 19:16:14 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id D7B6F242205
+	for <lists+kgdb-bugreport@lfdr.de>; Tue, 11 Aug 2020 23:33:26 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1k5Xsj-0003fT-PY
-	for lists+kgdb-bugreport@lfdr.de; Tue, 11 Aug 2020 17:16:13 +0000
+	id 1k5btd-0007dU-M5
+	for lists+kgdb-bugreport@lfdr.de; Tue, 11 Aug 2020 21:33:25 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <dianders@chromium.org>) id 1k5Xsi-0003ew-9d
- for kgdb-bugreport@lists.sourceforge.net; Tue, 11 Aug 2020 17:16:12 +0000
+ (envelope-from <keescook@chromium.org>) id 1k5btb-0007dJ-9f
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 11 Aug 2020 21:33:23 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=GcOJfgPH+kookjeNTFA/a55bCUyOIBtLpH9z1xzQ2Dk=; b=jsPexkUCzWgL7PJuwxS/K5zYoW
- Sza5Ns69Uj0SGbEUWLjNzULE3jG86DstGaL58hjHRQCWbxwqXV0IlvoMM3SZvqC022VMUaH9dSKxR
- 5+cElOZp7zD8HB1QS4ugEyHByyYNSYGpc8dMzjhFdB554ptoCFHGM8hv3qmSAM6IPsJw=;
+ bh=1XmU1UxtFoX+JxWRWBVQUmWx0SHpCQU0BLn06Acf+NU=; b=RLlYtKS8YMNB0kUn6AARjVnu+x
+ VbRoirvL7TFC37VlcviQFyvE7GHE/Mzw+r5A9TdQmcbb6zSXYQLZDTVA2fYThjpfkdLBTxTsfrLps
+ KRFnHpvr0jEGFoNL/nwwkoBk8/+/X18H+H/JUYxXozb6xtcrAeSy31pqxEN9i7bY1nQ8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=GcOJfgPH+kookjeNTFA/a55bCUyOIBtLpH9z1xzQ2Dk=; b=YommS9ctX68Iu2yN99WdNaf0rO
- GZeOQqy3JqcvQzjiOfVAzhA860cb3eXDiGq0NIiEjqgmBSONi/KxQvThf9TjLr8MYyJON5ROIdcj3
- XErpFo7PS6l7iPgOppLvLxJuIw8yBcEqcxMSJ7Epb+a+xJ0a1+tV1zrkwlbAZ47APGz4=;
-Received: from mail-ua1-f65.google.com ([209.85.222.65])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ bh=1XmU1UxtFoX+JxWRWBVQUmWx0SHpCQU0BLn06Acf+NU=; b=gXtNXHjE2pU4k4kNs1lqCZ9JxU
+ 12iAeuNDt+IfBm8/wK04Rq+DPlbwqPGgan0WF4SPxGQkjKr6y4ybmh9mFRp5zd8+/jrmR++0Ew9fF
+ oD0Ms+5Sx64E233c3DSPW2VJhtbLkwNiWWh+qXja43SXVtV2SGOPgOFoBGQUAknPhLE4=;
+Received: from mail-pj1-f65.google.com ([209.85.216.65])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1k5Xsg-006ZQ1-GE
- for kgdb-bugreport@lists.sourceforge.net; Tue, 11 Aug 2020 17:16:12 +0000
-Received: by mail-ua1-f65.google.com with SMTP id q68so3719706uaq.0
+ id 1k5btZ-00A3lA-1S
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 11 Aug 2020 21:33:23 +0000
+Received: by mail-pj1-f65.google.com with SMTP id kr4so87805pjb.2
  for <kgdb-bugreport@lists.sourceforge.net>;
- Tue, 11 Aug 2020 10:16:10 -0700 (PDT)
+ Tue, 11 Aug 2020 14:33:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=GcOJfgPH+kookjeNTFA/a55bCUyOIBtLpH9z1xzQ2Dk=;
- b=klLz6wKUUtyx3zTEv9yLDqYfCzgIBog5o60iZxU1w4FeSRHRE0b71zp3P+GhyIdo5T
- rChF30fNgQprCmJxLbQr1YPJFiBv6guVBUBCqfTSS5M8aXfntO6UJTZ/p6Op2XHdn7TR
- o2TnLXcqhz88ByC7UnvSIlo/qFjwfFZF2Gawg=
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=1XmU1UxtFoX+JxWRWBVQUmWx0SHpCQU0BLn06Acf+NU=;
+ b=nO3gYAQ3UHUw7olEjw932d3zFLqOCCUdnacl9cVKrUgmFx2PGjAFNp8CQwEB7V4Hmy
+ FGOy733ZHh3A1xH6oKC3op8DvO/HEaTRYWhxchiQa9h8rnO5vamgJzN81P21hsQ5n8I3
+ t7TvIriH92cU2JNs0mnOTN8SDZ89gDDMfKKUs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=GcOJfgPH+kookjeNTFA/a55bCUyOIBtLpH9z1xzQ2Dk=;
- b=MLMtFaBvl7cUv8KO7Ir4GLlUcGq5H1yOUA4W7L7JXfJAcF+XGDB26lGJo2DsqVyVXO
- mQdp9lofo2O1V5yyYaEXviPXbyaOQ98oegnPTjnzyk6E2o9S/8wMDLVmkrtY14OmRtT1
- pMgrI4I4uS3rKxrEuwq8AQxVhf3uxiWnxZeppqRLDRXcCWKm7EUzp3IRqyabf8D4asJL
- bdwpbKxNBTfi1WlWkARXedxf2m53YJwFUO0f4Gv0K5pQLw6haXNYVf2OAO0OUFb/NBJE
- 2xGIQG7foCTpxf0RZls9U5Xh0Pr5qYtEI6B9ThW6Re8GMPLIHrr4nL52bRdFfOZygRrr
- HkjA==
-X-Gm-Message-State: AOAM533UgO8z92SlZFh/6vEO+RiSWbLJl+pbPeNwp1k4UVBbsa+G0KcM
- nLtAAj2qgp3hd66A9XdBMIXK3S0Pbw8=
-X-Google-Smtp-Source: ABdhPJxfNw5f2F/+Zb1W6zTxlGFMV5nW0A6erRXK8zSVF7uYB2Zi6dU75pvDrHi9K0nhuXCpQXKEpA==
-X-Received: by 2002:ab0:6950:: with SMTP id c16mr23425741uas.71.1597166160849; 
- Tue, 11 Aug 2020 10:16:00 -0700 (PDT)
-Received: from mail-ua1-f46.google.com (mail-ua1-f46.google.com.
- [209.85.222.46])
- by smtp.gmail.com with ESMTPSA id 60sm8073223uad.5.2020.08.11.10.15.59
- for <kgdb-bugreport@lists.sourceforge.net>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 11 Aug 2020 10:16:00 -0700 (PDT)
-Received: by mail-ua1-f46.google.com with SMTP id s29so1542120uae.1
- for <kgdb-bugreport@lists.sourceforge.net>;
- Tue, 11 Aug 2020 10:15:59 -0700 (PDT)
-X-Received: by 2002:ab0:37d3:: with SMTP id e19mr24271569uav.64.1597166159205; 
- Tue, 11 Aug 2020 10:15:59 -0700 (PDT)
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=1XmU1UxtFoX+JxWRWBVQUmWx0SHpCQU0BLn06Acf+NU=;
+ b=F6XpRm2YZ7Z1JDZxaqdyqUXGyr86Cnkye8vfeH3KD7lRIuLdVWs0gAT5SZyxM3HJIf
+ D1F7W0/k3FKREBzJJ0HzswLqLnYOKkRy43rjuFEb0CHQw5kuy/xdazPFArwDbIGkVnaH
+ 7iyQcxdsmNQUGaVh3l5X1C3uYvwkxqMlhfFv4tD8pDwqwhEn7UC6luUomsZ/meaQnK1C
+ MfCwsgdibJgBhMY8uT+2oQI4gjYDZdbVKDqTPjqt+cT7xNXgEGngTBnttrxJheduPBCy
+ wCjaM9QTynFgd2x/AqJ9pA7LJw+lPzwsNUbOFXI7rZmZADJRMvRqluhu1nyMQR2G7gQM
+ MKPQ==
+X-Gm-Message-State: AOAM533PZOoeVi/1S360sj9Kf+mDV2KhPALKaGuE8dm2JA/BTdfxd7Ri
+ iDb9bKvGvxv++aMDgvxMjnYJ2A==
+X-Google-Smtp-Source: ABdhPJzVUgwczR2LI6waXoChEBBAZmQiyV+rznpXD/j383hrrCcUrIvWs+lVRQIEgQVz81ia6sNYwg==
+X-Received: by 2002:a17:90a:ccd:: with SMTP id
+ 13mr2785480pjt.123.1597181595355; 
+ Tue, 11 Aug 2020 14:33:15 -0700 (PDT)
+Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
+ by smtp.gmail.com with ESMTPSA id k12sm3694242pjp.38.2020.08.11.14.33.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 11 Aug 2020 14:33:14 -0700 (PDT)
+Date: Tue, 11 Aug 2020 14:33:13 -0700
+From: Kees Cook <keescook@chromium.org>
+To: Allen <allen.lkml@gmail.com>
+Message-ID: <202008111427.D00FCCF@keescook>
+References: <20200716030847.1564131-1-keescook@chromium.org>
+ <87h7tpa3hg.fsf@nanos.tec.linutronix.de>
+ <202007301113.45D24C9D@keescook>
+ <CAOMdWSJQKHAWY1P297b9koOLd8sVtezEYEyWGtymN1YeY27M6A@mail.gmail.com>
 MIME-Version: 1.0
-References: <1595333413-30052-1-git-send-email-sumit.garg@linaro.org>
- <CAFA6WYMN=na4Pxnu1LYRVAAZRdV==5EwU-Vcq-QkRb_jaLiPmw@mail.gmail.com>
- <20200811135801.GA416071@kroah.com>
- <CAFA6WYMN8i96rEZuHLnskB+4k0o=K9vF1_we83P04h2BSoGjmQ@mail.gmail.com>
- <20200811145816.GA424033@kroah.com>
-In-Reply-To: <20200811145816.GA424033@kroah.com>
-From: Doug Anderson <dianders@chromium.org>
-Date: Tue, 11 Aug 2020 10:15:47 -0700
-X-Gmail-Original-Message-ID: <CAD=FV=UD=cTn6jwpYS-C-=1ORd-4azZ8ZiBR6om++2sMS1nmMg@mail.gmail.com>
-Message-ID: <CAD=FV=UD=cTn6jwpYS-C-=1ORd-4azZ8ZiBR6om++2sMS1nmMg@mail.gmail.com>
-To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Content-Disposition: inline
+In-Reply-To: <CAOMdWSJQKHAWY1P297b9koOLd8sVtezEYEyWGtymN1YeY27M6A@mail.gmail.com>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: linuxfoundation.org]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.222.65 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.222.65 listed in wl.mailspike.net]
+ trust [209.85.216.65 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -104,10 +92,12 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.216.65 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1k5Xsg-006ZQ1-GE
-Subject: Re: [Kgdb-bugreport] [RFC 0/5] Introduce NMI aware serial drivers
+X-Headers-End: 1k5btZ-00A3lA-1S
+Subject: Re: [Kgdb-bugreport] [PATCH 0/3] Modernize tasklet callback API
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -119,160 +109,54 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daniel Thompson <daniel.thompson@linaro.org>,
- kgdb-bugreport@lists.sourceforge.net,
- Jason Wessel <jason.wessel@windriver.com>,
- Russell King - ARM Linux admin <linux@armlinux.org.uk>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- linux-serial@vger.kernel.org, Jiri Slaby <jslaby@suse.com>,
- linux-arm-kernel <linux-arm-kernel@lists.infradead.org>
+Cc: devel@driverdev.osuosl.org, linux-s390@vger.kernel.org,
+ alsa-devel@alsa-project.org, Oscar Carter <oscar.carter@gmx.com>,
+ Kernel Hardening <kernel-hardening@lists.openwall.com>,
+ Peter Zijlstra <peterz@infradead.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, linux-usb@vger.kernel.org,
+ linux-kernel@vger.kernel.org, netdev@vger.kernel.org,
+ linux-input@vger.kernel.org, kgdb-bugreport@lists.sourceforge.net,
+ Thomas Gleixner <tglx@linutronix.de>, Romain Perier <romain.perier@gmail.com>,
+ Will Deacon <will@kernel.org>, "David S. Miller" <davem@davemloft.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Hi,
+On Mon, Aug 03, 2020 at 02:16:15PM +0530, Allen wrote:
+> Here's the series re-based on top of 5.8
+> https://github.com/allenpais/tasklets/tree/V3
 
-On Tue, Aug 11, 2020 at 7:58 AM Greg Kroah-Hartman
-<gregkh@linuxfoundation.org> wrote:
->
-> On Tue, Aug 11, 2020 at 07:59:24PM +0530, Sumit Garg wrote:
-> > Hi Greg,
-> >
-> > Thanks for your comments.
-> >
-> > On Tue, 11 Aug 2020 at 19:27, Greg Kroah-Hartman
-> > <gregkh@linuxfoundation.org> wrote:
-> > >
-> > > On Tue, Aug 11, 2020 at 07:20:26PM +0530, Sumit Garg wrote:
-> > > > On Tue, 21 Jul 2020 at 17:40, Sumit Garg <sumit.garg@linaro.org> wrote:
-> > > > >
-> > > > > Make it possible for UARTs to trigger magic sysrq from an NMI. With the
-> > > > > advent of pseudo NMIs on arm64 it became quite generic to request serial
-> > > > > device interrupt as an NMI rather than IRQ. And having NMI driven serial
-> > > > > RX will allow us to trigger magic sysrq as an NMI and hence drop into
-> > > > > kernel debugger in NMI context.
-> > > > >
-> > > > > The major use-case is to add NMI debugging capabilities to the kernel
-> > > > > in order to debug scenarios such as:
-> > > > > - Primary CPU is stuck in deadlock with interrupts disabled and hence
-> > > > >   doesn't honor serial device interrupt. So having magic sysrq triggered
-> > > > >   as an NMI is helpful for debugging.
-> > > > > - Always enabled NMI based magic sysrq irrespective of whether the serial
-> > > > >   TTY port is active or not.
-> > > > >
-> > > > > Currently there is an existing kgdb NMI serial driver which provides
-> > > > > partial implementation in upstream to have a separate ttyNMI0 port but
-> > > > > that remained in silos with the serial core/drivers which made it a bit
-> > > > > odd to enable using serial device interrupt and hence remained unused. It
-> > > > > seems to be clearly intended to avoid almost all custom NMI changes to
-> > > > > the UART driver.
-> > > > >
-> > > > > But this patch-set allows the serial core/drivers to be NMI aware which
-> > > > > in turn provides NMI debugging capabilities via magic sysrq and hence
-> > > > > there is no specific reason to keep this special driver. So remove it
-> > > > > instead.
-> > > > >
-> > > > > Approach:
-> > > > > ---------
-> > > > >
-> > > > > The overall idea is to intercept serial RX characters in NMI context, if
-> > > > > those are specific to magic sysrq then allow corresponding handler to run
-> > > > > in NMI context. Otherwise, defer all other RX and TX operations onto IRQ
-> > > > > work queue in order to run those in normal interrupt context.
-> > > > >
-> > > > > This approach is demonstrated using amba-pl011 driver.
-> > > > >
-> > > > > Patch-wise description:
-> > > > > -----------------------
-> > > > >
-> > > > > Patch #1 prepares magic sysrq handler to be NMI aware.
-> > > > > Patch #2 adds NMI framework to serial core.
-> > > > > Patch #3 and #4 demonstrates NMI aware uart port using amba-pl011 driver.
-> > > > > Patch #5 removes kgdb NMI serial driver.
-> > > > >
-> > > > > Goal of this RFC:
-> > > > > -----------------
-> > > > >
-> > > > > My main reason for sharing this as an RFC is to help decide whether or
-> > > > > not to continue with this approach. The next step for me would to port
-> > > > > the work to a system with an 8250 UART.
-> > > > >
-> > > >
-> > > > A gentle reminder to seek feedback on this series.
+Great!
 
-It's been on my list for a while.  I started it Friday but ran out of
-time.  This week hasn't been going as smoothly as I hoped but I'll
-prioritize this since it's been too long.
+> Let me know how you would want these to be reviewed.
 
+Was a Coccinelle script used for any of these conversions? I wonder if
+it'd be easier to do a single treewide patch for the more mechanical
+changes.
 
-> > > It's the middle of the merge window, and I can't do anything.
-> > >
-> > > Also, I almost never review RFC patches as I have have way too many
-> > > patches that people think are "right" to review first...
-> > >
-> >
-> > Okay, I understand and I can definitely wait for your feedback.
->
-> My feedback here is this:
->
-> > > I suggest you work to flesh this out first and submit something that you
-> > > feels works properly.
->
-> :)
->
-> > IIUC, in order to make this approach substantial I need to make it
-> > work with 8250 UART (major serial driver), correct? As currently it
-> > works properly for amba-pl011 driver.
->
-> Yes, try to do that, or better yet, make it work with all serial drivers
-> automatically.
+And, actually, I still think the "prepare" patches should just be
+collapsed into the actual "covert" patches -- there are only a few.
 
-A bit of early feedback...
+After those, yeah, I think getting these sent to their respective
+maintainers is the next step.
 
-Although I'm not sure we can do Greg's "make it work everywhere
-automatically", it's possible you could get half of your patch done
-automatically.  Specifically, your patch really does two things:
+> Also, I was thinking if removing tasklets completely could be a task
+> on KSPP wiki. If yes, I did like to take ownership of that task. I have a
+> couple of ideas in mind, which could be discussed in a separate email.
 
-a) It leaves the serial port "active" all the time to look for sysrq.
-In other words even if there is no serial client it's always reading
-the port looking for characters.  IMO this concept should be separated
-out from the NMI concept and _could_ automatically work for all serial
-drivers.  You'd just need something in the serial core that acted like
-a default client if nobody else opened the serial port.  The nice
-thing here is that we go through all the normal code paths and don't
-need special cases in the driver.
+Sure! I will add it to the tracker. Here's for the refactoring:
+https://github.com/KSPP/linux/issues/30
 
-b) It enables NMI for your particular serial driver.  This seems like
-it'd be hard to do automatically because you can't do the same things
-at NMI that you could do in a normal interrupt handler.
+and here's for the removal:
+https://github.com/KSPP/linux/issues/94
 
-NOTE: to me, a) is more important than b) (though it'd be nice to have
-both).  This would be especially true the earlier you could make a)
-work since the main time when an "agetty" isn't running on my serial
-port to read characters is during bootup.
+if you can added details/examples of how they should be removed, that'd
+help other folks too, if they wanted to jump in. :)
 
-Why is b) less important to me? Sure, it would let you drop into the
-debugger in the case where the CPU handling serial port interrupts is
-hung with IRQs disabled, but it _woudln't_ let you drop into the
-debugger in the case where a different CPU is hung with IRQs disabled.
-To get that we need NMI roundup (which, I know, you are also working
-on for arm64).  ...and, if we've got NMI roundup, presumably we can
-find our way into the debugger by either moving the serial interrupt
-to a different CPU ahead of time or using some type of lockup detector
-(which I know you are also working on for arm64).
+-Kees
 
-
-One last bit of feedback is that I noticed that you didn't try to
-implement the old "knock" functionality of the old NMI driver that's
-being deleted.  That is: your new patches don't provide an alternate
-way to drop into the debugger for systems where BREAK isn't hooked up.
-That's not a hard requirement, but I was kinda hoping for it since I
-have some systems that haven't routed BREAK properly.  ;-)
-
-
-I'll try to get some more detailed feedback in the next few days.
-
--Doug
+-- 
+Kees Cook
 
 
 _______________________________________________
