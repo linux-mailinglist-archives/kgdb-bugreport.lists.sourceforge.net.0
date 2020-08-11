@@ -2,104 +2,108 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 83312241270
-	for <lists+kgdb-bugreport@lfdr.de>; Mon, 10 Aug 2020 23:33:01 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id DD9E5241AAB
+	for <lists+kgdb-bugreport@lfdr.de>; Tue, 11 Aug 2020 13:54:36 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1k5FPg-0005pl-Ai
-	for lists+kgdb-bugreport@lfdr.de; Mon, 10 Aug 2020 21:33:00 +0000
+	id 1k5SrT-00039T-MF
+	for lists+kgdb-bugreport@lfdr.de; Tue, 11 Aug 2020 11:54:35 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <dianders@chromium.org>) id 1k5FPe-0005pY-7i
- for kgdb-bugreport@lists.sourceforge.net; Mon, 10 Aug 2020 21:32:58 +0000
+ (envelope-from
+ <bounce+20cdd0.be9e4a-kgdb-bugreport=lists.sourceforge.net@mg.codeaurora.org>)
+ id 1k5SrR-00039D-4h
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 11 Aug 2020 11:54:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hXASfmqoUl3o8zN6MXHewh7vS0xl4tHelH9X4EiAPTg=; b=dYMdmsYOboMp/0uS69Dc/9u6zp
- 2gc6diTIXkmF3cXY/j4oQQZSapDXs7J1ZtrAvUocOVdsiT1/PzRiSppdWQq+Ebea+VhlT2T4OHVTq
- C8TMLVmlHDI9gXNseAoTYNyYLiLbfxMw9urDCpqHFgMwYFXehYL7vKJYYt/KzZjv8vrU=;
+ bh=BbgBllrGixV1VF5JA2+YDRoW43ZC6IFJKZUmb8h6+nw=; b=jA18hhN44OQD7hPeeQxnG1lWKH
+ mDv64fySPYEYMUDrqboiwtSJldDkajblw0VDP47+zt8m8sN0ke+sy47ba/uFqTXo6LtX+zZMtZmsg
+ rwan0B+2IsTCUHbYAERalRwZVL2Ylh4JKV/Ap7604nQCCw0ArjXOcN2VH3fAKJIe83Gg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=hXASfmqoUl3o8zN6MXHewh7vS0xl4tHelH9X4EiAPTg=; b=k3DXojSD0IiM48b2b1ZIpn2JYf
- RmV80t/LNN9JD38zf0cbZdgLJNOzteduH3ZhBpIjf9T4I2j5oQlYLHAaUZNSTFVucIo5rxnKkkLe4
- RCL3heqkF2tCy/lvof2LbFecLu9WJywZ+t+Zv5VNLKIYXU0yFhHG0Ety/ZxQEMRE/+nE=;
-Received: from mail-pj1-f67.google.com ([209.85.216.67])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ bh=BbgBllrGixV1VF5JA2+YDRoW43ZC6IFJKZUmb8h6+nw=; b=V/P7I0K4RzDjy9KiiK67aaqA97
+ qIsKpTFA4KhRbUqIHFbyj2eTutMmASoPTl4uq2ZwoHzDHilCS2c2CaCedLRXR4s6iWCobkV2mgd8W
+ tqEWBWunPYzfQcAUCoA++Dd4YGBO2sF98VV6uONZyA1HEbM7PBo3wrbH7qs36QY/8Owg=;
+Received: from m43-7.mailgun.net ([69.72.43.7])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1k5FPa-006Dmf-KW
- for kgdb-bugreport@lists.sourceforge.net; Mon, 10 Aug 2020 21:32:58 +0000
-Received: by mail-pj1-f67.google.com with SMTP id mt12so752846pjb.4
- for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 10 Aug 2020 14:32:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=hXASfmqoUl3o8zN6MXHewh7vS0xl4tHelH9X4EiAPTg=;
- b=iPtviNy9RShsJFpYsrUv4+ItQVmKuSBZAs+NqagKy930sVZjRWUTkUxZacbU9KMJ9x
- CldemxPziILP/Xm4LSWsQAELyezydtv5sifKft2/LSVyc4/58JoPG6k5BIxVVvNHjwp4
- uWlD8l3v+F7WMtJqUFLtCaENMe7W0y16GGvzg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=hXASfmqoUl3o8zN6MXHewh7vS0xl4tHelH9X4EiAPTg=;
- b=Ixj2Eh6Dpb1x3dWr7r2wWTNgofhyfcAdeKmEBw47cI1Vlza4tNuV+FhWj9sPXNbQzc
- ao47KWpp6S+RjSVTiyvApk9dhfbpGkH7K9GvU0zI2wOqXpcCoCJdfR2lljrK3XFtFE8J
- C1pk98AeUIiUQRaIIwec5yHTfbUZvbhsHJXc4mv6z0maDpcX5K+cS0vxQ1vh1vNu1mLI
- HX27OWprC3jTF29fYkKWJqFTjIQbySO/noxbuTnkhzrDFHauJyzC6siuzoLpbx7XvXwx
- lURwIe5wOw8Yk5Cw+DXjjGQyGZznZxDGZOg9aULGp3Woi0ZAl4YhEMn+r+GPHs5dqkOx
- 41jg==
-X-Gm-Message-State: AOAM532MowdS4zUeNaAqFJKEpuUFreyEi5cCYtsngRGGCSJuhRygbbPb
- h7SOWA9YGznBHiK4dZ2nuGTGq3TAN5A=
-X-Google-Smtp-Source: ABdhPJyGtAA1Ky0C6Oh+uX6aohRnUh1FOaQRV2rKSgTCn109u7ca1F4CJ+4knrgUz5mKGYtCdhAMiQ==
-X-Received: by 2002:ac5:cb6e:: with SMTP id l14mr22111768vkn.72.1597094784978; 
- Mon, 10 Aug 2020 14:26:24 -0700 (PDT)
-Received: from mail-vs1-f49.google.com (mail-vs1-f49.google.com.
- [209.85.217.49])
- by smtp.gmail.com with ESMTPSA id a82sm5656189vke.39.2020.08.10.14.26.23
- for <kgdb-bugreport@lists.sourceforge.net>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 10 Aug 2020 14:26:24 -0700 (PDT)
-Received: by mail-vs1-f49.google.com with SMTP id r7so4963578vsq.5
- for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 10 Aug 2020 14:26:23 -0700 (PDT)
-X-Received: by 2002:a67:2c4f:: with SMTP id s76mr20074899vss.213.1597094783404; 
- Mon, 10 Aug 2020 14:26:23 -0700 (PDT)
-MIME-Version: 1.0
+ id 1k5SrK-005UNK-AT
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 11 Aug 2020 11:54:33 +0000
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=mg.codeaurora.org;
+ q=dns/txt; 
+ s=smtp; t=1597146866; h=Content-Transfer-Encoding: Content-Type:
+ In-Reply-To: MIME-Version: Date: Message-ID: From: References: Cc: To:
+ Subject: Sender; bh=BbgBllrGixV1VF5JA2+YDRoW43ZC6IFJKZUmb8h6+nw=;
+ b=g9ZqpRoE6RNlHBSp4DqqUD8RNDJwZF9I1s0bfplhHSbe+cWBhwAWGs4QUrTL3CZljweuKrUg
+ G/muig8zi00tEd7jvKtaGi3p8CLuPZVHviygMPL56q4rHMKgBCXeE22pLV1Tf49oqvg/22VO
+ oVjytsnCUw1iYyo9Ge3tkRQopIE=
+X-Mailgun-Sending-Ip: 69.72.43.7
+X-Mailgun-Sid: WyJiNjhjNiIsICJrZ2RiLWJ1Z3JlcG9ydEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQiLCAiYmU5ZTRhIl0=
+Received: from smtp.codeaurora.org
+ (ec2-35-166-182-171.us-west-2.compute.amazonaws.com [35.166.182.171]) by
+ smtp-out-n13.prod.us-west-2.postgun.com with SMTP id
+ 5f3286eb4c787f237b268b3d (version=TLS1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256); Tue, 11 Aug 2020 11:54:19
+ GMT
+Received: by smtp.codeaurora.org (Postfix, from userid 1001)
+ id E80F9C433A0; Tue, 11 Aug 2020 11:54:18 +0000 (UTC)
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+ aws-us-west-2-caf-mail-1.web.codeaurora.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.0 required=2.0 tests=ALL_TRUSTED,NICE_REPLY_A,
+ SPF_NONE autolearn=unavailable autolearn_force=no version=3.4.0
+Received: from [192.168.1.100] (unknown [157.43.31.24])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested) (Authenticated sender: akashast)
+ by smtp.codeaurora.org (Postfix) with ESMTPSA id 9B877C433C6;
+ Tue, 11 Aug 2020 11:54:12 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org 9B877C433C6
+Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org;
+ dmarc=none (p=none dis=none) header.from=codeaurora.org
+Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org;
+ spf=none smtp.mailfrom=akashast@codeaurora.org
+To: Doug Anderson <dianders@chromium.org>
 References: <20200806221904.1.I4455ff86f0ef5281c2a0cd0a4712db614548a5ca@changeid>
  <adaef6bf-7887-feea-fedf-d3bc5566bb9d@codeaurora.org>
-In-Reply-To: <adaef6bf-7887-feea-fedf-d3bc5566bb9d@codeaurora.org>
-From: Doug Anderson <dianders@chromium.org>
-Date: Mon, 10 Aug 2020 14:26:11 -0700
-X-Gmail-Original-Message-ID: <CAD=FV=X8tNpmkSrEjXgKPKsBOZfjt8aVQe47gzi5FvPqdOQN+A@mail.gmail.com>
-Message-ID: <CAD=FV=X8tNpmkSrEjXgKPKsBOZfjt8aVQe47gzi5FvPqdOQN+A@mail.gmail.com>
-To: Akash Asthana <akashast@codeaurora.org>
-X-Spam-Score: -0.1 (/)
+ <CAD=FV=X8tNpmkSrEjXgKPKsBOZfjt8aVQe47gzi5FvPqdOQN+A@mail.gmail.com>
+From: Akash Asthana <akashast@codeaurora.org>
+Message-ID: <b4cd8daf-ef37-4cc1-546e-ba46cb19392a@codeaurora.org>
+Date: Tue, 11 Aug 2020 17:24:08 +0530
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.11.0
+MIME-Version: 1.0
+In-Reply-To: <CAD=FV=X8tNpmkSrEjXgKPKsBOZfjt8aVQe47gzi5FvPqdOQN+A@mail.gmail.com>
+Content-Language: en-US
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.216.67 listed in list.dnswl.org]
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: crrev.com]
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.216.67 listed in wl.mailspike.net]
+ [69.72.43.7 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [69.72.43.7 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1k5FPa-006Dmf-KW
+ -0.0 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1k5SrK-005UNK-AT
 Subject: Re: [Kgdb-bugreport] [PATCH] serial: qcom_geni_serial: Fix recent
  kdb hang
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
@@ -119,151 +123,131 @@ Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
  Bjorn Andersson <bjorn.andersson@linaro.org>, Andy Gross <agross@kernel.org>,
  linux-serial@vger.kernel.org, kgdb-bugreport@lists.sourceforge.net,
  Mukesh Savaliya <msavaliy@codeaurora.org>, Jiri Slaby <jirislaby@kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Hi,
-
-On Mon, Aug 10, 2020 at 5:32 AM Akash Asthana <akashast@codeaurora.org> wrote:
->
-> Hi Doug,
->
-> On 8/7/2020 10:49 AM, Douglas Anderson wrote:
-> > The commit e42d6c3ec0c7 ("serial: qcom_geni_serial: Make kgdb work
-> > even if UART isn't console") worked pretty well and I've been doing a
-> > lot of debugging with it.  However, recently I typed "dmesg" in kdb
-> > and then held the space key down to scroll through the pagination.  My
-> > device hung.  This was repeatable and I found that it was introduced
-> > with the aforementioned commit.
-> >
-> > It turns out that there are some strange boundary cases in geni where
-> > in some weird situations it will signal RX_LAST but then will put 0 in
-> > RX_LAST_BYTE.  This means that the entire last FIFO entry is valid.
->
-> IMO that means we received a word in RX_FIFO and it is the last word
-> hence RX_LAST bit is set.
-
-What you say would make logical sense, but it's not how I have
-observed geni to work.  See below.
-
-
-> RX_LAST_BYTE is 0 means none of the bytes are valid in the last word.
-
-This would imply that qcom_geni_serial_handle_rx() is also broken
-though, wouldn't it?  Specifically imagine that WORD_CNT is 1 and
-RX_LAST is set and RX_LAST_BYTE_VALID is true.  Here's the logic from
-that function:
-
-  total_bytes = BYTES_PER_FIFO_WORD * (word_cnt - 1);
-  if (last_word_partial && last_word_byte_cnt)
-    total_bytes += last_word_byte_cnt;
-  else
-    total_bytes += BYTES_PER_FIFO_WORD;
-  port->handle_rx(uport, total_bytes, drop);
-
-As you can see that logic will set "total_bytes" to 4 in the case I'm
-talking about.
-
-
-> In such scenario we should just read RX_FIFO buffer (to empty it),
-> discard the word and return NO_POLL_CHAR. Something like below.
->
-> ---------------------------------------------------------------------------------------------------------------------------------------------------------
->
->                  else
->                          private_data->poll_cached_bytes_cnt = 4;
->
->                  private_data->poll_cached_bytes =
->                          readl(uport->membase + SE_GENI_RX_FIFOn);
->          }
->
-> +        if (!private_data->poll_cached_bytes_cnt)
-> +              return NO_POLL_CHAR;
->          private_data->poll_cached_bytes_cnt--;
->          ret = private_data->poll_cached_bytes & 0xff;
-> -------------------------------------------------------------------------------------------------------------------------------------------------------------
->
-> Please let me know whether above code helps.
-
-Your code will avoid the hang.  Yes.  ...but it will drop bytes.  I
-devised a quick-n-dirty test.  Here's a test of your code:
-
-https://crrev.com/c/2346886
-
-...and here's a test of my code:
-
-https://crrev.com/c/2346884
-
-I had to keep a buffer around since it's hard to debug the serial
-driver.  In both cases I put "DOUG" into the buffer when I detect this
-case.  If my theory about how geni worked was wrong then we should
-expect to see some garbage in the buffer right after the DOUG, right?
-...but my code gets the alphabet in nice sequence.  Your code drops 4
-bytes.
-
-
-NOTE: while poking around with the above two test patches I found it
-was pretty easy to get geni to drop bytes / hit overflow cases and
-also to insert bogus 0 bytes in the stream (I believe these are
-related).  I was able to reproduce this:
-* With ${SUBJECT} patch in place.
-* With your proposed patch.
-* With the recent "geni" patches reverted (in other words back to 1
-byte per FIFO entry).
-
-It's not terribly surprising that we're overflowing since I believe
-kgdb isn't too keen to read characters at the same time it's writing.
-That doesn't explain the weird 0-bytes that geni seemed to be
-inserting, but at least it would explain the overflows.  However, even
-after I fixed this I _still_ was getting problems.  Specifically geni
-seemed to be hiding bytes from me until it was too late.  I put
-logging in and would see this:
-
-1 word in FIFO - wxyz
-1 word in FIFO (last set, last FIFO has 1 byte) - \n
-Check again, still 0 bytes in FIFO
-Suddenly 16 bytes are in FIFO and S_RX_FIFO_WR_ERR_EN is set.
-
-I spent a whole bunch of time poking at this and couldn't find any
-sort of workaround.  Presumably geni is taking some time between me
-reading the last word out of the FIFO from the "previous" packet and
-then transitioning to the new packet.  I found a lot of references to
-this process in the hardware register description (see GENI_CFG_REG69,
-for instance), but I couldn't manage to make the kick to happen any
-faster.  Presumably this isn't a problem for things like Bluetooth
-since flow control saves them.  ...and I guess this isn't a problem in
-practice because we usually _send_ a lot of data to the host for
-console/kgdb and it's only the host => DUT path that has problems.
-
-
-> I am not sure about what all scenario can leads to this behavior from
-> hardware, I will try to get an answer from hardware team.
->
-> Any error bit was set for SE_GENI_S_IRQ_STATUS & SE_GENI_M_IRQ_STATUS
-> registers?
-
-As per above I can see overflows in my test case and geni seems to be
-behaving pretty badly.  If you have ideas on how to fix this I'd love
-it.  However, it still seems like my patch is right because (at least
-in the cases I tested) it avoids dropping bytes in some cases.  It
-also matches how qcom_geni_serial_handle_rx() works and if that was
-broken we'd have noticed by now.
-
-
-> I guess the hang was seen because *poll_cached_bytes_cnt* is unsigned
-> int and it's value was 0, when it's decremented by 1 it's value become
-> '4294967295' (very large) and dummy RX (0x00) would happen that
->
-> many times before reading any actual RX transfers/bytes.
-
-Right.  That would be why it was hanging.
-
-
--Doug
-
-
-_______________________________________________
-Kgdb-bugreport mailing list
-Kgdb-bugreport@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport
+Ck9uIDgvMTEvMjAyMCAyOjU2IEFNLCBEb3VnIEFuZGVyc29uIHdyb3RlOgo+IEhpLAo+Cj4gT24g
+TW9uLCBBdWcgMTAsIDIwMjAgYXQgNTozMiBBTSBBa2FzaCBBc3RoYW5hIDxha2FzaGFzdEBjb2Rl
+YXVyb3JhLm9yZz4gd3JvdGU6Cj4+IEhpIERvdWcsCj4+Cj4+IE9uIDgvNy8yMDIwIDEwOjQ5IEFN
+LCBEb3VnbGFzIEFuZGVyc29uIHdyb3RlOgo+Pj4gVGhlIGNvbW1pdCBlNDJkNmMzZWMwYzcgKCJz
+ZXJpYWw6IHFjb21fZ2VuaV9zZXJpYWw6IE1ha2Uga2dkYiB3b3JrCj4+PiBldmVuIGlmIFVBUlQg
+aXNuJ3QgY29uc29sZSIpIHdvcmtlZCBwcmV0dHkgd2VsbCBhbmQgSSd2ZSBiZWVuIGRvaW5nIGEK
+Pj4+IGxvdCBvZiBkZWJ1Z2dpbmcgd2l0aCBpdC4gIEhvd2V2ZXIsIHJlY2VudGx5IEkgdHlwZWQg
+ImRtZXNnIiBpbiBrZGIKPj4+IGFuZCB0aGVuIGhlbGQgdGhlIHNwYWNlIGtleSBkb3duIHRvIHNj
+cm9sbCB0aHJvdWdoIHRoZSBwYWdpbmF0aW9uLiAgTXkKPj4+IGRldmljZSBodW5nLiAgVGhpcyB3
+YXMgcmVwZWF0YWJsZSBhbmQgSSBmb3VuZCB0aGF0IGl0IHdhcyBpbnRyb2R1Y2VkCj4+PiB3aXRo
+IHRoZSBhZm9yZW1lbnRpb25lZCBjb21taXQuCj4+Pgo+Pj4gSXQgdHVybnMgb3V0IHRoYXQgdGhl
+cmUgYXJlIHNvbWUgc3RyYW5nZSBib3VuZGFyeSBjYXNlcyBpbiBnZW5pIHdoZXJlCj4+PiBpbiBz
+b21lIHdlaXJkIHNpdHVhdGlvbnMgaXQgd2lsbCBzaWduYWwgUlhfTEFTVCBidXQgdGhlbiB3aWxs
+IHB1dCAwIGluCj4+PiBSWF9MQVNUX0JZVEUuICBUaGlzIG1lYW5zIHRoYXQgdGhlIGVudGlyZSBs
+YXN0IEZJRk8gZW50cnkgaXMgdmFsaWQuCj4+IElNTyB0aGF0IG1lYW5zIHdlIHJlY2VpdmVkIGEg
+d29yZCBpbiBSWF9GSUZPIGFuZCBpdCBpcyB0aGUgbGFzdCB3b3JkCj4+IGhlbmNlIFJYX0xBU1Qg
+Yml0IGlzIHNldC4KPiBXaGF0IHlvdSBzYXkgd291bGQgbWFrZSBsb2dpY2FsIHNlbnNlLCBidXQg
+aXQncyBub3QgaG93IEkgaGF2ZQo+IG9ic2VydmVkIGdlbmkgdG8gd29yay4gIFNlZSBiZWxvdy4K
+Pgo+Cj4+IFJYX0xBU1RfQllURSBpcyAwIG1lYW5zIG5vbmUgb2YgdGhlIGJ5dGVzIGFyZSB2YWxp
+ZCBpbiB0aGUgbGFzdCB3b3JkLgo+IFRoaXMgd291bGQgaW1wbHkgdGhhdCBxY29tX2dlbmlfc2Vy
+aWFsX2hhbmRsZV9yeCgpIGlzIGFsc28gYnJva2VuCj4gdGhvdWdoLCB3b3VsZG4ndCBpdD8gIFNw
+ZWNpZmljYWxseSBpbWFnaW5lIHRoYXQgV09SRF9DTlQgaXMgMSBhbmQKPiBSWF9MQVNUIGlzIHNl
+dCBhbmQgUlhfTEFTVF9CWVRFX1ZBTElEIGlzIHRydWUuICBIZXJlJ3MgdGhlIGxvZ2ljIGZyb20K
+PiB0aGF0IGZ1bmN0aW9uOgo+Cj4gICAgdG90YWxfYnl0ZXMgPSBCWVRFU19QRVJfRklGT19XT1JE
+ICogKHdvcmRfY250IC0gMSk7Cj4gICAgaWYgKGxhc3Rfd29yZF9wYXJ0aWFsICYmIGxhc3Rfd29y
+ZF9ieXRlX2NudCkKPiAgICAgIHRvdGFsX2J5dGVzICs9IGxhc3Rfd29yZF9ieXRlX2NudDsKPiAg
+ICBlbHNlCj4gICAgICB0b3RhbF9ieXRlcyArPSBCWVRFU19QRVJfRklGT19XT1JEOwo+ICAgIHBv
+cnQtPmhhbmRsZV9yeCh1cG9ydCwgdG90YWxfYnl0ZXMsIGRyb3ApOwo+Cj4gQXMgeW91IGNhbiBz
+ZWUgdGhhdCBsb2dpYyB3aWxsIHNldCAidG90YWxfYnl0ZXMiIHRvIDQgaW4gdGhlIGNhc2UgSSdt
+Cj4gdGFsa2luZyBhYm91dC4KClllYWggSU1PIGFzIHBlciB0aGVvcnkgdGhpcyBzaG91bGQgYWxz
+byBiZSBjb3JyZWN0ZWQgYnV0IHNpbmNlIHlvdSBoYXZlIAphbHJlYWR5IHB1bGxlZCBvdXQgZmV3
+IGV4cGVyaW1lbnQgdG8gcHJvdmUgZ2FyYmFnZSBkYXRhIGlzc3VlKHdoaWNoIEnCoCAKd2FzIHN1
+c3BlY3RpbmcpIGlzIG5vdCBzZWVuLgoKSXQncyBhbHJlYWR5IGNvbnNpc3RlbnQgd2l0aCBleGlz
+dGluZyBsb2dpYyBhbmQgaXQgYmVoYXZlcyB3ZWxsIApwcmFjdGljYWxseSAuIFNvIHRoZSBjaGFu
+Z2VzIGNvdWxkIGJlIG1lcmdlLiBNZWFud2hpbGUgSSBhbSBjaGVja2luZyAKd2l0aCBIVyB0ZWFt
+IHRvIGdldCBjbGFyaXR5LgoKPgo+Cj4+IEluIHN1Y2ggc2NlbmFyaW8gd2Ugc2hvdWxkIGp1c3Qg
+cmVhZCBSWF9GSUZPIGJ1ZmZlciAodG8gZW1wdHkgaXQpLAo+PiBkaXNjYXJkIHRoZSB3b3JkIGFu
+ZCByZXR1cm4gTk9fUE9MTF9DSEFSLiBTb21ldGhpbmcgbGlrZSBiZWxvdy4KPj4KPj4gLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCj4+Cj4+ICAgICAgICAgICAgICAgICAg
+IGVsc2UKPj4gICAgICAgICAgICAgICAgICAgICAgICAgICBwcml2YXRlX2RhdGEtPnBvbGxfY2Fj
+aGVkX2J5dGVzX2NudCA9IDQ7Cj4+Cj4+ICAgICAgICAgICAgICAgICAgIHByaXZhdGVfZGF0YS0+
+cG9sbF9jYWNoZWRfYnl0ZXMgPQo+PiAgICAgICAgICAgICAgICAgICAgICAgICAgIHJlYWRsKHVw
+b3J0LT5tZW1iYXNlICsgU0VfR0VOSV9SWF9GSUZPbik7Cj4+ICAgICAgICAgICB9Cj4+Cj4+ICsg
+ICAgICAgIGlmICghcHJpdmF0ZV9kYXRhLT5wb2xsX2NhY2hlZF9ieXRlc19jbnQpCj4+ICsgICAg
+ICAgICAgICAgIHJldHVybiBOT19QT0xMX0NIQVI7Cj4+ICAgICAgICAgICBwcml2YXRlX2RhdGEt
+PnBvbGxfY2FjaGVkX2J5dGVzX2NudC0tOwo+PiAgICAgICAgICAgcmV0ID0gcHJpdmF0ZV9kYXRh
+LT5wb2xsX2NhY2hlZF9ieXRlcyAmIDB4ZmY7Cj4+IC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0KPj4KPj4gUGxlYXNlIGxldCBtZSBrbm93IHdoZXRoZXIgYWJvdmUg
+Y29kZSBoZWxwcy4KPiBZb3VyIGNvZGUgd2lsbCBhdm9pZCB0aGUgaGFuZy4gIFllcy4gIC4uLmJ1
+dCBpdCB3aWxsIGRyb3AgYnl0ZXMuICBJCj4gZGV2aXNlZCBhIHF1aWNrLW4tZGlydHkgdGVzdC4g
+IEhlcmUncyBhIHRlc3Qgb2YgeW91ciBjb2RlOgpJIGFzc3VtZWQgdGhvc2UgYXMgaW52YWxpZCBi
+eXRlcyBhbmQgZG9uJ3Qgd2FudGVkIHRvIHJlYWQgdGhlbSBzbyB5ZWFoIApkcm9wcGluZyBvZiBi
+eXRlcyB3YXMgZXhwZWN0ZWQuCj4KPiBodHRwczovL2NycmV2LmNvbS9jLzIzNDY4ODYKPgo+IC4u
+LmFuZCBoZXJlJ3MgYSB0ZXN0IG9mIG15IGNvZGU6Cj4KPiBodHRwczovL2NycmV2LmNvbS9jLzIz
+NDY4ODQKPgo+IEkgaGFkIHRvIGtlZXAgYSBidWZmZXIgYXJvdW5kIHNpbmNlIGl0J3MgaGFyZCB0
+byBkZWJ1ZyB0aGUgc2VyaWFsCj4gZHJpdmVyLiAgSW4gYm90aCBjYXNlcyBJIHB1dCAiRE9VRyIg
+aW50byB0aGUgYnVmZmVyIHdoZW4gSSBkZXRlY3QgdGhpcwo+IGNhc2UuICBJZiBteSB0aGVvcnkg
+YWJvdXQgaG93IGdlbmkgd29ya2VkIHdhcyB3cm9uZyB0aGVuIHdlIHNob3VsZAo+IGV4cGVjdCB0
+byBzZWUgc29tZSBnYXJiYWdlIGluIHRoZSBidWZmZXIgcmlnaHQgYWZ0ZXIgdGhlIERPVUcsIHJp
+Z2h0Pwo+IC4uLmJ1dCBteSBjb2RlIGdldHMgdGhlIGFscGhhYmV0IGluIG5pY2Ugc2VxdWVuY2Uu
+ICBZb3VyIGNvZGUgZHJvcHMgNAo+IGJ5dGVzLgpZZWFoIEkgd2FzIGV4cGVjdGluZyBnYXJiYWdl
+IGRhdGEuCj4KPgo+IE5PVEU6IHdoaWxlIHBva2luZyBhcm91bmQgd2l0aCB0aGUgYWJvdmUgdHdv
+IHRlc3QgcGF0Y2hlcyBJIGZvdW5kIGl0Cj4gd2FzIHByZXR0eSBlYXN5IHRvIGdldCBnZW5pIHRv
+IGRyb3AgYnl0ZXMgLyBoaXQgb3ZlcmZsb3cgY2FzZXMgYW5kCj4gYWxzbyB0byBpbnNlcnQgYm9n
+dXMgMCBieXRlcyBpbiB0aGUgc3RyZWFtIChJIGJlbGlldmUgdGhlc2UgYXJlCj4gcmVsYXRlZCku
+ICBJIHdhcyBhYmxlIHRvIHJlcHJvZHVjZSB0aGlzOgo+ICogV2l0aCAke1NVQkpFQ1R9IHBhdGNo
+IGluIHBsYWNlLgo+ICogV2l0aCB5b3VyIHByb3Bvc2VkIHBhdGNoLgo+ICogV2l0aCB0aGUgcmVj
+ZW50ICJnZW5pIiBwYXRjaGVzIHJldmVydGVkIChpbiBvdGhlciB3b3JkcyBiYWNrIHRvIDEKPiBi
+eXRlIHBlciBGSUZPIGVudHJ5KS4KPgo+IEl0J3Mgbm90IHRlcnJpYmx5IHN1cnByaXNpbmcgdGhh
+dCB3ZSdyZSBvdmVyZmxvd2luZyBzaW5jZSBJIGJlbGlldmUKPiBrZ2RiIGlzbid0IHRvbyBrZWVu
+IHRvIHJlYWQgY2hhcmFjdGVycyBhdCB0aGUgc2FtZSB0aW1lIGl0J3Mgd3JpdGluZy4KPiBUaGF0
+IGRvZXNuJ3QgZXhwbGFpbiB0aGUgd2VpcmQgMC1ieXRlcyB0aGF0IGdlbmkgc2VlbWVkIHRvIGJl
+Cj4gaW5zZXJ0aW5nLCBidXQgYXQgbGVhc3QgaXQgd291bGQgZXhwbGFpbiB0aGUgb3ZlcmZsb3dz
+LiAgSG93ZXZlciwgZXZlbgo+IGFmdGVyIEkgZml4ZWQgdGhpcyBJIF9zdGlsbF8gd2FzIGdldHRp
+bmcgcHJvYmxlbXMuICBTcGVjaWZpY2FsbHkgZ2VuaQo+IHNlZW1lZCB0byBiZSBoaWRpbmcgYnl0
+ZXMgZnJvbSBtZSB1bnRpbCBpdCB3YXMgdG9vIGxhdGUuICBJIHB1dAo+IGxvZ2dpbmcgaW4gYW5k
+IHdvdWxkIHNlZSB0aGlzOgo+Cj4gMSB3b3JkIGluIEZJRk8gLSB3eHl6Cj4gMSB3b3JkIGluIEZJ
+Rk8gKGxhc3Qgc2V0LCBsYXN0IEZJRk8gaGFzIDEgYnl0ZSkgLSBcbgo+IENoZWNrIGFnYWluLCBz
+dGlsbCAwIGJ5dGVzIGluIEZJRk8KPiBTdWRkZW5seSAxNiBieXRlcyBhcmUgaW4gRklGTyBhbmQg
+U19SWF9GSUZPX1dSX0VSUl9FTiBpcyBzZXQuCgpSWCBkYXRhIGZpcnN0IHN0b3JlZCBpbiBSWF9B
+U1lOQ19GSUZPIHRoZW4gaXQncyB0cmFuc2ZlcmVkIHRvIFJYX0ZJRk8KCldoZW4gZ2V0X2NoYXIg
+aXMgY2FsbGVkIGFuZCB3ZSBvYnNlcnZlIDAgYnl0ZXMgaW4gUlhfRklGTywgbW9zdCBwcm9iYWJs
+eSAKZGF0YSBpcyBub3QgdHJhbnNmZXJlZCBmcm9tIFJYX0FTWU5DX0ZJRk8gdG8gUlhfRklGTy4K
+CkJJVFMgMjc6MjUgb2YgU0VfR0VOSV9SWF9GSUZPX1NUQVRVUyByZWdpc3RlciBzaG93cyBSWF9B
+U1lOQ19GSUZPIHdvcmQgCmNvdW50LgoKCj4KPiBJIHNwZW50IGEgd2hvbGUgYnVuY2ggb2YgdGlt
+ZSBwb2tpbmcgYXQgdGhpcyBhbmQgY291bGRuJ3QgZmluZCBhbnkKPiBzb3J0IG9mIHdvcmthcm91
+bmQuICBQcmVzdW1hYmx5IGdlbmkgaXMgdGFraW5nIHNvbWUgdGltZSBiZXR3ZWVuIG1lCj4gcmVh
+ZGluZyB0aGUgbGFzdCB3b3JkIG91dCBvZiB0aGUgRklGTyBmcm9tIHRoZSAicHJldmlvdXMiIHBh
+Y2tldCBhbmQKPiB0aGVuIHRyYW5zaXRpb25pbmcgdG8gdGhlIG5ldyBwYWNrZXQuICBJIGZvdW5k
+IGEgbG90IG9mIHJlZmVyZW5jZXMgdG8KPiB0aGlzIHByb2Nlc3MgaW4gdGhlIGhhcmR3YXJlIHJl
+Z2lzdGVyIGRlc2NyaXB0aW9uIChzZWUgR0VOSV9DRkdfUkVHNjksCj4gZm9yIGluc3RhbmNlKSwg
+YnV0IEkgY291bGRuJ3QgbWFuYWdlIHRvIG1ha2UgdGhlIGtpY2sgdG8gaGFwcGVuIGFueQo+IGZh
+c3Rlci4gIFByZXN1bWFibHkgdGhpcyBpc24ndCBhIHByb2JsZW0gZm9yIHRoaW5ncyBsaWtlIEJs
+dWV0b290aAo+IHNpbmNlIGZsb3cgY29udHJvbCBzYXZlcyB0aGVtLiAgLi4uYW5kIEkgZ3Vlc3Mg
+dGhpcyBpc24ndCBhIHByb2JsZW0gaW4KPiBwcmFjdGljZSBiZWNhdXNlIHdlIHVzdWFsbHkgX3Nl
+bmRfIGEgbG90IG9mIGRhdGEgdG8gdGhlIGhvc3QgZm9yCj4gY29uc29sZS9rZ2RiIGFuZCBpdCdz
+IG9ubHkgdGhlIGhvc3QgPT4gRFVUIHBhdGggdGhhdCBoYXMgcHJvYmxlbXMuCj4KPgo+PiBJIGFt
+IG5vdCBzdXJlIGFib3V0IHdoYXQgYWxsIHNjZW5hcmlvIGNhbiBsZWFkcyB0byB0aGlzIGJlaGF2
+aW9yIGZyb20KPj4gaGFyZHdhcmUsIEkgd2lsbCB0cnkgdG8gZ2V0IGFuIGFuc3dlciBmcm9tIGhh
+cmR3YXJlIHRlYW0uCj4+Cj4+IEFueSBlcnJvciBiaXQgd2FzIHNldCBmb3IgU0VfR0VOSV9TX0lS
+UV9TVEFUVVMgJiBTRV9HRU5JX01fSVJRX1NUQVRVUwo+PiByZWdpc3RlcnM/Cj4gQXMgcGVyIGFi
+b3ZlIEkgY2FuIHNlZSBvdmVyZmxvd3MgaW4gbXkgdGVzdCBjYXNlIGFuZCBnZW5pIHNlZW1zIHRv
+IGJlCj4gYmVoYXZpbmcgcHJldHR5IGJhZGx5LiAgSWYgeW91IGhhdmUgaWRlYXMgb24gaG93IHRv
+IGZpeCB0aGlzIEknZCBsb3ZlCj4gaXQuICBIb3dldmVyLCBpdCBzdGlsbCBzZWVtcyBsaWtlIG15
+IHBhdGNoIGlzIHJpZ2h0IGJlY2F1c2UgKGF0IGxlYXN0Cj4gaW4gdGhlIGNhc2VzIEkgdGVzdGVk
+KSBpdCBhdm9pZHMgZHJvcHBpbmcgYnl0ZXMgaW4gc29tZSBjYXNlcy4gIEl0Cj4gYWxzbyBtYXRj
+aGVzIGhvdyBxY29tX2dlbmlfc2VyaWFsX2hhbmRsZV9yeCgpIHdvcmtzIGFuZCBpZiB0aGF0IHdh
+cwo+IGJyb2tlbiB3ZSdkIGhhdmUgbm90aWNlZCBieSBub3cuCgpSZXZpZXdlZC1ieTogQWthc2gg
+QXN0aGFuYSA8YWthc2hhc3RAY29kZWF1cm9yYS5vcmc+CgoKPgo+PiBJIGd1ZXNzIHRoZSBoYW5n
+IHdhcyBzZWVuIGJlY2F1c2UgKnBvbGxfY2FjaGVkX2J5dGVzX2NudCogaXMgdW5zaWduZWQKPj4g
+aW50IGFuZCBpdCdzIHZhbHVlIHdhcyAwLCB3aGVuIGl0J3MgZGVjcmVtZW50ZWQgYnkgMSBpdCdz
+IHZhbHVlIGJlY29tZQo+PiAnNDI5NDk2NzI5NScgKHZlcnkgbGFyZ2UpIGFuZCBkdW1teSBSWCAo
+MHgwMCkgd291bGQgaGFwcGVuIHRoYXQKPj4KPj4gbWFueSB0aW1lcyBiZWZvcmUgcmVhZGluZyBh
+bnkgYWN0dWFsIFJYIHRyYW5zZmVycy9ieXRlcy4KPiBSaWdodC4gIFRoYXQgd291bGQgYmUgd2h5
+IGl0IHdhcyBoYW5naW5nLgo+Cj4KPiAtRG91ZwoKLS0gClRoZSBRdWFsY29tbSBJbm5vdmF0aW9u
+IENlbnRlciwgSW5jLiBpcyBhIG1lbWJlciBvZiB0aGUgQ29kZSBBdXJvcmEgRm9ydW0sXG5hIExp
+bnV4IEZvdW5kYXRpb24gQ29sbGFib3JhdGl2ZSBQcm9qZWN0CgoKCl9fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCktnZGItYnVncmVwb3J0IG1haWxpbmcgbGlz
+dApLZ2RiLWJ1Z3JlcG9ydEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3Vy
+Y2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8va2dkYi1idWdyZXBvcnQK
