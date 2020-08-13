@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3EB2A243199
-	for <lists+kgdb-bugreport@lfdr.de>; Thu, 13 Aug 2020 02:00:18 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 888BD2431A6
+	for <lists+kgdb-bugreport@lfdr.de>; Thu, 13 Aug 2020 02:08:53 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1k60fJ-00079k-14
-	for lists+kgdb-bugreport@lfdr.de; Thu, 13 Aug 2020 00:00:17 +0000
+	id 1k60nc-0002hS-9w
+	for lists+kgdb-bugreport@lfdr.de; Thu, 13 Aug 2020 00:08:52 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <dianders@chromium.org>) id 1k60fH-00079Z-Px
- for kgdb-bugreport@lists.sourceforge.net; Thu, 13 Aug 2020 00:00:15 +0000
+ (envelope-from <dianders@chromium.org>) id 1k60nb-0002hH-G4
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 13 Aug 2020 00:08:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
  In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
  :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=YZ0DPU+7FEgTW1kdKvFkaE475aoyAvXltQCD2JpTtaU=; b=Fuet/3Khy0LK4t+AQTH3HvMGGH
- jiVVXSITwyiXvzloWOtyhvWlaxICDQasuab2JdLVaO12l1fKW+VWnWb7XDGsyLjVQKvOajivh96o5
- oOIeLvl29F3pLuF8p/IifPabonfWd4PecAI35VUe0io0+AP7PwYsRvuKHYSbh0KMQrCs=;
+ bh=ceUtlC6MwMGrTyun60sqF99SKDJbWcXggrKlx7677S4=; b=Oyey0EegTg/tiFTTlYf8wyTnif
+ hoxjJYT2QGKoXd4QCIQN+958YYWNRQfW20CGcIAanYoV11r6tujk4+amzauk8hD4FCnuby/7y/lnE
+ RSWguUO/TUmF66Yg6t5wi3ZUjmOyahBGpRJbhaDe5+FDM4197uw/IEKADstN+z5oqtvc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
@@ -30,58 +30,64 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=YZ0DPU+7FEgTW1kdKvFkaE475aoyAvXltQCD2JpTtaU=; b=fGueglEsizF7SKfqyf9x1JLDpC
- iIDRxRx84yH3XgpEnO3hoMVnT+NWOAjfk0IfLsTkKfbYiiBiZ20J5wbwHsT/Z8AuVHnBxrF2rg7OV
- HZuvdVbwKTRqEvTraNY/SwswXJ9oce4uYhepVNXa7HEamrjOCjRynPMGFQctJJZN+960=;
-Received: from mail-ua1-f65.google.com ([209.85.222.65])
+ bh=ceUtlC6MwMGrTyun60sqF99SKDJbWcXggrKlx7677S4=; b=fF2CbWPmO6G/0ofYLeRyU8InP3
+ 0fMEm1b2jvNo6t7ePrdMG0axDf32RUl9cARp76KdVZbsAr/dhx1sNr1zLrId2c/kv+KqqbbwIya+a
+ DzIIgLeQ9jPmKPApUzNxIj7B1LBBU5Mxz6fbIyg4C/I/bumqNe2/u0uCHKvaMCihpJdo=;
+Received: from mail-vs1-f68.google.com ([209.85.217.68])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1k60fG-008WDg-BX
- for kgdb-bugreport@lists.sourceforge.net; Thu, 13 Aug 2020 00:00:15 +0000
-Received: by mail-ua1-f65.google.com with SMTP id x17so1130252uao.5
+ id 1k60nX-008WjL-UC
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 13 Aug 2020 00:08:51 +0000
+Received: by mail-vs1-f68.google.com with SMTP id o184so2048106vsc.0
  for <kgdb-bugreport@lists.sourceforge.net>;
- Wed, 12 Aug 2020 17:00:14 -0700 (PDT)
+ Wed, 12 Aug 2020 17:08:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=YZ0DPU+7FEgTW1kdKvFkaE475aoyAvXltQCD2JpTtaU=;
- b=cADRa2L+LNtmOC8nGDW4NEBh1LKPUNQBVbSJ2lRlPO7/ex575XERs6bkt8ye0WQ36q
- nKfPHAfk093ngCTZeIOX3r4GXkJbFYEonLHqKYPfvuBmjEDniJ+DDci92BugIbisNdPp
- AwJF9BUpjxQHhED+vrE0T9EHVEbtGvjX8N8kc=
+ :cc; bh=ceUtlC6MwMGrTyun60sqF99SKDJbWcXggrKlx7677S4=;
+ b=D6RUqChe/YBfnLLPy8n91WVpiwoeMX2S/KZsoS6uhmTVHOWCqH78TLtXUojHwHRONo
+ eFshRZnXFOwrUDBMHS4C8vETplXnvtXsbaZifZjYrNAKcHcZ8C3yc2x79D/XZ9CSkgqF
+ zeSNgiDAqnjky+Pb6dpc/OLwyXZsgiRBIKD4U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=YZ0DPU+7FEgTW1kdKvFkaE475aoyAvXltQCD2JpTtaU=;
- b=m6OXOjXZy0/jPcmz6REef43rgpz7/0GAH8TUyxzWFhOcsx3jAYs19Mo5flKoT0vMjw
- kgFlPuU6pgK97DPFIEv8D+uUGP8M/OSxbvI3uxHcB2x3l0u9I/8oFuPrSh69X5vOHpeX
- XjBYu/keR4Ys/1tfwnqjihZQbGRC++De1umrePtcinbVX1F8C4SzxMhzPmn3gWVNsnkj
- JCX5foZb7yTQHsasaWfCCYUPFj9GNOzZC0cyZ08/0uFVbHV05GAmOTBaxksbDPTGmk8a
- ctDfRPO2Ve4uwzMteE4eDBWce3eIszV1bdGUUD+MmAcKueBbNlGvr7rP5lYvhvwv5hAH
- b7Hw==
-X-Gm-Message-State: AOAM533RUd0Cqi9ANYX8pjinIKRBDLXa39Atqq6jXx2eRMY0tzzDY5TV
- 1ZVSSrboQvrlxiI88qefU6QSRdiGaSM=
-X-Google-Smtp-Source: ABdhPJyDf6NYO2R535Ozbq0yIcGXSfi8KMEmBY+/MfK8E8g+D7hW2d6pUB41F4Vu5vjn89gtv7BcNg==
-X-Received: by 2002:ab0:6905:: with SMTP id b5mr1601113uas.110.1597276801102; 
- Wed, 12 Aug 2020 17:00:01 -0700 (PDT)
-Received: from mail-vk1-f172.google.com (mail-vk1-f172.google.com.
- [209.85.221.172])
- by smtp.gmail.com with ESMTPSA id d204sm542947vkf.37.2020.08.12.17.00.00
+ bh=ceUtlC6MwMGrTyun60sqF99SKDJbWcXggrKlx7677S4=;
+ b=pRI1VTj75gOrOiAEJqzpKViCFLWa+u99ZEbfQqBtgAJRWz/eIfXhdf0QJtEb6n1m/I
+ yWlAEvAuWbZ4p+Ynea9Ro6Xi5W8Z+V1y/jWvIod4IgW4IyCv24hyIomln+bISuofKK6d
+ IoxHFpQ1sYW3fLPAj3z2F7Nf/cr5zXrtIdU3dVAQqEPuiPvHmdXZeYp27qKKCf7BR2jT
+ 1WllDQ4yAO4EqM/r3N6UwbqD4syeq/UaB1wGFRHKmGtofwHDJwZzqmQkJF2Lpb7QgpAy
+ wxT+rp1Q7lDqqZAvPv9Kx1edb/5TWV2b9keql05wLjHqNwbVDTjBFOlTWNM/ILgh/qqi
+ Zrnw==
+X-Gm-Message-State: AOAM530jdQ1+ihpBCTX8lEyOvOHT8YivHs7k0XvqmvKSTFLfPwG7RHq8
+ 2yipjzUKG3JuObf0bg2HB4FDpWL4a98=
+X-Google-Smtp-Source: ABdhPJz/jb6orYPlAhLRJ/J0AnvP7vIx+fXkJV7/5g6WA6opz5DdHCqqsfZSZR4JC5L2cZncgOE7eg==
+X-Received: by 2002:a67:ecd4:: with SMTP id i20mr1383976vsp.68.1597277321634; 
+ Wed, 12 Aug 2020 17:08:41 -0700 (PDT)
+Received: from mail-ua1-f47.google.com (mail-ua1-f47.google.com.
+ [209.85.222.47])
+ by smtp.gmail.com with ESMTPSA id p5sm546329vkp.44.2020.08.12.17.08.40
  for <kgdb-bugreport@lists.sourceforge.net>
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 12 Aug 2020 17:00:00 -0700 (PDT)
-Received: by mail-vk1-f172.google.com with SMTP id x142so905247vke.0
+ Wed, 12 Aug 2020 17:08:40 -0700 (PDT)
+Received: by mail-ua1-f47.google.com with SMTP id g20so1130507uap.8
  for <kgdb-bugreport@lists.sourceforge.net>;
- Wed, 12 Aug 2020 17:00:00 -0700 (PDT)
-X-Received: by 2002:a1f:fc02:: with SMTP id a2mr1543414vki.65.1597276799887;
- Wed, 12 Aug 2020 16:59:59 -0700 (PDT)
+ Wed, 12 Aug 2020 17:08:40 -0700 (PDT)
+X-Received: by 2002:a9f:2966:: with SMTP id t93mr1514582uat.90.1597277319479; 
+ Wed, 12 Aug 2020 17:08:39 -0700 (PDT)
 MIME-Version: 1.0
 References: <1595333413-30052-1-git-send-email-sumit.garg@linaro.org>
- <1595333413-30052-2-git-send-email-sumit.garg@linaro.org>
-In-Reply-To: <1595333413-30052-2-git-send-email-sumit.garg@linaro.org>
+ <CAFA6WYMN=na4Pxnu1LYRVAAZRdV==5EwU-Vcq-QkRb_jaLiPmw@mail.gmail.com>
+ <20200811135801.GA416071@kroah.com>
+ <CAFA6WYMN8i96rEZuHLnskB+4k0o=K9vF1_we83P04h2BSoGjmQ@mail.gmail.com>
+ <20200811145816.GA424033@kroah.com>
+ <CAD=FV=UD=cTn6jwpYS-C-=1ORd-4azZ8ZiBR6om++2sMS1nmMg@mail.gmail.com>
+ <CAFA6WYPBdOiVsKR_hSLpigN_1b9jimXKaqyRZjvKSx3xpAmLjA@mail.gmail.com>
+ <CAD=FV=WccmFRkV4UUTLSYR9+7210h00Si=nG4tRs3BBuweA6ng@mail.gmail.com>
+In-Reply-To: <CAD=FV=WccmFRkV4UUTLSYR9+7210h00Si=nG4tRs3BBuweA6ng@mail.gmail.com>
 From: Doug Anderson <dianders@chromium.org>
-Date: Wed, 12 Aug 2020 16:59:48 -0700
-X-Gmail-Original-Message-ID: <CAD=FV=Uqi28A=sm5+JhAqBM2OtBM3_XwvvkaKyEDVL9uVEioog@mail.gmail.com>
-Message-ID: <CAD=FV=Uqi28A=sm5+JhAqBM2OtBM3_XwvvkaKyEDVL9uVEioog@mail.gmail.com>
+Date: Wed, 12 Aug 2020 17:08:28 -0700
+X-Gmail-Original-Message-ID: <CAD=FV=V8UhQVQvcAp6XCmT3=6FYM=_zPELy4FTj4kMKUswaR8Q@mail.gmail.com>
+Message-ID: <CAD=FV=V8UhQVQvcAp6XCmT3=6FYM=_zPELy4FTj4kMKUswaR8Q@mail.gmail.com>
 To: Sumit Garg <sumit.garg@linaro.org>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -89,11 +95,11 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: linaro.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.222.65 listed in wl.mailspike.net]
+ for more information. [URIs: chromium.org]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.222.65 listed in list.dnswl.org]
+ trust [209.85.217.68 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.217.68 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -103,9 +109,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1k60fG-008WDg-BX
-Subject: Re: [Kgdb-bugreport] [RFC 1/5] tty/sysrq: Make sysrq handler NMI
- aware
+X-Headers-End: 1k60nX-008WjL-UC
+Subject: Re: [Kgdb-bugreport] [RFC 0/5] Introduce NMI aware serial drivers
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -120,196 +125,263 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>,
 Cc: Daniel Thompson <daniel.thompson@linaro.org>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
  Jason Wessel <jason.wessel@windriver.com>,
- Russell King - ARM Linux <linux@armlinux.org.uk>,
- LKML <linux-kernel@vger.kernel.org>, linux-serial@vger.kernel.org,
- Jiri Slaby <jslaby@suse.com>, kgdb-bugreport@lists.sourceforge.net,
- Linux ARM <linux-arm-kernel@lists.infradead.org>
+ Russell King - ARM Linux admin <linux@armlinux.org.uk>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ linux-serial@vger.kernel.org, Jiri Slaby <jslaby@suse.com>,
+ kgdb-bugreport@lists.sourceforge.net,
+ linux-arm-kernel <linux-arm-kernel@lists.infradead.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
 Hi,
 
-On Tue, Jul 21, 2020 at 5:10 AM Sumit Garg <sumit.garg@linaro.org> wrote:
+
+On Wed, Aug 12, 2020 at 8:27 AM Doug Anderson <dianders@chromium.org> wrote:
 >
-> In a future patch we will add support to the serial core to make it
-> possible to trigger a magic sysrq from an NMI context. Prepare for this
-> by marking some sysrq actions as NMI safe. Safe actions will be allowed
-> to run from NMI context whilst that cannot run from an NMI will be queued
-> as irq_work for later processing.
+> Hi,
 >
-> A particular sysrq handler is only marked as NMI safe in case the handler
-> isn't contending for any synchronization primitives as in NMI context
-> they are expected to cause deadlocks. Note that the debug sysrq do not
-> contend for any synchronization primitives. It does call kgdb_breakpoint()
-> to provoke a trap but that trap handler should be NMI safe on
-> architectures that implement an NMI.
+> On Wed, Aug 12, 2020 at 7:53 AM Sumit Garg <sumit.garg@linaro.org> wrote:
+> >
+> > Hi Doug,
+> >
+> > On Tue, 11 Aug 2020 at 22:46, Doug Anderson <dianders@chromium.org> wrote:
+> > >
+> > > Hi,
+> > >
+> > > On Tue, Aug 11, 2020 at 7:58 AM Greg Kroah-Hartman
+> > > <gregkh@linuxfoundation.org> wrote:
+> > > >
+> > > > On Tue, Aug 11, 2020 at 07:59:24PM +0530, Sumit Garg wrote:
+> > > > > Hi Greg,
+> > > > >
+> > > > > Thanks for your comments.
+> > > > >
+> > > > > On Tue, 11 Aug 2020 at 19:27, Greg Kroah-Hartman
+> > > > > <gregkh@linuxfoundation.org> wrote:
+> > > > > >
+> > > > > > On Tue, Aug 11, 2020 at 07:20:26PM +0530, Sumit Garg wrote:
+> > > > > > > On Tue, 21 Jul 2020 at 17:40, Sumit Garg <sumit.garg@linaro.org> wrote:
+> > > > > > > >
+> > > > > > > > Make it possible for UARTs to trigger magic sysrq from an NMI. With the
+> > > > > > > > advent of pseudo NMIs on arm64 it became quite generic to request serial
+> > > > > > > > device interrupt as an NMI rather than IRQ. And having NMI driven serial
+> > > > > > > > RX will allow us to trigger magic sysrq as an NMI and hence drop into
+> > > > > > > > kernel debugger in NMI context.
+> > > > > > > >
+> > > > > > > > The major use-case is to add NMI debugging capabilities to the kernel
+> > > > > > > > in order to debug scenarios such as:
+> > > > > > > > - Primary CPU is stuck in deadlock with interrupts disabled and hence
+> > > > > > > >   doesn't honor serial device interrupt. So having magic sysrq triggered
+> > > > > > > >   as an NMI is helpful for debugging.
+> > > > > > > > - Always enabled NMI based magic sysrq irrespective of whether the serial
+> > > > > > > >   TTY port is active or not.
+> > > > > > > >
+> > > > > > > > Currently there is an existing kgdb NMI serial driver which provides
+> > > > > > > > partial implementation in upstream to have a separate ttyNMI0 port but
+> > > > > > > > that remained in silos with the serial core/drivers which made it a bit
+> > > > > > > > odd to enable using serial device interrupt and hence remained unused. It
+> > > > > > > > seems to be clearly intended to avoid almost all custom NMI changes to
+> > > > > > > > the UART driver.
+> > > > > > > >
+> > > > > > > > But this patch-set allows the serial core/drivers to be NMI aware which
+> > > > > > > > in turn provides NMI debugging capabilities via magic sysrq and hence
+> > > > > > > > there is no specific reason to keep this special driver. So remove it
+> > > > > > > > instead.
+> > > > > > > >
+> > > > > > > > Approach:
+> > > > > > > > ---------
+> > > > > > > >
+> > > > > > > > The overall idea is to intercept serial RX characters in NMI context, if
+> > > > > > > > those are specific to magic sysrq then allow corresponding handler to run
+> > > > > > > > in NMI context. Otherwise, defer all other RX and TX operations onto IRQ
+> > > > > > > > work queue in order to run those in normal interrupt context.
+> > > > > > > >
+> > > > > > > > This approach is demonstrated using amba-pl011 driver.
+> > > > > > > >
+> > > > > > > > Patch-wise description:
+> > > > > > > > -----------------------
+> > > > > > > >
+> > > > > > > > Patch #1 prepares magic sysrq handler to be NMI aware.
+> > > > > > > > Patch #2 adds NMI framework to serial core.
+> > > > > > > > Patch #3 and #4 demonstrates NMI aware uart port using amba-pl011 driver.
+> > > > > > > > Patch #5 removes kgdb NMI serial driver.
+> > > > > > > >
+> > > > > > > > Goal of this RFC:
+> > > > > > > > -----------------
+> > > > > > > >
+> > > > > > > > My main reason for sharing this as an RFC is to help decide whether or
+> > > > > > > > not to continue with this approach. The next step for me would to port
+> > > > > > > > the work to a system with an 8250 UART.
+> > > > > > > >
+> > > > > > >
+> > > > > > > A gentle reminder to seek feedback on this series.
+> > >
+> > > It's been on my list for a while.  I started it Friday but ran out of
+> > > time.  This week hasn't been going as smoothly as I hoped but I'll
+> > > prioritize this since it's been too long.
+> > >
+> >
+> > No worries and thanks for your feedback.
+> >
+> > >
+> > > > > > It's the middle of the merge window, and I can't do anything.
+> > > > > >
+> > > > > > Also, I almost never review RFC patches as I have have way too many
+> > > > > > patches that people think are "right" to review first...
+> > > > > >
+> > > > >
+> > > > > Okay, I understand and I can definitely wait for your feedback.
+> > > >
+> > > > My feedback here is this:
+> > > >
+> > > > > > I suggest you work to flesh this out first and submit something that you
+> > > > > > feels works properly.
+> > > >
+> > > > :)
+> > > >
+> > > > > IIUC, in order to make this approach substantial I need to make it
+> > > > > work with 8250 UART (major serial driver), correct? As currently it
+> > > > > works properly for amba-pl011 driver.
+> > > >
+> > > > Yes, try to do that, or better yet, make it work with all serial drivers
+> > > > automatically.
+> > >
+> > > A bit of early feedback...
+> > >
+> > > Although I'm not sure we can do Greg's "make it work everywhere
+> > > automatically", it's possible you could get half of your patch done
+> > > automatically.  Specifically, your patch really does two things:
+> > >
+> > > a) It leaves the serial port "active" all the time to look for sysrq.
+> > > In other words even if there is no serial client it's always reading
+> > > the port looking for characters.  IMO this concept should be separated
+> > > out from the NMI concept and _could_ automatically work for all serial
+> > > drivers.  You'd just need something in the serial core that acted like
+> > > a default client if nobody else opened the serial port.  The nice
+> > > thing here is that we go through all the normal code paths and don't
+> > > need special cases in the driver.
+> >
+> > Okay, will try to explore this option to have default serial port
+> > client. Would this client be active in normal serial operation or only
+> > active when we have kgdb active? One drawback I see for normal
+> > operation could be power management as if user is not using serial
+> > port and would like to disable corresponding clock in order to reduce
+> > power consumption.
 >
-> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> ---
->  drivers/tty/sysrq.c       | 33 ++++++++++++++++++++++++++++++++-
->  include/linux/sysrq.h     |  1 +
->  kernel/debug/debug_core.c |  1 +
->  3 files changed, 34 insertions(+), 1 deletion(-)
+> If I could pick the ideal, I'd say we'd do it any time the console is
+> configured for that port and magic sysrq is enabled.  Presumably if
+> they're already choosing to output kernel log messages to the serial
+> port and they've enabled magic sysrq they're in a state where they'd
+> be OK with the extra power of also listening for characters?
 >
-> diff --git a/drivers/tty/sysrq.c b/drivers/tty/sysrq.c
-> index 7c95afa9..8017e33 100644
-> --- a/drivers/tty/sysrq.c
-> +++ b/drivers/tty/sysrq.c
-> @@ -50,6 +50,8 @@
->  #include <linux/syscalls.h>
->  #include <linux/of.h>
->  #include <linux/rcupdate.h>
-> +#include <linux/irq_work.h>
-> +#include <linux/kfifo.h>
 >
->  #include <asm/ptrace.h>
->  #include <asm/irq_regs.h>
-> @@ -111,6 +113,7 @@ static const struct sysrq_key_op sysrq_loglevel_op = {
->         .help_msg       = "loglevel(0-9)",
->         .action_msg     = "Changing Loglevel",
->         .enable_mask    = SYSRQ_ENABLE_LOG,
-> +       .nmi_safe       = true,
->  };
+> > > b) It enables NMI for your particular serial driver.  This seems like
+> > > it'd be hard to do automatically because you can't do the same things
+> > > at NMI that you could do in a normal interrupt handler.
+> >
+> > Agree.
+> >
+> > >
+> > > NOTE: to me, a) is more important than b) (though it'd be nice to have
+> > > both).  This would be especially true the earlier you could make a)
+> > > work since the main time when an "agetty" isn't running on my serial
+> > > port to read characters is during bootup.
+> > >
+> > > Why is b) less important to me? Sure, it would let you drop into the
+> > > debugger in the case where the CPU handling serial port interrupts is
+> > > hung with IRQs disabled, but it _woudln't_ let you drop into the
+> > > debugger in the case where a different CPU is hung with IRQs disabled.
+> > > To get that we need NMI roundup (which, I know, you are also working
+> > > on for arm64).  ...and, if we've got NMI roundup, presumably we can
+> > > find our way into the debugger by either moving the serial interrupt
+> > > to a different CPU ahead of time or using some type of lockup detector
+> > > (which I know you are also working on for arm64).
+> > >
+> >
+> > Thanks for sharing your preferences. I will try to get a) sorted out first.
+> >
+> > Overall I agree with your approaches to debug hard-lockup scenarios
+> > but they might not be so trivial for kernel engineers who doesn't
+> > posses kernel debugging experience as you do. :)
+> >
+> > And I still think NMI aware magic sysrq is useful for scenarios such as:
+> > - Try to get system information during hard-lockup rather than just
+> > panic via hard-lockup detection.
+> > - Do normal start/stop debugger activity on a core which was stuck in
+> > hard-lockup.
+> > - Random boot freezes which are not easily reproducible.
 >
->  #ifdef CONFIG_VT
-> @@ -157,6 +160,7 @@ static const struct sysrq_key_op sysrq_crash_op = {
->         .help_msg       = "crash(c)",
->         .action_msg     = "Trigger a crash",
->         .enable_mask    = SYSRQ_ENABLE_DUMP,
-> +       .nmi_safe       = true,
->  };
+> Don't get me wrong.  Having sysrq from NMI seems like a good feature
+> to me.  That being said, it will require non-trivial changes to each
+> serial driver to support it and that means that not all serial drivers
+> will support it.  It also starts requiring knowledge of how NMIs work
+> (what's allowed in NMI mode / not allowed / how to avoid races) for
+> authors of serial drivers.  I have a bit of a worry that the benefit
+> won't outweigh the extra complexity, but I guess time will tell.  One
+> last worry is that I assume that most people testing (and even
+> automated testing labs) will either always enable NMI or won't enable
+> NMI.  That means that everyone will be only testing one codepath or
+> the other and (given the complexity) the non-tested codepath will
+> break.
 >
->  static void sysrq_handle_reboot(int key)
-> @@ -170,6 +174,7 @@ static const struct sysrq_key_op sysrq_reboot_op = {
->         .help_msg       = "reboot(b)",
->         .action_msg     = "Resetting",
->         .enable_mask    = SYSRQ_ENABLE_BOOT,
-> +       .nmi_safe       = true,
->  };
->
->  const struct sysrq_key_op *__sysrq_reboot_op = &sysrq_reboot_op;
-> @@ -217,6 +222,7 @@ static const struct sysrq_key_op sysrq_showlocks_op = {
->         .handler        = sysrq_handle_showlocks,
->         .help_msg       = "show-all-locks(d)",
->         .action_msg     = "Show Locks Held",
-> +       .nmi_safe       = true,
->  };
->  #else
->  #define sysrq_showlocks_op (*(const struct sysrq_key_op *)NULL)
-> @@ -289,6 +295,7 @@ static const struct sysrq_key_op sysrq_showregs_op = {
->         .help_msg       = "show-registers(p)",
->         .action_msg     = "Show Regs",
->         .enable_mask    = SYSRQ_ENABLE_DUMP,
-> +       .nmi_safe       = true,
->  };
->
->  static void sysrq_handle_showstate(int key)
-> @@ -326,6 +333,7 @@ static const struct sysrq_key_op sysrq_ftrace_dump_op = {
->         .help_msg       = "dump-ftrace-buffer(z)",
->         .action_msg     = "Dump ftrace buffer",
->         .enable_mask    = SYSRQ_ENABLE_DUMP,
-> +       .nmi_safe       = true,
->  };
->  #else
->  #define sysrq_ftrace_dump_op (*(const struct sysrq_key_op *)NULL)
-> @@ -538,6 +546,23 @@ static void __sysrq_put_key_op(int key, const struct sysrq_key_op *op_p)
->                  sysrq_key_table[i] = op_p;
->  }
->
-> +#define SYSRQ_NMI_FIFO_SIZE    64
-> +static DEFINE_KFIFO(sysrq_nmi_fifo, int, SYSRQ_NMI_FIFO_SIZE);
+> Hrm.  Along the lines of the above, though: almost no modern systems
+> are uniprocessor.  That means that even if one CPU is stuck with IRQs
+> off it's fairly likely that some other CPU is OK.  Presumably you'd
+> get almost as much benefit as your patch but with more done
+> automatically if you could figure out how to detect that the serial
+> interrupt isn't being serviced and re-route it to a different CPU.
+> ...or possibly you could use some variant of the hard lockup detector
+> and move all interrupts off a locked up CPU?  You could make this an
+> option that's "default Y" when kgdb is turned on or something?
 
-A 64-entry FIFO seems excessive. Quite honestly even a FIFO seems a
-bit excessive and it feels like if two sysrqs were received in super
-quick succession that it would be OK to just process the first one.  I
-guess if it simplifies the processing to have a FIFO then it shouldn't
-hurt, but no need for 64 entries.
+One other idea occurred to me that's maybe simpler.  You could in
+theory just poll the serial port periodically to accomplish.  It would
+actually probably even work to call the normal serial port interrupt
+routine from any random CPU.  On many serial drivers the entire
+interrupt handler is wrapped with:
+
+spin_lock_irqsave(&uap->port.lock, flags);
+...
+spin_unlock_irqrestore(&uap->port.lock, flags);
+
+And a few (the ones I was involved in fixing) have the similar pattern
+of using uart_unlock_and_check_sysrq().
+
+Any serial drivers following this pattern could have their interrupt
+routine called periodically just to poll for characters and it'd be
+fine, right?  ...and having it take a second before a sysrq comes in
+this case is probably not the end of the world?
 
 
-> +static void sysrq_do_nmi_work(struct irq_work *work)
-> +{
-> +       const struct sysrq_key_op *op_p;
-> +       int key;
-> +
-> +       while (kfifo_out(&sysrq_nmi_fifo, &key, 1)) {
-> +               op_p = __sysrq_get_key_op(key);
-> +               if (op_p)
-> +                       op_p->handler(key);
-> +       }
-
-Do you need to manage "suppress_printk" in this function?  Do you need
-to call rcu_sysrq_start() and rcu_read_lock()?
-
-If so, how do you prevent racing between the mucking we're doing with
-these things and the mucking that the NMI does with them?
+One nice benefit of this is that it would actually work _better_ on
+SMP systems for any sysrqs that aren't NMI safe.  Specifically with
+your patch series those would be queued with irq_work_queue() which
+means they'd be blocked if the CPU processing the NMI is stuck with
+IRQs disabled.  With the polling mechanism they'd nicely just run on a
+different CPU.
 
 
-> +}
-> +
-> +static DEFINE_IRQ_WORK(sysrq_nmi_work, sysrq_do_nmi_work);
-> +
->  void __handle_sysrq(int key, bool check_mask)
->  {
->         const struct sysrq_key_op *op_p;
-> @@ -568,7 +593,13 @@ void __handle_sysrq(int key, bool check_mask)
->                 if (!check_mask || sysrq_on_mask(op_p->enable_mask)) {
->                         pr_info("%s\n", op_p->action_msg);
->                         console_loglevel = orig_log_level;
-> -                       op_p->handler(key);
-> +
-> +                       if (in_nmi() && !op_p->nmi_safe) {
-> +                               kfifo_in(&sysrq_nmi_fifo, &key, 1);
-
-Rather than kfifo_in() and kfifo_out(), I think you can use
-kfifo_put() and kfifo_get().  As I understand it those just get/put
-one element which is what you want.
-
-
-> +                               irq_work_queue(&sysrq_nmi_work);
-
-Wishful thinking, but (as far as I can tell) irq_work_queue() only
-queues work on the CPU running the NMI.  I don't have lots of NMI
-experience, but any chance there is a variant that will queue work on
-any CPU?  Then sysrq handlers that aren't NMI aware will be more
-likely to work.
-
-
-
-
-> +                       } else {
-> +                               op_p->handler(key);
-> +                       }
->                 } else {
->                         pr_info("This sysrq operation is disabled.\n");
->                         console_loglevel = orig_log_level;
-> diff --git a/include/linux/sysrq.h b/include/linux/sysrq.h
-> index 3a582ec..630b5b9 100644
-> --- a/include/linux/sysrq.h
-> +++ b/include/linux/sysrq.h
-> @@ -34,6 +34,7 @@ struct sysrq_key_op {
->         const char * const help_msg;
->         const char * const action_msg;
->         const int enable_mask;
-> +       const bool nmi_safe;
->  };
->
->  #ifdef CONFIG_MAGIC_SYSRQ
-> diff --git a/kernel/debug/debug_core.c b/kernel/debug/debug_core.c
-> index 9e59347..2b51173 100644
-> --- a/kernel/debug/debug_core.c
-> +++ b/kernel/debug/debug_core.c
-> @@ -943,6 +943,7 @@ static const struct sysrq_key_op sysrq_dbg_op = {
->         .handler        = sysrq_handle_dbg,
->         .help_msg       = "debug(g)",
->         .action_msg     = "DEBUG",
-> +       .nmi_safe       = true,
->  };
->  #endif
->
-> --
-> 2.7.4
->
+> > > One last bit of feedback is that I noticed that you didn't try to
+> > > implement the old "knock" functionality of the old NMI driver that's
+> > > being deleted.  That is: your new patches don't provide an alternate
+> > > way to drop into the debugger for systems where BREAK isn't hooked up.
+> > > That's not a hard requirement, but I was kinda hoping for it since I
+> > > have some systems that haven't routed BREAK properly.  ;-)
+> > >
+> >
+> > Yeah, this is on my TODO list to have a kgdb "knock" functionality to
+> > be implemented via a common hook in serial core.
+> >
+> > >
+> > > I'll try to get some more detailed feedback in the next few days.
+> >
+> > Thanks. I do look forward to your feedback.
+> >
+> > -Sumit
+> >
+> > >
+> > > -Doug
 
 
 _______________________________________________
