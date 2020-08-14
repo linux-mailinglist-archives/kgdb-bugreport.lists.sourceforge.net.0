@@ -2,107 +2,108 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B678D2449FA
-	for <lists+kgdb-bugreport@lfdr.de>; Fri, 14 Aug 2020 14:50:29 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1C407244B19
+	for <lists+kgdb-bugreport@lfdr.de>; Fri, 14 Aug 2020 16:13:53 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1k6ZAC-0006pb-I8
-	for lists+kgdb-bugreport@lfdr.de; Fri, 14 Aug 2020 12:50:28 +0000
+	id 1k6aSt-00026x-Tf
+	for lists+kgdb-bugreport@lfdr.de; Fri, 14 Aug 2020 14:13:51 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sumit.garg@linaro.org>) id 1k6ZAB-0006pK-Ne
- for kgdb-bugreport@lists.sourceforge.net; Fri, 14 Aug 2020 12:50:27 +0000
+ (envelope-from <daniel.thompson@linaro.org>) id 1k6aSs-00026k-Ow
+ for kgdb-bugreport@lists.sourceforge.net; Fri, 14 Aug 2020 14:13:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=oNrJofI4VSIM1YMzNApXQ6u0hlAa3YOeI7FwPv0W0xo=; b=R6zRvSzXb6iqWIzBhl5TkXXELb
- xqcTJq8lWv1JSqA/CTvf8vNwoA60PPQNN5tqBBuOMILQS9jIydSBZgkYriFv4d6a8lNzL/mvWl+/P
- YEH2fyydaICCmlEHal4fFa7qxxO4d0fSJKXrDWSbkLRrVVLhVgl4mwQ+QFer3uN94v3A=;
+ bh=6PZ8SEi14GOn4eemrIumaJvvtU1n1XVq4pJkW36yXBk=; b=TTSiZDWlC79199SfEmYouuORdc
+ rgCnXF+ov8HSwN3ATBbCT7wkX63U1dY8orK9Ba6mV7pbdX1Fha9RPxwDwqwzDlnbbnZPzLbKYI14P
+ /offGcDFew0CKeVcE2IH0XhoBSTEMoRTtY1gTPWdEHoClYIp4v0FQOrwxnzEsoWvh+5A=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=oNrJofI4VSIM1YMzNApXQ6u0hlAa3YOeI7FwPv0W0xo=; b=XDhOpGxBD3xguDCYHwGR0k94mM
- Gd8aczN/wbJUtPMByuVHS6RagVag2i/42tGW8+sQnXAO0/6yqlslKBx5jWrwDMQKSXPuiBojdFdm5
- nwxheIUaUdOmd3GPZ96vqlDeWNPKThDlw+mnCH536rT6B0PNhTyLASpRv1lEscFyp05k=;
-Received: from mail-lj1-f196.google.com ([209.85.208.196])
+ bh=6PZ8SEi14GOn4eemrIumaJvvtU1n1XVq4pJkW36yXBk=; b=gIRYALUkHP6paG7EBQ/xT6xaDC
+ 0CtIiERzl+W5r6LhUEXokquD3o8lyQT6dUKhVvPeEDBefRXt43Y/5a9kjbOuO7av/Ea9pkIarKUpW
+ vFOMCpuZZ9P8IBi1KL1U82b7BQ/3PsQ3G+4e1wFOdl6fbnXW2HT1E380QEgZeKJ9VC/E=;
+Received: from mail-wr1-f68.google.com ([209.85.221.68])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1k6ZA7-0075Tp-Hq
- for kgdb-bugreport@lists.sourceforge.net; Fri, 14 Aug 2020 12:50:27 +0000
-Received: by mail-lj1-f196.google.com with SMTP id t23so9815345ljc.3
+ id 1k6aSb-007ANS-1Y
+ for kgdb-bugreport@lists.sourceforge.net; Fri, 14 Aug 2020 14:13:50 +0000
+Received: by mail-wr1-f68.google.com with SMTP id f12so8463495wru.13
  for <kgdb-bugreport@lists.sourceforge.net>;
- Fri, 14 Aug 2020 05:50:23 -0700 (PDT)
+ Fri, 14 Aug 2020 07:13:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=oNrJofI4VSIM1YMzNApXQ6u0hlAa3YOeI7FwPv0W0xo=;
- b=dRkTj42r1ORWNCi0KwgABypOpxNH2YfxXSplKDrbKISe72oY7nKYANmkrXI7TtKY3n
- FWkBYRoaG+R3/7Eh6gST6LtxiWqxoQ1nnN/qdQ9Knst1jUzHDduf2/YG0bhDHTtvLjkS
- DBtUfpz7eYBCI85lLB3Rw7TkYRda85x+si9K8QaSMd4wEoLUDF/zI32+bvFkkArZLn2b
- lZ0LOGC3YD0UVakzKaVLrc7hDjHoQc8aEgGCpfrRHGeL+cc/bztqeYVArmzbPYRg/pBR
- wmtPaXdqENs54CoXQf69SlfWc9fyGj+wCEIJ0Ft9yWLyfQq98qCaRGUS6iUCHvOBLvZY
- YI2g==
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=6PZ8SEi14GOn4eemrIumaJvvtU1n1XVq4pJkW36yXBk=;
+ b=CvF2QHFp4dtQ8JSyPXKF4iGM14sojy/LnkFyiEUZklVNL1xzcPzwFs2iqNHaNDjS86
+ ZpST3rYJBrzHscIRaafOFU2hMTn9TMdku2PNOzgX9/q5xsYpX1GoMn9lwxL8qN/rdGLK
+ JipZDXfuXtLOuDg9qNUBQ+tU0MBOUf7/3v5XpgmhEn4xB9ZPa4Qphj/1kczmJxscKFZu
+ aRA9x5Xp8Imp0pgZE2KIyCC6/O4/t0m5dTwZCEAPDuIst0Rlkt7m4hC0UPiwMVWiSVus
+ XZC5ra2JLCZ8uRObVZhzBfMsm9tbKB1jlSrBLrmvTfsPnL4s2nlZtrb1jHgDy09AtoSi
+ Bw1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=oNrJofI4VSIM1YMzNApXQ6u0hlAa3YOeI7FwPv0W0xo=;
- b=gpeRyiF2+9Nv0EUKQbizHVau1tp7uGcz7MLLtM85OpDGnzbENu3/QPAwgDFRj9n9Ds
- 8+EnMEfz8xUPvA/WxXJKWRt8M6igCiBHhu40QyI6WzuC4OEpoWvI4miviHP1+xiM3Q8Q
- qD6xVM/sKFVdIksWtLVBAYv3d1h3S6UAFul6kfMIoIyu1sQ2FPqiC4e3sTTCWCW9Xdnw
- LTPz74wQ3z7P039k22gdCSz9LNJ5n0pCwPnhfwVJjKlS+UFWiSBSoNcQxZ1LUXjTiuMu
- Z5xOxD/RDEPQjEIQQ8Z8igOUEBDVl7wwSPBAZs6hV88yzeXA6fx31MnPNuYaTlKCQiDy
- dsyg==
-X-Gm-Message-State: AOAM531iUIgB37Qc3ykpIG1GAMC+PFKPVUSp9vzH6l7QjnMV1gZTo+qw
- MIU5NX6yTA5fCEs9KT6V1dwUmPuevNiK+UIsFpak/Q==
-X-Google-Smtp-Source: ABdhPJx+l2dECJh1QpeXm78A5+o8DyQZpif8ELQbqtHLPbnrx54NFZfHtESmhBFMjh1+R+HViwIbf0fFv25NmToqJpU=
-X-Received: by 2002:a2e:b8cb:: with SMTP id s11mr1353447ljp.110.1597409416937; 
- Fri, 14 Aug 2020 05:50:16 -0700 (PDT)
-MIME-Version: 1.0
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=6PZ8SEi14GOn4eemrIumaJvvtU1n1XVq4pJkW36yXBk=;
+ b=G0HJs3x5Oy5P8+jPbxjA67xpBhL8LJLaNr5aYlBzjzGAX68/6gD6pd1RQ9XPO/UrVM
+ JCyB51js2tlURVO3DLmmE+08iQwr6+qlw6Kr8MjBCkcyFRXTuPa55J/Ag+tBe0hdTywp
+ BlLqHMcYdw9pI76eyUHS93Pj07HzcQ+5HiLB6Gn/idjAaB5s0CxL2W20UXdjljZtr9G+
+ xYvumAvfpK7U7K316mrx3BgNKrzGIhOkxLkye5YwUBfEZntTPJgn2pcgqQVsNv+DMPK6
+ ULwmgnTIY7GZ2YJAotL8hEnqZUi7prsgGziUBbJOr8xmx77haYAM2rxuWJEz7Kppa6bn
+ A7Yw==
+X-Gm-Message-State: AOAM531T2k4sXcWfCL94asix98iCzyRTOqcp6OxAdmKWEOe61m+JuGC0
+ fFLk+l0IZtYEbU+Pp9uymr6EEA==
+X-Google-Smtp-Source: ABdhPJxCC8utsMF5rcTC7pd5UreHosbOWpzJm+pexx9q3NTFjU3YtRWzMBbuKfztaLE4yRhty81uRQ==
+X-Received: by 2002:a5d:5588:: with SMTP id i8mr2939341wrv.177.1597414406559; 
+ Fri, 14 Aug 2020 07:13:26 -0700 (PDT)
+Received: from holly.lan (cpc141214-aztw34-2-0-cust773.18-1.cable.virginm.net.
+ [86.9.19.6])
+ by smtp.gmail.com with ESMTPSA id b11sm14153744wrq.32.2020.08.14.07.13.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 14 Aug 2020 07:13:24 -0700 (PDT)
+Date: Fri, 14 Aug 2020 15:13:22 +0100
+From: Daniel Thompson <daniel.thompson@linaro.org>
+To: Sumit Garg <sumit.garg@linaro.org>
+Message-ID: <20200814141322.lffebtamfjt2qrym@holly.lan>
 References: <1595333413-30052-1-git-send-email-sumit.garg@linaro.org>
- <CAFA6WYMN=na4Pxnu1LYRVAAZRdV==5EwU-Vcq-QkRb_jaLiPmw@mail.gmail.com>
- <20200811135801.GA416071@kroah.com>
- <CAFA6WYMN8i96rEZuHLnskB+4k0o=K9vF1_we83P04h2BSoGjmQ@mail.gmail.com>
- <20200811145816.GA424033@kroah.com>
- <CAD=FV=UD=cTn6jwpYS-C-=1ORd-4azZ8ZiBR6om++2sMS1nmMg@mail.gmail.com>
- <CAFA6WYPBdOiVsKR_hSLpigN_1b9jimXKaqyRZjvKSx3xpAmLjA@mail.gmail.com>
- <CAD=FV=WccmFRkV4UUTLSYR9+7210h00Si=nG4tRs3BBuweA6ng@mail.gmail.com>
- <CAD=FV=V8UhQVQvcAp6XCmT3=6FYM=_zPELy4FTj4kMKUswaR8Q@mail.gmail.com>
- <CAFA6WYPxieH6ZTa_BFdaLuiwbqAs6r7eKmxG7ci4XtyRONGN7g@mail.gmail.com>
- <CAD=FV=WGh-+GTsg3-UDr-Ht48n3sRqAJ76PJVFcFuJ1ruFEqOw@mail.gmail.com>
-In-Reply-To: <CAD=FV=WGh-+GTsg3-UDr-Ht48n3sRqAJ76PJVFcFuJ1ruFEqOw@mail.gmail.com>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Fri, 14 Aug 2020 18:20:05 +0530
-Message-ID: <CAFA6WYPOF6_+jxG+PCtUS1BHPsnzYtAHmcWRMpMnvorQQ+M3wg@mail.gmail.com>
-To: Doug Anderson <dianders@chromium.org>
-X-Spam-Score: -0.1 (/)
+ <1595333413-30052-3-git-send-email-sumit.garg@linaro.org>
+ <CAD=FV=XUNqun3d+C_7GpgntGWRXwLSLnXKStLUz8iqZoGKu8zg@mail.gmail.com>
+ <CAFA6WYNq-Z5WD=AqJn2_DEg0F6G1CYte2y5Snc964vsgCnr0Bw@mail.gmail.com>
+ <CAD=FV=Vu3PGSUzargD-6e2XOw=Eh7CZaQ_+a09dr8SR1T8eE2g@mail.gmail.com>
+ <CAFA6WYPJ_w+R15NRKK5BzZtTxKq8Gh_mGswuYbW0cYZoBYLhxw@mail.gmail.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <CAFA6WYPJ_w+R15NRKK5BzZtTxKq8Gh_mGswuYbW0cYZoBYLhxw@mail.gmail.com>
+X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.208.196 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.208.196 listed in wl.mailspike.net]
+ trust [209.85.221.68 listed in list.dnswl.org]
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: linaro.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ for more information. [URIs: chromium.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1k6ZA7-0075Tp-Hq
-Subject: Re: [Kgdb-bugreport] [RFC 0/5] Introduce NMI aware serial drivers
+ -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1k6aSb-007ANS-1Y
+Subject: Re: [Kgdb-bugreport] [RFC 2/5] serial: core: Add framework to allow
+ NMI aware serial drivers
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,92 +115,172 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daniel Thompson <daniel.thompson@linaro.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
  Jason Wessel <jason.wessel@windriver.com>,
- Russell King - ARM Linux admin <linux@armlinux.org.uk>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- linux-serial@vger.kernel.org, Jiri Slaby <jslaby@suse.com>,
- kgdb-bugreport@lists.sourceforge.net,
- linux-arm-kernel <linux-arm-kernel@lists.infradead.org>
+ Russell King - ARM Linux <linux@armlinux.org.uk>,
+ Linux ARM <linux-arm-kernel@lists.infradead.org>, linux-serial@vger.kernel.org,
+ Jiri Slaby <jslaby@suse.com>, kgdb-bugreport@lists.sourceforge.net,
+ LKML <linux-kernel@vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Thu, 13 Aug 2020 at 20:56, Doug Anderson <dianders@chromium.org> wrote:
->
-> Hi,
->
-> On Thu, Aug 13, 2020 at 2:25 AM Sumit Garg <sumit.garg@linaro.org> wrote:
+On Fri, Aug 14, 2020 at 04:47:11PM +0530, Sumit Garg wrote:
+> On Thu, 13 Aug 2020 at 20:08, Doug Anderson <dianders@chromium.org> wrote:
 > >
-> > > One other idea occurred to me that's maybe simpler.  You could in
-> > > theory just poll the serial port periodically to accomplish.  It would
-> > > actually probably even work to call the normal serial port interrupt
-> > > routine from any random CPU.  On many serial drivers the entire
-> > > interrupt handler is wrapped with:
+> > Hi,
+> >
+> > On Thu, Aug 13, 2020 at 7:19 AM Sumit Garg <sumit.garg@linaro.org> wrote:
 > > >
-> > > spin_lock_irqsave(&uap->port.lock, flags);
-> > > ...
-> > > spin_unlock_irqrestore(&uap->port.lock, flags);
+> > > On Thu, 13 Aug 2020 at 05:29, Doug Anderson <dianders@chromium.org> wrote:
+> > > >
+> > > > Hi,
+> > > >
+> > > > On Tue, Jul 21, 2020 at 5:11 AM Sumit Garg <sumit.garg@linaro.org> wrote:
+> > > > >
+> > > > > Add NMI framework APIs in serial core which can be leveraged by serial
+> > > > > drivers to have NMI driven serial transfers. These APIs are kept under
+> > > > > CONFIG_CONSOLE_POLL as currently kgdb initializing uart in polling mode
+> > > > > is the only known user to enable NMI driven serial port.
+> > > > >
+> > > > > The general idea is to intercept RX characters in NMI context, if those
+> > > > > are specific to magic sysrq then allow corresponding handler to run in
+> > > > > NMI context. Otherwise defer all other RX and TX operations to IRQ work
+> > > > > queue in order to run those in normal interrupt context.
+> > > > >
+> > > > > Also, since magic sysrq entry APIs will need to be invoked from NMI
+> > > > > context, so make those APIs NMI safe via deferring NMI unsafe work to
+> > > > > IRQ work queue.
+> > > > >
+> > > > > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> > > > > ---
+> > > > >  drivers/tty/serial/serial_core.c | 120 ++++++++++++++++++++++++++++++++++++++-
+> > > > >  include/linux/serial_core.h      |  67 ++++++++++++++++++++++
+> > > > >  2 files changed, 185 insertions(+), 2 deletions(-)
+> > > > >
+> > > > > diff --git a/drivers/tty/serial/serial_core.c b/drivers/tty/serial/serial_core.c
+> > > > > index 57840cf..6342e90 100644
+> > > > > --- a/drivers/tty/serial/serial_core.c
+> > > > > +++ b/drivers/tty/serial/serial_core.c
+> > > > > @@ -3181,8 +3181,14 @@ static bool uart_try_toggle_sysrq(struct uart_port *port, unsigned int ch)
+> > > > >                 return true;
+> > > > >         }
+> > > > >
+> > > > > +#ifdef CONFIG_CONSOLE_POLL
+> > > > > +       if (in_nmi())
+> > > > > +               irq_work_queue(&port->nmi_state.sysrq_toggle_work);
+> > > > > +       else
+> > > > > +               schedule_work(&sysrq_enable_work);
+> > > > > +#else
+> > > > >         schedule_work(&sysrq_enable_work);
+> > > > > -
+> > > > > +#endif
+> > > >
+> > > > It should be a very high bar to have #ifdefs inside functions.  I
+> > > > don't think this meets it.  Instead maybe something like this
+> > > > (untested and maybe slightly wrong syntax, but hopefully makes
+> > > > sense?):
+> > > >
+> > > > Outside the function:
+> > > >
+> > > > #ifdef CONFIG_CONSOLE_POLL
+> > > > #define queue_port_nmi_work(port, work_type)
+> > > > irq_work_queue(&port->nmi_state.work_type)
+> > > > #else
+> > > > #define queue_port_nmi_work(port, work_type)
+> > > > #endif
+> > > >
+> > > > ...and then:
+> > > >
+> > > > if (IS_ENABLED(CONFIG_CONSOLE_POLL) && in_nmi())
+> > > >   queue_port_nmi_work(port, sysrq_toggle_work);
+> > > > else
+> > > >   schedule_work(&sysrq_enable_work);
+> > > >
+> > > > ---
+> > > >
+> > > > The whole double-hopping is really quite annoying.  I guess
+> > > > schedule_work() can't be called from NMI context but can be called
+> > > > from IRQ context?  So you need to first transition from NMI context to
+> > > > IRQ context and then go and schedule the work?  Almost feels like we
+> > > > should just fix schedule_work() to do this double-hop for you if
+> > > > called from NMI context.  Seems like you could even re-use the list
+> > > > pointers in the work_struct to keep the queue of people who need to be
+> > > > scheduled from the next irq_work?  Worst case it seems like you could
+> > > > add a schedule_work_nmi() that would do all the hoops for you.  ...but
+> > > > I also know very little about NMI so maybe I'm being naive.
+> > > >
 > > >
-> > > And a few (the ones I was involved in fixing) have the similar pattern
-> > > of using uart_unlock_and_check_sysrq().
+> > > Thanks for this suggestion and yes indeed we could make
+> > > schedule_work() NMI safe and in turn get rid of all this #ifdefs. Have
+> > > a look at below changes:
 > > >
-> > > Any serial drivers following this pattern could have their interrupt
-> > > routine called periodically just to poll for characters and it'd be
-> > > fine, right?  ...and having it take a second before a sysrq comes in
-> > > this case is probably not the end of the world?
+> > > diff --git a/include/linux/workqueue.h b/include/linux/workqueue.h
+> > > index 26de0ca..1daf1b4 100644
+> > > --- a/include/linux/workqueue.h
+> > > +++ b/include/linux/workqueue.h
+> > > @@ -14,6 +14,7 @@
+> > >  #include <linux/atomic.h>
+> > >  #include <linux/cpumask.h>
+> > >  #include <linux/rcupdate.h>
+> > > +#include <linux/irq_work.h>
 > > >
+> > >  struct workqueue_struct;
+> > >
+> > > @@ -106,6 +107,7 @@ struct work_struct {
+> > >  #ifdef CONFIG_LOCKDEP
+> > >         struct lockdep_map lockdep_map;
+> > >  #endif
+> > > +       struct irq_work iw;
 > >
-> > Are you proposing to have complete RX operation in polling mode with
-> > RX interrupt disabled (eg. using a kernel thread)?
->
-> No, I'm suggesting a hybrid approach.  Leave the interrupts enabled as
-> usual, but _also_ poll every 500 ms or 1 second (maybe make it
-> configurable?).  In some serial drivers (ones that hold the lock for
-> the whole interrupt routine) this polling function could actually be
-> the same as the normal interrupt handler so it'd be trivially easy to
-> implement and maintain.
->
-> NOTE: This is not the same type of polling that kgdb does today.  The
-> existing polling is really only intended to work when we're dropped
-> into the debugger.  This would be more like a "poll_irq" type function
-> that would do all the normal work the interrupt did and is really just
-> there in the case that the CPU that the interrupt is routed to is
-> locked up.
->
-
-Your idea sounds interesting. I think where we are reaching is to have
-an ever active listener to serial port that can be scheduled to any
-random active CPU. And to keep its CPU overhead negligible, it can
-sleep and only wake-up and listen once every 500 ms or 1 second
-(configurable).
-
-I will try to think more about it and probably give it a try with a PoC.
-
--Sumit
-
->
-> > > One nice benefit of this is that it would actually work _better_ on
-> > > SMP systems for any sysrqs that aren't NMI safe.  Specifically with
-> > > your patch series those would be queued with irq_work_queue() which
-> > > means they'd be blocked if the CPU processing the NMI is stuck with
-> > > IRQs disabled.
+> > Hrm, I was thinking you could just have a single queue per CPU then
+> > you don't need to add all this extra data to every single "struct
+> > work_struct".  I was thinking you could use the existing list node in
+> > the "struct work_struct" to keep track of the list of things.  ...but
+> > maybe my idea this isn't actually valid because the linked list might
+> > be in use if we're scheduling work that's already pending / running?
 > >
-> > Yes, the sysrq handlers which aren't NMI safe will behave similarly to
-> > existing IRQ based sysrq handlers.
-> >
-> > > With the polling mechanism they'd nicely just run on a
-> > > different CPU.
-> >
-> > It looks like polling would cause much CPU overhead. So I am not sure
-> > if that is the preferred approach.
->
-> Maybe now it's clearer that there should be almost no overhead.  When
-> dealing with a SYSRQ it's fine if there's a bit of a delay before it's
-> processed, so polling every 1 second is probably fine.
->
-> -Doug
+> > In any case, I worry that people won't be happy with the extra
+> > overhead per "struct work_struct".  Can we reduce it at all?  It still
+> > does feel like you could get by with a single global queue and thus
+> > you wouldn't need to store the function pointer and flags with every
+> > "struct work_struct", right?  So all you'd need is a single pointer
+> > for the linked list?  I haven't actually tried implementing this,
+> > though, so I could certainly be wrong.
+> 
+> Let me try to elaborate here:
+> 
+> Here we are dealing with 2 different layers of deferring work, one is
+> irq_work (NMI safe) using "struct irq_work" and other is normal
+> workqueue (NMI unsafe) using "struct work_struct".
+> 
+> So when we are in NMI context, the only option is to use irq_work to
+> defer work and need to pass reference to "struct irq_work". Now in
+> following irq_work function:
+> 
+> +void queue_work_nmi(struct irq_work *iw)
+> +{
+> +       struct work_struct *work = container_of(iw, struct work_struct, iw);
+> +
+> +       queue_work(system_wq, work);
+> +}
+> +EXPORT_SYMBOL(queue_work_nmi);
+> 
+> we can't find a reference to "struct work_struct" until there is 1:1
+> mapping with "struct irq_work". So we require a way to establish this
+> mapping and having "struct irq_work" as part of "struct work_struct"
+> tries to achieve that. If you have any better way to achieve this, I
+> can use that instead.
+
+Perhaps don't consider this to be "fixing schedule_work()" but providing
+an NMI-safe alternative to schedule_work().
+
+Does it look better if you create a new type to map the two structures
+together. Alternatively are there enough existing use-cases to want to
+extend irq_work_queue() with irq_work_schedule() or something similar?
+
+
+Daniel.
 
 
 _______________________________________________
