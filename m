@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A2E71249A53
-	for <lists+kgdb-bugreport@lfdr.de>; Wed, 19 Aug 2020 12:28:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5291D249A5C
+	for <lists+kgdb-bugreport@lfdr.de>; Wed, 19 Aug 2020 12:28:59 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1k8LKz-0007vl-CN
-	for lists+kgdb-bugreport@lfdr.de; Wed, 19 Aug 2020 10:28:57 +0000
+	id 1k8LL0-0007xh-1l
+	for lists+kgdb-bugreport@lfdr.de; Wed, 19 Aug 2020 10:28:58 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <christian.brauner@ubuntu.com>) id 1k85rc-00060n-E2
- for kgdb-bugreport@lists.sourceforge.net; Tue, 18 Aug 2020 17:57:36 +0000
+ (envelope-from <christian.brauner@ubuntu.com>) id 1k85so-0001G9-3O
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 18 Aug 2020 17:58:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Hbj3aHsHLbcgF7a9tJ0gpyNm4u2mi6aBQ1knkB/v6eo=; b=ZlaNh/9gRmzYnPVzYjtEA4mi0s
- WrJf2zIb2mOb7h/f0lpQaWUu/1+4S1abQ8aiY+6hpACi1qpsBDMJAT/L4/KPTDW5LFKN6ODxNLUSI
- p9w+pTvb7WCOBimz5U4xvrUugRk+ghDJoWlTl/4AK2d+JMAwNLsPDA/tCvuqvaS4RH+A=;
+ bh=7VMTovDPKA/Qdv1fmPuES5XUYxtFQaz44WnujpApQtY=; b=knIWXAsjf9+PQ+jT32feC5DzSh
+ z61nrBszhUk1RWL40BjZrD5tzXlepmUoNGERpNeUGw/4sAU5cQBv3fz0JrSLU3ThCXZvyW2Lf7Ir7
+ dsnjM5/kaKNThVZ0wb8pw0mgQEjMuERLVpYlbE+GjN7n3xwXA9Z8hyHdQpkocvIKWZH8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -30,43 +30,43 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Hbj3aHsHLbcgF7a9tJ0gpyNm4u2mi6aBQ1knkB/v6eo=; b=PdI8d/rk1/4DnoLUHDgsDdCY9q
- kmzPCwjrEBJir7LSbq37QrCrdCPY6w6u/khad7MIFpyLKCPDf/j32QZp38TARPzFCrqY3SqnP9Jsl
- iFTskqP+G3TqQQHDyvacHix+OqdqbEWMQb3cckFrPePq02/3YPSMEShEhViMAQuSdP1o=;
+ bh=7VMTovDPKA/Qdv1fmPuES5XUYxtFQaz44WnujpApQtY=; b=h5W5T3b2AGk6Ci1BpHtMNIaAC8
+ Kvk97fFjldKmB0csoZYQcoq3vZgnePnKcQ4H7+cFnCG7gFJDoPFdsC+MQQ/rU8E8vQgsddPPyU6eJ
+ LNnDJbtSPh19bmm9sH20fWkqRZcOyFpCZCfIHXJiawpzEj5WLBsPK1V12uNSWJZblt14=;
 Received: from youngberry.canonical.com ([91.189.89.112])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-SHA:128) (Exim 4.92.2) id 1k85ra-00BeNd-Oe
- for kgdb-bugreport@lists.sourceforge.net; Tue, 18 Aug 2020 17:57:36 +0000
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-SHA:128) (Exim 4.92.2) id 1k85sm-000hEo-TA
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 18 Aug 2020 17:58:50 +0000
 Received: from ip5f5af70b.dynamic.kabel-deutschland.de ([95.90.247.11]
  helo=wittgenstein.fritz.box) by youngberry.canonical.com with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.86_2)
  (envelope-from <christian.brauner@ubuntu.com>)
- id 1k85VG-0003E9-B8; Tue, 18 Aug 2020 17:34:30 +0000
+ id 1k85VH-0003E9-KN; Tue, 18 Aug 2020 17:34:31 +0000
 From: Christian Brauner <christian.brauner@ubuntu.com>
 To: Christoph Hewllig <hch@infradead.org>, linux-kernel@vger.kernel.org,
  Linus Torvalds <torvalds@linux-foundation.org>, linux-arch@vger.kernel.org
-Date: Tue, 18 Aug 2020 19:34:07 +0200
-Message-Id: <20200818173411.404104-8-christian.brauner@ubuntu.com>
+Date: Tue, 18 Aug 2020 19:34:08 +0200
+Message-Id: <20200818173411.404104-9-christian.brauner@ubuntu.com>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200818173411.404104-1-christian.brauner@ubuntu.com>
 References: <20200818173411.404104-1-christian.brauner@ubuntu.com>
 MIME-Version: 1.0
-X-Spam-Score: -0.2 (/)
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: linutronix.de]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [91.189.89.112 listed in wl.mailspike.net]
+ for more information. [URIs: ubuntu.com]
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [91.189.89.112 listed in wl.mailspike.net]
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1k85ra-00BeNd-Oe
+ -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1k85sm-000hEo-TA
 X-Mailman-Approved-At: Wed, 19 Aug 2020 10:28:55 +0000
-Subject: [Kgdb-bugreport] [PATCH 07/11] x86: switch to kernel_clone()
+Subject: [Kgdb-bugreport] [PATCH 08/11] kprobes: switch to kernel_clone()
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -103,27 +103,44 @@ Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 The old _do_fork() helper is removed in favor of the new kernel_clone() helper.
 The latter adheres to naming conventions for kernel internal syscall helpers.
 
-Cc: Thomas Gleixner <tglx@linutronix.de>
-Cc: Ingo Molnar <mingo@redhat.com>
-Cc: Borislav Petkov <bp@alien8.de>
-Cc: x86@kernel.org
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc: Alexandre Chartre <alexandre.chartre@oracle.com>
+Cc: Jonathan Corbet <corbet@lwn.net>
+Cc: Masami Hiramatsu <mhiramat@kernel.org>
 Signed-off-by: Christian Brauner <christian.brauner@ubuntu.com>
 ---
- arch/x86/kernel/sys_ia32.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ samples/kprobes/kprobe_example.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/arch/x86/kernel/sys_ia32.c b/arch/x86/kernel/sys_ia32.c
-index 720cde885042..6cf65397d225 100644
---- a/arch/x86/kernel/sys_ia32.c
-+++ b/arch/x86/kernel/sys_ia32.c
-@@ -251,6 +251,6 @@ COMPAT_SYSCALL_DEFINE5(ia32_clone, unsigned long, clone_flags,
- 		.tls		= tls_val,
- 	};
+diff --git a/samples/kprobes/kprobe_example.c b/samples/kprobes/kprobe_example.c
+index 240f2435ce6f..a02f53836ee1 100644
+--- a/samples/kprobes/kprobe_example.c
++++ b/samples/kprobes/kprobe_example.c
+@@ -2,13 +2,13 @@
+ /*
+  * NOTE: This example is works on x86 and powerpc.
+  * Here's a sample kernel module showing the use of kprobes to dump a
+- * stack trace and selected registers when _do_fork() is called.
++ * stack trace and selected registers when kernel_clone() is called.
+  *
+  * For more information on theory of operation of kprobes, see
+  * Documentation/staging/kprobes.rst
+  *
+  * You will see the trace data in /var/log/messages and on the console
+- * whenever _do_fork() is invoked to create a new process.
++ * whenever kernel_clone() is invoked to create a new process.
+  */
  
--	return _do_fork(&args);
-+	return kernel_clone(&args);
- }
- #endif /* CONFIG_IA32_EMULATION */
+ #include <linux/kernel.h>
+@@ -16,7 +16,7 @@
+ #include <linux/kprobes.h>
+ 
+ #define MAX_SYMBOL_LEN	64
+-static char symbol[MAX_SYMBOL_LEN] = "_do_fork";
++static char symbol[MAX_SYMBOL_LEN] = "kernel_clone";
+ module_param_string(symbol, symbol, sizeof(symbol), 0644);
+ 
+ /* For each probe you need to allocate a kprobe structure */
 -- 
 2.28.0
 
