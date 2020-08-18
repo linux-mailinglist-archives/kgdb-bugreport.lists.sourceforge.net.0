@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D5ED8249A56
+	by mail.lfdr.de (Postfix) with ESMTPS id BD784249A55
 	for <lists+kgdb-bugreport@lfdr.de>; Wed, 19 Aug 2020 12:28:58 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1k8LKz-0007wI-Ig
+	id 1k8LKz-0007w7-Fg
 	for lists+kgdb-bugreport@lfdr.de; Wed, 19 Aug 2020 10:28:57 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <christian.brauner@ubuntu.com>) id 1k85ry-0007aZ-Cr
- for kgdb-bugreport@lists.sourceforge.net; Tue, 18 Aug 2020 17:57:58 +0000
+ (envelope-from <christian.brauner@ubuntu.com>) id 1k85rr-00018J-1g
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 18 Aug 2020 17:57:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Od/+0T6tPRAFCiSOl4zr68WUtZnvWMSMx+Az/y0HLFE=; b=QEvtdNSD0uYHTXEh9tS1QV3zMD
- ErwUmaVGuUrjm0SO+K+22pLjujwd+aC78qx3uAfOkvyyBYNeOWUm0sIcDzJCKQllStPeXFTqEFKEK
- Z+7WJFPAJ93d2ivkzmvpVJshUAOsVJRH4Q+g8HblQjU0NoBxRRbnUCanJnFjMFtrCiBo=;
+ bh=mx/acPDOh5qyU27G8+6NK+aHNcq8ZLK4hunolR68Sf8=; b=YSGTQ7OCZY/E2svfa5GD0wLFlR
+ 7Z28rqIE7KQOXKkUU+g4uCbORHkNbURVWdoBsljMAw7bR/aVjxEI9IT0AJoY6YOsP1vJ2CmV/94oK
+ pGZUGvHgblOz8SvUc68uAsqWynlCCghUg5lh3fEz5Sg8GYxNJcg+O/cBNaIUXgPhUboc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -30,23 +30,23 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Od/+0T6tPRAFCiSOl4zr68WUtZnvWMSMx+Az/y0HLFE=; b=GKcjICU3OrlhKz78V+Q9EU1XfM
- nhLQHx1MsQhXhvtW0l1hv0MnGnjeECaWaocdHsg2dfqXxJoLhqh9dD1cInPUFeLFIErJyPoC/9yzv
- MCT+cxugh5VDYJLCWV5JdCGOU1MGHarzv5xyewZ4FmbTNmW4ckkTxGl6dsC2Ap999dTY=;
+ bh=mx/acPDOh5qyU27G8+6NK+aHNcq8ZLK4hunolR68Sf8=; b=LuZ4eC/O0WbcoqX4OLMYe/uLVg
+ afhM7Wm0E+iPckM8oTOPYSrcWE39Cj5+gyrDFSVpj9QdLD2R83Sp96xZtZ41z6NILxX3VcaUGlSwZ
+ sIblbsszDsFE4FDPsH0DTcX/HUul1R58V1JC4uO2X6YCidSb1k+gFiyCJpY99QlLv9eg=;
 Received: from youngberry.canonical.com ([91.189.89.112])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-SHA:128) (Exim 4.92.2) id 1k85rx-000hD7-5q
- for kgdb-bugreport@lists.sourceforge.net; Tue, 18 Aug 2020 17:57:58 +0000
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-SHA:128) (Exim 4.92.2) id 1k85rp-00BeOQ-Tz
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 18 Aug 2020 17:57:50 +0000
 Received: from ip5f5af70b.dynamic.kabel-deutschland.de ([95.90.247.11]
  helo=wittgenstein.fritz.box) by youngberry.canonical.com with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.86_2)
  (envelope-from <christian.brauner@ubuntu.com>)
- id 1k85VC-0003E9-CE; Tue, 18 Aug 2020 17:34:26 +0000
+ id 1k85VD-0003E9-Ko; Tue, 18 Aug 2020 17:34:27 +0000
 From: Christian Brauner <christian.brauner@ubuntu.com>
 To: Christoph Hewllig <hch@infradead.org>, linux-kernel@vger.kernel.org,
  Linus Torvalds <torvalds@linux-foundation.org>, linux-arch@vger.kernel.org
-Date: Tue, 18 Aug 2020 19:34:04 +0200
-Message-Id: <20200818173411.404104-5-christian.brauner@ubuntu.com>
+Date: Tue, 18 Aug 2020 19:34:05 +0200
+Message-Id: <20200818173411.404104-6-christian.brauner@ubuntu.com>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200818173411.404104-1-christian.brauner@ubuntu.com>
 References: <20200818173411.404104-1-christian.brauner@ubuntu.com>
@@ -64,9 +64,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1k85rx-000hD7-5q
+X-Headers-End: 1k85rp-00BeOQ-Tz
 X-Mailman-Approved-At: Wed, 19 Aug 2020 10:28:55 +0000
-Subject: [Kgdb-bugreport] [PATCH 04/11] m68k: switch to kernel_clone()
+Subject: [Kgdb-bugreport] [PATCH 05/11] nios2: switch to kernel_clone()
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -103,42 +103,23 @@ Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 The old _do_fork() helper is removed in favor of the new kernel_clone() helper.
 The latter adheres to naming conventions for kernel internal syscall helpers.
 
-Cc: Kars de Jong <jongk@linux-m68k.org>
-Cc: Geert Uytterhoeven <geert@linux-m68k.org>
-Cc: linux-m68k@lists.linux-m68k.org
+Cc: Ley Foon Tan <ley.foon.tan@intel.com>
 Signed-off-by: Christian Brauner <christian.brauner@ubuntu.com>
 ---
- arch/m68k/kernel/process.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ arch/nios2/kernel/process.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/m68k/kernel/process.c b/arch/m68k/kernel/process.c
-index 6492a2c54dbc..08359a6e058f 100644
---- a/arch/m68k/kernel/process.c
-+++ b/arch/m68k/kernel/process.c
-@@ -107,10 +107,10 @@ void flush_thread(void)
-  * on top of pt_regs, which means that sys_clone() arguments would be
-  * buried.  We could, of course, copy them, but it's too costly for no
-  * good reason - generic clone() would have to copy them *again* for
-- * _do_fork() anyway.  So in this case it's actually better to pass pt_regs *
-- * and extract arguments for _do_fork() from there.  Eventually we might
-- * go for calling _do_fork() directly from the wrapper, but only after we
-- * are finished with _do_fork() prototype conversion.
-+ * kernel_clone() anyway.  So in this case it's actually better to pass pt_regs *
-+ * and extract arguments for kernel_clone() from there.  Eventually we might
-+ * go for calling kernel_clone() directly from the wrapper, but only after we
-+ * are finished with kernel_clone() prototype conversion.
-  */
- asmlinkage int m68k_clone(struct pt_regs *regs)
- {
-@@ -125,7 +125,7 @@ asmlinkage int m68k_clone(struct pt_regs *regs)
- 		.tls		= regs->d5,
+diff --git a/arch/nios2/kernel/process.c b/arch/nios2/kernel/process.c
+index 88a4ec03edab..4ffe857e6ada 100644
+--- a/arch/nios2/kernel/process.c
++++ b/arch/nios2/kernel/process.c
+@@ -266,5 +266,5 @@ asmlinkage int nios2_clone(unsigned long clone_flags, unsigned long newsp,
+ 		.tls		= tls,
  	};
  
 -	return _do_fork(&args);
 +	return kernel_clone(&args);
  }
- 
- /*
 -- 
 2.28.0
 
