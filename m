@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1977E249ACD
-	for <lists+kgdb-bugreport@lfdr.de>; Wed, 19 Aug 2020 12:48:33 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 085B9249AD8
+	for <lists+kgdb-bugreport@lfdr.de>; Wed, 19 Aug 2020 12:48:45 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1k8Ldv-0002c7-K8
-	for lists+kgdb-bugreport@lfdr.de; Wed, 19 Aug 2020 10:48:31 +0000
+	id 1k8Le7-0008EA-F9
+	for lists+kgdb-bugreport@lfdr.de; Wed, 19 Aug 2020 10:48:43 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <christian.brauner@ubuntu.com>) id 1k8Ldr-0002bU-Nl
- for kgdb-bugreport@lists.sourceforge.net; Wed, 19 Aug 2020 10:48:27 +0000
+ (envelope-from <christian.brauner@ubuntu.com>) id 1k8Ldu-0008CC-DZ
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 19 Aug 2020 10:48:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=CM3yQo+Yvoa8KdLSXlv2SLkv+zq6yPpqhCN383TLsxI=; b=P4WmWW/WQadzIvgEcg4JFCCjEs
- TwSw0T/YJBYOTCOH7W6fPyyjfE3ENBIsRxpmvO2mggSOBIxf44dCke0jvloimJVidZ0rPJ07Ef01x
- I5oYTlmVjfwr+tNsJKXAD2rVbvuASDHmMmhPONAltVzjKrCXYqCHISEgvmdPaJRpxdDs=;
+ bh=YamdiT7KUdqmmTxnW67CqPppCSdh9IO8EVEh2UwrvQo=; b=bNlwf8rtKrvw5DnFT+XA9VLaLp
+ 2Xs5a9uKx0ldDiHuVVR2GmlBTTPlGUaEUGnoFo3uLoLDMyDgtXZFoaeO0v0ueZCvEw1f0sQy3XIYr
+ 8uo/FUfgeUktn4noko1Kp5imsOtvRB3AOOShXG+tsYlQwNDKwq9yptDj1Em/NHNFt2Fc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -30,23 +30,23 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=CM3yQo+Yvoa8KdLSXlv2SLkv+zq6yPpqhCN383TLsxI=; b=i28bMcfkx8r8eBCwrsJoDFr/MO
- gLx87ajt7hqxSk/Qc4WBGxWl4132eBuJ+p6NQfKwueOUjrHBYjmq9CAT7ySq8CQ7bo4uUVxq5oEEf
- 4mf9iRo0rAqUOIXaT85PCvJ89GYb1dGCAJgfmN3CqssaAELQuhuAt50MACfPzVmzroL4=;
+ bh=YamdiT7KUdqmmTxnW67CqPppCSdh9IO8EVEh2UwrvQo=; b=IxRJ325tiWEViQSc2Rkj+xSwOi
+ Fp78Jlb6g8who5DQ5DukDQO9voO9NBBEJvApwquh0RBJlHU73KMbyXg6sTQ382ZXpt+bnGBkMArGw
+ 7tVkqrU3S8dgyqZDDGi2L87fFqFkCIz0AulKyYNOwVysaLGkeFU2h0yZ9LFvj164+wrM=;
 Received: from youngberry.canonical.com ([91.189.89.112])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-SHA:128) (Exim 4.92.2) id 1k8Ldq-00G1Cm-IO
- for kgdb-bugreport@lists.sourceforge.net; Wed, 19 Aug 2020 10:48:27 +0000
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-SHA:128) (Exim 4.92.2) id 1k8Ldt-001Fxz-45
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 19 Aug 2020 10:48:30 +0000
 Received: from ip5f5af70b.dynamic.kabel-deutschland.de ([95.90.247.11]
  helo=wittgenstein.fritz.box) by youngberry.canonical.com with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.86_2)
  (envelope-from <christian.brauner@ubuntu.com>)
- id 1k8Lcw-0006IE-Fh; Wed, 19 Aug 2020 10:47:30 +0000
+ id 1k8Lcx-0006IE-R0; Wed, 19 Aug 2020 10:47:31 +0000
 From: Christian Brauner <christian.brauner@ubuntu.com>
 To: linux-arch@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Date: Wed, 19 Aug 2020 12:46:49 +0200
-Message-Id: <20200819104655.436656-6-christian.brauner@ubuntu.com>
+Date: Wed, 19 Aug 2020 12:46:50 +0200
+Message-Id: <20200819104655.436656-7-christian.brauner@ubuntu.com>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200819104655.436656-1-christian.brauner@ubuntu.com>
 References: <20200819104655.436656-1-christian.brauner@ubuntu.com>
@@ -64,8 +64,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1k8Ldq-00G1Cm-IO
-Subject: [Kgdb-bugreport] [PATCH v2 05/11] nios2: switch to kernel_clone()
+X-Headers-End: 1k8Ldt-001Fxz-45
+Subject: [Kgdb-bugreport] [PATCH v2 06/11] sparc: switch to kernel_clone()
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -103,26 +103,47 @@ Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 The old _do_fork() helper is removed in favor of the new kernel_clone() helper.
 The latter adheres to naming conventions for kernel internal syscall helpers.
 
-Cc: Ley Foon Tan <ley.foon.tan@intel.com>
+Cc: "David S. Miller" <davem@davemloft.net>
+Cc: sparclinux@vger.kernel.org
 Signed-off-by: Christian Brauner <christian.brauner@ubuntu.com>
 ---
 /* v2 */
 unchanged
 ---
- arch/nios2/kernel/process.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/sparc/kernel/process.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/arch/nios2/kernel/process.c b/arch/nios2/kernel/process.c
-index 88a4ec03edab..4ffe857e6ada 100644
---- a/arch/nios2/kernel/process.c
-+++ b/arch/nios2/kernel/process.c
-@@ -266,5 +266,5 @@ asmlinkage int nios2_clone(unsigned long clone_flags, unsigned long newsp,
- 		.tls		= tls,
+diff --git a/arch/sparc/kernel/process.c b/arch/sparc/kernel/process.c
+index 5234b5ccc0b9..0442ab00518d 100644
+--- a/arch/sparc/kernel/process.c
++++ b/arch/sparc/kernel/process.c
+@@ -25,7 +25,7 @@ asmlinkage long sparc_fork(struct pt_regs *regs)
+ 		.stack		= regs->u_regs[UREG_FP],
  	};
  
--	return _do_fork(&args);
-+	return kernel_clone(&args);
- }
+-	ret = _do_fork(&args);
++	ret = kernel_clone(&args);
+ 
+ 	/* If we get an error and potentially restart the system
+ 	 * call, we're screwed because copy_thread() clobbered
+@@ -50,7 +50,7 @@ asmlinkage long sparc_vfork(struct pt_regs *regs)
+ 		.stack		= regs->u_regs[UREG_FP],
+ 	};
+ 
+-	ret = _do_fork(&args);
++	ret = kernel_clone(&args);
+ 
+ 	/* If we get an error and potentially restart the system
+ 	 * call, we're screwed because copy_thread() clobbered
+@@ -96,7 +96,7 @@ asmlinkage long sparc_clone(struct pt_regs *regs)
+ 	else
+ 		args.stack = regs->u_regs[UREG_FP];
+ 
+-	ret = _do_fork(&args);
++	ret = kernel_clone(&args);
+ 
+ 	/* If we get an error and potentially restart the system
+ 	 * call, we're screwed because copy_thread() clobbered
 -- 
 2.28.0
 
