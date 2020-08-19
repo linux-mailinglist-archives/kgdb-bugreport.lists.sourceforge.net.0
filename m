@@ -2,69 +2,70 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9445F249AC3
-	for <lists+kgdb-bugreport@lfdr.de>; Wed, 19 Aug 2020 12:48:23 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5EEAD249AC9
+	for <lists+kgdb-bugreport@lfdr.de>; Wed, 19 Aug 2020 12:48:29 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1k8Ldm-00089a-2r
-	for lists+kgdb-bugreport@lfdr.de; Wed, 19 Aug 2020 10:48:22 +0000
+	id 1k8Ldr-0000Xj-QL
+	for lists+kgdb-bugreport@lfdr.de; Wed, 19 Aug 2020 10:48:27 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <christian.brauner@ubuntu.com>) id 1k8Ldk-00089B-Kg
+ (envelope-from <christian.brauner@ubuntu.com>) id 1k8Ldk-0000Wn-Qx
  for kgdb-bugreport@lists.sourceforge.net; Wed, 19 Aug 2020 10:48:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=OV9ggm/5/6Cdeyz3u2yrlAaYKeBigTPPePTfgCwUXco=; b=HPADT02dA1ToCS7XSuXPizITm2
- T8s5Skdjn4rLgBIGCxm9fzU2opA9wVupTQiBtJMmeyK67Zq+f84ghynJTGmFfkLREyePXH7rNRxbI
- TPlI0faCaOp+h9VxDn3Lts9PqL0zzdgFR8O7a+o1Sd0bbhBuX79RCXZMtNQLJit6Ixy4=;
+ bh=/x0JNQaU7GbFCdIGlD9ebtPhlJ42Ij+S9ofYz96BbKc=; b=DMPTmcU44invZkNbgeNiShfcBn
+ p25Ilc2GI0sHrqjhNTXT6CqT/PohjU05hKc+pMNpiPRtpJvdrzXbjvTCHvVV95kmaePoUIWRa6GjE
+ 9hYegFGUc5qY5sS0dS5a3xb8ct6zodlES3X0TGBtyJwnCYFBXtVigyouV6TlmPqIb8kw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=OV9ggm/5/6Cdeyz3u2yrlAaYKeBigTPPePTfgCwUXco=; b=M
- gWPhL3JZ96+6nRgNajb19zNPsHg/6kb6vLgT4fIVAwAcDFSDLr9X8m9j+uhX0I1lTEMtThGLfE0nc
- 2EvkAYtt/TCER3vme2Ccy9ydx9P8Eh8cKIQi7+ap8kk+kgmkr9QTYphEWIe5HYOdbIbYpWgZPG100
- aiAQaGXs7gBIwb+E=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=/x0JNQaU7GbFCdIGlD9ebtPhlJ42Ij+S9ofYz96BbKc=; b=dvXCe7dkBEnqURrwL9fSxPc1dk
+ MN2jy6i4B4vO5bOlOgDaVe0wR8Ix1LLE2AB1mWBNHDzHHnLmNhVrFd/porOA3/J4AiF3fvF/0rL3P
+ ph71WVN1pkfKtkuN+7zqAL3dUF00i5hayfC+aEGN0bdSmlza+IaAKw9OQ2r4C1jFp3sM=;
 Received: from youngberry.canonical.com ([91.189.89.112])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-SHA:128) (Exim 4.92.2) id 1k8Ldi-00CIoQ-I2
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-SHA:128) (Exim 4.92.2) id 1k8Ldi-00G1CR-R3
  for kgdb-bugreport@lists.sourceforge.net; Wed, 19 Aug 2020 10:48:20 +0000
 Received: from ip5f5af70b.dynamic.kabel-deutschland.de ([95.90.247.11]
  helo=wittgenstein.fritz.box) by youngberry.canonical.com with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.86_2)
  (envelope-from <christian.brauner@ubuntu.com>)
- id 1k8Lco-0006IE-NK; Wed, 19 Aug 2020 10:47:22 +0000
+ id 1k8Lcq-0006IE-KO; Wed, 19 Aug 2020 10:47:24 +0000
 From: Christian Brauner <christian.brauner@ubuntu.com>
 To: linux-arch@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Date: Wed, 19 Aug 2020 12:46:44 +0200
-Message-Id: <20200819104655.436656-1-christian.brauner@ubuntu.com>
+Date: Wed, 19 Aug 2020 12:46:45 +0200
+Message-Id: <20200819104655.436656-2-christian.brauner@ubuntu.com>
 X-Mailer: git-send-email 2.28.0
+In-Reply-To: <20200819104655.436656-1-christian.brauner@ubuntu.com>
+References: <20200819104655.436656-1-christian.brauner@ubuntu.com>
 MIME-Version: 1.0
 X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [91.189.89.112 listed in wl.mailspike.net]
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: kprobe_ftrace.tc]
+ for more information. [URIs: ubuntu.com]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [91.189.89.112 listed in wl.mailspike.net]
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1k8Ldi-00CIoQ-I2
-Subject: [Kgdb-bugreport] [PATCH v2 00/11] Introduce kernel_clone(),
- kill _do_fork()
+X-Headers-End: 1k8Ldi-00G1CR-R3
+Subject: [Kgdb-bugreport] [PATCH v2 01/11] fork: introduce kernel_clone()
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -84,8 +85,9 @@ Cc: Alexandre Chartre <alexandre.chartre@oracle.com>, linux-doc@vger.kernel.org,
  Thomas Gleixner <tglx@linutronix.de>, Tom Zanussi <zanussi@kernel.org>,
  Yoshinori Sato <ysato@users.sourceforge.jp>, Jonathan Corbet <corbet@lwn.net>,
  Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, x86@kernel.org,
- Ley Foon Tan <ley.foon.tan@intel.com>, Christoph Hewllig <hch@infradead.org>,
- Ingo Molnar <mingo@redhat.com>, Geert Uytterhoeven <geert@linux-m68k.org>,
+ Ley Foon Tan <ley.foon.tan@intel.com>, Ingo Molnar <mingo@kernel.org>,
+ Christoph Hewllig <hch@infradead.org>, Ingo Molnar <mingo@redhat.com>,
+ Geert Uytterhoeven <geert@linux-m68k.org>,
  "Eric W. Biederman" <ebiederm@xmission.com>,
  uclinux-h8-devel@lists.sourceforge.jp, Fenghua Yu <fenghua.yu@intel.com>,
  Kees Cook <keescook@chromium.org>, Arnd Bergmann <arnd@arndb.de>,
@@ -99,78 +101,130 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Hey everyone,
+The old _do_fork() helper doesn't follow naming conventions of in-kernel
+helpers for syscalls. The process creation cleanup in [1] didn't change the
+name to something more reasonable mainly because _do_fork() was used in quite a
+few places. So sending this as a separate series seemed the better strategy.
 
-This is a follow-up to the fork-related cleanup. It's based on a brief
-discussion after the initial series was merged.
-Last cycle we removed copy_thread_tls() and the associated Kconfig
-option for each architecture. Now we are only left with copy_thread().
-Part of this work was removing the old do_fork() legacy clone()-style
-calling convention in favor of the new struct kernel_clone args calling
-convention.
-The only remaining function callable outside of kernel/fork.c is
-_do_fork(). It doesn't really follow the naming of kernel-internal
-syscall helpers as Christoph righly pointed out. Switch all callers and
-references to kernel_clone() and remove _do_fork() once and for all also
-switching the return value for kernel_clone() from long to pid_t since
-that's what we use in all other places where we're dealing with process
-identifiers.
+This commit does two things:
+1. renames _do_fork() to kernel_clone() but keeps _do_fork() as a simple static
+   inline wrapper around kernel_clone().
+2. Changes the return type from long to pid_t. This aligns kernel_thread() and
+   kernel_clone(). Also, the return value from kernel_clone that is surfaced in
+   fork(), vfork(), clone(), and clone3() is taken from pid_vrn() which returns
+   a pid_t too.
 
-For all architectures I have done a full git rebase v5.9-rc1 -x "make
--j31". There were no built failures and the changes were fairly
-mechanical.
+Follow-up patches will switch each caller of _do_fork() and each place where it
+is referenced over to kernel_clone(). After all these changes are done, we can
+remove _do_fork() completely and will only be left with kernel_clone().
 
-The only helpers we have left now are kernel_thread() and kernel_clone()
-where kernel_thread() just calls kernel_clone().
+[1]: 9ba27414f2ec ("Merge tag 'fork-v5.9' of git://git.kernel.org/pub/scm/linux/kernel/git/brauner/linux")
+Cc: Thomas Gleixner <tglx@linutronix.de>
+Cc: Ingo Molnar <mingo@kernel.org>
+Cc: Matthew Wilcox (Oracle) <willy@infradead.org>
+Cc: "Peter Zijlstra (Intel)" <peterz@infradead.org>
+Signed-off-by: Christian Brauner <christian.brauner@ubuntu.com>
+---
+/* v2 */
+- Matthew Wilcox (Oracle) <willy@infradead.org>:
+  - make kernel_clone() return pid_t
+---
+ include/linux/sched/task.h |  6 +++++-
+ kernel/fork.c              | 16 ++++++++--------
+ 2 files changed, 13 insertions(+), 9 deletions(-)
 
-Thanks!
-Christian
-
-Christian Brauner (11):
-  fork: introduce kernel_clone()
-  h8300: switch to kernel_clone()
-  ia64: switch to kernel_clone()
-  m68k: switch to kernel_clone()
-  nios2: switch to kernel_clone()
-  sparc: switch to kernel_clone()
-  x86: switch to kernel_clone()
-  kprobes: switch to kernel_clone()
-  kgdbts: switch to kernel_clone()
-  tracing: switch to kernel_clone()
-  sched: remove _do_fork()
-
- Documentation/trace/histogram.rst             |  4 +-
- arch/h8300/kernel/process.c                   |  2 +-
- arch/ia64/kernel/process.c                    |  4 +-
- arch/m68k/kernel/process.c                    | 10 ++--
- arch/nios2/kernel/process.c                   |  2 +-
- arch/sparc/kernel/process.c                   |  6 +--
- arch/x86/kernel/sys_ia32.c                    |  2 +-
- drivers/misc/kgdbts.c                         | 48 +++++++++----------
- include/linux/sched/task.h                    |  2 +-
- kernel/fork.c                                 | 16 +++----
- samples/kprobes/kprobe_example.c              |  6 +--
- samples/kprobes/kretprobe_example.c           |  4 +-
- .../test.d/dynevent/add_remove_kprobe.tc      |  2 +-
- .../test.d/dynevent/clear_select_events.tc    |  2 +-
- .../test.d/dynevent/generic_clear_event.tc    |  2 +-
- .../test.d/ftrace/func-filter-stacktrace.tc   |  4 +-
- .../ftrace/test.d/kprobe/add_and_remove.tc    |  2 +-
- .../ftrace/test.d/kprobe/busy_check.tc        |  2 +-
- .../ftrace/test.d/kprobe/kprobe_args.tc       |  4 +-
- .../ftrace/test.d/kprobe/kprobe_args_comm.tc  |  2 +-
- .../test.d/kprobe/kprobe_args_string.tc       |  4 +-
- .../test.d/kprobe/kprobe_args_symbol.tc       | 10 ++--
- .../ftrace/test.d/kprobe/kprobe_args_type.tc  |  2 +-
- .../ftrace/test.d/kprobe/kprobe_ftrace.tc     | 14 +++---
- .../ftrace/test.d/kprobe/kprobe_multiprobe.tc |  2 +-
- .../test.d/kprobe/kprobe_syntax_errors.tc     | 12 ++---
- .../ftrace/test.d/kprobe/kretprobe_args.tc    |  4 +-
- .../selftests/ftrace/test.d/kprobe/profile.tc |  2 +-
- 28 files changed, 88 insertions(+), 88 deletions(-)
-
-
-base-commit: 9123e3a74ec7b934a4a099e98af6a61c2f80bbf5
+diff --git a/include/linux/sched/task.h b/include/linux/sched/task.h
+index a98965007eef..d4428039c3c1 100644
+--- a/include/linux/sched/task.h
++++ b/include/linux/sched/task.h
+@@ -83,7 +83,11 @@ extern void do_group_exit(int);
+ extern void exit_files(struct task_struct *);
+ extern void exit_itimers(struct signal_struct *);
+ 
+-extern long _do_fork(struct kernel_clone_args *kargs);
++extern pid_t kernel_clone(struct kernel_clone_args *kargs);
++static inline long _do_fork(struct kernel_clone_args *kargs)
++{
++	return kernel_clone(kargs);
++}
+ struct task_struct *fork_idle(int);
+ struct mm_struct *copy_init_mm(void);
+ extern pid_t kernel_thread(int (*fn)(void *), void *arg, unsigned long flags);
+diff --git a/kernel/fork.c b/kernel/fork.c
+index 4d32190861bd..d822c7a4b9c4 100644
+--- a/kernel/fork.c
++++ b/kernel/fork.c
+@@ -2384,14 +2384,14 @@ struct mm_struct *copy_init_mm(void)
+  *
+  * args->exit_signal is expected to be checked for sanity by the caller.
+  */
+-long _do_fork(struct kernel_clone_args *args)
++pid_t kernel_clone(struct kernel_clone_args *args)
+ {
+ 	u64 clone_flags = args->flags;
+ 	struct completion vfork;
+ 	struct pid *pid;
+ 	struct task_struct *p;
+ 	int trace = 0;
+-	long nr;
++	pid_t nr;
+ 
+ 	/*
+ 	 * For legacy clone() calls, CLONE_PIDFD uses the parent_tid argument
+@@ -2477,7 +2477,7 @@ pid_t kernel_thread(int (*fn)(void *), void *arg, unsigned long flags)
+ 		.stack_size	= (unsigned long)arg,
+ 	};
+ 
+-	return _do_fork(&args);
++	return kernel_clone(&args);
+ }
+ 
+ #ifdef __ARCH_WANT_SYS_FORK
+@@ -2488,7 +2488,7 @@ SYSCALL_DEFINE0(fork)
+ 		.exit_signal = SIGCHLD,
+ 	};
+ 
+-	return _do_fork(&args);
++	return kernel_clone(&args);
+ #else
+ 	/* can not support in nommu mode */
+ 	return -EINVAL;
+@@ -2504,7 +2504,7 @@ SYSCALL_DEFINE0(vfork)
+ 		.exit_signal	= SIGCHLD,
+ 	};
+ 
+-	return _do_fork(&args);
++	return kernel_clone(&args);
+ }
+ #endif
+ 
+@@ -2542,7 +2542,7 @@ SYSCALL_DEFINE5(clone, unsigned long, clone_flags, unsigned long, newsp,
+ 		.tls		= tls,
+ 	};
+ 
+-	return _do_fork(&args);
++	return kernel_clone(&args);
+ }
+ #endif
+ 
+@@ -2700,7 +2700,7 @@ SYSCALL_DEFINE2(clone3, struct clone_args __user *, uargs, size_t, size)
+ 	if (!clone3_args_valid(&kargs))
+ 		return -EINVAL;
+ 
+-	return _do_fork(&kargs);
++	return kernel_clone(&kargs);
+ }
+ #endif
+ 
+@@ -2863,7 +2863,7 @@ int unshare_fd(unsigned long unshare_flags, unsigned int max_fds,
+ /*
+  * unshare allows a process to 'unshare' part of the process
+  * context which was originally shared using clone.  copy_*
+- * functions used by _do_fork() cannot be used here directly
++ * functions used by kernel_clone() cannot be used here directly
+  * because they modify an inactive task_struct that is being
+  * constructed. Here we are modifying the current, active,
+  * task_struct.
 -- 
 2.28.0
 
