@@ -2,104 +2,65 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3B10025C113
-	for <lists+kgdb-bugreport@lfdr.de>; Thu,  3 Sep 2020 14:34:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 12E2F25C26A
+	for <lists+kgdb-bugreport@lfdr.de>; Thu,  3 Sep 2020 16:24:43 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1kDoS5-0006mt-1e
-	for lists+kgdb-bugreport@lfdr.de; Thu, 03 Sep 2020 12:34:53 +0000
+	id 1kDqAL-0005Ec-SA
+	for lists+kgdb-bugreport@lfdr.de; Thu, 03 Sep 2020 14:24:41 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sumit.garg@linaro.org>) id 1kDoS4-0006mh-37
- for kgdb-bugreport@lists.sourceforge.net; Thu, 03 Sep 2020 12:34:52 +0000
+ (envelope-from <dave@stgolabs.net>) id 1kCq1v-0003bZ-Tf
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 31 Aug 2020 20:03:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:
- To:From:Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=6rT3Oq3fCAt3C31zNixC41u1K5vlck9GLS8EDOYTmew=; b=Y91tfwUqro4IVHhnv+bNMrerx2
- H65W2a6d2seA/lvy3B7KrDsqGCtGHT/BPDo2WPzxt8Pi0VH4OprD5Sn8abbEsW32CsNHTp0CS+Buz
- qij6qdDO1NkFx9/5h/NMU3R9j+WRU2lPgDkBiyqc10hAGguq5KBa9k88rmQlH3Vdqj9I=;
+ bh=7lH1hbgMpToYcQR9PcjGIN1b09Stxu9g1DJ+UbRlGQI=; b=k5KkZmbqTpmF/Hn+8ZgvWY0KDb
+ YsCKDj4+pcZHvEcFS07xiuE/mAhhE3nwRyPfcCKg4XLJ/cKnCMqP4DNE5Hw6eLmneFhYOAPKJNaDa
+ a3Qmxv8DZdiLR4KIvuY3rYIIYibdKLEtnfhyq4PeHQnQRhuUfAzjZsE8EbdGPgXNY2Io=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To
- :MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=6rT3Oq3fCAt3C31zNixC41u1K5vlck9GLS8EDOYTmew=; b=nBJHh5Pk9dSMFEx/xMPJ+xFTh3
- 15K0mNyOSDimRgwjmo9B0Vj+gcgRNUroTS7MzWCdncki67++jZqWpnoV9//cKc74nnqCtTvu57r3R
- QRJ948JPVEQJ4eV3lpTBpLtVripjRs9PaRlS2etZ1uct5zD/y/ZHMNiHthti56XVNyXc=;
-Received: from mail-il1-f194.google.com ([209.85.166.194])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1kDoRy-00BOTT-UK
- for kgdb-bugreport@lists.sourceforge.net; Thu, 03 Sep 2020 12:34:52 +0000
-Received: by mail-il1-f194.google.com with SMTP id b17so2329997ilh.4
- for <kgdb-bugreport@lists.sourceforge.net>;
- Thu, 03 Sep 2020 05:34:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=6rT3Oq3fCAt3C31zNixC41u1K5vlck9GLS8EDOYTmew=;
- b=vWyyppW7hpygvE/IkGGf/gUhETTigprQq6UV1DJ8NWDb0v+mRfJtrPiVVREDvTmBLE
- 9wbVYxBwL7yziCp3zIGYydYwRUYaBmUoWla/7w6E6i7WekurGkRwFVOgFAzuX4EsdWK7
- SgBKTIy7EM9aXrk2pWefgyzvaHDSHZqiySbVvBukeOU9l09HsqE+QVe9pa2IW5Gd3RcA
- 0N9szfLficZOOZaiT0Qzu0ekzkT7ttJz62H81vng9XHHjh762SLxUQzRLjfuQmZEa+mw
- v01MFTpWgVsZStU4//S/zrx2uL8iDLqzxfbPuBGKVITP0EfjiLk7cxCHzzs/rYzrKLm5
- mAbw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references;
- bh=6rT3Oq3fCAt3C31zNixC41u1K5vlck9GLS8EDOYTmew=;
- b=piFNlEWpH2bOcqhoU4olwbxAL92eUp+OVlKTXFEAC44gZrds4hZNZxMDTHktffsUKz
- lA0SXLdQEjhkpK4TWWBBU6kZSHC/o+Y8Spr3W5VkYkFIiBFw8KcMi8kMCI9SQ4B/CSIa
- JT3Zu0v9if+ibp2w5FPasbWRdayTv6Qp9S70RUfBNOnmZi9a94CEz3tfumPFUDPYfDCE
- Wv2F3UJxmlH3WRpF6r2XhD/vPDG01yLr2ZgoHwUYCFZMHaanVJdKuXly0q3F2rb0YUZq
- ZO8rBABi3+RbrHm6/xgg5g6I5ISWwToZ51eJmyCb6l+3m/BAQicOxQ15G1Lk7n7j2m7E
- rKbg==
-X-Gm-Message-State: AOAM532HkSGq2uBw7Y9OWm1+DiA8PWUM/UqpNg3igaht3qEACGkX0KU0
- HowFeu9TdXR4IqbBBKVxvlmanORDAxs3QQ==
-X-Google-Smtp-Source: ABdhPJxmXC2UZJ7VbILNUGeZ4ZMRSdONwYc1dH1QIufwvZKqDdpG8ds3OWY7AMUfJZYq3qtbgunWWw==
-X-Received: by 2002:a63:4503:: with SMTP id s3mr2696201pga.119.1599134770782; 
- Thu, 03 Sep 2020 05:06:10 -0700 (PDT)
-Received: from localhost.localdomain ([117.210.209.248])
- by smtp.gmail.com with ESMTPSA id s1sm2922022pgh.47.2020.09.03.05.06.03
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 03 Sep 2020 05:06:10 -0700 (PDT)
-From: Sumit Garg <sumit.garg@linaro.org>
-To: maz@kernel.org,
-	catalin.marinas@arm.com,
-	will@kernel.org
-Date: Thu,  3 Sep 2020 17:35:12 +0530
-Message-Id: <1599134712-30923-5-git-send-email-sumit.garg@linaro.org>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1599134712-30923-1-git-send-email-sumit.garg@linaro.org>
-References: <1599134712-30923-1-git-send-email-sumit.garg@linaro.org>
-X-Spam-Score: -0.1 (/)
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=7lH1hbgMpToYcQR9PcjGIN1b09Stxu9g1DJ+UbRlGQI=; b=U
+ A3HRrqwvypp4Tfdp3dzFrHC1StcG61ayrJFmVVySlzghzeZnbT6mMCUIj0dmj1OFzvoYvwj2jtsYS
+ 5A/TDq/ZFEiZGR3mF5JAne1UCeYQwrlmR7qYrXFTiFE5r+RiRKgyMwtrcfC5rfmX5OiErO6IqBMq4
+ jBUvVHkj4VmRqso0=;
+Received: from mx2.suse.de ([195.135.220.15])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1kCq1t-006tr1-OR
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 31 Aug 2020 20:03:51 +0000
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 8E676B7F1;
+ Mon, 31 Aug 2020 19:50:06 +0000 (UTC)
+From: Davidlohr Bueso <dave@stgolabs.net>
+To: jason.wessel@windriver.com, daniel.thompson@linaro.org,
+ dianders@chromium.org
+Date: Mon, 31 Aug 2020 12:34:35 -0700
+Message-Id: <20200831193435.22141-1-dave@stgolabs.net>
+X-Mailer: git-send-email 2.26.2
+MIME-Version: 1.0
+X-Spam-Score: 1.0 (+)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: linaro.org]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.166.194 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [195.135.220.15 listed in wl.mailspike.net]
+ 1.0 SPF_SOFTFAIL           SPF: sender does not match SPF record (softfail)
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.194 listed in wl.mailspike.net]
-X-Headers-End: 1kDoRy-00BOTT-UK
-Subject: [Kgdb-bugreport] [PATCH v3 4/4] arm64: kgdb: Round up cpus using
- IPI_CALL_NMI_FUNC
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1kCq1t-006tr1-OR
+X-Mailman-Approved-At: Thu, 03 Sep 2020 14:24:40 +0000
+Subject: [Kgdb-bugreport] [PATCH -next] kdb: Use newer api for tasklist
+ scanning
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,109 +72,96 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: daniel.thompson@linaro.org, jason@lakedaemon.net,
- kgdb-bugreport@lists.sourceforge.net, linux-kernel@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org, jason.wessel@windriver.com,
- tglx@linutronix.de, julien.thierry.kdev@gmail.com
-MIME-Version: 1.0
+Cc: Davidlohr Bueso <dbueso@suse.de>, kgdb-bugreport@lists.sourceforge.net,
+ dave@stgolabs.net, oleg@redhat.com, linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-arm64 platforms with GICv3 or later supports pseudo NMIs which can be
-leveraged to round up CPUs which are stuck in hard lockup state with
-interrupts disabled that wouldn't be possible with a normal IPI.
+This kills the custom kdb_do_each_thread/kdb_while_each_thread
+calls used in kdb to iterate through all tasks. It is obsolete
+and racy to use tsk->thread_group, although in this particular
+case there is no concurrency so it doesn't matter. Still, lets
+trivially replace it for the newer one, maintaining semantics,
+of course.
 
-So instead switch to round up CPUs using IPI_CALL_NMI_FUNC. And in
-case a particular arm64 platform doesn't supports pseudo NMIs,
-IPI_CALL_NMI_FUNC will act as a normal IPI which maintains existing
-kgdb functionality.
-
-Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+Signed-off-by: Davidlohr Bueso <dbueso@suse.de>
 ---
- arch/arm64/include/asm/kgdb.h |  8 ++++++++
- arch/arm64/kernel/kgdb.c      | 21 +++++++++++++++++++++
- arch/arm64/kernel/smp.c       |  3 ++-
- 3 files changed, 31 insertions(+), 1 deletion(-)
+ kernel/debug/kdb/kdb_bt.c      | 4 ++--
+ kernel/debug/kdb/kdb_main.c    | 8 ++++----
+ kernel/debug/kdb/kdb_private.h | 4 ----
+ 3 files changed, 6 insertions(+), 10 deletions(-)
 
-diff --git a/arch/arm64/include/asm/kgdb.h b/arch/arm64/include/asm/kgdb.h
-index 21fc85e..6f3d3af 100644
---- a/arch/arm64/include/asm/kgdb.h
-+++ b/arch/arm64/include/asm/kgdb.h
-@@ -24,6 +24,14 @@ static inline void arch_kgdb_breakpoint(void)
- extern void kgdb_handle_bus_error(void);
- extern int kgdb_fault_expected;
+diff --git a/kernel/debug/kdb/kdb_bt.c b/kernel/debug/kdb/kdb_bt.c
+index 18e03aba2cfc..1f9f0e47aeda 100644
+--- a/kernel/debug/kdb/kdb_bt.c
++++ b/kernel/debug/kdb/kdb_bt.c
+@@ -149,14 +149,14 @@ kdb_bt(int argc, const char **argv)
+ 				return 0;
+ 		}
+ 		/* Now the inactive tasks */
+-		kdb_do_each_thread(g, p) {
++		for_each_process_thread(g, p) {
+ 			if (KDB_FLAG(CMD_INTERRUPT))
+ 				return 0;
+ 			if (task_curr(p))
+ 				continue;
+ 			if (kdb_bt1(p, mask, btaprompt))
+ 				return 0;
+-		} kdb_while_each_thread(g, p);
++		}
+ 	} else if (strcmp(argv[0], "btp") == 0) {
+ 		struct task_struct *p;
+ 		unsigned long pid;
+diff --git a/kernel/debug/kdb/kdb_main.c b/kernel/debug/kdb/kdb_main.c
+index 5c7949061671..930ac1b25ec7 100644
+--- a/kernel/debug/kdb/kdb_main.c
++++ b/kernel/debug/kdb/kdb_main.c
+@@ -2299,10 +2299,10 @@ void kdb_ps_suppressed(void)
+ 		if (kdb_task_state(p, mask_I))
+ 			++idle;
+ 	}
+-	kdb_do_each_thread(g, p) {
++	for_each_process_thread(g, p) {
+ 		if (kdb_task_state(p, mask_M))
+ 			++daemon;
+-	} kdb_while_each_thread(g, p);
++	}
+ 	if (idle || daemon) {
+ 		if (idle)
+ 			kdb_printf("%d idle process%s (state I)%s\n",
+@@ -2370,12 +2370,12 @@ static int kdb_ps(int argc, const char **argv)
+ 	}
+ 	kdb_printf("\n");
+ 	/* Now the real tasks */
+-	kdb_do_each_thread(g, p) {
++	for_each_process_thread(g, p) {
+ 		if (KDB_FLAG(CMD_INTERRUPT))
+ 			return 0;
+ 		if (kdb_task_state(p, mask))
+ 			kdb_ps1(p);
+-	} kdb_while_each_thread(g, p);
++	}
  
-+#ifdef CONFIG_KGDB
-+extern void ipi_kgdb_nmicallback(int cpu, void *regs);
-+#else
-+static inline void ipi_kgdb_nmicallback(int cpu, void *regs)
-+{
-+}
-+#endif
-+
- #endif /* !__ASSEMBLY__ */
- 
- /*
-diff --git a/arch/arm64/kernel/kgdb.c b/arch/arm64/kernel/kgdb.c
-index 1a157ca3..3a8ed97 100644
---- a/arch/arm64/kernel/kgdb.c
-+++ b/arch/arm64/kernel/kgdb.c
-@@ -14,6 +14,7 @@
- #include <linux/kgdb.h>
- #include <linux/kprobes.h>
- #include <linux/sched/task_stack.h>
-+#include <linux/smp.h>
- 
- #include <asm/debug-monitors.h>
- #include <asm/insn.h>
-@@ -353,3 +354,23 @@ int kgdb_arch_remove_breakpoint(struct kgdb_bkpt *bpt)
- 	return aarch64_insn_write((void *)bpt->bpt_addr,
- 			*(u32 *)bpt->saved_instr);
+ 	return 0;
  }
-+
-+void ipi_kgdb_nmicallback(int cpu, void *regs)
-+{
-+	if (atomic_read(&kgdb_active) != -1)
-+		kgdb_nmicallback(cpu, regs);
-+}
-+
-+#ifdef CONFIG_SMP
-+void kgdb_roundup_cpus(void)
-+{
-+	struct cpumask mask;
-+
-+	cpumask_copy(&mask, cpu_online_mask);
-+	cpumask_clear_cpu(raw_smp_processor_id(), &mask);
-+	if (cpumask_empty(&mask))
-+		return;
-+
-+	arch_send_call_nmi_func_ipi_mask(&mask);
-+}
-+#endif
-diff --git a/arch/arm64/kernel/smp.c b/arch/arm64/kernel/smp.c
-index 572f8f5..b4760d3 100644
---- a/arch/arm64/kernel/smp.c
-+++ b/arch/arm64/kernel/smp.c
-@@ -32,6 +32,7 @@
- #include <linux/irq_work.h>
- #include <linux/kernel_stat.h>
- #include <linux/kexec.h>
-+#include <linux/kgdb.h>
- #include <linux/kvm_host.h>
+diff --git a/kernel/debug/kdb/kdb_private.h b/kernel/debug/kdb/kdb_private.h
+index 2e296e4a234c..a4281fb99299 100644
+--- a/kernel/debug/kdb/kdb_private.h
++++ b/kernel/debug/kdb/kdb_private.h
+@@ -230,10 +230,6 @@ extern struct task_struct *kdb_curr_task(int);
  
- #include <asm/alternative.h>
-@@ -941,7 +942,7 @@ static void do_handle_IPI(int ipinr)
- #endif
+ #define kdb_task_has_cpu(p) (task_curr(p))
  
- 	case IPI_CALL_NMI_FUNC:
--		/* nop, IPI handlers for special features can be added here. */
-+		ipi_kgdb_nmicallback(cpu, get_irq_regs());
- 		break;
+-/* Simplify coexistence with NPTL */
+-#define	kdb_do_each_thread(g, p) do_each_thread(g, p)
+-#define	kdb_while_each_thread(g, p) while_each_thread(g, p)
+-
+ #define GFP_KDB (in_interrupt() ? GFP_ATOMIC : GFP_KERNEL)
  
- 	default:
+ extern void *debug_kmalloc(size_t size, gfp_t flags);
 -- 
-2.7.4
+2.26.2
 
 
 
