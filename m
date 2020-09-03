@@ -2,73 +2,101 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2607524A767
-	for <lists+kgdb-bugreport@lfdr.de>; Wed, 19 Aug 2020 22:02:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A1A1025C0FF
+	for <lists+kgdb-bugreport@lfdr.de>; Thu,  3 Sep 2020 14:29:45 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1k8UIJ-0001B0-TI
-	for lists+kgdb-bugreport@lfdr.de; Wed, 19 Aug 2020 20:02:47 +0000
+	id 1kDoN3-0001jd-EC
+	for lists+kgdb-bugreport@lfdr.de; Thu, 03 Sep 2020 12:29:41 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <davem@davemloft.net>) id 1k8UII-0001At-Fk
- for kgdb-bugreport@lists.sourceforge.net; Wed, 19 Aug 2020 20:02:46 +0000
+ (envelope-from <sumit.garg@linaro.org>) id 1kDoN2-0001jV-EO
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 03 Sep 2020 12:29:40 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Mime-Version
- :References:In-Reply-To:From:Subject:Cc:To:Message-Id:Date:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=7d2ZnGAIbd2KkJgir+QTMbyw97UIlQ/0iFkILhnRkAg=; b=b5eG0y7JPihYtb+ZZNZSLW1xLK
- iZYqbSMXZrQCVhxW1RGiACmqEeua413ohvtH+rHvD2WXXpUVg3D5PKcMKaLLvlfIxNn0jz3cWcRSN
- Suklrlck0DLLw2/2rLzuCDwFtukvzyPJ19I8jrpmnkWWvCfN6pb8QGdiUpZ1AVtpimPA=;
+ bh=FOLTzf/XO+P7QNOPhKxlSTfK9nSZlqcSxLohkx+kXno=; b=lsvrZ6u7Sv5ZbKWzZUk6ch2CAT
+ OUkDngl5ZyEuCahbEoJUhICJw2bbM1V60IcFpVNkr+LF4ep2KeI5MTl4JLhJLUN3aXvlccQ0AzJWc
+ oWTM1WiWmA7L9KfGWIWWFFKR1tsQRhvFoSBn6I8dLROMUwpoqEmGxKm7nhZYwfCGmOqc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Mime-Version:References:
- In-Reply-To:From:Subject:Cc:To:Message-Id:Date:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version:
+ Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=7d2ZnGAIbd2KkJgir+QTMbyw97UIlQ/0iFkILhnRkAg=; b=Fb0tcIyt6YoB4uEf+GmaqkdTRT
- HXl6sr8cnS4QqYofVanrDk1IxKcMLu3DOn/oJPqwW8F6v6cO82ZoYvW7n0e7sLp8kMd7SB+Zg1522
- MZsw/XRdVUQuTCC0IW9DCb2pVmuE0tGvFR5nMPCLjKibej2MEqlNrr1Wj77KXM3Uczfo=;
-Received: from shards.monkeyblade.net ([23.128.96.9])
+ bh=FOLTzf/XO+P7QNOPhKxlSTfK9nSZlqcSxLohkx+kXno=; b=d1VGjGXMYUdeb7QGypGdy7a2Q2
+ 0oU1hK+LOluYUGxeWLbiPMOiZ67XEuWgxTxnHuu1ZNJdz+cOjyPgqL7jvYD5N4SsCMiR1b9NihDVP
+ AcEwrfRba+4UCcimCQ5TgBz4kUSUpsXQsGMOv8rSLnAOmYaJqe1K2VkR5g7ntBpDdj9c=;
+Received: from mail-qv1-f68.google.com ([209.85.219.68])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1k8UIF-00GOrE-B2
- for kgdb-bugreport@lists.sourceforge.net; Wed, 19 Aug 2020 20:02:46 +0000
-Received: from localhost (unknown [IPv6:2601:601:9f00:477::3d5])
- (using TLSv1 with cipher AES256-SHA (256/256 bits))
- (Client did not present a certificate)
- (Authenticated sender: davem-davemloft)
- by shards.monkeyblade.net (Postfix) with ESMTPSA id 32B9F11E45763;
- Wed, 19 Aug 2020 12:45:37 -0700 (PDT)
-Date: Wed, 19 Aug 2020 13:02:22 -0700 (PDT)
-Message-Id: <20200819.130222.1915954815957844234.davem@davemloft.net>
-To: christian.brauner@ubuntu.com
-From: David Miller <davem@davemloft.net>
-In-Reply-To: <20200819104655.436656-7-christian.brauner@ubuntu.com>
-References: <20200819104655.436656-1-christian.brauner@ubuntu.com>
- <20200819104655.436656-7-christian.brauner@ubuntu.com>
-X-Mailer: Mew version 6.8 on Emacs 26.3
-Mime-Version: 1.0
-X-Greylist: Sender succeeded SMTP AUTH, not delayed by milter-greylist-4.5.12
- (shards.monkeyblade.net [149.20.54.216]);
- Wed, 19 Aug 2020 12:45:38 -0700 (PDT)
-X-Spam-Score: 0.1 (/)
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1kDoMt-00BO9U-71
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 03 Sep 2020 12:29:40 +0000
+Received: by mail-qv1-f68.google.com with SMTP id j10so1176835qvk.11
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Thu, 03 Sep 2020 05:29:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=from:to:cc:subject:date:message-id;
+ bh=FOLTzf/XO+P7QNOPhKxlSTfK9nSZlqcSxLohkx+kXno=;
+ b=DvbGunJ3jVOhcpKidYgRLJomJssy0XrlfofrGt6ER9y6uEGB5CxvcxQ7m3YR7QmKzZ
+ QHIleoxPUlkjZdjZHbbbWX85vS/A1jf8BglOTY5mxEskkB4Bjv9u5nv0/f+Fi86k27KQ
+ ORkzIn9/NrlgdBdWzPUW4YGq8RQWVetEnkBGzDmjp/yXneZDAiR2ThMO91x3Kxo6+Q34
+ ifFRwkmJa+7I16clQHdtc5GebdYH26Htu4SmECb1T1+QqINFKHYkIac1N7SzFgPql65t
+ xnezWLYtG4rFo0nv0Nv1YD+PeGg42adBXMjErE6/A99Oo8art6QEoTmUId2MrXpyKxEf
+ EDIw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=FOLTzf/XO+P7QNOPhKxlSTfK9nSZlqcSxLohkx+kXno=;
+ b=ql4fn1rAI0gJvTds1fSUSsgGuuzGCr0g7GnLUNHta3DW/157JwfN3iNCV4hR/22X9I
+ 9siDjVqtmL8DT/F0VUHghNt6Xttk1EXqNHGCm12P3SInMl/lBr+Yn2xXjb2RSjiTZxwV
+ VgzC5oeB31DMV5ioHCScoyoJCkEhIMX+NejiYu078kWJgL5VTfSJDBA3drw0VyJx3sv2
+ 7VT9d8/nD2/6wRMRYDSd6Qs9rWA8sDAsf2a1DWvbtFNdf/wj6ru2Dp/FFIP9pgH7rRLB
+ xXj2gwUj74Od+nHNJg7Wsq/GlhJcypsjNqd0PXi6v/jxuoChw01yzwXWOdr48g2CSYI8
+ PleQ==
+X-Gm-Message-State: AOAM533VnQhi6oXa6N87qcrsiQGh08n4Zock565SUnS4ei7zk/KZO1Cx
+ UsFYwSFw1uYgPkmvWE/CvKarnDJoOosQEw==
+X-Google-Smtp-Source: ABdhPJx69wueSgaulyBljwP5X2r7+JVhzDLt3bpKRIsvkt68un6f73FkRk63fK9P/WX/0/tFU0EDQA==
+X-Received: by 2002:a62:cf04:: with SMTP id b4mr3500815pfg.84.1599134740520;
+ Thu, 03 Sep 2020 05:05:40 -0700 (PDT)
+Received: from localhost.localdomain ([117.210.209.248])
+ by smtp.gmail.com with ESMTPSA id s1sm2922022pgh.47.2020.09.03.05.05.33
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Thu, 03 Sep 2020 05:05:39 -0700 (PDT)
+From: Sumit Garg <sumit.garg@linaro.org>
+To: maz@kernel.org,
+	catalin.marinas@arm.com,
+	will@kernel.org
+Date: Thu,  3 Sep 2020 17:35:08 +0530
+Message-Id: <1599134712-30923-1-git-send-email-sumit.garg@linaro.org>
+X-Mailer: git-send-email 2.7.4
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.219.68 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.219.68 listed in wl.mailspike.net]
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: ubuntu.com]
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ for more information. [URIs: lkml.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1k8UIF-00GOrE-B2
-Subject: Re: [Kgdb-bugreport] [PATCH v2 06/11] sparc: switch to
- kernel_clone()
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+X-Headers-End: 1kDoMt-00BO9U-71
+Subject: [Kgdb-bugreport] [PATCH v3 0/4] arm64: Introduce new IPI as
+ IPI_CALL_NMI_FUNC
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -80,35 +108,98 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: alexandre.chartre@oracle.com, linux-doc@vger.kernel.org,
- peterz@infradead.org, kgdb-bugreport@lists.sourceforge.net,
- jongk@linux-m68k.org, willy@infradead.org, linux-kselftest@vger.kernel.org,
- sparclinux@vger.kernel.org, linux-ia64@vger.kernel.org, shorne@gmail.com,
- linux-arch@vger.kernel.org, zanussi@kernel.org, ysato@users.sourceforge.jp,
- corbet@lwn.net, mchehab+huawei@kernel.org, x86@kernel.org,
- ley.foon.tan@intel.com, hch@infradead.org, mingo@redhat.com,
- geert@linux-m68k.org, mhiramat@kernel.org,
- uclinux-h8-devel@lists.sourceforge.jp, fenghua.yu@intel.com,
- keescook@chromium.org, arnd@arndb.de, rostedt@goodmis.org,
- linux-m68k@lists.linux-m68k.org, bp@alien8.de, green.hu@gmail.com,
- tglx@linutronix.de, yangx.jy@cn.fujitsu.com, tony.luck@intel.com,
- linux-kernel@vger.kernel.org, ebiederm@xmission.com,
- torvalds@linux-foundation.org
+Cc: daniel.thompson@linaro.org, jason@lakedaemon.net,
+ kgdb-bugreport@lists.sourceforge.net, linux-kernel@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, jason.wessel@windriver.com,
+ tglx@linutronix.de, julien.thierry.kdev@gmail.com
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-From: Christian Brauner <christian.brauner@ubuntu.com>
-Date: Wed, 19 Aug 2020 12:46:50 +0200
+With pseudo NMIs support available its possible to configure SGIs to be
+triggered as pseudo NMIs running in NMI context. And kernel features
+such as kgdb relies on NMI support to round up CPUs which are stuck in
+hard lockup state with interrupts disabled.
 
-> The old _do_fork() helper is removed in favor of the new kernel_clone() helper.
-> The latter adheres to naming conventions for kernel internal syscall helpers.
-> 
-> Cc: "David S. Miller" <davem@davemloft.net>
-> Cc: sparclinux@vger.kernel.org
-> Signed-off-by: Christian Brauner <christian.brauner@ubuntu.com>
+This patch-set adds support for IPI_CALL_NMI_FUNC which can be triggered
+as a pseudo NMI which in turn is leveraged via kgdb to round up CPUs.
 
-Acked-by: David S. Miller <davem@davemloft.net>
+After this patch-set we should be able to get a backtrace for a CPU
+stuck in HARDLOCKUP. Have a look at an example below from a testcase run
+on Developerbox:
+
+$ echo HARDLOCKUP > /sys/kernel/debug/provoke-crash/DIRECT
+
+# Enter kdb via Magic SysRq
+
+[11]kdb> btc
+btc: cpu status: Currently on cpu 10
+Available cpus: 0-7(I), 8, 9(I), 10, 11-23(I)
+<snip>
+Stack traceback for pid 619
+0xffff000871bc9c00      619      618  1    8   R  0xffff000871bca5c0  bash
+CPU: 8 PID: 619 Comm: bash Not tainted 5.7.0-rc6-00762-g3804420 #77
+Hardware name: Socionext SynQuacer E-series DeveloperBox, BIOS build #73 Apr  6 2020
+Call trace:
+ dump_backtrace+0x0/0x198
+ show_stack+0x18/0x28
+ dump_stack+0xb8/0x100
+ kgdb_cpu_enter+0x5c0/0x5f8
+ kgdb_nmicallback+0xa0/0xa8
+ ipi_kgdb_nmicallback+0x24/0x30
+ ipi_handler+0x160/0x1b8
+ handle_percpu_devid_fasteoi_ipi+0x44/0x58
+ generic_handle_irq+0x30/0x48
+ handle_domain_nmi+0x44/0x80
+ gic_handle_irq+0x140/0x2a0
+ el1_irq+0xcc/0x180
+ lkdtm_HARDLOCKUP+0x10/0x18
+ direct_entry+0x124/0x1c0
+ full_proxy_write+0x60/0xb0
+ __vfs_write+0x1c/0x48
+ vfs_write+0xe4/0x1d0
+ ksys_write+0x6c/0xf8
+ __arm64_sys_write+0x1c/0x28
+ el0_svc_common.constprop.0+0x74/0x1f0
+ do_el0_svc+0x24/0x90
+ el0_sync_handler+0x178/0x2b8
+ el0_sync+0x158/0x180
+
+Changes in v3:
+- Rebased to Marc's latest IPIs patch-set [1].
+
+[1] https://lkml.org/lkml/2020/9/1/603
+
+Changes since RFC version [1]:
+- Switch to use generic interrupt framework to turn an IPI as NMI.
+- Dependent on Marc's patch-set [2] which turns IPIs into normal
+  interrupts.
+- Addressed misc. comments from Doug on patch #4.
+- Posted kgdb NMI printk() fixup separately which has evolved since
+  to be solved using different approach via changing kgdb interception
+  of printk() in common printk() code (see patch [3]).
+
+[1] https://lkml.org/lkml/2020/4/24/328
+[2] https://lkml.org/lkml/2020/5/19/710
+[3] https://lkml.org/lkml/2020/5/20/418
+
+Sumit Garg (4):
+  arm64: smp: Introduce a new IPI as IPI_CALL_NMI_FUNC
+  irqchip/gic-v3: Enable support for SGIs to act as NMIs
+  arm64: smp: Setup IPI_CALL_NMI_FUNC as a pseudo NMI
+  arm64: kgdb: Round up cpus using IPI_CALL_NMI_FUNC
+
+ arch/arm64/include/asm/kgdb.h |  8 +++++++
+ arch/arm64/include/asm/smp.h  |  1 +
+ arch/arm64/kernel/kgdb.c      | 21 ++++++++++++++++++
+ arch/arm64/kernel/smp.c       | 50 ++++++++++++++++++++++++++++++++++---------
+ drivers/irqchip/irq-gic-v3.c  | 13 +++++++++--
+ 5 files changed, 81 insertions(+), 12 deletions(-)
+
+-- 
+2.7.4
+
 
 
 _______________________________________________
