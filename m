@@ -2,64 +2,99 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 12E2F25C26A
+	by mail.lfdr.de (Postfix) with ESMTPS id 2E95A25C26B
 	for <lists+kgdb-bugreport@lfdr.de>; Thu,  3 Sep 2020 16:24:43 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1kDqAL-0005Ec-SA
-	for lists+kgdb-bugreport@lfdr.de; Thu, 03 Sep 2020 14:24:41 +0000
+	id 1kDqAL-0005El-WB
+	for lists+kgdb-bugreport@lfdr.de; Thu, 03 Sep 2020 14:24:42 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <dave@stgolabs.net>) id 1kCq1v-0003bZ-Tf
- for kgdb-bugreport@lists.sourceforge.net; Mon, 31 Aug 2020 20:03:51 +0000
+ (envelope-from <oleg@redhat.com>) id 1kDpTN-00053I-9O
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 03 Sep 2020 13:40:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=7lH1hbgMpToYcQR9PcjGIN1b09Stxu9g1DJ+UbRlGQI=; b=k5KkZmbqTpmF/Hn+8ZgvWY0KDb
- YsCKDj4+pcZHvEcFS07xiuE/mAhhE3nwRyPfcCKg4XLJ/cKnCMqP4DNE5Hw6eLmneFhYOAPKJNaDa
- a3Qmxv8DZdiLR4KIvuY3rYIIYibdKLEtnfhyq4PeHQnQRhuUfAzjZsE8EbdGPgXNY2Io=;
+ bh=HtD2ycArY4CaDPGxp0AgCfZeRokiL+8HZRMctDc7COU=; b=enJlkQCF/ton1IQfhoiA042WUO
+ U7k6dx6gqfdtYV8pptn+A6vCumxvw53Xm2KbJkuna70a6js5qfiOBoKhi+V4r+Flm/3NM5UHMi40Y
+ zi+z5w6u5AVYUk9wtXTKtQYAbrUpehT1VTfLu0UeLklmszuIMVYabrZFvfwVeMKlWOV4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=7lH1hbgMpToYcQR9PcjGIN1b09Stxu9g1DJ+UbRlGQI=; b=U
- A3HRrqwvypp4Tfdp3dzFrHC1StcG61ayrJFmVVySlzghzeZnbT6mMCUIj0dmj1OFzvoYvwj2jtsYS
- 5A/TDq/ZFEiZGR3mF5JAne1UCeYQwrlmR7qYrXFTiFE5r+RiRKgyMwtrcfC5rfmX5OiErO6IqBMq4
- jBUvVHkj4VmRqso0=;
-Received: from mx2.suse.de ([195.135.220.15])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kCq1t-006tr1-OR
- for kgdb-bugreport@lists.sourceforge.net; Mon, 31 Aug 2020 20:03:51 +0000
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 8E676B7F1;
- Mon, 31 Aug 2020 19:50:06 +0000 (UTC)
-From: Davidlohr Bueso <dave@stgolabs.net>
-To: jason.wessel@windriver.com, daniel.thompson@linaro.org,
- dianders@chromium.org
-Date: Mon, 31 Aug 2020 12:34:35 -0700
-Message-Id: <20200831193435.22141-1-dave@stgolabs.net>
-X-Mailer: git-send-email 2.26.2
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=HtD2ycArY4CaDPGxp0AgCfZeRokiL+8HZRMctDc7COU=; b=ALhOMNNrHW2kQpK6yfpvqONJ3g
+ DmtUpxpul/tWnxica+yJ2vZ/2L+TCTUQYirukDtmypq1OzLNqC68H9i7BwXMCE1c1Yta7orOmsyHE
+ a6bH5YoH4k9zwZwE/QmagNyMIXx8XO7XDlb4XXyaZObwmbqgX5tRZhy845XXmClWJQhE=;
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-SHA384:256) (Exim 4.92.2)
+ id 1kDpTJ-00BSFu-75
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 03 Sep 2020 13:40:17 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1599140399;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=HtD2ycArY4CaDPGxp0AgCfZeRokiL+8HZRMctDc7COU=;
+ b=RmrqKXan4NW5ihrJaG39JMHNfkMp/gmdgVkhzSNtCpoHb2yThi2E8NYaxvsg0Um7cnAOEX
+ 2KRyvgVm1UhjPBlyfSgLqvIbnWLf3LG4mgeRpl2mMBgiDERKHIl1yakNmqjML5VuQfUjYZ
+ 5Vm6uxDZ1U0TBRquB+cyjpcHiNjghw8=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-487-hE2tQMiQOVmhBt7wAYVWig-1; Thu, 03 Sep 2020 09:39:58 -0400
+X-MC-Unique: hE2tQMiQOVmhBt7wAYVWig-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 6773A1019629;
+ Thu,  3 Sep 2020 13:39:55 +0000 (UTC)
+Received: from dhcp-27-174.brq.redhat.com (unknown [10.40.192.114])
+ by smtp.corp.redhat.com (Postfix) with SMTP id 4C6AF76E01;
+ Thu,  3 Sep 2020 13:39:53 +0000 (UTC)
+Received: by dhcp-27-174.brq.redhat.com (nbSMTP-1.00) for uid 1000
+ oleg@redhat.com; Thu,  3 Sep 2020 15:39:55 +0200 (CEST)
+Date: Thu, 3 Sep 2020 15:39:52 +0200
+From: Oleg Nesterov <oleg@redhat.com>
+To: Davidlohr Bueso <dave@stgolabs.net>
+Message-ID: <20200903133951.GG4386@redhat.com>
+References: <20200831193435.22141-1-dave@stgolabs.net>
 MIME-Version: 1.0
-X-Spam-Score: 1.0 (+)
+Content-Disposition: inline
+In-Reply-To: <20200831193435.22141-1-dave@stgolabs.net>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [195.135.220.15 listed in wl.mailspike.net]
- 1.0 SPF_SOFTFAIL           SPF: sender does not match SPF record (softfail)
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: suse.de]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [216.205.24.124 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
+ [216.205.24.124 listed in wl.mailspike.net]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1kCq1t-006tr1-OR
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1kDpTJ-00BSFu-75
 X-Mailman-Approved-At: Thu, 03 Sep 2020 14:24:40 +0000
-Subject: [Kgdb-bugreport] [PATCH -next] kdb: Use newer api for tasklist
+Subject: Re: [Kgdb-bugreport] [PATCH -next] kdb: Use newer api for tasklist
  scanning
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -72,96 +107,30 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: Davidlohr Bueso <dbueso@suse.de>, kgdb-bugreport@lists.sourceforge.net,
- dave@stgolabs.net, oleg@redhat.com, linux-kernel@vger.kernel.org
+Cc: daniel.thompson@linaro.org, Davidlohr Bueso <dbueso@suse.de>,
+ kgdb-bugreport@lists.sourceforge.net, linux-kernel@vger.kernel.org,
+ jason.wessel@windriver.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-This kills the custom kdb_do_each_thread/kdb_while_each_thread
-calls used in kdb to iterate through all tasks. It is obsolete
-and racy to use tsk->thread_group, although in this particular
-case there is no concurrency so it doesn't matter. Still, lets
-trivially replace it for the newer one, maintaining semantics,
-of course.
+On 08/31, Davidlohr Bueso wrote:
+>
+> This kills the custom kdb_do_each_thread/kdb_while_each_thread
+> calls used in kdb to iterate through all tasks. It is obsolete
+> and racy to use tsk->thread_group, although in this particular
+> case there is no concurrency so it doesn't matter. Still, lets
+> trivially replace it for the newer one, maintaining semantics,
+> of course.
+>
+> Signed-off-by: Davidlohr Bueso <dbueso@suse.de>
+> ---
+>  kernel/debug/kdb/kdb_bt.c      | 4 ++--
+>  kernel/debug/kdb/kdb_main.c    | 8 ++++----
+>  kernel/debug/kdb/kdb_private.h | 4 ----
+>  3 files changed, 6 insertions(+), 10 deletions(-)
 
-Signed-off-by: Davidlohr Bueso <dbueso@suse.de>
----
- kernel/debug/kdb/kdb_bt.c      | 4 ++--
- kernel/debug/kdb/kdb_main.c    | 8 ++++----
- kernel/debug/kdb/kdb_private.h | 4 ----
- 3 files changed, 6 insertions(+), 10 deletions(-)
-
-diff --git a/kernel/debug/kdb/kdb_bt.c b/kernel/debug/kdb/kdb_bt.c
-index 18e03aba2cfc..1f9f0e47aeda 100644
---- a/kernel/debug/kdb/kdb_bt.c
-+++ b/kernel/debug/kdb/kdb_bt.c
-@@ -149,14 +149,14 @@ kdb_bt(int argc, const char **argv)
- 				return 0;
- 		}
- 		/* Now the inactive tasks */
--		kdb_do_each_thread(g, p) {
-+		for_each_process_thread(g, p) {
- 			if (KDB_FLAG(CMD_INTERRUPT))
- 				return 0;
- 			if (task_curr(p))
- 				continue;
- 			if (kdb_bt1(p, mask, btaprompt))
- 				return 0;
--		} kdb_while_each_thread(g, p);
-+		}
- 	} else if (strcmp(argv[0], "btp") == 0) {
- 		struct task_struct *p;
- 		unsigned long pid;
-diff --git a/kernel/debug/kdb/kdb_main.c b/kernel/debug/kdb/kdb_main.c
-index 5c7949061671..930ac1b25ec7 100644
---- a/kernel/debug/kdb/kdb_main.c
-+++ b/kernel/debug/kdb/kdb_main.c
-@@ -2299,10 +2299,10 @@ void kdb_ps_suppressed(void)
- 		if (kdb_task_state(p, mask_I))
- 			++idle;
- 	}
--	kdb_do_each_thread(g, p) {
-+	for_each_process_thread(g, p) {
- 		if (kdb_task_state(p, mask_M))
- 			++daemon;
--	} kdb_while_each_thread(g, p);
-+	}
- 	if (idle || daemon) {
- 		if (idle)
- 			kdb_printf("%d idle process%s (state I)%s\n",
-@@ -2370,12 +2370,12 @@ static int kdb_ps(int argc, const char **argv)
- 	}
- 	kdb_printf("\n");
- 	/* Now the real tasks */
--	kdb_do_each_thread(g, p) {
-+	for_each_process_thread(g, p) {
- 		if (KDB_FLAG(CMD_INTERRUPT))
- 			return 0;
- 		if (kdb_task_state(p, mask))
- 			kdb_ps1(p);
--	} kdb_while_each_thread(g, p);
-+	}
- 
- 	return 0;
- }
-diff --git a/kernel/debug/kdb/kdb_private.h b/kernel/debug/kdb/kdb_private.h
-index 2e296e4a234c..a4281fb99299 100644
---- a/kernel/debug/kdb/kdb_private.h
-+++ b/kernel/debug/kdb/kdb_private.h
-@@ -230,10 +230,6 @@ extern struct task_struct *kdb_curr_task(int);
- 
- #define kdb_task_has_cpu(p) (task_curr(p))
- 
--/* Simplify coexistence with NPTL */
--#define	kdb_do_each_thread(g, p) do_each_thread(g, p)
--#define	kdb_while_each_thread(g, p) while_each_thread(g, p)
--
- #define GFP_KDB (in_interrupt() ? GFP_ATOMIC : GFP_KERNEL)
- 
- extern void *debug_kmalloc(size_t size, gfp_t flags);
--- 
-2.26.2
+Acked-by: Oleg Nesterov <oleg@redhat.com>
 
 
 
