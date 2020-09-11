@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EFE2326605A
-	for <lists+kgdb-bugreport@lfdr.de>; Fri, 11 Sep 2020 15:36:50 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 802C026605B
+	for <lists+kgdb-bugreport@lfdr.de>; Fri, 11 Sep 2020 15:37:26 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1kGjEP-0005oP-Q9
-	for lists+kgdb-bugreport@lfdr.de; Fri, 11 Sep 2020 13:36:49 +0000
+	id 1kGjEz-0002d1-A2
+	for lists+kgdb-bugreport@lfdr.de; Fri, 11 Sep 2020 13:37:25 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sumit.garg@linaro.org>) id 1kGjEP-0005oJ-Dv
- for kgdb-bugreport@lists.sourceforge.net; Fri, 11 Sep 2020 13:36:49 +0000
+ (envelope-from <sumit.garg@linaro.org>) id 1kGjEx-0002co-Hy
+ for kgdb-bugreport@lists.sourceforge.net; Fri, 11 Sep 2020 13:37:23 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:
  To:From:Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=V7c2tVI1sHEIHH1AjuWkw+8Vv4jkByqBwniC8b3+X7E=; b=ad5wI9GhQZQJMumrSY79G9Uh4t
- pRkufQ9M5IroogaleR3cG2/5JLEiyJ2YHHmYitpBq6Ww0J8BPaEjKRW8KyJ6lIIPiPS2yyUJ+IWaL
- bmWDrldarJl7KALxUSZ8+MatzLfWSUYr2K3Zr1PNKG8qBo5WijL0T8SJgVMfUtMB57VY=;
+ bh=UMF4bf/xlX5iMhhFdvv4POZJxLXNJMbFMY0/ylfkgBU=; b=exnAZ/FZk97SsYKxkiad1iyWQb
+ XRoCFi8WQ2S0bkRoxcIczRZH0mIHQJOvsnfTW553Tt3Uas/WPZMPexffSYziOhAanrUT8ewa0SVHR
+ j/CY0q3aB8sd7d1tbyAw55E2MO7yQHn78whYFh7I1TGvPFh2igz0odCcZ2nGitUyB36o=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To
@@ -30,53 +30,53 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=V7c2tVI1sHEIHH1AjuWkw+8Vv4jkByqBwniC8b3+X7E=; b=lfwDZf7ZLvTO1epHwpbYq76+HT
- LilesQoF+C2+gqmCk00uPx4SeL1CLcQIBp2ZRrwyaX4h+VK2TNEVKBpk8bXBsCmTfRWgEA8FS80gd
- SK0gAU3ZiKGIe5Cp3wELP+mbhIJBtWAgd5JRXWvrROWbGK+Ch3RtIz9cwELtlsL1yxBY=;
+ bh=UMF4bf/xlX5iMhhFdvv4POZJxLXNJMbFMY0/ylfkgBU=; b=JDsc7jDfndQAsHr0ZttxDTwMTg
+ 9WTknvtszuUp0frUCi35KyENps5z/b+ALczj93NNVHieyY/STtPCxRHHMenMXmZJ/oVSM7Vgi1ieK
+ OleXPDq6q8md9HCd62VDios9gUg62QQVn2FpkghGhNVMeu2L5B6dxficz/FjmlzhqfJ8=;
 Received: from mail-oi1-f193.google.com ([209.85.167.193])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1kGjEJ-004CR9-0N
- for kgdb-bugreport@lists.sourceforge.net; Fri, 11 Sep 2020 13:36:49 +0000
-Received: by mail-oi1-f193.google.com with SMTP id i17so9438049oig.10
+ id 1kGjEr-004V29-Mj
+ for kgdb-bugreport@lists.sourceforge.net; Fri, 11 Sep 2020 13:37:23 +0000
+Received: by mail-oi1-f193.google.com with SMTP id n2so9484291oij.1
  for <kgdb-bugreport@lists.sourceforge.net>;
- Fri, 11 Sep 2020 06:36:42 -0700 (PDT)
+ Fri, 11 Sep 2020 06:37:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=V7c2tVI1sHEIHH1AjuWkw+8Vv4jkByqBwniC8b3+X7E=;
- b=IPiXzooyc34XdY1D6OA308FNNt0ps3oUF0Df+DJViiEfKqHZVjejg3Ul3W/k9it8IG
- ZPjc34I3fmGpsJqjMubs6bOIJ+18H5ABsl65dH1Cv1/RcCHX+APupzonwUq2HbhPyVwO
- LwDTFeNGwv5p2zxycWhDc6202u3+/eR4/G4tPRfGltc0bK1kSgfRjV+U/X4Rufw4l735
- 9+Zzcc+BnyhsOg5mpksee8x7Rv+KQRi32iKb//u+GY7kk+pB+uLyaLoH0ma8BfKjzPWY
- IxF6DhPh+EglOOw1BTq5Z1DhbyaunfohQkQDTMioOOHUnXpjq2ifNLioiorbOzQwo7Rn
- IbEQ==
+ bh=UMF4bf/xlX5iMhhFdvv4POZJxLXNJMbFMY0/ylfkgBU=;
+ b=EuQDuBTvOvwLK210071x8IREFokQkgZaord4oFCyWIF92/r5O+/EHGVhTZB7Xa3ZYA
+ O6Y2+67Gs5ian2S/VK+fTAa2hAr+hTP0YsK989soxdqSat1sWOjtSlXx5AUdQdheN/r7
+ l+FNLv+QNEE9hzRIazVRwnfqsbKvqZLqCiwKBW/iegqkTtCcFFxV4oK/Aay+X8OFVNwt
+ ea7F6VWqHxZ4ol/1WXrJ5YTrlZSyygzFH08zKGn8NikhCkP2wRHgnIytnzENhf+9t8q5
+ EeOBCzZuDaOq0opR7A5YOpMF84iYa5OGzmk8Wn8tzIGeF3MAZphGwwlyFNNa9ikyVoXk
+ rKMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=V7c2tVI1sHEIHH1AjuWkw+8Vv4jkByqBwniC8b3+X7E=;
- b=BHcsFv3dzeC7njTNNl0MPtNIRZRzNSuvE6Z1W3Kw8eErpRaxcS9/uyj0s4WHT9nqOt
- uMZr7hj8j2vfVuHS1NbEqfSfeR67+Vi97HdQLvf+QiFDwvFASqbvbYFPhMew0vPOtexM
- Pb7YBYgAbrZBiGFSx1BzuWeKlbG1hSb5FaYLWPRhl+TJ0jTzyTlxV1wvKTgPNRS/stLH
- j0L51xoErv9u4CAQANX2/VkN0m6rrgHqjs7S/5bYVrjhAsO+7Z39t4c8/LYKIAvXUxWC
- D+ZANqEtlPDtIkope+p4xr81+B/C64fdj6MNAUsBqx3fOdgZY5CdT7DOEZxwaDXNKb7h
- mj0A==
-X-Gm-Message-State: AOAM532nS6++piNeLGvcWGTIYw+Zd5ATbtdd29g1bOc8u1EnbDMrXv/I
- P83xMvFkfgI9nAY7Z/oJkGOI/653NlkZHw==
-X-Google-Smtp-Source: ABdhPJy5G1MDK6kqBvQVO9OUwpmI/w6cEPnvwQ+s+rirVNKyqdVtvb8FhGeb80XLNvA9lxYHwbi3wg==
-X-Received: by 2002:a17:90b:100f:: with SMTP id
- gm15mr2186766pjb.235.1599830955357; 
- Fri, 11 Sep 2020 06:29:15 -0700 (PDT)
+ bh=UMF4bf/xlX5iMhhFdvv4POZJxLXNJMbFMY0/ylfkgBU=;
+ b=drDMuRWvNJb2YkjBK9ZfH5CChZlEKvYijolv9TUpBMNwVbZtP8WKoWzpVn7aHeV/Ke
+ fLZA6FRchvfnEKYzQajAt11Pc2gXJ4OOzZlGXZMbLzDNA2uYTzm4IKpS+1iuxnFnGCty
+ j4WXKQnKAPwqa5glPd7TluR557OwHqiDK+8+YVyXO6VU8q+IUH2ooY2UNSninqCNfshQ
+ 2PkdZNzVNJ0pf20EOxZ7mrfXJjX3lqh4KPHOKOs7/dSfZakAFJ8t/2FCtNO4w/MDlFYD
+ TV34KzhSvXjJ4edGxXqTv8kf2D0Mdh4+7XphRWd4QxQ9aTvGqQ2DlIMqakjWoDTbJehA
+ NQyw==
+X-Gm-Message-State: AOAM532GgmU66ujlXf0SyKa778QaD57Ky6oR97JWy+ZYJr5eEUxy7RgR
+ 9Q2d/MfOO0Ax6WIAqxvkEpL0zNysHE19IQ==
+X-Google-Smtp-Source: ABdhPJxB8cUOtjFdM+vSMsIEhsYFJvwax+iseMhfwh9gbEQK9y8yNt7VouZeSvdSOUYF8uN7QozcNQ==
+X-Received: by 2002:a17:90a:f992:: with SMTP id
+ cq18mr2296365pjb.136.1599830983031; 
+ Fri, 11 Sep 2020 06:29:43 -0700 (PDT)
 Received: from localhost.localdomain ([117.210.209.48])
- by smtp.gmail.com with ESMTPSA id e10sm557988pgb.45.2020.09.11.06.29.08
+ by smtp.gmail.com with ESMTPSA id e10sm557988pgb.45.2020.09.11.06.29.35
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Fri, 11 Sep 2020 06:29:14 -0700 (PDT)
+ Fri, 11 Sep 2020 06:29:42 -0700 (PDT)
 From: Sumit Garg <sumit.garg@linaro.org>
 To: maz@kernel.org,
 	catalin.marinas@arm.com,
 	will@kernel.org
-Date: Fri, 11 Sep 2020 18:58:40 +0530
-Message-Id: <1599830924-13990-2-git-send-email-sumit.garg@linaro.org>
+Date: Fri, 11 Sep 2020 18:58:44 +0530
+Message-Id: <1599830924-13990-6-git-send-email-sumit.garg@linaro.org>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1599830924-13990-1-git-send-email-sumit.garg@linaro.org>
 References: <1599830924-13990-1-git-send-email-sumit.garg@linaro.org>
@@ -98,9 +98,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1kGjEJ-004CR9-0N
-Subject: [Kgdb-bugreport] [PATCH v4 1/5] arm64: Add framework to turn IPI as
- NMI
+X-Headers-End: 1kGjEr-004V29-Mj
+Subject: [Kgdb-bugreport] [PATCH v4 5/5] arm64: ipi_nmi: Add support for NMI
+ backtrace
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -121,145 +121,68 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Introduce framework to turn an IPI as NMI using pseudo NMIs. In case a
-particular platform doesn't support pseudo NMIs, then request IPI as a
-regular IRQ.
-
-The main motivation for this feature is to have an IPI that can be
-leveraged to invoke NMI functions on other CPUs. And current prospective
-users are NMI backtrace and KGDB CPUs round-up whose support is added
-via future patches.
+Enable NMI backtrace support on arm64 using IPI turned as an NMI
+leveraging pseudo NMIs support. It is now possible for users to get a
+backtrace of a CPU stuck in hard-lockup using magic SYSRQ.
 
 Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 ---
- arch/arm64/include/asm/nmi.h | 16 +++++++++
- arch/arm64/kernel/Makefile   |  2 +-
- arch/arm64/kernel/ipi_nmi.c  | 80 ++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 97 insertions(+), 1 deletion(-)
- create mode 100644 arch/arm64/include/asm/nmi.h
- create mode 100644 arch/arm64/kernel/ipi_nmi.c
+ arch/arm64/include/asm/irq.h |  6 ++++++
+ arch/arm64/kernel/ipi_nmi.c  | 12 +++++++++++-
+ 2 files changed, 17 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm64/include/asm/nmi.h b/arch/arm64/include/asm/nmi.h
-new file mode 100644
-index 0000000..3433c55
---- /dev/null
-+++ b/arch/arm64/include/asm/nmi.h
-@@ -0,0 +1,16 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+#ifndef __ASM_NMI_H
-+#define __ASM_NMI_H
-+
-+#ifndef __ASSEMBLER__
-+
-+#include <linux/cpumask.h>
-+
-+extern void arch_send_call_nmi_func_ipi_mask(cpumask_t *mask);
-+
-+void set_smp_ipi_nmi(int ipi);
-+void ipi_nmi_setup(int cpu);
-+void ipi_nmi_teardown(int cpu);
-+
-+#endif /* !__ASSEMBLER__ */
+diff --git a/arch/arm64/include/asm/irq.h b/arch/arm64/include/asm/irq.h
+index b2b0c64..e840bf1 100644
+--- a/arch/arm64/include/asm/irq.h
++++ b/arch/arm64/include/asm/irq.h
+@@ -6,6 +6,12 @@
+ 
+ #include <asm-generic/irq.h>
+ 
++#ifdef CONFIG_SMP
++extern void arch_trigger_cpumask_backtrace(const cpumask_t *mask,
++					   bool exclude_self);
++#define arch_trigger_cpumask_backtrace arch_trigger_cpumask_backtrace
 +#endif
-diff --git a/arch/arm64/kernel/Makefile b/arch/arm64/kernel/Makefile
-index a561cbb..022c26b 100644
---- a/arch/arm64/kernel/Makefile
-+++ b/arch/arm64/kernel/Makefile
-@@ -19,7 +19,7 @@ obj-y			:= debug-monitors.o entry.o irq.o fpsimd.o		\
- 			   return_address.o cpuinfo.o cpu_errata.o		\
- 			   cpufeature.o alternative.o cacheinfo.o		\
- 			   smp.o smp_spin_table.o topology.o smccc-call.o	\
--			   syscall.o
-+			   syscall.o ipi_nmi.o
++
+ struct pt_regs;
  
- targets			+= efi-entry.o
- 
+ static inline int nr_legacy_irqs(void)
 diff --git a/arch/arm64/kernel/ipi_nmi.c b/arch/arm64/kernel/ipi_nmi.c
-new file mode 100644
-index 0000000..355ef92
---- /dev/null
+index 627bc11..d3aa430 100644
+--- a/arch/arm64/kernel/ipi_nmi.c
 +++ b/arch/arm64/kernel/ipi_nmi.c
-@@ -0,0 +1,80 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * NMI support for IPIs
-+ *
-+ * Copyright (C) 2020 Linaro Limited
-+ * Author: Sumit Garg <sumit.garg@linaro.org>
-+ */
-+
-+#include <linux/interrupt.h>
-+#include <linux/irq.h>
-+#include <linux/smp.h>
-+
-+#include <asm/nmi.h>
-+
-+static struct irq_desc *ipi_desc __read_mostly;
-+static int ipi_id __read_mostly;
-+static bool is_nmi __read_mostly;
-+
-+void arch_send_call_nmi_func_ipi_mask(cpumask_t *mask)
+@@ -9,6 +9,7 @@
+ #include <linux/interrupt.h>
+ #include <linux/irq.h>
+ #include <linux/kgdb.h>
++#include <linux/nmi.h>
+ #include <linux/smp.h>
+ 
+ #include <asm/nmi.h>
+@@ -25,12 +26,21 @@ void arch_send_call_nmi_func_ipi_mask(cpumask_t *mask)
+ 	__ipi_send_mask(ipi_desc, mask);
+ }
+ 
++void arch_trigger_cpumask_backtrace(const cpumask_t *mask, bool exclude_self)
 +{
-+	if (WARN_ON_ONCE(!ipi_desc))
-+		return;
-+
-+	__ipi_send_mask(ipi_desc, mask);
++	nmi_trigger_cpumask_backtrace(mask, exclude_self,
++				      arch_send_call_nmi_func_ipi_mask);
 +}
 +
-+static irqreturn_t ipi_nmi_handler(int irq, void *data)
-+{
-+	/* nop, NMI handlers for special features can be added here. */
-+
-+	return IRQ_HANDLED;
-+}
-+
-+void ipi_nmi_setup(int cpu)
-+{
-+	if (!ipi_desc)
-+		return;
-+
-+	if (is_nmi) {
-+		if (!prepare_percpu_nmi(ipi_id))
-+			enable_percpu_nmi(ipi_id, 0);
-+	} else {
-+		enable_percpu_irq(ipi_id, 0);
-+	}
-+}
-+
-+void ipi_nmi_teardown(int cpu)
-+{
-+	if (!ipi_desc)
-+		return;
-+
-+	if (is_nmi) {
-+		disable_percpu_nmi(ipi_id);
-+		teardown_percpu_nmi(ipi_id);
-+	} else {
-+		disable_percpu_irq(ipi_id);
-+	}
-+}
-+
-+void __init set_smp_ipi_nmi(int ipi)
-+{
-+	int err;
-+
-+	err = request_percpu_nmi(ipi, ipi_nmi_handler, "IPI", &cpu_number);
-+	if (err) {
-+		err = request_percpu_irq(ipi, ipi_nmi_handler, "IPI",
-+					 &cpu_number);
-+		WARN_ON(err);
-+		is_nmi = false;
-+	} else {
-+		is_nmi = true;
-+	}
-+
-+	ipi_desc = irq_to_desc(ipi);
-+	irq_set_status_flags(ipi, IRQ_HIDDEN);
-+	ipi_id = ipi;
-+
-+	/* Setup the boot CPU immediately */
-+	ipi_nmi_setup(smp_processor_id());
-+}
+ static irqreturn_t ipi_nmi_handler(int irq, void *data)
+ {
+ 	unsigned int cpu = smp_processor_id();
+ 
+-	ipi_kgdb_nmicallback(cpu, get_irq_regs());
++	if (nmi_cpu_backtrace(get_irq_regs()))
++		goto out;
+ 
++	ipi_kgdb_nmicallback(cpu, get_irq_regs());
++out:
+ 	return IRQ_HANDLED;
+ }
+ 
 -- 
 2.7.4
 
