@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B0FAC269A3E
-	for <lists+kgdb-bugreport@lfdr.de>; Tue, 15 Sep 2020 02:14:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CAB1E269A44
+	for <lists+kgdb-bugreport@lfdr.de>; Tue, 15 Sep 2020 02:14:47 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1kHybk-0006EC-GZ
-	for lists+kgdb-bugreport@lfdr.de; Tue, 15 Sep 2020 00:14:04 +0000
+	id 1kHycQ-0006GE-Jq
+	for lists+kgdb-bugreport@lfdr.de; Tue, 15 Sep 2020 00:14:46 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <dianders@chromium.org>) id 1kHybj-0006E5-5a
- for kgdb-bugreport@lists.sourceforge.net; Tue, 15 Sep 2020 00:14:03 +0000
+ (envelope-from <dianders@chromium.org>) id 1kHycP-0006G7-79
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 15 Sep 2020 00:14:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
  In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
  :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vbe1AqHS58DfWSfiPA4xYQAF16nRd6xvbt+9w/fq7F8=; b=Vai1OTSF/JhSZuertJretyTr7v
- 37j8rDTTG+eZKn1dHi2PnAmyFxiNv6MuZWWrlYyBxXo68JjtMcX3YanrRMW9ZJXxT3OUqdMPG9tse
- k6yNENM8kpEPvTRpDnkyjtJAT0ovbQxzdJAZemGPPx+ekxeYZAA053gavyQP8CM4w5yM=;
+ bh=aJnbONMeYZfyVdyxeGsIkJTHYkKRPSNz8vRxzIqGNEU=; b=jQgUb5Q351qjb5zG+GbPCjX/ac
+ i5pOSqiYeFl1OHtvcAyPfU9gVMoI8WFIIDmiPgYcQxB8rXRR81PaHayICriMaeAOKwZ19vRQndqeg
+ /c50HUYeq6DN6YfGBlMAFAbbNIlX/eTyuV2KH5+KKSpQr+YUiNkrSaqj5IcLjFJnh9jE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
@@ -30,66 +30,66 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=vbe1AqHS58DfWSfiPA4xYQAF16nRd6xvbt+9w/fq7F8=; b=LtsktE7Y95aTxcZhSRNOIjiczm
- Dpfp8+fgR5BNmiTKOGfOLeY0D8WjkgV8UZXtxDFSYJzrtnt8IKtkvJhTsWJvafneMG0ynMFgA8EbW
- GFrtRSgYI9wBd6Q5LLNHdZugA9YR0vhtfWnbb7l+NR4Lo9piG4TJaN40hnB21mNdika4=;
-Received: from mail-vk1-f195.google.com ([209.85.221.195])
+ bh=aJnbONMeYZfyVdyxeGsIkJTHYkKRPSNz8vRxzIqGNEU=; b=T6QviJoM99muJTTw/6cmGh0w6V
+ Cf66ngZ8QWOt4KT3ud1Rc71x7smLWa/CokHKfuRgL7WsT7dD275it1SZQMt9PppumMGjug1EgSFym
+ vulDkFx9QB89So1zy1QzXGTzpMYOnhdwEbxONFvUP0RU443k+MoOP6ZIciJy7XcuWzaU=;
+Received: from mail-ua1-f67.google.com ([209.85.222.67])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1kHybX-00985s-A9
- for kgdb-bugreport@lists.sourceforge.net; Tue, 15 Sep 2020 00:14:03 +0000
-Received: by mail-vk1-f195.google.com with SMTP id n193so381974vkf.12
+ id 1kHycL-00988d-9F
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 15 Sep 2020 00:14:45 +0000
+Received: by mail-ua1-f67.google.com with SMTP id e41so455498uad.6
  for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 14 Sep 2020 17:13:51 -0700 (PDT)
+ Mon, 14 Sep 2020 17:14:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=vbe1AqHS58DfWSfiPA4xYQAF16nRd6xvbt+9w/fq7F8=;
- b=a9nIWOuBsncn5CebByhLCjo54A9sj/xgJrXzTbXB4c+iGvDoxRz2kj+HDFuTlz6FHe
- ccTCakQhRnSTvbseiPYReW0cS/V95isQRNkbPDnFi3195ZDjjfks6GzN4NKVPvcaGFRA
- OiJFlEWiuip89VPeG5qgsATN0udSYhMKAY1mk=
+ :cc; bh=aJnbONMeYZfyVdyxeGsIkJTHYkKRPSNz8vRxzIqGNEU=;
+ b=d6gCudIK5g9Xugrn0/5pf/xRr0qPusWV9CWQYguGjj3LhcFyO8LTKBFmPsg7RfcHD3
+ R2gUlTkMLn1B1RF/E7q/eSwLpevMLjOdwQQHQt6uq3KC9yEZJ1uxlK2N031hdXOkkYkf
+ o9LHRKj4aCWRZS40y/4pMy6E/Bg3CS5QnHv2I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=vbe1AqHS58DfWSfiPA4xYQAF16nRd6xvbt+9w/fq7F8=;
- b=pY8e1oFOIDxMpcwHMxYBdwKClLLHrrhUEKugSuZJljHP3cFvsHlbvApq8CyqjxVrgI
- yZujNUq6UnHbLD55sepyHj0gwJ9+BR8JVj0ITqhU1LTvPPW+Lc++MFdfKonm5nUc5RSd
- OCM5G/fAe/kqpsNsLlUC5w/+40PoNPag52508GioyAs7/jadO3idIyA21cah5JdfbWHi
- PEmYg7eGr+9T9cz7KbCl5RPRMcyH0/xdg7mQnNtM8JSLLcBJsRzM/zKHaT0zc0GxZt8/
- QhwLXCTWS2+SC8lTmhPRp6mEYpyGOzAvQGEpPYglbKNp315skZNEZDvq7gkYt7Y8Cq9Z
- B3+w==
-X-Gm-Message-State: AOAM530ZMQRUIPSs2vyvBkKWUHKMuqRfEVgnYH7B75xYm/6ERAFGNbiF
- XDWjDlimYQr/y/1b5BVX3ZCaN2VVuKwg3A==
-X-Google-Smtp-Source: ABdhPJzDzRNCP2fucIbECmXvGr7kXojK1Ai+1WC0ax0DwyUKfQYsU3gcLqY4qalJXDkuRTJ9pLHzTw==
-X-Received: by 2002:a1f:e542:: with SMTP id c63mr8797267vkh.4.1600128821023;
- Mon, 14 Sep 2020 17:13:41 -0700 (PDT)
-Received: from mail-vk1-f176.google.com (mail-vk1-f176.google.com.
- [209.85.221.176])
- by smtp.gmail.com with ESMTPSA id s5sm1963475vsk.10.2020.09.14.17.13.40
+ bh=aJnbONMeYZfyVdyxeGsIkJTHYkKRPSNz8vRxzIqGNEU=;
+ b=Q9XJe6a6BkORBLVBY1cViypHty9jyhGFvo5/cpk56hWpg/IAjESz5ZbTmkDOdDFwwD
+ k+Ue/sFB+5Q1Esu2BljKlKubE+dhTX9ITlHyw/kYTLfwbsljJVIQ31DmVhahdPX3hpjn
+ Kms5sxAHzuQXOLPu8LTBPNFFJNjsEY8JLfr6AwWbCoh8R5uALfa9wOoVFQGRjalDCyex
+ t66CB6jKUkfI1DnTdjaZDmOkCzA2D4zI2nOnJIBi76yv2BS7yc/52HJ2nXnorpJ9cOWZ
+ e6w5hHixZn5ZM2tZvpb2IBIaysyr9tEuDw+cz/WE2w43qf6nvnyyNlJBLTbSYIGkg+AP
+ v0Lw==
+X-Gm-Message-State: AOAM530QoEIqmnRcW5zFL7RWc+6SCeNlDRwHTEPNP0EI5x2kASypaDm3
+ YoGLfzeJy6GUERHCU282BcVzuV9h7Dk6Cg==
+X-Google-Smtp-Source: ABdhPJy6HqgwRTqQ2LQZc4//IqlUZI4zLckiQmCGucI5PBfsWnlHKrbnF+Zp0wTOsXg0cFuvssYXXA==
+X-Received: by 2002:ab0:78e:: with SMTP id c14mr7975945uaf.117.1600128874919; 
+ Mon, 14 Sep 2020 17:14:34 -0700 (PDT)
+Received: from mail-ua1-f43.google.com (mail-ua1-f43.google.com.
+ [209.85.222.43])
+ by smtp.gmail.com with ESMTPSA id c125sm365985vkc.43.2020.09.14.17.14.33
  for <kgdb-bugreport@lists.sourceforge.net>
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 14 Sep 2020 17:13:40 -0700 (PDT)
-Received: by mail-vk1-f176.google.com with SMTP id h23so397785vkn.4
+ Mon, 14 Sep 2020 17:14:34 -0700 (PDT)
+Received: by mail-ua1-f43.google.com with SMTP id g16so457782uan.5
  for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 14 Sep 2020 17:13:40 -0700 (PDT)
-X-Received: by 2002:a1f:1dcf:: with SMTP id d198mr2927179vkd.30.1600128819652; 
- Mon, 14 Sep 2020 17:13:39 -0700 (PDT)
+ Mon, 14 Sep 2020 17:14:33 -0700 (PDT)
+X-Received: by 2002:ab0:5905:: with SMTP id n5mr8290763uad.90.1600128873477;
+ Mon, 14 Sep 2020 17:14:33 -0700 (PDT)
 MIME-Version: 1.0
 References: <20200914130143.1322802-1-daniel.thompson@linaro.org>
- <20200914130143.1322802-4-daniel.thompson@linaro.org>
-In-Reply-To: <20200914130143.1322802-4-daniel.thompson@linaro.org>
+ <20200914130143.1322802-3-daniel.thompson@linaro.org>
+In-Reply-To: <20200914130143.1322802-3-daniel.thompson@linaro.org>
 From: Doug Anderson <dianders@chromium.org>
-Date: Mon, 14 Sep 2020 17:13:28 -0700
-X-Gmail-Original-Message-ID: <CAD=FV=VUPXdHoPaQg=Pp=bH-iORicO+1LjBZ0PNu0=SumC5tYw@mail.gmail.com>
-Message-ID: <CAD=FV=VUPXdHoPaQg=Pp=bH-iORicO+1LjBZ0PNu0=SumC5tYw@mail.gmail.com>
+Date: Mon, 14 Sep 2020 17:14:22 -0700
+X-Gmail-Original-Message-ID: <CAD=FV=XTgNxVLwytSY1wmCj7Dex3cWGVMA+Rkpp9gb1UN5CU_A@mail.gmail.com>
+Message-ID: <CAD=FV=XTgNxVLwytSY1wmCj7Dex3cWGVMA+Rkpp9gb1UN5CU_A@mail.gmail.com>
 To: Daniel Thompson <daniel.thompson@linaro.org>
 X-Spam-Score: -1.9 (-)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.221.195 listed in list.dnswl.org]
+ trust [209.85.222.67 listed in list.dnswl.org]
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.221.195 listed in wl.mailspike.net]
+ [209.85.222.67 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -98,9 +98,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -1.8 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1kHybX-00985s-A9
-Subject: Re: [Kgdb-bugreport] [PATCH v3 3/3] kernel: debug: Centralize
- dbg_[de]activate_sw_breakpoints
+X-Headers-End: 1kHycL-00988d-9F
+Subject: Re: [Kgdb-bugreport] [PATCH v3 2/3] kgdb: Add NOKPROBE labels on
+ the trap handler functions
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -127,25 +127,36 @@ Hi,
 On Mon, Sep 14, 2020 at 6:02 AM Daniel Thompson
 <daniel.thompson@linaro.org> wrote:
 >
-> During debug trap execution we expect dbg_deactivate_sw_breakpoints()
-> to be paired with an dbg_activate_sw_breakpoint(). Currently although
-> the calls are paired correctly they are needlessly smeared across three
-> different functions. Worse this also results in code to drive polled I/O
-> being called with breakpoints activated which, in turn, needlessly
-> increases the set of functions that will recursively trap if breakpointed.
+> Currently kgdb honours the kprobe blocklist but doesn't place its own
+> trap handling code on the list. Add labels to discourage attempting to
+> use kgdb to debug itself.
 >
-> Fix this by moving the activation of breakpoints into the debug core.
->
-> Signed-off-by: Daniel Thompson <daniel.thompson@linaro.org>
-> ---
->  kernel/debug/debug_core.c       | 2 ++
->  kernel/debug/gdbstub.c          | 1 -
->  kernel/debug/kdb/kdb_debugger.c | 2 --
->  3 files changed, 2 insertions(+), 3 deletions(-)
+> Not every functions that executes from the trap handler needs to be
+> marked up: relatively early in the trap handler execution (just after
+> we bring the other CPUs to a halt) all breakpoints are replaced with
+> the original opcodes. This patch marks up code in the debug_core that
+> executes between trap entry and the breakpoints being deactivated
+> and, also, code that executes between breakpoint activation and trap
+> exit.
 
-I like the idea, but previously the kgdb_arch_handle_exception() was
-always called after the SW breakpoints were activated.  Are you sure
-it's OK to swap those two orders across all architectures?
+Other functions that seem to be missing from a quick skim:
+* kgdb_io_ready()
+* kgdb_roundup_cpus()
+* kgdb_call_nmi_hook()
+
+I'm not confident in my ability to spot every code path, though, so
+I'm not sure at what point we stop looking.  I only spent a few
+minutes and, if important, I could dig more.  Did you have any chance
+to see if there was any way to have a magic linker script just add
+this to everything under "kernel/debug" or something like that where
+we just use a heavier hammer to whack a whole bunch?
+
+In general any extra annotation here is better than no annotation, I
+suppose.  ...so if you just want to commit what you have (maybe with
+the above 3 extra functions) then I suppose it'd be fine.
+
+-Doug
+
 
 -Doug
 
