@@ -2,106 +2,102 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E285B27A43F
-	for <lists+kgdb-bugreport@lfdr.de>; Sun, 27 Sep 2020 23:16:39 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 87C0A27AC88
+	for <lists+kgdb-bugreport@lfdr.de>; Mon, 28 Sep 2020 13:18:07 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1kMe2A-0002aI-Nu
-	for lists+kgdb-bugreport@lfdr.de; Sun, 27 Sep 2020 21:16:38 +0000
+	id 1kMrAU-0002g5-1f
+	for lists+kgdb-bugreport@lfdr.de; Mon, 28 Sep 2020 11:18:06 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <daniel.thompson@linaro.org>) id 1kMe2A-0002a0-2p
- for kgdb-bugreport@lists.sourceforge.net; Sun, 27 Sep 2020 21:16:38 +0000
+ (envelope-from <daniel.thompson@linaro.org>) id 1kMrAS-0002fv-6l
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 28 Sep 2020 11:18:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=a99k07/EyDDQHmuhibQRaLo4XWgbxK6z35bVqiMsuv8=; b=VyRkwP3drI57bxIzUFRn0oUvRL
- 7Q915S/CgwqoVZ6WshFEGyUll7LHwpdwl9ckyowdXhFNy1rCI8/WDUiNc6FjMW+Z7gYnamo/TTcZV
- lFSuqZRaKZ/IcQTtgcrX7LiYWjWQsrr3rSA7d8xgRirW7hLw390Tjx2dKYSqa7GZ6W9Q=;
+ bh=eF74ZFK17+xMyvZFbbKNSS8MJbDDGd1/oidFI6dtPeQ=; b=eKL/8kGZqXmZAt5/yY0UgXXh+O
+ LQMJ7QCJCbEiYKh+3UfUw8GP5wB7an6bEJlOxdGMoTljNL/lkF4oruShG1fAvXiDlzZuYCLMn3OdH
+ gr6L1lHa73HpwL+XODcK5gK0yFb7IPop/57U3I7h+whNk69G8Kl3GlF4VTG04mGFjv44=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=a99k07/EyDDQHmuhibQRaLo4XWgbxK6z35bVqiMsuv8=; b=QXKZGAxJw5bN1Av2TjFpwLYQtB
- sWaJ/KknChe+1YAUOKRm/TLs2aMQnez8JIRvKBMU15MgYiuGRIngB4P36bVy+z2HRVTvBLBgkl21R
- Q2jUa9RW1HEeTGl61IlsTP4xEd6/MIh3Wpn2rVhFixZGMJkNnItP1sXY0uifPBBGz0wk=;
-Received: from mail-wr1-f68.google.com ([209.85.221.68])
+ bh=eF74ZFK17+xMyvZFbbKNSS8MJbDDGd1/oidFI6dtPeQ=; b=LV/ObQpf87t5/yGvYxBHFfxnyt
+ jE7ubv/r1ZYzf2tUlmjIh+12hgCnHIPUKHuD53TND6SA3HYfJVGwHJNnZjpeYs2P+JxXHytuCY0jw
+ DuytZWePk1z5Rqz+AIOl6/1Ql9oyZM2rYFZQhi5uOqBMXT+W1+4efQ6d2h/Cj4TrkJgg=;
+Received: from mail-wr1-f66.google.com ([209.85.221.66])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1kMe23-00Ah7t-D0
- for kgdb-bugreport@lists.sourceforge.net; Sun, 27 Sep 2020 21:16:38 +0000
-Received: by mail-wr1-f68.google.com with SMTP id e16so9827683wrm.2
+ id 1kMrAB-00BR3a-Bp
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 28 Sep 2020 11:18:04 +0000
+Received: by mail-wr1-f66.google.com with SMTP id k15so840667wrn.10
  for <kgdb-bugreport@lists.sourceforge.net>;
- Sun, 27 Sep 2020 14:16:31 -0700 (PDT)
+ Mon, 28 Sep 2020 04:17:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=a99k07/EyDDQHmuhibQRaLo4XWgbxK6z35bVqiMsuv8=;
- b=CjFXYG9BR8dkXSbiyxLxrUYbFRhjiOb1vcwmYg4vsW7360k60NHd/8S43UvXZA5FT5
- y5VyC5QYUXGmFaaGmwntXMTbUvqNhpSq3moC26ISTM5UAC+skTj4T6PO3hrzqrT6z15R
- hmAIvGK4AYwwCnEQeuzshHnQDATrFWpGn/iA1WzpjEShT3FvgfRikun4C5n3kerVeLUL
- 1ASUSioryEuYeddzAzUwSfgNb8cD3KjYmuWABM8tEtkal6+cf2e68Low/keUuApsOV6f
- /6j0xr2ThzRu2LrBh/JoIfZRwmi19wGblaXZqiOMVOmiIOcQs99OXexE8U3y7loHj9U+
- 9Zdw==
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=eF74ZFK17+xMyvZFbbKNSS8MJbDDGd1/oidFI6dtPeQ=;
+ b=gg1JP4uRsjVTO5ysoyRinZfbru3qcVXq+xS5cIWbUwGxr1C6syaVT1NLFv8sEaKsR3
+ bAGqWW8dIq6OUE1cv7esaoDR7pE1Xq1sUQRrk76BH0vh7ktEvuAm4oWTc1ggqcNz1NL2
+ BNRtwjBVZHKHzY0gOT9Kju106JXPdHoD/Qd+Rz2Ig5xPXZYyIHUXFw4oqIjNb/P3uA46
+ xZeaUTicg/SFRfXDdYEnrL4vgn5EGZV8xh7Aa1ClYnXRHANrth/n10+sqbzpW/MtXlmN
+ 7UEgMMFgYtXrS+6ogHOmMjx/WiCkgeb02EFYwHfyHPgnsp6oMXmlVxRH77+bQzSUaxET
+ UrwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=a99k07/EyDDQHmuhibQRaLo4XWgbxK6z35bVqiMsuv8=;
- b=YfqCjyc/jvIFVuXEPIAbqY4VHGfvbA515N3gWoLP8cB8CRQqpn2bGZhASwcdFxIXWg
- vXmx1PVHxaIWRB8BKb1OnqLXWf6YXkEdDQr3prjS67LySfJ+ycXvBfxjaoSkbKphh1Zd
- ro1M76OwBG0QS/ECmB1eQYA0mguvr9uCQeX03ZCRkJT9bXtGyeUBeXuY1K278QpAdmTl
- HeRILWvteXwFxNdbtwRCXwpYBflFbrGuZzBWu2vSbfv071dZUBvk6wIeNQ5XoUKGFr6j
- Vo34FrdqhEXa10MpIyDdAcGZ/8CTp0AIFTSlYrmqayaMTaN5ENR/HByz2UBzp5Z1PP25
- 35ow==
-X-Gm-Message-State: AOAM532g0PDjxgcewiUKjNzyVUO2tv5FUTFq6BOwN8+FXpxq/ab4cLoc
- JTY5IE1t7e5SFUYRuax3u9LEWQ==
-X-Google-Smtp-Source: ABdhPJxsis82EaVU2Ny17vWSbD6xDjUxPFjWZp3tZqcI8T/hln1YFSfFswHXGrJGbExBNQLQpInGKQ==
-X-Received: by 2002:a5d:51ca:: with SMTP id n10mr15438828wrv.222.1601241377872; 
- Sun, 27 Sep 2020 14:16:17 -0700 (PDT)
-Received: from wychelm.lan
- (cpc141216-aztw34-2-0-cust174.18-1.cable.virginm.net. [80.7.220.175])
- by smtp.gmail.com with ESMTPSA id s17sm11396676wrr.40.2020.09.27.14.16.16
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=eF74ZFK17+xMyvZFbbKNSS8MJbDDGd1/oidFI6dtPeQ=;
+ b=VJlWuR0GGzO6kVgWemHToBiEdGe7+zocj/sKH9tb780yKeTA8KEXNbTY6/M1dDOVOU
+ G+LYd2k59LipFYZ4bdqEG+3iA6jyXGST/F3HtfcQMISYm9cBPwjlEwva+V9z03qH/HtT
+ b9eIhtf44fgqnNdixd5MBcrauP0kSXaJJP4b8a/UEPy/227AsU1Ka8QsW+FAMxWyIPBw
+ d3e1jXFWu7efFNQJrjfHHnx2o/Pj+TWQ2Jqk6B68QVpT72FgZevjf5RFldYhsgmZVBDF
+ YrpnovoOWi4ONsdwEf979fc1ZrwTIZyphAlMmd3/O/En1acyZjnTrCOAZ5bf+E52aXy0
+ wHvg==
+X-Gm-Message-State: AOAM5334JfOIVXtttLadqi7TdSOXbE6AqVBfvmlvAPdlqmeckkB83NU0
+ G3vkCWMpQj1WmFgf4nJlpxfSXg==
+X-Google-Smtp-Source: ABdhPJxYnMFBR4He86ej0AcG8HKyVAP+FtnsRyYUT8aR0hp7Rx18E0FIW1v8bd3rqv9adlovXDN4Gw==
+X-Received: by 2002:adf:cf01:: with SMTP id o1mr1128621wrj.421.1601291853709; 
+ Mon, 28 Sep 2020 04:17:33 -0700 (PDT)
+Received: from holly.lan (cpc141216-aztw34-2-0-cust174.18-1.cable.virginm.net.
+ [80.7.220.175])
+ by smtp.gmail.com with ESMTPSA id d23sm860748wmb.6.2020.09.28.04.17.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 27 Sep 2020 14:16:17 -0700 (PDT)
+ Mon, 28 Sep 2020 04:17:33 -0700 (PDT)
+Date: Mon, 28 Sep 2020 12:17:31 +0100
 From: Daniel Thompson <daniel.thompson@linaro.org>
 To: Jason Wessel <jason.wessel@windriver.com>,
  Douglas Anderson <dianders@chromium.org>
-Date: Sun, 27 Sep 2020 22:15:31 +0100
-Message-Id: <20200927211531.1380577-4-daniel.thompson@linaro.org>
-X-Mailer: git-send-email 2.25.4
-In-Reply-To: <20200927211531.1380577-1-daniel.thompson@linaro.org>
+Message-ID: <20200928111731.koa7am62uxxaezcz@holly.lan>
 References: <20200927211531.1380577-1-daniel.thompson@linaro.org>
 MIME-Version: 1.0
-X-Spam-Score: -0.6 (/)
+Content-Disposition: inline
+In-Reply-To: <20200927211531.1380577-1-daniel.thompson@linaro.org>
+X-Spam-Score: -0.7 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: chromium.org]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.221.68 listed in list.dnswl.org]
+ trust [209.85.221.66 listed in list.dnswl.org]
+ -0.6 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.221.66 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.5 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.221.68 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1kMe23-00Ah7t-D0
-Subject: [Kgdb-bugreport] [PATCH v3 3/3] kernel: debug: Centralize
- dbg_[de]activate_sw_breakpoints
+X-Headers-End: 1kMrAB-00BR3a-Bp
+Subject: Re: [Kgdb-bugreport] [PATCH v3 0/3] kgdb: Honour the kprobe
+ blocklist when setting breakpoints
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,79 +109,83 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daniel Thompson <daniel.thompson@linaro.org>, pmladek@suse.com,
- Peter Zijlstra <peterz@infradead.org>, kgdb-bugreport@lists.sourceforge.net,
- patches@linaro.org, linux-kernel@vger.kernel.org, sergey.senozhatsky@gmail.com,
+Cc: pmladek@suse.com, Peter Zijlstra <peterz@infradead.org>,
+ kgdb-bugreport@lists.sourceforge.net, patches@linaro.org,
+ linux-kernel@vger.kernel.org, sergey.senozhatsky@gmail.com,
  Masami Hiramatsu <mhiramat@kernel.org>, will@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-During debug trap execution we expect dbg_deactivate_sw_breakpoints()
-to be paired with an dbg_activate_sw_breakpoint(). Currently although
-the calls are paired correctly they are needlessly smeared across three
-different functions. Worse this also results in code to drive polled I/O
-being called with breakpoints activated which, in turn, needlessly
-increases the set of functions that will recursively trap if breakpointed.
+On Sun, Sep 27, 2020 at 10:15:28PM +0100, Daniel Thompson wrote:
+> kgdb has traditionally adopted a no safety rails approach to breakpoint
+> placement. If the debugger is commanded to place a breakpoint at an
+> address then it will do so even if that breakpoint results in kgdb
+> becoming inoperable.
+> 
+> A stop-the-world debugger with memory peek/poke intrinsically provides
+> its operator with the means to hose their system in all manner of
+> exciting ways (not least because stopping-the-world is already a DoS
+> attack ;-) ). Nevertheless the current no safety rail approach is
+> difficult to defend, especially given kprobes can provide us with plenty
+> of machinery to mark the parts of the kernel where breakpointing is
+> discouraged.
+> 
+> This patchset introduces some safety rails by using the existing kprobes
+> infrastructure and ensures this will be enabled by default on
+> architectures that implement kprobes. At present it does not cover
+> absolutely all locations where breakpoints can cause trouble but it will
+> block off several avenues, including the architecture specific parts
+> that are handled by arch_within_kprobe_blacklist().
+> 
+> v4:
+> * Fixed KConfig dependencies for HONOUR_KPROBE_BLOCKLIST on kernels
+>   where MODULES=n
+> * Add additional debug_core.c functions to the blocklist (thanks Doug)
+> * Collected a few tags
 
-Fix this by moving the activation of breakpoints into the debug core.
+Looks like I neglected to bump the version number in the subject.
+For the avoidance of doubt, this comment is correct and the subject
+line is broken.
 
-Signed-off-by: Daniel Thompson <daniel.thompson@linaro.org>
-Reviewed-by: Douglas Anderson <dianders@chromium.org>
----
- kernel/debug/debug_core.c       | 2 ++
- kernel/debug/gdbstub.c          | 1 -
- kernel/debug/kdb/kdb_debugger.c | 2 --
- 3 files changed, 2 insertions(+), 3 deletions(-)
+Sorry!
 
-diff --git a/kernel/debug/debug_core.c b/kernel/debug/debug_core.c
-index faa1f99ce65a..e4339fd82db0 100644
---- a/kernel/debug/debug_core.c
-+++ b/kernel/debug/debug_core.c
-@@ -768,6 +768,8 @@ static int kgdb_cpu_enter(struct kgdb_state *ks, struct pt_regs *regs,
- 		}
- 	}
- 
-+	dbg_activate_sw_breakpoints();
-+
- 	/* Call the I/O driver's post_exception routine */
- 	if (dbg_io_ops->post_exception)
- 		dbg_io_ops->post_exception();
-diff --git a/kernel/debug/gdbstub.c b/kernel/debug/gdbstub.c
-index cc3c43dfec44..e9a9c3097089 100644
---- a/kernel/debug/gdbstub.c
-+++ b/kernel/debug/gdbstub.c
-@@ -1061,7 +1061,6 @@ int gdb_serial_stub(struct kgdb_state *ks)
- 				error_packet(remcom_out_buffer, -EINVAL);
- 				break;
- 			}
--			dbg_activate_sw_breakpoints();
- 			fallthrough;	/* to default processing */
- 		default:
- default_handle:
-diff --git a/kernel/debug/kdb/kdb_debugger.c b/kernel/debug/kdb/kdb_debugger.c
-index 53a0df6e4d92..0220afda3200 100644
---- a/kernel/debug/kdb/kdb_debugger.c
-+++ b/kernel/debug/kdb/kdb_debugger.c
-@@ -147,7 +147,6 @@ int kdb_stub(struct kgdb_state *ks)
- 		return DBG_PASS_EVENT;
- 	}
- 	kdb_bp_install(ks->linux_regs);
--	dbg_activate_sw_breakpoints();
- 	/* Set the exit state to a single step or a continue */
- 	if (KDB_STATE(DOING_SS))
- 		gdbstub_state(ks, "s");
-@@ -167,7 +166,6 @@ int kdb_stub(struct kgdb_state *ks)
- 		 * differently vs the gdbstub
- 		 */
- 		kgdb_single_step = 0;
--		dbg_deactivate_sw_breakpoints();
- 		return DBG_SWITCH_CPU_EVENT;
- 	}
- 	return kgdb_info[ks->cpu].ret_state;
--- 
-2.25.4
 
+Daniel.
+
+
+> 
+> v3:
+> * Dropped the single step blocklist checks. It is not proven that the
+>   code was actually reachable without triggering the catastrophic
+>   failure flag (which inhibits resume already).
+> * Update patch description for ("kgdb: Add NOKPROBE labels...") and
+>   added symbols that are called during trap exit
+> * Added a new patch to push the breakpoint activation later in the
+>   flow and ensure the I/O functions are not called with breakpoints
+>   activated.
+> 
+> v2:
+> * Reworked after initial RFC to make honouring the blocklist require
+>   CONFIG_KPROBES. It is now optional but the blocklist will be enabled
+>   by default for architectures that CONFIG_HAVE_KPROBES
+> 
+> Daniel Thompson (3):
+>   kgdb: Honour the kprobe blocklist when setting breakpoints
+>   kgdb: Add NOKPROBE labels on the trap handler functions
+>   kernel: debug: Centralize dbg_[de]activate_sw_breakpoints
+> 
+>  include/linux/kgdb.h            | 18 ++++++++++++++++++
+>  kernel/debug/debug_core.c       | 22 ++++++++++++++++++++++
+>  kernel/debug/gdbstub.c          |  1 -
+>  kernel/debug/kdb/kdb_bp.c       |  9 +++++++++
+>  kernel/debug/kdb/kdb_debugger.c |  2 --
+>  lib/Kconfig.kgdb                | 15 +++++++++++++++
+>  6 files changed, 64 insertions(+), 3 deletions(-)
+> 
+> --
+> 2.25.4
+> 
 
 
 _______________________________________________
