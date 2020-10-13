@@ -2,110 +2,84 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BC6EF28C787
-	for <lists+kgdb-bugreport@lfdr.de>; Tue, 13 Oct 2020 05:23:23 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 63CAA28CCDD
+	for <lists+kgdb-bugreport@lfdr.de>; Tue, 13 Oct 2020 13:55:08 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1kSAuI-0004Jn-IJ
-	for lists+kgdb-bugreport@lfdr.de; Tue, 13 Oct 2020 03:23:22 +0000
+	id 1kSItX-0001eL-6R
+	for lists+kgdb-bugreport@lfdr.de; Tue, 13 Oct 2020 11:55:07 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <msys.mizuma@gmail.com>) id 1kSAuG-0004JZ-VI
- for kgdb-bugreport@lists.sourceforge.net; Tue, 13 Oct 2020 03:23:20 +0000
+ (envelope-from <mchehab@kernel.org>) id 1kSItU-0001dp-Td
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 13 Oct 2020 11:55:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8avc/64suYQeMp5GgzA5tmw2pJjaDuZSyAtFHq8gm34=; b=CgqekVXMzLZouNWymwcqmqDChF
- v2J9CTqcEpJkb333c47lEewf4l6ePjvT4gj3eJONitbjwKAKU4Aw/f8L/fZgScAjmG6kYJiPFB2Wi
- kASXfvrzhpC/fHQ9CR0/1MTBLlcJKHnWmNfYOhXg+ilfbIhS44YemXbXaCpII8Wfkp8k=;
+ d=sourceforge.net; s=x; h=Sender:Content-Transfer-Encoding:MIME-Version:
+ References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Reply-To:
+ Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+ List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=MzRKF7hhSXqEYeVOUzMr0FrhbgwePIjIBZr6f+9WWcs=; b=QyerBvCuxdL0oYP9IUDU6N8zjH
+ UlsIYS/NL5wO81yS4GckAVbTh1SLbE0REIH2+Rz4oJzDmIt4Iz0kMyCCAugRrV2jmDyBhYWW7H5yh
+ jmKML1G7FZB+GUn6qXH98QI8x4bVARMjYoO3+y30jgvFUh4XJlS8m4HAnik+QYwRdaCs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Sender:Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:
+ Message-Id:Date:Subject:Cc:To:From:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=8avc/64suYQeMp5GgzA5tmw2pJjaDuZSyAtFHq8gm34=; b=CbPPGIGMvgejzLv846sYU7Lo/a
- ACrdwXdsUYXt/L+lvKK8ujE41+8QG298FU2IVEBK+m17o3Bn5lhSdvnrKW+cX177H53b32nXiPUah
- DjjQkNE0YM04h1TLFXuY5dlM6ljihBtelX2aXtWQ1qaw/ZuKTJ36gJBDBwuRKBx4hOB4=;
-Received: from mail-qk1-f195.google.com ([209.85.222.195])
+ bh=MzRKF7hhSXqEYeVOUzMr0FrhbgwePIjIBZr6f+9WWcs=; b=Ztv+JY//328MZWVin+fYxOL44L
+ UeF9upmERhz6GFZf4ah1BcGcoTZijhmtrYObGcp+peExJ7vrieeQh92LPwS6G1tN+N76ey42kwFk0
+ MQcaMHbx83iPGXbEMKY+EDrv36gLlr1bo2FO10Qx1gqtST6TfvATLvPTE5/BXwX+IwAw=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1kSAuC-00Cxaa-Jt
- for kgdb-bugreport@lists.sourceforge.net; Tue, 13 Oct 2020 03:23:20 +0000
-Received: by mail-qk1-f195.google.com with SMTP id q63so19645845qkf.3
- for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 12 Oct 2020 20:23:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=8avc/64suYQeMp5GgzA5tmw2pJjaDuZSyAtFHq8gm34=;
- b=fVshXDeXRvRHKXbkyOJuRjmLohKcGDX7DDjrMtShzKZFXCDWpDYpbtuY+9/lW0oSzn
- v31Y9XdnWd7q2wMfv4McLozcmD21u7PQ+peYEDpsaxn+Nwf4on/ItmLJgoPxnggt+dSG
- 4BmOONWVL5NGd5aeA1Co45HuViM2EoXkePxtaJnVYtuzKej4z68hlFlNZYGza2Kb6I6M
- KeM75AbjHbF4Cp4YlbCjsyYAQ/af4CxPjze0OrDmeo9gRqNmO12G1+FxnZja2YYiyJ3C
- Us6YNnhsANN9wHX6gdjni8JiDL6NZcg+9eDp6WcUXAVrAyaa6Z+hX2vukQUeJJy7uHPW
- enAw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=8avc/64suYQeMp5GgzA5tmw2pJjaDuZSyAtFHq8gm34=;
- b=f+ggfetggBDejOzxJOOiUsH++0YBp9GBH0MUXfKoM6aF0IYhOWsCNRWIlYcp9Nqe+M
- 1tFPFywETTJ7AaS4yw3mLZOQR6ez0cNRTgo7InU/SyYzCCZ7hVCZlQ0hCxY5fbvA+ryv
- E3G+6cZokJlIhtsMSOckO1xaRLSOiP2qmvVRTdn7uBRF4/bKElhZHkngbbuK8BIdXbjz
- NRlYFHOo9JWwh3if4Uk62g6VUegLi89paIF4jssDbfPWBLmW4ssHcKmyK93EG8l/gy4J
- o+ElQfX/RM6Cq7nAUlECzIf/xF3jgDXcYhCwavqC1vJEnDQ/7CxlnHtHOwKEQgAx+VWk
- TExw==
-X-Gm-Message-State: AOAM531hZonPSDK/lCKI6sT89cmWAuzFbL1bu2KE9HDh8iXttjNCbTJp
- GOsues9fd+InHycudlxfd55lqEcvWA==
-X-Google-Smtp-Source: ABdhPJyHjdm9v8cbZa7XC7+SU1TiL3kuhYJVBffwraE+SqHVz0Unk73Y35kuNXvQXVMGxEraIGfRMw==
-X-Received: by 2002:a05:620a:677:: with SMTP id
- a23mr2355679qkh.428.1602559383716; 
- Mon, 12 Oct 2020 20:23:03 -0700 (PDT)
-Received: from gabell
- (209-6-122-159.s2973.c3-0.arl-cbr1.sbo-arl.ma.cable.rcncustomer.com.
- [209.6.122.159])
- by smtp.gmail.com with ESMTPSA id w45sm506123qtw.96.2020.10.12.20.23.02
- (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Mon, 12 Oct 2020 20:23:02 -0700 (PDT)
-Date: Mon, 12 Oct 2020 23:23:00 -0400
-From: Masayoshi Mizuma <msys.mizuma@gmail.com>
-To: Sumit Garg <sumit.garg@linaro.org>
-Message-ID: <20201013032300.djsxeasxaqbzjhzr@gabell>
-References: <1599830924-13990-1-git-send-email-sumit.garg@linaro.org>
- <1599830924-13990-2-git-send-email-sumit.garg@linaro.org>
- <20201010015855.vksetnj4luft5enc@gabell>
- <877drypgqb.wl-maz@kernel.org>
- <20201010151307.vq74if4mndjn4nhm@gabell>
- <CAFA6WYOHs+yYvdR-6eQR3ZJPK8nF3sN0fbd8XsQ8pwGL63cdCQ@mail.gmail.com>
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1kSItP-00DPwC-P0
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 13 Oct 2020 11:55:04 +0000
+Received: from mail.kernel.org (ip5f5ad5b2.dynamic.kabel-deutschland.de
+ [95.90.213.178])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id E401A2240C;
+ Tue, 13 Oct 2020 11:54:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1602590081;
+ bh=2L6tpoHQxyeOwadIQQN4Im2A93Tx/4SXMLjoXbv8Smc=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=i6Qu06NZNWoufV989krWJrvsECI2OvRp9G/FGoWsdKf5rIVyMsg2DCyvHdNOb/Hin
+ elSXcE4Sl/FYmRjTQHuS93J4Z/gGCqqVneweyMTzpOW9SfWPeIIv51sWeye/uKFZya
+ pgfU6HZSAFYxV3Z6hXQr3LC2UpTl/NQQaJyCrkrY=
+Received: from mchehab by mail.kernel.org with local (Exim 4.94)
+ (envelope-from <mchehab@kernel.org>)
+ id 1kSIt4-006CV3-RP; Tue, 13 Oct 2020 13:54:38 +0200
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Date: Tue, 13 Oct 2020 13:53:56 +0200
+Message-Id: <0c56e8cfd793c0ac5810a12536d93ad6e223eca4.1602589096.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.26.2
+In-Reply-To: <cover.1602589096.git.mchehab+huawei@kernel.org>
+References: <cover.1602589096.git.mchehab+huawei@kernel.org>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAFA6WYOHs+yYvdR-6eQR3ZJPK8nF3sN0fbd8XsQ8pwGL63cdCQ@mail.gmail.com>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (msys.mizuma[at]gmail.com)
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.222.195 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.222.195 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: linaro.org]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1kSAuC-00Cxaa-Jt
-Subject: Re: [Kgdb-bugreport] [PATCH v4 1/5] arm64: Add framework to turn
- IPI as NMI
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1kSItP-00DPwC-P0
+Subject: [Kgdb-bugreport] [PATCH v6 41/80] docs: kgdb.rst: fix :c:type:
+ usages
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,105 +91,71 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: Mark Rutland <mark.rutland@arm.com>,
- Daniel Thompson <daniel.thompson@linaro.org>,
- Jason Cooper <jason@lakedaemon.net>, Marc Zyngier <maz@kernel.org>,
- Jason Wessel <jason.wessel@windriver.com>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- julien.thierry.kdev@gmail.com, Catalin Marinas <catalin.marinas@arm.com>,
- kgdb-bugreport@lists.sourceforge.net, Thomas Gleixner <tglx@linutronix.de>,
- Will Deacon <will@kernel.org>,
- linux-arm-kernel <linux-arm-kernel@lists.infradead.org>
+Cc: Daniel Thompson <daniel.thompson@linaro.org>,
+ Jonathan Corbet <corbet@lwn.net>,
+ Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+ kgdb-bugreport@lists.sourceforge.net, linux-kernel@vger.kernel.org,
+ Jason Wessel <jason.wessel@windriver.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Mon, Oct 12, 2020 at 05:49:09PM +0530, Sumit Garg wrote:
-> Hi Masa,
-> 
-> On Sat, 10 Oct 2020 at 20:43, Masayoshi Mizuma <msys.mizuma@gmail.com> wrote:
-> >
-> > On Sat, Oct 10, 2020 at 10:34:04AM +0100, Marc Zyngier wrote:
-> > > On Sat, 10 Oct 2020 02:58:55 +0100,
-> > > Masayoshi Mizuma <msys.mizuma@gmail.com> wrote:
-> > >
-> > > [...]
-> > >
-> > > > > +void ipi_nmi_setup(int cpu)
-> > > > > +{
-> > > > > + if (!ipi_desc)
-> > > > > +         return;
-> > > >
-> > > > ipi_nmi_setup() may be called twice for CPU0:
-> > > >
-> > > >   set_smp_ipi_range => set_smp_ipi_nmi => ipi_nmi_setup
-> > > >                     => ipi_setup => ipi_nmi_setup
-> > > >
-> > > > Actually, I got the following error message via the second ipi_nmi_setup():
-> > > >
-> > > >   GICv3: Pseudo-NMIs enabled using relaxed ICC_PMR_EL1 synchronisation
-> > > >   GICv3: Cannot set NMI property of enabled IRQ 8
-> > > >   genirq: Failed to setup NMI delivery: irq 8
-> > > >
-> 
-> Ah, thanks for catching this which I missed during my testing.
-> 
-> > > > Why don't we have a check to prevent that? Like as:
-> > > >
-> > > >        if (cpumask_test_cpu(cpu, ipi_desc->percpu_enabled))
-> > > >                return;
-> > >
-> > > That's definitely the wrong thing to do. prepare_nmi_setup() shouldn't
-> > > be called twice, and papering over it isn't acceptable.
-> >
-> > Got it. How about moving ipi_nmi_setup() from ipi_setup() to
-> > secondary_start_kernel() ? so that CPU0 can call ipi_nmi_setup() only
-> > from set_smp_ipi_nmi().
-> >
-> > --- a/arch/arm64/kernel/smp.c
-> > +++ b/arch/arm64/kernel/smp.c
-> > @@ -245,6 +245,7 @@ asmlinkage notrace void secondary_start_kernel(void)
-> >         notify_cpu_starting(cpu);
-> >
-> >         ipi_setup(cpu);
-> > +       ipi_nmi_setup(cpu);
-> >
-> >         store_cpu_topology(cpu);
-> >         numa_add_cpu(cpu);
-> > @@ -966,8 +967,6 @@ static void ipi_setup(int cpu)
-> >
-> >         for (i = 0; i < nr_ipi; i++)
-> >                 enable_percpu_irq(ipi_irq_base + i, 0);
-> > -
-> > -       ipi_nmi_setup(cpu);
-> >  }
-> >
-> >  #ifdef CONFIG_HOTPLUG_CPU
-> >
-> 
-> IMO, it would be more consistent to keep invocation of ipi_nmi_setup()
-> from ipi_setup(). So let me remove other invocation from
-> set_smp_ipi_nmi():
-> 
-> diff --git a/arch/arm64/kernel/ipi_nmi.c b/arch/arm64/kernel/ipi_nmi.c
-> index d3aa430..000e457 100644
-> --- a/arch/arm64/kernel/ipi_nmi.c
-> +++ b/arch/arm64/kernel/ipi_nmi.c
-> @@ -87,7 +87,4 @@ void __init set_smp_ipi_nmi(int ipi)
->         ipi_desc = irq_to_desc(ipi);
->         irq_set_status_flags(ipi, IRQ_HIDDEN);
->         ipi_id = ipi;
-> -
-> -       /* Setup the boot CPU immediately */
-> -       ipi_nmi_setup(smp_processor_id());
->  }
-> 
-> Do let me know if this works for you?
+Which Sphinx 3, :c:type:  can't be used anymore for structs,
+as this should be used only for typedefs.
 
-Yes, make sense to me.
+Rely on automarkup.py for struct references.
 
-Thanks!
-Masa
+This file has an special case, though: it uses the tag also
+to point to an array. Let's use, instead, :c:expr: for such
+purpose, as it should do the right thing.
+
+This should fix this warning:
+
+	./Documentation/dev-tools/kgdb.rst:875: WARNING: Unparseable C cross-reference: 'kdb_poll_funcs[]'
+	Invalid C declaration: Expected end of definition. [error at 14]
+	  kdb_poll_funcs[]
+	  --------------^
+
+Acked-by: Daniel Thompson <daniel.thompson@linaro.org>
+Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+---
+ Documentation/dev-tools/kgdb.rst | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/Documentation/dev-tools/kgdb.rst b/Documentation/dev-tools/kgdb.rst
+index c908ef4d3f04..77b688e6a254 100644
+--- a/Documentation/dev-tools/kgdb.rst
++++ b/Documentation/dev-tools/kgdb.rst
+@@ -726,7 +726,7 @@ The kernel debugger is organized into a number of components:
+    -  contains an arch-specific trap catcher which invokes
+       kgdb_handle_exception() to start kgdb about doing its work
+ 
+-   -  translation to and from gdb specific packet format to :c:type:`pt_regs`
++   -  translation to and from gdb specific packet format to struct pt_regs
+ 
+    -  Registration and unregistration of architecture specific trap
+       hooks
+@@ -846,7 +846,7 @@ invokes a callback in the serial core which in turn uses the callback in
+ the UART driver.
+ 
+ When using kgdboc with a UART, the UART driver must implement two
+-callbacks in the :c:type:`struct uart_ops <uart_ops>`.
++callbacks in the struct uart_ops.
+ Example from ``drivers/8250.c``::
+ 
+ 
+@@ -875,7 +875,7 @@ kernel when ``CONFIG_KDB_KEYBOARD=y`` is set in the kernel configuration.
+ The core polled keyboard driver for PS/2 type keyboards is in
+ ``drivers/char/kdb_keyboard.c``. This driver is hooked into the debug core
+ when kgdboc populates the callback in the array called
+-:c:type:`kdb_poll_funcs[]`. The kdb_get_kbd_char() is the top-level
++:c:expr:`kdb_poll_funcs[]`. The kdb_get_kbd_char() is the top-level
+ function which polls hardware for single character input.
+ 
+ kgdboc and kms
+-- 
+2.26.2
+
 
 
 _______________________________________________
