@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C57B28E9B2
-	for <lists+kgdb-bugreport@lfdr.de>; Thu, 15 Oct 2020 03:16:56 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3D7B428E9C4
+	for <lists+kgdb-bugreport@lfdr.de>; Thu, 15 Oct 2020 03:17:54 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1kSrt1-0000Bp-9C
-	for lists+kgdb-bugreport@lfdr.de; Thu, 15 Oct 2020 01:16:55 +0000
+	id 1kSrtx-0006iu-11
+	for lists+kgdb-bugreport@lfdr.de; Thu, 15 Oct 2020 01:17:53 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <msys.mizuma@gmail.com>) id 1kSrsz-0000Bh-7Z
- for kgdb-bugreport@lists.sourceforge.net; Thu, 15 Oct 2020 01:16:53 +0000
+ (envelope-from <msys.mizuma@gmail.com>) id 1kSrtt-0006iP-Mu
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 15 Oct 2020 01:17:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=f+VQm+GCd77gKfnBI0U0A6ACRKwOlvYFJHxUn4tNp/4=; b=GA/POyn0LFzmUplm37b1/YGXCd
- neCU6gSlgu3nGg6y2gl30q2Tb5D8qLQUeXsa2M2TWGuid3mkE+FV0yqYWXMohUP5XZ4xPOFw+G0N5
- QpUxkGAiHRUq5j5lgywIiVjFQnkVqUJIW9dPAg89AL1xC5VPuEBOWXF+YaPDfnOAbTcI=;
+ bh=gRUP5okLmkN2g8HT3wDw7jtbqT5ZCqE5twgUzt6/004=; b=WbJaUbt6tqrh0dRxU61HkjW4vB
+ 4lNXUrvO8C9YPOUAUry5OVWxxcziOVf/E73+QGfbbbiLtMcCh4G5XJdia/r9g1CIA8GtO9vK4cxp1
+ G93O4B3+u1MIJA7AH+9HyilV/WEgof3ZzNj579ryoBQthr5+n29sK8uEuypCGsKR7Ngc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -30,59 +30,58 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=f+VQm+GCd77gKfnBI0U0A6ACRKwOlvYFJHxUn4tNp/4=; b=Tq3qHZdPZsDbW4Wkw2I3DNwrvU
- CRiS2NYy7KIQVCUd5wg+wtVZ4J1EafV3ViRduv4Xm+yjxe9AGpptSoo8P0nyEzNXad27lFVQLrhe7
- EyczdzV706i3CFxGZkl6dK+ZBagNkVQuNs6CpgXVxoChk/PhRQLPbSbSTtd+xV2LAzoo=;
-Received: from mail-il1-f193.google.com ([209.85.166.193])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=gRUP5okLmkN2g8HT3wDw7jtbqT5ZCqE5twgUzt6/004=; b=ZiTzok3GuqYF5XjnYI9Pds6YAD
+ +sBdEySmHyuG6rS+3n0+vHHQ/GhNKbqIsTpqERItz4ctjWcYjvfPtIz6PSX1zG/DPsJFnJh6L0TaB
+ pAnZgAoZ4/R1v4FxETWUxOvAH18WNJFeyCeUDfs6u24jZ3Mf6FpaE2d+yILwC5JeZtoI=;
+Received: from mail-il1-f195.google.com ([209.85.166.195])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1kSrss-00G0VF-Tt
- for kgdb-bugreport@lists.sourceforge.net; Thu, 15 Oct 2020 01:16:53 +0000
-Received: by mail-il1-f193.google.com with SMTP id j8so2272795ilk.0
+ id 1kSrtn-00AyWo-6d
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 15 Oct 2020 01:17:49 +0000
+Received: by mail-il1-f195.google.com with SMTP id l16so2206025ilj.9
  for <kgdb-bugreport@lists.sourceforge.net>;
- Wed, 14 Oct 2020 18:16:46 -0700 (PDT)
+ Wed, 14 Oct 2020 18:17:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to;
- bh=f+VQm+GCd77gKfnBI0U0A6ACRKwOlvYFJHxUn4tNp/4=;
- b=P9ulBwKRoZlgh0HWFIhUvODejuLfpzxhsEIQzmYOFGtAxJJ4Ux85/rE9uWQNAtDXsA
- /+PKDXt/tdp3KUU7NvURom0vbscyaZgfGd5GjWTfDxW3hD5wjFiKmFhDs79+qU0H1EpA
- IEALnopRBia8fscwf2YDtcf1BxEIidP8sWtYEns/ZPafDXuZRGIunQ3f0uJgrpsCKl7g
- YOyWtHXVm9suoFAoUNzJWcZhRp5k0sl0rvdRWzlbx0cqriecFsho6CQjCrwNyUtu3iRY
- by3FUBjV9qnpRUJBpZd0jkglfKnZUpmCH8d/0NZsa699HI9GdH4l/qgN1haCjDP4ufRx
- QgHQ==
+ bh=gRUP5okLmkN2g8HT3wDw7jtbqT5ZCqE5twgUzt6/004=;
+ b=Axt5o00Pp6mgZRePuxQ5jTc1tIKAoWXVLza1VeaVWSk6EHkD9m3LvdYCBhVdhLLgoB
+ EQRKLb094zduDRN9Wgbho3j6WZQDmrKDR7znzAacxGZQxfgFDC0HAzPe8hwst1K0uiLT
+ MJVf9n3dWZ0RalrPKjJj/UZkTZ+8406R/J3fLX5ybJUNt+xLfuyN1t4YZe3JntgAuiB2
+ FipSBtW0NeTqwAgrpMsn3HBEbu47epCFqA+lT0fkyRsFFdEC2PtJIWJRjEb1va8tDGCK
+ AwQUbhWsIw9nEef0g5BPYmAf6qPLpwcG91sq19Erz9RfJL6FcUJpH+0DHCFGq6vGs2re
+ nwew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=f+VQm+GCd77gKfnBI0U0A6ACRKwOlvYFJHxUn4tNp/4=;
- b=rJeZlQ0XYtISBSFsfs43TQ8uuglrdkNdVE2m+Oeqmgy4Z4b6P6wAXPdojKLdXmMLb6
- x5BjMiQf6YrjkkBE4HPAVfDr8LTeqxDAF4ulJvNOy+TrpIdG3LCtAGLEX/PvjYad4vIS
- 9ZvaPwcEGAxPAF3hA3Sc4ZemnXQZM0DAVz7MYU8r/Ak9Z9y4sZwwI5kIPacwohNigNNc
- tiTXtRYkdIQb/25/15WvEGF2BDQdN0qjt5iv/5QVwnHQc3EMzioQ1DFniewVHlES0/o7
- e2bSn7xkr1Vz6wtWzok6dRumKGS0451ayKv9BfApjENV3LiaPT+Ujgy/Hay/8bKLwI8c
- VvPA==
-X-Gm-Message-State: AOAM5335oklk+LIp/670aUerrEzAnCR482eTLU8zHWk3gvd8O35msvST
- UcGmFwlG4ky2cuB+Kiq1Xw==
-X-Google-Smtp-Source: ABdhPJyrkoYD5xp/FDUz6oQftni3lYBv91fg4w/zk0ULRzN1QsQsl2aY6epo9iDiUgJNopfjmHkkzg==
-X-Received: by 2002:a05:6e02:1073:: with SMTP id
- q19mr1411357ilj.55.1602724601411; 
- Wed, 14 Oct 2020 18:16:41 -0700 (PDT)
+ bh=gRUP5okLmkN2g8HT3wDw7jtbqT5ZCqE5twgUzt6/004=;
+ b=cnUexOn8dx2gk4pPcIKHli+WbXS0/+wEaiTBv+9vOmvlAltbUnhr7W/eNPFMCb+Po2
+ EeH641kN6lln3EoWI97NLKRmV98PEtpCXvpyaHeqgFv4wzIkscm1ACdSYENE6NejNCG/
+ e7//edCEhYr2+scyoIv5DjkdIQ3CNt1CpWzCXbXKt9IGzuvdKvM8/wA4DDhdT+4V4PMc
+ vyW/gXE5QOYNRjTQozm8DihofsOTk5xBitEuHSlt584oUKuszfC7YazKFaOHL7a8iNhM
+ PoEGewcCcAdM2+9icWUnjXEB9dfQMT6ui4urp3Uaz4VLm64Rn1PxoYpkkUhDaupyBMVf
+ wsHA==
+X-Gm-Message-State: AOAM532Z6pWaOjbV18hrXVk0Iso8QWwlmiQAWcG/NpDkkYVQx+mtwu6e
+ p2wvWKDHa3To8Jmtq5u+qg==
+X-Google-Smtp-Source: ABdhPJwmPHN+xkaMEX00WKdHeJam3q4KuADGTGUWoOIWFo6TRZqa0MG79tQKSWB3WJHYAYtmTO/owA==
+X-Received: by 2002:a92:ca92:: with SMTP id t18mr1413551ilo.287.1602724657601; 
+ Wed, 14 Oct 2020 18:17:37 -0700 (PDT)
 Received: from gabell
  (209-6-122-159.s2973.c3-0.arl-cbr1.sbo-arl.ma.cable.rcncustomer.com.
  [209.6.122.159])
- by smtp.gmail.com with ESMTPSA id v18sm1079595ilj.12.2020.10.14.18.16.36
+ by smtp.gmail.com with ESMTPSA id o17sm1148985ila.47.2020.10.14.18.17.32
  (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Wed, 14 Oct 2020 18:16:37 -0700 (PDT)
-Date: Wed, 14 Oct 2020 21:16:34 -0400
+ Wed, 14 Oct 2020 18:17:33 -0700 (PDT)
+Date: Wed, 14 Oct 2020 21:17:30 -0400
 From: Masayoshi Mizuma <msys.mizuma@gmail.com>
 To: Sumit Garg <sumit.garg@linaro.org>
-Message-ID: <20201015011634.zz2tnbc7yvhzxddc@gabell>
+Message-ID: <20201015011730.mbhbxr2zgjfe2zen@gabell>
 References: <1602673931-28782-1-git-send-email-sumit.garg@linaro.org>
- <1602673931-28782-4-git-send-email-sumit.garg@linaro.org>
+ <1602673931-28782-6-git-send-email-sumit.garg@linaro.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <1602673931-28782-4-git-send-email-sumit.garg@linaro.org>
+In-Reply-To: <1602673931-28782-6-git-send-email-sumit.garg@linaro.org>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -90,8 +89,12 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: linaro.org]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.166.195 listed in list.dnswl.org]
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
  (msys.mizuma[at]gmail.com)
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.166.195 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -99,13 +102,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.166.193 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.193 listed in wl.mailspike.net]
-X-Headers-End: 1kSrss-00G0VF-Tt
-Subject: Re: [Kgdb-bugreport] [PATCH v5 3/5] arm64: smp: Allocate and setup
- IPI as NMI
+X-Headers-End: 1kSrtn-00AyWo-6d
+Subject: Re: [Kgdb-bugreport] [PATCH v5 5/5] arm64: ipi_nmi: Add support for
+ NMI backtrace
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -126,64 +125,77 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Wed, Oct 14, 2020 at 04:42:09PM +0530, Sumit Garg wrote:
-> Allocate an unused IPI that can be turned as NMI using ipi_nmi framework.
-> Also, invoke corresponding NMI setup/teardown APIs.
+On Wed, Oct 14, 2020 at 04:42:11PM +0530, Sumit Garg wrote:
+> Enable NMI backtrace support on arm64 using IPI turned as an NMI
+> leveraging pseudo NMIs support. It is now possible for users to get a
+> backtrace of a CPU stuck in hard-lockup using magic SYSRQ.
 > 
 > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 > ---
->  arch/arm64/kernel/smp.c | 8 ++++++++
->  1 file changed, 8 insertions(+)
+>  arch/arm64/include/asm/irq.h |  6 ++++++
+>  arch/arm64/kernel/ipi_nmi.c  | 12 +++++++++++-
+>  2 files changed, 17 insertions(+), 1 deletion(-)
 > 
-> diff --git a/arch/arm64/kernel/smp.c b/arch/arm64/kernel/smp.c
-> index 82e75fc..129ebfb 100644
-> --- a/arch/arm64/kernel/smp.c
-> +++ b/arch/arm64/kernel/smp.c
-> @@ -43,6 +43,7 @@
->  #include <asm/daifflags.h>
->  #include <asm/kvm_mmu.h>
->  #include <asm/mmu_context.h>
-> +#include <asm/nmi.h>
->  #include <asm/numa.h>
->  #include <asm/processor.h>
->  #include <asm/smp_plat.h>
-> @@ -962,6 +963,8 @@ static void ipi_setup(int cpu)
+> diff --git a/arch/arm64/include/asm/irq.h b/arch/arm64/include/asm/irq.h
+> index b2b0c64..e840bf1 100644
+> --- a/arch/arm64/include/asm/irq.h
+> +++ b/arch/arm64/include/asm/irq.h
+> @@ -6,6 +6,12 @@
 >  
->  	for (i = 0; i < nr_ipi; i++)
->  		enable_percpu_irq(ipi_irq_base + i, 0);
+>  #include <asm-generic/irq.h>
+>  
+> +#ifdef CONFIG_SMP
+> +extern void arch_trigger_cpumask_backtrace(const cpumask_t *mask,
+> +					   bool exclude_self);
+> +#define arch_trigger_cpumask_backtrace arch_trigger_cpumask_backtrace
+> +#endif
 > +
-> +	ipi_nmi_setup(cpu);
+>  struct pt_regs;
+>  
+>  static inline int nr_legacy_irqs(void)
+> diff --git a/arch/arm64/kernel/ipi_nmi.c b/arch/arm64/kernel/ipi_nmi.c
+> index e0a9e03..e1dc19d 100644
+> --- a/arch/arm64/kernel/ipi_nmi.c
+> +++ b/arch/arm64/kernel/ipi_nmi.c
+> @@ -9,6 +9,7 @@
+>  #include <linux/interrupt.h>
+>  #include <linux/irq.h>
+>  #include <linux/kgdb.h>
+> +#include <linux/nmi.h>
+>  #include <linux/smp.h>
+>  
+>  #include <asm/nmi.h>
+> @@ -25,12 +26,21 @@ void arch_send_call_nmi_func_ipi_mask(cpumask_t *mask)
+>  	__ipi_send_mask(ipi_desc, mask);
 >  }
 >  
->  #ifdef CONFIG_HOTPLUG_CPU
-> @@ -974,6 +977,8 @@ static void ipi_teardown(int cpu)
->  
->  	for (i = 0; i < nr_ipi; i++)
->  		disable_percpu_irq(ipi_irq_base + i);
+> +void arch_trigger_cpumask_backtrace(const cpumask_t *mask, bool exclude_self)
+> +{
+> +	nmi_trigger_cpumask_backtrace(mask, exclude_self,
+> +				      arch_send_call_nmi_func_ipi_mask);
+> +}
 > +
-> +	ipi_nmi_teardown(cpu);
+>  static irqreturn_t ipi_nmi_handler(int irq, void *data)
+>  {
+>  	unsigned int cpu = smp_processor_id();
+>  
+> -	ipi_kgdb_nmicallback(cpu, get_irq_regs());
+> +	if (nmi_cpu_backtrace(get_irq_regs()))
+> +		goto out;
+>  
+> +	ipi_kgdb_nmicallback(cpu, get_irq_regs());
+> +out:
+>  	return IRQ_HANDLED;
 >  }
->  #endif
 >  
-> @@ -995,6 +1000,9 @@ void __init set_smp_ipi_range(int ipi_base, int n)
->  		irq_set_status_flags(ipi_base + i, IRQ_HIDDEN);
->  	}
->  
-> +	if (n > nr_ipi)
-> +		set_smp_ipi_nmi(ipi_base + nr_ipi);
-> +
->  	ipi_irq_base = ipi_base;
->  
->  	/* Setup the boot CPU immediately */
 > -- 
 
-Looks good to me. Please feel free to add:
+It works well. Please feel free to add:
 
-        Reviewed-by: Masayoshi Mizuma <m.mizuma@jp.fujitsu.com>
+        Tested-by: Masayoshi Mizuma <m.mizuma@jp.fujitsu.com>
 
 Thanks!
 Masa
-
 
 
 _______________________________________________
