@@ -2,68 +2,68 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 51CE829270E
-	for <lists+kgdb-bugreport@lfdr.de>; Mon, 19 Oct 2020 14:16:16 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 869AF29271F
+	for <lists+kgdb-bugreport@lfdr.de>; Mon, 19 Oct 2020 14:20:55 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1kUU5G-0006Vc-PJ
-	for lists+kgdb-bugreport@lfdr.de; Mon, 19 Oct 2020 12:16:14 +0000
+	id 1kUU9m-0006eq-Aw
+	for lists+kgdb-bugreport@lfdr.de; Mon, 19 Oct 2020 12:20:54 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <maz@kernel.org>) id 1kUU5E-0006VC-V0
- for kgdb-bugreport@lists.sourceforge.net; Mon, 19 Oct 2020 12:16:12 +0000
+ (envelope-from <maz@kernel.org>) id 1kUU9l-0006ef-KR
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 19 Oct 2020 12:20:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Message-ID:References:In-Reply-To:Subject:Cc:To:
  From:Date:Content-Transfer-Encoding:Content-Type:MIME-Version:Sender:Reply-To
  :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=OSU7leaB88OfQMwrMZxZZ6qb/UjpQzYDftO6z5zyL8I=; b=acGGCMAibLZ0TPcCZvIlekPn/b
- H6Lwy0SfGAlWPXUcGWX16QwP4Ib0IYkxb5mcchNm1kaED8s63UWdhNoC/QHS0HXbXfdT+tv/HnKaT
- 5Bc3lq58VJFS5Hpc7ACn8savh7/aiM1jxMXCo/78xFrZNlsMdupdB3NY29ARy8g6hIK8=;
+ bh=vErLy8qHMxxAWPHggeNEKbw3AMwddoo8pBuXJ+iMiWY=; b=GkPq5yQ0ZWjBc7NzViU9AEyxsW
+ sgFSPAjerXe4IBHuJlj4K1v85TLN8rmPn5R8AQBuF4EoVBuUy4QR+G3M2ghLQd1Kl0OPgFqeGyyoN
+ +ayV2f0/XhOmK96HI2+KhxwavfLSsFzdaZ73lrqSq83bbxktuTPunHMeKKO2yiIfADl0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Message-ID:References:In-Reply-To:Subject:Cc:To:From:Date:
  Content-Transfer-Encoding:Content-Type:MIME-Version:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=OSU7leaB88OfQMwrMZxZZ6qb/UjpQzYDftO6z5zyL8I=; b=XEjbPwRzQCDVISbosiA+rqmP6Q
- c+cFW3zi5Lemg/Wwo2xS50XXO5AWnZDMOvOnZPRLDk5//3RAGYm935Qxosv1hRNTFF623ckC3vPEL
- qkgy9ZldcFrY9nRjQsK/iS/cRRsgM6wknSfNFip0MBuBaDVxDE7LiEFD51LiZC26H5PI=;
+ bh=vErLy8qHMxxAWPHggeNEKbw3AMwddoo8pBuXJ+iMiWY=; b=XT5ebaRk8bmkVPawpGWdhcgYrI
+ ynH/FdBRVHejrAndMPfw97ixZl5ljd64YLz2QzI9hWx0GxMhkQxk4/cToaUXSOssE/sv4IHseehKQ
+ 6pKEJmHWBVSYQs2Qt2e/NcKzDPEbQV1aV3RKltWZc5NLbEX4T0jjYIvyhIe+/62Sm2Do=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kUU59-003jds-BX
- for kgdb-bugreport@lists.sourceforge.net; Mon, 19 Oct 2020 12:16:12 +0000
+ id 1kUU9h-003k2M-Fo
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 19 Oct 2020 12:20:53 +0000
 Received: from disco-boy.misterjones.org (disco-boy.misterjones.org
  [51.254.78.96])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id A74D222268;
- Mon, 19 Oct 2020 12:15:49 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id B826522268;
+ Mon, 19 Oct 2020 12:20:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1603109749;
- bh=RYQpI+PlsEdpivnE+YOvprJVaqwBNAEJkR9tx1GcJa4=;
+ s=default; t=1603110043;
+ bh=KudzWihYn7TsHFILrc3bbZ/Ot13PpKP3HdWaA7pXYFs=;
  h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=clVAWMr3IFUpwbSGLYMFnhoyCjXo84OlYKfpqaNOO+RlNVrhG0ePOhZMv7ThU0Grk
- HN5gRo4gYu4Zgzc5851pH/KlhbP1JUrPDjWrVDMDFBnJZugMi/n1aGYdz/JiF9c+w0
- AYzxWQwRXEJq2Lly7B2Q5NN72fAI5MuLdmxYOYq0=
+ b=UdOZNQz6NTdrIOdjekI0yw+JYVbCpVdC6VkLuZWQnl4Kt+aZXZN4cWYEe4GOPUHG/
+ dvb9NauKrTxyxEZNPwV9uHlvXgYVVxNk59AyjXRIIlOhLBK2M9oP8RoD6VGTH9rrYM
+ C9oG6OEUesu5t0D3oI+sQ4ZDEE1NnNfetHm34Nlk=
 Received: from disco-boy.misterjones.org ([51.254.78.96] helo=www.loen.fr)
  by disco-boy.misterjones.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <maz@kernel.org>)
- id 1kUU4p-002PeW-Im; Mon, 19 Oct 2020 13:15:47 +0100
+ id 1kUU9Z-002PiH-Gw; Mon, 19 Oct 2020 13:20:41 +0100
 MIME-Version: 1.0
-Date: Mon, 19 Oct 2020 13:15:47 +0100
+Date: Mon, 19 Oct 2020 13:20:41 +0100
 From: Marc Zyngier <maz@kernel.org>
 To: Sumit Garg <sumit.garg@linaro.org>
-In-Reply-To: <1602673931-28782-5-git-send-email-sumit.garg@linaro.org>
+In-Reply-To: <1602673931-28782-6-git-send-email-sumit.garg@linaro.org>
 References: <1602673931-28782-1-git-send-email-sumit.garg@linaro.org>
- <1602673931-28782-5-git-send-email-sumit.garg@linaro.org>
+ <1602673931-28782-6-git-send-email-sumit.garg@linaro.org>
 User-Agent: Roundcube Webmail/1.4.9
-Message-ID: <0899dcad304ac8bf0ea7d5308ec2e263@kernel.org>
+Message-ID: <d4a4a37b93f34da79b87519181bffb97@kernel.org>
 X-Sender: maz@kernel.org
 X-SA-Exim-Connect-IP: 51.254.78.96
 X-SA-Exim-Rcpt-To: sumit.garg@linaro.org, catalin.marinas@arm.com,
@@ -85,9 +85,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1kUU59-003jds-BX
-Subject: Re: [Kgdb-bugreport] [PATCH v5 4/5] arm64: kgdb: Round up cpus
- using IPI as NMI
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1kUU9h-003k2M-Fo
+Subject: Re: [Kgdb-bugreport] [PATCH v5 5/5] arm64: ipi_nmi: Add support for
+ NMI backtrace
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,120 +110,74 @@ Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
 On 2020-10-14 12:12, Sumit Garg wrote:
-> arm64 platforms with GICv3 or later supports pseudo NMIs which can be
-> leveraged to round up CPUs which are stuck in hard lockup state with
-> interrupts disabled that wouldn't be possible with a normal IPI.
-> 
-> So instead switch to round up CPUs using IPI turned as NMI. And in
-> case a particular arm64 platform doesn't supports pseudo NMIs,
-> this IPI will act as a normal IPI which maintains existing kgdb
-> functionality.
+> Enable NMI backtrace support on arm64 using IPI turned as an NMI
+> leveraging pseudo NMIs support. It is now possible for users to get a
+> backtrace of a CPU stuck in hard-lockup using magic SYSRQ.
 > 
 > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 > ---
->  arch/arm64/include/asm/kgdb.h |  8 ++++++++
->  arch/arm64/kernel/ipi_nmi.c   |  5 ++++-
->  arch/arm64/kernel/kgdb.c      | 21 +++++++++++++++++++++
->  3 files changed, 33 insertions(+), 1 deletion(-)
+>  arch/arm64/include/asm/irq.h |  6 ++++++
+>  arch/arm64/kernel/ipi_nmi.c  | 12 +++++++++++-
+>  2 files changed, 17 insertions(+), 1 deletion(-)
 > 
-> diff --git a/arch/arm64/include/asm/kgdb.h 
-> b/arch/arm64/include/asm/kgdb.h
-> index 21fc85e..6f3d3af 100644
-> --- a/arch/arm64/include/asm/kgdb.h
-> +++ b/arch/arm64/include/asm/kgdb.h
-> @@ -24,6 +24,14 @@ static inline void arch_kgdb_breakpoint(void)
->  extern void kgdb_handle_bus_error(void);
->  extern int kgdb_fault_expected;
+> diff --git a/arch/arm64/include/asm/irq.h 
+> b/arch/arm64/include/asm/irq.h
+> index b2b0c64..e840bf1 100644
+> --- a/arch/arm64/include/asm/irq.h
+> +++ b/arch/arm64/include/asm/irq.h
+> @@ -6,6 +6,12 @@
 > 
-> +#ifdef CONFIG_KGDB
-> +extern void ipi_kgdb_nmicallback(int cpu, void *regs);
-> +#else
-> +static inline void ipi_kgdb_nmicallback(int cpu, void *regs)
-> +{
-> +}
+>  #include <asm-generic/irq.h>
+> 
+> +#ifdef CONFIG_SMP
+> +extern void arch_trigger_cpumask_backtrace(const cpumask_t *mask,
+> +					   bool exclude_self);
+> +#define arch_trigger_cpumask_backtrace arch_trigger_cpumask_backtrace
 > +#endif
 > +
->  #endif /* !__ASSEMBLY__ */
+>  struct pt_regs;
 > 
->  /*
+>  static inline int nr_legacy_irqs(void)
 > diff --git a/arch/arm64/kernel/ipi_nmi.c b/arch/arm64/kernel/ipi_nmi.c
-> index a959256..e0a9e03 100644
+> index e0a9e03..e1dc19d 100644
 > --- a/arch/arm64/kernel/ipi_nmi.c
 > +++ b/arch/arm64/kernel/ipi_nmi.c
-> @@ -8,6 +8,7 @@
-> 
+> @@ -9,6 +9,7 @@
 >  #include <linux/interrupt.h>
 >  #include <linux/irq.h>
-> +#include <linux/kgdb.h>
+>  #include <linux/kgdb.h>
+> +#include <linux/nmi.h>
 >  #include <linux/smp.h>
 > 
 >  #include <asm/nmi.h>
-> @@ -26,7 +27,9 @@ void arch_send_call_nmi_func_ipi_mask(cpumask_t 
+> @@ -25,12 +26,21 @@ void arch_send_call_nmi_func_ipi_mask(cpumask_t 
 > *mask)
+>  	__ipi_send_mask(ipi_desc, mask);
+>  }
 > 
+> +void arch_trigger_cpumask_backtrace(const cpumask_t *mask, bool 
+> exclude_self)
+> +{
+> +	nmi_trigger_cpumask_backtrace(mask, exclude_self,
+> +				      arch_send_call_nmi_func_ipi_mask);
+> +}
+> +
 >  static irqreturn_t ipi_nmi_handler(int irq, void *data)
 >  {
-> -	/* nop, NMI handlers for special features can be added here. */
-> +	unsigned int cpu = smp_processor_id();
-> +
-> +	ipi_kgdb_nmicallback(cpu, get_irq_regs());
-
-Please add a return value to ipi_kgdb_nmicallback(), and check it
-before returning IRQ_HANDLED.
-
-Thinking a bit more about the whole thing, you should have a way to
-avoid requesting the NMI if there is no user for it (there is nothing
-worse than an enabled interrupt without handlers...).
-
+>  	unsigned int cpu = smp_processor_id();
 > 
+> -	ipi_kgdb_nmicallback(cpu, get_irq_regs());
+> +	if (nmi_cpu_backtrace(get_irq_regs()))
+> +		goto out;
+> 
+> +	ipi_kgdb_nmicallback(cpu, get_irq_regs());
+> +out:
 >  	return IRQ_HANDLED;
 >  }
-> diff --git a/arch/arm64/kernel/kgdb.c b/arch/arm64/kernel/kgdb.c
-> index 1a157ca3..0991275 100644
-> --- a/arch/arm64/kernel/kgdb.c
-> +++ b/arch/arm64/kernel/kgdb.c
-> @@ -17,6 +17,7 @@
-> 
->  #include <asm/debug-monitors.h>
->  #include <asm/insn.h>
-> +#include <asm/nmi.h>
->  #include <asm/traps.h>
-> 
->  struct dbg_reg_def_t dbg_reg_def[DBG_MAX_REG_NUM] = {
-> @@ -353,3 +354,23 @@ int kgdb_arch_remove_breakpoint(struct kgdb_bkpt 
-> *bpt)
->  	return aarch64_insn_write((void *)bpt->bpt_addr,
->  			*(u32 *)bpt->saved_instr);
->  }
-> +
-> +void ipi_kgdb_nmicallback(int cpu, void *regs)
-> +{
-> +	if (atomic_read(&kgdb_active) != -1)
-> +		kgdb_nmicallback(cpu, regs);
-> +}
-> +
-> +#ifdef CONFIG_SMP
 
-There is no such thing as an arm64 UP kernel.
-
-> +void kgdb_roundup_cpus(void)
-> +{
-> +	struct cpumask mask;
-> +
-> +	cpumask_copy(&mask, cpu_online_mask);
-> +	cpumask_clear_cpu(raw_smp_processor_id(), &mask);
-> +	if (cpumask_empty(&mask))
-> +		return;
-> +
-> +	arch_send_call_nmi_func_ipi_mask(&mask);
-
-Surely you can come up with a less convoluted name for this function.
-arm64_send_nmi() would be plenty in my opinion.
-
-> +}
-> +#endif
-
-Thanks,
+Can't you have *both* a request for a backtrace and a KGDB call?
+It really shouldn't be either/or. It also outlines how well shared
+interrupts work with edge triggered signalling...
 
          M.
 -- 
