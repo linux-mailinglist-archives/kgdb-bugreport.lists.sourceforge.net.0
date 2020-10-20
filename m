@@ -2,82 +2,91 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 869AF29271F
-	for <lists+kgdb-bugreport@lfdr.de>; Mon, 19 Oct 2020 14:20:55 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 17C21293598
+	for <lists+kgdb-bugreport@lfdr.de>; Tue, 20 Oct 2020 09:17:08 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1kUU9m-0006eq-Aw
-	for lists+kgdb-bugreport@lfdr.de; Mon, 19 Oct 2020 12:20:54 +0000
+	id 1kUltK-0007sk-EB
+	for lists+kgdb-bugreport@lfdr.de; Tue, 20 Oct 2020 07:17:06 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <maz@kernel.org>) id 1kUU9l-0006ef-KR
- for kgdb-bugreport@lists.sourceforge.net; Mon, 19 Oct 2020 12:20:53 +0000
+ (envelope-from <sumit.garg@linaro.org>) id 1kUltJ-0007sb-2s
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 20 Oct 2020 07:17:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Message-ID:References:In-Reply-To:Subject:Cc:To:
- From:Date:Content-Transfer-Encoding:Content-Type:MIME-Version:Sender:Reply-To
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
  :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vErLy8qHMxxAWPHggeNEKbw3AMwddoo8pBuXJ+iMiWY=; b=GkPq5yQ0ZWjBc7NzViU9AEyxsW
- sgFSPAjerXe4IBHuJlj4K1v85TLN8rmPn5R8AQBuF4EoVBuUy4QR+G3M2ghLQd1Kl0OPgFqeGyyoN
- +ayV2f0/XhOmK96HI2+KhxwavfLSsFzdaZ73lrqSq83bbxktuTPunHMeKKO2yiIfADl0=;
+ bh=fKisSdPFhHMNCtICMhbcUEw2QFiANpq0wtVTr5Ou8mA=; b=cOMxfag/YzUh2jb15eZM2jlQW5
+ i/kZ3pNBcy6rOkMXsA4mSQwPZC2AaJGgRkBGAOgPr91oIWFoyQVIPOXhR4zBAsxaPjPuTdIUS/jN4
+ ku3o/3Dc2soEeXgd3b13WjW9SKrDYIYh5yrGilkbnFy+d8Jn3BayUcycv9OpTs+I7jOU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ; h=Message-ID:References:In-Reply-To:Subject:Cc:To:From:Date:
- Content-Transfer-Encoding:Content-Type:MIME-Version:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vErLy8qHMxxAWPHggeNEKbw3AMwddoo8pBuXJ+iMiWY=; b=XT5ebaRk8bmkVPawpGWdhcgYrI
- ynH/FdBRVHejrAndMPfw97ixZl5ljd64YLz2QzI9hWx0GxMhkQxk4/cToaUXSOssE/sv4IHseehKQ
- 6pKEJmHWBVSYQs2Qt2e/NcKzDPEbQV1aV3RKltWZc5NLbEX4T0jjYIvyhIe+/62Sm2Do=;
-Received: from mail.kernel.org ([198.145.29.99])
+ ;
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=fKisSdPFhHMNCtICMhbcUEw2QFiANpq0wtVTr5Ou8mA=; b=cLh4P3moHtUUQ6Cc63JvJRmTUa
+ ps3dV8y9mrj9eniLJPQERCqnAIUPDWv9EDS0XEv6KoH8k1Z1+HSHnqsG+vUA0/mXIgHmy5VcG2mH4
+ FDbRwR+7/vuIPN/JJDSxQwx75VKHP8dazQZzv+9XifPpd1l1yBetabf1g3nCJUQzSCpc=;
+Received: from mail-lf1-f65.google.com ([209.85.167.65])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kUU9h-003k2M-Fo
- for kgdb-bugreport@lists.sourceforge.net; Mon, 19 Oct 2020 12:20:53 +0000
-Received: from disco-boy.misterjones.org (disco-boy.misterjones.org
- [51.254.78.96])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id B826522268;
- Mon, 19 Oct 2020 12:20:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1603110043;
- bh=KudzWihYn7TsHFILrc3bbZ/Ot13PpKP3HdWaA7pXYFs=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=UdOZNQz6NTdrIOdjekI0yw+JYVbCpVdC6VkLuZWQnl4Kt+aZXZN4cWYEe4GOPUHG/
- dvb9NauKrTxyxEZNPwV9uHlvXgYVVxNk59AyjXRIIlOhLBK2M9oP8RoD6VGTH9rrYM
- C9oG6OEUesu5t0D3oI+sQ4ZDEE1NnNfetHm34Nlk=
-Received: from disco-boy.misterjones.org ([51.254.78.96] helo=www.loen.fr)
- by disco-boy.misterjones.org with esmtpsa
- (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <maz@kernel.org>)
- id 1kUU9Z-002PiH-Gw; Mon, 19 Oct 2020 13:20:41 +0100
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1kUlt9-0054Vp-SD
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 20 Oct 2020 07:17:05 +0000
+Received: by mail-lf1-f65.google.com with SMTP id l28so818242lfp.10
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Tue, 20 Oct 2020 00:16:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=fKisSdPFhHMNCtICMhbcUEw2QFiANpq0wtVTr5Ou8mA=;
+ b=pczU+Uf/yI647JWhv0sya2r4YrL9tI4JWCh6LvA9chOvYy2GPBsRbEcTC20uK+3d6E
+ rFY5Ijutq6Aqt+btCji2ciQ/aMCrRRuCVyN+bB1C1tcjLN2RIReFjomdZiLY3Oohp2iQ
+ BxsAJXNfO1swTyvUzivQOWeLDKMvhwkQplSJzMdJcBLE+savmOmxCZ73APJpj+grPYpf
+ XHtE2s326Yq/nWId6foQABkSQosJ7jRCMezMiLuI01YXOmKjtCkI/EV9g7REp2aNOGxa
+ d1heWwjBQ0zzxTSYWoumVf/sNlmsF9n+ZTsApPCHtloEtp4oAigfLkoNNFzE0sQ/9sB8
+ VTsA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=fKisSdPFhHMNCtICMhbcUEw2QFiANpq0wtVTr5Ou8mA=;
+ b=lug4rntqLraMg3rXjdTcv1RJxAfsXYC6tVj0UVwBS9d1jlneOWHgN7jBgnnLQWo/ox
+ OwjqFUXgFC8oTm+TSCFGBMszxIK/hM1GgGFlRamFBrEO3unj1ppQyKvuUDNU/Q+HZsab
+ XZPRen0oLdEMSrOQrZeakjJ9Cv0V1dlhNmhFWR7rTK3RH/BIiGm4+CCfdAL58VyrOdAb
+ wfUsL9JgoMH+zUQJVcJfIOmXrR0XoVGNnDa4mr1XyrXlcnhNlJniwZhPHHSHFhXhofM6
+ NbKFh/P3E6XXqcmg1VOf+fLgCLWIDec+txGuwmuB0GwriE9WOdC4tYa05tTrdV399z86
+ ne6w==
+X-Gm-Message-State: AOAM532zWfN8G6N1Ji4ZVmXIiPVC1LEYBhf3gtwJ/aBbhEbWiR4S8bne
+ FyiZkYnIPlYq1LJA/fcWdByYBsmiyZXOJvPaiEKiOcM5KFPawQ==
+X-Google-Smtp-Source: ABdhPJxCfdB+h+Yd0esHC1CUz+lgNJ2ChJECAocPjHWHYswWINkY1Vts8K7Hv2oG2TJTut9zB+s4+DYfxlB6AcqL55g=
+X-Received: by 2002:a05:6512:2029:: with SMTP id
+ s9mr405613lfs.273.1603176249396; 
+ Mon, 19 Oct 2020 23:44:09 -0700 (PDT)
 MIME-Version: 1.0
-Date: Mon, 19 Oct 2020 13:20:41 +0100
-From: Marc Zyngier <maz@kernel.org>
-To: Sumit Garg <sumit.garg@linaro.org>
-In-Reply-To: <1602673931-28782-6-git-send-email-sumit.garg@linaro.org>
 References: <1602673931-28782-1-git-send-email-sumit.garg@linaro.org>
- <1602673931-28782-6-git-send-email-sumit.garg@linaro.org>
-User-Agent: Roundcube Webmail/1.4.9
-Message-ID: <d4a4a37b93f34da79b87519181bffb97@kernel.org>
-X-Sender: maz@kernel.org
-X-SA-Exim-Connect-IP: 51.254.78.96
-X-SA-Exim-Rcpt-To: sumit.garg@linaro.org, catalin.marinas@arm.com,
- will@kernel.org, linux-arm-kernel@lists.infradead.org, tglx@linutronix.de,
- jason@lakedaemon.net, mark.rutland@arm.com, julien.thierry.kdev@gmail.com,
- dianders@chromium.org, daniel.thompson@linaro.org, jason.wessel@windriver.com,
- msys.mizuma@gmail.com, ito-yuichi@fujitsu.com,
- kgdb-bugreport@lists.sourceforge.net, linux-kernel@vger.kernel.org
-X-SA-Exim-Mail-From: maz@kernel.org
-X-SA-Exim-Scanned: No (on disco-boy.misterjones.org);
- SAEximRunCond expanded to false
+ <1602673931-28782-2-git-send-email-sumit.garg@linaro.org>
+ <fbf6bfecf344a06af94e17ccabb817dd@kernel.org>
+In-Reply-To: <fbf6bfecf344a06af94e17ccabb817dd@kernel.org>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Tue, 20 Oct 2020 12:13:57 +0530
+Message-ID: <CAFA6WYPEw5x_3zDZSnkL23YjFWbF=VkUKefM6Ts46JLVaj2sDA@mail.gmail.com>
+To: Marc Zyngier <maz@kernel.org>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.167.65 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.167.65 listed in wl.mailspike.net]
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: linaro.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -85,10 +94,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kUU9h-003k2M-Fo
-Subject: Re: [Kgdb-bugreport] [PATCH v5 5/5] arm64: ipi_nmi: Add support for
- NMI backtrace
+X-Headers-End: 1kUlt9-0054Vp-SD
+Subject: Re: [Kgdb-bugreport] [PATCH v5 1/5] arm64: Add framework to turn
+ IPI as NMI
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -100,88 +108,206 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: mark.rutland@arm.com, daniel.thompson@linaro.org, jason@lakedaemon.net,
- catalin.marinas@arm.com, ito-yuichi@fujitsu.com, linux-kernel@vger.kernel.org,
- julien.thierry.kdev@gmail.com, jason.wessel@windriver.com,
- kgdb-bugreport@lists.sourceforge.net, tglx@linutronix.de,
- msys.mizuma@gmail.com, will@kernel.org, linux-arm-kernel@lists.infradead.org
+Cc: Mark Rutland <mark.rutland@arm.com>,
+ Daniel Thompson <daniel.thompson@linaro.org>,
+ Jason Cooper <jason@lakedaemon.net>, Catalin Marinas <catalin.marinas@arm.com>,
+ ito-yuichi@fujitsu.com,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ julien.thierry.kdev@gmail.com, Jason Wessel <jason.wessel@windriver.com>,
+ kgdb-bugreport@lists.sourceforge.net, Thomas Gleixner <tglx@linutronix.de>,
+ Masayoshi Mizuma <msys.mizuma@gmail.com>, Will Deacon <will@kernel.org>,
+ linux-arm-kernel <linux-arm-kernel@lists.infradead.org>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On 2020-10-14 12:12, Sumit Garg wrote:
-> Enable NMI backtrace support on arm64 using IPI turned as an NMI
-> leveraging pseudo NMIs support. It is now possible for users to get a
-> backtrace of a CPU stuck in hard-lockup using magic SYSRQ.
-> 
-> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> ---
->  arch/arm64/include/asm/irq.h |  6 ++++++
->  arch/arm64/kernel/ipi_nmi.c  | 12 +++++++++++-
->  2 files changed, 17 insertions(+), 1 deletion(-)
-> 
-> diff --git a/arch/arm64/include/asm/irq.h 
-> b/arch/arm64/include/asm/irq.h
-> index b2b0c64..e840bf1 100644
-> --- a/arch/arm64/include/asm/irq.h
-> +++ b/arch/arm64/include/asm/irq.h
-> @@ -6,6 +6,12 @@
-> 
->  #include <asm-generic/irq.h>
-> 
-> +#ifdef CONFIG_SMP
-> +extern void arch_trigger_cpumask_backtrace(const cpumask_t *mask,
-> +					   bool exclude_self);
-> +#define arch_trigger_cpumask_backtrace arch_trigger_cpumask_backtrace
-> +#endif
-> +
->  struct pt_regs;
-> 
->  static inline int nr_legacy_irqs(void)
-> diff --git a/arch/arm64/kernel/ipi_nmi.c b/arch/arm64/kernel/ipi_nmi.c
-> index e0a9e03..e1dc19d 100644
-> --- a/arch/arm64/kernel/ipi_nmi.c
-> +++ b/arch/arm64/kernel/ipi_nmi.c
-> @@ -9,6 +9,7 @@
->  #include <linux/interrupt.h>
->  #include <linux/irq.h>
->  #include <linux/kgdb.h>
-> +#include <linux/nmi.h>
->  #include <linux/smp.h>
-> 
->  #include <asm/nmi.h>
-> @@ -25,12 +26,21 @@ void arch_send_call_nmi_func_ipi_mask(cpumask_t 
-> *mask)
->  	__ipi_send_mask(ipi_desc, mask);
->  }
-> 
-> +void arch_trigger_cpumask_backtrace(const cpumask_t *mask, bool 
-> exclude_self)
-> +{
-> +	nmi_trigger_cpumask_backtrace(mask, exclude_self,
-> +				      arch_send_call_nmi_func_ipi_mask);
-> +}
-> +
->  static irqreturn_t ipi_nmi_handler(int irq, void *data)
->  {
->  	unsigned int cpu = smp_processor_id();
-> 
-> -	ipi_kgdb_nmicallback(cpu, get_irq_regs());
-> +	if (nmi_cpu_backtrace(get_irq_regs()))
-> +		goto out;
-> 
-> +	ipi_kgdb_nmicallback(cpu, get_irq_regs());
-> +out:
->  	return IRQ_HANDLED;
->  }
+On Mon, 19 Oct 2020 at 17:07, Marc Zyngier <maz@kernel.org> wrote:
+>
+> On 2020-10-14 12:12, Sumit Garg wrote:
+> > Introduce framework to turn an IPI as NMI using pseudo NMIs. In case a
+> > particular platform doesn't support pseudo NMIs, then request IPI as a
+> > regular IRQ.
+> >
+> > The main motivation for this feature is to have an IPI that can be
+> > leveraged to invoke NMI functions on other CPUs. And current
+> > prospective
+> > users are NMI backtrace and KGDB CPUs round-up whose support is added
+> > via future patches.
+> >
+> > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> > ---
+> >  arch/arm64/include/asm/nmi.h | 16 +++++++++
+> >  arch/arm64/kernel/Makefile   |  2 +-
+> >  arch/arm64/kernel/ipi_nmi.c  | 77
+> > ++++++++++++++++++++++++++++++++++++++++++++
+> >  3 files changed, 94 insertions(+), 1 deletion(-)
+> >  create mode 100644 arch/arm64/include/asm/nmi.h
+> >  create mode 100644 arch/arm64/kernel/ipi_nmi.c
+> >
+> > diff --git a/arch/arm64/include/asm/nmi.h
+> > b/arch/arm64/include/asm/nmi.h
+> > new file mode 100644
+> > index 0000000..3433c55
+> > --- /dev/null
+> > +++ b/arch/arm64/include/asm/nmi.h
+> > @@ -0,0 +1,16 @@
+> > +/* SPDX-License-Identifier: GPL-2.0 */
+> > +#ifndef __ASM_NMI_H
+> > +#define __ASM_NMI_H
+> > +
+> > +#ifndef __ASSEMBLER__
+> > +
+> > +#include <linux/cpumask.h>
+> > +
+> > +extern void arch_send_call_nmi_func_ipi_mask(cpumask_t *mask);
+> > +
+> > +void set_smp_ipi_nmi(int ipi);
+> > +void ipi_nmi_setup(int cpu);
+> > +void ipi_nmi_teardown(int cpu);
+> > +
+> > +#endif /* !__ASSEMBLER__ */
+> > +#endif
+> > diff --git a/arch/arm64/kernel/Makefile b/arch/arm64/kernel/Makefile
+> > index bbaf0bc..525a1e0 100644
+> > --- a/arch/arm64/kernel/Makefile
+> > +++ b/arch/arm64/kernel/Makefile
+> > @@ -17,7 +17,7 @@ obj-y                       := debug-monitors.o entry.o irq.o fpsimd.o              \
+> >                          return_address.o cpuinfo.o cpu_errata.o              \
+> >                          cpufeature.o alternative.o cacheinfo.o               \
+> >                          smp.o smp_spin_table.o topology.o smccc-call.o       \
+> > -                        syscall.o proton-pack.o
+> > +                        syscall.o proton-pack.o ipi_nmi.o
+> >
+> >  targets                      += efi-entry.o
+> >
+> > diff --git a/arch/arm64/kernel/ipi_nmi.c b/arch/arm64/kernel/ipi_nmi.c
+> > new file mode 100644
+> > index 0000000..a959256
+> > --- /dev/null
+> > +++ b/arch/arm64/kernel/ipi_nmi.c
+> > @@ -0,0 +1,77 @@
+> > +// SPDX-License-Identifier: GPL-2.0-only
+> > +/*
+> > + * NMI support for IPIs
+> > + *
+> > + * Copyright (C) 2020 Linaro Limited
+> > + * Author: Sumit Garg <sumit.garg@linaro.org>
+> > + */
+> > +
+> > +#include <linux/interrupt.h>
+> > +#include <linux/irq.h>
+> > +#include <linux/smp.h>
+> > +
+> > +#include <asm/nmi.h>
+> > +
+> > +static struct irq_desc *ipi_desc __read_mostly;
+> > +static int ipi_id __read_mostly;
+> > +static bool is_nmi __read_mostly;
+> > +
+> > +void arch_send_call_nmi_func_ipi_mask(cpumask_t *mask)
+> > +{
+> > +     if (WARN_ON_ONCE(!ipi_desc))
+> > +             return;
+> > +
+> > +     __ipi_send_mask(ipi_desc, mask);
+> > +}
+> > +
+> > +static irqreturn_t ipi_nmi_handler(int irq, void *data)
+> > +{
+> > +     /* nop, NMI handlers for special features can be added here. */
+> > +
+> > +     return IRQ_HANDLED;
+>
+> This definitely is the *wrong* default. If nothing is explicitly
+> handling the interrupt, it should be reported as such to the core
+> code to be disabled if this happens too often.
 
-Can't you have *both* a request for a backtrace and a KGDB call?
-It really shouldn't be either/or. It also outlines how well shared
-interrupts work with edge triggered signalling...
+Okay will fix default as "IRQ_NONE".
 
-         M.
--- 
-Jazz is not dead. It just smells funny...
+>
+> > +}
+> > +
+> > +void ipi_nmi_setup(int cpu)
+>
+> The naming is awful. "ipi" is nowhere specific enough (we already have
+> another 7 of them), and this doesn't necessarily uses pseudo-NMIs, since
+> you are requesting IRQs.
+
+How about following naming conventions?
+
+- dynamic_ipi_setup()
+- dynamic_ipi_teardown()
+- set_smp_dynamic_ipi()
+
+>
+> > +{
+> > +     if (!ipi_desc)
+> > +             return;
+> > +
+> > +     if (is_nmi) {
+> > +             if (!prepare_percpu_nmi(ipi_id))
+> > +                     enable_percpu_nmi(ipi_id, IRQ_TYPE_NONE);
+> > +     } else {
+> > +             enable_percpu_irq(ipi_id, IRQ_TYPE_NONE);
+>
+> I'm not keen on this. Normal IRQs can't reliably work, so why do you
+> even bother with this?
+
+Yeah I agree but we need to support existing functionality for kgdb
+roundup and sysrq backtrace using normal IRQs as well.
+
+>
+> > +     }
+> > +}
+> > +
+> > +void ipi_nmi_teardown(int cpu)
+> > +{
+> > +     if (!ipi_desc)
+> > +             return;
+> > +
+> > +     if (is_nmi) {
+> > +             disable_percpu_nmi(ipi_id);
+> > +             teardown_percpu_nmi(ipi_id);
+> > +     } else {
+> > +             disable_percpu_irq(ipi_id);
+> > +     }
+> > +}
+> > +
+> > +void __init set_smp_ipi_nmi(int ipi)
+> > +{
+> > +     int err;
+> > +
+> > +     err = request_percpu_nmi(ipi, ipi_nmi_handler, "IPI", &cpu_number);
+> > +     if (err) {
+> > +             err = request_percpu_irq(ipi, ipi_nmi_handler, "IPI",
+> > +                                      &cpu_number);
+> > +             WARN_ON(err);
+> > +             is_nmi = false;
+> > +     } else {
+> > +             is_nmi = true;
+> > +     }
+> > +
+> > +     ipi_desc = irq_to_desc(ipi);
+> > +     irq_set_status_flags(ipi, IRQ_HIDDEN);
+> > +     ipi_id = ipi;
+>
+> Updating global state without checking for errors doesn't seem
+> like a great move.
+
+Are you worried about failure from request_percpu_irq()? If yes, there
+is an explicit warning for that and if you like I can add an
+additional check while updating the global state.
+
+BTW, this is written on an existing pattern as for other 7 IPIs requests [1].
+
+[1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/arm64/kernel/smp.c#n988
+
+-Sumit
+
+>
+>          M.
+> --
+> Jazz is not dead. It just smells funny...
 
 
 _______________________________________________
