@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0C8E12935B1
-	for <lists+kgdb-bugreport@lfdr.de>; Tue, 20 Oct 2020 09:25:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 477B729372A
+	for <lists+kgdb-bugreport@lfdr.de>; Tue, 20 Oct 2020 10:52:36 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1kUm1P-0006My-QL
-	for lists+kgdb-bugreport@lfdr.de; Tue, 20 Oct 2020 07:25:27 +0000
+	id 1kUnNj-0002DQ-1l
+	for lists+kgdb-bugreport@lfdr.de; Tue, 20 Oct 2020 08:52:35 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sumit.garg@linaro.org>) id 1kUm1O-0006Mp-8v
- for kgdb-bugreport@lists.sourceforge.net; Tue, 20 Oct 2020 07:25:26 +0000
+ (envelope-from <sumit.garg@linaro.org>) id 1kUnNe-0002DB-2O
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 20 Oct 2020 08:52:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
  In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
  :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=uFAymQB2VOJ4KqiBW6CIIX7WVz/95SQLzKrOC+AcK7M=; b=EgSj1kHprcEffvYanFLwuvaOcH
- EBZbX8QWKJ95gK1YdVsu6Pcn+Xh3nOBR8YDPJ0pgceR+H8WpJc5rZ0Ll7lKwPRZA48ZXdbo9Zuj7d
- ZJvdU4a8FCkiXGK4/P7e0e91hsxTigD8gwXEion9//ivv9CIjXjs0kbbriGv1bx56H3I=;
+ bh=Un3D4/T6ilGeRpZiqdkM650/Jk7htjxHR9MazqfDiC4=; b=Q9rcD+011IW0afGS/sTi9X2Dt5
+ S1TVEwbOikk2bjnE4ehGahFDspZCPsaOkyZWXNjzcbkm4h8oBXtZEO1GH2FjZeHegKimrNMEsykmm
+ 0vye0ZecE9nv5hluGU2Nupdf7TQKLN3cQSnUa0GdG5m0Bxs8gK2+jqwa3soJ/ByLLPUo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
@@ -30,60 +30,63 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=uFAymQB2VOJ4KqiBW6CIIX7WVz/95SQLzKrOC+AcK7M=; b=SYF6YF5jvGzDfqgd8AdABrTYOg
- XwqJJId/F+oClwXvGXcv4tlWj1iwQu47qpyNof9d+FpV/xgHEVB9l/+ynixiF52pL5Gb0wZAsEjYu
- K0y7s7SVSrmtKdqQ4Fjv+6cnaCPpLWAIvPoZKJePoV23E2sHAYW4gvAn4SRcTlXa6u88=;
-Received: from mail-lj1-f195.google.com ([209.85.208.195])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=Un3D4/T6ilGeRpZiqdkM650/Jk7htjxHR9MazqfDiC4=; b=Mc+t28LTey3ZiuNWnuUxif5JXj
+ AW9JtbygWh6yo1CenfURPA8EbsILf6jBml+5KyQv5PCCrpUpGhK0RfjFp6kPdpts/ynEqB0zUfTtq
+ Ogshnkn3eG2QdtP4i8evnwUDapyGk8mdhUXzqJ6QiEghmxfj99nju4IHicmwH5KsDTnc=;
+Received: from mail-lf1-f65.google.com ([209.85.167.65])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1kUm1A-0055Br-2A
- for kgdb-bugreport@lists.sourceforge.net; Tue, 20 Oct 2020 07:25:25 +0000
-Received: by mail-lj1-f195.google.com with SMTP id a5so892904ljj.11
+ id 1kUnNQ-00H0x7-DX
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 20 Oct 2020 08:52:29 +0000
+Received: by mail-lf1-f65.google.com with SMTP id j30so1148890lfp.4
  for <kgdb-bugreport@lists.sourceforge.net>;
- Tue, 20 Oct 2020 00:25:11 -0700 (PDT)
+ Tue, 20 Oct 2020 01:52:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=uFAymQB2VOJ4KqiBW6CIIX7WVz/95SQLzKrOC+AcK7M=;
- b=UU9fv3TX1Idl0ZF5nRqwPtZqh2KrQur59xb/KO68AV619Hi683xOkZPqV0DprRVr9C
- pcLP4tpdvcQwwnmg6vA1E4KUlU7e4Rlb8/cTOIOxTCgwcnYUlnUsmM50q0X22F+09m3g
- lYA0iwCXt64o8BKSbCRA+tSSFePqB+k+zXChXsNCo51epWTnXUwj3swFHL/Po7/+2j6I
- 3p0fM71PSmHp7FSRXep/2DPiMfanrUXBLnoCebm4iyn2uwonBI8CLRSDhezsFpH11bSG
- o57k44SMRg+fbmJGatt68vRgwCRnnlAAuViJSOZbK+3tgeDB8pH1EeMdCH4jETlJbwTm
- /+Iw==
+ :cc; bh=Un3D4/T6ilGeRpZiqdkM650/Jk7htjxHR9MazqfDiC4=;
+ b=y0mgbxStx7dP1CEylEL0KfYe8ot1qWi3yw6hgBxDWSkjp3KkdzSVVcV6nEVyxLx1E5
+ 7y8Gy1QhY7NLvt+MPs+vK5JBPtp2rKPaaxllHob1UvkNmOrKTfE27/fwR0d1GF/tZXUq
+ ZwovWj7Wr+adDV0FqCyAaYZkoj8NGPnTkQZGHbJ+GTBGHlxUm4Lgc1biVbBZT1S+ASMj
+ cs+CQ8kpdQcQF++MnntcADPiAf2yTrg0wAWnaqIoLbmlc7ClsxqD46U/y1XAR8gOO+y6
+ DQiyvoe37GUJSmKhYkyGz/OkdI6fWdo2pZJ50PQ8rgPKaiOcBhMyIxCT1iNcHXr+KeRb
+ dApA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=uFAymQB2VOJ4KqiBW6CIIX7WVz/95SQLzKrOC+AcK7M=;
- b=aWC9pV9IJ6YHMQ1SEeXhLp7F5C4A61kgnH4WB0CAzwH9DnS9DNZmuJMsFYQLoomsfv
- dtFziqt6YmeJbUk6EU4JG1rt0RzD/h++ZDCzHDs+FvH8iNtYTVqznQREFQESA2QNpbFN
- ZGfrxUGotK+iR/W68Tvy7XyA7Ujy7qqBn3nLdJf0bD31WJW4goj4JOWeywQW7bIM75sc
- 6vId1FTHhO6zZrfvv2aA1HpxQ4FIswfvLtiy3hlEmFd4sCDhrqED858UslJqaHCU4Qc7
- lCOHdg93wdvRk++Icnr+pTqcpzr3I/yqMYSelUe57iCfdrS8+yABmjrdak6LuXKTqvK0
- pnsQ==
-X-Gm-Message-State: AOAM5324qudzAxdvIAS1r0LNR/HB/UYUW8OAzXVuo+R0Z0qvE6POXJF0
- YgMKjFP183yAIehRb2ort3j8qEgpTEal4S6fKKOGg/gvIAE=
-X-Google-Smtp-Source: ABdhPJzICliDiG4TEYZv/LnXNOTyuv/fLxshlpvP4WJfDe5kyAJCZ1j6frOcxjozui1tsGRvMnuCxXV16CPYd6o/To8=
-X-Received: by 2002:a2e:9a9a:: with SMTP id p26mr537984lji.4.1603178705428;
- Tue, 20 Oct 2020 00:25:05 -0700 (PDT)
+ bh=Un3D4/T6ilGeRpZiqdkM650/Jk7htjxHR9MazqfDiC4=;
+ b=m6pJowdA0dSSpHJ/LAj3fOh3d+ClxaiZYk0rQX4VjzR37sx9bozDGLnDdavjcytqyR
+ OnP4uLvT+FLwpXSkIc5um0nyvlIfVZX9vn/JJsaT25n0LLcWPNaZ19kCgbGoDXJaC4c1
+ Y1GVXGxSHFSorQC8Bb82q+y6T1x5/pCl4PE1BGxaZcX5/tmjrNqExpryp9F8JHyKNSBt
+ Ocu7XrBi3ueYDtPbc+dq4xNodNouG5FA38Swu6bPbH80bscufYC3Rm5HikG60L9zxsVe
+ pnNrNpvkTkTV9h0xkAFldjohAXqD9xfWVnsI4DJ5W7Q4bYE3sIU7UKS27RAXDn9NO51W
+ k8sQ==
+X-Gm-Message-State: AOAM530Qy3kytCymuuAVu3IKKeYjJWEkL2m2kRwV9rsgbEwcdkTHyDCx
+ JsiCELcyB/Lva+MExuSDiaOYiWeVdEG4VIJQJDenZQ==
+X-Google-Smtp-Source: ABdhPJzlkzvvJ39eQc8fUTC6Aujw1h4QwmN2302mCuEJjspiHgnRtnMviG1InjkheEfRgPlqWclNNP7HQKFVh/B07L0=
+X-Received: by 2002:a05:6512:2029:: with SMTP id
+ s9mr556509lfs.273.1603183922516; 
+ Tue, 20 Oct 2020 01:52:02 -0700 (PDT)
 MIME-Version: 1.0
 References: <1602673931-28782-1-git-send-email-sumit.garg@linaro.org>
- <1602673931-28782-3-git-send-email-sumit.garg@linaro.org>
- <294754db12f4cd8a8ec9329a44e1cf02@kernel.org>
-In-Reply-To: <294754db12f4cd8a8ec9329a44e1cf02@kernel.org>
+ <1602673931-28782-5-git-send-email-sumit.garg@linaro.org>
+ <0899dcad304ac8bf0ea7d5308ec2e263@kernel.org>
+In-Reply-To: <0899dcad304ac8bf0ea7d5308ec2e263@kernel.org>
 From: Sumit Garg <sumit.garg@linaro.org>
-Date: Tue, 20 Oct 2020 12:54:53 +0530
-Message-ID: <CAFA6WYNAVsYTLtzHQvnJOTKG5E4iUo6FNTCQ8zHzg3_hm42kOA@mail.gmail.com>
+Date: Tue, 20 Oct 2020 14:21:51 +0530
+Message-ID: <CAFA6WYMNKGYYvuFA1PoLz+CQS3B+7DEkbj6_k4bZ5euA37VXZA@mail.gmail.com>
 To: Marc Zyngier <maz@kernel.org>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.167.65 listed in list.dnswl.org]
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: linaro.org]
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.208.195 listed in wl.mailspike.net]
+ [209.85.167.65 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -91,11 +94,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.208.195 listed in list.dnswl.org]
-X-Headers-End: 1kUm1A-0055Br-2A
-Subject: Re: [Kgdb-bugreport] [PATCH v5 2/5] irqchip/gic-v3: Enable support
- for SGIs to act as NMIs
+X-Headers-End: 1kUnNQ-00H0x7-DX
+Subject: Re: [Kgdb-bugreport] [PATCH v5 4/5] arm64: kgdb: Round up cpus
+ using IPI as NMI
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -120,97 +121,145 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Mon, 19 Oct 2020 at 17:37, Marc Zyngier <maz@kernel.org> wrote:
+On Mon, 19 Oct 2020 at 17:45, Marc Zyngier <maz@kernel.org> wrote:
 >
 > On 2020-10-14 12:12, Sumit Garg wrote:
-> > Add support to handle SGIs as regular NMIs. As SGIs or IPIs defaults to
-> > a
->
-> There is nothing "regular" about NMIs.
-
-Okay, will do s/regular/pseudo/.
-
-> Drop "or IPIs".
-> s/defaults/default/
->
-
-Ack.
-
-> > special flow handler: handle_percpu_devid_fasteoi_ipi(), so skip NMI
-> > handler update in case of SGIs.
+> > arm64 platforms with GICv3 or later supports pseudo NMIs which can be
+> > leveraged to round up CPUs which are stuck in hard lockup state with
+> > interrupts disabled that wouldn't be possible with a normal IPI.
 > >
-> > Also, enable NMI support prior to gic_smp_init() as allocation of SGIs
-> > as IRQs/NMIs happen as part of this routine.
+> > So instead switch to round up CPUs using IPI turned as NMI. And in
+> > case a particular arm64 platform doesn't supports pseudo NMIs,
+> > this IPI will act as a normal IPI which maintains existing kgdb
+> > functionality.
 > >
 > > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 > > ---
-> >  drivers/irqchip/irq-gic-v3.c | 13 +++++++++++--
-> >  1 file changed, 11 insertions(+), 2 deletions(-)
+> >  arch/arm64/include/asm/kgdb.h |  8 ++++++++
+> >  arch/arm64/kernel/ipi_nmi.c   |  5 ++++-
+> >  arch/arm64/kernel/kgdb.c      | 21 +++++++++++++++++++++
+> >  3 files changed, 33 insertions(+), 1 deletion(-)
 > >
-> > diff --git a/drivers/irqchip/irq-gic-v3.c
-> > b/drivers/irqchip/irq-gic-v3.c
-> > index 16fecc0..5efc865 100644
-> > --- a/drivers/irqchip/irq-gic-v3.c
-> > +++ b/drivers/irqchip/irq-gic-v3.c
-> > @@ -477,6 +477,11 @@ static int gic_irq_nmi_setup(struct irq_data *d)
-> >       if (WARN_ON(gic_irq(d) >= 8192))
-> >               return -EINVAL;
+> > diff --git a/arch/arm64/include/asm/kgdb.h
+> > b/arch/arm64/include/asm/kgdb.h
+> > index 21fc85e..6f3d3af 100644
+> > --- a/arch/arm64/include/asm/kgdb.h
+> > +++ b/arch/arm64/include/asm/kgdb.h
+> > @@ -24,6 +24,14 @@ static inline void arch_kgdb_breakpoint(void)
+> >  extern void kgdb_handle_bus_error(void);
+> >  extern int kgdb_fault_expected;
 > >
-> > +     if (get_intid_range(d) == SGI_RANGE) {
-> > +             gic_irq_set_prio(d, GICD_INT_NMI_PRI);
-> > +             return 0;
-> > +     }
+> > +#ifdef CONFIG_KGDB
+> > +extern void ipi_kgdb_nmicallback(int cpu, void *regs);
+> > +#else
+> > +static inline void ipi_kgdb_nmicallback(int cpu, void *regs)
+> > +{
+> > +}
+> > +#endif
 > > +
->
-> Please follow the existing control flow, or rework it to be organised by
-> range.
-
-Okay.
-
->
-> >       /* desc lock should already be held */
-> >       if (gic_irq_in_rdist(d)) {
-> >               u32 idx = gic_get_ppi_index(d);
-> > @@ -514,6 +519,11 @@ static void gic_irq_nmi_teardown(struct irq_data
-> > *d)
-> >       if (WARN_ON(gic_irq(d) >= 8192))
-> >               return;
+> >  #endif /* !__ASSEMBLY__ */
 > >
-> > +     if (get_intid_range(d) == SGI_RANGE) {
-> > +             gic_irq_set_prio(d, GICD_INT_DEF_PRI);
-> > +             return;
-> > +     }
+> >  /*
+> > diff --git a/arch/arm64/kernel/ipi_nmi.c b/arch/arm64/kernel/ipi_nmi.c
+> > index a959256..e0a9e03 100644
+> > --- a/arch/arm64/kernel/ipi_nmi.c
+> > +++ b/arch/arm64/kernel/ipi_nmi.c
+> > @@ -8,6 +8,7 @@
+> >
+> >  #include <linux/interrupt.h>
+> >  #include <linux/irq.h>
+> > +#include <linux/kgdb.h>
+> >  #include <linux/smp.h>
+> >
+> >  #include <asm/nmi.h>
+> > @@ -26,7 +27,9 @@ void arch_send_call_nmi_func_ipi_mask(cpumask_t
+> > *mask)
+> >
+> >  static irqreturn_t ipi_nmi_handler(int irq, void *data)
+> >  {
+> > -     /* nop, NMI handlers for special features can be added here. */
+> > +     unsigned int cpu = smp_processor_id();
+> > +
+> > +     ipi_kgdb_nmicallback(cpu, get_irq_regs());
 >
-> Same here.
+> Please add a return value to ipi_kgdb_nmicallback(), and check it
+> before returning IRQ_HANDLED.
 
 Okay.
+
+>
+> Thinking a bit more about the whole thing, you should have a way to
+> avoid requesting the NMI if there is no user for it (there is nothing
+> worse than an enabled interrupt without handlers...).
+
+I think IPIs or SGIs (for arm64) are different from normal interrupts
+in this aspect as if there is no handler then we can be sure that
+corresponding SGI won't be invoked as their invocation is controlled
+via software.
+
+This is the similar case with other IPIs as well whose handlers are
+optionally enabled, see:
+- IPI_CPU_CRASH_STOP
+- IPI_TIMER
+- IPI_IRQ_WORK
+- IPI_WAKEUP
+
+>
+> >
+> >       return IRQ_HANDLED;
+> >  }
+> > diff --git a/arch/arm64/kernel/kgdb.c b/arch/arm64/kernel/kgdb.c
+> > index 1a157ca3..0991275 100644
+> > --- a/arch/arm64/kernel/kgdb.c
+> > +++ b/arch/arm64/kernel/kgdb.c
+> > @@ -17,6 +17,7 @@
+> >
+> >  #include <asm/debug-monitors.h>
+> >  #include <asm/insn.h>
+> > +#include <asm/nmi.h>
+> >  #include <asm/traps.h>
+> >
+> >  struct dbg_reg_def_t dbg_reg_def[DBG_MAX_REG_NUM] = {
+> > @@ -353,3 +354,23 @@ int kgdb_arch_remove_breakpoint(struct kgdb_bkpt
+> > *bpt)
+> >       return aarch64_insn_write((void *)bpt->bpt_addr,
+> >                       *(u32 *)bpt->saved_instr);
+> >  }
+> > +
+> > +void ipi_kgdb_nmicallback(int cpu, void *regs)
+> > +{
+> > +     if (atomic_read(&kgdb_active) != -1)
+> > +             kgdb_nmicallback(cpu, regs);
+> > +}
+> > +
+> > +#ifdef CONFIG_SMP
+>
+> There is no such thing as an arm64 UP kernel.
+>
+
+Okay, will remove this #ifdef.
+
+> > +void kgdb_roundup_cpus(void)
+> > +{
+> > +     struct cpumask mask;
+> > +
+> > +     cpumask_copy(&mask, cpu_online_mask);
+> > +     cpumask_clear_cpu(raw_smp_processor_id(), &mask);
+> > +     if (cpumask_empty(&mask))
+> > +             return;
+> > +
+> > +     arch_send_call_nmi_func_ipi_mask(&mask);
+>
+> Surely you can come up with a less convoluted name for this function.
+> arm64_send_nmi() would be plenty in my opinion.
+
+Okay, will use it instead.
 
 -Sumit
 
 >
-> > +
-> >       /* desc lock should already be held */
-> >       if (gic_irq_in_rdist(d)) {
-> >               u32 idx = gic_get_ppi_index(d);
-> > @@ -1708,6 +1718,7 @@ static int __init gic_init_bases(void __iomem
-> > *dist_base,
-> >
-> >       gic_dist_init();
-> >       gic_cpu_init();
-> > +     gic_enable_nmi_support();
-> >       gic_smp_init();
-> >       gic_cpu_pm_init();
-> >
-> > @@ -1719,8 +1730,6 @@ static int __init gic_init_bases(void __iomem
-> > *dist_base,
-> >                       gicv2m_init(handle, gic_data.domain);
-> >       }
-> >
-> > -     gic_enable_nmi_support();
-> > -
-> >       return 0;
-> >
-> >  out_free:
+> > +}
+> > +#endif
 >
 > Thanks,
 >
