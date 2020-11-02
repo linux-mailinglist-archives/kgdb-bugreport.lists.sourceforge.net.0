@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 96F0A2A24B9
-	for <lists+kgdb-bugreport@lfdr.de>; Mon,  2 Nov 2020 07:19:24 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id A88132A24F1
+	for <lists+kgdb-bugreport@lfdr.de>; Mon,  2 Nov 2020 08:00:17 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1kZTBb-0003pY-Ci
-	for lists+kgdb-bugreport@lfdr.de; Mon, 02 Nov 2020 06:19:23 +0000
+	id 1kZTpA-0005gc-Et
+	for lists+kgdb-bugreport@lfdr.de; Mon, 02 Nov 2020 07:00:16 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sumit.garg@linaro.org>) id 1kZTBa-0003pS-5s
- for kgdb-bugreport@lists.sourceforge.net; Mon, 02 Nov 2020 06:19:22 +0000
+ (envelope-from <sumit.garg@linaro.org>) id 1kZTp8-0005gI-Pg
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 02 Nov 2020 07:00:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
  In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
  :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=iOizdv8Buv6FfQDjIz+DCkY2/qLkv4EBJXrU3sSnCWs=; b=gMQxw+X+GkVUscLqSZDK3GK1h4
- OtEqSM0I4ou5Nho+vt/wywsSjs4+wGZUEiCGFDVjB9vJ9bTohyVpbzFLTHQivIoERpvp3ednJ+7eG
- yhYdl7kLcemxa5/rQJ1Fl7DqYtQ/V23vIXsrc0qKdH2S86fStOfZXv3XtF25SgriUKuc=;
+ bh=c+XrbFe95lhlmoO1jxJAYeqcLTSX+HLUCIq1p8ctluo=; b=bJG4BkNSrPV7HH3lX2v4TW04OT
+ GMZTn/tEzVPpps35bWmAV84dAjcDSHG1bs+5C1puaw5fk1GZbTvEF9Yf7foqM9G7iyl+hBCzsb16z
+ 32YYn8TI6ASUQdauegrSOXYoGegciyMI4cGfteXIrjxt3meJj0IGM1DxoABd5cxoh8oo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
@@ -30,58 +30,59 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=iOizdv8Buv6FfQDjIz+DCkY2/qLkv4EBJXrU3sSnCWs=; b=YtnWSUip/HuhvW14MOGRp93yGs
- fK9sgFhzMT8gqkLTLPfPJ4jxfw6/zh5EG3DgXUcmdApl0blpsXGITEB4taN+5gy2s1yMm1qGFLDHo
- +IntCmmkJnO4JqiiIoQ0uQzRU/Fdp+KmCHVzUp7dcpEhG7HonmM84ilyZpZfqqbV2tGs=;
-Received: from mail-lf1-f66.google.com ([209.85.167.66])
+ bh=c+XrbFe95lhlmoO1jxJAYeqcLTSX+HLUCIq1p8ctluo=; b=WO08R8srq+/3QkouqhWR1oJH1/
+ lkUVlLWI8XbcTq9o+9biUCVdR6sDi4Naeaye4MaccQW5viUbZYWRZpBkaMa4A3NK/4zc2babwinM1
+ otFdnO6QOFhf0m2CXHlJZPu7zuQTifcRK3aVCMtHBkgMpv7n7N/JC4P2n2fztd2S+qh0=;
+Received: from mail-lf1-f68.google.com ([209.85.167.68])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1kZTBT-0060KR-Gd
- for kgdb-bugreport@lists.sourceforge.net; Mon, 02 Nov 2020 06:19:22 +0000
-Received: by mail-lf1-f66.google.com with SMTP id k14so713894lfg.7
+ id 1kZTp0-0063BB-KR
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 02 Nov 2020 07:00:14 +0000
+Received: by mail-lf1-f68.google.com with SMTP id i6so16036652lfd.1
  for <kgdb-bugreport@lists.sourceforge.net>;
- Sun, 01 Nov 2020 22:19:15 -0800 (PST)
+ Sun, 01 Nov 2020 23:00:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=iOizdv8Buv6FfQDjIz+DCkY2/qLkv4EBJXrU3sSnCWs=;
- b=yC26OzffaiSXuxD3Yv3sgbPJK3Y6JOG5O1docyb2L7i9Fusu3SZVvPjm1SFL6QmlQo
- gKg8kmbm+baIFlSZGvEojmKv/moocE3VvivuOLidCzkhuTl81R+xiTcW0wN9w4zUEyKk
- +NOg638xGq5V89dcOGjCepuD7f3H54SNnwkk0pvaXbSfBHPYlpDcU+2glYbbDnITAnRv
- dW8HjUa8iYuhhrd8V8NNa5vcffS0r6qI3yeFfQnJtGd/xuwDz66CsVIqzXt3COTZ/x+3
- lUsiJj8EzHi7IGwXAA2SqYvExzHB4sQ+MvmgCk9hJblZ3clBXKvK38cpazY5fXTxzPir
- yY1w==
+ :cc; bh=c+XrbFe95lhlmoO1jxJAYeqcLTSX+HLUCIq1p8ctluo=;
+ b=LZ71Tgk9nMGd2ZWC7FJqsuBzrWWF68BI6ujrE0QLNc5AlU/uOQYLsyV3xMPMhHACtA
+ gMW5w1tQR0MmzGdBljnfcV9ipagBmR/40NFY56dyjOwpp5YR5fChicwVZT9xLvZFd4oL
+ uDMgHEPtBvlYN0AHy8k2FBa9pWhtTLW+bbqWvrctqAWyGdHtIBAq6bNrmZiUP0VmSgdu
+ WCuNzcVlSUVHcQ9haZN7k8ffHSzCTdO/aWhYmobrso1nKPX59Nhtmr1DoxwXU5OjBk+P
+ EiLupArqfmt6Q3M+OVgNbv9I1xPaBP3rjVxRJVsGNddaVD75h+YS/ZVCZZm/ORaeD6Lo
+ rD7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=iOizdv8Buv6FfQDjIz+DCkY2/qLkv4EBJXrU3sSnCWs=;
- b=n+jeJRfYy+orlEtrOew3sLmH9lmbgW9p+e+HcnrVZaR4+peaxD4vI+ferL40Zc9IyA
- qU3fQegY4LpRPoBiNVz2ZT0aoCaxJyuWihRfaf9SgbdDjAXmGK1XUf21ng1oyPUrASVH
- 7eKyd0Yd5p31nAJ7ZdhU6+iap/uvSlMuPjRCZ9Smh839YPuRRVAJhbvEb4ZtXxf3N3p0
- E3j54G9JUe1vOmp/gMO7wUtHLpe22L6gH6cXvNyyU7a60osuIOfz5GLs5fdALB0UAY6Q
- ASqYtfMFXLYyfjB2GbZ1Ap/ulis4IdmeBpIHsrP+6wDYT7GgJeDKBqULLzBzQhlcZyJQ
- hXzQ==
-X-Gm-Message-State: AOAM532rsjNgoxXnU6yW58qqQs51w/WQNxxWWBCaKUp2vh6tkDsmySfG
- 6JOjh2XyA1yBJSBDUZJ0lC4gXBymf7EIs6/f7nqrPA==
-X-Google-Smtp-Source: ABdhPJyKErojm2uwnAv6KZ5/QPOe9e59v8XvwLaZBI6MqngV7Fl1vO/+e/CfWbVp59RoX2NQQqTQh9W6XnQTuDGh3+I=
-X-Received: by 2002:a19:e20f:: with SMTP id z15mr4551104lfg.273.1604297948806; 
- Sun, 01 Nov 2020 22:19:08 -0800 (PST)
+ bh=c+XrbFe95lhlmoO1jxJAYeqcLTSX+HLUCIq1p8ctluo=;
+ b=Pc5uaUZNfPudV568YaFYQ2fGi5jlAoJDeSe7qSc5KR28cuurmcj+xBlJ6ucIM1IU8x
+ up3PbkKOwHS6J552TnYp0p8BI0pRy7I0TR9G8lWWnZeMF4WyQBkdWdBt+ki460SYSnF9
+ GjrnCBaOOYaEzU2pv2Ia3nsjxd6XHEsyRbFikAF1TAQVyT9STAalipV3bzD4uaaQxfj6
+ /WbqBcoVPOJgC0Oa+84FCg/4+Zp9WrCUXyojBSxk8A2ivLriKp7Gqt17++NEnaOuPmqz
+ RjqzHLyaGVcmEWieh5xmunbM+Wozj2KNFiVPH358EgIUsRhyEqA3bUkVQM/nEDfu++/4
+ ZmSQ==
+X-Gm-Message-State: AOAM533AtUUci/wyl+oRdTiAwBw7N2pTPVm7apC1rzqnBphF1hitCV9c
+ q79Y6F65T1uQWqzAHYzwVcHV7P3Idr6Pb798PUsUZA==
+X-Google-Smtp-Source: ABdhPJyi9O1vrGK1LsMrHwA72XdsBK2WzU4SSnDVEBWijqQ/tCFtG5WKvsVEWkRzjPNCj3tJCwMX2YvWYeLrchESkQ0=
+X-Received: by 2002:ac2:46cc:: with SMTP id p12mr4949695lfo.283.1604300399964; 
+ Sun, 01 Nov 2020 22:59:59 -0800 (PST)
 MIME-Version: 1.0
 References: <1603983387-8738-1-git-send-email-sumit.garg@linaro.org>
- <1603983387-8738-7-git-send-email-sumit.garg@linaro.org>
- <20201029152106.gj66mjnathsdqtoe@holly.lan>
-In-Reply-To: <20201029152106.gj66mjnathsdqtoe@holly.lan>
+ <1603983387-8738-8-git-send-email-sumit.garg@linaro.org>
+ <20201029162234.a5czyjy4eyto6aa4@holly.lan>
+ <20201029163921.dibail374cwwonvo@holly.lan>
+In-Reply-To: <20201029163921.dibail374cwwonvo@holly.lan>
 From: Sumit Garg <sumit.garg@linaro.org>
-Date: Mon, 2 Nov 2020 11:48:53 +0530
-Message-ID: <CAFA6WYOcCj=_G67QGN=8McHWvunoggN7tho9_VueH763U9K=_g@mail.gmail.com>
+Date: Mon, 2 Nov 2020 12:29:48 +0530
+Message-ID: <CAFA6WYP1VOgNFuh+E0BOB3T5v+Brf3jCQsKf8iVTTMje6Mte9g@mail.gmail.com>
 To: Daniel Thompson <daniel.thompson@linaro.org>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.167.66 listed in list.dnswl.org]
+ trust [209.85.167.68 listed in list.dnswl.org]
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.167.66 listed in wl.mailspike.net]
+ [209.85.167.68 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -89,9 +90,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1kZTBT-0060KR-Gd
-Subject: Re: [Kgdb-bugreport] [PATCH v6 6/7] kgdb: roundup: Allow runtime
- arch specific override
+X-Headers-End: 1kZTp0-0063BB-KR
+Subject: Re: [Kgdb-bugreport] [PATCH v6 7/7] arm64: kgdb: Roundup cpus using
+ IPI as NMI
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -118,185 +119,187 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Thu, 29 Oct 2020 at 20:51, Daniel Thompson
+On Thu, 29 Oct 2020 at 22:09, Daniel Thompson
 <daniel.thompson@linaro.org> wrote:
 >
-> On Thu, Oct 29, 2020 at 08:26:26PM +0530, Sumit Garg wrote:
-> > Add a new API kgdb_arch_roundup_cpus() for a particular archichecture to
-> > override default kgdb roundup and if it detects at runtime to not support
-> > NMI roundup then it can fallback to default implementation using async
-> > SMP cross-calls.
+> On Thu, Oct 29, 2020 at 04:22:34PM +0000, Daniel Thompson wrote:
+> > On Thu, Oct 29, 2020 at 08:26:27PM +0530, Sumit Garg wrote:
+> > > arm64 platforms with GICv3 or later supports pseudo NMIs which can be
+> > > leveraged to roundup CPUs which are stuck in hard lockup state with
+> > > interrupts disabled that wouldn't be possible with a normal IPI.
+> > >
+> > > So instead switch to roundup CPUs using IPI turned as NMI. And in
+> > > case a particular arm64 platform doesn't supports pseudo NMIs,
+> > > it will switch back to default kgdb CPUs roundup mechanism.
+> > >
+> > > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> > > ---
+> > >  arch/arm64/include/asm/kgdb.h |  9 +++++++++
+> > >  arch/arm64/kernel/ipi_nmi.c   |  5 +++++
+> > >  arch/arm64/kernel/kgdb.c      | 35 +++++++++++++++++++++++++++++++++++
+> > >  3 files changed, 49 insertions(+)
+> > >
+> > > diff --git a/arch/arm64/include/asm/kgdb.h b/arch/arm64/include/asm/kgdb.h
+> > > index 21fc85e..c3d2425 100644
+> > > --- a/arch/arm64/include/asm/kgdb.h
+> > > +++ b/arch/arm64/include/asm/kgdb.h
+> > > @@ -24,6 +24,15 @@ static inline void arch_kgdb_breakpoint(void)
+> > >  extern void kgdb_handle_bus_error(void);
+> > >  extern int kgdb_fault_expected;
+> > >
+> > > +#ifdef CONFIG_KGDB
+> > > +extern bool kgdb_ipi_nmicallback(int cpu, void *regs);
+> > > +#else
+> > > +static inline bool kgdb_ipi_nmicallback(int cpu, void *regs)
+> > > +{
+> > > +   return false;
+> > > +}
+> > > +#endif
+> > > +
+> > >  #endif /* !__ASSEMBLY__ */
+> > >
+> > >  /*
+> > > diff --git a/arch/arm64/kernel/ipi_nmi.c b/arch/arm64/kernel/ipi_nmi.c
+> > > index 597dcf7..6ace182 100644
+> > > --- a/arch/arm64/kernel/ipi_nmi.c
+> > > +++ b/arch/arm64/kernel/ipi_nmi.c
+> > > @@ -8,6 +8,7 @@
+> > >
+> > >  #include <linux/interrupt.h>
+> > >  #include <linux/irq.h>
+> > > +#include <linux/kgdb.h>
+> > >  #include <linux/nmi.h>
+> > >  #include <linux/smp.h>
+> > >
+> > > @@ -45,10 +46,14 @@ bool arch_trigger_cpumask_backtrace(const cpumask_t *mask, bool exclude_self)
+> > >  static irqreturn_t ipi_nmi_handler(int irq, void *data)
+> > >  {
+> > >     irqreturn_t ret = IRQ_NONE;
+> > > +   unsigned int cpu = smp_processor_id();
+> > >
+> > >     if (nmi_cpu_backtrace(get_irq_regs()))
+> > >             ret = IRQ_HANDLED;
+> > >
+> > > +   if (kgdb_ipi_nmicallback(cpu, get_irq_regs()))
+> > > +           ret = IRQ_HANDLED;
+> > > +
+> > >     return ret;
 > >
-> > Currently such an architecture example is arm64 supporting pseudo NMIs
-> > feature which is only available on platforms which have support for GICv3
-> > or later version.
+> > It would be better to declare existing return value for
+> > kgdb_nmicallback() to be dangerously stupid and fix it so it returns an
+> > irqreturn_t (that's easy since most callers do not need to check the
+> > return value).
 > >
-> > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> > ---
-> >  arch/powerpc/kernel/kgdb.c |  3 ++-
-> >  arch/sparc/kernel/smp_64.c |  3 ++-
-> >  arch/x86/kernel/kgdb.c     |  6 ++++--
-> >  include/linux/kgdb.h       |  5 +++--
-> >  kernel/debug/debug_core.c  | 10 +++++++++-
-> >  5 files changed, 20 insertions(+), 7 deletions(-)
+> > Then this code simply becomes:
 > >
-> > diff --git a/arch/powerpc/kernel/kgdb.c b/arch/powerpc/kernel/kgdb.c
-> > index 4090802..126575d 100644
-> > --- a/arch/powerpc/kernel/kgdb.c
-> > +++ b/arch/powerpc/kernel/kgdb.c
-> > @@ -125,9 +125,10 @@ static int kgdb_debugger_ipi(struct pt_regs *regs)
-> >  }
-> >
-> >  #ifdef CONFIG_SMP
-> > -void kgdb_roundup_cpus(void)
-> > +bool kgdb_arch_roundup_cpus(void)
-> >  {
-> >       smp_send_debugger_break();
-> > +     return true;
-> >  }
-> >  #endif
-> >
-> > diff --git a/arch/sparc/kernel/smp_64.c b/arch/sparc/kernel/smp_64.c
-> > index e38d8bf..c459c83 100644
-> > --- a/arch/sparc/kernel/smp_64.c
-> > +++ b/arch/sparc/kernel/smp_64.c
-> > @@ -1014,9 +1014,10 @@ void flush_dcache_page_all(struct mm_struct *mm, struct page *page)
-> >  }
-> >
-> >  #ifdef CONFIG_KGDB
-> > -void kgdb_roundup_cpus(void)
-> > +bool kgdb_arch_roundup_cpus(void)
-> >  {
-> >       smp_cross_call(&xcall_kgdb_capture, 0, 0, 0);
-> > +     return true;
-> >  }
-> >  #endif
-> >
-> > diff --git a/arch/x86/kernel/kgdb.c b/arch/x86/kernel/kgdb.c
-> > index ff7878d..1b756d9 100644
-> > --- a/arch/x86/kernel/kgdb.c
-> > +++ b/arch/x86/kernel/kgdb.c
-> > @@ -404,7 +404,8 @@ static void kgdb_disable_hw_debug(struct pt_regs *regs)
-> >
-> >  #ifdef CONFIG_SMP
-> >  /**
-> > - *   kgdb_roundup_cpus - Get other CPUs into a holding pattern
-> > + *   kgdb_arch_roundup_cpus - Get other CPUs into a holding pattern
-> > + *                            in an architectural specific manner
-> >   *
-> >   *   On SMP systems, we need to get the attention of the other CPUs
-> >   *   and get them be in a known state.  This should do what is needed
-> > @@ -414,9 +415,10 @@ static void kgdb_disable_hw_debug(struct pt_regs *regs)
-> >   *
-> >   *   On non-SMP systems, this is not called.
-> >   */
-> > -void kgdb_roundup_cpus(void)
-> > +bool kgdb_arch_roundup_cpus(void)
-> >  {
-> >       apic_send_IPI_allbutself(NMI_VECTOR);
-> > +     return true;
-> >  }
-> >  #endif
-> >
-> > diff --git a/include/linux/kgdb.h b/include/linux/kgdb.h
-> > index 0d6cf64..f9db5b8 100644
-> > --- a/include/linux/kgdb.h
-> > +++ b/include/linux/kgdb.h
-> > @@ -200,7 +200,8 @@ kgdb_arch_handle_qxfer_pkt(char *remcom_in_buffer,
-> >  extern void kgdb_call_nmi_hook(void *ignored);
-> >
-> >  /**
-> > - *   kgdb_roundup_cpus - Get other CPUs into a holding pattern
-> > + *   kgdb_arch_roundup_cpus - Get other CPUs into a holding pattern
-> > + *                            in an architectural specific manner
-> >   *
-> >   *   On SMP systems, we need to get the attention of the other CPUs
-> >   *   and get them into a known state.  This should do what is needed
-> > @@ -210,7 +211,7 @@ extern void kgdb_call_nmi_hook(void *ignored);
-> >   *
-> >   *   On non-SMP systems, this is not called.
-> >   */
-> > -extern void kgdb_roundup_cpus(void);
-> > +extern bool kgdb_arch_roundup_cpus(void);
-> >
-> >  /**
-> >   *   kgdb_arch_set_pc - Generic call back to the program counter
-> > diff --git a/kernel/debug/debug_core.c b/kernel/debug/debug_core.c
-> > index 1e75a89..27e401c 100644
-> > --- a/kernel/debug/debug_core.c
-> > +++ b/kernel/debug/debug_core.c
-> > @@ -241,13 +241,21 @@ void __weak kgdb_call_nmi_hook(void *ignored)
-> >  }
-> >  NOKPROBE_SYMBOL(kgdb_call_nmi_hook);
-> >
-> > -void __weak kgdb_roundup_cpus(void)
-> > +bool __weak kgdb_arch_roundup_cpus(void)
-> > +{
-> > +     return false;
+> >       return kgdb_nmicallback(cpu, get_irq_regs());
 >
-> Do we really need to introduce all these boolean return values just to
-> call a bit of library code when one of the architectures wants to
-> fallback to a generic implementation?
+> Actually, reflecting on this maybe it is better to keep kgdb_nmicallin()
+> and kgdb_nmicallback() aligned w.r.t. return codes (even if they are a
+> little unusual).
 >
-> Why not something more like:
->
-> void kgdb_smp_call_nmi_hook(void)
-> {
->     /* original weak version of kgdb_roundup_cpus goes here */
-> }
->
-> void __weak kgdb_roundup_cpus(void)
-> {
->     kgdb_smp_call_nmi_hook();
-> }
->
-> arm64 can now simply call the new library function if a fallback is needed.
+> I'm still not sure why we'd keep kgdb_ipi_nmicallback() though.
+> kgdb_nmicallback() is intended to be called from arch code...
 >
 
-Makes sense, I will use this approach instead.
+I added kgdb_ipi_nmicallback() just to add a check for "kgdb_active"
+prior to entry into kgdb as here we are sharing NMI among backtrace
+and kgdb.
 
-> Note that same question applies to the backtrace changes...
+But after your comments, I looked carefully into kgdb_nmicallback()
+and I see the "raw_spin_is_locked(&dbg_master_lock)" check as well. So
+it looked sufficient to me for calling kgdb_nmicallback() directly
+from the arch code and hence I will remove kgdb_ipi_nmicallback() in
+the next version.
 
-In case of backtrace, there are already multiple APIs wrapping
-arch_trigger_cpumask_backtrace() as follows:
-
-- trigger_all_cpu_backtrace()
-- trigger_allbutself_cpu_backtrace()
-- trigger_cpumask_backtrace()
-- trigger_single_cpu_backtrace()
-
-And each of them already return a boolean and have corresponding
-different fallback mechanisms. So we can't have a common fallback API
-from arch specific code and instead need to extend that boolean return
-to arch specific code that is implemented as part of patch #4.
-
-If you do have any better ideas then do let me know.
-
--Sumit
-
->
 >
 > Daniel.
 >
 >
-> > +}
-> > +
-> > +static void kgdb_roundup_cpus(void)
-> >  {
-> >       call_single_data_t *csd;
-> >       int this_cpu = raw_smp_processor_id();
-> >       int cpu;
-> >       int ret;
 > >
-> > +     if (kgdb_arch_roundup_cpus())
-> > +             return;
-> > +
-> >       for_each_online_cpu(cpu) {
-> >               /* No need to roundup ourselves */
-> >               if (cpu == this_cpu)
-> > --
-> > 2.7.4
 > >
+> > >  }
+> > >
+> > > diff --git a/arch/arm64/kernel/kgdb.c b/arch/arm64/kernel/kgdb.c
+> > > index 1a157ca3..c26e710 100644
+> > > --- a/arch/arm64/kernel/kgdb.c
+> > > +++ b/arch/arm64/kernel/kgdb.c
+> > > @@ -17,6 +17,7 @@
+> > >
+> > >  #include <asm/debug-monitors.h>
+> > >  #include <asm/insn.h>
+> > > +#include <asm/nmi.h>
+> > >  #include <asm/traps.h>
+> > >
+> > >  struct dbg_reg_def_t dbg_reg_def[DBG_MAX_REG_NUM] = {
+> > > @@ -353,3 +354,37 @@ int kgdb_arch_remove_breakpoint(struct kgdb_bkpt *bpt)
+> > >     return aarch64_insn_write((void *)bpt->bpt_addr,
+> > >                     *(u32 *)bpt->saved_instr);
+> > >  }
+> > > +
+> > > +bool kgdb_ipi_nmicallback(int cpu, void *regs)
+> > > +{
+> > > +   if (atomic_read(&kgdb_active) != -1) {
+> > > +           kgdb_nmicallback(cpu, regs);
+> > > +           return true;
+> > > +   }
+> > > +
+> > > +   return false;
+> > > +}
+> >
+> > I *really* don't like this function.
+> >
+> > If the return code of kgdb_nmicallback() is broken then fix it, don't
+> > just wrap it and invent a new criteria for the return code.
+> >
+> > To be honest I don't actually think the logic in kgdb_nmicallback() is
+> > broken. As mentioned above the return value has a weird definition (0
+> > for "handled it OK" and 1 for "nothing for me to do") but the logic to
+> > calculate the return code looks OK.
+> >
+
+Makes sense, will remove it instead.
+
+> >
+> > > +
+> > > +static void kgdb_smp_callback(void *data)
+> > > +{
+> > > +   unsigned int cpu = smp_processor_id();
+> > > +
+> > > +   if (atomic_read(&kgdb_active) != -1)
+> > > +           kgdb_nmicallback(cpu, get_irq_regs());
+> > > +}
+> >
+> > This is Unused. I presume it is litter from a previous revision of the
+> > code and can be deleted?
+> >
+
+Yeah.
+
+> >
+> > > +
+> > > +bool kgdb_arch_roundup_cpus(void)
+> > > +{
+> > > +   struct cpumask mask;
+> > > +
+> > > +   if (!arm64_supports_nmi())
+> > > +           return false;
+> > > +
+> > > +   cpumask_copy(&mask, cpu_online_mask);
+> > > +   cpumask_clear_cpu(raw_smp_processor_id(), &mask);
+> > > +   if (cpumask_empty(&mask))
+> > > +           return false;
+> >
+> > Why do we need to fallback if there is no work to do? There will still
+> > be no work to do when we call the fallback.
+
+Okay, won't switch back to fallback mode here.
+
+-Sumit
+
+> >
+> >
+> > Daniel.
 
 
 _______________________________________________
