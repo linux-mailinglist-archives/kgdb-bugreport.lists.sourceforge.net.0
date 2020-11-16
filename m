@@ -2,101 +2,77 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E70532B4028
-	for <lists+kgdb-bugreport@lfdr.de>; Mon, 16 Nov 2020 10:48:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BF63B2B4115
+	for <lists+kgdb-bugreport@lfdr.de>; Mon, 16 Nov 2020 11:28:58 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1keb7C-0002eK-MP
-	for lists+kgdb-bugreport@lfdr.de; Mon, 16 Nov 2020 09:48:02 +0000
+	id 1kebkn-0005GY-IJ
+	for lists+kgdb-bugreport@lfdr.de; Mon, 16 Nov 2020 10:28:57 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <daniel.thompson@linaro.org>) id 1keb7A-0002d2-NL
- for kgdb-bugreport@lists.sourceforge.net; Mon, 16 Nov 2020 09:48:00 +0000
+ (envelope-from <yangtiezhu@loongson.cn>) id 1kebLO-0005FS-UR
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 16 Nov 2020 10:02:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=+si8LH3jhi9EyKVGhLQbwPSv91L15i1+9Oq4Ed8hni4=; b=b0+V0xkdHAvcGvkXCMLbWo2K/2
- ZxHbtWVAIWykWb8KxipFETan8IbQysw86F5BenmLzV1zd+j2Ke0wuqpZEME4lHbL72/l+YELs2Dz5
- 7NoNKlatpihm2GlvMDywKaunnr2U/ZvRO+NdJmjtg9z74hQPUGsBgnBrDcvOX8K1rgdE=;
+ bh=4WFEdRQSXo6qXqcSzlHOMN17BBCsvsvFX/W/yGENY9o=; b=Cwap9TqBsNnu6gA//HrvDO+Ef/
+ huwWj5GhBzW9hr/T2uy+7V3Tym/JmZh9pkqN/9B4oftEFQi9V6ArEDeg/RxhuwECE7I3lv3bhQQ4L
+ FndVwGFAEYLNReuigtNF2JJs3OnjQb4WOMaDqf81G4ggJXFdOb/xsGy8yZmRgnzOsYoI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version:
+ Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=+si8LH3jhi9EyKVGhLQbwPSv91L15i1+9Oq4Ed8hni4=; b=WskXX3xsjLHO4khcIzH1YMfsIn
- YHWfAije//66fOvANn9A02NeMTKf8dObN3jxZzIQMBt0DxaSELu1Jk07z64HH2F1O/N0P4LlnK7ud
- Q0EXGYNrHu9x7uHSjZYnofTHzL1b6cK8ZbaRGLRisIn93gjJDApKohijXtvGwkU4cIH4=;
-Received: from mail-wr1-f68.google.com ([209.85.221.68])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1keb6v-006Ndp-8e
- for kgdb-bugreport@lists.sourceforge.net; Mon, 16 Nov 2020 09:47:59 +0000
-Received: by mail-wr1-f68.google.com with SMTP id p1so17903793wrf.12
- for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 16 Nov 2020 01:47:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=+si8LH3jhi9EyKVGhLQbwPSv91L15i1+9Oq4Ed8hni4=;
- b=nqdN4uRj5voyOinQdTs1MOSCoiyOPfj8u3NnVEqnwsh89YfCT6AgozfIcjPTqpXfGM
- lBTAsB/8ReuT9cWudKtSXV6Xx6Cu1e9GXcTbBqR1IybviVR9utneYkZK07dnnd2r5fmU
- VjSpPGF3TP6yCGp1bFPcfJeEDazghUqDzEIAeHTMCz4+wDsWLtkUfvGl5yxM2LA4vTkT
- oTCM+tvMjLtGCGwZyEuxP91A5mCccTGGiYO8m6VdU2c7bhQeHi4RE0iuqY0NjzK1QlC9
- wpFZrvXQ9YK0dwFMJzJMKD4kZ42TTfZJ+4hxMdW5ja9gPk9S//eN2Zpx0npfMgnQLBI1
- FCMw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=+si8LH3jhi9EyKVGhLQbwPSv91L15i1+9Oq4Ed8hni4=;
- b=rPP0d1n2PmpPpk2qM3RNEj4AQTGo1aOol8bXJWSGryZfcJSMgQNoJldPnBYbzXmiFJ
- nL0jQhNV3VS8hY+Sb3OaUlCZXy8Srf1jcPwv4d5NheV240E78wdG1tS/3POa1yKgRLZR
- +9MNLvG6IYUNqHfn4Xu8RQtfEjArSF/GHCWDDejVdzWoGxW/K0MESjARopja3XBAP+OJ
- uaB3jD/qC8flCDIPTOaRP9xskn+XWIfcTH+1sLHoh0NXO9y73jGXX7CKHeUmnft1j7Np
- BJU+sLm6yUbgFJB4VCG3dFu5ouvsRFgpFDvdDRaOUZx8P7vZ0FbeqpOpKivHVc+L7nPF
- 1GBw==
-X-Gm-Message-State: AOAM531VGXtlc3ZWwMmKsfIuCkBC/QdvOmLh6fwvSU2TqOT8ZMJYrZ5F
- ulitGW93uM5d368hUwHY2DGPG3Z6EKXItg==
-X-Google-Smtp-Source: ABdhPJxTb/57HfJkOZ7cB/V/z4dTk0Fhk5LOW+nej7IimYiur/RP+toGkLtmhrPKf82iiC+Ou9db0w==
-X-Received: by 2002:a05:6000:1088:: with SMTP id
- y8mr19995697wrw.207.1605520058932; 
- Mon, 16 Nov 2020 01:47:38 -0800 (PST)
-Received: from holly.lan (cpc141216-aztw34-2-0-cust174.18-1.cable.virginm.net.
- [80.7.220.175])
- by smtp.gmail.com with ESMTPSA id m21sm29402766wmi.3.2020.11.16.01.47.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Nov 2020 01:47:38 -0800 (PST)
-Date: Mon, 16 Nov 2020 09:47:36 +0000
-From: Daniel Thompson <daniel.thompson@linaro.org>
-To: Tiezhu Yang <yangtiezhu@loongson.cn>
-Message-ID: <20201116094736.hmqnyl3xezeupzyb@holly.lan>
-References: <1605519767-25502-1-git-send-email-yangtiezhu@loongson.cn>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <1605519767-25502-1-git-send-email-yangtiezhu@loongson.cn>
-X-Spam-Score: -0.1 (/)
+ bh=4WFEdRQSXo6qXqcSzlHOMN17BBCsvsvFX/W/yGENY9o=; b=gfMXOz8yOLPqMwe2FSoulwEOcV
+ 60PQaVhkncGILzOVwWjBuer3thJxpUPMq2mf9XV1PsnTdRwH8LcKyxwoCpNCkHPaX5wYUx3zIP2S+
+ VLYP9yhmuI+7XeHanNzmdKZ6TTCBNUg4bz49QJSsUofJuY7RcK93N+BgfAPycr292zrA=;
+Received: from mail.loongson.cn ([114.242.206.163] helo=loongson.cn)
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtp (Exim 4.92.2)
+ id 1kebL8-00EUNJ-59
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 16 Nov 2020 10:02:42 +0000
+Received: from linux.localdomain (unknown [113.200.148.30])
+ by mail.loongson.cn (Coremail) with SMTP id AQAAf9Dxv9OYSbJfoOEPAA--.33384S2; 
+ Mon, 16 Nov 2020 17:42:48 +0800 (CST)
+From: Tiezhu Yang <yangtiezhu@loongson.cn>
+To: Jason Wessel <jason.wessel@windriver.com>,
+ Daniel Thompson <daniel.thompson@linaro.org>,
+ Douglas Anderson <dianders@chromium.org>, Jonathan Corbet <corbet@lwn.net>
+Date: Mon, 16 Nov 2020 17:42:47 +0800
+Message-Id: <1605519767-25502-1-git-send-email-yangtiezhu@loongson.cn>
+X-Mailer: git-send-email 2.1.0
+X-CM-TRANSID: AQAAf9Dxv9OYSbJfoOEPAA--.33384S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7CrW7Zr4kur1fuFWDuFy5XFb_yoW8GrW5pr
+ s8C3saq3yDJw15K3y8Kr1UC343AFZ3X3yUCrZ2gF45XF15XwnYqry3K3WkZ3WDJF4IyFWj
+ vr9IgFyqk3Wqy3DanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUkm14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
+ 6r4UJwA2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gc
+ CE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
+ 2Ix0cI8IcVAFwI0_JF0_Jw1lYx0Ex4A2jsIE14v26r4j6F4UMcvjeVCFs4IE7xkEbVWUJV
+ W8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lc2xSY4AK67AK6r4f
+ MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr
+ 0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0E
+ wIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWUJV
+ W8JwCI42IY6xAIw20EY4v20xvaj40_WFyUJVCq3wCI42IY6I8E87Iv67AKxVWUJVW8JwCI
+ 42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfU0xhLUUUUU
+X-CM-SenderInfo: p1dqw3xlh2x3gn0dqz5rrqw2lrqou0/
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.221.68 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.221.68 listed in wl.mailspike.net]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
-X-Headers-End: 1keb6v-006Ndp-8e
-Subject: Re: [Kgdb-bugreport] [PATCH] Documentation: kgdb: Fix a typo
+ 0.0 TIME_LIMIT_EXCEEDED    Exceeded time limit / deadline
+X-Headers-End: 1kebL8-00EUNJ-59
+X-Mailman-Approved-At: Mon, 16 Nov 2020 10:28:56 +0000
+Subject: [Kgdb-bugreport] [PATCH] Documentation: kgdb: Fix a typo
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,48 +84,44 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jonathan Corbet <corbet@lwn.net>, kgdb-bugreport@lists.sourceforge.net,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+Cc: kgdb-bugreport@lists.sourceforge.net,
  Sergei Shtylyov <sergei.shtylyov@gmail.com>,
- Jason Wessel <jason.wessel@windriver.com>, Xuefeng Li <lixuefeng@loongson.cn>
+ Xuefeng Li <lixuefeng@loongson.cn>, linux-kernel@vger.kernel.org,
+ linux-doc@vger.kernel.org
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Mon, Nov 16, 2020 at 05:42:47PM +0800, Tiezhu Yang wrote:
-> "to into" -> "into"
-> 
-> Reported-by: Sergei Shtylyov <sergei.shtylyov@gmail.com>
-> Signed-off-by: Tiezhu Yang <yangtiezhu@loongson.cn>
+"to into" -> "into"
 
-Acked-by: Daniel Thompson <daniel.thompson@linaro.org>
+Reported-by: Sergei Shtylyov <sergei.shtylyov@gmail.com>
+Signed-off-by: Tiezhu Yang <yangtiezhu@loongson.cn>
+---
+ Documentation/dev-tools/kgdb.rst | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
+diff --git a/Documentation/dev-tools/kgdb.rst b/Documentation/dev-tools/kgdb.rst
+index 77b688e..4345624 100644
+--- a/Documentation/dev-tools/kgdb.rst
++++ b/Documentation/dev-tools/kgdb.rst
+@@ -63,10 +63,9 @@ will want to turn on ``CONFIG_DEBUG_INFO`` which is called
+ It is advised, but not required, that you turn on the
+ ``CONFIG_FRAME_POINTER`` kernel option which is called :menuselection:`Compile
+ the kernel with frame pointers` in the config menu. This option inserts code
+-to into the compiled executable which saves the frame information in
+-registers or on the stack at different points which allows a debugger
+-such as gdb to more accurately construct stack back traces while
+-debugging the kernel.
++into the compiled executable which saves the frame information in registers
++or on the stack at different points which allows a debugger such as gdb to
++more accurately construct stack back traces while debugging the kernel.
+ 
+ If the architecture that you are using supports the kernel option
+ ``CONFIG_STRICT_KERNEL_RWX``, you should consider turning it off. This
+-- 
+2.1.0
 
-> ---
->  Documentation/dev-tools/kgdb.rst | 7 +++----
->  1 file changed, 3 insertions(+), 4 deletions(-)
-> 
-> diff --git a/Documentation/dev-tools/kgdb.rst b/Documentation/dev-tools/kgdb.rst
-> index 77b688e..4345624 100644
-> --- a/Documentation/dev-tools/kgdb.rst
-> +++ b/Documentation/dev-tools/kgdb.rst
-> @@ -63,10 +63,9 @@ will want to turn on ``CONFIG_DEBUG_INFO`` which is called
->  It is advised, but not required, that you turn on the
->  ``CONFIG_FRAME_POINTER`` kernel option which is called :menuselection:`Compile
->  the kernel with frame pointers` in the config menu. This option inserts code
-> -to into the compiled executable which saves the frame information in
-> -registers or on the stack at different points which allows a debugger
-> -such as gdb to more accurately construct stack back traces while
-> -debugging the kernel.
-> +into the compiled executable which saves the frame information in registers
-> +or on the stack at different points which allows a debugger such as gdb to
-> +more accurately construct stack back traces while debugging the kernel.
->  
->  If the architecture that you are using supports the kernel option
->  ``CONFIG_STRICT_KERNEL_RWX``, you should consider turning it off. This
-> -- 
-> 2.1.0
-> 
 
 
 _______________________________________________
