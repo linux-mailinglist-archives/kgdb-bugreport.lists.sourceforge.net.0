@@ -2,68 +2,68 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3CAE52B8654
-	for <lists+kgdb-bugreport@lfdr.de>; Wed, 18 Nov 2020 22:13:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8B39A2E0CCF
+	for <lists+kgdb-bugreport@lfdr.de>; Tue, 22 Dec 2020 16:36:37 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1kfUli-0005wG-0j
-	for lists+kgdb-bugreport@lfdr.de; Wed, 18 Nov 2020 21:13:34 +0000
+	id 1krjiG-0000Hl-C8
+	for lists+kgdb-bugreport@lfdr.de; Tue, 22 Dec 2020 15:36:36 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <corbet@lwn.net>) id 1kfUlg-0005vy-0t
- for kgdb-bugreport@lists.sourceforge.net; Wed, 18 Nov 2020 21:13:32 +0000
+ (envelope-from <zhengyongjun3@huawei.com>) id 1krhnL-0003Mz-Bo
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 22 Dec 2020 13:33:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
+ :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Gmn9WoSAuN+ZJjZPOe3qZzXt6xhGyzpsU2qXRea0W1M=; b=TFcIKGM1hrBO/m4tO8rMuEOYdx
- H96e4ChhS3r4EcAMpxF1dPU0Rp3cz+Id8mGFzmBBIR0KBFNfkOfIm2Zf6DA2gtS8EbstGOhp6gJFI
- njgPF0e3rfjPJwfKaYbubXgHVnhVJj23OAlMEHXV4PZT6JyvRE2tVZX1awsEtCEJE2qM=;
+ bh=/DIkVduXCA//Z/v1tYO+0WYwD5TgIei34M8jATXH1nU=; b=hlufXb+08LepPULun18d6Karz+
+ AoJ/dfr2ydjLi1GhmbH8djYbqM/HBZYv+3yFJgzKUuha0eV19dqVRvuh3BbxErobBZNKrRnpIXtV/
+ Nk9E28Sn44jmRzvH0lnmxZqCwxIFiH++tm34lIo6ZgHYK3pI9IzNAZH8+ZOqnBlmzdpo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:References:
- In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=Gmn9WoSAuN+ZJjZPOe3qZzXt6xhGyzpsU2qXRea0W1M=; b=HUNaGlZSl/DPIh2RoX0fPrJP4l
- UbJBhkNEUqgVlH0O/C1RDvplq+GjlLQCE4DJSAS3w1dsFoxBWIxj7q+Grg1dTixL2+n9X5AySHFtt
- FMno/Z3cCfhszln0bxQs4q3Z13VcZ6lLe92ofhDOePLjbNQoUIshf3/0RzqFfoIa3fEA=;
-Received: from ms.lwn.net ([45.79.88.28])
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=/DIkVduXCA//Z/v1tYO+0WYwD5TgIei34M8jATXH1nU=; b=e
+ Eyu3gNn7soQoPLH9VGQzswR6bnhsHaxA3t7KDUvtrrxGDnBlVWr08KlshL/YoaoLbzx77t8Wt/jnu
+ 4M8Yd13frd+evDufE+gRUpQhcbvUBwn7hVg6z0Hjw8FwhQ/QvA+jQ7ctrvJQjszDOkycNQT476gLN
+ odBaFRQ+RTAcMSgI=;
+Received: from szxga05-in.huawei.com ([45.249.212.191])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kfUlU-00EeAC-R5
- for kgdb-bugreport@lists.sourceforge.net; Wed, 18 Nov 2020 21:13:31 +0000
-Received: from lwn.net (localhost [127.0.0.1])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by ms.lwn.net (Postfix) with ESMTPSA id DF9EE1F5B;
- Wed, 18 Nov 2020 20:48:06 +0000 (UTC)
-Date: Wed, 18 Nov 2020 13:48:05 -0700
-From: Jonathan Corbet <corbet@lwn.net>
-To: Tiezhu Yang <yangtiezhu@loongson.cn>
-Message-ID: <20201118134805.7304a9bf@lwn.net>
-In-Reply-To: <1605519767-25502-1-git-send-email-yangtiezhu@loongson.cn>
-References: <1605519767-25502-1-git-send-email-yangtiezhu@loongson.cn>
-Organization: LWN.net
+ id 1krhnA-00664p-9f
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 22 Dec 2020 13:33:43 +0000
+Received: from DGGEMS408-HUB.china.huawei.com (unknown [172.30.72.58])
+ by szxga05-in.huawei.com (SkyGuard) with ESMTP id 4D0chN09SrzM6q8;
+ Tue, 22 Dec 2020 21:32:20 +0800 (CST)
+Received: from ubuntu.network (10.175.138.68) by
+ DGGEMS408-HUB.china.huawei.com (10.3.19.208) with Microsoft SMTP Server id
+ 14.3.498.0; Tue, 22 Dec 2020 21:33:08 +0800
+From: Zheng Yongjun <zhengyongjun3@huawei.com>
+To: <jason.wessel@windriver.com>, <daniel.thompson@linaro.org>,
+ <kgdb-bugreport@lists.sourceforge.net>, <linux-kernel@vger.kernel.org>
+Date: Tue, 22 Dec 2020 21:33:44 +0800
+Message-ID: <20201222133344.19753-1-zhengyongjun3@huawei.com>
+X-Mailer: git-send-email 2.22.0
 MIME-Version: 1.0
-X-Spam-Score: 0.0 (/)
+X-Originating-IP: [10.175.138.68]
+X-CFilter-Loop: Reflected
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [45.79.88.28 listed in list.dnswl.org]
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: loongson.cn]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [45.249.212.191 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1kfUlU-00EeAC-R5
-Subject: Re: [Kgdb-bugreport] [PATCH] Documentation: kgdb: Fix a typo
+X-Headers-End: 1krhnA-00664p-9f
+X-Mailman-Approved-At: Tue, 22 Dec 2020 15:36:33 +0000
+Subject: [Kgdb-bugreport] [PATCH -next] misc: use DIV_ROUND_UP macro to do
+ calculation
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -75,49 +75,37 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daniel Thompson <daniel.thompson@linaro.org>, linux-doc@vger.kernel.org,
- kgdb-bugreport@lists.sourceforge.net, linux-kernel@vger.kernel.org,
- Sergei Shtylyov <sergei.shtylyov@gmail.com>,
- Jason Wessel <jason.wessel@windriver.com>, Xuefeng Li <lixuefeng@loongson.cn>
+Cc: Zheng Yongjun <zhengyongjun3@huawei.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Mon, 16 Nov 2020 17:42:47 +0800
-Tiezhu Yang <yangtiezhu@loongson.cn> wrote:
+Don't open-code DIV_ROUND_UP() kernel macro.
 
-> "to into" -> "into"
-> 
-> Reported-by: Sergei Shtylyov <sergei.shtylyov@gmail.com>
-> Signed-off-by: Tiezhu Yang <yangtiezhu@loongson.cn>
-> ---
->  Documentation/dev-tools/kgdb.rst | 7 +++----
->  1 file changed, 3 insertions(+), 4 deletions(-)
-> 
-> diff --git a/Documentation/dev-tools/kgdb.rst b/Documentation/dev-tools/kgdb.rst
-> index 77b688e..4345624 100644
-> --- a/Documentation/dev-tools/kgdb.rst
-> +++ b/Documentation/dev-tools/kgdb.rst
-> @@ -63,10 +63,9 @@ will want to turn on ``CONFIG_DEBUG_INFO`` which is called
->  It is advised, but not required, that you turn on the
->  ``CONFIG_FRAME_POINTER`` kernel option which is called :menuselection:`Compile
->  the kernel with frame pointers` in the config menu. This option inserts code
-> -to into the compiled executable which saves the frame information in
-> -registers or on the stack at different points which allows a debugger
-> -such as gdb to more accurately construct stack back traces while
-> -debugging the kernel.
-> +into the compiled executable which saves the frame information in registers
-> +or on the stack at different points which allows a debugger such as gdb to
-> +more accurately construct stack back traces while debugging the kernel.
+Signed-off-by: Zheng Yongjun <zhengyongjun3@huawei.com>
+---
+ drivers/misc/kgdbts.c | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
-Applied.
+diff --git a/drivers/misc/kgdbts.c b/drivers/misc/kgdbts.c
+index 945701bce553..cd086921a792 100644
+--- a/drivers/misc/kgdbts.c
++++ b/drivers/misc/kgdbts.c
+@@ -139,9 +139,8 @@ static int restart_from_top_after_write;
+ static int sstep_state;
+ 
+ /* Storage for the registers, in GDB format. */
+-static unsigned long kgdbts_gdb_regs[(NUMREGBYTES +
+-					sizeof(unsigned long) - 1) /
+-					sizeof(unsigned long)];
++static unsigned long kgdbts_gdb_regs[DIV_ROUND_UP(NUMREGBYTES,
++				     sizeof(unsigned long)i)];
+ static struct pt_regs kgdbts_regs;
+ 
+ /* -1 = init not run yet, 0 = unconfigured, 1 = configured. */
+-- 
+2.22.0
 
-In the future, though, please avoid refilling paragraphs when you make a
-change like this; it makes it much harder to see what has actually changed.
-
-Thanks,
-
-jon
 
 
 _______________________________________________
