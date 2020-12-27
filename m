@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4112A2E0DDF
-	for <lists+kgdb-bugreport@lfdr.de>; Tue, 22 Dec 2020 18:38:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3619A2E31A1
+	for <lists+kgdb-bugreport@lfdr.de>; Sun, 27 Dec 2020 16:00:15 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1krlcY-0000xD-Rs
-	for lists+kgdb-bugreport@lfdr.de; Tue, 22 Dec 2020 17:38:50 +0000
+	id 1ktXWn-0003Ed-W6
+	for lists+kgdb-bugreport@lfdr.de; Sun, 27 Dec 2020 15:00:14 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <daniel.thompson@linaro.org>) id 1krlcX-0000x6-6N
- for kgdb-bugreport@lists.sourceforge.net; Tue, 22 Dec 2020 17:38:49 +0000
+ (envelope-from <gregkh@linuxfoundation.org>) id 1ktXWk-0003EP-M4
+ for kgdb-bugreport@lists.sourceforge.net; Sun, 27 Dec 2020 15:00:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=p90FBl2j96whg7rD4rhdiutq3kxVhonDmop9yW526g8=; b=iN0EGU7mwnbelMks1qc1QZzcms
- DW1NLWRTbdoEbsKBsvFq37n04j2g8p3qpQxGEvpaSbk2F9ZNP4jsDAokfRjnsu2A3x5v1hHQK2Prk
- 9vXqcSihw+E1cjaqVvLWo49UjLyFypEV0ZnBNnE7Rbd715M+h9NdGbfz1pVeodh2sTzo=;
+ bh=+JxNEiB+P7H7eGFWEFV+7whg6TSLX5TBNX7hWUrquUE=; b=BWlU6Yxm9ifGM0sNMn3AfEEnKw
+ mf0kigf2iyQ9p6aez0kbIverzJnmgBHX7F1MJ5lni/35j3okxs1jjDmANSuioLIe1CsJ5qq/u/d7s
+ Dqs+Bk8hYJGkdAzzsByVKf9oCSpkvSarpyTLOZ+fumVlO76PPpSVJ9AIvdvz811cuAP8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -30,64 +30,34 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=p90FBl2j96whg7rD4rhdiutq3kxVhonDmop9yW526g8=; b=HXvHVwzOuA8/7bh1PFeXhp2r+k
- QNCizmsu6Ox/UvzgV/7r9RuLS1/1sxv/4VOFt9QBRquxrZc+oK6CObs7+BQ9bP7ungx10At2UVIlG
- 4oyTpgyFMcOPfwD2a9AZoJRoLHpJ9FeBsT6LH0eRNL/QHos2QS8PDY7sYBhPB8yMJEeE=;
-Received: from mail-wm1-f52.google.com ([209.85.128.52])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1krlcK-006OYW-D6
- for kgdb-bugreport@lists.sourceforge.net; Tue, 22 Dec 2020 17:38:49 +0000
-Received: by mail-wm1-f52.google.com with SMTP id a6so2509154wmc.2
- for <kgdb-bugreport@lists.sourceforge.net>;
- Tue, 22 Dec 2020 09:38:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=p90FBl2j96whg7rD4rhdiutq3kxVhonDmop9yW526g8=;
- b=byK36WMeGyjauDHsfV5Qlnjf4POVyhYTKciOoMt72lxaB1vALTCw0V5yFzHS7bnB/j
- f64MilKlbMrOhQPejoJ/9AmIwAiaBZAs9Xl+l/HS1VRVWJXowqkR0+oFIwEulfwhkAdl
- 3xsY9laqxbKtZPzBjavTXEVSFBE1fLmn6jvSQOxct8n49vrZuFjCZdSCjjCcyIXo6pio
- C+YVa6KSvYC8TbkI0Sv2eaNiNWK6TzSXjWWAcJhwPeaRVFicXlQqGO55HZJSg2oBsOEK
- nGreGIfHE2Xt3NOrptppIV4M/T0s50hgpfxpHM5I2DQnXRFBjy5xPW1MAm4ryUx6erTb
- 2m0w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=p90FBl2j96whg7rD4rhdiutq3kxVhonDmop9yW526g8=;
- b=sV8/lZyyjzhHoohogljuLExU/amctrPK8bBaX6s/+W5WIKGuwVYjyu9Ja8FEZ97Qqs
- /3oU8M/4Fbjn90/ibYe7Fmz86UNL1YEQKv7R2e0Lv4/R0hHUZFtxYOG8xaThzp807GhP
- +GFmP1mqcEbJdg+YHAV6yEGkMnUiRjsBLolfYwtM69om4TOTCRxKwmRv3Vf5fZYCHpRE
- Aq/11cKv/AbKahnJhRArCqVnMV044LB2eRuDQ1FlSemrojWXwJ21MNB/bnegxvv/jye7
- ggsRtSQ+tIXCovWBVg1RfDbMqIK+bI85NSyZF+9f+utmXApHbubM+vp7geaosdk1kEzT
- V5Gw==
-X-Gm-Message-State: AOAM531lG9FHwDRdwA3fGkZ0PuoYNjtWTjKVfqnWuFFNpw6cPotMhUWi
- RRXVhViDVekBXpso1f+2QDbAQZYKL/ba4rBj
-X-Google-Smtp-Source: ABdhPJy5kQXFxdxKzoIJA+rjPAwNAIMQJ3pOLL2RpwHSSkfhfWHWrPiPRcLFqD7itQQ1C0RIT+IkFA==
-X-Received: by 2002:a1c:2d8b:: with SMTP id
- t133mr22262083wmt.127.1608657101273; 
- Tue, 22 Dec 2020 09:11:41 -0800 (PST)
-Received: from holly.lan (cpc141216-aztw34-2-0-cust174.18-1.cable.virginm.net.
- [80.7.220.175])
- by smtp.gmail.com with ESMTPSA id p9sm27641418wmm.17.2020.12.22.09.11.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Dec 2020 09:11:40 -0800 (PST)
-Date: Tue, 22 Dec 2020 17:11:39 +0000
-From: Daniel Thompson <daniel.thompson@linaro.org>
-To: Zheng Yongjun <zhengyongjun3@huawei.com>
-Message-ID: <20201222171139.hosgkr22lqczzdit@holly.lan>
-References: <20201222133344.19753-1-zhengyongjun3@huawei.com>
+ bh=+JxNEiB+P7H7eGFWEFV+7whg6TSLX5TBNX7hWUrquUE=; b=iufUSsQ0N2foEWCng47AlimkUf
+ rXy1eLoK9KRsTE7DHtS7+CsGpIxDF86IBfFqymqpojJ+/xowWn4fE4/ThwUE9RzziQlC4AUx1DJyd
+ 5S9E1+QMQeVVEQwkSG97TR1FTo7QoBFGiSd141vykZpehuTXCBcjj0w/lYuyOejBCIlw=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1ktXWU-00Ha5s-Ke
+ for kgdb-bugreport@lists.sourceforge.net; Sun, 27 Dec 2020 15:00:10 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 60E9020867;
+ Sun, 27 Dec 2020 14:59:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+ s=korg; t=1609081181;
+ bh=ZrFLsZfNoljHxg18KYAT61yF3cWJKpnoQLwPfqWvqTY=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=mP0X1/5Wz0ylJ43FfrIDN84YO1BWuS7NCnGiJPtx2/9yhwpU7vXQQWtT3k73hui+K
+ I2CZyWej+sOnWw5NVxCL2129QT+vFNSzmhiRVbbLmJMVk5dBngQmzZJ8AQw2ulLyFg
+ FjMoml6ShEj/YnrXQW7evdBDNq/msJ6f/qwTlKPk=
+Date: Sun, 27 Dec 2020 16:01:05 +0100
+From: Greg KH <gregkh@linuxfoundation.org>
+To: Defang Bo <bodefang@126.com>
+Message-ID: <X+ihsSzr3R6YB7vP@kroah.com>
+References: <1609076585-4010725-1-git-send-email-bodefang@126.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20201222133344.19753-1-zhengyongjun3@huawei.com>
+In-Reply-To: <1609076585-4010725-1-git-send-email-bodefang@126.com>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.128.52 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.128.52 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -95,9 +65,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1krlcK-006OYW-D6
-Subject: Re: [Kgdb-bugreport] [PATCH -next] misc: use DIV_ROUND_UP macro to
- do calculation
+X-Headers-End: 1ktXWU-00Ha5s-Ke
+Subject: Re: [Kgdb-bugreport] [PATCH] kgdbts: Passing ekgdbts to command
+ line causes panic
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,43 +79,26 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: kgdb-bugreport@lists.sourceforge.net, linux-kernel@vger.kernel.org,
+Cc: daniel.thompson@linaro.org, arnd@arndb.de,
+ kgdb-bugreport@lists.sourceforge.net, linux-kernel@vger.kernel.org,
  jason.wessel@windriver.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Tue, Dec 22, 2020 at 09:33:44PM +0800, Zheng Yongjun wrote:
-> Don't open-code DIV_ROUND_UP() kernel macro.
+On Sun, Dec 27, 2020 at 09:43:05PM +0800, Defang Bo wrote:
+> Similar to commit<1bd54d85>,kgdbts_option_setup does not check input argument
+> before passing it to strlen. The argument would be a NULL pointer.
 > 
-> Signed-off-by: Zheng Yongjun <zhengyongjun3@huawei.com>
-> ---
->  drivers/misc/kgdbts.c | 5 ++---
 
-Arguably this patch should have kgdbts in the Subject line.
+As per the documentation, you should write commits out as 1bd54d851f50
+("kgdboc: Passing ekgdboc to command line causes panic").
 
+Can you fix that up and resend this?
 
->  1 file changed, 2 insertions(+), 3 deletions(-)
-> 
-> diff --git a/drivers/misc/kgdbts.c b/drivers/misc/kgdbts.c
-> index 945701bce553..cd086921a792 100644
-> --- a/drivers/misc/kgdbts.c
-> +++ b/drivers/misc/kgdbts.c
-> @@ -139,9 +139,8 @@ static int restart_from_top_after_write;
->  static int sstep_state;
->  
->  /* Storage for the registers, in GDB format. */
-> -static unsigned long kgdbts_gdb_regs[(NUMREGBYTES +
-> -					sizeof(unsigned long) - 1) /
-> -					sizeof(unsigned long)];
-> +static unsigned long kgdbts_gdb_regs[DIV_ROUND_UP(NUMREGBYTES,
-> +				     sizeof(unsigned long)i)];
+thanks,
 
-How was this patch tested? This code does not look like it is
-compilable.
-
-
-Daniel.
+greg k-h
 
 
 _______________________________________________
