@@ -2,95 +2,86 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D6F742F7686
-	for <lists+kgdb-bugreport@lfdr.de>; Fri, 15 Jan 2021 11:21:39 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8199A2FB57D
+	for <lists+kgdb-bugreport@lfdr.de>; Tue, 19 Jan 2021 11:57:18 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1l0MEc-0005R7-KF
-	for lists+kgdb-bugreport@lfdr.de; Fri, 15 Jan 2021 10:21:38 +0000
+	id 1l1ohI-0005Ch-M9
+	for lists+kgdb-bugreport@lfdr.de; Tue, 19 Jan 2021 10:57:16 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <daniel.thompson@linaro.org>) id 1l0MEa-0005QR-K7
- for kgdb-bugreport@lists.sourceforge.net; Fri, 15 Jan 2021 10:21:36 +0000
+ (envelope-from <sumit.garg@linaro.org>) id 1l1ohH-0005Ca-Oa
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 19 Jan 2021 10:57:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=2V/bZEZDEb3V/fhFz7mUvhwT4BoeshuJFwVGruvza08=; b=Mn8pauQuICYMi5klMlLGF2tKCL
- IlJnO2sbPV4lD4ymz3iun2myih+RU52gnaz30Heh8u4C5BKgsGjJMKwMKNk9v5mZ1SBN6izQVqvVC
- 2qIzRddKdSeaGAeVEGSSygZUFJgop5wS+9UmNKarxrPd3wleP0tYcLqc37tW+hZ6R+Qo=;
+ bh=MdowI1spYzSZ783aBzUoan8uq2NdmnUHuCZElfPxqfQ=; b=Pw8Ek9jNR8JhkjLljVMK0pipNX
+ vpQ/5k7lLAUDDdcgwIsGas39pLqf/xoDLO9lswbmnC+TzUlfcQHrGxLQNiHo5mqDD8dH+aEbVyUR1
+ KYi13Y0hNqqVbmwtLm1XTCvzjxJlzqxtPXqaliduKU3SPzkXd3zk7CfcNLHyzjgfL40M=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version:
+ Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=2V/bZEZDEb3V/fhFz7mUvhwT4BoeshuJFwVGruvza08=; b=VK099XUf+Ecop0uLehJwRTtBTX
- 2HXz5XJICIyzhn/iOvRk4jZPsvQ8GiFmSJxQBiiANwbHsP3nf9mRbjcgI/FLogNcDU/JDnGCcdM/f
- BlQyk5RhhGyQPpjj7tCktPlYh5uLSBUB8ICfdLbcARSQQ8pKFn2k+DBDVtN6fH6qiXqM=;
-Received: from mail-wr1-f42.google.com ([209.85.221.42])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ bh=MdowI1spYzSZ783aBzUoan8uq2NdmnUHuCZElfPxqfQ=; b=WhYhkoZMxX0m62MPa3rPRAOHoG
+ 8BxVgG/TfP3tgE/2e2J6etuJGP+5X0ak0aOUlU6Xv0ALGBgxm6tSvCn7a/rwdprCkUEMZpP5xE0hE
+ 2vvhakQFAsV+1ghubniX9Hh7iJthaVN7jpX2WIcORK5oM5YTiJSyAmwiJTdaQPaAUgTw=;
+Received: from mail-oi1-f171.google.com ([209.85.167.171])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1l0MEV-004JaH-7U
- for kgdb-bugreport@lists.sourceforge.net; Fri, 15 Jan 2021 10:21:36 +0000
-Received: by mail-wr1-f42.google.com with SMTP id 6so1398506wri.3
+ id 1l1oh7-007TFC-Hd
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 19 Jan 2021 10:57:15 +0000
+Received: by mail-oi1-f171.google.com with SMTP id s2so20720137oij.2
  for <kgdb-bugreport@lists.sourceforge.net>;
- Fri, 15 Jan 2021 02:21:31 -0800 (PST)
+ Tue, 19 Jan 2021 02:57:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=2V/bZEZDEb3V/fhFz7mUvhwT4BoeshuJFwVGruvza08=;
- b=aYjLFPlRopkC8U+z0eeACcdHQr5l3mA5gCPJGb7hvxxDKTu77jLMB36mJ9NcXLPXe9
- DN0RymKSRhrU8jSS/Dewg6Y281s+HKwVt325kb508PUn+bn0FrWwiU8L2EC4KT90r+vY
- +cRvk7ZkOh9a8IXv140J5YgXsZM9fnQcWQmKA9nRSMUdb82slzKK2N1WewCRChtQEgkj
- v4ZP6fwXlv23OfWd+byqBPULGtjjn7PR/KwMmgwroXNqXWK2tXUB+xSAaC9EElgp3EJC
- hUNBOFcfKV554D9fzkBhUqYZT8UCJmznSPHsscChw15ZbNp/KxOkMtky8bypYbAGGCaK
- LuFg==
+ h=from:to:cc:subject:date:message-id;
+ bh=MdowI1spYzSZ783aBzUoan8uq2NdmnUHuCZElfPxqfQ=;
+ b=Fx/tzeqor4dkEBrQ0EyMKi5UYinFCZNM+4m2iEiHgFjtaqmVm8MaDD8C4DMfirKXyU
+ H5gAlRfQHzOM/5ghPHjfII8w+BN1O7fXQkhddHMAP/wAde5v1uvn14+cD29IIL+durT4
+ h5pxtZ+oPR5/0Mr2BZONiO4fZ9jVg+B0pmf5QUUeY2K/1IjvhcQ2aTOpG7VCHg4s10kG
+ 0f+RczmVuu9aFkP3pYQiQQwxxweG/yhG1p37p+eBX84V6KxuP/o5d6VXVhXBVzkBttTK
+ ACUL6DnJc6+255oBCQNY5VExJpM25oUrD3J+aVy4LCWpjQAKIXh+ndx2OC4S+5W+6ZOr
+ lsrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=2V/bZEZDEb3V/fhFz7mUvhwT4BoeshuJFwVGruvza08=;
- b=jYSxOLl/JQLzWHhkTNXJ1PedTX4diCLfscrsx1Tuu2K9RmHhDkkbIqrwYwkiuJDogm
- cA9MF0I4zqRrV2IOmLnpfsBCK2FiM3LVcCN1QHHziF14ir+zPqB01xIRPzyhNi4GQxcu
- r34YZP75Uk3q+mGn67vorYyI4rL2WJ+INPzgXqkndnrODXtFs0qVafEdfqNvmoY46JJg
- odj0xBJajZYTOGIPO93xRM6d7WGlysZ9PTPlkkHDzaaV0W1py+PuGy388xvcx9EzRhdP
- 3b86Ga5bMK/AjCXIrRUTn5XkxxwiQCY1I1dS3c+4ig54cZgnz0mToXxDenkSw8I1TIaq
- PdKw==
-X-Gm-Message-State: AOAM5317OgUEmv++28aJcJ2/EE3DHbU4Vm3aoKT4HsQ6bjc6KB6ywpP7
- hhNDALEcf2JbxEwtRdTDqXahPw==
-X-Google-Smtp-Source: ABdhPJwakoU+7BSQGbhR1JfvHegL+hWVJpGp1oN3cDW5tg3nshzdGm4R96q2lqQmaHmjIqHM8lN3Gg==
-X-Received: by 2002:adf:e410:: with SMTP id g16mr12476278wrm.364.1610706077647; 
- Fri, 15 Jan 2021 02:21:17 -0800 (PST)
-Received: from maple.lan (cpc141216-aztw34-2-0-cust174.18-1.cable.virginm.net.
- [80.7.220.175])
- by smtp.gmail.com with ESMTPSA id o20sm1876407wmm.24.2021.01.15.02.21.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Jan 2021 02:21:17 -0800 (PST)
-Date: Fri, 15 Jan 2021 10:21:15 +0000
-From: Daniel Thompson <daniel.thompson@linaro.org>
-To: Davidlohr Bueso <dave@stgolabs.net>
-Message-ID: <20210115102115.twv3oy3pmnhdejij@maple.lan>
-References: <20210115001344.117108-1-dave@stgolabs.net>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20210115001344.117108-1-dave@stgolabs.net>
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=MdowI1spYzSZ783aBzUoan8uq2NdmnUHuCZElfPxqfQ=;
+ b=QEqy5AI0Z067HUSAxa9Qu7PmMe2jssbZTBSk55fnAmQJ668oYdS5JNN0JAwnAuXgVf
+ Wg6bbbiqM0kJyjuFJwUzsjwUI/krlbj6dxYuG0UUYkttxBRbZWhLHK1lK/IEpE7P5hkd
+ UtED2QsjKC2PJrvTCbxILCURkCYSoFqEfjAGWBAz/983HTPUUdbUYu2u2LpEt2CJNB9M
+ nD1XqcUWeDnQgYdWaw5cMrfWvNdpEHoXIAAeSggmWCy0c3DkQqpcOj8cL1QoiazsXIXK
+ YjANYeTyZOr1o6EXZ0Dpdt13fR8TfviHJiwm7KAaiy/obvNYzalwkNRrfrRDCNeGYqFE
+ V4qw==
+X-Gm-Message-State: AOAM530TvkLWpZ7E/2Tddj1u6iWJ4EQqvVaUzNJxtu4yk63dghfVoCzH
+ /QN8rCtmLHN9vOGaFd8cATRSaCaaFvupwQ==
+X-Google-Smtp-Source: ABdhPJz6EoK9JnwYL1Qcj/o7CwQgRwQsXysqajEDUuSbbCkplLL+gfnG4gJ1U1PgzoWtncHHZFMJcQ==
+X-Received: by 2002:a17:90a:bf88:: with SMTP id
+ d8mr4764171pjs.102.1611053449104; 
+ Tue, 19 Jan 2021 02:50:49 -0800 (PST)
+Received: from localhost.localdomain ([122.181.110.213])
+ by smtp.gmail.com with ESMTPSA id a136sm19619797pfd.149.2021.01.19.02.50.45
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Tue, 19 Jan 2021 02:50:48 -0800 (PST)
+From: Sumit Garg <sumit.garg@linaro.org>
+To: kgdb-bugreport@lists.sourceforge.net
+Date: Tue, 19 Jan 2021 16:20:18 +0530
+Message-Id: <1611053418-29283-1-git-send-email-sumit.garg@linaro.org>
+X-Mailer: git-send-email 2.7.4
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.221.42 listed in list.dnswl.org]
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: suse.de]
+ trust [209.85.167.171 listed in list.dnswl.org]
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.221.42 listed in wl.mailspike.net]
+ [209.85.167.171 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -98,9 +89,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1l0MEV-004JaH-7U
-Subject: Re: [Kgdb-bugreport] [PATCH] kgdb: Schedule breakpoints via
- workqueue
+X-Headers-End: 1l1oh7-007TFC-Hd
+Subject: [Kgdb-bugreport] [PATCH] kdb: Simplify kdb commands registration
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,113 +102,215 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: kgdb-bugreport@lists.sourceforge.net, Davidlohr Bueso <dbueso@suse.de>,
- linux-kernel@vger.kernel.org, jason.wessel@windriver.com
+Cc: linux-kernel@vger.kernel.org, daniel.thompson@linaro.org,
+ jason.wessel@windriver.com
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Thu, Jan 14, 2021 at 04:13:44PM -0800, Davidlohr Bueso wrote:
-> The original functionality was added back in:
-> 
->     1cee5e35f15 (kgdb: Add the ability to schedule a breakpoint via a tasklet)
-> 
-> However tasklets have long been deprecated as being too heavy on
-> the system by running in irq context - and this is not a performance
-> critical path. If a higher priority process wants to run, it must
-> wait for the tasklet to finish before doing so. Instead, generate
-> the breakpoint exception in process context.
+Simplify kdb commands registration via using linked list instead of
+static array for commands storage.
 
-I don't agree that "this is not a performance critical path".
+Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+---
+ kernel/debug/kdb/kdb_main.c    | 78 ++++++++++--------------------------------
+ kernel/debug/kdb/kdb_private.h |  1 +
+ 2 files changed, 20 insertions(+), 59 deletions(-)
 
-kgdb is a stop-the-world debugger: if the developer trying to understand
-the system behaviour has commanded the system to halt then that is what
-it should be doing. It should not be scheduling tasks that are not
-necessary to bring the system a halt.
+diff --git a/kernel/debug/kdb/kdb_main.c b/kernel/debug/kdb/kdb_main.c
+index 930ac1b..93ac0f5 100644
+--- a/kernel/debug/kdb/kdb_main.c
++++ b/kernel/debug/kdb/kdb_main.c
+@@ -33,6 +33,7 @@
+ #include <linux/kallsyms.h>
+ #include <linux/kgdb.h>
+ #include <linux/kdb.h>
++#include <linux/list.h>
+ #include <linux/notifier.h>
+ #include <linux/interrupt.h>
+ #include <linux/delay.h>
+@@ -84,15 +85,8 @@ static unsigned int kdb_continue_catastrophic =
+ static unsigned int kdb_continue_catastrophic;
+ #endif
+ 
+-/* kdb_commands describes the available commands. */
+-static kdbtab_t *kdb_commands;
+-#define KDB_BASE_CMD_MAX 50
+-static int kdb_max_commands = KDB_BASE_CMD_MAX;
+-static kdbtab_t kdb_base_commands[KDB_BASE_CMD_MAX];
+-#define for_each_kdbcmd(cmd, num)					\
+-	for ((cmd) = kdb_base_commands, (num) = 0;			\
+-	     num < kdb_max_commands;					\
+-	     num++, num == KDB_BASE_CMD_MAX ? cmd = kdb_commands : cmd++)
++/* kdb_cmds_head describes the available commands. */
++static LIST_HEAD(kdb_cmds_head);
+ 
+ typedef struct _kdbmsg {
+ 	int	km_diag;	/* kdb diagnostic */
+@@ -921,7 +915,7 @@ int kdb_parse(const char *cmdstr)
+ 	char *cp;
+ 	char *cpp, quoted;
+ 	kdbtab_t *tp;
+-	int i, escaped, ignore_errors = 0, check_grep = 0;
++	int escaped, ignore_errors = 0, check_grep = 0;
+ 
+ 	/*
+ 	 * First tokenize the command string.
+@@ -1011,7 +1005,7 @@ int kdb_parse(const char *cmdstr)
+ 		++argv[0];
+ 	}
+ 
+-	for_each_kdbcmd(tp, i) {
++	list_for_each_entry(tp, &kdb_cmds_head, list_node) {
+ 		if (tp->cmd_name) {
+ 			/*
+ 			 * If this command is allowed to be abbreviated,
+@@ -1037,8 +1031,8 @@ int kdb_parse(const char *cmdstr)
+ 	 * few characters of this match any of the known commands.
+ 	 * e.g., md1c20 should match md.
+ 	 */
+-	if (i == kdb_max_commands) {
+-		for_each_kdbcmd(tp, i) {
++	if (list_entry_is_head(tp, &kdb_cmds_head, list_node)) {
++		list_for_each_entry(tp, &kdb_cmds_head, list_node) {
+ 			if (tp->cmd_name) {
+ 				if (strncmp(argv[0],
+ 					    tp->cmd_name,
+@@ -1049,7 +1043,7 @@ int kdb_parse(const char *cmdstr)
+ 		}
+ 	}
+ 
+-	if (i < kdb_max_commands) {
++	if (!list_entry_is_head(tp, &kdb_cmds_head, list_node)) {
+ 		int result;
+ 
+ 		if (!kdb_check_flags(tp->cmd_flags, kdb_cmd_enabled, argc <= 1))
+@@ -2428,12 +2422,11 @@ static int kdb_kgdb(int argc, const char **argv)
+ static int kdb_help(int argc, const char **argv)
+ {
+ 	kdbtab_t *kt;
+-	int i;
+ 
+ 	kdb_printf("%-15.15s %-20.20s %s\n", "Command", "Usage", "Description");
+ 	kdb_printf("-----------------------------"
+ 		   "-----------------------------\n");
+-	for_each_kdbcmd(kt, i) {
++	list_for_each_entry(kt, &kdb_cmds_head, list_node) {
+ 		char *space = "";
+ 		if (KDB_FLAG(CMD_INTERRUPT))
+ 			return 0;
+@@ -2667,13 +2660,9 @@ int kdb_register_flags(char *cmd,
+ 		       short minlen,
+ 		       kdb_cmdflags_t flags)
+ {
+-	int i;
+ 	kdbtab_t *kp;
+ 
+-	/*
+-	 *  Brute force method to determine duplicates
+-	 */
+-	for_each_kdbcmd(kp, i) {
++	list_for_each_entry(kp, &kdb_cmds_head, list_node) {
+ 		if (kp->cmd_name && (strcmp(kp->cmd_name, cmd) == 0)) {
+ 			kdb_printf("Duplicate kdb command registered: "
+ 				"%s, func %px help %s\n", cmd, func, help);
+@@ -2681,35 +2670,10 @@ int kdb_register_flags(char *cmd,
+ 		}
+ 	}
+ 
+-	/*
+-	 * Insert command into first available location in table
+-	 */
+-	for_each_kdbcmd(kp, i) {
+-		if (kp->cmd_name == NULL)
+-			break;
+-	}
+-
+-	if (i >= kdb_max_commands) {
+-		kdbtab_t *new = kmalloc_array(kdb_max_commands -
+-						KDB_BASE_CMD_MAX +
+-						kdb_command_extend,
+-					      sizeof(*new),
+-					      GFP_KDB);
+-		if (!new) {
+-			kdb_printf("Could not allocate new kdb_command "
+-				   "table\n");
+-			return 1;
+-		}
+-		if (kdb_commands) {
+-			memcpy(new, kdb_commands,
+-			  (kdb_max_commands - KDB_BASE_CMD_MAX) * sizeof(*new));
+-			kfree(kdb_commands);
+-		}
+-		memset(new + kdb_max_commands - KDB_BASE_CMD_MAX, 0,
+-		       kdb_command_extend * sizeof(*new));
+-		kdb_commands = new;
+-		kp = kdb_commands + kdb_max_commands - KDB_BASE_CMD_MAX;
+-		kdb_max_commands += kdb_command_extend;
++	kp = kmalloc(sizeof(*kp), GFP_KDB);
++	if (!kp) {
++		kdb_printf("Could not allocate new kdb_command table\n");
++		return 1;
+ 	}
+ 
+ 	kp->cmd_name   = cmd;
+@@ -2719,6 +2683,8 @@ int kdb_register_flags(char *cmd,
+ 	kp->cmd_minlen = minlen;
+ 	kp->cmd_flags  = flags;
+ 
++	list_add_tail(&kp->list_node, &kdb_cmds_head);
++
+ 	return 0;
+ }
+ EXPORT_SYMBOL_GPL(kdb_register_flags);
+@@ -2757,15 +2723,15 @@ EXPORT_SYMBOL_GPL(kdb_register);
+  */
+ int kdb_unregister(char *cmd)
+ {
+-	int i;
+ 	kdbtab_t *kp;
+ 
+ 	/*
+ 	 *  find the command.
+ 	 */
+-	for_each_kdbcmd(kp, i) {
++	list_for_each_entry(kp, &kdb_cmds_head, list_node) {
+ 		if (kp->cmd_name && (strcmp(kp->cmd_name, cmd) == 0)) {
+-			kp->cmd_name = NULL;
++			list_del(&kp->list_node);
++			kfree(kp);
+ 			return 0;
+ 		}
+ 	}
+@@ -2778,12 +2744,6 @@ EXPORT_SYMBOL_GPL(kdb_unregister);
+ /* Initialize the kdb command table. */
+ static void __init kdb_inittab(void)
+ {
+-	int i;
+-	kdbtab_t *kp;
+-
+-	for_each_kdbcmd(kp, i)
+-		kp->cmd_name = NULL;
+-
+ 	kdb_register_flags("md", kdb_md, "<vaddr>",
+ 	  "Display Memory Contents, also mdWcN, e.g. md8c1", 1,
+ 	  KDB_ENABLE_MEM_READ | KDB_REPEAT_NO_ARGS);
+diff --git a/kernel/debug/kdb/kdb_private.h b/kernel/debug/kdb/kdb_private.h
+index a4281fb..7a4a181 100644
+--- a/kernel/debug/kdb/kdb_private.h
++++ b/kernel/debug/kdb/kdb_private.h
+@@ -174,6 +174,7 @@ typedef struct _kdbtab {
+ 	short    cmd_minlen;		/* Minimum legal # command
+ 					 * chars required */
+ 	kdb_cmdflags_t cmd_flags;	/* Command behaviour flags */
++	struct list_head list_node;
+ } kdbtab_t;
+ 
+ extern int kdb_bt(int, const char **);	/* KDB display back trace */
+-- 
+2.7.4
 
-In other words this code is using tasklets *specifically* to benefit
-from their weird calling context.
-
-However I am aware the way the wind is blowing w.r.t. tasklets
-and...
-
-> Signed-off-by: Davidlohr Bueso <dbueso@suse.de>
-> ---
-> Compile-tested only.
-
-... this code can only ever be compile tested since AFAIK it has no
-in-kernel callers.
-
-There is a (still maintained) out-of-tree user that provides
-kgdb-over-ethernet using the netpoll API. It must defer the stop to a
-tasklet to avoid problems with netpoll running alongside the RX handler.
-
-Whilst I have some sympathy, that code has been out-of-tree for more
-than 10 years and I don't recall any serious attempt to upstream it at
-any point in the last five.
-
-So unless someone yells (convincingly) perhaps it's time to rip this
-out and help prepare for a tasklet-free future?
-
-
-Daniel.
-
-
-> 
->  kernel/debug/debug_core.c | 16 ++++++++--------
->  1 file changed, 8 insertions(+), 8 deletions(-)
-> 
-> diff --git a/kernel/debug/debug_core.c b/kernel/debug/debug_core.c
-> index af6e8b4fb359..e1ff974c6b6f 100644
-> --- a/kernel/debug/debug_core.c
-> +++ b/kernel/debug/debug_core.c
-> @@ -119,7 +119,7 @@ static DEFINE_RAW_SPINLOCK(dbg_slave_lock);
->   */
->  static atomic_t			masters_in_kgdb;
->  static atomic_t			slaves_in_kgdb;
-> -static atomic_t			kgdb_break_tasklet_var;
-> +static atomic_t			kgdb_break_work_var;
->  atomic_t			kgdb_setting_breakpoint;
->  
->  struct task_struct		*kgdb_usethread;
-> @@ -1085,27 +1085,27 @@ static void kgdb_unregister_callbacks(void)
->  }
->  
->  /*
-> - * There are times a tasklet needs to be used vs a compiled in
-> + * There are times a workqueue needs to be used vs a compiled in
->   * break point so as to cause an exception outside a kgdb I/O module,
->   * such as is the case with kgdboe, where calling a breakpoint in the
->   * I/O driver itself would be fatal.
->   */
-> -static void kgdb_tasklet_bpt(unsigned long ing)
-> +static void kgdb_work_bpt(struct work_struct *unused)
->  {
->  	kgdb_breakpoint();
-> -	atomic_set(&kgdb_break_tasklet_var, 0);
-> +	atomic_set(&kgdb_break_work_var, 0);
->  }
->  
-> -static DECLARE_TASKLET_OLD(kgdb_tasklet_breakpoint, kgdb_tasklet_bpt);
-> +static DECLARE_WORK(kgdb_async_breakpoint, kgdb_work_bpt);
->  
->  void kgdb_schedule_breakpoint(void)
->  {
-> -	if (atomic_read(&kgdb_break_tasklet_var) ||
-> +	if (atomic_read(&kgdb_break_work_var) ||
->  		atomic_read(&kgdb_active) != -1 ||
->  		atomic_read(&kgdb_setting_breakpoint))
->  		return;
-> -	atomic_inc(&kgdb_break_tasklet_var);
-> -	tasklet_schedule(&kgdb_tasklet_breakpoint);
-> +	atomic_inc(&kgdb_break_work_var);
-> +	schedule_work(&kgdb_async_breakpoint);
->  }
->  EXPORT_SYMBOL_GPL(kgdb_schedule_breakpoint);
->  
-> -- 
-> 2.26.2
-> 
 
 
 _______________________________________________
