@@ -2,91 +2,73 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6526D3261A0
-	for <lists+kgdb-bugreport@lfdr.de>; Fri, 26 Feb 2021 11:59:58 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id ABD093261AD
+	for <lists+kgdb-bugreport@lfdr.de>; Fri, 26 Feb 2021 12:03:02 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1lFaqj-0006M1-94
-	for lists+kgdb-bugreport@lfdr.de; Fri, 26 Feb 2021 10:59:57 +0000
+	id 1lFath-00069I-I9
+	for lists+kgdb-bugreport@lfdr.de; Fri, 26 Feb 2021 11:03:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <daniel.thompson@linaro.org>) id 1lFaqd-0006LK-97
- for kgdb-bugreport@lists.sourceforge.net; Fri, 26 Feb 2021 10:59:52 +0000
+ (envelope-from <john.ogness@linutronix.de>) id 1lFNBy-00024C-NT
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 25 Feb 2021 20:24:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Fo8kxQ4qJJM2hMS9tJdOXhE6q1LoinqW4MyTVHjxcOw=; b=CLHgpxxjJYDOkkwfeeXr3UWZy8
- YgygNqkr8I/98CvTg27ZHKJTJE/xeF5xcgzcDlpcKQvKC6XMJqWGTQufmMBX6Rj7/RRCqkvDOEufA
- /rQyYpNY4KMzEecrESbSHcFjltMzLU7aDA/2eclvtzjdDKYRBiqLGkWbm3OrIqCheLYc=;
+ bh=qDVKAKnnfPFs0Dxv5+kX2VVyNzrYE33K+BDYTVeJME8=; b=muLR7ANR+Y99IXAOKg3ki2hunB
+ J3vJXPYw8ilTRchJRqX3hjl31/L3N1bpVyUB8PJa1p+AUGLsSZ3NI84XHaivmPkng91+pqsEepWAi
+ c1pOX2Sx6o+J6/2uIeEaNxO5sgA4ruQHZoF0SqE9U7ktyH1OrYEQZi0vXfRx/p+Cn4jI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=Fo8kxQ4qJJM2hMS9tJdOXhE6q1LoinqW4MyTVHjxcOw=; b=FRvwlMUgWPHfy4Bche0SBafiPI
- 9IhUGyDRoZFexuPsYzm3adNqPbhOIbakq8n8pKHBmac5siUGpvrPkkbIL6r0HgNui6Rp4obvHrVLe
- CZxrOdO8UDZ4ZyoiumIumYK9k/Ui2rTPCYyolKNo6LEdMgnItv948Hh1zZ+rP8M19mww=;
-Received: from mail-wm1-f47.google.com ([209.85.128.47])
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=qDVKAKnnfPFs0Dxv5+kX2VVyNzrYE33K+BDYTVeJME8=; b=m
+ tZykQAz7iohIapmecCYqee+2ZULfZyaorihoaQSYfAt77FGWuYNSGXhihCYYqPc1emZ/slR1HYsdX
+ NpGQ0sUbQUAvc1KKAPAEhyBLLkwZIy0mOiQG4TxK5cUtgcq/wmvDggPjO4NW0XJgjZQmYhGBuOW02
+ mXssD7D8kVrhGpfQ=;
+Received: from galois.linutronix.de ([193.142.43.55])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1lFaqV-006AP3-IB
- for kgdb-bugreport@lists.sourceforge.net; Fri, 26 Feb 2021 10:59:51 +0000
-Received: by mail-wm1-f47.google.com with SMTP id o16so7410635wmh.0
- for <kgdb-bugreport@lists.sourceforge.net>;
- Fri, 26 Feb 2021 02:59:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=Fo8kxQ4qJJM2hMS9tJdOXhE6q1LoinqW4MyTVHjxcOw=;
- b=fy3n8m8JuruG8diPmtODUBtZ9jgV5geGqIpBAnjyravc3vlzUzvKO+U+ziDxxYhoWp
- 8qdEBObBKdD5itNFFzmrmGG3+i73ZkMEZrvgSLxRttM1rXRoHm+nbE5GuyMNqzNdwELy
- 10rDXm2uuX3rc8G7p5iGvc/7Z4zAqxsOPKC5bc3+AZCL/PQgEHrmwvyA6YQR1HRSa3aA
- cHijBp75rLRcqH06EkcyR4P6t0ZMhIHOSDRRYfmqMSCBlINdbPoYF1OErRHe85sLImbR
- zofsY5586afBxyVd+dY1DpI1HOf+k7HA0EMLxb87r89Xs8GeLL8YhIrCeDy/BMMZ78Yb
- pfhQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=Fo8kxQ4qJJM2hMS9tJdOXhE6q1LoinqW4MyTVHjxcOw=;
- b=Y0v/+noe/ADS9bkBm6l3S29DN3zFOELcfZ44uwIeGS7n4DNq4zlueUvL27bhHy8DkB
- XDKYUP+HHndtMoI/GwkWaln4CHr9Ng/OzuowHFby+0EiFe+Tz5mZ6I0j+Bwma2Ux+IiR
- vMkKMc6tUPVOhLiQMafoqx1+A+s1qctlvjlJbv8DxIt9DYWdBI4y0+eacKcdFLwoCJsj
- frzUpRw3R0rpxjCHZkUiQ57qR2ZAm5r/uSz8Sqe1I7pvDbiRMutDzFgs7UUCImQ84Yqk
- 02tNDs1hgL2JkAedVe7/Gt7wpGSBYqVCsELqwnbQ2Do3YV/XAAL7WXEc9MgdpW3U+yb7
- OV3Q==
-X-Gm-Message-State: AOAM530WFGZBoZpmE3jsUT6V6+znMuKQoAcp1+q9pBbl4u2YjH+JGmYv
- eEnpk7d1yRoTGXfmiklgMvPIeQ==
-X-Google-Smtp-Source: ABdhPJwIOJ6fFvVSJ5kBYtd2psAXOTCzGWFDo3o2VutegQrMaZI2qchJbhUSDGWDUWFvNSRlxhhfyg==
-X-Received: by 2002:a1c:4342:: with SMTP id q63mr2231079wma.112.1614337177200; 
- Fri, 26 Feb 2021 02:59:37 -0800 (PST)
-Received: from maple.lan (cpc141216-aztw34-2-0-cust174.18-1.cable.virginm.net.
- [80.7.220.175])
- by smtp.gmail.com with ESMTPSA id c2sm13067929wrx.70.2021.02.26.02.59.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Feb 2021 02:59:36 -0800 (PST)
-Date: Fri, 26 Feb 2021 10:59:34 +0000
-From: Daniel Thompson <daniel.thompson@linaro.org>
-To: Sumit Garg <sumit.garg@linaro.org>
-Message-ID: <20210226105934.gmppt6kubfadv4uf@maple.lan>
-References: <20210226095306.1236539-1-sumit.garg@linaro.org>
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1lFNBq-005QsB-U9
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 25 Feb 2021 20:24:58 +0000
+From: John Ogness <john.ogness@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020; t=1614284679;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=qDVKAKnnfPFs0Dxv5+kX2VVyNzrYE33K+BDYTVeJME8=;
+ b=Itg1HgnAQey3puEfZXpKRRf1RkHbrPWXsodppd3f9/agHLs59mQxmZvHrDVfXhn7TF2e+X
+ YgctQb8llo4ek4IXOH40pHKrSlSJUv+qmqSuRbNPlwERu5vmF3/VXIexN4FpY+8WHM5d4n
+ 3zHVITkWvbjhosz0zzfOytwQyTccmRTsG9uKDQ/PoVKslKdevkHeAS8FY/vBbTk7ZYAmwx
+ j9C6lcv4wUAstQLOYdbQOINDWx2UjXbjMRmTNEt/9KnzbRIvSmj2EXQuCLrXAd5jyQHGnB
+ 6degQSHuHB1F0v3eFX0HxngBtbRJympKrqQjrUQzvVBIk1MNI805LQYIDMpUAg==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020e; t=1614284679;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=qDVKAKnnfPFs0Dxv5+kX2VVyNzrYE33K+BDYTVeJME8=;
+ b=R+fgiTn80NtyboUkoI+34S01BUhJK8k4MSy2VNzuYCNOKjN83g0YvSMQCLvesqnrTwxeYZ
+ t+PogSzB5duz2fCg==
+To: Petr Mladek <pmladek@suse.com>
+Date: Thu, 25 Feb 2021 21:24:23 +0100
+Message-Id: <20210225202438.28985-1-john.ogness@linutronix.de>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20210226095306.1236539-1-sumit.garg@linaro.org>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.128.47 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.128.47 listed in wl.mailspike.net]
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: get_maintainer.pl]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -94,9 +76,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1lFaqV-006AP3-IB
-Subject: Re: [Kgdb-bugreport] [PATCH v2] kdb: Get rid of custom debug heap
- allocator
+X-Headers-End: 1lFNBq-005QsB-U9
+X-Mailman-Approved-At: Fri, 26 Feb 2021 11:03:00 +0000
+Subject: [Kgdb-bugreport] [PATCH next v3 00/15] printk: remove logbuf_lock
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,84 +90,120 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: kgdb-bugreport@lists.sourceforge.net, linux-kernel@vger.kernel.org,
- jason.wessel@windriver.com
+Cc: linux-hyperv@vger.kernel.org,
+ Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>,
+ Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+ linux-mtd@lists.infradead.org, Michael Ellerman <mpe@ellerman.id.au>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ "K. Y. Srinivasan" <kys@microsoft.com>, Thomas Meyer <thomas@m3y3r.de>,
+ Kees Cook <keescook@chromium.org>,
+ Daniel Thompson <daniel.thompson@linaro.org>,
+ Madhavan Srinivasan <maddy@linux.ibm.com>,
+ Stephen Hemminger <sthemmin@microsoft.com>,
+ Richard Weinberger <richard@nod.at>, Anton Vorontsov <anton@enomsg.org>,
+ Joel Stanley <joel@jms.id.au>, Jordan Niethe <jniethe5@gmail.com>,
+ Anton Ivanov <anton.ivanov@cambridgegreys.com>, Wei Li <liwei391@huawei.com>,
+ Haiyang Zhang <haiyangz@microsoft.com>,
+ Ravi Bangoria <ravi.bangoria@linux.ibm.com>,
+ Pavel Tatashin <pasha.tatashin@soleen.com>,
+ Alistair Popple <alistair@popple.id.au>, Jeff Dike <jdike@addtoit.com>,
+ Colin Cross <ccross@android.com>, linux-um@lists.infradead.org,
+ Wei Liu <wei.liu@kernel.org>, Steven Rostedt <rostedt@goodmis.org>,
+ Davidlohr Bueso <dave@stgolabs.net>, Nicholas Piggin <npiggin@gmail.com>,
+ Oleg Nesterov <oleg@redhat.com>, Thomas Gleixner <tglx@linutronix.de>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Michael Kelley <mikelley@microsoft.com>,
+ Christophe Leroy <christophe.leroy@c-s.fr>, Tony Luck <tony.luck@intel.com>,
+ linux-kernel@vger.kernel.org,
+ Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
+ Jason Wessel <jason.wessel@windriver.com>,
+ kgdb-bugreport@lists.sourceforge.net, Paul Mackerras <paulus@samba.org>,
+ linuxppc-dev@lists.ozlabs.org, Mike Rapoport <rppt@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Fri, Feb 26, 2021 at 03:23:06PM +0530, Sumit Garg wrote:
-> Currently the only user for debug heap is kdbnearsym() which can be
-> modified to rather ask the caller to supply a buffer for symbol name.
-> So do that and modify kdbnearsym() callers to pass a symbol name buffer
-> allocated statically and hence remove custom debug heap allocator.
+Hello,
 
-Why make the callers do this?
+Here is v3 of a series to remove @logbuf_lock, exposing the
+ringbuffer locklessly to both readers and writers. v2 is here [0].
 
-The LRU buffers were managed inside kdbnearsym() why does switching to
-an approach with a single buffer require us to push that buffer out to
-the callers?
+Since @logbuf_lock was protecting much more than just the
+ringbuffer, this series clarifies and cleans up the various
+protections using comments, lockless accessors, atomic types, and a
+new finer-grained @syslog_lock.
 
+Removing @logbuf_lock required changing the semantics of the
+kmsg_dumper callback in order to work locklessly. Since this
+involved touching all the kmsg_dump users, we also decided [1] to
+use this opportunity to clean up and clarify the kmsg_dump semantics
+in general.
 
-> diff --git a/kernel/debug/kdb/kdb_main.c b/kernel/debug/kdb/kdb_main.c
-> index 9d69169582c6..6efe9ec53906 100644
-> --- a/kernel/debug/kdb/kdb_main.c
-> +++ b/kernel/debug/kdb/kdb_main.c
-> @@ -526,6 +526,7 @@ int kdbgetaddrarg(int argc, const char **argv, int *nextarg,
+This series is based on next-20210225.
 
-The documentation comment for this function has not been updated to
-describe the new contract on callers of this function (e.g. if they
-consume the symbol name they must do so before calling kdbgetaddrarg()
-(and maybe kdbnearsym() again).
+Changes since v2:
 
+- use get_maintainer.pl to get the full list of developers that
+  should at least see the changes in their respective areas
 
->  	char symbol = '\0';
->  	char *cp;
->  	kdb_symtab_t symtab;
-> +	static char namebuf[KSYM_NAME_LEN];
->  
->  	/*
->  	 * If the enable flags prohibit both arbitrary memory access
-> diff --git a/kernel/debug/kdb/kdb_support.c b/kernel/debug/kdb/kdb_support.c
-> index b59aad1f0b55..9b907a84f2db 100644
-> --- a/kernel/debug/kdb/kdb_support.c
-> +++ b/kernel/debug/kdb/kdb_support.c
-> @@ -57,8 +57,6 @@ int kdbgetsymval(const char *symname, kdb_symtab_t *symtab)
->  }
->  EXPORT_SYMBOL(kdbgetsymval);
->  
-> -static char *kdb_name_table[100];	/* arbitrary size */
-> -
->  /*
->   * kdbnearsym -	Return the name of the symbol with the nearest address
->   *	less than 'addr'.
+- do not disable interrupts in arch/um kmsg_dumper (because there is
+  no need to)
 
-Again the documentation comment has not been updated and, in this case,
-is now misleading.
+- protect the mtd/mtdoops kmsg_dumper buffer against concurrent
+  dumps
 
-If we move the static buffer here then the remarks section on this
-function is a really good place to describe what the callers must do to
-manage the static buffer safely as well as a convenient place to mention
-that we tolerate the reuse of the static buffer if kdb is re-entered
-becase a) kdb is broken if that happens and b) we are crash resilient
-if if does.
+- update kerneldoc for kmsg_dump_get_line() (@len_out)
 
+- remove ksmg_dump's @active flag
 
-> @@ -79,13 +77,11 @@ static char *kdb_name_table[100];	/* arbitrary size */
->   *	hold active strings, no kdb caller of kdbnearsym makes more
->   *	than ~20 later calls before using a saved value.
->   */
-> -int kdbnearsym(unsigned long addr, kdb_symtab_t *symtab)
-> +int kdbnearsym(unsigned long addr, kdb_symtab_t *symtab, char *namebuf)
+- change kmsg_dumper callback to:
+  void (*dump)(enum kmsg_dump_reason reason);
 
-As above, I don't understand why we need to add namebuf here. I think
-the prototype can remain the same.
+- rename kmsg_dumper_iter to kmsg_dump_iter
 
-Think of it simple that we have reduce the cache from having 100 entries
-to having just 1 ;-) .
+- update kmsg_dumpers to use their own kmsg_dump_iter (and
+  initialize it with kmsg_dump_rewind() if necessary)
 
+John Ogness
 
-Daniel.
+[0] https://lkml.kernel.org/r/20210218081817.28849-1-john.ogness@linutronix.de
+[1] https://lkml.kernel.org/r/YDeZAA08NKCHa4s%2F@alley
+
+John Ogness (15):
+  um: synchronize kmsg_dumper
+  mtd: mtdoops: synchronize kmsg_dumper
+  printk: limit second loop of syslog_print_all
+  printk: kmsg_dump: remove unused fields
+  printk: refactor kmsg_dump_get_buffer()
+  printk: consolidate kmsg_dump_get_buffer/syslog_print_all code
+  printk: introduce CONSOLE_LOG_MAX for improved multi-line support
+  printk: use seqcount_latch for clear_seq
+  printk: use atomic64_t for devkmsg_user.seq
+  printk: add syslog_lock
+  printk: kmsg_dumper: remove @active field
+  printk: introduce a kmsg_dump iterator
+  printk: remove logbuf_lock
+  printk: kmsg_dump: remove _nolock() variants
+  printk: console: remove unnecessary safe buffer usage
+
+ arch/powerpc/kernel/nvram_64.c             |  14 +-
+ arch/powerpc/platforms/powernv/opal-kmsg.c |   3 +-
+ arch/powerpc/xmon/xmon.c                   |   6 +-
+ arch/um/kernel/kmsg_dump.c                 |  15 +-
+ drivers/hv/vmbus_drv.c                     |   7 +-
+ drivers/mtd/mtdoops.c                      |  20 +-
+ fs/pstore/platform.c                       |   8 +-
+ include/linux/kmsg_dump.h                  |  49 +--
+ kernel/debug/kdb/kdb_main.c                |  10 +-
+ kernel/printk/internal.h                   |   4 +-
+ kernel/printk/printk.c                     | 456 ++++++++++-----------
+ kernel/printk/printk_safe.c                |  27 +-
+ 12 files changed, 309 insertions(+), 310 deletions(-)
+
+-- 
+2.20.1
+
 
 
 _______________________________________________
