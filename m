@@ -2,88 +2,87 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B597F3261AE
+	by mail.lfdr.de (Postfix) with ESMTPS id DA53D3261B1
 	for <lists+kgdb-bugreport@lfdr.de>; Fri, 26 Feb 2021 12:03:02 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1lFath-00069Q-JU
+	id 1lFath-00069u-Ny
 	for lists+kgdb-bugreport@lfdr.de; Fri, 26 Feb 2021 11:03:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <john.ogness@linutronix.de>) id 1lFNBy-0003rM-NV
- for kgdb-bugreport@lists.sourceforge.net; Thu, 25 Feb 2021 20:24:58 +0000
+ (envelope-from <john.ogness@linutronix.de>) id 1lFY29-0008NZ-GB
+ for kgdb-bugreport@lists.sourceforge.net; Fri, 26 Feb 2021 07:59:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=2Gfs86MRR/HIf8qjS9ZT5ZBnpaj1z3IcrEotyUzGR2E=; b=K16meHM3b9K0HEzDIh8cYmK77x
- ZC6Dhx4OWJJMXVcOCXGLa9TA3np5PifEfbO3dj83Lp6sdPryITQXYG9rHEdkRO1xDZp8jiW/dw1P6
- FCXM8bd1gkzgjSqyqO27IgJD+Ve25HLMp4q9SB5PrtRFcDKPMEzjU1EG6shFq7jsR2UI=;
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:
+ References:In-Reply-To:Subject:Cc:To:From:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=As1fDYfwKrjxkKoe6zW8X2eDIPaM0LZx7cH6HHLoVWs=; b=hjVi40i6lTbOHAeVU39ZL7nBa
+ NS1EyepTxKfH1QLdGsVe0Sa6On/91YqskSlHMpLPJ1Sy64TDcCgCJ7KqCEivKvuIMUSHoiTzy7Iuo
+ iE9skWZU0GK3fpRVF1Qr5eEdup+Car2IJ1hP9VfqV2/UyoljIhAJFgauP43DEG9xL6bkE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=Content-Type:MIME-Version:Message-ID:Date:References:In-Reply-To:Subject:
+ Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=2Gfs86MRR/HIf8qjS9ZT5ZBnpaj1z3IcrEotyUzGR2E=; b=IzUkoTN/SfXCQtiLH5moJ/r5vC
- yB+X8dQeMGACYwKwIa+3WB/ojOWjoqqxEhVfRPPseFtO/jrYqSADkkt0rwcVYDO/iUpQvWp3dQWxb
- q/mhg8Be7PxYJfxUIu+05xCLAbjWvMy6C/sv0TT8+8fHnsxzrQ6ZvYFMP5jBzu9Bbye4=;
+ bh=As1fDYfwKrjxkKoe6zW8X2eDIPaM0LZx7cH6HHLoVWs=; b=G379B/gEEOh4z/TlbeEW/bSyiS
+ +x4fZalPOUqu6uWldC1c496w5TBfVOYCB9EsJEAcTYThXD78j/9oFGhkWpup8xOY8Kq8nMjs+kEpx
+ Hh68YCYJsaBOSQ0aNnxVMV27oynFhbcPoQZ7BsTkPzLPRAG3LbpmMfBgGV5JdND3A5sk=;
 Received: from galois.linutronix.de ([193.142.43.55])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1lFNBt-005QsO-MH
- for kgdb-bugreport@lists.sourceforge.net; Thu, 25 Feb 2021 20:24:58 +0000
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ id 1lFY1x-0001Q5-Ix
+ for kgdb-bugreport@lists.sourceforge.net; Fri, 26 Feb 2021 07:59:33 +0000
 From: John Ogness <john.ogness@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1614284687;
+ s=2020; t=1614326352;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=2Gfs86MRR/HIf8qjS9ZT5ZBnpaj1z3IcrEotyUzGR2E=;
- b=lulIOwnuyU3hd/34KyMUx7ZFGNNdseWIGnmk9oyARB+psVa+gwZ1G9Xq6W1/sETRB0Y0cT
- 76f/S43QXtg23OwOevaSwfLS9mKZy/VjTO3zsAMrM02VxLZDByEP7jPv5x57ePIKaGQ5kE
- fqygiDs8QaBDHz9ZmEiTZBBpkDrqZWLviyZDsxNAOBtzCD4TGTUjVLBU4hTAhBzHBJlUqS
- M2ZMEF50ojDbTEN2iN+JqWDOmeR7DFEL3JpvuXmmObWw7lLWDyiHWO1PB5UWstma0kJBJ7
- 9cU7tZNaVjcSLJpfZmkFAMES+5hOTrDBAFzM4HvE1PDACj0QVUvnZT7w724Faw==
+ bh=As1fDYfwKrjxkKoe6zW8X2eDIPaM0LZx7cH6HHLoVWs=;
+ b=gbarmf2Qo6ckmhKhSwECGeeDceFfmjCgsZgbKbhtGOe/ZVnrkkWOYHfk9EX/OvaW1rRLNX
+ 6LDrpfCyyASzExo2fQH3Wk6USh9mNHHsgvWuAZ0ub5xdUjEt5EUT6Vf5DxDGxiufDDA0dD
+ kAFR/HOCf19ewbMg3sDq6t6oq6IKm2/gnMZWkiBdDzKAc77Xol8evKFMxq42TLN5Mzy7Uy
+ RNyNAhsLGReJ53TJjBHzeNEoYHPjH6oRD0CNEhJq1Rdjk6kLa+SaZ2TLx2X4caPC7LziSo
+ LSCkRonnaAQbURvC/8avcnpGuSbPy+eih3OFwIP0fu687A4UJ2O4SpEJooilEQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1614284687;
+ s=2020e; t=1614326352;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=2Gfs86MRR/HIf8qjS9ZT5ZBnpaj1z3IcrEotyUzGR2E=;
- b=kJjC2HdFMTtlJGouQmxH7HQD/YDJ7f3i2SUg/u42twc7gzOZhHLeKKxgP3jL+zaTHIv7Cw
- daPYXYV4xAlealBw==
+ bh=As1fDYfwKrjxkKoe6zW8X2eDIPaM0LZx7cH6HHLoVWs=;
+ b=oBzcI9hkvNT1WswvpyoaczL8Miw+ylH42+GPWw36ZoSpeUkMPSwywAxm3+Z0cvgGSedn2L
+ iPW16K6EswEd9nAg==
 To: Petr Mladek <pmladek@suse.com>
-Date: Thu, 25 Feb 2021 21:24:37 +0100
-Message-Id: <20210225202438.28985-15-john.ogness@linutronix.de>
-In-Reply-To: <20210225202438.28985-1-john.ogness@linutronix.de>
+In-Reply-To: <20210225202438.28985-13-john.ogness@linutronix.de>
 References: <20210225202438.28985-1-john.ogness@linutronix.de>
+ <20210225202438.28985-13-john.ogness@linutronix.de>
+Date: Fri, 26 Feb 2021 08:59:10 +0100
+Message-ID: <87a6rrxnsh.fsf@jogness.linutronix.de>
 MIME-Version: 1.0
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: suse.com]
+ for more information. [URIs: githubusercontent.com]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1lFNBt-005QsO-MH
+X-Headers-End: 1lFY1x-0001Q5-Ix
 X-Mailman-Approved-At: Fri, 26 Feb 2021 11:03:00 +0000
-Subject: [Kgdb-bugreport] [PATCH next v3 14/15] printk: kmsg_dump: remove
- _nolock() variants
+Subject: Re: [Kgdb-bugreport] [PATCH next v3 12/15] printk: introduce a
+ kmsg_dump iterator
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -95,244 +94,125 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>,
+Cc: linux-hyperv@vger.kernel.org,
+ Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>,
  Benjamin Herrenschmidt <benh@kernel.crashing.org>,
- Paul Mackerras <paulus@samba.org>, Kees Cook <keescook@chromium.org>,
- Daniel Thompson <daniel.thompson@linaro.org>,
+ Paul Mackerras <paulus@samba.org>, Miquel Raynal <miquel.raynal@bootlin.com>,
+ "K. Y. Srinivasan" <kys@microsoft.com>, Thomas Meyer <thomas@m3y3r.de>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Wei Liu <wei.liu@kernel.org>,
  Madhavan Srinivasan <maddy@linux.ibm.com>,
- Michael Ellerman <mpe@ellerman.id.au>, Jordan Niethe <jniethe5@gmail.com>,
- Wei Li <liwei391@huawei.com>, Ravi Bangoria <ravi.bangoria@linux.ibm.com>,
- Pavel Tatashin <pasha.tatashin@soleen.com>,
- Alistair Popple <alistair@popple.id.au>, Steven Rostedt <rostedt@goodmis.org>,
- Davidlohr Bueso <dave@stgolabs.net>, Nicholas Piggin <npiggin@gmail.com>,
- Thomas Gleixner <tglx@linutronix.de>, linux-kernel@vger.kernel.org,
- Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
+ Stephen Hemminger <sthemmin@microsoft.com>, kernel test robot <lkp@intel.com>,
+ Michael Ellerman <mpe@ellerman.id.au>, Anton Vorontsov <anton@enomsg.org>,
+ clang-built-linux@googlegroups.com, Joel Stanley <joel@jms.id.au>,
  Jason Wessel <jason.wessel@windriver.com>,
- kgdb-bugreport@lists.sourceforge.net, linuxppc-dev@lists.ozlabs.org,
+ Anton Ivanov <anton.ivanov@cambridgegreys.com>, Wei Li <liwei391@huawei.com>,
+ Haiyang Zhang <haiyangz@microsoft.com>,
+ Ravi Bangoria <ravi.bangoria@linux.ibm.com>, Kees Cook <keescook@chromium.org>,
+ Alistair Popple <alistair@popple.id.au>, Jeff Dike <jdike@addtoit.com>,
+ Colin Cross <ccross@android.com>, linux-um@lists.infradead.org,
+ Daniel Thompson <daniel.thompson@linaro.org>,
+ Steven Rostedt <rostedt@goodmis.org>, Davidlohr Bueso <dave@stgolabs.net>,
+ Nicholas Piggin <npiggin@gmail.com>, Oleg Nesterov <oleg@redhat.com>,
+ Thomas Gleixner <tglx@linutronix.de>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Jordan Niethe <jniethe5@gmail.com>, Michael Kelley <mikelley@microsoft.com>,
+ Christophe Leroy <christophe.leroy@c-s.fr>, Tony Luck <tony.luck@intel.com>,
+ kbuild-all@lists.01.org, Pavel Tatashin <pasha.tatashin@soleen.com>,
+ linux-kernel@vger.kernel.org,
+ Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
+ Richard Weinberger <richard@nod.at>, kgdb-bugreport@lists.sourceforge.net,
+ linux-mtd@lists.infradead.org, linuxppc-dev@lists.ozlabs.org,
  Mike Rapoport <rppt@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-kmsg_dump_rewind() and kmsg_dump_get_line() are lockless, so there is
-no need for _nolock() variants. Remove these functions and switch all
-callers of the _nolock() variants.
+Hello,
 
-The functions without _nolock() were chosen because they are already
-exported to kernel modules.
+Thank you kernel test robot!
 
-Signed-off-by: John Ogness <john.ogness@linutronix.de>
-Reviewed-by: Petr Mladek <pmladek@suse.com>
----
- arch/powerpc/xmon/xmon.c    |  4 +--
- include/linux/kmsg_dump.h   | 16 ----------
- kernel/debug/kdb/kdb_main.c |  8 ++---
- kernel/printk/printk.c      | 60 +++++--------------------------------
- 4 files changed, 14 insertions(+), 74 deletions(-)
+Despite all of my efforts to carefully construct and test this series,
+somehome I managed to miss a compile test with CONFIG_MTD_OOPS. That
+kmsg_dumper does require the dumper parameter so that it can use
+container_of().
 
-diff --git a/arch/powerpc/xmon/xmon.c b/arch/powerpc/xmon/xmon.c
-index 5978b90a885f..bf7d69625a2e 100644
---- a/arch/powerpc/xmon/xmon.c
-+++ b/arch/powerpc/xmon/xmon.c
-@@ -3013,9 +3013,9 @@ dump_log_buf(void)
- 	catch_memory_errors = 1;
- 	sync();
- 
--	kmsg_dump_rewind_nolock(&iter);
-+	kmsg_dump_rewind(&iter);
- 	xmon_start_pagination();
--	while (kmsg_dump_get_line_nolock(&iter, false, buf, sizeof(buf), &len)) {
-+	while (kmsg_dump_get_line(&iter, false, buf, sizeof(buf), &len)) {
- 		buf[len] = '\0';
- 		printf("%s", buf);
- 	}
-diff --git a/include/linux/kmsg_dump.h b/include/linux/kmsg_dump.h
-index 5d3bf20f9f0a..532673b6570a 100644
---- a/include/linux/kmsg_dump.h
-+++ b/include/linux/kmsg_dump.h
-@@ -57,17 +57,12 @@ struct kmsg_dumper {
- #ifdef CONFIG_PRINTK
- void kmsg_dump(enum kmsg_dump_reason reason);
- 
--bool kmsg_dump_get_line_nolock(struct kmsg_dump_iter *iter, bool syslog,
--			       char *line, size_t size, size_t *len);
--
- bool kmsg_dump_get_line(struct kmsg_dump_iter *iter, bool syslog,
- 			char *line, size_t size, size_t *len);
- 
- bool kmsg_dump_get_buffer(struct kmsg_dump_iter *iter, bool syslog,
- 			  char *buf, size_t size, size_t *len_out);
- 
--void kmsg_dump_rewind_nolock(struct kmsg_dump_iter *iter);
--
- void kmsg_dump_rewind(struct kmsg_dump_iter *iter);
- 
- int kmsg_dump_register(struct kmsg_dumper *dumper);
-@@ -80,13 +75,6 @@ static inline void kmsg_dump(enum kmsg_dump_reason reason)
- {
- }
- 
--static inline bool kmsg_dump_get_line_nolock(struct kmsg_dump_iter *iter,
--					     bool syslog, const char *line,
--					     size_t size, size_t *len)
--{
--	return false;
--}
--
- static inline bool kmsg_dump_get_line(struct kmsg_dump_iter *iter, bool syslog,
- 				const char *line, size_t size, size_t *len)
- {
-@@ -99,10 +87,6 @@ static inline bool kmsg_dump_get_buffer(struct kmsg_dump_iter *iter, bool syslog
- 	return false;
- }
- 
--static inline void kmsg_dump_rewind_nolock(struct kmsg_dump_iter *iter)
--{
--}
--
- static inline void kmsg_dump_rewind(struct kmsg_dump_iter *iter)
- {
- }
-diff --git a/kernel/debug/kdb/kdb_main.c b/kernel/debug/kdb/kdb_main.c
-index 8544d7a55a57..67d9f2403b52 100644
---- a/kernel/debug/kdb/kdb_main.c
-+++ b/kernel/debug/kdb/kdb_main.c
-@@ -2126,8 +2126,8 @@ static int kdb_dmesg(int argc, const char **argv)
- 		kdb_set(2, setargs);
- 	}
- 
--	kmsg_dump_rewind_nolock(&iter);
--	while (kmsg_dump_get_line_nolock(&iter, 1, NULL, 0, NULL))
-+	kmsg_dump_rewind(&iter);
-+	while (kmsg_dump_get_line(&iter, 1, NULL, 0, NULL))
- 		n++;
- 
- 	if (lines < 0) {
-@@ -2159,8 +2159,8 @@ static int kdb_dmesg(int argc, const char **argv)
- 	if (skip >= n || skip < 0)
- 		return 0;
- 
--	kmsg_dump_rewind_nolock(&iter);
--	while (kmsg_dump_get_line_nolock(&iter, 1, buf, sizeof(buf), &len)) {
-+	kmsg_dump_rewind(&iter);
-+	while (kmsg_dump_get_line(&iter, 1, buf, sizeof(buf), &len)) {
- 		if (skip) {
- 			skip--;
- 			continue;
-diff --git a/kernel/printk/printk.c b/kernel/printk/printk.c
-index 01385ea92e7c..15a9bc409e0a 100644
---- a/kernel/printk/printk.c
-+++ b/kernel/printk/printk.c
-@@ -3373,7 +3373,7 @@ void kmsg_dump(enum kmsg_dump_reason reason)
- }
- 
- /**
-- * kmsg_dump_get_line_nolock - retrieve one kmsg log line (unlocked version)
-+ * kmsg_dump_get_line - retrieve one kmsg log line
-  * @iter: kmsg dump iterator
-  * @syslog: include the "<4>" prefixes
-  * @line: buffer to copy the line to
-@@ -3388,18 +3388,18 @@ void kmsg_dump(enum kmsg_dump_reason reason)
-  *
-  * A return value of FALSE indicates that there are no more records to
-  * read.
-- *
-- * The function is similar to kmsg_dump_get_line(), but grabs no locks.
-  */
--bool kmsg_dump_get_line_nolock(struct kmsg_dump_iter *iter, bool syslog,
--			       char *line, size_t size, size_t *len)
-+bool kmsg_dump_get_line(struct kmsg_dump_iter *iter, bool syslog,
-+			char *line, size_t size, size_t *len)
- {
- 	struct printk_info info;
- 	unsigned int line_count;
- 	struct printk_record r;
-+	unsigned long flags;
- 	size_t l = 0;
- 	bool ret = false;
- 
-+	printk_safe_enter_irqsave(flags);
- 	prb_rec_init_rd(&r, &info, line, size);
- 
- 	/* Read text or count text lines? */
-@@ -3420,40 +3420,11 @@ bool kmsg_dump_get_line_nolock(struct kmsg_dump_iter *iter, bool syslog,
- 	iter->cur_seq = r.info->seq + 1;
- 	ret = true;
- out:
-+	printk_safe_exit_irqrestore(flags);
- 	if (len)
- 		*len = l;
- 	return ret;
- }
--
--/**
-- * kmsg_dump_get_line - retrieve one kmsg log line
-- * @iter: kmsg dump iterator
-- * @syslog: include the "<4>" prefixes
-- * @line: buffer to copy the line to
-- * @size: maximum size of the buffer
-- * @len: length of line placed into buffer
-- *
-- * Start at the beginning of the kmsg buffer, with the oldest kmsg
-- * record, and copy one record into the provided buffer.
-- *
-- * Consecutive calls will return the next available record moving
-- * towards the end of the buffer with the youngest messages.
-- *
-- * A return value of FALSE indicates that there are no more records to
-- * read.
-- */
--bool kmsg_dump_get_line(struct kmsg_dump_iter *iter, bool syslog,
--			char *line, size_t size, size_t *len)
--{
--	unsigned long flags;
--	bool ret;
--
--	printk_safe_enter_irqsave(flags);
--	ret = kmsg_dump_get_line_nolock(iter, syslog, line, size, len);
--	printk_safe_exit_irqrestore(flags);
--
--	return ret;
--}
- EXPORT_SYMBOL_GPL(kmsg_dump_get_line);
- 
- /**
-@@ -3542,22 +3513,6 @@ bool kmsg_dump_get_buffer(struct kmsg_dump_iter *iter, bool syslog,
- }
- EXPORT_SYMBOL_GPL(kmsg_dump_get_buffer);
- 
--/**
-- * kmsg_dump_rewind_nolock - reset the iterator (unlocked version)
-- * @iter: kmsg dump iterator
-- *
-- * Reset the dumper's iterator so that kmsg_dump_get_line() and
-- * kmsg_dump_get_buffer() can be called again and used multiple
-- * times within the same dumper.dump() callback.
-- *
-- * The function is similar to kmsg_dump_rewind(), but grabs no locks.
-- */
--void kmsg_dump_rewind_nolock(struct kmsg_dump_iter *iter)
--{
--	iter->cur_seq = latched_seq_read_nolock(&clear_seq);
--	iter->next_seq = prb_next_seq(prb);
--}
--
- /**
-  * kmsg_dump_rewind - reset the iterator
-  * @iter: kmsg dump iterator
-@@ -3571,7 +3526,8 @@ void kmsg_dump_rewind(struct kmsg_dump_iter *iter)
- 	unsigned long flags;
- 
- 	printk_safe_enter_irqsave(flags);
--	kmsg_dump_rewind_nolock(iter);
-+	iter->cur_seq = latched_seq_read_nolock(&clear_seq);
-+	iter->next_seq = prb_next_seq(prb);
- 	printk_safe_exit_irqrestore(flags);
- }
- EXPORT_SYMBOL_GPL(kmsg_dump_rewind);
--- 
-2.20.1
+I will discuss this with the printk team. But most likely we will just
+re-instate the dumper parameter in the callback.
 
+I apologize for the lack of care on my part.
+
+John Ogness
+
+On 2021-02-26, kernel test robot <lkp@intel.com> wrote:
+> Hi John,
+>
+> I love your patch! Yet something to improve:
+>
+> [auto build test ERROR on next-20210225]
+>
+> url:    https://github.com/0day-ci/linux/commits/John-Ogness/printk-remove-logbuf_lock/20210226-043457
+> base:    7f206cf3ec2bee4621325cfacb2588e5085c07f5
+> config: arm-randconfig-r024-20210225 (attached as .config)
+> compiler: clang version 13.0.0 (https://github.com/llvm/llvm-project a921aaf789912d981cbb2036bdc91ad7289e1523)
+> reproduce (this is a W=1 build):
+>         wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
+>         chmod +x ~/bin/make.cross
+>         # install arm cross compiling tool for clang build
+>         # apt-get install binutils-arm-linux-gnueabi
+>         # https://github.com/0day-ci/linux/commit/fc7f655cded40fc98ba5304c200e3a01e8291fb4
+>         git remote add linux-review https://github.com/0day-ci/linux
+>         git fetch --no-tags linux-review John-Ogness/printk-remove-logbuf_lock/20210226-043457
+>         git checkout fc7f655cded40fc98ba5304c200e3a01e8291fb4
+>         # save the attached .config to linux build tree
+>         COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross ARCH=arm 
+>
+> If you fix the issue, kindly add following tag as appropriate
+> Reported-by: kernel test robot <lkp@intel.com>
+>
+> All errors (new ones prefixed by >>):
+>
+>>> drivers/mtd/mtdoops.c:277:45: error: use of undeclared identifier 'dumper'
+>            struct mtdoops_context *cxt = container_of(dumper,
+>                                                       ^
+>>> drivers/mtd/mtdoops.c:277:45: error: use of undeclared identifier 'dumper'
+>>> drivers/mtd/mtdoops.c:277:45: error: use of undeclared identifier 'dumper'
+>    3 errors generated.
+>
+>
+> vim +/dumper +277 drivers/mtd/mtdoops.c
+>
+> 4b23aff083649e Richard Purdie 2007-05-29  274  
+> fc7f655cded40f John Ogness    2021-02-25  275  static void mtdoops_do_dump(enum kmsg_dump_reason reason)
+> 2e386e4bac9055 Simon Kagstrom 2009-11-03  276  {
+> 2e386e4bac9055 Simon Kagstrom 2009-11-03 @277  	struct mtdoops_context *cxt = container_of(dumper,
+> 2e386e4bac9055 Simon Kagstrom 2009-11-03  278  			struct mtdoops_context, dump);
+> fc7f655cded40f John Ogness    2021-02-25  279  	struct kmsg_dump_iter iter;
+> fc2d557c74dc58 Seiji Aguchi   2011-01-12  280  
+> 2e386e4bac9055 Simon Kagstrom 2009-11-03  281  	/* Only dump oopses if dump_oops is set */
+> 2e386e4bac9055 Simon Kagstrom 2009-11-03  282  	if (reason == KMSG_DUMP_OOPS && !dump_oops)
+> 2e386e4bac9055 Simon Kagstrom 2009-11-03  283  		return;
+> 2e386e4bac9055 Simon Kagstrom 2009-11-03  284  
+> fc7f655cded40f John Ogness    2021-02-25  285  	kmsg_dump_rewind(&iter);
+> fc7f655cded40f John Ogness    2021-02-25  286  
+> df92cad8a03e83 John Ogness    2021-02-25  287  	if (test_and_set_bit(0, &cxt->oops_buf_busy))
+> df92cad8a03e83 John Ogness    2021-02-25  288  		return;
+> fc7f655cded40f John Ogness    2021-02-25  289  	kmsg_dump_get_buffer(&iter, true, cxt->oops_buf + MTDOOPS_HEADER_SIZE,
+> e2ae715d66bf4b Kay Sievers    2012-06-15  290  			     record_size - MTDOOPS_HEADER_SIZE, NULL);
+> df92cad8a03e83 John Ogness    2021-02-25  291  	clear_bit(0, &cxt->oops_buf_busy);
+> 2e386e4bac9055 Simon Kagstrom 2009-11-03  292  
+> c1cf1d57d14922 Mark Tomlinson 2020-09-03  293  	if (reason != KMSG_DUMP_OOPS) {
+> 2e386e4bac9055 Simon Kagstrom 2009-11-03  294  		/* Panics must be written immediately */
+> 2e386e4bac9055 Simon Kagstrom 2009-11-03  295  		mtdoops_write(cxt, 1);
+> c1cf1d57d14922 Mark Tomlinson 2020-09-03  296  	} else {
+> 2e386e4bac9055 Simon Kagstrom 2009-11-03  297  		/* For other cases, schedule work to write it "nicely" */
+> 2e386e4bac9055 Simon Kagstrom 2009-11-03  298  		schedule_work(&cxt->work_write);
+> 2e386e4bac9055 Simon Kagstrom 2009-11-03  299  	}
+> c1cf1d57d14922 Mark Tomlinson 2020-09-03  300  }
+> 4b23aff083649e Richard Purdie 2007-05-29  301  
+>
+> ---
+> 0-DAY CI Kernel Test Service, Intel Corporation
+> https://lists.01.org/hyperkitty/list/kbuild-all@lists.01.org
 
 
 _______________________________________________
