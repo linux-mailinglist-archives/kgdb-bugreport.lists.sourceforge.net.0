@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4E86B325DD6
-	for <lists+kgdb-bugreport@lfdr.de>; Fri, 26 Feb 2021 08:02:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 82533325E40
+	for <lists+kgdb-bugreport@lfdr.de>; Fri, 26 Feb 2021 08:24:54 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1lFX8z-0004Kl-2j
-	for lists+kgdb-bugreport@lfdr.de; Fri, 26 Feb 2021 07:02:33 +0000
+	id 1lFXUb-0005BD-85
+	for lists+kgdb-bugreport@lfdr.de; Fri, 26 Feb 2021 07:24:53 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sumit.garg@linaro.org>) id 1lFX8w-0004Kd-Jv
- for kgdb-bugreport@lists.sourceforge.net; Fri, 26 Feb 2021 07:02:30 +0000
+ (envelope-from <sumit.garg@linaro.org>) id 1lFXUV-0005AZ-VP
+ for kgdb-bugreport@lists.sourceforge.net; Fri, 26 Feb 2021 07:24:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
  In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
  :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=x49OuNAA7q3ldYJSjcOEu3pJBfD36s7mXciQbRekJb0=; b=IgV1Gp04+1wzpbdCwrzee8Xol9
- TtkXFjNCR5boFgPS5P/Jpv+UJ6mYbamZsjm1Ez3/s3NXXm4sMAvikyusInbomRAvgbTMRhEQ7MZYU
- uFwVx7Nqd3A1D/T7xh25ccs4RVGmhWyCYVRvAceFmX4LLIIJbLUR9kvdySj7g9zIVdUg=;
+ bh=LUBVX8ozr8RqHX/7AAsYiGZIyVumZxGTezpPl2oo3n0=; b=SxWsxFQ8/5tseV9X0rbfLffGwu
+ t6Sx0YIb9nPfuVBpVB6szKWITX1JGQaEwdwXPFvEYQr8YsLXr6Sik06mSGenWeMpVIIfiVODdKlAq
+ 48hLZdInEP8Bh4cToScmJUT5yuvFkqhHL5ZOeLqC1Oe2eNnV+bDfVbLb8EhwEGnpkJfU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
@@ -30,49 +30,49 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=x49OuNAA7q3ldYJSjcOEu3pJBfD36s7mXciQbRekJb0=; b=buIl7a+Dpg6d8Ncj/1J+VD+/H+
- ZvboizWJkQh7PJvMTqLsoK5pHyVtO1i/XL7W+FPOgsQJ5Rkf+6Awjg7nvSjPQUy9eMPE8qqpaTKKs
- Ee6YFBQlerbNmuLIGxSoPLxTlym6uexY5h+TIvlF+PUqJrMhwiEGVOeGxB3c4hXzhub8=;
-Received: from mail-lf1-f51.google.com ([209.85.167.51])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1lFX8r-005wbI-63
- for kgdb-bugreport@lists.sourceforge.net; Fri, 26 Feb 2021 07:02:30 +0000
-Received: by mail-lf1-f51.google.com with SMTP id a17so11912700lfb.1
+ bh=LUBVX8ozr8RqHX/7AAsYiGZIyVumZxGTezpPl2oo3n0=; b=TAYYUXx6dShABS5PBe5ReMSHl6
+ Vrp0Nr8xXVu6AnvywjzNXcWUmN/sv+ICSclFswNyxJPGMHLV0X8V7LDgmYcYZMnfz3ft7g+6RdED5
+ xlBDlIkfbePrYqXwIY6a+jvuUJu4dHNdMF9nSFlNZqOhY+YwbEGBgKSmejXRYGiMj81o=;
+Received: from mail-lj1-f180.google.com ([209.85.208.180])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
+ id 1lFXUM-0000AK-7Z
+ for kgdb-bugreport@lists.sourceforge.net; Fri, 26 Feb 2021 07:24:46 +0000
+Received: by mail-lj1-f180.google.com with SMTP id k12so478446ljg.9
  for <kgdb-bugreport@lists.sourceforge.net>;
- Thu, 25 Feb 2021 23:02:25 -0800 (PST)
+ Thu, 25 Feb 2021 23:24:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=x49OuNAA7q3ldYJSjcOEu3pJBfD36s7mXciQbRekJb0=;
- b=tMITdCHDdLuCxy3S/32qbXJZ86+VHkC0uFyR4ush6nMHiwC+xi4CKRwZq6S2zpQXM6
- fOwNrbN/hMHOc8r4+Q51MED5+s0jQWAa+UdhKZIzEVCLzfRftEkO4+R8YfqBsBH2D3dr
- yrStgOKlSXeZ86dKL8c3dz9qO0PxJCpMXYdqtqnoGxWVjBjGhkwOWIefZdGk7/A6+pOs
- xMEIuV1xsao2iTJVwUlvMEuq/kkSCPiX307gxmUGlySik8LsTVulgPBFxyod7n9hQOaT
- No5tmxAVrKpvClXxIIbmzuLyTSo/WDFGBEMqorUBwDkRBFp04tDaonVX9R8r8Q6ABZ/J
- /7xA==
+ :cc; bh=LUBVX8ozr8RqHX/7AAsYiGZIyVumZxGTezpPl2oo3n0=;
+ b=jUVEzOt39rRSayuEcZNaJLh40yzO2MGgSUYeliGFRPOMHZtaWm51pL4IMwaiStV/C4
+ IWNGM2XnhXWvD3tYfzDNAW75biypxJ0ai5q3octimawLFZx8PMuGrguBcodMoPf+f5SV
+ seYmxLbiHhwpSkNK7qhD5pq08ZQjuSs8pipXuQFS/an20yUguy/lpNf8yGxb2Z8+RBwm
+ 52X5B14AuRf1pVz6PO0b103/HakNaJ6jRtwDjuRHmKwnhD5swjL9Z3INEqkE0y+fdIjP
+ EdP2QRvxTxC8JaEHC6SK7mnRiMLujWXCvgg6s52+KGg3y8jOQAjP6sRo3zvcfeHDw28z
+ McNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=x49OuNAA7q3ldYJSjcOEu3pJBfD36s7mXciQbRekJb0=;
- b=K9/aUmc4MwdG3BA0+t0ulnh4xhwPHsLd0unCKI1Jmt4vz8QXOS3IyXVTyrNq01brjS
- o6CabSsDyB2HxYeWX9r9fnXyQxio4N8xAk5MoAAUk0f/t9hv1QMx1u9cv8ds1jEASduF
- sE3k34z5++tvF2FEsV3MVzq+SHhF5mNMXt6AvrWgxhifW8C+i9x47VQcLLI6bVkwS2+o
- 3/IpN6WtYXGi0+RaYLpl74x3ghVoo29Z19Z70iQlQMVw8a7z4DvW+8A4wKh1SXgqQ8VC
- NQ/AkOx/8P52pdhY9ms4PkajzboyvMI3QjtKAGascDoq+mJSXJP8SUI1DU2ydLuNr4Mb
- 3/UQ==
-X-Gm-Message-State: AOAM530am0emU2Bt3D2qSJrccQdsNDwCsv9JcB7jUnBYS+sgEmEPEw4B
- 5ejTVSm+26U7a9rF3lBw6rMtJA2jllPcytdQM0+PgA==
-X-Google-Smtp-Source: ABdhPJyFWiSTpK+1nRF6cL4mPPftIJJKu6Qpz/fRdVSz3dAHo0tnGwHqxfIs6AGlHV0PG60Z0ALrbSyX+iSP2Sffn1g=
-X-Received: by 2002:ac2:5295:: with SMTP id q21mr947778lfm.108.1614322938536; 
- Thu, 25 Feb 2021 23:02:18 -0800 (PST)
+ bh=LUBVX8ozr8RqHX/7AAsYiGZIyVumZxGTezpPl2oo3n0=;
+ b=qs+6fARxzJB2NxTktu/s+cf9VISc/8lA/gNt4jubI9wAU0jKuTvdtYyIRSk777snlh
+ UtA/ZHS/2PpkBL4Fdf2Jy780km7zjT00uwT++csafUPkVupawA/L3czDU8ASzAYhRl8S
+ vfInLNEJqbgD56qc4ksMKAJ4rR0lwrdd7NIVptkSaZF3CwOgd1kQX4ziL9p5Fm62EjCq
+ 4ShTrBCzzCuy/JSzM6qOnL8y4I3wUquyzUF/1vg45NQI4zCNDEDmQ3tuHm0ZOlsLyfR+
+ Gy8/FXDZMmb/cGGiUJg4EymDt/JfE73+Pl1z40jQSWJs06tgsfvvwabHLSwRCRkfidWK
+ l02w==
+X-Gm-Message-State: AOAM530FISFPTOgquQBDvMEHnRcE0D2bmkjiqgcoK9ZC//krAXvsY6GG
+ zf8zLbFixnk4JpcW0a6JYkU3M4BJ4fNlHtRlPj62gQ==
+X-Google-Smtp-Source: ABdhPJw2UWLxmRXyzIlU3Ngllo2PV0cvOaVxnRMLYKH43V8VQFgSqNhB7I/Lkhigaa+EEviHE6p6rPmey73FyQAuEnA=
+X-Received: by 2002:a2e:9310:: with SMTP id e16mr954841ljh.226.1614324271452; 
+ Thu, 25 Feb 2021 23:24:31 -0800 (PST)
 MIME-Version: 1.0
-References: <20210224081652.587785-1-sumit.garg@linaro.org>
- <20210225155607.634snzzq3w62kpkn@maple.lan>
-In-Reply-To: <20210225155607.634snzzq3w62kpkn@maple.lan>
+References: <20210225112258.978417-1-sumit.garg@linaro.org>
+ <20210225121912.ifeydzcriaibdgah@maple.lan>
+In-Reply-To: <20210225121912.ifeydzcriaibdgah@maple.lan>
 From: Sumit Garg <sumit.garg@linaro.org>
-Date: Fri, 26 Feb 2021 12:32:07 +0530
-Message-ID: <CAFA6WYMYDNk2S=7crfYsrbP7XONTA-ytEypoqeo1GTpxf8NhAQ@mail.gmail.com>
+Date: Fri, 26 Feb 2021 12:54:20 +0530
+Message-ID: <CAFA6WYNoEO9ZPCi_euUo_3gN63e4ZG-ecnQcqP_17-s+Ug0z-g@mail.gmail.com>
 To: Daniel Thompson <daniel.thompson@linaro.org>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -80,21 +80,21 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: chromium.org]
+ for more information. [URIs: linaro.org]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.167.51 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.167.51 listed in wl.mailspike.net]
+ trust [209.85.208.180 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.208.180 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1lFX8r-005wbI-63
-Subject: Re: [Kgdb-bugreport] [PATCH] kgdb: Fix to kill breakpoints on
- initmem after boot
+X-Headers-End: 1lFXUM-0000AK-7Z
+Subject: Re: [Kgdb-bugreport] [PATCH] kdb: Get rid of custom debug heap
+ allocator
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,117 +106,535 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: Peter Zijlstra <peterz@infradead.org>, kgdb-bugreport@lists.sourceforge.net,
- Steven Rostedt <rostedt@goodmis.org>,
+Cc: kgdb-bugreport@lists.sourceforge.net,
  Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- qy15sije@cip.cs.fau.de, Masami Hiramatsu <mhiramat@kernel.org>,
- Jason Wessel <jason.wessel@windriver.com>, stable <stable@vger.kernel.org>,
- Andrew Morton <akpm@linux-foundation.org>, stefan.saecherl@fau.de
+ Jason Wessel <jason.wessel@windriver.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-+ stable ML
-
-On Thu, 25 Feb 2021 at 21:26, Daniel Thompson
+On Thu, 25 Feb 2021 at 17:49, Daniel Thompson
 <daniel.thompson@linaro.org> wrote:
 >
-> On Wed, Feb 24, 2021 at 01:46:52PM +0530, Sumit Garg wrote:
-> > Currently breakpoints in kernel .init.text section are not handled
-> > correctly while allowing to remove them even after corresponding pages
-> > have been freed.
-> >
-> > Fix it via killing .init.text section breakpoints just prior to initmem
-> > pages being freed.
-> >
-> > Suggested-by: Doug Anderson <dianders@chromium.org>
-> > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> On Thu, Feb 25, 2021 at 04:52:58PM +0530, Sumit Garg wrote:
+> > Currently the only user for debug heap is kdbnearsym() which can be
+> > modified to rather ask the caller to supply a buffer for symbol name.
+> > So do that and modify kdbnearsym() callers to pass a symbol name buffer
+> > allocated from stack and hence remove custom debug heap allocator.
 >
-> I saw Andrew has picked this one up. That's ok for me:
-> Acked-by: Daniel Thompson <daniel.thompson@linaro.org>
+> Is it really a good idea to increase stack usage this much? I thought
+> several architectures will take the debug exception on existing stacks
+> (and that these can nest with other exceptions).
 >
-> I already enriched kgdbtest to cover this (and they pass) so I guess
-> this is also:
-> Tested-by: Daniel Thompson <daniel.thompson@linaro.org>
+> The reason I'm concerned is that AFAICT the *purpose* of the current
+> heap is to minimise stack usage... and that this has the effect of
+> improving debugger robustness when we take exceptions on small shared
+> stacks.
+>
+> The reason I called the heap redundant is that currently it also allows
+> us to have nested calls to kdbnearsym() whilst not consuming stack. In
+> this case, when I say nested I mean new calls to kdbnearsym() before the
+> previous caller has consumed the output rather than truely recursive
+> calls.
+>
+> This is why I think the heap is pointless. In "normal" usage I don't
+> think there will never be a nested call to kdbnearsym() so I think a
+> single static buffer will suffice.
+>
+> Technically speaking there is one way that kdbnearsym() can nest but I
+> think it is OK for that to be considered out-of-scope.
+>
+> To explain...
+>
+> It can nest is if we recursively enter the debugger! Recursive entry
+> should never happen, is pretty much untestable and, even if we tested
+> it, it is not a bug for an architeture to choose not to support it.
+> Nevertheless kgdb/kdb does include logic to handle this if an
+> architecture does make it as far are executing the trap. Note that
+> even if the architecture does somehow land in the debug trap there's
+> a strong chance the system is is too broken to resume (since we just
+> took an impossible trap). Therefore kdb will inhibit resume unless the
+> operator admits what they are doing won't work before trying to do it.
+>
+> Therefore I think it is ok for namebuf to be statically allocated and
+> the only thing we need do for stability is ensure that kdbnearsym()
+> guarantees that namebuf[sizeof(namebuf)-1] == '\0' regardless of the
+> symbol length. Thus if by some miracle the system can resume after the
+> user has ignored the warning then kdb can't take a bad memory access
+> when it tries to print an overwritten symbol name. They see a few
+> garbage characters... but since they just told us to do something
+> crazy they should be expecting that.
 >
 
-Thanks Daniel.
-
-> BTW this is not Cc:ed to stable and I do wonder if it crosses the
-> threshold to be considered a fix rather than a feature. Normally I
-> consider adding safety rails for kgdb to be a new feature but, in this
-> case, the problem would easily ensnare an inexperienced developer who is
-> doing nothing more than debugging their own driver (assuming they
-> correctly marked their probe function as .init) so I think this weighs
-> in favour of being a fix.
->
-
-Makes sense, Cc:ed stable.
-
--Sumit
+Thanks for the detailed explanation. I see the reasoning to not use
+stack and it does sound reasonable to use statically allocated namebuf
+with a stability guarantee.
 
 >
 > Daniel.
 >
 >
+> PS The code to guarantee that if we read past the end of the string
+>    we will still see a '\'0' before making an invalid memory access
+>    should be well commented though... because its pretty nasty.
+>
+
+Sure, I will add a proper comment.
+
+-Sumit
+
+>
+> >
+> > This change has been tested using kgdbtest on arm64 which doesn't show
+> > any regressions.
+> >
+> > Suggested-by: Daniel Thompson <daniel.thompson@linaro.org>
+> > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 > > ---
-> >  include/linux/kgdb.h      |  2 ++
-> >  init/main.c               |  1 +
-> >  kernel/debug/debug_core.c | 11 +++++++++++
-> >  3 files changed, 14 insertions(+)
+> >  kernel/debug/kdb/kdb_debugger.c |   1 -
+> >  kernel/debug/kdb/kdb_main.c     |   6 +-
+> >  kernel/debug/kdb/kdb_private.h  |   7 +-
+> >  kernel/debug/kdb/kdb_support.c  | 294 +-------------------------------
+> >  4 files changed, 11 insertions(+), 297 deletions(-)
 > >
-> > diff --git a/include/linux/kgdb.h b/include/linux/kgdb.h
-> > index 57b8885708e5..3aa503ef06fc 100644
-> > --- a/include/linux/kgdb.h
-> > +++ b/include/linux/kgdb.h
-> > @@ -361,9 +361,11 @@ extern atomic_t                  kgdb_active;
-> >  extern bool dbg_is_early;
-> >  extern void __init dbg_late_init(void);
-> >  extern void kgdb_panic(const char *msg);
-> > +extern void kgdb_free_init_mem(void);
-> >  #else /* ! CONFIG_KGDB */
-> >  #define in_dbg_master() (0)
-> >  #define dbg_late_init()
-> >  static inline void kgdb_panic(const char *msg) {}
-> > +static inline void kgdb_free_init_mem(void) { }
-> >  #endif /* ! CONFIG_KGDB */
-> >  #endif /* _KGDB_H_ */
-> > diff --git a/init/main.c b/init/main.c
-> > index c68d784376ca..a446ca3d334e 100644
-> > --- a/init/main.c
-> > +++ b/init/main.c
-> > @@ -1417,6 +1417,7 @@ static int __ref kernel_init(void *unused)
-> >       async_synchronize_full();
-> >       kprobe_free_init_mem();
-> >       ftrace_free_init_mem();
-> > +     kgdb_free_init_mem();
-> >       free_initmem();
-> >       mark_readonly();
+> > diff --git a/kernel/debug/kdb/kdb_debugger.c b/kernel/debug/kdb/kdb_debugger.c
+> > index 0220afda3200..e91fc3e4edd5 100644
+> > --- a/kernel/debug/kdb/kdb_debugger.c
+> > +++ b/kernel/debug/kdb/kdb_debugger.c
+> > @@ -140,7 +140,6 @@ int kdb_stub(struct kgdb_state *ks)
+> >        */
+> >       kdb_common_deinit_state();
+> >       KDB_STATE_CLEAR(PAGER);
+> > -     kdbnearsym_cleanup();
+> >       if (error == KDB_CMD_KGDB) {
+> >               if (KDB_STATE(DOING_KGDB))
+> >                       KDB_STATE_CLEAR(DOING_KGDB);
+> > diff --git a/kernel/debug/kdb/kdb_main.c b/kernel/debug/kdb/kdb_main.c
+> > index 9d69169582c6..ca525a3e0032 100644
+> > --- a/kernel/debug/kdb/kdb_main.c
+> > +++ b/kernel/debug/kdb/kdb_main.c
+> > @@ -526,6 +526,7 @@ int kdbgetaddrarg(int argc, const char **argv, int *nextarg,
+> >       char symbol = '\0';
+> >       char *cp;
+> >       kdb_symtab_t symtab;
+> > +     char namebuf[KSYM_NAME_LEN];
 > >
-> > diff --git a/kernel/debug/debug_core.c b/kernel/debug/debug_core.c
-> > index 229dd119f430..319381e95d1d 100644
-> > --- a/kernel/debug/debug_core.c
-> > +++ b/kernel/debug/debug_core.c
-> > @@ -465,6 +465,17 @@ int dbg_remove_all_break(void)
-> >       return 0;
+> >       /*
+> >        * If the enable flags prohibit both arbitrary memory access
+> > @@ -585,7 +586,7 @@ int kdbgetaddrarg(int argc, const char **argv, int *nextarg,
+> >       }
+> >
+> >       if (!found)
+> > -             found = kdbnearsym(addr, &symtab);
+> > +             found = kdbnearsym(addr, &symtab, namebuf);
+> >
+> >       (*nextarg)++;
+> >
+> > @@ -1503,6 +1504,7 @@ static void kdb_md_line(const char *fmtstr, unsigned long addr,
+> >       int i;
+> >       int j;
+> >       unsigned long word;
+> > +     char namebuf[KSYM_NAME_LEN];
+> >
+> >       memset(cbuf, '\0', sizeof(cbuf));
+> >       if (phys)
+> > @@ -1518,7 +1520,7 @@ static void kdb_md_line(const char *fmtstr, unsigned long addr,
+> >                       break;
+> >               kdb_printf(fmtstr, word);
+> >               if (symbolic)
+> > -                     kdbnearsym(word, &symtab);
+> > +                     kdbnearsym(word, &symtab, namebuf);
+> >               else
+> >                       memset(&symtab, 0, sizeof(symtab));
+> >               if (symtab.sym_name) {
+> > diff --git a/kernel/debug/kdb/kdb_private.h b/kernel/debug/kdb/kdb_private.h
+> > index b857a84de3b5..1707eeebc59a 100644
+> > --- a/kernel/debug/kdb/kdb_private.h
+> > +++ b/kernel/debug/kdb/kdb_private.h
+> > @@ -108,8 +108,7 @@ extern char *kdbgetenv(const char *);
+> >  extern int kdbgetaddrarg(int, const char **, int*, unsigned long *,
+> >                        long *, char **);
+> >  extern int kdbgetsymval(const char *, kdb_symtab_t *);
+> > -extern int kdbnearsym(unsigned long, kdb_symtab_t *);
+> > -extern void kdbnearsym_cleanup(void);
+> > +extern int kdbnearsym(unsigned long addr, kdb_symtab_t *symtab, char *namebuf);
+> >  extern char *kdb_strdup(const char *str, gfp_t type);
+> >  extern void kdb_symbol_print(unsigned long, const kdb_symtab_t *, unsigned int);
+> >
+> > @@ -233,10 +232,6 @@ extern struct task_struct *kdb_curr_task(int);
+> >
+> >  #define GFP_KDB (in_dbg_master() ? GFP_ATOMIC : GFP_KERNEL)
+> >
+> > -extern void *debug_kmalloc(size_t size, gfp_t flags);
+> > -extern void debug_kfree(void *);
+> > -extern void debug_kusage(void);
+> > -
+> >  extern struct task_struct *kdb_current_task;
+> >  extern struct pt_regs *kdb_current_regs;
+> >
+> > diff --git a/kernel/debug/kdb/kdb_support.c b/kernel/debug/kdb/kdb_support.c
+> > index b59aad1f0b55..319b36ceedf9 100644
+> > --- a/kernel/debug/kdb/kdb_support.c
+> > +++ b/kernel/debug/kdb/kdb_support.c
+> > @@ -57,8 +57,6 @@ int kdbgetsymval(const char *symname, kdb_symtab_t *symtab)
+> >  }
+> >  EXPORT_SYMBOL(kdbgetsymval);
+> >
+> > -static char *kdb_name_table[100];    /* arbitrary size */
+> > -
+> >  /*
+> >   * kdbnearsym -      Return the name of the symbol with the nearest address
+> >   *   less than 'addr'.
+> > @@ -79,13 +77,11 @@ static char *kdb_name_table[100]; /* arbitrary size */
+> >   *   hold active strings, no kdb caller of kdbnearsym makes more
+> >   *   than ~20 later calls before using a saved value.
+> >   */
+> > -int kdbnearsym(unsigned long addr, kdb_symtab_t *symtab)
+> > +int kdbnearsym(unsigned long addr, kdb_symtab_t *symtab, char *namebuf)
+> >  {
+> >       int ret = 0;
+> >       unsigned long symbolsize = 0;
+> >       unsigned long offset = 0;
+> > -#define knt1_size 128                /* must be >= kallsyms table size */
+> > -     char *knt1 = NULL;
+> >
+> >       if (KDB_DEBUG(AR))
+> >               kdb_printf("kdbnearsym: addr=0x%lx, symtab=%px\n", addr, symtab);
+> > @@ -93,14 +89,9 @@ int kdbnearsym(unsigned long addr, kdb_symtab_t *symtab)
+> >
+> >       if (addr < 4096)
+> >               goto out;
+> > -     knt1 = debug_kmalloc(knt1_size, GFP_ATOMIC);
+> > -     if (!knt1) {
+> > -             kdb_printf("kdbnearsym: addr=0x%lx cannot kmalloc knt1\n",
+> > -                        addr);
+> > -             goto out;
+> > -     }
+> > +
+> >       symtab->sym_name = kallsyms_lookup(addr, &symbolsize , &offset,
+> > -                             (char **)(&symtab->mod_name), knt1);
+> > +                             (char **)(&symtab->mod_name), namebuf);
+> >       if (offset > 8*1024*1024) {
+> >               symtab->sym_name = NULL;
+> >               addr = offset = symbolsize = 0;
+> > @@ -109,42 +100,6 @@ int kdbnearsym(unsigned long addr, kdb_symtab_t *symtab)
+> >       symtab->sym_end = symtab->sym_start + symbolsize;
+> >       ret = symtab->sym_name != NULL && *(symtab->sym_name) != '\0';
+> >
+> > -     if (ret) {
+> > -             int i;
+> > -             /* Another 2.6 kallsyms "feature".  Sometimes the sym_name is
+> > -              * set but the buffer passed into kallsyms_lookup is not used,
+> > -              * so it contains garbage.  The caller has to work out which
+> > -              * buffer needs to be saved.
+> > -              *
+> > -              * What was Rusty smoking when he wrote that code?
+> > -              */
+> > -             if (symtab->sym_name != knt1) {
+> > -                     strncpy(knt1, symtab->sym_name, knt1_size);
+> > -                     knt1[knt1_size-1] = '\0';
+> > -             }
+> > -             for (i = 0; i < ARRAY_SIZE(kdb_name_table); ++i) {
+> > -                     if (kdb_name_table[i] &&
+> > -                         strcmp(kdb_name_table[i], knt1) == 0)
+> > -                             break;
+> > -             }
+> > -             if (i >= ARRAY_SIZE(kdb_name_table)) {
+> > -                     debug_kfree(kdb_name_table[0]);
+> > -                     memmove(kdb_name_table, kdb_name_table+1,
+> > -                            sizeof(kdb_name_table[0]) *
+> > -                            (ARRAY_SIZE(kdb_name_table)-1));
+> > -             } else {
+> > -                     debug_kfree(knt1);
+> > -                     knt1 = kdb_name_table[i];
+> > -                     memmove(kdb_name_table+i, kdb_name_table+i+1,
+> > -                            sizeof(kdb_name_table[0]) *
+> > -                            (ARRAY_SIZE(kdb_name_table)-i-1));
+> > -             }
+> > -             i = ARRAY_SIZE(kdb_name_table) - 1;
+> > -             kdb_name_table[i] = knt1;
+> > -             symtab->sym_name = kdb_name_table[i];
+> > -             knt1 = NULL;
+> > -     }
+> > -
+> >       if (symtab->mod_name == NULL)
+> >               symtab->mod_name = "kernel";
+> >       if (KDB_DEBUG(AR))
+> > @@ -152,23 +107,10 @@ int kdbnearsym(unsigned long addr, kdb_symtab_t *symtab)
+> >                  "symtab->mod_name=%px, symtab->sym_name=%px (%s)\n", ret,
+> >                  symtab->sym_start, symtab->mod_name, symtab->sym_name,
+> >                  symtab->sym_name);
+> > -
+> >  out:
+> > -     debug_kfree(knt1);
+> >       return ret;
 > >  }
 > >
-> > +void kgdb_free_init_mem(void)
-> > +{
-> > +     int i;
-> > +
-> > +     /* Clear init memory breakpoints. */
-> > +     for (i = 0; i < KGDB_MAX_BREAKPOINTS; i++) {
-> > +             if (init_section_contains((void *)kgdb_break[i].bpt_addr, 0))
-> > +                     kgdb_break[i].state = BP_UNDEFINED;
-> > +     }
-> > +}
-> > +
-> >  #ifdef CONFIG_KGDB_KDB
-> >  void kdb_dump_stack_on_cpu(int cpu)
+> > -void kdbnearsym_cleanup(void)
+> > -{
+> > -     int i;
+> > -     for (i = 0; i < ARRAY_SIZE(kdb_name_table); ++i) {
+> > -             if (kdb_name_table[i]) {
+> > -                     debug_kfree(kdb_name_table[i]);
+> > -                     kdb_name_table[i] = NULL;
+> > -             }
+> > -     }
+> > -}
+> > -
+> >  static char ks_namebuf[KSYM_NAME_LEN+1], ks_namebuf_prev[KSYM_NAME_LEN+1];
+> >
+> >  /*
+> > @@ -259,11 +201,13 @@ void kdb_symbol_print(unsigned long addr, const kdb_symtab_t *symtab_p,
+> >                     unsigned int punc)
 > >  {
+> >       kdb_symtab_t symtab, *symtab_p2;
+> > +     char namebuf[KSYM_NAME_LEN];
+> > +
+> >       if (symtab_p) {
+> >               symtab_p2 = (kdb_symtab_t *)symtab_p;
+> >       } else {
+> >               symtab_p2 = &symtab;
+> > -             kdbnearsym(addr, symtab_p2);
+> > +             kdbnearsym(addr, symtab_p2, namebuf);
+> >       }
+> >       if (!(symtab_p2->sym_name || (punc & KDB_SP_VALUE)))
+> >               return;
+> > @@ -665,232 +609,6 @@ unsigned long kdb_task_state(const struct task_struct *p, unsigned long mask)
+> >       return (mask & kdb_task_state_string(state)) != 0;
+> >  }
+> >
+> > -/* Last ditch allocator for debugging, so we can still debug even when
+> > - * the GFP_ATOMIC pool has been exhausted.  The algorithms are tuned
+> > - * for space usage, not for speed.  One smallish memory pool, the free
+> > - * chain is always in ascending address order to allow coalescing,
+> > - * allocations are done in brute force best fit.
+> > - */
+> > -
+> > -struct debug_alloc_header {
+> > -     u32 next;       /* offset of next header from start of pool */
+> > -     u32 size;
+> > -     void *caller;
+> > -};
+> > -
+> > -/* The memory returned by this allocator must be aligned, which means
+> > - * so must the header size.  Do not assume that sizeof(struct
+> > - * debug_alloc_header) is a multiple of the alignment, explicitly
+> > - * calculate the overhead of this header, including the alignment.
+> > - * The rest of this code must not use sizeof() on any header or
+> > - * pointer to a header.
+> > - */
+> > -#define dah_align 8
+> > -#define dah_overhead ALIGN(sizeof(struct debug_alloc_header), dah_align)
+> > -
+> > -static u64 debug_alloc_pool_aligned[256*1024/dah_align];     /* 256K pool */
+> > -static char *debug_alloc_pool = (char *)debug_alloc_pool_aligned;
+> > -static u32 dah_first, dah_first_call = 1, dah_used, dah_used_max;
+> > -
+> > -/* Locking is awkward.  The debug code is called from all contexts,
+> > - * including non maskable interrupts.  A normal spinlock is not safe
+> > - * in NMI context.  Try to get the debug allocator lock, if it cannot
+> > - * be obtained after a second then give up.  If the lock could not be
+> > - * previously obtained on this cpu then only try once.
+> > - *
+> > - * sparse has no annotation for "this function _sometimes_ acquires a
+> > - * lock", so fudge the acquire/release notation.
+> > - */
+> > -static DEFINE_SPINLOCK(dap_lock);
+> > -static int get_dap_lock(void)
+> > -     __acquires(dap_lock)
+> > -{
+> > -     static int dap_locked = -1;
+> > -     int count;
+> > -     if (dap_locked == smp_processor_id())
+> > -             count = 1;
+> > -     else
+> > -             count = 1000;
+> > -     while (1) {
+> > -             if (spin_trylock(&dap_lock)) {
+> > -                     dap_locked = -1;
+> > -                     return 1;
+> > -             }
+> > -             if (!count--)
+> > -                     break;
+> > -             udelay(1000);
+> > -     }
+> > -     dap_locked = smp_processor_id();
+> > -     __acquire(dap_lock);
+> > -     return 0;
+> > -}
+> > -
+> > -void *debug_kmalloc(size_t size, gfp_t flags)
+> > -{
+> > -     unsigned int rem, h_offset;
+> > -     struct debug_alloc_header *best, *bestprev, *prev, *h;
+> > -     void *p = NULL;
+> > -     if (!get_dap_lock()) {
+> > -             __release(dap_lock);    /* we never actually got it */
+> > -             return NULL;
+> > -     }
+> > -     h = (struct debug_alloc_header *)(debug_alloc_pool + dah_first);
+> > -     if (dah_first_call) {
+> > -             h->size = sizeof(debug_alloc_pool_aligned) - dah_overhead;
+> > -             dah_first_call = 0;
+> > -     }
+> > -     size = ALIGN(size, dah_align);
+> > -     prev = best = bestprev = NULL;
+> > -     while (1) {
+> > -             if (h->size >= size && (!best || h->size < best->size)) {
+> > -                     best = h;
+> > -                     bestprev = prev;
+> > -                     if (h->size == size)
+> > -                             break;
+> > -             }
+> > -             if (!h->next)
+> > -                     break;
+> > -             prev = h;
+> > -             h = (struct debug_alloc_header *)(debug_alloc_pool + h->next);
+> > -     }
+> > -     if (!best)
+> > -             goto out;
+> > -     rem = best->size - size;
+> > -     /* The pool must always contain at least one header */
+> > -     if (best->next == 0 && bestprev == NULL && rem < dah_overhead)
+> > -             goto out;
+> > -     if (rem >= dah_overhead) {
+> > -             best->size = size;
+> > -             h_offset = ((char *)best - debug_alloc_pool) +
+> > -                        dah_overhead + best->size;
+> > -             h = (struct debug_alloc_header *)(debug_alloc_pool + h_offset);
+> > -             h->size = rem - dah_overhead;
+> > -             h->next = best->next;
+> > -     } else
+> > -             h_offset = best->next;
+> > -     best->caller = __builtin_return_address(0);
+> > -     dah_used += best->size;
+> > -     dah_used_max = max(dah_used, dah_used_max);
+> > -     if (bestprev)
+> > -             bestprev->next = h_offset;
+> > -     else
+> > -             dah_first = h_offset;
+> > -     p = (char *)best + dah_overhead;
+> > -     memset(p, POISON_INUSE, best->size - 1);
+> > -     *((char *)p + best->size - 1) = POISON_END;
+> > -out:
+> > -     spin_unlock(&dap_lock);
+> > -     return p;
+> > -}
+> > -
+> > -void debug_kfree(void *p)
+> > -{
+> > -     struct debug_alloc_header *h;
+> > -     unsigned int h_offset;
+> > -     if (!p)
+> > -             return;
+> > -     if ((char *)p < debug_alloc_pool ||
+> > -         (char *)p >= debug_alloc_pool + sizeof(debug_alloc_pool_aligned)) {
+> > -             kfree(p);
+> > -             return;
+> > -     }
+> > -     if (!get_dap_lock()) {
+> > -             __release(dap_lock);    /* we never actually got it */
+> > -             return;         /* memory leak, cannot be helped */
+> > -     }
+> > -     h = (struct debug_alloc_header *)((char *)p - dah_overhead);
+> > -     memset(p, POISON_FREE, h->size - 1);
+> > -     *((char *)p + h->size - 1) = POISON_END;
+> > -     h->caller = NULL;
+> > -     dah_used -= h->size;
+> > -     h_offset = (char *)h - debug_alloc_pool;
+> > -     if (h_offset < dah_first) {
+> > -             h->next = dah_first;
+> > -             dah_first = h_offset;
+> > -     } else {
+> > -             struct debug_alloc_header *prev;
+> > -             unsigned int prev_offset;
+> > -             prev = (struct debug_alloc_header *)(debug_alloc_pool +
+> > -                                                  dah_first);
+> > -             while (1) {
+> > -                     if (!prev->next || prev->next > h_offset)
+> > -                             break;
+> > -                     prev = (struct debug_alloc_header *)
+> > -                             (debug_alloc_pool + prev->next);
+> > -             }
+> > -             prev_offset = (char *)prev - debug_alloc_pool;
+> > -             if (prev_offset + dah_overhead + prev->size == h_offset) {
+> > -                     prev->size += dah_overhead + h->size;
+> > -                     memset(h, POISON_FREE, dah_overhead - 1);
+> > -                     *((char *)h + dah_overhead - 1) = POISON_END;
+> > -                     h = prev;
+> > -                     h_offset = prev_offset;
+> > -             } else {
+> > -                     h->next = prev->next;
+> > -                     prev->next = h_offset;
+> > -             }
+> > -     }
+> > -     if (h_offset + dah_overhead + h->size == h->next) {
+> > -             struct debug_alloc_header *next;
+> > -             next = (struct debug_alloc_header *)
+> > -                     (debug_alloc_pool + h->next);
+> > -             h->size += dah_overhead + next->size;
+> > -             h->next = next->next;
+> > -             memset(next, POISON_FREE, dah_overhead - 1);
+> > -             *((char *)next + dah_overhead - 1) = POISON_END;
+> > -     }
+> > -     spin_unlock(&dap_lock);
+> > -}
+> > -
+> > -void debug_kusage(void)
+> > -{
+> > -     struct debug_alloc_header *h_free, *h_used;
+> > -#ifdef       CONFIG_IA64
+> > -     /* FIXME: using dah for ia64 unwind always results in a memory leak.
+> > -      * Fix that memory leak first, then set debug_kusage_one_time = 1 for
+> > -      * all architectures.
+> > -      */
+> > -     static int debug_kusage_one_time;
+> > -#else
+> > -     static int debug_kusage_one_time = 1;
+> > -#endif
+> > -     if (!get_dap_lock()) {
+> > -             __release(dap_lock);    /* we never actually got it */
+> > -             return;
+> > -     }
+> > -     h_free = (struct debug_alloc_header *)(debug_alloc_pool + dah_first);
+> > -     if (dah_first == 0 &&
+> > -         (h_free->size == sizeof(debug_alloc_pool_aligned) - dah_overhead ||
+> > -          dah_first_call))
+> > -             goto out;
+> > -     if (!debug_kusage_one_time)
+> > -             goto out;
+> > -     debug_kusage_one_time = 0;
+> > -     kdb_printf("%s: debug_kmalloc memory leak dah_first %d\n",
+> > -                __func__, dah_first);
+> > -     if (dah_first) {
+> > -             h_used = (struct debug_alloc_header *)debug_alloc_pool;
+> > -             kdb_printf("%s: h_used %px size %d\n", __func__, h_used,
+> > -                        h_used->size);
+> > -     }
+> > -     do {
+> > -             h_used = (struct debug_alloc_header *)
+> > -                       ((char *)h_free + dah_overhead + h_free->size);
+> > -             kdb_printf("%s: h_used %px size %d caller %px\n",
+> > -                        __func__, h_used, h_used->size, h_used->caller);
+> > -             h_free = (struct debug_alloc_header *)
+> > -                       (debug_alloc_pool + h_free->next);
+> > -     } while (h_free->next);
+> > -     h_used = (struct debug_alloc_header *)
+> > -               ((char *)h_free + dah_overhead + h_free->size);
+> > -     if ((char *)h_used - debug_alloc_pool !=
+> > -         sizeof(debug_alloc_pool_aligned))
+> > -             kdb_printf("%s: h_used %px size %d caller %px\n",
+> > -                        __func__, h_used, h_used->size, h_used->caller);
+> > -out:
+> > -     spin_unlock(&dap_lock);
+> > -}
+> > -
+> >  /* Maintain a small stack of kdb_flags to allow recursion without disturbing
+> >   * the global kdb state.
+> >   */
 > > --
 > > 2.25.1
+> >
 
 
 _______________________________________________
