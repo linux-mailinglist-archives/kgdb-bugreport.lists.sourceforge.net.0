@@ -2,87 +2,76 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BBCF7327755
-	for <lists+kgdb-bugreport@lfdr.de>; Mon,  1 Mar 2021 07:03:26 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
-	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1lGbeP-000322-6P
-	for lists+kgdb-bugreport@lfdr.de; Mon, 01 Mar 2021 06:03:25 +0000
-Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sumit.garg@linaro.org>) id 1lGbeM-00031t-Ul
- for kgdb-bugreport@lists.sourceforge.net; Mon, 01 Mar 2021 06:03:23 +0000
+	by mail.lfdr.de (Postfix) with ESMTPS id B2AA532864A
+	for <lists+kgdb-bugreport@lfdr.de>; Mon,  1 Mar 2021 18:09:44 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
+	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	 bh=j+NwPGEgAhMN1Uq2AR1M5tcZP8//V8jGW0bR3JHDj1c=; b=m0YX69up7+vQ+LnZo4n7/EuUs
+	uR6wq9rzuiFtO3+yb01ONv9LWyRJFjgvYvHe/fH+oXDwzUFw+E603n/TIQEZjVH8kUtHcA92A823C
+	ml1PDxkL2TrFP+JrWaEfaBkI9+OvXIEZV4cfbWuSrPbL+kLur41V7dsCRhoDw5ka+UJkg=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
+	id 1lGm3D-0000BO-Fv
+	for lists+kgdb-bugreport@lfdr.de; Mon, 01 Mar 2021 17:09:43 +0000
+Received: from [172.30.20.202] (helo=mx.sourceforge.net)
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <pmladek@suse.com>) id 1lGm3B-0000BH-Mk
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 01 Mar 2021 17:09:41 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=q5+p89wmcRTNNV+DoPVNJPTQENWG1vX1KbzN9Cz/cN0=; b=Hssj+HlTTIP8uvqiW1gepT7puR
- 5dGYQOAkgacMI/LodXTL4AP5VPAid/DsYOD7ec/HxYuckWKoOL0TinEoIAS1e1Xzn9DODft/Bf/cM
- 0JJW6rEMi7CYUWiO2WXQ7lV//vEWTXCLb/IOHIctbL5cH99r3cxCJvall+3V54th/5Yg=;
+ bh=H35nz79U3iTc666xWR8lPmhHegrvhs5FWA9WuA5DkEI=; b=A3aLRSRI65SOW0RxGvyHHIOYOQ
+ 8JegW3dgalcPCsWR8zGD29znpsIp2IWKIoAhWTZwII0Q6j7mTxAapRvWRVklYbFgC3ptJO9PitTvr
+ Q/uQT7T+O2rNAAJ6HiQSRaXHsS5y7qHl7ZoGsQT+KXma85OsMIRCZ4m5tNiBlbN+P8KM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=q5+p89wmcRTNNV+DoPVNJPTQENWG1vX1KbzN9Cz/cN0=; b=LfSFBlVUVWWLA/4S+aYDu9fjk9
- KQ+NzP23ncYqouJYb9BSzZPBKIx8tZs+RGGwM7oygVBbTSh/mSvqijIIRkmuV9SgfOZ1HwwUkbK+i
- G+wvsQklNJLEAW3WdkCjMmZPY8F49vsXIR73JbsiI4gdh+vvJssMdMPB0iuuG1DvcGts=;
-Received: from mail-lf1-f45.google.com ([209.85.167.45])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
- id 1lGbeI-0000Fe-Pe
- for kgdb-bugreport@lists.sourceforge.net; Mon, 01 Mar 2021 06:03:22 +0000
-Received: by mail-lf1-f45.google.com with SMTP id v5so23512307lft.13
- for <kgdb-bugreport@lists.sourceforge.net>;
- Sun, 28 Feb 2021 22:03:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=q5+p89wmcRTNNV+DoPVNJPTQENWG1vX1KbzN9Cz/cN0=;
- b=rSeeF9p6bRGkezDtIr9TZf33lexnS0/9gyo2komWRPd60hDauQWTIgF617rODrWW2N
- iIygewHXGVFE4p1YjGr48eIdHMiqV3sJ18Wv/olQ6I1n79Rhkrc17v1eZg5qimnmvdsC
- 99hXO0nLkNkZD7syjN6ijItChujWhFmBAm+AVaqN14sCgGy3AuSF6sycBEKS2XEh23V8
- 0cIGvkrTLttFYWWoaE41RDFl9fSkgQvs3bHBdMdfVmRHPyQVE/7MuNL67i1UR8iDaFhh
- F7aTQbr+CbdtaOvcjFCgpxGYUQ2fNZ+RWAqym8QPeQrQtwakFHhc18+naI83MSrRyThr
- 7Irg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=q5+p89wmcRTNNV+DoPVNJPTQENWG1vX1KbzN9Cz/cN0=;
- b=DzgzRCdhfaL3pUNjTKycMy+0KJ3s2HnkcqkvQTo1lQaWufl/VEDsc19VvboKtlzXBv
- T55kUTv1kpvTRi75kuGkROzK+qrE6L5TjOvXJ/67PqzD426ZalyDMAevIKCIxKhD0QUz
- WC9iHPaXrk6cCXk//0YKcLbnXjLJCAEP2fJn1ywimAoCBEMpLMy7JzLTYj062hnUBwff
- f9zswno4Cutb4I+FiWdc7aTAvPQwSTs4IdPAWKCqQAtEZvrnrwPAfRw0f2YjPfwcPHjx
- c7T9O6yVgXy/LflacsHt/FtAOBbSnIQ2q60pvAZLMMTr9iY2qMSy2Sgbs1saWfz4v2G2
- zElQ==
-X-Gm-Message-State: AOAM530RCJdDz5zszy2G2j7CckeCIFZkuVRcnXraunaHpJTx1olNr0e9
- m7GmeMrrjoo6y0JCpQXnJeoJFn68Yesp8zqD0AUALA==
-X-Google-Smtp-Source: ABdhPJzceB3bTvWIkWkf1nJ1sz+48cpKT5slwIooq3ZAMqnB1a9PRUhVEqG6t3A4SL9HddKtn0498GWSAWYbL71ueS4=
-X-Received: by 2002:a19:4192:: with SMTP id o140mr8547067lfa.302.1614578592161; 
- Sun, 28 Feb 2021 22:03:12 -0800 (PST)
+ bh=H35nz79U3iTc666xWR8lPmhHegrvhs5FWA9WuA5DkEI=; b=FRK7L/1ySLLOgh7+j65ON9f0+9
+ KBO11flEVNl+b6WuisqreQ8tgGt4o+HDTiMFSexLevzdgkDTLJShdo2oAl+R+YiMI88zYbogkxPCA
+ HOkxd0XgingJUZZyP5jNdRwuPGF8sGDHZPgTrucUopfS8G7LAEyD8/2Ox1OP54czMdmo=;
+Received: from mx2.suse.de ([195.135.220.15])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1lGm35-00A9Iv-KS
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 01 Mar 2021 17:09:41 +0000
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+ t=1614618565; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=H35nz79U3iTc666xWR8lPmhHegrvhs5FWA9WuA5DkEI=;
+ b=RqQ5wOe0/iOPbgkCB6+F3wjB6c0eOIYiAodwUelOlBKkvKla4T6I47dITleDs6+RLWIspc
+ Es21DW2KUJVlAfVhSegO/4+EAe2vuEUr39OyN6XxmJfp4q/GBF6Pnh5R6EkEnA3PcrwpfB
+ JyUEYKEYJ1KY7x0yNXuizUFDOpdNCiw=
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 8FB08AE3C;
+ Mon,  1 Mar 2021 17:09:25 +0000 (UTC)
+Date: Mon, 1 Mar 2021 18:09:23 +0100
+To: John Ogness <john.ogness@linutronix.de>
+Message-ID: <YD0fw0DErfsi2ibs@alley>
+References: <20210225202438.28985-1-john.ogness@linutronix.de>
+ <20210225202438.28985-12-john.ogness@linutronix.de>
 MIME-Version: 1.0
-References: <20210226095306.1236539-1-sumit.garg@linaro.org>
- <20210226105934.gmppt6kubfadv4uf@maple.lan>
- <CAFA6WYPXCKSYBH8Tapf_yg-jS7G0sH0Dmi27s6hutUMtSE39-Q@mail.gmail.com>
- <20210226173727.dqa5uytqwbll6omo@maple.lan>
-In-Reply-To: <20210226173727.dqa5uytqwbll6omo@maple.lan>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Mon, 1 Mar 2021 11:33:00 +0530
-Message-ID: <CAFA6WYO0AHJmsGVQr0LPd8p4TS-3S=S_3OnzFS=q2R5p5FiXSA@mail.gmail.com>
-To: Daniel Thompson <daniel.thompson@linaro.org>
+Content-Disposition: inline
+In-Reply-To: <20210225202438.28985-12-john.ogness@linutronix.de>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.167.45 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.167.45 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [195.135.220.15 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -90,9 +79,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1lGbeI-0000Fe-Pe
-Subject: Re: [Kgdb-bugreport] [PATCH v2] kdb: Get rid of custom debug heap
- allocator
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1lGm35-00A9Iv-KS
+Subject: Re: [Kgdb-bugreport] [PATCH next v3 11/15] printk: kmsg_dumper:
+ remove @active field
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,166 +94,57 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: kgdb-bugreport@lists.sourceforge.net,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Jason Wessel <jason.wessel@windriver.com>
+From: Petr Mladek via Kgdb-bugreport <kgdb-bugreport@lists.sourceforge.net>
+Reply-To: Petr Mladek <pmladek@suse.com>
+Cc: Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>,
+ Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+ Paul Mackerras <paulus@samba.org>, Pavel Tatashin <pasha.tatashin@soleen.com>,
+ Daniel Thompson <daniel.thompson@linaro.org>,
+ Madhavan Srinivasan <maddy@linux.ibm.com>,
+ Michael Ellerman <mpe@ellerman.id.au>, Jordan Niethe <jniethe5@gmail.com>,
+ Wei Li <liwei391@huawei.com>, Ravi Bangoria <ravi.bangoria@linux.ibm.com>,
+ Kees Cook <keescook@chromium.org>, Alistair Popple <alistair@popple.id.au>,
+ Steven Rostedt <rostedt@goodmis.org>, Davidlohr Bueso <dave@stgolabs.net>,
+ Nicholas Piggin <npiggin@gmail.com>, Thomas Gleixner <tglx@linutronix.de>,
+ linux-kernel@vger.kernel.org,
+ Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
+ Jason Wessel <jason.wessel@windriver.com>,
+ kgdb-bugreport@lists.sourceforge.net, linuxppc-dev@lists.ozlabs.org,
+ Mike Rapoport <rppt@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Fri, 26 Feb 2021 at 23:07, Daniel Thompson
-<daniel.thompson@linaro.org> wrote:
->
-> On Fri, Feb 26, 2021 at 06:12:13PM +0530, Sumit Garg wrote:
-> > On Fri, 26 Feb 2021 at 16:29, Daniel Thompson
-> > <daniel.thompson@linaro.org> wrote:
-> > >
-> > > On Fri, Feb 26, 2021 at 03:23:06PM +0530, Sumit Garg wrote:
-> > > > Currently the only user for debug heap is kdbnearsym() which can be
-> > > > modified to rather ask the caller to supply a buffer for symbol name.
-> > > > So do that and modify kdbnearsym() callers to pass a symbol name buffer
-> > > > allocated statically and hence remove custom debug heap allocator.
-> > >
-> > > Why make the callers do this?
-> > >
-> > > The LRU buffers were managed inside kdbnearsym() why does switching to
-> > > an approach with a single buffer require us to push that buffer out to
-> > > the callers?
-> > >
-> >
-> > Earlier the LRU buffers managed namebuf uniqueness per caller (upto
-> > 100 callers)
->
-> The uniqueness is per symbol, not per caller.
->
+On Thu 2021-02-25 21:24:34, John Ogness wrote:
+> All 6 kmsg_dumpers do not benefit from the @active flag:
+> 
+>   (provide their own synchronization)
+>   - arch/powerpc/kernel/nvram_64.c
+>   - arch/um/kernel/kmsg_dump.c
+>   - drivers/mtd/mtdoops.c
+>   - fs/pstore/platform.c
+> 
+>   (only dump on KMSG_DUMP_PANIC, which does not require
+>   synchronization)
+>   - arch/powerpc/platforms/powernv/opal-kmsg.c
+>   - drivers/hv/vmbus_drv.c
+> 
+> The other 2 kmsg_dump users also do not rely on @active:
+> 
+>   (hard-code @active to always be true)
+>   - arch/powerpc/xmon/xmon.c
+>   - kernel/debug/kdb/kdb_main.c
 
-Agree.
+Great summary!
 
-> > but if we switch to single entry in kdbnearsym() then all
-> > callers need to share common buffer which will lead to incorrect
-> > results from following simple sequence:
-> >
-> > kdbnearsym(word, &symtab1);
-> > kdbnearsym(word, &symtab2);
-> > kdb_symbol_print(word, &symtab1, 0);
-> > kdb_symbol_print(word, &symtab2, 0);
-> >
-> > But if we change to a unique static namebuf per caller then the
-> > following sequence will work:
-> >
-> > kdbnearsym(word, &symtab1, namebuf1);
-> > kdbnearsym(word, &symtab2, namebuf2);
-> > kdb_symbol_print(word, &symtab1, 0);
-> > kdb_symbol_print(word, &symtab2, 0);
->
-> This is true but do any of the callers of kdbnearsym ever do this?
+> Therefore, @active can be removed.
+> 
+> Signed-off-by: John Ogness <john.ogness@linutronix.de>
 
-No, but any of prospective callers may need this.
+Reviewed-by: Petr Mladek <pmladek@suse.com>
 
-> The
-> main reaason that heap stuck out as redundant was that I've only ever
-> seen the output of kdbnearsym() consumed almost immediately by a print.
->
-
-Yeah but I think the alternative proposed in this patch isn't as
-burdensome as the heap and tries to somewhat match existing
-functionality.
-
-> I wrote an early version of a patch like this that just shrunk the LRU
-> cache down to 2 and avoided any heap usage... but I threw it away
-> when I realized we never carry cached values outside the function
-> that obtained them.
->
-
-Okay, so if you still think that having a single static buffer inside
-kdbnearsym() is an appropriate approach for time being then I will
-switch to use that instead.
-
--Sumit
-
->
-> > > > @@ -526,6 +526,7 @@ int kdbgetaddrarg(int argc, const char **argv, int *nextarg,
-> >
-> > >
-> > > > diff --git a/kernel/debug/kdb/kdb_main.c b/kernel/debug/kdb/kdb_main.c
-> > > > index 9d69169582c6..6efe9ec53906 100644
-> > > > --- a/kernel/debug/kdb/kdb_main.c
-> > > > +++ b/kernel/debug/kdb/kdb_main.c
-> > > > @@ -526,6 +526,7 @@ int kdbgetaddrarg(int argc, const char **argv, int *nextarg,
-> > >
-> > > The documentation comment for this function has not been updated to
-> > > describe the new contract on callers of this function (e.g. if they
-> > > consume the symbol name they must do so before calling kdbgetaddrarg()
-> > > (and maybe kdbnearsym() again).
-> > >
-> >
-> > I am not sure if I follow you here. If we have a unique static buffer
-> > per caller then why do we need this new contract?
->
-> I traced the code wrong. I thought it shared symtab->sym_name with its
-> own caller... but it doesn't it shares synname with its caller and
-> that's totally different...
->
->
-> Daniel.
->
-> >
-> > >
-> > > >       char symbol = '\0';
-> > > >       char *cp;
-> > > >       kdb_symtab_t symtab;
-> > > > +     static char namebuf[KSYM_NAME_LEN];
-> > > >
-> > > >       /*
-> > > >        * If the enable flags prohibit both arbitrary memory access
-> > > > diff --git a/kernel/debug/kdb/kdb_support.c b/kernel/debug/kdb/kdb_support.c
-> > > > index b59aad1f0b55..9b907a84f2db 100644
-> > > > --- a/kernel/debug/kdb/kdb_support.c
-> > > > +++ b/kernel/debug/kdb/kdb_support.c
-> > > > @@ -57,8 +57,6 @@ int kdbgetsymval(const char *symname, kdb_symtab_t *symtab)
-> > > >  }
-> > > >  EXPORT_SYMBOL(kdbgetsymval);
-> > > >
-> > > > -static char *kdb_name_table[100];    /* arbitrary size */
-> > > > -
-> > > >  /*
-> > > >   * kdbnearsym -      Return the name of the symbol with the nearest address
-> > > >   *   less than 'addr'.
-> > >
-> > > Again the documentation comment has not been updated and, in this case,
-> > > is now misleading.
-> >
-> > Okay, I will fix it.
-> >
-> > >
-> > > If we move the static buffer here then the remarks section on this
-> > > function is a really good place to describe what the callers must do to
-> > > manage the static buffer safely as well as a convenient place to mention
-> > > that we tolerate the reuse of the static buffer if kdb is re-entered
-> > > becase a) kdb is broken if that happens and b) we are crash resilient
-> > > if if does.
-> > >
-> > >
-> > > > @@ -79,13 +77,11 @@ static char *kdb_name_table[100]; /* arbitrary size */
-> > > >   *   hold active strings, no kdb caller of kdbnearsym makes more
-> > > >   *   than ~20 later calls before using a saved value.
-> > > >   */
-> > > > -int kdbnearsym(unsigned long addr, kdb_symtab_t *symtab)
-> > > > +int kdbnearsym(unsigned long addr, kdb_symtab_t *symtab, char *namebuf)
-> > >
-> > > As above, I don't understand why we need to add namebuf here. I think
-> > > the prototype can remain the same.
-> > >
-> > > Think of it simple that we have reduce the cache from having 100 entries
-> > > to having just 1 ;-) .
-> >
-> > Please see my response above.
-> >
-> > -Sumit
-> >
-> > >
-> > >
-> > > Daniel.
+Best Regards,
+Petr
 
 
 _______________________________________________
