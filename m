@@ -2,70 +2,72 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0804932B679
-	for <lists+kgdb-bugreport@lfdr.de>; Wed,  3 Mar 2021 11:15:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 09BB332B7F6
+	for <lists+kgdb-bugreport@lfdr.de>; Wed,  3 Mar 2021 14:18:57 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
+	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	 bh=RGrOWHR+m9PVneOwn68DY79ULNU0Xojglb6+iB7yJO0=; b=Ct1aYD992oF8khi35FYEABHu2
+	JCXiF5AEx55uNVnznZU2U2GM+jpO/OOKoAKeIpN+orrtJtjPJF4KEjRtIKXLgvyyGXVY4YHhxtmrw
+	xKGl9oTge5wwkBmpi3Hm8pZSRlmHrC1N9G5uLHLjzWVe8wof7NyYN74jTW+DH7tG1H6YU=;
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1lHOXk-0001w7-8c
-	for lists+kgdb-bugreport@lfdr.de; Wed, 03 Mar 2021 10:15:48 +0000
+	id 1lHROw-0001pg-L5
+	for lists+kgdb-bugreport@lfdr.de; Wed, 03 Mar 2021 13:18:54 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <john.ogness@linutronix.de>) id 1lHOXi-0001vy-CF
- for kgdb-bugreport@lists.sourceforge.net; Wed, 03 Mar 2021 10:15:46 +0000
+ (envelope-from <pmladek@suse.com>) id 1lHROv-0001pW-1f
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 03 Mar 2021 13:18:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
+ MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9CVCDvgkqaxh7MYJebjzfGDlcpHL5EV9JmU/3T5/E9o=; b=c2ZUsgPRlFWKrgsaagNTyx6Izb
- phJqcAjIBUU7o4y/EkMuSnpnb8o4NVUw4Kxlf6aZ+tzhVHRJ+eueWkIs45xWDUuQKCy8CAtwjlC5k
- UkW0XH4zZHh6T6Kh6+BV9aXXdQyx3cOByBHJET5miTEVtfMp+fwqxkZDrd6ur0i/LnUg=;
+ bh=fTjwCAs8NFhD6G8Me32PjCtQRtajdWLNU8hPxq2kLwY=; b=VwIXSH6KqMSFtQPTeUAXnto2j3
+ +pszhzOpIQjRSuwr6itkwwpFTZz9K+kR9bq9kY48aSNOx+IizGT7aiZ8QdCOF4OIf3y2pLDDPJHU2
+ eVAQ8CF1VS9l5d4Me3S9QgSZ3PGNRdFHSosRfOlJD3112xaDxHtE+4r2V66lpEG8izhk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=9CVCDvgkqaxh7MYJebjzfGDlcpHL5EV9JmU/3T5/E9o=; b=cEoHgrqC9+K8Krikb88KqeJCjs
- NewyxzNFpgFmOon38otS/a/79c0PZfDsgDwDFonelm4taJQVW87P71HAxV7cmp4CHy0pZ3p+wQTBM
- ntQB0wvBsvA1rT6hv5YvRx0cgjewcS/bvuUKEwKq5ZEj42fSd0zA5XVfkNA8GlZlY570=;
-Received: from galois.linutronix.de ([193.142.43.55])
+ bh=fTjwCAs8NFhD6G8Me32PjCtQRtajdWLNU8hPxq2kLwY=; b=DU4/nSCEafRgZ3XUoMaqmQ2oFi
+ L9BS6TaEt7xNSnPT3RUy5mqZJ9TmdEqHwh7R2ipPMH+QrJGgE4tpHC3iOanPadt83H+iRujBReh4R
+ P/RaAmDums+uWQ56HnB0hAKI6HR0aJuNMvQtxB4qnNObFOUfBiVqgl87pBCGfU4EWhkE=;
+Received: from mx2.suse.de ([195.135.220.15])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lHOXf-0000lE-PQ
- for kgdb-bugreport@lists.sourceforge.net; Wed, 03 Mar 2021 10:15:46 +0000
-From: John Ogness <john.ogness@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1614766537;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
+ id 1lHROn-0006UB-9i
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 03 Mar 2021 13:18:52 +0000
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+ t=1614777516; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=9CVCDvgkqaxh7MYJebjzfGDlcpHL5EV9JmU/3T5/E9o=;
- b=Zm7xKp9CT+sUU4WRzec8CVEpFrLLJdFNgYAi1a92dvtdqPPKabAr6dQ1ygaKwBhaQh1B7M
- vHeaI2YzUCOY3nHlbmeurQavz9gccOovBkvDoEsmUo+eyeYkpBEMpqPcH5Iw86ET2ZMpK0
- V8XJq5OjwzoLNWgDpbJnl3zMaxlG0Bvevf/LKPWFu7UuD8/SSgX6tTh81/mRFyzmz2r9T4
- bUxUgucGyycystzxjpWp2ddmSgxUTqCaZJICMULeqFqG8a1Yqn2vM0bg37svlJM0yq49XG
- h1ck627ETJj80c96ClUDLmUtcUcjHIGtXzAJ9RUPhWiy+KMwpf+tE3vnCpQx6g==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1614766537;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=9CVCDvgkqaxh7MYJebjzfGDlcpHL5EV9JmU/3T5/E9o=;
- b=bVf+wnuWrrtIo4HglvFNUtHsGhnWYVuWdv8nO4uJMFQhqNPABIruxkBynt1DXoWmG7hPu5
- lrRlsI5dtVWhuaDQ==
-To: Petr Mladek <pmladek@suse.com>
-Date: Wed,  3 Mar 2021 11:15:27 +0100
-Message-Id: <20210303101528.29901-15-john.ogness@linutronix.de>
-In-Reply-To: <20210303101528.29901-1-john.ogness@linutronix.de>
+ bh=fTjwCAs8NFhD6G8Me32PjCtQRtajdWLNU8hPxq2kLwY=;
+ b=OG2D8K0+PfCuA5USdfd+Vx6vvOPTyS3EUyRmE7sqZ415QTN8GcaX9NJMw0mxPVVFu1pGLR
+ m/nhsBzCaOzVYjLB8Jp0BgoRT32O09qY+clnqr6yXiqa/1CU+6464zYukujhq7ChdCD79P
+ 71x09r4i/F0vei3pckPBC7HbLpQl/ms=
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 531B1AD29;
+ Wed,  3 Mar 2021 13:18:36 +0000 (UTC)
+Date: Wed, 3 Mar 2021 14:18:29 +0100
+To: John Ogness <john.ogness@linutronix.de>,
+ Konstantin Ryabitsev <konstantin@linuxfoundation.org>
+Message-ID: <YD+MpccJp4gX6bOP@alley>
 References: <20210303101528.29901-1-john.ogness@linutronix.de>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20210303101528.29901-1-john.ogness@linutronix.de>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -80,9 +82,12 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1lHOXf-0000lE-PQ
-Subject: [Kgdb-bugreport] [PATCH next v4 14/15] printk: kmsg_dump: remove
- _nolock() variants
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [195.135.220.15 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1lHROn-0006UB-9i
+Subject: [Kgdb-bugreport] lkml delivery: was: Re: [PATCH next v4 00/15]
+ printk: remove logbuf_lock
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -94,251 +99,75 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>,
+From: Petr Mladek via Kgdb-bugreport <kgdb-bugreport@lists.sourceforge.net>
+Reply-To: Petr Mladek <pmladek@suse.com>
+Cc: linux-hyperv@vger.kernel.org,
+ Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>,
  Benjamin Herrenschmidt <benh@kernel.crashing.org>,
- Paul Mackerras <paulus@samba.org>, Kees Cook <keescook@chromium.org>,
+ linux-mtd@lists.infradead.org, Michael Ellerman <mpe@ellerman.id.au>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ "K. Y. Srinivasan" <kys@microsoft.com>, Thomas Meyer <thomas@m3y3r.de>,
+ Vignesh Raghavendra <vigneshr@ti.com>,
  Daniel Thompson <daniel.thompson@linaro.org>,
  Madhavan Srinivasan <maddy@linux.ibm.com>,
- Michael Ellerman <mpe@ellerman.id.au>, Jordan Niethe <jniethe5@gmail.com>,
- Wei Li <liwei391@huawei.com>, Ravi Bangoria <ravi.bangoria@linux.ibm.com>,
- Pavel Tatashin <pasha.tatashin@soleen.com>,
- Alistair Popple <alistair@popple.id.au>, Steven Rostedt <rostedt@goodmis.org>,
+ Stephen Hemminger <sthemmin@microsoft.com>,
+ Richard Weinberger <richard@nod.at>, Anton Vorontsov <anton@enomsg.org>,
+ Jordan Niethe <jniethe5@gmail.com>,
+ Anton Ivanov <anton.ivanov@cambridgegreys.com>, Wei Li <liwei391@huawei.com>,
+ Haiyang Zhang <haiyangz@microsoft.com>,
+ Ravi Bangoria <ravi.bangoria@linux.ibm.com>, Kees Cook <keescook@chromium.org>,
+ Alistair Popple <alistair@popple.id.au>, Jeff Dike <jdike@addtoit.com>,
+ Colin Cross <ccross@android.com>, linux-um@lists.infradead.org,
+ Wei Liu <wei.liu@kernel.org>, Steven Rostedt <rostedt@goodmis.org>,
  Davidlohr Bueso <dave@stgolabs.net>, Nicholas Piggin <npiggin@gmail.com>,
- Thomas Gleixner <tglx@linutronix.de>, linux-kernel@vger.kernel.org,
+ Oleg Nesterov <oleg@redhat.com>, Thomas Gleixner <tglx@linutronix.de>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Michael Kelley <mikelley@microsoft.com>,
+ Christophe Leroy <christophe.leroy@c-s.fr>, Tony Luck <tony.luck@intel.com>,
+ Pavel Tatashin <pasha.tatashin@soleen.com>, linux-kernel@vger.kernel.org,
  Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
  Jason Wessel <jason.wessel@windriver.com>,
- kgdb-bugreport@lists.sourceforge.net, linuxppc-dev@lists.ozlabs.org,
- Mike Rapoport <rppt@kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+ kgdb-bugreport@lists.sourceforge.net, Paul Mackerras <paulus@samba.org>,
+ linuxppc-dev@lists.ozlabs.org, Mike Rapoport <rppt@kernel.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-kmsg_dump_rewind() and kmsg_dump_get_line() are lockless, so there is
-no need for _nolock() variants. Remove these functions and switch all
-callers of the _nolock() variants.
-
-The functions without _nolock() were chosen because they are already
-exported to kernel modules.
-
-Signed-off-by: John Ogness <john.ogness@linutronix.de>
-Reviewed-by: Petr Mladek <pmladek@suse.com>
----
- arch/powerpc/xmon/xmon.c    |  4 +--
- include/linux/kmsg_dump.h   | 16 ----------
- kernel/debug/kdb/kdb_main.c |  8 ++---
- kernel/printk/printk.c      | 60 +++++--------------------------------
- 4 files changed, 14 insertions(+), 74 deletions(-)
-
-diff --git a/arch/powerpc/xmon/xmon.c b/arch/powerpc/xmon/xmon.c
-index 5978b90a885f..bf7d69625a2e 100644
---- a/arch/powerpc/xmon/xmon.c
-+++ b/arch/powerpc/xmon/xmon.c
-@@ -3013,9 +3013,9 @@ dump_log_buf(void)
- 	catch_memory_errors = 1;
- 	sync();
- 
--	kmsg_dump_rewind_nolock(&iter);
-+	kmsg_dump_rewind(&iter);
- 	xmon_start_pagination();
--	while (kmsg_dump_get_line_nolock(&iter, false, buf, sizeof(buf), &len)) {
-+	while (kmsg_dump_get_line(&iter, false, buf, sizeof(buf), &len)) {
- 		buf[len] = '\0';
- 		printf("%s", buf);
- 	}
-diff --git a/include/linux/kmsg_dump.h b/include/linux/kmsg_dump.h
-index 36c8c57e1051..906521c2329c 100644
---- a/include/linux/kmsg_dump.h
-+++ b/include/linux/kmsg_dump.h
-@@ -57,17 +57,12 @@ struct kmsg_dumper {
- #ifdef CONFIG_PRINTK
- void kmsg_dump(enum kmsg_dump_reason reason);
- 
--bool kmsg_dump_get_line_nolock(struct kmsg_dump_iter *iter, bool syslog,
--			       char *line, size_t size, size_t *len);
--
- bool kmsg_dump_get_line(struct kmsg_dump_iter *iter, bool syslog,
- 			char *line, size_t size, size_t *len);
- 
- bool kmsg_dump_get_buffer(struct kmsg_dump_iter *iter, bool syslog,
- 			  char *buf, size_t size, size_t *len_out);
- 
--void kmsg_dump_rewind_nolock(struct kmsg_dump_iter *iter);
--
- void kmsg_dump_rewind(struct kmsg_dump_iter *iter);
- 
- int kmsg_dump_register(struct kmsg_dumper *dumper);
-@@ -80,13 +75,6 @@ static inline void kmsg_dump(enum kmsg_dump_reason reason)
- {
- }
- 
--static inline bool kmsg_dump_get_line_nolock(struct kmsg_dump_iter *iter,
--					     bool syslog, const char *line,
--					     size_t size, size_t *len)
--{
--	return false;
--}
--
- static inline bool kmsg_dump_get_line(struct kmsg_dump_iter *iter, bool syslog,
- 				const char *line, size_t size, size_t *len)
- {
-@@ -99,10 +87,6 @@ static inline bool kmsg_dump_get_buffer(struct kmsg_dump_iter *iter, bool syslog
- 	return false;
- }
- 
--static inline void kmsg_dump_rewind_nolock(struct kmsg_dump_iter *iter)
--{
--}
--
- static inline void kmsg_dump_rewind(struct kmsg_dump_iter *iter)
- {
- }
-diff --git a/kernel/debug/kdb/kdb_main.c b/kernel/debug/kdb/kdb_main.c
-index 8544d7a55a57..67d9f2403b52 100644
---- a/kernel/debug/kdb/kdb_main.c
-+++ b/kernel/debug/kdb/kdb_main.c
-@@ -2126,8 +2126,8 @@ static int kdb_dmesg(int argc, const char **argv)
- 		kdb_set(2, setargs);
- 	}
- 
--	kmsg_dump_rewind_nolock(&iter);
--	while (kmsg_dump_get_line_nolock(&iter, 1, NULL, 0, NULL))
-+	kmsg_dump_rewind(&iter);
-+	while (kmsg_dump_get_line(&iter, 1, NULL, 0, NULL))
- 		n++;
- 
- 	if (lines < 0) {
-@@ -2159,8 +2159,8 @@ static int kdb_dmesg(int argc, const char **argv)
- 	if (skip >= n || skip < 0)
- 		return 0;
- 
--	kmsg_dump_rewind_nolock(&iter);
--	while (kmsg_dump_get_line_nolock(&iter, 1, buf, sizeof(buf), &len)) {
-+	kmsg_dump_rewind(&iter);
-+	while (kmsg_dump_get_line(&iter, 1, buf, sizeof(buf), &len)) {
- 		if (skip) {
- 			skip--;
- 			continue;
-diff --git a/kernel/printk/printk.c b/kernel/printk/printk.c
-index 8994bc192b88..602de86d4e76 100644
---- a/kernel/printk/printk.c
-+++ b/kernel/printk/printk.c
-@@ -3373,7 +3373,7 @@ void kmsg_dump(enum kmsg_dump_reason reason)
- }
- 
- /**
-- * kmsg_dump_get_line_nolock - retrieve one kmsg log line (unlocked version)
-+ * kmsg_dump_get_line - retrieve one kmsg log line
-  * @iter: kmsg dump iterator
-  * @syslog: include the "<4>" prefixes
-  * @line: buffer to copy the line to
-@@ -3388,22 +3388,22 @@ void kmsg_dump(enum kmsg_dump_reason reason)
-  *
-  * A return value of FALSE indicates that there are no more records to
-  * read.
-- *
-- * The function is similar to kmsg_dump_get_line(), but grabs no locks.
-  */
--bool kmsg_dump_get_line_nolock(struct kmsg_dump_iter *iter, bool syslog,
--			       char *line, size_t size, size_t *len)
-+bool kmsg_dump_get_line(struct kmsg_dump_iter *iter, bool syslog,
-+			char *line, size_t size, size_t *len)
- {
- 	u64 min_seq = latched_seq_read_nolock(&clear_seq);
- 	struct printk_info info;
- 	unsigned int line_count;
- 	struct printk_record r;
-+	unsigned long flags;
- 	size_t l = 0;
- 	bool ret = false;
- 
- 	if (iter->cur_seq < min_seq)
- 		iter->cur_seq = min_seq;
- 
-+	printk_safe_enter_irqsave(flags);
- 	prb_rec_init_rd(&r, &info, line, size);
- 
- 	/* Read text or count text lines? */
-@@ -3424,40 +3424,11 @@ bool kmsg_dump_get_line_nolock(struct kmsg_dump_iter *iter, bool syslog,
- 	iter->cur_seq = r.info->seq + 1;
- 	ret = true;
- out:
-+	printk_safe_exit_irqrestore(flags);
- 	if (len)
- 		*len = l;
- 	return ret;
- }
--
--/**
-- * kmsg_dump_get_line - retrieve one kmsg log line
-- * @iter: kmsg dump iterator
-- * @syslog: include the "<4>" prefixes
-- * @line: buffer to copy the line to
-- * @size: maximum size of the buffer
-- * @len: length of line placed into buffer
-- *
-- * Start at the beginning of the kmsg buffer, with the oldest kmsg
-- * record, and copy one record into the provided buffer.
-- *
-- * Consecutive calls will return the next available record moving
-- * towards the end of the buffer with the youngest messages.
-- *
-- * A return value of FALSE indicates that there are no more records to
-- * read.
-- */
--bool kmsg_dump_get_line(struct kmsg_dump_iter *iter, bool syslog,
--			char *line, size_t size, size_t *len)
--{
--	unsigned long flags;
--	bool ret;
--
--	printk_safe_enter_irqsave(flags);
--	ret = kmsg_dump_get_line_nolock(iter, syslog, line, size, len);
--	printk_safe_exit_irqrestore(flags);
--
--	return ret;
--}
- EXPORT_SYMBOL_GPL(kmsg_dump_get_line);
- 
- /**
-@@ -3550,22 +3521,6 @@ bool kmsg_dump_get_buffer(struct kmsg_dump_iter *iter, bool syslog,
- }
- EXPORT_SYMBOL_GPL(kmsg_dump_get_buffer);
- 
--/**
-- * kmsg_dump_rewind_nolock - reset the iterator (unlocked version)
-- * @iter: kmsg dump iterator
-- *
-- * Reset the dumper's iterator so that kmsg_dump_get_line() and
-- * kmsg_dump_get_buffer() can be called again and used multiple
-- * times within the same dumper.dump() callback.
-- *
-- * The function is similar to kmsg_dump_rewind(), but grabs no locks.
-- */
--void kmsg_dump_rewind_nolock(struct kmsg_dump_iter *iter)
--{
--	iter->cur_seq = latched_seq_read_nolock(&clear_seq);
--	iter->next_seq = prb_next_seq(prb);
--}
--
- /**
-  * kmsg_dump_rewind - reset the iterator
-  * @iter: kmsg dump iterator
-@@ -3579,7 +3534,8 @@ void kmsg_dump_rewind(struct kmsg_dump_iter *iter)
- 	unsigned long flags;
- 
- 	printk_safe_enter_irqsave(flags);
--	kmsg_dump_rewind_nolock(iter);
-+	iter->cur_seq = latched_seq_read_nolock(&clear_seq);
-+	iter->next_seq = prb_next_seq(prb);
- 	printk_safe_exit_irqrestore(flags);
- }
- EXPORT_SYMBOL_GPL(kmsg_dump_rewind);
--- 
-2.20.1
-
-
-
-_______________________________________________
-Kgdb-bugreport mailing list
-Kgdb-bugreport@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport
+SGkgSm9obiwKCk9uIFdlZCAyMDIxLTAzLTAzIDExOjE1OjEzLCBKb2huIE9nbmVzcyB3cm90ZToK
+PiBIZWxsbywKPiAKPiBIZXJlIGlzIHY0IG9mIGEgc2VyaWVzIHRvIHJlbW92ZSBAbG9nYnVmX2xv
+Y2ssIGV4cG9zaW5nIHRoZQo+IHJpbmdidWZmZXIgbG9ja2xlc3NseSB0byBib3RoIHJlYWRlcnMg
+YW5kIHdyaXRlcnMuIHYzIGlzCj4gaGVyZSBbMF0uCgpIYXZlIHlvdSBnb3Qgc29tZSByZXBseSBm
+cm9tIGxrbWwgdGhhdCBpdCBoYXMgbm90IGRlbGl2ZXJlZCB0aGVyZSwKcGxlYXNlPwoKSSBhbSBu
+b3QgYWJsZSB0byBnZXQgdGhlIHBhdGNoc2V0IHVzaW5nIGI0IHRvb2w6CgokPiBiNCBhbSAtbyB0
+ZXN0IDIwMjEwMzAzMTAxNTI4LjI5OTAxLTEtam9obi5vZ25lc3NAbGludXRyb25peC5kZQpMb29r
+aW5nIHVwIGh0dHBzOi8vbG9yZS5rZXJuZWwub3JnL3IvMjAyMTAzMDMxMDE1MjguMjk5MDEtMS1q
+b2huLm9nbmVzcyU0MGxpbnV0cm9uaXguZGUKR3JhYmJpbmcgdGhyZWFkIGZyb20gbG9yZS5rZXJu
+ZWwub3JnL2xpbnV4LWh5cGVydgpBbmFseXppbmcgMiBtZXNzYWdlcyBpbiB0aGUgdGhyZWFkCi0t
+LQpUaHJlYWQgaW5jb21wbGV0ZSwgYXR0ZW1wdGluZyB0byBiYWNrZmlsbApHcmFiYmluZyB0aHJl
+YWQgZnJvbSBsb3JlLmtlcm5lbC5vcmcvbGttbApTZXJ2ZXIgcmV0dXJuZWQgYW4gZXJyb3I6IDQw
+NApHcmFiYmluZyB0aHJlYWQgZnJvbSBsb3JlLmtlcm5lbC5vcmcvbGludXgtbXRkClNlcnZlciBy
+ZXR1cm5lZCBhbiBlcnJvcjogNDA0CkdyYWJiaW5nIHRocmVhZCBmcm9tIGxvcmUua2VybmVsLm9y
+Zy9saW51eHBwYy1kZXYKTG9hZGVkIDIgbWVzc2FnZXMgZnJvbSBodHRwczovL2xvcmUua2VybmVs
+Lm9yZy9saW51eHBwYy1kZXYvCi0tLQpXcml0aW5nIHRlc3QvdjRfMjAyMTAzMDNfam9obl9vZ25l
+c3NfcHJpbnRrX3JlbW92ZV9sb2didWZfbG9jay5tYngKICBFUlJPUjogbWlzc2luZyBbMS8xNV0h
+CiAgRVJST1I6IG1pc3NpbmcgWzIvMTVdIQogIEVSUk9SOiBtaXNzaW5nIFszLzE1XSEKICBFUlJP
+UjogbWlzc2luZyBbNC8xNV0hCiAgRVJST1I6IG1pc3NpbmcgWzUvMTVdIQogIEVSUk9SOiBtaXNz
+aW5nIFs2LzE1XSEKICBFUlJPUjogbWlzc2luZyBbNy8xNV0hCiAgRVJST1I6IG1pc3NpbmcgWzgv
+MTVdIQogIEVSUk9SOiBtaXNzaW5nIFs5LzE1XSEKICBFUlJPUjogbWlzc2luZyBbMTAvMTVdIQog
+IFtQQVRDSCBuZXh0IHY0IDExLzE1XSBwcmludGs6IGttc2dfZHVtcGVyOiByZW1vdmUgQGFjdGl2
+ZSBmaWVsZAogIOKckyBbUEFUQ0ggbmV4dCB2NCAxMi8xNV0gcHJpbnRrOiBpbnRyb2R1Y2UgYSBr
+bXNnX2R1bXAgaXRlcmF0b3IKICBFUlJPUjogbWlzc2luZyBbMTMvMTVdIQogIFtQQVRDSCBuZXh0
+IHY0IDE0LzE1XSBwcmludGs6IGttc2dfZHVtcDogcmVtb3ZlIF9ub2xvY2soKSB2YXJpYW50cwog
+IEVSUk9SOiBtaXNzaW5nIFsxNS8xNV0hCi0tLQpUb3RhbCBwYXRjaGVzOiAzCi0tLQpXQVJOSU5H
+OiBUaHJlYWQgaW5jb21wbGV0ZSEKQ292ZXI6IHRlc3QvdjRfMjAyMTAzMDNfam9obl9vZ25lc3Nf
+cHJpbnRrX3JlbW92ZV9sb2didWZfbG9jay5jb3ZlcgogTGluazogaHR0cHM6Ly9sb3JlLmtlcm5l
+bC5vcmcvci8yMDIxMDMwMzEwMTUyOC4yOTkwMS0xLWpvaG4ub2duZXNzQGxpbnV0cm9uaXguZGUK
+IEJhc2U6IG5vdCBmb3VuZAogICAgICAgZ2l0IGFtIHRlc3QvdjRfMjAyMTAzMDNfam9obl9vZ25l
+c3NfcHJpbnRrX3JlbW92ZV9sb2didWZfbG9jay5tYngKCgphbmQgSSBkbyBub3Qgc2VlIGl0IGF0
+IGxvcmUuIEl0IGhhcyBvbmx5IGZvdW5kIGNvcGllcyBpbiBsaW51eC1oeXBlcnYKYW5kIGxpbnV4
+LXBwY2RldiBtYWlsaW5nIGxpc3RzLApzZWUgaHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGttbC8y
+MDIxMDMwMzEwMTUyOC4yOTkwMS0yLWpvaG4ub2duZXNzQGxpbnV0cm9uaXguZGUvCgpCZXN0IFJl
+Z2FyZHMsClBldHIKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fXwpLZ2RiLWJ1Z3JlcG9ydCBtYWlsaW5nIGxpc3QKS2dkYi1idWdyZXBvcnRAbGlzdHMuc291
+cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZv
+L2tnZGItYnVncmVwb3J0Cg==
