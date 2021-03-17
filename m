@@ -2,104 +2,105 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CE28C33B0C3
-	for <lists+kgdb-bugreport@lfdr.de>; Mon, 15 Mar 2021 12:14:37 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id 85AFB33EE65
+	for <lists+kgdb-bugreport@lfdr.de>; Wed, 17 Mar 2021 11:37:37 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1lLlBE-0004eG-Kt
-	for lists+kgdb-bugreport@lfdr.de; Mon, 15 Mar 2021 11:14:36 +0000
+	id 1lMTYV-0006ka-9g
+	for lists+kgdb-bugreport@lfdr.de; Wed, 17 Mar 2021 10:37:35 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <shubhankarvk@gmail.com>) id 1lLCIZ-000346-6s
- for kgdb-bugreport@lists.sourceforge.net; Sat, 13 Mar 2021 21:59:51 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <unixbhaskar@gmail.com>) id 1lMSCc-0008VH-0L
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 17 Mar 2021 09:10:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:
- From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=O7+2eZP2W86H2DLexjazqWbJPqedwA+wictLUHpSxcs=; b=jfAnFCq1tXcgO3NG8qwD5V2v2f
- LAnCKIXdJjgHHF43zURaDu703wDBv3CYaDpdP1cfzYWM+cOMm45xT7xOjBkIWL9mdy8U/Af9ke59M
- 4aJwkhrbze21573ByEOloMXmGn0/m6B12wZtOKH6mc5WPlDNXCca8fSjNyWm47BK7M5w=;
+ bh=DCO4SGpYTn48obrAClA1NxmQHtXTT1+p+wX7tLZUWso=; b=FD+/mFFjlXmtiLr33Eg+hTa28v
+ nc/ksQlnwEjFAk6qIOi4lIh1hac6oEQmjGqdMTrMEHFif+DUJMb7cVxE6E3II/pmbLoGqjReyieaH
+ 9cHqZ5xt4bAj4aWZgZxsiZSo2gx+Hjmbl6ijqz7gmQbCj7ohUKBOICxLAhwcbC6YOHi0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=O7+2eZP2W86H2DLexjazqWbJPqedwA+wictLUHpSxcs=; b=A
- r4hREz66EAhPVXfYpHaY2+LVWDFSSf1FDVxF1ujCssGOYDEv+KtE3uvTcrYwR34Uin0TAwpupfk8w
- 2whY+62LPbcCYABpnLTIo5JfdCEEE6DtIsUtnRVwt42iGn9X0YUcE+f10KcXHEavQyPvSpK8tecZE
- 24/oHArtbesTkhDo=;
-Received: from mail-pj1-f49.google.com ([209.85.216.49])
+ List-Owner:List-Archive; bh=DCO4SGpYTn48obrAClA1NxmQHtXTT1+p+wX7tLZUWso=; b=W
+ hN/6+e+I9T130AZlsVd8miab6gK+LMB77cwGAaJV4XjaR9ILh69Uyu4DeJ69s69gAHUxL0engzLG+
+ VbWA0rkT5Fo2Iqxxon2MH3sG0OYJYrfOAbBUhi8TaXDUKu7Pg3Seu8UPCS4CWntE6rN1uJcUMsgG8
+ DAUj7CWBlE5zc3LA=;
+Received: from mail-qt1-f171.google.com ([209.85.160.171])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
- id 1lLCIT-0008Sj-VH
- for kgdb-bugreport@lists.sourceforge.net; Sat, 13 Mar 2021 21:59:50 +0000
-Received: by mail-pj1-f49.google.com with SMTP id
- kk2-20020a17090b4a02b02900c777aa746fso12824081pjb.3
+ id 1lMSCV-0003C8-Bo
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 17 Mar 2021 09:10:53 +0000
+Received: by mail-qt1-f171.google.com with SMTP id 73so832392qtg.13
  for <kgdb-bugreport@lists.sourceforge.net>;
- Sat, 13 Mar 2021 13:59:45 -0800 (PST)
+ Wed, 17 Mar 2021 02:10:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=date:from:to:cc:subject:message-id:mime-version:content-disposition
- :user-agent; bh=O7+2eZP2W86H2DLexjazqWbJPqedwA+wictLUHpSxcs=;
- b=qVfJMzeOrAtnNbLOwEyjkoOr0oLuRHf+pTiHwYdIIHsbZSj1lVRQcgApQJTlYj/Iuo
- JvggtYXkSDXnUUNrz/nNvpOrGkg8Ap52BA8FQfqMjelJePtzIw5pi2/9V3Kg34smibP4
- LsIQL+cuakP7ASfmA9kCYx08XnlSl1zPYgUI3dWAgZezKPhTsDg9F1ZYp+Ll4aU/qeAY
- dyu5tJHnAmgWQROGAbhvMjNqy1Gs+xyXaa+OkeZ+vKK7N2S0IUpaA1TqnrlIc8QOvL2V
- 6p+PQVzDxwg3jvu6m4fDKh8pdshNK5CmQnt3hgzBWuTZk3mm+Paj68WRP8E9W/xIfCoE
- nukg==
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=DCO4SGpYTn48obrAClA1NxmQHtXTT1+p+wX7tLZUWso=;
+ b=hheYuEzHbFUasFyKNJkgy946IunncImPTQG00VXga+Ouk8mNnufmqL5dk01c3VzmNo
+ 5wPhJ7Q/Q/jZtFzlpW9nvkGPXLf+obb0QCIKkDF+yBV05cT+cE14PnXI6VunS7WIZZ4X
+ jKrCXgAFt0OUjy2GC18IDhSFanXuURGoIOPnpqUUWNcdwkQORuYoHGpTXkhRqrYb2TMn
+ xgDoGyUIhF/AyrnNl98JlhhfzXZp+Rlc4DaXJL5tfAQqfEn2AhnrUlrZwUGxvon18mD4
+ PknLy+AL2xvBCuezSIJQgdZLvKcvyNofTDs/IjsTY8ElyKaGtNXJ2uXNhnpok3bEQp1u
+ K0aA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
- :content-disposition:user-agent;
- bh=O7+2eZP2W86H2DLexjazqWbJPqedwA+wictLUHpSxcs=;
- b=kjRZbr3n8/Y2Nwp8zvB2l/6nFJ9sZgFFr0sNKyVM6lkJGMxz2GL74WcxLgptKjUk8O
- 3d1PnYYLmgDuZ0sb3EjeZDsqay4OgmtcHrQxHdynNQOiDh8DxaxtB5D1tpybVX/yt1Ql
- V0YCAZRerfWxQKOYp0ECjGPoQ0U+5kCXQXluP+gyI4zrdiyF/15PFc7I6dgKyCihISMJ
- /nPbFEjOD5a5XNruPtxk1I2t68Xq8SChCV7+0D7UWLe20DHVKmP3IRISJ03UNEmJeEeK
- SxblcWPyZM4rzh4i6pGV1tqduKpTXnyfwccud/9gS4ip45HU4itp1F30eAm8JdP011UC
- TsEQ==
-X-Gm-Message-State: AOAM533RZX89USkM6RIjgIwb7OJAbfWW8M1rDbRradmSVGrr8jDx359K
- mowd4qBTkU1BlnAdF32JgIs=
-X-Google-Smtp-Source: ABdhPJybchg4iBw3bSpMm4rz2sxmlLG5WQ6fRzk+Nk8gMiew3PYNZhNhekQu7qk2pyNE5xLDadhJfA==
-X-Received: by 2002:a17:90b:358:: with SMTP id
- fh24mr5392777pjb.109.1615672780356; 
- Sat, 13 Mar 2021 13:59:40 -0800 (PST)
-Received: from localhost ([122.179.34.200])
- by smtp.gmail.com with ESMTPSA id c22sm8642891pfl.169.2021.03.13.13.59.39
- (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Sat, 13 Mar 2021 13:59:39 -0800 (PST)
-Date: Sun, 14 Mar 2021 03:29:37 +0530
-From: Shubhankar Kuranagatti <shubhankarvk@gmail.com>
-To: jason.wessel@windriver.com
-Message-ID: <20210313215937.iiw22mj5jxvd7sef@kewl-virtual-machine>
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=DCO4SGpYTn48obrAClA1NxmQHtXTT1+p+wX7tLZUWso=;
+ b=moGu8YzOFMQVauNu0g9TakVmlUfzaKv1xersoD/sUNmcriw11XCyqbo7CymMEC1jEN
+ x8yGx8V/hp+TXWDU+EvURYSXYMXuX1fvGOyodSId0V43+VofFObc28JnjNiNM4VO7m1s
+ obxU4JO843pAh2P0+cYgJ4ykcaO9A9YOnWaeneOHdoh49UOo1UG3ApNjC3eXsX0TaEng
+ 6NXEknJOLXNAilEkMX0iG9MbDzja8yxF7fXdNCH8wUq0LAe+gZhFblKepTD9IjicWD9Z
+ 8QukDNuyDTKNpMWqaARzKZ9Y0RWA/ojxVM/A55QgPbnlmj5DHpdVz/7WEZjm2NfEzZyD
+ 2gHA==
+X-Gm-Message-State: AOAM532/m/hpYhqx2u4jLHCz//Ohgv9fC8ccXl+/t+tCJbz00vKubhSi
+ Lh1YM0Htb+N+J9segsz/DAg=
+X-Google-Smtp-Source: ABdhPJyoORE5Q/k6SAwAzPgVJG6xpYOSlFLnqKSoDOiX1WlidPqqx1CTOLAXNGqvJOkUEIjpV2xhMg==
+X-Received: by 2002:ac8:5047:: with SMTP id h7mr3107983qtm.22.1615972241644;
+ Wed, 17 Mar 2021 02:10:41 -0700 (PDT)
+Received: from localhost.localdomain ([37.19.198.48])
+ by smtp.gmail.com with ESMTPSA id v137sm5092004qkb.109.2021.03.17.02.10.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 17 Mar 2021 02:10:41 -0700 (PDT)
+From: Bhaskar Chowdhury <unixbhaskar@gmail.com>
+To: jason.wessel@windriver.com, daniel.thompson@linaro.org,
+ dianders@chromium.org, kgdb-bugreport@lists.sourceforge.net,
+ linux-kernel@vger.kernel.org
+Date: Wed, 17 Mar 2021 14:40:22 +0530
+Message-Id: <20210317091022.347258-1-unixbhaskar@gmail.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-Content-Disposition: inline
-User-Agent: NeoMutt/20171215
-X-Spam-Score: -0.1 (/)
+X-Spam-Score: 3.5 (+++)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (shubhankarvk[at]gmail.com)
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.216.49 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.216.49 listed in wl.mailspike.net]
+ (unixbhaskar[at]gmail.com)
+ 3.6 RCVD_IN_SBL_CSS        RBL: Received via a relay in Spamhaus SBL-CSS
+ [37.19.198.48 listed in zen.spamhaus.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.160.171 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.160.171 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1lLCIT-0008Sj-VH
-X-Mailman-Approved-At: Mon, 15 Mar 2021 11:14:34 +0000
-Subject: [Kgdb-bugreport] [PATCH 2/2] drivers: misc: kgdbts.c: Fix
- indentation warning.
+X-Headers-End: 1lMSCV-0003C8-Bo
+X-Mailman-Approved-At: Wed, 17 Mar 2021 10:37:34 +0000
+Subject: [Kgdb-bugreport] [PATCH] kernel: debug: Ordinary typo fixes in the
+ file gdbstub.c
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,40 +112,54 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: daniel.thompson@linaro.org, arnd@arndb.de, gregkh@linuxfoundation.org,
- bkkarthik@pesu.pes.edu, linux-kernel@vger.kernel.org,
- kgdb-bugreport@lists.sourceforge.net
+Cc: Bhaskar Chowdhury <unixbhaskar@gmail.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-An extra space has been removed before tab. This is to maintain
-code uniformity.
 
-Signed-off-by: Shubhankar Kuranagatti <shubhankarvk@gmail.com>
+s/'O'utput/'Output/
+s/overwitten/overwritten/
+s/procesing/processing/
+
+Signed-off-by: Bhaskar Chowdhury <unixbhaskar@gmail.com>
 ---
- drivers/misc/kgdbts.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ kernel/debug/gdbstub.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/misc/kgdbts.c b/drivers/misc/kgdbts.c
-index 3ee5acc1c391..e6e7c5144ab3 100644
---- a/drivers/misc/kgdbts.c
-+++ b/drivers/misc/kgdbts.c
-@@ -41,10 +41,10 @@
-  *
-  * To invoke the kgdb test suite from boot you use a kernel start
-  * argument as follows:
-- * 	kgdbts=V1 kgdbwait
-+ *	kgdbts=V1 kgdbwait
-  * Or if you wanted to perform the NMI test for 6 seconds and kernel_clone
-  * test for 100 forks, you could use:
-- * 	kgdbts=V1N6F100 kgdbwait
-+ *	kgdbts=V1N6F100 kgdbwait
-  *
-  * The test suite can also be invoked at run time with:
-  *	echo kgdbts=V1N6F100 > /sys/module/kgdbts/parameters/kgdbts
+diff --git a/kernel/debug/gdbstub.c b/kernel/debug/gdbstub.c
+index e149a0ac9e9e..5c96590725f1 100644
+--- a/kernel/debug/gdbstub.c
++++ b/kernel/debug/gdbstub.c
+@@ -204,7 +204,7 @@ void gdbstub_msg_write(const char *s, int len)
+ 	if (len == 0)
+ 		len = strlen(s);
+
+-	/* 'O'utput */
++	/* 'Output */
+ 	gdbmsgbuf[0] = 'O';
+
+ 	/* Fill and send buffers... */
+@@ -321,7 +321,7 @@ int kgdb_hex2long(char **ptr, unsigned long *long_val)
+ /*
+  * Copy the binary array pointed to by buf into mem.  Fix $, #, and
+  * 0x7d escaped with 0x7d. Return -EFAULT on failure or 0 on success.
+- * The input buf is overwitten with the result to write to mem.
++ * The input buf is overwritten with the result to write to mem.
+  */
+ static int kgdb_ebin2mem(char *buf, char *mem, int count)
+ {
+@@ -952,7 +952,7 @@ static int gdb_cmd_exception_pass(struct kgdb_state *ks)
+ }
+
+ /*
+- * This function performs all gdbserial command procesing
++ * This function performs all gdbserial command processing
+  */
+ int gdb_serial_stub(struct kgdb_state *ks)
+ {
 --
-2.17.1
+2.30.2
 
 
 
