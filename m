@@ -2,85 +2,101 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E106333F6BF
-	for <lists+kgdb-bugreport@lfdr.de>; Wed, 17 Mar 2021 18:27:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D70D0342314
+	for <lists+kgdb-bugreport@lfdr.de>; Fri, 19 Mar 2021 18:17:30 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1lMZx7-0005HB-N4
-	for lists+kgdb-bugreport@lfdr.de; Wed, 17 Mar 2021 17:27:25 +0000
+	id 1lNIkb-00036v-MP
+	for lists+kgdb-bugreport@lfdr.de; Fri, 19 Mar 2021 17:17:29 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <rdunlap@infradead.org>) id 1lMZwu-0005E0-1T
- for kgdb-bugreport@lists.sourceforge.net; Wed, 17 Mar 2021 17:27:12 +0000
+ (envelope-from <daniel.thompson@linaro.org>) id 1lNIkZ-00036M-5h
+ for kgdb-bugreport@lists.sourceforge.net; Fri, 19 Mar 2021 17:17:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vDj5QLKIY3+m6sVOEX2/jPJ7XcnGNcq6gqehl799e4E=; b=DR+398wB44+qAFpd78+6jWbAYj
- EKSWrIye6PVvgjMfEVGu6kyzIZfdHpno2Sx0dhu+vU3kth/Hrm6aLa9A+cCQORqAkbXImP2oww+k3
- tEktQqdnziKETzb0An30VE1lysZ/30L35LW+u5Krro00QpmsPRXtqlKBxO4CATcHGMHA=;
+ bh=NmOSs5tEu47Laoh1qxa+rl3JlDXehYKJh6XfrCU+SRM=; b=UOPfr5IOWKnoteSP9qm2WmReUW
+ E7+GM539KFGHNLiYV7VDQaBoXw8TFIsxf9rZiTgiWLn5G709/hiLAfxhFHFAjZl8WAQRPEmCEo7dA
+ +ldAMxLeDGs2U6IgPcNe3Gy7t08N+qojmWsiqIg1n2DwvyrOMlqsMSGILJnF5nSaWB+E=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=vDj5QLKIY3+m6sVOEX2/jPJ7XcnGNcq6gqehl799e4E=; b=d4t7WJ1JzwYqbFUPG0KI8KftkV
- DAavbhkOUpgctU1jOIKvw0iJTGI+Gp8eTYBbyngRQ+QwqhQ2KmnP5deGOJUDcmOCNsIHlGG2oJiI/
- pLwkg7nTQJWFKkiWQrjWR466wnyaUWzbuDw5FoFYdIWmJKZyXOsW21mzaKsv75lQaSEs=;
-Received: from merlin.infradead.org ([178.238.156.107])
+ bh=NmOSs5tEu47Laoh1qxa+rl3JlDXehYKJh6XfrCU+SRM=; b=ei+BQaf+8MzXCvCqnSxy6HC8WQ
+ 89Rcgs2budrqLZbiAEEqG6nChiErMZvgO3xw1BBhzay46JoCXz5GGOBOz4mzvtBEQNc3gV1p4CgQg
+ 5QWxZXnks8Amj4FpDVHNFeLwiK0ZzKOKn0WMoPdUnSmixxpA7BqTSI+dSFqoKG1heZsM=;
+Received: from mail-ed1-f47.google.com ([209.85.208.47])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1lMZwj-00BSf3-LF
- for kgdb-bugreport@lists.sourceforge.net; Wed, 17 Mar 2021 17:27:11 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=merlin.20170209; h=Content-Transfer-Encoding:Content-Type:
- In-Reply-To:MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:
- Reply-To:Cc:Content-ID:Content-Description;
- bh=vDj5QLKIY3+m6sVOEX2/jPJ7XcnGNcq6gqehl799e4E=; b=G6KhVHbQM3vbUK+ZBzGCp55hmc
- BnZihHW468IxB3IqHulkTPnoU6ZSbePHcPe4BovE3fcWm1oDTvJWXw6jkr4VS6FGuNZxcbGMjvWxV
- 5qC+BUNHXHOGHyPbjrSTiLdb4ic4r44T9fYeWXjRQfmzinkOzFKRsywbWfSXPkthXlztNYyg4I9ku
- Is/Efy12OaPvKk66k6L/xsUpFTP+c5T2eC8wivoHonuxl1f64Fof4DUoOb4EDfjNjB6l1H9c1eCe8
- Va9j+dS1Zr7q2LkitVoLhUKn6c04UI4NNc283SEU8ISGYi4/aHb67pcpeJxFDx1G+DITWz9/KnMuo
- JElq35MQ==;
-Received: from [2601:1c0:6280:3f0::9757]
- by merlin.infradead.org with esmtpsa (Exim 4.94 #2 (Red Hat Linux))
- id 1lMZwY-001fQE-Is; Wed, 17 Mar 2021 17:26:50 +0000
-To: Bhaskar Chowdhury <unixbhaskar@gmail.com>, jason.wessel@windriver.com,
- daniel.thompson@linaro.org, dianders@chromium.org,
- kgdb-bugreport@lists.sourceforge.net, linux-kernel@vger.kernel.org
-References: <20210317104658.4053473-1-unixbhaskar@gmail.com>
-From: Randy Dunlap <rdunlap@infradead.org>
-Message-ID: <f7f9fc7f-3e6d-b9a8-b854-620d928b1f24@infradead.org>
-Date: Wed, 17 Mar 2021 10:26:47 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.0
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1lNIkS-002Q2r-QX
+ for kgdb-bugreport@lists.sourceforge.net; Fri, 19 Mar 2021 17:17:27 +0000
+Received: by mail-ed1-f47.google.com with SMTP id e7so11614708edu.10
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Fri, 19 Mar 2021 10:17:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=NmOSs5tEu47Laoh1qxa+rl3JlDXehYKJh6XfrCU+SRM=;
+ b=OU2XM07/P0SFEX8dpG4FteiSW0vErpq78CdkpTISEI3TrhMSkCQcs2ABH6+r8ZkqkH
+ NZloQc4xFVaGBSYiMCFUkfobMcc+GMn30T3hfWLv4FEEUqpHWaVZGE2AeuluiUkET39b
+ t6WHSkoXxOlo5HJXOQr6qp1ePUp2KERBezcJio2ikhSdUIWgm8C5MKFx/ra+RI/IC7DF
+ s5yi/XZu5xM02hzzAy+lhL6rcfPl+U9Be+soziyfLPm1VE4HneXtj6foLwOOKTpLQPh7
+ lR7E1oBw+EKZuyWHKTfP3QW4b+cBxthHGrWJhPGxZIOn53SAltZYkjEk6wfy7KiUprKC
+ 25fg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=NmOSs5tEu47Laoh1qxa+rl3JlDXehYKJh6XfrCU+SRM=;
+ b=NmfGPqDfzd7Q+bnJr4Sm6BsmBPuGGdP8o3ZwCa+TsgqgfQ3I0EfagmUff7v48L2X3r
+ zi2Qq5nvgduC7knjsd0G0JjXxAxi9ssCPPyG8ThcG8ou7OSP4DHlSoJmPKTowKlA9Xcn
+ rY6q4MVHN8T6WjkT4fdDTicqQd9zhD+gcdtkyXkMCoJh+fgKCDUXEAtwtMWvbfPKkkf+
+ ejabMdqhVb/EcCpnAV9fiX6ULi20N8ywlxHgbv76zp2loErKy9XLr+Nti7BX14oRWlCr
+ BY1MXRN9rTrKriA8XmzdBVVBJiIFJ3lu8qMF91T3vhoCwIARlmNKtXL1gbOuMKXBQtHi
+ 4gmw==
+X-Gm-Message-State: AOAM531VvbE901CCskKvBhJB2216ixDteLH/Licg/SzzQ6SpbarSpdro
+ ED9PvaB27o0WUbrl7/C9IYuu2g==
+X-Google-Smtp-Source: ABdhPJzOFq4v0Lwd4dwxfKOLdM+czU7z6OYUykk7hRaTQS/S4dNiOJFeqlritMVFyedzsDiN0+tPmg==
+X-Received: by 2002:a05:6402:1283:: with SMTP id
+ w3mr10777157edv.340.1616174234323; 
+ Fri, 19 Mar 2021 10:17:14 -0700 (PDT)
+Received: from maple.lan (cpc141216-aztw34-2-0-cust174.18-1.cable.virginm.net.
+ [80.7.220.175])
+ by smtp.gmail.com with ESMTPSA id r25sm3914743edv.78.2021.03.19.10.17.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 19 Mar 2021 10:17:13 -0700 (PDT)
+Date: Fri, 19 Mar 2021 17:17:12 +0000
+From: Daniel Thompson <daniel.thompson@linaro.org>
+To: Sumit Garg <sumit.garg@linaro.org>
+Message-ID: <20210319171712.vlkgnmp7cbnayxdn@maple.lan>
+References: <20210309121747.859823-1-sumit.garg@linaro.org>
 MIME-Version: 1.0
-In-Reply-To: <20210317104658.4053473-1-unixbhaskar@gmail.com>
-Content-Language: en-US
+Content-Disposition: inline
+In-Reply-To: <20210309121747.859823-1-sumit.garg@linaro.org>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: infradead.org]
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.208.47 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.208.47 listed in wl.mailspike.net]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1lMZwj-00BSf3-LF
-Subject: Re: [Kgdb-bugreport] [PATCH V2] kernel: debug: Ordinary typo fixes
- in the file gdbstub.c
+X-Headers-End: 1lNIkS-002Q2r-QX
+Subject: Re: [Kgdb-bugreport] [PATCH] kdb: Refactor kdb_defcmd implementation
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -92,53 +108,64 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
+Cc: kgdb-bugreport@lists.sourceforge.net, linux-kernel@vger.kernel.org,
+ jason.wessel@windriver.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On 3/17/21 3:46 AM, Bhaskar Chowdhury wrote:
-> s/overwitten/overwritten/
-> s/procesing/processing/
-> 
-> Signed-off-by: Bhaskar Chowdhury <unixbhaskar@gmail.com>
+On Tue, Mar 09, 2021 at 05:47:47PM +0530, Sumit Garg wrote:
+> Switch to use kdbtab_t instead of separate struct defcmd_set since
+> now we have kdb_register_table() to register pre-allocated kdb commands.
 
-Acked-by: Randy Dunlap <rdunlap@infradead.org>
-
-> ---
-> Changes from V1:
->  As Daniel pointed out, I was misdoing a check,so corrected
-> 
->  kernel/debug/gdbstub.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/kernel/debug/gdbstub.c b/kernel/debug/gdbstub.c
-> index e149a0ac9e9e..8372897402f4 100644
-> --- a/kernel/debug/gdbstub.c
-> +++ b/kernel/debug/gdbstub.c
-> @@ -321,7 +321,7 @@ int kgdb_hex2long(char **ptr, unsigned long *long_val)
->  /*
->   * Copy the binary array pointed to by buf into mem.  Fix $, #, and
->   * 0x7d escaped with 0x7d. Return -EFAULT on failure or 0 on success.
-> - * The input buf is overwitten with the result to write to mem.
-> + * The input buf is overwritten with the result to write to mem.
->   */
->  static int kgdb_ebin2mem(char *buf, char *mem, int count)
->  {
-> @@ -952,7 +952,7 @@ static int gdb_cmd_exception_pass(struct kgdb_state *ks)
->  }
-> 
->  /*
-> - * This function performs all gdbserial command procesing
-> + * This function performs all gdbserial command processing
->   */
->  int gdb_serial_stub(struct kgdb_state *ks)
->  {
-> --
+This needs rewriting. I've been struggling for some time to figure out
+what it actually means means and how it related to the patch. I'm
+starting to conclude that this might not be my fault!
 
 
--- 
-~Randy
+> Also, switch to use a linked list for sub-commands instead of dynamic
+> array which makes traversing the sub-commands list simpler.
 
+We can't call these things sub-commands! These days a sub-commands
+implies something like `git subcommand` and kdb doesn't have anything
+like that.
+
+
+> +struct kdb_subcmd {
+> +	char    *scmd_name;		/* Sub-command name */
+> +	struct  list_head list_node;	/* Sub-command node */
+> +};
+> +
+>  /* The KDB shell command table */
+>  typedef struct _kdbtab {
+>  	char    *cmd_name;		/* Command name */
+> @@ -175,6 +181,7 @@ typedef struct _kdbtab {
+>  	kdb_cmdflags_t cmd_flags;	/* Command behaviour flags */
+>  	struct list_head list_node;	/* Command list */
+>  	bool    is_dynamic;		/* Command table allocation type */
+> +	struct list_head kdb_scmds_head; /* Sub-commands list */
+>  } kdbtab_t;
+
+Perhaps this should be more like:
+
+struct defcmd_set {
+	kdbtab_t cmd;
+	struct list_head commands;
+	
+};
+
+This still gets registers using kdb_register_table() but it keeps the
+macro code all in once place:
+
+kdb_register_table(&macro->cmd, 1);
+
+I think that is what I *meant* to suggest ;-) . It also avoids having to
+talk about sub-commands! BTW I'm open to giving defcmd_set a better name
+(kdb_macro?) but I don't see why we want to give all commands a macro
+list.
+
+
+Daniel.
 
 
 _______________________________________________
