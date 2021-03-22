@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A9257344B1F
-	for <lists+kgdb-bugreport@lfdr.de>; Mon, 22 Mar 2021 17:23:40 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id F3419344B1D
+	for <lists+kgdb-bugreport@lfdr.de>; Mon, 22 Mar 2021 17:23:36 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1lONL9-0000SB-FE
-	for lists+kgdb-bugreport@lfdr.de; Mon, 22 Mar 2021 16:23:39 +0000
+	id 1lONL5-0002tu-DW
+	for lists+kgdb-bugreport@lfdr.de; Mon, 22 Mar 2021 16:23:35 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <daniel.thompson@linaro.org>) id 1lONL5-0000S1-SS
- for kgdb-bugreport@lists.sourceforge.net; Mon, 22 Mar 2021 16:23:35 +0000
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <daniel.thompson@linaro.org>) id 1lONHC-0002jb-90
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 22 Mar 2021 16:19:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=xxz6uPp9nrsVmPP5FVzOOUVKIjtinfu3XiwLbV9sXRM=; b=eMmWdBA3SsrWBdmVRjUvqXvpaP
- 2HKIWYT7J/dIdizCn0QsDRaoASXlzvchFb1Q2BFcrEQ4LnDJ62R8gh25u51s/9xBpat6LV8J7PtnY
- vdV0v5iI6WCOawOksGjUpbsOHzzkhL0ArvufzLwoCC0ayp4MR0Ml1at3MOqU+w0+1OiQ=;
+ bh=eldFodHTbSBJUE2zcFhJoaj3CYiDURbwU2RZsCSY3vk=; b=iJ3Zyde7B0weMHyYN/TMREHBqB
+ vzTacpqRCNVfTPCknJDPKdsmCrj2ttebeRIYJCewh9M8p41FOPP2M3K6QAjtAlFoOeFT/KEDnQCFl
+ SiTrcZkQhNzrCa4S7Vha+Wtx21DNT2zunSrWAa1ys8X6LwqkyFtQABmmr3vtLp8JYHXo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -30,64 +30,63 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=xxz6uPp9nrsVmPP5FVzOOUVKIjtinfu3XiwLbV9sXRM=; b=V/oxAvnaHdA9k8WSH2Qacq55N/
- jK3ZSc3ikeuU1/JOz6Kx1XiRIkPMjuR7dg6S4LO9uCWZIkBFZ77J21lErLUZ4KhGZgwXpTLLYZptz
- U3XOxSBEs12/4xEHYr/xORr7bA6qdvPHKDhw567bA6VhChz/Pqo16wEzsfcolFAdJFQ4=;
-Received: from mail-lf1-f49.google.com ([209.85.167.49])
+ bh=eldFodHTbSBJUE2zcFhJoaj3CYiDURbwU2RZsCSY3vk=; b=WCFwfSgOse8oHGyqFtAQSZDM+Z
+ 5bDB1lmsA2KO6/rLYMFqXkC1NdtbvEljQ6r4x+CiLMIxVFpiFMDYBa55dWuG7S+K4GZSFmg7NHMyT
+ JqLCtL83O25LuEmaJ0Am0gZ283OK35jQLeuQCELiGXH2rW8T6Cxnvr08ARlKsz66ER08=;
+Received: from mail-ed1-f48.google.com ([209.85.208.48])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
- id 1lONL0-00010i-6s
- for kgdb-bugreport@lists.sourceforge.net; Mon, 22 Mar 2021 16:23:35 +0000
-Received: by mail-lf1-f49.google.com with SMTP id o10so22198202lfb.9
+ id 1lONH0-0000px-0j
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 22 Mar 2021 16:19:34 +0000
+Received: by mail-ed1-f48.google.com with SMTP id dm8so20097478edb.2
  for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 22 Mar 2021 09:23:30 -0700 (PDT)
+ Mon, 22 Mar 2021 09:19:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to;
- bh=xxz6uPp9nrsVmPP5FVzOOUVKIjtinfu3XiwLbV9sXRM=;
- b=B37auJWa5f+faci9S6CxgjXZvpZEjxvYT2JTO8RfJHXlouFSTNM8wQVZtVLlQKUZPJ
- 67mFRHVUtAysINgZAnBMqhoteKeZWzSRhe3E6cBQ/tWMas7iDq3Je7fJolect5YIgqki
- 4E73+lh8nNx3aR//zWFLoe/kLHfM78gVK36SPPjk3T/RIgy1AhJb1TmV1usByGNH+QFc
- B4hm6mq/nr0pAMn+LLQ+Z6peI23pmHaYtDecBptYzKMlARHd2/hSrlum8JYwVumLgJGO
- PD2vIOUlBUcW4rPGmnFCM7vRDHdg1N0kxkssVrHlY9pbqQm61L78HhlQErsPmSFdq6Ib
- OjEA==
+ bh=eldFodHTbSBJUE2zcFhJoaj3CYiDURbwU2RZsCSY3vk=;
+ b=iR453lW6sLP64qnFJYDmv4LE+4sZNsatktXtJrVGX0ebjNnNdfszZqv/O8c5sz6Lql
+ 3cF2GGsmMczfu/Y8Z9DpcpoDV2f1l+sOluo8NnCVJvA59cxfjdJ/2Z60y+N3n7lyfJ+F
+ Wj+3Gd8uM7NuTZ8/QXuz/TN8mHEDeWdFbDs47VrQnK58TNAnLVP7w9GvSHD1DnTB+P/S
+ 2qvHT7o9/F75zGzpStGm9i4CdN0XzV81skEHiWn1JR8IBB349l7yE6X6ah2gYH8Dra27
+ WrlqSv1hmz5Miwu12AnySMAg2Cu5YrRJ3LJQJDmXUxAsG8qB+ucSWyzp2ae3pQRUJyGU
+ 5Pzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=xxz6uPp9nrsVmPP5FVzOOUVKIjtinfu3XiwLbV9sXRM=;
- b=N5vROzJpoVa8k1TgT9Gq1a5kvn3omEX/uAIXgq3GGRZO0f3fNINbyHYp9fnhnrdadg
- qSFcRaKGglz1TolC8IfBoQTzgPWtJZ+u60bLUV/1D/ZDSyUxnhzDD77kWZf7/C7vLhVJ
- 6JcwSXDU0cZ6UXY7lQOLCAJaVWMnnGfFVVmqdu1/3IrHVBqSuYJe0sIkUps0fxvnUnN9
- uaUBEmyfJlOIVnR8dMW9aRrvg/3EuJ0ZxGen/UpPQg4wQS13nWlAPfvXkHC+t9X4e9R7
- CM0ifUcdqV0+iDsFNm88XSQ5kXroXdDxYI1Dg0dp01+Xz9gvRv7uUc8/Wpa1ZBMYJZS6
- 5/ng==
-X-Gm-Message-State: AOAM532NiqmgXXNXnjXoSs7jk9UrOnCVJHRp4AdPKTeHHgor6j4/cxuc
- o/v3AKAlZYeitwNafu+/X/qPrphxGbpwBdDo
-X-Google-Smtp-Source: ABdhPJwIUuFnCxzO5NL76/IDSo47K440UTU8pRwnsw3jZK8/Q+G2x/w+Yrx/VtccsED7kn0PLfGA6A==
-X-Received: by 2002:a17:906:bccc:: with SMTP id
- lw12mr563337ejb.268.1616429702906; 
- Mon, 22 Mar 2021 09:15:02 -0700 (PDT)
+ bh=eldFodHTbSBJUE2zcFhJoaj3CYiDURbwU2RZsCSY3vk=;
+ b=INLPcIlEndRbLap2iD2qk/cjcm2L5HoSxGLEO2Ni0HwBt5J/EKSTKtlXE/cIhQ6B54
+ Oe308hRRgDbWPtTMhxNTQOqqBTl3DT3QMOpzdtqfrlpASRyvRBQrmeFJUtXIiyOFVY5n
+ 59tYSIsIsSMbk5JvWx1oQ7Wfj84ayH8+eOYKS2FE/CJWBJyBMBSLC6Z7bkSTlNGn+LRA
+ xzW5I/sn32E0t8PUJ5FRjwWhFHufopH1XowBh6QH+pol6yVfS5NaqRJKHNneqm4IYmom
+ K3uDBb0B0qMhpjX4IbSSyiso4sDbCWL+uWKezELbvJIIzVgIzw1XPwJ3neV2t8tMhGSI
+ KeDA==
+X-Gm-Message-State: AOAM530b9AtIdRt/mLu84k48RI0mArWP1MqofsESxRNgLh3IkRnNxe3y
+ j2EJSPf27JaRTyhVTZo4vFU5Uw==
+X-Google-Smtp-Source: ABdhPJxzhZ75lilJTGnJ2uSE44+ivj3vV6JfjU0UFJ/NAJPT46u2jR9a2541CVFtYpcFf8t22GkKPg==
+X-Received: by 2002:aa7:d841:: with SMTP id f1mr367235eds.286.1616429955708;
+ Mon, 22 Mar 2021 09:19:15 -0700 (PDT)
 Received: from maple.lan (cpc141216-aztw34-2-0-cust174.18-1.cable.virginm.net.
  [80.7.220.175])
- by smtp.gmail.com with ESMTPSA id gn3sm9573414ejc.2.2021.03.22.09.15.01
+ by smtp.gmail.com with ESMTPSA id y17sm9746213ejf.116.2021.03.22.09.19.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Mar 2021 09:15:02 -0700 (PDT)
-Date: Mon, 22 Mar 2021 16:15:00 +0000
+ Mon, 22 Mar 2021 09:19:15 -0700 (PDT)
+Date: Mon, 22 Mar 2021 16:19:13 +0000
 From: Daniel Thompson <daniel.thompson@linaro.org>
-To: Sumit Garg <sumit.garg@linaro.org>
-Message-ID: <20210322161500.ytadytsylt24wf2r@maple.lan>
-References: <20210224070827.408771-1-sumit.garg@linaro.org>
+To: Bhaskar Chowdhury <unixbhaskar@gmail.com>
+Message-ID: <20210322161913.fbvrtnorezojddee@maple.lan>
+References: <20210317104658.4053473-1-unixbhaskar@gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210224070827.408771-1-sumit.garg@linaro.org>
+In-Reply-To: <20210317104658.4053473-1-unixbhaskar@gmail.com>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.167.49 listed in list.dnswl.org]
+ trust [209.85.208.48 listed in list.dnswl.org]
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.167.49 listed in wl.mailspike.net]
+ [209.85.208.48 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -95,9 +94,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1lONL0-00010i-6s
-Subject: Re: [Kgdb-bugreport] [PATCH v5] kdb: Simplify kdb commands
- registration
+X-Headers-End: 1lONH0-0000px-0j
+Subject: Re: [Kgdb-bugreport] [PATCH V2] kernel: debug: Ordinary typo fixes
+ in the file gdbstub.c
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,747 +114,49 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Wed, Feb 24, 2021 at 12:38:27PM +0530, Sumit Garg wrote:
-> Simplify kdb commands registration via using linked list instead of
-> static array for commands storage.
+On Wed, Mar 17, 2021 at 04:16:58PM +0530, Bhaskar Chowdhury wrote:
+> s/overwitten/overwritten/
+> s/procesing/processing/
 > 
-> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> Signed-off-by: Bhaskar Chowdhury <unixbhaskar@gmail.com>
 
-Applied, thanks!
+Applied, Thanks!
+
+
+Daniel.
 
 
 > ---
+> Changes from V1:
+>  As Daniel pointed out, I was misdoing a check,so corrected
 > 
-> Changes in v5:
-> - Introduce new method: kdb_register_table() to register static kdb
->   main and breakpoint command tables instead of using statically
->   allocated commands.
+>  kernel/debug/gdbstub.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 > 
-> Changes in v4:
-> - Fix kdb commands memory allocation issue prior to slab being available
->   with an array of statically allocated commands. Now it works fine with
->   kgdbwait.
-> - Fix a misc checkpatch warning.
-> - I have dropped Doug's review tag as I think this version includes a
->   major fix that should be reviewed again.
-> 
-> Changes in v3:
-> - Remove redundant "if" check.
-> - Pick up review tag from Doug.
-> 
-> Changes in v2:
-> - Remove redundant NULL check for "cmd_name".
-> - Incorporate misc. comment.
-> 
->  kernel/debug/kdb/kdb_bp.c      |  81 ++++--
->  kernel/debug/kdb/kdb_main.c    | 472 ++++++++++++++++++++-------------
->  kernel/debug/kdb/kdb_private.h |   3 +
->  3 files changed, 343 insertions(+), 213 deletions(-)
-> 
-> diff --git a/kernel/debug/kdb/kdb_bp.c b/kernel/debug/kdb/kdb_bp.c
-> index ec4940146612..c15a1c6abfd6 100644
-> --- a/kernel/debug/kdb/kdb_bp.c
-> +++ b/kernel/debug/kdb/kdb_bp.c
-> @@ -522,6 +522,60 @@ static int kdb_ss(int argc, const char **argv)
->  	return KDB_CMD_SS;
->  }
->  
-> +static kdbtab_t bptab[] = {
-> +	{	.cmd_name = "bp",
-> +		.cmd_func = kdb_bp,
-> +		.cmd_usage = "[<vaddr>]",
-> +		.cmd_help = "Set/Display breakpoints",
-> +		.cmd_minlen = 0,
-> +		.cmd_flags = KDB_ENABLE_FLOW_CTRL | KDB_REPEAT_NO_ARGS,
-> +	},
-> +	{	.cmd_name = "bl",
-> +		.cmd_func = kdb_bp,
-> +		.cmd_usage = "[<vaddr>]",
-> +		.cmd_help = "Display breakpoints",
-> +		.cmd_minlen = 0,
-> +		.cmd_flags = KDB_ENABLE_FLOW_CTRL | KDB_REPEAT_NO_ARGS,
-> +	},
-> +	{	.cmd_name = "bc",
-> +		.cmd_func = kdb_bc,
-> +		.cmd_usage = "<bpnum>",
-> +		.cmd_help = "Clear Breakpoint",
-> +		.cmd_minlen = 0,
-> +		.cmd_flags = KDB_ENABLE_FLOW_CTRL,
-> +	},
-> +	{	.cmd_name = "be",
-> +		.cmd_func = kdb_bc,
-> +		.cmd_usage = "<bpnum>",
-> +		.cmd_help = "Enable Breakpoint",
-> +		.cmd_minlen = 0,
-> +		.cmd_flags = KDB_ENABLE_FLOW_CTRL,
-> +	},
-> +	{	.cmd_name = "bd",
-> +		.cmd_func = kdb_bc,
-> +		.cmd_usage = "<bpnum>",
-> +		.cmd_help = "Disable Breakpoint",
-> +		.cmd_minlen = 0,
-> +		.cmd_flags = KDB_ENABLE_FLOW_CTRL,
-> +	},
-> +	{	.cmd_name = "ss",
-> +		.cmd_func = kdb_ss,
-> +		.cmd_usage = "",
-> +		.cmd_help = "Single Step",
-> +		.cmd_minlen = 1,
-> +		.cmd_flags = KDB_ENABLE_FLOW_CTRL | KDB_REPEAT_NO_ARGS,
-> +	},
-> +};
-> +
-> +static kdbtab_t bphcmd = {
-> +	.cmd_name = "bph",
-> +	.cmd_func = kdb_bp,
-> +	.cmd_usage = "[<vaddr>]",
-> +	.cmd_help = "[datar [length]|dataw [length]]   Set hw brk",
-> +	.cmd_minlen = 0,
-> +	.cmd_flags = KDB_ENABLE_FLOW_CTRL | KDB_REPEAT_NO_ARGS,
-> +};
-> +
->  /* Initialize the breakpoint table and register	breakpoint commands. */
->  
->  void __init kdb_initbptab(void)
-> @@ -537,30 +591,7 @@ void __init kdb_initbptab(void)
->  	for (i = 0, bp = kdb_breakpoints; i < KDB_MAXBPT; i++, bp++)
->  		bp->bp_free = 1;
->  
-> -	kdb_register_flags("bp", kdb_bp, "[<vaddr>]",
-> -		"Set/Display breakpoints", 0,
-> -		KDB_ENABLE_FLOW_CTRL | KDB_REPEAT_NO_ARGS);
-> -	kdb_register_flags("bl", kdb_bp, "[<vaddr>]",
-> -		"Display breakpoints", 0,
-> -		KDB_ENABLE_FLOW_CTRL | KDB_REPEAT_NO_ARGS);
-> +	kdb_register_table(bptab, ARRAY_SIZE(bptab));
->  	if (arch_kgdb_ops.flags & KGDB_HW_BREAKPOINT)
-> -		kdb_register_flags("bph", kdb_bp, "[<vaddr>]",
-> -		"[datar [length]|dataw [length]]   Set hw brk", 0,
-> -		KDB_ENABLE_FLOW_CTRL | KDB_REPEAT_NO_ARGS);
-> -	kdb_register_flags("bc", kdb_bc, "<bpnum>",
-> -		"Clear Breakpoint", 0,
-> -		KDB_ENABLE_FLOW_CTRL);
-> -	kdb_register_flags("be", kdb_bc, "<bpnum>",
-> -		"Enable Breakpoint", 0,
-> -		KDB_ENABLE_FLOW_CTRL);
-> -	kdb_register_flags("bd", kdb_bc, "<bpnum>",
-> -		"Disable Breakpoint", 0,
-> -		KDB_ENABLE_FLOW_CTRL);
-> -
-> -	kdb_register_flags("ss", kdb_ss, "",
-> -		"Single Step", 1,
-> -		KDB_ENABLE_FLOW_CTRL | KDB_REPEAT_NO_ARGS);
-> -	/*
-> -	 * Architecture dependent initialization.
-> -	 */
-> +		kdb_register_table(&bphcmd, 1);
->  }
-> diff --git a/kernel/debug/kdb/kdb_main.c b/kernel/debug/kdb/kdb_main.c
-> index 930ac1b25ec7..1e0c2c37df94 100644
-> --- a/kernel/debug/kdb/kdb_main.c
-> +++ b/kernel/debug/kdb/kdb_main.c
-> @@ -33,6 +33,7 @@
->  #include <linux/kallsyms.h>
->  #include <linux/kgdb.h>
->  #include <linux/kdb.h>
-> +#include <linux/list.h>
->  #include <linux/notifier.h>
->  #include <linux/interrupt.h>
->  #include <linux/delay.h>
-> @@ -84,15 +85,8 @@ static unsigned int kdb_continue_catastrophic =
->  static unsigned int kdb_continue_catastrophic;
->  #endif
->  
-> -/* kdb_commands describes the available commands. */
-> -static kdbtab_t *kdb_commands;
-> -#define KDB_BASE_CMD_MAX 50
-> -static int kdb_max_commands = KDB_BASE_CMD_MAX;
-> -static kdbtab_t kdb_base_commands[KDB_BASE_CMD_MAX];
-> -#define for_each_kdbcmd(cmd, num)					\
-> -	for ((cmd) = kdb_base_commands, (num) = 0;			\
-> -	     num < kdb_max_commands;					\
-> -	     num++, num == KDB_BASE_CMD_MAX ? cmd = kdb_commands : cmd++)
-> +/* kdb_cmds_head describes the available commands. */
-> +static LIST_HEAD(kdb_cmds_head);
->  
->  typedef struct _kdbmsg {
->  	int	km_diag;	/* kdb diagnostic */
-> @@ -921,7 +915,7 @@ int kdb_parse(const char *cmdstr)
->  	char *cp;
->  	char *cpp, quoted;
->  	kdbtab_t *tp;
-> -	int i, escaped, ignore_errors = 0, check_grep = 0;
-> +	int escaped, ignore_errors = 0, check_grep = 0;
->  
->  	/*
->  	 * First tokenize the command string.
-> @@ -1011,25 +1005,17 @@ int kdb_parse(const char *cmdstr)
->  		++argv[0];
->  	}
->  
-> -	for_each_kdbcmd(tp, i) {
-> -		if (tp->cmd_name) {
-> -			/*
-> -			 * If this command is allowed to be abbreviated,
-> -			 * check to see if this is it.
-> -			 */
-> -
-> -			if (tp->cmd_minlen
-> -			 && (strlen(argv[0]) <= tp->cmd_minlen)) {
-> -				if (strncmp(argv[0],
-> -					    tp->cmd_name,
-> -					    tp->cmd_minlen) == 0) {
-> -					break;
-> -				}
-> -			}
-> +	list_for_each_entry(tp, &kdb_cmds_head, list_node) {
-> +		/*
-> +		 * If this command is allowed to be abbreviated,
-> +		 * check to see if this is it.
-> +		 */
-> +		if (tp->cmd_minlen && (strlen(argv[0]) <= tp->cmd_minlen) &&
-> +		    (strncmp(argv[0], tp->cmd_name, tp->cmd_minlen) == 0))
-> +			break;
->  
-> -			if (strcmp(argv[0], tp->cmd_name) == 0)
-> -				break;
-> -		}
-> +		if (strcmp(argv[0], tp->cmd_name) == 0)
-> +			break;
->  	}
->  
->  	/*
-> @@ -1037,19 +1023,15 @@ int kdb_parse(const char *cmdstr)
->  	 * few characters of this match any of the known commands.
->  	 * e.g., md1c20 should match md.
->  	 */
-> -	if (i == kdb_max_commands) {
-> -		for_each_kdbcmd(tp, i) {
-> -			if (tp->cmd_name) {
-> -				if (strncmp(argv[0],
-> -					    tp->cmd_name,
-> -					    strlen(tp->cmd_name)) == 0) {
-> -					break;
-> -				}
-> -			}
-> +	if (list_entry_is_head(tp, &kdb_cmds_head, list_node)) {
-> +		list_for_each_entry(tp, &kdb_cmds_head, list_node) {
-> +			if (strncmp(argv[0], tp->cmd_name,
-> +				    strlen(tp->cmd_name)) == 0)
-> +				break;
->  		}
->  	}
->  
-> -	if (i < kdb_max_commands) {
-> +	if (!list_entry_is_head(tp, &kdb_cmds_head, list_node)) {
->  		int result;
->  
->  		if (!kdb_check_flags(tp->cmd_flags, kdb_cmd_enabled, argc <= 1))
-> @@ -2428,17 +2410,14 @@ static int kdb_kgdb(int argc, const char **argv)
->  static int kdb_help(int argc, const char **argv)
->  {
->  	kdbtab_t *kt;
-> -	int i;
->  
->  	kdb_printf("%-15.15s %-20.20s %s\n", "Command", "Usage", "Description");
->  	kdb_printf("-----------------------------"
->  		   "-----------------------------\n");
-> -	for_each_kdbcmd(kt, i) {
-> +	list_for_each_entry(kt, &kdb_cmds_head, list_node) {
->  		char *space = "";
->  		if (KDB_FLAG(CMD_INTERRUPT))
->  			return 0;
-> -		if (!kt->cmd_name)
-> -			continue;
->  		if (!kdb_check_flags(kt->cmd_flags, kdb_cmd_enabled, true))
->  			continue;
->  		if (strlen(kt->cmd_usage) > 20)
-> @@ -2659,7 +2638,6 @@ static int kdb_grep_help(int argc, const char **argv)
->   * Returns:
->   *	zero for success, one if a duplicate command.
->   */
-> -#define kdb_command_extend 50	/* arbitrary */
->  int kdb_register_flags(char *cmd,
->  		       kdb_func_t func,
->  		       char *usage,
-> @@ -2667,49 +2645,20 @@ int kdb_register_flags(char *cmd,
->  		       short minlen,
->  		       kdb_cmdflags_t flags)
->  {
-> -	int i;
->  	kdbtab_t *kp;
->  
-> -	/*
-> -	 *  Brute force method to determine duplicates
-> -	 */
-> -	for_each_kdbcmd(kp, i) {
-> -		if (kp->cmd_name && (strcmp(kp->cmd_name, cmd) == 0)) {
-> +	list_for_each_entry(kp, &kdb_cmds_head, list_node) {
-> +		if (strcmp(kp->cmd_name, cmd) == 0) {
->  			kdb_printf("Duplicate kdb command registered: "
->  				"%s, func %px help %s\n", cmd, func, help);
->  			return 1;
->  		}
->  	}
->  
-> -	/*
-> -	 * Insert command into first available location in table
-> -	 */
-> -	for_each_kdbcmd(kp, i) {
-> -		if (kp->cmd_name == NULL)
-> -			break;
-> -	}
-> -
-> -	if (i >= kdb_max_commands) {
-> -		kdbtab_t *new = kmalloc_array(kdb_max_commands -
-> -						KDB_BASE_CMD_MAX +
-> -						kdb_command_extend,
-> -					      sizeof(*new),
-> -					      GFP_KDB);
-> -		if (!new) {
-> -			kdb_printf("Could not allocate new kdb_command "
-> -				   "table\n");
-> -			return 1;
-> -		}
-> -		if (kdb_commands) {
-> -			memcpy(new, kdb_commands,
-> -			  (kdb_max_commands - KDB_BASE_CMD_MAX) * sizeof(*new));
-> -			kfree(kdb_commands);
-> -		}
-> -		memset(new + kdb_max_commands - KDB_BASE_CMD_MAX, 0,
-> -		       kdb_command_extend * sizeof(*new));
-> -		kdb_commands = new;
-> -		kp = kdb_commands + kdb_max_commands - KDB_BASE_CMD_MAX;
-> -		kdb_max_commands += kdb_command_extend;
-> +	kp = kmalloc(sizeof(*kp), GFP_KDB);
-> +	if (!kp) {
-> +		kdb_printf("Could not allocate new kdb_command table\n");
-> +		return 1;
->  	}
->  
->  	kp->cmd_name   = cmd;
-> @@ -2718,11 +2667,27 @@ int kdb_register_flags(char *cmd,
->  	kp->cmd_help   = help;
->  	kp->cmd_minlen = minlen;
->  	kp->cmd_flags  = flags;
-> +	kp->is_dynamic = true;
-> +
-> +	list_add_tail(&kp->list_node, &kdb_cmds_head);
->  
->  	return 0;
->  }
->  EXPORT_SYMBOL_GPL(kdb_register_flags);
->  
-> +/*
-> + * kdb_register_table() - This function is used to register a kdb command
-> + *                        table.
-> + * @kp: pointer to kdb command table
-> + * @len: length of kdb command table
-> + */
-> +void kdb_register_table(kdbtab_t *kp, size_t len)
-> +{
-> +	while (len--) {
-> +		list_add_tail(&kp->list_node, &kdb_cmds_head);
-> +		kp++;
-> +	}
-> +}
->  
+> diff --git a/kernel/debug/gdbstub.c b/kernel/debug/gdbstub.c
+> index e149a0ac9e9e..8372897402f4 100644
+> --- a/kernel/debug/gdbstub.c
+> +++ b/kernel/debug/gdbstub.c
+> @@ -321,7 +321,7 @@ int kgdb_hex2long(char **ptr, unsigned long *long_val)
 >  /*
->   * kdb_register - Compatibility register function for commands that do
-> @@ -2757,15 +2722,16 @@ EXPORT_SYMBOL_GPL(kdb_register);
+>   * Copy the binary array pointed to by buf into mem.  Fix $, #, and
+>   * 0x7d escaped with 0x7d. Return -EFAULT on failure or 0 on success.
+> - * The input buf is overwitten with the result to write to mem.
+> + * The input buf is overwritten with the result to write to mem.
 >   */
->  int kdb_unregister(char *cmd)
+>  static int kgdb_ebin2mem(char *buf, char *mem, int count)
 >  {
-> -	int i;
->  	kdbtab_t *kp;
->  
->  	/*
->  	 *  find the command.
->  	 */
-> -	for_each_kdbcmd(kp, i) {
-> -		if (kp->cmd_name && (strcmp(kp->cmd_name, cmd) == 0)) {
-> -			kp->cmd_name = NULL;
-> +	list_for_each_entry(kp, &kdb_cmds_head, list_node) {
-> +		if (strcmp(kp->cmd_name, cmd) == 0) {
-> +			list_del(&kp->list_node);
-> +			if (kp->is_dynamic)
-> +				kfree(kp);
->  			return 0;
->  		}
->  	}
-> @@ -2775,118 +2741,248 @@ int kdb_unregister(char *cmd)
+> @@ -952,7 +952,7 @@ static int gdb_cmd_exception_pass(struct kgdb_state *ks)
 >  }
->  EXPORT_SYMBOL_GPL(kdb_unregister);
->  
-> -/* Initialize the kdb command table. */
-> -static void __init kdb_inittab(void)
-> -{
-> -	int i;
-> -	kdbtab_t *kp;
-> -
-> -	for_each_kdbcmd(kp, i)
-> -		kp->cmd_name = NULL;
-> -
-> -	kdb_register_flags("md", kdb_md, "<vaddr>",
-> -	  "Display Memory Contents, also mdWcN, e.g. md8c1", 1,
-> -	  KDB_ENABLE_MEM_READ | KDB_REPEAT_NO_ARGS);
-> -	kdb_register_flags("mdr", kdb_md, "<vaddr> <bytes>",
-> -	  "Display Raw Memory", 0,
-> -	  KDB_ENABLE_MEM_READ | KDB_REPEAT_NO_ARGS);
-> -	kdb_register_flags("mdp", kdb_md, "<paddr> <bytes>",
-> -	  "Display Physical Memory", 0,
-> -	  KDB_ENABLE_MEM_READ | KDB_REPEAT_NO_ARGS);
-> -	kdb_register_flags("mds", kdb_md, "<vaddr>",
-> -	  "Display Memory Symbolically", 0,
-> -	  KDB_ENABLE_MEM_READ | KDB_REPEAT_NO_ARGS);
-> -	kdb_register_flags("mm", kdb_mm, "<vaddr> <contents>",
-> -	  "Modify Memory Contents", 0,
-> -	  KDB_ENABLE_MEM_WRITE | KDB_REPEAT_NO_ARGS);
-> -	kdb_register_flags("go", kdb_go, "[<vaddr>]",
-> -	  "Continue Execution", 1,
-> -	  KDB_ENABLE_REG_WRITE | KDB_ENABLE_ALWAYS_SAFE_NO_ARGS);
-> -	kdb_register_flags("rd", kdb_rd, "",
-> -	  "Display Registers", 0,
-> -	  KDB_ENABLE_REG_READ);
-> -	kdb_register_flags("rm", kdb_rm, "<reg> <contents>",
-> -	  "Modify Registers", 0,
-> -	  KDB_ENABLE_REG_WRITE);
-> -	kdb_register_flags("ef", kdb_ef, "<vaddr>",
-> -	  "Display exception frame", 0,
-> -	  KDB_ENABLE_MEM_READ);
-> -	kdb_register_flags("bt", kdb_bt, "[<vaddr>]",
-> -	  "Stack traceback", 1,
-> -	  KDB_ENABLE_MEM_READ | KDB_ENABLE_INSPECT_NO_ARGS);
-> -	kdb_register_flags("btp", kdb_bt, "<pid>",
-> -	  "Display stack for process <pid>", 0,
-> -	  KDB_ENABLE_INSPECT);
-> -	kdb_register_flags("bta", kdb_bt, "[D|R|S|T|C|Z|E|U|I|M|A]",
-> -	  "Backtrace all processes matching state flag", 0,
-> -	  KDB_ENABLE_INSPECT);
-> -	kdb_register_flags("btc", kdb_bt, "",
-> -	  "Backtrace current process on each cpu", 0,
-> -	  KDB_ENABLE_INSPECT);
-> -	kdb_register_flags("btt", kdb_bt, "<vaddr>",
-> -	  "Backtrace process given its struct task address", 0,
-> -	  KDB_ENABLE_MEM_READ | KDB_ENABLE_INSPECT_NO_ARGS);
-> -	kdb_register_flags("env", kdb_env, "",
-> -	  "Show environment variables", 0,
-> -	  KDB_ENABLE_ALWAYS_SAFE);
-> -	kdb_register_flags("set", kdb_set, "",
-> -	  "Set environment variables", 0,
-> -	  KDB_ENABLE_ALWAYS_SAFE);
-> -	kdb_register_flags("help", kdb_help, "",
-> -	  "Display Help Message", 1,
-> -	  KDB_ENABLE_ALWAYS_SAFE);
-> -	kdb_register_flags("?", kdb_help, "",
-> -	  "Display Help Message", 0,
-> -	  KDB_ENABLE_ALWAYS_SAFE);
-> -	kdb_register_flags("cpu", kdb_cpu, "<cpunum>",
-> -	  "Switch to new cpu", 0,
-> -	  KDB_ENABLE_ALWAYS_SAFE_NO_ARGS);
-> -	kdb_register_flags("kgdb", kdb_kgdb, "",
-> -	  "Enter kgdb mode", 0, 0);
-> -	kdb_register_flags("ps", kdb_ps, "[<flags>|A]",
-> -	  "Display active task list", 0,
-> -	  KDB_ENABLE_INSPECT);
-> -	kdb_register_flags("pid", kdb_pid, "<pidnum>",
-> -	  "Switch to another task", 0,
-> -	  KDB_ENABLE_INSPECT);
-> -	kdb_register_flags("reboot", kdb_reboot, "",
-> -	  "Reboot the machine immediately", 0,
-> -	  KDB_ENABLE_REBOOT);
-> +static kdbtab_t maintab[] = {
-> +	{	.cmd_name = "md",
-> +		.cmd_func = kdb_md,
-> +		.cmd_usage = "<vaddr>",
-> +		.cmd_help = "Display Memory Contents, also mdWcN, e.g. md8c1",
-> +		.cmd_minlen = 1,
-> +		.cmd_flags = KDB_ENABLE_MEM_READ | KDB_REPEAT_NO_ARGS,
-> +	},
-> +	{	.cmd_name = "mdr",
-> +		.cmd_func = kdb_md,
-> +		.cmd_usage = "<vaddr> <bytes>",
-> +		.cmd_help = "Display Raw Memory",
-> +		.cmd_minlen = 0,
-> +		.cmd_flags = KDB_ENABLE_MEM_READ | KDB_REPEAT_NO_ARGS,
-> +	},
-> +	{	.cmd_name = "mdp",
-> +		.cmd_func = kdb_md,
-> +		.cmd_usage = "<paddr> <bytes>",
-> +		.cmd_help = "Display Physical Memory",
-> +		.cmd_minlen = 0,
-> +		.cmd_flags = KDB_ENABLE_MEM_READ | KDB_REPEAT_NO_ARGS,
-> +	},
-> +	{	.cmd_name = "mds",
-> +		.cmd_func = kdb_md,
-> +		.cmd_usage = "<vaddr>",
-> +		.cmd_help = "Display Memory Symbolically",
-> +		.cmd_minlen = 0,
-> +		.cmd_flags = KDB_ENABLE_MEM_READ | KDB_REPEAT_NO_ARGS,
-> +	},
-> +	{	.cmd_name = "mm",
-> +		.cmd_func = kdb_mm,
-> +		.cmd_usage = "<vaddr> <contents>",
-> +		.cmd_help = "Modify Memory Contents",
-> +		.cmd_minlen = 0,
-> +		.cmd_flags = KDB_ENABLE_MEM_WRITE | KDB_REPEAT_NO_ARGS,
-> +	},
-> +	{	.cmd_name = "go",
-> +		.cmd_func = kdb_go,
-> +		.cmd_usage = "[<vaddr>]",
-> +		.cmd_help = "Continue Execution",
-> +		.cmd_minlen = 1,
-> +		.cmd_flags = KDB_ENABLE_REG_WRITE |
-> +			     KDB_ENABLE_ALWAYS_SAFE_NO_ARGS,
-> +	},
-> +	{	.cmd_name = "rd",
-> +		.cmd_func = kdb_rd,
-> +		.cmd_usage = "",
-> +		.cmd_help = "Display Registers",
-> +		.cmd_minlen = 0,
-> +		.cmd_flags = KDB_ENABLE_REG_READ,
-> +	},
-> +	{	.cmd_name = "rm",
-> +		.cmd_func = kdb_rm,
-> +		.cmd_usage = "<reg> <contents>",
-> +		.cmd_help = "Modify Registers",
-> +		.cmd_minlen = 0,
-> +		.cmd_flags = KDB_ENABLE_REG_WRITE,
-> +	},
-> +	{	.cmd_name = "ef",
-> +		.cmd_func = kdb_ef,
-> +		.cmd_usage = "<vaddr>",
-> +		.cmd_help = "Display exception frame",
-> +		.cmd_minlen = 0,
-> +		.cmd_flags = KDB_ENABLE_MEM_READ,
-> +	},
-> +	{	.cmd_name = "bt",
-> +		.cmd_func = kdb_bt,
-> +		.cmd_usage = "[<vaddr>]",
-> +		.cmd_help = "Stack traceback",
-> +		.cmd_minlen = 1,
-> +		.cmd_flags = KDB_ENABLE_MEM_READ | KDB_ENABLE_INSPECT_NO_ARGS,
-> +	},
-> +	{	.cmd_name = "btp",
-> +		.cmd_func = kdb_bt,
-> +		.cmd_usage = "<pid>",
-> +		.cmd_help = "Display stack for process <pid>",
-> +		.cmd_minlen = 0,
-> +		.cmd_flags = KDB_ENABLE_INSPECT,
-> +	},
-> +	{	.cmd_name = "bta",
-> +		.cmd_func = kdb_bt,
-> +		.cmd_usage = "[D|R|S|T|C|Z|E|U|I|M|A]",
-> +		.cmd_help = "Backtrace all processes matching state flag",
-> +		.cmd_minlen = 0,
-> +		.cmd_flags = KDB_ENABLE_INSPECT,
-> +	},
-> +	{	.cmd_name = "btc",
-> +		.cmd_func = kdb_bt,
-> +		.cmd_usage = "",
-> +		.cmd_help = "Backtrace current process on each cpu",
-> +		.cmd_minlen = 0,
-> +		.cmd_flags = KDB_ENABLE_INSPECT,
-> +	},
-> +	{	.cmd_name = "btt",
-> +		.cmd_func = kdb_bt,
-> +		.cmd_usage = "<vaddr>",
-> +		.cmd_help = "Backtrace process given its struct task address",
-> +		.cmd_minlen = 0,
-> +		.cmd_flags = KDB_ENABLE_MEM_READ | KDB_ENABLE_INSPECT_NO_ARGS,
-> +	},
-> +	{	.cmd_name = "env",
-> +		.cmd_func = kdb_env,
-> +		.cmd_usage = "",
-> +		.cmd_help = "Show environment variables",
-> +		.cmd_minlen = 0,
-> +		.cmd_flags = KDB_ENABLE_ALWAYS_SAFE,
-> +	},
-> +	{	.cmd_name = "set",
-> +		.cmd_func = kdb_set,
-> +		.cmd_usage = "",
-> +		.cmd_help = "Set environment variables",
-> +		.cmd_minlen = 0,
-> +		.cmd_flags = KDB_ENABLE_ALWAYS_SAFE,
-> +	},
-> +	{	.cmd_name = "help",
-> +		.cmd_func = kdb_help,
-> +		.cmd_usage = "",
-> +		.cmd_help = "Display Help Message",
-> +		.cmd_minlen = 1,
-> +		.cmd_flags = KDB_ENABLE_ALWAYS_SAFE,
-> +	},
-> +	{	.cmd_name = "?",
-> +		.cmd_func = kdb_help,
-> +		.cmd_usage = "",
-> +		.cmd_help = "Display Help Message",
-> +		.cmd_minlen = 0,
-> +		.cmd_flags = KDB_ENABLE_ALWAYS_SAFE,
-> +	},
-> +	{	.cmd_name = "cpu",
-> +		.cmd_func = kdb_cpu,
-> +		.cmd_usage = "<cpunum>",
-> +		.cmd_help = "Switch to new cpu",
-> +		.cmd_minlen = 0,
-> +		.cmd_flags = KDB_ENABLE_ALWAYS_SAFE_NO_ARGS,
-> +	},
-> +	{	.cmd_name = "kgdb",
-> +		.cmd_func = kdb_kgdb,
-> +		.cmd_usage = "",
-> +		.cmd_help = "Enter kgdb mode",
-> +		.cmd_minlen = 0,
-> +		.cmd_flags = 0,
-> +	},
-> +	{	.cmd_name = "ps",
-> +		.cmd_func = kdb_ps,
-> +		.cmd_usage = "[<flags>|A]",
-> +		.cmd_help = "Display active task list",
-> +		.cmd_minlen = 0,
-> +		.cmd_flags = KDB_ENABLE_INSPECT,
-> +	},
-> +	{	.cmd_name = "pid",
-> +		.cmd_func = kdb_pid,
-> +		.cmd_usage = "<pidnum>",
-> +		.cmd_help = "Switch to another task",
-> +		.cmd_minlen = 0,
-> +		.cmd_flags = KDB_ENABLE_INSPECT,
-> +	},
-> +	{	.cmd_name = "reboot",
-> +		.cmd_func = kdb_reboot,
-> +		.cmd_usage = "",
-> +		.cmd_help = "Reboot the machine immediately",
-> +		.cmd_minlen = 0,
-> +		.cmd_flags = KDB_ENABLE_REBOOT,
-> +	},
->  #if defined(CONFIG_MODULES)
-> -	kdb_register_flags("lsmod", kdb_lsmod, "",
-> -	  "List loaded kernel modules", 0,
-> -	  KDB_ENABLE_INSPECT);
-> +	{	.cmd_name = "lsmod",
-> +		.cmd_func = kdb_lsmod,
-> +		.cmd_usage = "",
-> +		.cmd_help = "List loaded kernel modules",
-> +		.cmd_minlen = 0,
-> +		.cmd_flags = KDB_ENABLE_INSPECT,
-> +	},
->  #endif
->  #if defined(CONFIG_MAGIC_SYSRQ)
-> -	kdb_register_flags("sr", kdb_sr, "<key>",
-> -	  "Magic SysRq key", 0,
-> -	  KDB_ENABLE_ALWAYS_SAFE);
-> +	{	.cmd_name = "sr",
-> +		.cmd_func = kdb_sr,
-> +		.cmd_usage = "<key>",
-> +		.cmd_help = "Magic SysRq key",
-> +		.cmd_minlen = 0,
-> +		.cmd_flags = KDB_ENABLE_ALWAYS_SAFE,
-> +	},
->  #endif
->  #if defined(CONFIG_PRINTK)
-> -	kdb_register_flags("dmesg", kdb_dmesg, "[lines]",
-> -	  "Display syslog buffer", 0,
-> -	  KDB_ENABLE_ALWAYS_SAFE);
-> +	{	.cmd_name = "dmesg",
-> +		.cmd_func = kdb_dmesg,
-> +		.cmd_usage = "[lines]",
-> +		.cmd_help = "Display syslog buffer",
-> +		.cmd_minlen = 0,
-> +		.cmd_flags = KDB_ENABLE_ALWAYS_SAFE,
-> +	},
->  #endif
-> -	if (arch_kgdb_ops.enable_nmi) {
-> -		kdb_register_flags("disable_nmi", kdb_disable_nmi, "",
-> -		  "Disable NMI entry to KDB", 0,
-> -		  KDB_ENABLE_ALWAYS_SAFE);
-> -	}
-> -	kdb_register_flags("defcmd", kdb_defcmd, "name \"usage\" \"help\"",
-> -	  "Define a set of commands, down to endefcmd", 0,
-> -	  KDB_ENABLE_ALWAYS_SAFE);
-> -	kdb_register_flags("kill", kdb_kill, "<-signal> <pid>",
-> -	  "Send a signal to a process", 0,
-> -	  KDB_ENABLE_SIGNAL);
-> -	kdb_register_flags("summary", kdb_summary, "",
-> -	  "Summarize the system", 4,
-> -	  KDB_ENABLE_ALWAYS_SAFE);
-> -	kdb_register_flags("per_cpu", kdb_per_cpu, "<sym> [<bytes>] [<cpu>]",
-> -	  "Display per_cpu variables", 3,
-> -	  KDB_ENABLE_MEM_READ);
-> -	kdb_register_flags("grephelp", kdb_grep_help, "",
-> -	  "Display help on | grep", 0,
-> -	  KDB_ENABLE_ALWAYS_SAFE);
-> +	{	.cmd_name = "defcmd",
-> +		.cmd_func = kdb_defcmd,
-> +		.cmd_usage = "name \"usage\" \"help\"",
-> +		.cmd_help = "Define a set of commands, down to endefcmd",
-> +		.cmd_minlen = 0,
-> +		.cmd_flags = KDB_ENABLE_ALWAYS_SAFE,
-> +	},
-> +	{	.cmd_name = "kill",
-> +		.cmd_func = kdb_kill,
-> +		.cmd_usage = "<-signal> <pid>",
-> +		.cmd_help = "Send a signal to a process",
-> +		.cmd_minlen = 0,
-> +		.cmd_flags = KDB_ENABLE_SIGNAL,
-> +	},
-> +	{	.cmd_name = "summary",
-> +		.cmd_func = kdb_summary,
-> +		.cmd_usage = "",
-> +		.cmd_help = "Summarize the system",
-> +		.cmd_minlen = 4,
-> +		.cmd_flags = KDB_ENABLE_ALWAYS_SAFE,
-> +	},
-> +	{	.cmd_name = "per_cpu",
-> +		.cmd_func = kdb_per_cpu,
-> +		.cmd_usage = "<sym> [<bytes>] [<cpu>]",
-> +		.cmd_help = "Display per_cpu variables",
-> +		.cmd_minlen = 3,
-> +		.cmd_flags = KDB_ENABLE_MEM_READ,
-> +	},
-> +	{	.cmd_name = "grephelp",
-> +		.cmd_func = kdb_grep_help,
-> +		.cmd_usage = "",
-> +		.cmd_help = "Display help on | grep",
-> +		.cmd_minlen = 0,
-> +		.cmd_flags = KDB_ENABLE_ALWAYS_SAFE,
-> +	},
-> +};
-> +
-> +static kdbtab_t nmicmd = {
-> +	.cmd_name = "disable_nmi",
-> +	.cmd_func = kdb_disable_nmi,
-> +	.cmd_usage = "",
-> +	.cmd_help = "Disable NMI entry to KDB",
-> +	.cmd_minlen = 0,
-> +	.cmd_flags = KDB_ENABLE_ALWAYS_SAFE,
-> +};
-> +
-> +/* Initialize the kdb command table. */
-> +static void __init kdb_inittab(void)
-> +{
-> +	kdb_register_table(maintab, ARRAY_SIZE(maintab));
-> +	if (arch_kgdb_ops.enable_nmi)
-> +		kdb_register_table(&nmicmd, 1);
->  }
->  
->  /* Execute any commands defined in kdb_cmds.  */
-> diff --git a/kernel/debug/kdb/kdb_private.h b/kernel/debug/kdb/kdb_private.h
-> index a4281fb99299..2d4030fa56cf 100644
-> --- a/kernel/debug/kdb/kdb_private.h
-> +++ b/kernel/debug/kdb/kdb_private.h
-> @@ -174,8 +174,11 @@ typedef struct _kdbtab {
->  	short    cmd_minlen;		/* Minimum legal # command
->  					 * chars required */
->  	kdb_cmdflags_t cmd_flags;	/* Command behaviour flags */
-> +	struct list_head list_node;	/* Command list */
-> +	bool    is_dynamic;		/* Command table allocation type */
->  } kdbtab_t;
->  
-> +extern void kdb_register_table(kdbtab_t *kp, size_t len);
->  extern int kdb_bt(int, const char **);	/* KDB display back trace */
->  
->  /* KDB breakpoint management functions */
-> -- 
-> 2.25.1
+> 
+>  /*
+> - * This function performs all gdbserial command procesing
+> + * This function performs all gdbserial command processing
+>   */
+>  int gdb_serial_stub(struct kgdb_state *ks)
+>  {
+> --
+> 2.30.2
 
 
 _______________________________________________
