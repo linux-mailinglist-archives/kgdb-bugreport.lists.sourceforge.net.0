@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 62AFE344E16
-	for <lists+kgdb-bugreport@lfdr.de>; Mon, 22 Mar 2021 19:04:46 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id F236A344E4A
+	for <lists+kgdb-bugreport@lfdr.de>; Mon, 22 Mar 2021 19:19:27 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1lOOuz-00085R-4f
-	for lists+kgdb-bugreport@lfdr.de; Mon, 22 Mar 2021 18:04:45 +0000
+	id 1lOP9C-0005mf-NW
+	for lists+kgdb-bugreport@lfdr.de; Mon, 22 Mar 2021 18:19:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <arnd@kernel.org>) id 1lOOue-00082F-9a
- for kgdb-bugreport@lists.sourceforge.net; Mon, 22 Mar 2021 18:04:24 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <arnd@kernel.org>) id 1lOP9A-0005mX-Rf
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 22 Mar 2021 18:19:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
  In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
  :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=OCoD0hADJ3YK+tIVlWVerxJmcARg3G+cexRwU1qHPlg=; b=GoWwakZQPOTNV/ppF1Ysj3dkJZ
- A5NVVtKbwIhgX82tsxWUT2h/LHmIJNqnRPr8TCNNtKgxcwVy7IlFvqrgb5kd3x7k3n6u4umJDPdsE
- NOdAdYmpzBzEuWFHoPLbffuNUflrlPU+5rYOYLlu/qt4lYXJFLI5NgFGRNuQ1K2xtqpY=;
+ bh=KTtefK1KX08s6sVcbMW7myLRdRVww4b3rd94QDjhj6I=; b=MPeVi090KmKNFiGjCoExUYt9aK
+ UaKVsta4VqUp7ZkwHVOMXju/xOYI4FU1RX13sxlvZnzjoWfCRLNGfhDSF6j+VQQk0B8eRz6anBe67
+ hNvIRgM7a1U7cI65SQCd25q+F4gwjZnyY5qAHCkbUm4Nh3kyPGQtl5gO0hjqKadFGZXg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
@@ -30,46 +30,44 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=OCoD0hADJ3YK+tIVlWVerxJmcARg3G+cexRwU1qHPlg=; b=AN6ptueiDNR3GJLp7eP/ng0wWo
- P2rrU4DpPZOGQQyk8v3K90TEiSB3R36c9LF7Qy1lMBXx+2usRLn0/dEfurRszYBkU25XNVDJfxg4B
- 8CHwVWn99+cS8QW8t/HL91cPn+CEkPYjU8BMilvcEali1gdgBaeg3sFHmABcJH9JapzI=;
+ bh=KTtefK1KX08s6sVcbMW7myLRdRVww4b3rd94QDjhj6I=; b=CphYbJQkDXoPrV4zDlDtRe0Fnp
+ W/dVF4uEog2UpuVo7bCWSk6EBqRqTB5sv7DjCYvEDNnEm2ACPwNjKirXCEjn/qMVRGkkDc7MeWyXM
+ mLkrCq8kFElxDgQiRk679E+Rm0etNlye6exTsrPaEWuQoc+ftDqhoyVl7me2O7RDT6E8=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lOOuU-0005OM-TZ
- for kgdb-bugreport@lists.sourceforge.net; Mon, 22 Mar 2021 18:04:24 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id F40F06197F
+ id 1lOP92-0005pm-1k
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 22 Mar 2021 18:19:24 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 81C036191C
  for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 22 Mar 2021 18:04:02 +0000 (UTC)
+ Mon, 22 Mar 2021 18:19:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1616436243;
- bh=5Dn/hzqvZfSibFJhzGcqjPoya56ScHhqsZpa8x6VWX0=;
+ s=k20201202; t=1616437150;
+ bh=cdPpn3bt7dQ/SwR6Dy7EJSGEakSRnVumbWhThjLvpUc=;
  h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=mGJK1XbPpLAS5gt6K2+ft0a24oaImXngmCFuMPdWEZ8Ny1YO1AlTm70mhV+/+SnQD
- fDvwjYS3kX3vJG/1U/gXQH5SvK9Nulu6KdmDPUv+62Qinal/Kpmtyoocyznf73+VQV
- GxnqUq70OCBfSO8CoXe5x/baUVPmhR58EbzXZ7xwTQWfJ753HgbaVmswPuFsknUoVq
- gC9nB2yuqiVaoTNxVDQrNPN3aK8oPxuGZFdoqzvsBzAxzo4qap46DZUyHUN3jLekuX
- b44wTwGv1tNHcf+t0DyUFVU0QfqyE+8Emu6AEuoz3mrA0WdE7bMzrpLboJtgDSc2Sb
- z1Fq6oiWSFgSw==
-Received: by mail-ot1-f44.google.com with SMTP id
- w31-20020a9d36220000b02901f2cbfc9743so16565915otb.7
+ b=Ig2dXZ7ya8sNkFozuTgi5W6y9J2EXekKgRlM1HiQaNB/3/YWllzoWA2uj9Dk6Gxot
+ c8OYF13r5sAhuGUU2j8ZpwjyCp7bDl4NicFuDnUJxxP+c+htgTJv3IqaeEfprMd9Jz
+ TW7rJ7yFUWB3eYR6w6rS6g9h90wNqi0tmi8PXcecWF/0Nf23MC0oYYRP0ZXlt7jerq
+ 1wv0bo98kRhYRaBn502GKr4F2Adul/durycOsGJlE8KAyWExidh2tjwzhVUyzI9w2L
+ pAcGdtSxsIl/XrsBLiGD7/MkzrMfoS0+BMN6nvsAobPQIbcr7/cA8swpTPu+1/nMxN
+ i6NLBjIBVRPzg==
+Received: by mail-oi1-f179.google.com with SMTP id f9so14064633oiw.5
  for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 22 Mar 2021 11:04:02 -0700 (PDT)
-X-Gm-Message-State: AOAM5329d83POy4nSXe7PZWpM49132QsE6TCWXtQXAQXU689wmV/fTe0
- tkhGnoKTZwIn6/O99K3CexNUagYQx6rdXRsO32U=
-X-Google-Smtp-Source: ABdhPJw2un5ttiBaTn5Ti+2EjMAxggLyyWzU0D2isr+3+g++2JMn1SriCCHJ98YWT4UBLzCftEdxJBVrwoZCF0dR4us=
-X-Received: by 2002:a05:6830:148c:: with SMTP id
- s12mr921029otq.251.1616436242366; 
- Mon, 22 Mar 2021 11:04:02 -0700 (PDT)
+ Mon, 22 Mar 2021 11:19:10 -0700 (PDT)
+X-Gm-Message-State: AOAM532CciqERAfBJXhJrH9atjOQLGFos7gIB1F1quE85yDVxilENCg2
+ WbFdwJJBA0dtIafZ2QQWfP8tdktRlrZjYuWnbAc=
+X-Google-Smtp-Source: ABdhPJxSLNPBxXBFB8iEKPeuTux32ku2fkG7glt0LYjH9Mkhk2/DYQAu3FtNVJIcSki7YiLz4HABxLu8570f24xCyfE=
+X-Received: by 2002:a05:6808:3d9:: with SMTP id o25mr305830oie.4.1616437149772; 
+ Mon, 22 Mar 2021 11:19:09 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210322164308.827846-1-arnd@kernel.org>
- <20210322170330.wil52d2geopfnfka@maple.lan>
-In-Reply-To: <20210322170330.wil52d2geopfnfka@maple.lan>
+ <CAD=FV=WY6yxx+vkH+UU4VYei29xBftdnyRBE1OpEELmJ-kLfFg@mail.gmail.com>
+In-Reply-To: <CAD=FV=WY6yxx+vkH+UU4VYei29xBftdnyRBE1OpEELmJ-kLfFg@mail.gmail.com>
 From: Arnd Bergmann <arnd@kernel.org>
-Date: Mon, 22 Mar 2021 19:03:45 +0100
-X-Gmail-Original-Message-ID: <CAK8P3a30_E5ouw2eGF0wAYd0CiKcekKkEe9xBay2K+OXkyx-gw@mail.gmail.com>
-Message-ID: <CAK8P3a30_E5ouw2eGF0wAYd0CiKcekKkEe9xBay2K+OXkyx-gw@mail.gmail.com>
-To: Daniel Thompson <daniel.thompson@linaro.org>
+Date: Mon, 22 Mar 2021 19:18:53 +0100
+X-Gmail-Original-Message-ID: <CAK8P3a33qv79GedMCwA=GFBWYCMB2fYrq2QmGpN3TWfqgg8j2A@mail.gmail.com>
+Message-ID: <CAK8P3a33qv79GedMCwA=GFBWYCMB2fYrq2QmGpN3TWfqgg8j2A@mail.gmail.com>
+To: Doug Anderson <dianders@chromium.org>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -81,7 +79,7 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lOOuU-0005OM-TZ
+X-Headers-End: 1lOP92-0005pm-1k
 Subject: Re: [Kgdb-bugreport] [PATCH] kgdb: fix gcc-11 warning on indentation
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -94,29 +92,64 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: kgdb-bugreport@lists.sourceforge.net,
- Jason Wessel <jason.wessel@windriver.com>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+Cc: Daniel Thompson <daniel.thompson@linaro.org>,
+ kgdb-bugreport@lists.sourceforge.net,
+ Jason Wessel <jason.wessel@windriver.com>, LKML <linux-kernel@vger.kernel.org>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Ingo Molnar <mingo@elte.hu>,
  Christian Brauner <christian.brauner@ubuntu.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Mon, Mar 22, 2021 at 6:03 PM Daniel Thompson
-<daniel.thompson@linaro.org> wrote:
+On Mon, Mar 22, 2021 at 6:07 PM Doug Anderson <dianders@chromium.org> wrote:
+> On Mon, Mar 22, 2021 at 9:43 AM Arnd Bergmann <arnd@kernel.org> wrote:
+> >
+> > -#define v1printk(a...) do { \
+> > -       if (verbose) \
+> > -               printk(KERN_INFO a); \
+> > -       } while (0)
+> > -#define v2printk(a...) do { \
+> > -       if (verbose > 1) \
+> > -               printk(KERN_INFO a); \
+> > -               touch_nmi_watchdog();   \
+> > -       } while (0)
+> > -#define eprintk(a...) do { \
+> > -               printk(KERN_ERR a); \
+> > -               WARN_ON(1); \
+> > -       } while (0)
+> > +#define v1printk(a...) do {            \
 >
->
-> Acked-by: Daniel Thompson <daniel.thompson@linaro.org>
->
-> Which tree do you want to merge this one though? I've got nothing else
-> pending for this file so I am very relaxed about the route...
+> nit: In addition to the indentation change you're also lining up the
+> backslashes. Is that just personal preference, or is there some
+> official recommendation in the kernel? I don't really have a strong
+> opinion either way (IMO each style has its advantages).
 
-I don't plan to merge any of the build fixes through my own tree.
-If you don't have anything else, maybe Greg can pick it up
-in the char-misc tree.
+I don't think there is an official recommendation, I just think the
+style is more common, and it helped my figure out what the
+indentation should look like in this case.
 
-         Arnd
+>
+> > +       if (verbose)                    \
+> > +               printk(KERN_INFO a);    \
+> > +} while (0)
+> > +#define v2printk(a...) do {            \
+> > +       if (verbose > 1)                \
+> > +               printk(KERN_INFO a);    \
+> > +       touch_nmi_watchdog();           \
+>
+> This touch_nmi_watchdog() is pretty wonky. I guess maybe the
+> assumption is that the "verbose level 2" prints are so chatty that the
+> printing might prevent us from touching the NMI watchdog in the way
+> that we normally do and thus we need an extra one here?
+>
+> ...but, in that case, I think the old code was _wrong_ and that the
+> intention was that the touch_nmi_watchdog() should only be if "verose
+> > 1" as the indentation implied. There doesn't feel like a reason to
+> touch the watchdog if we're not doing anything slow.
+
+No idea. It was like this in Jason's original version from 2008.
+
+        Arnd
 
 
 _______________________________________________
