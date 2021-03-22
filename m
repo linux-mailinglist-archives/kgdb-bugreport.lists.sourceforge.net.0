@@ -2,91 +2,67 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F3419344B1D
-	for <lists+kgdb-bugreport@lfdr.de>; Mon, 22 Mar 2021 17:23:36 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 05AD8344CB9
+	for <lists+kgdb-bugreport@lfdr.de>; Mon, 22 Mar 2021 18:05:32 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1lONL5-0002tu-DW
-	for lists+kgdb-bugreport@lfdr.de; Mon, 22 Mar 2021 16:23:35 +0000
+	id 1lONze-000429-RJ
+	for lists+kgdb-bugreport@lfdr.de; Mon, 22 Mar 2021 17:05:30 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <daniel.thompson@linaro.org>) id 1lONHC-0002jb-90
- for kgdb-bugreport@lists.sourceforge.net; Mon, 22 Mar 2021 16:19:34 +0000
+ (envelope-from <arnd@kernel.org>) id 1lONeF-0003v3-NL
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 22 Mar 2021 16:43:23 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=eldFodHTbSBJUE2zcFhJoaj3CYiDURbwU2RZsCSY3vk=; b=iJ3Zyde7B0weMHyYN/TMREHBqB
- vzTacpqRCNVfTPCknJDPKdsmCrj2ttebeRIYJCewh9M8p41FOPP2M3K6QAjtAlFoOeFT/KEDnQCFl
- SiTrcZkQhNzrCa4S7Vha+Wtx21DNT2zunSrWAa1ys8X6LwqkyFtQABmmr3vtLp8JYHXo=;
+ bh=laBHjO3yLbHMb79TFiHRjdoov9dpoDfziDg5JXjN+5I=; b=DFggUWfL5XPtzmalQeo87nqpzs
+ x516+gEH7/RIVamU3xpCMVmA9LCQNf/RPaN6gCcCNOsWZ6qOLsDJGq7DwBCSrBcbACuZ+SwtQF3UX
+ 2vMsaZZ3lujk4/xNSKQC06IGpSpIU1feQf0MlcKsmxMyygzz5kze6bHd/cJ4zbY5JEOk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=eldFodHTbSBJUE2zcFhJoaj3CYiDURbwU2RZsCSY3vk=; b=WCFwfSgOse8oHGyqFtAQSZDM+Z
- 5bDB1lmsA2KO6/rLYMFqXkC1NdtbvEljQ6r4x+CiLMIxVFpiFMDYBa55dWuG7S+K4GZSFmg7NHMyT
- JqLCtL83O25LuEmaJ0Am0gZ283OK35jQLeuQCELiGXH2rW8T6Cxnvr08ARlKsz66ER08=;
-Received: from mail-ed1-f48.google.com ([209.85.208.48])
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-Id:Date:
+ Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=laBHjO3yLbHMb79TFiHRjdoov9dpoDfziDg5JXjN+5I=; b=E
+ HE8SftG9ouSIDwgiTyRdzoB94R4jWhl5zjVTGEMkJl4d4gjPiuTAyY+ze4gCWP8hqbjIYekdOBD78
+ lbvG9xhlOwywvO5wWBq0j2IfBgxrtm7A2r338PDKbIN/PkAaZjr7oB5qSt69yreItVFv719DEjJxP
+ O9hvF0Gexx6oWAts=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
- id 1lONH0-0000px-0j
- for kgdb-bugreport@lists.sourceforge.net; Mon, 22 Mar 2021 16:19:34 +0000
-Received: by mail-ed1-f48.google.com with SMTP id dm8so20097478edb.2
- for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 22 Mar 2021 09:19:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=eldFodHTbSBJUE2zcFhJoaj3CYiDURbwU2RZsCSY3vk=;
- b=iR453lW6sLP64qnFJYDmv4LE+4sZNsatktXtJrVGX0ebjNnNdfszZqv/O8c5sz6Lql
- 3cF2GGsmMczfu/Y8Z9DpcpoDV2f1l+sOluo8NnCVJvA59cxfjdJ/2Z60y+N3n7lyfJ+F
- Wj+3Gd8uM7NuTZ8/QXuz/TN8mHEDeWdFbDs47VrQnK58TNAnLVP7w9GvSHD1DnTB+P/S
- 2qvHT7o9/F75zGzpStGm9i4CdN0XzV81skEHiWn1JR8IBB349l7yE6X6ah2gYH8Dra27
- WrlqSv1hmz5Miwu12AnySMAg2Cu5YrRJ3LJQJDmXUxAsG8qB+ucSWyzp2ae3pQRUJyGU
- 5Pzw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=eldFodHTbSBJUE2zcFhJoaj3CYiDURbwU2RZsCSY3vk=;
- b=INLPcIlEndRbLap2iD2qk/cjcm2L5HoSxGLEO2Ni0HwBt5J/EKSTKtlXE/cIhQ6B54
- Oe308hRRgDbWPtTMhxNTQOqqBTl3DT3QMOpzdtqfrlpASRyvRBQrmeFJUtXIiyOFVY5n
- 59tYSIsIsSMbk5JvWx1oQ7Wfj84ayH8+eOYKS2FE/CJWBJyBMBSLC6Z7bkSTlNGn+LRA
- xzW5I/sn32E0t8PUJ5FRjwWhFHufopH1XowBh6QH+pol6yVfS5NaqRJKHNneqm4IYmom
- K3uDBb0B0qMhpjX4IbSSyiso4sDbCWL+uWKezELbvJIIzVgIzw1XPwJ3neV2t8tMhGSI
- KeDA==
-X-Gm-Message-State: AOAM530b9AtIdRt/mLu84k48RI0mArWP1MqofsESxRNgLh3IkRnNxe3y
- j2EJSPf27JaRTyhVTZo4vFU5Uw==
-X-Google-Smtp-Source: ABdhPJxzhZ75lilJTGnJ2uSE44+ivj3vV6JfjU0UFJ/NAJPT46u2jR9a2541CVFtYpcFf8t22GkKPg==
-X-Received: by 2002:aa7:d841:: with SMTP id f1mr367235eds.286.1616429955708;
- Mon, 22 Mar 2021 09:19:15 -0700 (PDT)
-Received: from maple.lan (cpc141216-aztw34-2-0-cust174.18-1.cable.virginm.net.
- [80.7.220.175])
- by smtp.gmail.com with ESMTPSA id y17sm9746213ejf.116.2021.03.22.09.19.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Mar 2021 09:19:15 -0700 (PDT)
-Date: Mon, 22 Mar 2021 16:19:13 +0000
-From: Daniel Thompson <daniel.thompson@linaro.org>
-To: Bhaskar Chowdhury <unixbhaskar@gmail.com>
-Message-ID: <20210322161913.fbvrtnorezojddee@maple.lan>
-References: <20210317104658.4053473-1-unixbhaskar@gmail.com>
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ id 1lONeC-0001z5-Ky
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 22 Mar 2021 16:43:23 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 137706157F;
+ Mon, 22 Mar 2021 16:43:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1616431392;
+ bh=XBODrVwui1BLGA9uFZuR76atFHHSxrtpJdBrM3gOevE=;
+ h=From:To:Cc:Subject:Date:From;
+ b=Yctwy+c7ufuuaKai6RHxr2DdFolb+BulYyvDxs/bKwMftGTbVTYQeWDHiIBqsWaps
+ gGmPu+if5ZZniByWFiQV3tkZOGK8q1xj92yGICB9J7GgP/NDJA2iRlt+Cn5sNNmOHn
+ N+DtfOBf8FDU2oSX8m6bZq1AOIlRjFA2+8/HaTUrn6ehDLDI+5Sg0LNZ+Ynf5HLjxh
+ GqBYu8vXVSDOLxIibSTIh4XGDRKQKlO//wRW4MgsHCEKgx6TzJSLAw78i6LV6reHqf
+ qFUDU+vVEodKvqfl7S8qcO1WWOuqBoOf0shrNQ1Dz099exMBL0zAvaB4iF8kQXWa7/
+ qeEA84nfHvmLQ==
+From: Arnd Bergmann <arnd@kernel.org>
+To: Jason Wessel <jason.wessel@windriver.com>,
+ Daniel Thompson <daniel.thompson@linaro.org>,
+ Arnd Bergmann <arnd@arndb.de>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Ingo Molnar <mingo@elte.hu>
+Date: Mon, 22 Mar 2021 17:43:03 +0100
+Message-Id: <20210322164308.827846-1-arnd@kernel.org>
+X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20210317104658.4053473-1-unixbhaskar@gmail.com>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.208.48 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.208.48 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -94,9 +70,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1lONH0-0000px-0j
-Subject: Re: [Kgdb-bugreport] [PATCH V2] kernel: debug: Ordinary typo fixes
- in the file gdbstub.c
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1lONeC-0001z5-Ky
+X-Mailman-Approved-At: Mon, 22 Mar 2021 17:05:24 +0000
+Subject: [Kgdb-bugreport] [PATCH] kgdb: fix gcc-11 warning on indentation
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,58 +85,45 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: kgdb-bugreport@lists.sourceforge.net, linux-kernel@vger.kernel.org,
- jason.wessel@windriver.com
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: kgdb-bugreport@lists.sourceforge.net,
+ Christian Brauner <christian.brauner@ubuntu.com>, linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Wed, Mar 17, 2021 at 04:16:58PM +0530, Bhaskar Chowdhury wrote:
-> s/overwitten/overwritten/
-> s/procesing/processing/
-> 
-> Signed-off-by: Bhaskar Chowdhury <unixbhaskar@gmail.com>
-
-Applied, Thanks!
-
-
-Daniel.
-
-
-> ---
-> Changes from V1:
->  As Daniel pointed out, I was misdoing a check,so corrected
-> 
->  kernel/debug/gdbstub.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/kernel/debug/gdbstub.c b/kernel/debug/gdbstub.c
-> index e149a0ac9e9e..8372897402f4 100644
-> --- a/kernel/debug/gdbstub.c
-> +++ b/kernel/debug/gdbstub.c
-> @@ -321,7 +321,7 @@ int kgdb_hex2long(char **ptr, unsigned long *long_val)
->  /*
->   * Copy the binary array pointed to by buf into mem.  Fix $, #, and
->   * 0x7d escaped with 0x7d. Return -EFAULT on failure or 0 on success.
-> - * The input buf is overwitten with the result to write to mem.
-> + * The input buf is overwritten with the result to write to mem.
->   */
->  static int kgdb_ebin2mem(char *buf, char *mem, int count)
->  {
-> @@ -952,7 +952,7 @@ static int gdb_cmd_exception_pass(struct kgdb_state *ks)
->  }
-> 
->  /*
-> - * This function performs all gdbserial command procesing
-> + * This function performs all gdbserial command processing
->   */
->  int gdb_serial_stub(struct kgdb_state *ks)
->  {
-> --
-> 2.30.2
-
-
-_______________________________________________
-Kgdb-bugreport mailing list
-Kgdb-bugreport@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport
+RnJvbTogQXJuZCBCZXJnbWFubiA8YXJuZEBhcm5kYi5kZT4KCmdjYy0xMSBzdGFydHMgd2Fybmlu
+ZyBhYm91dCBtaXNsZWFkaW5nIGluZGVudGF0aW9uIGluc2lkZSBvZiBtYWNyb3M6Cgpkcml2ZXJz
+L21pc2Mva2dkYnRzLmM6IEluIGZ1bmN0aW9uIOKAmGtnZGJ0c19icmVha190ZXN04oCZOgpkcml2
+ZXJzL21pc2Mva2dkYnRzLmM6MTAzOjk6IGVycm9yOiB0aGlzIOKAmGlm4oCZIGNsYXVzZSBkb2Vz
+IG5vdCBndWFyZC4uLiBbLVdlcnJvcj1taXNsZWFkaW5nLWluZGVudGF0aW9uXQogIDEwMyB8ICAg
+ICAgICAgaWYgKHZlcmJvc2UgPiAxKSBcCiAgICAgIHwgICAgICAgICBefgpkcml2ZXJzL21pc2Mv
+a2dkYnRzLmM6MjAwOjk6IG5vdGU6IGluIGV4cGFuc2lvbiBvZiBtYWNybyDigJh2MnByaW50a+KA
+mQogIDIwMCB8ICAgICAgICAgdjJwcmludGsoImtnZGJ0czogYnJlYWtwb2ludCBjb21wbGV0ZVxu
+Iik7CiAgICAgIHwgICAgICAgICBefn5+fn5+fgpkcml2ZXJzL21pc2Mva2dkYnRzLmM6MTA1OjE3
+OiBub3RlOiAuLi50aGlzIHN0YXRlbWVudCwgYnV0IHRoZSBsYXR0ZXIgaXMgbWlzbGVhZGluZ2x5
+IGluZGVudGVkIGFzIGlmIGl0IHdlcmUgZ3VhcmRlZCBieSB0aGUg4oCYaWbigJkKICAxMDUgfCAg
+ICAgICAgICAgICAgICAgdG91Y2hfbm1pX3dhdGNoZG9nKCk7ICAgXAogICAgICB8ICAgICAgICAg
+ICAgICAgICBefn5+fn5+fn5+fn5+fn5+fn4KClRoZSBjb2RlIGxvb2tzIGNvcnJlY3QgdG8gbWUs
+IHNvIGp1c3QgcmVpbmRlbnQgaXQgZm9yIHJlYWRhYmlsaXR5LgoKRml4ZXM6IGU4ZDMxYzIwNGUz
+NiAoImtnZGI6IGFkZCBrZ2RiIGludGVybmFsIHRlc3Qgc3VpdGUiKQpTaWduZWQtb2ZmLWJ5OiBB
+cm5kIEJlcmdtYW5uIDxhcm5kQGFybmRiLmRlPgotLS0KIGRyaXZlcnMvbWlzYy9rZ2RidHMuYyB8
+IDI2ICsrKysrKysrKysrKystLS0tLS0tLS0tLS0tCiAxIGZpbGUgY2hhbmdlZCwgMTMgaW5zZXJ0
+aW9ucygrKSwgMTMgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZHJpdmVycy9taXNjL2tnZGJ0
+cy5jIGIvZHJpdmVycy9taXNjL2tnZGJ0cy5jCmluZGV4IDk0NTcwMWJjZTU1My4uMmUwODFhNThk
+YTZjIDEwMDY0NAotLS0gYS9kcml2ZXJzL21pc2Mva2dkYnRzLmMKKysrIGIvZHJpdmVycy9taXNj
+L2tnZGJ0cy5jCkBAIC05NSwxOSArOTUsMTkgQEAKIAogI2luY2x1ZGUgPGFzbS9zZWN0aW9ucy5o
+PgogCi0jZGVmaW5lIHYxcHJpbnRrKGEuLi4pIGRvIHsgXAotCWlmICh2ZXJib3NlKSBcCi0JCXBy
+aW50ayhLRVJOX0lORk8gYSk7IFwKLQl9IHdoaWxlICgwKQotI2RlZmluZSB2MnByaW50ayhhLi4u
+KSBkbyB7IFwKLQlpZiAodmVyYm9zZSA+IDEpIFwKLQkJcHJpbnRrKEtFUk5fSU5GTyBhKTsgXAot
+CQl0b3VjaF9ubWlfd2F0Y2hkb2coKTsJXAotCX0gd2hpbGUgKDApCi0jZGVmaW5lIGVwcmludGso
+YS4uLikgZG8geyBcCi0JCXByaW50ayhLRVJOX0VSUiBhKTsgXAotCQlXQVJOX09OKDEpOyBcCi0J
+fSB3aGlsZSAoMCkKKyNkZWZpbmUgdjFwcmludGsoYS4uLikgZG8gewkJXAorCWlmICh2ZXJib3Nl
+KQkJCVwKKwkJcHJpbnRrKEtFUk5fSU5GTyBhKTsJXAorfSB3aGlsZSAoMCkKKyNkZWZpbmUgdjJw
+cmludGsoYS4uLikgZG8gewkJXAorCWlmICh2ZXJib3NlID4gMSkJCVwKKwkJcHJpbnRrKEtFUk5f
+SU5GTyBhKTsJXAorCXRvdWNoX25taV93YXRjaGRvZygpOwkJXAorfSB3aGlsZSAoMCkKKyNkZWZp
+bmUgZXByaW50ayhhLi4uKSBkbyB7CQlcCisJcHJpbnRrKEtFUk5fRVJSIGEpOwkJXAorCVdBUk5f
+T04oMSk7CQkJXAorfSB3aGlsZSAoMCkKICNkZWZpbmUgTUFYX0NPTkZJR19MRU4JCTQwCiAKIHN0
+YXRpYyBzdHJ1Y3Qga2dkYl9pbyBrZ2RidHNfaW9fb3BzOwotLSAKMi4yOS4yCgoKCl9fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCktnZGItYnVncmVwb3J0IG1h
+aWxpbmcgbGlzdApLZ2RiLWJ1Z3JlcG9ydEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9s
+aXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8va2dkYi1idWdyZXBvcnQK
