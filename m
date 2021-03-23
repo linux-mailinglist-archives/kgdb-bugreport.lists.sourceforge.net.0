@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DC55A3457C5
-	for <lists+kgdb-bugreport@lfdr.de>; Tue, 23 Mar 2021 07:27:30 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id 173F53457E0
+	for <lists+kgdb-bugreport@lfdr.de>; Tue, 23 Mar 2021 07:38:34 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1lOaVl-0002mX-Lr
-	for lists+kgdb-bugreport@lfdr.de; Tue, 23 Mar 2021 06:27:29 +0000
+	id 1lOagS-0005aT-R8
+	for lists+kgdb-bugreport@lfdr.de; Tue, 23 Mar 2021 06:38:32 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <sumit.garg@linaro.org>) id 1lOaVk-0002mQ-H7
- for kgdb-bugreport@lists.sourceforge.net; Tue, 23 Mar 2021 06:27:28 +0000
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <sumit.garg@linaro.org>) id 1lOagR-0005aM-Ka
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 23 Mar 2021 06:38:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
  In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
  :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Tf3+ufm9CCQWVkrT07EmAz18ZuZ1xI3SfrYzdfNmVEs=; b=YGfzZ0Ln6ARrlpVPH0g8Ew+RfG
- dLe/dwPEguBMMEve+wN6NawjAJ9gHYwfM+Fd97FqgoonAMwijkURrJv7jn3jQwQiHpmmie5SUdBFg
- 4A1VSXpP0a3yuPQmMD8ODSu2W2K1c4KNq9lr2OW5z0VRjXi2fDDdO9r5rp4Bxsg7LNf0=;
+ bh=PSlBc3ZngBpiSOBHU+TuOOm2Zx3vcQzp5yg+cLCt4ag=; b=WdM1l89ZJTDtQ6dsaVZNnJRaOd
+ 6sNlHDQT8xtH6G2r9CjbhydrMiiSjrEqLb0gLRXDLycIK2MDr4jj730hBfc5Z4Tz2aIjCt16QJWrx
+ /VVGsB1tkkVoM7WVwAmMG1/ogy6xK2C1UWybWpseaoIizXzkBnHD0b8IlYms7oAyrX0U=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
@@ -30,53 +30,48 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Tf3+ufm9CCQWVkrT07EmAz18ZuZ1xI3SfrYzdfNmVEs=; b=CxdsUGmguM6kLU4hJClhxMREQR
- kZIgjZgCaLdtC1FNrHoZYPIv4ARwOVpJFYt5HrNylOvZwt8OXcrt64QDVb1FsYeKWdl8D6Bov8DLo
- hUYz4rkN1eHyqMwPwktxoMNcyRnlAVP2soE/x6Iik/4NEKlgCpD51mh5nHtji0rezCK8=;
+ bh=PSlBc3ZngBpiSOBHU+TuOOm2Zx3vcQzp5yg+cLCt4ag=; b=fuQ7Ex2g7L/xCo/OpLcmieK+/U
+ 6KgG+16aJvG+KhhlAYgAcnyPqqg+fppuQtQSgX5tFG7fba12ydHIcPIgaB6hVY+ZYuwotKVV7pyXv
+ GwL6Sya+/eSIyTEvkaYx5ukHcN6VB3SG4Or3d2LxOJguWhONmoV9G8pV6Wmm+mCxHwEs=;
 Received: from mail-lf1-f52.google.com ([209.85.167.52])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1lOaVY-00HWqG-AI
- for kgdb-bugreport@lists.sourceforge.net; Tue, 23 Mar 2021 06:27:28 +0000
-Received: by mail-lf1-f52.google.com with SMTP id o126so15465849lfa.0
+ id 1lOagM-00HXNl-TE
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 23 Mar 2021 06:38:31 +0000
+Received: by mail-lf1-f52.google.com with SMTP id m12so24988408lfq.10
  for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 22 Mar 2021 23:27:16 -0700 (PDT)
+ Mon, 22 Mar 2021 23:38:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Tf3+ufm9CCQWVkrT07EmAz18ZuZ1xI3SfrYzdfNmVEs=;
- b=hKD863u5GWp09THn+Fjpe3f27PjIOM2kUWsUcHLpFeMMvK4PACsFwnZaxfIvS9+WtO
- 8o8wE6nUgBWRjJIPYEuCHruJ0o9MrIciN17RvW0ipbGVgXeHP0JBIwuwtTjeBv2l3UTH
- ktzFiHIxm7igxMrAHr1G/P34mrU6h5kruu9efCUaS6I9dBgzOdsueuUlIgYeN7sFC0BK
- yFi1XNnhBsralnp0YyUG3YYxzINrbYTc3G+Nyk05o6EYffTmsxIgBkUK6uwfBiMTp3Ag
- WWtCwieB5CZEXXuJzB/cmsTVu5yCzROZTGh7gjImTDt14BnejgL8CioD5EZq3jPrgvmz
- 2//Q==
+ :cc; bh=PSlBc3ZngBpiSOBHU+TuOOm2Zx3vcQzp5yg+cLCt4ag=;
+ b=sHrT681rY+0rIwjIqOBRu7J9IpoeGE2rE0Y3NSnZTcNAXypXgMrWVutpPgxtwOHyuX
+ 922KwstH6XNi1q/iWJyU46kRCF81jmAPK0yI8VqrpTwYJFE/c5tsrugr3S+JQFYm1+3L
+ LSMIf6kAHbpWYnO5jLR6Q1Nkip5n/+4vuvu1sCm2rFdwHFL5xFjimtM23S/0iP8CqmWJ
+ uKNMjv6jnTH+je4f6tcdfJ6/LHX3IbNOEKsA15IeemXsqClwC4qjsS9rM/8iCqmoYctC
+ epAlQkU+LimfxQoRWfLE7ed7Vxay63aF0K4XI8ZLWmhDgHfa/0iOK6XVzCvbv/USN5EV
+ 2/ag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=Tf3+ufm9CCQWVkrT07EmAz18ZuZ1xI3SfrYzdfNmVEs=;
- b=YcBeMPq+F+JuMcElq8rTIz6DS9LMOgTaPY+GRzKjOXzkRmMHCQTb0i908qcKM9HRB0
- 7kkBDH25LEaLMxxIR3zsBsdvpRJFVkHg5lMB264pKYF/06+9cm4aoyJ+iGKAyO6PGc58
- 62oTe+y8FAe0mXzLy1cPXUE0eVKs3TBKkiK1CEZeBWzkDXEU7ta6+mUgYErZ4fn2FsT8
- vIgQr7CxtHMxIWEcQA4umUIDriQN5Y9tTCdZnxagF4IBrlyV18t0znzB4wMNIiRhEm3T
- ggq30Pb7PuLnDtmwcuxxXjJMuFOIX9DSgiqk6rn5YIGSK/Crk5Kbp9ZBWJjTSKUD14Rp
- EMrQ==
-X-Gm-Message-State: AOAM531bbgP9/nFdFQhKbVYGbChZcD7lJmbwHZZmsVnvq9Hpa1D13ZvG
- h0PUqgSCJKCUTr000o4S31xkLDEgCY4AffV13pxC8A==
-X-Google-Smtp-Source: ABdhPJxTk+dXu/p8uzS5HVx5K721riyriY7sjL+rW5yxBSauGuOeMLtQR07/nLtidTe2MFJjtOzXDWK67GiEvNdZo9Q=
-X-Received: by 2002:ac2:46db:: with SMTP id p27mr1720809lfo.396.1616480829596; 
- Mon, 22 Mar 2021 23:27:09 -0700 (PDT)
+ bh=PSlBc3ZngBpiSOBHU+TuOOm2Zx3vcQzp5yg+cLCt4ag=;
+ b=q+f216GCFOlwZQbtyySSXHfgkNgWF2u+BYOMyjwhmFmuhgWJo6FUGZHFTiMo/k41aT
+ /jZIwK0KeG1kgnT0kMlEv9fqe0JSPkGIGizj3kmRmIkkrLruM8t0qj1c21iVOth9Fy4A
+ 8i6BBd+6wVgtKG5dFMu0lf5woYrrXCzx9zqRShXFmazBr7P147qpzzJ5EKktC12FFoDY
+ k81xlZj+cGNXIIAVENBWIMrjnlFrndLos1cw8we01845AjJZ+QlJpog4WeTJHr5P1XgG
+ 8YSo+lbFfYnOTI2ALF9w5iKxaennZWwMA/AUiVJ3InLjNkE5JDZ0z8Gg1UBazOW5pAq3
+ Wodg==
+X-Gm-Message-State: AOAM533cXDD2oyUwsGx5z+7YrQKLRTk5ir58U7h1DcTftl7sMWde9Oh0
+ lCBlaqV24YSWi5QSMo9f1ftbyCtNjYui8qnsVgz3Cw==
+X-Google-Smtp-Source: ABdhPJzU/VYeEgd9/jJllXeRBEjovJjqw5mvv74HaXJ0ebymNLYQruEx7PoOrA7PNN8fYODvuLCV5mq2N26T0Kx017Q=
+X-Received: by 2002:ac2:46db:: with SMTP id p27mr1747028lfo.396.1616481500301; 
+ Mon, 22 Mar 2021 23:38:20 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210226095306.1236539-1-sumit.garg@linaro.org>
- <20210226105934.gmppt6kubfadv4uf@maple.lan>
- <CAFA6WYPXCKSYBH8Tapf_yg-jS7G0sH0Dmi27s6hutUMtSE39-Q@mail.gmail.com>
- <20210226173727.dqa5uytqwbll6omo@maple.lan>
- <CAFA6WYO0AHJmsGVQr0LPd8p4TS-3S=S_3OnzFS=q2R5p5FiXSA@mail.gmail.com>
- <20210319173525.m5uagzthzzmtuldy@maple.lan>
-In-Reply-To: <20210319173525.m5uagzthzzmtuldy@maple.lan>
+References: <1612771342-16883-1-git-send-email-sumit.garg@linaro.org>
+In-Reply-To: <1612771342-16883-1-git-send-email-sumit.garg@linaro.org>
 From: Sumit Garg <sumit.garg@linaro.org>
-Date: Tue, 23 Mar 2021 11:56:58 +0530
-Message-ID: <CAFA6WYPEPQJ+bYvk7LbBmkYEuv91FgrzPjcQWG5r9vFTucUBVg@mail.gmail.com>
+Date: Tue, 23 Mar 2021 12:08:09 +0530
+Message-ID: <CAFA6WYPPTivcLW8D+_nRdc4M1FLr21cbNt81BXYgbb7T3odaWw@mail.gmail.com>
 To: Daniel Thompson <daniel.thompson@linaro.org>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -96,9 +91,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1lOaVY-00HWqG-AI
-Subject: Re: [Kgdb-bugreport] [PATCH v2] kdb: Get rid of custom debug heap
- allocator
+X-Headers-End: 1lOagM-00HXNl-TE
+Subject: Re: [Kgdb-bugreport] [PATCH v3] kdb: Refactor env variables get/set
+ code
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,197 +112,247 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Fri, 19 Mar 2021 at 23:05, Daniel Thompson
-<daniel.thompson@linaro.org> wrote:
+Hi Daniel,
+
+On Mon, 8 Feb 2021 at 13:32, Sumit Garg <sumit.garg@linaro.org> wrote:
 >
-> On Mon, Mar 01, 2021 at 11:33:00AM +0530, Sumit Garg wrote:
-> > On Fri, 26 Feb 2021 at 23:07, Daniel Thompson
-> > <daniel.thompson@linaro.org> wrote:
-> > >
-> > > On Fri, Feb 26, 2021 at 06:12:13PM +0530, Sumit Garg wrote:
-> > > > On Fri, 26 Feb 2021 at 16:29, Daniel Thompson
-> > > > <daniel.thompson@linaro.org> wrote:
-> > > > >
-> > > > > On Fri, Feb 26, 2021 at 03:23:06PM +0530, Sumit Garg wrote:
-> > > > > > Currently the only user for debug heap is kdbnearsym() which can be
-> > > > > > modified to rather ask the caller to supply a buffer for symbol name.
-> > > > > > So do that and modify kdbnearsym() callers to pass a symbol name buffer
-> > > > > > allocated statically and hence remove custom debug heap allocator.
-> > > > >
-> > > > > Why make the callers do this?
-> > > > >
-> > > > > The LRU buffers were managed inside kdbnearsym() why does switching to
-> > > > > an approach with a single buffer require us to push that buffer out to
-> > > > > the callers?
-> > > > >
-> > > >
-> > > > Earlier the LRU buffers managed namebuf uniqueness per caller (upto
-> > > > 100 callers)
-> > >
-> > > The uniqueness is per symbol, not per caller.
-> > >
-> >
-> > Agree.
-> >
-> > > > but if we switch to single entry in kdbnearsym() then all
-> > > > callers need to share common buffer which will lead to incorrect
-> > > > results from following simple sequence:
-> > > >
-> > > > kdbnearsym(word, &symtab1);
-> > > > kdbnearsym(word, &symtab2);
-> > > > kdb_symbol_print(word, &symtab1, 0);
-> > > > kdb_symbol_print(word, &symtab2, 0);
-> > > >
-> > > > But if we change to a unique static namebuf per caller then the
-> > > > following sequence will work:
-> > > >
-> > > > kdbnearsym(word, &symtab1, namebuf1);
-> > > > kdbnearsym(word, &symtab2, namebuf2);
-> > > > kdb_symbol_print(word, &symtab1, 0);
-> > > > kdb_symbol_print(word, &symtab2, 0);
-> > >
-> > > This is true but do any of the callers of kdbnearsym ever do this?
-> >
-> > No, but any of prospective callers may need this.
-> >
-> > > The
-> > > main reaason that heap stuck out as redundant was that I've only ever
-> > > seen the output of kdbnearsym() consumed almost immediately by a print.
-> > >
-> >
-> > Yeah but I think the alternative proposed in this patch isn't as
-> > burdensome as the heap and tries to somewhat match existing
-> > functionality.
-> >
-> > > I wrote an early version of a patch like this that just shrunk the LRU
-> > > cache down to 2 and avoided any heap usage... but I threw it away
-> > > when I realized we never carry cached values outside the function
-> > > that obtained them.
-> > >
-> >
-> > Okay, so if you still think that having a single static buffer inside
-> > kdbnearsym() is an appropriate approach for time being then I will
-> > switch to use that instead.
+> Add two new kdb environment access methods as kdb_setenv() and
+> kdb_printenv() in order to abstract out environment access code
+> from kdb command functions.
 >
-> Sorry to drop this thread for so long.
+> Also, replace (char *)0 with NULL as an initializer for environment
+> variables array.
 >
-> On reflection I still have a few concerns about the current code.
-> To be clear this is not really about wasting 128 bytes of RAM (your
-> patch saves 256K after all).
+> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> Reviewed-by: Douglas Anderson <dianders@chromium.org>
+> ---
 >
-> It's more that the current static buffers "look weird". They are static
-> so any competent OS programmer reads them and thinks "but what about
-> concurrency/reentrancy"). With the static buffers scattered through the
-> code they don't have a single place to find the answer.
+> Changes in v3:
+> - Remove redundant '\0' char assignment.
+> - Pick up Doug's review tag.
 >
-> I originally proposed handling this by the static buffer horror in
-> kdbnearsym() and describing how it all works in the header comment!
-> As much as anything this was to centralize the commentary in the
-> contract for calling kdbnearsym(). Hence nobody should write the
-> theoretic bug you describe because they read the contract!
+> Changes in v2:
+> - Get rid of code motion to separate kdb_env.c file.
+> - Replace (char *)0 with NULL.
+> - Use kernel-doc style function comments.
+> - s/kdb_prienv/kdb_printenv/
 >
-> You are welcome to counter propose but you must ensure that there are
-> equivalent comments so our "competent OS programmer" from the paragraph
-> above can figure out how the static buffer works without having to run
-> git blame` and digging out the patch history.
+>  kernel/debug/kdb/kdb_main.c | 164 ++++++++++++++++++++++++--------------------
+>  1 file changed, 91 insertions(+), 73 deletions(-)
 >
 
-Okay, I understand your point here. Let me go ahead with a single
-static buffer in kdbnearsym() with a proper header comment.
+Do you have any further comments on this? If no, can you pick this up as well?
 
 -Sumit
 
+> diff --git a/kernel/debug/kdb/kdb_main.c b/kernel/debug/kdb/kdb_main.c
+> index 588062a..69b8f55 100644
+> --- a/kernel/debug/kdb/kdb_main.c
+> +++ b/kernel/debug/kdb/kdb_main.c
+> @@ -142,40 +142,40 @@ static const int __nkdb_err = ARRAY_SIZE(kdbmsgs);
 >
-> Daniel.
+>  static char *__env[] = {
+>  #if defined(CONFIG_SMP)
+> - "PROMPT=[%d]kdb> ",
+> +       "PROMPT=[%d]kdb> ",
+>  #else
+> - "PROMPT=kdb> ",
+> +       "PROMPT=kdb> ",
+>  #endif
+> - "MOREPROMPT=more> ",
+> - "RADIX=16",
+> - "MDCOUNT=8",                  /* lines of md output */
+> - KDB_PLATFORM_ENV,
+> - "DTABCOUNT=30",
+> - "NOSECT=1",
+> - (char *)0,
+> - (char *)0,
+> - (char *)0,
+> - (char *)0,
+> - (char *)0,
+> - (char *)0,
+> - (char *)0,
+> - (char *)0,
+> - (char *)0,
+> - (char *)0,
+> - (char *)0,
+> - (char *)0,
+> - (char *)0,
+> - (char *)0,
+> - (char *)0,
+> - (char *)0,
+> - (char *)0,
+> - (char *)0,
+> - (char *)0,
+> - (char *)0,
+> - (char *)0,
+> - (char *)0,
+> - (char *)0,
+> - (char *)0,
+> +       "MOREPROMPT=more> ",
+> +       "RADIX=16",
+> +       "MDCOUNT=8",            /* lines of md output */
+> +       KDB_PLATFORM_ENV,
+> +       "DTABCOUNT=30",
+> +       "NOSECT=1",
+> +       NULL,
+> +       NULL,
+> +       NULL,
+> +       NULL,
+> +       NULL,
+> +       NULL,
+> +       NULL,
+> +       NULL,
+> +       NULL,
+> +       NULL,
+> +       NULL,
+> +       NULL,
+> +       NULL,
+> +       NULL,
+> +       NULL,
+> +       NULL,
+> +       NULL,
+> +       NULL,
+> +       NULL,
+> +       NULL,
+> +       NULL,
+> +       NULL,
+> +       NULL,
+> +       NULL,
+>  };
 >
+>  static const int __nenv = ARRAY_SIZE(__env);
+> @@ -318,6 +318,63 @@ int kdbgetintenv(const char *match, int *value)
+>  }
 >
+>  /*
+> + * kdb_setenv() - Alter an existing environment variable or create a new one.
+> + * @var: Name of the variable
+> + * @val: Value of the variable
+> + *
+> + * Return: Zero on success, a kdb diagnostic on failure.
+> + */
+> +static int kdb_setenv(const char *var, const char *val)
+> +{
+> +       int i;
+> +       char *ep;
+> +       size_t varlen, vallen;
+> +
+> +       varlen = strlen(var);
+> +       vallen = strlen(val);
+> +       ep = kdballocenv(varlen + vallen + 2);
+> +       if (ep == (char *)0)
+> +               return KDB_ENVBUFFULL;
+> +
+> +       sprintf(ep, "%s=%s", var, val);
+> +
+> +       for (i = 0; i < __nenv; i++) {
+> +               if (__env[i]
+> +                && ((strncmp(__env[i], var, varlen) == 0)
+> +                  && ((__env[i][varlen] == '\0')
+> +                   || (__env[i][varlen] == '=')))) {
+> +                       __env[i] = ep;
+> +                       return 0;
+> +               }
+> +       }
+> +
+> +       /*
+> +        * Wasn't existing variable.  Fit into slot.
+> +        */
+> +       for (i = 0; i < __nenv-1; i++) {
+> +               if (__env[i] == (char *)0) {
+> +                       __env[i] = ep;
+> +                       return 0;
+> +               }
+> +       }
+> +
+> +       return KDB_ENVFULL;
+> +}
+> +
+> +/*
+> + * kdb_printenv() - Display the current environment variables.
+> + */
+> +static void kdb_printenv(void)
+> +{
+> +       int i;
+> +
+> +       for (i = 0; i < __nenv; i++) {
+> +               if (__env[i])
+> +                       kdb_printf("%s\n", __env[i]);
+> +       }
+> +}
+> +
+> +/*
+>   * kdbgetularg - This function will convert a numeric string into an
+>   *     unsigned long value.
+>   * Parameters:
+> @@ -374,10 +431,6 @@ int kdbgetu64arg(const char *arg, u64 *value)
+>   */
+>  int kdb_set(int argc, const char **argv)
+>  {
+> -       int i;
+> -       char *ep;
+> -       size_t varlen, vallen;
+> -
+>         /*
+>          * we can be invoked two ways:
+>          *   set var=value    argv[1]="var", argv[2]="value"
+> @@ -422,37 +475,7 @@ int kdb_set(int argc, const char **argv)
+>          * Tokenizer squashed the '=' sign.  argv[1] is variable
+>          * name, argv[2] = value.
+>          */
+> -       varlen = strlen(argv[1]);
+> -       vallen = strlen(argv[2]);
+> -       ep = kdballocenv(varlen + vallen + 2);
+> -       if (ep == (char *)0)
+> -               return KDB_ENVBUFFULL;
+> -
+> -       sprintf(ep, "%s=%s", argv[1], argv[2]);
+> -
+> -       ep[varlen+vallen+1] = '\0';
+> -
+> -       for (i = 0; i < __nenv; i++) {
+> -               if (__env[i]
+> -                && ((strncmp(__env[i], argv[1], varlen) == 0)
+> -                  && ((__env[i][varlen] == '\0')
+> -                   || (__env[i][varlen] == '=')))) {
+> -                       __env[i] = ep;
+> -                       return 0;
+> -               }
+> -       }
+> -
+> -       /*
+> -        * Wasn't existing variable.  Fit into slot.
+> -        */
+> -       for (i = 0; i < __nenv-1; i++) {
+> -               if (__env[i] == (char *)0) {
+> -                       __env[i] = ep;
+> -                       return 0;
+> -               }
+> -       }
+> -
+> -       return KDB_ENVFULL;
+> +       return kdb_setenv(argv[1], argv[2]);
+>  }
 >
-> >
-> > -Sumit
-> >
-> > >
-> > > > > > @@ -526,6 +526,7 @@ int kdbgetaddrarg(int argc, const char **argv, int *nextarg,
-> > > >
-> > > > >
-> > > > > > diff --git a/kernel/debug/kdb/kdb_main.c b/kernel/debug/kdb/kdb_main.c
-> > > > > > index 9d69169582c6..6efe9ec53906 100644
-> > > > > > --- a/kernel/debug/kdb/kdb_main.c
-> > > > > > +++ b/kernel/debug/kdb/kdb_main.c
-> > > > > > @@ -526,6 +526,7 @@ int kdbgetaddrarg(int argc, const char **argv, int *nextarg,
-> > > > >
-> > > > > The documentation comment for this function has not been updated to
-> > > > > describe the new contract on callers of this function (e.g. if they
-> > > > > consume the symbol name they must do so before calling kdbgetaddrarg()
-> > > > > (and maybe kdbnearsym() again).
-> > > > >
-> > > >
-> > > > I am not sure if I follow you here. If we have a unique static buffer
-> > > > per caller then why do we need this new contract?
-> > >
-> > > I traced the code wrong. I thought it shared symtab->sym_name with its
-> > > own caller... but it doesn't it shares synname with its caller and
-> > > that's totally different...
-> > >
-> > >
-> > > Daniel.
-> > >
-> > > >
-> > > > >
-> > > > > >       char symbol = '\0';
-> > > > > >       char *cp;
-> > > > > >       kdb_symtab_t symtab;
-> > > > > > +     static char namebuf[KSYM_NAME_LEN];
-> > > > > >
-> > > > > >       /*
-> > > > > >        * If the enable flags prohibit both arbitrary memory access
-> > > > > > diff --git a/kernel/debug/kdb/kdb_support.c b/kernel/debug/kdb/kdb_support.c
-> > > > > > index b59aad1f0b55..9b907a84f2db 100644
-> > > > > > --- a/kernel/debug/kdb/kdb_support.c
-> > > > > > +++ b/kernel/debug/kdb/kdb_support.c
-> > > > > > @@ -57,8 +57,6 @@ int kdbgetsymval(const char *symname, kdb_symtab_t *symtab)
-> > > > > >  }
-> > > > > >  EXPORT_SYMBOL(kdbgetsymval);
-> > > > > >
-> > > > > > -static char *kdb_name_table[100];    /* arbitrary size */
-> > > > > > -
-> > > > > >  /*
-> > > > > >   * kdbnearsym -      Return the name of the symbol with the nearest address
-> > > > > >   *   less than 'addr'.
-> > > > >
-> > > > > Again the documentation comment has not been updated and, in this case,
-> > > > > is now misleading.
-> > > >
-> > > > Okay, I will fix it.
-> > > >
-> > > > >
-> > > > > If we move the static buffer here then the remarks section on this
-> > > > > function is a really good place to describe what the callers must do to
-> > > > > manage the static buffer safely as well as a convenient place to mention
-> > > > > that we tolerate the reuse of the static buffer if kdb is re-entered
-> > > > > becase a) kdb is broken if that happens and b) we are crash resilient
-> > > > > if if does.
-> > > > >
-> > > > >
-> > > > > > @@ -79,13 +77,11 @@ static char *kdb_name_table[100]; /* arbitrary size */
-> > > > > >   *   hold active strings, no kdb caller of kdbnearsym makes more
-> > > > > >   *   than ~20 later calls before using a saved value.
-> > > > > >   */
-> > > > > > -int kdbnearsym(unsigned long addr, kdb_symtab_t *symtab)
-> > > > > > +int kdbnearsym(unsigned long addr, kdb_symtab_t *symtab, char *namebuf)
-> > > > >
-> > > > > As above, I don't understand why we need to add namebuf here. I think
-> > > > > the prototype can remain the same.
-> > > > >
-> > > > > Think of it simple that we have reduce the cache from having 100 entries
-> > > > > to having just 1 ;-) .
-> > > >
-> > > > Please see my response above.
-> > > >
-> > > > -Sumit
-> > > >
-> > > > >
-> > > > >
-> > > > > Daniel.
+>  static int kdb_check_regs(void)
+> @@ -2055,12 +2078,7 @@ static int kdb_lsmod(int argc, const char **argv)
+>
+>  static int kdb_env(int argc, const char **argv)
+>  {
+> -       int i;
+> -
+> -       for (i = 0; i < __nenv; i++) {
+> -               if (__env[i])
+> -                       kdb_printf("%s\n", __env[i]);
+> -       }
+> +       kdb_printenv();
+>
+>         if (KDB_DEBUG(MASK))
+>                 kdb_printf("KDBDEBUG=0x%x\n",
+> --
+> 2.7.4
+>
 
 
 _______________________________________________
