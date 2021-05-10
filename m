@@ -2,106 +2,76 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0D0BD35F432
-	for <lists+kgdb-bugreport@lfdr.de>; Wed, 14 Apr 2021 14:46:40 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 802163791DD
+	for <lists+kgdb-bugreport@lfdr.de>; Mon, 10 May 2021 17:04:46 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1lWeuk-0005WC-No
-	for lists+kgdb-bugreport@lfdr.de; Wed, 14 Apr 2021 12:46:38 +0000
+	id 1lg7Se-00057J-Ly
+	for lists+kgdb-bugreport@lfdr.de; Mon, 10 May 2021 15:04:44 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <daniel.thompson@linaro.org>) id 1lWeuj-0005Vu-8F
- for kgdb-bugreport@lists.sourceforge.net; Wed, 14 Apr 2021 12:46:37 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <andriy.shevchenko@linux.intel.com>)
+ id 1lg7Sc-00057B-QS
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 10 May 2021 15:04:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=c12kBO3Pgp5axDxH1oUxBgya9YWgLpZ/kaZ33hnvOio=; b=cledXLfEVTgNIo/L4a0j/tM6gA
- fsQkox++8kUM7YzpqZT4tH5feR1znSZuWmfnaTDqaYXAEuZRMOHsK5aanD4f2Z5Fnd3foAg9OiDGo
- KmDEnPkJE9kK6ZQtHr9/wqNK0KcyLw7ct3Hie4rfAuZNr0wRHffFCDrJf0V+ma2SNbqs=;
+ bh=jdYJkkj29NwpYVvjgfY8FHXag2cPo8Xu+j//oZAxZsI=; b=jZY1ubTOqwAssWQ5qnsFCi5xpN
+ tV6X8OOsNqVqkeOycHoLLuokVTnTKX2EwKfp2o6avzyGMXmgTrLeqvJxS4HSAkd4TlKxVXKclOzRF
+ La60sIQJF7cIWcsuaYJRkVHhCkuVMftLP2C5wHfgcrX0sxJ/70W2KxaZK18F30wHWY6Y=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=c12kBO3Pgp5axDxH1oUxBgya9YWgLpZ/kaZ33hnvOio=; b=A+8Je9go56lYPJk81NGr6Jx5qw
- OUpTqfeh/LOy/4sJkVNZACXYGPvKkGl2+dAt5x1H1c/ySuJIcHDwJ7IU7LguT6Ov5MlLYIuBUhb8y
- TsTusjeMuxcMdapjfWbaXN5sCwRGOmh00FAYIz/LGhIW5RTBoMf+BB7T0Fijxt5cJlxU=;
-Received: from mail-ed1-f51.google.com ([209.85.208.51])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
- id 1lWeud-0004YF-7T
- for kgdb-bugreport@lists.sourceforge.net; Wed, 14 Apr 2021 12:46:37 +0000
-Received: by mail-ed1-f51.google.com with SMTP id s15so23538028edd.4
- for <kgdb-bugreport@lists.sourceforge.net>;
- Wed, 14 Apr 2021 05:46:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=c12kBO3Pgp5axDxH1oUxBgya9YWgLpZ/kaZ33hnvOio=;
- b=GxqTGgkBQuBd+h08zms+A5cxIMNwiDUQbpLkFJUNS/zcrTzD3n0Z/fmg6CUKL2yW6a
- 4L7HADBDvJccCEV95/rW0rIow7jf/Yc1brNiHpPHMtPIk75v3EvO4eL7g9abY0GP8JA3
- 1BBq/t/InonR6TCP/3srjzvBGhuxAuYdtFna9tMpxEalwph0UcSApnqutK3eKIaB/uJI
- /AVUunC7EjPBXUuTCusZR825FALkPdKX7swsxDW91S5qHGKs097g05ryYrQrgFi3d1/d
- 0tuMM9iaaY5tmHgztpqcL6LT3V53zVLEQXc8qxSAr22BcG91kUpHdgpss6p3PFzR8CuN
- e3xw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=c12kBO3Pgp5axDxH1oUxBgya9YWgLpZ/kaZ33hnvOio=;
- b=SaCKkCBdoOZnAvGdalCDcYsGqvSnQIJLcVT7e5kCM0glxiUBnZat0xKR4r6E8u4h+f
- Uh6KHv07fMSXJObuMn+9Ty9VSk54ccQk6QlJpUeOUMI4W5VS2G/ivPUW9wNfOZ0Mdplk
- NxZtexLWWB2+fAEXsNSkSBwTDCfm0jax8zrcPsESMlI9jIFWkyWlPQByTup/Cpc55CWq
- fZaGr4N/d9PJIRxhU4h02L6SZpqSgVgGk2RvV6ZJdei7zop2jVdtrOhlrQKwfZZAWolo
- BhW6S+M5JR3Jh3TlpiWqSHJWvH6frpkelRDrtGbtFeiA1lJvcjYCucuN066R7kVCeT6P
- nlWQ==
-X-Gm-Message-State: AOAM5329HxXax1cA/RTDxDpdhGl8xGQUNuI8mVK5pjNcOJpzyw5KXRdD
- ynJnGeuhbS4CsMgbvjcCMaLBCw==
-X-Google-Smtp-Source: ABdhPJxNoeVMM4M7fagorplO94aOHvWHBEbak2D1eGPYacICUTWOeO46urEtFrulJagbKqAkvLLgTA==
-X-Received: by 2002:a05:6402:1a31:: with SMTP id
- be17mr41943431edb.330.1618404385016; 
- Wed, 14 Apr 2021 05:46:25 -0700 (PDT)
-Received: from maple.lan (cpc141216-aztw34-2-0-cust174.18-1.cable.virginm.net.
- [80.7.220.175])
- by smtp.gmail.com with ESMTPSA id hp12sm9484101ejc.46.2021.04.14.05.46.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Apr 2021 05:46:24 -0700 (PDT)
-Date: Wed, 14 Apr 2021 13:46:22 +0100
-From: Daniel Thompson <daniel.thompson@linaro.org>
-To: Sumit Garg <sumit.garg@linaro.org>
-Message-ID: <20210414124622.sjgiwtjjzxolixvx@maple.lan>
-References: <1612771342-16883-1-git-send-email-sumit.garg@linaro.org>
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=jdYJkkj29NwpYVvjgfY8FHXag2cPo8Xu+j//oZAxZsI=; b=S
+ LEaXvrOv40w/mkZR6H7TFtMAQpDcZxTbptcy9WKJA72eruLNNJ7N+A/0jUrRiwIdvUahLm3mhXLIj
+ MpvrpnNdaHrv3NprbFQhwt8H8J69ye9yvt4UjWiTyHGqQvdu8i/d3Qbgqr7YCQBgZFcDcwF+cSoLs
+ 9mmVCsxOoa0cxAGs=;
+Received: from mga06.intel.com ([134.134.136.31])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1lg7SX-002Cet-4S
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 10 May 2021 15:04:43 +0000
+IronPort-SDR: rMyzeYq7CZf7klgRI8cLPu3hiiOG0LBZ3FC6tMxdpnQ5zqRkWgTr1/bEBsE6HEGC9WS4qZVCbu
+ 6LJbk5E5vJzg==
+X-IronPort-AV: E=McAfee;i="6200,9189,9980"; a="260478000"
+X-IronPort-AV: E=Sophos;i="5.82,286,1613462400"; d="scan'208";a="260478000"
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+ by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 10 May 2021 08:04:31 -0700
+IronPort-SDR: 5HtizJ1vAOQZfmDWuujDPkjkF4zn0yMx9a+JK8MEiXghp0HskM5L/WkqyoCEer5wcgyVmNat77
+ 67u0ynZXBGMg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.82,287,1613462400"; d="scan'208";a="470818104"
+Received: from black.fi.intel.com ([10.237.72.28])
+ by orsmga001.jf.intel.com with ESMTP; 10 May 2021 08:03:57 -0700
+Received: by black.fi.intel.com (Postfix, from userid 1003)
+ id 6A7D812A; Mon, 10 May 2021 18:04:16 +0300 (EEST)
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To: Petr Mladek <pmladek@suse.com>, JC Kuo <jckuo@nvidia.com>,
+ Joe Perches <joe@perches.com>, Sumit Garg <sumit.garg@linaro.org>,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-usb@vger.kernel.org, linux-tegra@vger.kernel.org,
+ linux-nilfs@vger.kernel.org, kgdb-bugreport@lists.sourceforge.net
+Date: Mon, 10 May 2021 18:04:10 +0300
+Message-Id: <20210510150413.59356-1-andriy.shevchenko@linux.intel.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <1612771342-16883-1-git-send-email-sumit.garg@linaro.org>
-X-Spam-Score: -0.1 (/)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: linaro.org]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.208.51 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.208.51 listed in wl.mailspike.net]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
-X-Headers-End: 1lWeud-0004YF-7T
-Subject: Re: [Kgdb-bugreport] [PATCH v3] kdb: Refactor env variables get/set
- code
+X-Headers-End: 1lg7SX-002Cet-4S
+Subject: [Kgdb-bugreport] [PATCH v1 1/4] lib/vsprintf: Allow to override
+ date and time separator
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,257 +83,120 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: kgdb-bugreport@lists.sourceforge.net, linux-kernel@vger.kernel.org,
- jason.wessel@windriver.com
+Cc: Daniel Thompson <daniel.thompson@linaro.org>,
+ Mathias Nyman <mathias.nyman@intel.com>, Jonathan Corbet <corbet@lwn.net>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Rasmus Villemoes <linux@rasmusvillemoes.dk>,
+ Steven Rostedt <rostedt@goodmis.org>, Jonathan Hunter <jonathanh@nvidia.com>,
+ Sergey Senozhatsky <senozhatsky@chromium.org>,
+ Thierry Reding <thierry.reding@gmail.com>,
+ Jason Wessel <jason.wessel@windriver.com>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Ryusuke Konishi <konishi.ryusuke@gmail.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Mon, Feb 08, 2021 at 01:32:22PM +0530, Sumit Garg wrote:
-> 
-> Add two new kdb environment access methods as kdb_setenv() and
-> kdb_printenv() in order to abstract out environment access code
-> from kdb command functions.
-> 
-> Also, replace (char *)0 with NULL as an initializer for environment
-> variables array.
+ISO 8601 defines 'T' as a separator between date and time. Though,
+some ABIs use time and date with ' ' separator instead.
 
-Neither (char *)0 nor NULL are great initializers since, for static
-data, these are the default value anyway. Better to just give the array
-a explicit dimension and be done.
+Add a flavour to the %pt specifier to override default separator.
 
-However... that's a fairly small change and I can fix it up when
-applying this.
+Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+---
+ Documentation/core-api/printk-formats.rst |  6 +++++-
+ lib/test_printf.c                         |  5 +++++
+ lib/vsprintf.c                            | 19 ++++++++++++++++---
+ 3 files changed, 26 insertions(+), 4 deletions(-)
 
+diff --git a/Documentation/core-api/printk-formats.rst b/Documentation/core-api/printk-formats.rst
+index f063a384c7c8..bc85fd4685e7 100644
+--- a/Documentation/core-api/printk-formats.rst
++++ b/Documentation/core-api/printk-formats.rst
+@@ -514,9 +514,10 @@ Time and date
+ ::
+ 
+ 	%pt[RT]			YYYY-mm-ddTHH:MM:SS
++	%pt[RT]s		YYYY-mm-dd HH:MM:SS
+ 	%pt[RT]d		YYYY-mm-dd
+ 	%pt[RT]t		HH:MM:SS
+-	%pt[RT][dt][r]
++	%pt[RT][dt][rs]
+ 
+ For printing date and time as represented by::
+ 
+@@ -528,6 +529,9 @@ in human readable format.
+ By default year will be incremented by 1900 and month by 1.
+ Use %pt[RT]r (raw) to suppress this behaviour.
+ 
++The %pt[RT]s (space) will override ISO 8601 by using ' ' instead of 'T'
++between date and time. It won't have any effect when date or time is omitted.
++
+ Passed by reference.
+ 
+ struct clk
+diff --git a/lib/test_printf.c b/lib/test_printf.c
+index ec0d5976bb69..8ac71aee46af 100644
+--- a/lib/test_printf.c
++++ b/lib/test_printf.c
+@@ -528,6 +528,11 @@ time_and_date(void)
+ 	test("0119-00-04T15:32:23", "%ptTr", &t);
+ 	test("15:32:23|2019-01-04", "%ptTt|%ptTd", &t, &t);
+ 	test("15:32:23|0119-00-04", "%ptTtr|%ptTdr", &t, &t);
++
++	test("2019-01-04 15:32:23", "%ptTs", &t);
++	test("0119-00-04 15:32:23", "%ptTsr", &t);
++	test("15:32:23|2019-01-04", "%ptTts|%ptTds", &t, &t);
++	test("15:32:23|0119-00-04", "%ptTtrs|%ptTdrs", &t, &t);
+ }
+ 
+ static void __init
+diff --git a/lib/vsprintf.c b/lib/vsprintf.c
+index f0c35d9b65bf..5f36c7a43cdc 100644
+--- a/lib/vsprintf.c
++++ b/lib/vsprintf.c
+@@ -1834,7 +1834,8 @@ char *rtc_str(char *buf, char *end, const struct rtc_time *tm,
+ 	      struct printf_spec spec, const char *fmt)
+ {
+ 	bool have_t = true, have_d = true;
+-	bool raw = false;
++	bool raw = false, space = false;
++	bool found = true;
+ 	int count = 2;
+ 
+ 	if (check_pointer(&buf, end, tm, spec))
+@@ -1851,14 +1852,26 @@ char *rtc_str(char *buf, char *end, const struct rtc_time *tm,
+ 		break;
+ 	}
+ 
+-	raw = fmt[count] == 'r';
++	do {
++		switch (fmt[count++]) {
++		case 'r':
++			raw = true;
++			break;
++		case 's':
++			space = true;
++			break;
++		default:
++			found = false;
++			break;
++		}
++	} while (found);
+ 
+ 	if (have_d)
+ 		buf = date_str(buf, end, tm, raw);
+ 	if (have_d && have_t) {
+ 		/* Respect ISO 8601 */
+ 		if (buf < end)
+-			*buf = 'T';
++			*buf = space ? ' ' : 'T';
+ 		buf++;
+ 	}
+ 	if (have_t)
+-- 
+2.30.2
 
-Daniel.
-
-
-> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> Reviewed-by: Douglas Anderson <dianders@chromium.org>
-> ---
-> 
-> Changes in v3:
-> - Remove redundant '\0' char assignment.
-> - Pick up Doug's review tag.
-> 
-> Changes in v2:
-> - Get rid of code motion to separate kdb_env.c file.
-> - Replace (char *)0 with NULL.
-> - Use kernel-doc style function comments.
-> - s/kdb_prienv/kdb_printenv/
-> 
->  kernel/debug/kdb/kdb_main.c | 164 ++++++++++++++++++++++++--------------------
->  1 file changed, 91 insertions(+), 73 deletions(-)
-> 
-> diff --git a/kernel/debug/kdb/kdb_main.c b/kernel/debug/kdb/kdb_main.c
-> index 588062a..69b8f55 100644
-> --- a/kernel/debug/kdb/kdb_main.c
-> +++ b/kernel/debug/kdb/kdb_main.c
-> @@ -142,40 +142,40 @@ static const int __nkdb_err = ARRAY_SIZE(kdbmsgs);
->  
->  static char *__env[] = {
->  #if defined(CONFIG_SMP)
-> - "PROMPT=[%d]kdb> ",
-> +	"PROMPT=[%d]kdb> ",
->  #else
-> - "PROMPT=kdb> ",
-> +	"PROMPT=kdb> ",
->  #endif
-> - "MOREPROMPT=more> ",
-> - "RADIX=16",
-> - "MDCOUNT=8",			/* lines of md output */
-> - KDB_PLATFORM_ENV,
-> - "DTABCOUNT=30",
-> - "NOSECT=1",
-> - (char *)0,
-> - (char *)0,
-> - (char *)0,
-> - (char *)0,
-> - (char *)0,
-> - (char *)0,
-> - (char *)0,
-> - (char *)0,
-> - (char *)0,
-> - (char *)0,
-> - (char *)0,
-> - (char *)0,
-> - (char *)0,
-> - (char *)0,
-> - (char *)0,
-> - (char *)0,
-> - (char *)0,
-> - (char *)0,
-> - (char *)0,
-> - (char *)0,
-> - (char *)0,
-> - (char *)0,
-> - (char *)0,
-> - (char *)0,
-> +	"MOREPROMPT=more> ",
-> +	"RADIX=16",
-> +	"MDCOUNT=8",		/* lines of md output */
-> +	KDB_PLATFORM_ENV,
-> +	"DTABCOUNT=30",
-> +	"NOSECT=1",
-> +	NULL,
-> +	NULL,
-> +	NULL,
-> +	NULL,
-> +	NULL,
-> +	NULL,
-> +	NULL,
-> +	NULL,
-> +	NULL,
-> +	NULL,
-> +	NULL,
-> +	NULL,
-> +	NULL,
-> +	NULL,
-> +	NULL,
-> +	NULL,
-> +	NULL,
-> +	NULL,
-> +	NULL,
-> +	NULL,
-> +	NULL,
-> +	NULL,
-> +	NULL,
-> +	NULL,
->  };
->  
->  static const int __nenv = ARRAY_SIZE(__env);
-> @@ -318,6 +318,63 @@ int kdbgetintenv(const char *match, int *value)
->  }
->  
->  /*
-> + * kdb_setenv() - Alter an existing environment variable or create a new one.
-> + * @var: Name of the variable
-> + * @val: Value of the variable
-> + *
-> + * Return: Zero on success, a kdb diagnostic on failure.
-> + */
-> +static int kdb_setenv(const char *var, const char *val)
-> +{
-> +	int i;
-> +	char *ep;
-> +	size_t varlen, vallen;
-> +
-> +	varlen = strlen(var);
-> +	vallen = strlen(val);
-> +	ep = kdballocenv(varlen + vallen + 2);
-> +	if (ep == (char *)0)
-> +		return KDB_ENVBUFFULL;
-> +
-> +	sprintf(ep, "%s=%s", var, val);
-> +
-> +	for (i = 0; i < __nenv; i++) {
-> +		if (__env[i]
-> +		 && ((strncmp(__env[i], var, varlen) == 0)
-> +		   && ((__env[i][varlen] == '\0')
-> +		    || (__env[i][varlen] == '=')))) {
-> +			__env[i] = ep;
-> +			return 0;
-> +		}
-> +	}
-> +
-> +	/*
-> +	 * Wasn't existing variable.  Fit into slot.
-> +	 */
-> +	for (i = 0; i < __nenv-1; i++) {
-> +		if (__env[i] == (char *)0) {
-> +			__env[i] = ep;
-> +			return 0;
-> +		}
-> +	}
-> +
-> +	return KDB_ENVFULL;
-> +}
-> +
-> +/*
-> + * kdb_printenv() - Display the current environment variables.
-> + */
-> +static void kdb_printenv(void)
-> +{
-> +	int i;
-> +
-> +	for (i = 0; i < __nenv; i++) {
-> +		if (__env[i])
-> +			kdb_printf("%s\n", __env[i]);
-> +	}
-> +}
-> +
-> +/*
->   * kdbgetularg - This function will convert a numeric string into an
->   *	unsigned long value.
->   * Parameters:
-> @@ -374,10 +431,6 @@ int kdbgetu64arg(const char *arg, u64 *value)
->   */
->  int kdb_set(int argc, const char **argv)
->  {
-> -	int i;
-> -	char *ep;
-> -	size_t varlen, vallen;
-> -
->  	/*
->  	 * we can be invoked two ways:
->  	 *   set var=value    argv[1]="var", argv[2]="value"
-> @@ -422,37 +475,7 @@ int kdb_set(int argc, const char **argv)
->  	 * Tokenizer squashed the '=' sign.  argv[1] is variable
->  	 * name, argv[2] = value.
->  	 */
-> -	varlen = strlen(argv[1]);
-> -	vallen = strlen(argv[2]);
-> -	ep = kdballocenv(varlen + vallen + 2);
-> -	if (ep == (char *)0)
-> -		return KDB_ENVBUFFULL;
-> -
-> -	sprintf(ep, "%s=%s", argv[1], argv[2]);
-> -
-> -	ep[varlen+vallen+1] = '\0';
-> -
-> -	for (i = 0; i < __nenv; i++) {
-> -		if (__env[i]
-> -		 && ((strncmp(__env[i], argv[1], varlen) == 0)
-> -		   && ((__env[i][varlen] == '\0')
-> -		    || (__env[i][varlen] == '=')))) {
-> -			__env[i] = ep;
-> -			return 0;
-> -		}
-> -	}
-> -
-> -	/*
-> -	 * Wasn't existing variable.  Fit into slot.
-> -	 */
-> -	for (i = 0; i < __nenv-1; i++) {
-> -		if (__env[i] == (char *)0) {
-> -			__env[i] = ep;
-> -			return 0;
-> -		}
-> -	}
-> -
-> -	return KDB_ENVFULL;
-> +	return kdb_setenv(argv[1], argv[2]);
->  }
->  
->  static int kdb_check_regs(void)
-> @@ -2055,12 +2078,7 @@ static int kdb_lsmod(int argc, const char **argv)
->  
->  static int kdb_env(int argc, const char **argv)
->  {
-> -	int i;
-> -
-> -	for (i = 0; i < __nenv; i++) {
-> -		if (__env[i])
-> -			kdb_printf("%s\n", __env[i]);
-> -	}
-> +	kdb_printenv();
->  
->  	if (KDB_DEBUG(MASK))
->  		kdb_printf("KDBDEBUG=0x%x\n",
-> -- 
-> 2.7.4
-> 
 
 
 _______________________________________________
