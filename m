@@ -2,28 +2,28 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3619237926C
-	for <lists+kgdb-bugreport@lfdr.de>; Mon, 10 May 2021 17:19:46 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id AFC0537926D
+	for <lists+kgdb-bugreport@lfdr.de>; Mon, 10 May 2021 17:19:52 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1lg7h9-0006f4-9Q
-	for lists+kgdb-bugreport@lfdr.de; Mon, 10 May 2021 15:19:43 +0000
+	id 1lg7hH-0004il-3Y
+	for lists+kgdb-bugreport@lfdr.de; Mon, 10 May 2021 15:19:51 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from <andriy.shevchenko@linux.intel.com>)
- id 1lg7h6-0006er-HC
- for kgdb-bugreport@lists.sourceforge.net; Mon, 10 May 2021 15:19:40 +0000
+ id 1lg7hF-0004iP-Ed
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 10 May 2021 15:19:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=BC2GSXHk6PHUwj0JYTEZ6Y2qfFay8GkilUHRjcodHqA=; b=WesEf+5W63lLwB5HYcTbbVr+zn
- s/EbkyErT/tn9wKR2wqFw73YJTGWI7abb2I1s+Sj165+SkDWFq+VLh4sKaYZYpve90iWpPXLmlRgd
- CHs4gbG8XIhIeLorYDghDFHydiPTuf8akRjmPOQNhKPiV+OHarkhVV8/rU134ZbCvWO8=;
+ bh=Ac2U/T0L1UtHg08BXD8mkAuaWOjGRqRfwPje5wgZfd8=; b=KM5AePcY7WwweUzAtS7UbFZlsZ
+ h5bdh+948VUFazArPAESvHM2aF4OAPc+3d4By3Qvh1OYbn6ciOQErGhrDLMNQFcR0tEqCejt+tl4y
+ tO1yAOF7zBhWKuY3C6stde2JuH9QX6zhtfnuGjXmtp1nTgIPz7M4kZM6rpJU6MjNbQMg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,37 +31,37 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=BC2GSXHk6PHUwj0JYTEZ6Y2qfFay8GkilUHRjcodHqA=; b=muQaWS73SmfXsX89BugZdVOylr
- /NTwsEiae1SbuLFN+QI9gfnWIyEdTCIjfgQ37OL0xr/Mvhm1RqC4MYTfEg0aRWzTuKsXG0/qUKUN0
- Np7wmZAyY4XkYdkUf7NDlmoRFz/TIQN8698Cu7MAlXFvG2bCEVbASHNXQZq36AwpFHjQ=;
-Received: from mga14.intel.com ([192.55.52.115])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lg7h0-0005hO-AA
- for kgdb-bugreport@lists.sourceforge.net; Mon, 10 May 2021 15:19:41 +0000
-IronPort-SDR: ya1Vlz5PPEYXg9tkqW9V2hdNK/wzjsg3Gxz1GVaX+IqK7WlWm5tfYzwMIM/y4Vq7uUASWJ34kj
- HgQgvr9S+baQ==
-X-IronPort-AV: E=McAfee;i="6200,9189,9980"; a="198891288"
-X-IronPort-AV: E=Sophos;i="5.82,287,1613462400"; d="scan'208";a="198891288"
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
- by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 10 May 2021 08:04:01 -0700
-IronPort-SDR: vtCioZJlQQudEsVBPUFAdiRcXz8hr8ByH7nkY/1QzNUsTgRdwzS673eAs+6b+hMtXD267On8EP
- QquePXuHOn1Q==
+ bh=Ac2U/T0L1UtHg08BXD8mkAuaWOjGRqRfwPje5wgZfd8=; b=VT6NrUyhltGRaOk4yjknZe4bnA
+ t2+vom1TGHF+WbzdwRCaXcSq3IpGMBtO/RMbJB5ZeqIgtdq3n6pcZVc87JWwx+UKuhpMGj5ktCtoW
+ c/i1YA23TkUgbbOOuEQB+NffkaP4DbWJ19fXOdFjo/bqTQYlP0YuQTQkaC+9F0rB4h9o=;
+Received: from mga01.intel.com ([192.55.52.88])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1lg7h7-002Fue-5r
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 10 May 2021 15:19:49 +0000
+IronPort-SDR: zEWZmufkR3LlE/w8hBy0CD6KLBe7MtdxfXUra9X2MQZt2De8YWBQizBuvLmJLQYE8EKFFXrQ8p
+ R0B1Rhvo+q7g==
+X-IronPort-AV: E=McAfee;i="6200,9189,9980"; a="220162464"
+X-IronPort-AV: E=Sophos;i="5.82,287,1613462400"; d="scan'208";a="220162464"
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+ by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 10 May 2021 08:04:02 -0700
+IronPort-SDR: IOjie96ZhmgBakkWhU2dJA996iOyKlZJgdodqHtw3Qv0We3mF69WZ562+YavWqrvP7cHA1djcp
+ KCtcD6gLXJ3w==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.82,287,1613462400"; d="scan'208";a="536448298"
+X-IronPort-AV: E=Sophos;i="5.82,287,1613462400"; d="scan'208";a="468259165"
 Received: from black.fi.intel.com ([10.237.72.28])
- by fmsmga001.fm.intel.com with ESMTP; 10 May 2021 08:03:56 -0700
+ by fmsmga002.fm.intel.com with ESMTP; 10 May 2021 08:03:56 -0700
 Received: by black.fi.intel.com (Postfix, from userid 1003)
- id 7EA3F147; Mon, 10 May 2021 18:04:16 +0300 (EEST)
+ id 88ECF1D2; Mon, 10 May 2021 18:04:16 +0300 (EEST)
 From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
 To: Petr Mladek <pmladek@suse.com>, JC Kuo <jckuo@nvidia.com>,
  Joe Perches <joe@perches.com>, Sumit Garg <sumit.garg@linaro.org>,
  linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
  linux-usb@vger.kernel.org, linux-tegra@vger.kernel.org,
  linux-nilfs@vger.kernel.org, kgdb-bugreport@lists.sourceforge.net
-Date: Mon, 10 May 2021 18:04:12 +0300
-Message-Id: <20210510150413.59356-3-andriy.shevchenko@linux.intel.com>
+Date: Mon, 10 May 2021 18:04:13 +0300
+Message-Id: <20210510150413.59356-4-andriy.shevchenko@linux.intel.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20210510150413.59356-1-andriy.shevchenko@linux.intel.com>
 References: <20210510150413.59356-1-andriy.shevchenko@linux.intel.com>
@@ -71,8 +71,12 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1lg7h0-0005hO-AA
-Subject: [Kgdb-bugreport] [PATCH v1 3/4] nilfs2: Switch to use %ptTs
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [192.55.52.88 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1lg7h7-002Fue-5r
+Subject: [Kgdb-bugreport] [PATCH v1 4/4] usb: host: xhci-tegra: Switch to
+ use %ptTs
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -101,66 +105,38 @@ Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 Use %ptTs instead of open coded variant to print contents
 of time64_t type in human readable form.
 
-Use sysfs_emit() at the same time in the changed functions.
-
-Cc: Ryusuke Konishi <konishi.ryusuke@gmail.com>
-Cc: linux-nilfs@vger.kernel.org
+Cc: Thierry Reding <thierry.reding@gmail.com>
+Cc: Jonathan Hunter <jonathanh@nvidia.com>
 Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
 ---
- fs/nilfs2/sysfs.c | 19 +++----------------
- 1 file changed, 3 insertions(+), 16 deletions(-)
+ drivers/usb/host/xhci-tegra.c | 6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
 
-diff --git a/fs/nilfs2/sysfs.c b/fs/nilfs2/sysfs.c
-index 303d71430bdd..4e10423f0448 100644
---- a/fs/nilfs2/sysfs.c
-+++ b/fs/nilfs2/sysfs.c
-@@ -19,19 +19,6 @@
- /* /sys/fs/<nilfs>/ */
- static struct kset *nilfs_kset;
+diff --git a/drivers/usb/host/xhci-tegra.c b/drivers/usb/host/xhci-tegra.c
+index ce97ff054c68..937b78cba89b 100644
+--- a/drivers/usb/host/xhci-tegra.c
++++ b/drivers/usb/host/xhci-tegra.c
+@@ -890,7 +890,6 @@ static int tegra_xusb_load_firmware(struct tegra_xusb *tegra)
+ 	struct xhci_op_regs __iomem *op;
+ 	unsigned long timeout;
+ 	time64_t timestamp;
+-	struct tm time;
+ 	u64 address;
+ 	u32 value;
+ 	int err;
+@@ -987,11 +986,8 @@ static int tegra_xusb_load_firmware(struct tegra_xusb *tegra)
+ 	}
  
--#define NILFS_SHOW_TIME(time_t_val, buf) ({ \
--		struct tm res; \
--		int count = 0; \
--		time64_to_tm(time_t_val, 0, &res); \
--		res.tm_year += 1900; \
--		res.tm_mon += 1; \
--		count = scnprintf(buf, PAGE_SIZE, \
--				    "%ld-%.2d-%.2d %.2d:%.2d:%.2d\n", \
--				    res.tm_year, res.tm_mon, res.tm_mday, \
--				    res.tm_hour, res.tm_min, res.tm_sec);\
--		count; \
--})
--
- #define NILFS_DEV_INT_GROUP_OPS(name, parent_name) \
- static ssize_t nilfs_##name##_attr_show(struct kobject *kobj, \
- 					struct attribute *attr, char *buf) \
-@@ -576,7 +563,7 @@ nilfs_segctor_last_seg_write_time_show(struct nilfs_segctor_attr *attr,
- 	ctime = nilfs->ns_ctime;
- 	up_read(&nilfs->ns_segctor_sem);
+ 	timestamp = le32_to_cpu(header->fwimg_created_time);
+-	time64_to_tm(timestamp, 0, &time);
  
--	return NILFS_SHOW_TIME(ctime, buf);
-+	return sysfs_emit(buf, "%ptTs\n", &ctime);
+-	dev_info(dev, "Firmware timestamp: %ld-%02d-%02d %02d:%02d:%02d UTC\n",
+-		 time.tm_year + 1900, time.tm_mon + 1, time.tm_mday,
+-		 time.tm_hour, time.tm_min, time.tm_sec);
++	dev_info(dev, "Firmware timestamp: %ptTs UTC\n", &timestamp);
+ 
+ 	return 0;
  }
- 
- static ssize_t
-@@ -604,7 +591,7 @@ nilfs_segctor_last_nongc_write_time_show(struct nilfs_segctor_attr *attr,
- 	nongc_ctime = nilfs->ns_nongc_ctime;
- 	up_read(&nilfs->ns_segctor_sem);
- 
--	return NILFS_SHOW_TIME(nongc_ctime, buf);
-+	return sysfs_emit(buf, "%ptTs\n", &nongc_ctime);
- }
- 
- static ssize_t
-@@ -724,7 +711,7 @@ nilfs_superblock_sb_write_time_show(struct nilfs_superblock_attr *attr,
- 	sbwtime = nilfs->ns_sbwtime;
- 	up_read(&nilfs->ns_sem);
- 
--	return NILFS_SHOW_TIME(sbwtime, buf);
-+	return sysfs_emit(buf, "%ptTs\n", &sbwtime);
- }
- 
- static ssize_t
 -- 
 2.30.2
 
