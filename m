@@ -2,79 +2,87 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1532537F4E1
-	for <lists+kgdb-bugreport@lfdr.de>; Thu, 13 May 2021 11:34:38 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
-	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	 bh=r0egdHJHG/Ym0ubX0yjPKlzn+kDbnTDf1DKurGn/+MU=; b=dNz345lzkoqz4oUrEtR5AStS6
-	24Lu18pFNETg+cWL+Q5g3cDHLYrNxZeiRAYrNpvir5oKm/VTMMHkW1CF2q1lJeYRTAxWoKjPb2oGa
-	mM5dy93HXnYgGodLM9ojRQfkf0HI83UEybg6tdMpkIM4Af712x61yaPMbhxMoUs0rkYPc=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5595E37F6D5
+	for <lists+kgdb-bugreport@lfdr.de>; Thu, 13 May 2021 13:34:51 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1lh7jo-0004vb-5p
-	for lists+kgdb-bugreport@lfdr.de; Thu, 13 May 2021 09:34:36 +0000
+	id 1lh9c8-0002PQ-8L
+	for lists+kgdb-bugreport@lfdr.de; Thu, 13 May 2021 11:34:48 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <pmladek@suse.com>) id 1lh7jn-0004vV-HJ
- for kgdb-bugreport@lists.sourceforge.net; Thu, 13 May 2021 09:34:35 +0000
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <sumit.garg@linaro.org>) id 1lh9bz-0002Op-BF
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 13 May 2021 11:34:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bOeXjgffhRk4ROYar2MNv8Jtg7kJ41kJ+qOqxZ43DeA=; b=C1E251nOOKeLEDtNtSuCBOKXn7
- xWVWlO1JjIxmwnocd9IiO9N/e6tyXztp1oRkM2bHpDZzilGN9jhxdddX6S5a/ynWuYnpULucw27Lf
- 0X0Koakgl6yHzmf0hfqVV55/gJ99I9v8fOM1BRTR0SZmzx8Kw6xuEQ6UFmGdfqdxk0eE=;
+ bh=3e5v4xpnkSIXUPVBTFRMeaXzgMFdRaxBbtf5FiuvHJU=; b=ID1q/W4JZYPfq2aUgAsgxIEt6p
+ DSm9sqQqJOjkBsuESxX7iEz9N5Lqw3XQaT4pGTTY7FdvAvmXbO8UZjWxc92mEvYouTU9zJCUgC9MR
+ Cd9RkuwOzgkc2Q8tnJUyfXCu1KiBQoZGM87Yr48Fvj8witirzmvWtuMqHzmguZjgx9uA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=bOeXjgffhRk4ROYar2MNv8Jtg7kJ41kJ+qOqxZ43DeA=; b=NsdSsYmy1LSDOLCENPrmv1mIwC
- XVkZRylBYMm1MgXxcXQYKGKYc6g7UuuhLrk9UZPEWx0SmYSGyyUh7RfvwuBOJTKX7K5ARvcBIvM7M
- 42GKWhMVVfF85xSmdJ8GQxNb4BVHbOYsqlqCuGXOUWrYAsVyHL5d09WfhM3z8IubEQzM=;
-Received: from mx2.suse.de ([195.135.220.15])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1lh7jh-006YF2-Ml
- for kgdb-bugreport@lists.sourceforge.net; Thu, 13 May 2021 09:34:36 +0000
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
- t=1620898459; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=bOeXjgffhRk4ROYar2MNv8Jtg7kJ41kJ+qOqxZ43DeA=;
- b=JldI/5nRDymnQ0GD1tOj3C0xjFauFlRVsMq7TmtJAemWoVVsiaetI55P07F0ZtkXSTwqLp
- bYhVznRykaMlcfnF0XK5Dn/J/UlFgc2DRdxfnLReWlZIkgq7pVSzVhgV+TiQTkzz6j6td4
- SvRnqkcCxcQxm6oV+cuTFNRJC42t+YQ=
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id BD533AED6;
- Thu, 13 May 2021 09:34:18 +0000 (UTC)
-Date: Thu, 13 May 2021 11:34:17 +0200
-To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Message-ID: <YJzymZ7m3R1ELjGD@alley>
-References: <20210511153958.34527-1-andriy.shevchenko@linux.intel.com>
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=3e5v4xpnkSIXUPVBTFRMeaXzgMFdRaxBbtf5FiuvHJU=; b=V
+ VmWMs27nVFOyWNp2CjDkk/11xvAZC8jT6eK4h09u5ORxE3AG0DivAs9TE42u3QZAlFp1rP/exI7Km
+ 7p7d3RUqZWR29EbeUqnpo30198ODasTad25KEedRnIOFfs12+AeMCn+nuVLnHn7WCkI9j7W1Zyk0Q
+ UeP23N0GsaLLuxR8=;
+Received: from mail-oi1-f174.google.com ([209.85.167.174])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
+ id 1lh9bq-0001NS-GD
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 13 May 2021 11:34:40 +0000
+Received: by mail-oi1-f174.google.com with SMTP id u144so451228oie.6
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Thu, 13 May 2021 04:34:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=3e5v4xpnkSIXUPVBTFRMeaXzgMFdRaxBbtf5FiuvHJU=;
+ b=HyYqjMT/ljXc7hZMpSLyjtsuNGZh2jsqXON7U/nS3LDGimuUjB8l2mSo7bMMaTe4va
+ llgxNKJh/PwhA1G3VjY7n+os3OmHmpeTcMq+pitxRBd1CYUHxqq0UGmfYUe/iis22ukZ
+ 43p4DISxlRUntQ0DX41UZJSYeuOROkKldMST//mvE9s8h08cLBwFtYW8iL0U/UeBjBJ2
+ t/HP0JIwwNtYnav1RXVXfqjC5Jgy1yGqPudWNK+YRFPL8j/I2nx98ErizyPEOt/lONJW
+ W067NZeE/1ffUQKOpbPmbqAJVQ970kFuONwUCuE172cfcHlTTlKZKpwpUg8n9IQ4ponI
+ Szlw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=3e5v4xpnkSIXUPVBTFRMeaXzgMFdRaxBbtf5FiuvHJU=;
+ b=BemPITl/R4CNyAAUD3Ab/KFMlEWRM4FRaaKL627/Wjq3KjaY8PgFTGzQUwGVZ3WDh2
+ wkBiTM9MsZT/OOCD+STiSWKaecvQhVrMkXbJLXNHcvUrJtl0iaEccQsKh5u2Un8dg9fq
+ +spUs7uQPGOaPW3N29ZYciRlGK1jt8eLMzs1LONgsSsz7OfHBoYIm3WPPImZHIBgvXhN
+ QMaJm/+ZUp+ozCpE9oPzt5OKVUSq1OQacqnaWl5Zl3XtxB7wQrvoNoPUo95mog+G5zgR
+ 5uI+6gn8L1Bh23UQOpz5ANem7PZgozEVL9aw0jJZ6io5eL4gTbhxJ8DEQfI91vNNeS4o
+ bqcQ==
+X-Gm-Message-State: AOAM531z1oy1ShJkA0M3MGa1d8n0e6xt1dsV2Bgu+LBbiVLAF+ubtI3Q
+ 5Zge+9jUtgT9Vi/SojI0mVhrWaQWspQbmg==
+X-Google-Smtp-Source: ABdhPJwXoqSbmvHmhg/EtteVGv0rfE1RDmx00kvLUmrUwmX+eFBzkQTr+WU74TcyMw7apb1YlpZ54g==
+X-Received: by 2002:a17:90a:bc0c:: with SMTP id
+ w12mr4536221pjr.213.1620905345995; 
+ Thu, 13 May 2021 04:29:05 -0700 (PDT)
+Received: from localhost.localdomain ([223.236.157.188])
+ by smtp.gmail.com with ESMTPSA id p9sm6768807pjb.32.2021.05.13.04.29.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 13 May 2021 04:29:05 -0700 (PDT)
+From: Sumit Garg <sumit.garg@linaro.org>
+To: kgdb-bugreport@lists.sourceforge.net
+Date: Thu, 13 May 2021 16:58:40 +0530
+Message-Id: <20210513112842.707103-1-sumit.garg@linaro.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20210511153958.34527-1-andriy.shevchenko@linux.intel.com>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: intel.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [195.135.220.15 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.167.174 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -82,10 +90,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1lh7jh-006YF2-Ml
-Subject: Re: [Kgdb-bugreport] [PATCH v2 1/4] lib/vsprintf: Allow to override
- ISO 8601 date and time separator
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.167.174 listed in wl.mailspike.net]
+X-Headers-End: 1lh9bq-0001NS-GD
+Subject: [Kgdb-bugreport] [PATCH v3 0/2] kdb code refactoring
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -97,39 +105,42 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-From: Petr Mladek via Kgdb-bugreport <kgdb-bugreport@lists.sourceforge.net>
-Reply-To: Petr Mladek <pmladek@suse.com>
-Cc: Daniel Thompson <daniel.thompson@linaro.org>, linux-nilfs@vger.kernel.org,
- Mathias Nyman <mathias.nyman@intel.com>, linux-doc@vger.kernel.org,
- JC Kuo <jckuo@nvidia.com>, kgdb-bugreport@lists.sourceforge.net,
- linux-usb@vger.kernel.org, Rasmus Villemoes <linux@rasmusvillemoes.dk>,
- linux-kernel@vger.kernel.org, Steven Rostedt <rostedt@goodmis.org>,
- Jonathan Hunter <jonathanh@nvidia.com>,
- Jason Wessel <jason.wessel@windriver.com>, linux-tegra@vger.kernel.org,
- Thierry Reding <thierry.reding@gmail.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Joe Perches <joe@perches.com>,
- Jonathan Corbet <corbet@lwn.net>,
- Sergey Senozhatsky <senozhatsky@chromium.org>,
- Ryusuke Konishi <konishi.ryusuke@gmail.com>
+Cc: daniel.thompson@linaro.org, linux-kernel@vger.kernel.org,
+ rostedt@goodmis.org, mingo@redhat.com, jason.wessel@windriver.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Tue 2021-05-11 18:39:55, Andy Shevchenko wrote:
-> ISO 8601 defines 'T' as a separator between date and time. Though,
-> some ABIs use time and date with ' ' (space) separator instead.
-> 
-> Add a flavour to the %pt specifier to override default separator.
-> 
-> Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Some more kdb code refactoring related to:
+- Removal of redundant kdb_register_flags().
+- Simplification of kdb defcmd macro logic.
 
-Reviewed-by: Petr Mladek <pmladek@suse.com>
+Tested with kgdbtest on arm64, doesn't show any regressions.
 
-I am going to queue the entire patchset for 5.14 via the printk tree
-the following week unless anyone complains in the meantime.
+Changes in v3:
+- Split patch into 2 for ease of review.
+- Get rid of kdb_register_flags() completely via switching all user to
+  register pre-allocated kdb commands.
 
-Best Regards,
-Petr
+Changes in v2:
+- Define new structs: kdb_macro_t and kdb_macro_cmd_t instead of
+  modifying existing kdb command struct and struct kdb_subcmd.
+- Reword commit message.
+
+Sumit Garg (2):
+  kdb: Get rid of redundant kdb_register_flags()
+  kdb: Simplify kdb_defcmd macro logic
+
+ include/linux/kdb.h            |  27 ++--
+ kernel/debug/kdb/kdb_main.c    | 271 +++++++++++++--------------------
+ kernel/debug/kdb/kdb_private.h |  13 --
+ kernel/trace/trace_kdb.c       |  12 +-
+ samples/kdb/kdb_hello.c        |  20 ++-
+ 5 files changed, 141 insertions(+), 202 deletions(-)
+
+-- 
+2.25.1
+
 
 
 _______________________________________________
