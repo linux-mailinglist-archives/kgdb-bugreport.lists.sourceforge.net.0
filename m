@@ -2,114 +2,77 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CC2F7397C74
-	for <lists+kgdb-bugreport@lfdr.de>; Wed,  2 Jun 2021 00:34:10 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id A1BAF397D40
+	for <lists+kgdb-bugreport@lfdr.de>; Wed,  2 Jun 2021 01:54:58 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1loCxb-0007Cb-TY
-	for lists+kgdb-bugreport@lfdr.de; Tue, 01 Jun 2021 22:34:07 +0000
+	id 1loEDo-0003ZC-G8
+	for lists+kgdb-bugreport@lfdr.de; Tue, 01 Jun 2021 23:54:56 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <gustavo@embeddedor.com>) id 1loCxa-0007CT-Dh
- for kgdb-bugreport@lists.sourceforge.net; Tue, 01 Jun 2021 22:34:06 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <mhiramat@kernel.org>) id 1loEDn-0003Yy-3W
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 01 Jun 2021 23:54:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Mime-Version
+ :References:In-Reply-To:Message-Id:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=gQRWjLhpoAcL1f0UUsLAbLVdyvmjcaGwSmImCIMpK8g=; b=NAyItlrRsIhBZa5NtQDCENwCPR
- tCTii7Cx5suzUnLjXdXXuY6b+aFbHmHK5uWi9d3kU5IHnbcT474Kx46xDP/I+tysdpc2/gj9s6GTQ
- iKeGYHSagKH6NTVHlKIJTOGQh9Ly5q4Fg/RbMbC7D1XPFMEs7cCgC98JMjSoZPy94+tg=;
+ bh=5KfrA9gzd8lvy3NgQoqC+DWKUpV/vDRaeK0gZ/7i3Ew=; b=ZOrF8jU9LkW0NHnnbgZeon9LqC
+ zVZwXVsCkkJPPN+7Qk9prtstZ3wktPjsRwmDPZn7Lwr9wdeFpTQTA2FN7UFsXSrwZIuhzDl/Gj1rw
+ X318aKh9uH2s9S/gBuM6Bq100xG4TdjTGx9Er5XZ3lpFtLoeTum+Y3JVkJDXYfmRufhU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:Mime-Version:References:
+ In-Reply-To:Message-Id:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=gQRWjLhpoAcL1f0UUsLAbLVdyvmjcaGwSmImCIMpK8g=; b=YZl12IfPjwI4sOYenrF8VOd/bn
- Aqf6nWjo5bQC07UZ72EAYx7g2HxmQWfdPlCbldBPZ6sTzlTdi+qnHSBkHolzgPmqZ1wRwK4dkHwpv
- Tx/zd+qtcYTsvFPbij6QKQec1vx7mhWm37qMjFT2iYjyV9pZDUKgnsXoqQIrAY7plIac=;
-Received: from gateway32.websitewelcome.com ([192.185.145.178])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=5KfrA9gzd8lvy3NgQoqC+DWKUpV/vDRaeK0gZ/7i3Ew=; b=EH9u4e5OYKsW+fjgsNwlp6BzpZ
+ 4sp6Rief4YmAu35i1/yjdjuIor867BoFgUJ7hum6Mv3PaHMXsb5dKRV2FL34Cks2V/K2hnxY3T2iG
+ ysDrWBIYTpKcGXs6j9tKnyj3D1TksObvdEZJXaYh1sQO0CvEjdVdOjJPQhMaUhnBArys=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1loCxR-006OaJ-N6
- for kgdb-bugreport@lists.sourceforge.net; Tue, 01 Jun 2021 22:34:07 +0000
-Received: from cm10.websitewelcome.com (cm10.websitewelcome.com [100.42.49.4])
- by gateway32.websitewelcome.com (Postfix) with ESMTP id EEF141612CD
- for <kgdb-bugreport@lists.sourceforge.net>;
- Tue,  1 Jun 2021 17:12:41 -0500 (CDT)
-Received: from gator4166.hostgator.com ([108.167.133.22]) by cmsmtp with SMTP
- id oCcrlJLkcx8DpoCcrl3Ku2; Tue, 01 Jun 2021 17:12:41 -0500
-X-Authority-Reason: nr=8
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=embeddedor.com; s=default; h=Content-Transfer-Encoding:Content-Type:
- In-Reply-To:MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender
- :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
- List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=gQRWjLhpoAcL1f0UUsLAbLVdyvmjcaGwSmImCIMpK8g=; b=bMNcVIOdSbAXlFOIuKZBAlQgHb
- rizHEbtPx/wzzA8zqcRapvlU8ysBb7UK1JtNxmi9ml0UM3aWv2vx56T2J6VDzc9qm9xnsicW6cPub
- wCWYuhcSS0L4MR/0nu+MH1rJ8KNNWRDQZba/bygsG2AVLOwhqdh0oJFFpMd9o5XRSrSqFMPMEoBHs
- 9Eycf2roWWXoQh436c20ZAonzOD6Dff1+OIQK/bdOQYuXJmaM3D8Dj2tQXEwxBZxBKCJLdeJal2Kx
- DBPDf7EnoxQyV365tcr0fc7lC7Q6+OAvSioS5JvoAErfDv+s5bNk5+LxyYo50rrDXoNxXtDKzCtmI
- JKx47Xbg==;
-Received: from 187-162-31-110.static.axtel.net ([187.162.31.110]:52568
- helo=[192.168.15.8])
- by gator4166.hostgator.com with esmtpsa (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.94.2)
- (envelope-from <gustavo@embeddedor.com>)
- id 1loCco-000BPJ-Fv; Tue, 01 Jun 2021 17:12:38 -0500
-To: Kees Cook <keescook@chromium.org>,
- "Gustavo A. R. Silva" <gustavoars@kernel.org>
-References: <20210528200222.GA39201@embeddedor>
- <202106011220.AA0C1482@keescook>
-From: "Gustavo A. R. Silva" <gustavo@embeddedor.com>
-Message-ID: <0d53a68c-b445-1df6-43a9-eff1a54f8fce@embeddedor.com>
-Date: Tue, 1 Jun 2021 17:13:42 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.1
-MIME-Version: 1.0
-In-Reply-To: <202106011220.AA0C1482@keescook>
-Content-Language: en-US
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - gator4166.hostgator.com
-X-AntiAbuse: Original Domain - lists.sourceforge.net
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - embeddedor.com
-X-BWhitelist: no
-X-Source-IP: 187.162.31.110
-X-Source-L: No
-X-Exim-ID: 1loCco-000BPJ-Fv
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-Source-Sender: 187-162-31-110.static.axtel.net ([192.168.15.8])
- [187.162.31.110]:52568
-X-Source-Auth: gustavo@embeddedor.com
-X-Email-Count: 12
-X-Source-Cap: Z3V6aWRpbmU7Z3V6aWRpbmU7Z2F0b3I0MTY2Lmhvc3RnYXRvci5jb20=
-X-Local-Domain: yes
-X-Spam-Score: -0.7 (/)
+ id 1loEDj-0007x7-0q
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 01 Jun 2021 23:54:55 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 68B9D61167;
+ Tue,  1 Jun 2021 23:54:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1622591679;
+ bh=jiyCehCLO829F6OKGhd/MkEJDDNUeXwesyXS4WzMpFA=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=QLYXdKbA96urLnwb0KA5Pkwu6brrP+fVjZOZ6gXjseEpPy4bQ8nVEwCBW0r01239W
+ 4sTn+s0whEDqQXvyTTG6IhbBrhPA8UxmuUEuVWOSOOy/cvYXk0yjdOL1euKxWx5Ao7
+ /whdp2MpLv+1WfGIVRc9adHT08WbA2XFGQ1gPLUnzly+SH95GwUNRNOKhAcZn0Os3l
+ 4ieZoqbnu6Ct5y7frj9n95ylgMgF6vVyC5yr4U84/PKXeCSd8trScLQZbrO5iraR75
+ IIMcGH/Gag5EAZnBLv7nAykwVMfxYFACbCgWpyQeY3zn92fM7TKen8PEAj5Y0wgPoH
+ smOUfaDRcelSQ==
+Date: Wed, 2 Jun 2021 08:54:31 +0900
+From: Masami Hiramatsu <mhiramat@kernel.org>
+To: Zhen Lei <thunder.leizhen@huawei.com>
+Message-Id: <20210602085431.a4c2f3eb92f020ed50775eda@kernel.org>
+In-Reply-To: <20210529110305.9446-2-thunder.leizhen@huawei.com>
+References: <20210529110305.9446-1-thunder.leizhen@huawei.com>
+ <20210529110305.9446-2-thunder.leizhen@huawei.com>
+X-Mailer: Sylpheed 3.7.0 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+Mime-Version: 1.0
+X-Spam-Score: -1.1 (-)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [192.185.145.178 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.6 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1loCxR-006OaJ-N6
-Subject: Re: [Kgdb-bugreport] [PATCH][next] kgdb: Fix fall-through warning
- for Clang
+ -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1loEDj-0007x7-0q
+Subject: Re: [Kgdb-bugreport] [PATCH v2 1/4] kprobes: Fix spelling mistakes
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -121,62 +84,85 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daniel Thompson <daniel.thompson@linaro.org>,
- kgdb-bugreport@lists.sourceforge.net, linux-kernel@vger.kernel.org,
- linux-hardening@vger.kernel.org, Jason Wessel <jason.wessel@windriver.com>
+Cc: Peter Zijlstra <peterz@infradead.org>,
+ kgdb-bugreport <kgdb-bugreport@lists.sourceforge.net>,
+ Balbir Singh <bsingharora@gmail.com>, Lai Jiangshan <jiangshanlai@gmail.com>,
+ Christoph Hellwig <hch@lst.de>, Marek Szyprowski <m.szyprowski@samsung.com>,
+ Steffen Klassert <steffen.klassert@secunet.com>,
+ Daniel Thompson <daniel.thompson@linaro.org>,
+ Davidlohr Bueso <dave@stgolabs.net>,
+ Anil S Keshavamurthy <anil.s.keshavamurthy@intel.com>,
+ Daniel Jordan <daniel.m.jordan@oracle.com>, Ingo Molnar <mingo@redhat.com>,
+ "Naveen N . Rao" <naveen.n.rao@linux.ibm.com>,
+ Darren Hart <dvhart@infradead.org>,
+ linux-crypto <linux-crypto@vger.kernel.org>,
+ Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+ Jason Wessel <jason.wessel@windriver.com>,
+ John Stultz <john.stultz@linaro.org>, Thomas Gleixner <tglx@linutronix.de>,
+ Barry Song <song.bao.hua@hisilicon.com>, Stephen Boyd <sboyd@kernel.org>,
+ kexec <kexec@lists.infradead.org>, Oleg Nesterov <oleg@redhat.com>,
+ linux-kernel <linux-kernel@vger.kernel.org>,
+ Luis Chamberlain <mcgrof@kernel.org>, Eric Biederman <ebiederm@xmission.com>,
+ Jessica Yu <jeyu@kernel.org>, Tejun Heo <tj@kernel.org>,
+ Robin Murphy <robin.murphy@arm.com>, "David S . Miller" <davem@davemloft.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
+On Sat, 29 May 2021 19:03:02 +0800
+Zhen Lei <thunder.leizhen@huawei.com> wrote:
 
+> Fix some spelling mistakes in comments:
+> decrese ==> decrease
+> immmediately ==> immediately
 
-On 6/1/21 14:20, Kees Cook wrote:
-> On Fri, May 28, 2021 at 03:02:22PM -0500, Gustavo A. R. Silva wrote:
->> In preparation to enable -Wimplicit-fallthrough for Clang, fix a
->> fall-through warning by explicitly adding a goto statement instead
->> of letting the code fall through to the next case.
->>
->> Link: https://github.com/KSPP/linux/issues/115
->> Signed-off-by: Gustavo A. R. Silva <gustavoars@kernel.org>
->> ---
->> JFYI: We had thousands of these sorts of warnings and now we are down
->>       to just 25 in linux-next. This is one of those last remaining
->>       warnings.
-> 
-> So close! :)
+This looks good to me.
 
-Almost there!
+Acked-by: Masami Hiramatsu <mhiramat@kernel.org>
 
-> Reviewed-by: Kees Cook <keescook@chromium.org>
-
-Thanks
-
---
-Gustavo
+Thanks!
 
 > 
-> -Kees
+> Signed-off-by: Zhen Lei <thunder.leizhen@huawei.com>
+> ---
+>  include/linux/freelist.h | 2 +-
+>  kernel/kprobes.c         | 2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
 > 
->>
->>  kernel/debug/debug_core.c | 1 +
->>  1 file changed, 1 insertion(+)
->>
->> diff --git a/kernel/debug/debug_core.c b/kernel/debug/debug_core.c
->> index 4708aec492df..431749dd9ab6 100644
->> --- a/kernel/debug/debug_core.c
->> +++ b/kernel/debug/debug_core.c
->> @@ -1038,6 +1038,7 @@ dbg_notify_reboot(struct notifier_block *this, unsigned long code, void *x)
->>  	switch (kgdbreboot) {
->>  	case 1:
->>  		kgdb_breakpoint();
->> +		goto done;
->>  	case -1:
->>  		goto done;
->>  	}
->> -- 
->> 2.27.0
->>
+> diff --git a/include/linux/freelist.h b/include/linux/freelist.h
+> index fc1842b96469..1811c1f3f8cb 100644
+> --- a/include/linux/freelist.h
+> +++ b/include/linux/freelist.h
+> @@ -39,7 +39,7 @@ static inline void __freelist_add(struct freelist_node *node, struct freelist_he
+>  	 * and a refcount increment of a node in try_get, then back up to
+>  	 * something non-zero, then the refcount increment is done by the other
+>  	 * thread) -- so if the CAS to add the node to the actual list fails,
+> -	 * decrese the refcount and leave the add operation to the next thread
+> +	 * decrease the refcount and leave the add operation to the next thread
+>  	 * who puts the refcount back to zero (which could be us, hence the
+>  	 * loop).
+>  	 */
+> diff --git a/kernel/kprobes.c b/kernel/kprobes.c
+> index 8c0a6fdef771..d4156082d5a5 100644
+> --- a/kernel/kprobes.c
+> +++ b/kernel/kprobes.c
+> @@ -641,7 +641,7 @@ void wait_for_kprobe_optimizer(void)
+>  	while (!list_empty(&optimizing_list) || !list_empty(&unoptimizing_list)) {
+>  		mutex_unlock(&kprobe_mutex);
+>  
+> -		/* this will also make optimizing_work execute immmediately */
+> +		/* this will also make optimizing_work execute immediately */
+>  		flush_delayed_work(&optimizing_work);
+>  		/* @optimizing_work might not have been queued yet, relax */
+>  		cpu_relax();
+> -- 
+> 2.25.1
 > 
+> 
+
+
+-- 
+Masami Hiramatsu <mhiramat@kernel.org>
 
 
 _______________________________________________
