@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C34C3398DFF
-	for <lists+kgdb-bugreport@lfdr.de>; Wed,  2 Jun 2021 17:10:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 49FCA399054
+	for <lists+kgdb-bugreport@lfdr.de>; Wed,  2 Jun 2021 18:47:47 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1loSVz-00059v-Jb
-	for lists+kgdb-bugreport@lfdr.de; Wed, 02 Jun 2021 15:10:39 +0000
+	id 1loU1x-0006C6-31
+	for lists+kgdb-bugreport@lfdr.de; Wed, 02 Jun 2021 16:47:45 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <will@kernel.org>) id 1loSVz-00059l-4q
- for kgdb-bugreport@lists.sourceforge.net; Wed, 02 Jun 2021 15:10:39 +0000
+ (envelope-from <peterz@infradead.org>) id 1loU1v-0006Bm-Hu
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 02 Jun 2021 16:47:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=lMoZMjkQxKDhX7c/vTuAXnZ7wKa26+4IsvXaiscLjJs=; b=PKH/rkrRGojMIiM8R4oeStUiLm
- iRL9K8eX6cjrKQluuKTfdT8VRLh/dotnAF0swVSDwChhbg4rpQn9Qcypm2FL5jUiYHoTmWo9Glk1x
- pmmirBVZyq1JFPMlNRocQKJekeHYbN8izWSqflrMQOZkt3nAVLm6oOm5g7YUXBzTyEfE=;
+ bh=7tohifuv5JYW3E7Hk1sVQuIjPI/C8MKSY3MQl5vvB4s=; b=JqQZDt/BWYPoTDazTebSanjQVH
+ /3fX5wjvqWeNsGqdmjRzH33vdHSRN/oYiZwn8iCeOA9W3hi1UZzlc2lHC6fSZ+Kyg6w4/pZE/t99I
+ SdIkl8QieyF6oBctiT1nMuPyFr6wqi1U0hop2pkz+F8Mi5jNsh8FDOwrUe73821tSPtc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -30,53 +30,65 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=lMoZMjkQxKDhX7c/vTuAXnZ7wKa26+4IsvXaiscLjJs=; b=LP/93sB7mGCClqmNfK3EpwLLar
- Xjh93ImLTKQNXqRRCB4VbYRra4zvj/z6Z4zu53WOuKbNzuksXgtyfejChb7vhWg1xyPNjnis+mhEI
- 4Bpckoblr681nBYS6uiOhLOtS2F0+c8LZ0pB2fcqdo8pPnmf2NzeTEBXWTNOQJYS8uwM=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=7tohifuv5JYW3E7Hk1sVQuIjPI/C8MKSY3MQl5vvB4s=; b=hyYb4EflwMV75Mgf8eprEW9ufX
+ EO7IbWUxQXyiotp9z0HW8qPwkFwLpTvCDCOOkAFFIvoeugoCAvL0y22WPtQtFS7PdJsEZFLq0Q6t0
+ 62aN8VoYL1MJP/kC/sRPaDR75ymoPyz42i2+w5ukTbz/yL75/bzF+kKT3SHkRts8FNmw=;
+Received: from casper.infradead.org ([90.155.50.34])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1loSVu-007Oec-0B
- for kgdb-bugreport@lists.sourceforge.net; Wed, 02 Jun 2021 15:10:40 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 73C1A61182;
- Wed,  2 Jun 2021 15:10:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1622646628;
- bh=MmmB5edNPbRN/+c+2On4lV0BgwteW7Cw405ip5Z8YuI=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=eoW8oxXoywj95HF19beDzh3Wa+WhWkiyj9FjvvSEw7ScJ8OuGQbEy6+2TGjP0xVYN
- XSSJAJXvhI5MOj1+GRdHIbg46k9rJSpJMlo/HDJefXpEwJPCDFcYn8COIR/VQO5DZl
- 47yzM30C6QaWLqEpy6LeVNCLBHEk+aKjfkrC6CQ5ViDR3bMQ0fCKMIt+zFjJNZMY+v
- SNl2CwOo9QKvwQF6AUEFLQH9ccSyIziiULTl3YApDUWutkiYOLv0+Q04TM9wwWdkfx
- bdsysjlbcoFBsmj9C1l84fr+oHwMhBsnHonyI6jC2MFd17CoX0BlIS16/UkYyFRS6U
- MochfZ+/mAepQ==
-Date: Wed, 2 Jun 2021 16:10:11 +0100
-From: Will Deacon <will@kernel.org>
-To: Peter Zijlstra <peterz@infradead.org>
-Message-ID: <20210602151010.GE31179@willie-the-truck>
+ id 1loU1q-0000ud-Kw
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 02 Jun 2021 16:47:43 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=7tohifuv5JYW3E7Hk1sVQuIjPI/C8MKSY3MQl5vvB4s=; b=kdu4BwlchYINw3C+EcBocsHDUy
+ a91P+WO2n/ztNAZpC4i1gw7tqOKUFzwWu58suQdLAjM2YXFikv/5/oaqPmf99JVYKCNj2WJKpDQ0i
+ S0c8GI0OlAIisTgxakan8G10HFtH5HuNw7Hqdqi3RHiYYq3zdmBzXy5lsDnRzF3TJVEtdO68TnpgS
+ 8K25eJH4v8dAAo7rswaiwcEE8nXrQyqHEIrzfWlp7ORDwYUd2bEDZxmNSuwBFuW4xEFDNeWs3Yg6U
+ o+Kb0+cIMahvxPwVt/nlQwL5AtLXT/J6J+qePZba4xfUkA84xt+DhB39swRCy3609n/Mv+E85Mgmt
+ FcuTDgEw==;
+Received: from j217100.upc-j.chello.nl ([24.132.217.100]
+ helo=noisy.programming.kicks-ass.net)
+ by casper.infradead.org with esmtpsa (Exim 4.94 #2 (Red Hat Linux))
+ id 1loU0Z-00BKKZ-9j; Wed, 02 Jun 2021 16:46:22 +0000
+Received: from hirez.programming.kicks-ass.net
+ (hirez.programming.kicks-ass.net [192.168.1.225])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (Client did not present a certificate)
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id A2E72300091;
+ Wed,  2 Jun 2021 18:46:16 +0200 (CEST)
+Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
+ id 8A73D2016D6DD; Wed,  2 Jun 2021 18:46:16 +0200 (CEST)
+Date: Wed, 2 Jun 2021 18:46:16 +0200
+From: Peter Zijlstra <peterz@infradead.org>
+To: Will Deacon <will@kernel.org>
+Message-ID: <YLe12Ba4CrvhMhFI@hirez.programming.kicks-ass.net>
 References: <20210602131225.336600299@infradead.org>
- <20210602133040.587042016@infradead.org>
+ <20210602133040.334970485@infradead.org>
+ <20210602145921.GB31179@willie-the-truck>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210602133040.587042016@infradead.org>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Spam-Score: -0.5 (/)
+In-Reply-To: <20210602145921.GB31179@willie-the-truck>
+X-Spam-Score: 3.5 (+++)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: infradead.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 3.6 RCVD_IN_SBL_CSS        RBL: Received via a relay in Spamhaus SBL-CSS
+ [24.132.217.100 listed in zen.spamhaus.org]
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1loSVu-007Oec-0B
-Subject: Re: [Kgdb-bugreport] [PATCH 6/6] sched: Change task_struct::state
+X-Headers-End: 1loU1q-0000ud-Kw
+Subject: Re: [Kgdb-bugreport] [PATCH 2/6] sched: Introduce task_is_running()
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -124,48 +136,44 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Wed, Jun 02, 2021 at 03:12:31PM +0200, Peter Zijlstra wrote:
-> Change the type and name of task_struct::state. Drop the volatile and
-> shrink it to an 'unsigned int'. Rename it in order to find all uses
-> such that we can use READ_ONCE/WRITE_ONCE as appropriate.
+On Wed, Jun 02, 2021 at 03:59:21PM +0100, Will Deacon wrote:
+> On Wed, Jun 02, 2021 at 03:12:27PM +0200, Peter Zijlstra wrote:
+> > Replace a bunch of 'p->state == TASK_RUNNING' with a new helper:
+> > task_is_running(p).
+> > 
+> > Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
+> > ---
+> >  arch/x86/kernel/process.c |    4 ++--
+> >  block/blk-mq.c            |    2 +-
+> >  include/linux/sched.h     |    2 ++
+> >  kernel/locking/lockdep.c  |    2 +-
+> >  kernel/rcu/tree_plugin.h  |    2 +-
+> >  kernel/sched/core.c       |    6 +++---
+> >  kernel/sched/stats.h      |    2 +-
+> >  kernel/signal.c           |    2 +-
+> >  kernel/softirq.c          |    3 +--
+> >  mm/compaction.c           |    2 +-
+> >  10 files changed, 14 insertions(+), 13 deletions(-)
+> > 
+> > --- a/arch/x86/kernel/process.c
+> > +++ b/arch/x86/kernel/process.c
+> > @@ -931,7 +931,7 @@ unsigned long get_wchan(struct task_stru
+> >  	unsigned long start, bottom, top, sp, fp, ip, ret = 0;
+> >  	int count = 0;
+> >  
+> > -	if (p == current || p->state == TASK_RUNNING)
+> > +	if (p == current || task_is_running(p))
 > 
-> Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
-> ---
->  block/blk-mq.c                 |    2 -
->  drivers/md/dm.c                |    6 ++--
->  fs/binfmt_elf.c                |    8 +++---
->  fs/userfaultfd.c               |    4 +--
->  include/linux/sched.h          |   31 +++++++++++------------
->  include/linux/sched/debug.h    |    2 -
->  include/linux/sched/signal.h   |    2 -
->  init/init_task.c               |    2 -
->  kernel/cgroup/cgroup-v1.c      |    2 -
->  kernel/debug/kdb/kdb_support.c |   18 +++++++------
->  kernel/fork.c                  |    4 +--
->  kernel/hung_task.c             |    2 -
->  kernel/kthread.c               |    4 +--
->  kernel/locking/mutex.c         |    6 ++--
->  kernel/locking/rtmutex.c       |    4 +--
->  kernel/locking/rwsem.c         |    2 -
->  kernel/ptrace.c                |   12 ++++-----
->  kernel/rcu/rcutorture.c        |    4 +--
->  kernel/rcu/tree_stall.h        |   12 ++++-----
->  kernel/sched/core.c            |   53 +++++++++++++++++++++--------------------
->  kernel/sched/deadline.c        |   10 +++----
->  kernel/sched/fair.c            |   11 +++++---
->  lib/syscall.c                  |    4 +--
->  net/core/dev.c                 |    2 -
->  24 files changed, 108 insertions(+), 99 deletions(-)
+> Looks like this one in get_wchan() has been cargo-culted across most of
+> arch/ so they'll need fixing up before you rename the struct member.
 
-I think this makes the code a _lot_ easier to understand, so:
+Yeah, this was x86_64 allmodconfig driven, I've already got a bunch of
+robot mail telling me other archs need help, I'll fix it iup.
 
-Acked-by: Will Deacon <will@kernel.org>
+> There's also a weird one in tools/bpf/runqslower/runqslower.bpf.c (!)
 
-on the assumption that you'll fix get_wchan() for !x86 as well.
-
-Cheers,
-
-Will
+I'm tempted to let the bpf people sort their own gunk. This is not an
+ABI. I so don't care breaking every script out there.
 
 
 _______________________________________________
