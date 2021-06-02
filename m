@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 43BDB39941E
-	for <lists+kgdb-bugreport@lfdr.de>; Wed,  2 Jun 2021 22:00:20 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id C08FD39943A
+	for <lists+kgdb-bugreport@lfdr.de>; Wed,  2 Jun 2021 22:05:08 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1loX2I-0001Nr-3Z
-	for lists+kgdb-bugreport@lfdr.de; Wed, 02 Jun 2021 20:00:18 +0000
+	id 1loX6w-0002ND-98
+	for lists+kgdb-bugreport@lfdr.de; Wed, 02 Jun 2021 20:05:06 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <dave@stgolabs.net>) id 1loX2F-0001NZ-Ra
- for kgdb-bugreport@lists.sourceforge.net; Wed, 02 Jun 2021 20:00:15 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <dave@stgolabs.net>) id 1loX6u-0002N6-Ci
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 02 Jun 2021 20:05:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=s6bELta0yb8x4uXBHqmrBVKAV+H4yhL1NMosxHdrxlQ=; b=kge614tz9KXIyv8yRN+xvoEW0r
- hF0YFBxHNsLzSC0q3FUgEUFQjfKJC9a07H432341MlEstnKbdgOULD/KreU/wkx9Cb0ognaAgAB/+
- 5pqk2j7x7IugHwqNn79OhsGb66Ji1jyvgfmulmmqCWtZqojZvIsivnEkMzE/4vkQukRQ=;
+ bh=eqsuj4I2wt2cF8yosU4+Wtks6QgJ/pixtaVHlAugpcI=; b=hsNWN9nIJ5h2HWeDhH525ItMAw
+ 3jI+qL7kT7FFSJSozOMFVuk+pLXY5jPEF0sWHbRx5sPNhfOIMQivP0MRfRMQkX9CuR7aEll53Oj4v
+ +qyOPU73am3ZIx0IUrLCf3Pok5X9A7q8eEKwUYqoMHrKf3gJVYXYjlbxc7kQvoWB0YZo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -30,29 +30,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=s6bELta0yb8x4uXBHqmrBVKAV+H4yhL1NMosxHdrxlQ=; b=mbCvXjz8nbf026rdHgjTCxPyUG
- NG8vOWF2b+EolqTgD7RsarFed/BCH+KEmA+6RjrfOKb9CD/qHajllGlfshljSWJmtboN5MwAvE/00
- fOqo05SHK1ZZ8Ke2CHeWMFs5cko77Yj/BXRR8y59HzarAoELoeTGkpZCoNfcTJo6G884=;
+ bh=eqsuj4I2wt2cF8yosU4+Wtks6QgJ/pixtaVHlAugpcI=; b=h2Scsv95ar5HOGrQgEI3yBP/yd
+ e8KK3YiXkxgDj2lW0Gk4I6pSmBDDkUEKqCH1WcFiiD4pqqFICWZHYZRb2c4gwOStXNkDlQYXDHXN9
+ nUBE5FovCIoSPzVRMkQtoPqZrGtW9jUKUfPTmBPIqC2RNCrKTuLugNUJIXYVwc5qDMLI=;
 Received: from smtp-out1.suse.de ([195.135.220.28])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
- id 1loX1z-007pMH-8t
- for kgdb-bugreport@lists.sourceforge.net; Wed, 02 Jun 2021 20:00:16 +0000
+ id 1loX6p-007pjq-Cp
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 02 Jun 2021 20:05:05 +0000
 Received: from imap.suse.de (imap-alt.suse-dmz.suse.de [192.168.254.47])
  (using TLSv1.2 with cipher ECDHE-ECDSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 01DE3219C1;
- Wed,  2 Jun 2021 19:44:17 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id F276A219C3;
+ Wed,  2 Jun 2021 19:55:15 +0000 (UTC)
 Received: from imap3-int (imap-alt.suse-dmz.suse.de [192.168.254.47])
- by imap.suse.de (Postfix) with ESMTP id E98D2118DD;
- Wed,  2 Jun 2021 19:44:04 +0000 (UTC)
+ by imap.suse.de (Postfix) with ESMTP id CF189118DD;
+ Wed,  2 Jun 2021 19:55:03 +0000 (UTC)
 Received: from director2.suse.de ([192.168.254.72]) by imap3-int with ESMTPSA
- id 2jzcLITft2B5CwAALh3uQQ
- (envelope-from <dave@stgolabs.net>); Wed, 02 Jun 2021 19:44:04 +0000
-Date: Wed, 2 Jun 2021 12:43:59 -0700
+ id 3FtyJhfit2AuEAAALh3uQQ
+ (envelope-from <dave@stgolabs.net>); Wed, 02 Jun 2021 19:55:03 +0000
+Date: Wed, 2 Jun 2021 12:54:58 -0700
 From: Davidlohr Bueso <dave@stgolabs.net>
 To: Peter Zijlstra <peterz@infradead.org>
-Message-ID: <20210602194359.pxujd4rx4lxv2ldm@offworld>
+Message-ID: <20210602195458.uj3rsci4suz4mufj@offworld>
 Mail-Followup-To: Peter Zijlstra <peterz@infradead.org>,
  Thomas Gleixner <tglx@linutronix.de>,
  Ingo Molnar <mingo@redhat.com>, Juri Lelli <juri.lelli@redhat.com>,
@@ -96,10 +96,10 @@ Mail-Followup-To: Peter Zijlstra <peterz@infradead.org>,
  linux-perf-users@vger.kernel.org, linux-pm@vger.kernel.org,
  rcu@vger.kernel.org, linux-mm@kvack.org, kvm@vger.kernel.org
 References: <20210602131225.336600299@infradead.org>
- <20210602133040.271625424@infradead.org>
+ <20210602133040.524487671@infradead.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210602133040.271625424@infradead.org>
+In-Reply-To: <20210602133040.524487671@infradead.org>
 User-Agent: NeoMutt/20201120
 X-Spam-Score: 1.0 (+)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -107,11 +107,12 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: suse.de]
+ for more information. [URIs: infradead.org]
  1.0 SPF_SOFTFAIL           SPF: sender does not match SPF record (softfail)
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1loX1z-007pMH-8t
-Subject: Re: [Kgdb-bugreport] [PATCH 1/6] sched: Unbreak wakeups
+X-Headers-End: 1loX6p-007pjq-Cp
+Subject: Re: [Kgdb-bugreport] [PATCH 5/6] sched,
+ timer: Use __set_current_state()
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -160,25 +161,10 @@ Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
 On Wed, 02 Jun 2021, Peter Zijlstra wrote:
 
->Remove broken task->state references and let wake_up_process() DTRT.
->
->The anti-pattern in these patches breaks the ordering of ->state vs
->COND as described in the comment near set_current_state() and can lead
->to missed wakeups:
->
->	(OoO load, observes RUNNING)<-.
->	for (;;) {                    |
->	  t->state = UNINTERRUPTIBLE; |
->	  smp_mb();          ,-----> ,' (OoO load, observed !COND)
->                             |       |
->	                     |       |	COND = 1;
->			     |	     `- if (t->state != RUNNING)
->                             |		  wake_up_process(t); // not done
->	  if (COND) ---------'
->	    break;
->	  schedule(); // forever waiting
->	}
->	t->state = TASK_RUNNING;
+-ENOCHANGELONG
+
+But yeah, I thought we had gotten rid of all these.
+
 >
 >Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
 
