@@ -2,68 +2,68 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D311E398D43
-	for <lists+kgdb-bugreport@lfdr.de>; Wed,  2 Jun 2021 16:38:45 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id 815F4398D3F
+	for <lists+kgdb-bugreport@lfdr.de>; Wed,  2 Jun 2021 16:38:19 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1loS15-0007Lo-BQ
-	for lists+kgdb-bugreport@lfdr.de; Wed, 02 Jun 2021 14:38:43 +0000
+	id 1loS0d-0000H8-EB
+	for lists+kgdb-bugreport@lfdr.de; Wed, 02 Jun 2021 14:38:15 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <peterz@infradead.org>) id 1loS13-0007Lh-QR
- for kgdb-bugreport@lists.sourceforge.net; Wed, 02 Jun 2021 14:38:41 +0000
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <peterz@infradead.org>) id 1loS0b-0000H0-PR
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 02 Jun 2021 14:38:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:MIME-Version:References:Subject:Cc:To:
  From:Date:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=xAgXF5452HulRjyD+JrT6Ce1EM30lHGgXf0FUiEeuf8=; b=QoYdyxsYHmG9o2Tg+knp12rBnl
- c1/1hmmENXMIA5gdMnyEyY0QU8SXUO1OjfJ4Z/PgN20RghbzvBQJmx9mr5kwhIhuJgVlWjG/yQssA
- eiXsXmXvdiTlJburpp8tScofC2h/09HjhS7mmHOvB9eqZlCjhURpq9EB58Q6Rty6lM2w=;
+ bh=StHUrZVTyidITaso9MHtdeY9nPrW5Ogz3wqQtaiZ0ws=; b=JbyR+hnZ70+SZSAJktrBd+rdej
+ I2pz9ZWkWVi4dqis0QDdT4PEW080oNIIKzMOIM3aBhFsjjgiw5JDTRoUB6ZppVDLw1Ofg/HxcEwS1
+ Oo+SrrNx1dd1wIHNbcUQ8Kxx5bolTClErn9imJ/5fMm2Mkl/krZEpVkClDbLCl6w0ERc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:MIME-Version:References:Subject:Cc:To:From:Date:Message-ID:
  Sender:Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:
  Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
  In-Reply-To:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=xAgXF5452HulRjyD+JrT6Ce1EM30lHGgXf0FUiEeuf8=; b=b
- TP5LQQtXBN3OcZAJNCBQnTpEu9nHUCK/6wHN5Bspcm64jjC44wjpcjSV1socvHG6URc/HgwhV64gI
- +S41edDZ/NX1dt66ylWXXes9YwohD4Z9lC+fxz2nXC1q4izuHiV2/KkDeXGyQg0NPfAlwY5gBU8Ui
- Gf9YFXIyLWIvBU+I=;
+ List-Owner:List-Archive; bh=StHUrZVTyidITaso9MHtdeY9nPrW5Ogz3wqQtaiZ0ws=; b=X
+ P7eOW66j5AllyPLqnHYYETI70D3DpyDAE6sVSO7r0W9HBoI/muL1IHPef7QwkcwXMaA4cz+/f+G4P
+ dcOVnHeA//6wsN4jpi91jC3R78o03nO8qK7B7DcAQ5XOPTC16zy8jx1OmR1q2isnN4xiDRIUJkyyo
+ R2ZIukfbReDROPLk=;
 Received: from desiato.infradead.org ([90.155.92.199])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1loS0w-007LXq-Vw
- for kgdb-bugreport@lists.sourceforge.net; Wed, 02 Jun 2021 14:38:42 +0000
+ id 1loS0T-007LUp-0A
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 02 Jun 2021 14:38:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=desiato.20200630; h=Content-Type:MIME-Version:References:
  Subject:Cc:To:From:Date:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:In-Reply-To;
- bh=xAgXF5452HulRjyD+JrT6Ce1EM30lHGgXf0FUiEeuf8=; b=VvpK7YiNmJCX41zrA8okNEybDp
- eQ6B/no5m3jpzjv3vtsCvj/I+JC23a6uedcV8jgSiowQRskTunxDthNkfNGhTAFIlNg7Mp34lDO1v
- cJi7jUAN8r25x997QWW1iZ1s0mJEO/4TCJLBsUD/Lwvj8V5xmtHLkWqJ3/i+cAuwKhHWJJh3gK3Ih
- vP6xpGukyGIL5aEjAbdHmS9jRaDI483T3jnwPxONjWNDG4udVku6TL780C9Ec0NINGrPz5nI2nlsi
- VM1b+8ilWKuCZZyiB9PWMQ/LkZFJTj3o+rZcyBY6BUTJfo/Lky1rn8D/U1takW/WZq9JTYU9U5iTx
- ooUsJycA==;
+ bh=StHUrZVTyidITaso9MHtdeY9nPrW5Ogz3wqQtaiZ0ws=; b=P6N4rxYRYVyJKXyPv/qWD9zHEM
+ ae7/GsDR0G4z0W3zvLFylIHdZxOruBRKoQnWY8N7W1rLQbprQYlZS9dUYXxQLhu4AjsLFXcwYBtlb
+ eD49gln0vrb9EAWt9nv02V8yo6iI8t6lfBp4ez+3qPHUG9tGWQq/Ui8PnSuXrhM6rnBI0cO7Swj1I
+ 3oXGm9LyYJOi4Ch+3FlALr0ysdqMd8mylXs107QW8UAnjvRfZ51B4Hs3PtzRgkCxUTtPW/2AMfCG/
+ ndwfk+vKAcWWm7HgBB7G3jkOSIw+UMNaGluyVVk4MLNMCyWDacIRZvLv7nz2KpnM+noLcBRHUzGbP
+ FF2fzzTQ==;
 Received: from j217100.upc-j.chello.nl ([24.132.217.100]
  helo=noisy.programming.kicks-ass.net)
  by desiato.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1loQxb-002toj-A6; Wed, 02 Jun 2021 13:31:10 +0000
+ id 1loQxc-002tou-3G; Wed, 02 Jun 2021 13:31:11 +0000
 Received: from hirez.programming.kicks-ass.net
  (hirez.programming.kicks-ass.net [192.168.1.225])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id B458030029C;
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id BB4B13002B1;
  Wed,  2 Jun 2021 15:31:04 +0200 (CEST)
 Received: by hirez.programming.kicks-ass.net (Postfix, from userid 0)
- id 950C12016D6C5; Wed,  2 Jun 2021 15:31:04 +0200 (CEST)
-Message-ID: <20210602133040.271625424@infradead.org>
+ id 989162C14C594; Wed,  2 Jun 2021 15:31:04 +0200 (CEST)
+Message-ID: <20210602133040.334970485@infradead.org>
 User-Agent: quilt/0.66
-Date: Wed, 02 Jun 2021 15:12:26 +0200
+Date: Wed, 02 Jun 2021 15:12:27 +0200
 From: Peter Zijlstra <peterz@infradead.org>
 To: Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
  Peter Zijlstra <peterz@infradead.org>, Juri Lelli <juri.lelli@redhat.com>,
@@ -90,8 +90,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1loS0w-007LXq-Vw
-Subject: [Kgdb-bugreport] [PATCH 1/6] sched: Unbreak wakeups
+X-Headers-End: 1loS0T-007LUp-0A
+Subject: [Kgdb-bugreport] [PATCH 2/6] sched: Introduce task_is_running()
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -133,131 +133,161 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Remove broken task->state references and let wake_up_process() DTRT.
-
-The anti-pattern in these patches breaks the ordering of ->state vs
-COND as described in the comment near set_current_state() and can lead
-to missed wakeups:
-
-	(OoO load, observes RUNNING)<-.
-	for (;;) {                    |
-	  t->state = UNINTERRUPTIBLE; |
-	  smp_mb();          ,-----> ,' (OoO load, observed !COND)
-                             |       |
-	                     |       |	COND = 1;
-			     |	     `- if (t->state != RUNNING)
-                             |		  wake_up_process(t); // not done
-	  if (COND) ---------'
-	    break;
-	  schedule(); // forever waiting
-	}
-	t->state = TASK_RUNNING;
+Replace a bunch of 'p->state == TASK_RUNNING' with a new helper:
+task_is_running(p).
 
 Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
 ---
- drivers/net/ethernet/qualcomm/qca_spi.c |    6 ++----
- drivers/usb/gadget/udc/max3420_udc.c    |   15 +++++----------
- drivers/usb/host/max3421-hcd.c          |    3 +--
- kernel/softirq.c                        |    2 +-
- 4 files changed, 9 insertions(+), 17 deletions(-)
+ arch/x86/kernel/process.c |    4 ++--
+ block/blk-mq.c            |    2 +-
+ include/linux/sched.h     |    2 ++
+ kernel/locking/lockdep.c  |    2 +-
+ kernel/rcu/tree_plugin.h  |    2 +-
+ kernel/sched/core.c       |    6 +++---
+ kernel/sched/stats.h      |    2 +-
+ kernel/signal.c           |    2 +-
+ kernel/softirq.c          |    3 +--
+ mm/compaction.c           |    2 +-
+ 10 files changed, 14 insertions(+), 13 deletions(-)
 
---- a/drivers/net/ethernet/qualcomm/qca_spi.c
-+++ b/drivers/net/ethernet/qualcomm/qca_spi.c
-@@ -653,8 +653,7 @@ qcaspi_intr_handler(int irq, void *data)
- 	struct qcaspi *qca = data;
+--- a/arch/x86/kernel/process.c
++++ b/arch/x86/kernel/process.c
+@@ -931,7 +931,7 @@ unsigned long get_wchan(struct task_stru
+ 	unsigned long start, bottom, top, sp, fp, ip, ret = 0;
+ 	int count = 0;
  
- 	qca->intr_req++;
--	if (qca->spi_thread &&
--	    qca->spi_thread->state != TASK_RUNNING)
-+	if (qca->spi_thread)
- 		wake_up_process(qca->spi_thread);
+-	if (p == current || p->state == TASK_RUNNING)
++	if (p == current || task_is_running(p))
+ 		return 0;
  
- 	return IRQ_HANDLED;
-@@ -777,8 +776,7 @@ qcaspi_netdev_xmit(struct sk_buff *skb,
+ 	if (!try_get_task_stack(p))
+@@ -975,7 +975,7 @@ unsigned long get_wchan(struct task_stru
+ 			goto out;
+ 		}
+ 		fp = READ_ONCE_NOCHECK(*(unsigned long *)fp);
+-	} while (count++ < 16 && p->state != TASK_RUNNING);
++	} while (count++ < 16 && !task_is_running(p));
  
- 	netif_trans_update(dev);
+ out:
+ 	put_task_stack(p);
+--- a/block/blk-mq.c
++++ b/block/blk-mq.c
+@@ -3926,7 +3926,7 @@ int blk_poll(struct request_queue *q, bl
+ 		if (signal_pending_state(state, current))
+ 			__set_current_state(TASK_RUNNING);
  
--	if (qca->spi_thread &&
--	    qca->spi_thread->state != TASK_RUNNING)
-+	if (qca->spi_thread)
- 		wake_up_process(qca->spi_thread);
+-		if (current->state == TASK_RUNNING)
++		if (task_is_running(current))
+ 			return 1;
+ 		if (ret < 0 || !spin)
+ 			break;
+--- a/include/linux/sched.h
++++ b/include/linux/sched.h
+@@ -113,6 +113,8 @@ struct task_group;
+ 					 __TASK_TRACED | EXIT_DEAD | EXIT_ZOMBIE | \
+ 					 TASK_PARKED)
  
- 	return NETDEV_TX_OK;
---- a/drivers/usb/gadget/udc/max3420_udc.c
-+++ b/drivers/usb/gadget/udc/max3420_udc.c
-@@ -509,8 +509,7 @@ static irqreturn_t max3420_vbus_handler(
- 			     ? USB_STATE_POWERED : USB_STATE_NOTATTACHED);
- 	spin_unlock_irqrestore(&udc->lock, flags);
++#define task_is_running(task)		(READ_ONCE((task)->state) == TASK_RUNNING)
++
+ #define task_is_traced(task)		((task->state & __TASK_TRACED) != 0)
  
--	if (udc->thread_task &&
--	    udc->thread_task->state != TASK_RUNNING)
-+	if (udc->thread_task)
- 		wake_up_process(udc->thread_task);
- 
- 	return IRQ_HANDLED;
-@@ -529,8 +528,7 @@ static irqreturn_t max3420_irq_handler(i
- 	}
- 	spin_unlock_irqrestore(&udc->lock, flags);
- 
--	if (udc->thread_task &&
--	    udc->thread_task->state != TASK_RUNNING)
-+	if (udc->thread_task)
- 		wake_up_process(udc->thread_task);
- 
- 	return IRQ_HANDLED;
-@@ -1093,8 +1091,7 @@ static int max3420_wakeup(struct usb_gad
- 
- 	spin_unlock_irqrestore(&udc->lock, flags);
- 
--	if (udc->thread_task &&
--	    udc->thread_task->state != TASK_RUNNING)
-+	if (udc->thread_task)
- 		wake_up_process(udc->thread_task);
- 	return ret;
+ #define task_is_stopped(task)		((task->state & __TASK_STOPPED) != 0)
+--- a/kernel/locking/lockdep.c
++++ b/kernel/locking/lockdep.c
+@@ -760,7 +760,7 @@ static void lockdep_print_held_locks(str
+ 	 * It's not reliable to print a task's held locks if it's not sleeping
+ 	 * and it's not the current task.
+ 	 */
+-	if (p->state == TASK_RUNNING && p != current)
++	if (p != current && task_is_running(p))
+ 		return;
+ 	for (i = 0; i < depth; i++) {
+ 		printk(" #%d: ", i);
+--- a/kernel/rcu/tree_plugin.h
++++ b/kernel/rcu/tree_plugin.h
+@@ -2768,7 +2768,7 @@ EXPORT_SYMBOL_GPL(rcu_bind_current_to_no
+ #ifdef CONFIG_SMP
+ static char *show_rcu_should_be_on_cpu(struct task_struct *tsp)
+ {
+-	return tsp && tsp->state == TASK_RUNNING && !tsp->on_cpu ? "!" : "";
++	return tsp && task_is_running(tsp) && !tsp->on_cpu ? "!" : "";
  }
-@@ -1117,8 +1114,7 @@ static int max3420_udc_start(struct usb_
- 	udc->todo |= UDC_START;
- 	spin_unlock_irqrestore(&udc->lock, flags);
+ #else // #ifdef CONFIG_SMP
+ static char *show_rcu_should_be_on_cpu(struct task_struct *tsp)
+--- a/kernel/sched/core.c
++++ b/kernel/sched/core.c
+@@ -5989,7 +5989,7 @@ static inline void sched_submit_work(str
+ {
+ 	unsigned int task_flags;
  
--	if (udc->thread_task &&
--	    udc->thread_task->state != TASK_RUNNING)
-+	if (udc->thread_task)
- 		wake_up_process(udc->thread_task);
+-	if (!tsk->state)
++	if (task_is_running(tsk))
+ 		return;
  
- 	return 0;
-@@ -1137,8 +1133,7 @@ static int max3420_udc_stop(struct usb_g
- 	udc->todo |= UDC_START;
- 	spin_unlock_irqrestore(&udc->lock, flags);
+ 	task_flags = tsk->flags;
+@@ -7964,7 +7964,7 @@ int __sched yield_to(struct task_struct
+ 	if (curr->sched_class != p->sched_class)
+ 		goto out_unlock;
  
--	if (udc->thread_task &&
--	    udc->thread_task->state != TASK_RUNNING)
-+	if (udc->thread_task)
- 		wake_up_process(udc->thread_task);
+-	if (task_running(p_rq, p) || p->state)
++	if (task_running(p_rq, p) || !task_is_running(p))
+ 		goto out_unlock;
  
- 	return 0;
---- a/drivers/usb/host/max3421-hcd.c
-+++ b/drivers/usb/host/max3421-hcd.c
-@@ -1169,8 +1169,7 @@ max3421_irq_handler(int irq, void *dev_i
- 	struct spi_device *spi = to_spi_device(hcd->self.controller);
- 	struct max3421_hcd *max3421_hcd = hcd_to_max3421(hcd);
+ 	yielded = curr->sched_class->yield_to_task(rq, p);
+@@ -8167,7 +8167,7 @@ void sched_show_task(struct task_struct
  
--	if (max3421_hcd->spi_thread &&
--	    max3421_hcd->spi_thread->state != TASK_RUNNING)
-+	if (max3421_hcd->spi_thread)
- 		wake_up_process(max3421_hcd->spi_thread);
- 	if (!test_and_set_bit(ENABLE_IRQ, &max3421_hcd->todo))
- 		disable_irq_nosync(spi->irq);
+ 	pr_info("task:%-15.15s state:%c", p->comm, task_state_to_char(p));
+ 
+-	if (p->state == TASK_RUNNING)
++	if (task_is_running(p))
+ 		pr_cont("  running task    ");
+ #ifdef CONFIG_DEBUG_STACK_USAGE
+ 	free = stack_not_used(p);
+--- a/kernel/sched/stats.h
++++ b/kernel/sched/stats.h
+@@ -217,7 +217,7 @@ static inline void sched_info_depart(str
+ 
+ 	rq_sched_info_depart(rq, delta);
+ 
+-	if (t->state == TASK_RUNNING)
++	if (task_is_running(t))
+ 		sched_info_enqueue(rq, t);
+ }
+ 
+--- a/kernel/signal.c
++++ b/kernel/signal.c
+@@ -4719,7 +4719,7 @@ void kdb_send_sig(struct task_struct *t,
+ 	}
+ 	new_t = kdb_prev_t != t;
+ 	kdb_prev_t = t;
+-	if (t->state != TASK_RUNNING && new_t) {
++	if (!task_is_running(t) && new_t) {
+ 		spin_unlock(&t->sighand->siglock);
+ 		kdb_printf("Process is not RUNNING, sending a signal from "
+ 			   "kdb risks deadlock\n"
 --- a/kernel/softirq.c
 +++ b/kernel/softirq.c
-@@ -76,7 +76,7 @@ static void wakeup_softirqd(void)
- 	/* Interrupts are disabled: no need to stop preemption */
- 	struct task_struct *tsk = __this_cpu_read(ksoftirqd);
+@@ -92,8 +92,7 @@ static bool ksoftirqd_running(unsigned l
  
--	if (tsk && tsk->state != TASK_RUNNING)
-+	if (tsk)
- 		wake_up_process(tsk);
+ 	if (pending & SOFTIRQ_NOW_MASK)
+ 		return false;
+-	return tsk && (tsk->state == TASK_RUNNING) &&
+-		!__kthread_should_park(tsk);
++	return tsk && task_is_running(tsk) && !__kthread_should_park(tsk);
  }
  
+ #ifdef CONFIG_TRACE_IRQFLAGS
+--- a/mm/compaction.c
++++ b/mm/compaction.c
+@@ -1955,7 +1955,7 @@ static inline bool is_via_compact_memory
+ 
+ static bool kswapd_is_running(pg_data_t *pgdat)
+ {
+-	return pgdat->kswapd && (pgdat->kswapd->state == TASK_RUNNING);
++	return pgdat->kswapd && task_is_running(pgdat->kswapd);
+ }
+ 
+ /*
 
 
 
