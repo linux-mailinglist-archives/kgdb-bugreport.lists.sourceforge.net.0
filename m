@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CF1B63C5DA1
-	for <lists+kgdb-bugreport@lfdr.de>; Mon, 12 Jul 2021 15:47:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C36BE3C5DA5
+	for <lists+kgdb-bugreport@lfdr.de>; Mon, 12 Jul 2021 15:47:22 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1m2wHD-00014a-Ll
-	for lists+kgdb-bugreport@lfdr.de; Mon, 12 Jul 2021 13:47:15 +0000
+	id 1m2wHJ-0001H8-Iz
+	for lists+kgdb-bugreport@lfdr.de; Mon, 12 Jul 2021 13:47:21 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sumit.garg@linaro.org>) id 1m2wH3-00011q-Ux
- for kgdb-bugreport@lists.sourceforge.net; Mon, 12 Jul 2021 13:47:05 +0000
+ (envelope-from <sumit.garg@linaro.org>) id 1m2wH4-00012D-2o
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 12 Jul 2021 13:47:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=X39Zn6ifNoXfst3hgP/wkM+8Q6BFz1kUsfMCGnikBrY=; b=YoeflE4HgrN2rF1v8t3+YRIYxn
- 3teI2l8nSlW03HMmkaui6ishOYNR8QwYnSt3eka6YDtK20VY6mms6X7F5yaufbTG0eohOv3QJszFA
- AkwnrQdWz4c+P5dxanCsUh0e4CEGFsZrvYkRnuMWEbB3LdSWNiCN4B1IvfuwU/fUDnbo=;
+ bh=7lndx/Q0BSeWXmTJRjg5t/KTDSpkqtinldnSc918fkk=; b=dghIpOTZ+clK2YaEvZVyHmiN5q
+ i724mPrA81bC7Wc392W3LOOhqHY+7UX/RHp/mvfWBSN5s4tTc6d2oYhHRQIrut5HZH/EGlshBNNGx
+ yY00k4DwLLdpocPVFGPqi6ewG5b1W6S7pduDM0vREkyw9f1nz5PIxA6iK3553Ttf7eog=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -30,51 +30,53 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=X39Zn6ifNoXfst3hgP/wkM+8Q6BFz1kUsfMCGnikBrY=; b=Ia2GyILDUvMzlGFmGWlR3pJRFa
- NoiuEZFFdDBEeaJ9cwNKULdhoB0OH2wWKDX7EuVb/HTedRfrLQ2vxZfK/jl8YsaeJiK4605OjBAf2
- yf1h1Obz4psu5Tgb+33F2PzpGNBT3baTvJZOO/zDhP/LxjPVDtHavZeVfStm/6JH0JOc=;
-Received: from mail-pg1-f182.google.com ([209.85.215.182])
+ bh=7lndx/Q0BSeWXmTJRjg5t/KTDSpkqtinldnSc918fkk=; b=aZL/0TbFwFFSo6Eri2ZrLhpWnj
+ yLEcui56jQp+IM59gj37RA3/b7Tt25zTd+kWn9qB3NFtRpy8z4o6mDwKzj8oCkdwj8JuOtdiX7C6+
+ VpRLxbyFxt566FoL9+vpM540+PdYEhxV2aYVAZRGW83XHTXY9ckTyMLupGUtgxwQB1i0=;
+Received: from mail-pj1-f42.google.com ([209.85.216.42])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
- id 1m2wGs-005oGN-AD
- for kgdb-bugreport@lists.sourceforge.net; Mon, 12 Jul 2021 13:47:02 +0000
-Received: by mail-pg1-f182.google.com with SMTP id 62so18320712pgf.1
+ id 1m2wGw-005oGX-3y
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 12 Jul 2021 13:47:06 +0000
+Received: by mail-pj1-f42.google.com with SMTP id
+ o3-20020a17090a6783b0290173ce472b8aso1659394pjj.2
  for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 12 Jul 2021 06:46:54 -0700 (PDT)
+ Mon, 12 Jul 2021 06:46:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=X39Zn6ifNoXfst3hgP/wkM+8Q6BFz1kUsfMCGnikBrY=;
- b=xNpmDaZBWAxNq2+kIatyxLDSK7GsARQSvYe9RergKHCmNPXydjv2qWQpPHIqd0UHk4
- 4UCLY3vyajae0MmPLxcnhPf0kjbQF0RxnpW3aqelH0pXfqpEJ5VG1UsLxJ6Q9vbJtvBH
- CjE7oWjZ46zDKL5++656AicjA+G8W+y15F1WkRIyuGa1XA4711FAEvlGAF6BX03Fl1u0
- 52pxot4vteN/xePuNEt0wvEqEIGm9OcQMqO0AJ91UWR1NsfmZMf03l3EHLc4pzOIXRpG
- /rZL0fj+UFj6MX+yL6tR5rOkmBayGNgzNmWjNKwRpSxrr5YAL6jW1QNXYEiGdanlfXoO
- CI0w==
+ bh=7lndx/Q0BSeWXmTJRjg5t/KTDSpkqtinldnSc918fkk=;
+ b=qEqy9k9IeisSsqXkaFSZtlkp+CGUn0VvlDhwX9bQMDjSsvmJlwAQeulrovlh7I+Le+
+ cKt4ENIJQnfOiHrsTB+nh+weIj6ktK7ZKp31rf5rLOzGUeFBc8G8LXNy9uQrQl55eBOb
+ ZebUdcI9fX/UYrcm3fOE5zEAWOxp3koBcwoA+lSIjKljfSh4n7mn8vRZj+SjU39L9AiW
+ L/uRVGS3jum+ihJjExjPWZCNaypNYeQdFr62psAeXh9foq8k15AfcpCezx6rx71GzItZ
+ xA6dMUQjRmkbYwB4SnBjIlbSycCnMvsoSETEHTJK6Dv+ugBr3DbO0DR5YVsoz5OxDdP0
+ I7Bg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=X39Zn6ifNoXfst3hgP/wkM+8Q6BFz1kUsfMCGnikBrY=;
- b=r44YAT4SFPeJ9bgMJaDbuvBOxHti/SHHDiF4X+q/p8XmjKJwSzTkNxsGpVmj7SoBk3
- bpkJzXW4kNopJYOWtHVklC6no3GwQLgFQJ3j1RhgSzQi+qqDOe4TbhYJKsQC605b318+
- dWWF63UCRSHCTnk27ks81ABeYVc7XsAXzrQPxDsNPxFUSdaW+oo9PRmBkHfCabCO8JBU
- FKHAXOJOxp2u4RckvRhyOr+iSrS9DvSeASV5xOOC58u38zuGYGHKhkrzquBNEJq/RhxS
- pGH2Xf1WL0yDmyVlFk+9+/GM5+6GRDmvuCx6thC52aWT6MlFdtev8J2miR7ys4WmHPqs
- LO4w==
-X-Gm-Message-State: AOAM532vjNJ6B0b54ldXvoQcDEgBTUvKTAWak3k34YaxIPrFo6VqGFMm
- 481+ZyEhfcFhXAbk91Y11TniEw1Vzc+oCQ==
-X-Google-Smtp-Source: ABdhPJykDczkXUm7BJHsk9Upap4/FqeghsWb8lZnNVFBJKUrtDeA85bKv7LBu4G/gWhEZcAmb4k6kw==
-X-Received: by 2002:a63:1244:: with SMTP id 4mr43483908pgs.334.1626097608280; 
- Mon, 12 Jul 2021 06:46:48 -0700 (PDT)
+ bh=7lndx/Q0BSeWXmTJRjg5t/KTDSpkqtinldnSc918fkk=;
+ b=WKUbqY/TM33kOGRvd1fFyZEjFS/7CE89kU6KKQ+lCTa5C7iiBnLsRCbuokKz7c0ImD
+ 3lxY8jNob9jqaDz3F/bKfMcVp41nq6BWp2l5UrC7DleWEXM3+9/edpVVYjZAyrgU5plr
+ +TctXCXqPtsJjMZAKg/7RCjbz77mY0aemJ9Cxci2Cgd8QvYalK/p3GlrXvUK1SxgUXDy
+ 8i4gibE3BLre3wIzqOH4yQ8qAblUqe1WQaqmDEqlhBCIX+gQaJtyU2MAqA8otxppuv1S
+ gm411vfkRHHozZ8AznZeNTODs4kx+rucD1YxugPcHmW16vYjFaeCfHHd1iJURbXLzT83
+ ZmFw==
+X-Gm-Message-State: AOAM532W//nGfo7QLkmRmNeXtj1ex9vmC/oJZfvf49kjrurjTZXU0SSZ
+ HYbxiUBtdhB/hjvWA9ok8c2oTF76GdnoAw==
+X-Google-Smtp-Source: ABdhPJzjQx81QNJb//yoI/tavQ7MCWXT0XlgOGV16bjbtPy/fAH3Ce7u/rt4O4Hva7MVVjbNE/sfHg==
+X-Received: by 2002:a17:90b:10a:: with SMTP id
+ p10mr10112212pjz.189.1626097612162; 
+ Mon, 12 Jul 2021 06:46:52 -0700 (PDT)
 Received: from localhost.localdomain ([223.178.210.84])
- by smtp.gmail.com with ESMTPSA id z13sm835405pfn.94.2021.07.12.06.46.44
+ by smtp.gmail.com with ESMTPSA id z13sm835405pfn.94.2021.07.12.06.46.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Jul 2021 06:46:47 -0700 (PDT)
+ Mon, 12 Jul 2021 06:46:51 -0700 (PDT)
 From: Sumit Garg <sumit.garg@linaro.org>
 To: kgdb-bugreport@lists.sourceforge.net
-Date: Mon, 12 Jul 2021 19:16:18 +0530
-Message-Id: <20210712134620.276667-3-sumit.garg@linaro.org>
+Date: Mon, 12 Jul 2021 19:16:19 +0530
+Message-Id: <20210712134620.276667-4-sumit.garg@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210712134620.276667-1-sumit.garg@linaro.org>
 References: <20210712134620.276667-1-sumit.garg@linaro.org>
@@ -82,21 +84,20 @@ MIME-Version: 1.0
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.216.42 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.216.42 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.215.182 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.215.182 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1m2wGs-005oGN-AD
-Subject: [Kgdb-bugreport] [PATCH v5 2/4] kdb: Get rid of redundant
- kdb_register_flags()
+X-Headers-End: 1m2wGw-005oGX-3y
+Subject: [Kgdb-bugreport] [PATCH v5 3/4] kdb: Simplify kdb_defcmd macro logic
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,450 +115,204 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Commit e4f291b3f7bb ("kdb: Simplify kdb commands registration")
-allowed registration of pre-allocated kdb commands with pointer to
-struct kdbtab_t. Lets switch other users as well to register pre-
-allocated kdb commands via:
-- Changing prototype for kdb_register() to pass a pointer to struct
-  kdbtab_t instead.
-- Embed kdbtab_t structure in kdb_macro_t rather than individual params.
-
-With these changes kdb_register_flags() becomes redundant and hence
-removed. Also, since we have switched all users to register
-pre-allocated commands, "is_dynamic" flag in struct kdbtab_t becomes
-redundant and hence removed as well.
+Switch to use a linked list instead of dynamic array which makes
+allocation of kdb macro and traversing the kdb macro commands list
+simpler.
 
 Suggested-by: Daniel Thompson <daniel.thompson@linaro.org>
 Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-Acked-by: Steven Rostedt (VMware) <rostedt@goodmis.org>
 Reviewed-by: Douglas Anderson <dianders@chromium.org>
 ---
- include/linux/kdb.h            |  27 ++++--
- kernel/debug/kdb/kdb_main.c    | 167 +++++++++++----------------------
- kernel/debug/kdb/kdb_private.h |  13 ---
- kernel/trace/trace_kdb.c       |  12 ++-
- samples/kdb/kdb_hello.c        |  20 ++--
- 5 files changed, 88 insertions(+), 151 deletions(-)
+ kernel/debug/kdb/kdb_main.c | 107 +++++++++++++++++++-----------------
+ 1 file changed, 58 insertions(+), 49 deletions(-)
 
-diff --git a/include/linux/kdb.h b/include/linux/kdb.h
-index 0125a677b67f..de858edfb3b8 100644
---- a/include/linux/kdb.h
-+++ b/include/linux/kdb.h
-@@ -13,6 +13,8 @@
-  * Copyright (C) 2009 Jason Wessel <jason.wessel@windriver.com>
-  */
- 
-+#include <linux/list.h>
-+
- /* Shifted versions of the command enable bits are be used if the command
-  * has no arguments (see kdb_check_flags). This allows commands, such as
-  * go, to have different permissions depending upon whether it is called
-@@ -64,6 +66,17 @@ typedef enum {
- 
- typedef int (*kdb_func_t)(int, const char **);
- 
-+/* The KDB shell command table */
-+typedef struct _kdbtab {
-+	char    *cmd_name;		/* Command name */
-+	kdb_func_t cmd_func;		/* Function to execute command */
-+	char    *cmd_usage;		/* Usage String for this command */
-+	char    *cmd_help;		/* Help message for this command */
-+	short    cmd_minlen;		/* Minimum legal # cmd chars required */
-+	kdb_cmdflags_t cmd_flags;	/* Command behaviour flags */
-+	struct list_head list_node;	/* Command list */
-+} kdbtab_t;
-+
- #ifdef	CONFIG_KGDB_KDB
- #include <linux/init.h>
- #include <linux/sched.h>
-@@ -193,19 +206,13 @@ static inline const char *kdb_walk_kallsyms(loff_t *pos)
- #endif /* ! CONFIG_KALLSYMS */
- 
- /* Dynamic kdb shell command registration */
--extern int kdb_register(char *, kdb_func_t, char *, char *, short);
--extern int kdb_register_flags(char *, kdb_func_t, char *, char *,
--			      short, kdb_cmdflags_t);
--extern int kdb_unregister(char *);
-+extern int kdb_register(kdbtab_t *cmd);
-+extern void kdb_unregister(kdbtab_t *cmd);
- #else /* ! CONFIG_KGDB_KDB */
- static inline __printf(1, 2) int kdb_printf(const char *fmt, ...) { return 0; }
- static inline void kdb_init(int level) {}
--static inline int kdb_register(char *cmd, kdb_func_t func, char *usage,
--			       char *help, short minlen) { return 0; }
--static inline int kdb_register_flags(char *cmd, kdb_func_t func, char *usage,
--				     char *help, short minlen,
--				     kdb_cmdflags_t flags) { return 0; }
--static inline int kdb_unregister(char *cmd) { return 0; }
-+static inline int kdb_register(kdbtab_t *cmd) { return 0; }
-+static inline void kdb_unregister(kdbtab_t *cmd) {}
- #endif	/* CONFIG_KGDB_KDB */
- enum {
- 	KDB_NOT_INITIALIZED,
 diff --git a/kernel/debug/kdb/kdb_main.c b/kernel/debug/kdb/kdb_main.c
-index 5cf9867fa118..b2880fad26d4 100644
+index b2880fad26d4..7c7a2ef834fc 100644
 --- a/kernel/debug/kdb/kdb_main.c
 +++ b/kernel/debug/kdb/kdb_main.c
-@@ -33,7 +33,6 @@
- #include <linux/kallsyms.h>
- #include <linux/kgdb.h>
- #include <linux/kdb.h>
--#include <linux/list.h>
- #include <linux/notifier.h>
- #include <linux/interrupt.h>
- #include <linux/delay.h>
-@@ -657,9 +656,7 @@ static void kdb_cmderror(int diag)
+@@ -654,13 +654,16 @@ static void kdb_cmderror(int diag)
+  *	zero for success, a kdb diagnostic if error
+  */
  struct kdb_macro {
- 	int count;
- 	bool usable;
--	char *name;
--	char *usage;
--	char *help;
-+	kdbtab_t cmd;
- 	char **command;
+-	int count;
+-	bool usable;
+-	kdbtab_t cmd;
+-	char **command;
++	kdbtab_t cmd;			/* Macro command */
++	struct list_head statements;	/* Associated statement list */
  };
++
++struct kdb_macro_statement {
++	char *statement;		/* Statement text */
++	struct list_head list_node;	/* Statement list node */
++};
++
  static struct kdb_macro *kdb_macro;
-@@ -678,13 +675,7 @@ static int kdb_defcmd2(const char *cmdstr, const char *argv0)
- 		if (!s->count)
- 			s->usable = false;
- 		if (s->usable)
--			/* macros are always safe because when executed each
--			 * internal command re-enters kdb_parse() and is
--			 * safety checked individually.
--			 */
--			kdb_register_flags(s->name, kdb_exec_defcmd, s->usage,
--					   s->help, 0,
--					   KDB_ENABLE_ALWAYS_SAFE);
-+			kdb_register(&s->cmd);
+-static int kdb_macro_count;
+ static bool defcmd_in_progress;
+ 
+ /* Forward references */
+@@ -668,34 +671,33 @@ static int kdb_exec_defcmd(int argc, const char **argv);
+ 
+ static int kdb_defcmd2(const char *cmdstr, const char *argv0)
+ {
+-	struct kdb_macro *s = kdb_macro + kdb_macro_count - 1;
+-	char **save_command = s->command;
++	struct kdb_macro_statement *kms;
++
++	if (!kdb_macro)
++		return KDB_NOTIMP;
++
+ 	if (strcmp(argv0, "endefcmd") == 0) {
+ 		defcmd_in_progress = false;
+-		if (!s->count)
+-			s->usable = false;
+-		if (s->usable)
+-			kdb_register(&s->cmd);
++		if (!list_empty(&kdb_macro->statements))
++			kdb_register(&kdb_macro->cmd);
  		return 0;
  	}
- 	if (!s->usable)
-@@ -705,6 +696,8 @@ static int kdb_defcmd2(const char *cmdstr, const char *argv0)
+-	if (!s->usable)
+-		return KDB_NOTIMP;
+-	s->command = kcalloc(s->count + 1, sizeof(*(s->command)), GFP_KDB);
+-	if (!s->command) {
+-		kdb_printf("Could not allocate new kdb_defcmd table for %s\n",
++
++	kms = kmalloc(sizeof(*kms), GFP_KDB);
++	if (!kms) {
++		kdb_printf("Could not allocate new kdb macro command: %s\n",
+ 			   cmdstr);
+-		s->usable = false;
+ 		return KDB_NOTIMP;
+ 	}
+-	memcpy(s->command, save_command, s->count * sizeof(*(s->command)));
+-	s->command[s->count++] = kdb_strdup(cmdstr, GFP_KDB);
+-	kfree(save_command);
++
++	kms->statement = kdb_strdup(cmdstr, GFP_KDB);
++	list_add_tail(&kms->list_node, &kdb_macro->statements);
++
+ 	return 0;
+ }
+ 
  static int kdb_defcmd(int argc, const char **argv)
  {
- 	struct kdb_macro *save_kdb_macro = kdb_macro, *s;
-+	kdbtab_t *mp;
-+
+-	struct kdb_macro *save_kdb_macro = kdb_macro, *s;
+ 	kdbtab_t *mp;
+ 
  	if (defcmd_in_progress) {
- 		kdb_printf("kdb: nested defcmd detected, assuming missing "
- 			   "endefcmd\n");
-@@ -713,8 +706,8 @@ static int kdb_defcmd(int argc, const char **argv)
+@@ -704,13 +706,21 @@ static int kdb_defcmd(int argc, const char **argv)
+ 		kdb_defcmd2("endefcmd", "endefcmd");
+ 	}
  	if (argc == 0) {
- 		int i;
- 		for (s = kdb_macro; s < kdb_macro + kdb_macro_count; ++s) {
--			kdb_printf("defcmd %s \"%s\" \"%s\"\n", s->name,
--				   s->usage, s->help);
-+			kdb_printf("defcmd %s \"%s\" \"%s\"\n", s->cmd.cmd_name,
-+				   s->cmd.cmd_usage, s->cmd.cmd_help);
- 			for (i = 0; i < s->count; ++i)
- 				kdb_printf("%s", s->command[i]);
- 			kdb_printf("endefcmd\n");
-@@ -736,31 +729,36 @@ static int kdb_defcmd(int argc, const char **argv)
- 	s = kdb_macro + kdb_macro_count;
- 	memset(s, 0, sizeof(*s));
- 	s->usable = true;
--	s->name = kdb_strdup(argv[1], GFP_KDB);
--	if (!s->name)
+-		int i;
+-		for (s = kdb_macro; s < kdb_macro + kdb_macro_count; ++s) {
+-			kdb_printf("defcmd %s \"%s\" \"%s\"\n", s->cmd.cmd_name,
+-				   s->cmd.cmd_usage, s->cmd.cmd_help);
+-			for (i = 0; i < s->count; ++i)
+-				kdb_printf("%s", s->command[i]);
+-			kdb_printf("endefcmd\n");
++		kdbtab_t *kp;
++		struct kdb_macro *kmp;
++		struct kdb_macro_statement *kms;
 +
-+	mp = &s->cmd;
-+	mp->cmd_func = kdb_exec_defcmd;
-+	mp->cmd_minlen = 0;
-+	mp->cmd_flags = KDB_ENABLE_ALWAYS_SAFE;
-+	mp->cmd_name = kdb_strdup(argv[1], GFP_KDB);
-+	if (!mp->cmd_name)
- 		goto fail_name;
--	s->usage = kdb_strdup(argv[2], GFP_KDB);
--	if (!s->usage)
-+	mp->cmd_usage = kdb_strdup(argv[2], GFP_KDB);
-+	if (!mp->cmd_usage)
- 		goto fail_usage;
--	s->help = kdb_strdup(argv[3], GFP_KDB);
--	if (!s->help)
-+	mp->cmd_help = kdb_strdup(argv[3], GFP_KDB);
-+	if (!mp->cmd_help)
- 		goto fail_help;
--	if (s->usage[0] == '"') {
--		strcpy(s->usage, argv[2]+1);
--		s->usage[strlen(s->usage)-1] = '\0';
-+	if (mp->cmd_usage[0] == '"') {
-+		strcpy(mp->cmd_usage, argv[2]+1);
-+		mp->cmd_usage[strlen(mp->cmd_usage)-1] = '\0';
++		list_for_each_entry(kp, &kdb_cmds_head, list_node) {
++			if (kp->cmd_func == kdb_exec_defcmd) {
++				kdb_printf("defcmd %s \"%s\" \"%s\"\n",
++					   kp->cmd_name, kp->cmd_usage,
++					   kp->cmd_help);
++				kmp = container_of(kp, struct kdb_macro, cmd);
++				list_for_each_entry(kms, &kmp->statements,
++						    list_node)
++					kdb_printf("%s", kms->statement);
++				kdb_printf("endefcmd\n");
++			}
+ 		}
+ 		return 0;
  	}
--	if (s->help[0] == '"') {
--		strcpy(s->help, argv[3]+1);
--		s->help[strlen(s->help)-1] = '\0';
-+	if (mp->cmd_help[0] == '"') {
-+		strcpy(mp->cmd_help, argv[3]+1);
-+		mp->cmd_help[strlen(mp->cmd_help)-1] = '\0';
+@@ -720,17 +730,11 @@ static int kdb_defcmd(int argc, const char **argv)
+ 		kdb_printf("Command only available during kdb_init()\n");
+ 		return KDB_NOTIMP;
  	}
- 	++kdb_macro_count;
+-	kdb_macro = kmalloc_array(kdb_macro_count + 1, sizeof(*kdb_macro),
+-				  GFP_KDB);
++	kdb_macro = kzalloc(sizeof(*kdb_macro), GFP_KDB);
+ 	if (!kdb_macro)
+ 		goto fail_defcmd;
+-	memcpy(kdb_macro, save_kdb_macro,
+-	       kdb_macro_count * sizeof(*kdb_macro));
+-	s = kdb_macro + kdb_macro_count;
+-	memset(s, 0, sizeof(*s));
+-	s->usable = true;
+ 
+-	mp = &s->cmd;
++	mp = &kdb_macro->cmd;
+ 	mp->cmd_func = kdb_exec_defcmd;
+ 	mp->cmd_minlen = 0;
+ 	mp->cmd_flags = KDB_ENABLE_ALWAYS_SAFE;
+@@ -751,9 +755,9 @@ static int kdb_defcmd(int argc, const char **argv)
+ 		strcpy(mp->cmd_help, argv[3]+1);
+ 		mp->cmd_help[strlen(mp->cmd_help)-1] = '\0';
+ 	}
+-	++kdb_macro_count;
++
++	INIT_LIST_HEAD(&kdb_macro->statements);
  	defcmd_in_progress = true;
- 	kfree(save_kdb_macro);
+-	kfree(save_kdb_macro);
  	return 0;
  fail_help:
--	kfree(s->usage);
-+	kfree(mp->cmd_usage);
- fail_usage:
--	kfree(s->name);
-+	kfree(mp->cmd_name);
- fail_name:
+ 	kfree(mp->cmd_usage);
+@@ -763,7 +767,6 @@ static int kdb_defcmd(int argc, const char **argv)
  	kfree(kdb_macro);
  fail_defcmd:
-@@ -785,7 +783,7 @@ static int kdb_exec_defcmd(int argc, const char **argv)
+ 	kdb_printf("Could not allocate new kdb_macro entry for %s\n", argv[1]);
+-	kdb_macro = save_kdb_macro;
+ 	return KDB_NOTIMP;
+ }
+ 
+@@ -778,25 +781,31 @@ static int kdb_defcmd(int argc, const char **argv)
+  */
+ static int kdb_exec_defcmd(int argc, const char **argv)
+ {
+-	int i, ret;
+-	struct kdb_macro *s;
++	int ret;
++	kdbtab_t *kp;
++	struct kdb_macro *kmp;
++	struct kdb_macro_statement *kms;
++
  	if (argc != 0)
  		return KDB_ARGCOUNT;
- 	for (s = kdb_macro, i = 0; i < kdb_macro_count; ++i, ++s) {
--		if (strcmp(s->name, argv[0]) == 0)
-+		if (strcmp(s->cmd.cmd_name, argv[0]) == 0)
+-	for (s = kdb_macro, i = 0; i < kdb_macro_count; ++i, ++s) {
+-		if (strcmp(s->cmd.cmd_name, argv[0]) == 0)
++
++	list_for_each_entry(kp, &kdb_cmds_head, list_node) {
++		if (strcmp(kp->cmd_name, argv[0]) == 0)
  			break;
  	}
- 	if (i == kdb_macro_count) {
-@@ -797,7 +795,7 @@ static int kdb_exec_defcmd(int argc, const char **argv)
- 		/* Recursive use of kdb_parse, do not use argv after
- 		 * this point */
+-	if (i == kdb_macro_count) {
++	if (list_entry_is_head(kp, &kdb_cmds_head, list_node)) {
+ 		kdb_printf("kdb_exec_defcmd: could not find commands for %s\n",
+ 			   argv[0]);
+ 		return KDB_NOTIMP;
+ 	}
+-	for (i = 0; i < s->count; ++i) {
+-		/* Recursive use of kdb_parse, do not use argv after
+-		 * this point */
++	kmp = container_of(kp, struct kdb_macro, cmd);
++	list_for_each_entry(kms, &kmp->statements, list_node) {
++		/*
++		 * Recursive use of kdb_parse, do not use argv after this point.
++		 */
  		argv = NULL;
--		kdb_printf("[%s]kdb> %s\n", s->name, s->command[i]);
-+		kdb_printf("[%s]kdb> %s\n", s->cmd.cmd_name, s->command[i]);
- 		ret = kdb_parse(s->command[i]);
+-		kdb_printf("[%s]kdb> %s\n", s->cmd.cmd_name, s->command[i]);
+-		ret = kdb_parse(s->command[i]);
++		kdb_printf("[%s]kdb> %s\n", kmp->cmd.cmd_name, kms->statement);
++		ret = kdb_parse(kms->statement);
  		if (ret)
  			return ret;
-@@ -2613,56 +2611,32 @@ static int kdb_grep_help(int argc, const char **argv)
- 	return 0;
- }
- 
--/*
-- * kdb_register_flags - This function is used to register a kernel
-- * 	debugger command.
-- * Inputs:
-- *	cmd	Command name
-- *	func	Function to execute the command
-- *	usage	A simple usage string showing arguments
-- *	help	A simple help string describing command
-- *	repeat	Does the command auto repeat on enter?
-- * Returns:
-- *	zero for success, one if a duplicate command.
-+/**
-+ * kdb_register() - This function is used to register a kernel debugger
-+ *                  command.
-+ * @cmd: pointer to kdb command
-+ *
-+ * Note that it's the job of the caller to keep the memory for the cmd
-+ * allocated until unregister is called.
-  */
--int kdb_register_flags(char *cmd,
--		       kdb_func_t func,
--		       char *usage,
--		       char *help,
--		       short minlen,
--		       kdb_cmdflags_t flags)
-+int kdb_register(kdbtab_t *cmd)
- {
- 	kdbtab_t *kp;
- 
- 	list_for_each_entry(kp, &kdb_cmds_head, list_node) {
--		if (strcmp(kp->cmd_name, cmd) == 0) {
--			kdb_printf("Duplicate kdb command registered: "
--				"%s, func %px help %s\n", cmd, func, help);
-+		if (strcmp(kp->cmd_name, cmd->cmd_name) == 0) {
-+			kdb_printf("Duplicate kdb cmd: %s, func %p help %s\n",
-+				   cmd->cmd_name, cmd->cmd_func, cmd->cmd_help);
- 			return 1;
- 		}
  	}
- 
--	kp = kmalloc(sizeof(*kp), GFP_KDB);
--	if (!kp) {
--		kdb_printf("Could not allocate new kdb_command table\n");
--		return 1;
--	}
--
--	kp->cmd_name   = cmd;
--	kp->cmd_func   = func;
--	kp->cmd_usage  = usage;
--	kp->cmd_help   = help;
--	kp->cmd_minlen = minlen;
--	kp->cmd_flags  = flags;
--	kp->is_dynamic = true;
--
--	list_add_tail(&kp->list_node, &kdb_cmds_head);
--
-+	list_add_tail(&cmd->list_node, &kdb_cmds_head);
- 	return 0;
- }
--EXPORT_SYMBOL_GPL(kdb_register_flags);
-+EXPORT_SYMBOL_GPL(kdb_register);
- 
--/*
-+/**
-  * kdb_register_table() - This function is used to register a kdb command
-  *                        table.
-  * @kp: pointer to kdb command table
-@@ -2676,55 +2650,15 @@ void kdb_register_table(kdbtab_t *kp, size_t len)
- 	}
- }
- 
--/*
-- * kdb_register - Compatibility register function for commands that do
-- *	not need to specify a repeat state.  Equivalent to
-- *	kdb_register_flags with flags set to 0.
-- * Inputs:
-- *	cmd	Command name
-- *	func	Function to execute the command
-- *	usage	A simple usage string showing arguments
-- *	help	A simple help string describing command
-- * Returns:
-- *	zero for success, one if a duplicate command.
-- */
--int kdb_register(char *cmd,
--	     kdb_func_t func,
--	     char *usage,
--	     char *help,
--	     short minlen)
--{
--	return kdb_register_flags(cmd, func, usage, help, minlen, 0);
--}
--EXPORT_SYMBOL_GPL(kdb_register);
--
--/*
-- * kdb_unregister - This function is used to unregister a kernel
-- *	debugger command.  It is generally called when a module which
-- *	implements kdb commands is unloaded.
-- * Inputs:
-- *	cmd	Command name
-- * Returns:
-- *	zero for success, one command not registered.
-+/**
-+ * kdb_unregister() - This function is used to unregister a kernel debugger
-+ *                    command. It is generally called when a module which
-+ *                    implements kdb command is unloaded.
-+ * @cmd: pointer to kdb command
-  */
--int kdb_unregister(char *cmd)
-+void kdb_unregister(kdbtab_t *cmd)
- {
--	kdbtab_t *kp;
--
--	/*
--	 *  find the command.
--	 */
--	list_for_each_entry(kp, &kdb_cmds_head, list_node) {
--		if (strcmp(kp->cmd_name, cmd) == 0) {
--			list_del(&kp->list_node);
--			if (kp->is_dynamic)
--				kfree(kp);
--			return 0;
--		}
--	}
--
--	/* Couldn't find it.  */
--	return 1;
-+	list_del(&cmd->list_node);
- }
- EXPORT_SYMBOL_GPL(kdb_unregister);
- 
-@@ -2900,6 +2834,11 @@ static kdbtab_t maintab[] = {
- 		.cmd_func = kdb_defcmd,
- 		.cmd_usage = "name \"usage\" \"help\"",
- 		.cmd_help = "Define a set of commands, down to endefcmd",
-+		/*
-+		 * Macros are always safe because when executed each
-+		 * internal command re-enters kdb_parse() and is safety
-+		 * checked individually.
-+		 */
- 		.cmd_flags = KDB_ENABLE_ALWAYS_SAFE,
- 	},
- 	{	.cmd_name = "kill",
-diff --git a/kernel/debug/kdb/kdb_private.h b/kernel/debug/kdb/kdb_private.h
-index 8dbc840113c9..629590084a0d 100644
---- a/kernel/debug/kdb/kdb_private.h
-+++ b/kernel/debug/kdb/kdb_private.h
-@@ -164,19 +164,6 @@ typedef struct _kdb_bp {
- #ifdef CONFIG_KGDB_KDB
- extern kdb_bp_t kdb_breakpoints[/* KDB_MAXBPT */];
- 
--/* The KDB shell command table */
--typedef struct _kdbtab {
--	char    *cmd_name;		/* Command name */
--	kdb_func_t cmd_func;		/* Function to execute command */
--	char    *cmd_usage;		/* Usage String for this command */
--	char    *cmd_help;		/* Help message for this command */
--	short    cmd_minlen;		/* Minimum legal # command
--					 * chars required */
--	kdb_cmdflags_t cmd_flags;	/* Command behaviour flags */
--	struct list_head list_node;	/* Command list */
--	bool    is_dynamic;		/* Command table allocation type */
--} kdbtab_t;
--
- extern void kdb_register_table(kdbtab_t *kp, size_t len);
- extern int kdb_bt(int, const char **);	/* KDB display back trace */
- 
-diff --git a/kernel/trace/trace_kdb.c b/kernel/trace/trace_kdb.c
-index 9da76104f7a2..6c4f92c79e43 100644
---- a/kernel/trace/trace_kdb.c
-+++ b/kernel/trace/trace_kdb.c
-@@ -147,11 +147,17 @@ static int kdb_ftdump(int argc, const char **argv)
- 	return 0;
- }
- 
-+static kdbtab_t ftdump_cmd = {
-+	.cmd_name = "ftdump",
-+	.cmd_func = kdb_ftdump,
-+	.cmd_usage = "[skip_#entries] [cpu]",
-+	.cmd_help = "Dump ftrace log; -skip dumps last #entries",
-+	.cmd_flags = KDB_ENABLE_ALWAYS_SAFE,
-+};
-+
- static __init int kdb_ftrace_register(void)
- {
--	kdb_register_flags("ftdump", kdb_ftdump, "[skip_#entries] [cpu]",
--			    "Dump ftrace log; -skip dumps last #entries", 0,
--			    KDB_ENABLE_ALWAYS_SAFE);
-+	kdb_register(&ftdump_cmd);
- 	return 0;
- }
- 
-diff --git a/samples/kdb/kdb_hello.c b/samples/kdb/kdb_hello.c
-index c1c2fa0f62c2..9ad514a6648b 100644
---- a/samples/kdb/kdb_hello.c
-+++ b/samples/kdb/kdb_hello.c
-@@ -28,28 +28,26 @@ static int kdb_hello_cmd(int argc, const char **argv)
- 	return 0;
- }
- 
-+static kdbtab_t hello_cmd = {
-+	.cmd_name = "hello",
-+	.cmd_func = kdb_hello_cmd,
-+	.cmd_usage = "[string]",
-+	.cmd_help = "Say Hello World or Hello [string]",
-+};
- 
- static int __init kdb_hello_cmd_init(void)
- {
- 	/*
- 	 * Registration of a dynamically added kdb command is done with
--	 * kdb_register() with the arguments being:
--	 *   1: The name of the shell command
--	 *   2: The function that processes the command
--	 *   3: Description of the usage of any arguments
--	 *   4: Descriptive text when you run help
--	 *   5: Number of characters to complete the command
--	 *      0 == type the whole command
--	 *      1 == match both "g" and "go" for example
-+	 * kdb_register().
- 	 */
--	kdb_register("hello", kdb_hello_cmd, "[string]",
--		     "Say Hello World or Hello [string]", 0);
-+	kdb_register(&hello_cmd);
- 	return 0;
- }
- 
- static void __exit kdb_hello_cmd_exit(void)
- {
--	kdb_unregister("hello");
-+	kdb_unregister(&hello_cmd);
- }
- 
- module_init(kdb_hello_cmd_init);
 -- 
 2.25.1
 
