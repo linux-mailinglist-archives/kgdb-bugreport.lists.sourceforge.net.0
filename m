@@ -2,36 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E53FC3E0134
-	for <lists+kgdb-bugreport@lfdr.de>; Wed,  4 Aug 2021 14:31:52 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
-	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	 bh=YcqSDT6kZKr+DjG08N/p60LUfUL1s9ZbouinioWNt3o=; b=Mx3G1AEyxcA+b7UWkbHJWpXzq
-	EXNXjm4GrD47U8CobXoMPac7q5OTBdFA1aL3V8PsqSv3p7fJ1tl+AHFID69lOFxMuBSeZ+7mN5UPI
-	pRv8Ez0o85vZfxAeDEPUGB4gpR+5wQX2LpM6UM76m19Qtx4tEWbflj6vY5Mh/2KEQfVB4=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id E10D23E03D9
+	for <lists+kgdb-bugreport@lfdr.de>; Wed,  4 Aug 2021 17:04:47 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1mBG3r-0002gc-Nz
-	for lists+kgdb-bugreport@lfdr.de; Wed, 04 Aug 2021 12:31:51 +0000
+	id 1mBIRq-0007wS-ND
+	for lists+kgdb-bugreport@lfdr.de; Wed, 04 Aug 2021 15:04:46 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <pmladek@suse.com>) id 1mBG3q-0002gG-Ec
- for kgdb-bugreport@lists.sourceforge.net; Wed, 04 Aug 2021 12:31:50 +0000
+ (envelope-from <daniel.thompson@linaro.org>) id 1mBIRp-0007wI-5t
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 04 Aug 2021 15:04:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=DC4/KiaX6Vt6MBJgEki+wBHi3z9bnh0HTsoiAX5JG+Y=; b=LdxkTOZS9NB/WXZg/7nqADaqg4
- WZ1F260repU8O5qbNDX5WKeDjjZi5Q6g+1KTJowKYcWoAjo4gmfqrdBxTF43xK3qCYVr1sYyT3Z9q
- +uHUAYnsD8pdw+Ue/UGPUNoXBi8TQgO/i3C5TRETCsxTizXtx/YX0zx7ZMvayCKh/WII=;
+ bh=6aUVH/oLofEmmm6h+v2hcxaCiBX9BgRXOiDFnU5oRiQ=; b=QEKPrX8vmFdKTcgoKfFetdDhAc
+ +0ikN2yy1GmlUdAl1djH2Y46vwChsYzr2ldVuOto1hTlkZsFJRAK4N0jTM1nuqkIw+yslBNrdtX1L
+ I1s0TqSfiSdQUJTOGeJ/REnwpy3X0uw08FvbhSePbSl/s98zUW6uJVFWg09/TLMBbkkY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -39,47 +30,74 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=DC4/KiaX6Vt6MBJgEki+wBHi3z9bnh0HTsoiAX5JG+Y=; b=T+fyh3Kx270KR4ddzfP4Kuqhpc
- UoE87epTHZQCdWX7iY62phKx2rBGr0seMnGOYxNwCXiyRbOSO78P9t0qCwySngLhqmTxN57BMWHA2
- Y6apBdGlnW52DYLae9It+LqZzRe+Vzi8pzm/zZgi9r/huYvkbgr8Ll7D4/Ir9YHlKW/I=;
-Received: from smtp-out2.suse.de ([195.135.220.29])
+ bh=6aUVH/oLofEmmm6h+v2hcxaCiBX9BgRXOiDFnU5oRiQ=; b=R4s16Cef/kf4b9brQ2k05OkP8p
+ 51gCsqU2EvLdP+fRm/2Rg+ociog+IvJUrwjQxiNA2IfilZHkGpJdzSN7468Wh6fV1n3vIaFqAqayN
+ kelw5Yf0teiQAi6M9u1uY944wCY5Vb0HrWI4iNkfJnvi3nnGK1fgVtVfg6YG4PNZg260=;
+Received: from mail-wm1-f52.google.com ([209.85.128.52])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
- id 1mBG3o-0002po-RV
- for kgdb-bugreport@lists.sourceforge.net; Wed, 04 Aug 2021 12:31:50 +0000
-Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
- by smtp-out2.suse.de (Postfix) with ESMTP id 1C1141FDD3;
- Wed,  4 Aug 2021 12:31:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
- t=1628080298; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=DC4/KiaX6Vt6MBJgEki+wBHi3z9bnh0HTsoiAX5JG+Y=;
- b=qv89K6eJX6qCyTdTbWC4KoIJyZrT3KxOobSvMJygB5ThmfxOox1BDe2omC2JBPPAoLMtGB
- bKFSc+u2up5Woqc9r/hhTWJ8Ov9DX5HAMaytSa9uS/AcZYXU1vxKGHzVBgdDIPMeXPJbGJ
- AqnoLG6rfavK0Kh86LcdVpnFJG8pEbA=
-Received: from suse.cz (unknown [10.100.216.66])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by relay2.suse.de (Postfix) with ESMTPS id 4A1B3A3B84;
- Wed,  4 Aug 2021 12:31:37 +0000 (UTC)
-Date: Wed, 4 Aug 2021 14:31:36 +0200
-To: John Ogness <john.ogness@linutronix.de>
-Message-ID: <YQqIqKjRcNhZSaAZ@alley>
+ id 1mBIRl-0006c1-0b
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 04 Aug 2021 15:04:44 +0000
+Received: by mail-wm1-f52.google.com with SMTP id
+ m28-20020a05600c3b1cb02902b5a8c22575so1450711wms.0
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Wed, 04 Aug 2021 08:04:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=6aUVH/oLofEmmm6h+v2hcxaCiBX9BgRXOiDFnU5oRiQ=;
+ b=AuCKuZ40QgcSYPXdblKcj4kcdmjIXcOcMu/6OXSijGIKG+9ZEduszPOpb6Wy7siTBu
+ aDQVeDRRtfKHh0DSmUUnlF1MyhHeBuyTFWDz/rupBcCkanJFAcmVn1gxD3M6jhUJFR0c
+ aoFBS42Y8iEZuJJQYwiiK3FqrE/vD3HCdLTc4iOAMmb39QE7stztPLYdeO1xj59IttAw
+ Efh4T2Avp4vh+kGDf6xZUpTuy8gBk+TQ3lZ79PfmtRvth5ggDb7V/l4jQGHEnU2YolWg
+ kMcSWvW28mM9WsaGCvSH5yGp2CcQgK5ZiNGB/S/efgdqNxucA/BVLVUMVAVuHWYqZwHs
+ g0UQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=6aUVH/oLofEmmm6h+v2hcxaCiBX9BgRXOiDFnU5oRiQ=;
+ b=U/9mLiH1KIb/CEaWX7ABSWoVeRDmvPrYzuDbwLR8o8VsMbwXs9/XkhVQ0XobmyuVO4
+ wAdXbjY9gLsXWyfi1+qHMmaXTUxo8ZSI+fY26nWEA8R9qPb48WbRfeAPUPP6EteDDheK
+ e7N+YvyFG/WYzXuwq9LQN772rBQ9uHOv6+4Xrreqy5i+QG7kkBvRaCPQzEBTQmzZQDfI
+ GDLdqE/V4h4P05E1XQPrxSvdL4inhiO/hZr0z6zMlb4sVbFFIaHehOFMHzlHOsOd8+I1
+ odsSgCuUtO7/OCrdTP1MU67EdXVoxcUIcyryurxZSNsUEbnbjkS9E/qNt07JbTtDJ1q9
+ deeA==
+X-Gm-Message-State: AOAM531n1DwRuAKmfoRPs6QzltWoCQmVWYD6PrG2YDSVnnk0E+qmSbIZ
+ G1+3W1T1BQFec+8Xi1D6oiQ37Q==
+X-Google-Smtp-Source: ABdhPJyVKS2KYPrHTlu7TD/lkdA7+BjOWbghd40OQTpu+TAAM9zjd70hDbrMzKWO8CQhm4tJjA99gA==
+X-Received: by 2002:a05:600c:4f0d:: with SMTP id
+ l13mr93288wmq.18.1628089474526; 
+ Wed, 04 Aug 2021 08:04:34 -0700 (PDT)
+Received: from maple.lan (cpc141216-aztw34-2-0-cust174.18-1.cable.virginm.net.
+ [80.7.220.175])
+ by smtp.gmail.com with ESMTPSA id w5sm3361185wro.45.2021.08.04.08.04.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 04 Aug 2021 08:04:33 -0700 (PDT)
+Date: Wed, 4 Aug 2021 16:04:31 +0100
+From: Daniel Thompson <daniel.thompson@linaro.org>
+To: Petr Mladek <pmladek@suse.com>
+Message-ID: <20210804150431.qtra3wvh2n4m6j64@maple.lan>
 References: <20210803131301.5588-1-john.ogness@linutronix.de>
  <20210803131301.5588-4-john.ogness@linutronix.de>
  <20210803142558.cz7apumpgijs5y4y@maple.lan>
  <87tuk635rb.fsf@jogness.linutronix.de>
+ <20210804113159.lsnoyylifg6v5i35@maple.lan>
+ <YQqEJtmNFxVxH3U/@alley>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <87tuk635rb.fsf@jogness.linutronix.de>
+In-Reply-To: <YQqEJtmNFxVxH3U/@alley>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.128.52 listed in list.dnswl.org]
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: linaro.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.128.52 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -87,7 +105,7 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1mBG3o-0002po-RV
+X-Headers-End: 1mBIRl-0006c1-0b
 Subject: Re: [Kgdb-bugreport] [PATCH printk v1 03/10] kgdb: delay roundup if
  holding printk cpulock
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
@@ -101,104 +119,182 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-From: Petr Mladek via Kgdb-bugreport <kgdb-bugreport@lists.sourceforge.net>
-Reply-To: Petr Mladek <pmladek@suse.com>
 Cc: "Gautham R. Shenoy" <ego@linux.vnet.ibm.com>,
  Srikar Dronamraju <srikar@linux.vnet.ibm.com>,
  Peter Zijlstra <peterz@infradead.org>,
  Benjamin Herrenschmidt <benh@kernel.crashing.org>,
  linux-kernel@vger.kernel.org, Paul Mackerras <paulus@samba.org>,
  "H. Peter Anvin" <hpa@zytor.com>, Chengyang Fan <cy.fan@huawei.com>,
- Daniel Thompson <daniel.thompson@linaro.org>,
  Bhaskar Chowdhury <unixbhaskar@gmail.com>,
  Michael Ellerman <mpe@ellerman.id.au>, x86@kernel.org,
  Christophe Leroy <christophe.leroy@csgroup.eu>, Ingo Molnar <mingo@redhat.com>,
- kgdb-bugreport@lists.sourceforge.net, Nicholas Piggin <npiggin@gmail.com>,
- Borislav Petkov <bp@alien8.de>, Steven Rostedt <rostedt@goodmis.org>,
- Thomas Gleixner <tglx@linutronix.de>,
+ kgdb-bugreport@lists.sourceforge.net, John Ogness <john.ogness@linutronix.de>,
+ Nicholas Piggin <npiggin@gmail.com>, Borislav Petkov <bp@alien8.de>,
+ Steven Rostedt <rostedt@goodmis.org>, Thomas Gleixner <tglx@linutronix.de>,
  "Gustavo A. R. Silva" <gustavoars@kernel.org>,
  Sergey Senozhatsky <senozhatsky@chromium.org>,
  Jason Wessel <jason.wessel@windriver.com>, linuxppc-dev@lists.ozlabs.org,
- =?iso-8859-1?Q?C=E9dric?= Le Goater <clg@kaod.org>
+ =?utf-8?Q?C=C3=A9dric?= Le Goater <clg@kaod.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Tue 2021-08-03 17:36:32, John Ogness wrote:
-> On 2021-08-03, Daniel Thompson <daniel.thompson@linaro.org> wrote:
-> > On Tue, Aug 03, 2021 at 03:18:54PM +0206, John Ogness wrote:
-> >> kgdb makes use of its own cpulock (@dbg_master_lock, @kgdb_active)
-> >> during cpu roundup. This will conflict with the printk cpulock.
+On Wed, Aug 04, 2021 at 02:12:22PM +0200, Petr Mladek wrote:
+> On Wed 2021-08-04 12:31:59, Daniel Thompson wrote:
+> > On Tue, Aug 03, 2021 at 05:36:32PM +0206, John Ogness wrote:
+> > > On 2021-08-03, Daniel Thompson <daniel.thompson@linaro.org> wrote:
+> > > > On Tue, Aug 03, 2021 at 03:18:54PM +0206, John Ogness wrote:
+> > > >> kgdb makes use of its own cpulock (@dbg_master_lock, @kgdb_active)
+> > > >> during cpu roundup. This will conflict with the printk cpulock.
+> > > >
+> > > > When the full vision is realized what will be the purpose of the printk
+> > > > cpulock?
+> > > >
+> > > > I'm asking largely because it's current role is actively unhelpful
+> > > > w.r.t. kdb. It is possible that cautious use of in_dbg_master() might
+> > > > be a better (and safer) solution. However it sounds like there is a
+> > > > larger role planned for the printk cpulock...
+> > > 
+> > > The printk cpulock is used as a synchronization mechanism for
+> > > implementing atomic consoles, which need to be able to safely interrupt
+> > > the console write() activity at any time and immediately continue with
+> > > their own printing. The ultimate goal is to move all console printing
+> > > into per-console dedicated kthreads, so the primary function of the
+> > > printk cpulock is really to immediately _stop_ the CPU/kthread
+> > > performing write() in order to allow write_atomic() (from any context on
+> > > any CPU) to safely and reliably take over.
+> > 
+> > I see.
+> > 
+> > Is there any mileage in allowing in_dbg_master() to suppress taking
+> > the console lock?
+> > 
+> > There's a couple of reasons to worry about the current approach.
+> > 
+> > The first is that we don't want this code to trigger in the case when
+> > kgdb is enabled and kdb is not since it is only kdb (a self-hosted
+> > debugger) than uses the consoles. This case is relatively trivial to
+> > address since we can rename it kdb_roundup_delay() and alter the way it
+> > is conditionally compiled.
+> > 
+> > The second is more of a problem however. kdb will only call into the
+> > console code from the debug master. By default this is the CPU that
+> > takes the debug trap so initial prints will work fine. However it is
+> > possible to switch to a different master (so we can read per-CPU
+> > registers and things like that). This will result in one of the CPUs
+> > that did the IPI round up calling into console code and this is unsafe
+> > in that instance.
+> > 
+> > There are a couple of tricks we could adopt to work around this but
+> > given the slightly odd calling context for kdb (all CPUs quiesced, no
+> > log interleaving possible) it sounds like it would remain safe to
+> > bypass the lock if in_dbg_master() is true.
+> > 
+> > Bypassing an inconvenient lock might sound icky but:
+> > 
+> > 1. If the lock is not owned by any CPU then what kdb will do is safe.
 > >
-> >> diff --git a/kernel/printk/printk.c b/kernel/printk/printk.c
-> >> index 3d0c933937b4..1b546e117f10 100644
-> >> --- a/kernel/printk/printk.c
-> >> +++ b/kernel/printk/printk.c
-> >> @@ -214,6 +215,7 @@ int devkmsg_sysctl_set_loglvl(struct ctl_table *table, int write,
-> >>  #ifdef CONFIG_SMP
-> >>  static atomic_t printk_cpulock_owner = ATOMIC_INIT(-1);
-> >>  static atomic_t printk_cpulock_nested = ATOMIC_INIT(0);
-> >> +static unsigned int kgdb_cpu = -1;
-> >
-> > Is this the flag to provoke retriggering? It appears to be a write-only
-> > variable (at least in this patch). How is it consumed?
+> > 2. If the lock is owned by any CPU then we have quiesced it anyway
+> >    and this makes is safe for the owning CPU to share its ownership
+> >    (since it isn't much different to recursive acquisition on a single
+> >    CPU)
 > 
-> Critical catch! Thank you. I am quite unhappy to see these hunks were
-> accidentally dropped when generating this series.
+> I think about the following:
 > 
-> @@ -3673,6 +3675,9 @@ EXPORT_SYMBOL(__printk_cpu_trylock);
->   */
->  void __printk_cpu_unlock(void)
->  {
-> +	bool trigger_kgdb = false;
-> +	unsigned int cpu;
-> +
->  	if (atomic_read(&printk_cpulock_nested)) {
->  		atomic_dec(&printk_cpulock_nested);
->  		return;
-> @@ -3683,6 +3688,12 @@ void __printk_cpu_unlock(void)
->  	 * LMM(__printk_cpu_unlock:A)
->  	 */
->  
-> +	cpu = smp_processor_id();
-> +	if (kgdb_cpu == cpu) {
-> +		trigger_kgdb = true;
-> +		kgdb_cpu = -1;
-> +	}
+> void kgdb_roundup_cpus(void)
+> {
+> 	__printk_cpu_lock();
+> 	__kgdb_roundup_cpus();
+> }
+> 
+> , where __printk_cpu_lock() waits/takes printk_cpu_lock()
+> 	__kgdb_roundup_cpus() is the original kgdb_roundup_cpus();
+> 
+> 
+> The idea is that kgdb_roundup_cpus() caller takes the printk_cpu lock.
+> The owner will be well defined.
+> 
+> As a result any other CPU will not be able to take the printk_cpu lock
+> as long as it is owned by the kgdb lock. But as you say, kgdb will
+> make sure that everything is serialized at this stage. So that
+> the original raw_printk_cpu_lock_irqsave() might just disable
+> IRQs when called under debugger.
+> 
+> Does it make any sense?
 
-Just in case that this approach is used in the end.
+Yes but I think it is still has problems.
 
-This code looks racy. kgdb_roundup_delay() seems to be called in NMI
-context. NMI might happen at this point and set kgdb_cpu after
-it was checked.
+Primarily is doesn't solve the issue I raised. It would still be unsafe
+to change debug master: we can guarantee the initial master owns the
+lock but if it has been multiply acquired we cannot transfer ownership
+when we want to change master.
 
-I am afraid that it won't be easy to make this safe using a single
-global variable. A solution might be a per-CPU variable set
-by kgdb_roundup_delay() when it owns printk_cpu_lock.
-__printk_cpu_unlock() would call kgdb_roundup_cpu(cpu) when
-the variable is set.
+Additionally it will delay the round up of cores that do not own the
+lock. The quiescing is never atomic and the operator needs to know
+that but the longer CPUs are allows to execute for the more confusing
+things can become for the operator.
 
-Nit: The name "kgdb_cpu" is too generic. It is not clear what is
-     so special about this CPU. I would call the per-CPU variable
-     "kgdb_delayed_roundup" or so.
+Finally on machines without an NMI this could cause trouble with the
+interrupt disable in raw_printk_cpu_lock_irqsave() (or any outer level
+interrupt disable). If the master get the lock then the other processes
+will become incapable of being rounded up if they are waiting for the
+printk lock).
 
 
-Best Regards,
-Petr
+> I have to say that it is a bit hairy. But it looks slightly better
+> than the delayed/repeated IPI proposed by this patch.
 
->  	/*
->  	 * Guarantee loads and stores from this CPU when it was the
->  	 * lock owner are visible to the next lock owner. This pairs
-> @@ -3703,6 +3714,21 @@ void __printk_cpu_unlock(void)
->  	 */
->  	atomic_set_release(&printk_cpulock_owner,
->  			   -1); /* LMM(__printk_cpu_unlock:B) */
-> +
-> +	if (trigger_kgdb) {
-> +		pr_warn("re-triggering kgdb roundup for CPU#%d\n", cpu);
-> +		kgdb_roundup_cpu(cpu);
-> +	}
->  }
+I'd like to reserve judgement for now which one is least worst...
+largely because if the purpose of the lock simply to prevent interleaving
+of console output then the debugger quiescing code should already have
+this covered.
+
+It leaves me wondering if a change like the one below is sufficient
+(based on code without John's patches but hopefully still clear enough).
+I've given the new code it's own branch which it doesn't, strictly
+speaking, need but it is easier to comment this way... and perhaps also
+just a little easier for people who have not set CONFIG_KGDB to
+ignore ;-).
+
+~~~
+diff --git a/kernel/printk/printk.c b/kernel/printk/printk.c
+index 142a58d124d9..41a7e103bb66 100644
+--- a/kernel/printk/printk.c
++++ b/kernel/printk/printk.c
+@@ -3599,6 +3599,18 @@ int __printk_cpu_trylock(void)
+                /* This CPU is already the owner. */
+                atomic_inc(&printk_cpulock_nested);
+                return 1;
++       } else if (in_dbg_master()) {
++               /*
++                * If we are executing as the primary CPU and with the debugger
++                * active than all other CPUs in the system are quiesced by
++                * the time kdb winds up calling this function. To execute this
++                * branch then the lock must be owned by one of the quiesced CPUs.
++                * Happily, because it is quiesced and cannot release it, it is
++                * safe for us to allow the lock to be taken from a different CPU!
++                * The lock will be released prior to resuming the real owner.
++                */
++               atomic_inc(&printk_cpulock_nested);
++               return 1;
+        }
+ 
+        return 0;
+~~~
+
+
+Daniel.
+
+
+PS In the interested of full disclosure there is a special case
+   in the debugger to allow it to try to cope if it fails to
+   quiesce a CPU and I deliberately omitted this from the long
+   comment above. That special case is expected to be unstable
+   but since the alternative is likely to be a permanent deadlock
+   without any indication of why we choose to take the risk of
+   continuing. Personally I don't recommend reasoning about
+   console safety based on this emergency case hence omitting the
+   comment.
 
 
 _______________________________________________
