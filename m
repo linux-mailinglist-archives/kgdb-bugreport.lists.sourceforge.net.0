@@ -2,116 +2,114 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4949F3FBFF6
-	for <lists+kgdb-bugreport@lfdr.de>; Tue, 31 Aug 2021 02:34:03 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2706F3FC5AA
+	for <lists+kgdb-bugreport@lfdr.de>; Tue, 31 Aug 2021 12:33:25 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1mKriz-0008Hq-IL
-	for lists+kgdb-bugreport@lfdr.de; Tue, 31 Aug 2021 00:34:01 +0000
+	id 1mL151-00038f-P3
+	for lists+kgdb-bugreport@lfdr.de; Tue, 31 Aug 2021 10:33:23 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <senozhatsky@chromium.org>) id 1mKriy-0008Ha-Up
- for kgdb-bugreport@lists.sourceforge.net; Tue, 31 Aug 2021 00:34:00 +0000
+ (envelope-from <cgel.zte@gmail.com>) id 1mGuDY-0001di-CQ
+ for kgdb-bugreport@lists.sourceforge.net; Fri, 20 Aug 2021 02:25:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=TjFdVibCziMMV625QJ8En+pQePJGwxqOLzHHo+cR/2g=; b=MiLFw1MIk0wJe3f1QhfKZ83xkB
- wRig9/N6DY8GG9gDSggw1G3aKNK98kMPjzMGlqWX387oiBT+yAZP7pgKbVrngCPoJqDdDfK2vbMHA
- NX9ysH//QkLGge2vRxCKrAa3O0Gdy6b66CbTKfC2+q4URKgimxjvPd6x8Dzy7DsE77tc=;
+ bh=e12Fdj0H/GzNvYiPmXkZR9coJxYkGDOj8wc4ZBlhff8=; b=dHY8VB+4U61x9i4OxHK6fk9s+x
+ yPVQ6r2f7fCXc3HAQ/TaWWc9o7iufvf9IJmTRibOdWVjGlic+ZmzL6Oj4HudA5UbzdbwKyoAL4CkD
+ 2y3rt67XjkmjO2LxiS6rCE2cwXZy3ZWO/y7S+QRqA3YJA5mYi36bFQXBVAVX8I/jmqJQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=TjFdVibCziMMV625QJ8En+pQePJGwxqOLzHHo+cR/2g=; b=Bhms6EN8FeUdM7r9luhGyUljgx
- UHoa13X4J8I3jCAiE2WR8Ak+68gIqPgbfL4o+KhOqgVzizW1asPMXWwPxs/EjYJ+CwzhiXhtFn99F
- ZHgvkofuaQh9B9mHc0cPUg4WZeXziePl028hERjSoG2WmA4zqO0bou+YQa/1L+bqZZMw=;
-Received: from mail-pj1-f41.google.com ([209.85.216.41])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=e12Fdj0H/GzNvYiPmXkZR9coJxYkGDOj8wc4ZBlhff8=; b=g
+ xVKzxNCOF96F2M/Jqsse7axzETc0Bk3Gvxn0Y8SpVprowYt4wLoQsnevHt1WwR1TDUU2a5+qJHTVC
+ FT6BRtItUWDFunlb6uJfIuMf1/aMglJzf62QTGiGOT8GbaukQUohj+3OxuTCPIrZPCi9+IgVUZUgw
+ hqLKs3iBO0w6fgw0=;
+Received: from mail-qk1-f172.google.com ([209.85.222.172])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
- id 1mKriu-008RzS-Gi
- for kgdb-bugreport@lists.sourceforge.net; Tue, 31 Aug 2021 00:34:00 +0000
-Received: by mail-pj1-f41.google.com with SMTP id
- f11-20020a17090aa78b00b0018e98a7cddaso1161255pjq.4
+ id 1mGuDU-0000Bf-Ih
+ for kgdb-bugreport@lists.sourceforge.net; Fri, 20 Aug 2021 02:25:12 +0000
+Received: by mail-qk1-f172.google.com with SMTP id 14so9436392qkc.4
  for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 30 Aug 2021 17:33:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=TjFdVibCziMMV625QJ8En+pQePJGwxqOLzHHo+cR/2g=;
- b=AzDcWKGtdHyMnoIEjzFPFQjRSRfN6cZcyUfqyg+1RFft/sQblgaz4y7UB0acXhUsAk
- aYq77Xwd7EMjSfEApWR3a558fJLQOEbjXYD1SI5rTv8NJMwK07Xba20kndQ9K5z7nQNv
- VqF6GPhvubvT3lLK/TsJYcG7uj5cuYcL5eVI8=
+ Thu, 19 Aug 2021 19:25:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=e12Fdj0H/GzNvYiPmXkZR9coJxYkGDOj8wc4ZBlhff8=;
+ b=Vk5qUmT6JpyL0tQl7SYZTk25N5BoXeC9/+yEfiI+yRMOmQmU0UOfwi5d76NOrjoKWE
+ 4DvR9WCNUPYFWxfF2VXDZOMqo79zWdvt1APShnn2yg5OfgTVH+fDGiWa7UxGIpb/1yte
+ wU1DKoiqDF54JqjTay3sM2DsT9zRO7DKFAFEmektQAx5eq0SpPedf2pns2wWP50Wy2J3
+ lpw7hc5bsk5AcF3VNcCnG69og8ORqph4dzlpS8FzFEp1ZbHmGu5w/PU5DifqT3Nl/QXz
+ +jcaTmx97QoqyiGd4APkSKd0fj+ynBoLXq65mHFvu3yT/rxR4tzrFUrOwwuBD19/tsW+
+ xEdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=TjFdVibCziMMV625QJ8En+pQePJGwxqOLzHHo+cR/2g=;
- b=PrmXipBJjrB2uAtIodidSqsucuPjpHZ+OTemr+clLoZbVRRt3A4eqlIOSUy/PaGs8q
- bRFyLt5ia+jWn6I4Vil1g14kHOJYBrbshMI8R4alzYbbH5JQCW1nUgAJ+dyThqvDXv8r
- UG5FrWcBMI8gjwdZPbl6rJ1slKLLfWulirP3bCjbe64iaLN7QEpRZ4I5HAl0p/D6S4bA
- YW2nyUZuYzMFATNV7DazaSHF0u8Z6rfw0rloIvZge4rZok8oq7+vw1wrnfs6aLzZisE9
- uTZzqfaeOee7479DRhfGwxhsGArHVf+KCYPBtuQai6Suc04K0RPtNyrEEXLcLcYbkInL
- eASQ==
-X-Gm-Message-State: AOAM531ujF0KMlA4rZ3YQYuuul2mIKlE7qxogMKcI+BVr8fNZU/7cCSN
- kNmY0lpv4h9m1VAHerbrDxOAuw==
-X-Google-Smtp-Source: ABdhPJxdbxW4ryHv5bhuf8dsnrqkWswjsDidSV0lyn6xogTwXPWUAw0uITGdywWoWH5lbvCpqEzDjw==
-X-Received: by 2002:a17:90a:bc47:: with SMTP id
- t7mr2025742pjv.19.1630370030908; 
- Mon, 30 Aug 2021 17:33:50 -0700 (PDT)
-Received: from google.com ([2409:10:2e40:5100:69ed:b45b:ceb5:e18b])
- by smtp.gmail.com with ESMTPSA id q12sm15915318pfj.153.2021.08.30.17.33.38
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=e12Fdj0H/GzNvYiPmXkZR9coJxYkGDOj8wc4ZBlhff8=;
+ b=gV/2w9Oyyi2VoSD5FHQPiLsDixN/D9OXZAxAFt3anZwJzgCUoSQvwOr5g/V4xU5FN4
+ AZJOsHYp0BQuJCy/8dCgxXXsrUWMWO2hNaMSVVmtgw7B5l9unXtUpxQtmbHDyPRhsP8L
+ X6JcDSxNHX99aIzaRGCs9LlcEHvhkUr+zm9ioYoJkn0xTI3ZmvN1gJ75zuqsY1aQ05XX
+ 5f26clJwTtazNj2il11mL7MDCfJ4QxO9XDqK/1T45gu+V4Hx5L9gfGXaoGiZqhUg0v6A
+ 13rPjheQNavqbAA3O15mdpfoh9Uh0/l3Hp+9VinRMz0OcFh42ebL66Y+684vbcvz/9PQ
+ 9hYw==
+X-Gm-Message-State: AOAM530BljAod9Nw+AydILYka/FN2GWXFTnoQCH/4ZXg5AfkjnXxKTcd
+ fvU4RyfifanPQXXUoKwjP/E=
+X-Google-Smtp-Source: ABdhPJzMvF5SJh0bN8VWKI3dxiY8iD94/z4UdRgqg5m1jG4vlfCimhoAUS317AsU7+zc0xyp3H0QjA==
+X-Received: by 2002:a05:620a:1525:: with SMTP id
+ n5mr6726722qkk.386.1629426302750; 
+ Thu, 19 Aug 2021 19:25:02 -0700 (PDT)
+Received: from localhost.localdomain ([193.203.214.57])
+ by smtp.gmail.com with ESMTPSA id d26sm2586626qkl.6.2021.08.19.19.24.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 30 Aug 2021 17:33:50 -0700 (PDT)
-Date: Tue, 31 Aug 2021 09:33:36 +0900
-From: Sergey Senozhatsky <senozhatsky@chromium.org>
-To: Petr Mladek <pmladek@suse.com>
-Message-ID: <YS144PMiCJnmoKE4@google.com>
-References: <20210803131301.5588-1-john.ogness@linutronix.de>
- <YQwHwT2wYM1dJfVk@alley>
+ Thu, 19 Aug 2021 19:25:02 -0700 (PDT)
+From: jing yangyang <cgel.zte@gmail.com>
+X-Google-Original-From: jing yangyang <jing.yangyang@zte.com.cn>
+To: Jason Wessel <jason.wessel@windriver.com>,
+ Daniel Thompson <daniel.thompson@linaro.org>,
+ Douglas Anderson <dianders@chromium.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Will Deacon <will@kernel.org>,
+ Stephen Zhang <stephenzhangzsd@gmail.com>,
+ Peter Zijlstra <peterz@infradead.org>,
+ "Gustavo A . R . Silva" <gustavoars@kernel.org>,
+ kgdb-bugreport@lists.sourceforge.net, linux-kernel@vger.kernel.org
+Date: Thu, 19 Aug 2021 19:24:42 -0700
+Message-Id: <20210820022442.11107-1-jing.yangyang@zte.com.cn>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <YQwHwT2wYM1dJfVk@alley>
-X-Spam-Score: -0.9 (/)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
- has NOT identified this incoming email as spam.  The original
- message has been attached to this so you can view it or label
- similar future email.  If you have any questions, see
- the administrator of that system for details.
- Content preview:  On (21/08/05 17:47),
- Petr Mladek wrote: [..] > 3. After introducing
- console kthread(s): > > int printk(...) > { > vprintk_store();
- > wake_consoles_via_irqwork(); 
- > } > > + in panic: > > + with atomic [...] 
- Content analysis details:   (-0.9 points, 6.0 required)
- pts rule name              description
- ---- ---------------------- --------------------------------------------------
+X-Spam-Score: -0.1 (/)
+X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
+ See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: zte.com.cn]
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (cgel.zte[at]gmail.com)
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.216.41 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.222.172 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.222.172 listed in list.dnswl.org]
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.216.41 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mKriu-008RzS-Gi
-Subject: Re: [Kgdb-bugreport] [PATCH printk v1 00/10] printk: introduce
- atomic consoles and sync mode
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+X-Headers-End: 1mGuDU-0000Bf-Ih
+X-Mailman-Approved-At: Tue, 31 Aug 2021 10:33:22 +0000
+Subject: [Kgdb-bugreport] [PATCH linux-next] debug:kdb: fix unsigned int win
+ compared to less than zero
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -123,68 +121,38 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: "Gautham R. Shenoy" <ego@linux.vnet.ibm.com>,
- "Gustavo A. R. Silva" <gustavoars@kernel.org>,
- Srikar Dronamraju <srikar@linux.vnet.ibm.com>,
- Jiri Slaby <jirislaby@kernel.org>, Peter Zijlstra <peterz@infradead.org>,
- Benjamin Herrenschmidt <benh@kernel.crashing.org>,
- Al Cooper <alcooperx@gmail.com>, Paul Cercueil <paul@crapouillou.net>,
- Matthias Brugger <matthias.bgg@gmail.com>, Paul Mackerras <paulus@samba.org>,
- "H. Peter Anvin" <hpa@zytor.com>, Cengiz Can <cengiz@kernel.wtf>,
- Chengyang Fan <cy.fan@huawei.com>,
- Daniel Thompson <daniel.thompson@linaro.org>,
- Eddie Huang <eddie.huang@mediatek.com>,
- Bhaskar Chowdhury <unixbhaskar@gmail.com>,
- John Ogness <john.ogness@linutronix.de>, Changbin Du <changbin.du@intel.com>,
- Michael Ellerman <mpe@ellerman.id.au>, Masahiro Yamada <masahiroy@kernel.org>,
- x86@kernel.org, linux-mediatek@lists.infradead.org,
- Christophe Leroy <christophe.leroy@csgroup.eu>,
- Tetsuo Handa <penguin-kernel@i-love.sakura.ne.jp>,
- Ingo Molnar <mingo@redhat.com>, linux-serial@vger.kernel.org,
- kgdb-bugreport@lists.sourceforge.net, linux-mips@vger.kernel.org,
- Wang Qing <wangqing@vivo.com>,
- Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
- "Paul E. McKenney" <paulmck@kernel.org>, Johan Hovold <johan@kernel.org>,
- Steven Rostedt <rostedt@goodmis.org>, Borislav Petkov <bp@alien8.de>,
- Nicholas Piggin <npiggin@gmail.com>, Hsin-Yi Wang <hsinyi@chromium.org>,
- Sedat Dilek <sedat.dilek@gmail.com>, Claire Chang <tientzu@chromium.org>,
- Thomas Gleixner <tglx@linutronix.de>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Andrij Abyzov <aabyzov@slb.com>, linux-arm-kernel@lists.infradead.org,
- kuldip dwivedi <kuldip.dwivedi@puresoftware.com>,
- Andrew Jeffery <andrew@aj.id.au>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Zhang Qilong <zhangqilong3@huawei.com>,
- Nick Desaulniers <ndesaulniers@google.com>, linux-kernel@vger.kernel.org,
- Sergey Senozhatsky <senozhatsky@chromium.org>,
- Guenter Roeck <linux@roeck-us.net>, Jason Wessel <jason.wessel@windriver.com>,
- Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
- Andrew Morton <akpm@linux-foundation.org>,
- "Maciej W. Rozycki" <macro@orcam.me.uk>, linuxppc-dev@lists.ozlabs.org,
- Vitor Massaru Iha <vitor@massaru.org>,
- =?iso-8859-1?Q?C=E9dric?= Le Goater <clg@kaod.org>
+Cc: Zeal Robot <zealci@zte.com.cn>, jing yangyang <jing.yangyang@zte.com.cn>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On (21/08/05 17:47), Petr Mladek wrote:
-[..]
-> 3. After introducing console kthread(s):
-> 
-> 	int printk(...)
-> 	{
-> 		vprintk_store();
-> 		wake_consoles_via_irqwork();
-> 	}
-> 
-> 	+ in panic:
-> 
-> 	    + with atomic console like after this patchset?
-> 	    + without atomic consoles?
-> 
-> 	+ during early boot?
+Fix coccicheck warning:
+./kernel/debug/kdb/kdb_support.c:575:3-10:
+WARNING:Unsigned expression compared with zero  p_state < 0
 
-I guess I'd also add netconsole to the list.
+Reported-by: Zeal Robot <zealci@zte.com.cn>
+Signed-off-by: jing yangyang <jing.yangyang@zte.com.cn>
+---
+ kernel/debug/kdb/kdb_support.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/kernel/debug/kdb/kdb_support.c b/kernel/debug/kdb/kdb_support.c
+index c605b17..fb30801 100644
+--- a/kernel/debug/kdb/kdb_support.c
++++ b/kernel/debug/kdb/kdb_support.c
+@@ -560,7 +560,7 @@ unsigned long kdb_task_state_string(const char *s)
+  */
+ char kdb_task_state_char (const struct task_struct *p)
+ {
+-	unsigned int p_state;
++	int p_state;
+ 	unsigned long tmp;
+ 	char state;
+ 	int cpu;
+-- 
+1.8.3.1
+
+
 
 
 _______________________________________________
