@@ -2,110 +2,116 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1E6A23F3219
-	for <lists+kgdb-bugreport@lfdr.de>; Fri, 20 Aug 2021 19:15:50 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4949F3FBFF6
+	for <lists+kgdb-bugreport@lfdr.de>; Tue, 31 Aug 2021 02:34:03 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1mH87Q-0003jU-Rs
-	for lists+kgdb-bugreport@lfdr.de; Fri, 20 Aug 2021 17:15:48 +0000
+	id 1mKriz-0008Hq-IL
+	for lists+kgdb-bugreport@lfdr.de; Tue, 31 Aug 2021 00:34:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <dianders@chromium.org>) id 1mH87P-0003jO-QJ
- for kgdb-bugreport@lists.sourceforge.net; Fri, 20 Aug 2021 17:15:47 +0000
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <senozhatsky@chromium.org>) id 1mKriy-0008Ha-Up
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 31 Aug 2021 00:34:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=BatGZvnfPX/8BO8di0fHBk4PO/vONowvEXDrPfGjhtE=; b=Z3su9YXIxqVoqp9yVvgqfw7DXd
- PbutdlOK9xiv6Qnzag6lZ1Bf779ip6WLiz6mYkwBulDhozeJPDeADAu6V+0Ry3hXOZDeuJIaYo0HY
- fP0zZzEm9+pDW4BjXy6TCdVt0eVGWU76rT+BHApssIividrg6mK2Tx9lzS8wb0ulNxQU=;
+ bh=TjFdVibCziMMV625QJ8En+pQePJGwxqOLzHHo+cR/2g=; b=MiLFw1MIk0wJe3f1QhfKZ83xkB
+ wRig9/N6DY8GG9gDSggw1G3aKNK98kMPjzMGlqWX387oiBT+yAZP7pgKbVrngCPoJqDdDfK2vbMHA
+ NX9ysH//QkLGge2vRxCKrAa3O0Gdy6b66CbTKfC2+q4URKgimxjvPd6x8Dzy7DsE77tc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=BatGZvnfPX/8BO8di0fHBk4PO/vONowvEXDrPfGjhtE=; b=i5jsyOOzUl28q9mctcHgfNEKSg
- qOjJmkX2bCbwlCl3oG3b0zyi6kN7q0acwc6GN2/D1mZs2H5scUb8pcXh1B0JsOuX+mj7SdBlSrR3X
- VioIG9tNrQrUmnLXRrAoQBHilfolaNJxqYFjElpvx6JK1F5RPckzcgHqRw85EDokPc2U=;
-Received: from mail-qt1-f174.google.com ([209.85.160.174])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=TjFdVibCziMMV625QJ8En+pQePJGwxqOLzHHo+cR/2g=; b=Bhms6EN8FeUdM7r9luhGyUljgx
+ UHoa13X4J8I3jCAiE2WR8Ak+68gIqPgbfL4o+KhOqgVzizW1asPMXWwPxs/EjYJ+CwzhiXhtFn99F
+ ZHgvkofuaQh9B9mHc0cPUg4WZeXziePl028hERjSoG2WmA4zqO0bou+YQa/1L+bqZZMw=;
+Received: from mail-pj1-f41.google.com ([209.85.216.41])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
- id 1mH87L-000212-IX
- for kgdb-bugreport@lists.sourceforge.net; Fri, 20 Aug 2021 17:15:47 +0000
-Received: by mail-qt1-f174.google.com with SMTP id d5so8012585qtd.3
+ id 1mKriu-008RzS-Gi
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 31 Aug 2021 00:34:00 +0000
+Received: by mail-pj1-f41.google.com with SMTP id
+ f11-20020a17090aa78b00b0018e98a7cddaso1161255pjq.4
  for <kgdb-bugreport@lists.sourceforge.net>;
- Fri, 20 Aug 2021 10:15:43 -0700 (PDT)
+ Mon, 30 Aug 2021 17:33:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=BatGZvnfPX/8BO8di0fHBk4PO/vONowvEXDrPfGjhtE=;
- b=QORcfENsVBzv8KOaanpTcj64PpMZIDbzZhbE3mr0pKZBKwLlkGP6mcMz/IL+aw+RTk
- QTCNYTNQwnLnlhZtj+50FDSPi79cQ5ZrCbvDKZIPmpeBW0yo9FMWxpZHAzS/2dqdWflI
- 1f0Qa65z/MIWurpflq/kQ63w3GrHyiEUXFNo4=
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=TjFdVibCziMMV625QJ8En+pQePJGwxqOLzHHo+cR/2g=;
+ b=AzDcWKGtdHyMnoIEjzFPFQjRSRfN6cZcyUfqyg+1RFft/sQblgaz4y7UB0acXhUsAk
+ aYq77Xwd7EMjSfEApWR3a558fJLQOEbjXYD1SI5rTv8NJMwK07Xba20kndQ9K5z7nQNv
+ VqF6GPhvubvT3lLK/TsJYcG7uj5cuYcL5eVI8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=BatGZvnfPX/8BO8di0fHBk4PO/vONowvEXDrPfGjhtE=;
- b=gr2uGWwPjuddU0AzkAPk+/pKt4K9Kq7ZOgdhyb/rposodtAI4DKh1SDbg5mmPxmRRD
- w+V8EteiwD14R4uyeCn9uoaXpzHUgBWGXJwer9u4r+44IS3TyDFPgmWaPkBM9JSpINQz
- y979vYWaoxQlFuj0OTl7IJDLWDjMtu8wryQFOOHtHyw1jRpXA5TwVtpp4NZ41iWlEquY
- L6B5608PdZrGk6C+vP9dVTwu1Ma03Zb1vIk7Yii1/XyiesYZ1WEzhFd2iIaiK0uZDNos
- rou8zrPW38+gmU0gA4Z5tdPyYnn4wLRe1x0yaotjgNudz6pz9r3lPCD+xbyo/JGPRdt3
- sG7w==
-X-Gm-Message-State: AOAM530W5WXnCUgXei0l2jhkXdi9dAXUOl2tO78eBVnmlVz7KvW2VzpT
- O7LUCss4IMXtq4HkdAAt3L+2k8Xlh3NdzA==
-X-Google-Smtp-Source: ABdhPJyas2aShATpW8sPCtbgMWiA40/kht47vnCLFuCHTK+Yl+8oYXsp8+ytwRvlygyqF9KRpquI1Q==
-X-Received: by 2002:a05:6638:2712:: with SMTP id
- m18mr18365531jav.76.1629477979459; 
- Fri, 20 Aug 2021 09:46:19 -0700 (PDT)
-Received: from mail-io1-f47.google.com (mail-io1-f47.google.com.
- [209.85.166.47])
- by smtp.gmail.com with ESMTPSA id f5sm3641832ils.3.2021.08.20.09.46.17
- for <kgdb-bugreport@lists.sourceforge.net>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 20 Aug 2021 09:46:18 -0700 (PDT)
-Received: by mail-io1-f47.google.com with SMTP id b200so13042805iof.13
- for <kgdb-bugreport@lists.sourceforge.net>;
- Fri, 20 Aug 2021 09:46:17 -0700 (PDT)
-X-Received: by 2002:a6b:e70f:: with SMTP id b15mr1231462ioh.140.1629477977297; 
- Fri, 20 Aug 2021 09:46:17 -0700 (PDT)
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=TjFdVibCziMMV625QJ8En+pQePJGwxqOLzHHo+cR/2g=;
+ b=PrmXipBJjrB2uAtIodidSqsucuPjpHZ+OTemr+clLoZbVRRt3A4eqlIOSUy/PaGs8q
+ bRFyLt5ia+jWn6I4Vil1g14kHOJYBrbshMI8R4alzYbbH5JQCW1nUgAJ+dyThqvDXv8r
+ UG5FrWcBMI8gjwdZPbl6rJ1slKLLfWulirP3bCjbe64iaLN7QEpRZ4I5HAl0p/D6S4bA
+ YW2nyUZuYzMFATNV7DazaSHF0u8Z6rfw0rloIvZge4rZok8oq7+vw1wrnfs6aLzZisE9
+ uTZzqfaeOee7479DRhfGwxhsGArHVf+KCYPBtuQai6Suc04K0RPtNyrEEXLcLcYbkInL
+ eASQ==
+X-Gm-Message-State: AOAM531ujF0KMlA4rZ3YQYuuul2mIKlE7qxogMKcI+BVr8fNZU/7cCSN
+ kNmY0lpv4h9m1VAHerbrDxOAuw==
+X-Google-Smtp-Source: ABdhPJxdbxW4ryHv5bhuf8dsnrqkWswjsDidSV0lyn6xogTwXPWUAw0uITGdywWoWH5lbvCpqEzDjw==
+X-Received: by 2002:a17:90a:bc47:: with SMTP id
+ t7mr2025742pjv.19.1630370030908; 
+ Mon, 30 Aug 2021 17:33:50 -0700 (PDT)
+Received: from google.com ([2409:10:2e40:5100:69ed:b45b:ceb5:e18b])
+ by smtp.gmail.com with ESMTPSA id q12sm15915318pfj.153.2021.08.30.17.33.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 30 Aug 2021 17:33:50 -0700 (PDT)
+Date: Tue, 31 Aug 2021 09:33:36 +0900
+From: Sergey Senozhatsky <senozhatsky@chromium.org>
+To: Petr Mladek <pmladek@suse.com>
+Message-ID: <YS144PMiCJnmoKE4@google.com>
+References: <20210803131301.5588-1-john.ogness@linutronix.de>
+ <YQwHwT2wYM1dJfVk@alley>
 MIME-Version: 1.0
-References: <20210820022442.11107-1-jing.yangyang@zte.com.cn>
-In-Reply-To: <20210820022442.11107-1-jing.yangyang@zte.com.cn>
-From: Doug Anderson <dianders@chromium.org>
-Date: Fri, 20 Aug 2021 09:46:03 -0700
-X-Gmail-Original-Message-ID: <CAD=FV=WJQQsK4-okC+6HSPQp8q_ahVYFHXDBhigSLGYLvnEJjQ@mail.gmail.com>
-Message-ID: <CAD=FV=WJQQsK4-okC+6HSPQp8q_ahVYFHXDBhigSLGYLvnEJjQ@mail.gmail.com>
-To: jing yangyang <cgel.zte@gmail.com>
-X-Spam-Score: -0.8 (/)
-X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
- See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: mail-archive.com]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.160.174 listed in list.dnswl.org]
+Content-Disposition: inline
+In-Reply-To: <YQwHwT2wYM1dJfVk@alley>
+X-Spam-Score: -0.9 (/)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ has NOT identified this incoming email as spam.  The original
+ message has been attached to this so you can view it or label
+ similar future email.  If you have any questions, see
+ the administrator of that system for details.
+ Content preview:  On (21/08/05 17:47),
+ Petr Mladek wrote: [..] > 3. After introducing
+ console kthread(s): > > int printk(...) > { > vprintk_store();
+ > wake_consoles_via_irqwork(); 
+ > } > > + in panic: > > + with atomic [...] 
+ Content analysis details:   (-0.9 points, 6.0 required)
+ pts rule name              description
+ ---- ---------------------- --------------------------------------------------
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.160.174 listed in wl.mailspike.net]
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
+ [209.85.216.41 listed in wl.mailspike.net]
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.216.41 listed in list.dnswl.org]
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mH87L-000212-IX
-Subject: Re: [Kgdb-bugreport] [PATCH linux-next] debug:kdb: fix unsigned int
- win compared to less than zero
+X-Headers-End: 1mKriu-008RzS-Gi
+Subject: Re: [Kgdb-bugreport] [PATCH printk v1 00/10] printk: introduce
+ atomic consoles and sync mode
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,64 +123,68 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daniel Thompson <daniel.thompson@linaro.org>,
- jing yangyang <jing.yangyang@zte.com.cn>,
- Peter Zijlstra <peterz@infradead.org>, kgdb-bugreport@lists.sourceforge.net,
- Zeal Robot <zealci@zte.com.cn>,
- "Gustavo A . R . Silva" <gustavoars@kernel.org>,
- LKML <linux-kernel@vger.kernel.org>, Jason Wessel <jason.wessel@windriver.com>,
- Stephen Zhang <stephenzhangzsd@gmail.com>, Will Deacon <will@kernel.org>
+Cc: "Gautham R. Shenoy" <ego@linux.vnet.ibm.com>,
+ "Gustavo A. R. Silva" <gustavoars@kernel.org>,
+ Srikar Dronamraju <srikar@linux.vnet.ibm.com>,
+ Jiri Slaby <jirislaby@kernel.org>, Peter Zijlstra <peterz@infradead.org>,
+ Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+ Al Cooper <alcooperx@gmail.com>, Paul Cercueil <paul@crapouillou.net>,
+ Matthias Brugger <matthias.bgg@gmail.com>, Paul Mackerras <paulus@samba.org>,
+ "H. Peter Anvin" <hpa@zytor.com>, Cengiz Can <cengiz@kernel.wtf>,
+ Chengyang Fan <cy.fan@huawei.com>,
+ Daniel Thompson <daniel.thompson@linaro.org>,
+ Eddie Huang <eddie.huang@mediatek.com>,
+ Bhaskar Chowdhury <unixbhaskar@gmail.com>,
+ John Ogness <john.ogness@linutronix.de>, Changbin Du <changbin.du@intel.com>,
+ Michael Ellerman <mpe@ellerman.id.au>, Masahiro Yamada <masahiroy@kernel.org>,
+ x86@kernel.org, linux-mediatek@lists.infradead.org,
+ Christophe Leroy <christophe.leroy@csgroup.eu>,
+ Tetsuo Handa <penguin-kernel@i-love.sakura.ne.jp>,
+ Ingo Molnar <mingo@redhat.com>, linux-serial@vger.kernel.org,
+ kgdb-bugreport@lists.sourceforge.net, linux-mips@vger.kernel.org,
+ Wang Qing <wangqing@vivo.com>,
+ Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
+ "Paul E. McKenney" <paulmck@kernel.org>, Johan Hovold <johan@kernel.org>,
+ Steven Rostedt <rostedt@goodmis.org>, Borislav Petkov <bp@alien8.de>,
+ Nicholas Piggin <npiggin@gmail.com>, Hsin-Yi Wang <hsinyi@chromium.org>,
+ Sedat Dilek <sedat.dilek@gmail.com>, Claire Chang <tientzu@chromium.org>,
+ Thomas Gleixner <tglx@linutronix.de>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Andrij Abyzov <aabyzov@slb.com>, linux-arm-kernel@lists.infradead.org,
+ kuldip dwivedi <kuldip.dwivedi@puresoftware.com>,
+ Andrew Jeffery <andrew@aj.id.au>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Zhang Qilong <zhangqilong3@huawei.com>,
+ Nick Desaulniers <ndesaulniers@google.com>, linux-kernel@vger.kernel.org,
+ Sergey Senozhatsky <senozhatsky@chromium.org>,
+ Guenter Roeck <linux@roeck-us.net>, Jason Wessel <jason.wessel@windriver.com>,
+ Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ "Maciej W. Rozycki" <macro@orcam.me.uk>, linuxppc-dev@lists.ozlabs.org,
+ Vitor Massaru Iha <vitor@massaru.org>,
+ =?iso-8859-1?Q?C=E9dric?= Le Goater <clg@kaod.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Hi,
+On (21/08/05 17:47), Petr Mladek wrote:
+[..]
+> 3. After introducing console kthread(s):
+> 
+> 	int printk(...)
+> 	{
+> 		vprintk_store();
+> 		wake_consoles_via_irqwork();
+> 	}
+> 
+> 	+ in panic:
+> 
+> 	    + with atomic console like after this patchset?
+> 	    + without atomic consoles?
+> 
+> 	+ during early boot?
 
-On Thu, Aug 19, 2021 at 7:25 PM jing yangyang <cgel.zte@gmail.com> wrote:
->
-> Fix coccicheck warning:
-> ./kernel/debug/kdb/kdb_support.c:575:3-10:
-> WARNING:Unsigned expression compared with zero  p_state < 0
->
-> Reported-by: Zeal Robot <zealci@zte.com.cn>
-> Signed-off-by: jing yangyang <jing.yangyang@zte.com.cn>
-> ---
->  kernel/debug/kdb/kdb_support.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/kernel/debug/kdb/kdb_support.c b/kernel/debug/kdb/kdb_support.c
-> index c605b17..fb30801 100644
-> --- a/kernel/debug/kdb/kdb_support.c
-> +++ b/kernel/debug/kdb/kdb_support.c
-> @@ -560,7 +560,7 @@ unsigned long kdb_task_state_string(const char *s)
->   */
->  char kdb_task_state_char (const struct task_struct *p)
->  {
-> -       unsigned int p_state;
-> +       int p_state;
-
-This was talked about:
-
-https://www.mail-archive.com/kgdb-bugreport@lists.sourceforge.net/msg06159.html
-
-There, Peter Zijlstra said:
-
-> Pre-existing fail that.. but yes that code (and it's carbon copy in
-> arch/powerpc/xmon/xmon.c) are clearly bogus and have been for a long
-> time afaict.
->
-> Ideally someone that cares about this code can replace it with
-> get_task_state() or something.
-
-...so while the warning was introduced by commit 2f064a59a11f ("sched:
-Change task_struct::state") and your fix papers over of the warning,
-it actually doesn't fix the real bug. Apparently the comment
-describing the "state" variable before that commit was wrong and "-1"
-didn't mean unrunnable.
-
-Maybe you could submit a v2 that does what Peter suggests?
-
--Doug
+I guess I'd also add netconsole to the list.
 
 
 _______________________________________________
