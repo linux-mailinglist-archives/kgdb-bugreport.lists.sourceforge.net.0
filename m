@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B7E0740EE6D
-	for <lists+kgdb-bugreport@lfdr.de>; Fri, 17 Sep 2021 02:43:19 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 43A9440F192
+	for <lists+kgdb-bugreport@lfdr.de>; Fri, 17 Sep 2021 07:20:31 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1mR1yI-0003vx-7y
-	for lists+kgdb-bugreport@lfdr.de; Fri, 17 Sep 2021 00:43:18 +0000
+	id 1mR6IY-00057v-1A
+	for lists+kgdb-bugreport@lfdr.de; Fri, 17 Sep 2021 05:20:30 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <lkp@intel.com>) id 1mR1yH-0003vn-8d
- for kgdb-bugreport@lists.sourceforge.net; Fri, 17 Sep 2021 00:43:17 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <lkp@intel.com>) id 1mR6IW-00057n-Gp
+ for kgdb-bugreport@lists.sourceforge.net; Fri, 17 Sep 2021 05:20:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=tZt/mTzz1ZkaNSGtYxBUwa4bX+2kq3Q+nGKqm+Gimes=; b=XZPSu+vDSfMpLCuNM/T8bzFcrV
- mXSbRPLcZoRQzIetK+Ot6qK/aAI3S0g5O5mwrp/g5Rz32ihOet15ugXMPTT90TmWgZp95Tqe8nyOd
- d0ZQxvfH4yxDPDsz/GKDgk0+SEDFfq7c2hrakZwcQvsDTZGz3bmRpL7ccoK5o3pB1o1s=;
+ bh=xpQjWFEmRGjpLoV0VG0Ybceoh5YWwPShs3NQu3f+3zg=; b=W+ZhA4Rj8fQbkK2iLlRCyZcF4l
+ lzzrCKrNfgwwFVnsLuOnm0gaksIZo8ovz+WuM9UUIKNX+cKxjqF5kjhAdxmFek8MRznSxDkuOMVz4
+ jFRQPTSq/VH4om2SShBrFJr+sVvpCPjOHsf8qT/fzqe5FGwf0akHkGoa+VjxweIecXkA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -30,59 +30,59 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=tZt/mTzz1ZkaNSGtYxBUwa4bX+2kq3Q+nGKqm+Gimes=; b=Zb6gE7rajomU8/pCaRCA9m8aXB
- R7unVu8UnTknS2vyVBqDPdRSR60oj7xzMa6scGiOkoR1m/kjHaTsZpdaQtXpyCZqzRc1Yf/U6z63t
- 1IEVY3kFdmrfykaNidWuErFG9A4fLV4gKgKIpiNbxonNUCyThImvNCwq/8tdhKsIFP1A=;
-Received: from mga14.intel.com ([192.55.52.115])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=xpQjWFEmRGjpLoV0VG0Ybceoh5YWwPShs3NQu3f+3zg=; b=XFd4KN9VnFkmOVG8yLSsyqR/QK
+ 9+Jxp5Jj+1CMu7D3jeozhuRODnKBWv2h/FyDUsR8ihY1MdbGF9d1H+CPAJY5XD68lcFfCzmGjjeHi
+ PU+vYOVVML7N8gn/vv80OmeZ9Uo+oF3sVflqSL3Uwdwy72DgwWE/xWCq/E2Gg4psC364=;
+Received: from mga03.intel.com ([134.134.136.65])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mR1yD-00051C-Jl
- for kgdb-bugreport@lists.sourceforge.net; Fri, 17 Sep 2021 00:43:17 +0000
-X-IronPort-AV: E=McAfee;i="6200,9189,10109"; a="222352917"
-X-IronPort-AV: E=Sophos;i="5.85,299,1624345200"; 
- d="gz'50?scan'50,208,50";a="222352917"
-Received: from fmsmga008.fm.intel.com ([10.253.24.58])
- by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 16 Sep 2021 17:43:08 -0700
+ id 1mR6IU-00DQGr-98
+ for kgdb-bugreport@lists.sourceforge.net; Fri, 17 Sep 2021 05:20:28 +0000
+X-IronPort-AV: E=McAfee;i="6200,9189,10109"; a="222778481"
+X-IronPort-AV: E=Sophos;i="5.85,300,1624345200"; 
+ d="gz'50?scan'50,208,50";a="222778481"
+Received: from fmsmga004.fm.intel.com ([10.253.24.48])
+ by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 16 Sep 2021 22:20:18 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.85,299,1624345200"; 
- d="gz'50?scan'50,208,50";a="509563759"
+X-IronPort-AV: E=Sophos;i="5.85,300,1624345200"; 
+ d="gz'50?scan'50,208,50";a="530553892"
 Received: from lkp-server01.sh.intel.com (HELO 285e7b116627) ([10.239.97.150])
- by fmsmga008.fm.intel.com with ESMTP; 16 Sep 2021 17:43:03 -0700
+ by fmsmga004.fm.intel.com with ESMTP; 16 Sep 2021 22:20:15 -0700
 Received: from kbuild by 285e7b116627 with local (Exim 4.92)
  (envelope-from <lkp@intel.com>)
- id 1mR1y2-0001Zt-S9; Fri, 17 Sep 2021 00:43:02 +0000
-Date: Fri, 17 Sep 2021 08:42:35 +0800
+ id 1mR6IJ-0001jr-0j; Fri, 17 Sep 2021 05:20:15 +0000
+Date: Fri, 17 Sep 2021 13:19:32 +0800
 From: kernel test robot <lkp@intel.com>
 To: Daniel Thompson <daniel.thompson@linaro.org>,
  Jason Wessel <jason.wessel@windriver.com>,
  Douglas Anderson <dianders@chromium.org>
-Message-ID: <202109170802.zMVIp0aN-lkp@intel.com>
+Message-ID: <202109171316.1J0bOfpZ-lkp@intel.com>
 References: <20210916154253.2731609-1-daniel.thompson@linaro.org>
 MIME-Version: 1.0
 In-Reply-To: <20210916154253.2731609-1-daniel.thompson@linaro.org>
 User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Spam-Score: -5.0 (-----)
+X-Spam-Score: -2.3 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi Daniel, I love your patch! Yet something to improve: [auto
- build test ERROR on 6880fa6c56601bb8ed59df6c30fd390cc5f6dd8f] 
- Content analysis details:   (-5.0 points, 6.0 required)
+ Content preview:  Hi Daniel, I love your patch! Perhaps something to improve:
+ [auto build test WARNING on 6880fa6c56601bb8ed59df6c30fd390cc5f6dd8f] 
+ Content analysis details:   (-2.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [192.55.52.115 listed in list.dnswl.org]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [134.134.136.65 listed in list.dnswl.org]
  0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
  blocked.  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: 01.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1mR1yD-00051C-Jl
+X-Headers-End: 1mR6IU-00DQGr-98
 Content-Disposition: inline
 X-Content-Filtered-By: Mailman/MimeDel 2.1.21
 Subject: Re: [Kgdb-bugreport] [PATCH] kdb: Adopt scheduler's task
@@ -107,13 +107,13 @@ Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
 Hi Daniel,
 
-I love your patch! Yet something to improve:
+I love your patch! Perhaps something to improve:
 
-[auto build test ERROR on 6880fa6c56601bb8ed59df6c30fd390cc5f6dd8f]
+[auto build test WARNING on 6880fa6c56601bb8ed59df6c30fd390cc5f6dd8f]
 
 url:    https://github.com/0day-ci/linux/commits/Daniel-Thompson/kdb-Adopt-scheduler-s-task-clasification/20210917-004549
 base:   6880fa6c56601bb8ed59df6c30fd390cc5f6dd8f
-config: hexagon-buildonly-randconfig-r005-20210916 (attached as .config)
+config: hexagon-randconfig-r001-20210916 (attached as .config)
 compiler: clang version 14.0.0 (https://github.com/llvm/llvm-project c8b3d7d6d6de37af68b2f379d0e37304f78e115f)
 reproduce (this is a W=1 build):
         wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
@@ -128,16 +128,22 @@ reproduce (this is a W=1 build):
 If you fix the issue, kindly add following tag as appropriate
 Reported-by: kernel test robot <lkp@intel.com>
 
-All errors (new ones prefixed by >>):
+All warnings (new ones prefixed by >>):
 
->> kernel/debug/kdb/kdb_support.c:512:41: error: variable 'cpu' is uninitialized when used here [-Werror,-Wuninitialized]
+>> kernel/debug/kdb/kdb_support.c:512:41: warning: variable 'cpu' is uninitialized when used here [-Wuninitialized]
                    if (!kdb_task_has_cpu(p) || kgdb_info[cpu].irq_depth == 1) {
                                                          ^~~
+   include/linux/compiler.h:56:47: note: expanded from macro 'if'
+   #define if(cond, ...) if ( __trace_if_var( !!(cond , ## __VA_ARGS__) ) )
+                                                 ^~~~
+   include/linux/compiler.h:58:52: note: expanded from macro '__trace_if_var'
+   #define __trace_if_var(cond) (__builtin_constant_p(cond) ? (cond) : __trace_if_value(cond))
+                                                      ^~~~
    kernel/debug/kdb/kdb_support.c:489:9: note: initialize the variable 'cpu' to silence this warning
            int cpu;
                   ^
                    = 0
-   1 error generated.
+   1 warning generated.
 
 
 vim +/cpu +512 kernel/debug/kdb/kdb_support.c
