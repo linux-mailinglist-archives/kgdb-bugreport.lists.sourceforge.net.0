@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 43A9440F192
-	for <lists+kgdb-bugreport@lfdr.de>; Fri, 17 Sep 2021 07:20:31 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id 43EC340F3F1
+	for <lists+kgdb-bugreport@lfdr.de>; Fri, 17 Sep 2021 10:18:32 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1mR6IY-00057v-1A
-	for lists+kgdb-bugreport@lfdr.de; Fri, 17 Sep 2021 05:20:30 +0000
+	id 1mR94p-0002uu-2a
+	for lists+kgdb-bugreport@lfdr.de; Fri, 17 Sep 2021 08:18:31 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <lkp@intel.com>) id 1mR6IW-00057n-Gp
- for kgdb-bugreport@lists.sourceforge.net; Fri, 17 Sep 2021 05:20:28 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <daniel.thompson@linaro.org>) id 1mR94n-0002uU-FX
+ for kgdb-bugreport@lists.sourceforge.net; Fri, 17 Sep 2021 08:18:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=xpQjWFEmRGjpLoV0VG0Ybceoh5YWwPShs3NQu3f+3zg=; b=W+ZhA4Rj8fQbkK2iLlRCyZcF4l
- lzzrCKrNfgwwFVnsLuOnm0gaksIZo8ovz+WuM9UUIKNX+cKxjqF5kjhAdxmFek8MRznSxDkuOMVz4
- jFRQPTSq/VH4om2SShBrFJr+sVvpCPjOHsf8qT/fzqe5FGwf0akHkGoa+VjxweIecXkA=;
+ bh=+EBxk48D2Ri39ajK9sHFGOT1FXUJjXNGWwxV16s2SjI=; b=e5ZSKrhrSGQlC/u+1s6zPIrfQ1
+ a0VBS/y63nNBK2GbB1oBbqIpOa8qu0g3kCkmknCbkg0Z+dF4eRPfQY8iBIn6jiuOKifEMjJ1l50hy
+ wEtOVuvxoOQyrcQjt6JY0aFYzNErPy9+aylWOvt2OwavsWYb606A2tqRSKTKqWrk6yrk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -30,61 +30,89 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=xpQjWFEmRGjpLoV0VG0Ybceoh5YWwPShs3NQu3f+3zg=; b=XFd4KN9VnFkmOVG8yLSsyqR/QK
- 9+Jxp5Jj+1CMu7D3jeozhuRODnKBWv2h/FyDUsR8ihY1MdbGF9d1H+CPAJY5XD68lcFfCzmGjjeHi
- PU+vYOVVML7N8gn/vv80OmeZ9Uo+oF3sVflqSL3Uwdwy72DgwWE/xWCq/E2Gg4psC364=;
-Received: from mga03.intel.com ([134.134.136.65])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mR6IU-00DQGr-98
- for kgdb-bugreport@lists.sourceforge.net; Fri, 17 Sep 2021 05:20:28 +0000
-X-IronPort-AV: E=McAfee;i="6200,9189,10109"; a="222778481"
-X-IronPort-AV: E=Sophos;i="5.85,300,1624345200"; 
- d="gz'50?scan'50,208,50";a="222778481"
-Received: from fmsmga004.fm.intel.com ([10.253.24.48])
- by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 16 Sep 2021 22:20:18 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.85,300,1624345200"; 
- d="gz'50?scan'50,208,50";a="530553892"
-Received: from lkp-server01.sh.intel.com (HELO 285e7b116627) ([10.239.97.150])
- by fmsmga004.fm.intel.com with ESMTP; 16 Sep 2021 22:20:15 -0700
-Received: from kbuild by 285e7b116627 with local (Exim 4.92)
- (envelope-from <lkp@intel.com>)
- id 1mR6IJ-0001jr-0j; Fri, 17 Sep 2021 05:20:15 +0000
-Date: Fri, 17 Sep 2021 13:19:32 +0800
-From: kernel test robot <lkp@intel.com>
-To: Daniel Thompson <daniel.thompson@linaro.org>,
- Jason Wessel <jason.wessel@windriver.com>,
- Douglas Anderson <dianders@chromium.org>
-Message-ID: <202109171316.1J0bOfpZ-lkp@intel.com>
+ bh=+EBxk48D2Ri39ajK9sHFGOT1FXUJjXNGWwxV16s2SjI=; b=ha11ZI9S7ME4A14tXBqJxYnl4j
+ 0eSjB8r6b7b5leaPXO43gf+nPV/puEKy2KWoQ77h2pOcJg8V73X/dI6lu4g3l5p64Co+H4jeR/f39
+ lKW+JTvkFlajhHsJir0GXYYlHLU1m6W5HAL276S153bu0wHE6sgG5USt9xymaPgaHGBk=;
+Received: from mail-wr1-f54.google.com ([209.85.221.54])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
+ id 1mR94j-0000Lk-6S
+ for kgdb-bugreport@lists.sourceforge.net; Fri, 17 Sep 2021 08:18:29 +0000
+Received: by mail-wr1-f54.google.com with SMTP id u15so13771022wru.6
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Fri, 17 Sep 2021 01:18:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=+EBxk48D2Ri39ajK9sHFGOT1FXUJjXNGWwxV16s2SjI=;
+ b=Hrv+P7lmpHE0m2T8u2gh057X/ZLS4E7VSZNGXccENgj/N7Uxh11gCyN0lGU3oNhHxe
+ +XTIXz/CyI56g3MW2Y7mpIGKcOE8Alpy0OC6f6z+O+RNY+GH+jhKS71yws1V2tGKd2XC
+ 33TsdEARtBKBXszG8D5z2rGTwQKU2xcfvCAEpg52oAgwRXUs7FG2JzZltoAKXu1tJ/36
+ /p8Y9AE/xdjBzDHThA9q/79J+29I4NMyhGX+74SmB8DACGGrOEUBkn8PJdtaWo6i20YQ
+ sVZm6yCqvRkVh5cnSomMq6GMBUCRR8jJToIepYDslIotXjdj6HlMC/VK2lQH2AU6Sl5m
+ nifQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=+EBxk48D2Ri39ajK9sHFGOT1FXUJjXNGWwxV16s2SjI=;
+ b=K7sGJ+GStvC9dVM0JUj8R72XJWFFeFqqITc6LVHF2KPkJHYDtcdo9Wx7waYCZ2T8bz
+ pkxpgsAsajxaFyH09ebrp5zbUW33huAJy8udph1+W0iJCfbO9rg3JX7MUxxjgX13rNQn
+ 6P7aKiWwoC+Knk8GAy1zHtkESyby2cizD3qXpXjwjgooA7aGJ2v1kOPWvAj1hUSPEryh
+ NMUm+bsHP5cFxtAP/TJa/25CrebK7OxLrl7ZKY9Gnatvo6j9cBsyA30Qmf9CFqoYs3de
+ 0ek06ECYA9XTFBU5glxPRgFKNr/6nSkntM7b8570h92lKm7b50+mS2VMcyXOKmxHB62D
+ jJPw==
+X-Gm-Message-State: AOAM533MIdxYs8GQTRa1JqhFGQKaWxsRJFgk9A/7RQMEzybxGdPdBngX
+ K86BDsPH2j0RbgLA2ISY1UymfxLbRw8c2yba
+X-Google-Smtp-Source: ABdhPJzw2bpggPBJCppZg2Y1vp0YqGgFpDYA9U0vmBJeddmUbIU6OoaSWRLKxa/DK4Lg1oi/oWwrzQ==
+X-Received: by 2002:a5d:5351:: with SMTP id t17mr10685224wrv.405.1631866698733; 
+ Fri, 17 Sep 2021 01:18:18 -0700 (PDT)
+Received: from maple.lan (cpc141216-aztw34-2-0-cust174.18-1.cable.virginm.net.
+ [80.7.220.175])
+ by smtp.gmail.com with ESMTPSA id v21sm781664wrv.3.2021.09.17.01.18.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 17 Sep 2021 01:18:18 -0700 (PDT)
+Date: Fri, 17 Sep 2021 09:18:16 +0100
+From: Daniel Thompson <daniel.thompson@linaro.org>
+To: Doug Anderson <dianders@chromium.org>
+Message-ID: <20210917081816.kkyvqbdptnyke5jp@maple.lan>
 References: <20210916154253.2731609-1-daniel.thompson@linaro.org>
+ <CAD=FV=Xri+J2=iQzCHLxB+ksT41V6Rexp+BXWi6Fe7=jq3oTFg@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20210916154253.2731609-1-daniel.thompson@linaro.org>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Spam-Score: -2.3 (--)
+Content-Disposition: inline
+In-Reply-To: <CAD=FV=Xri+J2=iQzCHLxB+ksT41V6Rexp+BXWi6Fe7=jq3oTFg@mail.gmail.com>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi Daniel, I love your patch! Perhaps something to improve:
- [auto build test WARNING on 6880fa6c56601bb8ed59df6c30fd390cc5f6dd8f] 
- Content analysis details:   (-2.3 points, 6.0 required)
+ Content preview:  On Thu, Sep 16, 2021 at 09:28:22AM -0700,
+ Doug Anderson wrote: > Hi, > > On Thu, Sep 16,
+ 2021 at 8:43 AM Daniel Thompson > <daniel.thompson@linaro.org>
+ wrote: > > > > Currently kdb contains some open- [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [134.134.136.65 listed in list.dnswl.org]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.221.54 listed in list.dnswl.org]
  0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
  blocked.  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: 01.org]
+ for more information. [URIs: linaro.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.221.54 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1mR6IU-00DQGr-98
-Content-Disposition: inline
-X-Content-Filtered-By: Mailman/MimeDel 2.1.21
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+X-Headers-End: 1mR94j-0000Lk-6S
 Subject: Re: [Kgdb-bugreport] [PATCH] kdb: Adopt scheduler's task
  clasification
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
@@ -98,107 +126,161 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: Xiang wangx <wangxiang@cdjrlc.com>, kbuild-all@lists.01.org,
+Cc: Xiang wangx <wangxiang@cdjrlc.com>,
  jing yangyang <jing.yangyang@zte.com.cn>, kgdb-bugreport@lists.sourceforge.net,
- llvm@lists.linux.dev, linux-kernel@vger.kernel.org, patches@linaro.org
+ Patch Tracking <patches@linaro.org>, LKML <linux-kernel@vger.kernel.org>,
+ Jason Wessel <jason.wessel@windriver.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Hi Daniel,
+On Thu, Sep 16, 2021 at 09:28:22AM -0700, Doug Anderson wrote:
+> Hi,
+> 
+> On Thu, Sep 16, 2021 at 8:43 AM Daniel Thompson
+> <daniel.thompson@linaro.org> wrote:
+> >
+> > Currently kdb contains some open-coded routines to generate a summary
+> > character for each task. This code currently issues warnings, is
+> > almost certainly broken and won't make any sense to any kernel dev who
+> > has ever used /proc to examine tasks (D means uninterruptible?).
+> >
+> > Fix both the warning and the potential for confusion but adopting the
+> > scheduler's task clasification. Whilst doing this we also simplify the
+> 
+> s/clasification/classification/
+> [...]
+> s/scheudler/scheduler/
+> [...]
+> s/entirity/entirety/
 
-I love your patch! Perhaps something to improve:
-
-[auto build test WARNING on 6880fa6c56601bb8ed59df6c30fd390cc5f6dd8f]
-
-url:    https://github.com/0day-ci/linux/commits/Daniel-Thompson/kdb-Adopt-scheduler-s-task-clasification/20210917-004549
-base:   6880fa6c56601bb8ed59df6c30fd390cc5f6dd8f
-config: hexagon-randconfig-r001-20210916 (attached as .config)
-compiler: clang version 14.0.0 (https://github.com/llvm/llvm-project c8b3d7d6d6de37af68b2f379d0e37304f78e115f)
-reproduce (this is a W=1 build):
-        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
-        chmod +x ~/bin/make.cross
-        # https://github.com/0day-ci/linux/commit/d315f14b7a044983f76f08221be33c2900c58e37
-        git remote add linux-review https://github.com/0day-ci/linux
-        git fetch --no-tags linux-review Daniel-Thompson/kdb-Adopt-scheduler-s-task-clasification/20210917-004549
-        git checkout d315f14b7a044983f76f08221be33c2900c58e37
-        # save the attached .config to linux build tree
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross W=1 ARCH=hexagon 
-
-If you fix the issue, kindly add following tag as appropriate
-Reported-by: kernel test robot <lkp@intel.com>
-
-All warnings (new ones prefixed by >>):
-
->> kernel/debug/kdb/kdb_support.c:512:41: warning: variable 'cpu' is uninitialized when used here [-Wuninitialized]
-                   if (!kdb_task_has_cpu(p) || kgdb_info[cpu].irq_depth == 1) {
-                                                         ^~~
-   include/linux/compiler.h:56:47: note: expanded from macro 'if'
-   #define if(cond, ...) if ( __trace_if_var( !!(cond , ## __VA_ARGS__) ) )
-                                                 ^~~~
-   include/linux/compiler.h:58:52: note: expanded from macro '__trace_if_var'
-   #define __trace_if_var(cond) (__builtin_constant_p(cond) ? (cond) : __trace_if_value(cond))
-                                                      ^~~~
-   kernel/debug/kdb/kdb_support.c:489:9: note: initialize the variable 'cpu' to silence this warning
-           int cpu;
-                  ^
-                   = 0
-   1 warning generated.
+Will do. Thanks.
 
 
-vim +/cpu +512 kernel/debug/kdb/kdb_support.c
+> > characters, we need to keep I as a means to identify idle CPUs rather than
+> > system daemons that don't contribute to the load average! Naturally there
+> > is quite a large comment discussing this.
+> 
+> I'm a bit curious why we're OK with changing other characters but not
+> 'I'. Even if the scheduler use of the character 'I' is a bit
+> confusing, it still seems like it might be nice to match it just to
+> avoid confusion. Couldn't we use lowercase 'i' for idle CPUs?
+> Alternatively beef up the commit message justifying why exactly we
+> need to keep 'I' as-is.
 
-5d5314d6795f3c1 Jason Wessel      2010-05-20  475  
-5d5314d6795f3c1 Jason Wessel      2010-05-20  476  
-5d5314d6795f3c1 Jason Wessel      2010-05-20  477  
-5d5314d6795f3c1 Jason Wessel      2010-05-20  478  /*
-5d5314d6795f3c1 Jason Wessel      2010-05-20  479   * kdb_task_state_char - Return the character that represents the task state.
-5d5314d6795f3c1 Jason Wessel      2010-05-20  480   * Inputs:
-5d5314d6795f3c1 Jason Wessel      2010-05-20  481   *	p	struct task for the process
-5d5314d6795f3c1 Jason Wessel      2010-05-20  482   * Returns:
-5d5314d6795f3c1 Jason Wessel      2010-05-20  483   *	One character to represent the task state.
-5d5314d6795f3c1 Jason Wessel      2010-05-20  484   */
-5d5314d6795f3c1 Jason Wessel      2010-05-20  485  char kdb_task_state_char (const struct task_struct *p)
-5d5314d6795f3c1 Jason Wessel      2010-05-20  486  {
-5d5314d6795f3c1 Jason Wessel      2010-05-20  487  	unsigned long tmp;
-2f064a59a11ff9b Peter Zijlstra    2021-06-11  488  	char state;
-2f064a59a11ff9b Peter Zijlstra    2021-06-11  489  	int cpu;
-5d5314d6795f3c1 Jason Wessel      2010-05-20  490  
-fe557319aa06c23 Christoph Hellwig 2020-06-17  491  	if (!p ||
-fe557319aa06c23 Christoph Hellwig 2020-06-17  492  	    copy_from_kernel_nofault(&tmp, (char *)p, sizeof(unsigned long)))
-5d5314d6795f3c1 Jason Wessel      2010-05-20  493  		return 'E';
-5d5314d6795f3c1 Jason Wessel      2010-05-20  494  
-d315f14b7a04498 Daniel Thompson   2021-09-16  495  	state = task_state_to_char((struct task_struct *) p);
-d315f14b7a04498 Daniel Thompson   2021-09-16  496  
-d315f14b7a04498 Daniel Thompson   2021-09-16  497  	/*
-d315f14b7a04498 Daniel Thompson   2021-09-16  498  	 * task_state_to_char() uses I(dle) differently to is_idle_task().
-d315f14b7a04498 Daniel Thompson   2021-09-16  499  	 * I(dle) tasks are (U)ninterruptible tasks that do not
-d315f14b7a04498 Daniel Thompson   2021-09-16  500  	 * contribute to the load average and have nothing to do with
-d315f14b7a04498 Daniel Thompson   2021-09-16  501  	 * code that runs on idle CPUs.
-d315f14b7a04498 Daniel Thompson   2021-09-16  502  	 *
-d315f14b7a04498 Daniel Thompson   2021-09-16  503  	 * For historic reasons we'd like to reserve I for idle CPUs in
-d315f14b7a04498 Daniel Thompson   2021-09-16  504  	 * kdb so we must reclassify (I)dle tasks.
-d315f14b7a04498 Daniel Thompson   2021-09-16  505  	 */
-d315f14b7a04498 Daniel Thompson   2021-09-16  506  	if (state == 'I')
-d315f14b7a04498 Daniel Thompson   2021-09-16  507  		state = 'U';
-d315f14b7a04498 Daniel Thompson   2021-09-16  508  
-7fc20c5cbdd184f Paul E. McKenney  2011-11-10  509  	if (is_idle_task(p)) {
-5d5314d6795f3c1 Jason Wessel      2010-05-20  510  		/* Idle task.  Is it really idle, apart from the kdb
-5d5314d6795f3c1 Jason Wessel      2010-05-20  511  		 * interrupt? */
-5d5314d6795f3c1 Jason Wessel      2010-05-20 @512  		if (!kdb_task_has_cpu(p) || kgdb_info[cpu].irq_depth == 1) {
-5d5314d6795f3c1 Jason Wessel      2010-05-20  513  			if (cpu != kdb_initial_cpu)
-5d5314d6795f3c1 Jason Wessel      2010-05-20  514  				state = 'I';	/* idle task */
-5d5314d6795f3c1 Jason Wessel      2010-05-20  515  		}
-5d5314d6795f3c1 Jason Wessel      2010-05-20  516  	} else if (!p->mm && state == 'S') {
-5d5314d6795f3c1 Jason Wessel      2010-05-20  517  		state = 'M';	/* sleeping system daemon */
-5d5314d6795f3c1 Jason Wessel      2010-05-20  518  	}
-5d5314d6795f3c1 Jason Wessel      2010-05-20  519  	return state;
-5d5314d6795f3c1 Jason Wessel      2010-05-20  520  }
-5d5314d6795f3c1 Jason Wessel      2010-05-20  521  
+I've been though a couple of iterations and nothing felt 100% right
+(to the extent I should probably have marked the patch RFC).
 
----
-0-DAY CI Kernel Test Service, Intel Corporation
-https://lists.01.org/hyperkitty/list/kbuild-all@lists.01.org
+There is another thing I left for a later patch... and that is that
+the logic to hide sleeping kernel threads (called system daemons
+in the comments) is also rather broken at present since, in the modern
+kernel, the majority of sleeping system deamons today tend to be doing
+uninterruptible sleeps (and many are marked no load and are reported
+as idle). That means that the S -> M translation needs to change since
+the way it hides processes is too unpredictable. I think it needs to
+become an S -> s, D -> d and, if we keep I, I -> i.
+
+Or, putting it another way, once we fix the S -> M translations, then
+finding a character that implies idle and does not collide with the
+existing set is very hard.
+
+Perhaps '-' might be a good way to mark idle tasks? It's different that
+the not-really-a-task nature of idle tasks might be obvious.
+
+Let me take a second look!
+
+
+> > Signed-off-by: Daniel Thompson <daniel.thompson@linaro.org>
+> 
+> Worth having a "Fixes" for the patch that introduced the warning?
+
+I'm never sure how useful Fixes: that point to the dawn of time
+actually are.
+
+
+> > @@ -74,7 +74,7 @@ static void kdb_show_stack(struct task_struct *p, void *addr)
+> >   */
+> >
+> >  static int
+> > -kdb_bt1(struct task_struct *p, unsigned long mask, bool btaprompt)
+> > +kdb_bt1(struct task_struct *p, const char *mask, bool btaprompt)
+> 
+> In the comment above this function there is still a reference to
+> "DRSTCZEUIMA". Update that?
+
+We spotted. I'm inclined to change this and the one for ps to
+<filter> and not attempt to maintain a list of valid characters.
+
+
+> > @@ -2300,7 +2298,7 @@ void kdb_ps_suppressed(void)
+> >  /*
+> >   * kdb_ps - This function implements the 'ps' command which shows a
+> >   *     list of the active processes.
+> > - *             ps [DRSTCZEUIMA]   All processes, optionally filtered by state
+> > + *             ps [RSDTtXZPIMA]   All processes, optionally filtered by state
+> 
+> What about "U"? What about "E"?
+
+As above... keeping these comments maintained seems a little pointless.
+I'll switch this to filter.
+> 
+> 
+> > @@ -2742,7 +2741,7 @@ static kdbtab_t maintab[] = {
+> >         },
+> >         {       .name = "bta",
+> >                 .func = kdb_bt,
+> > -               .usage = "[D|R|S|T|C|Z|E|U|I|M|A]",
+> > +               .usage = "[R|S|D|T|t|X|Z|P|I|M|A]",
+> 
+> What about "U"? What about "E"?
+
+I might even consider <filter> here (and a few extra hints). The output
+of ps (or ps A) is a much more useful way to figure out the interesting
+tasks to filter.
+
+
+> > @@ -559,7 +484,6 @@ unsigned long kdb_task_state_string(const char *s)
+> >   */
+> >  char kdb_task_state_char (const struct task_struct *p)
+> >  {
+> > -       unsigned int p_state;
+> >         unsigned long tmp;
+> >         char state;
+> >         int cpu;
+> > @@ -568,16 +492,20 @@ char kdb_task_state_char (const struct task_struct *p)
+> >             copy_from_kernel_nofault(&tmp, (char *)p, sizeof(unsigned long)))
+> >                 return 'E';
+> >
+> > -       cpu = kdb_process_cpu(p);
+> 
+> Don't you still need this? You still have the `cpu` variable and you
+> still use it in the idle task case.
+
+Not sure what happened here. I have to assume fat fingers post testing
+since I tested the code paths to recognise idle threads before posting.
+
+
+> > -       p_state = READ_ONCE(p->__state);
+> > -       state = (p_state == 0) ? 'R' :
+> > -               (p_state < 0) ? 'U' :
+> > -               (p_state & TASK_UNINTERRUPTIBLE) ? 'D' :
+> > -               (p_state & TASK_STOPPED) ? 'T' :
+> > -               (p_state & TASK_TRACED) ? 'C' :
+> > -               (p->exit_state & EXIT_ZOMBIE) ? 'Z' :
+> > -               (p->exit_state & EXIT_DEAD) ? 'E' :
+> > -               (p_state & TASK_INTERRUPTIBLE) ? 'S' : '?';
+> > +       state = task_state_to_char((struct task_struct *) p);
+> 
+> Casting away constness is fine for now and likely makes this easier to
+> land, but maybe you can send a patch up to change the API to have
+> "const" in it?
+
+I already have the patch written but I'd like to keep it decoupled from
+the this one due to the warning fix aspect (I'll note in header).
+
+
+Daniel.
+
 
 _______________________________________________
 Kgdb-bugreport mailing list
