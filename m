@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7460E4A7BC7
-	for <lists+kgdb-bugreport@lfdr.de>; Thu,  3 Feb 2022 00:36:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 97C714A7BDD
+	for <lists+kgdb-bugreport@lfdr.de>; Thu,  3 Feb 2022 00:49:08 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1nFPBC-00058g-93
-	for lists+kgdb-bugreport@lfdr.de; Wed, 02 Feb 2022 23:36:49 +0000
+	id 1nFPN6-0005K7-Dq
+	for lists+kgdb-bugreport@lfdr.de; Wed, 02 Feb 2022 23:49:07 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <mcgrof@infradead.org>) id 1nFPBA-00058Z-Kj
- for kgdb-bugreport@lists.sourceforge.net; Wed, 02 Feb 2022 23:36:47 +0000
+ (envelope-from <mcgrof@infradead.org>) id 1nFPN5-0005K1-0Q
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 02 Feb 2022 23:49:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Sender:In-Reply-To:Content-Type:MIME-Version:
  References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
  List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=sKMSro+nqi3+TRaInDh/r5jt9h3R6I+1JvbqLUuQ9zw=; b=AmnfjksDcTpOtFJHcIN+XUzFIB
- +kBvcsrDXDmqNYIHU2JMiJ1PsuQoXAasxVa/Ox353Sw/QN+py+tMzeKLVlaqy/++fwGZNPMF1pnWq
- KZBXoyqWpRm6UXyAK2xn87myc5Cd9h9+WdBA3yjB+69YGaWSu1r+Fi3/f/1Ev2+TwoeU=;
+ bh=dcnAz8tCoaicOwm8UwBmt1xaDF3i1/7+mqYajUH4SfM=; b=LKGbmidH5dCBcHbd5rXThwouyw
+ pYkzXZxUVjsdjx2BflDYNAYyQSpowykO83IhgGed8/Kxub1Oz9+aICEzjwZt8fEo2fof4oc4W1Gre
+ 7OII8xAxsUqa4noj8aBRinsnzBQj233CL0nClgeu/6KCJt6+YIgMS7K5MumnqCNTvpGc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Sender:In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
@@ -30,63 +30,62 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=sKMSro+nqi3+TRaInDh/r5jt9h3R6I+1JvbqLUuQ9zw=; b=jeryERB8uIJPm+T8HIOFo/fbPV
- OHamKXfoTYi9D4+PrpvA6DtDE5XcHnNHLKJ23LC/8UiGmqwze5n9VAzAyoNVlIbO40dgdOK03xz0v
- B/6F+Mx/Ek+wTfbm8BRyVGkXgIgnIjj0gxdwOGMnf0o7lWvq1Z5F2yhftdNdn/X79p2s=;
+ bh=dcnAz8tCoaicOwm8UwBmt1xaDF3i1/7+mqYajUH4SfM=; b=Fj+gQ8mTD/+M9gt84rB4m5efPe
+ ZhjP+sT8A1kzQUDVBttC4qUUqdR0QYXWph3pchOIaZF178NUPl1KWa5fSFifdB1YjVK4EXFmHyDZk
+ 9iQ4DB2xqH80ga8SgFEgKO9WxSERuKf6w5cyDkMJrpOqUTprsKWE54+AEyadf9R2uWzw=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nFPB8-00E5C4-Pu
- for kgdb-bugreport@lists.sourceforge.net; Wed, 02 Feb 2022 23:36:47 +0000
+ id 1nFPN2-00E5v8-KC
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 02 Feb 2022 23:49:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Sender:In-Reply-To:Content-Type:
  MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=sKMSro+nqi3+TRaInDh/r5jt9h3R6I+1JvbqLUuQ9zw=; b=EQFB7AmHjcEOog2AgXpabrhNbq
- eb+nIuW++r278MsQm+yo6BJLgWEi7DgA0z/LlXygv3QszEhUFbTZTYEd7tnQF95I9q+HDvddpS0dr
- ZT4oOJqpMyq2CEFRDI9sNR/0008KH9VEFO6SEXb/UlghtmM1nhzbpJM/5gNt8d05BRv4D8tQ5GrZW
- fpzQ8SgxsTS6vdNOuRec1F/wQ5pWQ0g4+NAL2ajplTSo5BZ+1fnALWGrFPMSPAfHFWRnsxJ/WmIg1
- N3Sh1ZVZn6t5DVK/fZ6Xax5LywKa/tBa8o8JoZbW2WIGkbbwfyxz0e9MK78JgVYWCcygyNJY3ImiP
- uQFa5xkw==;
+ bh=dcnAz8tCoaicOwm8UwBmt1xaDF3i1/7+mqYajUH4SfM=; b=GlERCyG3JxZhciig/yUUTOOt7N
+ qDoQxeWCdsfxJmVQC80mVru0TdX48Bwquf6XlXLN6cKFPd0tqQEtcIZ0guQ8UznK2bwgiK+aX9QyM
+ tg0vhEoUE314QlaB3x2ldubznkAfUFvaqRGlBG/QV8ADLL/bR5YQyNFHFs74NZqoflXmUEB1yzFcd
+ YNQmFeDMhVGvUY3iXOvG302NzsrFECQ0ifrcpwzlnD8zntWf+rWtUqZ7OHGjqOBoNDXrcjiOimMhe
+ qlvny4kHhR/csemsRaASlE9jSggbTVPgM++bWyxk/ytynA8TPgRCaxKOJNPv7nsTZBYyjju9Y1DWt
+ ly8Ba3tQ==;
 Received: from mcgrof by bombadil.infradead.org with local (Exim 4.94.2 #2
- (Red Hat Linux)) id 1nFPAz-00H4rN-PB; Wed, 02 Feb 2022 23:36:37 +0000
-Date: Wed, 2 Feb 2022 15:36:37 -0800
+ (Red Hat Linux)) id 1nFPMu-00H5lz-Mt; Wed, 02 Feb 2022 23:48:56 +0000
+Date: Wed, 2 Feb 2022 15:48:56 -0800
 From: Luis Chamberlain <mcgrof@kernel.org>
 To: Christophe Leroy <christophe.leroy@csgroup.eu>
-Message-ID: <YfsVhcpVTW0+YCl5@bombadil.infradead.org>
-References: <cover.1643282353.git.christophe.leroy@csgroup.eu>
- <a20285472ad0a0a13a1d93c4707180be5b4fa092.1643282353.git.christophe.leroy@csgroup.eu>
+Message-ID: <YfsYaDyqrFyVypkv@bombadil.infradead.org>
+References: <cover.1643475473.git.christophe.leroy@csgroup.eu>
+ <230bfd896f24ca7a9281783aaa8c0ebfebd0bc7e.1643475473.git.christophe.leroy@csgroup.eu>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <a20285472ad0a0a13a1d93c4707180be5b4fa092.1643282353.git.christophe.leroy@csgroup.eu>
-X-Spam-Score: -2.2 (--)
+In-Reply-To: <230bfd896f24ca7a9281783aaa8c0ebfebd0bc7e.1643475473.git.christophe.leroy@csgroup.eu>
+X-Spam-Score: -2.1 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Jan 27, 2022 at 11:28:12AM +0000, Christophe Leroy
- wrote: > book3s/32 and 8xx have a separate area for allocating modules, >
- defined by MODULES_VADDR / MODULES_END. > > On book3s/32, it is not [...]
- Content analysis details:   (-2.2 points, 6.0 required)
+ Content preview:  On Sat, Jan 29, 2022 at 05:02:07PM +0000, Christophe Leroy
+ wrote: > diff --git a/kernel/module.c b/kernel/module.c > index
+ 163e32e39064..11f51e17fb9f
+ 100644 > --- a/kernel/module.c > +++ b/kernel/modu [...] 
+ Content analysis details:   (-2.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
  medium trust [198.137.202.133 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
  mail domains are different
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1nFPB8-00E5C4-Pu
-Subject: Re: [Kgdb-bugreport] [PATCH v2 5/5] powerpc: Select
- ARCH_WANTS_MODULES_DATA_IN_VMALLOC on book3s/32 and 8xx
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+X-Headers-End: 1nFPN2-00E5v8-KC
+Subject: Re: [Kgdb-bugreport] [PATCH v3 3/6] modules: Introduce data_layout
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -99,44 +98,54 @@ List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
 Cc: "linux-arch@vger.kernel.org" <linux-arch@vger.kernel.org>,
- Benjamin Herrenschmidt <benh@kernel.crashing.org>,
- "kgdb-bugreport@lists.sourceforge.net" <kgdb-bugreport@lists.sourceforge.net>,
+ "kgdb-bugreport@lists.sourceforge.net"
+ <kgdb-bugreport@lists.sourceforge.net>,
  "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "linux-mm@kvack.org" <linux-mm@kvack.org>, Paul Mackerras <paulus@samba.org>,
- Michael Ellerman <mpe@ellerman.id.au>, Jessica Yu <jeyu@kernel.org>,
+ "linux-mm@kvack.org" <linux-mm@kvack.org>, Jessica Yu <jeyu@kernel.org>,
  "linuxppc-dev@lists.ozlabs.org" <linuxppc-dev@lists.ozlabs.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Thu, Jan 27, 2022 at 11:28:12AM +0000, Christophe Leroy wrote:
-> book3s/32 and 8xx have a separate area for allocating modules,
-> defined by MODULES_VADDR / MODULES_END.
-> 
-> On book3s/32, it is not possible to protect against execution
-> on a page basis. A full 256M segment is either Exec or NoExec.
-> The module area is in an Exec segment while vmalloc area is
-> in a NoExec segment.
-> 
-> In order to protect module data against execution, select
-> ARCH_WANTS_MODULES_DATA_IN_VMALLOC.
-> 
-> For the 8xx (and possibly other 32 bits platform in the future),
-> there is no such constraint on Exec/NoExec protection, however
-> there is a critical distance between kernel functions and callers
-> that needs to remain below 32Mbytes in order to avoid costly
-> trampolines. By allocating data outside of module area, we
-> increase the chance for module text to remain within acceptable
-> distance from kernel core text.
-> 
-> So select ARCH_WANTS_MODULES_DATA_IN_VMALLOC for 8xx as well.
-> 
-> Signed-off-by: Christophe Leroy <christophe.leroy@csgroup.eu>
-> Cc: Michael Ellerman <mpe@ellerman.id.au>
-> Cc: Benjamin Herrenschmidt <benh@kernel.crashing.org>
-> Cc: Paul Mackerras <paulus@samba.org>
+On Sat, Jan 29, 2022 at 05:02:07PM +0000, Christophe Leroy wrote:
+> diff --git a/kernel/module.c b/kernel/module.c
+> index 163e32e39064..11f51e17fb9f 100644
+> --- a/kernel/module.c
+> +++ b/kernel/module.c
+> @@ -81,6 +81,8 @@
+>  /* If this is set, the section belongs in the init part of the module */
+>  #define INIT_OFFSET_MASK (1UL << (BITS_PER_LONG-1))
+>  
+> +#define	data_layout core_layout
+> +
+>  /*
+>   * Mutex protects:
+>   * 1) List of modules (also safely readable with preempt_disable),
+> @@ -2451,7 +2454,10 @@ static void layout_sections(struct module *mod, struct load_info *info)
+>  			    || s->sh_entsize != ~0UL
+>  			    || module_init_layout_section(sname))
+>  				continue;
+> -			s->sh_entsize = get_offset(mod, &mod->core_layout.size, s, i);
+> +			if (m)
+> +				s->sh_entsize = get_offset(mod, &mod->data_layout.size, s, i);
+> +			else
+> +				s->sh_entsize = get_offset(mod, &mod->core_layout.size, s, i);
+>  			pr_debug("\t%s\n", sname);
 
-Cc list first and then the SOB.
+Huh why is this branching here, given you just used mod->data_layout in
+all other areas?
+
+> @@ -3468,6 +3474,8 @@ static int move_module(struct module *mod, struct load_info *info)
+>  		if (shdr->sh_entsize & INIT_OFFSET_MASK)
+>  			dest = mod->init_layout.base
+>  				+ (shdr->sh_entsize & ~INIT_OFFSET_MASK);
+> +		else if (!(shdr->sh_flags & SHF_EXECINSTR))
+> +			dest = mod->data_layout.base + shdr->sh_entsize;
+>  		else
+>  			dest = mod->core_layout.base + shdr->sh_entsize;
+>  
+
+Likewise here.
 
   Luis
 
