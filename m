@@ -2,99 +2,97 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B6F24A8CB7
-	for <lists+kgdb-bugreport@lfdr.de>; Thu,  3 Feb 2022 20:51:32 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id BEA144AB30D
+	for <lists+kgdb-bugreport@lfdr.de>; Mon,  7 Feb 2022 02:19:32 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1nFi8f-0005qz-Qb
-	for lists+kgdb-bugreport@lfdr.de; Thu, 03 Feb 2022 19:51:28 +0000
+	id 1nGsgm-0006Fw-Hj
+	for lists+kgdb-bugreport@lfdr.de; Mon, 07 Feb 2022 01:19:31 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <mcgrof@infradead.org>) id 1nFi8e-0005qs-No
- for kgdb-bugreport@lists.sourceforge.net; Thu, 03 Feb 2022 19:51:27 +0000
+ (envelope-from <mpe@ellerman.id.au>) id 1nGsgl-0006Fq-0s
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 07 Feb 2022 01:19:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Sender:In-Reply-To:Content-Transfer-Encoding:
- Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :Message-ID:Date:References:In-Reply-To:Subject:Cc:To:From:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ft7cClkc6vBpNUXHJ0m3xjhOU7udO/ZG3yRM4g1vYT4=; b=X6gYLgvDfaI7r8gc+YY6OgVfYc
- h1F+UYgXzg9+8Wmi4UhgoirFuysZQnlcmDtkWVVFM5Wtekn4gGFuxvnU9gM/WqYTZ0ddhgooR/9MO
- JAZKLpO1wTSRfRg5l0tl5v4vxZUnKs3wZb2dl7IugoV01s6gUlRoLc6IwAd1sOh2sxPY=;
+ bh=DVo9TFj10WHnIMP3upbM4NlbZB2TC5ggS49NOyVsTQo=; b=DxQRBpUyjZqyZFGI+bcJDRjGQp
+ ztzm6ZbtDyJbOCLZ8q+oMmdEmJiwM/Nns7nNKPsKxYpzX04FvsAUQtddJNP3y5S5zAslIDDmr1f4c
+ N3Qzptgt8E3p53DhRBEY9JeHnrlVbcDLSd5kHIbg/mdhzam2d7JOfzV9L0dgGPe/BVcE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Sender:In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:
+ References:In-Reply-To:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ft7cClkc6vBpNUXHJ0m3xjhOU7udO/ZG3yRM4g1vYT4=; b=XjEB4RlFF+sbYDv3azrWTDe6Ox
- pZwmRqEq06XGuPDFhcriGiXx3m8bOlN2S9oMJYT2ABBbh01SUk6mWRluXDPQUeoxBy/nZgks6NgHf
- aZ3h2/plUs01jtRl+2sFAA3XZLlqMwNObPMHzPMpQ5y9sfr7U3ZZ77yVLVCzhSkHIeuw=;
-Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=DVo9TFj10WHnIMP3upbM4NlbZB2TC5ggS49NOyVsTQo=; b=ZNlBOoKe7A9FpX5W/+RbVNc+Pv
+ 5dq2oCqCi1mUaSp6pY8Un/UdM7ipgs7c6rwY+ND8sBX2c7NR4OIemP2t2zGnL7QBnEDS1JnTvPno1
+ R+djGBdf9Tfu3LvYhusxoP2wMkelkGHlQWS22dQHURjuPNDxb336TPk0jacEnoIpZ1cQ=;
+Received: from gandalf.ozlabs.org ([150.107.74.76])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nFi8b-00Fa8U-QS
- for kgdb-bugreport@lists.sourceforge.net; Thu, 03 Feb 2022 19:51:27 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20210309; h=Sender:In-Reply-To:
- Content-Transfer-Encoding:Content-Type:MIME-Version:References:Message-ID:
- Subject:Cc:To:From:Date:Reply-To:Content-ID:Content-Description;
- bh=ft7cClkc6vBpNUXHJ0m3xjhOU7udO/ZG3yRM4g1vYT4=; b=EERLXhvvt+cUvphZ6I2kMdQwAc
- gjUUegQLCgS6JEACSczf7sBm1sx0ciVihEcBEg6gWVwkeuOFzmzWE1IIcpdMUUXszGrQuqLXGzihh
- LeMchQTAwicUQZfUfwK2iMpfkQkiMsn3DWsB1QiR74LXTelFtBWOg1RxqQpd9mrtJf6TSXko8SokG
- LDqGoCCTv/a3N84VLojdahz+Az++nC/dlh+pCXF7cvWQr73/CSO//N38EjPDx8WMmQQ8IX57cCbyh
- eJKVSWYNzH5Z7YDCP3hNbckQeEzhtIKKnUKhBOPdzT69CFjUx+fIyWUbbataKpfPiqQS+5XJN4joB
- +evkUpRQ==;
-Received: from mcgrof by bombadil.infradead.org with local (Exim 4.94.2 #2
- (Red Hat Linux)) id 1nFi8H-002dkz-Se; Thu, 03 Feb 2022 19:51:05 +0000
-Date: Thu, 3 Feb 2022 11:51:05 -0800
-From: Luis Chamberlain <mcgrof@kernel.org>
-To: Christophe Leroy <christophe.leroy@csgroup.eu>,
- Lucas De Marchi <lucas.de.marchi@gmail.com>,
- Lucas De Marchi <lucas.demarchi@intel.com>,
- Aaron Tomlin <atomlin@redhat.com>,
- Michal =?iso-8859-1?Q?Such=E1nek?= <msuchanek@suse.de>
-Message-ID: <YfwyKR1xFaApWjRb@bombadil.infradead.org>
-References: <cover.1643475473.git.christophe.leroy@csgroup.eu>
- <b59ed8781ef9af995c5bfa762de1f42fdfc57c74.1643475473.git.christophe.leroy@csgroup.eu>
- <YfsbcXD74BwJ9ci2@bombadil.infradead.org>
- <228849f5-f6a4-eb45-5e1e-a9b3eccb28b3@csgroup.eu>
+ id 1nGsgf-0003vc-SQ
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 07 Feb 2022 01:19:29 +0000
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 4JsSwK1MWyz4xcZ;
+ Mon,  7 Feb 2022 12:19:13 +1100 (AEDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ellerman.id.au;
+ s=201909; t=1644196753;
+ bh=DVo9TFj10WHnIMP3upbM4NlbZB2TC5ggS49NOyVsTQo=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=fVv9D5FuEvLaNhfgmXgjlmjX4g5lOMemZmfYENVGDoppdX2Jo87qwVgAkhSIW0EP0
+ 89Lc++67+OIoMEwNxjvC50RgrjFDElHcPnLgKXuA5z1ZQiM++i/WE+BI+matwTnW2P
+ 91Ie3ar6Hr7cTtJ21ddl+Mbkp3WJslga+XRknX57rBaj+Wt1/rbTxjyAQqrUiUMLyq
+ 69wA8R2wfhA4KR8xTZG8HD3WRA+dYQp8A8q5D5TWDPWcWDmNGi2ZrHqlZZAor3hGwP
+ gBZUprAx+25T1ngXxDkvVI01Gokid1upCSXRiWM4/lXk81+HjumKOlIxOkqLRh8iAA
+ xnZSLLukqnG4w==
+From: Michael Ellerman <mpe@ellerman.id.au>
+To: Christophe Leroy <christophe.leroy@csgroup.eu>
+In-Reply-To: <9cab4adb-bd4b-48d5-d63c-33a0f25c97e4@csgroup.eu>
+References: <cover.1643282353.git.christophe.leroy@csgroup.eu>
+ <a20285472ad0a0a13a1d93c4707180be5b4fa092.1643282353.git.christophe.leroy@csgroup.eu>
+ <YfsVhcpVTW0+YCl5@bombadil.infradead.org>
+ <87h79gmrux.fsf@mpe.ellerman.id.au>
+ <9cab4adb-bd4b-48d5-d63c-33a0f25c97e4@csgroup.eu>
+Date: Mon, 07 Feb 2022 12:19:06 +1100
+Message-ID: <877da7mq2d.fsf@mpe.ellerman.id.au>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <228849f5-f6a4-eb45-5e1e-a9b3eccb28b3@csgroup.eu>
-X-Spam-Score: -2.1 (--)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
+X-Spam-Score: -0.2 (/)
+X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  
- Content preview:  On Thu, Feb 03, 2022 at 07:05:13AM +0000, Christophe Leroy
-    wrote: > > > Le 03/02/2022 à 01:01, Luis Chamberlain a écrit : > > On Sat,
-    Jan 29, 2022 at 05:02:09PM +0000, Christophe Leroy wrote: > >> dif [...] 
+ Content preview:  Christophe Leroy <christophe.leroy@csgroup.eu> writes: > Le
+    03/02/2022 Ã  06:39, Michael Ellerman a Ã©critÂ : >> Luis Chamberlain <mcgrof@kernel.org>
+    writes: >>> On Thu, Jan 27, 2022 at 11:28:12AM +00 [...] 
  
- Content analysis details:   (-2.1 points, 6.0 required)
+ Content analysis details:   (-0.2 points, 6.0 required)
  
   pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
-                             medium trust
-                             [198.137.202.133 listed in list.dnswl.org]
-  0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
-                             mail domains are different
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
                              envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+                             author's domain
   0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
                              valid
  -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
-X-Headers-End: 1nFi8b-00Fa8U-QS
-Subject: Re: [Kgdb-bugreport] [PATCH v3 4/6] modules: Add
- CONFIG_ARCH_WANTS_MODULES_DATA_IN_VMALLOC
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+X-Headers-End: 1nGsgf-0003vc-SQ
+Subject: Re: [Kgdb-bugreport] [PATCH v2 5/5] powerpc: Select
+ ARCH_WANTS_MODULES_DATA_IN_VMALLOC on book3s/32 and 8xx
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,129 +105,53 @@ List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
 Cc: "linux-arch@vger.kernel.org" <linux-arch@vger.kernel.org>,
- Daniel Thompson <daniel.thompson@linaro.org>,
+ Benjamin Herrenschmidt <benh@kernel.crashing.org>,
  "kgdb-bugreport@lists.sourceforge.net" <kgdb-bugreport@lists.sourceforge.net>,
- Aaron Tomlin <atomlin@redhat.com>,
  "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- Jason Wessel <jason.wessel@windriver.com>,
- "linux-mm@kvack.org" <linux-mm@kvack.org>, Jessica Yu <jeyu@kernel.org>,
+ "linux-mm@kvack.org" <linux-mm@kvack.org>,
+ Luis Chamberlain <mcgrof@kernel.org>, Paul Mackerras <paulus@samba.org>,
+ Jessica Yu <jeyu@kernel.org>,
  "linuxppc-dev@lists.ozlabs.org" <linuxppc-dev@lists.ozlabs.org>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Thu, Feb 03, 2022 at 07:05:13AM +0000, Christophe Leroy wrote:
-> =
-
-> =
-
-> Le 03/02/2022 =E0 01:01, Luis Chamberlain a =E9crit=A0:
-> > On Sat, Jan 29, 2022 at 05:02:09PM +0000, Christophe Leroy wrote:
-> >> diff --git a/kernel/module.c b/kernel/module.c
-> >> index 11f51e17fb9f..f3758115ebaa 100644
-> >> --- a/kernel/module.c
-> >> +++ b/kernel/module.c
-> >> @@ -81,7 +81,9 @@
-> >>   /* If this is set, the section belongs in the init part of the modul=
-e */
-> >>   #define INIT_OFFSET_MASK (1UL << (BITS_PER_LONG-1))
-> >>   =
-
-> >> +#ifndef CONFIG_ARCH_WANTS_MODULES_DATA_IN_VMALLOC
-> >>   #define	data_layout core_layout
-> >> +#endif
-> >>   =
-
-> >>   /*
-> >>    * Mutex protects:
-> >> @@ -111,6 +113,12 @@ static struct mod_tree_root {
-> >>   #define module_addr_min mod_tree.addr_min
-> >>   #define module_addr_max mod_tree.addr_max
-> >>   =
-
-> >> +#ifdef CONFIG_ARCH_WANTS_MODULES_DATA_IN_VMALLOC
-> >> +static struct mod_tree_root mod_data_tree __cacheline_aligned =3D {
-> >> +	.addr_min =3D -1UL,
-> >> +};
-> >> +#endif
-> >> +
-> >>   #ifdef CONFIG_MODULES_TREE_LOOKUP
-> >>   =
-
-> >>   /*
-> >> @@ -186,6 +194,11 @@ static void mod_tree_insert(struct module *mod)
-> >>   	__mod_tree_insert(&mod->core_layout.mtn, &mod_tree);
-> >>   	if (mod->init_layout.size)
-> >>   		__mod_tree_insert(&mod->init_layout.mtn, &mod_tree);
-> >> +
-> >> +#ifdef CONFIG_ARCH_WANTS_MODULES_DATA_IN_VMALLOC
-> >> +	mod->data_layout.mtn.mod =3D mod;
-> >> +	__mod_tree_insert(&mod->data_layout.mtn, &mod_data_tree);
-> >> +#endif
-> > =
-
-> > =
-
-> > kernel/ directory has quite a few files, module.c is the second to
-> > largest file, and it has tons of stuff. Aaron is doing work to
-> > split things out to make code easier to read and so that its easier
-> > to review changes. See:
-> > =
-
-> > https://lkml.kernel.org/r/20220130213214.1042497-1-atomlin@redhat.com
-> > =
-
-> > I think this is a good patch example which could benefit from that work.
-> > So I'd much prefer to see that work go in first than this, so to see if
-> > we can make the below changes more compartamentalized.
-> > =
-
-> > Curious, how much testing has been put into this series?
-> =
-
-> =
-
-> I tested the change up to (including) patch 4 to verify it doesn't =
-
-> introduce regression when not using =
-
-> CONFIG_ARCH_WANTS_MODULES_DATA_IN_VMALLOC,
-
-> Then I tested with patch 5. I first tried with the 'hello world' test =
-
-> module. After that I loaded several important modules and checked I =
-
-> didn't get any regression, both with and without STRICT_MODULES_RWX and =
-
-> I checked the consistency in /proc/vmallocinfo
->   /proc/modules /sys/class/modules/*
-
-I wonder if we have a test for STRICT_MODULES_RWX.
-
-> I also tested with a hacked module_alloc() to force branch trampolines.
-
-So to verify that reducing these trampolines actually helps on an
-architecture? I wonder if we can generalize this somehow to let archs
-verify such strategies can help.
-
-I was hoping for a bit more wider testing, like actually users, etc.
-It does not seem like so. So we can get to that by merging this soon
-into modules-next and having this bleed out issues with linux-next.
-We are in good time to do this now.
-
-The kmod tree has tons of tests:
-
-https://git.kernel.org/pub/scm/utils/kernel/kmod/kmod.git/
-
-Can you use that to verify there are no regressions?
-
-Aaron, Michal, if you can do the same that'd be appreciated.
-
-
-  Luis
-
-
-_______________________________________________
-Kgdb-bugreport mailing list
-Kgdb-bugreport@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport
+Q2hyaXN0b3BoZSBMZXJveSA8Y2hyaXN0b3BoZS5sZXJveUBjc2dyb3VwLmV1PiB3cml0ZXM6Cj4g
+TGUgMDMvMDIvMjAyMiDDoCAwNjozOSwgTWljaGFlbCBFbGxlcm1hbiBhIMOpY3JpdMKgOgo+PiBM
+dWlzIENoYW1iZXJsYWluIDxtY2dyb2ZAa2VybmVsLm9yZz4gd3JpdGVzOgo+Pj4gT24gVGh1LCBK
+YW4gMjcsIDIwMjIgYXQgMTE6Mjg6MTJBTSArMDAwMCwgQ2hyaXN0b3BoZSBMZXJveSB3cm90ZToK
+Pj4+PiBib29rM3MvMzIgYW5kIDh4eCBoYXZlIGEgc2VwYXJhdGUgYXJlYSBmb3IgYWxsb2NhdGlu
+ZyBtb2R1bGVzLAo+Pj4+IGRlZmluZWQgYnkgTU9EVUxFU19WQUREUiAvIE1PRFVMRVNfRU5ELgo+
+Pj4+Cj4+Pj4gT24gYm9vazNzLzMyLCBpdCBpcyBub3QgcG9zc2libGUgdG8gcHJvdGVjdCBhZ2Fp
+bnN0IGV4ZWN1dGlvbgo+Pj4+IG9uIGEgcGFnZSBiYXNpcy4gQSBmdWxsIDI1Nk0gc2VnbWVudCBp
+cyBlaXRoZXIgRXhlYyBvciBOb0V4ZWMuCj4+Pj4gVGhlIG1vZHVsZSBhcmVhIGlzIGluIGFuIEV4
+ZWMgc2VnbWVudCB3aGlsZSB2bWFsbG9jIGFyZWEgaXMKPj4+PiBpbiBhIE5vRXhlYyBzZWdtZW50
+Lgo+Pj4+Cj4+Pj4gSW4gb3JkZXIgdG8gcHJvdGVjdCBtb2R1bGUgZGF0YSBhZ2FpbnN0IGV4ZWN1
+dGlvbiwgc2VsZWN0Cj4+Pj4gQVJDSF9XQU5UU19NT0RVTEVTX0RBVEFfSU5fVk1BTExPQy4KPj4+
+Pgo+Pj4+IEZvciB0aGUgOHh4IChhbmQgcG9zc2libHkgb3RoZXIgMzIgYml0cyBwbGF0Zm9ybSBp
+biB0aGUgZnV0dXJlKSwKPj4+PiB0aGVyZSBpcyBubyBzdWNoIGNvbnN0cmFpbnQgb24gRXhlYy9O
+b0V4ZWMgcHJvdGVjdGlvbiwgaG93ZXZlcgo+Pj4+IHRoZXJlIGlzIGEgY3JpdGljYWwgZGlzdGFu
+Y2UgYmV0d2VlbiBrZXJuZWwgZnVuY3Rpb25zIGFuZCBjYWxsZXJzCj4+Pj4gdGhhdCBuZWVkcyB0
+byByZW1haW4gYmVsb3cgMzJNYnl0ZXMgaW4gb3JkZXIgdG8gYXZvaWQgY29zdGx5Cj4+Pj4gdHJh
+bXBvbGluZXMuIEJ5IGFsbG9jYXRpbmcgZGF0YSBvdXRzaWRlIG9mIG1vZHVsZSBhcmVhLCB3ZQo+
+Pj4+IGluY3JlYXNlIHRoZSBjaGFuY2UgZm9yIG1vZHVsZSB0ZXh0IHRvIHJlbWFpbiB3aXRoaW4g
+YWNjZXB0YWJsZQo+Pj4+IGRpc3RhbmNlIGZyb20ga2VybmVsIGNvcmUgdGV4dC4KPj4+Pgo+Pj4+
+IFNvIHNlbGVjdCBBUkNIX1dBTlRTX01PRFVMRVNfREFUQV9JTl9WTUFMTE9DIGZvciA4eHggYXMg
+d2VsbC4KPj4+Pgo+Pj4+IFNpZ25lZC1vZmYtYnk6IENocmlzdG9waGUgTGVyb3kgPGNocmlzdG9w
+aGUubGVyb3lAY3Nncm91cC5ldT4KPj4+PiBDYzogTWljaGFlbCBFbGxlcm1hbiA8bXBlQGVsbGVy
+bWFuLmlkLmF1Pgo+Pj4+IENjOiBCZW5qYW1pbiBIZXJyZW5zY2htaWR0IDxiZW5oQGtlcm5lbC5j
+cmFzaGluZy5vcmc+Cj4+Pj4gQ2M6IFBhdWwgTWFja2VycmFzIDxwYXVsdXNAc2FtYmEub3JnPgo+
+Pj4KPj4+IENjIGxpc3QgZmlyc3QgYW5kIHRoZW4gdGhlIFNPQi4KPj4gCj4+IEp1c3QgZGVsZXRl
+IHRoZSBDYzogbGlzdCwgaXQncyBtZWFuaW5nbGVzcy4KPj4gCj4KPiBXYXMgYW4gZWFzeSB3YXkg
+dG8gY29weSB5b3UgYXV0b21hdGljYWxseSB3aXRoICdnaXQgc2VuZC1lbWFpbCcsIGJ1dCAKPiBn
+ZXR0aW5nIGl0IHRocm91Z2ggbGludXhwcGMtZGV2IGxpc3QgaXMgZW5vdWdoIEkgZ3Vlc3MgPwoK
+SXQncyB1c2VmdWwgZm9yIG1ha2luZyB0aGUgdG9vbGluZyBDYyB0aGUgcmlnaHQgcGVvcGxlLCBp
+dCdzIGZpbmUgdG8gdXNlCnRoZW0gZm9yIHRoYXQuCgpCdXQgdGhlcmUncyBubyB2YWx1ZSBpbiBj
+b21taXR0aW5nIHRoZW0gdG8gdGhlIGdpdCBoaXN0b3J5LCBJIGFjdGl2ZWx5CnN0cmlwIHRoZW0g
+d2hlbiBhcHBseWluZy4gVGhlIGZhY3QgdGhhdCBzb21lb25lIGlzIENjJ2VkIG9uIGEgcGF0Y2gK
+dGVsbHMgeW91IG5vdGhpbmcsIGdpdmVuIHRoZSB2b2x1bWUgb2YgbWFpbCBtYWludGFpbmVycyBy
+ZWNlaXZlLgoKVGhlIGxpbmsgdGFnIGJhY2sgdG8gdGhlIG9yaWdpbmFsIHN1Ym1pc3Npb24gZ2l2
+ZXMgeW91IHRoZSBDYyBsaXN0CmFueXdheS4KCmNoZWVycwoKCl9fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fCktnZGItYnVncmVwb3J0IG1haWxpbmcgbGlzdApL
+Z2RiLWJ1Z3JlcG9ydEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vm
+b3JnZS5uZXQvbGlzdHMvbGlzdGluZm8va2dkYi1idWdyZXBvcnQK
