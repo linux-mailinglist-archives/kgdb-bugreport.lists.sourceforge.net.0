@@ -2,104 +2,108 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5A5CA4BFB88
-	for <lists+kgdb-bugreport@lfdr.de>; Tue, 22 Feb 2022 16:01:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id ACFCA4BFB7D
+	for <lists+kgdb-bugreport@lfdr.de>; Tue, 22 Feb 2022 16:00:51 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1nMWfs-0002TN-5F
-	for lists+kgdb-bugreport@lfdr.de; Tue, 22 Feb 2022 15:01:54 +0000
+	id 1nMWep-0002Ql-Fn
+	for lists+kgdb-bugreport@lfdr.de; Tue, 22 Feb 2022 15:00:50 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <christophe.leroy@csgroup.eu>) id 1nMWfq-0002TH-6z
- for kgdb-bugreport@lists.sourceforge.net; Tue, 22 Feb 2022 15:01:53 +0000
+ (envelope-from <christophe.leroy@csgroup.eu>) id 1nMWen-0002Qf-UA
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 22 Feb 2022 15:00:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bX2I7Dpgr1OcSSmzfwnygziV3GDIT/60nV3hGxLKOC4=; b=WzhConDAT+npj4wTLtbErakD6E
- +0wEU9vWYV02sgVShYU5F2A21zb4ceWVWypn7sNoAw9WbdbMLmXCGzDs/aSk2Q/5Zbov5asKK8vu+
- ptreouG+HlKOZI1FT/weKgaTChDwwQf5KqzSZM4shCrKPv/cpgvpAebqsCz4UjgBTS/U=;
+ bh=+/GnzMFsOfgSwnOs9jSq0bvgRBQZVFqN9YEsTfyn9IY=; b=HOF+ouWgVLH+0fe9q5NmptX6AF
+ WzP3Cqc5SZDmCjyN2zHb6emhfpcWjfDSjPo6DyDfxXt9A1p/lgCW9Eodq5827YyvEzdVX38q4PDJv
+ g69bvc5iVQ1QIQt4XrpWlqYh+JhaEnW6votK2MDWkoUJW0hneb+pwpFmAbkrwJpSik0Q=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=bX2I7Dpgr1OcSSmzfwnygziV3GDIT/60nV3hGxLKOC4=; b=J
- O7sYSbFLCESlhcwyzfe6kEnSyZoO3uM9YmqCYTbwvZtsj4AsVM3F0J9/6ihYLVE0TGbnzJHJ5qrZN
- I7Z3EPrY5KPbO52ILWpRELmldjQTcz2w/K/lzRNs2kXibrHsVSRO6NIGEAlf7fKPH5k4Z2y4LbA54
- MliBx7bYQpqLxwgQ=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=+/GnzMFsOfgSwnOs9jSq0bvgRBQZVFqN9YEsTfyn9IY=; b=bg3FVjHolDnUcFGuha6wKi3Mu0
+ zCWObz8BnNsOTZ3L8uDctRXKCJ6PmohOmTzeV5rtQlAQMsxNZla6idx7aFBM5FFfc1WiQ8fl70xN9
+ tmmyJS7BI4MajKUdfxNsNBMQElpsyKeOSSeiL5YyZAGKIG+Be3vqLCShmY6LONr/D1F4=;
 Received: from pegase2.c-s.fr ([93.17.235.10])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nMWfn-0004ZQ-Qv
- for kgdb-bugreport@lists.sourceforge.net; Tue, 22 Feb 2022 15:01:52 +0000
+ id 1nMWel-00BOrY-Iv
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 22 Feb 2022 15:00:48 +0000
 Received: from localhost (mailhub3.si.c-s.fr [172.26.127.67])
- by localhost (Postfix) with ESMTP id 4K32RN4Yt5z9sSX;
- Tue, 22 Feb 2022 16:00:48 +0100 (CET)
+ by localhost (Postfix) with ESMTP id 4K32RF1vXMz9sSX;
+ Tue, 22 Feb 2022 16:00:41 +0100 (CET)
 X-Virus-Scanned: amavisd-new at c-s.fr
 Received: from pegase2.c-s.fr ([172.26.127.65])
  by localhost (pegase2.c-s.fr [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id jUS-I58NIWE3; Tue, 22 Feb 2022 16:00:48 +0100 (CET)
+ with ESMTP id aHsBMPXbzwiE; Tue, 22 Feb 2022 16:00:41 +0100 (CET)
 Received: from messagerie.si.c-s.fr (messagerie.si.c-s.fr [192.168.25.192])
- by pegase2.c-s.fr (Postfix) with ESMTP id 4K32RF4Tbmz9sSq;
+ by pegase2.c-s.fr (Postfix) with ESMTP id 4K32RF16bkz9sSP;
  Tue, 22 Feb 2022 16:00:41 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id 89CBD8B778;
+ by messagerie.si.c-s.fr (Postfix) with ESMTP id 15D7D8B783;
  Tue, 22 Feb 2022 16:00:41 +0100 (CET)
 X-Virus-Scanned: amavisd-new at c-s.fr
 Received: from messagerie.si.c-s.fr ([127.0.0.1])
  by localhost (messagerie.si.c-s.fr [127.0.0.1]) (amavisd-new, port 10023)
- with ESMTP id twoxT6Wk121T; Tue, 22 Feb 2022 16:00:41 +0100 (CET)
+ with ESMTP id Rfqs5P2jSmQ5; Tue, 22 Feb 2022 16:00:41 +0100 (CET)
 Received: from PO20335.IDSI0.si.c-s.fr (unknown [192.168.7.78])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id CA66A8B77C;
+ by messagerie.si.c-s.fr (Postfix) with ESMTP id BB7CB8B764;
  Tue, 22 Feb 2022 16:00:40 +0100 (CET)
 Received: from PO20335.IDSI0.si.c-s.fr (localhost [127.0.0.1])
- by PO20335.IDSI0.si.c-s.fr (8.17.1/8.16.1) with ESMTPS id 21MF0V3h1087059
+ by PO20335.IDSI0.si.c-s.fr (8.17.1/8.16.1) with ESMTPS id 21MF0VhI1087063
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
  Tue, 22 Feb 2022 16:00:31 +0100
 Received: (from chleroy@localhost)
- by PO20335.IDSI0.si.c-s.fr (8.17.1/8.17.1/Submit) id 21MF0UWY1087057;
- Tue, 22 Feb 2022 16:00:30 +0100
+ by PO20335.IDSI0.si.c-s.fr (8.17.1/8.17.1/Submit) id 21MF0V8O1087062;
+ Tue, 22 Feb 2022 16:00:31 +0100
 X-Authentication-Warning: PO20335.IDSI0.si.c-s.fr: chleroy set sender to
  christophe.leroy@csgroup.eu using -f
 From: Christophe Leroy <christophe.leroy@csgroup.eu>
 To: Luis Chamberlain <mcgrof@kernel.org>, Aaron Tomlin <atomlin@redhat.com>
-Date: Tue, 22 Feb 2022 16:00:17 +0100
-Message-Id: <cover.1645541930.git.christophe.leroy@csgroup.eu>
+Date: Tue, 22 Feb 2022 16:00:18 +0100
+Message-Id: <c9584f48abce748e62e65e6757ceb23800f15380.1645541930.git.christophe.leroy@csgroup.eu>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1645541930.git.christophe.leroy@csgroup.eu>
+References: <cover.1645541930.git.christophe.leroy@csgroup.eu>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1645542019; l=2069; s=20211009;
- h=from:subject:message-id; bh=vT+HtZuIc4tR/dCOg1oXL5RYCzAmw2cfyGL9n79gTuw=;
- b=N9aK/3o0a2abh6NrLLGjWLf0bPQndtrvH5N4Z/A3ykaTzXTaLBTGHurSFdAaIaXhVlQokNvjCQ5D
- dV2wrKrkDxj7IZ9KQ/SsIfBVEKB/1EmR6Sn9k07enWxpz+QWXS40
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1645542019; l=1894; s=20211009;
+ h=from:subject:message-id; bh=LdQW7knw8SonM6V3x5dRanGW0RmzQuevemJoFaoAVWs=;
+ b=Gf7wC7QYemkicc/NhrBdTVD+qjc4lnhJtPWXAc0YJAgZbJFTXdX6gN0m5lURY+4t4MD8nfsJoIVg
+ SGmcTtOhARaEy/nlBipLNhQMxcFRT4kiZqtuWEy4h3O5bzlknr5V
 X-Developer-Key: i=christophe.leroy@csgroup.eu; a=ed25519;
  pk=HIzTzUj91asvincQGOFx6+ZF5AoUuP9GdOtQChs7Mm0=
-X-Spam-Score: 0.0 (/)
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  This series applies on top of Aaron's series "module: core
- code clean up" v8. This series allow architectures to request having modules
- data in vmalloc area instead of module area. This is required on powerpc
- book3s/32 in order to set data non executable, because it is not possible
- to set executability on page basis, this is done per 256 Mbytes segments.
- The module area has exec [...] 
- Content analysis details:   (0.0 points, 6.0 required)
+ Content preview:  In order to separate text and data, we need to setup two rb
+ trees. This means that struct mod_tree_root is required even without
+ MODULES_TREE_LOOKUP.
+ Signed-off-by: Christophe Leroy <christophe.leroy@csgroup.eu> ---
+ kernel/module/internal.h
+ | 4 +++- kernel/module/main.c | 5 ----- 2 files changed, 3 insertions(+),
+ 6 deletions(-) 
+ Content analysis details:   (-0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1nMWfn-0004ZQ-Qv
-Subject: [Kgdb-bugreport] [PATCH v5 0/6] Allocate module text and data
- separately
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+X-Headers-End: 1nMWel-00BOrY-Iv
+Subject: [Kgdb-bugreport] [PATCH v5 1/6] module: Always have struct
+ mod_tree_root
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -119,57 +123,64 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-This series applies on top of Aaron's series "module: core code clean up" v8.
+In order to separate text and data, we need to setup
+two rb trees.
 
+This means that struct mod_tree_root is required even without
+MODULES_TREE_LOOKUP.
 
-This series allow architectures to request having modules data in
-vmalloc area instead of module area.
+Signed-off-by: Christophe Leroy <christophe.leroy@csgroup.eu>
+---
+ kernel/module/internal.h | 4 +++-
+ kernel/module/main.c     | 5 -----
+ 2 files changed, 3 insertions(+), 6 deletions(-)
 
-This is required on powerpc book3s/32 in order to set data non
-executable, because it is not possible to set executability on page
-basis, this is done per 256 Mbytes segments. The module area has exec
-right, vmalloc area has noexec. Without this change module data
-remains executable regardless of CONFIG_STRICT_MODULES_RWX.
-
-This can also be useful on other powerpc/32 in order to maximize the
-chance of code being close enough to kernel core to avoid branch
-trampolines.
-
-Changes in v5:
-- Rebased on top of Aaron's series "module: core code clean up" v8
-
-Changes in v4:
-- Rebased on top of Aaron's series "module: core code clean up" v6
-
-Changes in v3:
-- Fixed the tree for data_layout at one place (Thanks Miroslav)
-- Moved removal of module_addr_min/module_addr_max macro out of patch 1 in a new patch at the end of the series to reduce churn.
-
-Changes in v2:
-- Dropped first two patches which are not necessary. They may be added back later as a follow-up series.
-- Fixed the printks in GDB
-
-Christophe Leroy (6):
-  module: Always have struct mod_tree_root
-  module: Prepare for handling several RB trees
-  module: Introduce data_layout
-  module: Add CONFIG_ARCH_WANTS_MODULES_DATA_IN_VMALLOC
-  module: Remove module_addr_min and module_addr_max
-  powerpc: Select ARCH_WANTS_MODULES_DATA_IN_VMALLOC on book3s/32 and
-    8xx
-
- arch/Kconfig                |   6 +++
- arch/powerpc/Kconfig        |   1 +
- include/linux/module.h      |   8 +++
- kernel/debug/kdb/kdb_main.c |  10 +++-
- kernel/module/internal.h    |  13 +++--
- kernel/module/kallsyms.c    |  18 +++----
- kernel/module/main.c        | 103 +++++++++++++++++++++++++++---------
- kernel/module/procfs.c      |   8 ++-
- kernel/module/strict_rwx.c  |  10 ++--
- kernel/module/tree_lookup.c |  28 ++++++----
- 10 files changed, 149 insertions(+), 56 deletions(-)
-
+diff --git a/kernel/module/internal.h b/kernel/module/internal.h
+index 3fc139d5074b..743b598e7cc2 100644
+--- a/kernel/module/internal.h
++++ b/kernel/module/internal.h
+@@ -143,15 +143,17 @@ static inline void module_decompress_cleanup(struct load_info *info)
+ }
+ #endif
+ 
+-#ifdef CONFIG_MODULES_TREE_LOOKUP
+ struct mod_tree_root {
++#ifdef CONFIG_MODULES_TREE_LOOKUP
+ 	struct latch_tree_root root;
++#endif
+ 	unsigned long addr_min;
+ 	unsigned long addr_max;
+ };
+ 
+ extern struct mod_tree_root mod_tree;
+ 
++#ifdef CONFIG_MODULES_TREE_LOOKUP
+ void mod_tree_insert(struct module *mod);
+ void mod_tree_remove_init(struct module *mod);
+ void mod_tree_remove(struct module *mod);
+diff --git a/kernel/module/main.c b/kernel/module/main.c
+index 0749afdc34b5..3b75cb97f8c2 100644
+--- a/kernel/module/main.c
++++ b/kernel/module/main.c
+@@ -74,7 +74,6 @@ static void do_free_init(struct work_struct *w);
+ static DECLARE_WORK(init_free_wq, do_free_init);
+ static LLIST_HEAD(init_free_list);
+ 
+-#ifdef CONFIG_MODULES_TREE_LOOKUP
+ struct mod_tree_root mod_tree __cacheline_aligned = {
+ 	.addr_min = -1UL,
+ };
+@@ -82,10 +81,6 @@ struct mod_tree_root mod_tree __cacheline_aligned = {
+ #define module_addr_min mod_tree.addr_min
+ #define module_addr_max mod_tree.addr_max
+ 
+-#else /* !CONFIG_MODULES_TREE_LOOKUP */
+-static unsigned long module_addr_min = -1UL, module_addr_max;
+-#endif /* CONFIG_MODULES_TREE_LOOKUP */
+-
+ struct symsearch {
+ 	const struct kernel_symbol *start, *stop;
+ 	const s32 *crcs;
 -- 
 2.34.1
 
