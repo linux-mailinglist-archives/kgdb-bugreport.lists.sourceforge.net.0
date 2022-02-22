@@ -2,87 +2,103 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1E5364BD8F3
-	for <lists+kgdb-bugreport@lfdr.de>; Mon, 21 Feb 2022 11:12:30 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id F213F4BF6A5
+	for <lists+kgdb-bugreport@lfdr.de>; Tue, 22 Feb 2022 11:51:17 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1nM5gC-0006vO-5V
-	for lists+kgdb-bugreport@lfdr.de; Mon, 21 Feb 2022 10:12:28 +0000
+	id 1nMSlJ-0003Qj-MC
+	for lists+kgdb-bugreport@lfdr.de; Tue, 22 Feb 2022 10:51:16 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <tangmeng@uniontech.com>) id 1nM2dq-00085p-2v
- for kgdb-bugreport@lists.sourceforge.net; Mon, 21 Feb 2022 06:57:48 +0000
+ (envelope-from <christophe.leroy@csgroup.eu>) id 1nMSlH-0003Qd-LZ
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 22 Feb 2022 10:51:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=FP5x1u9Oa169m4tpEPx15G30Mio+MvD4qaBLlvek5o8=; b=E+RszeyB/j3lwpj0Gk9j/Dnhcr
- mwkbloHaYTmTV8q/Pa79k4cxtBQY4/rCAxvRX8WwatKeNM38CLWPMsKvkOWBAXAFuxhRImmXxScoI
- FXW7m8lnQflqRWjx9k7RT5ArW1wL7sZ0YsoH/5Ub4G++4ehRQo3Mfwn57nXRPzmROOwA=;
+ bh=4BwwILTuOK2DtLRKN/H5xrYkz8g3OdfycjD5TditqWY=; b=D4VZl7kbLBrg2b0rUkZCcdEsEg
+ SuiJxzI04bARe6g59Rar3MHlWPQcja8NdJ34J/ZsfL8Tid4aDhBJsP7V2DVLNTyIgzn+rckWUtnF2
+ H/iyZ6+PMdbTvtZtobSCpAdyqcWeYQ+sySR2M63Wu/JGDGOHveuph4oNwju2Fh8/3T24=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=FP5x1u9Oa169m4tpEPx15G30Mio+MvD4qaBLlvek5o8=; b=B
- SjJOCJ6uoY3Obo4vL2NBW87BjKreeTXOpUuOZopl76R0yQQdHlP3Dtc/kUgM1XarQ4qAvmGGf5VKm
- m7qcq+ykFWFEp4yMOCFqTNLOFMtrqOYy4hpPJ9Iyv2dLlbERTbSp7UrxQw4+bC4aLgulflrdyRRvX
- zERTLkp4e6BupRWQ=;
-Received: from smtpbg464.qq.com ([59.36.132.32] helo=qq.com)
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ List-Owner:List-Archive; bh=4BwwILTuOK2DtLRKN/H5xrYkz8g3OdfycjD5TditqWY=; b=A
+ wEqhXrmQFc0gLGg+SgbLcsJ6IKNOVkqY1/YfOXfe7JxfZzGglCkbeo382MbFjHNNAdGxdmtr7Sjte
+ tOonSoK7/Kp3mOhZOnjvFYAp5dy5RV8YFoIiZDWAkf3wqghuJtHEOTG/+xXF4+DR43TNITCclFpyt
+ T5BQybqF7qPHB/eQ=;
+Received: from pegase2.c-s.fr ([93.17.235.10])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nM2de-0003Xr-Bb
- for kgdb-bugreport@lists.sourceforge.net; Mon, 21 Feb 2022 06:57:47 +0000
-X-QQ-mid: bizesmtp79t1645424404te6fwesw
-Received: from localhost.localdomain (unknown [58.240.82.166])
- by bizesmtp.qq.com (ESMTP) with 
- id ; Mon, 21 Feb 2022 14:19:58 +0800 (CST)
-X-QQ-SSF: 01400000002000B0F000000A0000000
-X-QQ-FEAT: hR9GyqeohSjJ8b/qPk34ny37FDJWImGPRvOx7CiNu3SDi/J1JEglKreV1giAO
- DO8xtgMRmohoyPBF3C537Ys3WEBfk6oA6v29etPGuRLwNbEXuajJpL4VS4I63kXOXMehMs7
- vQ8TUXh4vYgwsoz75bgK+Jurhfwwp4nlYZBv23LwBYxaMKqzzV30e6PHk2Op2N4pW6mJ2Wz
- hfr2eBOq8dWMr1+WoY1W7HheQvSKwCcHLqfnKYcp+XM1h9wiwGVOjshARnkFiO4R0P36NkF
- 5aOs9K+IiByovORfSgURAaNuFtplWzRjOS0hHCjanRqtqB9feuqrqeUCigEzNRt4MlN2+Yf
- k1NoiHJrCIR3qw52txtSJknNkO3zECzpYjCp4+M
-X-QQ-GoodBg: 1
-From: tangmeng <tangmeng@uniontech.com>
-To: jason.wessel@windriver.com, daniel.thompson@linaro.org,
- dianders@chromium.org
-Date: Mon, 21 Feb 2022 14:19:54 +0800
-Message-Id: <20220221061954.4822-1-tangmeng@uniontech.com>
-X-Mailer: git-send-email 2.20.1
+ id 1nMSlF-00BC1B-K4
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 22 Feb 2022 10:51:14 +0000
+Received: from localhost (mailhub3.si.c-s.fr [172.26.127.67])
+ by localhost (Postfix) with ESMTP id 4K2wVB5lsJz9sS4;
+ Tue, 22 Feb 2022 11:32:50 +0100 (CET)
+X-Virus-Scanned: amavisd-new at c-s.fr
+Received: from pegase2.c-s.fr ([172.26.127.65])
+ by localhost (pegase2.c-s.fr [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 0GgEn6udiCup; Tue, 22 Feb 2022 11:32:50 +0100 (CET)
+Received: from messagerie.si.c-s.fr (messagerie.si.c-s.fr [192.168.25.192])
+ by pegase2.c-s.fr (Postfix) with ESMTP id 4K2wV93dcWz9sSN;
+ Tue, 22 Feb 2022 11:32:49 +0100 (CET)
+Received: from localhost (localhost [127.0.0.1])
+ by messagerie.si.c-s.fr (Postfix) with ESMTP id 6B34F8B783;
+ Tue, 22 Feb 2022 11:32:49 +0100 (CET)
+X-Virus-Scanned: amavisd-new at c-s.fr
+Received: from messagerie.si.c-s.fr ([127.0.0.1])
+ by localhost (messagerie.si.c-s.fr [127.0.0.1]) (amavisd-new, port 10023)
+ with ESMTP id Gw8BlweLiiqu; Tue, 22 Feb 2022 11:32:49 +0100 (CET)
+Received: from PO20335.IDSI0.si.c-s.fr (unknown [172.25.230.108])
+ by messagerie.si.c-s.fr (Postfix) with ESMTP id 18C7A8B764;
+ Tue, 22 Feb 2022 11:32:49 +0100 (CET)
+Received: from PO20335.IDSI0.si.c-s.fr (localhost [127.0.0.1])
+ by PO20335.IDSI0.si.c-s.fr (8.17.1/8.16.1) with ESMTPS id 21MAWeWM1075957
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Tue, 22 Feb 2022 11:32:40 +0100
+Received: (from chleroy@localhost)
+ by PO20335.IDSI0.si.c-s.fr (8.17.1/8.17.1/Submit) id 21MAWdo71075955;
+ Tue, 22 Feb 2022 11:32:39 +0100
+X-Authentication-Warning: PO20335.IDSI0.si.c-s.fr: chleroy set sender to
+ christophe.leroy@csgroup.eu using -f
+From: Christophe Leroy <christophe.leroy@csgroup.eu>
+To: Aaron Tomlin <atomlin@redhat.com>, Luis Chamberlain <mcgrof@kernel.org>,
+ Jessica Yu <jeyu@kernel.org>
+Date: Tue, 22 Feb 2022 11:32:14 +0100
+Message-Id: <cover.1645525635.git.christophe.leroy@csgroup.eu>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-QQ-SENDSIZE: 520
-Feedback-ID: bizesmtp:uniontech.com:qybgforeign:qybgforeign6
-X-QQ-Bgrelay: 1
-X-Spam-Score: 0.0 (/)
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1645525927; l=2322; s=20211009;
+ h=from:subject:message-id; bh=ylAL86OcQDmaf/79jjmRMYu8EaHsQl69CI8Wp+NgxRs=;
+ b=N/0ZMxBg+GwkjabUyTrFxxthQkecVcI/2rmKrsOmpW7+8o/K+MJvyH4Y4zRqbsKdvtHrxbkRbuAl
+ +TxAkjhwCMNIBYD+J51inrtMQ3qgdvYHu55ElJ/ti5hl2To48geV
+X-Developer-Key: i=christophe.leroy@csgroup.eu; a=ed25519;
+ pk=HIzTzUj91asvincQGOFx6+ZF5AoUuP9GdOtQChs7Mm0=
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: In kernel/Makefile has: obj-$(CONFIG_KGDB) += debug/ so
- kernel/debug/Makefile
- don't need this 'obj-$(CONFIG_KGDB) +=', delete it from kernel/debug/Makefile.
- Signed-off-by: tangmeng <tangmeng@uniontech.com> --- kernel/debug/Makefile
- | 2 +- 1 file changed, 1 insertion(+), 1 deletion(-) 
- Content analysis details:   (0.0 points, 6.0 required)
+ Content preview:  This series applies on top of Aaron's series "module: core
+ code clean up" v6, plus the 4 fixups I just sent: - Fixup for 54f2273e5fef
+ ("module: Move kallsyms support into a separate file") - Fixup for [...] 
+ Content analysis details:   (-0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [59.36.132.32 listed in list.dnswl.org]
- 0.0 T_SPF_TEMPERROR        SPF: test of record failed (temperror)
- 0.0 T_SPF_HELO_TEMPERROR   SPF: test of HELO record failed (temperror)
-X-Headers-End: 1nM2de-0003Xr-Bb
-X-Mailman-Approved-At: Mon, 21 Feb 2022 10:12:27 +0000
-Subject: [Kgdb-bugreport] [PATCH] kernel/debug: remove unnecessary CONFIG
- options
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+X-Headers-End: 1nMSlF-00BC1B-K4
+Subject: [Kgdb-bugreport] [PATCH v4 0/6] Allocate module text and data
+ separately
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -94,38 +110,68 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: kgdb-bugreport@lists.sourceforge.net, linux-kernel@vger.kernel.org,
- tangmeng <tangmeng@uniontech.com>
+Cc: linux-arch@vger.kernel.org, kgdb-bugreport@lists.sourceforge.net,
+ linux-kernel@vger.kernel.org, Christophe Leroy <christophe.leroy@csgroup.eu>,
+ linux-mm@kvack.org, linuxppc-dev@lists.ozlabs.org,
+ linux-modules@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-In kernel/Makefile has:
-obj-$(CONFIG_KGDB) += debug/
+This series applies on top of Aaron's series "module: core code clean up" v6, plus the 4 fixups I just sent:
+- Fixup for 54f2273e5fef ("module: Move kallsyms support into a separate file")
+- Fixup for e5973a14d187 ("module: Move strict rwx support to a separate file")
+- Fixup for 1df95c1b9fb2 ("module: Move latched RB-tree support to a separate file")
+- Fixup for 87b31159f78a ("module: Move all into module/")
 
-so kernel/debug/Makefile don't need this 'obj-$(CONFIG_KGDB) +=',
-delete it from kernel/debug/Makefile.
 
-Signed-off-by: tangmeng <tangmeng@uniontech.com>
----
- kernel/debug/Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+This series allow architectures to request having modules data in
+vmalloc area instead of module area.
 
-diff --git a/kernel/debug/Makefile b/kernel/debug/Makefile
-index 332ee6c6ec2c..9c49ff7c75f4 100644
---- a/kernel/debug/Makefile
-+++ b/kernel/debug/Makefile
-@@ -3,5 +3,5 @@
- # Makefile for the linux kernel debugger
- #
- 
--obj-$(CONFIG_KGDB) += debug_core.o gdbstub.o
-+obj-y += debug_core.o gdbstub.o
- obj-$(CONFIG_KGDB_KDB) += kdb/
+This is required on powerpc book3s/32 in order to set data non
+executable, because it is not possible to set executability on page
+basis, this is done per 256 Mbytes segments. The module area has exec
+right, vmalloc area has noexec. Without this change module data
+remains executable regardless of CONFIG_STRICT_MODULES_RWX.
+
+This can also be useful on other powerpc/32 in order to maximize the
+chance of code being close enough to kernel core to avoid branch
+trampolines.
+
+Changes in v4:
+- Rebased on top of Aaron's series "module: core code clean up" v6
+
+Changes in v3:
+- Fixed the tree for data_layout at one place (Thanks Miroslav)
+- Moved removal of module_addr_min/module_addr_max macro out of patch 1 in a new patch at the end of the series to reduce churn.
+
+Changes in v2:
+- Dropped first two patches which are not necessary. They may be added back later as a follow-up series.
+- Fixed the printks in GDB
+
+Christophe Leroy (6):
+  module: Always have struct mod_tree_root
+  module: Prepare for handling several RB trees
+  module: Introduce data_layout
+  module: Add CONFIG_ARCH_WANTS_MODULES_DATA_IN_VMALLOC
+  module: Remove module_addr_min and module_addr_max
+  powerpc: Select ARCH_WANTS_MODULES_DATA_IN_VMALLOC on book3s/32 and
+    8xx
+
+ arch/Kconfig                |   6 +++
+ arch/powerpc/Kconfig        |   1 +
+ include/linux/module.h      |   8 +++
+ kernel/debug/kdb/kdb_main.c |  10 +++-
+ kernel/module/internal.h    |  13 +++--
+ kernel/module/kallsyms.c    |  18 +++----
+ kernel/module/main.c        | 103 +++++++++++++++++++++++++++---------
+ kernel/module/procfs.c      |   8 ++-
+ kernel/module/strict_rwx.c  |  10 ++--
+ kernel/module/tree_lookup.c |  28 ++++++----
+ 10 files changed, 149 insertions(+), 56 deletions(-)
+
 -- 
-2.20.1
-
-
+2.34.1
 
 
 
