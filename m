@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 83C394C122D
-	for <lists+kgdb-bugreport@lfdr.de>; Wed, 23 Feb 2022 13:03:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 743274C1234
+	for <lists+kgdb-bugreport@lfdr.de>; Wed, 23 Feb 2022 13:03:31 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1nMqMI-0006fG-AK
-	for lists+kgdb-bugreport@lfdr.de; Wed, 23 Feb 2022 12:03:01 +0000
+	id 1nMqMk-0006hB-VG
+	for lists+kgdb-bugreport@lfdr.de; Wed, 23 Feb 2022 12:03:29 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <christophe.leroy@csgroup.eu>) id 1nMqMG-0006f9-JP
- for kgdb-bugreport@lists.sourceforge.net; Wed, 23 Feb 2022 12:02:59 +0000
+ (envelope-from <christophe.leroy@csgroup.eu>) id 1nMqMj-0006h1-Iy
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 23 Feb 2022 12:03:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=2tYTsLRs5xOLLeRP+SLJ3lc3CBL+fQr2IFyKKSY/SD0=; b=Q3maXZYktuaMxeXrhDJq8iGuJu
- aO0wzI1GCGg+lZuynQucz3ipzQW/shhlOnxlx+ghGEY2wUblmltOArTqTA3W7+8pWLbeMk9CJDgE3
- 0ssfiibKUB4NdtN+Ioena2Fb4ud2j7/en7N3YYNsR1kwnnJQFYs/O0vMSpr0eb4qm894=;
+ bh=MNuKKTSCxgf/wX8e6d0WW3i5ClxxwZ7TVQZBbXKONPE=; b=jALPWQCX5xrOmna2rgqYi4/p17
+ RG6p0uabw1Zuk3MkCMHQT+feYjAKx0VHk6WhfF9j30A/WYSGXWJxGj4cveH1jQBJ66J6XkisyteWe
+ 7Wqe9Ki9exSEWWML3CdB8AjGRfd5RelWqjN7+M/S/zGB3SfJLDSYF7eymlywHQVDvVX4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -30,79 +30,74 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=2tYTsLRs5xOLLeRP+SLJ3lc3CBL+fQr2IFyKKSY/SD0=; b=AkDRkhZyOHcGd5ElrsUphYly2a
- 4AIeXK7LrCW7RtEBcWtn08Mu8kEkRnoBVZJP8XSqanNUycRxzOKnuaT1FNjAum8lBvjPD9mr2BqcN
- nfbLFnKnEhgSlvl6AyK+gw0nh2ifH/bEhY4Em0TRXO6sN2dBphJO0btX6geQVU6w2UPE=;
+ bh=MNuKKTSCxgf/wX8e6d0WW3i5ClxxwZ7TVQZBbXKONPE=; b=PRDxkiD6GD2wyFE6Yb+VxakWed
+ xfQujT4hOQfvE2n5CDWsKsdeVhQi2OZS+UoXnG5y2vjmEIBDF3qiCkTXk9wUSlbyYrlEbSp4Mkazp
+ JLk40fQgYH8i3ypxoV4/MGdNm0wWEDZby74DSMDzKk5NyetLHeO1FGmJJNVuvWPVBXfs=;
 Received: from pegase2.c-s.fr ([93.17.235.10])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nMqMD-0001Z2-LG
- for kgdb-bugreport@lists.sourceforge.net; Wed, 23 Feb 2022 12:02:58 +0000
+ id 1nMqMg-00CRaf-UM
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 23 Feb 2022 12:03:27 +0000
 Received: from localhost (mailhub3.si.c-s.fr [172.26.127.67])
- by localhost (Postfix) with ESMTP id 4K3ZRF5YZlz9sSg;
- Wed, 23 Feb 2022 13:02:33 +0100 (CET)
+ by localhost (Postfix) with ESMTP id 4K3ZRJ23dVz9sSZ;
+ Wed, 23 Feb 2022 13:02:36 +0100 (CET)
 X-Virus-Scanned: amavisd-new at c-s.fr
 Received: from pegase2.c-s.fr ([172.26.127.65])
  by localhost (pegase2.c-s.fr [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id PupAe0jjbyvw; Wed, 23 Feb 2022 13:02:33 +0100 (CET)
+ with ESMTP id m9JXzGGU1xor; Wed, 23 Feb 2022 13:02:36 +0100 (CET)
 Received: from messagerie.si.c-s.fr (messagerie.si.c-s.fr [192.168.25.192])
- by pegase2.c-s.fr (Postfix) with ESMTP id 4K3ZRC0gJ1z9sSh;
+ by pegase2.c-s.fr (Postfix) with ESMTP id 4K3ZRC29xVz9sSq;
  Wed, 23 Feb 2022 13:02:31 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id 085D78B779;
+ by messagerie.si.c-s.fr (Postfix) with ESMTP id 3C1FE8B779;
  Wed, 23 Feb 2022 13:02:31 +0100 (CET)
 X-Virus-Scanned: amavisd-new at c-s.fr
 Received: from messagerie.si.c-s.fr ([127.0.0.1])
  by localhost (messagerie.si.c-s.fr [127.0.0.1]) (amavisd-new, port 10023)
- with ESMTP id AROrFHZOhGpQ; Wed, 23 Feb 2022 13:02:30 +0100 (CET)
+ with ESMTP id UlqdccA2a9jd; Wed, 23 Feb 2022 13:02:31 +0100 (CET)
 Received: from PO20335.IDSI0.si.c-s.fr (unknown [192.168.7.201])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id 65ED78B778;
+ by messagerie.si.c-s.fr (Postfix) with ESMTP id C3A158B77B;
  Wed, 23 Feb 2022 13:02:30 +0100 (CET)
 Received: from PO20335.IDSI0.si.c-s.fr (localhost [127.0.0.1])
- by PO20335.IDSI0.si.c-s.fr (8.17.1/8.16.1) with ESMTPS id 21NC2LZS1148187
+ by PO20335.IDSI0.si.c-s.fr (8.17.1/8.16.1) with ESMTPS id 21NC2LXX1148191
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
  Wed, 23 Feb 2022 13:02:21 +0100
 Received: (from chleroy@localhost)
- by PO20335.IDSI0.si.c-s.fr (8.17.1/8.17.1/Submit) id 21NC2LuK1148186;
+ by PO20335.IDSI0.si.c-s.fr (8.17.1/8.17.1/Submit) id 21NC2LnF1148190;
  Wed, 23 Feb 2022 13:02:21 +0100
 X-Authentication-Warning: PO20335.IDSI0.si.c-s.fr: chleroy set sender to
  christophe.leroy@csgroup.eu using -f
 From: Christophe Leroy <christophe.leroy@csgroup.eu>
 To: Luis Chamberlain <mcgrof@kernel.org>, Aaron Tomlin <atomlin@redhat.com>
-Date: Wed, 23 Feb 2022 13:02:12 +0100
-Message-Id: <8788e5b6180ad45ec933359bc97c1c8fe865f186.1645607143.git.christophe.leroy@csgroup.eu>
+Date: Wed, 23 Feb 2022 13:02:13 +0100
+Message-Id: <50797bbf84acd87c490192ae5b8539ee67b71418.1645607143.git.christophe.leroy@csgroup.eu>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1645607143.git.christophe.leroy@csgroup.eu>
 References: <cover.1645607143.git.christophe.leroy@csgroup.eu>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1645617734; l=4776; s=20211009;
- h=from:subject:message-id; bh=zW762VTX2wgJQdaUEhSgceFO6MryOmerkmFB78i7T/o=;
- b=opu3ZV2a7zUveKjdvLUAJlBYvn4o0Fkim4MybaD/po/M6L4Jo4sZpUoZZojQnG+EvZEEnt+68ssv
- sFG4q5q6CiQMIjcCvJRlIX2LlhqxRcsmGyvpggqXstHlEUFEb+xb
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1645617734; l=7630; s=20211009;
+ h=from:subject:message-id; bh=SGwB0g/VxOk2Hxo10neUQCGEPvBipCTZ4EgruMPkPX8=;
+ b=3xAwSrf4ThjTcViq5YoqXp4ZAWQSGrAFOmUT3HPpL/SfcClpcVP8uAstD8Hv76DC1Ubxm+5XQBS/
+ 1fGk8wH7CDUedQC/8UuKOHw3irvOL/Vy2gNlb+pzdEJSj1/8THcD
 X-Developer-Key: i=christophe.leroy@csgroup.eu; a=ed25519;
  pk=HIzTzUj91asvincQGOFx6+ZF5AoUuP9GdOtQChs7Mm0=
-X-Spam-Score: -0.0 (/)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  In order to separate text and data, we need to setup two rb
- trees. Modify functions to give the tree as a parameter. Signed-off-by:
- Christophe
- Leroy <christophe.leroy@csgroup.eu> --- kernel/module/internal.h | 4 ++--
- kernel/module/main.c | 16 ++++++++-------- kernel/module/tree_lookup.c |
- 20 ++++++++++ 3 f [...] 
- Content analysis details:   (-0.0 points, 6.0 required)
+ Content preview:  In order to allow separation of data from text, add another
+ layout, called data_layout. For architectures requesting separation of text
+ and data, only text will go in core_layout and data will go in d [...] 
+ Content analysis details:   (0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1nMqMD-0001Z2-LG
-Subject: [Kgdb-bugreport] [PATCH v6 2/6] module: Prepare for handling
- several RB trees
+X-Headers-End: 1nMqMg-00CRaf-UM
+Subject: [Kgdb-bugreport] [PATCH v6 3/6] module: Introduce data_layout
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -122,139 +117,174 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-In order to separate text and data, we need to setup
-two rb trees.
+In order to allow separation of data from text, add another layout,
+called data_layout. For architectures requesting separation of text
+and data, only text will go in core_layout and data will go in
+data_layout.
 
-Modify functions to give the tree as a parameter.
+For architectures which keep text and data together, make data_layout
+an alias of core_layout, that way data_layout can be used for all
+data manipulations, regardless of whether data is in core_layout or
+data_layout.
 
 Signed-off-by: Christophe Leroy <christophe.leroy@csgroup.eu>
 ---
- kernel/module/internal.h    |  4 ++--
- kernel/module/main.c        | 16 ++++++++--------
- kernel/module/tree_lookup.c | 20 ++++++++++----------
- 3 files changed, 20 insertions(+), 20 deletions(-)
+ kernel/module/internal.h   |  2 ++
+ kernel/module/kallsyms.c   | 18 +++++++++---------
+ kernel/module/main.c       | 20 ++++++++++++--------
+ kernel/module/strict_rwx.c | 10 +++++-----
+ 4 files changed, 28 insertions(+), 22 deletions(-)
 
 diff --git a/kernel/module/internal.h b/kernel/module/internal.h
-index ac64e53ac5e3..0f3146347256 100644
+index 0f3146347256..0aabbf5cbcd1 100644
 --- a/kernel/module/internal.h
 +++ b/kernel/module/internal.h
-@@ -157,13 +157,13 @@ extern struct mod_tree_root mod_tree;
- void mod_tree_insert(struct module *mod);
- void mod_tree_remove_init(struct module *mod);
- void mod_tree_remove(struct module *mod);
--struct module *mod_find(unsigned long addr);
-+struct module *mod_find(unsigned long addr, struct mod_tree_root *tree);
- #else /* !CONFIG_MODULES_TREE_LOOKUP */
+@@ -20,6 +20,8 @@
+ /* Maximum number of characters written by module_flags() */
+ #define MODULE_FLAGS_BUF_SIZE (TAINT_FLAGS_COUNT + 4)
  
- static inline void mod_tree_insert(struct module *mod) { }
- static inline void mod_tree_remove_init(struct module *mod) { }
- static inline void mod_tree_remove(struct module *mod) { }
--static inline struct module *mod_find(unsigned long addr)
-+static inline struct module *mod_find(unsigned long addr, struct mod_tree_root *tree)
- {
- 	struct module *mod;
++#define	data_layout core_layout
++
+ /*
+  * Modules' sections will be aligned on page boundaries
+  * to ensure complete separation of code and data, but
+diff --git a/kernel/module/kallsyms.c b/kernel/module/kallsyms.c
+index 23034b50f8f5..c56de1686172 100644
+--- a/kernel/module/kallsyms.c
++++ b/kernel/module/kallsyms.c
+@@ -134,12 +134,12 @@ void layout_symtab(struct module *mod, struct load_info *info)
+ 	}
  
+ 	/* Append room for core symbols at end of core part. */
+-	info->symoffs = ALIGN(mod->core_layout.size, symsect->sh_addralign ?: 1);
+-	info->stroffs = mod->core_layout.size = info->symoffs + ndst * sizeof(Elf_Sym);
+-	mod->core_layout.size += strtab_size;
+-	info->core_typeoffs = mod->core_layout.size;
+-	mod->core_layout.size += ndst * sizeof(char);
+-	mod->core_layout.size = strict_align(mod->core_layout.size);
++	info->symoffs = ALIGN(mod->data_layout.size, symsect->sh_addralign ?: 1);
++	info->stroffs = mod->data_layout.size = info->symoffs + ndst * sizeof(Elf_Sym);
++	mod->data_layout.size += strtab_size;
++	info->core_typeoffs = mod->data_layout.size;
++	mod->data_layout.size += ndst * sizeof(char);
++	mod->data_layout.size = strict_align(mod->data_layout.size);
+ 
+ 	/* Put string table section at end of init part of module. */
+ 	strsect->sh_flags |= SHF_ALLOC;
+@@ -187,9 +187,9 @@ void add_kallsyms(struct module *mod, const struct load_info *info)
+ 	 * Now populate the cut down core kallsyms for after init
+ 	 * and set types up while we still have access to sections.
+ 	 */
+-	mod->core_kallsyms.symtab = dst = mod->core_layout.base + info->symoffs;
+-	mod->core_kallsyms.strtab = s = mod->core_layout.base + info->stroffs;
+-	mod->core_kallsyms.typetab = mod->core_layout.base + info->core_typeoffs;
++	mod->core_kallsyms.symtab = dst = mod->data_layout.base + info->symoffs;
++	mod->core_kallsyms.strtab = s = mod->data_layout.base + info->stroffs;
++	mod->core_kallsyms.typetab = mod->data_layout.base + info->core_typeoffs;
+ 	src = rcu_dereference_sched(mod->kallsyms)->symtab;
+ 	for (ndst = i = 0; i < rcu_dereference_sched(mod->kallsyms)->num_symtab; i++) {
+ 		rcu_dereference_sched(mod->kallsyms)->typetab[i] = elf_type(src + i, info);
 diff --git a/kernel/module/main.c b/kernel/module/main.c
-index 3832a71cdacb..a831f51595d7 100644
+index a831f51595d7..84db7318ba2b 100644
 --- a/kernel/module/main.c
 +++ b/kernel/module/main.c
-@@ -91,22 +91,22 @@ struct symsearch {
-  * Bounds of module text, for speeding up __module_address.
-  * Protected by module_mutex.
-  */
--static void __mod_update_bounds(void *base, unsigned int size)
-+static void __mod_update_bounds(void *base, unsigned int size, struct mod_tree_root *tree)
- {
- 	unsigned long min = (unsigned long)base;
- 	unsigned long max = min + size;
+@@ -1190,7 +1190,7 @@ static void free_module(struct module *mod)
+ 	percpu_modfree(mod);
  
--	if (min < module_addr_min)
--		module_addr_min = min;
--	if (max > module_addr_max)
--		module_addr_max = max;
-+	if (min < tree->addr_min)
-+		tree->addr_min = min;
-+	if (max > tree->addr_max)
-+		tree->addr_max = max;
+ 	/* Free lock-classes; relies on the preceding sync_rcu(). */
+-	lockdep_free_key_range(mod->core_layout.base, mod->core_layout.size);
++	lockdep_free_key_range(mod->data_layout.base, mod->data_layout.size);
+ 
+ 	/* Finally, free the core (containing the module structure) */
+ 	module_memfree(mod->core_layout.base);
+@@ -1431,13 +1431,15 @@ static void layout_sections(struct module *mod, struct load_info *info)
+ 		for (i = 0; i < info->hdr->e_shnum; ++i) {
+ 			Elf_Shdr *s = &info->sechdrs[i];
+ 			const char *sname = info->secstrings + s->sh_name;
++			unsigned int *sizep;
+ 
+ 			if ((s->sh_flags & masks[m][0]) != masks[m][0]
+ 			    || (s->sh_flags & masks[m][1])
+ 			    || s->sh_entsize != ~0UL
+ 			    || module_init_layout_section(sname))
+ 				continue;
+-			s->sh_entsize = module_get_offset(mod, &mod->core_layout.size, s, i);
++			sizep = m ? &mod->data_layout.size : &mod->core_layout.size;
++			s->sh_entsize = module_get_offset(mod, sizep, s, i);
+ 			pr_debug("\t%s\n", sname);
+ 		}
+ 		switch (m) {
+@@ -1446,15 +1448,15 @@ static void layout_sections(struct module *mod, struct load_info *info)
+ 			mod->core_layout.text_size = mod->core_layout.size;
+ 			break;
+ 		case 1: /* RO: text and ro-data */
+-			mod->core_layout.size = strict_align(mod->core_layout.size);
+-			mod->core_layout.ro_size = mod->core_layout.size;
++			mod->data_layout.size = strict_align(mod->data_layout.size);
++			mod->data_layout.ro_size = mod->data_layout.size;
+ 			break;
+ 		case 2: /* RO after init */
+-			mod->core_layout.size = strict_align(mod->core_layout.size);
+-			mod->core_layout.ro_after_init_size = mod->core_layout.size;
++			mod->data_layout.size = strict_align(mod->data_layout.size);
++			mod->data_layout.ro_after_init_size = mod->data_layout.size;
+ 			break;
+ 		case 4: /* whole core */
+-			mod->core_layout.size = strict_align(mod->core_layout.size);
++			mod->data_layout.size = strict_align(mod->data_layout.size);
+ 			break;
+ 		}
+ 	}
+@@ -2134,6 +2136,8 @@ static int move_module(struct module *mod, struct load_info *info)
+ 		if (shdr->sh_entsize & INIT_OFFSET_MASK)
+ 			dest = mod->init_layout.base
+ 				+ (shdr->sh_entsize & ~INIT_OFFSET_MASK);
++		else if (!(shdr->sh_flags & SHF_EXECINSTR))
++			dest = mod->data_layout.base + shdr->sh_entsize;
+ 		else
+ 			dest = mod->core_layout.base + shdr->sh_entsize;
+ 
+@@ -2829,7 +2833,7 @@ static int load_module(struct load_info *info, const char __user *uargs,
+ 	mutex_unlock(&module_mutex);
+  free_module:
+ 	/* Free lock-classes; relies on the preceding sync_rcu() */
+-	lockdep_free_key_range(mod->core_layout.base, mod->core_layout.size);
++	lockdep_free_key_range(mod->data_layout.base, mod->data_layout.size);
+ 
+ 	module_deallocate(mod, info);
+  free_copy:
+diff --git a/kernel/module/strict_rwx.c b/kernel/module/strict_rwx.c
+index f36ea54c1dac..fe3c10891407 100644
+--- a/kernel/module/strict_rwx.c
++++ b/kernel/module/strict_rwx.c
+@@ -101,12 +101,12 @@ void module_enable_ro(const struct module *mod, bool after_init)
+ 	set_vm_flush_reset_perms(mod->init_layout.base);
+ 	frob_text(&mod->core_layout, set_memory_ro);
+ 
+-	frob_rodata(&mod->core_layout, set_memory_ro);
++	frob_rodata(&mod->data_layout, set_memory_ro);
+ 	frob_text(&mod->init_layout, set_memory_ro);
+ 	frob_rodata(&mod->init_layout, set_memory_ro);
+ 
+ 	if (after_init)
+-		frob_ro_after_init(&mod->core_layout, set_memory_ro);
++		frob_ro_after_init(&mod->data_layout, set_memory_ro);
  }
  
- static void mod_update_bounds(struct module *mod)
- {
--	__mod_update_bounds(mod->core_layout.base, mod->core_layout.size);
-+	__mod_update_bounds(mod->core_layout.base, mod->core_layout.size, &mod_tree);
- 	if (mod->init_layout.size)
--		__mod_update_bounds(mod->init_layout.base, mod->init_layout.size);
-+		__mod_update_bounds(mod->init_layout.base, mod->init_layout.size, &mod_tree);
+ void module_enable_nx(const struct module *mod)
+@@ -114,9 +114,9 @@ void module_enable_nx(const struct module *mod)
+ 	if (!IS_ENABLED(CONFIG_STRICT_MODULE_RWX))
+ 		return;
+ 
+-	frob_rodata(&mod->core_layout, set_memory_nx);
+-	frob_ro_after_init(&mod->core_layout, set_memory_nx);
+-	frob_writable_data(&mod->core_layout, set_memory_nx);
++	frob_rodata(&mod->data_layout, set_memory_nx);
++	frob_ro_after_init(&mod->data_layout, set_memory_nx);
++	frob_writable_data(&mod->data_layout, set_memory_nx);
+ 	frob_rodata(&mod->init_layout, set_memory_nx);
+ 	frob_writable_data(&mod->init_layout, set_memory_nx);
  }
- 
- static void module_assert_mutex_or_preempt(void)
-@@ -3017,7 +3017,7 @@ struct module *__module_address(unsigned long addr)
- 
- 	module_assert_mutex_or_preempt();
- 
--	mod = mod_find(addr);
-+	mod = mod_find(addr, &mod_tree);
- 	if (mod) {
- 		BUG_ON(!within_module(addr, mod));
- 		if (mod->state == MODULE_STATE_UNFORMED)
-diff --git a/kernel/module/tree_lookup.c b/kernel/module/tree_lookup.c
-index 0bc4ec3b22ce..995fe68059db 100644
---- a/kernel/module/tree_lookup.c
-+++ b/kernel/module/tree_lookup.c
-@@ -61,14 +61,14 @@ static const struct latch_tree_ops mod_tree_ops = {
- 	.comp = mod_tree_comp,
- };
- 
--static noinline void __mod_tree_insert(struct mod_tree_node *node)
-+static noinline void __mod_tree_insert(struct mod_tree_node *node, struct mod_tree_root *tree)
- {
--	latch_tree_insert(&node->node, &mod_tree.root, &mod_tree_ops);
-+	latch_tree_insert(&node->node, &tree->root, &mod_tree_ops);
- }
- 
--static void __mod_tree_remove(struct mod_tree_node *node)
-+static void __mod_tree_remove(struct mod_tree_node *node, struct mod_tree_root *tree)
- {
--	latch_tree_erase(&node->node, &mod_tree.root, &mod_tree_ops);
-+	latch_tree_erase(&node->node, &tree->root, &mod_tree_ops);
- }
- 
- /*
-@@ -80,28 +80,28 @@ void mod_tree_insert(struct module *mod)
- 	mod->core_layout.mtn.mod = mod;
- 	mod->init_layout.mtn.mod = mod;
- 
--	__mod_tree_insert(&mod->core_layout.mtn);
-+	__mod_tree_insert(&mod->core_layout.mtn, &mod_tree);
- 	if (mod->init_layout.size)
--		__mod_tree_insert(&mod->init_layout.mtn);
-+		__mod_tree_insert(&mod->init_layout.mtn, &mod_tree);
- }
- 
- void mod_tree_remove_init(struct module *mod)
- {
- 	if (mod->init_layout.size)
--		__mod_tree_remove(&mod->init_layout.mtn);
-+		__mod_tree_remove(&mod->init_layout.mtn, &mod_tree);
- }
- 
- void mod_tree_remove(struct module *mod)
- {
--	__mod_tree_remove(&mod->core_layout.mtn);
-+	__mod_tree_remove(&mod->core_layout.mtn, &mod_tree);
- 	mod_tree_remove_init(mod);
- }
- 
--struct module *mod_find(unsigned long addr)
-+struct module *mod_find(unsigned long addr, struct mod_tree_root *tree)
- {
- 	struct latch_tree_node *ltn;
- 
--	ltn = latch_tree_find((void *)addr, &mod_tree.root, &mod_tree_ops);
-+	ltn = latch_tree_find((void *)addr, &tree->root, &mod_tree_ops);
- 	if (!ltn)
- 		return NULL;
- 
 -- 
 2.34.1
 
