@@ -2,124 +2,93 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 340F24C7CCF
-	for <lists+kgdb-bugreport@lfdr.de>; Mon, 28 Feb 2022 23:05:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 670B14C7E5C
+	for <lists+kgdb-bugreport@lfdr.de>; Tue,  1 Mar 2022 00:27:26 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1nOo9E-0006ks-8D
-	for lists+kgdb-bugreport@lfdr.de; Mon, 28 Feb 2022 22:05:38 +0000
+	id 1nOpQM-0004LT-EF
+	for lists+kgdb-bugreport@lfdr.de; Mon, 28 Feb 2022 23:27:25 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jakobkoschel@gmail.com>)
- id 1nOo9D-0006kO-FP; Mon, 28 Feb 2022 22:05:38 +0000
+ (envelope-from <willy@infradead.org>)
+ id 1nOpQJ-0004L6-In; Mon, 28 Feb 2022 23:27:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=To:References:Message-Id:Content-Transfer-Encoding:
- Cc:Date:In-Reply-To:From:Subject:Mime-Version:Content-Type:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=rjAgW0TZYa01aB+RWuD5jL6/P65QVmPGzGS1fypwqkM=; b=Oz9CJVKHngBVk/8QJfgPfWyyWM
- o4seIp96b0RhtZKcMD6CBlnJQM88yXPnfWKwPgphstRxctj3LoehbgctyAhZspyZpMWafDuUQWpk8
- fR4VqASnsE2tLJ5oIVozDMlFjwNZL73n0iaBx5KjDkV4eLmojAAGs5VNUjMcMLk3mPuc=;
+ bh=kySnWHttTi8Odl1WzgGLjQ1pb3b/AWH5qnYZSwnte50=; b=MZM20KUxUJ3dVkxfR/6U/0rleH
+ Z6Hj0Yflbsw7hrRUBLbVqX0evIREdqZLgwK2WZOpOLfwtTsQxb89GY8oIgnSQITSXPwfVhCb+qcX1
+ Yt1qIVE4eBOaQmQQ0NkcEKqyb/E+pvB6wSKMOC/pcYxFx1kDNqqyZKGFhG3Dw9uLmC2k=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=To:References:Message-Id:Content-Transfer-Encoding:Cc:Date:In-Reply-To:
- From:Subject:Mime-Version:Content-Type:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=rjAgW0TZYa01aB+RWuD5jL6/P65QVmPGzGS1fypwqkM=; b=LdBGJznrfgOkQamw6UDeqh293N
- 7NEEPtOU9eMwyThJmFsGLt1Q0RSZ/Og08N9TfvGlDokHLpFTUiC2RK3HdCzE0a29unRNcMM0mDcXa
- jxTM2nf+Jbpvm+ji54RoH/wIBEVTXez5HW1uqUZ2YbLpRB4el7h7hkA1H3Tgx4y1hxnw=;
-Received: from mail-ej1-f50.google.com ([209.85.218.50])
+ bh=kySnWHttTi8Odl1WzgGLjQ1pb3b/AWH5qnYZSwnte50=; b=G4vZkrBC5j1v5tAB5WvN3Y5KFO
+ QIQvl0xJ8v4q+cfmEB65LKzC6JgcyJf1iGDIsHkBR+AI8hSYkytMP9MhaxIDCCvTvsV4ikBTYd0hJ
+ JB+2ftPPU+i5yVCAEv0PYbJ/+L/fajfltB5aXNNP+RhUu7YYC0+iQgzgqsKA+cb2gJ0M=;
+Received: from casper.infradead.org ([90.155.50.34])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1nOo9A-000Y0e-8g; Mon, 28 Feb 2022 22:05:36 +0000
-Received: by mail-ej1-f50.google.com with SMTP id bg10so27685087ejb.4;
- Mon, 28 Feb 2022 14:05:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:subject:from:in-reply-to:date:cc
- :content-transfer-encoding:message-id:references:to;
- bh=rjAgW0TZYa01aB+RWuD5jL6/P65QVmPGzGS1fypwqkM=;
- b=SsE2iptdX/xTNU84zbtZf+FZ8hKTkJX9H9ZM578+fdgJrDU7+0yGKs3Y1+Ec8zM22z
- 4L/SCSccM9eH+aBbsU9p5ll5VTrDlXvOt1QFHQZ0QoX++s1RFseEQQ8VJGBWAvwFCFIq
- jeFzH1SGTYgHS7irPmR7cmG6wYjaX3+E6LxhLklpw86+z7E18Zuelcsa1QvD5X9AuKj5
- NYlhLrqxXUYjh+QgOiXwDeMKoQqdSp4BR7hulFUTvSZMfnkNflEuO+lrt30n2JUf7UIn
- 5TdA8KwzIEgmQjPXnxPtLxIzLgpwPLiA+LehnjNWRY5HBdt4E59Tm/VNBLrMAmAi/DS2
- EEuw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:subject:from:in-reply-to:date:cc
- :content-transfer-encoding:message-id:references:to;
- bh=rjAgW0TZYa01aB+RWuD5jL6/P65QVmPGzGS1fypwqkM=;
- b=OIOnnyrRF5Z2iqsb1zWccjcVfbkh2Xpzz6RkpmOG+NPiSHohagrBJkrHYZk96XlMmT
- 58NXDut5+y0w0y36OZiz7aOEJ2grtpQqMtJ+ozJga1plMwiK1DcGuJ73wgXYREu3txUh
- iBFP8x6rR/WK5KEN49C6sp/0EH1qIRchudE+MNbsrq+/oObX3wy++ewi5o45PWDxmZI9
- YWGyxR6mTXFwJBuTDGxbjTPVR9d5VsR/IXEAKc4FIcIbZop9/xvIu10ylrwIZcZP7yVe
- Cl0qDeqptSclRyKHC9fV1OdKoM+Ko/kcSTKwDJt13qD/8OTZ2MAa/A6segQWoIsvedJ+
- ckog==
-X-Gm-Message-State: AOAM53178+b/CWQSNKYBmfap9fE3yCIxSNV/E7/TUP9KlLJQwhU2rT4J
- F/c2KVe2rVTc/nB8QvvKD+k=
-X-Google-Smtp-Source: ABdhPJy9dyrpbH/urhqhSpy7WKh/oklsnc56vlW33h3ZTWE1g0yI8U4qpehenqdC8nVSV7dV3sC9Vw==
-X-Received: by 2002:a17:906:370f:b0:6ce:6e7:7344 with SMTP id
- d15-20020a170906370f00b006ce06e77344mr16083589ejc.654.1646085929715; 
- Mon, 28 Feb 2022 14:05:29 -0800 (PST)
-Received: from smtpclient.apple ([2a02:8109:9d80:3f6c:957a:1d13:c949:d1f3])
- by smtp.gmail.com with ESMTPSA id
- v2-20020a17090606c200b006a728f4a9bcsm4769566ejb.148.2022.02.28.14.05.27
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 28 Feb 2022 14:05:29 -0800 (PST)
-Mime-Version: 1.0 (Mac OS X Mail 15.0 \(3693.60.0.1.1\))
-From: Jakob Koschel <jakobkoschel@gmail.com>
-In-Reply-To: <0b65541a-3da7-dc35-690a-0ada75b0adae@amd.com>
-Date: Mon, 28 Feb 2022 23:05:26 +0100
-Message-Id: <192A6D7F-E803-47AE-9C7A-267B4E87C856@gmail.com>
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
+ id 1nOpQH-000bVi-2P; Mon, 28 Feb 2022 23:27:21 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=kySnWHttTi8Odl1WzgGLjQ1pb3b/AWH5qnYZSwnte50=; b=nt03mWtTaEB9qwsFMTflxzDbvW
+ aPSsVBeLr8i8UFwA1l3fNavsuYE231uUwb0yDTUi43cd3zIwbEaMZqro2u+rXbOt0KZriPQpyGi5J
+ +pW6oqM84XOoVppIQh3QNnM4ANpt9aIP3ShEwC0IGa2NKI/m2xxapQAyHhJG42Bevn7SuMSAnyA27
+ 7+3DFdmFFllbJzk1MHudhAJj7GPo/5RsA7npxrePVRbtGBQKbJeOUSye2chevgvDMrFkod2y0FmL7
+ JW29U+rs2LR5a0WX3s04bvbvXotX/UjRCpaaxaXPYROyoDfpDk5Wuy418QovroPX+qbpGelik5Tc/
+ I0FC9RZw==;
+Received: from willy by casper.infradead.org with local (Exim 4.94.2 #2 (Red
+ Hat Linux)) id 1nOpPe-0090gL-Ex; Mon, 28 Feb 2022 23:26:42 +0000
+Date: Mon, 28 Feb 2022 23:26:42 +0000
+From: Matthew Wilcox <willy@infradead.org>
+To: Linus Torvalds <torvalds@linux-foundation.org>
+Message-ID: <Yh1aMm3hFe/j9ZbI@casper.infradead.org>
 References: <20220228110822.491923-1-jakobkoschel@gmail.com>
  <20220228110822.491923-3-jakobkoschel@gmail.com>
  <2e4e95d6-f6c9-a188-e1cd-b1eae465562a@amd.com>
  <CAHk-=wgQps58DPEOe4y5cTh5oE9EdNTWRLXzgMiETc+mFX7jzw@mail.gmail.com>
- <282f0f8d-f491-26fc-6ae0-604b367a5a1a@amd.com>
- <b2d20961dbb7533f380827a7fcc313ff849875c1.camel@HansenPartnership.com>
- <0b65541a-3da7-dc35-690a-0ada75b0adae@amd.com>
-To: =?utf-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-X-Mailer: Apple Mail (2.3693.60.0.1.1)
+ <CAHk-=wj8fkosQ7=bps5K+DDazBXk=ypfn49A0sEq+7-nZnyfXA@mail.gmail.com>
+ <CAHk-=wiTCvLQkHcJ3y0hpqH7FEk9D28LDvZZogC6OVLk7naBww@mail.gmail.com>
+ <Yh0tl3Lni4weIMkl@casper.infradead.org>
+ <CAHk-=wgBfJ1-cPA2LTvFyyy8owpfmtCuyiZi4+um8DhFNe+CyA@mail.gmail.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <CAHk-=wgBfJ1-cPA2LTvFyyy8owpfmtCuyiZi4+um8DhFNe+CyA@mail.gmail.com>
 X-Spam-Score: -0.2 (/)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  > On 28. Feb 2022, at 21:56, Christian König wrote: > > >
-    > Am 28.02.22 um 21:42 schrieb James Bottomley: >> On Mon, 2022-02-28 at
-   21:07 +0100, Christian König wrote: >>> Am 28.02.22 um 20:56 schr [...] 
- 
+ Content preview:  On Mon, Feb 28, 2022 at 12:37:15PM -0800,
+ Linus Torvalds wrote:
+ > On Mon, Feb 28, 2022 at 12:16 PM Matthew Wilcox <willy@infradead.org> wrote:
+ > > > > Then we can never use -Wshadow ;-( I'd love to be [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
- 
-  pts rule name              description
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
-                              no trust
-                             [209.85.218.50 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
-                             provider
-                             [jakobkoschel[at]gmail.com]
-  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
-                             [209.85.218.50 listed in wl.mailspike.net]
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
+ author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
-  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1nOo9A-000Y0e-8g
+X-Headers-End: 1nOpQH-000bVi-2P
 Subject: Re: [Kgdb-bugreport] [PATCH 2/6] treewide: remove using list
  iterator after loop body as a ptr
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
@@ -138,14 +107,12 @@ Cc: linux-wireless <linux-wireless@vger.kernel.org>,
  "Gustavo A. R. Silva" <gustavo@embeddedor.com>, linux-iio@vger.kernel.org,
  nouveau@lists.freedesktop.org, Rasmus Villemoes <linux@rasmusvillemoes.dk>,
  dri-devel <dri-devel@lists.freedesktop.org>,
- James Bottomley <James.Bottomley@HansenPartnership.com>,
- Cristiano Giuffrida <c.giuffrida@vu.nl>,
- amd-gfx list <amd-gfx@lists.freedesktop.org>,
+ Cristiano Giuffrida <c.giuffrida@vu.nl>, "Bos, H.J." <h.j.bos@vu.nl>,
  linux1394-devel@lists.sourceforge.net, drbd-dev@lists.linbit.com,
  linux-arch <linux-arch@vger.kernel.org>, CIFS <linux-cifs@vger.kernel.org>,
  linux-aspeed@lists.ozlabs.org, linux-scsi <linux-scsi@vger.kernel.org>,
- linux-rdma <linux-rdma@vger.kernel.org>, linux-staging@lists.linux.dev, "Bos,
- H.J." <h.j.bos@vu.nl>, Jason Gunthorpe <jgg@ziepe.ca>,
+ linux-rdma <linux-rdma@vger.kernel.org>, linux-staging@lists.linux.dev,
+ amd-gfx list <amd-gfx@lists.freedesktop.org>, Jason Gunthorpe <jgg@ziepe.ca>,
  intel-wired-lan@lists.osuosl.org, kgdb-bugreport@lists.sourceforge.net,
  bcm-kernel-feedback-list@broadcom.com,
  Dan Carpenter <dan.carpenter@oracle.com>,
@@ -153,11 +120,10 @@ Cc: linux-wireless <linux-wireless@vger.kernel.org>,
  Kees Cook <keescook@chromium.org>, Arnd Bergman <arnd@arndb.de>,
  Linux PM <linux-pm@vger.kernel.org>,
  intel-gfx <intel-gfx@lists.freedesktop.org>,
- linuxppc-dev <linuxppc-dev@lists.ozlabs.org>,
  Brian Johannesmeyer <bjohannesmeyer@gmail.com>,
  Nathan Chancellor <nathan@kernel.org>, dma <dmaengine@vger.kernel.org>,
  Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
- v9fs-developer@lists.sourceforge.net,
+ Jakob Koschel <jakobkoschel@gmail.com>, v9fs-developer@lists.sourceforge.net,
  linux-tegra <linux-tegra@vger.kernel.org>,
  Thomas Gleixner <tglx@linutronix.de>,
  Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
@@ -170,55 +136,60 @@ Cc: linux-wireless <linux-wireless@vger.kernel.org>,
  Linux Crypto Mailing List <linux-crypto@vger.kernel.org>,
  linux-fsdevel <linux-fsdevel@vger.kernel.org>,
  linux-mediatek@lists.infradead.org, Andrew Morton <akpm@linux-foundation.org>,
- Linus Torvalds <torvalds@linux-foundation.org>,
+ linuxppc-dev <linuxppc-dev@lists.ozlabs.org>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
  Mike Rapoport <rppt@kernel.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Cgo+IE9uIDI4LiBGZWIgMjAyMiwgYXQgMjE6NTYsIENocmlzdGlhbiBLw7ZuaWcgPGNocmlzdGlh
-bi5rb2VuaWdAYW1kLmNvbT4gd3JvdGU6Cj4gCj4gCj4gCj4gQW0gMjguMDIuMjIgdW0gMjE6NDIg
-c2NocmllYiBKYW1lcyBCb3R0b21sZXk6Cj4+IE9uIE1vbiwgMjAyMi0wMi0yOCBhdCAyMTowNyAr
-MDEwMCwgQ2hyaXN0aWFuIEvDtm5pZyB3cm90ZToKPj4+IEFtIDI4LjAyLjIyIHVtIDIwOjU2IHNj
-aHJpZWIgTGludXMgVG9ydmFsZHM6Cj4+Pj4gT24gTW9uLCBGZWIgMjgsIDIwMjIgYXQgNDoxOSBB
-TSBDaHJpc3RpYW4gS8O2bmlnCj4+Pj4gPGNocmlzdGlhbi5rb2VuaWdAYW1kLmNvbT4gd3JvdGU6
-Cj4+Pj4gW1NOSVBdCj4+Pj4gQW55Ym9keSBoYXZlIGFueSBpZGVhcz8KPj4+IEkgdGhpbmsgd2Ug
-c2hvdWxkIGxvb2sgYXQgdGhlIHVzZSBjYXNlcyB3aHkgY29kZSBpcyB0b3VjaGluZyAocG9zKQo+
-Pj4gYWZ0ZXIgdGhlIGxvb3AuCj4+PiAKPj4+IEp1c3QgZnJvbSBza2ltbWluZyBvdmVyIHRoZSBw
-YXRjaGVzIHRvIGNoYW5nZSB0aGlzIGFuZCBleHBlcmllbmNlCj4+PiB3aXRoIHRoZSBkcml2ZXJz
-L3N1YnN5c3RlbXMgSSBoZWxwIHRvIG1haW50YWluIEkgdGhpbmsgdGhlIHByaW1hcnkKPj4+IHBh
-dHRlcm4gbG9va3Mgc29tZXRoaW5nIGxpa2UgdGhpczoKPj4+IAo+Pj4gbGlzdF9mb3JfZWFjaF9l
-bnRyeShlbnRyeSwgaGVhZCwgbWVtYmVyKSB7Cj4+PiAgICAgIGlmIChzb21lX2NvbmRpdGlvbl9j
-aGVja2luZyhlbnRyeSkpCj4+PiAgICAgICAgICBicmVhazsKPj4+IH0KPj4+IGRvX3NvbWV0aGlu
-Z193aXRoKGVudHJ5KTsKClRoZXJlIGFyZSBvdGhlciBjYXNlcyB3aGVyZSB0aGUgbGlzdCBpdGVy
-YXRvciB2YXJpYWJsZSBpcyB1c2VkIGFmdGVyIHRoZSBsb29wClNvbWUgZXhhbXBsZXM6CgotIGxp
-c3RfZm9yX2VhY2hfZW50cnlfY29udGludWUoKSBhbmQgbGlzdF9mb3JfZWFjaF9lbnRyeV9mcm9t
-KCkuCgotIChhbHRob3VnaCB2ZXJ5IHJhcmUpIHRoZSBoZWFkIGlzIGFjdHVhbGx5IG9mIHRoZSBj
-b3JyZWN0IHN0cnVjdCB0eXBlLgoJCShwcGM0NDBzcGVfZ2V0X2dyb3VwX2VudHJ5KCk6IGRyaXZl
-cnMvZG1hL3BwYzR4eC9hZG1hLmM6MTQzNikKCi0gdG8gdXNlIHBvcy0+bGlzdCBmb3IgZXhhbXBs
-ZSBmb3IgbGlzdF9hZGRfdGFpbCgpOgoJCShhZGRfc3RhdGljX3ZtX2Vhcmx5KCk6IGFyY2gvYXJt
-L21tL2lvcmVtYXAuYzoxMDcpCgpJZiB0aGUgc2NvcGUgb2YgdGhlIGxpc3QgaXRlcmF0b3IgaXMg
-bGltaXRlZCB0aG9zZSBzdGlsbCBuZWVkIGZpeGluZyBpbiBhIGRpZmZlcmVudCB3YXkuCgo+PiAK
-Pj4gQWN0dWFsbHksIHdlIHVzdWFsbHkgaGF2ZSBhIGNoZWNrIHRvIHNlZSBpZiB0aGUgbG9vcCBm
-b3VuZCBhbnl0aGluZywKPj4gYnV0IGluIHRoYXQgY2FzZSBpdCBzaG91bGQgc29tZXRoaW5nIGxp
-a2UKPj4gCj4+IGlmIChsaXN0X2VudHJ5X2lzX2hlYWQoZW50cnksIGhlYWQsIG1lbWJlcikpIHsK
-Pj4gICAgIHJldHVybiB3aXRoIGVycm9yOwo+PiB9Cj4+IGRvX3NvbWV0aGluX3dpdGgoZW50cnkp
-Owo+PiAKPj4gU3VmZmljZT8gIFRoZSBsaXN0X2VudHJ5X2lzX2hlYWQoKSBtYWNybyBpcyBkZXNp
-Z25lZCB0byBjb3BlIHdpdGggdGhlCj4+IGJvZ3VzIGVudHJ5IG9uIGhlYWQgcHJvYmxlbS4KPiAK
-PiBUaGF0IHdpbGwgd29yayBhbmQgaXMgYWxzbyB3aGF0IHBlb3BsZSBhbHJlYWR5IGRvLgo+IAo+
-IFRoZSBrZXkgcHJvYmxlbSBpcyB0aGF0IHdlIGxldCBwZW9wbGUgZG8gdGhlIHNhbWUgdGhpbmcg
-b3ZlciBhbmQgb3ZlciBhZ2FpbiB3aXRoIHNsaWdodGx5IGRpZmZlcmVudCBpbXBsZW1lbnRhdGlv
-bnMuCj4gCj4gT3V0IGluIHRoZSB3aWxkIEkndmUgc2VlbiBhdCBsZWFzdCB1c2luZyBhIHNlcGFy
-YXRlIHZhcmlhYmxlLCB1c2luZyBhIGJvb2wgdG8gaW5kaWNhdGUgdGhhdCBzb21ldGhpbmcgd2Fz
-IGZvdW5kIGFuZCBqdXN0IGFzc3VtaW5nIHRoYXQgdGhlIGxpc3QgaGFzIGFuIGVudHJ5Lgo+IAo+
-IFRoZSBsYXN0IGNhc2UgaXMgYm9ndXMgYW5kIGJhc2ljYWxseSB3aGF0IGNhbiBicmVhayBiYWRs
-eS4KPiAKPiBJZiB3ZSB3b3VsZCBoYXZlIGFuIHVuaWZpZWQgbWFjcm8gd2hpY2ggc2VhcmNoIGZv
-ciBhbiBlbnRyeSBjb21iaW5lZCB3aXRoIGF1dG9tYXRlZCByZXBvcnRpbmcgb24gcGF0Y2hlcyB0
-byB1c2UgdGhhdCBtYWNybyBJIHRoaW5rIHRoZSBwb3RlbnRpYWwgdG8gaW50cm9kdWNlIHN1Y2gg
-aXNzdWVzIHdpbGwgYWxyZWFkeSBnbyBkb3duIG1hc3NpdmVseSB3aXRob3V0IGF1ZGl0aW5nIHRv
-bnMgb2YgZXhpc3RpbmcgY29kZS4KCkhhdmluZyBhIHVuaWZpZWQgd2F5IHRvIGRvIHRoZSBzYW1l
-IHRoaW5nIHdvdWxkIGluZGVlZCBiZSBncmVhdC4KCj4gCj4gUmVnYXJkcywKPiBDaHJpc3RpYW4u
-Cj4gCj4+IAo+PiBKYW1lcwo+PiAKPj4gCj4gCgotIEpha29iCgoKCl9fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCktnZGItYnVncmVwb3J0IG1haWxpbmcgbGlz
-dApLZ2RiLWJ1Z3JlcG9ydEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3Vy
-Y2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8va2dkYi1idWdyZXBvcnQK
+On Mon, Feb 28, 2022 at 12:37:15PM -0800, Linus Torvalds wrote:
+> On Mon, Feb 28, 2022 at 12:16 PM Matthew Wilcox <willy@infradead.org> wrote:
+> >
+> > Then we can never use -Wshadow ;-(  I'd love to be able to turn it on;
+> > it catches real bugs.
+> 
+> Oh, we already can never use -Wshadow regardless of things like this.
+> That bridge hasn't just been burned, it never existed in the first
+> place.
+> 
+> The whole '-Wshadow' thing simply cannot work with local variables in
+> macros - something that we've used since day 1.
+> 
+> Try this (as a "p.c" file):
+> 
+>         #define min(a,b) ({                     \
+>                 typeof(a) __a = (a);            \
+>                 typeof(b) __b = (b);            \
+>                 __a < __b ? __a : __b; })
+> 
+>         int min3(int a, int b, int c)
+>         {
+>                 return min(a,min(b,c));
+>         }
+> 
+> and now do "gcc -O2 -S t.c".
+> 
+> Then try it with -Wshadow.
+
+#define ___PASTE(a, b)	a##b
+#define __PASTE(a, b) ___PASTE(a, b)
+#define _min(a, b, u) ({         \
+        typeof(a) __PASTE(__a,u) = (a);            \
+        typeof(b) __PASTE(__b,u) = (b);            \
+        __PASTE(__a,u) < __PASTE(__b,u) ? __PASTE(__a,u) : __PASTE(__b,u); })
+
+#define min(a, b) _min(a, b, __COUNTER__)
+
+int min3(int a, int b, int c)
+{
+        return min(a,min(b,c));
+}
+
+(probably there's a more elegant way to do this)
+
+
+_______________________________________________
+Kgdb-bugreport mailing list
+Kgdb-bugreport@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport
