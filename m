@@ -2,27 +2,27 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A38204C7A99
-	for <lists+kgdb-bugreport@lfdr.de>; Mon, 28 Feb 2022 21:37:59 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 80CB74C7AAC
+	for <lists+kgdb-bugreport@lfdr.de>; Mon, 28 Feb 2022 21:41:46 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1nOmmN-00077b-N9
-	for lists+kgdb-bugreport@lfdr.de; Mon, 28 Feb 2022 20:37:58 +0000
+	id 1nOmq1-0004yK-Gb
+	for lists+kgdb-bugreport@lfdr.de; Mon, 28 Feb 2022 20:41:44 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <torvalds@linuxfoundation.org>) id 1nOmmM-00077V-Gv
- for kgdb-bugreport@lists.sourceforge.net; Mon, 28 Feb 2022 20:37:57 +0000
+ (envelope-from <torvalds@linuxfoundation.org>) id 1nOmpy-0004y9-1A
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 28 Feb 2022 20:41:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
  In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
  :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=S/LNP14iVGpJY7HEU3KoWC3rGBeIOldyeXi/18P4YEg=; b=CFWPhxoql0gKACiRJoSCoaVE4M
- +97avcBrRglUeHvdghmyqXIVXP8oPGtZgAl9wBKzkufFHkC8YblLjGvRjFJafM1hMPedzpxfALuM/
- q2RxpKCrrFd/o9xMA8iFH9WCw7vW6YqUQYiBya3W+OnA4R0jtuyW8mMgMLeHFhaAHKYY=;
+ bh=qhbC6eV8gO++7ErI4p8jtmcwHU0MP2/Ov9cpdMFArow=; b=gd207MzUUoIVTEelRozsQgdb3Z
+ u1FE6i4Ci5eYpAIRtnA16PIsD/kz0Dk25WI6aCzx8ty7qQnMMG41It7zklPNPuSCwfrHQW1Ni2PZY
+ ueH4E3KBdkCfQrgoh71j00ak+BQHkBCRKZajtukGoNXpKpBWonPk1K+opAfmDt2zsCRc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
@@ -30,53 +30,53 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=S/LNP14iVGpJY7HEU3KoWC3rGBeIOldyeXi/18P4YEg=; b=LS/mTeR+GKzOsygrMSv1QIAj0y
- jzbPdjrMUcXNRhXoc01GRMy385Rdkg/q/vmLhxSZmWN8afjkg+WzxggDFXxUfwOVFjFuwEE71OHFP
- oztMcUrkBhPJvJ3f9oc0cBytqmBpaeAQYsHzv2V2ZUJAUpD1aZ9b5Ln3Dl7DtBiy2/10=;
-Received: from mail-lf1-f41.google.com ([209.85.167.41])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=qhbC6eV8gO++7ErI4p8jtmcwHU0MP2/Ov9cpdMFArow=; b=CjpRm42AIFB8idT14z3NSSIFJL
+ ayv1/e7CIZEPgVKD+v00G20t23BYXNqfKKr5OL5KyJt9k1y/RNajrHnd9mx9JeTmE4BBD+6nivI6K
+ mhHmKrNjkjMTPELORy71LrANHIe4qs4urq0lIWCrWtWnWevHSARGK8t4Szp3T8P6T9E0=;
+Received: from mail-ej1-f54.google.com ([209.85.218.54])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1nOmmE-00058u-3y
- for kgdb-bugreport@lists.sourceforge.net; Mon, 28 Feb 2022 20:37:55 +0000
-Received: by mail-lf1-f41.google.com with SMTP id m14so23428989lfu.4
+ id 1nOmps-000UXQ-St
+ for kgdb-bugreport@lists.sourceforge.net; Mon, 28 Feb 2022 20:41:40 +0000
+Received: by mail-ej1-f54.google.com with SMTP id a23so27283345eju.3
  for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 28 Feb 2022 12:37:50 -0800 (PST)
+ Mon, 28 Feb 2022 12:41:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux-foundation.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=S/LNP14iVGpJY7HEU3KoWC3rGBeIOldyeXi/18P4YEg=;
- b=JCfpf2EkV0u8p2DIwI3SoZoRhHthQMEAy9/7LEkowc8JnTmPgsFXHlzh4U3t+Q6SEk
- Lc7ftzGO2kIrejoWkV3dzzd0jpx1zu67BigJ1Dmt6MH2aSREOTU5VOooJKZjMGKU+kco
- F0IyOo2hDxkf3WtcbllN4ffR7kqC0AZqO0I4w=
+ :cc; bh=qhbC6eV8gO++7ErI4p8jtmcwHU0MP2/Ov9cpdMFArow=;
+ b=WVa5dIiqx38h7wrDwDC1XUsKJKiBFCag4a2cDDwm9PX3cUtT8qqZ7IT4jQUgf/P4m+
+ SFGMe+WsS02R4cGzO91FNZKGdT/lUA2soxV9cxmDWvmKG61T36jSK+GypeHu4wmj47J3
+ J2dEWo9WRu5EKgz1ZgjNDbSUreOeJ25KIOWY4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=S/LNP14iVGpJY7HEU3KoWC3rGBeIOldyeXi/18P4YEg=;
- b=0/0NRlCxA25PHJAJtAlUUFzcfzSJT+BiY0W5kgdyejSlzmNHem3GOW+iKQDiuikWMc
- 4BtEwpNW5Z3whFacNb6FVJ1o9wUwe7tFtdjD/UkmLYcxYt8QCsRB64f3vIvioolbAIy6
- nMUtHH/Hxc8fublM73oVSL+ZM4uKHLdCkQp+SCkgfaTHegkcSsw7kHL3Da49I/KFROpE
- jPM+eW4hvJDcuk70+onQmHC/Rych5AHL7+5sLuCa7LpgQuP6IAZyqtTAJNporGZlgmdz
- fGk5wuXWa/Vf9/m5ChU4ZTiIxv96PCWHfqejLpNLwJV1oA8wbPoaAgxN2nhI5kusctOd
- QTag==
-X-Gm-Message-State: AOAM533Oe+RsCQxcb93UhGeJouzokGKTQcUPvjdSrnttpLKIp2BuInX+
- /OKH5cP51vc7v624T5ydSBjILW93g4P3ILbgUbU=
-X-Google-Smtp-Source: ABdhPJylcZQJBWtRb4q3pChwu3dH9PluQxXhjEqeVhlsD+4kkRHyTbTHazMvPvi9t9x0aLhEwnrZ8Q==
-X-Received: by 2002:a19:e049:0:b0:42f:b0e2:10c4 with SMTP id
- g9-20020a19e049000000b0042fb0e210c4mr13371338lfj.170.1646080662969; 
- Mon, 28 Feb 2022 12:37:42 -0800 (PST)
-Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com.
- [209.85.167.45]) by smtp.gmail.com with ESMTPSA id
- v25-20020a056512049900b00443f5c2edb6sm1131234lfq.81.2022.02.28.12.37.42
+ bh=qhbC6eV8gO++7ErI4p8jtmcwHU0MP2/Ov9cpdMFArow=;
+ b=ZHcwrBrIzDycltHsZHGm19+as9NmrOmNPNzcGqJaCSmYOLRyo6xJIe4Bz3bynUxlhs
+ oYEobg8iLcvIyMlYV3X0Mz48aPAGhP7cQ5JM1YP1fQPNHKiFdTZuBwvijIicMJqreWoj
+ 4hHGC6wtJjGHLOHKenMbl3xXEaFxRrGym4oi7iPPhZuZPAhIaAYNmUSW89mkLEsK8ljw
+ sRWJjSCub1DVZDjaR5Tb1zYEppCdiR/M84Hg+8Vrrpv6a3bNwSDTVuL81n2KpQxUDbbs
+ 9Wv8pzBCy2gYBLlPsktg/C252Et5VYywrw1AEjOqqmMLhq/KGWMcjyigctX3xjn2hpRy
+ f/vQ==
+X-Gm-Message-State: AOAM533RkmB8akbv7THt+xhOrx8SjR7akIgJ6ssG+A3O1pDXer+yadoH
+ SotJfeSN76/2uQYe/3k93q/Uk8FuR/Z6u4KSJPY=
+X-Google-Smtp-Source: ABdhPJyLiujMWYCigkr8//7HKmB5vNHB4H9F5EpvR+h3YzD3zuXINmQDf89eDdFa4ApsHP1ebOwirg==
+X-Received: by 2002:a17:906:4783:b0:6d0:9b6e:b5a5 with SMTP id
+ cw3-20020a170906478300b006d09b6eb5a5mr17383699ejc.526.1646080889824; 
+ Mon, 28 Feb 2022 12:41:29 -0800 (PST)
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com.
+ [209.85.221.41]) by smtp.gmail.com with ESMTPSA id
+ l1-20020a056402028100b0040f682ee13dsm6406087edv.26.2022.02.28.12.41.28
  for <kgdb-bugreport@lists.sourceforge.net>
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 28 Feb 2022 12:37:42 -0800 (PST)
-Received: by mail-lf1-f45.google.com with SMTP id f37so23373480lfv.8
+ Mon, 28 Feb 2022 12:41:28 -0800 (PST)
+Received: by mail-wr1-f41.google.com with SMTP id bk29so2927wrb.4
  for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 28 Feb 2022 12:37:42 -0800 (PST)
-X-Received: by 2002:a2e:924d:0:b0:246:370c:5618 with SMTP id
- v13-20020a2e924d000000b00246370c5618mr15158756ljg.358.1646080652034; Mon, 28
- Feb 2022 12:37:32 -0800 (PST)
+ Mon, 28 Feb 2022 12:41:28 -0800 (PST)
+X-Received: by 2002:a05:6512:e8a:b0:443:7b8c:579a with SMTP id
+ bi10-20020a0565120e8a00b004437b8c579amr13784522lfb.687.1646080877791; Mon, 28
+ Feb 2022 12:41:17 -0800 (PST)
 MIME-Version: 1.0
 References: <20220228110822.491923-1-jakobkoschel@gmail.com>
  <20220228110822.491923-3-jakobkoschel@gmail.com>
@@ -85,42 +85,43 @@ References: <20220228110822.491923-1-jakobkoschel@gmail.com>
  <CAHk-=wj8fkosQ7=bps5K+DDazBXk=ypfn49A0sEq+7-nZnyfXA@mail.gmail.com>
  <CAHk-=wiTCvLQkHcJ3y0hpqH7FEk9D28LDvZZogC6OVLk7naBww@mail.gmail.com>
  <Yh0tl3Lni4weIMkl@casper.infradead.org>
-In-Reply-To: <Yh0tl3Lni4weIMkl@casper.infradead.org>
+ <e3bb7d0632f8ef60f18c19976d57330e1ef00584.camel@sipsolutions.net>
+In-Reply-To: <e3bb7d0632f8ef60f18c19976d57330e1ef00584.camel@sipsolutions.net>
 From: Linus Torvalds <torvalds@linux-foundation.org>
-Date: Mon, 28 Feb 2022 12:37:15 -0800
-X-Gmail-Original-Message-ID: <CAHk-=wgBfJ1-cPA2LTvFyyy8owpfmtCuyiZi4+um8DhFNe+CyA@mail.gmail.com>
-Message-ID: <CAHk-=wgBfJ1-cPA2LTvFyyy8owpfmtCuyiZi4+um8DhFNe+CyA@mail.gmail.com>
-To: Matthew Wilcox <willy@infradead.org>
+Date: Mon, 28 Feb 2022 12:41:01 -0800
+X-Gmail-Original-Message-ID: <CAHk-=wjNgWNa9njuBJEoafc-cRV3SbzZfh3m5YfxcZxdCw3+XQ@mail.gmail.com>
+Message-ID: <CAHk-=wjNgWNa9njuBJEoafc-cRV3SbzZfh3m5YfxcZxdCw3+XQ@mail.gmail.com>
+To: Johannes Berg <johannes@sipsolutions.net>
 X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  On Mon, Feb 28,
- 2022 at 12:16 PM Matthew Wilcox <willy@infradead.org>
- wrote: > > Then we can never use -Wshadow ;-( I'd love to be able to turn
- it on; > it catches real bugs. Oh, we already can never use -Wshadow regardless
- of things like this. That bridge hasn't just been burned, it never existed
- in the first place. 
+ 2022 at 12:29 PM Johannes Berg <johannes@sipsolutions.net>
+ wrote: > > If we're willing to change the API for the macro, we could do
+ > > list_for_each_entry(type, pos, head, member) > > [...] 
  Content analysis details:   (0.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.167.41 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.167.41 listed in wl.mailspike.net]
+ no trust [209.85.218.54 listed in list.dnswl.org]
  0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
  mail domains are different
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1nOmmE-00058u-3y
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.218.54 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+X-Headers-End: 1nOmps-000UXQ-St
 Subject: Re: [Kgdb-bugreport] [PATCH 2/6] treewide: remove using list
  iterator after loop body as a ptr
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
@@ -139,9 +140,10 @@ Cc: linux-wireless <linux-wireless@vger.kernel.org>,
  "Gustavo A. R. Silva" <gustavo@embeddedor.com>, linux-iio@vger.kernel.org,
  nouveau@lists.freedesktop.org, Rasmus Villemoes <linux@rasmusvillemoes.dk>,
  dri-devel <dri-devel@lists.freedesktop.org>,
- Cristiano Giuffrida <c.giuffrida@vu.nl>, "Bos, H.J." <h.j.bos@vu.nl>,
+ Cristiano Giuffrida <c.giuffrida@vu.nl>, Matthew Wilcox <willy@infradead.org>,
  linux1394-devel@lists.sourceforge.net, drbd-dev@lists.linbit.com,
  linux-arch <linux-arch@vger.kernel.org>, CIFS <linux-cifs@vger.kernel.org>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
  linux-aspeed@lists.ozlabs.org, linux-scsi <linux-scsi@vger.kernel.org>,
  linux-rdma <linux-rdma@vger.kernel.org>, linux-staging@lists.linux.dev,
  amd-gfx list <amd-gfx@lists.freedesktop.org>, Jason Gunthorpe <jgg@ziepe.ca>,
@@ -151,14 +153,13 @@ Cc: linux-wireless <linux-wireless@vger.kernel.org>,
  Linux Media Mailing List <linux-media@vger.kernel.org>,
  Kees Cook <keescook@chromium.org>, Arnd Bergman <arnd@arndb.de>,
  Linux PM <linux-pm@vger.kernel.org>,
- intel-gfx <intel-gfx@lists.freedesktop.org>,
- Brian Johannesmeyer <bjohannesmeyer@gmail.com>,
+ intel-gfx <intel-gfx@lists.freedesktop.org>, "Bos, H.J." <h.j.bos@vu.nl>,
  Nathan Chancellor <nathan@kernel.org>, dma <dmaengine@vger.kernel.org>,
  Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
  Jakob Koschel <jakobkoschel@gmail.com>, v9fs-developer@lists.sourceforge.net,
  linux-tegra <linux-tegra@vger.kernel.org>,
  Thomas Gleixner <tglx@linutronix.de>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Brian Johannesmeyer <bjohannesmeyer@gmail.com>,
  Linux ARM <linux-arm-kernel@lists.infradead.org>, linux-sgx@vger.kernel.org,
  linux-block <linux-block@vger.kernel.org>, Netdev <netdev@vger.kernel.org>,
  linux-usb@vger.kernel.org, samba-technical@lists.samba.org,
@@ -175,44 +176,31 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Mon, Feb 28, 2022 at 12:16 PM Matthew Wilcox <willy@infradead.org> wrote:
+On Mon, Feb 28, 2022 at 12:29 PM Johannes Berg
+<johannes@sipsolutions.net> wrote:
 >
-> Then we can never use -Wshadow ;-(  I'd love to be able to turn it on;
-> it catches real bugs.
+> If we're willing to change the API for the macro, we could do
+>
+>   list_for_each_entry(type, pos, head, member)
+>
+> and then actually take advantage of -Wshadow?
 
-Oh, we already can never use -Wshadow regardless of things like this.
-That bridge hasn't just been burned, it never existed in the first
-place.
+See my reply to Willy. There is no way -Wshadow will ever happen.
 
-The whole '-Wshadow' thing simply cannot work with local variables in
-macros - something that we've used since day 1.
+I considered that (type, pos, head, member) kind of thing, to the
+point of trying it for one file, but it ends up as horrendous syntax.
+It turns out that declaring the type separately really helps, and
+avoids crazy long lines among other things.
 
-Try this (as a "p.c" file):
+It would be unacceptable for another reason too - the amount of churn
+would just be immense. Every single use of that macro (and related
+macros) would change, even the ones that really don't need it or want
+it (ie the good kinds that already only use the variable inside the
+loop).
 
-        #define min(a,b) ({                     \
-                typeof(a) __a = (a);            \
-                typeof(b) __b = (b);            \
-                __a < __b ? __a : __b; })
+So "typeof(pos) pos" may be ugly - but it's a very localized ugly.
 
-        int min3(int a, int b, int c)
-        {
-                return min(a,min(b,c));
-        }
-
-and now do "gcc -O2 -S t.c".
-
-Then try it with -Wshadow.
-
-In other words, -Wshadow is simply not acceptable. Never has been,
-never will be, and that has nothing to do with the
-
-        typeof(pos) pos
-
-kind of thing.
-
-Your argument just isn't an argument.
-
-              Linus
+                    Linus
 
 
 _______________________________________________
