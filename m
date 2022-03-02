@@ -2,85 +2,79 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AD74C4CAF92
-	for <lists+kgdb-bugreport@lfdr.de>; Wed,  2 Mar 2022 21:19:28 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 54EA54CB06D
+	for <lists+kgdb-bugreport@lfdr.de>; Wed,  2 Mar 2022 21:59:39 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1nPVRY-0001QP-Ey
-	for lists+kgdb-bugreport@lfdr.de; Wed, 02 Mar 2022 20:19:27 +0000
+	id 1nPW4R-0007hU-Ch
+	for lists+kgdb-bugreport@lfdr.de; Wed, 02 Mar 2022 20:59:37 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <torvalds@linuxfoundation.org>) id 1nPVRX-0001QJ-71
- for kgdb-bugreport@lists.sourceforge.net; Wed, 02 Mar 2022 20:19:26 +0000
+ (envelope-from <keescook@chromium.org>) id 1nPW4Q-0007hL-2L
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 02 Mar 2022 20:59:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Uy+qIY61mUv01aVZ77KYqcI4VQ6CnEr5ehBFaIlKwdg=; b=AV2n1iHpObMWkvdcT4mZjoOhbi
- wORQgjawqPPak/j0g/CRf7EC/qX89OO95Q+nYLYnKevGcpHmZqQQ2y/8RAvzh4LMH0UJOoZ4NBdSx
- RzVXaW5rZEk8vjZRKqxjoUIFzjOEu/VaFHVNWyBP3LUPbnfCspaYy2doHIaq9cnO9uUg=;
+ bh=R/oQqieG0aXWXHs93Td97reRxAIjZoSgBmUtDJFVhjU=; b=XnK0o1rK/Za69M9OoRm0Mo/MZD
+ i9/yDCdOLfu5qW9O3hgs+udlsUizeB1Eer5SbHmnGQG2nd3FGsYZve3VvfhcKuKZtoXqo5nHIIeRk
+ gFeG0psrq5Lry/pgnyAJ9esMvR3FWE1QkyMA7M2PF+PfpHz/ChjECtxe6tgqnirXkYh8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Uy+qIY61mUv01aVZ77KYqcI4VQ6CnEr5ehBFaIlKwdg=; b=dJo7iKHKxpk495g6UstgAIzziG
- sZHgspJMjdNUKpenv6NEo5nZy7q+r9mk4W1i5h+EmvAZOATEWt0J7WW5tBC/5g156NvI7ZlIXBPzC
- MCiGZXiXgHFNaj3tKQSbW29WVCuGcjZli2RbYGlqNekXIlMFTes+Q6Z+Yr4UGQZvMhBM=;
-Received: from mail-ej1-f44.google.com ([209.85.218.44])
+ bh=R/oQqieG0aXWXHs93Td97reRxAIjZoSgBmUtDJFVhjU=; b=jTXhpDZvJ7Ubz3mMJEK0twq29+
+ L1tp/bFzsW5O9gvBEGUtL0dhMUCBJokrvPbvxWFgjP+wfMPckjVMwhzNipRlMmbsmvPGizd7Fgzx7
+ csg/nuy6ArGcfwiyg3+lfmB6vx1kDFmOHbxdxeQGhhYQ8Sr7J4dmlg7vOS+Wcq0cRcLo=;
+Received: from mail-pf1-f170.google.com ([209.85.210.170])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1nPVRS-0003qB-94
- for kgdb-bugreport@lists.sourceforge.net; Wed, 02 Mar 2022 20:19:25 +0000
-Received: by mail-ej1-f44.google.com with SMTP id pj17so1784735ejb.2
+ id 1nPW4N-0005vs-Ap
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 02 Mar 2022 20:59:36 +0000
+Received: by mail-pf1-f170.google.com with SMTP id d187so2964387pfa.10
  for <kgdb-bugreport@lists.sourceforge.net>;
- Wed, 02 Mar 2022 12:19:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux-foundation.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Uy+qIY61mUv01aVZ77KYqcI4VQ6CnEr5ehBFaIlKwdg=;
- b=Be+smD91jIehBxsphVP8GxPmG9fZ7UzsziFVI8sCcayH4ghcjVwFadN69qX3SSZZfA
- w/nKcppYscRVDTynDM99u+3Int1mDvzuW1vHPoDdJ+8JxYLDdH7+xaY9DZL7COnmW4q3
- yEVm7FisHcBkdW7xwzBny/SyDipBoZU1ONqUc=
+ Wed, 02 Mar 2022 12:59:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=R/oQqieG0aXWXHs93Td97reRxAIjZoSgBmUtDJFVhjU=;
+ b=d2ZFN7FzXJICmnX4Tyt0wAx0nHny3V7g7RBF7BzoFi4JqvMjvTlFe6r9CSmtZHYpfY
+ sI7cCbacBhQSn0c2nYjk/wWGRSWn9quhJSSynH9lMYRKPPdVW/LYlF+HQ4F3tfS4GoN+
+ rfxT6gA9HHGJJFfNnOWheyqKpysRyPxkd0f8U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=Uy+qIY61mUv01aVZ77KYqcI4VQ6CnEr5ehBFaIlKwdg=;
- b=3JZgxctpOH4d2pcEFhmxWRwqSqS6R8qnqjtjCK3ZcC18sWrP2FzysOO+0NtFYBnSYq
- 97ejAufryZ/gNfaEJwKGZRDVyauruwZ2oLliV4rFA444d3niJbuE9GCakuGPKyTByaoq
- Wre3XIQWaNgnP/w+Pagc9dUwKwg4eJyjQX7xplt5BM2CWWKgNebkINo+qdXlTx5zpaix
- 8DwmeFKEndfQrf+VfrEoKtmOg/IT/6KHOfu7A71L0+3lpu5wT6vQp22xrNUr6/cwv+Jd
- irgXi/J00qyIVnII1kCS/Djgxptym/j7Mq50Vdwt+tAJUZZ8p22RKEPeRZoha8wAzpii
- Wt4w==
-X-Gm-Message-State: AOAM533wazd+lj1MC15gXDSJLcOgziVwlXL7iqr7O55rrdQyWrm/4YEX
- 3Xhj3pU9+jnYVc+nPlcGZjWS5dLGL3EZKLKwkFM=
-X-Google-Smtp-Source: ABdhPJy1N1kRs5xRruHfdhLvt3nyopDL5Gl/PlAuc0hXU2UFFlaOeAmgFCz3hvxQnEGAfwZWvso7Iw==
-X-Received: by 2002:a17:906:e04:b0:6ce:e210:4fe1 with SMTP id
- l4-20020a1709060e0400b006cee2104fe1mr25011681eji.402.1646252355641; 
- Wed, 02 Mar 2022 12:19:15 -0800 (PST)
-Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com.
- [209.85.208.54]) by smtp.gmail.com with ESMTPSA id
- y12-20020a50eb8c000000b00410f02e577esm9171481edr.7.2022.03.02.12.19.12
- for <kgdb-bugreport@lists.sourceforge.net>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 02 Mar 2022 12:19:13 -0800 (PST)
-Received: by mail-ed1-f54.google.com with SMTP id o1so2807190edc.3
- for <kgdb-bugreport@lists.sourceforge.net>;
- Wed, 02 Mar 2022 12:19:12 -0800 (PST)
-X-Received: by 2002:a2e:3013:0:b0:246:2ca9:365e with SMTP id
- w19-20020a2e3013000000b002462ca9365emr21092331ljw.291.1646252342192; Wed, 02
- Mar 2022 12:19:02 -0800 (PST)
-MIME-Version: 1.0
-References: <282f0f8d-f491-26fc-6ae0-604b367a5a1a@amd.com>
- <b2d20961dbb7533f380827a7fcc313ff849875c1.camel@HansenPartnership.com>
- <7D0C2A5D-500E-4F38-AD0C-A76E132A390E@kernel.org>
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=R/oQqieG0aXWXHs93Td97reRxAIjZoSgBmUtDJFVhjU=;
+ b=LTZADbRTCX2xu/Ly1e2AjZuKfXWooQgpchYdnakrrtPut9qFPGnfGc6YqxVox39YLN
+ XNHVyxxKpaSPzaX8NpcDFaVwM1YJj88eezxNVx8T1ACAw9ftMwKJpgIHZ2VhOde6iCkq
+ ep0hUBH3roCgpOCwdOMEgUXOHQZtJugccT9y0b9IPPte4SRasvx0HlB0aOCOYbT4Mtwl
+ m+JBfMZbmNc189IvxELe7hk72MymsWF+eRkTdkRj528JflpJfr6aCbaRP6gw0jUJ1CH2
+ 32dl9A/9MoN1mBsUPJSnNCOyjKHl+a4CX/1RXQvSTquNHWLpyAcICOftig23UKiDJUmd
+ cH6Q==
+X-Gm-Message-State: AOAM533ZIj6TNjc04BZqMAI7D/5kT21MMlokoBff5V+QiQvN2B9oA4mn
+ 2KgzoIY4etfw60Yf+XF6Q/zICQ==
+X-Google-Smtp-Source: ABdhPJwV5Vftpu3BNFYOd1YAI3xcgBfQbmCq2DPnKYT59xnVma61vCMoUamoUdgwMbiUWTPibOctJw==
+X-Received: by 2002:a63:595e:0:b0:378:b203:a74e with SMTP id
+ j30-20020a63595e000000b00378b203a74emr13280856pgm.328.1646254769698; 
+ Wed, 02 Mar 2022 12:59:29 -0800 (PST)
+Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
+ by smtp.gmail.com with ESMTPSA id
+ z9-20020a655a49000000b00373459df190sm58337pgs.35.2022.03.02.12.59.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 02 Mar 2022 12:59:29 -0800 (PST)
+Date: Wed, 2 Mar 2022 12:59:28 -0800
+From: Kees Cook <keescook@chromium.org>
+To: Linus Torvalds <torvalds@linux-foundation.org>
+Message-ID: <202203021256.69D7C4BCA6@keescook>
+References: <7D0C2A5D-500E-4F38-AD0C-A76E132A390E@kernel.org>
  <73fa82a20910c06784be2352a655acc59e9942ea.camel@HansenPartnership.com>
  <CAHk-=wiT5HX6Kp0Qv4ZYK_rkq9t5fZ5zZ7vzvi6pub9kgp=72g@mail.gmail.com>
  <7dc860874d434d2288f36730d8ea3312@AcuMS.aculab.com>
@@ -89,44 +83,41 @@ References: <282f0f8d-f491-26fc-6ae0-604b367a5a1a@amd.com>
  <CAHk-=wix0HLCBs5sxAeW3uckg0YncXbTjMsE-Tv8WzmkOgLAXQ@mail.gmail.com>
  <78ccb184-405e-da93-1e02-078f90d2b9bc@rasmusvillemoes.dk>
  <202203021158.DB5204A0@keescook>
-In-Reply-To: <202203021158.DB5204A0@keescook>
-From: Linus Torvalds <torvalds@linux-foundation.org>
-Date: Wed, 2 Mar 2022 12:18:45 -0800
-X-Gmail-Original-Message-ID: <CAHk-=wikKPC0LUqZ8++EC5JOvGdBqVH9uUaTX=DvBioDoReYww@mail.gmail.com>
-Message-ID: <CAHk-=wikKPC0LUqZ8++EC5JOvGdBqVH9uUaTX=DvBioDoReYww@mail.gmail.com>
-To: Kees Cook <keescook@chromium.org>
-X-Spam-Score: 0.1 (/)
+ <CAHk-=wikKPC0LUqZ8++EC5JOvGdBqVH9uUaTX=DvBioDoReYww@mail.gmail.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <CAHk-=wikKPC0LUqZ8++EC5JOvGdBqVH9uUaTX=DvBioDoReYww@mail.gmail.com>
+X-Spam-Score: -0.6 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Mar 2,
- 2022 at 12:07 PM Kees Cook <keescook@chromium.org>
- wrote: > > I've long wanted to change kfree() to explicitly set pointers
- to NULL on > free. https://github.com/KSPP/linux/issues/87 We've had this
- discussion with the gcc people in the past, and gcc actually has some support
- for it, but it's sadly tied to the actual function name (ie gcc has some
- special-casing for "free()") 
- Content analysis details:   (0.1 points, 6.0 required)
+ Content preview:  On Wed, Mar 02, 2022 at 12:18:45PM -0800,
+ Linus Torvalds wrote:
+ > On Wed, Mar 2, 2022 at 12:07 PM Kees Cook <keescook@chromium.org> wrote:
+ > > > > I've long wanted to change kfree() to explicitly set [...] 
+ Content analysis details:   (-0.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.210.170 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.218.44 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.218.44 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.210.170 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1nPVRS-0003qB-94
+ -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1nPW4N-0005vs-Ap
 Subject: Re: [Kgdb-bugreport] [PATCH 2/6] treewide: remove using list
  iterator after loop body as a ptr
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
@@ -190,33 +181,44 @@ Cc: "alsa-devel@alsa-project.org" <alsa-devel@alsa-project.org>,
  "linux-mediatek@lists.infradead.org" <linux-mediatek@lists.infradead.org>,
  Andrew Morton <akpm@linux-foundation.org>,
  linuxppc-dev <linuxppc-dev@lists.ozlabs.org>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
  Mike Rapoport <rppt@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Wed, Mar 2, 2022 at 12:07 PM Kees Cook <keescook@chromium.org> wrote:
->
-> I've long wanted to change kfree() to explicitly set pointers to NULL on
-> free. https://github.com/KSPP/linux/issues/87
+On Wed, Mar 02, 2022 at 12:18:45PM -0800, Linus Torvalds wrote:
+> On Wed, Mar 2, 2022 at 12:07 PM Kees Cook <keescook@chromium.org> wrote:
+> >
+> > I've long wanted to change kfree() to explicitly set pointers to NULL on
+> > free. https://github.com/KSPP/linux/issues/87
+> 
+> We've had this discussion with the gcc people in the past, and gcc
+> actually has some support for it, but it's sadly tied to the actual
+> function name (ie gcc has some special-casing for "free()")
+> 
+> See
+> 
+>     https://gcc.gnu.org/bugzilla/show_bug.cgi?id=94527
+> 
+> for some of that discussion.
+> 
+> Oh, and I see some patch actually got merged since I looked there last
+> so that you can mark "deallocator" functions, but I think it's only
+> for the context matching, not for actually killing accesses to the
+> pointer afterwards.
 
-We've had this discussion with the gcc people in the past, and gcc
-actually has some support for it, but it's sadly tied to the actual
-function name (ie gcc has some special-casing for "free()")
+Ah! I missed that getting added in GCC 11. But yes, there it is:
 
-See
+https://gcc.gnu.org/onlinedocs/gcc/Common-Function-Attributes.html#index-malloc-function-attribute
 
-    https://gcc.gnu.org/bugzilla/show_bug.cgi?id=94527
+Hah, now we may need to split __malloc from __alloc_size. ;)
 
-for some of that discussion.
+I'd still like the NULL assignment behavior, though, since some things
+can easily avoid static analysis.
 
-Oh, and I see some patch actually got merged since I looked there last
-so that you can mark "deallocator" functions, but I think it's only
-for the context matching, not for actually killing accesses to the
-pointer afterwards.
-
-               Linus
+-- 
+Kees Cook
 
 
 _______________________________________________
