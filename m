@@ -2,122 +2,112 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 54EA54CB06D
-	for <lists+kgdb-bugreport@lfdr.de>; Wed,  2 Mar 2022 21:59:39 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 20DE74CB4C9
+	for <lists+kgdb-bugreport@lfdr.de>; Thu,  3 Mar 2022 03:28:05 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1nPW4R-0007hU-Ch
-	for lists+kgdb-bugreport@lfdr.de; Wed, 02 Mar 2022 20:59:37 +0000
+	id 1nPbCF-00076M-MG
+	for lists+kgdb-bugreport@lfdr.de; Thu, 03 Mar 2022 02:28:02 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <keescook@chromium.org>) id 1nPW4Q-0007hL-2L
- for kgdb-bugreport@lists.sourceforge.net; Wed, 02 Mar 2022 20:59:36 +0000
+ (envelope-from <xiam0nd.tong@gmail.com>)
+ id 1nPbCC-00075s-QQ; Thu, 03 Mar 2022 02:27:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:
+ To:From:Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=R/oQqieG0aXWXHs93Td97reRxAIjZoSgBmUtDJFVhjU=; b=XnK0o1rK/Za69M9OoRm0Mo/MZD
- i9/yDCdOLfu5qW9O3hgs+udlsUizeB1Eer5SbHmnGQG2nd3FGsYZve3VvfhcKuKZtoXqo5nHIIeRk
- gFeG0psrq5Lry/pgnyAJ9esMvR3FWE1QkyMA7M2PF+PfpHz/ChjECtxe6tgqnirXkYh8=;
+ bh=C6016/38QKZUQAyk5HMPjenTvm42Pe8sPBzTcqL5vmY=; b=ZDDYUSpvVx8uBzMJ2HXzadaNmP
+ JXt+GgRb8miLhvirJsvALqohxsmQ82Qq0a/Lble0Zd3Zt333LNY+JJ7Nd3tEa4dsEZs+z5f2Y6+WA
+ Ycc/kkrcGGEgD6FwV10TzbymZCBiyRH+KtNGMW/h+vDD1qiUyWJxnqS9vMPUjruJ0+nE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To
+ :MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=R/oQqieG0aXWXHs93Td97reRxAIjZoSgBmUtDJFVhjU=; b=jTXhpDZvJ7Ubz3mMJEK0twq29+
- L1tp/bFzsW5O9gvBEGUtL0dhMUCBJokrvPbvxWFgjP+wfMPckjVMwhzNipRlMmbsmvPGizd7Fgzx7
- csg/nuy6ArGcfwiyg3+lfmB6vx1kDFmOHbxdxeQGhhYQ8Sr7J4dmlg7vOS+Wcq0cRcLo=;
-Received: from mail-pf1-f170.google.com ([209.85.210.170])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=C6016/38QKZUQAyk5HMPjenTvm42Pe8sPBzTcqL5vmY=; b=HxxDR1/gxRIW0tut2ll0DHVy5n
+ sZRDBGwN3VIeQksva7pMcXhWklglQDhlCGPFVqhvAIFoUk467GF61CzEYBV/xmD4ERgqCi87C1RyB
+ jhw+OFRGAif1o4Rwcfr5EPOqaeJtY4AnzsnEipArqP/exvoyZHd8Nqy/cHZGvLs2VzPI=;
+Received: from mail-pj1-f41.google.com ([209.85.216.41])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1nPW4N-0005vs-Ap
- for kgdb-bugreport@lists.sourceforge.net; Wed, 02 Mar 2022 20:59:36 +0000
-Received: by mail-pf1-f170.google.com with SMTP id d187so2964387pfa.10
- for <kgdb-bugreport@lists.sourceforge.net>;
- Wed, 02 Mar 2022 12:59:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=R/oQqieG0aXWXHs93Td97reRxAIjZoSgBmUtDJFVhjU=;
- b=d2ZFN7FzXJICmnX4Tyt0wAx0nHny3V7g7RBF7BzoFi4JqvMjvTlFe6r9CSmtZHYpfY
- sI7cCbacBhQSn0c2nYjk/wWGRSWn9quhJSSynH9lMYRKPPdVW/LYlF+HQ4F3tfS4GoN+
- rfxT6gA9HHGJJFfNnOWheyqKpysRyPxkd0f8U=
+ id 1nPbCA-003BGJ-OA; Thu, 03 Mar 2022 02:27:59 +0000
+Received: by mail-pj1-f41.google.com with SMTP id
+ mr24-20020a17090b239800b001bf0a375440so1098544pjb.4; 
+ Wed, 02 Mar 2022 18:27:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=from:to:cc:subject:date:message-id:in-reply-to:references;
+ bh=C6016/38QKZUQAyk5HMPjenTvm42Pe8sPBzTcqL5vmY=;
+ b=qBGtve+IuFrAkJa+gsN1WQjHRs2fvQkSK1D44BenBKAqsyswWIPF49CjeAw6Lc/Xiz
+ 7VY9uX10GWOeYOq3Roffx9lK59MGCnSnWmLkHD6Zz3XGADMqQbIXFAspvzlfyt7tl87F
+ C44YITS/y0gKUKqqxM42VKL4jH/Xx4KasojD++jZOWXtcwkx1m//DlSoFwhQEbp4i/NS
+ eGEaCL2abI9d2Qo/vgVE47lljuFHl9RIsYb9haWI9DYl1+oIMHXMK3O9uyeK26H4D1AX
+ Jy4saNgfSyFkb5FP8pbKE6ds3BSqIpGBCoZu+qijzq/vfSl1dGYXTnehjmH9/ySByi+z
+ BIOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=R/oQqieG0aXWXHs93Td97reRxAIjZoSgBmUtDJFVhjU=;
- b=LTZADbRTCX2xu/Ly1e2AjZuKfXWooQgpchYdnakrrtPut9qFPGnfGc6YqxVox39YLN
- XNHVyxxKpaSPzaX8NpcDFaVwM1YJj88eezxNVx8T1ACAw9ftMwKJpgIHZ2VhOde6iCkq
- ep0hUBH3roCgpOCwdOMEgUXOHQZtJugccT9y0b9IPPte4SRasvx0HlB0aOCOYbT4Mtwl
- m+JBfMZbmNc189IvxELe7hk72MymsWF+eRkTdkRj528JflpJfr6aCbaRP6gw0jUJ1CH2
- 32dl9A/9MoN1mBsUPJSnNCOyjKHl+a4CX/1RXQvSTquNHWLpyAcICOftig23UKiDJUmd
- cH6Q==
-X-Gm-Message-State: AOAM533ZIj6TNjc04BZqMAI7D/5kT21MMlokoBff5V+QiQvN2B9oA4mn
- 2KgzoIY4etfw60Yf+XF6Q/zICQ==
-X-Google-Smtp-Source: ABdhPJwV5Vftpu3BNFYOd1YAI3xcgBfQbmCq2DPnKYT59xnVma61vCMoUamoUdgwMbiUWTPibOctJw==
-X-Received: by 2002:a63:595e:0:b0:378:b203:a74e with SMTP id
- j30-20020a63595e000000b00378b203a74emr13280856pgm.328.1646254769698; 
- Wed, 02 Mar 2022 12:59:29 -0800 (PST)
-Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
- by smtp.gmail.com with ESMTPSA id
- z9-20020a655a49000000b00373459df190sm58337pgs.35.2022.03.02.12.59.29
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references;
+ bh=C6016/38QKZUQAyk5HMPjenTvm42Pe8sPBzTcqL5vmY=;
+ b=RsKTQhTkdvVYn5mXNdI/j6kipfwLlTU7aKUSdNBfvAMGf6WMyVV2nc5GkRR/OM4G+q
+ OpfhTiWupLKZHTu7QRFr2e7IBGsXMZv8LgPmtncYjyfrhSQq74H0ARClzGKBfSj4lTYV
+ /rfnmBuqK8vlfYJTwLWsRALhG+PSFtKZGXMJn5nDsrKO6Ry3klJwoH0r6BmzG0rIgg0v
+ 8ILGaJ5d9hcWRXfRZiEor6Y9LFD+R8+5Rp+CaIJGU7MdOQ/ik8VH9M3V53xk1kvetX8e
+ bukzz3ybk0ZHbpNDdMhoLZAQTE/wHyxL/XTQGX6ndk3kE+Kdr685MBvSgD8RzUwXJc5M
+ sxuw==
+X-Gm-Message-State: AOAM5322OV+Af/Jlr7UGKGY9JdmspSErd8xGVqpUKYRUmK9/ozYrM8HS
+ P3iaHia/XN1Ro0QP6GFO3LM=
+X-Google-Smtp-Source: ABdhPJwdGKGtPoJbq9KB0b78P8kOQOqlHazHAUCZQHvA6TzNHcldJErwW75BUHOqmaVxrll88UvLqQ==
+X-Received: by 2002:a17:902:ec90:b0:151:a632:7ebb with SMTP id
+ x16-20020a170902ec9000b00151a6327ebbmr1936164plg.154.1646274473191; 
+ Wed, 02 Mar 2022 18:27:53 -0800 (PST)
+Received: from ubuntu.huawei.com ([119.3.119.19])
+ by smtp.googlemail.com with ESMTPSA id
+ d15-20020a17090ab30f00b001b8e65326b3sm359822pjr.9.2022.03.02.18.27.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Mar 2022 12:59:29 -0800 (PST)
-Date: Wed, 2 Mar 2022 12:59:28 -0800
-From: Kees Cook <keescook@chromium.org>
-To: Linus Torvalds <torvalds@linux-foundation.org>
-Message-ID: <202203021256.69D7C4BCA6@keescook>
-References: <7D0C2A5D-500E-4F38-AD0C-A76E132A390E@kernel.org>
- <73fa82a20910c06784be2352a655acc59e9942ea.camel@HansenPartnership.com>
- <CAHk-=wiT5HX6Kp0Qv4ZYK_rkq9t5fZ5zZ7vzvi6pub9kgp=72g@mail.gmail.com>
- <7dc860874d434d2288f36730d8ea3312@AcuMS.aculab.com>
- <CAHk-=whKqg89zu4T95+ctY-hocR6kDArpo2qO14-kV40Ga7ufw@mail.gmail.com>
- <0ced2b155b984882b39e895f0211037c@AcuMS.aculab.com>
- <CAHk-=wix0HLCBs5sxAeW3uckg0YncXbTjMsE-Tv8WzmkOgLAXQ@mail.gmail.com>
- <78ccb184-405e-da93-1e02-078f90d2b9bc@rasmusvillemoes.dk>
- <202203021158.DB5204A0@keescook>
- <CAHk-=wikKPC0LUqZ8++EC5JOvGdBqVH9uUaTX=DvBioDoReYww@mail.gmail.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAHk-=wikKPC0LUqZ8++EC5JOvGdBqVH9uUaTX=DvBioDoReYww@mail.gmail.com>
-X-Spam-Score: -0.6 (/)
+ Wed, 02 Mar 2022 18:27:52 -0800 (PST)
+From: Xiaomeng Tong <xiam0nd.tong@gmail.com>
+To: david.laight@aculab.com
+Date: Thu,  3 Mar 2022 10:27:29 +0800
+Message-Id: <20220303022729.9321-1-xiam0nd.tong@gmail.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <1077f17e50d34dc2bbfdf4e52a1cb2fd@AcuMS.aculab.com>
+References: <1077f17e50d34dc2bbfdf4e52a1cb2fd@AcuMS.aculab.com>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Mar 02, 2022 at 12:18:45PM -0800,
- Linus Torvalds wrote:
- > On Wed, Mar 2, 2022 at 12:07 PM Kees Cook <keescook@chromium.org> wrote:
- > > > > I've long wanted to change kfree() to explicitly set [...] 
- Content analysis details:   (-0.6 points, 6.0 required)
+ Content preview:  On Wed, 2 Mar 2022 14:04:06 +0000, David Laight wrote: > I
+ think that it would be better to make any alternate loop macro > just set
+ the variable to NULL on the loop exit. > That is easier to code f [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.210.170 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [xiam0nd.tong[at]gmail.com]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.210.170 listed in wl.mailspike.net]
+ [209.85.216.41 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.216.41 listed in list.dnswl.org]
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nPW4N-0005vs-Ap
+X-Headers-End: 1nPbCA-003BGJ-OA
 Subject: Re: [Kgdb-bugreport] [PATCH 2/6] treewide: remove using list
  iterator after loop body as a ptr
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
@@ -131,94 +121,67 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: "alsa-devel@alsa-project.org" <alsa-devel@alsa-project.org>,
- "linux-aspeed@lists.ozlabs.org" <linux-aspeed@lists.ozlabs.org>,
- "Gustavo A. R. Silva" <gustavo@embeddedor.com>,
- "linux-iio@vger.kernel.org" <linux-iio@vger.kernel.org>,
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- Rasmus Villemoes <linux@rasmusvillemoes.dk>,
- dri-devel <dri-devel@lists.freedesktop.org>,
- James Bottomley <James.Bottomley@hansenpartnership.com>,
- Cristiano Giuffrida <c.giuffrida@vu.nl>, "Bos, H.J." <h.j.bos@vu.nl>,
- "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>,
- "linux1394-devel@lists.sourceforge.net"
- <linux1394-devel@lists.sourceforge.net>,
- "drbd-dev@lists.linbit.com" <drbd-dev@lists.linbit.com>,
- linux-arch <linux-arch@vger.kernel.org>, CIFS <linux-cifs@vger.kernel.org>,
- KVM list <kvm@vger.kernel.org>, linux-scsi <linux-scsi@vger.kernel.org>,
- linux-rdma <linux-rdma@vger.kernel.org>,
- "linux-staging@lists.linux.dev" <linux-staging@lists.linux.dev>,
- amd-gfx list <amd-gfx@lists.freedesktop.org>, Jason Gunthorpe <jgg@ziepe.ca>,
- "intel-wired-lan@lists.osuosl.org" <intel-wired-lan@lists.osuosl.org>,
- "kgdb-bugreport@lists.sourceforge.net" <kgdb-bugreport@lists.sourceforge.net>,
- "bcm-kernel-feedback-list@broadcom.com"
- <bcm-kernel-feedback-list@broadcom.com>,
- Dan Carpenter <dan.carpenter@oracle.com>,
- Linux Media Mailing List <linux-media@vger.kernel.org>,
- Arnd Bergman <arnd@arndb.de>, Linux PM <linux-pm@vger.kernel.org>,
- intel-gfx <intel-gfx@lists.freedesktop.org>,
- Brian Johannesmeyer <bjohannesmeyer@gmail.com>,
- Nathan Chancellor <nathan@kernel.org>,
- linux-fsdevel <linux-fsdevel@vger.kernel.org>,
- Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
- Jakob Koschel <jakobkoschel@gmail.com>,
- "v9fs-developer@lists.sourceforge.net" <v9fs-developer@lists.sourceforge.net>,
- linux-tegra <linux-tegra@vger.kernel.org>,
- Thomas Gleixner <tglx@linutronix.de>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Linux ARM <linux-arm-kernel@lists.infradead.org>,
- "linux-sgx@vger.kernel.org" <linux-sgx@vger.kernel.org>,
- linux-block <linux-block@vger.kernel.org>, Netdev <netdev@vger.kernel.org>,
- "linux-usb@vger.kernel.org" <linux-usb@vger.kernel.org>,
- linux-wireless <linux-wireless@vger.kernel.org>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Linux F2FS Dev Mailing List <linux-f2fs-devel@lists.sourceforge.net>,
- David Laight <David.Laight@aculab.com>,
- "tipc-discussion@lists.sourceforge.net"
- <tipc-discussion@lists.sourceforge.net>,
- Linux Crypto Mailing List <linux-crypto@vger.kernel.org>,
- dma <dmaengine@vger.kernel.org>,
- "linux-mediatek@lists.infradead.org" <linux-mediatek@lists.infradead.org>,
- Andrew Morton <akpm@linux-foundation.org>,
- linuxppc-dev <linuxppc-dev@lists.ozlabs.org>,
- Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
- Mike Rapoport <rppt@kernel.org>
+Cc: alsa-devel@alsa-project.org, kvm@vger.kernel.org, gustavo@embeddedor.com,
+ linux-iio@vger.kernel.org, kgdb-bugreport@lists.sourceforge.net,
+ linux@rasmusvillemoes.dk, dri-devel@lists.freedesktop.org, c.giuffrida@vu.nl,
+ amd-gfx@lists.freedesktop.org, torvalds@linux-foundation.org,
+ samba-technical@lists.samba.org, linux1394-devel@lists.sourceforge.net,
+ drbd-dev@lists.linbit.com, linux-arch@vger.kernel.org,
+ linux-cifs@vger.kernel.org, linux-aspeed@lists.ozlabs.org,
+ linux-scsi@vger.kernel.org, linux-rdma@vger.kernel.org,
+ linux-staging@lists.linux.dev, h.j.bos@vu.nl, jgg@ziepe.ca,
+ intel-wired-lan@lists.osuosl.org, nouveau@lists.freedesktop.org,
+ bcm-kernel-feedback-list@broadcom.com, dan.carpenter@oracle.com,
+ linux-media@vger.kernel.org, keescook@chromium.org, arnd@arndb.de,
+ linux-pm@vger.kernel.org, intel-gfx@lists.freedesktop.org,
+ bjohannesmeyer@gmail.com, linux-block@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, christophe.jaillet@wanadoo.fr,
+ jakobkoschel@gmail.com, v9fs-developer@lists.sourceforge.net,
+ linux-tegra@vger.kernel.org, tglx@linutronix.de,
+ andriy.shevchenko@linux.intel.com, linux-arm-kernel@lists.infradead.org,
+ linux-sgx@vger.kernel.org, nathan@kernel.org, netdev@vger.kernel.org,
+ linux-usb@vger.kernel.org, linux-wireless@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ xiam0nd.tong@gmail.com, tipc-discussion@lists.sourceforge.net,
+ linux-crypto@vger.kernel.org, dmaengine@vger.kernel.org,
+ linux-mediatek@lists.infradead.org, akpm@linux-foundation.org,
+ linuxppc-dev@lists.ozlabs.org, christian.koenig@amd.com, rppt@kernel.org
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Wed, Mar 02, 2022 at 12:18:45PM -0800, Linus Torvalds wrote:
-> On Wed, Mar 2, 2022 at 12:07 PM Kees Cook <keescook@chromium.org> wrote:
-> >
-> > I've long wanted to change kfree() to explicitly set pointers to NULL on
-> > free. https://github.com/KSPP/linux/issues/87
-> 
-> We've had this discussion with the gcc people in the past, and gcc
-> actually has some support for it, but it's sadly tied to the actual
-> function name (ie gcc has some special-casing for "free()")
-> 
-> See
-> 
->     https://gcc.gnu.org/bugzilla/show_bug.cgi?id=94527
-> 
-> for some of that discussion.
-> 
-> Oh, and I see some patch actually got merged since I looked there last
-> so that you can mark "deallocator" functions, but I think it's only
-> for the context matching, not for actually killing accesses to the
-> pointer afterwards.
+On Wed, 2 Mar 2022 14:04:06 +0000, David Laight
+<David.Laight@ACULAB.COM> wrote:
+> I think that it would be better to make any alternate loop macro
+> just set the variable to NULL on the loop exit.
+> That is easier to code for and the compiler might be persuaded to
+> not redo the test.
 
-Ah! I missed that getting added in GCC 11. But yes, there it is:
+No, that would lead to a NULL dereference.
 
-https://gcc.gnu.org/onlinedocs/gcc/Common-Function-Attributes.html#index-malloc-function-attribute
+The problem is the mis-use of iterator outside the loop on exit, and
+the iterator will be the HEAD's container_of pointer which pointers
+to a type-confused struct. Sidenote: The *mis-use* here refers to
+mistakely access to other members of the struct, instead of the
+list_head member which acutally is the valid HEAD.
 
-Hah, now we may need to split __malloc from __alloc_size. ;)
+IOW, you would dereference a (NULL + offset_of_member) address here.
 
-I'd still like the NULL assignment behavior, though, since some things
-can easily avoid static analysis.
+Please remind me if i missed something, thanks.
 
--- 
-Kees Cook
+> OTOH there may be alternative definitions that can be used to get
+> the compiler (or other compiler-like tools) to detect broken code.
+> Even if the definition can't possibly generate a working kerrnel.
+
+The "list_for_each_entry_inside(pos, type, head, member)" way makes
+the iterator invisiable outside the loop, and would be catched by
+compiler if use-after-loop things happened.
+
+Can you share your "alternative definitions" details? thanks!
+
+--
+Xiaomeng Tong
 
 
 _______________________________________________
