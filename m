@@ -2,107 +2,113 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C51AB4CC32D
-	for <lists+kgdb-bugreport@lfdr.de>; Thu,  3 Mar 2022 17:48:00 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id BCE834CCE3E
+	for <lists+kgdb-bugreport@lfdr.de>; Fri,  4 Mar 2022 08:00:37 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1nPocS-0006oH-JG
-	for lists+kgdb-bugreport@lfdr.de; Thu, 03 Mar 2022 16:47:59 +0000
+	id 1nQ1vZ-0002Oj-KX
+	for lists+kgdb-bugreport@lfdr.de; Fri, 04 Mar 2022 07:00:36 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <tvrtko.ursulin@linux.intel.com>)
- id 1nPSoK-0005Pi-7Y; Wed, 02 Mar 2022 17:30:47 +0000
+ (envelope-from <xiam0nd.tong@gmail.com>)
+ id 1nQ1vX-0002ON-RG; Fri, 04 Mar 2022 07:00:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:
+ To:From:Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=GNUJTdx/CXqG0F6Gi3f79BsUb8LRzy8a1Ziwnr6YbJk=; b=KknKNmUBUdaDOHYo4OHGR2Xb1a
- KiX6u2R3XbGfdXDLmadYYlkBtYxFOSyMD/Zat9F/ak06q/+7o9zHeyFMiDOFnVSKCL9BuhgSMB0LH
- 8onpwwIMlpXSCL832S3xJ0uQdsscUNP8ZK/WjlHAZcf1YPAxQlCJ3m9CSCPMjDwpIrLI=;
+ bh=0a+oQu3LYTAbOOyoILb+F/zkApGIum0yjd+xPCLEHo4=; b=BZxB8zUeJ/VPaxgsV9SAVIlYLy
+ /Rc97Yreorw1O11/aVsCq2AFNaPaLxG8Nd2/SyfQcH6FbM3ia+GO7RMBs9osRN5UJUX2JmmDr4wrZ
+ PmMfFmSwpdzDp7e3f0e6EZe3brVBxt0vqc+IPgijXJJNeqMI9+6SrYjo0tgUSObjFWlU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To
+ :MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=GNUJTdx/CXqG0F6Gi3f79BsUb8LRzy8a1Ziwnr6YbJk=; b=MY/9Gg3x3F0ITKh/FlGe4IG+k6
- HMe7O2o3EgiZ8OfZ0kYdie3xCV7yUfxuFi7gV4gyaOmBc55+L2d+pRQBWkFlpz0jkJTLRwQ53VguY
- fR6Zku8RPnlW0gDD7VLQt6EIA5+F/ZVZmXFnqiUIfo0jGifWeoYI/cS5FxnEwWp0E6NI=;
-Received: from mga17.intel.com ([192.55.52.151])
+ bh=0a+oQu3LYTAbOOyoILb+F/zkApGIum0yjd+xPCLEHo4=; b=J29X5vFsmzeJlhMNHWYRDUcZI7
+ qpH8/310HYafNvcsYBEL1JM7MQIRCwAmrKlOkJGVG0uUZs+oNtU52mIhtAVm1eO+usWVJIFdqqHNa
+ XK+V9dELyVXDVzxaGAuCGnzFu2Dh8ZRjGo9cUdF8duVqxXl96PzceHzI4XwbHJbdTtms=;
+Received: from mail-pf1-f178.google.com ([209.85.210.178])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nPSoE-002mwk-SL; Wed, 02 Mar 2022 17:30:46 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1646242242; x=1677778242;
- h=message-id:date:mime-version:subject:to:cc:references:
- from:in-reply-to:content-transfer-encoding;
- bh=quZJORXDoBJnmtXWeY1UEG0LMErZNbKWG4uR8GxuM8A=;
- b=Tlg52j4L9YqQx7uCl7JYC/5z+1oQykxSHEMjTS1WmNArK1SiTCtTPx5G
- WxL8QVGrRbj3IQzWWMfZHvPYe95mBBotQO4Ysad8rOZtGza0g49a4MOK8
- fJufrPJmQ5AMm4ifJT8bp9vKKB0laxJJe3JxPHT/oKaFRRZpWF212GiWQ
- lQAHl7ALLHPDKH2WvsWycMdr1E9SF4b9+R1hIf6JKRXaxBepfwk58XZr/
- k04VldBhAo3DBpxq/4OrsgzSYjlJ90GgpLfFi5yNh/hMaZFFS5mxIx7q6
- gHb8cT4gDwJlSybANlG0t9Nn02Kmz5im04oeqGQEZQW4DHNzu0li+PtX4 A==;
-X-IronPort-AV: E=McAfee;i="6200,9189,10274"; a="234073288"
-X-IronPort-AV: E=Sophos;i="5.90,149,1643702400"; d="scan'208";a="234073288"
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
- by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 02 Mar 2022 09:15:05 -0800
-X-IronPort-AV: E=Sophos;i="5.90,149,1643702400"; d="scan'208";a="551343768"
-Received: from jbuller-mobl1.ger.corp.intel.com (HELO [10.213.194.231])
- ([10.213.194.231])
- by orsmga008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 02 Mar 2022 09:14:53 -0800
-Message-ID: <ed52ce3c-0f4a-a1e8-4176-543657d6228d@linux.intel.com>
-Date: Wed, 2 Mar 2022 17:14:50 +0000
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.5.0
-Content-Language: en-US
-To: Jakob Koschel <jakobkoschel@gmail.com>,
- Linus Torvalds <torvalds@linux-foundation.org>
-References: <20220228110822.491923-1-jakobkoschel@gmail.com>
- <20220228110822.491923-7-jakobkoschel@gmail.com>
-From: Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>
-Organization: Intel Corporation UK Plc
-In-Reply-To: <20220228110822.491923-7-jakobkoschel@gmail.com>
-X-Spam-Score: -3.8 (---)
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
+ id 1nQ1vV-004U7g-Du; Fri, 04 Mar 2022 07:00:34 +0000
+Received: by mail-pf1-f178.google.com with SMTP id a5so6875625pfv.9;
+ Thu, 03 Mar 2022 23:00:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=from:to:cc:subject:date:message-id:in-reply-to:references;
+ bh=0a+oQu3LYTAbOOyoILb+F/zkApGIum0yjd+xPCLEHo4=;
+ b=UcHSzcmMAevEFsqxc8gimvoSIew96LrW3UYvjfgkcaeLb/Edql9668oTELTgMdhcyh
+ uwTLYgNgPfuwuQfZCbkLtuIX59UkP2xXrD0mK6eOfNdOu/KSihdjQUFHL7gwAFzgpb4Z
+ PeSQfhLMwS3uLkuXfSSL1QQyblGTA4kTyWBkcty1viz6EkWmIbbGn99xu95lY6jAsJ0c
+ CbisDo/RPFGn8gAJnKluj00ht4OQ80XaXmCEvGalnXTnvAWrV5UWFfWh6kgUBnLZJvSQ
+ W0PYU136vUwP4grvjJEIhDxHc0WM1lPQ2cysIXPjh+breTQ07tU9AM0RgZ3Jr4UsSFjT
+ NaGQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references;
+ bh=0a+oQu3LYTAbOOyoILb+F/zkApGIum0yjd+xPCLEHo4=;
+ b=lATL6oq/Tm7d51UWlbItd0/TS/e/Vqc62oUlf68cNdPOabS4dNhvCk2BinDY9nDrF2
+ nJxvS0DwDG4645eemnSZroKvlm+Z+xaPB2ZSjOg7Kh0b4RkslBdNNa11qfqrjqkMxaKc
+ +PvogzPElF4fMlrlXxnTO2GnH34/5evknoxBa4YOVRL3hxBC9B7AgzE1Wvs/rGp4K2Gm
+ cAQ+ms+CDOTw3KG39LO7jBsM4Xn24Viu33Ru7217GiqrXyieOX0EOLtghaEV6TgPqtvi
+ 6dlvtA028e2/Rkn1eU4ztt+LMtm+zDnfXjbNEV/h/zHUyVRliYVUeU1t1s4GwPLCjCA2
+ gCwA==
+X-Gm-Message-State: AOAM533p9hmGrWPAW/5jP8qfqQfsKIblklBiDDuyCLyGN9L3y6NrrRmq
+ kqozTIiQlxVB4M4rRQMdpeg=
+X-Google-Smtp-Source: ABdhPJxBFOb3A6C/RlDh1uHGrWM51HjSkR68cXfNAhNGErUbSC2hd/FilwMHkJmidt1eEHAWD7GVrA==
+X-Received: by 2002:a05:6a00:cc7:b0:4ec:c6f3:ad29 with SMTP id
+ b7-20020a056a000cc700b004ecc6f3ad29mr41958698pfv.66.1646377221067; 
+ Thu, 03 Mar 2022 23:00:21 -0800 (PST)
+Received: from ubuntu.huawei.com ([119.3.119.19])
+ by smtp.googlemail.com with ESMTPSA id
+ f6-20020a654006000000b00346193b405fsm3665134pgp.44.2022.03.03.23.00.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 03 Mar 2022 23:00:20 -0800 (PST)
+From: Xiaomeng Tong <xiam0nd.tong@gmail.com>
+To: daniel.thompson@linaro.org
+Date: Fri,  4 Mar 2022 14:59:57 +0800
+Message-Id: <20220304065957.16799-1-xiam0nd.tong@gmail.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20220303121824.qdyrognluik74iph@maple.lan>
+References: <20220303121824.qdyrognluik74iph@maple.lan>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 28/02/2022 11:08,
- Jakob Koschel wrote: > When list_for_each_entry()
- completes the iteration over the whole list > without breaking the loop,
- the iterator value will be a bogus pointer > computed ba [...] 
- Content analysis details:   (-3.8 points, 6.0 required)
+ Content preview:  On Thu, 3 Mar 2022 12:18:24 +0000, Daniel Thompson wrote:
+ > On Thu, Mar 03, 2022 at 03:26:57PM +0800, Xiaomeng Tong wrote: > > On Thu,
+ 3 Mar 2022 04:58:23 +0000, David Laight wrote: > > > on 3 Mar 202 [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.3 HK_RANDOM_FROM         From username looks random
- 1.0 HK_RANDOM_ENVFROM      Envelope sender username looks random
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [192.55.52.151 listed in list.dnswl.org]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.210.178 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [xiam0nd.tong[at]gmail.com]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.210.178 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -2.0 NICE_REPLY_A           Looks like a legit reply (A)
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nPSoE-002mwk-SL
-X-Mailman-Approved-At: Thu, 03 Mar 2022 16:47:56 +0000
-Subject: Re: [Kgdb-bugreport] [Intel-gfx] [PATCH 6/6] treewide: remove check
- of list iterator against head past the loop body
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1nQ1vV-004U7g-Du
+Subject: Re: [Kgdb-bugreport] [PATCH 2/6] treewide: remove using list
+ iterator after loop body as a ptr
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,203 +120,133 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-wireless@vger.kernel.org, alsa-devel@alsa-project.org,
- kvm@vger.kernel.org, "Gustavo A. R. Silva" <gustavo@embeddedor.com>,
- linux-iio@vger.kernel.org, nouveau@lists.freedesktop.org,
- Rasmus Villemoes <linux@rasmusvillemoes.dk>, dri-devel@lists.freedesktop.org,
- Cristiano Giuffrida <c.giuffrida@vu.nl>, amd-gfx@lists.freedesktop.org,
- linux1394-devel@lists.sourceforge.net, drbd-dev@lists.linbit.com,
- linux-arch <linux-arch@vger.kernel.org>, linux-cifs@vger.kernel.org,
- linux-aspeed@lists.ozlabs.org, linux-scsi@vger.kernel.org,
- linux-rdma@vger.kernel.org, linux-staging@lists.linux.dev, "Bos,
- H.J." <h.j.bos@vu.nl>, Jason Gunthorpe <jgg@ziepe.ca>,
- intel-wired-lan@lists.osuosl.org, kgdb-bugreport@lists.sourceforge.net,
- bcm-kernel-feedback-list@broadcom.com,
- Dan Carpenter <dan.carpenter@oracle.com>, linux-media@vger.kernel.org,
- Kees Cook <keescook@chromium.org>, Arnd Bergman <arnd@arndb.de>,
+Cc: alsa-devel@alsa-project.org, kvm@vger.kernel.org, gustavo@embeddedor.com,
+ linux-iio@vger.kernel.org, kgdb-bugreport@lists.sourceforge.net,
+ linux@rasmusvillemoes.dk, dri-devel@lists.freedesktop.org, c.giuffrida@vu.nl,
+ amd-gfx@lists.freedesktop.org, torvalds@linux-foundation.org,
+ samba-technical@lists.samba.org, linux1394-devel@lists.sourceforge.net,
+ drbd-dev@lists.linbit.com, linux-arch@vger.kernel.org,
+ linux-cifs@vger.kernel.org, linux-aspeed@lists.ozlabs.org,
+ linux-scsi@vger.kernel.org, linux-rdma@vger.kernel.org,
+ linux-staging@lists.linux.dev, h.j.bos@vu.nl, jgg@ziepe.ca,
+ intel-wired-lan@lists.osuosl.org, nouveau@lists.freedesktop.org,
+ bcm-kernel-feedback-list@broadcom.com, dan.carpenter@oracle.com,
+ linux-media@vger.kernel.org, keescook@chromium.org, arnd@arndb.de,
  linux-pm@vger.kernel.org, intel-gfx@lists.freedesktop.org,
- Brian Johannesmeyer <bjohannesmeyer@gmail.com>,
- Nathan Chancellor <nathan@kernel.org>, dmaengine@vger.kernel.org,
- Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
- v9fs-developer@lists.sourceforge.net, linux-tegra@vger.kernel.org,
- Thomas Gleixner <tglx@linutronix.de>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- linux-arm-kernel@lists.infradead.org, linux-sgx@vger.kernel.org,
- linux-block@vger.kernel.org, netdev@vger.kernel.org, linux-usb@vger.kernel.org,
- samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, tipc-discussion@lists.sourceforge.net,
- linux-crypto@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- linux-mediatek@lists.infradead.org, Andrew Morton <akpm@linux-foundation.org>,
- linuxppc-dev@lists.ozlabs.org, Mike Rapoport <rppt@kernel.org>
+ bjohannesmeyer@gmail.com, linux-block@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, christophe.jaillet@wanadoo.fr,
+ jakobkoschel@gmail.com, v9fs-developer@lists.sourceforge.net,
+ linux-tegra@vger.kernel.org, tglx@linutronix.de,
+ andriy.shevchenko@linux.intel.com, linux-arm-kernel@lists.infradead.org,
+ linux-sgx@vger.kernel.org, nathan@kernel.org, netdev@vger.kernel.org,
+ linux-usb@vger.kernel.org, linux-wireless@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ xiam0nd.tong@gmail.com, david.laight@aculab.com,
+ tipc-discussion@lists.sourceforge.net, linux-crypto@vger.kernel.org,
+ dmaengine@vger.kernel.org, linux-mediatek@lists.infradead.org,
+ akpm@linux-foundation.org, linuxppc-dev@lists.ozlabs.org,
+ christian.koenig@amd.com, rppt@kernel.org
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
+On Thu, 3 Mar 2022 12:18:24 +0000, Daniel Thompson wrote:
+> On Thu, Mar 03, 2022 at 03:26:57PM +0800, Xiaomeng Tong wrote:
+> > On Thu, 3 Mar 2022 04:58:23 +0000, David Laight wrote:
+> > > on 3 Mar 2022 10:27:29 +0800, Xiaomeng Tong wrote:
+> > > > The problem is the mis-use of iterator outside the loop on exit, and
+> > > > the iterator will be the HEAD's container_of pointer which pointers
+> > > > to a type-confused struct. Sidenote: The *mis-use* here refers to
+> > > > mistakely access to other members of the struct, instead of the
+> > > > list_head member which acutally is the valid HEAD.
+> > >
+> > > The problem is that the HEAD's container_of pointer should never
+> > > be calculated at all.
+> > > This is what is fundamentally broken about the current definition.
+> > 
+> > Yes, the rule is "the HEAD's container_of pointer should never be
+> > calculated at all outside the loop", but how do you make sure everyone
+> > follows this rule?
+> 
+> Your formulation of the rule is correct: never run container_of() on HEAD
+> pointer.
 
-On 28/02/2022 11:08, Jakob Koschel wrote:
-> When list_for_each_entry() completes the iteration over the whole list
-> without breaking the loop, the iterator value will be a bogus pointer
-> computed based on the head element.
-> 
-> While it is safe to use the pointer to determine if it was computed
-> based on the head element, either with list_entry_is_head() or
-> &pos->member == head, using the iterator variable after the loop should
-> be avoided.
-> 
-> In preparation to limiting the scope of a list iterator to the list
-> traversal loop, use a dedicated pointer to point to the found element.
-> 
-> Signed-off-by: Jakob Koschel <jakobkoschel@gmail.com>
+Actually, it is not my rule. My rule is that never access other members
+of the struct except for the list_head member after the loop, because
+this is a invalid member after loop exit, but valid for the list_head
+member which just is HEAD and the lately caculation (&pos->head) seems
+harmless.
 
-[snip until i915 parts]
+I have considered the case that the HEAD's container "pos" is layouted
+across the max and the min address boundary, which means the address of
+HEAD is likely 0x60, and the address of pos is likely 0xffffffe0.
+It seems ok to caculate pos with:
+((type *)(__mptr - offsetof(type, member)));
+and it seems ok to caculate head outside the loop with:
+if (&pos->head == &HEAD)
+    return NULL;
 
->   drivers/gpu/drm/i915/gem/i915_gem_context.c   | 14 +++---
->   .../gpu/drm/i915/gem/i915_gem_execbuffer.c    | 15 ++++---
->   drivers/gpu/drm/i915/gt/intel_ring.c          | 15 ++++---
+The only case I can think of with the rule "never run container_of()
+on HEAD" must be followed is when the first argument (which is &HEAD)
+passing to container_of() is NULL + some offset, it may lead to the
+resulting "pos->member" access being a NULL dereference. But maybe
+the caller can take the responsibility to check if it is NULL, not
+container_of() itself.
 
-[snip]
-
-> diff --git a/drivers/gpu/drm/i915/gem/i915_gem_context.c b/drivers/gpu/drm/i915/gem/i915_gem_context.c
-> index 00327b750fbb..80c79028901a 100644
-> --- a/drivers/gpu/drm/i915/gem/i915_gem_context.c
-> +++ b/drivers/gpu/drm/i915/gem/i915_gem_context.c
-> @@ -107,25 +107,27 @@ static void lut_close(struct i915_gem_context *ctx)
->   	radix_tree_for_each_slot(slot, &ctx->handles_vma, &iter, 0) {
->   		struct i915_vma *vma = rcu_dereference_raw(*slot);
->   		struct drm_i915_gem_object *obj = vma->obj;
-> -		struct i915_lut_handle *lut;
-> +		struct i915_lut_handle *lut = NULL;
-> +		struct i915_lut_handle *tmp;
-> 
->   		if (!kref_get_unless_zero(&obj->base.refcount))
->   			continue;
-> 
->   		spin_lock(&obj->lut_lock);
-> -		list_for_each_entry(lut, &obj->lut_list, obj_link) {
-> -			if (lut->ctx != ctx)
-> +		list_for_each_entry(tmp, &obj->lut_list, obj_link) {
-> +			if (tmp->ctx != ctx)
->   				continue;
-> 
-> -			if (lut->handle != iter.index)
-> +			if (tmp->handle != iter.index)
->   				continue;
-> 
-> -			list_del(&lut->obj_link);
-> +			list_del(&tmp->obj_link);
-> +			lut = tmp;
->   			break;
->   		}
->   		spin_unlock(&obj->lut_lock);
-> 
-> -		if (&lut->obj_link != &obj->lut_list) {
-> +		if (lut) {
->   			i915_lut_handle_free(lut);
->   			radix_tree_iter_delete(&ctx->handles_vma, &iter, slot);
-
-Looks okay although personally I would have left lut as is for a smaller 
-diff and introduced a new local like 'found' or 'unlinked'.
-
->   			i915_vma_close(vma);
-> diff --git a/drivers/gpu/drm/i915/gem/i915_gem_execbuffer.c b/drivers/gpu/drm/i915/gem/i915_gem_execbuffer.c
-> index 1736efa43339..fda9e3685ad2 100644
-> --- a/drivers/gpu/drm/i915/gem/i915_gem_execbuffer.c
-> +++ b/drivers/gpu/drm/i915/gem/i915_gem_execbuffer.c
-> @@ -2444,7 +2444,8 @@ static struct i915_request *eb_throttle(struct i915_execbuffer *eb, struct intel
->   {
->   	struct intel_ring *ring = ce->ring;
->   	struct intel_timeline *tl = ce->timeline;
-> -	struct i915_request *rq;
-> +	struct i915_request *rq = NULL;
-> +	struct i915_request *tmp;
-> 
->   	/*
->   	 * Completely unscientific finger-in-the-air estimates for suitable
-> @@ -2460,15 +2461,17 @@ static struct i915_request *eb_throttle(struct i915_execbuffer *eb, struct intel
->   	 * claiming our resources, but not so long that the ring completely
->   	 * drains before we can submit our next request.
->   	 */
-> -	list_for_each_entry(rq, &tl->requests, link) {
-> -		if (rq->ring != ring)
-> +	list_for_each_entry(tmp, &tl->requests, link) {
-> +		if (tmp->ring != ring)
->   			continue;
-> 
-> -		if (__intel_ring_space(rq->postfix,
-> -				       ring->emit, ring->size) > ring->size / 2)
-> +		if (__intel_ring_space(tmp->postfix,
-> +				       ring->emit, ring->size) > ring->size / 2) {
-> +			rq = tmp;
->   			break;
-> +		}
->   	}
-> -	if (&rq->link == &tl->requests)
-> +	if (!rq)
->   		return NULL; /* weird, we will check again later for real */
-
-Alternatively, instead of break could simply do "return 
-i915_request_get(rq);" and replace the end of the function after the 
-loop with "return NULL;". A bit smaller diff, or at least less "spread 
-out" over the function, so might be easier to backport stuff touching 
-this area in the future. But looks correct as is.
+Please remind me if i missed somthing, thanks.
 
 > 
->   	return i915_request_get(rq);
-> diff --git a/drivers/gpu/drm/i915/gt/intel_ring.c b/drivers/gpu/drm/i915/gt/intel_ring.c
-> index 2fdd52b62092..4881c4e0c407 100644
-> --- a/drivers/gpu/drm/i915/gt/intel_ring.c
-> +++ b/drivers/gpu/drm/i915/gt/intel_ring.c
-> @@ -191,24 +191,27 @@ wait_for_space(struct intel_ring *ring,
->   	       struct intel_timeline *tl,
->   	       unsigned int bytes)
->   {
-> -	struct i915_request *target;
-> +	struct i915_request *target = NULL;
-> +	struct i915_request *tmp;
->   	long timeout;
-> 
->   	if (intel_ring_update_space(ring) >= bytes)
->   		return 0;
-> 
->   	GEM_BUG_ON(list_empty(&tl->requests));
-> -	list_for_each_entry(target, &tl->requests, link) {
-> -		if (target->ring != ring)
-> +	list_for_each_entry(tmp, &tl->requests, link) {
-> +		if (tmp->ring != ring)
->   			continue;
-> 
->   		/* Would completion of this request free enough space? */
-> -		if (bytes <= __intel_ring_space(target->postfix,
-> -						ring->emit, ring->size))
-> +		if (bytes <= __intel_ring_space(tmp->postfix,
-> +						ring->emit, ring->size)) {
-> +			target = tmp;
->   			break;
-> +		}
->   	}
-> 
-> -	if (GEM_WARN_ON(&target->link == &tl->requests))
-> +	if (GEM_WARN_ON(!target))
->   		return -ENOSPC;
-> 
->   	timeout = i915_request_wait(target,
+> However the rule that is introduced by list_for_each_entry_inside() is
+> *not* this rule. The rule it introduces is: never access the iterator
+> variable outside the loop.
 
-Looks okay as well. Less clear here if there is a clean solution to make 
-the diff smaller so no suggestions. I mean do I dare mention "goto 
-found;" from inside the loop, where the break is, instead of the 
-variable renames.. risky.. :) (And ofc "return -ENOSPC" immediately 
-after the loop.)
+Sorry for the confusion, indeed, that is two *different* rule.
 
-As a summary changes looks okay, up to you if you want to try to make 
-the diffs smaller or not. It doesn't matter hugely really, all I have is 
-a vague and uncertain "maybe it makes backporting of something, someday 
-easier". So for i915 it is good either way.
+> 
+> Making the iterator NULL on loop exit does follow the rule you proposed
+> but using a different technique: do not allow HEAD to be stored in the
+> iterator variable after loop exit. This also makes it impossible to run
+> container_of() on the HEAD pointer.
+> 
 
-Reviewed-by: Tvrtko Ursulin <tvrtko.ursulin@intel.com> # i915 bits only
+It does not. My rule is: never access the iterator variable outside the loop.
+The "Making the iterator NULL on loop exit" way still leak the pos with NULL
+outside the loop, may lead to a NULL deference.
 
-Regards,
+> 
+> > Everyone makes mistakes, but we can eliminate them all from the beginning
+> > with the help of compiler which can catch such use-after-loop things.
+> 
+> Indeed but if we introduce new interfaces then we don't have to worry
+> about existing usages and silent regressions. Code will have been
+> written knowing the loop can exit with the iterator set to NULL.
 
-Tvrtko
+Yes, it is more simple and compatible with existing interfaces. Howerver,
+you should make every developers to remember that "pos will be set NULL on
+loop exit", which is unreasonable and impossible for *every* single person.
+Otherwise the mis-use-after-loop will lead to a NULL dereference.
+But we can kill this problem by declaring iterator inside the loop and the
+complier will catch it if somebody mis-use-after-loop.
+
+> 
+> Sure it is still possible for programmers to make mistakes and
+> dereference the NULL pointer but C programmers are well training w.r.t.
+> NULL pointer checking so such mistakes are much less likely than with
+> the current list_for_each_entry() macro. This risk must be offset
+> against the way a NULLify approach can lead to more elegant code when we
+> are doing a list search.
+> 
+
+Yes, the NULLify approach is better than the current list_for_each_entry()
+macro, but i stick with that the list_for_each_entry_inside() way is best
+and perfect _technically_.
+
+Thus, my idea is *better a finger off than always aching*, let's settle this
+damn problem once and for all, with list_for_each_entry_inside().
+
+--
+Xiaomeng Tong
 
 
 _______________________________________________
