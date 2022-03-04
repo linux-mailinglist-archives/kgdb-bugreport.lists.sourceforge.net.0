@@ -2,113 +2,92 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BCE834CCE3E
-	for <lists+kgdb-bugreport@lfdr.de>; Fri,  4 Mar 2022 08:00:37 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id E3C664CD397
+	for <lists+kgdb-bugreport@lfdr.de>; Fri,  4 Mar 2022 12:38:03 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1nQ1vZ-0002Oj-KX
-	for lists+kgdb-bugreport@lfdr.de; Fri, 04 Mar 2022 07:00:36 +0000
+	id 1nQ6G3-0001Rh-Lb
+	for lists+kgdb-bugreport@lfdr.de; Fri, 04 Mar 2022 11:38:02 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <xiam0nd.tong@gmail.com>)
- id 1nQ1vX-0002ON-RG; Fri, 04 Mar 2022 07:00:34 +0000
+ (envelope-from <hasegawa-hitomi@fujitsu.com>) id 1nQ1wR-0004Qi-C0
+ for kgdb-bugreport@lists.sourceforge.net; Fri, 04 Mar 2022 07:01:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:
- To:From:Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=0a+oQu3LYTAbOOyoILb+F/zkApGIum0yjd+xPCLEHo4=; b=BZxB8zUeJ/VPaxgsV9SAVIlYLy
- /Rc97Yreorw1O11/aVsCq2AFNaPaLxG8Nd2/SyfQcH6FbM3ia+GO7RMBs9osRN5UJUX2JmmDr4wrZ
- PmMfFmSwpdzDp7e3f0e6EZe3brVBxt0vqc+IPgijXJJNeqMI9+6SrYjo0tgUSObjFWlU=;
+ bh=A+RpFOlEuJHnJX/RXvQgZnIYOIQdsuYlk0HZClr17QI=; b=kEg/hElp1X7W4w6m/bd70GGLIS
+ U+0S4WoOptR8vbQxtmWSFRT7PINJK1MuvxL7ZWFjB0ff25TxI93VBu27Pt/pQ4aFJCnzhFGlOBdLH
+ e0OAxNVLMuVYSf+9MR0DrcAoetvmuELYA+3IfYTZVCWLGHfQA71j3smeqJVX8epeeWCY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To
- :MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=0a+oQu3LYTAbOOyoILb+F/zkApGIum0yjd+xPCLEHo4=; b=J29X5vFsmzeJlhMNHWYRDUcZI7
- qpH8/310HYafNvcsYBEL1JM7MQIRCwAmrKlOkJGVG0uUZs+oNtU52mIhtAVm1eO+usWVJIFdqqHNa
- XK+V9dELyVXDVzxaGAuCGnzFu2Dh8ZRjGo9cUdF8duVqxXl96PzceHzI4XwbHJbdTtms=;
-Received: from mail-pf1-f178.google.com ([209.85.210.178])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1nQ1vV-004U7g-Du; Fri, 04 Mar 2022 07:00:34 +0000
-Received: by mail-pf1-f178.google.com with SMTP id a5so6875625pfv.9;
- Thu, 03 Mar 2022 23:00:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=0a+oQu3LYTAbOOyoILb+F/zkApGIum0yjd+xPCLEHo4=;
- b=UcHSzcmMAevEFsqxc8gimvoSIew96LrW3UYvjfgkcaeLb/Edql9668oTELTgMdhcyh
- uwTLYgNgPfuwuQfZCbkLtuIX59UkP2xXrD0mK6eOfNdOu/KSihdjQUFHL7gwAFzgpb4Z
- PeSQfhLMwS3uLkuXfSSL1QQyblGTA4kTyWBkcty1viz6EkWmIbbGn99xu95lY6jAsJ0c
- CbisDo/RPFGn8gAJnKluj00ht4OQ80XaXmCEvGalnXTnvAWrV5UWFfWh6kgUBnLZJvSQ
- W0PYU136vUwP4grvjJEIhDxHc0WM1lPQ2cysIXPjh+breTQ07tU9AM0RgZ3Jr4UsSFjT
- NaGQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references;
- bh=0a+oQu3LYTAbOOyoILb+F/zkApGIum0yjd+xPCLEHo4=;
- b=lATL6oq/Tm7d51UWlbItd0/TS/e/Vqc62oUlf68cNdPOabS4dNhvCk2BinDY9nDrF2
- nJxvS0DwDG4645eemnSZroKvlm+Z+xaPB2ZSjOg7Kh0b4RkslBdNNa11qfqrjqkMxaKc
- +PvogzPElF4fMlrlXxnTO2GnH34/5evknoxBa4YOVRL3hxBC9B7AgzE1Wvs/rGp4K2Gm
- cAQ+ms+CDOTw3KG39LO7jBsM4Xn24Viu33Ru7217GiqrXyieOX0EOLtghaEV6TgPqtvi
- 6dlvtA028e2/Rkn1eU4ztt+LMtm+zDnfXjbNEV/h/zHUyVRliYVUeU1t1s4GwPLCjCA2
- gCwA==
-X-Gm-Message-State: AOAM533p9hmGrWPAW/5jP8qfqQfsKIblklBiDDuyCLyGN9L3y6NrrRmq
- kqozTIiQlxVB4M4rRQMdpeg=
-X-Google-Smtp-Source: ABdhPJxBFOb3A6C/RlDh1uHGrWM51HjSkR68cXfNAhNGErUbSC2hd/FilwMHkJmidt1eEHAWD7GVrA==
-X-Received: by 2002:a05:6a00:cc7:b0:4ec:c6f3:ad29 with SMTP id
- b7-20020a056a000cc700b004ecc6f3ad29mr41958698pfv.66.1646377221067; 
- Thu, 03 Mar 2022 23:00:21 -0800 (PST)
-Received: from ubuntu.huawei.com ([119.3.119.19])
- by smtp.googlemail.com with ESMTPSA id
- f6-20020a654006000000b00346193b405fsm3665134pgp.44.2022.03.03.23.00.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Mar 2022 23:00:20 -0800 (PST)
-From: Xiaomeng Tong <xiam0nd.tong@gmail.com>
-To: daniel.thompson@linaro.org
-Date: Fri,  4 Mar 2022 14:59:57 +0800
-Message-Id: <20220304065957.16799-1-xiam0nd.tong@gmail.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20220303121824.qdyrognluik74iph@maple.lan>
-References: <20220303121824.qdyrognluik74iph@maple.lan>
-X-Spam-Score: -0.2 (/)
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=A+RpFOlEuJHnJX/RXvQgZnIYOIQdsuYlk0HZClr17QI=; b=i
+ Wd72KPqm77fJrRhi/NoziCq5qarZSi95a8wDTlDJ/Un8yP1dmmpk27XhsGe4UbCkGB9tMebI3CLFX
+ IkR4P/crRxWcGdGJ/m2GG0fBHwxo4SQhNB7WFtkUWEX16aVJ9pcC+khHl4BRM8wICh6CzeGGIau3s
+ SXsruOuII/8e3nXk=;
+Received: from esa9.hc1455-7.c3s2.iphmx.com ([139.138.36.223])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
+ id 1nQ1wO-0003St-CQ
+ for kgdb-bugreport@lists.sourceforge.net; Fri, 04 Mar 2022 07:01:29 +0000
+IronPort-SDR: NEqaBTLRVYZQG3kiqY3WislZTlFs5oxlvGgv3iuuUiVmywC0NbhCdUq70FMug2aWxXB37CCLTJ
+ /Zg/WAppgyIXUOO6fHkkP222Lwbrp7cKLJ3/FrhEwkB/UHGLWvb2A/sCHwalqfTvQucGpdaMKr
+ ed8d4arFfUKRr0TYFfyL6NAPuPgrlnO208TDuauwQB3IuJx+K1t2OH5WH0uko5iSvX4GNKdy2i
+ /8rbl/JmkO7MWmucWiH+RT8vNAEqk1MgRwMKwHrdFWxHO37e7BkCido9DwkdZJsB+YwckvNHdP
+ onW0lIqeBRj8Bit7YeU6UH2x
+X-IronPort-AV: E=McAfee;i="6200,9189,10275"; a="53090335"
+X-IronPort-AV: E=Sophos;i="5.90,154,1643641200"; d="scan'208";a="53090335"
+Received: from unknown (HELO oym-r4.gw.nic.fujitsu.com) ([210.162.30.92])
+ by esa9.hc1455-7.c3s2.iphmx.com with ESMTP; 04 Mar 2022 15:45:45 +0900
+Received: from oym-m2.gw.nic.fujitsu.com (oym-nat-oym-m2.gw.nic.fujitsu.com
+ [192.168.87.59])
+ by oym-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id 63225D9FCD
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Fri,  4 Mar 2022 15:45:44 +0900 (JST)
+Received: from yto-om2.fujitsu.com (yto-om2.o.css.fujitsu.com [10.128.89.163])
+ by oym-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 86E8ABDB28
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Fri,  4 Mar 2022 15:45:43 +0900 (JST)
+Received: from cn-r05-10.example.com (n3235113.np.ts.nmh.cs.fujitsu.co.jp
+ [10.123.235.113])
+ by yto-om2.fujitsu.com (Postfix) with ESMTP id 7D372403884F7;
+ Fri,  4 Mar 2022 15:45:42 +0900 (JST)
+From: Hitomi Hasegawa <hasegawa-hitomi@fujitsu.com>
+To: linux-arm-kernel@lists.infradead.org, soc@kernel.org,
+ linux-serial@vger.kernel.org, sumit.garg@linaro.org
+Date: Fri,  4 Mar 2022 15:43:22 +0900
+Message-Id: <20220304064324.331217-1-hasegawa-hitomi@fujitsu.com>
+X-Mailer: git-send-email 2.27.0
+MIME-Version: 1.0
+X-Spam-Score: -1.6 (-)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, 3 Mar 2022 12:18:24 +0000, Daniel Thompson wrote:
- > On Thu, Mar 03, 2022 at 03:26:57PM +0800, Xiaomeng Tong wrote: > > On Thu,
- 3 Mar 2022 04:58:23 +0000, David Laight wrote: > > > on 3 Mar 202 [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  The interrupt is set using pseudo-NMI if it is available.
+ Arm has a diagnostic interrupt feature called "Arm Generic Diagnostic Dump
+ and Reset device", but the A64FX does not support this feature and [...] 
+ Content analysis details:   (-1.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.210.178 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [xiam0nd.tong[at]gmail.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.210.178 listed in wl.mailspike.net]
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1nQ1vV-004U7g-Du
-Subject: Re: [Kgdb-bugreport] [PATCH 2/6] treewide: remove using list
- iterator after loop body as a ptr
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [139.138.36.223 listed in list.dnswl.org]
+ 0.7 SPF_NEUTRAL            SPF: sender does not match SPF record (neutral)
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+X-Headers-End: 1nQ1wO-0003St-CQ
+X-Mailman-Approved-At: Fri, 04 Mar 2022 11:38:02 +0000
+Subject: [Kgdb-bugreport] [PATCH v2 0/2] soc: fujitsu: Add A64FX diagnostic
+ interrupt driver
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -120,133 +99,73 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: alsa-devel@alsa-project.org, kvm@vger.kernel.org, gustavo@embeddedor.com,
- linux-iio@vger.kernel.org, kgdb-bugreport@lists.sourceforge.net,
- linux@rasmusvillemoes.dk, dri-devel@lists.freedesktop.org, c.giuffrida@vu.nl,
- amd-gfx@lists.freedesktop.org, torvalds@linux-foundation.org,
- samba-technical@lists.samba.org, linux1394-devel@lists.sourceforge.net,
- drbd-dev@lists.linbit.com, linux-arch@vger.kernel.org,
- linux-cifs@vger.kernel.org, linux-aspeed@lists.ozlabs.org,
- linux-scsi@vger.kernel.org, linux-rdma@vger.kernel.org,
- linux-staging@lists.linux.dev, h.j.bos@vu.nl, jgg@ziepe.ca,
- intel-wired-lan@lists.osuosl.org, nouveau@lists.freedesktop.org,
- bcm-kernel-feedback-list@broadcom.com, dan.carpenter@oracle.com,
- linux-media@vger.kernel.org, keescook@chromium.org, arnd@arndb.de,
- linux-pm@vger.kernel.org, intel-gfx@lists.freedesktop.org,
- bjohannesmeyer@gmail.com, linux-block@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, christophe.jaillet@wanadoo.fr,
- jakobkoschel@gmail.com, v9fs-developer@lists.sourceforge.net,
- linux-tegra@vger.kernel.org, tglx@linutronix.de,
- andriy.shevchenko@linux.intel.com, linux-arm-kernel@lists.infradead.org,
- linux-sgx@vger.kernel.org, nathan@kernel.org, netdev@vger.kernel.org,
- linux-usb@vger.kernel.org, linux-wireless@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- xiam0nd.tong@gmail.com, david.laight@aculab.com,
- tipc-discussion@lists.sourceforge.net, linux-crypto@vger.kernel.org,
- dmaengine@vger.kernel.org, linux-mediatek@lists.infradead.org,
- akpm@linux-foundation.org, linuxppc-dev@lists.ozlabs.org,
- christian.koenig@amd.com, rppt@kernel.org
-MIME-Version: 1.0
+Cc: hasegawa-hitomi@fujitsu.com, daniel.thompson@linaro.org, arnd@arndb.de,
+ will@kernel.org, peterz@infradead.org, catalin.marinas@arm.com,
+ jason.wessel@windriver.com, linux-kernel@vger.kernel.org,
+ gregkh@linuxfoundation.org, olof@lixom.net, jirislaby@kernel.org,
+ kgdb-bugreport@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Thu, 3 Mar 2022 12:18:24 +0000, Daniel Thompson wrote:
-> On Thu, Mar 03, 2022 at 03:26:57PM +0800, Xiaomeng Tong wrote:
-> > On Thu, 3 Mar 2022 04:58:23 +0000, David Laight wrote:
-> > > on 3 Mar 2022 10:27:29 +0800, Xiaomeng Tong wrote:
-> > > > The problem is the mis-use of iterator outside the loop on exit, and
-> > > > the iterator will be the HEAD's container_of pointer which pointers
-> > > > to a type-confused struct. Sidenote: The *mis-use* here refers to
-> > > > mistakely access to other members of the struct, instead of the
-> > > > list_head member which acutally is the valid HEAD.
-> > >
-> > > The problem is that the HEAD's container_of pointer should never
-> > > be calculated at all.
-> > > This is what is fundamentally broken about the current definition.
-> > 
-> > Yes, the rule is "the HEAD's container_of pointer should never be
-> > calculated at all outside the loop", but how do you make sure everyone
-> > follows this rule?
-> 
-> Your formulation of the rule is correct: never run container_of() on HEAD
-> pointer.
+The interrupt is set using pseudo-NMI if it is available. Arm has a
+diagnostic interrupt feature called "Arm Generic Diagnostic Dump and
+Reset device", but the A64FX does not support this feature and instead
+has its own device definition.
 
-Actually, it is not my rule. My rule is that never access other members
-of the struct except for the list_head member after the loop, because
-this is a invalid member after loop exit, but valid for the list_head
-member which just is HEAD and the lately caculation (&pos->head) seems
-harmless.
+This patch series includes ones created by Sumit.[1]
 
-I have considered the case that the HEAD's container "pos" is layouted
-across the max and the min address boundary, which means the address of
-HEAD is likely 0x60, and the address of pos is likely 0xffffffe0.
-It seems ok to caculate pos with:
-((type *)(__mptr - offsetof(type, member)));
-and it seems ok to caculate head outside the loop with:
-if (&pos->head == &HEAD)
-    return NULL;
+I tested on FX700:
+$ echo 1 > /proc/sys/kernel/sysrq
+$ echo HARDLOCKUP > /sys/kernel/debug/provoke-crash/DIRECT
+[  124.712351] lkdtm: Performing direct entry HARDLOCKUP
+[  147.232096] rcu: INFO: rcu_preempt detected stalls on CPUs/tasks:
+:
+:
 
-The only case I can think of with the rule "never run container_of()
-on HEAD" must be followed is when the first argument (which is &HEAD)
-passing to container_of() is NULL + some offset, it may lead to the
-resulting "pos->member" access being a NULL dereference. But maybe
-the caller can take the responsibility to check if it is NULL, not
-container_of() itself.
+Send the "chassis power diag" command from the management server
+using ipmitool, the following message is shown:
+[  206.061770] sysrq: Trigger a crash
+[  206.061779] Kernel panic - not syncing: sysrq triggered crash
+:
+:
 
-Please remind me if i missed somthing, thanks.
+Changes in V2:
+ - Include Sumit's patch.
+ - The handler calls handle_sysrq() to use the sysrq feature to cause
+   a panic.
+ - request_nmi() and request_irq() now use the same handler, and
+   the function name of the handler has also changed.
+ - Use readl()/writel() instead of readl_relaxed()/writel_relaxed().
 
-> 
-> However the rule that is introduced by list_for_each_entry_inside() is
-> *not* this rule. The rule it introduces is: never access the iterator
-> variable outside the loop.
+V1:
+  https://lore.kernel.org/linux-arm-kernel/20220218092010.1327309-1-hasegawa-hitomi@fujitsu.com/
 
-Sorry for the confusion, indeed, that is two *different* rule.
+[1] https://lore.kernel.org/all/20220228135408.1452882-1-sumit.garg@linaro.org/
 
-> 
-> Making the iterator NULL on loop exit does follow the rule you proposed
-> but using a different technique: do not allow HEAD to be stored in the
-> iterator variable after loop exit. This also makes it impossible to run
-> container_of() on the HEAD pointer.
-> 
+Sumit Garg (1):
+  tty/sysrq: Make sysrq handler NMI aware
 
-It does not. My rule is: never access the iterator variable outside the loop.
-The "Making the iterator NULL on loop exit" way still leak the pos with NULL
-outside the loop, may lead to a NULL deference.
+Hitomi Hasegawa (1):
+  soc: fujitsu: Add A64FX diagnostic interrupt driver
 
-> 
-> > Everyone makes mistakes, but we can eliminate them all from the beginning
-> > with the help of compiler which can catch such use-after-loop things.
-> 
-> Indeed but if we introduce new interfaces then we don't have to worry
-> about existing usages and silent regressions. Code will have been
-> written knowing the loop can exit with the iterator set to NULL.
+ MAINTAINERS                      |   5 +
+ drivers/soc/Kconfig              |   1 +
+ drivers/soc/Makefile             |   1 +
+ drivers/soc/fujitsu/Kconfig      |  13 +++
+ drivers/soc/fujitsu/Makefile     |   3 +
+ drivers/soc/fujitsu/a64fx-diag.c | 151 +++++++++++++++++++++++++++++++
+ drivers/tty/sysrq.c              |  45 ++++++++-
+ include/linux/sysrq.h            |   1 +
+ kernel/debug/debug_core.c        |   1 +
+ 9 files changed, 220 insertions(+), 1 deletion(-)
+ create mode 100644 drivers/soc/fujitsu/Kconfig
+ create mode 100644 drivers/soc/fujitsu/Makefile
+ create mode 100644 drivers/soc/fujitsu/a64fx-diag.c
 
-Yes, it is more simple and compatible with existing interfaces. Howerver,
-you should make every developers to remember that "pos will be set NULL on
-loop exit", which is unreasonable and impossible for *every* single person.
-Otherwise the mis-use-after-loop will lead to a NULL dereference.
-But we can kill this problem by declaring iterator inside the loop and the
-complier will catch it if somebody mis-use-after-loop.
+-- 
+2.27.0
 
-> 
-> Sure it is still possible for programmers to make mistakes and
-> dereference the NULL pointer but C programmers are well training w.r.t.
-> NULL pointer checking so such mistakes are much less likely than with
-> the current list_for_each_entry() macro. This risk must be offset
-> against the way a NULLify approach can lead to more elegant code when we
-> are doing a list search.
-> 
-
-Yes, the NULLify approach is better than the current list_for_each_entry()
-macro, but i stick with that the list_for_each_entry_inside() way is best
-and perfect _technically_.
-
-Thus, my idea is *better a finger off than always aching*, let's settle this
-damn problem once and for all, with list_for_each_entry_inside().
-
---
-Xiaomeng Tong
 
 
 _______________________________________________
