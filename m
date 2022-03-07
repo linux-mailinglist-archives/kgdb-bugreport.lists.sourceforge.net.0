@@ -2,115 +2,196 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 995144D0139
-	for <lists+kgdb-bugreport@lfdr.de>; Mon,  7 Mar 2022 15:29:34 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id D1EDE4D024A
+	for <lists+kgdb-bugreport@lfdr.de>; Mon,  7 Mar 2022 16:02:46 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1nREMg-0006gP-Dt
-	for lists+kgdb-bugreport@lfdr.de; Mon, 07 Mar 2022 14:29:33 +0000
+	id 1nREso-0006sL-Ih
+	for lists+kgdb-bugreport@lfdr.de; Mon, 07 Mar 2022 15:02:45 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <daniel.thompson@linaro.org>) id 1nREMd-0006gI-IY
- for kgdb-bugreport@lists.sourceforge.net; Mon, 07 Mar 2022 14:29:30 +0000
+ (envelope-from <dan.carpenter@oracle.com>)
+ id 1nREsn-0006rt-1c; Mon, 07 Mar 2022 15:02:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ d=sourceforge.net; s=x; h=MIME-Version:In-Reply-To:Content-Type:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=mIIVvuK2N/32KeIEXgX7T/cu6Rp6fCq2WJv1t+elJk0=; b=Y3Cph8uZl0KO0AT+JEDR1AKTnY
- K+nL+j3cUDrYOm3We3Y4pvYX4c8dsWGvHWvJghEqH8rsHaATBZnUa8yXCikVDLHvKm8jXh7IfttsF
- 1DJcxTtKE7J99bfGS4hWM+cY9D+tvBpOTaU0/5K7VnkL2E8QQvt0JvxsnGubx58K7tAQ=;
+ bh=x1Z8v8EkivpLkEtwJQKAOgXpTNObPmq0E2YTEG1eV80=; b=IDswfwLOX9bxqy8BvwpbzxKe6z
+ VnCfSiiDO2jLcdcm5YOG0ERprlR610WpaRMd9E6HfPRxMje2Nvu47Wa1836EebMNs1JMRpvyZOeX/
+ Elf9bxpCYaK4bHUMOCHMQwUgkp/9UjtWRtELmu2l6EoM4dlOatvFtbYy0y6tsgq8O7SU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ h=MIME-Version:In-Reply-To:Content-Type:References:Message-ID:Subject:Cc:To
  :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=mIIVvuK2N/32KeIEXgX7T/cu6Rp6fCq2WJv1t+elJk0=; b=YfbQ3ws5CJhWZOLya6+G1k3fmG
- aRyeRwM1rdKcH5jYjAsZrxu4xK1pZnnKl5uGA0aM4cqbrLfaRusQPGKFa8g0qyxFRGLWtH+QROJEz
- pD5MdlTjGVroMu7lPQE7xoL+vgD/oFHEC+Sfaj3AvaxrTgVRibxb3K+l68cYVEwqO3M4=;
-Received: from mail-ej1-f43.google.com ([209.85.218.43])
+ bh=x1Z8v8EkivpLkEtwJQKAOgXpTNObPmq0E2YTEG1eV80=; b=iM4Qdzc9pNoK7IGBuiTkoFEz+v
+ ehOvy0WEwEAanOsUlKsJiYLRNK3ODXo+S0DSfGQQK+AYVMy8WyT12cTxs5ZM7eMlsnKxH/swBfhLZ
+ aJpkbgruyzUNH1h/PhbAaKE3oSYxi+D7IDtCczsC8QJ6Cs9I2Blf7CNfOF/fan4uOtIY=;
+Received: from mx0b-00069f02.pphosted.com ([205.220.177.32])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1nREMX-007SfV-Gg
- for kgdb-bugreport@lists.sourceforge.net; Mon, 07 Mar 2022 14:29:30 +0000
-Received: by mail-ej1-f43.google.com with SMTP id p15so32344986ejc.7
- for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 07 Mar 2022 06:29:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=mIIVvuK2N/32KeIEXgX7T/cu6Rp6fCq2WJv1t+elJk0=;
- b=F2EkS1OkeFcBz8FzJ1PYrn6nmbbnh/LcjsYdslyLyKZouoZOngfzPhavOHdNWb7ntF
- lMAgQWVFgb49+9jjYedUUgGDvRPwtCEPF3NcY6CddSac5a65ceBDeKdeRDx6SbE2t+BC
- gHnLBtUa4KBEJzs26sxJjjlCII0LOpkjS2+HXgBAsIvNNBZ/RvzRs2LyEfle51GLFuEQ
- +QIzEPukRNOi04Ew6pYfB6zcXlT4hEx0ppXmoFcwMVBY69ad7YNJxhFEuu72csDcx1eH
- xY6WwAFodItq4zPMUqlzV8XDP17LIDgSqj9umFJOElv28rbY7NuoxbVuvoU8Q/yICaoX
- ndSg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=mIIVvuK2N/32KeIEXgX7T/cu6Rp6fCq2WJv1t+elJk0=;
- b=i+id9vdUw1lTILFSCXmjlzSMgBEkGlB4BavtYGJMCGh4A8VIAqhfCo6SrR+B/5ryft
- vHGS1rHZZ27QmHm1ypSb8eSz8RK7mclejdhaV5csBP68of0ejKMzwJpSLho3Fgdk20iX
- oRnloNHpt7BI6rtlOM4KTIXGUXw/Mqt3R8FNS0klrNiWu7R6RFo53l6atAfDME4pu2ZU
- mDfWVRylJMGbJ4BOXp029gN655WKogLx7D3tTcEvn8hiQH2NglQBgl6T8Y2WuyW/ighp
- yKB3Tp6ggRkBMbqmP803ouZ1EqN6eDKni5u1d0HIsC1VLeYi+b8m4gjyhFMytYWtXjM8
- elAw==
-X-Gm-Message-State: AOAM532YxsOj/VvaqvIGoDXPLHZH5mG0pETW3bs5wWn8r4QsFZwWIH06
- Xbwt6t1dIrevdhY5Ndkll5ZRxjYN4PMNf1PI
-X-Google-Smtp-Source: ABdhPJzQI4QjqhdFPG0fJBteqt1+29zzxkApr9e/9w3GgGEmpxrbvRqsxvfQsyX3DLpyuuTW1sis/A==
-X-Received: by 2002:adf:ea0f:0:b0:1f0:61f6:c3df with SMTP id
- q15-20020adfea0f000000b001f061f6c3dfmr8407228wrm.543.1646663038946; 
- Mon, 07 Mar 2022 06:23:58 -0800 (PST)
-Received: from maple.lan (cpc141216-aztw34-2-0-cust174.18-1.cable.virginm.net.
- [80.7.220.175]) by smtp.gmail.com with ESMTPSA id
- p3-20020a05600c358300b003897e440047sm10853608wmq.28.2022.03.07.06.23.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Mar 2022 06:23:58 -0800 (PST)
-Date: Mon, 7 Mar 2022 14:23:56 +0000
-From: Daniel Thompson <daniel.thompson@linaro.org>
-To: Sumit Garg <sumit.garg@linaro.org>
-Message-ID: <20220307142356.ksx7k5xalqlsxnqk@maple.lan>
-References: <20220307110328.2557655-1-sumit.garg@linaro.org>
-MIME-Version: 1.0
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
+ id 1nREsj-007U82-3w; Mon, 07 Mar 2022 15:02:43 +0000
+Received: from pps.filterd (m0246630.ppops.net [127.0.0.1])
+ by mx0b-00069f02.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 227EhPPT010128; 
+ Mon, 7 Mar 2022 15:01:37 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=date : from : to : cc
+ : subject : message-id : references : content-type : in-reply-to :
+ mime-version; s=corp-2021-07-09;
+ bh=x1Z8v8EkivpLkEtwJQKAOgXpTNObPmq0E2YTEG1eV80=;
+ b=Dg9v6mq3ZY49K7dv8mVx+7YTXcu5DpYlLSB56tB8Lv7c8vUKEuAC+Ln+DGTfeAsBLPbc
+ HsLsgriLDJ6yPnDEiJ+JAvFXLiWaRSFRITBgZkhxxa1KJ88Lx81LPOxVSVWo2/sI2smE
+ Qk+QqZJ99YwmFUguJpoWEeaES30pTwTrF9EouzWH+MUwiH/9QSHWlboBHy/g5GqWn9Dh
+ nqrs/brqswoJ3H76eZKtgTZ0Zte2rWSqq8IeDW1TROSz/LVzycXddxzaLXSKofKJwwn9
+ 0LX2WGlD8iHTz11FLpDqPc0HLFlRX3eV4kt7alsIdTiAw+TuafbLMtKtRSl7NwvFvRUA dw== 
+Received: from aserp3030.oracle.com (aserp3030.oracle.com [141.146.126.71])
+ by mx0b-00069f02.pphosted.com with ESMTP id 3ekx9cc0uw-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Mon, 07 Mar 2022 15:01:37 +0000
+Received: from pps.filterd (aserp3030.oracle.com [127.0.0.1])
+ by aserp3030.oracle.com (8.16.1.2/8.16.1.2) with SMTP id 227F1YB8182831;
+ Mon, 7 Mar 2022 15:01:36 GMT
+Received: from nam10-dm6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10lp2100.outbound.protection.outlook.com [104.47.58.100])
+ by aserp3030.oracle.com with ESMTP id 3ekwwb2ceg-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Mon, 07 Mar 2022 15:01:35 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=ZVxJCQH5xNzO3rnfAv830aUd7WYux8KegXHKjztVeeuY0Psr1rQHhg75Db+FsMCz0FiiZsf35jkHeMdxUqhhAoTula8BUaRj7pTs/65NHjz6BRvHhtApD7yxSd2SRpFCuxFgQn9D4PMo39iPUj4bCTUPnttCwfzCuxARP5DLY858t/juyFyBQlEDsdN6C05vyeJADD+7m5ntFvexeIu6BcUbSyEsjyikQSMG/stuDpSoUTaifnr5k+jON94hbAymivJw+ar9ps3N6xTi8tizrBeebQT+3dwgyJUj7nnNxE5hP58uauTpcgeEem+tiQRgCh6VGJx8oCozqYT4UJ878w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=x1Z8v8EkivpLkEtwJQKAOgXpTNObPmq0E2YTEG1eV80=;
+ b=T1RBS/H4uxN+ed6NkiG9eof4AnRTtgXwT05Anuk8il8H1ij8v1e0UrftdhvCiw6fp3ZWNqwT+mPWB3mTK/PrA+IYRltCpfFUwmDgJU6ozBaTFXEjK/LPnY74RbmnJEYiKv65G41bjLZ+IFhxZUN7r87iN76OO13/3XIDQUo9Rw+V9cRBMkvL9z/SkJrb2xKoHC25ZslkEktS9tYOSE6edRrZfsLWQ3Owlcq0B92Q11tPUBOiEX2XXBcmVk4aTybL3hLLQyEj5Rzeu1AIGHPkqMH2zcj8JghEhxgM5OqaSlQMv7qvI5f099AQBS1Onv4IdWhkb8y4B6rdreWySGIjuA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
+ dkim=pass header.d=oracle.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=x1Z8v8EkivpLkEtwJQKAOgXpTNObPmq0E2YTEG1eV80=;
+ b=RxwdW2rzDCZD0qWd/XaY98p+dmcfiggvHn2cZf4CURZpYtDt62oszWyey/oixeSjClOuHWh7B2B2HlO6iogDTrJls4Qmg+xSKBanhi98fi6rONd9mHcMBfDSa2NFnhm18wXVa/tlrq1kkT5GWOz16thid1PowWArmAhKZ0Fmb+4=
+Received: from MWHPR1001MB2365.namprd10.prod.outlook.com
+ (2603:10b6:301:2d::28) by DM6PR10MB3162.namprd10.prod.outlook.com
+ (2603:10b6:5:1a7::20) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5038.15; Mon, 7 Mar
+ 2022 15:01:27 +0000
+Received: from MWHPR1001MB2365.namprd10.prod.outlook.com
+ ([fe80::2c3d:92b5:42b3:c1c5]) by MWHPR1001MB2365.namprd10.prod.outlook.com
+ ([fe80::2c3d:92b5:42b3:c1c5%4]) with mapi id 15.20.5038.026; Mon, 7 Mar 2022
+ 15:01:27 +0000
+Date: Mon, 7 Mar 2022 18:00:37 +0300
+From: Dan Carpenter <dan.carpenter@oracle.com>
+To: Jakob Koschel <jakobkoschel@gmail.com>
+Message-ID: <20220307150037.GD3293@kadam>
+References: <20220228110822.491923-1-jakobkoschel@gmail.com>
 Content-Disposition: inline
-In-Reply-To: <20220307110328.2557655-1-sumit.garg@linaro.org>
-X-Spam-Score: -0.2 (/)
+In-Reply-To: <20220228110822.491923-1-jakobkoschel@gmail.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-ClientProxiedBy: JNAP275CA0067.ZAFP275.PROD.OUTLOOK.COM (2603:1086:0:4f::13)
+ To MWHPR1001MB2365.namprd10.prod.outlook.com
+ (2603:10b6:301:2d::28)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: a790898f-2ec8-463f-3dc0-08da004b5aa8
+X-MS-TrafficTypeDiagnostic: DM6PR10MB3162:EE_
+X-Microsoft-Antispam-PRVS: <DM6PR10MB3162E5B690ED927B678D923E8E089@DM6PR10MB3162.namprd10.prod.outlook.com>
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: Y/fLTcENPy3FDPNbRhqURAmaW2b+qsga24wWjHAJa2bIyULxvWUIl2ol/8oP9OpffdCI9+WIU/mdnsgId0Ia5t6Y571afcH5tstavjRljpRPfo+54PM0gqPjoq828bWe+A9YGLh4zXv5yNSoCFUqx/IhBqVaONfo6avK+iwn3140w3noRjVXsjSXyS87BkBaHyVpEvOQzcX5L4l1pNk4ANAwGEatJJfh1jfUOz/vGFvi/BKEGTCNnnIpLeBlhtAhTts8DTrk18T/OlTF+JBJ4ikYzLV5MHKpRKroTDZhsLceSwaXwAOiAnNSx7t2MuAIgwwRX7ZQoVs43AgjsG+Fg6BLneQojEcGKiR6b2BGzKIgAzleffcWgpHQy9UoUVPk/+C3EIFr9UszIpi7TavCp2FHEtJGl/SVafQVW6aCWyoAHs88Luhzkj71LnU3wCLb4c+8Z3H1XPYjXL3h3uAoFIqzaNkjNcOSIAfbwQ6iuicT8Vki8+YKCR1aToL6Z8tugzM6uY24TmoT3SavWW+FJxQhewHw1CdSx04GF3NxGph8aG8BzAL/WvMnHz2nv5fZaY14jCvAxM2OD3mgGpks2il9IciqttjmkYqJdj2l5Ku4EwbO6Q/s4EoBojCoh9Ei2UGFxJ5LYiZlKSIt1GHfidLEcqmQ/F4bj6oYeWLtfBwd1h6CFc8cBOYZkpOeQ5imTBMIiyQoluLm/4ZVf1oQrA==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:MWHPR1001MB2365.namprd10.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230001)(7916004)(366004)(66476007)(33716001)(66556008)(66946007)(4326008)(1076003)(8676002)(186003)(26005)(86362001)(83380400001)(7366002)(7416002)(2906002)(7406005)(38100700002)(38350700002)(44832011)(5660300002)(8936002)(6486002)(6506007)(6916009)(54906003)(508600001)(316002)(9686003)(6512007)(33656002)(52116002)(6666004);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?bWnw9vDUW8VZdEEeOBoLe1Y2rGYUV11qKNE9g6dxqMiuS87/ZyKsTccHFR0h?=
+ =?us-ascii?Q?zsB0WiEiqlAdSnYChqWyixjeTe8J70lFdgZDxvpYY8Md1QJlCxc57WI3lKKW?=
+ =?us-ascii?Q?7OKVtZZPwo4PQELlJDxenjkgFckWDcGxekNXoRiALgGlLG8LqMmpbMB8ekyf?=
+ =?us-ascii?Q?G9MyP6chT/cDn70t0b0ueGN5RG+81wHOZAjBs8HDDvAaxhGaNbnfncAdt8Yz?=
+ =?us-ascii?Q?qX72thiL+n24WSbMLcuBJJ8V1ccly/dGK5UDZGkFOFVT4AXyXoELapcqNS9z?=
+ =?us-ascii?Q?NDhaaoIUKUexKB2+F4X5Y98PCgFTSNenrUz1PIjLEhyc3Q/ZE8sAIfA2h29O?=
+ =?us-ascii?Q?bQjjNrixP+R7RSxpVCbbgsDGbv/ZATRvk3WhKWwb+jmrZDtXDwxLOMHZ8yBc?=
+ =?us-ascii?Q?4pHu7DI8TyzkjqTF1upf8s5iN4CMqoFQdu4wUb7MaRHV72jMkEUXsFkASQSF?=
+ =?us-ascii?Q?vv7Ac+6drIRQn/r1jQ982aqhi7u5vO5ZL+dEMNOjGriG3gC1OcYvZQ1u8c+n?=
+ =?us-ascii?Q?g8NZ2LHY9el7yNIaIukR4Zm1ktcTCctIG4XS/pg46BXoL1qdKLQRRYagZFK0?=
+ =?us-ascii?Q?/n7DreZfZaB3/y6z/AfBYEefukHPXeDe7d5ezAitzK+d2QQog4rIlDD8qa+8?=
+ =?us-ascii?Q?zymgVQ4pYNtlCsnjeMBG+jeXNkGWjbBYLXnAKxwmjjZXhcMZumddOy+Ox579?=
+ =?us-ascii?Q?4AO7+KrxbY8OaHng70JT1yHw7jJ41cKVMyj6+lSTTT0hY/vBD/EjaHX7CQGj?=
+ =?us-ascii?Q?gn+ib54LqJK5ERUYLkPyLTr3fL3+8qVsU6VJuAMogYWficUmoqE1kgh3VfYy?=
+ =?us-ascii?Q?5GG2gh3eUz3ZmDWGrWLk37QmW8AjdqWL331TJqq2Vtfi2os1mSDeNEMNgTfs?=
+ =?us-ascii?Q?JigyK6JXXFG/AjbfCvKyxTb5b97bfuqzQYdE4eHJbcn0vo5hRiIhGLbJf54r?=
+ =?us-ascii?Q?1+wj0BXD4HTyx09AT7V8I93fCvHTD4ORTHncQiR55MrEjVVVy2S/EZ4ptMEb?=
+ =?us-ascii?Q?TJM0wnWIaTrGbKcSA81X6pV7ijz2Wk0PZGUl92KsTsSPo6c4I02gYNS2TSAe?=
+ =?us-ascii?Q?K9VDwr5GETgPv8BUisSpiQzgq9JMAGL7ZnOl5wVX/XqKWvpIc07KZtQcXnwM?=
+ =?us-ascii?Q?Jtjl9gkcqxAFpr/BjcYIaEQjfGCfJ6idypOOy3N2d/uEFFqMaOjZtDKDIYwv?=
+ =?us-ascii?Q?oEIKeog/E7IrMTA6satUj+vLfWFpsVkMzFoWxRRR8DQAkSF4xn7i35zyuOiw?=
+ =?us-ascii?Q?irH+K1abxkvnaTDv9ZoTXuNBzuRMTaGXYA62J39eVJbq3yJy0RQEPW6c0rcx?=
+ =?us-ascii?Q?g4pKQAKlIR+gQdM+vVMBlpeZKtU9aKXqqCOO0sXGBz9wOH+Aj8leCTE7a3IZ?=
+ =?us-ascii?Q?JCCfiA7fX21qLYfVF1XBAOUSvI0Ernt29iTu8NYZpO7IoQmKhLGZr4GbkcTZ?=
+ =?us-ascii?Q?hiPa/2oyjB36rA+wClvc51mBbcVTEESLuNZYDurf2ZbK37ErAOGCOnXBlzO+?=
+ =?us-ascii?Q?JqGgc+A6MF0WAnahTTJHEWvldUZikGnWltMXf1mxdNBxe2cMPy+SzwaHv47W?=
+ =?us-ascii?Q?Ezb+s+3OJuV1G7JHkGx4LKYHG8u/EbA6EEPLRBhVPvvFEpozXSOWy4gopb23?=
+ =?us-ascii?Q?liAgqtWCS98yMgwNB8XKXCa2EWsUifta9yDiiGpqy2G7yeH4aoZGFsf04L6O?=
+ =?us-ascii?Q?iPDcFg=3D=3D?=
+X-OriginatorOrg: oracle.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a790898f-2ec8-463f-3dc0-08da004b5aa8
+X-MS-Exchange-CrossTenant-AuthSource: MWHPR1001MB2365.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Mar 2022 15:01:27.4868 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 2UjWK/F6sROiJEXQUOU6TRAnQMxXsqg9czn6a4AF3iOMRRrzhwWtM+yb68NNSa/ELQMga9NSOgJl/ugDx/4aSzJoYDeZK1PeFGaYPs8ke5I=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR10MB3162
+X-Proofpoint-Virus-Version: vendor=nai engine=6300 definitions=10278
+ signatures=690470
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxlogscore=999
+ spamscore=0
+ phishscore=0 bulkscore=0 adultscore=0 malwarescore=0 suspectscore=0
+ mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2202240000 definitions=main-2203070088
+X-Proofpoint-ORIG-GUID: fjWplAebQ6s5baA-c6tMuaOl9h85GlXo
+X-Proofpoint-GUID: fjWplAebQ6s5baA-c6tMuaOl9h85GlXo
+X-Spam-Score: -0.9 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, Mar 07, 2022 at 04:33:28PM +0530, Sumit Garg wrote:
- > Allow a magic sysrq to be triggered from an NMI context. This is done >
- via marking some sysrq actions as NMI safe. Safe actions will be a [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  Updating this API is risky because some places rely on the
+ old behavior and not all of them have been updated. Here are some additional
+ places you might want to change. drivers/usb/host/uhci-q.c:466 link_async()
+ warn: iterator used outside loop: 'pqh' drivers/infiniband/core/mad.c:968
+ ib_get_rmpp_segment() warn: iterator used outside loop: 'mad_send_wr->cur_seg'
+ driv [...] 
+ Content analysis details:   (-0.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.218.43 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
+ [205.220.177.32 listed in wl.mailspike.net]
+ -0.7 RCVD_IN_DNSWL_LOW      RBL: Sender listed at https://www.dnswl.org/,
+ low trust [205.220.177.32 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.218.43 listed in wl.mailspike.net]
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1nREMX-007SfV-Gg
-Subject: Re: [Kgdb-bugreport] [RFT v4] tty/sysrq: Make sysrq handler NMI
- aware
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1nREsj-007U82-3w
+Subject: Re: [Kgdb-bugreport] [PATCH 0/6] Remove usage of list iterator past
+ the loop body
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -122,81 +203,72 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: hasegawa-hitomi@fujitsu.com, arnd@arndb.de, peterz@infradead.org,
- gregkh@linuxfoundation.org, linux-kernel@vger.kernel.org,
- linux-serial@vger.kernel.org, jason.wessel@windriver.com,
- kgdb-bugreport@lists.sourceforge.net, jirislaby@kernel.org
+Cc: alsa-devel@alsa-project.org, linux-aspeed@lists.ozlabs.org,
+ "Gustavo A. R. Silva" <gustavo@embeddedor.com>, linux-iio@vger.kernel.org,
+ nouveau@lists.freedesktop.org, Rasmus Villemoes <linux@rasmusvillemoes.dk>,
+ dri-devel@lists.freedesktop.org, Cristiano Giuffrida <c.giuffrida@vu.nl>,
+ amd-gfx@lists.freedesktop.org, samba-technical@lists.samba.org,
+ linux1394-devel@lists.sourceforge.net, drbd-dev@lists.linbit.com,
+ linux-arch <linux-arch@vger.kernel.org>, linux-cifs@vger.kernel.org,
+ kvm@vger.kernel.org, linux-scsi@vger.kernel.org, linux-rdma@vger.kernel.org,
+ linux-staging@lists.linux.dev, "Bos, H.J." <h.j.bos@vu.nl>,
+ Jason Gunthorpe <jgg@ziepe.ca>, intel-wired-lan@lists.osuosl.org,
+ kgdb-bugreport@lists.sourceforge.net, bcm-kernel-feedback-list@broadcom.com,
+ linux-media@vger.kernel.org, Kees Cook <keescook@chromium.org>,
+ Arnd Bergman <arnd@arndb.de>, linux-pm@vger.kernel.org,
+ intel-gfx@lists.freedesktop.org,
+ Brian Johannesmeyer <bjohannesmeyer@gmail.com>, linux-block@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org,
+ Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
+ v9fs-developer@lists.sourceforge.net, linux-tegra@vger.kernel.org,
+ Thomas Gleixner <tglx@linutronix.de>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ linux-arm-kernel@lists.infradead.org, linux-sgx@vger.kernel.org,
+ Nathan Chancellor <nathan@kernel.org>,
+ Linus Torvalds <torvalds@linux-foundation.org>, linux-usb@vger.kernel.org,
+ linux-wireless@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, tipc-discussion@lists.sourceforge.net,
+ linux-crypto@vger.kernel.org, netdev@vger.kernel.org,
+ dmaengine@vger.kernel.org, linux-mediatek@lists.infradead.org,
+ Andrew Morton <akpm@linux-foundation.org>, linuxppc-dev@lists.ozlabs.org,
+ Mike Rapoport <rppt@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Mon, Mar 07, 2022 at 04:33:28PM +0530, Sumit Garg wrote:
-> Allow a magic sysrq to be triggered from an NMI context. This is done
-> via marking some sysrq actions as NMI safe. Safe actions will be allowed
-> to run from NMI context whilst that cannot run from an NMI will be queued
-> as irq_work for later processing.
->
-> <snip>
->
-> @@ -566,12 +573,46 @@ static void __sysrq_put_key_op(int key, const struct sysrq_key_op *op_p)
->  		sysrq_key_table[i] = op_p;
->  }
->  
-> +static atomic_t sysrq_key = ATOMIC_INIT(-1);
-> +
-> +static void sysrq_do_irq_work(struct irq_work *work)
-> +{
-> +	const struct sysrq_key_op *op_p;
-> +	int orig_suppress_printk;
-> +	int key = atomic_read(&sysrq_key);
-> +
-> +	orig_suppress_printk = suppress_printk;
-> +	suppress_printk = 0;
-> +
-> +	rcu_sysrq_start();
-> +	rcu_read_lock();
-> +
-> +	op_p = __sysrq_get_key_op(key);
-> +	if (op_p)
-> +		op_p->handler(key);
-> +
-> +	rcu_read_unlock();
-> +	rcu_sysrq_end();
-> +
-> +	suppress_printk = orig_suppress_printk;
-> +	atomic_set(&sysrq_key, -1);
-> +}
-> +
-> +static DEFINE_IRQ_WORK(sysrq_irq_work, sysrq_do_irq_work);
-> +
->  void __handle_sysrq(int key, bool check_mask)
->  {
->  	const struct sysrq_key_op *op_p;
->  	int orig_log_level;
->  	int orig_suppress_printk;
->  	int i;
-> +	bool irq_work = false;
-> +
-> +	/* Skip sysrq handling if one already in progress */
-> +	if (atomic_cmpxchg(&sysrq_key, -1, key) != -1) {
-> +		pr_warn("Skip sysrq key: %i as one already in progress\n", key);
-> +		return;
-> +	}
+Updating this API is risky because some places rely on the old behavior
+and not all of them have been updated.  Here are some additional places
+you might want to change.
 
-Doesn't this logic needlessly jam sysrq handling if the irq_work cannot
-be undertaken?
+drivers/usb/host/uhci-q.c:466 link_async() warn: iterator used outside loop: 'pqh'
+drivers/infiniband/core/mad.c:968 ib_get_rmpp_segment() warn: iterator used outside loop: 'mad_send_wr->cur_seg'
+drivers/opp/debugfs.c:208 opp_migrate_dentry() warn: iterator used outside loop: 'new_dev'
+drivers/staging/greybus/audio_codec.c:602 gbcodec_mute_stream() warn: iterator used outside loop: 'module'
+drivers/staging/media/atomisp/pci/atomisp_acc.c:508 atomisp_acc_load_extensions() warn: iterator used outside loop: 'acc_fw'
+drivers/perf/thunderx2_pmu.c:814 tx2_uncore_pmu_init_dev() warn: iterator used outside loop: 'rentry'
+drivers/gpu/drm/nouveau/nvkm/engine/device/ctrl.c:111 nvkm_control_mthd_pstate_attr() warn: iterator used outside loop: 'pstate'
+drivers/gpu/drm/panfrost/panfrost_mmu.c:203 panfrost_mmu_as_get() warn: iterator used outside loop: 'lru_mmu'
+drivers/media/usb/uvc/uvc_v4l2.c:885 uvc_ioctl_enum_input() warn: iterator used outside loop: 'iterm'
+drivers/media/usb/uvc/uvc_v4l2.c:896 uvc_ioctl_enum_input() warn: iterator used outside loop: 'iterm'
+drivers/scsi/dc395x.c:3596 device_alloc() warn: iterator used outside loop: 'p'
+drivers/net/ethernet/mellanox/mlx4/alloc.c:379 __mlx4_alloc_from_zone() warn: iterator used outside loop: 'curr_node'
+fs/ocfs2/dlm/dlmdebug.c:573 lockres_seq_start() warn: iterator used outside loop: 'res'
 
-A console user could unwittingly attempt an !nmi_safe SysRq action on
-a damaged system that cannot service interrupts. Logic that prevents
-things like backtrace, ftrace dump, kgdb or reboot is actively harmful
-to that user's capability to figure out why their original sysrq doesn't
-work.
+This patchset fixes 3 bugs.  Initially when it's merged it's probably
+going to introduce some bugs because there are likely other places which
+rely on the old behavior.
 
-I think the logic to prohibht multiple deferred sysrqs should only
-be present on code paths where we are actually going to defer the sysrq.
+In an ideal world, with the new API the compiler would warn about
+uninitialized variables, but unfortunately that warning is disabled by
+default so we still have to rely on kbuild/Clang/Smatch to find the
+bugs.
 
+But hopefully the new API encourages people to write clearer code so it
+prevents bugs in the long run.
 
-Daniel.
+regards,
+dan carpenter
+
 
 
 _______________________________________________
