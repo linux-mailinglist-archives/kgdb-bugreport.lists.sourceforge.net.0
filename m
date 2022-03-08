@@ -2,105 +2,106 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CF3624D1CE0
-	for <lists+kgdb-bugreport@lfdr.de>; Tue,  8 Mar 2022 17:11:52 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 07AB64D1CE1
+	for <lists+kgdb-bugreport@lfdr.de>; Tue,  8 Mar 2022 17:12:28 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1nRcRE-0005oO-Sn
-	for lists+kgdb-bugreport@lfdr.de; Tue, 08 Mar 2022 16:11:51 +0000
+	id 1nRcRn-0004Oi-Oq
+	for lists+kgdb-bugreport@lfdr.de; Tue, 08 Mar 2022 16:12:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <daniel.thompson@linaro.org>) id 1nRcR3-0005nR-RX
- for kgdb-bugreport@lists.sourceforge.net; Tue, 08 Mar 2022 16:11:40 +0000
+ (envelope-from <dianders@chromium.org>) id 1nRcRl-0004Ob-Rm
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 08 Mar 2022 16:12:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=LK9uf9V8m3oUibOnNP7wgnje39NrA7Q39n1xrUjRn4w=; b=YOj6xLFIzt/+UC5wMp010KqGk6
- q/WWtx76+08oZmAy13mQTWP7D81mxkmIWTaOrp1v5VOJtrnGmVUhPfqzcDMnLQj3jq4+MFxPtfm75
- DbY33JUf2WrwH1FJbRBa61nx5i202MwBnzc7PO+VTuRqwGbx7Ol0thaipG9yeQlg0AfI=;
+ bh=wPdkQphM15Eo5SdM94J/CTEkuLTXrgrE/iujWZfOFDM=; b=daLha16BnEOcIYRdMNGtFK3R1t
+ Y9C5B0BfhNoyJ1LtsIKHM9qO1TzU+beuBFj4l4zAK46mHnybykWNhYG2g7XaJJL8ldVAbeRg1la2J
+ 4/GzJWRob1Q83xD1ZlxdsQ/1aGYjLG0gzXUHyNFD7WEr7z7os7xkRTHMnrkbgPlLk/zg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=LK9uf9V8m3oUibOnNP7wgnje39NrA7Q39n1xrUjRn4w=; b=NeiSOtVie41A3uj+j7caKyOyrD
- ecPry5vFJeN1wHB2JtmTF0Ayh6g5Qu/1X2ZV96o1TaO6iX5PO2xz+L3JJS6yUlQkb/GIdv3pZWxWP
- gzhSxMaJ/f7FR14WeaLnZ1EJtjG37RxGhm6T2xalMnTgAQADbpod+mmu0dRETxJtcgNY=;
-Received: from mail-ej1-f47.google.com ([209.85.218.47])
+ bh=wPdkQphM15Eo5SdM94J/CTEkuLTXrgrE/iujWZfOFDM=; b=Rq+ryid9+YO8CLvY1/1/K2B+/e
+ tQQmzAT2OpSI35K1RTYhDYODrnQiVWwZ8SmWy7LgGFWW9604I8adYoZXG8ridDwwAGsXKWtuz3ho3
+ fsIJmLv4mb50XPfY6REr9SC6dK3p2rrlgz4w2xaewOo8hRMpwETTsym692iKGwJwcPJI=;
+Received: from mail-lf1-f44.google.com ([209.85.167.44])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1nRcQx-008l4C-NS
- for kgdb-bugreport@lists.sourceforge.net; Tue, 08 Mar 2022 16:11:40 +0000
-Received: by mail-ej1-f47.google.com with SMTP id bg10so40374343ejb.4
+ id 1nRcRj-008l6l-RP
+ for kgdb-bugreport@lists.sourceforge.net; Tue, 08 Mar 2022 16:12:24 +0000
+Received: by mail-lf1-f44.google.com with SMTP id w7so19429471lfd.6
  for <kgdb-bugreport@lists.sourceforge.net>;
- Tue, 08 Mar 2022 08:11:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=LK9uf9V8m3oUibOnNP7wgnje39NrA7Q39n1xrUjRn4w=;
- b=Ie+UyZFVWo5ezaet+8lp260zEbCp6993EFkmk1mHPI9jhs8nlRncCPwQCSETo00K0H
- pR3SzTiNfIkATsEYxTt9yo5CKqDsYAVwOsD8QnHQgTiW5fVT1llyZdkVx1VRS9fAoVFG
- 8+iw72UO6+fq2WVAnl9tmvCXwq90akGOAA/85Ykl4vACoans4WkGLlEWgjuv3CLEVacK
- rGXAvbkrOa1zVd73Wl4HDFtyacx5e2YlmCbtaFEzyCIA18hUSn9CXBmCUh19KDQMpgo8
- ebQOiOdN9fksKEhhLR8zhFMGq+kOb0acyH1Eup5qkPf32k1V69yKsvA2POdpsXF1G+wI
- k5JA==
+ Tue, 08 Mar 2022 08:12:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=wPdkQphM15Eo5SdM94J/CTEkuLTXrgrE/iujWZfOFDM=;
+ b=aEkBiyYVtzRXNJrAwcqq5Cwk5JilhiTWgJi0SCpBkYO4Fiat+SModSUH3HKB3MwIVt
+ M4do+kkcYvc+Hi/On7MZ173vl9tapETKN5+r8i8Q1TTXLM8AxNSBVbDLs1z4eeGhOmfB
+ wWL4ES7pxhENQhDd4uNDCD8b/YcftTftn6DYs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=LK9uf9V8m3oUibOnNP7wgnje39NrA7Q39n1xrUjRn4w=;
- b=KTQcr8fprnUhAL5GQO0forXPzfAzzdnZKQoSXHA7W01myyTyRMZCCxgq0NFDXetOkp
- yPVcxr4NaDZzNO4fRP7lJgErK6uQzSHd6ZuHMjsgHi1MG0VC06x9QA2Q+2kaTvXXok7f
- HEnY32jZXK9e0b1VIqBQt8OzWY1hC80vUktzwTtlsXlS8vjJL9QUmHk9w6TDMNFDkPTP
- YeLVf4mHSAVox0lL/A5OQsZjiBTh1ICaAF99TsgpIw4VMZNrBRC2U12asBF+jTRV/+In
- T3ngFp2L6N1AEnO1nVqHbSW80H3ru8as6OsCo7ScRKrx6rVAvSeWMsssZ+e7+yLbGZE5
- NdhA==
-X-Gm-Message-State: AOAM53175pKiqMcBfzwLfO5VHGm16SrNzFNT8EklluZ8NikK8j4ybpwK
- z9EDDqyT95uNA2omYk/lluAMFgyG4UNnH7nh
-X-Google-Smtp-Source: ABdhPJwTJKvEz01X94pGA38KQdbjDZPWxtj4C1+0HF/sD9kUnvvEoIEZhWxTc2QmjdZunG1Rm2MuTw==
-X-Received: by 2002:adf:fb47:0:b0:1ed:9f2c:492e with SMTP id
- c7-20020adffb47000000b001ed9f2c492emr12858210wrs.196.1646754363872; 
- Tue, 08 Mar 2022 07:46:03 -0800 (PST)
-Received: from maple.lan (cpc141216-aztw34-2-0-cust174.18-1.cable.virginm.net.
- [80.7.220.175]) by smtp.gmail.com with ESMTPSA id
- n4-20020a05600c4f8400b00380e45cd564sm2817117wmq.8.2022.03.08.07.46.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Mar 2022 07:46:03 -0800 (PST)
-Date: Tue, 8 Mar 2022 15:46:01 +0000
-From: Daniel Thompson <daniel.thompson@linaro.org>
-To: Sumit Garg <sumit.garg@linaro.org>
-Message-ID: <20220308154601.2f2v4aqsny3ta52a@maple.lan>
-References: <20220307110328.2557655-1-sumit.garg@linaro.org>
- <20220307142356.ksx7k5xalqlsxnqk@maple.lan>
- <CAFA6WYNdc5fTk61GB2siLj-EkTtRE0u6fq-MtqF3Zt1uwJqJCw@mail.gmail.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=wPdkQphM15Eo5SdM94J/CTEkuLTXrgrE/iujWZfOFDM=;
+ b=J0XKJglAlX7LIkq5Vuot6eFJGSIqLJ7kABxycgvgNB344PsVCBZOzQsYdq/3OruOYN
+ 9xqNCDqkpP+c6Vo3+mPCmDFighr60yAGSW4ZuKjk9f9vfsqfz986Df1CcIXlDu+OJ7NO
+ xYVXO6xMPTykunbLQPt9bctmx6K5zH0WyGSpnol2K5bsNnTyF8zEgWLjrXeLTZz/72+K
+ v6h2zdvddyjGOeyU8+3PKD314CojPNVbOZl4uQZV7ye6lJwY7lYDBv7nRv4kAmXcFpTn
+ pGhbgDQc+hIHHPYnIZTnIQEDU4VwoRHACMhtKxEwfnpIFOC06KvcjGts9sI8ShEo8twn
+ 4maQ==
+X-Gm-Message-State: AOAM532XPUE+ABGkHGz2EeK62sW9VZaWlfcZeIzKdZ7ObcrZwBId7MTV
+ nF5zNKaY3uWecgODCPLO+R3Uz8iUAZ5YT5xY
+X-Google-Smtp-Source: ABdhPJxrr5X0rbLRwcp2owQFW1RHr8P+y1WFcwsVh6SeervTVSodrtBZU/jzGAnw5Ww6VnkVe+SdEQ==
+X-Received: by 2002:aa7:cac8:0:b0:410:cc6c:6512 with SMTP id
+ l8-20020aa7cac8000000b00410cc6c6512mr16996798edt.408.1646755477855; 
+ Tue, 08 Mar 2022 08:04:37 -0800 (PST)
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com.
+ [209.85.221.54]) by smtp.gmail.com with ESMTPSA id
+ k19-20020a1709062a5300b006c75a94c587sm6131889eje.65.2022.03.08.08.04.36
+ for <kgdb-bugreport@lists.sourceforge.net>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 08 Mar 2022 08:04:36 -0800 (PST)
+Received: by mail-wr1-f54.google.com with SMTP id q14so13743128wrc.4
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Tue, 08 Mar 2022 08:04:36 -0800 (PST)
+X-Received: by 2002:a5d:490f:0:b0:1f0:6791:a215 with SMTP id
+ x15-20020a5d490f000000b001f06791a215mr13078257wrq.422.1646755475774; Tue, 08
+ Mar 2022 08:04:35 -0800 (PST)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAFA6WYNdc5fTk61GB2siLj-EkTtRE0u6fq-MtqF3Zt1uwJqJCw@mail.gmail.com>
-X-Spam-Score: -0.2 (/)
+References: <20220308033241.22099-1-rdunlap@infradead.org>
+In-Reply-To: <20220308033241.22099-1-rdunlap@infradead.org>
+From: Doug Anderson <dianders@chromium.org>
+Date: Tue, 8 Mar 2022 08:04:23 -0800
+X-Gmail-Original-Message-ID: <CAD=FV=W90Hd-baPzurraEaDUGNOCxb8FLUysHKOQg2frMuZRAQ@mail.gmail.com>
+Message-ID: <CAD=FV=W90Hd-baPzurraEaDUGNOCxb8FLUysHKOQg2frMuZRAQ@mail.gmail.com>
+To: Randy Dunlap <rdunlap@infradead.org>
+X-Spam-Score: -0.7 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, Mar 08, 2022 at 08:13:43PM +0530, Sumit Garg wrote:
- > Hi Daniel, > > On Mon, 7 Mar 2022 at 19:53,
- Daniel Thompson <daniel.thompson@linaro.org>
- wrote: > > > > On Mon, Mar 07, 2022 at 04:33:28PM [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  Hi, On Mon, Mar 7,
+ 2022 at 7:32 PM Randy Dunlap <rdunlap@infradead.org>
+ wrote: > > __setup() handlers should return 1 to indicate that the boot option
+ > has been handled. A return of 0 causes the boot opt [...] 
+ Content analysis details:   (-0.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.218.47 listed in list.dnswl.org]
+ no trust [209.85.167.44 listed in list.dnswl.org]
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.218.47 listed in wl.mailspike.net]
+ [209.85.167.44 listed in wl.mailspike.net]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -110,9 +111,11 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1nRcQx-008l4C-NS
-Subject: Re: [Kgdb-bugreport] [RFT v4] tty/sysrq: Make sysrq handler NMI
- aware
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1nRcRj-008l6l-RP
+Subject: Re: [Kgdb-bugreport] [PATCH] kgdboc: fix return value of __setup
+ handler
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -124,153 +127,88 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: hasegawa-hitomi@fujitsu.com, arnd@arndb.de, peterz@infradead.org,
- gregkh@linuxfoundation.org, linux-kernel@vger.kernel.org,
- linux-serial@vger.kernel.org, jason.wessel@windriver.com,
- kgdb-bugreport@lists.sourceforge.net, jirislaby@kernel.org
+Cc: Daniel Thompson <daniel.thompson@linaro.org>,
+ kgdb-bugreport@lists.sourceforge.net,
+ Jason Wessel <jason.wessel@windriver.com>, LKML <linux-kernel@vger.kernel.org>,
+ Igor Zhbanov <i.zhbanov@omprussia.ru>, linux-serial@vger.kernel.org,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Laura Abbott <labbott@redhat.com>, Jiri Slaby <jirislaby@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Tue, Mar 08, 2022 at 08:13:43PM +0530, Sumit Garg wrote:
-> Hi Daniel,
-> 
-> On Mon, 7 Mar 2022 at 19:53, Daniel Thompson <daniel.thompson@linaro.org> wrote:
-> >
-> > On Mon, Mar 07, 2022 at 04:33:28PM +0530, Sumit Garg wrote:
-> > > Allow a magic sysrq to be triggered from an NMI context. This is done
-> > > via marking some sysrq actions as NMI safe. Safe actions will be allowed
-> > > to run from NMI context whilst that cannot run from an NMI will be queued
-> > > as irq_work for later processing.
-> > >
-> > > <snip>
-> > >
-> > > @@ -566,12 +573,46 @@ static void __sysrq_put_key_op(int key, const struct sysrq_key_op *op_p)
-> > >               sysrq_key_table[i] = op_p;
-> > >  }
-> > >
-> > > +static atomic_t sysrq_key = ATOMIC_INIT(-1);
-> > > +
-> > > +static void sysrq_do_irq_work(struct irq_work *work)
-> > > +{
-> > > +     const struct sysrq_key_op *op_p;
-> > > +     int orig_suppress_printk;
-> > > +     int key = atomic_read(&sysrq_key);
-> > > +
-> > > +     orig_suppress_printk = suppress_printk;
-> > > +     suppress_printk = 0;
-> > > +
-> > > +     rcu_sysrq_start();
-> > > +     rcu_read_lock();
-> > > +
-> > > +     op_p = __sysrq_get_key_op(key);
-> > > +     if (op_p)
-> > > +             op_p->handler(key);
-> > > +
-> > > +     rcu_read_unlock();
-> > > +     rcu_sysrq_end();
-> > > +
-> > > +     suppress_printk = orig_suppress_printk;
-> > > +     atomic_set(&sysrq_key, -1);
-> > > +}
-> > > +
-> > > +static DEFINE_IRQ_WORK(sysrq_irq_work, sysrq_do_irq_work);
-> > > +
-> > >  void __handle_sysrq(int key, bool check_mask)
-> > >  {
-> > >       const struct sysrq_key_op *op_p;
-> > >       int orig_log_level;
-> > >       int orig_suppress_printk;
-> > >       int i;
-> > > +     bool irq_work = false;
-> > > +
-> > > +     /* Skip sysrq handling if one already in progress */
-> > > +     if (atomic_cmpxchg(&sysrq_key, -1, key) != -1) {
-> > > +             pr_warn("Skip sysrq key: %i as one already in progress\n", key);
-> > > +             return;
-> > > +     }
-> >
-> > Doesn't this logic needlessly jam sysrq handling if the irq_work cannot
-> > be undertaken?
-> >
-> 
-> Here this is done purposefully to ensure synchronisation of three
-> contexts while handling sysrq:
-> 1. Thread context
-> 2. IRQ context
-> 3. NMI context
+Hi,
 
-Why is it necessary to provide such synchronization?
+On Mon, Mar 7, 2022 at 7:32 PM Randy Dunlap <rdunlap@infradead.org> wrote:
+>
+> __setup() handlers should return 1 to indicate that the boot option
+> has been handled. A return of 0 causes the boot option/value to be
+> listed as an Unknown kernel parameter and added to init's (limited)
+> environment strings. So return 1 from kgdboc_option_setup().
 
-Also, if there really is an existing bug in the way thread and irq
-contexts interact (e.g. something we can tickle without NMI being
-involved) then that should probably be tackled in a separate patch
-and with an explanation of the synchronization problem.
+This took me about 20 minutes to trace through the code to confirm,
+but it appears you're correct. It's pretty twisted that early_param()
+and __setup(), both of which add things to the same list, work exactly
+opposite here. :( Any chance I could convince you to:
+
+1. Add a comment before the definition of __setup_param() explaining
+that 0 means error and 1 means no error. There's a comment next to
+early_param() that _implies_ that setup is the opposite(), but it'd be
+nice to see documentation of __setup(). I know __setup() is supposed
+to be "only for core code", but still seems like we could document it.
+
+2. Add something to your commit message helping someone find the place
+where the return value is checked. Basically just mention
+obsolete_checksetup() to give people a hint.
 
 
-> > A console user could unwittingly attempt an !nmi_safe SysRq action on
-> > a damaged system that cannot service interrupts. Logic that prevents
-> > things like backtrace, ftrace dump, kgdb or reboot is actively harmful
-> > to that user's capability to figure out why their original sysrq doesn't
-> > work.
-> 
-> I see your point.
-> 
-> >
-> > I think the logic to prohibht multiple deferred sysrqs should only
-> > be present on code paths where we are actually going to defer the sysrq.
-> >
-> 
-> It's not only there to prohibit multiple deferred sysrq (as that alone
-> could be handled by irq_work_queue()) but rather to avoid parallelism
-> scenarios that Doug mentioned on prior versions.
+> Unknown kernel command line parameters "BOOT_IMAGE=/boot/bzImage-517rc7
+>   kgdboc=kbd kgdbts=", will be passed to user space.
+>
+>  Run /sbin/init as init process
+>    with arguments:
+>      /sbin/init
+>    with environment:
+>      HOME=/
+>      TERM=linux
+>      BOOT_IMAGE=/boot/bzImage-517rc7
+>      kgdboc=kbd
+>      kgdbts=
+>
+> Fixes: 1cd25cbb2fed ("kgdboc: Fix warning with module build")
 
-I'm afraid I'm still a little lost here. I've only done a quick review
-but sysrq's entry/exit protocols look like they are intended to handle
-stacked contexts. This shouldn't be all that suprising since, even
-without your changes, a sysrq triggered by an irq will interrupt
-a sysrq triggered using /proc/sysrq-trigger .
+Are you certain about this "Fixes" line? That commit was just code
+motion to move the code inside the #ifdef. It sure looks like it was
+broken even before this.
 
 
-> How about the following add-on change to allow passthrough for broken
-> irq_work systems?
+> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
+> Reported-by: Igor Zhbanov <i.zhbanov@omprussia.ru>
+> Link: lore.kernel.org/r/64644a2f-4a20-bab3-1e15-3b2cdd0defe3@omprussia.ru
+> Cc: Laura Abbott <labbott@redhat.com>
+> Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+> Cc: Jiri Slaby <jirislaby@kernel.org>
+> Cc: kgdb-bugreport@lists.sourceforge.net
+> Cc: Jason Wessel <jason.wessel@windriver.com>
+> Cc: Daniel Thompson <daniel.thompson@linaro.org>
+> Cc: Douglas Anderson <dianders@chromium.org>
+> Cc: linux-serial@vger.kernel.org
+> ---
+>  drivers/tty/serial/kgdboc.c |    6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>
+> --- lnx-517-rc7.orig/drivers/tty/serial/kgdboc.c
+> +++ lnx-517-rc7/drivers/tty/serial/kgdboc.c
+> @@ -403,16 +403,16 @@ static int kgdboc_option_setup(char *opt
+>  {
+>         if (!opt) {
+>                 pr_err("config string not provided\n");
+> -               return -EINVAL;
+> +               return 1;
 
-My question ultimately boils down to whether the existing logic
-is necessary, not whether we can make it even more complex!
-
-So before thinking too much about this change I think it would be
-useful to have a clear example of the circumstances that you think
-it will not be safe to run an NMI-safe sysrq from an NMI.
-
-
-Daniel.
-
-
-> diff --git a/drivers/tty/sysrq.c b/drivers/tty/sysrq.c
-> index 005c9f9e0004..0a91d3ccf862 100644
-> --- a/drivers/tty/sysrq.c
-> +++ b/drivers/tty/sysrq.c
-> @@ -608,6 +608,15 @@ void __handle_sysrq(int key, bool check_mask)
->         int i;
->         bool irq_work = false;
-> 
-> +       /*
-> +        * Handle a case if irq_work cannot be undertaken on a damaged
-> +        * system stuck in hard lockup and cannot service interrupts.
-> +        * In such cases we shouldn't atleast block NMI safe handlers
-> +        * that doesn't depend on irq_work.
-> +        */
-> +       if (irq_work_is_pending(&sysrq_irq_work))
-> +               atomic_set(&sysrq_key, -1);
-> +
->         /* Skip sysrq handling if one already in progress */
->         if (atomic_cmpxchg(&sysrq_key, -1, key) != -1) {
->                 pr_warn("Skip sysrq key: %i as one already in progress\n", key);
-> 
-> -Sumit
-> 
-> >
-> > Daniel.
+Shouldn't it return 0 in the error cases? If __setup() functions are
+supposed to return "1" no matter what then what was the purpose of
+having a return value in the first place?
 
 
 _______________________________________________
