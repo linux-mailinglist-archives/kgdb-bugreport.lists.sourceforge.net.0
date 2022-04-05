@@ -2,17 +2,17 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CE4DA4F299B
+	by mail.lfdr.de (Postfix) with ESMTPS id D39654F299C
 	for <lists+kgdb-bugreport@lfdr.de>; Tue,  5 Apr 2022 11:48:09 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1nbfnF-0005VR-Ff
+	id 1nbffI-0007o0-LY
 	for lists+kgdb-bugreport@lfdr.de; Tue, 05 Apr 2022 09:48:08 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <gregkh@linuxfoundation.org>) id 1nbfnD-0005VK-DK
+ (envelope-from <gregkh@linuxfoundation.org>) id 1nbffG-0007nt-D4
  for kgdb-bugreport@lists.sourceforge.net; Tue, 05 Apr 2022 09:48:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
@@ -20,9 +20,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=BYVW6WX01lxbIlBplOlyTJrApec1zUPjthaqTo2XYY0=; b=kvix047FVEGS+rkpqztPvbEQjC
- 70d3HwDTW34OnnmxCRArfSRqxte01/q3V10LXHuZms2JAgbjQWmvfCGrixZGz9+3gBxZNjqW47t1Q
- cif/6mV3Z7tiOF9HYUEx75AhGUyT0/hJhmUaAuDw7Cj4PXRIFZLDPQ9thVFHB/cxFsB0=;
+ bh=1PpbyrusbJx5hmjQj8kcTk+6TaTz9XJ3G1h9pdgvEss=; b=hhM7Ok17hzSOrDpV7W8Un4xnmI
+ jr4MphEvpc/YuhcgjOveeqJPPh/TLYv1r3zhKDvX6oI7ocugOkHR+XgMXCPL1/VzTuZdm7riHRGtd
+ s4FyytQarMqCMvFJGM3/HgLuQBHP4eSrkmHcBpNGYeb+iiZZah2LKc7rxH1b+ccrw1lU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:MIME-Version:References:
@@ -30,32 +30,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=BYVW6WX01lxbIlBplOlyTJrApec1zUPjthaqTo2XYY0=; b=IOw59ZrWSRyFWjhtWlv0EdPypa
- m7lYRouEcomEzQJT13qvNsawo0tlEbpMEkTE0f31zJ5LDxGCRoz8PXR2YOY7xl8ZtfvIKLy+Kc/JP
- ZKUED5EW+M0eCrSeGF/5y4L8aVpg82qPjQfrp13YOMbskq83nSZW40lcXpIYMZ+RjEgg=;
-Received: from sin.source.kernel.org ([145.40.73.55])
+ bh=1PpbyrusbJx5hmjQj8kcTk+6TaTz9XJ3G1h9pdgvEss=; b=Laf3nTQks795/4xuE0YWMo16Qy
+ iA8ZZLZUeZrRn6BXhoPDZPi6zXW1ZvJgut1yRixAWvkiRHVIS8IdzsVH8U5BSR8MTuBDQGGd6jg8Q
+ siwaxLPIMMyV1Ep2nuXdrCXONNtsI027/O0GJTllT9ZqABKzH15t3nmutDEa3+9BSR+A=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nbfn4-0063Os-WF
+ id 1nbfn5-0063P5-AL
  for kgdb-bugreport@lists.sourceforge.net; Tue, 05 Apr 2022 09:48:05 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by sin.source.kernel.org (Postfix) with ESMTPS id DD6FFCE0B18;
- Tue,  5 Apr 2022 09:47:43 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C88E1C385A4;
- Tue,  5 Apr 2022 09:47:41 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id E0C46615E3;
+ Tue,  5 Apr 2022 09:47:53 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BFB1BC385A2;
+ Tue,  5 Apr 2022 09:47:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1649152062;
- bh=JCLM8YKiiHyma2HgpUKFb0VzrXsL8iLb6rFhuU6ooFw=;
+ s=korg; t=1649152073;
+ bh=pLIQlGkUzPkW36H+QN7RfbIl6w439D/LXITrrVw3+x8=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=gDLrJs9yDmKjWWg8xZlefRWACd68U8pXbjZnCwL3jpGka+8sPeYPDQ7r9pa+mrYgK
- E7vaaohmKJBRgNhaDLN62tWMuaDkFskC4HHPYMpgqfDJiWw1WDXLjWfS8uWvDlG1uC
- e9iKo5Opa9qrbbM9BKfswVHrcPeFQL9lyNnPtz2o=
+ b=ielukMC3bJP7GOPhRKt7LYaxhOjeANxHC0rumQqKecjWwqckC2hS6p0mzx29H9v82
+ YxW7nr2ZsB+vknV2Cx83x60U3VTucyKM41LJe4Z90c5+ZfKF+2vhWxZ4b7KrgDQJTl
+ +cOesVJO5PvD+zlyqYN4YFD4gOKfdpWQJKAVhncI=
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 To: linux-kernel@vger.kernel.org
-Date: Tue,  5 Apr 2022 09:28:23 +0200
-Message-Id: <20220405070359.054596577@linuxfoundation.org>
+Date: Tue,  5 Apr 2022 09:28:27 +0200
+Message-Id: <20220405070359.173490547@linuxfoundation.org>
 X-Mailer: git-send-email 2.35.1
 In-Reply-To: <20220405070339.801210740@linuxfoundation.org>
 References: <20220405070339.801210740@linuxfoundation.org>
@@ -69,13 +69,15 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview: From: Randy Dunlap <rdunlap@infradead.org> [ Upstream commit
- ab818c7aa7544bf8d2dd4bdf68878b17a02eb332 ] __setup() handlers should return
- 1 to obsolete_checksetup() in init/main.c to indicate that the boot option
- has been handled. A return of 0 causes the boot option/value to be listed
- as an Unknown kern [...] 
+ 96c9e802c64014a7716865332d732cc9c7f24593 ] __setup() handlers should return
+ 1 to indicate that the boot option has been handled. A return of 0 causes
+ the boot option/value to be listed as an Unknown kernel parameter and added
+ to init's (limite [...] 
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -85,11 +87,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.73.55 listed in list.dnswl.org]
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nbfn4-0063Os-WF
-Subject: [Kgdb-bugreport] [PATCH 5.15 641/913] kgdboc: fix return value of
+X-Headers-End: 1nbfn5-0063P5-AL
+Subject: [Kgdb-bugreport] [PATCH 5.15 645/913] kgdbts: fix return value of
  __setup handler
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -103,24 +103,23 @@ List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
 Cc: Sasha Levin <sashal@kernel.org>,
- Daniel Thompson <daniel.thompson@linaro.org>, He Zhe <zhe.he@windriver.com>,
+ Daniel Thompson <daniel.thompson@linaro.org>, Arnd Bergmann <arnd@arndb.de>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>, stable@vger.kernel.org,
- Igor Zhbanov <i.zhbanov@omprussia.ru>, linux-serial@vger.kernel.org,
+ Igor Zhbanov <i.zhbanov@omprussia.ru>,
  Jason Wessel <jason.wessel@windriver.com>,
- kgdb-bugreport@lists.sourceforge.net, Jiri Slaby <jirislaby@kernel.org>
+ kgdb-bugreport@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
 From: Randy Dunlap <rdunlap@infradead.org>
 
-[ Upstream commit ab818c7aa7544bf8d2dd4bdf68878b17a02eb332 ]
+[ Upstream commit 96c9e802c64014a7716865332d732cc9c7f24593 ]
 
-__setup() handlers should return 1 to obsolete_checksetup() in
-init/main.c to indicate that the boot option has been handled.
-A return of 0 causes the boot option/value to be listed as an Unknown
-kernel parameter and added to init's (limited) environment strings.
-So return 1 from kgdboc_option_setup().
+__setup() handlers should return 1 to indicate that the boot option
+has been handled. A return of 0 causes the boot option/value to be
+listed as an Unknown kernel parameter and added to init's (limited)
+environment strings. So return 1 from kgdbts_option_setup().
 
 Unknown kernel command line parameters "BOOT_IMAGE=/boot/bzImage-517rc7
   kgdboc=kbd kgdbts=", will be passed to user space.
@@ -136,50 +135,40 @@ Unknown kernel command line parameters "BOOT_IMAGE=/boot/bzImage-517rc7
      kgdbts=
 
 Link: lore.kernel.org/r/64644a2f-4a20-bab3-1e15-3b2cdd0defe3@omprussia.ru
-Fixes: 1bd54d851f50 ("kgdboc: Passing ekgdboc to command line causes panic")
-Fixes: f2d937f3bf00 ("consoles: polling support, kgdboc")
-Cc: He Zhe <zhe.he@windriver.com>
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc: Jiri Slaby <jirislaby@kernel.org>
+Fixes: e8d31c204e36 ("kgdb: add kgdb internal test suite")
 Cc: kgdb-bugreport@lists.sourceforge.net
 Cc: Jason Wessel <jason.wessel@windriver.com>
 Cc: Daniel Thompson <daniel.thompson@linaro.org>
 Cc: Douglas Anderson <dianders@chromium.org>
-Cc: linux-serial@vger.kernel.org
+Cc: Arnd Bergmann <arnd@arndb.de>
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 Reported-by: Igor Zhbanov <i.zhbanov@omprussia.ru>
 Reviewed-by: Douglas Anderson <dianders@chromium.org>
 Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
-Link: https://lore.kernel.org/r/20220309033018.17936-1-rdunlap@infradead.org
+Link: https://lore.kernel.org/r/20220308033255.22118-1-rdunlap@infradead.org
 Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- drivers/tty/serial/kgdboc.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ drivers/misc/kgdbts.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/tty/serial/kgdboc.c b/drivers/tty/serial/kgdboc.c
-index 49d0c7f2b29b..79b7db8580e0 100644
---- a/drivers/tty/serial/kgdboc.c
-+++ b/drivers/tty/serial/kgdboc.c
-@@ -403,16 +403,16 @@ static int kgdboc_option_setup(char *opt)
+diff --git a/drivers/misc/kgdbts.c b/drivers/misc/kgdbts.c
+index 67c5b452dd35..88b91ad8e541 100644
+--- a/drivers/misc/kgdbts.c
++++ b/drivers/misc/kgdbts.c
+@@ -1070,10 +1070,10 @@ static int kgdbts_option_setup(char *opt)
  {
- 	if (!opt) {
- 		pr_err("config string not provided\n");
--		return -EINVAL;
-+		return 1;
- 	}
- 
  	if (strlen(opt) >= MAX_CONFIG_LEN) {
- 		pr_err("config string too long\n");
+ 		printk(KERN_ERR "kgdbts: config string too long\n");
 -		return -ENOSPC;
 +		return 1;
  	}
  	strcpy(config, opt);
- 
 -	return 0;
 +	return 1;
  }
  
- __setup("kgdboc=", kgdboc_option_setup);
+ __setup("kgdbts=", kgdbts_option_setup);
 -- 
 2.34.1
 
