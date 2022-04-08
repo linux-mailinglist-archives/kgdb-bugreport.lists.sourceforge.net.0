@@ -2,118 +2,106 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 05AAA4F96B8
-	for <lists+kgdb-bugreport@lfdr.de>; Fri,  8 Apr 2022 15:33:00 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 28F674F97EF
+	for <lists+kgdb-bugreport@lfdr.de>; Fri,  8 Apr 2022 16:22:54 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1ncojU-0008HH-04
-	for lists+kgdb-bugreport@lfdr.de; Fri, 08 Apr 2022 13:32:58 +0000
+	id 1ncpVl-0002GT-HB
+	for lists+kgdb-bugreport@lfdr.de; Fri, 08 Apr 2022 14:22:52 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <daniel.thompson@linaro.org>) id 1ncojT-0008HB-0v
- for kgdb-bugreport@lists.sourceforge.net; Fri, 08 Apr 2022 13:32:57 +0000
+ (envelope-from <arnd@arndb.de>) id 1ncpVj-0002G7-ME
+ for kgdb-bugreport@lists.sourceforge.net; Fri, 08 Apr 2022 14:22:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=pDC9L0lcr1QHf8qfh13ooZQp7CHb5z3+opmiIbCpO5g=; b=aJFI+H2fAiNGUEC2G4aDsuMKkp
- ty6QlIu3tyuGgPTk97sbHi6JIhezyZC90+sbYmFunpu34O0p6Z1xwN9b42FyAFrLp4u5vSehLCDMO
- 8vTUNKMzaFVK1TU9c3ky4MLQzjjdIOFt7oAKx+oTWMeIWPJxOFL5OKgUIbnLA7GTGEp4=;
+ bh=BQzT3P6RYSKNw1efg20ycxE2OU+qNj45a1JDzvWikZ8=; b=BHCtCn38Nup00OsR7QYOk8jn8O
+ jJudZ5YuhFmTIIR8Rtt40RO5aYZhguUPwM3u2P5fuCE08SrhPsSrtcwT9QeqdvAC9bmlsDxEh4EMc
+ tiplNQVmwih1Q5EFfBrYFhzen0V1F85S31UFCSo90/dZYG1QqAMX6hHeodC6iNMC5xlA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=pDC9L0lcr1QHf8qfh13ooZQp7CHb5z3+opmiIbCpO5g=; b=D01dN5M+ggkA2DMs0+ijXYLbYa
- srwDPX0p9JhM3fHK5swYE3NS1wJk4627XLQz9WeO27ecWO4ksDvZtiIeS9XqmjFKUhmG17Cp4je6l
- nQR9uejfjn7MwoXTiym1sgoOSQt0Y3dN8EKIGMRQk9TGj93z7M8HKCsTb6QeLkO3nWYs=;
-Received: from mail-wm1-f51.google.com ([209.85.128.51])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1ncojP-009nwz-36
- for kgdb-bugreport@lists.sourceforge.net; Fri, 08 Apr 2022 13:32:57 +0000
-Received: by mail-wm1-f51.google.com with SMTP id
- i6-20020a1c3b06000000b0038e710da2dcso7599857wma.1
+ bh=BQzT3P6RYSKNw1efg20ycxE2OU+qNj45a1JDzvWikZ8=; b=L2R1pZjayaftXLMjls8AceB2hM
+ +kQEiNdC5ktG8j/AV7HlMD4CJetj5Kwl81QVtvu22UeL3bVlDGmKnkkO+OmU10m3wt57ZfVaA/IB/
+ PhLwvxpEIDpta17lMybZf7eUqzzhT3aIjRG0enzC+d6vT+7Php1Y7tHAX1SuYqra61hE=;
+Received: from mout.kundenserver.de ([217.72.192.73])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
+ id 1ncpVh-00027U-Ke
+ for kgdb-bugreport@lists.sourceforge.net; Fri, 08 Apr 2022 14:22:50 +0000
+Received: from mail-wr1-f53.google.com ([209.85.221.53]) by
+ mrelayeu.kundenserver.de (mreue107 [213.165.67.113]) with ESMTPSA (Nemesis)
+ id 1MBmI6-1noyUz0DnQ-00C94F for <kgdb-bugreport@lists.sourceforge.net>; Fri,
+ 08 Apr 2022 16:17:33 +0200
+Received: by mail-wr1-f53.google.com with SMTP id b19so13044005wrh.11
  for <kgdb-bugreport@lists.sourceforge.net>;
- Fri, 08 Apr 2022 06:32:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=pDC9L0lcr1QHf8qfh13ooZQp7CHb5z3+opmiIbCpO5g=;
- b=jmrr9ES2B8XWO03NQZzQI4F2KKQwsDwVsKRsbWp63khlAKSkmi9C+eilQOfzSCKath
- b3no7GA5N4PEoy7SBC5oRO6EjCTlned/SX99tuyEsBpExUCpvQy48bLQ5u/Ei8+f7+70
- JjoSwIq3ChdypUMSjHJMZXtPDo6LBN4VWGLzEibGOseVKZTsmd8rOjKDQID9fcDLqQLJ
- NDZUZYPMPUPPbnyc0e1+Kc+f3IMnC7PXOXkmbrtOHF4HITAHh0MbxX93nNvzfRQLYfBj
- JRUU1LkEyrPi6gVeOgj1vX501pObHoK8SRG8vDH2evWMkgLQFKGNabXNKtnXXbfryVtb
- 7B1w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=pDC9L0lcr1QHf8qfh13ooZQp7CHb5z3+opmiIbCpO5g=;
- b=8D3H54DmHpMcbtN8Pw9si25thRG6eARZb9g7I2fFmY4czy6ioNTC22y2Edp7rgZwDV
- Zni9ylkfxJEnsLFdN5EFsFH1tyboS5oAq8I1f/B1brzT7xRLMuQtRFZ7HVvQFTyvvBoD
- 5ag3VGmKTrRibDIwFAd+p1tm2wdf39ssSXmz9uTe+td3FNJLsYoEcy5Un77EttupSp97
- 6ox4B9w78jMip25wxpfXNO/1O3udUxgxiuJfnqzahJy27RIlC96N4FLrO35qdKqIXp+t
- 3/nAyTTDyMxbWoSiwh+VVQPjkKWYJY/Z0ycXBnsBtwDCeLno5DYNzU6rFINMiQnJGUW3
- CX5Q==
-X-Gm-Message-State: AOAM532fCbmT6b6oYuPJ0ngOGs2UPoKjxyNpwqT58SqVr2psWvDxhxAs
- uk3uqEORusyhqSR5BbjSAHaXbw==
-X-Google-Smtp-Source: ABdhPJyeiw4bwAQfXU133L8POlyN9oSdy3Td0K/5lQO2DSbqQQ73iq/K4PM/64Hhgx/RD0NCcuI3hQ==
-X-Received: by 2002:a05:600c:34c5:b0:38c:30e3:1e6c with SMTP id
- d5-20020a05600c34c500b0038c30e31e6cmr17255479wmq.144.1649424768622; 
- Fri, 08 Apr 2022 06:32:48 -0700 (PDT)
-Received: from maple.lan (cpc141216-aztw34-2-0-cust174.18-1.cable.virginm.net.
- [80.7.220.175]) by smtp.gmail.com with ESMTPSA id
- v26-20020a1cf71a000000b0038ea373273bsm1707695wmh.47.2022.04.08.06.32.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 Apr 2022 06:32:48 -0700 (PDT)
-Date: Fri, 8 Apr 2022 14:32:46 +0100
-From: Daniel Thompson <daniel.thompson@linaro.org>
-To: Arnd Bergmann <arnd@arndb.de>
-Message-ID: <20220408133246.fyw5554lgli4olvg@maple.lan>
+ Fri, 08 Apr 2022 07:17:32 -0700 (PDT)
+X-Gm-Message-State: AOAM532+kAwFghRbxKIiVKZGmUhV0AtTVgTCvbkeJBYAOOdf3GXHThDw
+ R7BZtnbTeaBaVxrDowDh5s22WNsdzd7nuGpGaug=
+X-Google-Smtp-Source: ABdhPJyRvLylYLoRuY6841KYpUytqXI11HqBYxQTS325hyru8pYNuf4xphTlAZhMdkzDaG6t0dxOMOlKEQOVIRLpsBk=
+X-Received: by 2002:a05:6000:178c:b0:204:648:b4c4 with SMTP id
+ e12-20020a056000178c00b002040648b4c4mr14524137wrg.219.1649427452724; Fri, 08
+ Apr 2022 07:17:32 -0700 (PDT)
+MIME-Version: 1.0
 References: <20220331092235.3000787-1-hasegawa-hitomi@fujitsu.com>
  <20220331092235.3000787-2-hasegawa-hitomi@fujitsu.com>
  <YkWVTEG5oFO82GPL@kroah.com>
  <CAK8P3a0jnzse4sG58taO5+Yd5vCgh1uddqbtAuim_z9r15Q3BA@mail.gmail.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAK8P3a0jnzse4sG58taO5+Yd5vCgh1uddqbtAuim_z9r15Q3BA@mail.gmail.com>
-X-Spam-Score: -0.2 (/)
+ <20220408133246.fyw5554lgli4olvg@maple.lan>
+In-Reply-To: <20220408133246.fyw5554lgli4olvg@maple.lan>
+From: Arnd Bergmann <arnd@arndb.de>
+Date: Fri, 8 Apr 2022 16:17:16 +0200
+X-Gmail-Original-Message-ID: <CAK8P3a0u2xa9BFmakG+f4kyLsqNZQbE6KQ6jz2356Fyen=1EHw@mail.gmail.com>
+Message-ID: <CAK8P3a0u2xa9BFmakG+f4kyLsqNZQbE6KQ6jz2356Fyen=1EHw@mail.gmail.com>
+To: Daniel Thompson <daniel.thompson@linaro.org>
+X-Provags-ID: V03:K1:l+Tunj5nnRx9bCGjJqm2RxLq9IELTU/624oLgcJHl2Ss4txqB/9
+ XYTiWLwTdhMq8e6LlBByyY3eExBu3dqfERgAnEtNGQG30VJ72RgKCpe/95sopSwzp51117e
+ ZPGHhY4XbjhA+q9ri0PxTa8A70Q3q+XhJcq7b8MFCQvjfD7m/m81ubiibucoAk7e6bubdpb
+ JuachzdGcgSf9Yt3j8KfA==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:3W4QVJYtIUg=:Er2FewaK0imS60ZSGCvJEH
+ vg9RDc48lGeg51RIMOJ51bHJRYXXSCdjoJs7Jn7PZnbO+oVM0Q9fPuFWzEBf5oE19Uo/5+pIg
+ uXTfIaBB5THBA3b0mRRYeswZRMHH0g2M9IgVEpt8rHkzsr2IoUsZrj4WP1y5X4xJD9sbkcLcn
+ 4RSGx5C8wRkX5HU1D3W6xQJXlOF3XdMFsT6jiQ2pGEX1NBe9NVisAWpAPb1VANKS83G19rA0H
+ hWDj6ZigNBFwJIOT4bmVu/wKjQ5aE80QsSefgeoE1Kz0GZVxxioug3ratm8EK7nQXJtjmZljm
+ CFtgZ7bACKXpSm6fRQRdMTaUhAhcqaG3jjGCUvPVCGNzPSRfqP4o5kcY6IBodeuffu5wCfk5T
+ vk02RTx1DFhtAgPWoqn9PtFEeEqsdYeBnPG6K0vO9hHkDrPymI//B7Q/1lTTpsi2hpo7cvlcr
+ LTpHhEQFTNlC3xtYdHVRwjw6NHDFJbK57AeMH4/7QDoTL9kJ/sr8GCkA812+G72SEwmHQdKO4
+ VivLcw3d4XbZIoJEwu1V0DkSdHMUhIn8KPRAWENsvrDX3hLx/BEcPABH0uXCvrgE1Ee4NHplG
+ 5N8cw5IG1p6Xm0e+4YrJPqh461bQecurjja/NU9ZvQ3LctICuVi/Zsirn9KBCvKnupDiZutZK
+ EEVqKKOBvzV3QbSc59BoUO8SSbj44yw0cNeMbFprQ2WJYTa5yO26NEvpGqkdhyc2gDK8=
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Mar 31, 2022 at 05:44:55PM +0200,
- Arnd Bergmann wrote:
- > On Thu, Mar 31, 2022 at 1:49 PM Greg KH <gregkh@linuxfoundation.org> wrote:
- > > > + > > > +static irqreturn_t a64fx_diag_handler(int ir [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  On Fri, Apr 8,
+ 2022 at 3:32 PM Daniel Thompson <daniel.thompson@linaro.org>
+ wrote: > On Thu, Mar 31, 2022 at 05:44:55PM +0200, Arnd Bergmann wrote: >
+ > There is some prior art for this sort of feature [...] 
+ Content analysis details:   (-0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.128.51 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.128.51 listed in wl.mailspike.net]
+ no trust [217.72.192.73 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [217.72.192.73 listed in wl.mailspike.net]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1ncojP-009nwz-36
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1ncpVh-00027U-Ke
 Subject: Re: [Kgdb-bugreport] [PATCH v3 1/1] soc: fujitsu: Add A64FX
  diagnostic interrupt driver
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
@@ -128,57 +116,36 @@ List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
 Cc: Hitomi Hasegawa <hasegawa-hitomi@fujitsu.com>,
- kgdb-bugreport@lists.sourceforge.net, Jiri Slaby <jirislaby@kernel.org>,
+ kgdb-bugreport@lists.sourceforge.net, Arnd Bergmann <arnd@arndb.de>,
  Peter Zijlstra <peterz@infradead.org>, Greg KH <gregkh@linuxfoundation.org>,
  Jason Wessel <jason.wessel@windriver.com>,
  Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
  Mike Travis <mike.travis@hpe.com>, SoC Team <soc@kernel.org>,
  "open list:SERIAL DRIVERS" <linux-serial@vger.kernel.org>,
  Catalin Marinas <catalin.marinas@arm.com>, Olof Johansson <olof@lixom.net>,
- Will Deacon <will@kernel.org>,
+ Jiri Slaby <jirislaby@kernel.org>, Will Deacon <will@kernel.org>,
  Linux ARM <linux-arm-kernel@lists.infradead.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Thu, Mar 31, 2022 at 05:44:55PM +0200, Arnd Bergmann wrote:
-> On Thu, Mar 31, 2022 at 1:49 PM Greg KH <gregkh@linuxfoundation.org> wrote:
-> > > +
-> > > +static irqreturn_t a64fx_diag_handler(int irq, void *dev_id)
-> > > +{
-> > > +     handle_sysrq('c');
-> >
-> >
-> > Why is this calling this sysrq call?  From an interrupt?  Why?
-> >
-> > And you are hard-coding "c", are you sure?
-> 
-> This is an actual sysrq driver in the traditional sense, where you can send
-> a single interrupt to the machine from the outside over a side channel.
-> 
-> I suggested sysrq instead of just panic() to make it a bit more flexible.
-> Unfortunately there is no additional data, so it comes down to always
-> sending the same character.
-> 
-> It would be possible to make that character configurable with a module
-> parameter or something like that, but I'm not sure that is an improvement.
-> Maybe you have another idea for this.
+On Fri, Apr 8, 2022 at 3:32 PM Daniel Thompson
+<daniel.thompson@linaro.org> wrote:
+> On Thu, Mar 31, 2022 at 05:44:55PM +0200, Arnd Bergmann wrote:
+>
+> There is some prior art for this sort of feature. AFAICT SGI UV has a
+> similar mechanism that can send an NMI-with-no-side-channel to the
+> kernel. The corresponding driver offers a range of actions using a
+> module parameter:
+> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/platform/uv/uv_nmi.c#n180
+>
+> I don't think a hardcoded 'c' makes any sense. With a hardcoded argument
+> it is just obfuscation. However it is certainly seems attractive to be
+> able to reuse handle_sysrq() to provide a more powerful set of actions.
 
-Given the interrupt can be dismissed then offering non-fatal actions in
-response the chassis command seems reasonable.
+How about a module parameter that allows picking a sysrq character then?
 
-There is some prior art for this sort of feature. AFAICT SGI UV has a
-similar mechanism that can send an NMI-with-no-side-channel to the
-kernel. The corresponding driver offers a range of actions using a
-module parameter:
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/platform/uv/uv_nmi.c#n180
-
-I don't think a hardcoded 'c' makes any sense. With a hardcoded argument
-it is just obfuscation. However it is certainly seems attractive to be
-able to reuse handle_sysrq() to provide a more powerful set of actions.
-
-
-Daniel.
+        Arnd
 
 
 _______________________________________________
