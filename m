@@ -2,201 +2,111 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6FDE3529E8B
-	for <lists+kgdb-bugreport@lfdr.de>; Tue, 17 May 2022 11:55:07 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id DCEFA52EE95
+	for <lists+kgdb-bugreport@lfdr.de>; Fri, 20 May 2022 16:59:51 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1nqtv1-0003Ta-GI
-	for lists+kgdb-bugreport@lfdr.de; Tue, 17 May 2022 09:55:06 +0000
+	id 1ns46Y-00022s-2O
+	for lists+kgdb-bugreport@lfdr.de; Fri, 20 May 2022 14:59:50 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <hasegawa-hitomi@fujitsu.com>) id 1nqtv0-0003TT-KH
- for kgdb-bugreport@lists.sourceforge.net; Tue, 17 May 2022 09:55:05 +0000
+ (envelope-from <jirislaby@gmail.com>) id 1nog8k-0004fI-ON
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 11 May 2022 06:48:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ltIx7NwlEkYvxV4ogDfxJsnqbp2/U0+BMpm3L8hmtB4=; b=lZOBwNoggNApdozBeymIMMGMoy
- WkgpCrPW5XPqu1eEYSMtcsSbwIZP/zaBenrxcAQlwAqJfur5fz73G3fzl1UhztcXbEiA+/DY0Dk8u
- xmwU4lhp5iSijJoHHwTx4apG3iimuREFOiF1h7IgiHVBSQtmJjovN233jgbGhSf/2Nvk=;
+ bh=d0+VSEkVTN5UKp/1tlZfodLf5D5A+zx04J2EOUOCF00=; b=VjJCxb6C2nMDqmNQXW49jmue+U
+ RRzRtXrc7ZSFpuvnLfDqj7z5J6z9X0ElV4p2IictBuZDyQW5IlaZeo59TPIjMyQZnBSEAD+B+N6FC
+ v55QVyccBPfa1NeYweCEtFU8ptU7e78zEK6kd99SzgYRWT5PJNqMUcJHM1HVbBxI/kZs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:In-Reply-To:
- References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ltIx7NwlEkYvxV4ogDfxJsnqbp2/U0+BMpm3L8hmtB4=; b=ZKVXvPlQohF7vrilQWtPS/cuWz
- qPK9WCXFU2qlhjiMvnyxlAeRMIMl4KPNTg09cktcOBDZ0t5hdqctdO1yzh5zNi1Br+SUnNR6uOH/I
- D8H5POYGDpIKGPo3YYfegafm2+alNskMH1VfoDSKAvQZfb4pA9wTsYrULJUCaGIzH4Ok=;
-Received: from esa4.fujitsucc.c3s2.iphmx.com ([68.232.151.214])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nqtur-0002IG-Gl
- for kgdb-bugreport@lists.sourceforge.net; Tue, 17 May 2022 09:55:04 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj1;
- t=1652781297; x=1684317297;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-transfer-encoding:mime-version;
- bh=UjdwZFDdFj0VdUcJ8DlUE5pA4fADB4mYqHDJBDDT0yU=;
- b=JZeMAVn5fnP3OcggPjDALATTioojnbPG7ScbN3ZtQ6u99fRQyIO7JrYa
- 20He+/7zQ2pA8h95B3Qb1y2AmJeE6ffoLhY6spmS7Age6NQ63Zf4QDjSD
- dfbSpcDJcvDdVcJZP22KDdsGN4lcLazVfe7pwJuhbP7/1Qqni9o3v2pZF
- 1VHR3Wo3gscY6sUuOAYMdA3O41papaLfQO+Y99FbZKNNazkIvqLZzht7y
- U8nwZiL2TtDLYowKW4gkz+K2VuvGILcaT5WrKmUFvE154Bh8l4I1Gfav0
- xwds54KX94j1Da6VErn6xIU5HTJG47y3URPerYMJdVdpOlh+9NXbeg++E g==;
-X-IronPort-AV: E=McAfee;i="6400,9594,10349"; a="63856273"
-X-IronPort-AV: E=Sophos;i="5.91,232,1647270000"; d="scan'208";a="63856273"
-Received: from mail-tycjpn01lp2175.outbound.protection.outlook.com (HELO
- JPN01-TYC-obe.outbound.protection.outlook.com) ([104.47.23.175])
- by ob1.fujitsucc.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 17 May 2022 18:54:47 +0900
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=IEQL565kXnxGJ8KQU+MW6BfdzN5o5T6XbF5YiemjzcM1rP96SIXjGmxH4mHPSUizknjwta1IcMvUxkgcNyKTJo9C5Epg8sDxFDTUkv72pG6SUyechA87mkKnWU7MjSceYh4he7SlKPiqVN+m15r1OeSO9dRrERUaZJ5kzo3175cns5E+VLgv7kMgIGUcQDajP89Rg5VYHyB48FXC8kiOBjS88mSEjIOYJXQfqFqMdrIK/kEaTjcW936tQhru815sPasyHAlmlAkQ+rlIhNxwX08OyxGE61AE2byZBYTsz1qVfDXsqtS2VPrtSjN2hsiiA97aYw+Ukpjfne9Af0Twpg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ltIx7NwlEkYvxV4ogDfxJsnqbp2/U0+BMpm3L8hmtB4=;
- b=Ikx49giO+M7t3V6Kq5uoByg659QNiIraIdsbGsfw+ZPKRGfCrfHTkuRE3sIL6XXfLzZn059amOKoKePgMMegoorq+mtXLloI7K1cRCSto4yoUimJMucLj/Lz+7vV+CqANyG0MrkmfUPL+RmCkJK5oSCHjBUmGj8pnVpMTaTYor/EtGhB40v1U3SLHLYL6iNmWks+rzBL2K1VFXZwojq70LUWTGSPhkjExm/L686CqC58AgZfdlinzbQvoNcvM/lsrot/XbJq3ijhqyO6QE/KwIU0g8hitqmyrRUt0fDE5E6I3zT/yRCFEvOsDjsJXUU61AUUEyTCzeps7cRbBnLyYw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=fujitsu.com; dmarc=pass action=none header.from=fujitsu.com;
- dkim=pass header.d=fujitsu.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=fujitsu.onmicrosoft.com; s=selector2-fujitsu-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ltIx7NwlEkYvxV4ogDfxJsnqbp2/U0+BMpm3L8hmtB4=;
- b=hjNhRyJk9dbaquorSKY596irp21Rdk5OQu9A4jCYwTv4JS/zVcOfLcckBQKHXoZLi0c9BuYBs0UX8avcw7w3k0n3no9O634TRZYQykgIX9Y/M7yIQeO9azbfLW72OxQ4elcyCCAu6TqegZrwdlM9c4J/Ip6gEUOeKMoCfY5aUSI=
-Received: from OSZPR01MB7050.jpnprd01.prod.outlook.com (2603:1096:604:13e::5)
- by TYAPR01MB5087.jpnprd01.prod.outlook.com (2603:1096:404:12f::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5250.16; Tue, 17 May
- 2022 09:54:43 +0000
-Received: from OSZPR01MB7050.jpnprd01.prod.outlook.com
- ([fe80::9d45:c509:9a59:4892]) by OSZPR01MB7050.jpnprd01.prod.outlook.com
- ([fe80::9d45:c509:9a59:4892%8]) with mapi id 15.20.5250.018; Tue, 17 May 2022
- 09:54:43 +0000
-From: "hasegawa-hitomi@fujitsu.com" <hasegawa-hitomi@fujitsu.com>
-To: Greg KH <gregkh@linuxfoundation.org>
-Thread-Topic: [PATCH v4 1/1] soc: fujitsu: Add A64FX diagnostic interrupt
- driver
-Thread-Index: AQHYZP9hMqXNlfDlg0S66tEsssG4aK0ZPLSAgAmfR10=
-Date: Tue, 17 May 2022 09:54:43 +0000
-Message-ID: <OSZPR01MB7050F695478F22E864E24411EBCE9@OSZPR01MB7050.jpnprd01.prod.outlook.com>
+ bh=d0+VSEkVTN5UKp/1tlZfodLf5D5A+zx04J2EOUOCF00=; b=dJhu+8YKNyt2Kefgvvy7cS8VCz
+ XB45+2iAM6sWyhmNW9AfkzQyN0gQXhUJYbLR2B65QF7fBTF4MiNiQQrGi9X05mBDx1QbOiqOnxeG3
+ K51bF360xEtKOMZfn2TWs6xyIXgD+Z+EcIMbk2f5Yt0fZoJKzETcvP+H6LQJ16qzPv0g=;
+Received: from mail-wm1-f46.google.com ([209.85.128.46])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
+ id 1nog8d-008Xw9-QN
+ for kgdb-bugreport@lists.sourceforge.net; Wed, 11 May 2022 06:48:05 +0000
+Received: by mail-wm1-f46.google.com with SMTP id k126so605083wme.2
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Tue, 10 May 2022 23:47:59 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+ :content-language:to:cc:references:from:in-reply-to
+ :content-transfer-encoding;
+ bh=d0+VSEkVTN5UKp/1tlZfodLf5D5A+zx04J2EOUOCF00=;
+ b=loJf73Zn3QXp08oaN9nEudWUN/1gmK23eZvQL8+lH1AHhuAhApDSzfNGZ53i4uwHPH
+ wMy9eGsdQ6nSVOGfvwxTOQg5ckkU8WhSwCsJNpkLgDr9oQjS0VPnd2cg9lIxhdVxMFdL
+ joz0OD6kyyNWe3ftQsqavY1hjkfTBi7JcVBp9NBQfj4rRC4DAHtaVu0lYSP/T+nHGLcH
+ XDR3FOygj7I8z/zdEk2iQf0fth0eA6HZZtzRxj1R0F2XA/kyXK70e77YTqUYmjVARUs9
+ /jUmbDEFsTN781XuEQzHz4FKg4ulPFP21unkLYiRj7ChcpW6fQ5yjuyzE10MQ8aVjihI
+ D1pw==
+X-Gm-Message-State: AOAM532lUm1WqHJ7bWLjj8zrLpdt7AHIVzR21yL5GCKnPUG84CJQdV4P
+ Y3l3PMMWfTEiD1hql25JkY0=
+X-Google-Smtp-Source: ABdhPJzpnoc2OQxaCLNzOlLY2Q6PMGILiG41ZK3gGqRANQoSQNuIjjpR7zhzwOg/QpERIZ7XiCnJ5Q==
+X-Received: by 2002:a05:600c:6021:b0:394:56be:18e with SMTP id
+ az33-20020a05600c602100b0039456be018emr3207844wmb.86.1652251672631; 
+ Tue, 10 May 2022 23:47:52 -0700 (PDT)
+Received: from ?IPV6:2a0b:e7c0:0:107::70f? ([2a0b:e7c0:0:107::70f])
+ by smtp.gmail.com with ESMTPSA id
+ m36-20020a05600c3b2400b003942a244edbsm1446971wms.32.2022.05.10.23.47.51
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 10 May 2022 23:47:52 -0700 (PDT)
+Message-ID: <48cfa0b3-0424-81bd-ac6a-d631184b71b7@kernel.org>
+Date: Wed, 11 May 2022 08:47:50 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.8.1
+Content-Language: en-US
+To: Hitomi Hasegawa <hasegawa-hitomi@fujitsu.com>,
+ linux-arm-kernel@lists.infradead.org, soc@kernel.org,
+ linux-serial@vger.kernel.org, sumit.garg@linaro.org
 References: <20220511062113.2645747-1-hasegawa-hitomi@fujitsu.com>
  <20220511062113.2645747-2-hasegawa-hitomi@fujitsu.com>
- <Yntcn4esjJRS50Am@kroah.com>
-In-Reply-To: <Yntcn4esjJRS50Am@kroah.com>
-Accept-Language: ja-JP, en-US
-Content-Language: ja-JP
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: MSIP_Label_a7295cc1-d279-42ac-ab4d-3b0f4fece050_Enabled=True;
- MSIP_Label_a7295cc1-d279-42ac-ab4d-3b0f4fece050_SiteId=a19f121d-81e1-4858-a9d8-736e267fd4c7;
- MSIP_Label_a7295cc1-d279-42ac-ab4d-3b0f4fece050_SetDate=2022-05-17T09:54:43.408Z;
- MSIP_Label_a7295cc1-d279-42ac-ab4d-3b0f4fece050_Name=FUJITSU-RESTRICTED;
- MSIP_Label_a7295cc1-d279-42ac-ab4d-3b0f4fece050_ContentBits=0;
- MSIP_Label_a7295cc1-d279-42ac-ab4d-3b0f4fece050_Method=Standard; 
-suggested_attachment_session_id: 17a99957-017a-8023-360d-ef95dd29bbfa
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=fujitsu.com;
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 472fe320-470f-4618-4f54-08da37eb44df
-x-ms-traffictypediagnostic: TYAPR01MB5087:EE_
-x-microsoft-antispam-prvs: <TYAPR01MB50873C9454C4B6AC75DFBA36EBCE9@TYAPR01MB5087.jpnprd01.prod.outlook.com>
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: xQOSonZ50Hae/ALdmWRftb8bLzy6dCkpGX5n1deJzy+NiOqNsVRADrrb3e+8z3QpYavHYWuav3zQef6TdCwcKAe5fCIXkikWMOo6r8kepwd/f3LqsSpEEkanFexxyK3GnpJwHyCWZzmflOhqfIQxAjz7VWjlfL7ZKQKdKdmO4QdHjcHZAx2HMf/xeOuwroVFUvqIw+ZECGVeqdEMUlbCVoYzg6mei0oa5pMZwz7qnufbmvdE3WrNHZEQXO332f8N1WHtzplDCntlI3n+jSsgNT+UMwvzTAbHVwgQLJeOBucf269JeTJk4vUlrEkmzMmq+PZhcFk8golPXCG/dHz2w23cpFvfik0nr4kb/H3pIHQGoxd1gqOMnAuakr3p51rbv2xMiD6jmXLg1GseGiiBOito10z5CGCqoLSeDT0GysF3eE9kLXlpLbqM0DGFkPWj5kCgyxCzXf+WfNzmRlDFG+SgRQXZYlcgT9OYTxyxKcipDgV1PN0zWrIiemk9IC9vtwu/3k7AxOSljBdIYEDXrazfeVq39Z0/g2nflRPEleGncIsEWD71ByJyfcbav4Wmv8LwCr6TNnBZPAVUvEiy6mSxHI2NgNOfsiMg4n5zbxF5dcQSjasduFqJqWh3BjOVd1W1raCSdEUdGVYNKYcMIG8Hqr07zMjcI4N3hriK9u2zeiZ2vChxx7dVIRAz7ErglknMkOZIfeX++IGIIZT0kA==
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:OSZPR01MB7050.jpnprd01.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230001)(4636009)(366004)(85182001)(82960400001)(6916009)(2906002)(52536014)(71200400001)(55016003)(4326008)(33656002)(66556008)(64756008)(76116006)(54906003)(66446008)(66946007)(66476007)(7696005)(508600001)(9686003)(8676002)(122000001)(186003)(6506007)(86362001)(316002)(8936002)(26005)(4744005)(7416002)(5660300002)(38070700005)(38100700002);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-2022-jp?B?QXBvdTAydHkxRjNJS1pieHF1emxGRXRnSklhYWhTem1jdnl3QUhEczlC?=
- =?iso-2022-jp?B?UnA1RjJLY3MzTGg4dThYS0NoVGE3algvSVZWYisxR0ZVZk1SRDF1QkYw?=
- =?iso-2022-jp?B?STZiMHY0MGdFeFFqbUtZU3hUQjVJK0E5M1c3K0xFVld5V3Vma0t4NWNa?=
- =?iso-2022-jp?B?WnoyUm44REJEckRKZ2dNYWxJam9mZGlBTGRaODZzSFk1dUZCdkF3OUJ0?=
- =?iso-2022-jp?B?RnF2OHhya29KcjQzT1ZFdklGSU95ZUhDVWZyRSsrZFhQdXVEMTVKZi9v?=
- =?iso-2022-jp?B?akwzZVRYSmVHV2pHcENhbjR3Q25xTkdHaE9BVkhxQWVGcHVhK0x2OUpu?=
- =?iso-2022-jp?B?QVZVM1ZMNEJuNFJ3WkVIWDNWRmRrOHhvRmg5SFl5S2tjTEFDSFIxTEdq?=
- =?iso-2022-jp?B?d2Rpc01rNTMxVzhUMEdReW44ZTdnNXpCRlI5UmVzYzhMdUk5Y1hFWnF2?=
- =?iso-2022-jp?B?bmdhdjZTSjhVYnZ5a0VsblZ5UWRpeTZKZW9GT1VrVUlPVDlRYWN3WVh3?=
- =?iso-2022-jp?B?ZlEzT1dTUHJnYUhCcXRlSThybHNYSHlJeU1YRnN0Zkk4cTFiZDFsc2pv?=
- =?iso-2022-jp?B?RjFqZ2c5SUlReHp4Q3R2UU9LS0ZkQ3NsSWs3cWFqbUlBYXpuRFBWY2x5?=
- =?iso-2022-jp?B?UHJTZld6YTZoays3VklLT2VVK1A5QkpMMGhoNHc5WXlzdWNaOXZHSjBH?=
- =?iso-2022-jp?B?T0dOVUUxdHNZa3dqbDVDRm0yUmIrS1JjaUJmTTNkZ3ZSTXZLenRsMUdQ?=
- =?iso-2022-jp?B?a2RlTTdUSUxPOUovMGdzMUpqcjU5ajNwWklqQXpJM3hGUDhXbmdQclQ4?=
- =?iso-2022-jp?B?QzlDdndxTDA3TXpYbXJKSURORDJVZFlqU3RwTnJzbUxHdmpzdGE0K1Vw?=
- =?iso-2022-jp?B?OElGamtzTFRtZ2g4NFpGQTZDVHBEQ254RDQ2dDhBY3R0QXdJZGY5NjVa?=
- =?iso-2022-jp?B?OXkrOWt0TUNxZzQyR0t1WTRGV1dNRlZoVGUzZ3Z2cXR0NlQzRVNSVW1v?=
- =?iso-2022-jp?B?ayt6SmxqUTJCaHBFK0tnN0pVVmFjY2M5TE10K1JmRjVwRHRmM2VnSnhv?=
- =?iso-2022-jp?B?dGtNdnhvblJqY0pHMUw3STZCaGtYMCt4anI1WGRPR3pwRXo3UENvU21H?=
- =?iso-2022-jp?B?ajVnMW9XYWY5eVZDSkpQVk1OTmtkVGJyeEVrSUl1UkRhUkhDUlJ3U0xx?=
- =?iso-2022-jp?B?U2wvZVg1dEdmVEpGQlNtSm1SWkZIUkVwL0ZHYXA1MXl2empWRkg4anVu?=
- =?iso-2022-jp?B?V3lIb2MrTlJwQnhlbkFEeTlDTlBPdXlRSWRiWG1XTzZzcEJDS3l2bm1U?=
- =?iso-2022-jp?B?ZFZJd0lPYm8wcnpHZC96djRabDRPQ2VHcDlLNkNabVgwTmRKeTNxZXdZ?=
- =?iso-2022-jp?B?MlloOFBPLzVSM2dLVlJwR1QzWjU4UGlwMnZNMFo1em5YVjlEcnZibS9D?=
- =?iso-2022-jp?B?UDM1eVNZMXgxa1owTjRHeDg5alRQUVIxTEJaYi9WeUIxbkh0Sk9wMWgw?=
- =?iso-2022-jp?B?NWtvdkZicVdLOG5DbmNnSFhXcjM5UzZuUHlrNm8rczNaYzBTZ1A2Mms0?=
- =?iso-2022-jp?B?dHhCcm1CbHNQcU9CT0wrRG40ay9BUlhMSmZvYVhNK1RDZnUxTUM2aXUr?=
- =?iso-2022-jp?B?L0RTdmxaNTQ3OUNjVE9yZThpZzBnN2dKUXhLTnRISkpab2QxREFyeGVs?=
- =?iso-2022-jp?B?Y0RpcmNIa1d1VXpsMno3Z1o4bm1oeEl2MGdJbWtBRkRDMi9RZzRxSE5B?=
- =?iso-2022-jp?B?NkpkcEp3a1Vsb2ZBZzNKdVVkWFQ3QmdiSVdabytlMGlKYlZoc1J6Q1lk?=
- =?iso-2022-jp?B?VjhsZGo4WTZCOUc4ZVFDRVRiSUJtNjJ2aTRYVUZhYkdiNmN1bzIwYWtZ?=
- =?iso-2022-jp?B?UFgwWm94QnlIbGIvdU4zcHl5dzhldlZrT0VwRG1lQTRzeEJkNDg3cTlx?=
- =?iso-2022-jp?B?RkJuaGVVbU5GZU1IY3VDSHhzVVBmWFU4ckVoNmNlajVmQVNodi9PaGwz?=
- =?iso-2022-jp?B?a3FLSisva0hudG1DZDRRU0p2NVBBbllCWmtUOU5VYnVwWWIxZk1ZUmhB?=
- =?iso-2022-jp?B?ZVJXVnpLR1pjVkJQNUFFOGpPZDlPYTVSc0RHWGxxRGhvZVdzVmhqSkxn?=
- =?iso-2022-jp?B?a0ptbExvZytGUGVRaWZkTG5jZDd5bXEwaXRFSFg4bXdzd3dpVWxlQm5N?=
- =?iso-2022-jp?B?b1FvSWswY09lYnZqdS96UjlSV2YvbGVTa25CK0Q1RnllVEpFUkZvTHlU?=
- =?iso-2022-jp?B?TUJ3RHN3V1hleGNLU0JOOC9mUWpPZjd1eDVva2NDdUlvaGxLWjNoVWcx?=
- =?iso-2022-jp?B?a0xFTzdQYkVVN09TOUFkeVlzZkpTV2UxQ1JSeEVuV2g3ZFZKa0xVSHA1?=
- =?iso-2022-jp?B?bjFKWmJMMlMwZHM4TXBNeVNxZVk5L2RUWnJna095NzJjcDdyZWlTSlMw?=
- =?iso-2022-jp?B?cWlJS00yb21SbklFSWl1Y25ZUlRaMldVcEVJN0x3SzA3QStTRFJBdlJD?=
- =?iso-2022-jp?B?L3p6ajlNQXRCdmZpYmcvbWZway9QWmN3VXpSOE5lc1I5T2c3OHJ2aDAr?=
- =?iso-2022-jp?B?REVCd09DZz0=?=
-MIME-Version: 1.0
-X-OriginatorOrg: fujitsu.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: OSZPR01MB7050.jpnprd01.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 472fe320-470f-4618-4f54-08da37eb44df
-X-MS-Exchange-CrossTenant-originalarrivaltime: 17 May 2022 09:54:43.8518 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: a19f121d-81e1-4858-a9d8-736e267fd4c7
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: hIb4g94LcTbxDERvAyC/tsB2BFeEaLQJly2UckfDfFYdovkVAexPNqXSskLEb0a8MMJmierqq2ykq98/brjuWYhwyVa+Q8IFEIc0TO0wo98=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYAPR01MB5087
-X-Spam-Score: -2.5 (--)
+From: Jiri Slaby <jirislaby@kernel.org>
+In-Reply-To: <20220511062113.2645747-2-hasegawa-hitomi@fujitsu.com>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi Greg, > > +obj-y += fujitsu/ > > Why a sub directory for
- just one .c file? As Arnd mentioned, I placed the sub directory following
- the convention of drivers/soc. 
- Content analysis details:   (-2.5 points, 6.0 required)
+ Content preview:  On 11. 05. 22, 8:21,
+ Hitomi Hasegawa wrote: > Enable diagnostic
+ interrupts for the Fujitsu A64FX. > > Register the NMI/IRQ corresponding
+ to the A64FX's device definition > dedicated to diagnostic inte [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [68.232.151.214 listed in list.dnswl.org]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.128.46 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [jirislaby[at]gmail.com]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
+ mail domains are different
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.128.46 listed in wl.mailspike.net]
+ 0.2 FREEMAIL_FORGED_FROMDOMAIN 2nd level domains in From and
+ EnvelopeFrom freemail headers are different
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1nqtur-0002IG-Gl
+ -0.7 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1nog8d-008Xw9-QN
+X-Mailman-Approved-At: Fri, 20 May 2022 14:59:49 +0000
 Subject: Re: [Kgdb-bugreport] [PATCH v4 1/1] soc: fujitsu: Add A64FX
  diagnostic interrupt driver
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
@@ -210,46 +120,219 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: "daniel.thompson@linaro.org" <daniel.thompson@linaro.org>,
- "arnd@arndb.de" <arnd@arndb.de>, "peterz@infradead.org" <peterz@infradead.org>,
- "catalin.marinas@arm.com" <catalin.marinas@arm.com>,
- "kgdb-bugreport@lists.sourceforge.net" <kgdb-bugreport@lists.sourceforge.net>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "soc@kernel.org" <soc@kernel.org>,
- "linux-serial@vger.kernel.org" <linux-serial@vger.kernel.org>,
- "jason.wessel@windriver.com" <jason.wessel@windriver.com>,
- "olof@lixom.net" <olof@lixom.net>,
- "jirislaby@kernel.org" <jirislaby@kernel.org>,
- "will@kernel.org" <will@kernel.org>,
- "linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>
-Content-Type: text/plain; charset="us-ascii"
+Cc: daniel.thompson@linaro.org, arnd@arndb.de, gregkh@linuxfoundation.org,
+ peterz@infradead.org, catalin.marinas@arm.com, linux-kernel@vger.kernel.org,
+ jason.wessel@windriver.com, olof@lixom.net, will@kernel.org,
+ kgdb-bugreport@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Hi Greg,
-
-
-> > +obj-y				+= fujitsu/
+On 11. 05. 22, 8:21, Hitomi Hasegawa wrote:
+> Enable diagnostic interrupts for the Fujitsu A64FX.
 > 
-> Why a sub directory for just one .c file?
-
-As Arnd mentioned, I placed the sub directory following the convention
-of drivers/soc.
-
-
-> > +	help
-> > +	  Say Y here if you want to enable diag interrupt on Fujitsu A64FX.
-> > +
-> > +	  If unsure, say N.
+> Register the NMI/IRQ corresponding to the A64FX's device definition
+> dedicated to diagnostic interrupts, so that when this interrupt is
+> sent using the BMC, it causes a panic. This can be used to obtain
+> a kernel dump.
 > 
-> You need to provide more information about what this driver does and what it is
-> here.
+> Signed-off-by: Hitomi Hasegawa <hasegawa-hitomi@fujitsu.com>
 
-OK, I will add a description.
+Hi,
+
+I'm not sure why you cc linux-serial, but anyway, comments below :).
+
+> --- /dev/null
+> +++ b/drivers/soc/fujitsu/a64fx-diag.c
+> @@ -0,0 +1,155 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/*
+> + * A64FX diag driver.
+> + * Copyright (c) 2022 Fujitsu Ltd.
+> + */
+> +
+> +#include <linux/acpi.h>
+> +#include <linux/interrupt.h>
+> +#include <linux/irq.h>
+> +#include <linux/module.h>
+> +#include <linux/platform_device.h>
+> +
+> +#define A64FX_DIAG_IRQ 1
+> +#define BMC_DIAG_INTERRUPT_STATUS_OFFSET (0x0044)
+> +#define BMC_DIAG_INTERRUPT_ENABLE_OFFSET (0x0040)
+> +#define BMC_DIAG_INTERRUPT_MASK BIT(31)
+> +
+> +struct a64fx_diag_priv {
+> +	int irq;
+> +	void __iomem *mmsc_reg_base;
+> +	bool has_nmi;
+
+There are unnecessary holes in the struct. If you reorder it, you drop 
+some alignment. Like: pointer, int, bool.
+
+> +};
+> +
+> +static irqreturn_t a64fx_diag_handler_nmi(int irq, void *dev_id)
+> +{
+> +	nmi_panic(NULL, "a64fx_diag: interrupt received\n");
+> +
+> +	return IRQ_HANDLED;
+> +}
+> +
+> +static irqreturn_t a64fx_diag_handler_irq(int irq, void *dev_id)
+> +{
+> +	panic("a64fx_diag: interrupt received\n");
+> +
+> +	return IRQ_HANDLED;
+> +}
+> +
+> +static void a64fx_diag_interrupt_clear(struct a64fx_diag_priv *priv)
+> +{
+> +	u32 mmsc;
+> +	void __iomem *diag_status_reg_addr;
+
+I'm not sure what soc/ maintainers prefer, but inverted xmas tree would 
+look/read better.
+
+> +
+> +	diag_status_reg_addr = priv->mmsc_reg_base + BMC_DIAG_INTERRUPT_STATUS_OFFSET;
+> +	mmsc = readl(diag_status_reg_addr);
+> +	if (mmsc & BMC_DIAG_INTERRUPT_MASK)
+> +		writel(BMC_DIAG_INTERRUPT_MASK, diag_status_reg_addr);
+> +}
+> +
+> +static void a64fx_diag_interrupt_enable(struct a64fx_diag_priv *priv)
+> +{
+> +	u32 mmsc;
+> +	void __iomem *diag_enable_reg_addr;
+> +
+> +	diag_enable_reg_addr = priv->mmsc_reg_base + BMC_DIAG_INTERRUPT_ENABLE_OFFSET;
+> +	mmsc = readl(diag_enable_reg_addr);
+> +	if (!(mmsc & BMC_DIAG_INTERRUPT_MASK)) {
+> +		mmsc |= BMC_DIAG_INTERRUPT_MASK;
+> +		writel(mmsc, diag_enable_reg_addr);
+> +	}
+> +}
+> +
+> +static void a64fx_diag_interrupt_disable(struct a64fx_diag_priv *priv)
+> +{
+> +	u32 mmsc;
+> +	void __iomem *diag_enable_reg_addr;
+> +
+> +	diag_enable_reg_addr = priv->mmsc_reg_base + BMC_DIAG_INTERRUPT_ENABLE_OFFSET;
+> +	mmsc = readl(diag_enable_reg_addr);
+> +	if (mmsc & BMC_DIAG_INTERRUPT_MASK) {
+> +		mmsc &= ~BMC_DIAG_INTERRUPT_MASK;
+> +		writel(mmsc, diag_enable_reg_addr);
+> +	}
+> +}
+> +
+> +static int a64fx_diag_probe(struct platform_device *pdev)
+> +{
+> +	int ret;
+> +	unsigned long irq_flags;
+> +	struct device *dev = &pdev->dev;
+> +	struct a64fx_diag_priv *priv;
+> +
+> +	priv = devm_kzalloc(dev, sizeof(struct a64fx_diag_priv), GFP_KERNEL);
+
+Don't we prefer sizeof(*priv)?
+
+> +	if (priv == NULL)
+> +		return -ENOMEM;
+> +
+> +	priv->mmsc_reg_base = devm_platform_ioremap_resource(pdev, 0);
+> +	if (IS_ERR(priv->mmsc_reg_base))
+> +		return PTR_ERR(priv->mmsc_reg_base);
+> +
+> +	priv->irq = platform_get_irq(pdev, A64FX_DIAG_IRQ);
+> +	if (priv->irq < 0)
+> +		return priv->irq;
+> +
+> +	platform_set_drvdata(pdev, priv);
+> +
+> +	a64fx_diag_interrupt_clear(priv);
+> +	a64fx_diag_interrupt_enable(priv);
+> +
+> +	irq_flags = IRQF_PERCPU | IRQF_NOBALANCING | IRQF_NO_AUTOEN |
+> +		   IRQF_NO_THREAD;
+> +	ret = request_nmi(priv->irq, &a64fx_diag_handler_nmi, irq_flags,
+> +			"a64fx_diag_nmi", NULL);
+> +	if (ret) {
+> +		ret = request_irq(priv->irq, &a64fx_diag_handler_irq,
+> +				irq_flags, "a64fx_diag_irq", NULL);
+> +		if (ret) {
+> +			dev_err(dev, "cannot register IRQ %d\n", ret);
+
+No a64fx_diag_interrupt_disable()?
+
+> +			return ret;
+> +		}
+> +		enable_irq(priv->irq);
+
+Hmm...
+
+> +		priv->has_nmi = false;
+
+No need to set zeroed priv member to zero.
+
+> +	} else {
+> +		enable_nmi(priv->irq);
+
+Provided the above, I don't immediatelly see, what's the purpose of 
+IRQF_NO_AUTOEN then?
+
+> +		priv->has_nmi = true;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int __exit a64fx_diag_remove(struct platform_device *pdev)
+
+Is __exit appropriate here at all -- I doubt that.
+
+> +{
+> +	struct a64fx_diag_priv *priv = platform_get_drvdata(pdev);
+> +
+> +	a64fx_diag_interrupt_disable(priv);
+> +	a64fx_diag_interrupt_clear(priv);
+> +
+> +	if (priv->has_nmi)
+> +		free_nmi(priv->irq, NULL);
+> +	else
+> +		free_irq(priv->irq, NULL);
+> +
+> +	return 0;
+> +}
+> +
+> +static const struct acpi_device_id a64fx_diag_acpi_match[] = {
+> +	{ "FUJI2007", 0 },
+> +	{ },
+> +};
+> +MODULE_DEVICE_TABLE(acpi, a64fx_diag_acpi_match);
+> +
+> +
+> +static struct platform_driver a64fx_diag_driver = {
+> +	.driver = {
+> +		.name = "a64fx_diag_driver",
+> +		.acpi_match_table = ACPI_PTR(a64fx_diag_acpi_match),
+> +	},
+> +	.probe = a64fx_diag_probe,
+> +	.remove = a64fx_diag_remove,
+> +};
+> +
+> +module_platform_driver(a64fx_diag_driver);
+> +
+> +MODULE_LICENSE("GPL v2");
+> +MODULE_AUTHOR("Hitomi Hasegawa <hasegawa-hitomi@fujitsu.com>");
+> +MODULE_DESCRIPTION("A64FX diag driver");
 
 
-Thank you.
-Hitomi Hasegawa
+-- 
+js
+suse labs
+
 
 _______________________________________________
 Kgdb-bugreport mailing list
