@@ -2,82 +2,89 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 76AE056C4BF
-	for <lists+kgdb-bugreport@lfdr.de>; Sat,  9 Jul 2022 02:10:15 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1BA3657D171
+	for <lists+kgdb-bugreport@lfdr.de>; Thu, 21 Jul 2022 18:25:13 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1o9y33-000383-NB
-	for lists+kgdb-bugreport@lfdr.de; Sat, 09 Jul 2022 00:10:13 +0000
+	id 1oEYz9-0007ij-9b
+	for lists+kgdb-bugreport@lfdr.de; Thu, 21 Jul 2022 16:25:10 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <dianders@chromium.org>) id 1o9y32-00037w-8t
- for kgdb-bugreport@lists.sourceforge.net; Sat, 09 Jul 2022 00:10:12 +0000
+ (envelope-from <dianders@chromium.org>) id 1oEYz2-0007ib-J0
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 21 Jul 2022 16:25:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=W2LVGWnAwFgRc5jhP8FcZl76hymzaguoUc9mEpMyzqk=; b=E+KUkfGat711SpwXunpMHQQAHv
- tJ/Zjxr4X1dfG79/9OTDlBm1UtCMziEgQFX/Gvxtr34AXGWdXdYuK7seRL3MtH2kRIg7XWO4+k2tL
- XoQyWh+c7ErB7DWXMUZR4rBFKsDNNprAgCO9STx5jB52UlOnEtXnH7SQE6hlccbn4rWI=;
+ bh=CdzyaaSS9wVD/EeKAhIRDfgg/YpGZ+e1ODi82IyhDFc=; b=NlCZEAwLHHptRpXw6ghVCZ6nF6
+ iHWEEFbn80vSqqfp17yJ1TQlKCiMCbvziY10y+byhmlzStW6J00OtvaaaRhH+NtRjVWo3dKtrb7wI
+ mqccV8UV3VuJ50PLpR1G7jP2WIllKY8opoSqcT3BgBhElilD1b8SXyBEJk+StdalMudk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=W2LVGWnAwFgRc5jhP8FcZl76hymzaguoUc9mEpMyzqk=; b=e
- cZ0jprPCU/OzEXH4VA6gvzICndtr+6hzCuy6yHkbWYX3BSru0VCUoULBkOLPqfvrhBdTKXyJlBIMr
- v5VcF4JCV4tsqO+gxlqo2P+Y9dQFrIpd4f8ONuaQen2pZCCa1vZDptSTd7P6oYqTuJDyPtXHff3pd
- tT+/uoplC/hqezMk=;
-Received: from mail-pj1-f48.google.com ([209.85.216.48])
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=CdzyaaSS9wVD/EeKAhIRDfgg/YpGZ+e1ODi82IyhDFc=; b=igGg3LTnsndBGjgorajcJz/sgm
+ LCoMe/fdi9h0WT/G4bTUV5U3TvPPa9BknTAGXgW2fteiGzdBeytk3JcKbSxT1XX1Vp05+1eDckMnp
+ XHm9u98p5GF+Qij6stSpN7VLS+RZ19X4LghiDiRx2CzOXCUsx4RUxz+eFXsyMVEjbeiQ=;
+Received: from mail-ej1-f45.google.com ([209.85.218.45])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1o9y2z-00057A-70
- for kgdb-bugreport@lists.sourceforge.net; Sat, 09 Jul 2022 00:10:11 +0000
-Received: by mail-pj1-f48.google.com with SMTP id p9so364379pjd.3
+ id 1oEYyx-0004An-Rk
+ for kgdb-bugreport@lists.sourceforge.net; Thu, 21 Jul 2022 16:25:03 +0000
+Received: by mail-ej1-f45.google.com with SMTP id j22so4065619ejs.2
  for <kgdb-bugreport@lists.sourceforge.net>;
- Fri, 08 Jul 2022 17:10:09 -0700 (PDT)
+ Thu, 21 Jul 2022 09:24:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=W2LVGWnAwFgRc5jhP8FcZl76hymzaguoUc9mEpMyzqk=;
- b=kkOW1+SjtZPxCBn2fz4/jmiOkOnCyX9VUWF7EydqhDfwApPAEJ1e0HoFrJSSEi+srl
- rEnEpC6C2YRQHRllsFcMf+aifrQTAuBM0clcSljbNteeWl3yotxWdY2DNqP9zePwIk9j
- +djYKBSpvjUYQlYH6CUWGEiQ0rGy5OdgHlJps=
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=CdzyaaSS9wVD/EeKAhIRDfgg/YpGZ+e1ODi82IyhDFc=;
+ b=ixbeGzrVmvVURAdO5sU9OOcCnx0pffmC11dEXfqHTPv7aPiBEc70P0ZZGoaIHU3BTQ
+ A9M6pSaNj9xmUq15oOdfCneHQ0oBU1DIhG+Mkm71JN+8EIG3QsRnX+RGJnlZQQZk2ZPm
+ Om2nQfvVC8EjD+aZQMkscw2RC8rR7VediHcGs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=W2LVGWnAwFgRc5jhP8FcZl76hymzaguoUc9mEpMyzqk=;
- b=fuRbzymnv8Yj+Hx65y/XSupRhj7qwHe8fJFCgz3CshtAWyGVo+QClTG/uBjVMKaean
- kEvrKAU56xCliuZeMtK9wHkGikB9tQwIpM1CinD6oQAcm21k+GzMLQIINPrp3TnMHoog
- fWqzLxvZWYw9vYHMzAdOT8dj5Uvhbzgp2A2AkBJfPbK3WrP7ldmLZy1Chq71OuYLe1b5
- 4woLb4CxCu39xnmbgIZPpGfTEZCV3znbfWydZfinCy13Uj2+CjRhLjwNJbYb29PfFCUX
- Zd1nt95OE2THvdlc+rPnEteHkbTqkHAT3b2iG/MlWeBtu5xZP8/A5S9846AVj6CAKS8i
- dWRw==
-X-Gm-Message-State: AJIora/GtEcmCaTGhZUMe9/pZmHyl7Ruazdq3oFusl2oF0rFSG8U1iII
- aotqcF/s5bCQQfbWVFmdHJyN8Q==
-X-Google-Smtp-Source: AGRyM1uULmuZRaaRkYAYsmExtrJbPm//wpABlQ5XATc+h5LLDlbZ5cyuD1LMFeHvOA+LFBe5geqHyQ==
-X-Received: by 2002:a17:903:2112:b0:16b:de4d:555a with SMTP id
- o18-20020a170903211200b0016bde4d555amr6242641ple.61.1657325403592; 
- Fri, 08 Jul 2022 17:10:03 -0700 (PDT)
-Received: from tictac2.mtv.corp.google.com
- ([2620:15c:202:201:f16f:292f:711d:4603])
- by smtp.gmail.com with ESMTPSA id
- f12-20020a170902684c00b0016bd6635b6csm82695pln.278.2022.07.08.17.10.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 Jul 2022 17:10:03 -0700 (PDT)
-From: Douglas Anderson <dianders@chromium.org>
-To: Steven Rostedt <rostedt@goodmis.org>,
-	Ingo Molnar <mingo@redhat.com>
-Date: Fri,  8 Jul 2022 17:09:52 -0700
-Message-Id: <20220708170919.1.I75844e5038d9425add2ad853a608cb44bb39df40@changeid>
-X-Mailer: git-send-email 2.37.0.rc0.161.g10f37bed90-goog
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=CdzyaaSS9wVD/EeKAhIRDfgg/YpGZ+e1ODi82IyhDFc=;
+ b=Nec8IG+oPsnPtxh8nBtuo4uOeQ3AkNn7XOylJNmODPYtU8yjH7kjpMw8P4C/guU7uw
+ quRIJyqXC2maLHwEOQn7HFRZ+8TPJf4dbmPZ6VCga3E3PEaoDm93sqGKsxyoDlPgV+G1
+ BaNj8coisHIgAHnWV/k94vOHrFR8YY3YK1AUsWZbJJKb8ninF7CYO6X9wjrTrNOG6iZ+
+ eHA0+fD1YU3XZnE7aRcKgupxtTNsa9lOCtiekco/dLh6cFJd022w0LkVkYYCGji8qQCI
+ qxLc+e1U8iyI8V/28pF33g8WaAR6TB1Cak3aorocN3k5Zc+fQUu22pB7dA37CerKQxlN
+ CnwA==
+X-Gm-Message-State: AJIora9nMx8K2yVOiOwsUFDp1pvFtLz4Xc5rsOtnrlIGGNKqobn6RmnM
+ d/uAJC5AbGjVwGpVXzdOhbC0Lplt5avB1pVMDeo=
+X-Google-Smtp-Source: AGRyM1sl/MfEaM122qL24GaPvAmBKnjXnI8JlytXjbVCQGy0g9BHNTG1aPk+b7RlP2Y0tuvSl97Dzw==
+X-Received: by 2002:a17:907:2cca:b0:72b:4188:f95b with SMTP id
+ hg10-20020a1709072cca00b0072b4188f95bmr42048184ejc.153.1658420690035; 
+ Thu, 21 Jul 2022 09:24:50 -0700 (PDT)
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com.
+ [209.85.128.42]) by smtp.gmail.com with ESMTPSA id
+ fu14-20020a170907b00e00b00726298147b1sm984783ejc.161.2022.07.21.09.24.46
+ for <kgdb-bugreport@lists.sourceforge.net>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 21 Jul 2022 09:24:47 -0700 (PDT)
+Received: by mail-wm1-f42.google.com with SMTP id
+ a18-20020a05600c349200b003a30de68697so4016828wmq.0
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Thu, 21 Jul 2022 09:24:46 -0700 (PDT)
+X-Received: by 2002:a05:600c:4e86:b0:3a3:2edc:bcb4 with SMTP id
+ f6-20020a05600c4e8600b003a32edcbcb4mr4239876wmq.85.1658420686023; Thu, 21 Jul
+ 2022 09:24:46 -0700 (PDT)
 MIME-Version: 1.0
+References: <20220721093042.9840-1-khalid.masum.92@gmail.com>
+In-Reply-To: <20220721093042.9840-1-khalid.masum.92@gmail.com>
+From: Doug Anderson <dianders@chromium.org>
+Date: Thu, 21 Jul 2022 09:24:31 -0700
+X-Gmail-Original-Message-ID: <CAD=FV=UbRX194rDztr_=eoALg4kTmjzq=EXCX6RJSSq3vO=fbw@mail.gmail.com>
+Message-ID: <CAD=FV=UbRX194rDztr_=eoALg4kTmjzq=EXCX6RJSSq3vO=fbw@mail.gmail.com>
+To: Khalid Masum <khalid.masum.92@gmail.com>
 X-Spam-Score: -0.9 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -85,20 +92,20 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: If you drop into kdb and type "ftdump" you'll get a sleeping
- while atomic warning from memory allocation in trace_find_next_entry(). This
- appears to have been caused by commit ff895103a84a ("tracing: Save off entry
- when peeking at next entry"), which added the allocation in that path. The
- problematic commit was already fixed by com [...] 
+ Content preview:  Hi, On Thu, Jul 21,
+ 2022 at 2:31 AM Khalid Masum <khalid.masum.92@gmail.com>
+ wrote: > > Currently the command 'lx-symbols' in gdb exits with the
+ error`Function
+ > "do_init_module" not defined in "kernel/mo [...] 
  Content analysis details:   (-0.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.216.48 listed in list.dnswl.org]
+ no trust [209.85.218.45 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.216.48 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.218.45 listed in wl.mailspike.net]
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
@@ -108,9 +115,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1o9y2z-00057A-70
-Subject: [Kgdb-bugreport] [PATCH] tracing: Fix sleeping while atomic in kdb
- ftdump
+X-Headers-End: 1oEYyx-0004An-Rk
+Subject: Re: [Kgdb-bugreport] [PATCH RESEND] scripts/gdb: Fix gdb
+ 'lx-symbols' command
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -122,72 +129,46 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: kgdb-bugreport@lists.sourceforge.net,
- Daniel Thompson <daniel.thompson@linaro.org>, linux-kernel@vger.kernel.org,
- Masami Hiramatsu <mhiramat@kernel.org>
+Cc: Aaron Tomlin <atomlin@redhat.com>, Pavel Skripkin <paskripkin@gmail.com>,
+ Shuah Khan <skhan@linuxfoundation.org>, LKML <linux-kernel@vger.kernel.org>,
+ Stephen Boyd <swboyd@chromium.org>, Luis Chamberlain <mcgrof@kernel.org>,
+ Jan Kiszka <jan.kiszka@siemens.com>, Kieran Bingham <kbingham@kernel.org>,
+ kgdb-bugreport@lists.sourceforge.net,
+ Andrew Morton <akpm@linux-foundation.org>,
+ linux-kernel-mentees@lists.linuxfoundation.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-If you drop into kdb and type "ftdump" you'll get a sleeping while
-atomic warning from memory allocation in trace_find_next_entry().
+Hi,
 
-This appears to have been caused by commit ff895103a84a ("tracing:
-Save off entry when peeking at next entry"), which added the
-allocation in that path. The problematic commit was already fixed by
-commit 8e99cf91b99b ("tracing: Do not allocate buffer in
-trace_find_next_entry() in atomic") but that fix missed the kdb case.
+On Thu, Jul 21, 2022 at 2:31 AM Khalid Masum <khalid.masum.92@gmail.com> wrote:
+>
+> Currently the command 'lx-symbols' in gdb exits with the error`Function
+> "do_init_module" not defined in "kernel/module.c"`. This occurs because
+> the file kernel/module.c was moved to kernel/module/main.c.
+>
+> Fix this breakage by changing the path to "kernel/module/main.c" in
+> LoadModuleBreakpoint.
+>
+> Signed-off-by: Khalid Masum <khalid.masum.92@gmail.com>
+> ---
+>  scripts/gdb/linux/symbols.py | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/scripts/gdb/linux/symbols.py b/scripts/gdb/linux/symbols.py
+> index 46f7542db08c..dc07b6d12e30 100644
+> --- a/scripts/gdb/linux/symbols.py
+> +++ b/scripts/gdb/linux/symbols.py
+> @@ -180,7 +180,7 @@ lx-symbols command."""
+>                  self.breakpoint.delete()
+>                  self.breakpoint = None
+>              self.breakpoint = LoadModuleBreakpoint(
+> -                "kernel/module.c:do_init_module", self)
+> +                "kernel/module/main.c:do_init_module", self)
 
-The fix here is easy: just move the assignment of the static buffer to
-the place where it should have been to begin with:
-trace_init_global_iter(). That function is called in two places, once
-is right before the assignment of the static buffer added by the
-previous fix and once is in kdb.
-
-Note that it appears that there's a second static buffer that we need
-to assign that was added in commit efbbdaa22bb7 ("tracing: Show real
-address for trace event arguments"), so we'll move that too.
-
-Fixes: ff895103a84a ("tracing: Save off entry when peeking at next entry")
-Fixes: efbbdaa22bb7 ("tracing: Show real address for trace event arguments")
-Signed-off-by: Douglas Anderson <dianders@chromium.org>
----
-
- kernel/trace/trace.c | 11 ++++++-----
- 1 file changed, 6 insertions(+), 5 deletions(-)
-
-diff --git a/kernel/trace/trace.c b/kernel/trace/trace.c
-index 2c95992e2c71..64700ad2866b 100644
---- a/kernel/trace/trace.c
-+++ b/kernel/trace/trace.c
-@@ -9866,6 +9866,12 @@ void trace_init_global_iter(struct trace_iterator *iter)
- 	/* Output in nanoseconds only if we are using a clock in nanoseconds. */
- 	if (trace_clocks[iter->tr->clock_id].in_ns)
- 		iter->iter_flags |= TRACE_FILE_TIME_IN_NS;
-+
-+	/* Can not use kmalloc for iter.temp and iter.fmt */
-+	iter->temp = static_temp_buf;
-+	iter->temp_size = STATIC_TEMP_BUF_SIZE;
-+	iter->fmt = static_fmt_buf;
-+	iter->fmt_size = STATIC_FMT_BUF_SIZE;
- }
- 
- void ftrace_dump(enum ftrace_dump_mode oops_dump_mode)
-@@ -9898,11 +9904,6 @@ void ftrace_dump(enum ftrace_dump_mode oops_dump_mode)
- 
- 	/* Simulate the iterator */
- 	trace_init_global_iter(&iter);
--	/* Can not use kmalloc for iter.temp and iter.fmt */
--	iter.temp = static_temp_buf;
--	iter.temp_size = STATIC_TEMP_BUF_SIZE;
--	iter.fmt = static_fmt_buf;
--	iter.fmt_size = STATIC_FMT_BUF_SIZE;
- 
- 	for_each_tracing_cpu(cpu) {
- 		atomic_inc(&per_cpu_ptr(iter.array_buffer->data, cpu)->disabled);
--- 
-2.37.0.rc0.161.g10f37bed90-goog
-
+Fixes: cfc1d277891e ("module: Move all into module/")
+Reviewed-by: Douglas Anderson <dianders@chromium.org>
 
 
 _______________________________________________
