@@ -2,124 +2,102 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 863AF5F0D77
-	for <lists+kgdb-bugreport@lfdr.de>; Fri, 30 Sep 2022 16:24:22 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 18C365F10C6
+	for <lists+kgdb-bugreport@lfdr.de>; Fri, 30 Sep 2022 19:27:40 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1oeGw8-0008Rx-IO
+	id 1oeJnJ-0000EV-Dz
 	for lists+kgdb-bugreport@lfdr.de;
-	Fri, 30 Sep 2022 14:24:20 +0000
+	Fri, 30 Sep 2022 17:27:38 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <dianders@chromium.org>) id 1oeGw6-0008Re-KK
+ (envelope-from <pmladek@suse.com>) id 1oeJn3-0000Du-8r
  for kgdb-bugreport@lists.sourceforge.net;
- Fri, 30 Sep 2022 14:24:18 +0000
+ Fri, 30 Sep 2022 17:27:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=VwNQ7+2ua16Xcezf7uX5/OiXV8isJNe+JovjKGf9FvY=; b=NSRITBcdMCtuJk1EREe+2YnwJU
- /pajsZVeNGV1TKBeMyXUIES/S0jQz3dMuximDUWCfQb5id6usVd6lRCDriadlwnxHurssWj8eWrK3
- XxkQzVXqsVyqHo7gaMDBwd861YXUT7oPA78HQEjOFrS7NeXHoPxu5iN65Dv8oAUxPFAY=;
+ bh=QFL6LlhwvZGz/p5H7pzHxGfwk3dZsCKYsSd1m5JM4oM=; b=TeEeMuyU8XzcXoX9ppU+JxhC7p
+ b2YAT/ixZ3fEjjXGdwfdYNnQC6NHZh0pSdGq3WL2A0PLlQR9nIl9GVvnHv5n/in4ZVk8GQA5SAEZI
+ BT+IC8F7gBEKdZR2FnSXxZcid9JW8zkV1t+wO6MiQaAQFiIKo1ifvLXufIEywBfLbzGc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=VwNQ7+2ua16Xcezf7uX5/OiXV8isJNe+JovjKGf9FvY=; b=Kkz8+LxoOWfdS/UIulaouG3jZ/
- gRrcMzq0svlogefHoIYHdj86reK/amGIPdusDCkHjyvYVf4GM+2AmrH2zrI+9GP7/LHmwB4Ch8i6O
- lcjZuzY7kjE6bHoqhCMgQ6v2UWrNlcXTbEv06csdy3GzJJnQYN5ZMoLL/RvJFRv39fXI=;
-Received: from mail-ed1-f49.google.com ([209.85.208.49])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=QFL6LlhwvZGz/p5H7pzHxGfwk3dZsCKYsSd1m5JM4oM=; b=KfgscDiuX9sP5HaqKH1RSWChMh
+ ZfQoC+zFrHvZn1Jc6H01dhPltAla5UsWGJByDxOk27FfoS9H5V8j1FeVTgWmPQomzQ1gZXxz9Bs5D
+ dRXr7oHysa+v8EgM0BQ/xxFB9qcFUAdiceHhnrA9YSz6HKNzU2ww2pbgiaB2zXIaALCs=;
+Received: from smtp-out2.suse.de ([195.135.220.29])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1oeGw5-0001Yi-VS for kgdb-bugreport@lists.sourceforge.net;
- Fri, 30 Sep 2022 14:24:18 +0000
-Received: by mail-ed1-f49.google.com with SMTP id c30so6206963edn.2
- for <kgdb-bugreport@lists.sourceforge.net>;
- Fri, 30 Sep 2022 07:24:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date;
- bh=VwNQ7+2ua16Xcezf7uX5/OiXV8isJNe+JovjKGf9FvY=;
- b=hl9i90bcLZEk70jdX3jQ5moL2FHbU+7F36Pd1jeWoUNiOvxSexA51qnUdtDpfuJNL6
- lgi7QemszzqznIfQl9bWyojo4yamR5K3OKT+25iQwp3tBhGSZkRyOP3erCKgmetqxhUr
- pqAo48rnKIPXH+JjHwZZWEapdJOpuxUqPiM4Q=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date;
- bh=VwNQ7+2ua16Xcezf7uX5/OiXV8isJNe+JovjKGf9FvY=;
- b=Q7qpgF0T3oLNWsFzX9L4Kh2NPMIVf4e6XEkMCoZpJZcbzb+xQKdRz8EQMo6zupCnyt
- b4cohURbRO8lb35mgFo8NOJjAC+/0v8A5ZJzgJyECW8FnRTMuXGhnvIf+VkIddUrgL5Y
- +/TKHaOjJ+LxFRXeVdgW+STlLRR5VmTnWMEp7xlX1400Sr42V9T9UASM5kPoaNhfK+Ba
- QtlgYYhvOckHuyTYlj1+T5hzCbZ1UMB4raQKLLDEiXj9C8XhvxdD3CBzBCIT5lsXWrFh
- yWoOvUs5y3bxhLoOz8DXYI6JZ5A761ZBZx67aRKndjIIRulfoqq/TnxljHMsiiubQpBs
- VFLQ==
-X-Gm-Message-State: ACrzQf0WNOJMG65HrdwV3HhTvB0/YA7+1tCbeeVIJKnQ9KixpXqcJAgx
- GLsoAOIUGCpW3byix8VTAJcAJuddzOohSok8
-X-Google-Smtp-Source: AMsMyM5LBySSE4fwJN63t6ZbmvK3K1C3oJEgmYOYCGY2HhNIitoMu2c7fBpAMt3Tfcqc/TR0PvNUfw==
-X-Received: by 2002:aa7:c849:0:b0:453:9543:6ef3 with SMTP id
- g9-20020aa7c849000000b0045395436ef3mr8048290edt.105.1664547851301; 
- Fri, 30 Sep 2022 07:24:11 -0700 (PDT)
-Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com.
- [209.85.221.44]) by smtp.gmail.com with ESMTPSA id
- l3-20020a170906644300b0077a201f6d1esm1261698ejn.87.2022.09.30.07.24.10
- for <kgdb-bugreport@lists.sourceforge.net>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 30 Sep 2022 07:24:10 -0700 (PDT)
-Received: by mail-wr1-f44.google.com with SMTP id x18so7131904wrm.7
- for <kgdb-bugreport@lists.sourceforge.net>;
- Fri, 30 Sep 2022 07:24:10 -0700 (PDT)
-X-Received: by 2002:a5d:522f:0:b0:228:dc7f:b9a8 with SMTP id
- i15-20020a5d522f000000b00228dc7fb9a8mr6150906wra.617.1664547850437; Fri, 30
- Sep 2022 07:24:10 -0700 (PDT)
+ id 1oeJnC-0087Mq-Sp for kgdb-bugreport@lists.sourceforge.net;
+ Fri, 30 Sep 2022 17:27:20 +0000
+Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
+ by smtp-out2.suse.de (Postfix) with ESMTP id 019271F8B9;
+ Fri, 30 Sep 2022 17:27:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+ t=1664558829; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=QFL6LlhwvZGz/p5H7pzHxGfwk3dZsCKYsSd1m5JM4oM=;
+ b=fVFmnuf1u1KQlPpWHU/orNzNBxCa48mSUZkdDX4xlVMEG3NTwC9YxcZf+MalvdIs8VPDMC
+ osCorspvdyRlzuSH6nWTp5FHT9YJrkRNI+xnlBo1Cinbk4bxPlh8r1QOWYUzGwN4Ing/dy
+ eTbPx3G/4qET3f0xn+WB1F2qlpsf9P8=
+Received: from suse.cz (unknown [10.100.201.202])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by relay2.suse.de (Postfix) with ESMTPS id 526442C161;
+ Fri, 30 Sep 2022 17:27:08 +0000 (UTC)
+Date: Fri, 30 Sep 2022 19:27:04 +0200
+To: John Ogness <john.ogness@linutronix.de>
+Message-ID: <Yzcm6Fb6FJGbspgY@alley>
+References: <20220924000454.3319186-1-john.ogness@linutronix.de>
+ <20220924000454.3319186-11-john.ogness@linutronix.de>
+ <CAD=FV=U3m_mVLpWna3pgi4=b7OCzUxmKh666g62zPNaB+6QHUA@mail.gmail.com>
+ <YzarXlj1NyFGTC08@alley> <87o7uxugbr.fsf@jogness.linutronix.de>
 MIME-Version: 1.0
-References: <CAL2OxujDSaiGmQA+htbRrKVznKOhcX_C4oYd951ROScMnAV8wA@mail.gmail.com>
-In-Reply-To: <CAL2OxujDSaiGmQA+htbRrKVznKOhcX_C4oYd951ROScMnAV8wA@mail.gmail.com>
-From: Doug Anderson <dianders@chromium.org>
-Date: Fri, 30 Sep 2022 07:23:58 -0700
-X-Gmail-Original-Message-ID: <CAD=FV=V_041NcyXqg8o8+x+9uVkS8FLwcGoUiHX4L+Lq+m_bpA@mail.gmail.com>
-Message-ID: <CAD=FV=V_041NcyXqg8o8+x+9uVkS8FLwcGoUiHX4L+Lq+m_bpA@mail.gmail.com>
-To: arden jay <arden.jay@gmail.com>
-X-Spam-Score: -0.3 (/)
+Content-Disposition: inline
+In-Reply-To: <87o7uxugbr.fsf@jogness.linutronix.de>
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi, On Thu, Sep 29,
- 2022 at 11:34 PM arden jay <arden.jay@gmail.com>
- wrote: > > Hi, > > In ARM64, kdb "ss" always keeps the same pc. For example,
- > > Entering kdb (current=0xffff0000c0240e40, pid 188) on [...] 
- Content analysis details:   (-0.3 points, 6.0 required)
+ Content preview:  On Fri 2022-09-30 15:50:56,
+ John Ogness wrote: > On 2022-09-30, 
+ Petr Mladek <pmladek@suse.com> wrote: > > Anyway, what about using the later
+ added SRCU walk here? > > After all, this is exactly what R [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.208.49 listed in list.dnswl.org]
  0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
  blocked.  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: chromium.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.208.49 listed in wl.mailspike.net]
+ for more information. [URIs: suse.com]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [195.135.220.29 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1oeGw5-0001Yi-VS
-Subject: Re: [Kgdb-bugreport] single step
+X-Headers-End: 1oeJnC-0087Mq-Sp
+Subject: Re: [Kgdb-bugreport] [PATCH printk 10/18] kgbd: Pretend that
+ console list walk is safe
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -131,39 +109,48 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: kgdb-bugreport@lists.sourceforge.net, Will Deacon <will@kernel.org>
+From: Petr Mladek via Kgdb-bugreport <kgdb-bugreport@lists.sourceforge.net>
+Reply-To: Petr Mladek <pmladek@suse.com>
+Cc: Daniel Thompson <daniel.thompson@linaro.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Aaron Tomlin <atomlin@redhat.com>, Steven Rostedt <rostedt@goodmis.org>,
+ LKML <linux-kernel@vger.kernel.org>,
+ Sergey Senozhatsky <senozhatsky@chromium.org>,
+ Luis Chamberlain <mcgrof@kernel.org>, linux-serial@vger.kernel.org,
+ Jason Wessel <jason.wessel@windriver.com>,
+ kgdb-bugreport@lists.sourceforge.net, Thomas Gleixner <tglx@linutronix.de>,
+ Jiri Slaby <jirislaby@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Hi,
+On Fri 2022-09-30 15:50:56, John Ogness wrote:
+> On 2022-09-30, Petr Mladek <pmladek@suse.com> wrote:
+> > Anyway, what about using the later added SRCU walk here?
+> > After all, this is exactly what RCU is for, isn't it?
+> 
+> So I think a lot of the problems with this series is that SRCU is
+> introduced too late. We are debating things in patch 6 that are
+> irrelevant by patch 12.
 
-On Thu, Sep 29, 2022 at 11:34 PM arden jay <arden.jay@gmail.com> wrote:
+> I will rework the series so that the changes come in the following
+> order:
+> 
+> 1. provide an atomic console_is_enabled()
 >
-> Hi,
->
-> In ARM64, kdb "ss" always keeps the same pc. For example,
->
-> Entering kdb (current=0xffff0000c0240e40, pid 188) on processor 0 due to SS
-> trap @ 0xffff800010011c84
-> [0]kdb> ss
->
-> Entering kdb (current=0xffff0000c0240e40, pid 188) on processor 0 due to SS
-> trap @ 0xffff800010011c84
->
-> From the code, kgdb_arch_update_addr won't update the pc if it is not
-> compiled_break. Shouldn't "ss" single step to the next instruction?
->
-> Do I miss something?
+> 2. convert the list to SRCU
+> 
+> 3. move all iterators from console_lock()/console_trylock() to SRCU
+> 
+> Step 3 may result in console_lock()/console_trylock() calls disappearing
+> or relocating to where they are needed for non-list-synchronization
+> purposes.
 
-No. Single step on arm64 is simply broken. See:
+I agree that introding SRCU as early as possible would
+help. The current patchset converts the same code several times...
 
-https://lore.kernel.org/r/20220511060521.465744-1-sumit.garg@linaro.org
-
-The latest news is that we're waiting for Will to have time to look at
-Sumit's patches and either bless them or suggest something different.
-
--Doug
+Best Regards,
+Petr
 
 
 _______________________________________________
