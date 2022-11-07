@@ -2,18 +2,18 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5206C61F52B
+	by mail.lfdr.de (Postfix) with ESMTPS id EB1C661F52E
 	for <lists+kgdb-bugreport@lfdr.de>; Mon,  7 Nov 2022 15:17:08 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1os2vz-0003AE-1s
+	id 1os2vz-0002ZM-MX
 	for lists+kgdb-bugreport@lfdr.de;
 	Mon, 07 Nov 2022 14:17:07 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <john.ogness@linutronix.de>) id 1os2vw-00039o-Ax
+ (envelope-from <john.ogness@linutronix.de>) id 1os2vw-0002YY-FS
  for kgdb-bugreport@lists.sourceforge.net;
  Mon, 07 Nov 2022 14:17:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -22,9 +22,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=SVseywoielHQsdgFj4SQ2wUZa0m9RxiqWqQHkSQjPis=; b=O6BrMcRBLO+sbf9VvUDaAuwLXy
- ANoPRwN3iay3ri0eQ25UgiQrimUCf9zGBWVyPs7KT+fufflm4Ex8Sup2AXC/bjxYZaU6X1ciN4CJr
- 9MWEK4Ft6EG/v+3mokN150irtr25FRF8U0d0TLD8RT2KvAZJ9rJVTL2bFSettTmKbArw=;
+ bh=ABDFtrgjV5x8uGkolXUUesJdZpQfr7BwwBr7iTObU1k=; b=KXwa1rT/zWuQRhAhArfiZLflOs
+ 1TQD1eHKayTA4XCAEqcJqdLqwWd1Fuo0Dd6RN1/cbyAG14klk6DH+aJdbLO/1kg+Z0KuSDetKPGbU
+ KGhKljn4ba36z+nv2K/c/GVEXKkAK5QFSgK1sjDyWcUeSRvKdI2BQEiWfJSlUlq4/g84=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -32,14 +32,14 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=SVseywoielHQsdgFj4SQ2wUZa0m9RxiqWqQHkSQjPis=; b=a4+uv/CnMuEpF82ux17F9ZKz7/
- E7Kjkh/HiOtTD3U6/SgWka0+t+B23SWHj+5hsdyvTevRP+jaLY7p1GoyVRGdGWXZdPZS8LAkbZF9t
- /TEeehz7USlQFOYxMom8/3xkrwSa49YPGJVVm2F54u/dVjLkd5W1BHoC/nafiQjMqUgM=;
+ bh=ABDFtrgjV5x8uGkolXUUesJdZpQfr7BwwBr7iTObU1k=; b=S0rps67hfzF3z2al9WtUm/Im2k
+ 043uHy1OjTJ35/OfsPWuPpYjgYEv3Gn60BTk14NL32O9SeDqDO3Y6Nxkojt4J9oFnbRd+UTOVRhhq
+ +gQCo4UGM4VJ2Sn2ooXZs0fIAJTKMUfEIbheI3FWOTIyVRrTyiknS+Wwz2vIvG0tUi4w=;
 Received: from galois.linutronix.de ([193.142.43.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1os2vv-00036d-81 for kgdb-bugreport@lists.sourceforge.net;
- Mon, 07 Nov 2022 14:17:03 +0000
+ id 1os2vv-00036i-Oo for kgdb-bugreport@lists.sourceforge.net;
+ Mon, 07 Nov 2022 14:17:04 +0000
 From: John Ogness <john.ogness@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
  s=2020; t=1667830617;
@@ -47,37 +47,38 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=SVseywoielHQsdgFj4SQ2wUZa0m9RxiqWqQHkSQjPis=;
- b=gqAyq8wc/xmtR7iqeOG6HKRPQNaHenvleIBzDQ/LW3mKRO51oeZo94GS/qRNuT8ieSU0xm
- 67Ezdbpop5bIKLaW4vynak6kv+RutOCMz7GJmsmWvJ7ztSxvOPnfZsII/sczgr4+zwlbH0
- bvBpYYScUM3+IVnwUhj0PRvYRquDb0k9dX6d4FiyUu64Q/sTrT/pd/vzPWoMAYhgg2rfNa
- 2MwuVE4oyZ5XOUiJrMrXKb8HCarltDgby4NEQN13ZduKMvpyiMLdZaTIIaHReLQ4CPsOXo
- WmDQpN1gWbLYKOD9QXS7ZKEJtYAVyIu5cwJ/0yLtFFfv2+ZH5482Fb2f8IS7XA==
+ bh=ABDFtrgjV5x8uGkolXUUesJdZpQfr7BwwBr7iTObU1k=;
+ b=quYSkn0H6WS4/l0RYtMy3BDn/rK/rRzby8k7+wPwnxKordiq2TgHz8VGVPX95WuRGgwskm
+ EtBX73KPFW0k9NtYTpUCTtC+tWMJhMww3Zvq9V2lgXuA2ShF3fqmI4g0ScS/P1sTLwetNh
+ ExpToebi/v9WRQUmTKE5E/WcN/uuirbBRldIeX/WLOaS06fohXQ/OGszmxg1g6WSergB31
+ MbaozUQ59Y9Fv+G+GH08ICMAjHlm76Pco9BS188p4z7JPQKzTEx426fF2f8aER4+H6sylG
+ CSiyN8MEZvyACLULxolUeG76LhEFYwnZoc0EQUAsjHeEZdS3ykqCDiKbXDiAqw==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
  s=2020e; t=1667830617;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=SVseywoielHQsdgFj4SQ2wUZa0m9RxiqWqQHkSQjPis=;
- b=Z547tJz8CL/7ne/rUO0T2mCvQYl5X73Ya4ph+/4nhh6mLeSrOtoKGcN6H+lDnm6AvUFYKH
- ymi7EfX8Rj0GaIBw==
+ bh=ABDFtrgjV5x8uGkolXUUesJdZpQfr7BwwBr7iTObU1k=;
+ b=0EsqVlG5GcPGEcsVNMZ4uy7CR5J6JcEVjcsCxd7fPEIZJDWclxknPbTwQCDjbw6tArZeef
+ 7aUFWCYb4TEtlXBA==
 To: Petr Mladek <pmladek@suse.com>
-Date: Mon,  7 Nov 2022 15:22:34 +0106
-Message-Id: <20221107141638.3790965-37-john.ogness@linutronix.de>
+Date: Mon,  7 Nov 2022 15:22:35 +0106
+Message-Id: <20221107141638.3790965-38-john.ogness@linutronix.de>
 In-Reply-To: <20221107141638.3790965-1-john.ogness@linutronix.de>
 References: <20221107141638.3790965-1-john.ogness@linutronix.de>
 MIME-Version: 1.0
 X-Spam-Score: -1.9 (-)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  configure_kgdboc() uses the console_lock for console list
- iteration. Use the console_list_lock instead because list synchronization
- responsibility will be removed from the console_lock in a later chan [...]
+ Content preview: Calling tty_find_polling_driver() can lead to
+ uart_set_options()
+ being called (via the poll_init() callback of tty_operations) to configure
+ the uart. But uart_set_options() can also be called by regis [...] 
  Content analysis details:   (-1.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -85,18 +86,18 @@ X-Spam-Report: Spam detection software,
  medium trust [193.142.43.55 listed in list.dnswl.org]
  0.6 INVALID_DATE_TZ_ABSURD Invalid Date: header (timezone does not
  exist)
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1os2vv-00036d-81
-Subject: [Kgdb-bugreport] [PATCH printk v3 36/40] tty: serial: kgdboc: use
- console_list_lock for list traversal
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+X-Headers-End: 1os2vv-00036i-Oo
+Subject: [Kgdb-bugreport] [PATCH printk v3 37/40] tty: serial: kgdboc:
+ synchronize tty_find_polling_driver() and register_console()
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -119,80 +120,49 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-configure_kgdboc() uses the console_lock for console list iteration. Use
-the console_list_lock instead because list synchronization responsibility
-will be removed from the console_lock in a later change.
+Calling tty_find_polling_driver() can lead to uart_set_options() being
+called (via the poll_init() callback of tty_operations) to configure the
+uart. But uart_set_options() can also be called by register_console()
+(via the setup() callback of console).
 
-The SRCU iterator could have been used here, but a later change will
-relocate the locking of the console_list_lock to also provide
-synchronization against register_console().
-
-Note, the console_lock is still needed to serialize the device()
-callback with other console operations.
+Take the console_list_lock to synchronize against register_console() and
+also use it for console list traversal. This also ensures the console list
+cannot change until the polling console has been chosen.
 
 Signed-off-by: John Ogness <john.ogness@linutronix.de>
 ---
- drivers/tty/serial/kgdboc.c | 22 ++++++++++++++++++++--
- 1 file changed, 20 insertions(+), 2 deletions(-)
+ drivers/tty/serial/kgdboc.c | 16 ++++++++++++----
+ 1 file changed, 12 insertions(+), 4 deletions(-)
 
 diff --git a/drivers/tty/serial/kgdboc.c b/drivers/tty/serial/kgdboc.c
-index 5be381003e58..82b4b4d67823 100644
+index 82b4b4d67823..8c2b7ccdfebf 100644
 --- a/drivers/tty/serial/kgdboc.c
 +++ b/drivers/tty/serial/kgdboc.c
-@@ -193,7 +193,16 @@ static int configure_kgdboc(void)
- 	if (!p)
- 		goto noconfig;
+@@ -189,12 +189,20 @@ static int configure_kgdboc(void)
+ 	if (kgdboc_register_kbd(&cptr))
+ 		goto do_register;
  
-+	/* For safe traversal of the console list. */
++	/*
++	 * tty_find_polling_driver() can call uart_set_options()
++	 * (via poll_init) to configure the uart. Take the console_list_lock
++	 * in order to synchronize against register_console(), which can also
++	 * configure the uart via uart_set_options(). This also allows safe
++	 * traversal of the console list.
++	 */
 +	console_list_lock();
 +
-+	/*
-+	 * Take console_lock to serialize device() callback with
-+	 * other console operations. For example, fg_console is
-+	 * modified under console_lock when switching vt.
-+	 */
- 	console_lock();
-+
- 	for_each_console(cons) {
- 		int idx;
- 		if (cons->device && cons->device(cons, &idx) == p &&
-@@ -202,8 +211,11 @@ static int configure_kgdboc(void)
- 			break;
- 		}
- 	}
-+
- 	console_unlock();
- 
-+	console_list_unlock();
-+
- 	kgdb_tty_driver = p;
- 	kgdb_tty_line = tty_line;
- 
-@@ -451,6 +463,7 @@ static void kgdboc_earlycon_pre_exp_handler(void)
- {
- 	struct console *con;
- 	static bool already_warned;
-+	int cookie;
- 
- 	if (already_warned)
- 		return;
-@@ -463,9 +476,14 @@ static void kgdboc_earlycon_pre_exp_handler(void)
- 	 * serial drivers might be OK with this, print a warning once per
- 	 * boot if we detect this case.
- 	 */
--	for_each_console(con)
-+	cookie = console_srcu_read_lock();
-+	for_each_console_srcu(con) {
- 		if (con == kgdboc_earlycon_io_ops.cons)
--			return;
-+			break;
+ 	p = tty_find_polling_driver(cptr, &tty_line);
+-	if (!p)
++	if (!p) {
++		console_list_unlock();
+ 		goto noconfig;
+-
+-	/* For safe traversal of the console list. */
+-	console_list_lock();
 +	}
-+	console_srcu_read_unlock(cookie);
-+	if (con)
-+		return;
  
- 	already_warned = true;
- 	pr_warn("kgdboc_earlycon is still using bootconsole\n");
+ 	/*
+ 	 * Take console_lock to serialize device() callback with
 -- 
 2.30.2
 
