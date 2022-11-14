@@ -2,18 +2,18 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6F113628547
-	for <lists+kgdb-bugreport@lfdr.de>; Mon, 14 Nov 2022 17:30:20 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 73E5E62854D
+	for <lists+kgdb-bugreport@lfdr.de>; Mon, 14 Nov 2022 17:30:24 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1oucLT-0008TV-Mx
+	id 1oucLn-0007Jn-6J
 	for lists+kgdb-bugreport@lfdr.de;
-	Mon, 14 Nov 2022 16:30:03 +0000
+	Mon, 14 Nov 2022 16:30:23 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <john.ogness@linutronix.de>) id 1oucLR-0008TN-R3
+ (envelope-from <john.ogness@linutronix.de>) id 1oucLR-0007JH-Qy
  for kgdb-bugreport@lists.sourceforge.net;
  Mon, 14 Nov 2022 16:30:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -22,9 +22,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Ekc6YsdvItEWqTtBsALAxHEjpl5Na6n2oyZUMYkLTB4=; b=L35jmoCPN0HcRyTxYu9Xx6omKn
- Qrm8oEPggi1TMoCLBwHjcWv2P6pso2Kgm+KL3ociMxvEZTOq0Y1/j0RhR2aMmcxux0w582RfEcaOe
- ZGQlI2y7DZChu9l5Nj2Jcn7gsFZss93b/4eEJVuHFMpRgC9VWJWRaFQCfnds1MDjj3Ag=;
+ bh=R9VqGyF+glKoWbwrATKZGXQP3ZfoC2SELt3pYx7i6e4=; b=UA8UKTqF9PqfI7wIptbOAigXyB
+ UqpdbbVDUgrUK/HGsWRlvixMBkX6/tKsik8Y8o7eoV3gCWfxWkBjrt1Bzlhuas6pgbQtlHdueyutc
+ fWC5Au7TS0ga4+4opq/7uKkup1xNWinmzDyKMR9qzDCTOpO0PIrzpqzURs3QM3kCKPnw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -32,39 +32,39 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Ekc6YsdvItEWqTtBsALAxHEjpl5Na6n2oyZUMYkLTB4=; b=L8jn3R9m4vMW53WN9pAxsMkx+T
- CgYQqERImP7rNV1PL22ydkgArjNOTyFVxiwsQAXExG/4ObznM9QeaovfYfgsyUENekUdB7QX4PgdY
- aJEyPzReDUex2dYK0VFLxZkDGvlFMe70SL5FWFn1eqvxU3ALf+aINsltA/PVgv7zgFF0=;
+ bh=R9VqGyF+glKoWbwrATKZGXQP3ZfoC2SELt3pYx7i6e4=; b=Su6vrSTZq2Cbex+bV5QoI1coH6
+ I1Km7TfRZRSfO92a3r93gUfHGNqAutZJC8xsz8ctvi/Lt4Ugk1juh1N8BpaiSE7+YL2ycB7kzzpGb
+ 5cHY4Z9Ge8ZGAHysitQXdogszcQBYBV1sBZ80m0FpYe2Hp6qeyvBMhGKOgvB7em61Br4=;
 Received: from galois.linutronix.de ([193.142.43.55])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oucLM-0000hW-U9 for kgdb-bugreport@lists.sourceforge.net;
+ id 1oucLN-0083vX-ED for kgdb-bugreport@lists.sourceforge.net;
  Mon, 14 Nov 2022 16:30:01 +0000
 From: John Ogness <john.ogness@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1668443390;
+ s=2020; t=1668443391;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Ekc6YsdvItEWqTtBsALAxHEjpl5Na6n2oyZUMYkLTB4=;
- b=yLTA3smRSwZAzo0WodrUiCw7R5e475OFiwy+MWrPjH2XP7ogPwQVMS/zXU+LhKNp3eKpXA
- KGtD1o1+JZmtwdaVIy0gg29vMf6kvK9rm2vrsZyonpaDUUTb5Sp/mH9T0OWeMIm1fw0CNZ
- yVxqCP1JkAW2TE0usGB3mIL6COdrOyYk7TGKh3uCK6ZEoKV1rsr8JN2AswuXWtLRch8B/g
- h9RBqzV3HRHCpEuRiQzw7NorZv1XRz1MTdoruSZvLqfVBLUkSQNCGeokFeJYuRRdnl1ChN
- gpVIJdkzBvjKIPQNYUsMfwB2OouUp3eQQlkvIZcwWD6vHw7JrG+3vaFv+Ovqvg==
+ bh=R9VqGyF+glKoWbwrATKZGXQP3ZfoC2SELt3pYx7i6e4=;
+ b=DacyzsBcp752j0f06x6Q5nIQ3Y5gHBQvOHj6L2Z1z+kRtb13uwnRXYW37qeBlA7kgq5U5n
+ OaG76pGwOCwmTLoNnu/ZsGzwldP/gJxxLG3s06WbdxVYr9g1JXPqk0nThtOkMIKl8nD9ZC
+ J5NDzg7I6YeBPhNNt11xV2oCLyep6w6l3sQDsNbw86SZHUUGw3Z7L59dKKhdvveul7RcQw
+ gTAN2eDqhT8DvmFpCl3VGyA+CLcij+AIKpEnvnW1Y2ot2Pkpr7hjHH5KLAm7Due/1vwzjr
+ AB7lVHWHuwghLHNLPcTikzz1Xbjg9af9IqHrb2u8wSXUTwh+qQgOKXTfbaCX7Q==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1668443390;
+ s=2020e; t=1668443391;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Ekc6YsdvItEWqTtBsALAxHEjpl5Na6n2oyZUMYkLTB4=;
- b=cu2GY0TtUc+v5tINvlKDlxbO+i9OxziAYNewzqmSMu9L8Im8ozqk0RzFdYXxlRic6fMIZq
- zx1LlYZGgEzZ0FCA==
+ bh=R9VqGyF+glKoWbwrATKZGXQP3ZfoC2SELt3pYx7i6e4=;
+ b=5U/0tNMtf/1+xSx/qQ15ry4JRyEwzML/OTxzN7u46NDdwk8a6TlIBlnh67P6RTs4qrLo08
+ vYO+POSL/MrszBCw==
 To: Petr Mladek <pmladek@suse.com>
-Date: Mon, 14 Nov 2022 17:35:29 +0106
-Message-Id: <20221114162932.141883-37-john.ogness@linutronix.de>
+Date: Mon, 14 Nov 2022 17:35:30 +0106
+Message-Id: <20221114162932.141883-38-john.ogness@linutronix.de>
 In-Reply-To: <20221114162932.141883-1-john.ogness@linutronix.de>
 References: <20221114162932.141883-1-john.ogness@linutronix.de>
 MIME-Version: 1.0
@@ -75,10 +75,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Calling tty_find_polling_driver() can lead to
- uart_set_options()
- being called (via the poll_init() callback of tty_operations) to configure
- the uart. But uart_set_options() can also be called by regis [...] 
+ Content preview: kgdboc_earlycon_init() uses the console_lock to ensure that
+ no consoles are unregistered until the kgdboc_earlycon is setup. The
+ console_list_lock
+ should be used instead because list synchronization r [...] 
  Content analysis details:   (-1.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -95,9 +95,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
-X-Headers-End: 1oucLM-0000hW-U9
-Subject: [Kgdb-bugreport] [PATCH printk v4 36/39] tty: serial: kgdboc:
- synchronize tty_find_polling_driver() and register_console()
+X-Headers-End: 1oucLN-0083vX-ED
+Subject: [Kgdb-bugreport] [PATCH printk v4 37/39] tty: serial: kgdboc: use
+ console_list_lock to trap exit
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -120,51 +120,47 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Calling tty_find_polling_driver() can lead to uart_set_options() being
-called (via the poll_init() callback of tty_operations) to configure the
-uart. But uart_set_options() can also be called by register_console()
-(via the setup() callback of console).
-
-Take the console_list_lock to synchronize against register_console() and
-also use it for console list traversal. This also ensures the console list
-cannot change until the polling console has been chosen.
+kgdboc_earlycon_init() uses the console_lock to ensure that no consoles
+are unregistered until the kgdboc_earlycon is setup. The console_list_lock
+should be used instead because list synchronization responsibility will
+be removed from the console_lock in a later change.
 
 Signed-off-by: John Ogness <john.ogness@linutronix.de>
 Reviewed-by: Daniel Thompson <daniel.thompson@linaro.org>
 Reviewed-by: Petr Mladek <pmladek@suse.com>
 ---
- drivers/tty/serial/kgdboc.c | 16 ++++++++++++----
- 1 file changed, 12 insertions(+), 4 deletions(-)
+ drivers/tty/serial/kgdboc.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/drivers/tty/serial/kgdboc.c b/drivers/tty/serial/kgdboc.c
-index 82b4b4d67823..8c2b7ccdfebf 100644
+index 8c2b7ccdfebf..a3ed9b34e2ab 100644
 --- a/drivers/tty/serial/kgdboc.c
 +++ b/drivers/tty/serial/kgdboc.c
-@@ -189,12 +189,20 @@ static int configure_kgdboc(void)
- 	if (kgdboc_register_kbd(&cptr))
- 		goto do_register;
- 
-+	/*
-+	 * tty_find_polling_driver() can call uart_set_options()
-+	 * (via poll_init) to configure the uart. Take the console_list_lock
-+	 * in order to synchronize against register_console(), which can also
-+	 * configure the uart via uart_set_options(). This also allows safe
-+	 * traversal of the console list.
-+	 */
-+	console_list_lock();
-+
- 	p = tty_find_polling_driver(cptr, &tty_line);
--	if (!p)
-+	if (!p) {
-+		console_list_unlock();
- 		goto noconfig;
--
--	/* For safe traversal of the console list. */
--	console_list_lock();
-+	}
+@@ -558,13 +558,13 @@ static int __init kgdboc_earlycon_init(char *opt)
+ 	 */
  
  	/*
- 	 * Take console_lock to serialize device() callback with
+-	 * Hold the console_lock to guarantee that no consoles are
++	 * Hold the console_list_lock to guarantee that no consoles are
+ 	 * unregistered until the kgdboc_earlycon setup is complete.
+ 	 * Trapping the exit() callback relies on exit() not being
+ 	 * called until the trap is setup. This also allows safe
+ 	 * traversal of the console list and race-free reading of @flags.
+ 	 */
+-	console_lock();
++	console_list_lock();
+ 	for_each_console(con) {
+ 		if (con->write && con->read &&
+ 		    (con->flags & (CON_BOOT | CON_ENABLED)) &&
+@@ -606,7 +606,7 @@ static int __init kgdboc_earlycon_init(char *opt)
+ 	}
+ 
+ unlock:
+-	console_unlock();
++	console_list_unlock();
+ 
+ 	/* Non-zero means malformed option so we always return zero */
+ 	return 0;
 -- 
 2.30.2
 
