@@ -2,18 +2,18 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B1CA662853C
+	by mail.lfdr.de (Postfix) with ESMTPS id 5129262853B
 	for <lists+kgdb-bugreport@lfdr.de>; Mon, 14 Nov 2022 17:29:52 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1oucLH-0007IM-DS
+	id 1oucLH-0007IG-2D
 	for lists+kgdb-bugreport@lfdr.de;
 	Mon, 14 Nov 2022 16:29:51 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <john.ogness@linutronix.de>) id 1oucLG-0007I5-1D
+ (envelope-from <john.ogness@linutronix.de>) id 1oucLG-0007I4-16
  for kgdb-bugreport@lists.sourceforge.net;
  Mon, 14 Nov 2022 16:29:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -22,9 +22,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=MpXDwx4HKdMdBWDyluBjDSAFdjedUOkxkf204NlGPAs=; b=Wo8/dQD8Z0yL9MTxwZtfD+9fHE
- AVgS5KZXG1qLmhXdJLcEPZMo/9mEBScEATvV2m2HGm24xha8xY+Ok19NGz7a0fG+QrAA4cWZ8giI3
- E2VFDvCpaYHJ+SIUfPKUnfA3Lmem/TI6ocYYoefGgWAhqkaKBYzc55VWHkh5aNObbI+E=;
+ bh=OX8P8PjcP3et+B8RxGuAu/qJSUE13puFYmEXVzvc8MY=; b=AVHhaIHeth47p/j/Q1ij0B3PaY
+ Glt/BoT3kXeUCa/uoYnABziZ5IrdYcO0Xm9+ZTtqGC/h744HQkutJC+Y4NX3ZMef7PrpcpVuRvoiT
+ PFn05QKVrLhUeI1UAkGH/YNlD/wXj105P2Jbt4aK5R4/B5cbqvNLAa7afqrEFMIXYVNI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -32,39 +32,39 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=MpXDwx4HKdMdBWDyluBjDSAFdjedUOkxkf204NlGPAs=; b=dSZLTjYvvmfdEHV+NFvmrHMfbc
- 1XOsnFj18zEsTpHWkkHripFQ0HOt3fDibsYwx2jX2MmPZ+lzyz7uNJe6YZUhYJR4hyEorEIJKyZNq
- g+w+S7pSRko52VzSHhBuG1GtgutrLYTC8Ap7H+kgs6rotE8OV1QOgwTURW86RX7OcJX0=;
+ bh=OX8P8PjcP3et+B8RxGuAu/qJSUE13puFYmEXVzvc8MY=; b=ENb5BAqpUt456Ux0TGxsyE3HDQ
+ Of9PRAv1D3sNTkNXZFnmHaHqSmfM+jJ3RaBJ1d5A/wVscLn5xZzQsA0eaR9f3giUAvXKlw/V2M8S1
+ 0o+yLxKw0vNYrrIRa0y0bjb4tNAsS21gaSbdf/31gCdMF04C1osX6R8QnZjVed92xYg4=;
 Received: from galois.linutronix.de ([193.142.43.55])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oucLB-0083vB-Su for kgdb-bugreport@lists.sourceforge.net;
- Mon, 14 Nov 2022 16:29:50 +0000
+ id 1oucLB-0083vC-St for kgdb-bugreport@lists.sourceforge.net;
+ Mon, 14 Nov 2022 16:29:49 +0000
 From: John Ogness <john.ogness@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1668443375;
+ s=2020; t=1668443377;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=MpXDwx4HKdMdBWDyluBjDSAFdjedUOkxkf204NlGPAs=;
- b=ZIb+4NiGcX3L5i14ZL3n7tyukxCFrzAaN2u/yt52dY0OinERwz3VqBV0iF7GolWDeFJnsS
- svoW/OdbNhOb7rb654aqbqcDtFwbYfHWhVZ2ceuMPMcmhjv0V1q3gI9oTYPoEvd8jv81b2
- ma9pcNTXKnS70k2gFZOc7Mia1+4plCCQeNOoytXM9nVFKXzKRZtPhuY59fzFOSCKq0RZRA
- poyjWM9clrOP4N2sx47bznvDPqWcHfs5npYE93Qb0Y0jv9sBxSYz56D2YmtmCZohhyLeYI
- KMrf2UiGEmrv9Y3gYhZPaxYcx475ZwaukWQ0CpuTNgN1i+6jxNyGMVDu29ZVDQ==
+ bh=OX8P8PjcP3et+B8RxGuAu/qJSUE13puFYmEXVzvc8MY=;
+ b=07f/Iv1wL9DpAMhdAgc7Xt3WxoplT/3Nu02eKR1b8+j1+Y7qfzi1+FNR+cnpkz+yvo16Ze
+ MBTxlfIFPnOpIaZmaWz8PKDgW1EEFLce5Z7cjkdy6Vz0eKot3ypTtDpD7aXfrOfrZ5b4jX
+ QntAcdes7YddyPfeX5F8PQ8xBH1C/Xmv0UymHEQmXC9tX8u9cMQ0818P0ky0qz/V24Ia2u
+ 6PtsU3Op8WIIueIM9CeNFqHhD5rmh6U9hltEKu6vOewN2wBbCliUb2DS6q5csf2Eu5FEkm
+ eEGxJwFLBff19l0CYvNQu8UBltdyze2FqKOkIC9D+rP9sBHRrdRV24X32/Thow==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1668443375;
+ s=2020e; t=1668443377;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=MpXDwx4HKdMdBWDyluBjDSAFdjedUOkxkf204NlGPAs=;
- b=rHBzMhUuyyCGljjYgo6M9g2z9ptIJHtaTE0co9JJYi84qxrRS2zWgGLSRMhVC57vB7U60l
- V2qJLfb/YvGXv+AA==
+ bh=OX8P8PjcP3et+B8RxGuAu/qJSUE13puFYmEXVzvc8MY=;
+ b=tELjjwZ800XS5coQk0qRU9bwQBSC526T8kNf1rYyslpyZ3bvfpKU2a+6OVmFy+qzAW3ZUV
+ +iS9PnHyufG1tIDg==
 To: Petr Mladek <pmladek@suse.com>
-Date: Mon, 14 Nov 2022 17:34:54 +0106
-Message-Id: <20221114162932.141883-2-john.ogness@linutronix.de>
+Date: Mon, 14 Nov 2022 17:35:00 +0106
+Message-Id: <20221114162932.141883-8-john.ogness@linutronix.de>
 In-Reply-To: <20221114162932.141883-1-john.ogness@linutronix.de>
 References: <20221114162932.141883-1-john.ogness@linutronix.de>
 MIME-Version: 1.0
@@ -75,18 +75,16 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Thomas Gleixner <tglx@linutronix.de> Unprotected list
- walks are not necessarily safe. Signed-off-by: Thomas Gleixner
- <tglx@linutronix.de>
- Signed-off-by: John Ogness <john.ogness@linutronix.de> Reviewed-by: Greg
- Kroah-Hartman <gregkh@linuxfoundation.org> Reviewed-by: Douglas Anderson <d
- [...] Content analysis details:   (-1.9 points, 6.0 required)
+ Content preview: kgdboc_earlycon_init() uses the console_lock to ensure that
+ no consoles are unregistered until the kgdboc_earlycon is setup. This is
+ necessary because the trapping of the exit() callback assumes that [...] 
+ Content analysis details:   (-1.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [193.142.43.55 listed in list.dnswl.org]
  0.6 INVALID_DATE_TZ_ABSURD Invalid Date: header (timezone does not
  exist)
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [193.142.43.55 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -96,9 +94,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1oucLB-0083vB-Su
-Subject: [Kgdb-bugreport] [PATCH printk v4 01/39] serial: kgdboc: Lock
- console list in probe function
+X-Headers-End: 1oucLB-0083vC-St
+Subject: [Kgdb-bugreport] [PATCH printk v4 07/39] tty: serial: kgdboc:
+ document console_lock usage
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -121,41 +119,41 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-From: Thomas Gleixner <tglx@linutronix.de>
+kgdboc_earlycon_init() uses the console_lock to ensure that no consoles
+are unregistered until the kgdboc_earlycon is setup. This is necessary
+because the trapping of the exit() callback assumes that the exit()
+callback is not called before the trap is setup.
 
-Unprotected list walks are not necessarily safe.
+Explicitly document this non-typical console_lock usage.
 
-Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Signed-off-by: John Ogness <john.ogness@linutronix.de>
 Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 Reviewed-by: Douglas Anderson <dianders@chromium.org>
-Reviewed-by: Sergey Senozhatsky <senozhatsky@chromium.org>
-Reviewed-by: Petr Mladek <pmladek@suse.com>
 Reviewed-by: Daniel Thompson <daniel.thompson@linaro.org>
+Reviewed-by: Petr Mladek <pmladek@suse.com>
 ---
- drivers/tty/serial/kgdboc.c | 2 ++
- 1 file changed, 2 insertions(+)
+ drivers/tty/serial/kgdboc.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
 diff --git a/drivers/tty/serial/kgdboc.c b/drivers/tty/serial/kgdboc.c
-index 7aa37be3216a..e76f0186c335 100644
+index e76f0186c335..5be381003e58 100644
 --- a/drivers/tty/serial/kgdboc.c
 +++ b/drivers/tty/serial/kgdboc.c
-@@ -193,6 +193,7 @@ static int configure_kgdboc(void)
- 	if (!p)
- 		goto noconfig;
- 
-+	console_lock();
- 	for_each_console(cons) {
- 		int idx;
- 		if (cons->device && cons->device(cons, &idx) == p &&
-@@ -201,6 +202,7 @@ static int configure_kgdboc(void)
- 			break;
- 		}
- 	}
-+	console_unlock();
- 
- 	kgdb_tty_driver = p;
- 	kgdb_tty_line = tty_line;
+@@ -530,6 +530,14 @@ static int __init kgdboc_earlycon_init(char *opt)
+ 	 * Look for a matching console, or if the name was left blank just
+ 	 * pick the first one we find.
+ 	 */
++
++	/*
++	 * Hold the console_lock to guarantee that no consoles are
++	 * unregistered until the kgdboc_earlycon setup is complete.
++	 * Trapping the exit() callback relies on exit() not being
++	 * called until the trap is setup. This also allows safe
++	 * traversal of the console list and race-free reading of @flags.
++	 */
+ 	console_lock();
+ 	for_each_console(con) {
+ 		if (con->write && con->read &&
 -- 
 2.30.2
 
