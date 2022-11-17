@@ -2,29 +2,29 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5CC6C62D050
-	for <lists+kgdb-bugreport@lfdr.de>; Thu, 17 Nov 2022 01:59:52 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 93E9462D051
+	for <lists+kgdb-bugreport@lfdr.de>; Thu, 17 Nov 2022 02:00:00 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1ovTFv-0006mI-3E
+	id 1ovTG3-0004Jb-BC
 	for lists+kgdb-bugreport@lfdr.de;
-	Thu, 17 Nov 2022 00:59:51 +0000
+	Thu, 17 Nov 2022 00:59:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <dianders@chromium.org>) id 1ovTFt-0006mC-9R
+ (envelope-from <dianders@chromium.org>) id 1ovTG1-0004JV-P7
  for kgdb-bugreport@lists.sourceforge.net;
- Thu, 17 Nov 2022 00:59:49 +0000
+ Thu, 17 Nov 2022 00:59:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
  In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
  :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=457d9iQgit+Z1EJB0nqQekgVdEZwOgAEMvvOEWPkupI=; b=fmvcR5fqPEajOXxaAWqrvKTe1L
- I2MfHOdP9h2yaGo+VN2UPR8w90G1iOqfLhx4HEOFRM3RDWjcMuV5K7xCdx+gcNf28DUmZ+oUhsf7o
- YTBuDkJlGMZ9Fcu9KgZKXngTkEKXb11QUhrxX5nIs13URNWeyxLDh806vGoZ79Z2scgI=;
+ bh=7IItaZa/7I4VBu5cw0wrKUsh/hbQDFMwGlkpESbfAao=; b=H+7E9YSIFqKoouCZGy3+g+FLdL
+ kkbh4eL9OHI66Hg9Qqx0/QTkntPGHjEFICV0cMuqdUPCbdFNiF+srVHaNL7i5cptsggxNk8T8RnHl
+ cKwlG90Y5JHrOpygoJU/o3sWW06uyyZoPGWh0wtdHWVufdG9S8+0m4dNxiUkfQYg35aU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
@@ -32,62 +32,62 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=457d9iQgit+Z1EJB0nqQekgVdEZwOgAEMvvOEWPkupI=; b=Tc9eGutGvmK8Yb/bMwtq/dAQn8
- 4PFicAF9izaWHTCOkjp9xHK8UsWkWaCYLDuSVOKdllAokHbfAL6IZjQgZpCqZJ/HFlmsf3i0AICZD
- 79vA4HejKah+4SGZP2U/J8W51KgQ1o+GQRf8PSD7VnS5XbsvEMYjHVHuTUxSi1JlFRe4=;
-Received: from mail-ed1-f48.google.com ([209.85.208.48])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=7IItaZa/7I4VBu5cw0wrKUsh/hbQDFMwGlkpESbfAao=; b=TMcEXQylSvk/cCFTA/C4r/AEVf
+ 9a9jy7mBGTqMF8HTsXOG66PZ58t+GwZrTgNnKOcSiRXYpYg5PXEgfK1m5nhUl++DLADgcMdtH/hQu
+ 58m/VKu/+GkkOs8GkQHMZSQcNdnYb+Unk5+jP9D07sRj690QYFZc7zjr/ORusUFcemHM=;
+Received: from mail-ej1-f47.google.com ([209.85.218.47])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1ovTFp-000052-G4 for kgdb-bugreport@lists.sourceforge.net;
- Thu, 17 Nov 2022 00:59:49 +0000
-Received: by mail-ed1-f48.google.com with SMTP id s12so393170edd.5
+ id 1ovTFz-00AvCZ-V4 for kgdb-bugreport@lists.sourceforge.net;
+ Thu, 17 Nov 2022 00:59:57 +0000
+Received: by mail-ej1-f47.google.com with SMTP id n12so1278629eja.11
  for <kgdb-bugreport@lists.sourceforge.net>;
- Wed, 16 Nov 2022 16:59:45 -0800 (PST)
+ Wed, 16 Nov 2022 16:59:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=457d9iQgit+Z1EJB0nqQekgVdEZwOgAEMvvOEWPkupI=;
- b=Bh70kUdShhAGETdykikAQJOKTnFptoZPW3kSYZE+AGERi5jQgkT24kHTMqNAWR10tU
- BuAeJQu/Oi7S5Fcd6875vVxSldt7DeCbJfaCEzyokpntEoPmNCfgg0zYiuf//Cx60LbX
- eL07Ybiq3UPZ7/QNaNsuVClF+LzfF5L0ZCzFo=
+ bh=7IItaZa/7I4VBu5cw0wrKUsh/hbQDFMwGlkpESbfAao=;
+ b=HAD+QNbZhmm80gWWfMxazQiOdxU/8OoWGwpppi16ividblCxYrow2hz0E0zZ7AhQ0z
+ cJqUTprf41aF4MbLXaLFlbvRQJVq6IL9gsK+Kqxa/h2queVIuT30rA6VyDlCgXIBzNyT
+ qslBCis6l11GbiAG8lz7dScccivWN8QaYUE08=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=457d9iQgit+Z1EJB0nqQekgVdEZwOgAEMvvOEWPkupI=;
- b=7P6E804GDpMYdE5pr0DXFzPF0lrzV4neih7rOPGiduyjVVJB05Mu9SkIj/5JmkQKk8
- Ce0qOFhmkudcueXCtpLYPJuRDHeGPrbn5HLucfKvl5sTv0NT4eNq3GgQnyI8BqgXRvP7
- LhlpGwEzhZRqXw4/r+UZSU/rncLXdLKlIs7aMgyxhKjeCNimF363ggID0Cd0RmqNLWgJ
- PMGcDt5McfmiUViqZ85aP4px+ek5/R7MQokDGjH+1yPz4Z4g7iVxDpr9pQbyG+ChEWMR
- ZgUd+VewcZ2ISWaNnxeStKQS/qDmTA9v/UaU1YQxa0hk3y7Q+h9w1lQWFSR7hyq13Jgs
- sbgQ==
-X-Gm-Message-State: ANoB5plbTApwVxExs+AgBe13fIdttUWgqkodGXfXwxeP+cSoT8vsu/hY
- R8dBpmP4eGnyqvdkkX7TTjUGUNmQTl2qQQ6z
-X-Google-Smtp-Source: AA0mqf6AXEXDgC1DC8mA+747QUmUAN5mQYV35XB4dWVYUpWk2DHRVOuwRnf/rhZP5l8M7HW9BRAUcw==
-X-Received: by 2002:a50:fc11:0:b0:45a:1bfa:98bf with SMTP id
- i17-20020a50fc11000000b0045a1bfa98bfmr172327edr.413.1668646778313; 
- Wed, 16 Nov 2022 16:59:38 -0800 (PST)
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com.
- [209.85.128.52]) by smtp.gmail.com with ESMTPSA id
- c1-20020a17090618a100b0078b03d57fa7sm7456910ejf.34.2022.11.16.16.59.35
+ bh=7IItaZa/7I4VBu5cw0wrKUsh/hbQDFMwGlkpESbfAao=;
+ b=KUvG9skvVF+z3Kh1NKptRviLe+vT/rIew0x+hZLoMlwx8pClGP0BkpKHDitIetTezu
+ jYggPgGAE7HDqpkf9U/fGL5CK02meprDYi9wDfQI8GkCy0nVvMEtekubPigdx5+u++1h
+ r2bxFTbfwQ2vThEEvyn/k95WHI8NPJqPvPmQp4mS5UxcHmQduGJg6RrW6gOH4dsFRqN1
+ L1OTavQTC6HHjbuuuemUVsRvoTZ0tmLD+ikazTyDla7JbW6my+Nu6xFlHRlLnye7iz2k
+ DoBS7mEnvJPQ8GqP0gP53ISlunnlssl2W+xwviK9GhlWSiRgegH7vsHWBMQ0CLcVuv7M
+ usQw==
+X-Gm-Message-State: ANoB5pnizNG6HMMih+2aUCbeE5QbcTxuMHIG2ntBUlLypRpAx6LbWT+n
+ 1OV6vtD0evAOwCJqiK4kglGLyZZTo+R/IV25
+X-Google-Smtp-Source: AA0mqf4gMOlUoBpnKlRWx6NlaeddsR8Gxvl3vApqGBpqYcZA159rw1kUc2lTiwBnGqjoa25QhSmuLA==
+X-Received: by 2002:a17:906:50f:b0:78d:ad5d:75e with SMTP id
+ j15-20020a170906050f00b0078dad5d075emr304770eja.172.1668646789130; 
+ Wed, 16 Nov 2022 16:59:49 -0800 (PST)
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com.
+ [209.85.221.44]) by smtp.gmail.com with ESMTPSA id
+ ky14-20020a170907778e00b0078afe360800sm7408200ejc.199.2022.11.16.16.59.47
  for <kgdb-bugreport@lists.sourceforge.net>
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 16 Nov 2022 16:59:36 -0800 (PST)
-Received: by mail-wm1-f52.google.com with SMTP id o30so147311wms.2
+ Wed, 16 Nov 2022 16:59:48 -0800 (PST)
+Received: by mail-wr1-f44.google.com with SMTP id o4so414717wrq.6
  for <kgdb-bugreport@lists.sourceforge.net>;
- Wed, 16 Nov 2022 16:59:35 -0800 (PST)
-X-Received: by 2002:a05:600c:1e12:b0:3cf:9ad3:a20e with SMTP id
- ay18-20020a05600c1e1200b003cf9ad3a20emr110075wmb.151.1668646775488; Wed, 16
- Nov 2022 16:59:35 -0800 (PST)
+ Wed, 16 Nov 2022 16:59:47 -0800 (PST)
+X-Received: by 2002:adf:fb4c:0:b0:236:5270:735e with SMTP id
+ c12-20020adffb4c000000b002365270735emr35889wrs.659.1668646787360; Wed, 16 Nov
+ 2022 16:59:47 -0800 (PST)
 MIME-Version: 1.0
 References: <20221116162152.193147-1-john.ogness@linutronix.de>
- <20221116162152.193147-37-john.ogness@linutronix.de>
-In-Reply-To: <20221116162152.193147-37-john.ogness@linutronix.de>
+ <20221116162152.193147-36-john.ogness@linutronix.de>
+In-Reply-To: <20221116162152.193147-36-john.ogness@linutronix.de>
 From: Doug Anderson <dianders@chromium.org>
-Date: Wed, 16 Nov 2022 16:59:23 -0800
-X-Gmail-Original-Message-ID: <CAD=FV=XhkmOLXnfc0YQyUN-FvNeoF1+=zvp56ttaYvsoKESMdA@mail.gmail.com>
-Message-ID: <CAD=FV=XhkmOLXnfc0YQyUN-FvNeoF1+=zvp56ttaYvsoKESMdA@mail.gmail.com>
+Date: Wed, 16 Nov 2022 16:59:35 -0800
+X-Gmail-Original-Message-ID: <CAD=FV=WHEjpL1VYnLRp9Vy300Xd3Tu=u3MOo_rvHCABDTsQFPA@mail.gmail.com>
+Message-ID: <CAD=FV=WHEjpL1VYnLRp9Vy300Xd3Tu=u3MOo_rvHCABDTsQFPA@mail.gmail.com>
 To: John Ogness <john.ogness@linutronix.de>
 X-Spam-Score: -0.9 (/)
 X-Spam-Report: Spam detection software,
@@ -98,9 +98,8 @@ X-Spam-Report: Spam detection software,
  the administrator of that system for details.
  Content preview:  Hi, On Wed, Nov 16,
  2022 at 8:22 AM John Ogness <john.ogness@linutronix.de>
- wrote: > > configure_kgdboc() uses the console_lock for console list
- iteration.
- Use > the console_list_lock instead because list [...] 
+ wrote: > > Use srcu console list iteration for safe console list traversal.
+ > Note that this is a preparatory change for when co [...] 
  Content analysis details:   (-0.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -109,7 +108,7 @@ X-Spam-Report: Spam detection software,
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: chromium.org]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.208.48 listed in list.dnswl.org]
+ no trust [209.85.218.47 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -120,11 +119,11 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.208.48 listed in wl.mailspike.net]
+ [209.85.218.47 listed in wl.mailspike.net]
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ovTFp-000052-G4
-Subject: Re: [Kgdb-bugreport] [PATCH printk v5 36/40] tty: serial: kgdboc:
- use console_list_lock for list traversal
+X-Headers-End: 1ovTFz-00AvCZ-V4
+Subject: Re: [Kgdb-bugreport] [PATCH printk v5 35/40] tty: serial: kgdboc:
+ use srcu console list iterator
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -152,22 +151,60 @@ Hi,
 
 On Wed, Nov 16, 2022 at 8:22 AM John Ogness <john.ogness@linutronix.de> wrote:
 >
-> configure_kgdboc() uses the console_lock for console list iteration. Use
-> the console_list_lock instead because list synchronization responsibility
-> will be removed from the console_lock in a later change.
->
-> The SRCU iterator could have been used here, but a later change will
-> relocate the locking of the console_list_lock to also provide
-> synchronization against register_console().
->
-> Note, the console_lock is still needed to serialize the device()
-> callback with other console operations.
+> Use srcu console list iteration for safe console list traversal.
+> Note that this is a preparatory change for when console_lock no
+> longer provides synchronization for the console list.
 >
 > Signed-off-by: John Ogness <john.ogness@linutronix.de>
 > Reviewed-by: Petr Mladek <pmladek@suse.com>
 > ---
->  drivers/tty/serial/kgdboc.c | 12 ++++++++++++
->  1 file changed, 12 insertions(+)
+>  drivers/tty/serial/kgdboc.c | 10 ++++++++--
+>  1 file changed, 8 insertions(+), 2 deletions(-)
+>
+> diff --git a/drivers/tty/serial/kgdboc.c b/drivers/tty/serial/kgdboc.c
+> index 5be381003e58..c6df9ef34099 100644
+> --- a/drivers/tty/serial/kgdboc.c
+> +++ b/drivers/tty/serial/kgdboc.c
+> @@ -451,6 +451,7 @@ static void kgdboc_earlycon_pre_exp_handler(void)
+>  {
+>         struct console *con;
+>         static bool already_warned;
+> +       int cookie;
+>
+>         if (already_warned)
+>                 return;
+> @@ -463,9 +464,14 @@ static void kgdboc_earlycon_pre_exp_handler(void)
+>          * serial drivers might be OK with this, print a warning once per
+>          * boot if we detect this case.
+>          */
+> -       for_each_console(con)
+> +       cookie = console_srcu_read_lock();
+> +       for_each_console_srcu(con) {
+>                 if (con == kgdboc_earlycon_io_ops.cons)
+> -                       return;
+> +                       break;
+> +       }
+> +       console_srcu_read_unlock(cookie);
+> +       if (con)
+> +               return;
+
+Is there truly any guarantee that "con" will be NULL if
+for_each_console_srcu() finishes naturally (AKA without a "break"
+being executed)?
+
+It looks as if currently this will be true but nothing in the comments
+of for_each_console_srcu() nor hlist_for_each_entry_srcu() (which it
+calls) guarantees this, right? It would be nice if that was
+documented, but I guess it's not a huge deal.
+
+ Also: wasn't there just some big issue about people using loop
+iteration variables after the loop finished?
+
+https://lwn.net/Articles/885941/
+
+Ah, I guess that's a slightly different problem and probably not relevant here.
+
+So it seems like this is fine.
 
 Reviewed-by: Douglas Anderson <dianders@chromium.org>
 
