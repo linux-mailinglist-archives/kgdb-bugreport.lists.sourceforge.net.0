@@ -2,29 +2,29 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0D47E62D04B
-	for <lists+kgdb-bugreport@lfdr.de>; Thu, 17 Nov 2022 01:59:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5CC6C62D050
+	for <lists+kgdb-bugreport@lfdr.de>; Thu, 17 Nov 2022 01:59:52 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1ovTFc-0006gU-OU
+	id 1ovTFv-0006mI-3E
 	for lists+kgdb-bugreport@lfdr.de;
-	Thu, 17 Nov 2022 00:59:32 +0000
+	Thu, 17 Nov 2022 00:59:51 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <dianders@chromium.org>) id 1ovTFa-0006gN-Np
+ (envelope-from <dianders@chromium.org>) id 1ovTFt-0006mC-9R
  for kgdb-bugreport@lists.sourceforge.net;
- Thu, 17 Nov 2022 00:59:30 +0000
+ Thu, 17 Nov 2022 00:59:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
  In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
  :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=5z9QLYoOFm95pMVOnKF25qs3Hcqgci3miwbsOY+I7C0=; b=WEnRNC4Q1LW4pcqFNH7glS1i2V
- kaEDQvGzqIAmW+kYEyJz+wtcFGdYMxn5K44+nJ43o7z9Qm8KASDEsQ7e0H0fgrIMONz3gXy+ywE29
- IJwINg/DeD3Q2qOQVBT4kh4pO3EPtHa2WJMklwNwmUOnpb5KO6D3e+nKgeSXKA5kBmFc=;
+ bh=457d9iQgit+Z1EJB0nqQekgVdEZwOgAEMvvOEWPkupI=; b=fmvcR5fqPEajOXxaAWqrvKTe1L
+ I2MfHOdP9h2yaGo+VN2UPR8w90G1iOqfLhx4HEOFRM3RDWjcMuV5K7xCdx+gcNf28DUmZ+oUhsf7o
+ YTBuDkJlGMZ9Fcu9KgZKXngTkEKXb11QUhrxX5nIs13URNWeyxLDh806vGoZ79Z2scgI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
@@ -32,98 +32,99 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=5z9QLYoOFm95pMVOnKF25qs3Hcqgci3miwbsOY+I7C0=; b=M/WHDxWkpNLPSW+R9PnOXNF2Pq
- 1VryiRVwCoYLTckumV1bTsFx3OPYRHETHjzamgRObpVGBeFeVeg8gqZ703SqBIfrnWlo8B5j0fF/8
- 2HE/6QcTOo1tiUcDg+li47aHr8nWrrBMxClpp6hsMabWBCMSO4SQfDKfVHns3IqoRzvY=;
-Received: from mail-ej1-f44.google.com ([209.85.218.44])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=457d9iQgit+Z1EJB0nqQekgVdEZwOgAEMvvOEWPkupI=; b=Tc9eGutGvmK8Yb/bMwtq/dAQn8
+ 4PFicAF9izaWHTCOkjp9xHK8UsWkWaCYLDuSVOKdllAokHbfAL6IZjQgZpCqZJ/HFlmsf3i0AICZD
+ 79vA4HejKah+4SGZP2U/J8W51KgQ1o+GQRf8PSD7VnS5XbsvEMYjHVHuTUxSi1JlFRe4=;
+Received: from mail-ed1-f48.google.com ([209.85.208.48])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1ovTFZ-00AvBl-0f for kgdb-bugreport@lists.sourceforge.net;
- Thu, 17 Nov 2022 00:59:30 +0000
-Received: by mail-ej1-f44.google.com with SMTP id bj12so1249299ejb.13
+ id 1ovTFp-000052-G4 for kgdb-bugreport@lists.sourceforge.net;
+ Thu, 17 Nov 2022 00:59:49 +0000
+Received: by mail-ed1-f48.google.com with SMTP id s12so393170edd.5
  for <kgdb-bugreport@lists.sourceforge.net>;
- Wed, 16 Nov 2022 16:59:28 -0800 (PST)
+ Wed, 16 Nov 2022 16:59:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=5z9QLYoOFm95pMVOnKF25qs3Hcqgci3miwbsOY+I7C0=;
- b=aoSgoXP2zY/ZjfphtaJ/kTepLvpy5D+9DdGupsf/12+gXXehkXjkHUg6wn2VSX8VwU
- bPsEpBCjmTno6sKngL1LHpPiYZymT1EQwM8fJ3Qu9ZEn83R3dKrXfbpX1BBzBd4FTO67
- V5zSbzQ7arcbflqVfWpaHTBo8VouN+J2TfYCI=
+ bh=457d9iQgit+Z1EJB0nqQekgVdEZwOgAEMvvOEWPkupI=;
+ b=Bh70kUdShhAGETdykikAQJOKTnFptoZPW3kSYZE+AGERi5jQgkT24kHTMqNAWR10tU
+ BuAeJQu/Oi7S5Fcd6875vVxSldt7DeCbJfaCEzyokpntEoPmNCfgg0zYiuf//Cx60LbX
+ eL07Ybiq3UPZ7/QNaNsuVClF+LzfF5L0ZCzFo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=5z9QLYoOFm95pMVOnKF25qs3Hcqgci3miwbsOY+I7C0=;
- b=VHvRLzRxrUZlDxQTdtjNOkazcBo3tjQi60rsSkOBN1rfhKq27mlBS8QCOfzaUSqILT
- cHxdKFqZF3CxSh9FBy7aGc2Yrn6CEbDOphPnGQI9zVg3wpmVNO8d5QytnzmCFyQkfcCT
- w6RRhZccRgRKv3GoiZR42SEaTXOIi0CCb8Pr2eyJv5P+bMpP0s7PQXipuCyOV5411hfS
- 2Zu8f+smkZrk/tsevfVYWpLCO80xL00ppHagi96ljPDcrW3dxO+hTynuCNMkiUExuFGl
- nCaXLC61fgDJB45d21KvP9vbJwkEzubh9Yw5K+e0zA1MzGQQuweDHOE/tsfabOVwace8
- n9oQ==
-X-Gm-Message-State: ANoB5pl3k0w48XzQuC+T1WqE/LX2ddZ/WzUF8ACbDiWNjzfkb7O2JmGf
- MwUmkV0WHXJJNhXeO6AAgPL2cDEUrzCU2/+d
-X-Google-Smtp-Source: AA0mqf7opFsH4vr56ladIY9eOYYfJkr4wENrTi65HmslzaIdmLGf3fo0Ctm8mFCK1aIiJwBG9fq9cg==
-X-Received: by 2002:a17:906:c0c:b0:78d:77b1:a433 with SMTP id
- s12-20020a1709060c0c00b0078d77b1a433mr271942ejf.486.1668646761470; 
- Wed, 16 Nov 2022 16:59:21 -0800 (PST)
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com.
- [209.85.128.45]) by smtp.gmail.com with ESMTPSA id
- g16-20020a1709065d1000b0073d7b876621sm7431187ejt.205.2022.11.16.16.59.20
+ bh=457d9iQgit+Z1EJB0nqQekgVdEZwOgAEMvvOEWPkupI=;
+ b=7P6E804GDpMYdE5pr0DXFzPF0lrzV4neih7rOPGiduyjVVJB05Mu9SkIj/5JmkQKk8
+ Ce0qOFhmkudcueXCtpLYPJuRDHeGPrbn5HLucfKvl5sTv0NT4eNq3GgQnyI8BqgXRvP7
+ LhlpGwEzhZRqXw4/r+UZSU/rncLXdLKlIs7aMgyxhKjeCNimF363ggID0Cd0RmqNLWgJ
+ PMGcDt5McfmiUViqZ85aP4px+ek5/R7MQokDGjH+1yPz4Z4g7iVxDpr9pQbyG+ChEWMR
+ ZgUd+VewcZ2ISWaNnxeStKQS/qDmTA9v/UaU1YQxa0hk3y7Q+h9w1lQWFSR7hyq13Jgs
+ sbgQ==
+X-Gm-Message-State: ANoB5plbTApwVxExs+AgBe13fIdttUWgqkodGXfXwxeP+cSoT8vsu/hY
+ R8dBpmP4eGnyqvdkkX7TTjUGUNmQTl2qQQ6z
+X-Google-Smtp-Source: AA0mqf6AXEXDgC1DC8mA+747QUmUAN5mQYV35XB4dWVYUpWk2DHRVOuwRnf/rhZP5l8M7HW9BRAUcw==
+X-Received: by 2002:a50:fc11:0:b0:45a:1bfa:98bf with SMTP id
+ i17-20020a50fc11000000b0045a1bfa98bfmr172327edr.413.1668646778313; 
+ Wed, 16 Nov 2022 16:59:38 -0800 (PST)
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com.
+ [209.85.128.52]) by smtp.gmail.com with ESMTPSA id
+ c1-20020a17090618a100b0078b03d57fa7sm7456910ejf.34.2022.11.16.16.59.35
  for <kgdb-bugreport@lists.sourceforge.net>
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 16 Nov 2022 16:59:20 -0800 (PST)
-Received: by mail-wm1-f45.google.com with SMTP id
- h186-20020a1c21c3000000b003cfe48519a6so3312540wmh.0
+ Wed, 16 Nov 2022 16:59:36 -0800 (PST)
+Received: by mail-wm1-f52.google.com with SMTP id o30so147311wms.2
  for <kgdb-bugreport@lists.sourceforge.net>;
- Wed, 16 Nov 2022 16:59:20 -0800 (PST)
-X-Received: by 2002:a1c:cc04:0:b0:3cf:7716:8954 with SMTP id
- h4-20020a1ccc04000000b003cf77168954mr157185wmb.57.1668646760151; Wed, 16 Nov
- 2022 16:59:20 -0800 (PST)
+ Wed, 16 Nov 2022 16:59:35 -0800 (PST)
+X-Received: by 2002:a05:600c:1e12:b0:3cf:9ad3:a20e with SMTP id
+ ay18-20020a05600c1e1200b003cf9ad3a20emr110075wmb.151.1668646775488; Wed, 16
+ Nov 2022 16:59:35 -0800 (PST)
 MIME-Version: 1.0
 References: <20221116162152.193147-1-john.ogness@linutronix.de>
- <20221116162152.193147-38-john.ogness@linutronix.de>
-In-Reply-To: <20221116162152.193147-38-john.ogness@linutronix.de>
+ <20221116162152.193147-37-john.ogness@linutronix.de>
+In-Reply-To: <20221116162152.193147-37-john.ogness@linutronix.de>
 From: Doug Anderson <dianders@chromium.org>
-Date: Wed, 16 Nov 2022 16:59:08 -0800
-X-Gmail-Original-Message-ID: <CAD=FV=WWZAAhw7rWjCvtqz6VGh-PzG_zMnugX_KkG7gZ+a9Qpw@mail.gmail.com>
-Message-ID: <CAD=FV=WWZAAhw7rWjCvtqz6VGh-PzG_zMnugX_KkG7gZ+a9Qpw@mail.gmail.com>
+Date: Wed, 16 Nov 2022 16:59:23 -0800
+X-Gmail-Original-Message-ID: <CAD=FV=XhkmOLXnfc0YQyUN-FvNeoF1+=zvp56ttaYvsoKESMdA@mail.gmail.com>
+Message-ID: <CAD=FV=XhkmOLXnfc0YQyUN-FvNeoF1+=zvp56ttaYvsoKESMdA@mail.gmail.com>
 To: John Ogness <john.ogness@linutronix.de>
-X-Spam-Score: -0.2 (/)
+X-Spam-Score: -0.9 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Hi, On Wed, Nov 16,
  2022 at 8:22 AM John Ogness <john.ogness@linutronix.de>
- wrote: > > Calling tty_find_polling_driver() can lead to uart_set_options()
- being > called (via the poll_init() callback of tty_ [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ wrote: > > configure_kgdboc() uses the console_lock for console list
+ iteration.
+ Use > the console_list_lock instead because list [...] 
+ Content analysis details:   (-0.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.218.44 listed in list.dnswl.org]
  0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
  blocked.  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: chromium.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.218.44 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.208.48 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ovTFZ-00AvBl-0f
-Subject: Re: [Kgdb-bugreport] [PATCH printk v5 37/40] tty: serial: kgdboc:
- synchronize tty_find_polling_driver() and register_console()
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.208.48 listed in wl.mailspike.net]
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1ovTFp-000052-G4
+Subject: Re: [Kgdb-bugreport] [PATCH printk v5 36/40] tty: serial: kgdboc:
+ use console_list_lock for list traversal
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -151,53 +152,22 @@ Hi,
 
 On Wed, Nov 16, 2022 at 8:22 AM John Ogness <john.ogness@linutronix.de> wrote:
 >
-> Calling tty_find_polling_driver() can lead to uart_set_options() being
-> called (via the poll_init() callback of tty_operations) to configure the
-> uart. But uart_set_options() can also be called by register_console()
-> (via the setup() callback of console).
+> configure_kgdboc() uses the console_lock for console list iteration. Use
+> the console_list_lock instead because list synchronization responsibility
+> will be removed from the console_lock in a later change.
 >
-> Take the console_list_lock to synchronize against register_console() and
-> also use it for console list traversal. This also ensures the console list
-> cannot change until the polling console has been chosen.
+> The SRCU iterator could have been used here, but a later change will
+> relocate the locking of the console_list_lock to also provide
+> synchronization against register_console().
+>
+> Note, the console_lock is still needed to serialize the device()
+> callback with other console operations.
 >
 > Signed-off-by: John Ogness <john.ogness@linutronix.de>
-> Reviewed-by: Daniel Thompson <daniel.thompson@linaro.org>
 > Reviewed-by: Petr Mladek <pmladek@suse.com>
 > ---
->  drivers/tty/serial/kgdboc.c | 16 ++++++++++++----
->  1 file changed, 12 insertions(+), 4 deletions(-)
->
-> diff --git a/drivers/tty/serial/kgdboc.c b/drivers/tty/serial/kgdboc.c
-> index 82b4b4d67823..8c2b7ccdfebf 100644
-> --- a/drivers/tty/serial/kgdboc.c
-> +++ b/drivers/tty/serial/kgdboc.c
-> @@ -189,12 +189,20 @@ static int configure_kgdboc(void)
->         if (kgdboc_register_kbd(&cptr))
->                 goto do_register;
->
-> +       /*
-> +        * tty_find_polling_driver() can call uart_set_options()
-> +        * (via poll_init) to configure the uart. Take the console_list_lock
-> +        * in order to synchronize against register_console(), which can also
-> +        * configure the uart via uart_set_options(). This also allows safe
-> +        * traversal of the console list.
-> +        */
-> +       console_list_lock();
-> +
->         p = tty_find_polling_driver(cptr, &tty_line);
-> -       if (!p)
-> +       if (!p) {
-> +               console_list_unlock();
->                 goto noconfig;
-> -
-> -       /* For safe traversal of the console list. */
-> -       console_list_lock();
-> +       }
-
-Seems OK to me, though I guess I would have moved console_lock() up
-too just because this isn't a case we need to optimize and then we can
-be extra certain that nobody else is messing with console structures
-while we're looking at them.
+>  drivers/tty/serial/kgdboc.c | 12 ++++++++++++
+>  1 file changed, 12 insertions(+)
 
 Reviewed-by: Douglas Anderson <dianders@chromium.org>
 
