@@ -2,29 +2,29 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8536B62F399
-	for <lists+kgdb-bugreport@lfdr.de>; Fri, 18 Nov 2022 12:23:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id ECD4962F862
+	for <lists+kgdb-bugreport@lfdr.de>; Fri, 18 Nov 2022 15:55:52 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1ovzSi-0006Kh-1K
+	id 1ow2mV-0000YB-Mf
 	for lists+kgdb-bugreport@lfdr.de;
-	Fri, 18 Nov 2022 11:23:12 +0000
+	Fri, 18 Nov 2022 14:55:51 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <pmladek@suse.com>) id 1ovzSh-0006Ka-HK
+ (envelope-from <pmladek@suse.com>) id 1ow2mH-0000XI-Rp
  for kgdb-bugreport@lists.sourceforge.net;
- Fri, 18 Nov 2022 11:23:11 +0000
+ Fri, 18 Nov 2022 14:55:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8+Mt338auMAPyZ6wHbrxbwJ1oWL2/y5Lq8MjJbkctG8=; b=gJXw7i+aAqkOZGFyVBFVX00TBs
- j+br5Y0wZ0IIEYeulOF0ecAo7c40q09SaFy8rNTVbJRdVKcwrnP7IoL8pl1RGA6Vw9+XcebefHioR
- 8fTn3EWuIpgYR1qoh/73Nmbmc/vriTcx93bfVxgkSMyqDTsOGOrLRvmyoy2BOCLAvXk8=;
+ bh=RcWbup5BnnjHzEPpsHQeQ/9zmfC/ktCQBWDNShm4WAU=; b=GA/9So83pEHtveV5IyqdnXHsGb
+ x+gP9aQZ0+qqpIjd0QZhhhnQZNzajtmmG9voBb8jKZMUYCUH2TjfQIEumYyKILN4/XW6G7zebvAoQ
+ KYeYZQLAYwp130T+PpYgQgGiB55AA2KHxIpLQ6ps3aj+xRPHi3Afg5U3f4XyVBsuL6LY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -32,37 +32,38 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=8+Mt338auMAPyZ6wHbrxbwJ1oWL2/y5Lq8MjJbkctG8=; b=LWKrmSksuaEkT84kEBKvaL+buB
- l2iBYF4AQvvM0j5pn+Wpzy81e87Sm40qfyrDLsHKRQEQFydLJBiWHgzPLtnnmjr8TlUVslOKuo7Ix
- t7iINBeHOUy8OwU4xJdZc29rwHCCNPEMBYqKqU11sQmXsA/D5+JA6sGjCmooCxOYuJA4=;
+ bh=RcWbup5BnnjHzEPpsHQeQ/9zmfC/ktCQBWDNShm4WAU=; b=Kt/Xuk5qu/CbTwTBZ64DZWV2I+
+ qbZq/R+21rWSojd1TA5ww5qUZ6QHDr8/FPkKgWHBGIBFU8sAE3lVh+W9c7w/2ZGEZxR4wGJ930mvK
+ qTj/4Rl7HAN//iMLACYAdNWQOfZOT7gz6M3yJl6zNK+Yye+FlZ61Hnr99LVyRD+280Bc=;
 Received: from smtp-out1.suse.de ([195.135.220.28])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1ovzSe-00CTpK-ML for kgdb-bugreport@lists.sourceforge.net;
- Fri, 18 Nov 2022 11:23:11 +0000
+ id 1ow2mG-00Cc7X-0q for kgdb-bugreport@lists.sourceforge.net;
+ Fri, 18 Nov 2022 14:55:37 +0000
 Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
- by smtp-out1.suse.de (Postfix) with ESMTP id 24094224B6;
- Fri, 18 Nov 2022 11:22:58 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTP id A1D8221FB8;
+ Fri, 18 Nov 2022 14:55:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
- t=1668770578; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1668783329; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=8+Mt338auMAPyZ6wHbrxbwJ1oWL2/y5Lq8MjJbkctG8=;
- b=Mqsids9jdixeoyQ3eEblSjOT6qn2nKBBxnXO4YIV6MczkJIueBfOWf5IH+Qgu5GEThrRT6
- hSgJwbIBgcAARZnSZqZlRalEkqp3F27xcCibtgAVfz9XkwKNyhdLPpWTxITfMMyrMmaYir
- bQTfFlUi5/jqo+/cVb1R0youfVPvkVY=
+ bh=RcWbup5BnnjHzEPpsHQeQ/9zmfC/ktCQBWDNShm4WAU=;
+ b=EDb4yO6yUhovxR1R/uuiYft78ukr2h+oU+IjaIre1crSLD6FqDa7tOBl7T9GdFyjImWzLl
+ fuZVE7BJe7raqlKMXUK6GnRr1NqEKply8FF3aod58x9Whn9xAOWMtUkNgxO/GnqpzSdULK
+ TFzAN6y09Rae96AY+OVlAOuIn3VhXg8=
 Received: from suse.cz (unknown [10.100.201.202])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by relay2.suse.de (Postfix) with ESMTPS id 871B52C141;
- Fri, 18 Nov 2022 11:22:56 +0000 (UTC)
-Date: Fri, 18 Nov 2022 12:22:56 +0100
+ by relay2.suse.de (Postfix) with ESMTPS id 093D42C141;
+ Fri, 18 Nov 2022 14:55:28 +0000 (UTC)
+Date: Fri, 18 Nov 2022 15:55:27 +0100
 To: John Ogness <john.ogness@linutronix.de>
-Message-ID: <Y3drEOkD1fuZcvV2@alley>
+Message-ID: <Y3ec3/fpdAQacAOW@alley>
 References: <20221116162152.193147-1-john.ogness@linutronix.de>
+ <Y3drEOkD1fuZcvV2@alley>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20221116162152.193147-1-john.ogness@linutronix.de>
+In-Reply-To: <Y3drEOkD1fuZcvV2@alley>
 X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -70,9 +71,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed 2022-11-16 17:27:12, John Ogness wrote: > This is v5
- of a series to prepare for threaded/atomic > printing. v4 is here [0]. This
- series focuses on reducing the > scope of the BKL console_lock. [...] 
+ Content preview:  On Fri 2022-11-18 12:22:58,
+ Petr Mladek wrote: > On Wed 2022-11-16 17:27:12,
+ John Ogness wrote: > > This is v5 of a series to prepare for threaded/atomic
+ > > printing. v4 is here [0]. This series focu [...] 
  Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -87,7 +89,7 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1ovzSe-00CTpK-ML
+X-Headers-End: 1ow2mG-00Cc7X-0q
 Subject: Re: [Kgdb-bugreport] [PATCH printk v5 00/40] reduce console_lock
  scope
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
@@ -137,22 +139,26 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Wed 2022-11-16 17:27:12, John Ogness wrote:
-> This is v5 of a series to prepare for threaded/atomic
-> printing. v4 is here [0]. This series focuses on reducing the
-> scope of the BKL console_lock. It achieves this by switching to
-> SRCU and a dedicated mutex for console list iteration and
-> modification, respectively. The console_lock will no longer
-> offer this protection.
+On Fri 2022-11-18 12:22:58, Petr Mladek wrote:
+> On Wed 2022-11-16 17:27:12, John Ogness wrote:
+> > This is v5 of a series to prepare for threaded/atomic
+> > printing. v4 is here [0]. This series focuses on reducing the
+> > scope of the BKL console_lock. It achieves this by switching to
+> > SRCU and a dedicated mutex for console list iteration and
+> > modification, respectively. The console_lock will no longer
+> > offer this protection.
+> 
+> The patchset looks ready for linux-next from my POV.
+> 
+> I am going to push it there right now to get as much testing
+> as possible before the merge window.
 
-The patchset looks ready for linux-next from my POV.
+JFYI, the patchset is committed in printk/linux.git,
+branch rework/console-list-lock.
 
-I am going to push it there right now to get as much testing
-as possible before the merge window.
-
-Any review and comments are still appreciate. We could always
-take it back if some critical problems are discovered and
-can't be solved easily.
+I'll eventually merge it into rework/kthreads. But I wanted to have
+it separated until it gets some more testing in linux-next and
+eventually some more review.
 
 Best Regards,
 Petr
