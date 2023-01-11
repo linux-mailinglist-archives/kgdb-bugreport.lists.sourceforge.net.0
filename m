@@ -2,120 +2,103 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 82A6D65BE5C
-	for <lists+kgdb-bugreport@lfdr.de>; Tue,  3 Jan 2023 11:46:46 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7F672665E6B
+	for <lists+kgdb-bugreport@lfdr.de>; Wed, 11 Jan 2023 15:52:11 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1pCeoe-0008HQ-V0
+	id 1pFcSY-0001gS-IY
 	for lists+kgdb-bugreport@lfdr.de;
-	Tue, 03 Jan 2023 10:46:44 +0000
+	Wed, 11 Jan 2023 14:52:10 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <deller@gmx.de>) id 1p8PQu-0004dH-QC
+ (envelope-from <john.ogness@linutronix.de>) id 1pFcSX-0001gM-25
  for kgdb-bugreport@lists.sourceforge.net;
- Thu, 22 Dec 2022 17:32:40 +0000
+ Wed, 11 Jan 2023 14:52:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Sonf3YuJ21g7y9fP2klqVc6ahItTRyNJlBOds7p9XJg=; b=JNbbX+gOXSQgGb7EbwaFSyAxm7
- uf+/ypY4upoqjCU1FamSj1tYl0l1qcD/Nrs2HS6EBjMpWaOaIrOL/ZwNpe90QRMsBO/KKlVbjFDdr
- V451I1vFgPwuaEZf5LJrhw4QKqt1sSoTJ3Wf42UVlLyN9YNAR+xABO/+twN/6pA2lPGI=;
+ bh=C3ShpcOwOQrvdccdvZNmwpq5oNx/F35tbPLB2fWoef8=; b=b9+88Zymj2yqUFlj/vHqi3M3JN
+ LDyO6hMhZZ91MtGaPxruCMj0rKgxZ3ejKwDtNOMiWL+++7iMLn4FwJF73zWEpu+/7Zu/HS1Aux9kp
+ hAOPDQAookVqQrxdbxD8cV/pNAm49jTyD3g4bIlD+bxwn/ypm/P/fb//EBedOb3zE+RY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=Sonf3YuJ21g7y9fP2klqVc6ahItTRyNJlBOds7p9XJg=; b=m2/QNOLXx96qhWWWK810YUa5/A
- RRr0nVQYdiCUk5wlZ6A/AD0YP48P6p3d0pKIKPwyhYtSAIYnSvXPiU/KUw3JPsBVbDtZ/FsO1jVbt
- g5x6LdLoRVWClPCVQi5zE7EYVtb07QKby4jsdM/MxaEJu6eZqleJ+lnU7QO3fe4A7p6Q=;
-Received: from mout.gmx.net ([212.227.15.18])
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=C3ShpcOwOQrvdccdvZNmwpq5oNx/F35tbPLB2fWoef8=; b=m
+ oVTUAfj3izEYoQ7Ulibxi6lzRwDu6OM0TLOhTTMuIY29CqC8DzECeM+gxJ1Av1uF195PD5iJDuCm/
+ 8chfuUV/57ur9rdDl9ksSc3ojFVdnpaOty2/O70PewBqXpyli/J7IOIRSD/YFFlcPvLeXxUOp+P3e
+ eCOonLmGXWJN/jis=;
+Received: from galois.linutronix.de ([193.142.43.55])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1p8PQt-007wik-OL for kgdb-bugreport@lists.sourceforge.net;
- Thu, 22 Dec 2022 17:32:40 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1671730345; bh=joTnMx5Wltrn22nCgRqZ2lqm+qJj8yI9pYNBu2qONEA=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
- b=l4uNxKBuEYw92uOKJZZ2jESgR7nQiz0SFCHaV7DmugSvEOGeEP2jv6Us+RwrgOgis
- 1zVtzwTzjTL3NzjxsmQGiawFj1+DNJ5bqi33VQ6jxxeZYiACpOOBATV/RqsfJ7uFj9
- x+fpNNLU8pfqBE6W3Of4WmdKwUDAkk2bntcOMsscCZ3MlfDpWmWk8P2r+qqCcwAJf6
- /cR9b7EtZq4f70imXVnRes2QGJxyEck7Kjek3bn3DC1Dm/lAtFrT6/sG+inX9tOp5b
- Gcwa04Re4niz56g9rKF6kuJN95rFa+i6o/IUujgl8sQlFMVH3Y11fU15in9QJSj0Gd
- 2pxRsLCM3Gy0A==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.20.60] ([92.116.142.238]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MFKGZ-1p6VkG2Dw9-00FoG1; Thu, 22
- Dec 2022 18:32:25 +0100
-Message-ID: <b49b8c19-5dc1-5cc2-2c92-711456a56ea1@gmx.de>
-Date: Thu, 22 Dec 2022 18:32:24 +0100
+ id 1pFcSS-00DxuX-UX for kgdb-bugreport@lists.sourceforge.net;
+ Wed, 11 Jan 2023 14:52:07 +0000
+From: John Ogness <john.ogness@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020; t=1673448715;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=C3ShpcOwOQrvdccdvZNmwpq5oNx/F35tbPLB2fWoef8=;
+ b=IxLWTMd44vVjt+DirBUWgQYJI/UOfvIW8vYd8ssjsPkHlrjpioQhApzLpwEmh6T3hICiOK
+ Vt2UE6NAVZRw8JydZxC6ukdxTmTvhFNNfeYB6iaDvBaVTy5AvSeNOvR86IL7KWStfVNQIR
+ L2Y6VwUxDpieUmqyo2V6KO6QtsF3syndBf7DzhElOpiQCMAgpF/lAhX6LtxuNHWmS/kROt
+ Rr5cOPYJDcRnA9mzbOMx7+vgmgG4htzS8p4gDm9NTTnMcR25EP/SQgr3TViTvmemDLzlUM
+ qRgM803Rro8yMRdOMR++SSbuhZV3WYHoTt44/mIo4BBvs2aRUGGenk0A87jyCw==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020e; t=1673448715;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=C3ShpcOwOQrvdccdvZNmwpq5oNx/F35tbPLB2fWoef8=;
+ b=uoOqLfetODlsE968Zaka7g/1SL5Ga0HewEV2DZsZZXbcna0JECOq1/c8A+3uvgPhsO5i6W
+ v6OdmN8tCIo0HEDw==
+To: Petr Mladek <pmladek@suse.com>
+Date: Wed, 11 Jan 2023 15:57:10 +0106
+Message-Id: <20230111145110.1327831-1-john.ogness@linutronix.de>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.5.1
-Content-Language: en-US
-To: Daniel Thompson <daniel.thompson@linaro.org>
-References: <Y6DhewN27vMnfgzT@p100> <Y6SKpn1Zaz9aZN1Y@aspen.lan>
-From: Helge Deller <deller@gmx.de>
-In-Reply-To: <Y6SKpn1Zaz9aZN1Y@aspen.lan>
-X-Provags-ID: V03:K1:v3AjLOx2gTzyQ63WCKomL2foOtbTXdiI35v+wb8O1mFgCNVBNbV
- I5JrgsLnsuFPTAOTyK0MWKx1IsoGlVDwUkwKrpIxLcqC5qQaCqoNasFgV4sal1p08JIGAOx
- mOXOvHNnxYV57ivityTUsPAFrx05yQkcXVsW4TyPOgDHY7IMsTRt81LaJ41BoTdrywzK/Pm
- W38q+G2xKxVL9+5Oio5jA==
-X-Spam-Flag: NO
-UI-OutboundReport: notjunk:1;M01:P0:bRnqSWadAjs=;6zpaXwGIdypNdnzehnebSkSDZJc
- F92NOpDGqtVH+KfGhc25EmaIT0Sh5njJhAmHrAYzqvCZM3PvqSh0LYsNpl94s/UcZ0KAQzl42
- t1p67SoR2V+Z45Z1bam1N+2iVPTNasPMs8rsubDC6d1fKp91NSoWUeGaINsFTJd+2UR2hgahB
- n+tZ/JTTW8DLd725oVl9cfcBwO8uwiEZroYhrbEgdiCKbk5MYwMeUQkjhRyS8sQ6B6sk5SVke
- tBt8WBHE+SMH1NVSGpkAD+mUZu+ukF232HjItM30NCNXe1eslV/kgYbhzpuwqcZoUh3UVCbns
- p2EWL1uRffU88jsmZEqii0k7Uv92Lkd49NDtRwTlI3sxPLU2u5qtRFTLFV+YCQF4LNB5xdOKO
- X7JEqHj2H+teJK4YmG/X1JE2BRzMH15KU3HQruoQEzvqV9f0VHgSwSLiSey9DpwCS9AjZk/9D
- OBMh9ljiOKRsnQNMJ8kvy+DDJ/uoCuLw3xi9jVt3dX6hTCAOOGs58+ZufkjInvv4Z0GJutlOc
- TQS9+l1XnFuYD3UGKQA3R8yNnEoypxx8AlRYseHmai/I+2l3kXGuDgcIEIIFg4WlryJQtIqH5
- vHVhrxFz8vexLmTZMTKics4SxskRegrPFNsHTSj33VBYg5SoyDEeq+9szAKDrHIKBUHawBZWa
- OopfSVP5UqUxcvff3eaI5/+Zh1kCXtd7F2DDTrRR28XL4+lmwzjO8C7o0JItA0QmCAKK39fQk
- 0d1wSzXPZzN0I8raIK++7eEz+s96AYjocNQtv6slITmSWvxY5zg+fYFClTT5gc6l1dnfMcfD4
- VWEbwFwsYYHiDlJBbN2gquxERXQGW4uctIyL4yb7oSvP0s5yepXjR84gR0Pa3z3B5UrB5oy8g
- kyCjJ+QhDYY5sH8o9zOIH09uQQk1kUYJta8QrkW5GFU5r4q/I7LpIkAfjLwu7taf6DpFdZGOK
- Tye3Syprs4MMkht+ydRlncy+rxs=
-X-Spam-Score: -2.0 (--)
+X-Spam-Score: -1.9 (-)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 12/22/22 17:49, Daniel Thompson wrote: > On Mon, Dec 19, 
- 2022 at 11:11:07PM +0100, Helge Deller wrote: >> On my 32-bit machine, with
- BREAK_INSTR_SIZE=4 the kgdb_break[] structure >> allocates 16000 [...] 
- Content analysis details:   (-2.0 points, 6.0 required)
+ Content preview:  Several mutexes are taken while setting up console serial
+ ports. In particular,
+ the tty_port->mutex and @console_mutex are taken: serial_pnp_probe
+ serial8250_register_8250_port uart_add_one_port (locks tty_port->mutex)
+ uart_configure_port register_console (locks @console_mutex) 
+ Content analysis details:   (-1.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.7 RCVD_IN_DNSWL_LOW      RBL: Sender listed at https://www.dnswl.org/,
- low trust [212.227.15.18 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [212.227.15.18 listed in wl.mailspike.net]
+ 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
+ blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: linutronix.de]
+ 0.6 INVALID_DATE_TZ_ABSURD Invalid Date: header (timezone does not
+ exist)
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [deller[at]gmx.de]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [193.142.43.55 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -1.1 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1p8PQt-007wik-OL
-X-Mailman-Approved-At: Tue, 03 Jan 2023 10:46:44 +0000
-Subject: Re: [Kgdb-bugreport] [PATCH] Reduce number of concurrent
- KGDB_MAX_BREAKPOINTS
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+X-Headers-End: 1pFcSS-00DxuX-UX
+Subject: [Kgdb-bugreport] [PATCH] tty: serial: kgdboc: fix mutex locking
+ order for configure_kgdboc()
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -127,41 +110,138 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: kgdb-bugreport@lists.sourceforge.net,
- Jason Wessel <jason.wessel@windriver.com>
+Cc: Daniel Thompson <daniel.thompson@linaro.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, linux-kernel@vger.kernel.org,
+ Steven Rostedt <rostedt@goodmis.org>,
+ Sergey Senozhatsky <senozhatsky@chromium.org>, linux-serial@vger.kernel.org,
+ Jason Wessel <jason.wessel@windriver.com>,
+ kgdb-bugreport@lists.sourceforge.net, Thomas Gleixner <tglx@linutronix.de>,
+ Jiri Slaby <jirislaby@kernel.org>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On 12/22/22 17:49, Daniel Thompson wrote:
-> On Mon, Dec 19, 2022 at 11:11:07PM +0100, Helge Deller wrote:
->> On my 32-bit machine, with BREAK_INSTR_SIZE=4 the kgdb_break[] structure
->> allocates 16000 bytes of static kernel memory, which is - by default -
->> to be able to handle up to 1000 concurrent kgdb breakpoints.  I might be
->> wrong, but I doubt that in real life someone really needs that many
->> breakpoints, so I suggest to reduce the number of possible kgdb
->> breakpoints and thus reduce the memory footprint of kgdb_break[].
->
-> I am somewhat dubious about this change. 1000 is large but if we place
-> a breakpoint on an inline function this can result in many breakpoints
-> being set (they appear as a single b.p. in the gdb UI but kgdb will see
-> all the inlined sites).
->
-> As such I'm not clear why 40 (which risks breaking some use cases) is a
-> better default than 1000 (which "only" costs us 16 to 24k).
->
-> If somebody really wants to debug a system where the memory costs cause
-> serious trouble then I guess we could entertain a config option
-> (defaulting to 1000) to allow for such tiny systems. However it does
-> need to start from "we really need this memory because..." rather than
-> just because "16k is a waste".
+Several mutexes are taken while setting up console serial ports. In
+particular, the tty_port->mutex and @console_mutex are taken:
 
-Saving memory is good, and choosing a sane and realistic high-enough default
-value which keeps debugging possible should be the goal. I haven't debugged
-much with kgdb yet, so I don't know what the best amount is.
-40 was just a guess from me.
+  serial_pnp_probe
+    serial8250_register_8250_port
+      uart_add_one_port (locks tty_port->mutex)
+        uart_configure_port
+          register_console (locks @console_mutex)
 
-Helge
+In order to synchronize kgdb's tty_find_polling_driver() with
+register_console(), commit 6193bc90849a ("tty: serial: kgdboc:
+synchronize tty_find_polling_driver() and register_console()") takes
+the @console_mutex. However, this leads to the following call chain
+(with locking):
+
+  platform_probe
+    kgdboc_probe
+      configure_kgdboc (locks @console_mutex)
+        tty_find_polling_driver
+          uart_poll_init (locks tty_port->mutex)
+            uart_set_options
+
+This is clearly deadlock potential due to the reverse lock ordering.
+
+Since uart_set_options() requires holding @console_mutex in order to
+serialize early initialization of the serial-console lock, take the
+@console_mutex in uart_poll_init() instead of configure_kgdboc().
+
+Since configure_kgdboc() was using @console_mutex for safe traversal
+of the console list, change it to use the SRCU iterator instead.
+
+Add comments to uart_set_options() kerneldoc mentioning that it
+requires holding @console_mutex (aka the console_list_lock).
+
+Fixes: 6193bc90849a ("tty: serial: kgdboc: synchronize tty_find_polling_driver() and register_console()")
+Signed-off-by: John Ogness <john.ogness@linutronix.de>
+---
+ drivers/tty/serial/kgdboc.c      | 16 ++++------------
+ drivers/tty/serial/serial_core.c |  5 +++++
+ 2 files changed, 9 insertions(+), 12 deletions(-)
+
+diff --git a/drivers/tty/serial/kgdboc.c b/drivers/tty/serial/kgdboc.c
+index a3ed9b34e2ab..f7df46cc1890 100644
+--- a/drivers/tty/serial/kgdboc.c
++++ b/drivers/tty/serial/kgdboc.c
+@@ -171,6 +171,7 @@ static int configure_kgdboc(void)
+ 	int err = -ENODEV;
+ 	char *cptr = config;
+ 	struct console *cons;
++	int cookie;
+ 
+ 	if (!strlen(config) || isspace(config[0])) {
+ 		err = 0;
+@@ -189,15 +190,6 @@ static int configure_kgdboc(void)
+ 	if (kgdboc_register_kbd(&cptr))
+ 		goto do_register;
+ 
+-	/*
+-	 * tty_find_polling_driver() can call uart_set_options()
+-	 * (via poll_init) to configure the uart. Take the console_list_lock
+-	 * in order to synchronize against register_console(), which can also
+-	 * configure the uart via uart_set_options(). This also allows safe
+-	 * traversal of the console list.
+-	 */
+-	console_list_lock();
+-
+ 	p = tty_find_polling_driver(cptr, &tty_line);
+ 	if (!p) {
+ 		console_list_unlock();
+@@ -211,7 +203,8 @@ static int configure_kgdboc(void)
+ 	 */
+ 	console_lock();
+ 
+-	for_each_console(cons) {
++	cookie = console_srcu_read_lock();
++	for_each_console_srcu(cons) {
+ 		int idx;
+ 		if (cons->device && cons->device(cons, &idx) == p &&
+ 		    idx == tty_line) {
+@@ -219,11 +212,10 @@ static int configure_kgdboc(void)
+ 			break;
+ 		}
+ 	}
++	console_srcu_read_unlock(cookie);
+ 
+ 	console_unlock();
+ 
+-	console_list_unlock();
+-
+ 	kgdb_tty_driver = p;
+ 	kgdb_tty_line = tty_line;
+ 
+diff --git a/drivers/tty/serial/serial_core.c b/drivers/tty/serial/serial_core.c
+index b9fbbee598b8..ec874f3a567c 100644
+--- a/drivers/tty/serial/serial_core.c
++++ b/drivers/tty/serial/serial_core.c
+@@ -2212,6 +2212,9 @@ EXPORT_SYMBOL_GPL(uart_parse_options);
+  * @parity: parity character - 'n' (none), 'o' (odd), 'e' (even)
+  * @bits: number of data bits
+  * @flow: flow control character - 'r' (rts)
++ *
++ * Locking: Caller must hold console_list_lock in order to serialize
++ * early initialization of the serial-console lock.
+  */
+ int
+ uart_set_options(struct uart_port *port, struct console *co,
+@@ -2619,7 +2622,9 @@ static int uart_poll_init(struct tty_driver *driver, int line, char *options)
+ 
+ 	if (!ret && options) {
+ 		uart_parse_options(options, &baud, &parity, &bits, &flow);
++		console_list_lock();
+ 		ret = uart_set_options(port, NULL, baud, parity, bits, flow);
++		console_list_unlock();
+ 	}
+ out:
+ 	mutex_unlock(&tport->mutex);
+
+base-commit: b7bfaa761d760e72a969d116517eaa12e404c262
+-- 
+2.30.2
+
 
 
 _______________________________________________
