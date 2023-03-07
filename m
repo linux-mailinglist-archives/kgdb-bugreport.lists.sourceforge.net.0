@@ -2,29 +2,29 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (unknown [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 99C3E6C69C9
+	by mail.lfdr.de (Postfix) with ESMTPS id E69316C69CA
 	for <lists+kgdb-bugreport@lfdr.de>; Thu, 23 Mar 2023 14:45:26 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1pfLFr-0006Ew-DC
+	id 1pfLFr-0006F6-NW
 	for lists+kgdb-bugreport@lfdr.de;
 	Thu, 23 Mar 2023 13:45:25 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <brgl@bgdev.pl>) id 1pZZoS-0002f0-5x
+ (envelope-from <brgl@bgdev.pl>) id 1pZZzi-0002k4-Cw
  for kgdb-bugreport@lists.sourceforge.net;
- Tue, 07 Mar 2023 16:05:16 +0000
+ Tue, 07 Mar 2023 16:16:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
  Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=+PtH9Gk9ydTOUuCLXL03A9HQrmxm7UqvxGMXgnUBbiM=; b=HDQIqm84qilyLvJ3C839GnD3EP
- lvIrYcH+cbvvGzQ2MgGi6RHZjK770BTZaljluCyVuqTpIr0JzinzVSH6FAxA7C3iZuFUpZowCigrQ
- GL5qT84N5VW0HEkYLduXFPbB4bRLX/WKMDBWFW+oxrDjrpXJelNEWgFAf7GB8xg20uxo=;
+ bh=h9+99NXNhE+HCsau06muPJZBCwtg/6d76sJA1Z4GbtQ=; b=NwfVSiOoNJPQ57r+gWTNCLAbiA
+ /zdm0q8sTPEpb0tPkWfAzj7sqNzz3xRO8tTwINW+nBuskEvvuZbpMasYPMx0O8b2rk8NJVwekoxJI
+ y/a7dttT4ukrzOii11F7LUN/oBzri02pp0W/dxre7UVaRVkeBsrqCPI7hYdOdo2f7d6o=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
@@ -32,53 +32,53 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=+PtH9Gk9ydTOUuCLXL03A9HQrmxm7UqvxGMXgnUBbiM=; b=ES+/zxRh1BnormC1cigdsQGyPA
- KzqGc5u/1hpTKFbEbiOEPX+Wpw2BNvP8KN0p1x5NSeJub3fKmvfdQAUy4lTCbTzf98b5Mvob9ZDnv
- g3zlS0XSzuLb+OXeqUDUIx0cUr+Cc1iRBg25prfYUB4/p41D6sPljqBMtzeI3MPKeZRk=;
-Received: from mail-ed1-f49.google.com ([209.85.208.49])
+ bh=h9+99NXNhE+HCsau06muPJZBCwtg/6d76sJA1Z4GbtQ=; b=Ldf4nUM1zpm/3MooLSfIFrhXNN
+ C6EtXZvTdHioR8BPhT9XNU8vG7mQXdCuiwVP0kA+sFLgKiBMqO6LGn2n3Vwd4b5Mbr2bnhLHzyfoA
+ tK45o0SHKD18lPLC7GyZXEzbXIhY+aVyvJOPuyA2yHE+YgQ4H39gouzPfcOfVYQuIEh8=;
+Received: from mail-lj1-f178.google.com ([209.85.208.178])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1pZZoP-0006dO-HO for kgdb-bugreport@lists.sourceforge.net;
- Tue, 07 Mar 2023 16:05:16 +0000
-Received: by mail-ed1-f49.google.com with SMTP id k10so30379000edk.13
+ id 1pZZzf-00070P-AT for kgdb-bugreport@lists.sourceforge.net;
+ Tue, 07 Mar 2023 16:16:53 +0000
+Received: by mail-lj1-f178.google.com with SMTP id b10so13779326ljr.0
  for <kgdb-bugreport@lists.sourceforge.net>;
- Tue, 07 Mar 2023 08:05:14 -0800 (PST)
+ Tue, 07 Mar 2023 08:16:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=bgdev-pl.20210112.gappssmtp.com; s=20210112; t=1678205108;
+ d=bgdev-pl.20210112.gappssmtp.com; s=20210112; t=1678205805;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+PtH9Gk9ydTOUuCLXL03A9HQrmxm7UqvxGMXgnUBbiM=;
- b=Vu+i/J8Aa/nOcfvDlvzi+xucdax+PjFPvXbsNLNDVVqLKkoTufBm2yG9cvXY3S4eJp
- 255pHDqaf3g14KGQ1vhqUP4Tp09bld6ivw0AQnqjC6WO639OZuw3Z88qWME6zgx+gNQn
- pdYvd6fDvB49I0fu55kfczvimV4B2ZWM+S1UVr7kBaJH6GkQeGwa1UdE7fvpd4vUlyL+
- fx6SYSksUfAT7EpkwofOvMeIymBeN1w2ECsSv+afe6AP0AzUdPR7xaS3C3CB+t/AnmMw
- UwC9DtREEfHXQ1/1sba3ia21hwZgfd0XEXqvau6Fu/PAj6IMsLAMU9J8XapM30O6vSsZ
- c3kw==
+ bh=h9+99NXNhE+HCsau06muPJZBCwtg/6d76sJA1Z4GbtQ=;
+ b=EX1enJkIHCE4Jft6dHgd+TTBxYCsddhtYsmIqxOfIs7J6idEMG2Du9IQIH4UCKCeOk
+ rSAubAr4K5TPojsZpND5rHJCXBE7cDhSOWZlwz8BCxQZTlzEF9FM+3vY53dqVCbnGdDW
+ 6dAELdl8p2wKzuZVBu6dUb6y3k9G+HfmoYmEUC+90nrnwdCX2b2gFIudOQPvCpDZvpwY
+ oppckq1WKvl40RThgzcaq22mLx08CEh/x3o+fAbD3DegnFMQzaWRCFlKmlbNJ+cUZzCE
+ jpe7pAgH8f+v20jYQyU7ceTloZUGfmPwtPt7E/GGJmylG+zm2RnSB9G668pSv/k/HAnx
+ Xx4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1678205108;
+ d=1e100.net; s=20210112; t=1678205805;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+PtH9Gk9ydTOUuCLXL03A9HQrmxm7UqvxGMXgnUBbiM=;
- b=yrM0MZRC8Q4FMP0aC14aWhmY02/rkiOrcEDIOPb5mBzoFEfw1Q8aQ8FIkw95o6DYoq
- C3xdmmo+y2A6R/qnEQpFm9Lr/yS1dx6M9rEF/W4Oft5R50gUkabRlmhlb0zD9VqXtw1r
- IaPddC/JO5y/+DKdlGOIcv7jA6+s9IQtmj0Y30nynbakYncwPqbqeqgoX4PdBHM/Es3B
- XgpDCkCph6hbv8l1b5obPhl8NaVhu783/hiYZF/sHPGGVS2vsvRgyzO16oy3LoeqBf7y
- ZkQrLrQVEYWWgXS4ciWBpg64FlJQ/xF9x9unP8zzBzN7Ec4OGS7bzAz5l1AswImf48OI
- wsBA==
-X-Gm-Message-State: AO0yUKVedK3kn/FMrJDfc25ZaZlbEoMA4cMsnj7Yi2oPma5iwIOgqaH+
- l7UwlGVkgvV0vxM+9dWiLYKUgUba4ZAilXuoP6XbIni7rU6foCSF
-X-Google-Smtp-Source: AK7set/sxMp2nymcDtGOA+3rKK9UwGmZwcMpf7ztw0lEMN+8H5sNhHbCwoz5CimvcW51n/7crDGpnBESVibPIo32sWU=
-X-Received: by 2002:ac2:43a6:0:b0:4db:3ab2:896e with SMTP id
- t6-20020ac243a6000000b004db3ab2896emr4355849lfl.6.1678203532966; Tue, 07 Mar
- 2023 07:38:52 -0800 (PST)
+ bh=h9+99NXNhE+HCsau06muPJZBCwtg/6d76sJA1Z4GbtQ=;
+ b=PNhAOvma6IljxzGUOvluu4FpGqDHjyRj+cKh7shAScqc5cG1SwtJh4HsGunjSFhJxs
+ CederaF/9aeqAQ2zq+dEFfpgD2gCGzOPd2TZa/e0OoU2lxSR9/lwy+f2i4NhJ6c+5cr7
+ nWZtliWQVvIfgO6cdhkfaTFTf+H0pF0hkGRqH4ZjP9Hqew/jYrXbnroBOuieOqTgKfl1
+ 9gflZSpOYcr/gAkeVF5LejjkeUSlfg18jo39Pp/VEUn9koX+ilKQEdXptd7JPyQVGzG7
+ tB03U1B8zXSLUv6J5IOuLqzG3tamPzRV4XEVgPkyewmYOFtsoId90hRHjBy/wuteW5Nj
+ Bolw==
+X-Gm-Message-State: AO0yUKV2a8U3058wklratqaAjcTvudUdQBqtmuYFnkhTd0nLPTLWpAPW
+ BKPxHTmmLH+PcIquIvNh6IItsTTD425PpSwg8loi7fNxSvBm5PN/
+X-Google-Smtp-Source: AK7set+EUPmmQ3KQEHGY3m5gS4LQmB5rlfTmCkgWLid5zxaXS4ZPk4vzmFfYMo7ea0TRMI75s5JFMj77XkpxSfOGbJ8=
+X-Received: by 2002:a05:651c:1246:b0:295:b77c:a3a2 with SMTP id
+ h6-20020a05651c124600b00295b77ca3a2mr4616438ljh.6.1678203976045; Tue, 07 Mar
+ 2023 07:46:16 -0800 (PST)
 MIME-Version: 1.0
 References: <20230307073155.1.Iaab0159b8d268060a0e131ebb27125af4750ef99@changeid>
 In-Reply-To: <20230307073155.1.Iaab0159b8d268060a0e131ebb27125af4750ef99@changeid>
 From: Bartosz Golaszewski <brgl@bgdev.pl>
-Date: Tue, 7 Mar 2023 16:38:21 +0100
-Message-ID: <CAMRc=MdKmDQGj_tWJhFMtOW3bGJWu4gqjL40BbCbP-Or5epVZA@mail.gmail.com>
+Date: Tue, 7 Mar 2023 16:46:03 +0100
+Message-ID: <CAMRc=McL7P7Zr5csLtLVBj0DzuJ_M6OZZKeVQvpPCx1ytMk+=g@mail.gmail.com>
 To: Douglas Anderson <dianders@chromium.org>
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
@@ -95,18 +95,18 @@ X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.
  
   pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
-                              no trust
-                             [209.85.208.49 listed in list.dnswl.org]
   0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
   0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+                              no trust
+                             [209.85.208.178 listed in list.dnswl.org]
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
-                             [209.85.208.49 listed in wl.mailspike.net]
+                             [209.85.208.178 listed in wl.mailspike.net]
  -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
   0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
                              valid
-X-Headers-End: 1pZZoP-0006dO-HO
-X-Mailman-Approved-At: Thu, 23 Mar 2023 13:45:19 +0000
+X-Headers-End: 1pZZzf-00070P-AT
+X-Mailman-Approved-At: Thu, 23 Mar 2023 13:45:22 +0000
 Subject: Re: [Kgdb-bugreport] [PATCH 1/3] tty: serial: qcom-geni-serial: Fix
  kdb/kgdb after port shutdown (again)
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
@@ -169,10 +169,8 @@ dCkpIHsKPiArICAgICAgICAgICAgICAgcWNvbV9nZW5pX3NlcmlhbF9zdG9wX3R4KHVwb3J0KTsK
 PiArICAgICAgICAgICAgICAgcWNvbV9nZW5pX3NlcmlhbF9zdG9wX3J4KHVwb3J0KTsKPiArICAg
 ICAgIH0KPiAgfQo+Cj4gIHN0YXRpYyBpbnQgcWNvbV9nZW5pX3NlcmlhbF9wb3J0X3NldHVwKHN0
 cnVjdCB1YXJ0X3BvcnQgKnVwb3J0KQo+IC0tCj4gMi40MC4wLnJjMC4yMTYuZ2M0MjQ2YWQwZjAt
-Z29vZwo+CgpIZXkgRG91Z2xhcywKClRoYW5rcyBmb3IgdGhpcywgSSB3YXMgYWJvdXQgdG8gcG9z
-dCBhIHNpbWlsYXIgZml4LCB0aGlzIHdhcyByZXBvcnRlZAp0byBtZSBieSB0d28gb3RoZXIgcGVv
-cGxlLgoKUmV2aWV3ZWQtYnk6IEJhcnRvc3ogR29sYXN6ZXdza2kgPGJhcnRvc3ouZ29sYXN6ZXdz
-a2lAbGluYXJvLm9yZz4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fXwpLZ2RiLWJ1Z3JlcG9ydCBtYWlsaW5nIGxpc3QKS2dkYi1idWdyZXBvcnRAbGlzdHMu
-c291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3Rp
-bmZvL2tnZGItYnVncmVwb3J0Cg==
+Z29vZwo+CgpBbmQgYWxzbzoKClRlc3RlZC1ieTogQmFydG9zeiBHb2xhc3pld3NraSA8YmFydG9z
+ei5nb2xhc3pld3NraUBsaW5hcm8ub3JnPgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fCktnZGItYnVncmVwb3J0IG1haWxpbmcgbGlzdApLZ2RiLWJ1Z3Jl
+cG9ydEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQv
+bGlzdHMvbGlzdGluZm8va2dkYi1idWdyZXBvcnQK
