@@ -2,131 +2,199 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EE79C6B831F
-	for <lists+kgdb-bugreport@lfdr.de>; Mon, 13 Mar 2023 21:53:33 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id DF42E6BBBD5
+	for <lists+kgdb-bugreport@lfdr.de>; Wed, 15 Mar 2023 19:17:02 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1pbpAi-0001BW-3j
+	id 1pcVgK-0007eh-JE
 	for lists+kgdb-bugreport@lfdr.de;
-	Mon, 13 Mar 2023 20:53:32 +0000
+	Wed, 15 Mar 2023 18:17:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <dianders@chromium.org>) id 1pbpAg-0001BL-4V
+ (envelope-from <ira.weiny@intel.com>) id 1pcVgI-0007eb-JP
  for kgdb-bugreport@lists.sourceforge.net;
- Mon, 13 Mar 2023 20:53:31 +0000
+ Wed, 15 Mar 2023 18:16:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
- Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:In-Reply-To:Content-Type:References:
+ Message-ID:Subject:CC:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=cXlzN006xu3ZBfFq7erm402Or2NyISMhbX+wHGYXkEM=; b=KJ+jg0IRG4sJ98EsEWslFk8xGq
- phSz2mVi3JmfbgSHk7BiCUsv/jG5CRmwQOP/J3FV+j4AAVpTrozO78t7PXJe3eX73ZPvcwbnnjP4l
- Wwx7BrTzVfipwp4eaymrDEmFgn9IW4jCZcfLxV5X4LzjVjQ3CT+Q6nRJzyU/TX5DKDAU=;
+ bh=wWlcTC/7MCDM5uFiCCPEH0VVVioGT/bM0uBWO+6CCmQ=; b=ZlkaijV+uyR90LBRyQz8IwA9XQ
+ Ekybyep/Dkl/NPmrGI4aIr3UjnbXWttnvr4N2qDYRce1VSyUqc2q9KsNCWwFlQ8i3Dd+hHNRM9ECN
+ pX9yK401H2TY8FQdAZuYraT7DBiCltMbBPULieQSXN97itsSLlgCzQoXV53SV72LDvZI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
- :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
+ h=MIME-Version:In-Reply-To:Content-Type:References:Message-ID:Subject:CC:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=cXlzN006xu3ZBfFq7erm402Or2NyISMhbX+wHGYXkEM=; b=MAl5aMKBJMWJ7aWZADKL/zvkx4
- VgALa/pU5vAFA9vGi/Q6nC+DvvE/oqixUjfLoQbqvb2nZ0e+oKNW4O4OUuEpzayMSYQFC6StHw5QV
- 7oVixRICofqT8p2E2Wz6XpHvCM+ORCcDao97izlw7z+n/JqCbZXLUSKGzqdbUkYI/Qss=;
-Received: from mail-qt1-f178.google.com ([209.85.160.178])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1pbpAe-0004l4-Eb for kgdb-bugreport@lists.sourceforge.net;
- Mon, 13 Mar 2023 20:53:30 +0000
-Received: by mail-qt1-f178.google.com with SMTP id r16so14670953qtx.9
- for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 13 Mar 2023 13:53:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1678740802;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=cXlzN006xu3ZBfFq7erm402Or2NyISMhbX+wHGYXkEM=;
- b=oJVMobxQTq/fK7Mcw93LhfePaKHEdZb+5Dk0NZWNkLvoafPLA5ilrwCVU1+hj9F3bm
- 9aGicSUT/WW4whH+nZ6a6/MdF20/28OZ7q5BZ0l+YHMnrKOhV3cgeU0wUL1FPepSgDP1
- ZvYdhT7QFMMlfof+AVTV7VyIpCzNau11JfmHU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1678740802;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=cXlzN006xu3ZBfFq7erm402Or2NyISMhbX+wHGYXkEM=;
- b=wnbhinM6A3PRlolXNFZJs0FFSayvXMWXlUEpr7blZ9FfQTRg2676qTngpVvuMrhm9+
- 0nZRgJFFrbsA458DBSjorlTTe3E82nW/LnTpCZ2Md3synCx+Nwau/DibIlIMeasHxt3w
- prlUPEJgll0XolB14QwU0zCwyAW7ZCtaTVefmFQDAXliEjl17prcPedYI0Q2rnaJLN8W
- VR9s2/JU/8NQrmAjh+jAApQm4l9G9m7JcVoTWRPkaf1nuqRussQzvWUuuRORXXOw12Gz
- 4r/rKA5hWCfFAnSqKk4+Jj9ETPVg94Ig2ZDFymUYEL9urana6yZI3UgApcY6baS8qsCj
- QBIQ==
-X-Gm-Message-State: AO0yUKWRL27hcC26f6A2MgPuUFZ089LI7NGLlCvPoqhXfHNsdPloZxjA
- 4VrbENZiT0TKU6kG8tZRO5dsAEvnjLalADOCTfI=
-X-Google-Smtp-Source: AK7set8y+1Db6YS1BbjOZqZ3eIY/SmiwUPzgT4uT60F8LC2gfFu0IZ5N5/fzJRwCuMkfSibuQkujdg==
-X-Received: by 2002:a05:622a:d1:b0:3bf:d1b3:2bbb with SMTP id
- p17-20020a05622a00d100b003bfd1b32bbbmr25440716qtw.13.1678740801948; 
- Mon, 13 Mar 2023 13:53:21 -0700 (PDT)
-Received: from mail-yw1-f178.google.com (mail-yw1-f178.google.com.
- [209.85.128.178]) by smtp.gmail.com with ESMTPSA id
- a17-20020ac844b1000000b003a527d29a41sm476382qto.75.2023.03.13.13.53.16
- for <kgdb-bugreport@lists.sourceforge.net>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 13 Mar 2023 13:53:17 -0700 (PDT)
-Received: by mail-yw1-f178.google.com with SMTP id
- 00721157ae682-5416949b35aso139720727b3.13
- for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 13 Mar 2023 13:53:16 -0700 (PDT)
-X-Received: by 2002:a81:ed06:0:b0:540:e6c5:5118 with SMTP id
- k6-20020a81ed06000000b00540e6c55118mr6945254ywm.2.1678740794346; Mon, 13 Mar
- 2023 13:53:14 -0700 (PDT)
+ bh=wWlcTC/7MCDM5uFiCCPEH0VVVioGT/bM0uBWO+6CCmQ=; b=kh77XRE+x4UUJcA8l2c09tsSdR
+ KF7go1W7nJ53cu0um3Eb9IRO0ctJUS4T9jKLs+/qifa1Ak/wcugJeqg4EntOI83jIYSG17x+iAGfZ
+ jfAx5sLsYh52Yupjkzuxf5iGagq1p+zD4ZqPH7u3teMVA9sK5qP+0hUTRMRk1sxGdDz8=;
+Received: from mga05.intel.com ([192.55.52.43])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1pcVgD-009oJf-EE for kgdb-bugreport@lists.sourceforge.net;
+ Wed, 15 Mar 2023 18:16:58 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1678904213; x=1710440213;
+ h=date:from:to:cc:subject:message-id:references:
+ in-reply-to:mime-version;
+ bh=UoOLGCHElLJHE914g69hMuHVYDgaYmJxD786LnMTNxs=;
+ b=CsmiH9814AMZUpWG7aOhxxFzM+soj9X2w4B7WYC3VEjj0S88FSg/EV9h
+ I8a8jDRW5jXWqQprsQ7/O2+7Nzl4mcO+YGUWyvYgqEByprG5OOfWOJo71
+ Pw2m4oJ+3Uga1rxuoaJ5ubEzcIbGLLeYqVh8FuFkLWVQ+r8c/uXnj6kXM
+ hk5s0+AvJjpQn8lHpg2rAO7JKh5GL4MOi+Ynl+LbgXmedhZ+TDeB6V6su
+ LgHfn1B7M7PqH1veL6H/w4LsZlR6YeqNWOYKz5vs2pjAAD/ichIWCE90H
+ +h5are4aEsKyDpUhQtTyyshjxnFnT5PiqIpmBE3zf4yNNMXg/KJp1sIwC w==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10650"; a="424058434"
+X-IronPort-AV: E=Sophos;i="5.98,262,1673942400"; d="scan'208";a="424058434"
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+ by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 15 Mar 2023 11:16:39 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6500,9779,10650"; a="709770009"
+X-IronPort-AV: E=Sophos;i="5.98,262,1673942400"; d="scan'208";a="709770009"
+Received: from orsmsx603.amr.corp.intel.com ([10.22.229.16])
+ by orsmga008.jf.intel.com with ESMTP; 15 Mar 2023 11:16:39 -0700
+Received: from orsmsx612.amr.corp.intel.com (10.22.229.25) by
+ ORSMSX603.amr.corp.intel.com (10.22.229.16) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.21; Wed, 15 Mar 2023 11:16:39 -0700
+Received: from ORSEDG601.ED.cps.intel.com (10.7.248.6) by
+ orsmsx612.amr.corp.intel.com (10.22.229.25) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.21 via Frontend Transport; Wed, 15 Mar 2023 11:16:39 -0700
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com (104.47.55.107)
+ by edgegateway.intel.com (134.134.137.102) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2507.21; Wed, 15 Mar 2023 11:16:38 -0700
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=GrJ3LkhyIAekF++Qj5ye9RPnkJ5LpDV863AyXjbVR6sTSLHkjC/Y5RMpTLxgTAUz/xYxB8pd+nevQJWDcgD+Zh+o8OEnQDjlPF5Yg5UOEl9oZ+eAH0sOAtlb5cvVUOQtzG+7SWoRzgNVa5I816CNJpUZcGJUbUVzE68TjKZqQUJsn20EKyycAfqoUNYoPoZFZj61W5Sg2Yq8GjQgGKYLb9KIeqEHM8cZgV3/HPdPYBrZTNS1lAQ4UQda5DsrldnXxtD1/KGjDArHq6iWfDlRpYdaC9W9L3Hsr/4QeIAfOVTqBYAj2SNe+L2/GRrIDxlUs1dxSFB9dUUFWrD0rcVr9g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=wWlcTC/7MCDM5uFiCCPEH0VVVioGT/bM0uBWO+6CCmQ=;
+ b=fl/XtjZHU3fLwHXCw7mdHQZkyavHywLqtgYg4rajfEyBI29XpUwirM3WYXO9bN8PMAfMPvID7ct+il+gyqn7po2cgZ5QD5OoSbj8W5la7ya2Nh5vayJisFH2X94wFNwgoA2iZuM+lTBsE4FAGLOG9zDQ7TXzTKoo49GJDXT2R9tnOWJ7zl18XtELlqVXTDDDfBDw2qv/Sso0DbzwuHG7Glt4HjxJk/VUEUeRaABQgmL8aInitkcq2lrsiT3d1YWfd4v283dcE8xqIr47eURHOk744KK6zx9mYG38zm5mWuDces7y2vRWkqV8ie+11ERe4Z7X6MZ/x3coZ0T2g1YvRw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=intel.com;
+Received: from SA1PR11MB6733.namprd11.prod.outlook.com (2603:10b6:806:25c::17)
+ by DM4PR11MB5390.namprd11.prod.outlook.com (2603:10b6:5:395::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.26; Wed, 15 Mar
+ 2023 18:16:36 +0000
+Received: from SA1PR11MB6733.namprd11.prod.outlook.com
+ ([fe80::84dd:d3f2:6d99:d7ff]) by SA1PR11MB6733.namprd11.prod.outlook.com
+ ([fe80::84dd:d3f2:6d99:d7ff%7]) with mapi id 15.20.6178.024; Wed, 15 Mar 2023
+ 18:16:36 +0000
+Date: Wed, 15 Mar 2023 11:16:31 -0700
+From: Ira Weiny <ira.weiny@intel.com>
+To: "Fabio M. De Francesco" <fmdefrancesco@gmail.com>, Luis Chamberlain
+ <mcgrof@kernel.org>, Jason Wessel <jason.wessel@windriver.com>, "Daniel
+ Thompson" <daniel.thompson@linaro.org>, Douglas Anderson
+ <dianders@chromium.org>, Josh Poimboeuf <jpoimboe@kernel.org>, Jiri Kosina
+ <jikos@kernel.org>, Miroslav Benes <mbenes@suse.cz>, Petr Mladek
+ <pmladek@suse.com>, Joe Lawrence <joe.lawrence@redhat.com>, Chris Down
+ <chris@chrisdown.name>, Nick Terrell <terrelln@fb.com>, Nathan Chancellor
+ <nathan@kernel.org>, Nick Desaulniers <ndesaulniers@google.com>, Tom Rix
+ <trix@redhat.com>, <linux-modules@vger.kernel.org>,
+ <linux-kernel@vger.kernel.org>, <kgdb-bugreport@lists.sourceforge.net>,
+ <live-patching@vger.kernel.org>, <bpf@vger.kernel.org>,
+ <llvm@lists.linux.dev>
+Message-ID: <64120b7f2e123_2513fa294a7@iweiny-mobl.notmuch>
+References: <20230315125256.22772-1-fmdefrancesco@gmail.com>
+Content-Disposition: inline
+In-Reply-To: <20230315125256.22772-1-fmdefrancesco@gmail.com>
+X-ClientProxiedBy: SJ0PR13CA0136.namprd13.prod.outlook.com
+ (2603:10b6:a03:2c6::21) To SA1PR11MB6733.namprd11.prod.outlook.com
+ (2603:10b6:806:25c::17)
 MIME-Version: 1.0
-References: <20230307073155.1.Iaab0159b8d268060a0e131ebb27125af4750ef99@changeid>
- <20230307073155.2.I106c39498d8094c6f5e7ada42c7db17aa5c64e48@changeid>
-In-Reply-To: <20230307073155.2.I106c39498d8094c6f5e7ada42c7db17aa5c64e48@changeid>
-From: Doug Anderson <dianders@chromium.org>
-Date: Mon, 13 Mar 2023 13:53:02 -0700
-X-Gmail-Original-Message-ID: <CAD=FV=XFEYPbC64TFLVUmky=1Y-b_iyqiwrALvjKTM_NWr34Dg@mail.gmail.com>
-Message-ID: <CAD=FV=XFEYPbC64TFLVUmky=1Y-b_iyqiwrALvjKTM_NWr34Dg@mail.gmail.com>
-To: Bjorn Andersson <andersson@kernel.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-X-Spam-Score: -0.9 (/)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SA1PR11MB6733:EE_|DM4PR11MB5390:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9c6d3333-c8f5-46c8-e567-08db258169e5
+X-LD-Processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: vWChfBLao6nKEH7jMLaaPDg6QB5SzgaXfDsTwU3/82rd2s2IVLOrc7UN3dt/geEG8awyu7BNf1XzMoAmB4gOLOQlt9IAhrfemIuTozlmRI+VAnPQDUubVlxzKM4PNArj9eUExuXPgHPA3v7yws+7i+5puavToOpX/ujwNcJX5RU8nO1zQC6V4DsIwqFulNO9DkrZZ3lR1Iip8QrLDcHXyVDXnfkEDHoQhJx8FuZ18Flvbg9WaMzMDVnrg6Ym725VPJ3Og/MlTnq/eTZlDLJ+hUAztUF7lTn4jQWJiKBJFunw8Fc80m02IY4HD4Bfr710NRwS0qckE/uIPon+PYn8OZ4jMxb+SQkd9aHBlJ4x9FdhSwOmc+rzRtpJTWgPTK4G2NkdNjxk9GPFBIwB5iOB4TCEp7NltyfeadO3VrvJwH9ihICTzHAWEsSd8Hwl/8v9FGCZ7rAF58TNYFlFiXnXc28hyUeRORBl+mm+HDRSODmhKZw7hH8nxoGruSnPG7Z98tkSqEB3cXa1UO9iFmb5Lulnp6rTnywb1+0QRvKQcL8l1w8DRoNUNvJKpFEWuDqduciOGRvHEXnd7lj3YN/HCvu9bE6P+0/Rzc2AYGLkcg4+V9Fj4xopD2erm3HopVJtzuQePCxBFHPkBaWHk+vbjDK2Z5/PhCZwH/L8eAVWTO+CjKoVWbdzQzbiB2G8aAZ4
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SA1PR11MB6733.namprd11.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230025)(136003)(346002)(39860400002)(366004)(376002)(396003)(451199018)(7416002)(5660300002)(478600001)(2906002)(9686003)(6506007)(26005)(6512007)(6486002)(6666004)(107886003)(186003)(44832011)(86362001)(41300700001)(38100700002)(82960400001)(4326008)(66476007)(8676002)(8936002)(66946007)(921005)(316002)(66556008)(83380400001)(110136005)(54906003);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?GnncIWgTad5+W7x2yjuHWrHTc0pNMjmyOgA8c7bmDKKmCDZY4Be1qf8VO/Ze?=
+ =?us-ascii?Q?3W+hzMuppVxAbSKPPEXA91VVjjmRp33BRDE3BKLo4OYZtni9XtNhIVyGixsy?=
+ =?us-ascii?Q?l782MEw20UQhm4nNHSnOelhYLggwF9dzWlUGa5bBGHD6EESICmGaQDIjrKWX?=
+ =?us-ascii?Q?E1Tjgjnfww8/0vhRWnH8LFdkm8c30xQ2rQcS5mB5jlVhgQCaPejnmBThLX3E?=
+ =?us-ascii?Q?V9xjInpl1mMqkqGJTTlXAiyrAhhlUOojwj9OPsHTs3mCCNCVKUyqOn+bMH4P?=
+ =?us-ascii?Q?ExNTW/G3LCGsMrFp/mV9hjuS/LHk5ZLWyoHxmnRuZ0Pf7QgBHtcrLcPQsE3b?=
+ =?us-ascii?Q?dggjvV7zPYcHLONSEuA9j0/RqN0T2CcjIsJSgk842Qq1X70hPZKMPvG7nvDp?=
+ =?us-ascii?Q?my7zzS6lAg6RcOTg7Na+9YR620PPSs+qRVeVU59mHjP8P0x76EVvzP+5jRIY?=
+ =?us-ascii?Q?ZqkmeBaexanWpEtYLgQvJFSmUlQk7JG/hcb2vRDfko3CEvbFRaNP3cdu/WxH?=
+ =?us-ascii?Q?mw/r3PY01qVsXIjVUh2stj/91twKWprRwSah/QiEJyKwsLw5uMngiy6jyHS8?=
+ =?us-ascii?Q?zyiiMmQmeD72Wj1l2XzpaEDTg05xaE2cPCjWpUZfj1L6MS6yA7+Ij2EWPiV0?=
+ =?us-ascii?Q?gtcfICm768SfLioahMmHddYw1cwCObIEZeyxmzenWMWe/P1hD1es0GX/cok7?=
+ =?us-ascii?Q?P7x7iCrx5FTmlxb+obeiJxAsgUUv+QHhbOLy0fN9E9RsrcgdlHzTwEu5V5Dp?=
+ =?us-ascii?Q?7D6PHTO+8R1LlrKFHBo/g73haZh1ETWHsYwqDVFZ7t5UHdYbMdu279XbmR74?=
+ =?us-ascii?Q?j7mr1bF5h8UBmMeGGocts1JSNfbhmYGbawFx6S7FVxykH7wI8xkr1EaCDlqE?=
+ =?us-ascii?Q?d1RPqvbP3YxBaJ0SrfznAYKCKwxWHVMd6Z0Nr7zRNFgCCF1HEp5fqF6INPlK?=
+ =?us-ascii?Q?rYvntlxDKu2S70t/paYkyeNTOohwMLXg3FFofitxQk2PjWqJ7l39sz1LYxT4?=
+ =?us-ascii?Q?K/Du5htsn8VL92nR+Nxztu0LJCzwV8Pxp3FbdsN7iMaUjRzcccHI78T7in6T?=
+ =?us-ascii?Q?mOcqjBiTScp3JmUJ+trja02zySAEsv2po7R0tfiEl+kfNSwKofOM6HMM+wf2?=
+ =?us-ascii?Q?lT4ez5eHmK5oJxfLn3H26cH1iuBgapu8NCqufS13Fcy/bVtKbmFi4gf5zhdR?=
+ =?us-ascii?Q?8e6kafDeIPS3t3eDA+bilo9onAngm65C8NFOv1EAYGN3sGE0yIw2ZsN+CI4T?=
+ =?us-ascii?Q?1Jsr9OupamEYLSCyvRDHt2dA6jDpKxogMTQ5sUgbM6ZOChjh43hOfjplsxWy?=
+ =?us-ascii?Q?mkk0VC37Ha60R+pe+T/olFOruOWIgGwmCuXbqaZIfm/Xs77cB/etR1IsIX8Z?=
+ =?us-ascii?Q?P0g0WfduhEplvunUwFYR3u37MbJqmSYlqm96Igh9uaF/9TilR5gn4AJjL4qK?=
+ =?us-ascii?Q?5qGSUyAI3B3Sfbyjrjz2/INry4tXQ2MXyNIkirMLRs2+GqkXdDimr3xF4SQy?=
+ =?us-ascii?Q?Wi04LlCfTxk9q59TzWy3qIiU85P1u3JMPPfwIqqM1UYV19Q2iAwLxm4iUMqu?=
+ =?us-ascii?Q?hQfaMfBe+zNiJC62sbwrvfsp2jH2xKbfzfOTXtkM?=
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9c6d3333-c8f5-46c8-e567-08db258169e5
+X-MS-Exchange-CrossTenant-AuthSource: SA1PR11MB6733.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Mar 2023 18:16:36.5739 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: u3wWrCeSHDbz1hN6Q2lZoAjYMOiM+kyUR3VrwvnoiuSK2P+2+uTyCiXOyaUjx/cQlzy53OpKBzlaHDyuu8Rg+A==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR11MB5390
+X-OriginatorOrg: intel.com
+X-Spam-Score: -3.2 (---)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  Hi, On Tue, Mar 7, 2023 at 7:32 AM Douglas Anderson <dianders@chromium.org>
-    wrote: > > On Qualcomm devices which use the "geni" serial driver, kdb/kgdb
-    won't > be very happy if you use it but the resour [...] 
- 
- Content analysis details:   (-0.9 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview:  Fabio M. De Francesco wrote: > Use kunmap_local() to unmap
+ pages locally mapped with kmap_local_page(). > > kunmap_local() must be called
+ on the kernel virtual address returned by > kmap_local_page(), [...] 
+ Content analysis details:   (-3.2 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
-  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
-                             [209.85.160.178 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
-                              no trust
-                             [209.85.160.178 listed in list.dnswl.org]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [192.55.52.43 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
-  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ author's domain
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pbpAe-0004l4-Eb
-Subject: Re: [Kgdb-bugreport] [PATCH 2/3] serial: uart_poll_init() should
- power on the UART
+X-Headers-End: 1pcVgD-009oJf-EE
+Subject: Re: [Kgdb-bugreport] [PATCH] module/decompress: Never use kunmap()
+ for local un-mappings
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -138,32 +206,59 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daniel Thompson <daniel.thompson@linaro.org>,
- Bartosz Golaszewski <bartosz.golaszewski@linaro.org>,
- kgdb-bugreport@lists.sourceforge.net, linux-kernel@vger.kernel.org,
- Konrad Dybcio <konrad.dybcio@linaro.org>, linux-serial@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, Jiri Slaby <jirislaby@kernel.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Ira Weiny <ira.weiny@intel.com>, Piotr Gorski <piotrgorski@cachyos.org>,
+ Dmitry Torokhov <dmitry.torokhov@gmail.com>,
+ "Fabio M. De Francesco" <fmdefrancesco@gmail.com>,
+ Stephen Boyd <swboyd@chromium.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-SGksCgpPbiBUdWUsIE1hciA3LCAyMDIzIGF0IDc6MzLigK9BTSBEb3VnbGFzIEFuZGVyc29uIDxk
-aWFuZGVyc0BjaHJvbWl1bS5vcmc+IHdyb3RlOgo+Cj4gT24gUXVhbGNvbW0gZGV2aWNlcyB3aGlj
-aCB1c2UgdGhlICJnZW5pIiBzZXJpYWwgZHJpdmVyLCBrZGIva2dkYiB3b24ndAo+IGJlIHZlcnkg
-aGFwcHkgaWYgeW91IHVzZSBpdCBidXQgdGhlIHJlc291cmNlcyBvZiB0aGUgcG9ydCBoYXZlbid0
-IGJlZW4KPiBwb3dlcmVkIG9uLiBUb2RheSBrZGIva2dkYiByZWx5IG9uIHNvbWVvbmUgZWxzZSBw
-b3dlcmluZyB0aGUgcG9ydAo+IG9uLiBUaGlzIGNvdWxkIGJlIHRoZSBub3JtYWwga2VybmVsIGNv
-bnNvbGUgb3IgYW4gYWdldHR5IHJ1bm5pbmcuCj4gTGV0J3MgZml4IHRoaXMgdG8gZXhwbGljaXRs
-eSBwb3dlciB0aGluZ3Mgb24gd2hlbiBzZXR0aW5nIHVwIGEgcG9sbGluZwo+IGRyaXZlci4KPgo+
-IFNpZ25lZC1vZmYtYnk6IERvdWdsYXMgQW5kZXJzb24gPGRpYW5kZXJzQGNocm9taXVtLm9yZz4K
-PiAtLS0KPgo+ICBkcml2ZXJzL3R0eS9zZXJpYWwvc2VyaWFsX2NvcmUuYyB8IDYgKysrKysrCj4g
-IDEgZmlsZSBjaGFuZ2VkLCA2IGluc2VydGlvbnMoKykKCkp1c3QgaW4gY2FzZSBpdCdzIG5vdCBv
-YnZpb3VzLCBldmVuIHRob3VnaCB3ZSBlbmRlZCB1cCBnb2luZyB3aXRoCkpvaGFuJ3Mgc2VyaWVz
-IFsxXSBpbnN0ZWFkIG9mIHBhdGNoICMxIG9mIG15IHNlcmllcywgcGF0Y2ggIzIgYW5kICMzCm9m
-IG15IHNlcmllcyBhcmUgc3RpbGwgcmVsZXZhbnQuIEkgY2FuIHJlcG9zdCB0aGUgc2VyaWVzIHdp
-dGhvdXQgcGF0Y2gKIzEgaWYgaXQncyBoZWxwZnVsLgoKWzFdIGh0dHBzOi8vbG9yZS5rZXJuZWwu
-b3JnL3IvMjAyMzAzMDcxNjQ0MDUuMTQyMTgtMS1qb2hhbitsaW5hcm9Aa2VybmVsLm9yZwoKLURv
-dWcKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpLZ2Ri
-LWJ1Z3JlcG9ydCBtYWlsaW5nIGxpc3QKS2dkYi1idWdyZXBvcnRAbGlzdHMuc291cmNlZm9yZ2Uu
-bmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2tnZGItYnVn
-cmVwb3J0Cg==
+Fabio M. De Francesco wrote:
+> Use kunmap_local() to unmap pages locally mapped with kmap_local_page().
+> 
+> kunmap_local() must be called on the kernel virtual address returned by
+> kmap_local_page(), differently from how we use kunmap() which instead
+> expects the mapped page as its argument.
+> 
+> In module_zstd_decompress() we currently map with kmap_local_page() and
+> unmap with kunmap(). This breaks the code and so it should be fixed.
+> 
+> Cc: Piotr Gorski <piotrgorski@cachyos.org>
+> Cc: Dmitry Torokhov <dmitry.torokhov@gmail.com>
+> Cc: Luis Chamberlain <mcgrof@kernel.org>
+> Cc: Stephen Boyd <swboyd@chromium.org>
+> Cc: Ira Weiny <ira.weiny@intel.com>
+
+Reviewed-by: Ira Weiny <ira.weiny@intel.com>
+
+> Fixes: 169a58ad824d ("module/decompress: Support zstd in-kernel decompression")
+> Signed-off-by: Fabio M. De Francesco <fmdefrancesco@gmail.com>
+> ---
+>  kernel/module/decompress.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/kernel/module/decompress.c b/kernel/module/decompress.c
+> index bb79ac1a6d8f..7ddc87bee274 100644
+> --- a/kernel/module/decompress.c
+> +++ b/kernel/module/decompress.c
+> @@ -267,7 +267,7 @@ static ssize_t module_zstd_decompress(struct load_info *info,
+>  		zstd_dec.size = PAGE_SIZE;
+>  
+>  		ret = zstd_decompress_stream(dstream, &zstd_dec, &zstd_buf);
+> -		kunmap(page);
+> +		kunmap_local(zstd_dec.dst);
+>  		retval = zstd_get_error_code(ret);
+>  		if (retval)
+>  			break;
+> -- 
+> 2.39.2
+> 
+
+
+
+
+_______________________________________________
+Kgdb-bugreport mailing list
+Kgdb-bugreport@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport
