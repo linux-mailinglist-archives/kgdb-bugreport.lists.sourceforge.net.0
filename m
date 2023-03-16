@@ -2,86 +2,88 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3AA506BDA27
-	for <lists+kgdb-bugreport@lfdr.de>; Thu, 16 Mar 2023 21:29:55 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 005016BDA21
+	for <lists+kgdb-bugreport@lfdr.de>; Thu, 16 Mar 2023 21:27:14 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1pcuET-00080m-B8
+	id 1pcuBs-0001w1-LZ
 	for lists+kgdb-bugreport@lfdr.de;
-	Thu, 16 Mar 2023 20:29:54 +0000
+	Thu, 16 Mar 2023 20:27:13 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <dianders@chromium.org>) id 1pcuEQ-00080b-Bo
+ (envelope-from <dianders@chromium.org>) id 1pcuBr-0001vv-5c
  for kgdb-bugreport@lists.sourceforge.net;
- Thu, 16 Mar 2023 20:29:51 +0000
+ Thu, 16 Mar 2023 20:27:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=q3i1too33EMahveRbuxNasAN0FfHWaolQncNRUeKk3s=; b=ZHr+fpZeRCeA0Kf1SBAetJLC+5
- QDWPK2r4A7pYCWEZJKJqM+zV0Nmm/9nnTdIwHgeYgXDrnSUtYIjoipv+bs63Gbf6AI2/cuI3oS3mb
- 60s6L8ActvgXoGdbzbLp03i+cb30XZO7UXKmw8b/tAFXlO0XOCsMYrHs1Iu1XYCNUPTE=;
+ bh=g57LqyNVPd4QtvwDpadq5p0zhAPNVIWZbBGClF8fQN4=; b=lxG2IuoqwzF/7j4VC7NAtqZ/qM
+ KrIp2/qWCMeuSRaOpF+VGLQOVKeq7uj5jLT22rdfHFE7kSz8NAHT+t/vG/lAviiFdrLyQ30FfcSkq
+ gFR1lBa5wVwue33xRUEwW8qchferTb5L+gFmke8GdsZXaYHMujGZrbyg1wanzNHc43BU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=q3i1too33EMahveRbuxNasAN0FfHWaolQncNRUeKk3s=; b=m
- T74Vq/O6B0Ci8l7u9RXlRydRTg7zs3ROA/r0dAvvdzUxVkK50VjM1mP7ZbQk66m6PVijw8XraZzaa
- dV/Cb4KHkhHTjILYVIkxLJgtfcZwOzcfjhdzdpJCxbcMSARrOtUnMepmA2LIsRe3pouuj6evWRMzW
- xLFraNsmMP3arHxc=;
-Received: from mail-yw1-f179.google.com ([209.85.128.179])
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=g57LqyNVPd4QtvwDpadq5p0zhAPNVIWZbBGClF8fQN4=; b=PL9RZz4TvMqxCdW1jYqUayqoaj
+ +9LwAAXEgzQEfx9jJRSHQyxO95jr3JAzt5r19rPUKMZmpeHYUPPNHeNn6ncAc3MxdO5R56LlSgE9V
+ uJobn+Jrb+iYRbIm+HR4CoYt5n7WEu5azFPGnQNcgo9qsTzOmYVyriT4GcFOYciSDfKI=;
+Received: from mail-qt1-f173.google.com ([209.85.160.173])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1pcuEQ-0000Ce-CS for kgdb-bugreport@lists.sourceforge.net;
- Thu, 16 Mar 2023 20:29:50 +0000
-Received: by mail-yw1-f179.google.com with SMTP id
- 00721157ae682-5419d4c340aso54470307b3.11
+ id 1pcuBo-00007h-91 for kgdb-bugreport@lists.sourceforge.net;
+ Thu, 16 Mar 2023 20:27:12 +0000
+Received: by mail-qt1-f173.google.com with SMTP id h19so3224039qtn.1
  for <kgdb-bugreport@lists.sourceforge.net>;
- Thu, 16 Mar 2023 13:29:50 -0700 (PDT)
+ Thu, 16 Mar 2023 13:27:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1678998584;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=q3i1too33EMahveRbuxNasAN0FfHWaolQncNRUeKk3s=;
- b=NIulQexoKeOFfby0hifFc62DMyabcEAEu1GNulXBVuafuJWTMhakW7BSHGi4sGtrno
- k/7tff+BYBOg53JgRvo1MSwk9oNOUV+eR6CzxTWPn+MHL85KP/BUrLtbKhEWfQhuZENp
- 4fGEfP0YJ0Z5byCE3O8FocNwZfGCHPchAFgt8=
+ d=chromium.org; s=google; t=1678998422;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=g57LqyNVPd4QtvwDpadq5p0zhAPNVIWZbBGClF8fQN4=;
+ b=ktx4n+J79z0MdVE5zTVU0XAxqEzIJEkoAR6TFA1HTyndyOuu3DQBETtHCoVvehZogH
+ RtVpEyQTGtvQ7q6gfV1+Io2eLm0fdwEQQBGwo/nDcMHmCSMGrJngtV4LUIYzZOeG9SB2
+ l7JwB7tDWYWUrKosOved3plgLlv8B+n17FGVg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1678998584;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=q3i1too33EMahveRbuxNasAN0FfHWaolQncNRUeKk3s=;
- b=dZWmGAVoyx3WaWJSEa4OrI5gelKhQLGaXZLKYQRBAo2cRIuCbAe1rb3psums5hFV53
- ophiql1e8QGFA/NugWwTJZsPsV+IgrcX9ereK2OSuMIeHbbzR/YqXt9QswaOIZBpGWRT
- T8nlnA+pB/9Htc5x4PDFvETKNg2YCTfWHzyNg8mz2H7bQUnUGk/kNrq5KhqM9m7IDyEH
- bwcofD4fhumX4vWPdpW6JH9O5B38ux6jO4gSBHjfI95465W+JFL6LMm78mWPp7XSNtPo
- czHpM6gWhkjGVA0qf924uDPI6ZiBz/WauV2G+G43awmwa3ouM4DVfV9HLgLNkdBK8iTK
- Fi+A==
-X-Gm-Message-State: AO0yUKV6frh8wFolVlk2cL0ZiUtSlbI2D0DfYbxw4K1goaAypqN6np1o
- mHYYTv+vXpp0JewoZGP2dZ9LJH+cXpQh/PPIrvk=
-X-Google-Smtp-Source: AK7set9yssgAFQezxJ/RfIneXy6O9/6hx6IWvENqFQh8FK49jmaaVVUPU6K/d3qqZDHF4VNoOI1Xyg==
-X-Received: by 2002:a17:90b:350f:b0:23f:35c8:895 with SMTP id
- ls15-20020a17090b350f00b0023f35c80895mr2925707pjb.32.1678998079225; 
- Thu, 16 Mar 2023 13:21:19 -0700 (PDT)
+ d=1e100.net; s=20210112; t=1678998422;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=g57LqyNVPd4QtvwDpadq5p0zhAPNVIWZbBGClF8fQN4=;
+ b=yM+iefy2bPjxgEgIn96GTh2pGgu7dmAdpYWkPPMF7mZpHRLQSuVwKcfq7OzBMXR8s1
+ b0TjyyQeG36dgeinr3gba7gkw64G5fMKOdcAcXR6KO4rIeE9KtsNq8pzgXRcY+xak8nv
+ 2eYJg7DDtw8pLTN8+/IRocqqAiLx6isqkRzjQyoHsU8mbqtzTst6lBzfSA7qsPjKTzis
+ 52qe0tqDzdU7jTuwjHvVP9NYi/WUf3ZYxCB95/EWbLnpqmoQZfPWVzQTiCjn/KhhRGgf
+ RiBSyxXlPVK/adhMdpjsF/RBhuUmO60D7pLXDlJlW5D0TOBGg0RN/0vmPXBDdgUm13B7
+ 5vTQ==
+X-Gm-Message-State: AO0yUKV4OrDKUIygHBa2Mc/+/W1Aq9ZpwuTwzP2X06U1ZWkbY2keDQcR
+ VGUloNFZs5bZwYlog4KB5BX+yosuAcn6e/IHNxI=
+X-Google-Smtp-Source: AK7set9yCaDngXDzLHihTbNxF3zv4vAS5iqalhbZOQqV0PyRM1ANGSN9XbnsR7tHimYz7WJ9Kc71Dw==
+X-Received: by 2002:a17:90a:1903:b0:233:76bd:9faa with SMTP id
+ 3-20020a17090a190300b0023376bd9faamr5352705pjg.47.1678998080936; 
+ Thu, 16 Mar 2023 13:21:20 -0700 (PDT)
 Received: from tictac2.mtv.corp.google.com
  ([2620:15c:9d:2:4db6:6f23:6ad2:998d])
  by smtp.gmail.com with ESMTPSA id
- b4-20020a17090a5a0400b0023acdac248dsm24114pjd.15.2023.03.16.13.21.17
+ b4-20020a17090a5a0400b0023acdac248dsm24114pjd.15.2023.03.16.13.21.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Mar 2023 13:21:18 -0700 (PDT)
+ Thu, 16 Mar 2023 13:21:20 -0700 (PDT)
 From: Douglas Anderson <dianders@chromium.org>
 To: Bjorn Andersson <andersson@kernel.org>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Date: Thu, 16 Mar 2023 13:20:55 -0700
-Message-Id: <20230316202057.4070382-1-dianders@chromium.org>
+Date: Thu, 16 Mar 2023 13:20:56 -0700
+Message-Id: <20230316132027.RESEND.1.I106c39498d8094c6f5e7ada42c7db17aa5c64e48@changeid>
 X-Mailer: git-send-email 2.40.0.rc1.284.g88254d51c5-goog
+In-Reply-To: <20230316202057.4070382-1-dianders@chromium.org>
+References: <20230316202057.4070382-1-dianders@chromium.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.9 (/)
 X-Spam-Report: Spam detection software,
@@ -90,13 +92,17 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Today to get kgdb to work on qcom-geni-serial devices you
- need _something_ to init/power on the UART. This could either the kernel
- console
- output or an "agetty" running on the port. If nothing else po [...] 
+ Content preview:  On Qualcomm devices which use the "geni" serial driver,
+ kdb/kgdb
+ won't be very happy if you use it but the resources of the port haven't been
+ powered on. Today kdb/kgdb rely on someone else powering t [...] 
  Content analysis details:   (-0.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.160.173 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.160.173 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -106,14 +112,11 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.128.179 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.128.179 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pcuEQ-0000Ce-CS
-Subject: [Kgdb-bugreport] [RESEND PATCH 0/2] tty: serial: Fix kgdb on
- qcom-geni-serial when no other UART users
+X-Headers-End: 1pcuBo-00007h-91
+Subject: [Kgdb-bugreport] [RESEND PATCH 1/2] serial: uart_poll_init() should
+ power on the UART
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -128,43 +131,56 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>,
 Cc: Daniel Thompson <daniel.thompson@linaro.org>,
  Bartosz Golaszewski <bartosz.golaszewski@linaro.org>,
  kgdb-bugreport@lists.sourceforge.net, linux-kernel@vger.kernel.org,
- Konrad Dybcio <konrad.dybcio@linaro.org>, Andy Gross <agross@kernel.org>,
- linux-serial@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- Jiri Slaby <jirislaby@kernel.org>
+ Konrad Dybcio <konrad.dybcio@linaro.org>, linux-serial@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, Jiri Slaby <jirislaby@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Today to get kgdb to work on qcom-geni-serial devices you need
-_something_ to init/power on the UART. This could either the kernel
-console output or an "agetty" running on the port. If nothing else
-powers the port then you'll end up getting a silent hang when you try
-to enter kgdb.
+On Qualcomm devices which use the "geni" serial driver, kdb/kgdb won't
+be very happy if you use it but the resources of the port haven't been
+powered on. Today kdb/kgdb rely on someone else powering the port
+on. This could be the normal kernel console or an agetty running.
+Let's fix this to explicitly power things on when setting up a polling
+driver.
 
-Let's fix this. The first patch here is for the tty layer to make sure
-that we power on the port when we init it for polling. This would be
-important for any drivers similar to qcom-geni-serial that actually
-need to be powered on. The second patch here hooks up the poll_init()
-function for qcom-geni-serial, leveraging an existing function in the
-driver that does everything we need.
+Signed-off-by: Douglas Anderson <dianders@chromium.org>
+---
 
-Originally these two patches were bundled together as pathes 2 and 3
-of a 3-patch series.  We no longer need the first patch from the
-orginal series since we landed a similar patch from Johan [1]
-instead. The second two patches are still useful, though, so I've
-reposted them alone and added this cover letter.
+ drivers/tty/serial/serial_core.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-[1] https://lore.kernel.org/r/20230307164405.14218-1-johan+linaro@kernel.org
-
-
-Douglas Anderson (2):
-  serial: uart_poll_init() should power on the UART
-  tty: serial: qcom-geni-serial: Add a poll_init() function
-
- drivers/tty/serial/qcom_geni_serial.c | 1 +
- drivers/tty/serial/serial_core.c      | 6 ++++++
- 2 files changed, 7 insertions(+)
-
+diff --git a/drivers/tty/serial/serial_core.c b/drivers/tty/serial/serial_core.c
+index 2bd32c8ece39..b14b5ed6fff4 100644
+--- a/drivers/tty/serial/serial_core.c
++++ b/drivers/tty/serial/serial_core.c
+@@ -2593,6 +2593,7 @@ static int uart_poll_init(struct tty_driver *driver, int line, char *options)
+ {
+ 	struct uart_driver *drv = driver->driver_state;
+ 	struct uart_state *state = drv->state + line;
++	enum uart_pm_state pm_state;
+ 	struct tty_port *tport;
+ 	struct uart_port *port;
+ 	int baud = 9600;
+@@ -2610,6 +2611,9 @@ static int uart_poll_init(struct tty_driver *driver, int line, char *options)
+ 		goto out;
+ 	}
+ 
++	pm_state = state->pm_state;
++	uart_change_pm(state, UART_PM_STATE_ON);
++
+ 	if (port->ops->poll_init) {
+ 		/*
+ 		 * We don't set initialized as we only initialized the hw,
+@@ -2626,6 +2630,8 @@ static int uart_poll_init(struct tty_driver *driver, int line, char *options)
+ 		console_list_unlock();
+ 	}
+ out:
++	if (ret)
++		uart_change_pm(state, pm_state);
+ 	mutex_unlock(&tport->mutex);
+ 	return ret;
+ }
 -- 
 2.40.0.rc1.284.g88254d51c5-goog
 
