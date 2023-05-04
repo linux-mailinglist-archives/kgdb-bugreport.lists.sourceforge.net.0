@@ -2,95 +2,116 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C50C46F4716
-	for <lists+kgdb-bugreport@lfdr.de>; Tue,  2 May 2023 17:26:33 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 511F76F78F7
+	for <lists+kgdb-bugreport@lfdr.de>; Fri,  5 May 2023 00:20:59 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1ptrtf-0001k3-Mw
+	id 1puhJl-0000dM-T5
 	for lists+kgdb-bugreport@lfdr.de;
-	Tue, 02 May 2023 15:26:32 +0000
+	Thu, 04 May 2023 22:20:53 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <pmladek@suse.com>) id 1ptrte-0001jx-Kw
+ (envelope-from <dianders@chromium.org>) id 1puhJk-0000dG-Ma
  for kgdb-bugreport@lists.sourceforge.net;
- Tue, 02 May 2023 15:26:31 +0000
+ Thu, 04 May 2023 22:20:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=CXWn7FssbrSs8MRrutlOtshdeBbrP/crYQCwv1Iexd0=; b=eYlvTFP28r5Hy2Rv3LjeMc5Otr
- ZzG+AvRW5gLoiWIclcR1UfA8lWZicP2ZNnfYyEPIMfFibqXlNukfMB84bkxAojdodDUQPyDyKOwaE
- Ax28kfNIVsyCI312ojE8otCVCpqezUoBlBmOiZ5gZ+zZNMIZcex8ky9y0uaZuIfkgMEU=;
+ bh=vD4bvIvOh45mQL2EmEIxy5cxC2wkD1Nakyo16A6M3Ak=; b=Zkqt1Opiuik+/KfrICwLI/YbHZ
+ LWhW+QtTWWc/SLDwvW19N1+g0bOD2pJfEDjH55PkIatADcMEWkqcOI7e9t72NrbB67iLk3cWuJ2B6
+ 8P661Ii1P+VAo1jvhZAo9vnDAlW84qzTtrRG1TU/mAvr3b892ClhW0hAYLmVw04rYvGE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=CXWn7FssbrSs8MRrutlOtshdeBbrP/crYQCwv1Iexd0=; b=S/+eqk3DblwXJvClYo7MKoEhxc
- oxHNojC+znrBUY2lPAhG4bYQA09RZKHAnR7crqLzEkAKs79zvPYnqKboVl0yPp94w1ngzfrU2J+ue
- 9H2vHcXd35UfA7yQOcFB+PGBq/7Vba+wt04Plh83lxTny/CqYr4YbH4AR84n/K9QlPr0=;
-Received: from smtp-out1.suse.de ([195.135.220.28])
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=vD4bvIvOh45mQL2EmEIxy5cxC2wkD1Nakyo16A6M3Ak=; b=H
+ Ln3AREZDB5A7XRRCz/mxm7eS1pyWNVvIv8m8DSMYUwEVJaiIQ6GofzFoPDW0vc1uizP7u5lSIOhcf
+ yZ0mtpYBmInjTZXJ37IhJ8C5mlp7W3pYEVhRDxLOJfZW9oZXtLJMefgGRX2A8CAVJI3beDKgQtRJx
+ Gw38KORQuzq+NJn8=;
+Received: from mail-yb1-f180.google.com ([209.85.219.180])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1ptrtd-00BgyN-Iw for kgdb-bugreport@lists.sourceforge.net;
- Tue, 02 May 2023 15:26:31 +0000
-Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
- by smtp-out1.suse.de (Postfix) with ESMTP id A531421B0D;
- Tue,  2 May 2023 15:26:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
- t=1683041179; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=CXWn7FssbrSs8MRrutlOtshdeBbrP/crYQCwv1Iexd0=;
- b=XxDdHFZlQui1F2WlF8bhbf41oWW6Fr9rAfk13WKktw/+Jtw97yL5A1Sttz4uqgqOcjRNii
- pj4J+Cp+HRg6BC0SrBdlXBmUXIj6XkAHYUWf0RbaKYkK6ZbWB8Cclv6Li0bhCJwINGjccy
- EBYuacjqAOW4uoLsHujhtJf/7MKOnXE=
-Received: from suse.cz (unknown [10.100.201.202])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by relay2.suse.de (Postfix) with ESMTPS id AA2872C141;
- Tue,  2 May 2023 15:26:18 +0000 (UTC)
-Date: Tue, 2 May 2023 17:26:18 +0200
-To: Douglas Anderson <dianders@chromium.org>
-Message-ID: <ZFErmshcrcikrSU1@alley>
-References: <20230501082341.v3.1.I6bf789d21d0c3d75d382e7e51a804a7a51315f2c@changeid>
+ id 1puhJj-00ESuA-Rq for kgdb-bugreport@lists.sourceforge.net;
+ Thu, 04 May 2023 22:20:52 +0000
+Received: by mail-yb1-f180.google.com with SMTP id
+ 3f1490d57ef6-ba1cfbb860dso15978276.0
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Thu, 04 May 2023 15:20:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1683238851; x=1685830851;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=vD4bvIvOh45mQL2EmEIxy5cxC2wkD1Nakyo16A6M3Ak=;
+ b=Dj8L8KVo06hcF3N3TlXUM0qYzR1kN359UIn520fQ9AK3iGc8QJbm4JgsNf2l9NHCZ6
+ 32eoL55Zo6pW8QGVGnP3LfXGbSk2h7jNPQFRgZTbcYc8AB6Mt+p4vNL8SIPvCNXU8DTw
+ RA86O/WZOx5QnNNoYJuhCk1E5K5UjdiFYB3sk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1683238851; x=1685830851;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=vD4bvIvOh45mQL2EmEIxy5cxC2wkD1Nakyo16A6M3Ak=;
+ b=fc2STBQYRskhSLBZwTWrPdQ5OWVZDxzHaSf/l8figrUWG46eK+DtZH1YaMKZ4xkKPw
+ OeL8ozvPOKQTRzzGX3ArWDy59OUKDCILhsEyvSGwgzQlHBYutEkfKIwzycSs6sCKg6Mr
+ b2XB41FTFP1LvTuB1I3GYkjQWFHlGcnnl6StJ0RanfEP4KERQkz/TWdubKAglaxxPeN6
+ v0s+sZ89BQgcI8BV3ijurG0hBVCcC4rwtafroaeO+j5SQpEkVJ8xO4+OW817xaYNzwjd
+ Y8S+zFIj9Q//HmhFr1BA4FA421bHOKGLjmYL5oO884Q+gGYxLiNBkH9fnp5dZwwUZpz4
+ EveA==
+X-Gm-Message-State: AC+VfDwrAVrHHqLISPArCFiKJ3zkhejFZA7lsO0bFdZN/P/hVNZLf6BW
+ +NcaMSv00PaKgblX3Z3fgrQgV0az5DU6ac5k+0U=
+X-Google-Smtp-Source: ACHHUZ7APdUihveMdpfm3eEVk6bRDMsTJcYFsjX+MPsTlla4z2IzYm9zOOfkxJX9arU9AhobNf/4uQ==
+X-Received: by 2002:a05:6a20:1594:b0:f5:68c9:6fa6 with SMTP id
+ h20-20020a056a20159400b000f568c96fa6mr4168059pzj.17.1683238483824; 
+ Thu, 04 May 2023 15:14:43 -0700 (PDT)
+Received: from tictac2.mtv.corp.google.com
+ ([2620:15c:9d:2:edf0:7321:6b9e:d5e7])
+ by smtp.gmail.com with ESMTPSA id
+ g26-20020aa7819a000000b006437c0edf9csm169615pfi.16.2023.05.04.15.14.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 04 May 2023 15:14:42 -0700 (PDT)
+From: Douglas Anderson <dianders@chromium.org>
+To: Petr Mladek <pmladek@suse.com>, Andrew Morton <akpm@linux-foundation.org>
+Date: Thu,  4 May 2023 15:13:32 -0700
+Message-ID: <20230504221349.1535669-1-dianders@chromium.org>
+X-Mailer: git-send-email 2.40.1.521.gf1e218fcd8-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230501082341.v3.1.I6bf789d21d0c3d75d382e7e51a804a7a51315f2c@changeid>
-X-Spam-Score: -2.5 (--)
+X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon 2023-05-01 08:24:46, Douglas Anderson wrote: > From:
- Colin Cross <ccross@android.com> > > Implement a hardlockup detector that
- doesn't doesn't need any extra > arch-specific support code to det [...] 
- Content analysis details:   (-2.5 points, 6.0 required)
+ Content preview:  This patch series adds the "buddy" hardlockup detector. In
+ brief, the buddy hardlockup detector can detect hardlockups without arch-level
+ support by having CPUs checkup on a "buddy" CPU periodically. [...] 
+ Content analysis details:   (-0.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.219.180 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.219.180 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [195.135.220.28 listed in list.dnswl.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1ptrtd-00BgyN-Iw
-Subject: [Kgdb-bugreport] shared code: was: Re: [PATCH v3] hardlockup:
- detect hard lockups using secondary (buddy) CPUs
+ valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1puhJj-00ESuA-Rq
+Subject: [Kgdb-bugreport] [PATCH v4 00/17] watchdog/hardlockup: Add the
+ buddy hardlockup detector
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,310 +123,175 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-From: Petr Mladek via Kgdb-bugreport <kgdb-bugreport@lists.sourceforge.net>
-Reply-To: Petr Mladek <pmladek@suse.com>
 Cc: Mark Rutland <mark.rutland@arm.com>, Ian Rogers <irogers@google.com>,
  Randy Dunlap <rdunlap@infradead.org>,
  Lecopzer Chen <lecopzer.chen@mediatek.com>,
- Geert Uytterhoeven <geert+renesas@glider.be>,
- Catalin Marinas <catalin.marinas@arm.com>, ricardo.neri@intel.com,
- Stephane Eranian <eranian@google.com>, Alexander Potapenko <glider@google.com>,
- Michael Ellerman <mpe@ellerman.id.au>, Guenter Roeck <groeck@chromium.org>,
- Will Deacon <will@kernel.org>, Daniel Thompson <daniel.thompson@linaro.org>,
- Andi Kleen <ak@linux.intel.com>, Marc Zyngier <maz@kernel.org>,
- Masahiro Yamada <masahiroy@kernel.org>, Chen-Yu Tsai <wens@csie.org>,
- Matthias Kaehlcke <mka@chromium.org>, Vlastimil Babka <vbabka@suse.cz>,
- Sami Tolvanen <samitolvanen@google.com>, kgdb-bugreport@lists.sourceforge.net,
- Miguel Ojeda <ojeda@kernel.org>, Masayoshi Mizuma <msys.mizuma@gmail.com>,
- ravi.v.shankar@intel.com, Tzung-Bi Shih <tzungbi@chromium.org>,
- Kees Cook <keescook@chromium.org>, "Paul E. McKenney" <paulmck@kernel.org>,
- Liam Howlett <liam.howlett@oracle.com>, Stephen Boyd <swboyd@chromium.org>,
- Nathan Chancellor <nathan@kernel.org>, linux-mediatek@lists.infradead.org,
- Zhen Lei <thunder.leizhen@huawei.com>,
- Matthias Brugger <matthias.bgg@gmail.com>,
- Laurent Dufour <ldufour@linux.ibm.com>, linux-arm-kernel@lists.infradead.org,
- AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
- Juergen Gross <jgross@suse.com>, Zhaoyang Huang <zhaoyang.huang@unisoc.com>,
- ito-yuichi@fujitsu.com, Nick Desaulniers <ndesaulniers@google.com>,
- linux-kernel@vger.kernel.org, linux-perf-users@vger.kernel.org,
- Colin Cross <ccross@android.com>, Andrew Morton <akpm@linux-foundation.org>
+ kgdb-bugreport@lists.sourceforge.net, ricardo.neri@intel.com,
+ Stephane Eranian <eranian@google.com>, Guenter Roeck <groeck@chromium.org>,
+ sparclinux@vger.kernel.org, Will Deacon <will@kernel.org>,
+ Daniel Thompson <daniel.thompson@linaro.org>, Andi Kleen <ak@linux.intel.com>,
+ mpe@ellerman.id.au, christophe.leroy@csgroup.eu, Chen-Yu Tsai <wens@csie.org>,
+ Matthias Kaehlcke <mka@chromium.org>,
+ Catalin Marinas <catalin.marinas@arm.com>,
+ Masayoshi Mizuma <msys.mizuma@gmail.com>, ravi.v.shankar@intel.com,
+ Tzung-Bi Shih <tzungbi@chromium.org>, npiggin@gmail.com,
+ Stephen Boyd <swboyd@chromium.org>, Pingfan Liu <kernelfans@gmail.com>,
+ linux-arm-kernel@lists.infradead.org, ito-yuichi@fujitsu.com,
+ linux-perf-users@vger.kernel.org, Marc Zyngier <maz@kernel.org>,
+ linuxppc-dev@lists.ozlabs.org, davem@davemloft.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Mon 2023-05-01 08:24:46, Douglas Anderson wrote:
-> From: Colin Cross <ccross@android.com>
-> 
-> Implement a hardlockup detector that doesn't doesn't need any extra
-> arch-specific support code to detect lockups. Instead of using
-> something arch-specific we will use the buddy system, where each CPU
-> watches out for another one. Specifically, each CPU will use its
-> softlockup hrtimer to check that the next CPU is processing hrtimer
-> interrupts by verifying that a counter is increasing.
-> 
-> --- a/include/linux/nmi.h
-> +++ b/include/linux/nmi.h
-> @@ -134,6 +144,7 @@ void lockup_detector_reconfigure(void);
->  static inline void touch_nmi_watchdog(void)
->  {
->  	arch_touch_nmi_watchdog();
-> +	buddy_cpu_touch_watchdog();
+This patch series adds the "buddy" hardlockup detector. In brief, the
+buddy hardlockup detector can detect hardlockups without arch-level
+support by having CPUs checkup on a "buddy" CPU periodically. All the
+details are in the patch ("watchdog/hardlockup: detect hard lockups
+using secondary (buddy) CPUs") and I encourage folks to reply to that
+patch for general comments about this approach.
 
-	touch_buddy_watchdog();    ??? to follow the naming scheme?
+Note that in v3, this was a single patch [1]. It's now exploded into a
+much larger series. The much larger series does a bunch of cleanup
+that Petr requested in response to v3 [2] [3]. This new series ends up
+sharing a lot more code with the perf lockup detector. It also tries
+to bring a little sanity to some of the naming we had.
 
->  	touch_softlockup_watchdog();
->  }
->  
-> --- a/kernel/watchdog.c
-> +++ b/kernel/watchdog.c
-> @@ -106,6 +108,13 @@ void __weak watchdog_nmi_disable(unsigned int cpu)
->  	hardlockup_detector_perf_disable();
->  }
->  
-> +#else
-> +
-> +int __weak watchdog_nmi_enable(unsigned int cpu) { return 0; }
-> +void __weak watchdog_nmi_disable(unsigned int cpu) { return; }
+The fact that this series now touches across the whole lockup detector
+codebase also caused conflicts with the series trying to add a arm64
+perf-based hardlockup detector. That was a bit incovenient for me
+since I was testing on arm64 and wanted to make sure that the perf
+and buddy hardlockup detectors both compiled and worked. Because of
+this, I've pulled the latest arm64 perf-based lockup detector patches
+into my series. Specifically:
+- Patches #1 - #3 of the arm64 perf-based lockup detector patches were
+  generic cleanups. I added them early in my series. IMO these should
+  just land.
+- Patches #4 - #6 of the arm64 perf-based lockup detector patches were
+  less generic but still caused conflict with my series. I tacked them
+  to the end of my series after adapting them to my changes. However,
+  I don't really consider them part of this series and I'd be OK if
+  the series landed without them. For use cases I'm aware of the buddy
+  system is sufficient and I see no urgent need to land the arm64 perf
+  hardlockup support, though I also don't have any strong objections
+  to the patches.
 
-Honestly, the mix of softlockup and hardlockup code was a hard to
-follow even before this patch. And it is going to be worse.
+I will note that this patch series currently has no conflicts with the
+other patch series I posed recently adding support for pseudo-NMI
+based backtraces [5] and the two patches series are meant to work
+together.
 
-Anyway, the buddy watchdog is not using NMI at all. It should not
-get enable using a function called *_nmi_enabled().
+Given the new design of this patch series, testing all combinations is
+fairly difficult. I've attempted to make sure that all combinations of
+CONFIG_ options are good, but it wouldn't surprise me if I missed
+something. I apologize in advance and I'll do my best to fix any
+problems that are found.
 
-Also some comments are not longer valid, for example:
+I'll also note that the CC list is pretty giant. Some of this is based
+on get_maintainers and some of this is people I thought might be
+interested. Now that this series is touching so many files, I've
+stopped auto-CCing everyone that get_maintainers suggests. I'll reply
+to v3 and point at this patch to make sure folks are aware of it, but
+if I stopped CCing you and you want back on then please yell.
 
-static void watchdog_enable(unsigned int cpu)
-{
-[...]
-	/* Enable the perf event */
-	if (watchdog_enabled & NMI_WATCHDOG_ENABLED)
-		watchdog_nmi_enable(cpu);
+As far as I can tell, there's no true MAINTAINER listed for the
+existing watchdog code. Assuming people don't hate this, maybe it
+would go through Andrew Morton's tree? There is now some arch-specific
+code for sparc and powerpc, but it's all still watchdog code so
+hopefully that would still be fine to go through the same tree.
 
+[1] https://lore.kernel.org/r/20230501082341.v3.1.I6bf789d21d0c3d75d382e7e51a804a7a51315f2c@changeid
+[2] https://lore.kernel.org/r/ZFEqynvf5nqkzEvQ@alley
+[3] https://lore.kernel.org/r/ZFErmshcrcikrSU1@alley
+[4] https://lore.kernel.org/linux-arm-kernel/20220903093415.15850-1-lecopzer.chen@mediatek.com/
+[5] https://lore.kernel.org/r/20230419225604.21204-1-dianders@chromium.org
 
-I do not know. Maybe, fixing the mess is beyond any hope.
-But we shold not make it worse.
+Changes in v4:
+- ("Add a "cpu" param to watchdog_hardlockup_check()") new for v4.
+- ("Add a weak function for an arch to detect ...") new for v4.
+- ("Define dummy watchdog_update_hrtimer_threshold() ...") new for v4.
+- ("Have the perf hardlockup use __weak ...") new for v4.
+- ("Move perf hardlockup checking/panic ...") new for v4.
+- ("Move perf hardlockup watchdog petting to watchdog.c") new for v4.
+- ("Rename some "NMI watchdog" constants/function ...") new for v4.
+- ("Rename touch_nmi_watchdog() to ...") new for v4.
+- ("Rename watchdog_hld.c to watchdog_perf.c") new for v4.
+- ("Style changes to watchdog_hardlockup_check ...") new for v4.
+- Pulled ("Adapt the watchdog_hld interface ...") into my series for v4.
+- Pulled ("Enable perf events based hard ...") into my series for v4.
+- Pulled ("Ensure CPU-bound context when creating ...") into my series for v4.
+- Pulled ("add hw_nmi_get_sample_period for ...") into my series for v4.
+- Pulled ("change watchdog_nmi_enable() to void") into my series for v4.
+- Pulled ("remove WATCHDOG_DEFAULT") into my series for v4.
+- Reworked atop a whole pile of cleanups, as suggested by Petr.
 
-I suggest to rename/shuffle at least functions touched
-by this patchset to improve the meaning.
+Changes in v3:
+- Added a note in commit message about the effect on idle.
+- Cleaned up commit message pros/cons to be complete sentences.
+- More cpu => CPU (in Kconfig and comments).
+- No code changes other than comments.
 
-Sigh, it is hard to find a reasonable names. The code
-already uses:
+Changes in v2:
+- No code changes.
+- Reworked description and Kconfig based on v1 discussion.
+- cpu => CPU (in commit message).
 
-    + watchdog_*
-    + watchdog_nmi_
+Colin Cross (1):
+  watchdog/hardlockup: detect hard lockups using secondary (buddy) CPUs
 
-    + softlockup_*
+Douglas Anderson (11):
+  watchdog/perf: Define dummy watchdog_update_hrtimer_threshold() on
+    correct config
+  watchdog/hardlockup: Rename touch_nmi_watchdog() to
+    touch_hardlockup_watchdog()
+  watchdog/perf: Rename watchdog_hld.c to watchdog_perf.c
+  watchdog/hardlockup: Move perf hardlockup checking/panic to common
+    watchdog.c
+  watchdog/hardlockup: Style changes to watchdog_hardlockup_check() /
+    ..._is_lockedup()
+  watchdog/hardlockup: Add a "cpu" param to watchdog_hardlockup_check()
+  watchdog/hardlockup: Move perf hardlockup watchdog petting to
+    watchdog.c
+  watchdog/hardlockup: Rename some "NMI watchdog" constants/function
+  watchdog/hardlockup: Have the perf hardlockup use __weak functions
+    more cleanly
+  watchdog/perf: Add a weak function for an arch to detect if perf can
+    use NMIs
+  arm64: Enable perf events based hard lockup detector
 
-    + lockup_detector_*
-    + hardlockup_detector_perf_*
+Lecopzer Chen (4):
+  watchdog: remove WATCHDOG_DEFAULT
+  watchdog/hardlockup: change watchdog_nmi_enable() to void
+  watchdog/perf: Adapt the watchdog_perf interface for async model
+  arm64: add hw_nmi_get_sample_period for preparation of lockup detector
 
-and sysctl:
+Pingfan Liu (1):
+  watchdog/perf: Ensure CPU-bound context when creating hardlockup
+    detector event
 
-		.procname       = "watchdog",
-		.procname	= "watchdog_thresh",
-		.procname       = "nmi_watchdog",
-		.procname	= "watchdog_cpumask",
-		.procname       = "soft_watchdog",
-		.procname	= "softlockup_panic",
-		.procname	= "softlockup_all_cpu_backtrace",
-		.procname	= "hardlockup_panic",
-		.procname	= "hardlockup_all_cpu_backtrace",
+ arch/arm64/Kconfig                         |   2 +
+ arch/arm64/kernel/Makefile                 |   1 +
+ arch/arm64/kernel/perf_event.c             |  12 +-
+ arch/arm64/kernel/watchdog_hld.c           |  36 +++
+ arch/powerpc/include/asm/nmi.h             |   4 +-
+ arch/powerpc/kernel/watchdog.c             |  12 +-
+ arch/powerpc/platforms/pseries/mobility.c  |   4 +-
+ arch/sparc/kernel/nmi.c                    |  10 +-
+ drivers/perf/arm_pmu.c                     |   5 +
+ include/linux/nmi.h                        |  73 +++--
+ include/linux/perf/arm_pmu.h               |   2 +
+ kernel/Makefile                            |   3 +-
+ kernel/watchdog.c                          | 293 ++++++++++++++++-----
+ kernel/watchdog_buddy.c                    |  93 +++++++
+ kernel/{watchdog_hld.c => watchdog_perf.c} | 105 +++-----
+ lib/Kconfig.debug                          |  52 +++-
+ 16 files changed, 527 insertions(+), 180 deletions(-)
+ create mode 100644 arch/arm64/kernel/watchdog_hld.c
+ create mode 100644 kernel/watchdog_buddy.c
+ rename kernel/{watchdog_hld.c => watchdog_perf.c} (72%)
 
+-- 
+2.40.1.521.gf1e218fcd8-goog
 
-So, I suggest, to use the names:
-
-
-    + watchdog_*
-
-	+ for the common infrastructure
-	+ keep it in watchdog.c
-
-    + hardlockup_detector_* or
-      hardlockup_watchdog_* or
-      watchdog_hld_*
-
-	+ for the common hardlockup stuff.
-	+ it t can stay in watchdog.c to keep shuffling bearable
-
-
-    + hardlockup_detector_nmi_* or
-      hardlockup_watchdog_nmi_* or
-      watchdog_hld_nmi_* or
-      watchdog_nmi_*
-
-	+ for the arch specific hardlockup stuff that is
-	  using NMI interrupts.
-
-	+ it might either stay in watchdog_hld.c
-	  or be moved to watchdog_nmi.c or
-	  watchdog_hld_nmi.c
-
-    + hardlockup_detector_buddy_* or
-      hardlockup_watchdog_buddy_* or
-      watchdog_hld_buddy_*
-      watchdog_buddy_*
-
-	+ for the arch specific hardlockup stuff that is
-	  using buddy monitoring
-
-	+ it might either be added to watchdog_hld.c
-	  or be moved to watchdog_buddy.c or
-	  watchdog_hld_buddy.c
-
-
-Opinion:
-
-     The buddy watchdog might actually be used also for
-     softlockup detector. So, watchdog_buddy_* API
-     and watchdog_buddy.c might make sense.
-
-
-> +
-> +#endif /* CONFIG_HARDLOCKUP_DETECTOR */
-> +
->  /* Return 0, if a NMI watchdog is available. Error code otherwise */
->  int __weak __init watchdog_nmi_probe(void)
->  {
-> @@ -364,6 +373,9 @@ static enum hrtimer_restart watchdog_timer_fn(struct hrtimer *hrtimer)
->  	/* kick the hardlockup detector */
->  	watchdog_interrupt_count();
->  
-> +	/* test for hardlockups */
-> +	watchdog_check_hardlockup();
-
-  rename watchdog_buddy_check_hardlockup(); ???
-
-> +
->  	/* kick the softlockup detector */
->  	if (completion_done(this_cpu_ptr(&softlockup_completion))) {
->  		reinit_completion(this_cpu_ptr(&softlockup_completion));
-> --- /dev/null
-> +++ b/kernel/watchdog_buddy_cpu.c
-> @@ -0,0 +1,141 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +
-> +#include <linux/cpu.h>
-> +#include <linux/cpumask.h>
-> +#include <linux/kernel.h>
-> +#include <linux/nmi.h>
-> +#include <linux/percpu-defs.h>
-> +
-> +static DEFINE_PER_CPU(bool, watchdog_touch);
-> +static DEFINE_PER_CPU(bool, hard_watchdog_warn);
-> +static cpumask_t __read_mostly watchdog_cpus;
-> +
-> +static unsigned long hardlockup_allcpu_dumped;
-> +
-> +int __init watchdog_nmi_probe(void)
-> +{
-> +	return 0;
-> +}
-
-This is pretty strange. It shows that it was added a hacky way.
-
-> +
-> +notrace void buddy_cpu_touch_watchdog(void)
-> +{
-> +	/*
-> +	 * Using __raw here because some code paths have
-> +	 * preemption enabled.  If preemption is enabled
-> +	 * then interrupts should be enabled too, in which
-> +	 * case we shouldn't have to worry about the watchdog
-> +	 * going off.
-> +	 */
-> +	raw_cpu_write(watchdog_touch, true);
-> +}
-> +EXPORT_SYMBOL_GPL(buddy_cpu_touch_watchdog);
-
-Cut&pasted arch_touch_nmi_watchdog().
-
-> +
-> +static unsigned int watchdog_next_cpu(unsigned int cpu)
-> +{
-> +	cpumask_t cpus = watchdog_cpus;
-> +	unsigned int next_cpu;
-> +
-> +	next_cpu = cpumask_next(cpu, &cpus);
-> +	if (next_cpu >= nr_cpu_ids)
-> +		next_cpu = cpumask_first(&cpus);
-> +
-> +	if (next_cpu == cpu)
-> +		return nr_cpu_ids;
-> +
-> +	return next_cpu;
-> +}
-> +
-[...]
-> +static int is_hardlockup_buddy_cpu(unsigned int cpu)
-> +{
-> +	unsigned long hrint = per_cpu(hrtimer_interrupts, cpu);
-> +
-> +	if (per_cpu(hrtimer_interrupts_saved, cpu) == hrint)
-> +		return 1;
-> +
-> +	per_cpu(hrtimer_interrupts_saved, cpu) = hrint;
-> +	return 0;
-
-This is cut&pasted is_hardlockup(). And the __this_cpu_* API
-is replaced by per_cpu_* API.
-
-> +}
-> +
-> +void watchdog_check_hardlockup(void)
-> +{
-> +	unsigned int next_cpu;
-> +
-> +	/*
-> +	 * Test for hardlockups every 3 samples. The sample period is
-> +	 *  watchdog_thresh * 2 / 5, so 3 samples gets us back to slightly over
-> +	 *  watchdog_thresh (over by 20%).
-> +	 */
-> +	if (__this_cpu_read(hrtimer_interrupts) % 3 != 0)
-> +		return;
-> +
-> +	/* check for a hardlockup on the next CPU */
-> +	next_cpu = watchdog_next_cpu(smp_processor_id());
-> +	if (next_cpu >= nr_cpu_ids)
-> +		return;
-> +
-> +	/* Match with smp_wmb() in watchdog_nmi_enable() / watchdog_nmi_disable() */
-> +	smp_rmb();
-> +
-> +	if (per_cpu(watchdog_touch, next_cpu) == true) {
-> +		per_cpu(watchdog_touch, next_cpu) = false;
-> +		return;
-> +	}
-> +
-> +	if (is_hardlockup_buddy_cpu(next_cpu)) {
-> +		/* only warn once */
-> +		if (per_cpu(hard_watchdog_warn, next_cpu) == true)
-> +			return;
-> +
-> +		/*
-> +		 * Perform all-CPU dump only once to avoid multiple hardlockups
-> +		 * generating interleaving traces
-> +		 */
-> +		if (sysctl_hardlockup_all_cpu_backtrace &&
-> +				!test_and_set_bit(0, &hardlockup_allcpu_dumped))
-> +			trigger_allbutself_cpu_backtrace();
-> +
-> +		if (hardlockup_panic)
-> +			panic("Watchdog detected hard LOCKUP on cpu %u", next_cpu);
-> +		else
-> +			WARN(1, "Watchdog detected hard LOCKUP on cpu %u", next_cpu);
-> +
-> +		per_cpu(hard_watchdog_warn, next_cpu) = true;
-> +	} else {
-> +		per_cpu(hard_watchdog_warn, next_cpu) = false;
-
-Also this cut&pastes a lots of code from watchdog_overflow_callback().
-
-I wonder if we could somehow share the code between the two hardlockup
-detectors. It would be win-win. It might help a lot with maintenance.
-
-Best Regards,
-Petr
 
 
 _______________________________________________
