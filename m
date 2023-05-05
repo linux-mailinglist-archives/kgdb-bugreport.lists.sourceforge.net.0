@@ -2,126 +2,125 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 50B966FC7AA
+	by mail.lfdr.de (Postfix) with ESMTPS id D2B3D6FC7AB
 	for <lists+kgdb-bugreport@lfdr.de>; Tue,  9 May 2023 15:15:38 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1pwNBp-0007Zm-16
+	id 1pwNBp-0007Zy-Cp
 	for lists+kgdb-bugreport@lfdr.de;
 	Tue, 09 May 2023 13:15:37 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <npiggin@gmail.com>) id 1pulXd-0000Qj-5X
+ (envelope-from <npiggin@gmail.com>) id 1pulZU-0001he-QM
  for kgdb-bugreport@lists.sourceforge.net;
- Fri, 05 May 2023 02:51:30 +0000
+ Fri, 05 May 2023 02:53:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:References:Subject:Cc:To:From:
+ d=sourceforge.net; s=x; h=In-Reply-To:References:To:From:Subject:Cc:
  Message-Id:Date:Content-Type:Content-Transfer-Encoding:Mime-Version:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=gVzHKIeVTs5o2uUKP+mQkds3ksDwFVvhqkKafztg4+4=; b=l/6unegSE9ys2Z3PObiHbXHBfu
- qX2ufzQnRJnVeBQKYNsc+8jM8OCr0wnJNG/p1SMlwhPJwsh2IgfQj9cCA9a/itL7YPmjWmumB82ps
- XLZyc7519rEK9BBNV9nKHtLNvladH7hQsM+oDSUxvUulCh6vTXJCXdV3d+DfztspVpqc=;
+ bh=TvuQIwE86qT9nMkGXeQaDip5ug2GQu1BAKE7bYWgdwk=; b=WC0gtlWE5N6MzDHndEy3EfBuoT
+ 1XbPWxEHGbRSyrFsTSNWR2x6OgtFtwkfH0oiC/fMXi+2InfHREsqw3zzuvT40/Nn2YQQgbqQ41BEq
+ MQwixQPiTPU+sUGHZpfu8VSuH39st5B0uKv7PsTe/MjT9tM/Xe8RqskNIPeDSZoSluiQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:References:Subject:Cc:To:From:Message-Id:Date:Content-Type:
+ h=In-Reply-To:References:To:From:Subject:Cc:Message-Id:Date:Content-Type:
  Content-Transfer-Encoding:Mime-Version:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=gVzHKIeVTs5o2uUKP+mQkds3ksDwFVvhqkKafztg4+4=; b=I3loyBD0OVIetzFDnuIMEcoShF
- KNfsFjy6S89o64oP26yurDU5czxPlfVxP1FivPhnOeMGr7emv/kBER3+eN85cHT4p0yIM5pKmZVXP
- gSYlEHa9Hr7/nTpV/+FqFKkcZkrvHH1jJnhXVwaF3qCdTVAXC61Sj0vJ62ld7oiStCWg=;
-Received: from mail-pf1-f174.google.com ([209.85.210.174])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=TvuQIwE86qT9nMkGXeQaDip5ug2GQu1BAKE7bYWgdwk=; b=ikkteSsT510RgU1/VdV1y3NyDV
+ mfVYPly5laRTGP3HdijFEa9v6LcslJPvQoxUbunIxYuSfdvmXSgNCnAIckYLihFHUIfEWSDE1ooWF
+ KN+ecWHQPZ3lIU0K8jMbBjq/th8xhBC8Ev4UngkFKbvixmevF1QIr2V+8ZqcLfVLNUyw=;
+Received: from mail-pl1-f179.google.com ([209.85.214.179])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1pulXd-00ErU7-AY for kgdb-bugreport@lists.sourceforge.net;
- Fri, 05 May 2023 02:51:29 +0000
-Received: by mail-pf1-f174.google.com with SMTP id
- d2e1a72fcca58-64115e652eeso16804067b3a.0
+ id 1pulZQ-0002cP-Jw for kgdb-bugreport@lists.sourceforge.net;
+ Fri, 05 May 2023 02:53:24 +0000
+Received: by mail-pl1-f179.google.com with SMTP id
+ d9443c01a7336-1aaf21bb427so8954485ad.1
  for <kgdb-bugreport@lists.sourceforge.net>;
- Thu, 04 May 2023 19:51:29 -0700 (PDT)
+ Thu, 04 May 2023 19:53:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1683255084; x=1685847084;
- h=in-reply-to:references:subject:cc:to:from:message-id:date
+ d=gmail.com; s=20221208; t=1683255195; x=1685847195;
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
  :content-transfer-encoding:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gVzHKIeVTs5o2uUKP+mQkds3ksDwFVvhqkKafztg4+4=;
- b=ktqHNk5loLtU/KCwR//Z7tYcVQSm8JM7u7EDXu2OxKQQsBws43LRUPjwNVbUHAGJBj
- gc3DxpQtC1/OOyHW26dX3MwFbgdfWwpOVxdtbuQThRVEzgfI1BNUZ5OhrxthomwTTvW9
- KuWgSVznYjqLHRiyHmWJk+LT2L2s0ufFsPGG+IURgPieshXMcNyyDt/Kzo+DCv0xKjZe
- DyDKfQZeNNs/8VMonmfGERnmO5tTqr0eHZh+Y875AJRCzvNs9yxUih9l0rhqWFmBJrRo
- cV/9lUiVQ0pbHb4cFF5mCXAHtl60nbslHtAtfWdEsj03EbDyIlSOcirz6VnmjBK9H4/J
- ow4g==
+ bh=TvuQIwE86qT9nMkGXeQaDip5ug2GQu1BAKE7bYWgdwk=;
+ b=jxvLXO0ysCTk5XQj17Rp4MPTljRhsg/NAlWqiFmGR2fpw55Cfg5sVLQNF9ke8zqu/N
+ HHnWR+znibrRLrH9vcnvMDlm348iuI+SsyPL+KjDHd8kJ+kLygMtANYkoqlJA6z6lSGj
+ QZNZWJy5SjgWh7ZGzeckqYUPsJuTsWIU94R5NJGqG7ornKXAjfQhUxU9ZW6eHYyHSwC8
+ XuNhhR9rjzN6nhEHsIDIEBvw8EKr9RR4JqVK8n0VmA4Fy2LIawRCSoZ2wFbIEnMX0Hu7
+ jCpsjNuzdvbOAUR1puJswLMYD3EbpysfH1e5Yu7q8B6TUU8LxJDGkmTXqTGuht3T2lUp
+ xFiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1683255084; x=1685847084;
- h=in-reply-to:references:subject:cc:to:from:message-id:date
+ d=1e100.net; s=20221208; t=1683255195; x=1685847195;
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
  :content-transfer-encoding:mime-version:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=gVzHKIeVTs5o2uUKP+mQkds3ksDwFVvhqkKafztg4+4=;
- b=icmvUOboEUBC1YuZG0Tr2CtVe685z7JMQ2RtzdgCV47Grz5ThZuIWiZzjrsNJsMIQL
- hGts2XPyKriGFGaLqaYM/ycqiTtK4pCVQ6bB2N+0bleNmKUxz8k628bYDTylDbfvYECE
- 6f9h2MFWMabThYubiSeFQcW0YhvY335k76Yr0H/B4/ilIV5F8a9jXw+R1vfBYw+jN6Wn
- cAjFCgIRfgGsH41bJu6S5CDnbNNw5NJKWGSV0TkYEOSYUnTFgAsPXkb/Vigu/GFcjWMl
- gFJXCWjiV/egWS8+yfu6maU1tgrQtCv516a17SrRasDKNgg+zcqcXiyULr7eNH7YMjLk
- AQVA==
-X-Gm-Message-State: AC+VfDy5ITrRUFvrWiDmSjdN1XvMs5uECR3LgXR/ibz0/AjiZNU6DAdG
- HTfzBq2fmkXK/1SLkMgcPRs=
-X-Google-Smtp-Source: ACHHUZ5BRoOs+9WXOczfgGoXbf4YZMUc/Uu5++G5XcOuyogjStZoqiKceepZC/RfSwAcQqdM6F1UUg==
-X-Received: by 2002:a17:902:d48e:b0:1a9:68d2:e4ae with SMTP id
- c14-20020a170902d48e00b001a968d2e4aemr6701878plg.2.1683255083704; 
- Thu, 04 May 2023 19:51:23 -0700 (PDT)
+ bh=TvuQIwE86qT9nMkGXeQaDip5ug2GQu1BAKE7bYWgdwk=;
+ b=ky7h2NWdXBrf2aNuoH07qsjESAsLXLujGsUwUGZjCNus+AC9kuae7xU7UZ5TIBRG57
+ hvXFpXuOM+bS0zMBlpKtwVQEZ+5B/OsmxS70ZzbTABEIJ/1/q3hlTZ9NyVkHROCfkdLL
+ 1qcSvUI7Py73jFpS7KcFPNsf3+BrQNUaCqNGfsR4L/JdpdHTkhCCjFJ68EuPqYJtd8H/
+ MKtw1nCm595zou3dEK2s6UqpcrqhgesN9gPS1HDF3Xhu+6I9vqr/7o5DktaNHqvoecgK
+ 4rbckeuZi7GvZTQMqfQg1F96bOxPsOjdDQzQkTcTD9nqRk4MeNKCT4uT9mvziLnc0PnE
+ Tf0w==
+X-Gm-Message-State: AC+VfDyyLFZFn8kpIBJAFgdLzBaxtqvv7JsvbKDuWNm8q6Rv3CvmO2tr
+ B/JoZ3WLx3qOfLHQ6m7d9Qo=
+X-Google-Smtp-Source: ACHHUZ5a9oH4I1uJO71H1fLGgVbhwllNxoxjP5ILVe8scfc+huKbvNVr33otWqWTE3YRZg/we43I2g==
+X-Received: by 2002:a17:903:2285:b0:1aa:f536:b1e2 with SMTP id
+ b5-20020a170903228500b001aaf536b1e2mr6428524plh.62.1683255194928; 
+ Thu, 04 May 2023 19:53:14 -0700 (PDT)
 Received: from localhost ([203.59.190.92]) by smtp.gmail.com with ESMTPSA id
- t4-20020a170902bc4400b001ab29e002fbsm367141plz.17.2023.05.04.19.51.09
+ a13-20020a170902eccd00b00186a2274382sm356805plh.76.2023.05.04.19.53.03
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 04 May 2023 19:51:23 -0700 (PDT)
+ Thu, 04 May 2023 19:53:14 -0700 (PDT)
 Mime-Version: 1.0
-Date: Fri, 05 May 2023 12:51:06 +1000
-Message-Id: <CSE04EI159N2.2TSXHBN2QLFCM@wheely>
+Date: Fri, 05 May 2023 12:53:01 +1000
+Message-Id: <CSE05UZ1HC0R.2L6QW2OI7GIMA@wheely>
 From: "Nicholas Piggin" <npiggin@gmail.com>
 To: "Douglas Anderson" <dianders@chromium.org>, "Petr Mladek"
  <pmladek@suse.com>, "Andrew Morton" <akpm@linux-foundation.org>
 X-Mailer: aerc 0.14.0
 References: <20230504221349.1535669-1-dianders@chromium.org>
- <20230504151100.v4.5.I4e47cbfa1bb2ebbcdb5ca16817aa2887f15dc82c@changeid>
-In-Reply-To: <20230504151100.v4.5.I4e47cbfa1bb2ebbcdb5ca16817aa2887f15dc82c@changeid>
+ <20230504151100.v4.6.Ice803cb078d0e15fb2cbf49132f096ee2bd4199d@changeid>
+In-Reply-To: <20230504151100.v4.6.Ice803cb078d0e15fb2cbf49132f096ee2bd4199d@changeid>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  On Fri May 5, 2023 at 8:13 AM AEST, Douglas Anderson wrote:
- > In preparation for the buddy hardlockup detector,
- rename > touch_nmi_watchdog()
- to touch_hardlockup_watchdog() to make it clear > that it [...] 
+ > The code currently in "watchdog_hld.c" is for detecting hardlockups > using
+ perf, as evidenced by the line in the Makefile that only > com [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.210.174 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.210.174 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
  provider [npiggin[at]gmail.com]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.214.179 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.214.179 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1pulXd-00ErU7-AY
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+X-Headers-End: 1pulZQ-0002cP-Jw
 X-Mailman-Approved-At: Tue, 09 May 2023 13:15:34 +0000
-Subject: Re: [Kgdb-bugreport] [PATCH v4 05/17] watchdog/hardlockup: Rename
- touch_nmi_watchdog() to touch_hardlockup_watchdog()
+Subject: Re: [Kgdb-bugreport] [PATCH v4 06/17] watchdog/perf: Rename
+ watchdog_hld.c to watchdog_perf.c
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -153,81 +152,62 @@ Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
 On Fri May 5, 2023 at 8:13 AM AEST, Douglas Anderson wrote:
-> In preparation for the buddy hardlockup detector, rename
-> touch_nmi_watchdog() to touch_hardlockup_watchdog() to make it clear
-> that it will touch whatever hardlockup detector is configured. We'll
-> add a #define for the old name (touch_nmi_watchdog) so that we don't
-> have to touch every piece of code referring to the old name.
+> The code currently in "watchdog_hld.c" is for detecting hardlockups
+> using perf, as evidenced by the line in the Makefile that only
+> compiles this file if CONFIG_HARDLOCKUP_DETECTOR_PERF is
+> defined. Rename the file to prepare for the buddy hardlockup detector,
+> which doesn't use perf.
+>
+> It could be argued that the new name makes it less obvious that this
+> is a hardlockup detector. While true, it's not hard to remember that
+> the "perf" detector is always a hardlockup detector and it's nice not
+> to have names that are too convoluted.
 
-Is this really helpful? Now it's got two names Could just leave it.
-If you insist then it'd be better just to rename everything in one
-go at the end of a merge window IMO. Conflicts would be trivial.
+Better than the confusion that the perf version is *the* hardlockup
+detector IMO.
 
-> Ideally this change would also rename the arch_touch_nmi_watchdog(),
-> but that is harder since arch_touch_nmi_watchdog() is exported with
-> EXPORT_SYMBOL() and thus is ABI. Add a comment next to the call to
-> hopefully alleviate some of the confusion here.
-
-We don't keep ABI fixed upstream.
-
-Thanks,
-Nick
+Acked-by: Nicholas Piggin <npiggin@gmail.com>
 
 >
 > Signed-off-by: Douglas Anderson <dianders@chromium.org>
 > ---
 >
 > Changes in v4:
-> - ("Rename touch_nmi_watchdog() to ...") new for v4.
+> - ("Rename watchdog_hld.c to watchdog_perf.c") new for v4.
 >
->  include/linux/nmi.h | 27 ++++++++++++++++++++++-----
->  1 file changed, 22 insertions(+), 5 deletions(-)
+>  kernel/Makefile                            | 2 +-
+>  kernel/{watchdog_hld.c => watchdog_perf.c} | 2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
+>  rename kernel/{watchdog_hld.c => watchdog_perf.c} (99%)
 >
-> diff --git a/include/linux/nmi.h b/include/linux/nmi.h
-> index 454fe99c4874..35d09d70f394 100644
-> --- a/include/linux/nmi.h
-> +++ b/include/linux/nmi.h
-> @@ -125,18 +125,35 @@ void watchdog_nmi_disable(unsigned int cpu);
->  void lockup_detector_reconfigure(void);
->  
->  /**
-> - * touch_nmi_watchdog - restart NMI watchdog timeout.
-> + * touch_hardlockup_watchdog - manually pet the hardlockup watchdog.
->   *
-> - * If the architecture supports the NMI watchdog, touch_nmi_watchdog()
-> - * may be used to reset the timeout - for code which intentionally
-> - * disables interrupts for a long time. This call is stateless.
-> + * If we support detecting hardlockups, touch_hardlockup_watchdog() may be
-> + * used to pet the watchdog (reset the timeout) - for code which
-> + * intentionally disables interrupts for a long time. This call is stateless.
->   */
-> -static inline void touch_nmi_watchdog(void)
-> +static inline void touch_hardlockup_watchdog(void)
->  {
-> +	/*
-> +	 * Pass on to the hardlockup detector selected via CONFIG_. Note that
-> +	 * the hardlockup detector may not be arch-specific nor using NMIs,
-> +	 * but arch_touch_nmi_watchdog() is exported with EXPORT_SYMBOL() and
-> +	 * is thus ABI.
-> +	 */
->  	arch_touch_nmi_watchdog();
-> +
-> +	/*
-> +	 * Touching the hardlock detector implcitily pets the
-> +	 * softlockup detector too
-> +	 */
->  	touch_softlockup_watchdog();
->  }
->  
-> +/*
-> + * It's encouraged for code to refer to the new name, but allow the old
-> + * name as well.
-> + */
-> +#define touch_nmi_watchdog	touch_hardlockup_watchdog
-> +
+> diff --git a/kernel/Makefile b/kernel/Makefile
+> index 10ef068f598d..406ccccc4dd3 100644
+> --- a/kernel/Makefile
+> +++ b/kernel/Makefile
+> @@ -91,7 +91,7 @@ obj-$(CONFIG_FAIL_FUNCTION) += fail_function.o
+>  obj-$(CONFIG_KGDB) += debug/
+>  obj-$(CONFIG_DETECT_HUNG_TASK) += hung_task.o
+>  obj-$(CONFIG_LOCKUP_DETECTOR) += watchdog.o
+> -obj-$(CONFIG_HARDLOCKUP_DETECTOR_PERF) += watchdog_hld.o
+> +obj-$(CONFIG_HARDLOCKUP_DETECTOR_PERF) += watchdog_perf.o
+>  obj-$(CONFIG_SECCOMP) += seccomp.o
+>  obj-$(CONFIG_RELAY) += relay.o
+>  obj-$(CONFIG_SYSCTL) += utsname_sysctl.o
+> diff --git a/kernel/watchdog_hld.c b/kernel/watchdog_perf.c
+> similarity index 99%
+> rename from kernel/watchdog_hld.c
+> rename to kernel/watchdog_perf.c
+> index 96b717205952..c3d8ceb149da 100644
+> --- a/kernel/watchdog_hld.c
+> +++ b/kernel/watchdog_perf.c
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0
 >  /*
->   * Create trigger_all_cpu_backtrace() out of the arch-provided
->   * base function. Return whether such support was available,
+> - * Detect hard lockups on a system
+> + * Detect hard lockups on a system using perf
+>   *
+>   * started by Don Zickus, Copyright (C) 2010 Red Hat, Inc.
+>   *
 > -- 
 > 2.40.1.521.gf1e218fcd8-goog
 
