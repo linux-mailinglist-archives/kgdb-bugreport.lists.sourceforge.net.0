@@ -2,103 +2,132 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 926206FC7AF
-	for <lists+kgdb-bugreport@lfdr.de>; Tue,  9 May 2023 15:15:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D10D6FC7B0
+	for <lists+kgdb-bugreport@lfdr.de>; Tue,  9 May 2023 15:15:41 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1pwNBr-0007bl-Cu
+	id 1pwNBr-0007c7-Tv
 	for lists+kgdb-bugreport@lfdr.de;
 	Tue, 09 May 2023 13:15:39 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ak@linux.intel.com>) id 1pviBH-0002Gz-Fd
+ (envelope-from <npiggin@gmail.com>) id 1pvpJF-0001Ax-Ix
  for kgdb-bugreport@lists.sourceforge.net;
- Sun, 07 May 2023 17:28:19 +0000
+ Mon, 08 May 2023 01:05:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:References:Subject:Cc:To:From:
+ Message-Id:Date:Content-Type:Content-Transfer-Encoding:Mime-Version:Sender:
+ Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+ :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=VZjhU8K9yNscHwfFIedpFnb9T5NjtGy9r4a8tOJPjGs=; b=jnowTx20NRc0e+hwPtscS4q8Fz
- y1DtrzvdRgSzfUflzFibbrw9QCoTQnTnINgDjrfWALeti3AgOdd6Mxn8DEt7fCU9g+azh3mX/MELw
- TUx3NnyyxP+DJHJ1/jqZU9wpPWAY3MJahuudjFYNoYJvQsSojBbAxq9qNYLlQuQ9s4/w=;
+ bh=L+PPFKXX425r8vzKPVM6Zic55f59QA5mguBoW8dBKWo=; b=CHaQTAEMZGqyObRgPetYfbhxF/
+ 0LZUn6dbJuFW/LqYEw9oVZNd3UhkS/4o0b43ANPquhT9n+nutYqlCIVGjkZALfDtOSlnINam0QvAG
+ xi40wyy4v7St8/Z9VQ0GagcAA6k6qQjnWhevLGgVmgmdWeofjS2Pz3lhjU5kgY09fzR0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:References:Subject:Cc:To:From:Message-Id:Date:Content-Type:
+ Content-Transfer-Encoding:Mime-Version:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=VZjhU8K9yNscHwfFIedpFnb9T5NjtGy9r4a8tOJPjGs=; b=YEbzNJ8Nt28/orjPel7w/f6Si+
- tX0xTKuXkCzGtp4ZYcVaBuJS04iF4IX5lbJT+Vp6J2KROcTfV1gbQYv+Me8zwHA8PdM9/GlPMiS9W
- QM6J69iqNnTsYXLj05SamrJwA5R6TSRM64fxaRlnpv5pODyBSgsdCftyzRFidDgs6Y/U=;
-Received: from mga18.intel.com ([134.134.136.126])
+ bh=L+PPFKXX425r8vzKPVM6Zic55f59QA5mguBoW8dBKWo=; b=F+qCCP7olqp0ye59KeQeYBq5xw
+ knKdoOVC+QaIqF2XCZw7gskHeLj4L532aG5aSHd2oXmFNqG5zqpY1hNzVmLzcdCcLjkwW2sMBrbJJ
+ WwR4rksHalXBu6D6wGR3UjGhs2QV8p1OSbUcmxo7LwCJIg/le1Q0mnMnkg1SMxl7JDxI=;
+Received: from mail-pj1-f41.google.com ([209.85.216.41])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pviBG-000Ayb-AS for kgdb-bugreport@lists.sourceforge.net;
- Sun, 07 May 2023 17:28:19 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1683480498; x=1715016498;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=xadsDlIqSLYDH8jAUQJ+rU/bh9AyzgsU04VnNDkPNZk=;
- b=WjmPMBRM1FmZ/XcBu1GWUh8K9pysiM3Jcoq/bN69H9EKj3igRsDph7Sb
- uk44zxIhwcCHZ2ypLHInX5200e1fy9L8D4oJvHnH/yzIG6xIlw85TLv0S
- 9QiydYojgHfBOIqaOgUklkk6fF7UC31lC7es3kVss1VZbDHBr3ID2rIOj
- 1vH5TOSduc9qQjochl+9EQtHKbm2Bfs/uhjBvE3AMo9kz6r6ZrugmXBfr
- G9uRd/36oqKKhkwOkB9ZOF02W6hNSgG0fT4rbeyYaLowIVegPnLWd3YgT
- AZrYgACv9D7YDRUtb1NH5Jx3hjlM3drFySxGvd4LtU4omyEC3WLG+g5pu Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10703"; a="333933241"
-X-IronPort-AV: E=Sophos;i="5.99,257,1677571200"; d="scan'208";a="333933241"
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
- by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 07 May 2023 10:12:38 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10703"; a="842466547"
-X-IronPort-AV: E=Sophos;i="5.99,257,1677571200"; d="scan'208";a="842466547"
-Received: from tassilo.jf.intel.com (HELO tassilo) ([10.54.38.190])
- by fmsmga001-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 07 May 2023 10:12:37 -0700
-Date: Sun, 7 May 2023 10:12:29 -0700
-From: Andi Kleen <ak@linux.intel.com>
-To: Doug Anderson <dianders@chromium.org>
-Message-ID: <ZFfb/bTi22RQwaol@tassilo>
-References: <20230421155255.1.I6bf789d21d0c3d75d382e7e51a804a7a51315f2c@changeid>
- <CAP-5=fUB1e=bJk-w0i8+MEo4sLOZtb_Eb7FMy4u7ky7D2AZm6A@mail.gmail.com>
- <CAD=FV=Xuuefi9XBQA7z7sbe+Qw0=WeZ956gLGCoFGHBg6GBftg@mail.gmail.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAD=FV=Xuuefi9XBQA7z7sbe+Qw0=WeZ956gLGCoFGHBg6GBftg@mail.gmail.com>
-X-Spam-Score: -0.3 (/)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1pvpJE-001NGF-UJ for kgdb-bugreport@lists.sourceforge.net;
+ Mon, 08 May 2023 01:05:01 +0000
+Received: by mail-pj1-f41.google.com with SMTP id
+ 98e67ed59e1d1-24df6bbf765so3563886a91.0
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Sun, 07 May 2023 18:05:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1683507895; x=1686099895;
+ h=in-reply-to:references:subject:cc:to:from:message-id:date
+ :content-transfer-encoding:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=L+PPFKXX425r8vzKPVM6Zic55f59QA5mguBoW8dBKWo=;
+ b=g6nKyzCdl7wTzFzj0LPDCvxv55Fy7TfpGWgO3pV6ij+uOoq81YB2jNTSX5iaFONC1a
+ 2mmifmqG7gTqnR60RJOMRKTGxfC1MPZOBDnxBxC8EfLhTHJL8AhE1/n2yUOJyPMLC9o/
+ uuml0GrB72oOnQcqwCMNQfB2MRnFdMZQT3rB+TP3y0CeS4NjZ5eUYbvjHqlpvDWij0mY
+ +Rsmlbec0zcoH6AhBTwgJ1Kv0dXBCznV96/reb0frVyB8K6Y485zWs34lthhXNKMQ7fk
+ dmwcTIP128fzDg1lcXBtIwm0yEzMGvicYdNfyIwQCmGboUqYj0oPhBVNRspiaZjXGsoc
+ yQQw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1683507895; x=1686099895;
+ h=in-reply-to:references:subject:cc:to:from:message-id:date
+ :content-transfer-encoding:mime-version:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=L+PPFKXX425r8vzKPVM6Zic55f59QA5mguBoW8dBKWo=;
+ b=LSyaIMJk40GSgD6r3a3aTiBEmFIyYLO2l6lTLAM8ZYKSK22UqcyAVkfKPfvRPeeYAD
+ u9P8WM+Fn3F/BfLYQxDXp60aacJoqK7Ud3Je1xWieWCfQQqJmQVhRMp9J0SWK4Hr8ypY
+ uoQP9CutIjzymVaDLPf3Yd3jK6etNNhMtVLf9kpdyu5zi1QA+gc59e/MHJQAF0RGdq+F
+ l5/j4QJG6mwDif/CJktTmMrK+oH26VhZbzWtWwZmPRj8MePvk6H1RRi+ZSwwu4Xazpfd
+ 2WcwNAgUXaSP0t3meBGvYA5xf3N8Gt/4J8as6BhpiKO6I+JCDW8GLHyLCZsxg5AYfGVy
+ a8+A==
+X-Gm-Message-State: AC+VfDzQec+QBHM10fIYQzSke6cmpLMi61iittu6hG7kbPBHouMtoCXF
+ P+H1IVVWn4ihDSoLCJYEIrA=
+X-Google-Smtp-Source: ACHHUZ59icTjTc2OdzI15EfiZxFSZ69uNN4QwbtfViigDNmld+b2odQxDB6B0BmyEFVXN9x050Oztw==
+X-Received: by 2002:a17:90b:3142:b0:246:f8d7:3083 with SMTP id
+ ip2-20020a17090b314200b00246f8d73083mr8577679pjb.16.1683507895288; 
+ Sun, 07 May 2023 18:04:55 -0700 (PDT)
+Received: from localhost (58-6-235-78.tpgi.com.au. [58.6.235.78])
+ by smtp.gmail.com with ESMTPSA id
+ ie14-20020a17090b400e00b0024e1172c1d3sm11713201pjb.32.2023.05.07.18.04.43
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 07 May 2023 18:04:54 -0700 (PDT)
+Mime-Version: 1.0
+Date: Mon, 08 May 2023 11:04:40 +1000
+Message-Id: <CSGHQJAJHWVS.1UAJOF8P5UXSK@wheely>
+From: "Nicholas Piggin" <npiggin@gmail.com>
+To: "Doug Anderson" <dianders@chromium.org>
+X-Mailer: aerc 0.14.0
+References: <20230504221349.1535669-1-dianders@chromium.org>
+ <20230504151100.v4.13.I6bf789d21d0c3d75d382e7e51a804a7a51315f2c@changeid>
+ <CSDZSKA38AEF.FY7J3JXBJX4I@wheely>
+ <CAD=FV=XDfbx3UaP7DV63tASE5Md7siS-EnORD_3T-4yYaEQ7ww@mail.gmail.com>
+In-Reply-To: <CAD=FV=XDfbx3UaP7DV63tASE5Md7siS-EnORD_3T-4yYaEQ7ww@mail.gmail.com>
+X-Spam-Score: -0.2 (/)
+X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, Apr 24, 2023 at 08:23:59AM -0700,
- Doug Anderson wrote:
- > HPET system seems to have a single CPU in charge of processing the > main
- NMI and then that single CPU is in charge of checking all the [...] 
- Content analysis details:   (-0.3 points, 6.0 required)
- pts rule name              description
+ 
+ Content preview:  On Sat May 6, 2023 at 2:35 AM AEST, Doug Anderson wrote: >
+    Hi, > > On Thu, May 4, 2023 at 7:36 PM Nicholas Piggin wrote: > > > > On
+    Fri May 5, 2023 at 8:13 AM AEST, Douglas Anderson wrote: > > > F [...] 
+ 
+ Content analysis details:   (-0.2 points, 6.0 required)
+ 
+  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+                             provider
+                             [npiggin[at]gmail.com]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+                              no trust
+                             [209.85.216.41 listed in list.dnswl.org]
+  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+                             [209.85.216.41 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pviBG-000Ayb-AS
-X-Mailman-Approved-At: Tue, 09 May 2023 13:15:34 +0000
-Subject: Re: [Kgdb-bugreport] [PATCH] hardlockup: detect hard lockups using
- secondary (buddy) cpus
+                             envelope-from domain
+ -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+                             author's domain
+  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+                             valid
+  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+X-Headers-End: 1pvpJE-001NGF-UJ
+X-Mailman-Approved-At: Tue, 09 May 2023 13:15:35 +0000
+Subject: Re: [Kgdb-bugreport] [PATCH v4 13/17] watchdog/hardlockup: detect
+ hard lockups using secondary (buddy) CPUs
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,67 +139,82 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: Mark Rutland <mark.rutland@arm.com>, Ian Rogers <irogers@google.com>,
- Randy Dunlap <rdunlap@infradead.org>,
- Lecopzer Chen <lecopzer.chen@mediatek.com>,
- Geert Uytterhoeven <geert+renesas@glider.be>, Petr Mladek <pmladek@suse.com>,
- Peter Zijlstra <peterz@infradead.org>,
- Catalin Marinas <catalin.marinas@arm.com>,
- Rasmus Villemoes <linux@rasmusvillemoes.dk>, ricardo.neri@intel.com,
- Stephane Eranian <eranian@google.com>, Alexander Potapenko <glider@google.com>,
- Michael Ellerman <mpe@ellerman.id.au>, Guenter Roeck <groeck@chromium.org>,
- Will Deacon <will@kernel.org>, Ingo Molnar <mingo@kernel.org>,
- Daniel Thompson <daniel.thompson@linaro.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- "Paul E. McKenney" <paulmck@kernel.org>, Marc Zyngier <maz@kernel.org>,
- Chen-Yu Tsai <wens@csie.org>, Matthias Kaehlcke <mka@chromium.org>,
- Vlastimil Babka <vbabka@suse.cz>, Sami Tolvanen <samitolvanen@google.com>,
- kgdb-bugreport@lists.sourceforge.net, Miguel Ojeda <ojeda@kernel.org>,
- Masayoshi Mizuma <msys.mizuma@gmail.com>, ravi.v.shankar@intel.com,
- Marco Elver <elver@google.com>, Tzung-Bi Shih <tzungbi@chromium.org>,
- Kees Cook <keescook@chromium.org>, John Ogness <john.ogness@linutronix.de>,
- Liam Howlett <liam.howlett@oracle.com>, Stephen Boyd <swboyd@chromium.org>,
- Nathan Chancellor <nathan@kernel.org>, linux-mediatek@lists.infradead.org,
- Zhen Lei <thunder.leizhen@huawei.com>,
- Matthias Brugger <matthias.bgg@gmail.com>,
- Dan Williams <dan.j.williams@intel.com>,
- Laurent Dufour <ldufour@linux.ibm.com>, Josh Poimboeuf <jpoimboe@kernel.org>,
- linux-arm-kernel@lists.infradead.org,
- AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
- Juergen Gross <jgross@suse.com>, Zhaoyang Huang <zhaoyang.huang@unisoc.com>,
- ito-yuichi@fujitsu.com, Nick Desaulniers <ndesaulniers@google.com>,
- linux-kernel@vger.kernel.org, linux-perf-users@vger.kernel.org,
- Colin Cross <ccross@android.com>, Andrew Morton <akpm@linux-foundation.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: Mark Rutland <mark.rutland@arm.com>, Ian Rogers <irogers@google.com>, Randy
+ Dunlap <rdunlap@infradead.org>, Lecopzer Chen <lecopzer.chen@mediatek.com>,
+ ravi.v.shankar@intel.com, kgdb-bugreport@lists.sourceforge.net,
+ ricardo.neri@intel.com, Stephane Eranian <eranian@google.com>,
+ sparclinux@vger.kernel.org, Guenter Roeck <groeck@chromium.org>,
+ Will Deacon <will@kernel.org>, Daniel Thompson <daniel.thompson@linaro.org>,
+ Andi Kleen <ak@linux.intel.com>, mpe@ellerman.id.au,
+ christophe.leroy@csgroup.eu, Chen-Yu Tsai <wens@csie.org>,
+ Matthias Kaehlcke <mka@chromium.org>, Catalin
+ Marinas <catalin.marinas@arm.com>, Masayoshi Mizuma <msys.mizuma@gmail.com>,
+ Petr Mladek <pmladek@suse.com>, Tzung-Bi Shih <tzungbi@chromium.org>,
+ Colin Cross <ccross@android.com>, Stephen Boyd <swboyd@chromium.org>, Pingfan
+ Liu <kernelfans@gmail.com>, linux-arm-kernel@lists.infradead.org,
+ ito-yuichi@fujitsu.com, linux-perf-users@vger.kernel.org,
+ Marc Zyngier <maz@kernel.org>, Andrew Morton <akpm@linux-foundation.org>,
+ linuxppc-dev@lists.ozlabs.org, davem@davemloft.net
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-
-On Mon, Apr 24, 2023 at 08:23:59AM -0700, Doug Anderson wrote:
-> HPET system seems to have a single CPU in charge of processing the
-> main NMI and then that single CPU is in charge of checking all the
-> others. If that single CPU goes out to lunch then the system couldn't
-> detect hard lockups.
-> 
-> In any case, I'm happy to let others debate about the HPET system. For
-> now, I'll take my action items to be:
-
-We don't really seem to make any progress on the HPET series, so even
-if it is better in some way a series that is never merged is always
-worse than one that is.
-
-My experience is that cases where everything locks up are very rare.
-I suspect as long as we cover the garden variety single CPU lockup case well
-it is likely very diminishing returns to handle more complex cases. So whatever
-gets the job done is fine.
-
-Yes freeing the Perfmon resources is big advantage of either.
-
--Andi
-
-
-
-_______________________________________________
-Kgdb-bugreport mailing list
-Kgdb-bugreport@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport
+T24gU2F0IE1heSA2LCAyMDIzIGF0IDI6MzUgQU0gQUVTVCwgRG91ZyBBbmRlcnNvbiB3cm90ZToK
+PiBIaSwKPgo+IE9uIFRodSwgTWF5IDQsIDIwMjMgYXQgNzozNuKAr1BNIE5pY2hvbGFzIFBpZ2dp
+biA8bnBpZ2dpbkBnbWFpbC5jb20+IHdyb3RlOgo+ID4KPiA+IE9uIEZyaSBNYXkgNSwgMjAyMyBh
+dCA4OjEzIEFNIEFFU1QsIERvdWdsYXMgQW5kZXJzb24gd3JvdGU6Cj4gPiA+IEZyb206IENvbGlu
+IENyb3NzIDxjY3Jvc3NAYW5kcm9pZC5jb20+Cj4gPiA+Cj4gPiA+IEltcGxlbWVudCBhIGhhcmRs
+b2NrdXAgZGV0ZWN0b3IgdGhhdCBkb2Vzbid0IGRvZXNuJ3QgbmVlZCBhbnkgZXh0cmEKPiA+ID4g
+YXJjaC1zcGVjaWZpYyBzdXBwb3J0IGNvZGUgdG8gZGV0ZWN0IGxvY2t1cHMuIEluc3RlYWQgb2Yg
+dXNpbmcKPiA+ID4gc29tZXRoaW5nIGFyY2gtc3BlY2lmaWMgd2Ugd2lsbCB1c2UgdGhlIGJ1ZGR5
+IHN5c3RlbSwgd2hlcmUgZWFjaCBDUFUKPiA+ID4gd2F0Y2hlcyBvdXQgZm9yIGFub3RoZXIgb25l
+LiBTcGVjaWZpY2FsbHksIGVhY2ggQ1BVIHdpbGwgdXNlIGl0cwo+ID4gPiBzb2Z0bG9ja3VwIGhy
+dGltZXIgdG8gY2hlY2sgdGhhdCB0aGUgbmV4dCBDUFUgaXMgcHJvY2Vzc2luZyBocnRpbWVyCj4g
+PiA+IGludGVycnVwdHMgYnkgdmVyaWZ5aW5nIHRoYXQgYSBjb3VudGVyIGlzIGluY3JlYXNpbmcu
+Cj4gPgo+ID4gUG93ZXJwYydzIHdhdGNoZG9nIGhhcyBhbiBTTVAgY2hlY2tlciwgZGlkIHlvdSBz
+ZWUgaXQ/Cj4KPiBObywgSSB3YXNuJ3QgYXdhcmUgb2YgaXQuIEludGVyZXN0aW5nLCBpdCBzZWVt
+cyB0byBiYXNpY2FsbHkgZW5hYmxlCj4gYm90aCB0eXBlcyBvZiBoYXJkbG9ja3VwIGRldGVjdG9y
+cyB0b2dldGhlci4gSWYgdGhhdCByZWFsbHkgY2F0Y2hlcwo+IG1vcmUgbG9ja3VwcywgaXQgc2Vl
+bXMgbGlrZSB3ZSBjb3VsZCBkbyB0aGUgc2FtZSB0aGluZyBmb3IgdGhlIGJ1ZGR5Cj4gc3lzdGVt
+LgoKSXQgZG9lc24ndCBjYXRjaCBtb3JlIGxvY2t1cHMuIE9uIHBvd2VycGMgd2UgZG9uJ3QgaGF2
+ZSBhIHJlbGlhYmxlCnBlcmlvZGljIE5NSSBoZW5jZSB0aGUgU01QIGNoZWNrZXIuIEJ1dCBpdCBp
+cyBwcmVmZXJhYmxlIHRoYXQgYSBDUFUKZGV0ZWN0cyBpdHMgb3duIGxvY2t1cCBiZWNhdXNlIE5N
+SSBJUElzIGNhbiByZXN1bHQgaW4gY3Jhc2hlcyBpZgp0aGV5IGFyZSB0YWtlbiBpbiBjZXJ0YWlu
+IGNyaXRpY2FsIHNlY3Rpb25zLgoKPiBJZiBwZW9wbGUgd2FudCwgSSBkb24ndCB0aGluayBpdCB3
+b3VsZCBiZSB2ZXJ5IGhhcmQgdG8gbWFrZQo+IHRoZSBidWRkeSBzeXN0ZW0gX25vdF8gZXhjbHVz
+aXZlIG9mIHRoZSBwZXJmIHN5c3RlbS4gSW5zdGVhZCBvZiBoYXZpbmcKPiB0aGUgYnVkZHkgc3lz
+dGVtIGltcGxlbWVudCB0aGUgIndlYWsiIGZ1bmN0aW9ucyBJIGNvdWxkIGp1c3QgY2FsbCB0aGUK
+PiBidWRkeSBmdW5jdGlvbnMgaW4gdGhlIHJpZ2h0IHBsYWNlcyBkaXJlY3RseSBhbmQgbGVhdmUg
+dGhlICJ3ZWFrIgo+IGZ1bmN0aW9ucyBmb3IgYSBtb3JlIHRyYWRpdGlvbmFsIGhhcmRsb2NrdXAg
+ZGV0ZWN0b3IgdG8gaW1wbGVtZW50Lgo+IE9waW5pb25zPwo+Cj4gTWF5YmUgYWZ0ZXIgYWxsIHRo
+aXMgbGFuZHMsIHRoZSBwb3dlcnBjIHdhdGNoZG9nIGNvdWxkIG1vdmUgdG8gdXNlIHRoZQo+IGNv
+bW1vbiBjb2RlPyBBcyBldmlkZW5jZWQgYnkgdGhpcyBwYXRjaCBzZXJpZXMsIHRoZXJlJ3Mgbm90
+IHJlYWxseSBhCj4gcmVhc29uIGZvciB0aGUgU01QIGRldGVjdGlvbiB0byBiZSBwbGF0Zm9ybSBz
+cGVjaWZpYy4KClRoZSBwb3dlcnBjIFNNUCBjaGVja2VyIGNvdWxkIGNlcnRhaW5seSBtb3ZlIHRv
+IGNvbW1vbiBjb2RlIGlmCm90aGVycyB3YW50ZWQgdG8gdXNlIGl0LgoKPiA+IEl0J3MgYWxsIHRv
+Cj4gPiBhbGwgcmF0aGVyIHRoYW4gYnVkZHkgd2hpY2ggbWFrZXMgaXQgbW9yZSBjb21wbGljYXRl
+ZCBidXQgYXJndWFibHkKPiA+IGJpdCBiZXR0ZXIgZnVuY3Rpb25hbGl0eS4KPgo+IENhbiB5b3Ug
+Y29tZSB1cCB3aXRoIGFuIGV4YW1wbGUgY3Jhc2ggd2hlcmUgdGhlICJhbGwgdG8gYWxsIiB3b3Vs
+ZAo+IHdvcmsgYmV0dGVyIHRoYW4gdGhlIHNpbXBsZSBidWRkeSBzeXN0ZW0gcHJvdmlkZWQgYnkg
+dGhpcyBwYXRjaD8KCkNQVTIgICAgICAgICAgICAgICAgICAgICBDUFUzCnNwaW5fbG9ja19pcnFz
+YXZlKEEpICAgICBzcGluX2xvY2tfaXJxc2F2ZShCKQpzcGluX2xvY2tfaXJxc2F2ZShCKSAgICAg
+c3Bpbl9sb2NrX2lycXNhdmUoQSkKCkNQVTEgd2lsbCBkZXRlY3QgdGhlIGxvY2t1cCBvbiBDUFUy
+LCBidXQgQ1BVMydzIGxvY2t1cCB3b24ndCBiZQpkZXRlY3RlZCBzbyB3ZSBkb24ndCBnZXQgdGhl
+IHRyYWNlIHRoYXQgY2FuIGRpYWdub3NlIHRoZSBidWcuCgpBbm90aGVyIHRoaW5nIEkgYWN0dWFs
+bHkgZm91bmQgaXQgdXNlZnVsIGZvciBpcyB5b3UgY2FuIGVhc2lseQpzZWUgaWYgYSBjb3JlIChp
+LmUuLCBhbGwgdGhyZWFkcyBpbiB0aGUgY29yZSkgb3IgYSBjaGlwIGhhcwpkaWVkLiBNYXliZSBt
+b3JlIHVzZWZ1bCB3aGVuIGRvaW5nIHByZXNpbGljb24gYW5kIGJyaW5nIHVwIHdvcmsKb3IgZmly
+bXdhcmUgaGFja2luZywgYnV0IHN0aWxsIHVzZWZ1bC4KClRoYW5rcywKTmljawoKPiBJdAo+IHNl
+ZW1zIGxpa2UgdGhleSB3b3VsZCBiZSBlcXVpdmFsZW50LCBidXQgSSBjb3VsZCBiZSBtaXNzaW5n
+IHNvbWV0aGluZy4KPiBTcGVjaWZpY2FsbHkgdGhleSBib3RoIG5lZWQgYXQgbGVhc3Qgb25lIG5v
+bi1sb2NrZWQtdXAgQ1BVIHRvIGRldGVjdCBhCj4gcHJvYmxlbS4gSWYgb25lIG9yIG1vcmUgQ1BV
+cyBpcyBsb2NrZWQgdXAgdGhlbiB3ZSdsbCBhbHdheXMgZGV0ZWN0IGl0Lgo+IEkgc3VwcG9zZSBt
+YXliZSB5b3UgY291bGQgcHJvdmlkZSBhIGJldHRlciBlcnJvciBtZXNzYWdlIGF0IGxvY2t1cAo+
+IHRpbWUgc2F5aW5nIHRoYXQgc2V2ZXJhbCBDUFVzIHdlcmUgbG9ja2VkIHVwIGFuZCB0aGF0IGNv
+dWxkIGJlCj4gaGVscGZ1bC4gRm9yIG5vdywgSSdkIGtlZXAgdGhlIGN1cnJlbnQgYnVkZHkgc3lz
+dGVtIHRoZSB3YXkgaXQgaXMgYW5kCj4gaWYgeW91IHdhbnQgdG8gcHJvdmlkZSBhIHBhdGNoIGlt
+cHJvdmluZyB0aGluZ3MgdG8gYmUgImFsbC10by1hbGwiIGluCj4gdGhlIGZ1dHVyZSB0aGF0IHdv
+dWxkIGJlIGludGVyZXN0aW5nIHRvIHJldmlldy4KCgoKX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX18KS2dkYi1idWdyZXBvcnQgbWFpbGluZyBsaXN0CktnZGIt
+YnVncmVwb3J0QGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdl
+Lm5ldC9saXN0cy9saXN0aW5mby9rZ2RiLWJ1Z3JlcG9ydAo=
