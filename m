@@ -2,133 +2,96 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2DC536FF47D
-	for <lists+kgdb-bugreport@lfdr.de>; Thu, 11 May 2023 16:35:04 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id A66886FF65E
+	for <lists+kgdb-bugreport@lfdr.de>; Thu, 11 May 2023 17:46:39 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1px7Nm-0001I6-Qm
+	id 1px8V4-0004e4-4K
 	for lists+kgdb-bugreport@lfdr.de;
-	Thu, 11 May 2023 14:35:02 +0000
+	Thu, 11 May 2023 15:46:38 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <dianders@chromium.org>) id 1px7Nj-0001Hn-Tq
+ (envelope-from <pmladek@suse.com>) id 1px8V2-0004dy-Q6
  for kgdb-bugreport@lists.sourceforge.net;
- Thu, 11 May 2023 14:35:00 +0000
+ Thu, 11 May 2023 15:46:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
- Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=RDAnVIuo236iFwX8Q4PwBvcDGXZtwfSqujw0bG7p3X0=; b=dZdIDiIZBibFXRz7tlkLkNgg7l
- G2QNGqu+qAcWtMGs3hNx0Fv8bxSuLChQPOhKrGd3zkedyPuKIlw6HgLwGYvSCPKeYpjSRd/Huha8u
- KalxSZWwB/+P/k3MVSmWJNxkPvuBIL5yOFTGGXnheL/8FM/WcBei2kfRySqAY7LF05Po=;
+ bh=O+WNLGZ1q9D+gmD3l0BETAfuL1MeSiB7Zp5Utl633Ws=; b=KgcSTZs3GD3rjY6rKaXCNHuyOY
+ DkcZjVjW6T43/jDQu05Ns7TP2dH+s4Bc+3XHoDLxkfBXhGFw2RkGPrPK93zaNrlwSLSVWSlh2PDYv
+ 431ZP2AylMeMSgd193X4945w8BQV/J+N1Fl8cmq9EQB5HCF8mfVDHNJaphRnAIPBrhEE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
- :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=RDAnVIuo236iFwX8Q4PwBvcDGXZtwfSqujw0bG7p3X0=; b=CowZwzWXxUH3sIoYQMnFJHnMnE
- ejkP+0Wy1dx/8WIvZasgOwNCxbWZyty036xi5V6y0IC3aff46RrNULsp7uAYQUSyKutb7BcOlrwMc
- Op5rozAnbDZYAJpZ5Siif4IrzbQQytsrc0YB4VgL6zWWHt17OnYt6ROC8ypMfpfF6oTU=;
-Received: from mail-qk1-f176.google.com ([209.85.222.176])
+ bh=O+WNLGZ1q9D+gmD3l0BETAfuL1MeSiB7Zp5Utl633Ws=; b=cAdLHAtxpYRmC+YkLvAYduVzB+
+ FYR5wAoKXRM/9rMLYgsgxR1fySIv8YJFjanhs48/dGy0umBkbMiKCeJnHAL32IlhVuHdrPbKFZcKp
+ 9455lcMgBR5hu+yXHFv5iaOV3EM4+Ecs8Sd0LMVH8+Cb6Z/iCtNEtMGl5p6V5x1m3lAw=;
+Received: from smtp-out1.suse.de ([195.135.220.28])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1px7Ne-0005fR-GP for kgdb-bugreport@lists.sourceforge.net;
- Thu, 11 May 2023 14:34:59 +0000
-Received: by mail-qk1-f176.google.com with SMTP id
- af79cd13be357-7577a91cfd6so261855485a.3
- for <kgdb-bugreport@lists.sourceforge.net>;
- Thu, 11 May 2023 07:34:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1683815688; x=1686407688;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RDAnVIuo236iFwX8Q4PwBvcDGXZtwfSqujw0bG7p3X0=;
- b=P7DecjB8ZMeCZYwkxxsNCSOOAgyMkv5tU/XZqQtnIcNLOQBM6XJeRQS3Iav4nMcJt4
- Ta8guLRSewlcGwVVy35Wr1zjbOhSrL0QfZ1PCgZyLzzJ99FCwywNVSBTd7syngCiIec1
- uN5XBrwZRSnj4EvM3rvLtcwkSot2aFDa+9Zog=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1683815688; x=1686407688;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=RDAnVIuo236iFwX8Q4PwBvcDGXZtwfSqujw0bG7p3X0=;
- b=l/kuTwB+8XgkPqa9BNIqFY4Z+L1kpZep3XLPqMo3wp15Jn3XehuQ97VqnmS+V1Lz2M
- o6UTG3Ah5J70doXR9gMZOwKlextUvUvwfMETHWHWAy4SXgKU7n2ObuYcMfivbAA8X83t
- amjksxvvsaa9EvjuMizWxi34vKA3OMay3YCUZgGcIvGxCc6MvE7FmxSJL0ZoGGOVakp+
- SnZ6lSgxo5pGcWCg6G1X3x8AYsl9H00HyuU0SyQW8rU+1HUD+LZSX/y2/Mx2YMxcApXL
- I9hBVikXI8kQT9USbvvlzn7M6dZ8Cbuj9Li/NDY+6zecP6GdpJS4nVDT8QQhrPIYIme1
- xK+g==
-X-Gm-Message-State: AC+VfDwpdd+Ah+VslHuwv3pemmLJ/Jjq6bxc//GEEM09XIuK/jgaz9da
- AdcR6THeheXtqD0fJ2Vc+uenCzPFleBJkWvCUqFduA==
-X-Google-Smtp-Source: ACHHUZ6MmdhAsgh9RC4vUEedz9p4GSYUcJ25NC/3U5FHjdyIT600KnpuYnMX7efDjPB9q+pfHOvqEw==
-X-Received: by 2002:a05:6214:21a1:b0:61b:5bb0:a236 with SMTP id
- t1-20020a05621421a100b0061b5bb0a236mr28587836qvc.48.1683815687913; 
- Thu, 11 May 2023 07:34:47 -0700 (PDT)
-Received: from mail-qt1-f181.google.com (mail-qt1-f181.google.com.
- [209.85.160.181]) by smtp.gmail.com with ESMTPSA id
- y11-20020a0ceacb000000b0060f5a75b750sm2316538qvp.99.2023.05.11.07.34.43
- for <kgdb-bugreport@lists.sourceforge.net>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 11 May 2023 07:34:43 -0700 (PDT)
-Received: by mail-qt1-f181.google.com with SMTP id
- d75a77b69052e-3f38824a025so789471cf.0
- for <kgdb-bugreport@lists.sourceforge.net>;
- Thu, 11 May 2023 07:34:43 -0700 (PDT)
-X-Received: by 2002:a05:622a:1a05:b0:3f3:9c91:fee7 with SMTP id
- f5-20020a05622a1a0500b003f39c91fee7mr421512qtb.16.1683815682956; Thu, 11 May
- 2023 07:34:42 -0700 (PDT)
+ id 1px8V0-0000Zx-TT for kgdb-bugreport@lists.sourceforge.net;
+ Thu, 11 May 2023 15:46:37 +0000
+Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
+ by smtp-out1.suse.de (Postfix) with ESMTP id 8888221DF6;
+ Thu, 11 May 2023 15:46:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+ t=1683819988; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=O+WNLGZ1q9D+gmD3l0BETAfuL1MeSiB7Zp5Utl633Ws=;
+ b=Zq7AfBNF97Xrqxden+m2xxxrVOT7WIdxT4zaU0B11ZzrDPPF4umix8ROjZsj1Yqduhj2K4
+ wGM3tgBLn5jPechHV8jYrk1e745lz7lAaGx8uE8MrE1r6njfUsjcmkhOBF6Rp/hp5Ezzds
+ PDX4wIbB8mhF/MQqunXnk9vf5g/lR4s=
+Received: from suse.cz (unknown [10.100.201.202])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by relay2.suse.de (Postfix) with ESMTPS id 50A782C145;
+ Thu, 11 May 2023 15:46:24 +0000 (UTC)
+Date: Thu, 11 May 2023 17:46:21 +0200
+To: Douglas Anderson <dianders@chromium.org>
+Message-ID: <ZF0NzSCRCapqDbC4@alley>
+References: <20230504221349.1535669-1-dianders@chromium.org>
+ <20230504151100.v4.10.I00dfd6386ee00da25bf26d140559a41339b53e57@changeid>
 MIME-Version: 1.0
-References: <20230419225604.21204-1-dianders@chromium.org>
- <20230419155341.v8.8.Ia3aeac89bb6751b682237e76e5ba594318e4b1aa@changeid>
-In-Reply-To: <20230419155341.v8.8.Ia3aeac89bb6751b682237e76e5ba594318e4b1aa@changeid>
-From: Doug Anderson <dianders@chromium.org>
-Date: Thu, 11 May 2023 07:34:30 -0700
-X-Gmail-Original-Message-ID: <CAD=FV=X=tm_smsi9itwK_Ku2vU0d676JT+MK3fkALn5QMsduiQ@mail.gmail.com>
-Message-ID: <CAD=FV=X=tm_smsi9itwK_Ku2vU0d676JT+MK3fkALn5QMsduiQ@mail.gmail.com>
-To: Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, 
- Sumit Garg <sumit.garg@linaro.org>,
- Daniel Thompson <daniel.thompson@linaro.org>, 
- Marc Zyngier <maz@kernel.org>, Mark Rutland <mark.rutland@arm.com>
-X-Spam-Score: -0.9 (/)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
+Content-Disposition: inline
+In-Reply-To: <20230504151100.v4.10.I00dfd6386ee00da25bf26d140559a41339b53e57@changeid>
+X-Spam-Score: -2.5 (--)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  Hi, On Wed, Apr 19, 2023 at 3:57 PM Douglas Anderson <dianders@chromium.org>
-    wrote: > > To save architectures from needing to wrap the call in #ifdefs,
-    add a > stub no-op version of kgdb_nmicallback(), [...] 
- 
- Content analysis details:   (-0.9 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview:  On Thu 2023-05-04 15:13:42,
+ Douglas Anderson wrote: > In preparation
+ for the buddy hardlockup detector, which wants the same > petting logic as
+ the current perf hardlockup detector, move the code > to [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
-                              no trust
-                             [209.85.222.176 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
-                             [209.85.222.176 listed in wl.mailspike.net]
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [195.135.220.28 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
+ envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1px7Ne-0005fR-GP
-Subject: Re: [Kgdb-bugreport] [PATCH v8 08/10] kgdb: Provide a stub
- kgdb_nmicallback() if !CONFIG_KGDB
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+X-Headers-End: 1px8V0-0000Zx-TT
+Subject: Re: [Kgdb-bugreport] [PATCH v4 10/17] watchdog/hardlockup: Move
+ perf hardlockup watchdog petting to watchdog.c
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -140,38 +103,129 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
+From: Petr Mladek via Kgdb-bugreport <kgdb-bugreport@lists.sourceforge.net>
+Reply-To: Petr Mladek <pmladek@suse.com>
+Cc: Mark Rutland <mark.rutland@arm.com>, Ian Rogers <irogers@google.com>,
+ Randy Dunlap <rdunlap@infradead.org>,
  Lecopzer Chen <lecopzer.chen@mediatek.com>,
- Peter Zijlstra <peterz@infradead.org>, kgdb-bugreport@lists.sourceforge.net,
- ito-yuichi@fujitsu.com, linux-kernel@vger.kernel.org,
- Stephen Boyd <swboyd@chromium.org>, linux-perf-users@vger.kernel.org,
- Chen-Yu Tsai <wens@csie.org>, Jason Wessel <jason.wessel@windriver.com>,
- Thomas Gleixner <tglx@linutronix.de>, Masayoshi Mizuma <msys.mizuma@gmail.com>,
- Ard Biesheuvel <ardb@kernel.org>, linux-arm-kernel@lists.infradead.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ kgdb-bugreport@lists.sourceforge.net, ricardo.neri@intel.com,
+ Stephane Eranian <eranian@google.com>, sparclinux@vger.kernel.org,
+ Guenter Roeck <groeck@chromium.org>, Will Deacon <will@kernel.org>,
+ Daniel Thompson <daniel.thompson@linaro.org>, Andi Kleen <ak@linux.intel.com>,
+ mpe@ellerman.id.au, christophe.leroy@csgroup.eu, Chen-Yu Tsai <wens@csie.org>,
+ Matthias Kaehlcke <mka@chromium.org>,
+ Catalin Marinas <catalin.marinas@arm.com>,
+ Masayoshi Mizuma <msys.mizuma@gmail.com>, ravi.v.shankar@intel.com,
+ Tzung-Bi Shih <tzungbi@chromium.org>, npiggin@gmail.com,
+ Stephen Boyd <swboyd@chromium.org>, Pingfan Liu <kernelfans@gmail.com>,
+ linux-arm-kernel@lists.infradead.org, ito-yuichi@fujitsu.com,
+ linux-perf-users@vger.kernel.org, Marc Zyngier <maz@kernel.org>,
+ Andrew Morton <akpm@linux-foundation.org>, linuxppc-dev@lists.ozlabs.org,
+ davem@davemloft.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-SGksCgpPbiBXZWQsIEFwciAxOSwgMjAyMyBhdCAzOjU34oCvUE0gRG91Z2xhcyBBbmRlcnNvbiA8
-ZGlhbmRlcnNAY2hyb21pdW0ub3JnPiB3cm90ZToKPgo+IFRvIHNhdmUgYXJjaGl0ZWN0dXJlcyBm
-cm9tIG5lZWRpbmcgdG8gd3JhcCB0aGUgY2FsbCBpbiAjaWZkZWZzLCBhZGQgYQo+IHN0dWIgbm8t
-b3AgdmVyc2lvbiBvZiBrZ2RiX25taWNhbGxiYWNrKCksIHdoaWNoIHJldHVybnMgMSBpZiBpdCBk
-aWRuJ3QKPiBoYW5kbGUgYW55dGhpbmcuCj4KPiBTaWduZWQtb2ZmLWJ5OiBEb3VnbGFzIEFuZGVy
-c29uIDxkaWFuZGVyc0BjaHJvbWl1bS5vcmc+Cj4gLS0tCj4KPiBDaGFuZ2VzIGluIHY4Ogo+IC0g
-IlByb3ZpZGUgYSBzdHViIGtnZGJfbm1pY2FsbGJhY2soKSBpZiAhQ09ORklHX0tHREIiIG5ldyBm
-b3IgdjgKPgo+ICBpbmNsdWRlL2xpbnV4L2tnZGIuaCB8IDEgKwo+ICAxIGZpbGUgY2hhbmdlZCwg
-MSBpbnNlcnRpb24oKykKPgo+IGRpZmYgLS1naXQgYS9pbmNsdWRlL2xpbnV4L2tnZGIuaCBiL2lu
-Y2x1ZGUvbGludXgva2dkYi5oCj4gaW5kZXggODc3MTNiZDM5MGYzLi45Y2U2MjhlZTQ3Y2MgMTAw
-NjQ0Cj4gLS0tIGEvaW5jbHVkZS9saW51eC9rZ2RiLmgKPiArKysgYi9pbmNsdWRlL2xpbnV4L2tn
-ZGIuaAo+IEBAIC0zNzcsNSArMzc3LDYgQEAgZXh0ZXJuIHZvaWQga2dkYl9mcmVlX2luaXRfbWVt
-KHZvaWQpOwo+ICAjZGVmaW5lIGRiZ19sYXRlX2luaXQoKQo+ICBzdGF0aWMgaW5saW5lIHZvaWQg
-a2dkYl9wYW5pYyhjb25zdCBjaGFyICptc2cpIHt9Cj4gIHN0YXRpYyBpbmxpbmUgdm9pZCBrZ2Ri
-X2ZyZWVfaW5pdF9tZW0odm9pZCkgeyB9Cj4gK3N0YXRpYyBpbnQga2dkYl9ubWljYWxsYmFjayhp
-bnQgY3B1LCB2b2lkICpyZWdzKSB7IHJldHVybiAxOyB9CgpGV0lXOiBJIGp1c3QgcmVhbGl6ZWQg
-dGhhdCB0aGUgYWJvdmUgbmVlZHMgYW4gImlubGluZSIgdG8gbWFrZSB0aGUKY29tcGlsZXIgbm90
-IGNvbXBsYWluLiBJJ20gc3RpbGwgaG9waW5nIGZvciBtb3JlIGZlZWRiYWNrIG9uIHRoZQpzZXJp
-ZXMsIGJ1dCBJJ2xsIHBsYW4gdG8gZml4IHRoYXQgaW4gdGhlIG5leHQgc3Bpbi4KCi1Eb3VnCgoK
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KS2dkYi1idWdy
-ZXBvcnQgbWFpbGluZyBsaXN0CktnZGItYnVncmVwb3J0QGxpc3RzLnNvdXJjZWZvcmdlLm5ldApo
-dHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9rZ2RiLWJ1Z3JlcG9y
-dAo=
+On Thu 2023-05-04 15:13:42, Douglas Anderson wrote:
+> In preparation for the buddy hardlockup detector, which wants the same
+> petting logic as the current perf hardlockup detector, move the code
+> to watchdog.c. While doing this, rename the global variable to match
+> others nearby. The arch_touch_nmi_watchdog() function is not renamed
+> since that is exported with "EXPORT_SYMBOL" and is thus ABI.
+> 
+> Currently the code in watchdog.c is guarded by
+> CONFIG_HARDLOCKUP_DETECTOR_PERF, which makes this change seem
+> silly. However, a future patch will change this.
+> 
+> NOTE: there is a slight side effect to this change, though from code
+> analysis I believe it to be a beneficial one. Specifically the perf
+> hardlockup detector will now do check the "timestamp" before clearing
+> any watchdog pets. Previously the order was reversed. With the old
+> order if the watchdog perf event was firing super fast then it would
+> also be clearing existing watchdog pets super fast. The new behavior
+> of handling super-fast perf before clearing watchdog pets seems
+> better.
+
+Ah, I think that this was actually pretty serious bug in the perf
+detector. But I think that it should work another way, see below.
+
+> Signed-off-by: Douglas Anderson <dianders@chromium.org>
+> ---
+> 
+> --- a/kernel/watchdog.c
+> +++ b/kernel/watchdog.c
+> @@ -111,6 +125,11 @@ static void watchdog_hardlockup_interrupt_count(void)
+>  
+>  void watchdog_hardlockup_check(unsigned int cpu, struct pt_regs *regs)
+>  {
+> +	if (__this_cpu_read(watchdog_hardlockup_touch)) {
+> +		__this_cpu_write(watchdog_hardlockup_touch, false);
+> +		return;
+> +	}
+
+If we clear watchdog_hardlockup_touch() here then
+watchdog_hardlockup_check() won't be called yet another
+watchdog_hrtimer_sample_threshold perior.
+
+It means that any touch will cause ignoring one full period.
+The is_hardlockup() check will be done after full two periods.
+
+It is not ideal, see below.
+
+> +
+>  	/*
+>  	 * Check for a hardlockup by making sure the CPU's timer
+>  	 * interrupt is incrementing. The timer interrupt should have
+> diff --git a/kernel/watchdog_perf.c b/kernel/watchdog_perf.c
+> index 9be90b2a2ea7..547917ebd5d3 100644
+> --- a/kernel/watchdog_perf.c
+> +++ b/kernel/watchdog_perf.c
+> @@ -112,11 +98,6 @@ static void watchdog_overflow_callback(struct perf_event *event,
+>  	/* Ensure the watchdog never gets throttled */
+>  	event->hw.interrupts = 0;
+>  
+> -	if (__this_cpu_read(watchdog_nmi_touch) == true) {
+> -		__this_cpu_write(watchdog_nmi_touch, false);
+> -		return;
+> -	}
+
+The original code looks wrong. arch_touch_nmi_watchdog() caused
+skipping only one period of the perf event.
+
+I would expect that it caused restarting the period,
+something like:
+
+	if (__this_cpu_read(watchdog_nmi_touch) == true) {
+		/*
+		 * Restart the period after which the interrupt
+		 * counter is checked.
+		 */
+		__this_cpu_write(nmi_rearmed, 0);
+		__this_cpu_write(last_timestamp, now);
+		__this_cpu_write(watchdog_nmi_touch, false);
+		return;
+	}
+
+By other words, we should restart the period in the very next perf
+event after the watchdog was touched.
+
+That said, the new code looks better than the original.
+IMHO, the original code was prone to false positives.
+
+Best Regards,
+Petr
+
+PS: It might be worth fixing this problem in a separate patch at the
+    beginning of this patchset. It might be a candidate for stable
+    backports.
+
+> -
+>  	if (!watchdog_check_timestamp())
+>  		return;
+>  
+
+
+_______________________________________________
+Kgdb-bugreport mailing list
+Kgdb-bugreport@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport
