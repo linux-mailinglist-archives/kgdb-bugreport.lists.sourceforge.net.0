@@ -2,97 +2,133 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E63A26FF3C9
-	for <lists+kgdb-bugreport@lfdr.de>; Thu, 11 May 2023 16:14:53 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2DC536FF47D
+	for <lists+kgdb-bugreport@lfdr.de>; Thu, 11 May 2023 16:35:04 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1px74F-0001o3-T9
+	id 1px7Nm-0001I6-Qm
 	for lists+kgdb-bugreport@lfdr.de;
-	Thu, 11 May 2023 14:14:52 +0000
+	Thu, 11 May 2023 14:35:02 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <pmladek@suse.com>) id 1px74E-0001ns-Sl
+ (envelope-from <dianders@chromium.org>) id 1px7Nj-0001Hn-Tq
  for kgdb-bugreport@lists.sourceforge.net;
- Thu, 11 May 2023 14:14:51 +0000
+ Thu, 11 May 2023 14:35:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
+ Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
+ Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+ :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=RsbmH7Uqop/nnM3vjIRjHRqffBOelcetDOasqeW6Jho=; b=AFO+8l/zasfZ459m1cgRTpp79g
- 3bxAGhbVsHVq84Gx/z/rBgGnSbA1kQoV+sNcN0wrBt4gmlmjYsBdj6M7xdvF7HstPDMoq/MuwkzKf
- JvCUiVInfvAPX6sHYHk4CXdNohMqkEaEnO7FC7V/6011Bt8kc946BDbh1S4vPOglyhho=;
+ bh=RDAnVIuo236iFwX8Q4PwBvcDGXZtwfSqujw0bG7p3X0=; b=dZdIDiIZBibFXRz7tlkLkNgg7l
+ G2QNGqu+qAcWtMGs3hNx0Fv8bxSuLChQPOhKrGd3zkedyPuKIlw6HgLwGYvSCPKeYpjSRd/Huha8u
+ KalxSZWwB/+P/k3MVSmWJNxkPvuBIL5yOFTGGXnheL/8FM/WcBei2kfRySqAY7LF05Po=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
+ :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=RsbmH7Uqop/nnM3vjIRjHRqffBOelcetDOasqeW6Jho=; b=cZpskgHO6B0a/pdk1r7pKz+Vr4
- M+piLjbTAedwNrL6XMTFwzsKNPqie6bXXxJKEKRizQuIxauqGQ/RjuUtUB38R2M7AAOGuRhcKU1BU
- I4FNJ8kCBiOoSbMEyvDZlbo0ix9svee6nA6xFuk/YmQ+SXTBDtnbYoUqseVuuwVhF9r0=;
-Received: from smtp-out1.suse.de ([195.135.220.28])
+ bh=RDAnVIuo236iFwX8Q4PwBvcDGXZtwfSqujw0bG7p3X0=; b=CowZwzWXxUH3sIoYQMnFJHnMnE
+ ejkP+0Wy1dx/8WIvZasgOwNCxbWZyty036xi5V6y0IC3aff46RrNULsp7uAYQUSyKutb7BcOlrwMc
+ Op5rozAnbDZYAJpZ5Siif4IrzbQQytsrc0YB4VgL6zWWHt17OnYt6ROC8ypMfpfF6oTU=;
+Received: from mail-qk1-f176.google.com ([209.85.222.176])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1px74E-0004xu-R5 for kgdb-bugreport@lists.sourceforge.net;
- Thu, 11 May 2023 14:14:51 +0000
-Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
- by smtp-out1.suse.de (Postfix) with ESMTP id 75A5A21D09;
- Thu, 11 May 2023 14:14:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
- t=1683814480; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=RsbmH7Uqop/nnM3vjIRjHRqffBOelcetDOasqeW6Jho=;
- b=pOJqJS5iXtgLyWgNrYikAH8lcP9VErhN6vam0bviIGKv5MIKfAJuXwdEnozUAl1mFiB4qM
- Td/bamTw2bqEgQNfkm93ZRlv/TH+VmTSwCohSr4w9x5dduYiCKpI5GaFu6jyUYqF9cD6Qa
- q9wqaGcZN1O3kEmspF38GXvD5Hh7KCE=
-Received: from suse.cz (unknown [10.100.201.202])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by relay2.suse.de (Postfix) with ESMTPS id 5B4622C141;
- Thu, 11 May 2023 14:14:37 +0000 (UTC)
-Date: Thu, 11 May 2023 16:14:37 +0200
-To: Douglas Anderson <dianders@chromium.org>
-Message-ID: <ZFz4TVOyEU51b898@alley>
-References: <20230504221349.1535669-1-dianders@chromium.org>
- <20230504151100.v4.9.I3a7d4dd8c23ac30ee0b607d77feb6646b64825c0@changeid>
+ id 1px7Ne-0005fR-GP for kgdb-bugreport@lists.sourceforge.net;
+ Thu, 11 May 2023 14:34:59 +0000
+Received: by mail-qk1-f176.google.com with SMTP id
+ af79cd13be357-7577a91cfd6so261855485a.3
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Thu, 11 May 2023 07:34:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1683815688; x=1686407688;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=RDAnVIuo236iFwX8Q4PwBvcDGXZtwfSqujw0bG7p3X0=;
+ b=P7DecjB8ZMeCZYwkxxsNCSOOAgyMkv5tU/XZqQtnIcNLOQBM6XJeRQS3Iav4nMcJt4
+ Ta8guLRSewlcGwVVy35Wr1zjbOhSrL0QfZ1PCgZyLzzJ99FCwywNVSBTd7syngCiIec1
+ uN5XBrwZRSnj4EvM3rvLtcwkSot2aFDa+9Zog=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1683815688; x=1686407688;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=RDAnVIuo236iFwX8Q4PwBvcDGXZtwfSqujw0bG7p3X0=;
+ b=l/kuTwB+8XgkPqa9BNIqFY4Z+L1kpZep3XLPqMo3wp15Jn3XehuQ97VqnmS+V1Lz2M
+ o6UTG3Ah5J70doXR9gMZOwKlextUvUvwfMETHWHWAy4SXgKU7n2ObuYcMfivbAA8X83t
+ amjksxvvsaa9EvjuMizWxi34vKA3OMay3YCUZgGcIvGxCc6MvE7FmxSJL0ZoGGOVakp+
+ SnZ6lSgxo5pGcWCg6G1X3x8AYsl9H00HyuU0SyQW8rU+1HUD+LZSX/y2/Mx2YMxcApXL
+ I9hBVikXI8kQT9USbvvlzn7M6dZ8Cbuj9Li/NDY+6zecP6GdpJS4nVDT8QQhrPIYIme1
+ xK+g==
+X-Gm-Message-State: AC+VfDwpdd+Ah+VslHuwv3pemmLJ/Jjq6bxc//GEEM09XIuK/jgaz9da
+ AdcR6THeheXtqD0fJ2Vc+uenCzPFleBJkWvCUqFduA==
+X-Google-Smtp-Source: ACHHUZ6MmdhAsgh9RC4vUEedz9p4GSYUcJ25NC/3U5FHjdyIT600KnpuYnMX7efDjPB9q+pfHOvqEw==
+X-Received: by 2002:a05:6214:21a1:b0:61b:5bb0:a236 with SMTP id
+ t1-20020a05621421a100b0061b5bb0a236mr28587836qvc.48.1683815687913; 
+ Thu, 11 May 2023 07:34:47 -0700 (PDT)
+Received: from mail-qt1-f181.google.com (mail-qt1-f181.google.com.
+ [209.85.160.181]) by smtp.gmail.com with ESMTPSA id
+ y11-20020a0ceacb000000b0060f5a75b750sm2316538qvp.99.2023.05.11.07.34.43
+ for <kgdb-bugreport@lists.sourceforge.net>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 11 May 2023 07:34:43 -0700 (PDT)
+Received: by mail-qt1-f181.google.com with SMTP id
+ d75a77b69052e-3f38824a025so789471cf.0
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Thu, 11 May 2023 07:34:43 -0700 (PDT)
+X-Received: by 2002:a05:622a:1a05:b0:3f3:9c91:fee7 with SMTP id
+ f5-20020a05622a1a0500b003f39c91fee7mr421512qtb.16.1683815682956; Thu, 11 May
+ 2023 07:34:42 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230504151100.v4.9.I3a7d4dd8c23ac30ee0b607d77feb6646b64825c0@changeid>
-X-Spam-Score: -2.5 (--)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+References: <20230419225604.21204-1-dianders@chromium.org>
+ <20230419155341.v8.8.Ia3aeac89bb6751b682237e76e5ba594318e4b1aa@changeid>
+In-Reply-To: <20230419155341.v8.8.Ia3aeac89bb6751b682237e76e5ba594318e4b1aa@changeid>
+From: Doug Anderson <dianders@chromium.org>
+Date: Thu, 11 May 2023 07:34:30 -0700
+X-Gmail-Original-Message-ID: <CAD=FV=X=tm_smsi9itwK_Ku2vU0d676JT+MK3fkALn5QMsduiQ@mail.gmail.com>
+Message-ID: <CAD=FV=X=tm_smsi9itwK_Ku2vU0d676JT+MK3fkALn5QMsduiQ@mail.gmail.com>
+To: Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, 
+ Sumit Garg <sumit.garg@linaro.org>,
+ Daniel Thompson <daniel.thompson@linaro.org>, 
+ Marc Zyngier <maz@kernel.org>, Mark Rutland <mark.rutland@arm.com>
+X-Spam-Score: -0.9 (/)
+X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu 2023-05-04 15:13:41,
- Douglas Anderson wrote: > In preparation
- for the buddy hardlockup detector where the CPU > checking for lockup might
- not be the currently running CPU, add a > "cpu" paramet [...] 
- Content analysis details:   (-2.5 points, 6.0 required)
- pts rule name              description
+ 
+ Content preview:  Hi, On Wed, Apr 19, 2023 at 3:57 PM Douglas Anderson <dianders@chromium.org>
+    wrote: > > To save architectures from needing to wrap the call in #ifdefs,
+    add a > stub no-op version of kgdb_nmicallback(), [...] 
+ 
+ Content analysis details:   (-0.9 points, 6.0 required)
+ 
+  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [195.135.220.28 listed in list.dnswl.org]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+                              no trust
+                             [209.85.222.176 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+                             [209.85.222.176 listed in wl.mailspike.net]
+  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1px74E-0004xu-R5
-Subject: Re: [Kgdb-bugreport] [PATCH v4 09/17] watchdog/hardlockup: Add a
- "cpu" param to watchdog_hardlockup_check()
+                             envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+                             author's domain
+ -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
+  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+                             valid
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1px7Ne-0005fR-GP
+Subject: Re: [Kgdb-bugreport] [PATCH v8 08/10] kgdb: Provide a stub
+ kgdb_nmicallback() if !CONFIG_KGDB
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,182 +140,38 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-From: Petr Mladek via Kgdb-bugreport <kgdb-bugreport@lists.sourceforge.net>
-Reply-To: Petr Mladek <pmladek@suse.com>
-Cc: Mark Rutland <mark.rutland@arm.com>, Ian Rogers <irogers@google.com>,
- Randy Dunlap <rdunlap@infradead.org>,
+Cc: "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
  Lecopzer Chen <lecopzer.chen@mediatek.com>,
- kgdb-bugreport@lists.sourceforge.net, ricardo.neri@intel.com,
- Stephane Eranian <eranian@google.com>, sparclinux@vger.kernel.org,
- Guenter Roeck <groeck@chromium.org>, Will Deacon <will@kernel.org>,
- Daniel Thompson <daniel.thompson@linaro.org>, Andi Kleen <ak@linux.intel.com>,
- mpe@ellerman.id.au, christophe.leroy@csgroup.eu, Chen-Yu Tsai <wens@csie.org>,
- Matthias Kaehlcke <mka@chromium.org>,
- Catalin Marinas <catalin.marinas@arm.com>,
- Masayoshi Mizuma <msys.mizuma@gmail.com>, ravi.v.shankar@intel.com,
- Tzung-Bi Shih <tzungbi@chromium.org>, npiggin@gmail.com,
- Stephen Boyd <swboyd@chromium.org>, Pingfan Liu <kernelfans@gmail.com>,
- linux-arm-kernel@lists.infradead.org, ito-yuichi@fujitsu.com,
- linux-perf-users@vger.kernel.org, Marc Zyngier <maz@kernel.org>,
- Andrew Morton <akpm@linux-foundation.org>, linuxppc-dev@lists.ozlabs.org,
- davem@davemloft.net
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+ Peter Zijlstra <peterz@infradead.org>, kgdb-bugreport@lists.sourceforge.net,
+ ito-yuichi@fujitsu.com, linux-kernel@vger.kernel.org,
+ Stephen Boyd <swboyd@chromium.org>, linux-perf-users@vger.kernel.org,
+ Chen-Yu Tsai <wens@csie.org>, Jason Wessel <jason.wessel@windriver.com>,
+ Thomas Gleixner <tglx@linutronix.de>, Masayoshi Mizuma <msys.mizuma@gmail.com>,
+ Ard Biesheuvel <ardb@kernel.org>, linux-arm-kernel@lists.infradead.org
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Thu 2023-05-04 15:13:41, Douglas Anderson wrote:
-> In preparation for the buddy hardlockup detector where the CPU
-> checking for lockup might not be the currently running CPU, add a
-> "cpu" parameter to watchdog_hardlockup_check().
-> 
-> --- a/kernel/watchdog.c
-> +++ b/kernel/watchdog.c
-> @@ -92,14 +92,14 @@ static DEFINE_PER_CPU(unsigned long, hrtimer_interrupts_saved);
->  static DEFINE_PER_CPU(bool, watchdog_hardlockup_processed);
->  static unsigned long watchdog_hardlockup_dumped_stacks;
->  
-> -static bool watchdog_hardlockup_is_lockedup(void)
-> +static bool watchdog_hardlockup_is_lockedup(unsigned int cpu)
->  {
-> -	unsigned long hrint = __this_cpu_read(hrtimer_interrupts);
-> +	unsigned long hrint = per_cpu(hrtimer_interrupts, cpu);
-
-My radar tells me that this should be
-READ_ONCE(per_cpu(hrtimer_interrupts, cpu)) when the value might
-be modified on another CPU. Otherwise, the compiler is allowed
-to split the read into more instructions.
-
-It will be needed for the buddy detector. And it will require
-also incrementing the value in watchdog_hardlockup_interrupt_count()
-an atomic way.
-
-Note that __this_cpu_inc_return() does not guarantee atomicity
-according to my understanding. In theory, the following should
-work because counter will never be incremented in parallel:
-
-static unsigned long watchdog_hardlockup_interrupt_count(void)
-{
-	unsigned long count;
-
-	count = __this_cpu_read(hrtimer_interrupts);
-	count++;
-	WRITE_ONCE(*raw_cpu_ptr(hrtimer_interrupts), count);
-}
-
-but it is nasty. A more elegant solution might be using atomic_t
-for hrtimer_interrupts counter.
-
-> -	if (__this_cpu_read(hrtimer_interrupts_saved) == hrint)
-> +	if (per_cpu(hrtimer_interrupts_saved, cpu) == hrint)
->  		return true;
->  
-> -	__this_cpu_write(hrtimer_interrupts_saved, hrint);
-> +	per_cpu(hrtimer_interrupts_saved, cpu) = hrint;
-
-IMHO, hrtimer_interrupts_saved might be handled this way.
-The value is read/written only by this function.
-
-The buddy watchdog should see consistent values even when
-the buddy CPU goes offline. This check should never race
-because this CPU should get touched when another buddy
-gets assigned.
-
-Well, it would deserve a comment.
-
->  
->  	return false;
->  }
-> @@ -117,35 +117,50 @@ void watchdog_hardlockup_check(struct pt_regs *regs)
->  	 * fired multiple times before we overflow'd. If it hasn't
->  	 * then this is a good indication the cpu is stuck
->  	 */
-> -	if (watchdog_hardlockup_is_lockedup()) {
-> +	if (watchdog_hardlockup_is_lockedup(cpu)) {
->  		unsigned int this_cpu = smp_processor_id();
-> +		struct cpumask backtrace_mask = *cpu_online_mask;
->  
->  		/* Only handle hardlockups once. */
-> -		if (__this_cpu_read(watchdog_hardlockup_processed))
-> +		if (per_cpu(watchdog_hardlockup_processed, cpu))
-
-This should not need READ_ONCE()/WRITE_ONCE() because it is just bool.
-Also it is read/modified only in this function on the same CPU.
-
->  			return;
->  
-> -		pr_emerg("Watchdog detected hard LOCKUP on cpu %d\n", this_cpu);
-> +		pr_emerg("Watchdog detected hard LOCKUP on cpu %d\n", cpu);
->  		print_modules();
->  		print_irqtrace_events(current);
-> -		if (regs)
-> +		if (regs) {
->  			show_regs(regs);
-> -		else
-> -			dump_stack();
-> +			cpumask_clear_cpu(cpu, &backtrace_mask);
-> +		} else {
-> +			/*
-> +			 * If the locked up CPU is different than the CPU we're
-> +			 * running on then we'll try to backtrace the CPU that
-> +			 * locked up and then exclude it from later backtraces.
-> +			 * If that fails or if we're running on the locked up
-> +			 * CPU, just do a normal backtrace.
-> +			 */
-> +			if (cpu != this_cpu && trigger_single_cpu_backtrace(cpu)) {
-> +				cpumask_clear_cpu(cpu, &backtrace_mask);
-> +			} else {
-> +				dump_stack();
-> +				cpumask_clear_cpu(this_cpu, &backtrace_mask);
-
-This will dump the stack on the current CPU when
-trigger_single_cpu_backtrace(cpu) is not supported.
-It would be confusing because the buddy watchdog
-could be here only when this_cpu is not hardlocked.
-
-It should be:
-
-	if (cpu == this_cpu) {
-		if (regs)
-			show_regs(regs);
-		else
-			dump_stack();
-		cpumask_clear_cpu(cpu, &backtrace_mask);
-	} else {
-		if (trigger_single_cpu_backtrace(cpu)
-			cpumask_clear_cpu(cpu, &backtrace_mask);
-	}
-
-> +			}
-> +		}
->  
->  		/*
-> -		 * Perform all-CPU dump only once to avoid multiple hardlockups
-> -		 * generating interleaving traces
-> +		 * Perform multi-CPU dump only once to avoid multiple
-> +		 * hardlockups generating interleaving traces
->  		 */
->  		if (sysctl_hardlockup_all_cpu_backtrace &&
->  		    !test_and_set_bit(0, &watchdog_hardlockup_dumped_stacks))
-> -			trigger_allbutself_cpu_backtrace();
-> +			trigger_cpumask_backtrace(&backtrace_mask);
->  
->  		if (hardlockup_panic)
->  			nmi_panic(regs, "Hard LOCKUP");
->  
-> -		__this_cpu_write(watchdog_hardlockup_processed, true);
-> +		per_cpu(watchdog_hardlockup_processed, cpu) = true;
->  	} else {
-> -		__this_cpu_write(watchdog_hardlockup_processed, false);
-> +		per_cpu(watchdog_hardlockup_processed, cpu) = false;
->  	}
->  }
->  
-
-Best Regards,
-Petr
-
-
-_______________________________________________
-Kgdb-bugreport mailing list
-Kgdb-bugreport@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport
+SGksCgpPbiBXZWQsIEFwciAxOSwgMjAyMyBhdCAzOjU34oCvUE0gRG91Z2xhcyBBbmRlcnNvbiA8
+ZGlhbmRlcnNAY2hyb21pdW0ub3JnPiB3cm90ZToKPgo+IFRvIHNhdmUgYXJjaGl0ZWN0dXJlcyBm
+cm9tIG5lZWRpbmcgdG8gd3JhcCB0aGUgY2FsbCBpbiAjaWZkZWZzLCBhZGQgYQo+IHN0dWIgbm8t
+b3AgdmVyc2lvbiBvZiBrZ2RiX25taWNhbGxiYWNrKCksIHdoaWNoIHJldHVybnMgMSBpZiBpdCBk
+aWRuJ3QKPiBoYW5kbGUgYW55dGhpbmcuCj4KPiBTaWduZWQtb2ZmLWJ5OiBEb3VnbGFzIEFuZGVy
+c29uIDxkaWFuZGVyc0BjaHJvbWl1bS5vcmc+Cj4gLS0tCj4KPiBDaGFuZ2VzIGluIHY4Ogo+IC0g
+IlByb3ZpZGUgYSBzdHViIGtnZGJfbm1pY2FsbGJhY2soKSBpZiAhQ09ORklHX0tHREIiIG5ldyBm
+b3IgdjgKPgo+ICBpbmNsdWRlL2xpbnV4L2tnZGIuaCB8IDEgKwo+ICAxIGZpbGUgY2hhbmdlZCwg
+MSBpbnNlcnRpb24oKykKPgo+IGRpZmYgLS1naXQgYS9pbmNsdWRlL2xpbnV4L2tnZGIuaCBiL2lu
+Y2x1ZGUvbGludXgva2dkYi5oCj4gaW5kZXggODc3MTNiZDM5MGYzLi45Y2U2MjhlZTQ3Y2MgMTAw
+NjQ0Cj4gLS0tIGEvaW5jbHVkZS9saW51eC9rZ2RiLmgKPiArKysgYi9pbmNsdWRlL2xpbnV4L2tn
+ZGIuaAo+IEBAIC0zNzcsNSArMzc3LDYgQEAgZXh0ZXJuIHZvaWQga2dkYl9mcmVlX2luaXRfbWVt
+KHZvaWQpOwo+ICAjZGVmaW5lIGRiZ19sYXRlX2luaXQoKQo+ICBzdGF0aWMgaW5saW5lIHZvaWQg
+a2dkYl9wYW5pYyhjb25zdCBjaGFyICptc2cpIHt9Cj4gIHN0YXRpYyBpbmxpbmUgdm9pZCBrZ2Ri
+X2ZyZWVfaW5pdF9tZW0odm9pZCkgeyB9Cj4gK3N0YXRpYyBpbnQga2dkYl9ubWljYWxsYmFjayhp
+bnQgY3B1LCB2b2lkICpyZWdzKSB7IHJldHVybiAxOyB9CgpGV0lXOiBJIGp1c3QgcmVhbGl6ZWQg
+dGhhdCB0aGUgYWJvdmUgbmVlZHMgYW4gImlubGluZSIgdG8gbWFrZSB0aGUKY29tcGlsZXIgbm90
+IGNvbXBsYWluLiBJJ20gc3RpbGwgaG9waW5nIGZvciBtb3JlIGZlZWRiYWNrIG9uIHRoZQpzZXJp
+ZXMsIGJ1dCBJJ2xsIHBsYW4gdG8gZml4IHRoYXQgaW4gdGhlIG5leHQgc3Bpbi4KCi1Eb3VnCgoK
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KS2dkYi1idWdy
+ZXBvcnQgbWFpbGluZyBsaXN0CktnZGItYnVncmVwb3J0QGxpc3RzLnNvdXJjZWZvcmdlLm5ldApo
+dHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9rZ2RiLWJ1Z3JlcG9y
+dAo=
