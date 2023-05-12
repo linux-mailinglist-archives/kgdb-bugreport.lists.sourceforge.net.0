@@ -2,29 +2,29 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 88468700745
-	for <lists+kgdb-bugreport@lfdr.de>; Fri, 12 May 2023 13:55:44 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 13E4A700972
+	for <lists+kgdb-bugreport@lfdr.de>; Fri, 12 May 2023 15:49:11 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1pxRN9-0006jy-Cn
+	id 1pxT8v-0004ZB-6u
 	for lists+kgdb-bugreport@lfdr.de;
-	Fri, 12 May 2023 11:55:43 +0000
+	Fri, 12 May 2023 13:49:09 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <pmladek@suse.com>) id 1pxRN8-0006jo-DL
+ (envelope-from <daniel.thompson@linaro.org>) id 1pxT8t-0004Z5-VM
  for kgdb-bugreport@lists.sourceforge.net;
- Fri, 12 May 2023 11:55:42 +0000
+ Fri, 12 May 2023 13:49:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=xyID2nrfRFvnCmCCEoDqrRJb/SLL4bOOzyPEcVWhIcg=; b=Ba3OFuBLu8ocshI7agQvs6elzA
- Kzpft3fgqkN6PMBIpf+YmskUC5Rb+B6imId0Cz86iKF8/LetWiSNltrCGsMUAMQLPIxMV+Ha+cqIu
- CIkMj93cUt/7rbvkzvmQUzj+UYBHFUvlMe3AwjaJi9dSjvRfxOyR9DlQkLAUC7bmwrUA=;
+ bh=67+i61jguyp+ViZ9g6BdKZA7MoS8H9z+3IWq9oh/QL4=; b=dTRAtinYG6RMkYwGabO2PfqPQu
+ fseBPPuE2bBzm8d0c7os0G4juwh9FUU0xh3QxtoFlEPh0AA0dc0cFL31bkB9LsTzeWjHpREQESM7Q
+ +zoqZHa42gSuSOccpWajsJcnYdRezleXri3zy3Ac/lBurg6Ql/+4U29foAtfB9tVzbe0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -32,66 +32,92 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=xyID2nrfRFvnCmCCEoDqrRJb/SLL4bOOzyPEcVWhIcg=; b=a4262G4VZg74+tiXWQJbHJ2Btm
- N4ZWvP1HgpzZePAikXXH+CNZL6R+2MZDLTkVVWn24wU9vluTggNQxdBM1Ubd0qKb9+AIQIt37lbmA
- LOuSeJNtwjZADvbRCLGuoMJHdGNyluBceML0VaBvaiRyeAF2hJP1BdWTa1t9tzdmkfjE=;
-Received: from smtp-out1.suse.de ([195.135.220.28])
+ bh=67+i61jguyp+ViZ9g6BdKZA7MoS8H9z+3IWq9oh/QL4=; b=RutjLGGTNYJqaiPDbNIhqC+I83
+ xe7ZLTFK0fmFUWSDBf5UMQNrmpA5hVjSOvOt0F+6ouFVwGNOKrEG5Fd9d05fdLlBlh8YYxIv0wlcR
+ XbxKU2glNi32L5kgp1Vg1qIBd0pplPthJTo3+mZrUcqNwQmGIX50xxTkaFXVmSgfxM4E=;
+Received: from mail-wm1-f42.google.com ([209.85.128.42])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1pxRN7-004RK8-Ib for kgdb-bugreport@lists.sourceforge.net;
- Fri, 12 May 2023 11:55:42 +0000
-Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
- by smtp-out1.suse.de (Postfix) with ESMTP id D7F82221B0;
- Fri, 12 May 2023 11:55:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
- t=1683892526; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=xyID2nrfRFvnCmCCEoDqrRJb/SLL4bOOzyPEcVWhIcg=;
- b=lEQ0yjMIPHRMyl9VsYuE8tD7yo0iFTwLUXaORxnhA7t8728sX0q4aRdF3iN6dqy1aC3q8/
- YPm1Tcs8DZ1wYKRHJ8/JPaw9/W3ekjR2+D3gmP9Tk3pQE/UABRQW6NVwrkr0j2R28omH/o
- DCRZdesZpFrDMAZ/mT4KGYDe+egXfWo=
-Received: from suse.cz (unknown [10.100.208.146])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by relay2.suse.de (Postfix) with ESMTPS id 6A61A2C152;
- Fri, 12 May 2023 11:55:25 +0000 (UTC)
-Date: Fri, 12 May 2023 13:55:24 +0200
+ id 1pxT8p-004Xuv-Kp for kgdb-bugreport@lists.sourceforge.net;
+ Fri, 12 May 2023 13:49:07 +0000
+Received: by mail-wm1-f42.google.com with SMTP id
+ 5b1f17b1804b1-3f435658d23so38917845e9.3
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Fri, 12 May 2023 06:49:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1683899337; x=1686491337;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=67+i61jguyp+ViZ9g6BdKZA7MoS8H9z+3IWq9oh/QL4=;
+ b=OwLBvsSCAL4IKqngbyeoNx/oUbfIXwpu3OvJhWUAlVCiT6A9dVvRwxpOuPJqfIbT/6
+ PrRcyqgLS3++Foa3bBtNBv/pj2lvZa83iigcr+fC8lrKrUMNsAQzjyEy+PMw5OMm/Mhf
+ xF0yyGQzDsuSOMbxKBHHyAFAEKrz+LS4Fyu3wgjp0bEG6ZAZ6d6zsvotf2t02PXSwHRW
+ FfnDosgrkDUWBd8K4VTIE+ETIO+fdaZ1mayOHMPSoB8rpU8IPhOHJYHvOjr5iMGiPkQF
+ 8qstkH9p0C0OucOJviu7r6yDgaQ9C5Z5Y9EfGtbIHXO5xfXzDSrQ5BQ6gaa5O1McMXua
+ 2pOA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1683899337; x=1686491337;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=67+i61jguyp+ViZ9g6BdKZA7MoS8H9z+3IWq9oh/QL4=;
+ b=FROiX7BGAUi8f9l8F9xdZsWvrWUS344uzI2S1XveRo6L0aQi7Y4XyhepDnDq+N6jRu
+ 3ohc1L0yIQazq4k/NOg9FYlxMcgNrHWeOdI/Y/3aTRb5chrMOWlr//P47Mr09crl+qUM
+ iTHg7Mn7dMRW45YCs529LQbqZkm4Ar0Zdq0hqx+Y91APx4GboHvhKl+Fso+vXmObz/15
+ jD+BD+CgnEjoS4y+cceHNy+O1cMbX2kiZjw2e/55BNPLhIg1FaG6N/WdTXaQWuUnykY7
+ 7KYgoQKLNiOVJx4Vm7I5Yuq6iENWIe9HeHNFCmTHze4YLIMTGdT1v0nr/nnc3X+BPKhV
+ 24FQ==
+X-Gm-Message-State: AC+VfDwNICJ8epcWVlxUw33Am05pA9UIVJEWJ3cSQBAk8LKIrKcPmFf6
+ mMN6jL/n3ZaHbLaz9AD11L/y7g==
+X-Google-Smtp-Source: ACHHUZ587vmfUkFwUYJByiVpeFrZ7RH44sF7IGxP8ERhwrP7uly1qe+BtE/g9t78xP4zh4ZmSj7afw==
+X-Received: by 2002:a05:600c:2198:b0:3f4:253b:92a9 with SMTP id
+ e24-20020a05600c219800b003f4253b92a9mr11929533wme.30.1683899337069; 
+ Fri, 12 May 2023 06:48:57 -0700 (PDT)
+Received: from aspen.lan
+ (aztw-34-b2-v4wan-166919-cust780.vm26.cable.virginm.net. [82.37.195.13])
+ by smtp.gmail.com with ESMTPSA id
+ k14-20020a7bc40e000000b003f4272c2d0csm13894413wmi.36.2023.05.12.06.48.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 12 May 2023 06:48:56 -0700 (PDT)
+Date: Fri, 12 May 2023 14:48:53 +0100
+From: Daniel Thompson <daniel.thompson@linaro.org>
 To: Douglas Anderson <dianders@chromium.org>
-Message-ID: <ZF4pLJUpvec7vvXT@alley>
-References: <20230504221349.1535669-1-dianders@chromium.org>
- <20230504151100.v4.12.I847d9ec852449350997ba00401d2462a9cb4302b@changeid>
+Message-ID: <20230512134853.GA216623@aspen.lan>
+References: <20230419225604.21204-1-dianders@chromium.org>
+ <20230419155341.v8.7.I21d92f8974c8e4001a5982fea6c98da1bed33ef5@changeid>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20230504151100.v4.12.I847d9ec852449350997ba00401d2462a9cb4302b@changeid>
-X-Spam-Score: -2.5 (--)
+In-Reply-To: <20230419155341.v8.7.I21d92f8974c8e4001a5982fea6c98da1bed33ef5@changeid>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu 2023-05-04 15:13:44, Douglas Anderson wrote: > The
- fact that there watchdog_hardlockup_enable(), > watchdog_hardlockup_disable(), 
- and watchdog_hardlockup_probe() are > declared __weak means tha [...] 
- Content analysis details:   (-2.5 points, 6.0 required)
+ Content preview:  On Wed, Apr 19, 2023 at 03:56:01PM -0700, Douglas Anderson
+ wrote: > From: Sumit Garg <sumit.garg@linaro.org> > > Add a new API
+ kgdb_smp_call_nmi_hook()
+ to expose default CPUs roundup > mechanism to a [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [195.135.220.28 listed in list.dnswl.org]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.128.42 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.128.42 listed in wl.mailspike.net]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1pxRN7-004RK8-Ib
-Subject: Re: [Kgdb-bugreport] [PATCH v4 12/17] watchdog/hardlockup: Have the
- perf hardlockup use __weak functions more cleanly
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+X-Headers-End: 1pxT8p-004Xuv-Kp
+Subject: Re: [Kgdb-bugreport] [PATCH v8 07/10] kgdb: Expose default CPUs
+ roundup fallback mechanism
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -103,97 +129,75 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-From: Petr Mladek via Kgdb-bugreport <kgdb-bugreport@lists.sourceforge.net>
-Reply-To: Petr Mladek <pmladek@suse.com>
-Cc: Mark Rutland <mark.rutland@arm.com>, Ian Rogers <irogers@google.com>,
- Randy Dunlap <rdunlap@infradead.org>,
+Cc: Mark Rutland <mark.rutland@arm.com>,
+ "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
  Lecopzer Chen <lecopzer.chen@mediatek.com>,
- kgdb-bugreport@lists.sourceforge.net, ricardo.neri@intel.com,
- Stephane Eranian <eranian@google.com>, sparclinux@vger.kernel.org,
- Guenter Roeck <groeck@chromium.org>, Will Deacon <will@kernel.org>,
- Daniel Thompson <daniel.thompson@linaro.org>, Andi Kleen <ak@linux.intel.com>,
- mpe@ellerman.id.au, christophe.leroy@csgroup.eu, Chen-Yu Tsai <wens@csie.org>,
- Matthias Kaehlcke <mka@chromium.org>,
+ Peter Zijlstra <peterz@infradead.org>,
  Catalin Marinas <catalin.marinas@arm.com>,
- Masayoshi Mizuma <msys.mizuma@gmail.com>, ravi.v.shankar@intel.com,
- Tzung-Bi Shih <tzungbi@chromium.org>, npiggin@gmail.com,
- Stephen Boyd <swboyd@chromium.org>, Pingfan Liu <kernelfans@gmail.com>,
- linux-arm-kernel@lists.infradead.org, ito-yuichi@fujitsu.com,
- linux-perf-users@vger.kernel.org, Marc Zyngier <maz@kernel.org>,
- Andrew Morton <akpm@linux-foundation.org>, linuxppc-dev@lists.ozlabs.org,
- davem@davemloft.net
+ Jason Wessel <jason.wessel@windriver.com>, ito-yuichi@fujitsu.com,
+ linux-kernel@vger.kernel.org, Stephen Boyd <swboyd@chromium.org>,
+ linux-perf-users@vger.kernel.org, Chen-Yu Tsai <wens@csie.org>,
+ Marc Zyngier <maz@kernel.org>, kgdb-bugreport@lists.sourceforge.net,
+ Thomas Gleixner <tglx@linutronix.de>, Masayoshi Mizuma <msys.mizuma@gmail.com>,
+ Will Deacon <will@kernel.org>, Ard Biesheuvel <ardb@kernel.org>,
+ linux-arm-kernel@lists.infradead.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Thu 2023-05-04 15:13:44, Douglas Anderson wrote:
-> The fact that there watchdog_hardlockup_enable(),
-> watchdog_hardlockup_disable(), and watchdog_hardlockup_probe() are
-> declared __weak means that the configured hardlockup detector can
-> define non-weak versions of those functions if it needs to. Instead of
-> doing this, the perf hardlockup detector hooked itself into the
-> default __weak implementation, which was a bit awkward. Clean this up.
-> 
-> >From comments, it looks as if the original design was done because the
-> __weak function were expected to implemented by the architecture and
-> not by the configured hardlockup detector. This got awkward when we
-> tried to add the buddy lockup detector which was not arch-specific but
-> wanted to hook into those same functions.
-> 
-> This is not expected to have any functional impact.
-> 
+On Wed, Apr 19, 2023 at 03:56:01PM -0700, Douglas Anderson wrote:
+> From: Sumit Garg <sumit.garg@linaro.org>
+>
+> Add a new API kgdb_smp_call_nmi_hook() to expose default CPUs roundup
+> mechanism to a particular archichecture as a runtime fallback if it
+> detects to not support NMI roundup.
+>
+> Currently such an architecture example is arm64 supporting pseudo NMIs
+> feature which is only available on platforms which have support for GICv3
+> or later version.
+>
+> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> Tested-by: Chen-Yu Tsai <wens@csie.org>
 > Signed-off-by: Douglas Anderson <dianders@chromium.org>
-
-I like this change:
-
-Reviewed-by: Petr Mladek <pmladek@suse.com>
-
-See a comment below.
-
-> --- a/kernel/watchdog_perf.c
-> +++ b/kernel/watchdog_perf.c
-> @@ -147,12 +151,16 @@ void hardlockup_detector_perf_enable(void)
->  }
->  
->  /**
-> - * hardlockup_detector_perf_disable - Disable the local event
-> + * watchdog_hardlockup_disable - Disable the local event
+> ---
+>
+> (no changes since v1)
+>
+>  include/linux/kgdb.h      | 12 ++++++++++++
+>  kernel/debug/debug_core.c |  8 +++++++-
+>  2 files changed, 19 insertions(+), 1 deletion(-)
+>
+> diff --git a/include/linux/kgdb.h b/include/linux/kgdb.h
+> index 258cdde8d356..87713bd390f3 100644
+> --- a/include/linux/kgdb.h
+> +++ b/include/linux/kgdb.h
+> @@ -199,6 +199,18 @@ kgdb_arch_handle_qxfer_pkt(char *remcom_in_buffer,
+>
+>  extern void kgdb_call_nmi_hook(void *ignored);
+>
+> +/**
+> + *	kgdb_smp_call_nmi_hook - Provide default fallback mechanism to
+> + *				 round-up CPUs
 > + *
-> + * @cpu: The CPU to enable hard lockup on.
->   */
-> -void hardlockup_detector_perf_disable(void)
-> +void watchdog_hardlockup_disable(unsigned int cpu)
->  {
->  	struct perf_event *event = this_cpu_read(watchdog_ev);
->  
-> +	WARN_ON_ONCE(cpu != smp_processor_id());
+> + *	If you're using the default implementation of kgdb_roundup_cpus()
+> + *	this function will be called.  And if an arch detects at runtime to
+> + *	not support NMI based roundup then it can fallback to default
+> + *	mechanism using this API.
+> + */
 > +
+> +extern void kgdb_smp_call_nmi_hook(void);
 
-It makes sense. But it just shows how the code is weird.
-@cpu is passed as a parameter and the code expects that it is
-running on the given CPU.
+Concept looks sensible but this is a terrible name for aa command to
+round up the CPUs using smp_call... functions. Whilst it is true it that
+kgdb_roundup_cpus() does use kgdb_call_nmi_hook() internally that
+doesn't mean we should name functions after it. They should be named
+after what they are do, not how they do it.
 
-It seems that @cpu is passed as a parameter because this is
-called from:
+Something more like kgdb_roundup_cpus_with_smp_call() would be a much
+better name.
 
-  + [CPUHP_AP_WATCHDOG_ONLINE].teardown.single()
-    + lockup_detector_offline_cpu()
-      + watchdog_disable()
 
-and the CPU hotplug API passes @cpu parameter.
-
-IMHO, the clean solution would be to use per_cpu*() instead
-of this_cpu*() API everywhere in this code path.
-
-But it is yet another cleanup. It seems to be out-of-scope of
-this patchset.
-
->  	if (event) {
->  		perf_event_disable(event);
->  		this_cpu_write(watchdog_ev, NULL);
-
-Best Regards,
-Petr
+Daniel.
 
 
 _______________________________________________
