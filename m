@@ -2,29 +2,29 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2873C70A95C
+	by mail.lfdr.de (Postfix) with ESMTPS id 2B80F70A95D
 	for <lists+kgdb-bugreport@lfdr.de>; Sat, 20 May 2023 18:55:08 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1q0PrG-0005Vv-JW
+	id 1q0PrG-0004dC-W0
 	for lists+kgdb-bugreport@lfdr.de;
-	Sat, 20 May 2023 16:55:06 +0000
+	Sat, 20 May 2023 16:55:07 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <dianders@chromium.org>) id 1q03sD-00028X-PQ
+ (envelope-from <dianders@chromium.org>) id 1q03u4-00086C-Rq
  for kgdb-bugreport@lists.sourceforge.net;
- Fri, 19 May 2023 17:26:38 +0000
+ Fri, 19 May 2023 17:28:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=02qH/DnpEiYKBFSrjaJ0Y79pipvrSaWo4CdISHdDfuc=; b=ZMgdeDD/xCgUijgD6Xk+mJsIw2
- 4luwmJ1B/lMvPLkRrpPA2qhRX8ZHW354Q3VIlALkhedKqe3uSNiV96x0kCZZGF321wl5iTlK5nM4E
- ONid8+o8XF/WjkLedg+O4fyLNHmu+m+A9EknRKyYeJNfAqEnFlspqineZD/r9VdyJ/vk=;
+ bh=dNeu6vyPdP07ZkKg14nXq7JlkRTws6KPwBPqf0mDzVI=; b=aLxlkr3K7w/INOpLW7d1Pw9K2P
+ HiAqX31rLNEOF4MgQs92keEj94lSasxdkcjx00+3M+VE5JRbFWwXaSmlUPbQkm9cOq6fF4lnnI90k
+ 1UOqzACyRQQL4B81gAtEpoD4C0lgiAdBb5sQGI6NwvcmJlT4VPf+WElU8IxfcY8P8ThI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -32,55 +32,55 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=02qH/DnpEiYKBFSrjaJ0Y79pipvrSaWo4CdISHdDfuc=; b=N4MYNPqQuGzVEU0ua/6/kXG8XJ
- X1a8s+Ef0LNEWfeEwqaWxNBtuyDYw6/aWkaThHPJqQZs2zmKD9UI58tQg7EUdpiJ4iIqCqATVa0Vj
- qRzl2tN+n7/7v32U5PtsPtnG7eaEfdwMsxVkAb44+Y8u7dP/4FspzcGAsm8VRIsak13o=;
-Received: from mail-pf1-f171.google.com ([209.85.210.171])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=dNeu6vyPdP07ZkKg14nXq7JlkRTws6KPwBPqf0mDzVI=; b=U5a1iaY6ZEAKIez/ZMfe0bM3+P
+ va+QfeZrD0thWwknbSCVR0ZnrNyIucVDGLhIKASjEQ8cI6JHgNuN5GsoCPMTUe5NeKj0Og99wRstt
+ xAI8K8y7V1S3wtOeKMYU+i4Ql54tuBm91/Q3o95S7cnO6ay8DIMcUjIpFHxaNRVLpSA8=;
+Received: from mail-yb1-f174.google.com ([209.85.219.174])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1q03s9-00DY9K-Nk for kgdb-bugreport@lists.sourceforge.net;
- Fri, 19 May 2023 17:26:38 +0000
-Received: by mail-pf1-f171.google.com with SMTP id
- d2e1a72fcca58-64d3e5e5980so636874b3a.2
+ id 1q03u1-0007Mr-TV for kgdb-bugreport@lists.sourceforge.net;
+ Fri, 19 May 2023 17:28:32 +0000
+Received: by mail-yb1-f174.google.com with SMTP id
+ 3f1490d57ef6-ba827c74187so4903078276.0
  for <kgdb-bugreport@lists.sourceforge.net>;
- Fri, 19 May 2023 10:26:33 -0700 (PDT)
+ Fri, 19 May 2023 10:28:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1684517188; x=1687109188;
+ d=chromium.org; s=google; t=1684517304; x=1687109304;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=02qH/DnpEiYKBFSrjaJ0Y79pipvrSaWo4CdISHdDfuc=;
- b=ZLYYdC6jpInK1Iso31LARmHolQEG29hlLZTeIQfvYnMcOb4ojsWmjWTUEbXUx7QHcV
- OwTCChP4jKrVnx35jvQsKbnQzIFhagnMtccKOwx0RLztifsF4ygfVT4XIoGmZBVh/M3A
- PM8l5gB76BR3Kdb3H/iXj3mBA7xZW2USB5w64=
+ bh=dNeu6vyPdP07ZkKg14nXq7JlkRTws6KPwBPqf0mDzVI=;
+ b=VudTycovmcO8r5+Wsk1BzU4Jkozuzbfxk6Y2Y0pe0v5EWb8rANX8Z66fZinAjaCJZd
+ vLLfSicggHknQwUf/6KW7shOyf0cJF3DChmAq2n+dKDdy7FmUAp93ooeCP5flA4ftDx4
+ JBrkwVtoJgsVbmlCFP+90RqqXpsh9QcyWUQiE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1684517188; x=1687109188;
+ d=1e100.net; s=20221208; t=1684517304; x=1687109304;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=02qH/DnpEiYKBFSrjaJ0Y79pipvrSaWo4CdISHdDfuc=;
- b=g39FD6LQgYrNp2QjgRTg07T0CHG9BXuA6XI3pMZvO8R5hV4J+A8MEnKoJonRwyqZut
- 9TMg2NQqBcdEfLjckDmQhY9x8ZMRwaj3Mgd0kXV/4cxamPr5+FezLGqNucZdmOn4dQLR
- 0PM95GG2hqShhVRu3k1DItScoNvcmVOh7x9xCt5sb7FIPx5K2BQIAjF8Y87I79odUoJx
- 5xXgxLL19l/2cHF4/TT4tCwVlVhf8SKW1pWOGkyQqKgXLW41r/4wzBcZb5Xc00C6TZUn
- 9clDA229gUaQQubhqHyy1J1+/zm4m753a2d4uLVkfitiao+/jm88whibq8QBY4ch3hzt
- vKyA==
-X-Gm-Message-State: AC+VfDwTBya+WFwciXqLUjZ+CR5m0LlFZBwKHK2xcEn9YhbCrBi4/EkW
- zp/dwKId3pznrt5qAjqn36gqGb9WH9+m3hJDROY=
-X-Google-Smtp-Source: ACHHUZ4VewjZvf6tgnnmMrLmNUmoTIX2MqjaMcwoqjHE7Ok2xZz+MKgk8d92NT7mvLQB9l1ZhiFZDg==
-X-Received: by 2002:a17:90b:4b46:b0:253:6713:c7c2 with SMTP id
- mi6-20020a17090b4b4600b002536713c7c2mr2717286pjb.43.1684516839149; 
- Fri, 19 May 2023 10:20:39 -0700 (PDT)
+ bh=dNeu6vyPdP07ZkKg14nXq7JlkRTws6KPwBPqf0mDzVI=;
+ b=HMicbfeijFdiLAbKNcqWN1QsxEUj1c1pavlLAiD7KF7QLmguGM0wWK4c2XBmn/czeo
+ 5L58luO2Nlw/plX0CF7d7QC48CZorfAuGACh0HFEhGP2FUw1RCkyfuhJHw4vPV77Kl0g
+ uy0H+zeM3MO/qfBxgoUEoJRd7QWhgdVpIPENSywQxM4NNOIBPQBXoLpBxE/oeYT0EzO/
+ Ug0vxN6cjmiTL28K2dLcdrDl9rkCJqaQUreHSym90e6ZBvfMbKVBxGgjQQ+6IEBTLLq+
+ BJKJbEm/EhHxsnXPWW6WTgBdV5wPFQY7cCv+w8Fgur7t8bMgnEIZvrtBgugBx7EgtXsL
+ xQUg==
+X-Gm-Message-State: AC+VfDwVeef+iwMuZH54heG27ZD1Q2gRlTpBBBzFoykVXB3B6aUeIw2S
+ DOh2FMYwwuqeFG7DUP4AvqzG/vOJNtJ4Un0zYec=
+X-Google-Smtp-Source: ACHHUZ56xIwu+OAsmj4ap7FEJYDEFDc65SEAcDRmxfPUsg25AN6kC4stY0LeDhYT4ZvsYWBDy+bC2g==
+X-Received: by 2002:a17:90b:1e49:b0:250:9aee:563c with SMTP id
+ pi9-20020a17090b1e4900b002509aee563cmr2506737pjb.41.1684516842239; 
+ Fri, 19 May 2023 10:20:42 -0700 (PDT)
 Received: from tictac2.mtv.corp.google.com
  ([2620:15c:9d:2:9b89:2dd0:d160:429d])
  by smtp.gmail.com with ESMTPSA id
- gj19-20020a17090b109300b0024e4f169931sm1763835pjb.2.2023.05.19.10.20.36
+ gj19-20020a17090b109300b0024e4f169931sm1763835pjb.2.2023.05.19.10.20.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 May 2023 10:20:38 -0700 (PDT)
+ Fri, 19 May 2023 10:20:41 -0700 (PDT)
 From: Douglas Anderson <dianders@chromium.org>
 To: Petr Mladek <pmladek@suse.com>, Andrew Morton <akpm@linux-foundation.org>
-Date: Fri, 19 May 2023 10:18:25 -0700
-Message-ID: <20230519101840.v5.1.I8cbb2f4fa740528fcfade4f5439b6cdcdd059251@changeid>
+Date: Fri, 19 May 2023 10:18:26 -0700
+Message-ID: <20230519101840.v5.2.I843b0d1de3e096ba111a179f3adb16d576bef5c7@changeid>
 X-Mailer: git-send-email 2.40.1.698.g37aff9b760-goog
 In-Reply-To: <20230519101840.v5.18.Ia44852044cdcb074f387e80df6b45e892965d4a1@changeid>
 References: <20230519101840.v5.18.Ia44852044cdcb074f387e80df6b45e892965d4a1@changeid>
@@ -92,19 +92,21 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  The real watchdog_update_hrtimer_threshold() is defined in
- kernel/watchdog_hld.c. That file is included if
- CONFIG_HARDLOCKUP_DETECTOR_PERF
- and the function is defined in that file if CONFIG_HARDLOCKUP [...] 
+ Content preview:  Currently, in the watchdog_overflow_callback() we first check
+ to see if the watchdog had been touched and _then_ we handle the workaround
+ for turbo mode. This order should be reversed. Specifically, "touching" the
+ hardlockup detector's watchdog should avoid lockups being detected for one
+ period that should be roughly the same regardless of whether we're running
+ turbo or not. That me [...] 
  Content analysis details:   (-0.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.210.171 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.210.171 listed in wl.mailspike.net]
+ no trust [209.85.219.174 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.219.174 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -112,9 +114,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1q03s9-00DY9K-Nk
-Subject: [Kgdb-bugreport] [PATCH v5 01/18] watchdog/perf: Define dummy
- watchdog_update_hrtimer_threshold() on correct config
+X-Headers-End: 1q03u1-0007Mr-TV
+Subject: [Kgdb-bugreport] [PATCH v5 02/18] watchdog/perf: More properly
+ prevent false positives with turbo modes
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -145,48 +147,53 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-The real watchdog_update_hrtimer_threshold() is defined in
-kernel/watchdog_hld.c. That file is included if
-CONFIG_HARDLOCKUP_DETECTOR_PERF and the function is defined in that
-file if CONFIG_HARDLOCKUP_CHECK_TIMESTAMP.
+Currently, in the watchdog_overflow_callback() we first check to see
+if the watchdog had been touched and _then_ we handle the workaround
+for turbo mode. This order should be reversed.
 
-The dummy version of the function in "nmi.h" didn't get that quite
-right. While this doesn't appear to be a huge deal, it's nice to make
-it consistent.
+Specifically, "touching" the hardlockup detector's watchdog should
+avoid lockups being detected for one period that should be roughly the
+same regardless of whether we're running turbo or not. That means that
+we should do the extra accounting for turbo _before_ we look at (and
+clear) the global indicating that we've been touched.
 
-It doesn't break builds because CHECK_TIMESTAMP is only defined by
-x86 so others don't get a double definition, and x86 uses perf lockup
-detector, so it gets the out of line version.
+NOTE: this fix is made based on code inspection. I am not aware of any
+reports where the old code would have generated false positives. That
+being said, this order seems more correct and also makes it easier
+down the line to share code with the "buddy" hardlockup detector.
 
 Fixes: 7edaeb6841df ("kernel/watchdog: Prevent false positives with turbo modes")
-Reviewed-by: Nicholas Piggin <npiggin@gmail.com>
-Reviewed-by: Petr Mladek <pmladek@suse.com>
 Signed-off-by: Douglas Anderson <dianders@chromium.org>
 ---
 
 Changes in v5:
-- Add Nicholas's explanation of why this didn't break builds.
-- watchdog_hardlockup_perf.c => kernel/watchdog_hld.c in description.
+- ("More properly prevent false ...") promoted to its own patch for v5.
 
-Changes in v4:
-- ("Define dummy watchdog_update_hrtimer_threshold() ...") new for v4.
+ kernel/watchdog_hld.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
- include/linux/nmi.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/include/linux/nmi.h b/include/linux/nmi.h
-index 048c0b9aa623..771d77b62bc1 100644
---- a/include/linux/nmi.h
-+++ b/include/linux/nmi.h
-@@ -197,7 +197,7 @@ u64 hw_nmi_get_sample_period(int watchdog_thresh);
- #endif
+diff --git a/kernel/watchdog_hld.c b/kernel/watchdog_hld.c
+index 247bf0b1582c..1e8a49dc956e 100644
+--- a/kernel/watchdog_hld.c
++++ b/kernel/watchdog_hld.c
+@@ -114,14 +114,14 @@ static void watchdog_overflow_callback(struct perf_event *event,
+ 	/* Ensure the watchdog never gets throttled */
+ 	event->hw.interrupts = 0;
  
- #if defined(CONFIG_HARDLOCKUP_CHECK_TIMESTAMP) && \
--    defined(CONFIG_HARDLOCKUP_DETECTOR)
-+    defined(CONFIG_HARDLOCKUP_DETECTOR_PERF)
- void watchdog_update_hrtimer_threshold(u64 period);
- #else
- static inline void watchdog_update_hrtimer_threshold(u64 period) { }
++	if (!watchdog_check_timestamp())
++		return;
++
+ 	if (__this_cpu_read(watchdog_nmi_touch) == true) {
+ 		__this_cpu_write(watchdog_nmi_touch, false);
+ 		return;
+ 	}
+ 
+-	if (!watchdog_check_timestamp())
+-		return;
+-
+ 	/* check for a hardlockup
+ 	 * This is done by making sure our timer interrupt
+ 	 * is incrementing.  The timer interrupt should have
 -- 
 2.40.1.698.g37aff9b760-goog
 
