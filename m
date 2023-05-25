@@ -2,131 +2,97 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 67F4270FE9F
-	for <lists+kgdb-bugreport@lfdr.de>; Wed, 24 May 2023 21:40:05 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id B1DE17110E7
+	for <lists+kgdb-bugreport@lfdr.de>; Thu, 25 May 2023 18:27:14 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1q1uKx-0004lY-Bw
+	id 1q2Do0-0000hy-Lw
 	for lists+kgdb-bugreport@lfdr.de;
-	Wed, 24 May 2023 19:39:57 +0000
+	Thu, 25 May 2023 16:27:13 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <dianders@chromium.org>) id 1q1uKO-0004lN-Gr
+ (envelope-from <pmladek@suse.com>) id 1q2Dnw-0000hr-CY
  for kgdb-bugreport@lists.sourceforge.net;
- Wed, 24 May 2023 19:39:21 +0000
+ Thu, 25 May 2023 16:27:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
- Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=XIB0HReKptcGBTosdBXg1PO+NrPRx+I4udNpoc6AMN0=; b=WYz2PbWJOoJ3a7IdNF0ydeimfj
- qYwpCjz/cVxCuYym0UFONHCX5wRbZueL3aWORGfqWQZQqUos4CmU6iKXLydSUGFnuFNswrUMmVHbX
- eSw1YoZFxxCvpW95d7SJTqA2T7L8JcknTpdwEkJc6qu2vqj6ZGBcXK5OIYzuZ/SquAkg=;
+ bh=qBSf8dQvqenvM4XuaXqBfFlxjVrL5fPe+CB4lmnXjuk=; b=HO9EoTiUw4HONA3POYRMWsu0OM
+ +npEBVwR4bW6/lnmor0+vJKLHM3nzuq/abIPsLQD8RAA9L/eHWlzvK3p5XuTB10w0bBZmCP44etLs
+ 4fwxUPYx6J0nyJ8OrkiA1M4d68fSZm5oa5KzvJr0gmS4kU0LYfRwPIl0gby2O/KEaMvI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
- :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=XIB0HReKptcGBTosdBXg1PO+NrPRx+I4udNpoc6AMN0=; b=EHiiMah32pQE4U8Vjho1n08Xix
- Mjvc/01UFp59LPkhfBJVEHNpEc+RjPRr+RwpsfeDAyFA3LHILRBvZ6g3mxuLOQHcORgg8Ue6rk1ES
- 1/jlfcvEIxXxN8olyOHCxTrpS7EfLilSHBBvPZX6El0qUlGcXaQ/J4R9YSgaL+rfhh9o=;
-Received: from mail-io1-f49.google.com ([209.85.166.49])
+ bh=qBSf8dQvqenvM4XuaXqBfFlxjVrL5fPe+CB4lmnXjuk=; b=F6nqBK52BCAio6ynwzAqr5H42D
+ ufrJgciQEj4rCJ9vyMZiKureNvjF3ro6TK+RaYQSQe/tmd16nMSN/X/UTdqrb1qY0U79Cq9bSjSsi
+ O4O0SbC9mK99Y8mXztpSxwzQA1XUifQv+FxAhd9ZGZyBMEGfvIXyT1GiuLLdoZ4a1Mn0=;
+Received: from smtp-out1.suse.de ([195.135.220.28])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1q1uKG-0003nS-IT for kgdb-bugreport@lists.sourceforge.net;
- Wed, 24 May 2023 19:39:16 +0000
-Received: by mail-io1-f49.google.com with SMTP id
- ca18e2360f4ac-7748c901812so37485239f.0
- for <kgdb-bugreport@lists.sourceforge.net>;
- Wed, 24 May 2023 12:39:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1684957145; x=1687549145;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=XIB0HReKptcGBTosdBXg1PO+NrPRx+I4udNpoc6AMN0=;
- b=V2lnKHvyL6puhQYWDKidJ9xM8y51Y9qTYPhiu08GMj5yQTMJKQlI8fNKYBuCw5OxQ4
- pvwWB8gHd0DWfjhNSg9EkN1QuEi9L5Bu7dJtGVs3JKDtWDs+CNQjq6mj6FphCtNjQPfm
- mu82ExkpsMg0Fdps04jES/Hrw7T47YnrnEeuk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1684957145; x=1687549145;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=XIB0HReKptcGBTosdBXg1PO+NrPRx+I4udNpoc6AMN0=;
- b=RLZSgWJdWnIV91zHsGfyVuXHxE80MQxGkH57J0hO/Drvchd8mDyZX+AjTdRdfFP2pN
- ZidgyQVkZwLBQqyUgFDSuNo5Q1If3nNSI6RAKyLND6EtRfVf8xH19HL9R/42Tn7KKNju
- lvxF7iKJ24rjCEiCt+Iw/Q8GKHmr/qLqdkErBD+vexqCyqMGN7MCP6+0WNPpQOwg/ZQ1
- rDjmx+cirWfiQ5wtwca5hNcKd99ugzSBBlZ07ST9qLFtyNWLPbHUgKRZo/6SWEyplZX9
- x2f6gynsW0bjoQ2A1OgFfwJxD3/5KGNAJs9GmE70Qr1CFNMSXM/97jhrCGC/v3R2PDVp
- BPJA==
-X-Gm-Message-State: AC+VfDwU381jWOdaC8BokHO3n3P8Urc5zWQG7GL0GunRUg+/nVtPyVjv
- REpQrXXNQXGlTTo72O5nEmj74WDMrFoSAgh9zQM=
-X-Google-Smtp-Source: ACHHUZ6P22XuNKzbZ4u2HbvuEp2jPxRnhReYuoQfYTz7mjjuGdaqdZtbs+zAL0SMSCjR5Z3izJW/aw==
-X-Received: by 2002:a5d:8e17:0:b0:76c:65df:a118 with SMTP id
- e23-20020a5d8e17000000b0076c65dfa118mr11148613iod.6.1684957145028; 
- Wed, 24 May 2023 12:39:05 -0700 (PDT)
-Received: from mail-il1-f177.google.com (mail-il1-f177.google.com.
- [209.85.166.177]) by smtp.gmail.com with ESMTPSA id
- s11-20020a6b740b000000b00763699c3d02sm3560444iog.0.2023.05.24.12.39.03
- for <kgdb-bugreport@lists.sourceforge.net>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 24 May 2023 12:39:04 -0700 (PDT)
-Received: by mail-il1-f177.google.com with SMTP id
- e9e14a558f8ab-33a8f766b64so1105ab.1
- for <kgdb-bugreport@lists.sourceforge.net>;
- Wed, 24 May 2023 12:39:03 -0700 (PDT)
-X-Received: by 2002:a05:6e02:194e:b0:331:d42:d06e with SMTP id
- x14-20020a056e02194e00b003310d42d06emr33974ilu.17.1684957143210; Wed, 24 May
- 2023 12:39:03 -0700 (PDT)
-MIME-Version: 1.0
+ id 1q2Dns-0000P9-PG for kgdb-bugreport@lists.sourceforge.net;
+ Thu, 25 May 2023 16:27:08 +0000
+Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
+ by smtp-out1.suse.de (Postfix) with ESMTP id 34E5221C65;
+ Thu, 25 May 2023 16:26:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+ t=1685032018; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=qBSf8dQvqenvM4XuaXqBfFlxjVrL5fPe+CB4lmnXjuk=;
+ b=C4s+hdIyCnXmGRzN2XmAwfRTIB+9xRT+DvPlRO3vRcui7FbrbO1JQDWFx0rfTnZPSjX5i1
+ rRTvdTF0fGM/eRmPRJQYStRfQXRzvjlNo/ZL8IUHR6kuT7x8QzWCoJZmsiqU3ukACJ1fan
+ DauIAYjaJf8QRWaSlI7nNnrfcF7cPGY=
+Received: from suse.cz (unknown [10.100.201.202])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by relay2.suse.de (Postfix) with ESMTPS id A2C412C141;
+ Thu, 25 May 2023 16:26:55 +0000 (UTC)
+Date: Thu, 25 May 2023 18:26:52 +0200
+To: Douglas Anderson <dianders@chromium.org>
+Message-ID: <ZG-MTPSZakRDl2CP@alley>
 References: <20230519101840.v5.18.Ia44852044cdcb074f387e80df6b45e892965d4a1@changeid>
- <20230519101840.v5.13.I847d9ec852449350997ba00401d2462a9cb4302b@changeid>
- <ZG4YMyifGLOBJxLo@alley>
-In-Reply-To: <ZG4YMyifGLOBJxLo@alley>
-From: Doug Anderson <dianders@chromium.org>
-Date: Wed, 24 May 2023 12:38:49 -0700
-X-Gmail-Original-Message-ID: <CAD=FV=X+LEcSrArV+w35MX4oP1sC9KoRM0puJLT1RFmyS84Hxw@mail.gmail.com>
-Message-ID: <CAD=FV=X+LEcSrArV+w35MX4oP1sC9KoRM0puJLT1RFmyS84Hxw@mail.gmail.com>
-To: Petr Mladek <pmladek@suse.com>
-X-Spam-Score: -0.9 (/)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
+ <20230519101840.v5.14.I6bf789d21d0c3d75d382e7e51a804a7a51315f2c@changeid>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20230519101840.v5.14.I6bf789d21d0c3d75d382e7e51a804a7a51315f2c@changeid>
+X-Spam-Score: -2.5 (--)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  Hi, On Wed, May 24, 2023 at 6:59 AM Petr Mladek <pmladek@suse.com>
-    wrote: > > On Fri 2023-05-19 10:18:37, Douglas Anderson wrote: > > The fact
-    that there watchdog_hardlockup_enable(), > > watchdog_hardl [...] 
- 
- Content analysis details:   (-0.9 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview:  On Fri 2023-05-19 10:18:38,
+ Douglas Anderson wrote: > Implement
+ a hardlockup detector that doesn't doesn't need any extra > arch-specific
+ support code to detect lockups. Instead of using > something a [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [195.135.220.28 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
-                             [209.85.166.49 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
-                              no trust
-                             [209.85.166.49 listed in list.dnswl.org]
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1q1uKG-0003nS-IT
-Subject: Re: [Kgdb-bugreport] [PATCH v5 13/18] watchdog/hardlockup: Have the
- perf hardlockup use __weak functions more cleanly
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+X-Headers-End: 1q2Dns-0000P9-PG
+Subject: Re: [Kgdb-bugreport] [PATCH v5 14/18] watchdog/hardlockup: detect
+ hard lockups using secondary (buddy) CPUs
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -138,6 +104,8 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
+From: Petr Mladek via Kgdb-bugreport <kgdb-bugreport@lists.sourceforge.net>
+Reply-To: Petr Mladek <pmladek@suse.com>
 Cc: Mark Rutland <mark.rutland@arm.com>, Ian Rogers <irogers@google.com>,
  ito-yuichi@fujitsu.com, Lecopzer Chen <lecopzer.chen@mediatek.com>,
  kgdb-bugreport@lists.sourceforge.net, ricardo.neri@intel.com,
@@ -148,129 +116,307 @@ Cc: Mark Rutland <mark.rutland@arm.com>, Ian Rogers <irogers@google.com>,
  Chen-Yu Tsai <wens@csie.org>, Matthias Kaehlcke <mka@chromium.org>,
  Catalin Marinas <catalin.marinas@arm.com>,
  Masayoshi Mizuma <msys.mizuma@gmail.com>, ravi.v.shankar@intel.com,
- Tzung-Bi Shih <tzungbi@chromium.org>, npiggin@gmail.com,
- Stephen Boyd <swboyd@chromium.org>, Pingfan Liu <kernelfans@gmail.com>,
- linux-arm-kernel@lists.infradead.org, Randy Dunlap <rdunlap@infradead.org>,
- linux-kernel@vger.kernel.org, linux-perf-users@vger.kernel.org,
- mpe@ellerman.id.au, Andrew Morton <akpm@linux-foundation.org>,
- linuxppc-dev@lists.ozlabs.org, davem@davemloft.net
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ Tzung-Bi Shih <tzungbi@chromium.org>, Colin Cross <ccross@android.com>,
+ npiggin@gmail.com, Stephen Boyd <swboyd@chromium.org>,
+ Pingfan Liu <kernelfans@gmail.com>, linux-arm-kernel@lists.infradead.org,
+ Randy Dunlap <rdunlap@infradead.org>, linux-kernel@vger.kernel.org,
+ linux-perf-users@vger.kernel.org, mpe@ellerman.id.au,
+ Andrew Morton <akpm@linux-foundation.org>, linuxppc-dev@lists.ozlabs.org,
+ davem@davemloft.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-SGksCgpPbiBXZWQsIE1heSAyNCwgMjAyMyBhdCA2OjU54oCvQU0gUGV0ciBNbGFkZWsgPHBtbGFk
-ZWtAc3VzZS5jb20+IHdyb3RlOgo+Cj4gT24gRnJpIDIwMjMtMDUtMTkgMTA6MTg6MzcsIERvdWds
-YXMgQW5kZXJzb24gd3JvdGU6Cj4gPiBUaGUgZmFjdCB0aGF0IHRoZXJlIHdhdGNoZG9nX2hhcmRs
-b2NrdXBfZW5hYmxlKCksCj4gPiB3YXRjaGRvZ19oYXJkbG9ja3VwX2Rpc2FibGUoKSwgYW5kIHdh
-dGNoZG9nX2hhcmRsb2NrdXBfcHJvYmUoKSBhcmUKPiA+IGRlY2xhcmVkIF9fd2VhayBtZWFucyB0
-aGF0IHRoZSBjb25maWd1cmVkIGhhcmRsb2NrdXAgZGV0ZWN0b3IgY2FuCj4gPiBkZWZpbmUgbm9u
-LXdlYWsgdmVyc2lvbnMgb2YgdGhvc2UgZnVuY3Rpb25zIGlmIGl0IG5lZWRzIHRvLiBJbnN0ZWFk
-IG9mCj4gPiBkb2luZyB0aGlzLCB0aGUgcGVyZiBoYXJkbG9ja3VwIGRldGVjdG9yIGhvb2tlZCBp
-dHNlbGYgaW50byB0aGUKPiA+IGRlZmF1bHQgX193ZWFrIGltcGxlbWVudGF0aW9uLCB3aGljaCB3
-YXMgYSBiaXQgYXdrd2FyZC4gQ2xlYW4gdGhpcyB1cC4KPiA+Cj4gPiA+RnJvbSBjb21tZW50cywg
-aXQgbG9va3MgYXMgaWYgdGhlIG9yaWdpbmFsIGRlc2lnbiB3YXMgZG9uZSBiZWNhdXNlIHRoZQo+
-ID4gX193ZWFrIGZ1bmN0aW9uIHdlcmUgZXhwZWN0ZWQgdG8gaW1wbGVtZW50ZWQgYnkgdGhlIGFy
-Y2hpdGVjdHVyZSBhbmQKPiA+IG5vdCBieSB0aGUgY29uZmlndXJlZCBoYXJkbG9ja3VwIGRldGVj
-dG9yLiBUaGlzIGdvdCBhd2t3YXJkIHdoZW4gd2UKPiA+IHRyaWVkIHRvIGFkZCB0aGUgYnVkZHkg
-bG9ja3VwIGRldGVjdG9yIHdoaWNoIHdhcyBub3QgYXJjaC1zcGVjaWZpYyBidXQKPiA+IHdhbnRl
-ZCB0byBob29rIGludG8gdGhvc2Ugc2FtZSBmdW5jdGlvbnMuCj4gPgo+ID4gVGhpcyBpcyBub3Qg
-ZXhwZWN0ZWQgdG8gaGF2ZSBhbnkgZnVuY3Rpb25hbCBpbXBhY3QuCj4gPgo+ID4gQEAgLTE4Nywy
-NyArMTg3LDMzIEBAIHN0YXRpYyBpbmxpbmUgdm9pZCB3YXRjaGRvZ19oYXJkbG9ja3VwX2tpY2so
-dm9pZCkgeyB9Cj4gPiAgI2VuZGlmIC8qICFDT05GSUdfSEFSRExPQ0tVUF9ERVRFQ1RPUl9QRVJG
-ICovCj4gPgo+ID4gIC8qCj4gPiAtICogVGhlc2UgZnVuY3Rpb25zIGNhbiBiZSBvdmVycmlkZGVu
-IGlmIGFuIGFyY2hpdGVjdHVyZSBpbXBsZW1lbnRzIGl0cwo+ID4gLSAqIG93biBoYXJkbG9ja3Vw
-IGRldGVjdG9yLgo+ID4gKyAqIFRoZXNlIGZ1bmN0aW9ucyBjYW4gYmUgb3ZlcnJpZGRlbiBiYXNl
-ZCBvbiB0aGUgY29uZmlndXJlZCBoYXJkbG9ja2R1cCBkZXRlY3Rvci4KPiA+ICAgKgo+ID4gICAq
-IHdhdGNoZG9nX2hhcmRsb2NrdXBfZW5hYmxlL2Rpc2FibGUgY2FuIGJlIGltcGxlbWVudGVkIHRv
-IHN0YXJ0IGFuZCBzdG9wIHdoZW4KPiA+IC0gKiBzb2Z0bG9ja3VwIHdhdGNoZG9nIHN0YXJ0IGFu
-ZCBzdG9wLiBUaGUgYXJjaCBtdXN0IHNlbGVjdCB0aGUKPiA+ICsgKiBzb2Z0bG9ja3VwIHdhdGNo
-ZG9nIHN0YXJ0IGFuZCBzdG9wLiBUaGUgZGV0ZWN0b3IgbXVzdCBzZWxlY3QgdGhlCj4gPiAgICog
-U09GVExPQ0tVUF9ERVRFQ1RPUiBLY29uZmlnLgo+ID4gICAqLwo+ID4gLXZvaWQgX193ZWFrIHdh
-dGNoZG9nX2hhcmRsb2NrdXBfZW5hYmxlKHVuc2lnbmVkIGludCBjcHUpCj4gPiAtewo+ID4gLSAg
-ICAgaGFyZGxvY2t1cF9kZXRlY3Rvcl9wZXJmX2VuYWJsZSgpOwo+ID4gLX0KPiA+ICt2b2lkIF9f
-d2VhayB3YXRjaGRvZ19oYXJkbG9ja3VwX2VuYWJsZSh1bnNpZ25lZCBpbnQgY3B1KSB7IH0KPiA+
-Cj4gPiAtdm9pZCBfX3dlYWsgd2F0Y2hkb2dfaGFyZGxvY2t1cF9kaXNhYmxlKHVuc2lnbmVkIGlu
-dCBjcHUpCj4gPiAtewo+ID4gLSAgICAgaGFyZGxvY2t1cF9kZXRlY3Rvcl9wZXJmX2Rpc2FibGUo
-KTsKPiA+IC19Cj4gPiArdm9pZCBfX3dlYWsgd2F0Y2hkb2dfaGFyZGxvY2t1cF9kaXNhYmxlKHVu
-c2lnbmVkIGludCBjcHUpIHsgfQo+ID4KPiA+ICAvKiBSZXR1cm4gMCwgaWYgYSBoYXJkbG9ja3Vw
-IHdhdGNoZG9nIGlzIGF2YWlsYWJsZS4gRXJyb3IgY29kZSBvdGhlcndpc2UgKi8KPiA+ICBpbnQg
-X193ZWFrIF9faW5pdCB3YXRjaGRvZ19oYXJkbG9ja3VwX3Byb2JlKHZvaWQpCj4gPiAgewo+ID4g
-LSAgICAgcmV0dXJuIGhhcmRsb2NrdXBfZGV0ZWN0b3JfcGVyZl9pbml0KCk7Cj4gPiArICAgICAv
-Kgo+ID4gKyAgICAgICogSWYgQ09ORklHX0hBVkVfTk1JX1dBVENIRE9HIGlzIGRlZmluZWQgdGhl
-biBhbiBhcmNoaXRlY3R1cmUKPiA+ICsgICAgICAqIGlzIGFzc3VtZWQgdG8gaGF2ZSB0aGUgaGFy
-ZCB3YXRjaGRvZyBhdmFpbGFibGUgYW5kIHdlIHJldHVybiAwLgo+ID4gKyAgICAgICovCj4gPiAr
-ICAgICBpZiAoSVNfRU5BQkxFRChDT05GSUdfSEFWRV9OTUlfV0FUQ0hET0cpKQo+ID4gKyAgICAg
-ICAgICAgICByZXR1cm4gMDsKPiA+ICsKPiA+ICsgICAgIC8qCj4gPiArICAgICAgKiBIYXJkbG9j
-a3VwIGRldGVjdG9ycyBvdGhlciB0aGFuIHRob3NlIHVzaW5nIENPTkZJR19IQVZFX05NSV9XQVRD
-SERPRwo+ID4gKyAgICAgICogYXJlIHJlcXVpcmVkIHRvIGltcGxlbWVudCBhIG5vbi13ZWFrIHZl
-cnNpb24gb2YgdGhpcyBwcm9iZSBmdW5jdGlvbgo+ID4gKyAgICAgICogdG8gdGVsbCB3aGV0aGVy
-IHRoZXkgYXJlIGF2YWlsYWJsZS4gSWYgdGhleSBkb24ndCBvdmVycmlkZSB0aGVuCj4gPiArICAg
-ICAgKiB3ZSdsbCByZXR1cm4gLUVOT0RFVi4KPiA+ICsgICAgICAqLwo+ID4gKyAgICAgcmV0dXJu
-IC1FTk9ERVY7Cj4gPiAgfQo+Cj4gV2hlbiB0aGlua2luZyBtb3JlIGFib3V0IGl0LiBJdCBpcyB3
-ZWlyZCB0aGF0IHdlIG5lZWQgdG8gaGFuZGxlCj4gQ09ORklHX0hBVkVfTk1JX1dBVENIRE9HIGlu
-IHRoaXMgZGVmYXVsdCB3ZWVrIGZ1bmN0aW9uLgo+Cj4gSXQgc2hvdWxkIGJlIGhhbmRsZWQgaW4g
-d2F0Y2hkb2dfaGFyZGxvY2t1cF9wcm9iZSgpIGltcGxlbWVudGVkCj4gaW4ga2VybmVsL3dhdGNo
-ZG9nX3BlcmYuYy4KPgo+IElNSE8sIHRoZSBkZWZhdWx0IF9fd2VhayBmdW5jdGlvbiBjb3VsZCBh
-bHdheXMgcmV0dXJuIC1FTk9ERVY7Cj4KPiBXb3VsZCBpdCBtYWtlIHNlbnNlLCBwbGVhc2U/CgpJ
-IGRvbid0IHF1aXRlIHVuZGVyc3RhbmQuIEknZCBhZ3JlZSB0aGF0IHRoZSBzcGVjaWFsIGNhc2Ug
-Zm9yCkNPTkZJR19IQVZFX05NSV9XQVRDSERPRyBpcyB1Z2x5LCBidXQgaXQgd2FzIGFsc28gdWds
-eSBiZWZvcmUuIElNTwppdCdzIGFjdHVhbGx5IGEgbGl0dGxlIGxlc3MgdWdseSAvIGVhc2llciB0
-byB1bmRlcnN0YW5kIGFmdGVyIG15CnBhdGNoLiAuLi5idXQgbGV0IG1lIHdhbGsgdGhyb3VnaCBo
-b3cgSSB0aGluayB0aGlzIHNwZWNpYWwgY2FzZSB3b3JrcwphbmQgbWF5YmUgeW91IGNhbiB0ZWxs
-IG1lIHdoZXJlIEknbSBjb25mdXNlZC4KClRoZSBmaXJzdCB0aGluZyB0byB1bmRlcnN0YW5kIGlz
-IHRoYXQgQ09ORklHX0hBUkRMT0NLVVBfREVURUNUT1JfUEVSRgphbmQgQ09ORklHX0hBVkVfTk1J
-X1dBVENIRE9HIGFyZSBtdXR1YWxseSBleGNsdXNpdmUgZnJvbSBlYWNoIG90aGVyLgpUaGlzIHdh
-cyB0cnVlIGJlZm9yZSBhbnkgb2YgbXkgcGF0Y2hlcyBhbmQgaXMgc3RpbGwgdHJ1ZSBhZnRlciB0
-aGVtLgpTcGVjaWZpY2FsbHksIGlmIENPTkZJR19IQVZFX05NSV9XQVRDSERPRyBpcyBkZWZpbmVk
-IHRoZW4gYW4KYXJjaGl0ZWN0dXJlIGltcGxlbWVudHMgYXJjaF90b3VjaF9ubWlfd2F0Y2hkb2co
-KSAoYXMgZG9jdW1lbnRlZCBpbgp0aGUgS2NvbmZpZyBkb2NzIGZvciBIQVZFX05NSV9XQVRDSERP
-RykuIExvb2tpbmcgYXQgdGhlIHRyZWUgYmVmb3JlIG15CnNlcmllcyB5b3UgY2FuIHNlZSB0aGF0
-IHRoZSBwZXJmIGhhcmRsb2NrdXAgZGV0ZWN0b3IgYWxzbyBpbXBsZW1lbnRlZAphcmNoX3RvdWNo
-X25taV93YXRjaGRvZygpLiBUaGlzIHdvdWxkIGhhdmUgY2F1c2VkIGEgY29uZmxpY3QuIFRoZQpt
-dXR1YWwgZXhjbHVzaW9uIHdhcyBwcmVzdW1hYmx5IGVuZm9yY2VkIGJ5IGFuIGFyY2hpdGVjdHVy
-ZSBub3QKZGVmaW5pbmcgYm90aCBIQVZFX05NSV9XQVRDSERPRyBhbmQgSEFWRV9IQVJETE9DS1VQ
-X0RFVEVDVE9SX1BFUkYuCgpUaGUgc2Vjb25kIHRoaW5nIHRvIHVuZGVyc3RhbmQgaXMgdGhhdCBh
-biBhcmNoaXRlY3R1cmUgdGhhdCBkZWZpbmVzCkNPTkZJR19IQVZFX05NSV9XQVRDSERPRyBpcyBf
-bm90XyByZXF1aXJlZCB0byBpbXBsZW1lbnQKd2F0Y2hkb2dfaGFyZGxvY2t1cF9wcm9iZSgpICh1
-c2VkIHRvIGJlIGNhbGxlZCB3YXRjaGRvZ19ubWlfcHJvYmUoKSkuCk1heWJlIHRoaXMgc2hvdWxk
-IGNoYW5nZSwgYnV0IGF0IHRoZSB2ZXJ5IGxlYXN0IGl0IGFwcGVhcnMgdGhhdApTUEFSQzY0IGRl
-ZmluZXMgSEFWRV9OTUlfV0FUQ0hET0cgYnV0IGRvZXNuJ3QgZGVmaW5lCndhdGNoZG9nX2hhcmRs
-b2NrdXBfcHJvYmUoKSBBS0Egd2F0Y2hkb2dfbm1pX3Byb2JlKCkuIEFueW9uZSB3aG8KZGVmaW5l
-cyBDT05GSUdfSEFWRV9OTUlfV0FUQ0hET0cgYW5kIGRvZXNuJ3QgaW1wbGVtZW50CndhdGNoZG9n
-X2hhcmRsb2NrdXBfcHJvYmUoKSBpcyBjbGFpbWluZyB0aGF0IHRoZWlyIHdhdGNoZG9nIG5lZWRz
-IG5vCnByb2JpbmcgYW5kIGlzIGFsd2F5cyBhdmFpbGFibGUuCgpTbyB3aXRoIHRoYXQgY29udGV4
-dDoKCjEuIFdlIGNhbid0IGhhbmRsZSBhbnkgc3BlY2lhbCBjYXNlcyBmb3IgQ09ORklHX0hBVkVf
-Tk1JX1dBVENIRE9HIGluCiJrZXJuZWwvd2F0Y2hkb2dfcGVyZi5jIi4gVGhlIHNwZWNpYWwgY2Fz
-ZXMgdGhhdCB3ZSBuZWVkIHRvIGhhbmRsZSBhcmUKYWxsIGZvciB0aGUgY2FzZXMgd2hlcmUgQ09O
-RklHX0hBUkRMT0NLVVBfREVURUNUT1JfUEVSRiBpc24ndCBkZWZpbmVkCmFuZCB0aGF0IG1lYW5z
-ICJrZXJuZWwvd2F0Y2hkb2dfcGVyZi5jIiBpc24ndCBpbmNsdWRlZC4KCjIuIFdlIGNhbid0IGhh
-dmUgdGhlIGRlZmF1bHQgX193ZWFrIGZ1bmN0aW9uIHJldHVybiAtRU5PREVWIGJlY2F1c2UKQ09O
-RklHX0hBVkVfTk1JX1dBVENIRE9HIGRvZXNuJ3QgcmVxdWlyZSBhbiBhcmNoIHRvIGltcGxlbWVu
-dAp3YXRjaGRvZ19oYXJkbG9ja3VwX3Byb2JlKCksIGJ1dCB3ZSB3YW50IHdhdGNoZG9nX2hhcmRs
-b2NrdXBfcHJvYmUoKQp0byByZXR1cm4gIm5vIGVycm9yIiBpbiB0aGF0IGNhc2Ugc28gdGhhdAoi
-d2F0Y2hkb2dfaGFyZGxvY2t1cF9hdmFpbGFibGUiIGdldHMgc2V0IHRvIHRydWUuCgpEb2VzIHRo
-YXQgc291bmQgcmlnaHQ/CgpJJ2QgYWdyZWUgdGhhdCBhIGZ1dHVyZSBpbXByb3ZlbWVudCBzYXlp
-bmcgdGhhdApDT05GSUdfSEFWRV9OTUlfV0FUQ0hET0cgbWVhbnMgeW91IF9tdXN0XyBpbXBsZW1l
-bnQKd2F0Y2hkb2dfaGFyZGxvY2t1cF9wcm9iZSgpIHdvdWxkIG1ha2Ugc2Vuc2UgYW5kIHRoYXQg
-d291bGQgYWxsb3cgdXMKdG8gZ2V0IHJpZCBvZiB0aGUgc3BlY2lhbCBjYXNlLiBJTU8sIHRob3Vn
-aCwgdGhhdCdzIGEgc2VwYXJhdGUgcGF0Y2guCkknZCBiZSBoYXBweSB0byByZXZpZXcgdGhhdCBw
-YXRjaCBpZiB5b3Ugd2FudGVkIHRvIHBvc3QgaXQgdXAuIDotKQoKSWYgd2Ugd2FudCB0byBhZGQg
-dGhhdCByZXF1aXJlbWVudCwgSSBfdGhpbmtfIHRoZSBvbmx5IHRoaW5nIHlvdSdkCm5lZWQgdG8g
-ZG8gaXMgdG8gYWRkIHdhdGNoZG9nX2hhcmRsb2NrdXBfcHJvYmUoKSB0byBzcGFyYzY0IGFuZCBo
-YXZlCml0IHJldHVybiAwIGFuZCBwdXQgdGhhdCBkZWZpbml0aW9uIGluIHRoZSBzYW1lIGZpbGUg
-Y29udGFpbmluZwphcmNoX3RvdWNoX25taV93YXRjaGRvZygpLiBwb3dlcnBjIGFsc28gZ2V0cyBD
-T05GSUdfSEFWRV9OTUlfV0FUQ0hET0cKYXMgYSBzaWRlIGVmZmVjdCBvZiBzZWxlY3RpbmcgQ09O
-RklHX0hBVkVfSEFSRExPQ0tVUF9ERVRFQ1RPUl9BUkNIIGJ1dAppdCBsb29rcyBsaWtlIHRoZXkg
-aW1wbGVtZW50IHdhdGNoZG9nX2hhcmRsb2NrdXBfcHJvYmUoKSBhbHJlYWR5LiBPaCwKYnV0IG1h
-eWJlIHRoaXMgd2lsbCBmaXggYSBwcmVleGlzdGluZyAoZXhpc3RlZCBiZWZvcmUgbXkgcGF0Y2hl
-cykKbWlub3IgYnVnLi4uIFVubGVzcyBJJ20gbWlzc2luZyBzb21ldGhpbmcgKGVudGlyZWx5IHBv
-c3NpYmxlISkgb24KcG93ZXJwYyB0b2RheSBJIGd1ZXNzIGlmIHlvdSB0dXJuIG9mZiBDT05GSUdf
-UFBDX1dBVENIRE9HIHRoZW4KQ09ORklHX0hBVkVfSEFSRExPQ0tVUF9ERVRFQ1RPUl9BUkNIIGFu
-ZCBDT05GSUdfSEFWRV9OTUlfV0FUQ0hET0cKd291bGQgc3RpbGwgYmUgZGVmaW5lZCBhbmQgd2Un
-ZCBlbmQgdXAgcmV0dXJuaW5nIDAgKG5vIGVycm9yKSBmcm9tCndhdGNoZG9nX2hhcmRsb2NrdXBf
-cHJvYmUoKS4gVGhhdCBtZWFucyB0aGF0IG9uIHBvd2VycGMgdG9kYXkgaWYgeW91CnR1cm4gb2Zm
-IENPTkZJR19QUENfV0FUQ0hET0cgdGhhdCAnL3Byb2Mvc3lzL2tlcm5lbC9ubWlfd2F0Y2hkb2cn
-IHdpbGwKc3RpbGwgdGhpbmsgdGhlIHdhdGNoZG9nIGlzIGVuYWJsZWQ/CgoKLURvdWcKCgpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpLZ2RiLWJ1Z3JlcG9y
-dCBtYWlsaW5nIGxpc3QKS2dkYi1idWdyZXBvcnRAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBz
-Oi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2tnZGItYnVncmVwb3J0Cg==
+On Fri 2023-05-19 10:18:38, Douglas Anderson wrote:
+> Implement a hardlockup detector that doesn't doesn't need any extra
+> arch-specific support code to detect lockups. Instead of using
+> something arch-specific we will use the buddy system, where each CPU
+> watches out for another one. Specifically, each CPU will use its
+> softlockup hrtimer to check that the next CPU is processing hrtimer
+> interrupts by verifying that a counter is increasing.
+> 
+> --- a/kernel/watchdog.c
+> +++ b/kernel/watchdog.c
+> @@ -85,7 +85,7 @@ __setup("nmi_watchdog=", hardlockup_panic_setup);
+>  
+>  #endif /* CONFIG_HARDLOCKUP_DETECTOR */
+>  
+> -#if defined(CONFIG_HARDLOCKUP_DETECTOR_PERF)
+> +#if defined(CONFIG_HARDLOCKUP_DETECTOR_COUNTS_HRTIMER)
+>  
+>  static DEFINE_PER_CPU(atomic_t, hrtimer_interrupts);
+>  static DEFINE_PER_CPU(int, hrtimer_interrupts_saved);
+> @@ -106,6 +106,14 @@ notrace void arch_touch_nmi_watchdog(void)
+>  }
+>  EXPORT_SYMBOL(arch_touch_nmi_watchdog);
+>  
+> +void watchdog_hardlockup_touch_cpu(unsigned int cpu)
+> +{
+> +	per_cpu(watchdog_hardlockup_touched, cpu) = true;
+> +
+> +	/* Match with smp_rmb() in watchdog_hardlockup_check() */
+> +	smp_wmb();
+
+It is great that you described where the related barrier is.
+
+Another important information is what exactly is synchronized.
+And I am actually not sure what we are synchronizing here.
+
+My understanding is that a write barrier should synchronize
+related writes, for example:
+
+	X = ...;
+	/* Make sure that X is modified before Y */
+	smp_wmb();
+	Y = ...;
+
+And the related read barrier should synchronize the related reads,
+for example:
+
+	if (test(Y)) {
+		/*
+		 * Make sure that we use the updated X when
+		 * we saw the updated Y.
+		 */
+		 smp_rmb();
+		 do_something(X);
+	 }
+
+IMHO, we do not need any barrier here because we have only
+one variable "watchdog_hardlockup_touched" here.
+watchdog_hardlockup_check() will either see the updated value
+or not. But it does not synchronize it against any other
+variables or values.
+
+> +}
+> +
+>  static bool is_hardlockup(unsigned int cpu)
+>  {
+>  	int hrint = atomic_read(&per_cpu(hrtimer_interrupts, cpu));
+> @@ -443,11 +454,15 @@ static enum hrtimer_restart watchdog_timer_fn(struct hrtimer *hrtimer)
+>  	struct pt_regs *regs = get_irq_regs();
+>  	int duration;
+>  	int softlockup_all_cpu_backtrace = sysctl_softlockup_all_cpu_backtrace;
+> +	unsigned long hrtimer_interrupts;
+>  
+>  	if (!watchdog_enabled)
+>  		return HRTIMER_NORESTART;
+>  
+> -	watchdog_hardlockup_kick();
+> +	hrtimer_interrupts = watchdog_hardlockup_kick();
+> +
+> +	/* test for hardlockups */
+
+I would omit the comment. It is not valid when perf detector is used.
+And checking the buddy is clear from the function name.
+
+> +	watchdog_buddy_check_hardlockup(hrtimer_interrupts);
+
+I would personally move this into watchdog_hardlockup_kick().
+watchdog_timer_fn() is already complex enough. And checking
+the buddy when kicking a CPU makes sense.
+
+Also I would not pass "hrtimer_interrupts". I guess that it is
+just an optimization. It is an extra churn in the code. IMHO,
+is is not wort it. This code does not need to be super optimized.
+
+> +
+
+>  
+>  	/* kick the softlockup detector */
+>  	if (completion_done(this_cpu_ptr(&softlockup_completion))) {
+> diff --git a/kernel/watchdog_buddy.c b/kernel/watchdog_buddy.c
+> new file mode 100644
+> index 000000000000..fee45af2e5bd
+> --- /dev/null
+> +++ b/kernel/watchdog_buddy.c
+> @@ -0,0 +1,93 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +
+> +#include <linux/cpu.h>
+> +#include <linux/cpumask.h>
+> +#include <linux/kernel.h>
+> +#include <linux/nmi.h>
+> +#include <linux/percpu-defs.h>
+> +
+> +static cpumask_t __read_mostly watchdog_cpus;
+> +
+> +static unsigned int watchdog_next_cpu(unsigned int cpu)
+> +{
+> +	cpumask_t cpus = watchdog_cpus;
+
+A copy should be done by cpumask_copy().
+
+But the question is why a copy would be needed. When called from
+watchdog_buddy_check_hardlockup(), this function is not sychronized
+against the CPU hotplug. And even the copying would be racy.
+
+IMHO, the copy does not help much and we do not need it.
+
+The only important this is that this function would return
+a valid CPU. And I think that it is guarantted because
+CPU0 could not be disabled.
+
+> +	unsigned int next_cpu;
+> +
+> +	next_cpu = cpumask_next(cpu, &cpus);
+> +	if (next_cpu >= nr_cpu_ids)
+> +		next_cpu = cpumask_first(&cpus);
+> +
+> +	if (next_cpu == cpu)
+> +		return nr_cpu_ids;
+>> +	return next_cpu;
+> +}
+> +
+> +int __init watchdog_hardlockup_probe(void)
+> +{
+> +	return 0;
+> +}
+> +
+> +void watchdog_hardlockup_enable(unsigned int cpu)
+> +{
+> +	unsigned int next_cpu;
+> +
+> +	/*
+> +	 * The new CPU will be marked online before the hrtimer interrupt
+> +	 * gets a chance to run on it. If another CPU tests for a
+> +	 * hardlockup on the new CPU before it has run its the hrtimer
+> +	 * interrupt, it will get a false positive. Touch the watchdog on
+> +	 * the new CPU to delay the check for at least 3 sampling periods
+> +	 * to guarantee one hrtimer has run on the new CPU.
+> +	 */
+> +	watchdog_hardlockup_touch_cpu(cpu);
+> +
+> +	/*
+> +	 * We are going to check the next CPU. Our watchdog_hrtimer
+> +	 * need not be zero if the CPU has already been online earlier.
+> +	 * Touch the watchdog on the next CPU to avoid false positive
+> +	 * if we try to check it in less then 3 interrupts.
+> +	 */
+> +	next_cpu = watchdog_next_cpu(cpu);
+> +	if (next_cpu < nr_cpu_ids)
+> +		watchdog_hardlockup_touch_cpu(next_cpu);
+
+Thinking loudly:
+
+This feels racy when many CPUs are enabled/disabled in parallel.
+I am not 100% sure it it can happen though.
+
+My understanding is that it can't happen because the CPU hotplug
+is serialized by cpu_add_remove_lock.
+
+So, this seems to work after all.
+
+> +
+> +	cpumask_set_cpu(cpu, &watchdog_cpus);
+> +}
+> +
+> --- a/lib/Kconfig.debug
+> +++ b/lib/Kconfig.debug
+> @@ -1035,10 +1035,55 @@ config BOOTPARAM_SOFTLOCKUP_PANIC
+>  
+>  	  Say N if unsure.
+>  
+> -config HARDLOCKUP_DETECTOR_PERF
+> +# Both the "perf" and "buddy" hardlockup detectors count hrtimer
+> +# interrupts. This config enables functions managing this common code.
+> +config HARDLOCKUP_DETECTOR_COUNTS_HRTIMER
+>  	bool
+>  	select SOFTLOCKUP_DETECTOR
+>  
+> +config HARDLOCKUP_DETECTOR_PERF
+> +	bool
+> +	depends on HAVE_HARDLOCKUP_DETECTOR_PERF
+> +	select HARDLOCKUP_DETECTOR_COUNTS_HRTIMER
+> +
+> +config HARDLOCKUP_DETECTOR_BUDDY
+> +	bool
+> +	depends on SMP
+> +	select HARDLOCKUP_DETECTOR_COUNTS_HRTIMER
+> +
+> +# For hardlockup detectors you can have one directly provided by the arch
+> +# or use a "non-arch" one. If you're using a "non-arch" one that is
+> +# further divided the perf hardlockup detector (which, confusingly, needs
+> +# arch-provided perf support) and the buddy hardlockup detector (which just
+> +# needs SMP). In either case, using the "non-arch" code conflicts with
+> +# the NMI watchdog code (which is sometimes used directly and sometimes used
+> +# by the arch-provided hardlockup detector).
+> +config HAVE_HARDLOCKUP_DETECTOR_NON_ARCH
+> +	bool
+> +	depends on (HAVE_HARDLOCKUP_DETECTOR_PERF || SMP) && !HAVE_NMI_WATCHDOG
+> +	default y
+> +
+> +config HARDLOCKUP_DETECTOR_PREFER_BUDDY
+> +	bool "Prefer the buddy CPU hardlockup detector"
+> +	depends on HAVE_HARDLOCKUP_DETECTOR_NON_ARCH && HAVE_HARDLOCKUP_DETECTOR_PERF && SMP
+
+Huh, I have big troubles to scratch my head around this check:
+
+       HAVE_HARDLOCKUP_DETECTOR_NON_ARCH depends on HAVE_HARDLOCKUP_DETECTOR_PERF and SMP
+
+       and this depends on HAVE_HARDLOCKUP_DETECTOR_NON_ARCH and again
+	       on HAVE_HARDLOCKUP_DETECTOR_PERF and SMP.
+
+> +	help
+> +	  Say Y here to prefer the buddy hardlockup detector over the perf one.
+> +
+> +	  With the buddy detector, each CPU uses its softlockup hrtimer
+> +	  to check that the next CPU is processing hrtimer interrupts by
+> +	  verifying that a counter is increasing.
+> +
+> +	  This hardlockup detector is useful on systems that don't have
+> +	  an arch-specific hardlockup detector or if resources needed
+> +	  for the hardlockup detector are better used for other things.
+> +
+> +# This will select the appropriate non-arch hardlockdup detector
+> +config HARDLOCKUP_DETECTOR_NON_ARCH
+> +	bool
+> +	depends on HAVE_HARDLOCKUP_DETECTOR_NON_ARCH
+> +	select HARDLOCKUP_DETECTOR_BUDDY if !HAVE_HARDLOCKUP_DETECTOR_PERF || HARDLOCKUP_DETECTOR_PREFER_BUDDY
+> +	select HARDLOCKUP_DETECTOR_PERF if HAVE_HARDLOCKUP_DETECTOR_PERF && !HARDLOCKUP_DETECTOR_PREFER_BUDDY
+> +
+>  #
+>  # Enables a timestamp based low pass filter to compensate for perf based
+>  # hard lockup detection which runs too fast due to turbo modes.
+> @@ -1053,9 +1098,10 @@ config HARDLOCKUP_CHECK_TIMESTAMP
+>  config HARDLOCKUP_DETECTOR
+>  	bool "Detect Hard Lockups"
+>  	depends on DEBUG_KERNEL && !S390
+
+Is there any reason why S390 could not or do not want to use the buddy
+hardlockup detector.
+
+> -	depends on HAVE_HARDLOCKUP_DETECTOR_PERF || HAVE_HARDLOCKUP_DETECTOR_ARCH
+> +	depends on HAVE_HARDLOCKUP_DETECTOR_NON_ARCH || HAVE_HARDLOCKUP_DETECTOR_ARCH
+>  	select LOCKUP_DETECTOR
+> -	select HARDLOCKUP_DETECTOR_PERF if HAVE_HARDLOCKUP_DETECTOR_PERF
+> +	select HARDLOCKUP_DETECTOR_NON_ARCH if HAVE_HARDLOCKUP_DETECTOR_NON_ARCH
+
+Anyway, the configuration of the hard lockup detectors is insane and
+this patchset makes it even worse, especially the new
+HARDLOCKUP_DETECTOR_NON_ARCH stuff.
+
+It seems that sparc, powerpc and s390 are somehow special. Do you
+still have in mind how they are distinguished using the Kconfig
+variables?
+
+For example, I am pretty confused by the meaning of HAVE_NMI_WATCHDOG.
+
+And sparc has its own variant of
+watchdog_hardlockup_enable()/disable(). It means that it is
+arch-specific. Does it work with the 13th patch which made
+watchdog_hardlockup_enable()/disable() to be watchdog-hardlockup-type
+specific? Is is somehow related to HAVE_NMI_WATCHDOG?
+Does this replace the entire watchdog only only the enable part?
+
+I think that we need to make this more straightforward. But I first
+need to understand the existing maze of config variables.
+
+Best Regards,
+Petr
+
+
+_______________________________________________
+Kgdb-bugreport mailing list
+Kgdb-bugreport@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport
