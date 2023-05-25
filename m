@@ -2,95 +2,130 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B1DE17110E7
-	for <lists+kgdb-bugreport@lfdr.de>; Thu, 25 May 2023 18:27:14 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5CE8A7117D8
+	for <lists+kgdb-bugreport@lfdr.de>; Thu, 25 May 2023 22:08:43 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1q2Do0-0000hy-Lw
+	id 1q2HGK-0005cZ-V4
 	for lists+kgdb-bugreport@lfdr.de;
-	Thu, 25 May 2023 16:27:13 +0000
+	Thu, 25 May 2023 20:08:42 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <pmladek@suse.com>) id 1q2Dnw-0000hr-CY
+ (envelope-from <dianders@chromium.org>) id 1q2HG8-0005cS-8T
  for kgdb-bugreport@lists.sourceforge.net;
- Thu, 25 May 2023 16:27:09 +0000
+ Thu, 25 May 2023 20:08:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
+ Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
+ Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+ :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=qBSf8dQvqenvM4XuaXqBfFlxjVrL5fPe+CB4lmnXjuk=; b=HO9EoTiUw4HONA3POYRMWsu0OM
- +npEBVwR4bW6/lnmor0+vJKLHM3nzuq/abIPsLQD8RAA9L/eHWlzvK3p5XuTB10w0bBZmCP44etLs
- 4fwxUPYx6J0nyJ8OrkiA1M4d68fSZm5oa5KzvJr0gmS4kU0LYfRwPIl0gby2O/KEaMvI=;
+ bh=mwEH9RLMdsbq8mv/836L9d1ukre5dvMmw+kdM+lXLDo=; b=YHIFnSz7kAI2vFw+j8EshBlH5M
+ 9SE+x/Eb6LtFkmuC1Y/bXJ+MrAxMm0qKIAAv5/Ynfoefg86Akihfx9nia1NO5IzORh2x959EBYGGD
+ lg2Npf/yKYAVkbkiASJS3+YnIRiHng85zoNJYo7/WOwXjd29x9Y4V3/d/KkD/6REmJOk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
+ :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=qBSf8dQvqenvM4XuaXqBfFlxjVrL5fPe+CB4lmnXjuk=; b=F6nqBK52BCAio6ynwzAqr5H42D
- ufrJgciQEj4rCJ9vyMZiKureNvjF3ro6TK+RaYQSQe/tmd16nMSN/X/UTdqrb1qY0U79Cq9bSjSsi
- O4O0SbC9mK99Y8mXztpSxwzQA1XUifQv+FxAhd9ZGZyBMEGfvIXyT1GiuLLdoZ4a1Mn0=;
-Received: from smtp-out1.suse.de ([195.135.220.28])
+ bh=mwEH9RLMdsbq8mv/836L9d1ukre5dvMmw+kdM+lXLDo=; b=Mk0O4ae33nUZPi5oi9QLPGjcDC
+ NakKYYbK+zo3VTFYEXwk4plvpQX8+6QjoIhwMA1qbwABGgQVxuqHn0q+PxVzFiPoC79Mg/B0Lw3rD
+ jZw7EbPs4asj9kJTC2oFgySlyXfzqGQclp+0zPOsvuGCy8MwzlhZPZ4R1YudL+aw8KLA=;
+Received: from mail-io1-f53.google.com ([209.85.166.53])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1q2Dns-0000P9-PG for kgdb-bugreport@lists.sourceforge.net;
- Thu, 25 May 2023 16:27:08 +0000
-Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
- by smtp-out1.suse.de (Postfix) with ESMTP id 34E5221C65;
- Thu, 25 May 2023 16:26:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
- t=1685032018; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=qBSf8dQvqenvM4XuaXqBfFlxjVrL5fPe+CB4lmnXjuk=;
- b=C4s+hdIyCnXmGRzN2XmAwfRTIB+9xRT+DvPlRO3vRcui7FbrbO1JQDWFx0rfTnZPSjX5i1
- rRTvdTF0fGM/eRmPRJQYStRfQXRzvjlNo/ZL8IUHR6kuT7x8QzWCoJZmsiqU3ukACJ1fan
- DauIAYjaJf8QRWaSlI7nNnrfcF7cPGY=
-Received: from suse.cz (unknown [10.100.201.202])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by relay2.suse.de (Postfix) with ESMTPS id A2C412C141;
- Thu, 25 May 2023 16:26:55 +0000 (UTC)
-Date: Thu, 25 May 2023 18:26:52 +0200
-To: Douglas Anderson <dianders@chromium.org>
-Message-ID: <ZG-MTPSZakRDl2CP@alley>
+ id 1q2HG7-0008Gx-Be for kgdb-bugreport@lists.sourceforge.net;
+ Thu, 25 May 2023 20:08:28 +0000
+Received: by mail-io1-f53.google.com with SMTP id
+ ca18e2360f4ac-7748cb1038eso2773239f.2
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Thu, 25 May 2023 13:08:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1685045299; x=1687637299;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mwEH9RLMdsbq8mv/836L9d1ukre5dvMmw+kdM+lXLDo=;
+ b=Hg6FE4Jhy2Y80PVT3js1Fq3U7ezH34iyRqbVapOC4f93GPFlkePhSN46GevvCB2K8i
+ GpJ4zCJO83wc3WsCKPoB2E0dcrw6z6oF85zWBswjT7ucPcWjL2kNOCIAvlv/it/DSU8C
+ RX3N2T5uefFwG5jo4/ZsFKt+czPAzun6imnNY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1685045299; x=1687637299;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=mwEH9RLMdsbq8mv/836L9d1ukre5dvMmw+kdM+lXLDo=;
+ b=bY8rQ7Omi+MN3WmAXS5UzJs/6pr3E519puWgPmNHBPP4SANaQ8nq7um3YoInsrYnzu
+ QBPlxMV6PTK/SVAQWkRs05U+kvJd5Po4drLP1Lkr4icWxwibuLlThFDKAmBEGDeDCcdb
+ 5HADZgf5yQZH25h7LVe0P93RSbSIKUBgtaYiWSIn5ntzHVOCev1QYDJj1m41D3g6ZkL5
+ 1u3W8YD4efpnHF1wGvn5rcvGgAn6MHwBd6X9aq6utLl/Q9gEd/lr/hRepXYjUL7FGdyl
+ L0WHh0tPWJNM5rmPd4Zs+QjY07Ab5FLtYJZuLFb3tTkcoMYr/cWwo7U3uOq08w3g3xdA
+ 5c4g==
+X-Gm-Message-State: AC+VfDzjXPuhohkB/9kAmQnsXTXDtG5mMD7gcO9+qwexO3Yqjt+w8SbP
+ /4kEI6tPruSzJRTzkdqCEjxcyIcaU+IbigXQx6Y=
+X-Google-Smtp-Source: ACHHUZ4B/Ncng4eslsyUyPTS0YotcNNv1oWcjYrKP7nX46n8xYGlvvucLhnD55rlxPKZWKDtiKnMwg==
+X-Received: by 2002:a5e:d712:0:b0:774:9af9:f45e with SMTP id
+ v18-20020a5ed712000000b007749af9f45emr514151iom.11.1685045298875; 
+ Thu, 25 May 2023 13:08:18 -0700 (PDT)
+Received: from mail-il1-f181.google.com (mail-il1-f181.google.com.
+ [209.85.166.181]) by smtp.gmail.com with ESMTPSA id
+ c8-20020a02c9c8000000b0041a9c4e0f1csm639604jap.109.2023.05.25.13.08.17
+ for <kgdb-bugreport@lists.sourceforge.net>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 25 May 2023 13:08:17 -0700 (PDT)
+Received: by mail-il1-f181.google.com with SMTP id
+ e9e14a558f8ab-33a8f766b64so5745ab.1
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Thu, 25 May 2023 13:08:17 -0700 (PDT)
+X-Received: by 2002:a05:6e02:1be4:b0:335:12d6:2c7d with SMTP id
+ y4-20020a056e021be400b0033512d62c7dmr18774ilv.0.1685045296939; Thu, 25 May
+ 2023 13:08:16 -0700 (PDT)
+MIME-Version: 1.0
 References: <20230519101840.v5.18.Ia44852044cdcb074f387e80df6b45e892965d4a1@changeid>
  <20230519101840.v5.14.I6bf789d21d0c3d75d382e7e51a804a7a51315f2c@changeid>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230519101840.v5.14.I6bf789d21d0c3d75d382e7e51a804a7a51315f2c@changeid>
-X-Spam-Score: -2.5 (--)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ <ZG-MTPSZakRDl2CP@alley>
+In-Reply-To: <ZG-MTPSZakRDl2CP@alley>
+From: Doug Anderson <dianders@chromium.org>
+Date: Thu, 25 May 2023 13:08:04 -0700
+X-Gmail-Original-Message-ID: <CAD=FV=XNgevGRrD8cAsq03RwDX=n0i6d=4VDxWDKo-g3DQ07dA@mail.gmail.com>
+Message-ID: <CAD=FV=XNgevGRrD8cAsq03RwDX=n0i6d=4VDxWDKo-g3DQ07dA@mail.gmail.com>
+To: Petr Mladek <pmladek@suse.com>
+X-Spam-Score: -0.2 (/)
+X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Fri 2023-05-19 10:18:38,
- Douglas Anderson wrote: > Implement
- a hardlockup detector that doesn't doesn't need any extra > arch-specific
- support code to detect lockups. Instead of using > something a [...] 
- Content analysis details:   (-2.5 points, 6.0 required)
- pts rule name              description
+ 
+ Content preview:  Hi, On Thu, May 25, 2023 at 9:27 AM Petr Mladek <pmladek@suse.com>
+    wrote: > > On Fri 2023-05-19 10:18:38, Douglas Anderson wrote: > > Implement
+    a hardlockup detector that doesn't doesn't need any extra [...] 
+ 
+ Content analysis details:   (-0.2 points, 6.0 required)
+ 
+  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [195.135.220.28 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+                              no trust
+                             [209.85.166.53 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+                             [209.85.166.53 listed in wl.mailspike.net]
+  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+                             author's domain
+  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+                             valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+                             envelope-from domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1q2Dns-0000P9-PG
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1q2HG7-0008Gx-Be
 Subject: Re: [Kgdb-bugreport] [PATCH v5 14/18] watchdog/hardlockup: detect
  hard lockups using secondary (buddy) CPUs
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
@@ -104,8 +139,6 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-From: Petr Mladek via Kgdb-bugreport <kgdb-bugreport@lists.sourceforge.net>
-Reply-To: Petr Mladek <pmladek@suse.com>
 Cc: Mark Rutland <mark.rutland@arm.com>, Ian Rogers <irogers@google.com>,
  ito-yuichi@fujitsu.com, Lecopzer Chen <lecopzer.chen@mediatek.com>,
  kgdb-bugreport@lists.sourceforge.net, ricardo.neri@intel.com,
@@ -123,300 +156,297 @@ Cc: Mark Rutland <mark.rutland@arm.com>, Ian Rogers <irogers@google.com>,
  linux-perf-users@vger.kernel.org, mpe@ellerman.id.au,
  Andrew Morton <akpm@linux-foundation.org>, linuxppc-dev@lists.ozlabs.org,
  davem@davemloft.net
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Fri 2023-05-19 10:18:38, Douglas Anderson wrote:
-> Implement a hardlockup detector that doesn't doesn't need any extra
-> arch-specific support code to detect lockups. Instead of using
-> something arch-specific we will use the buddy system, where each CPU
-> watches out for another one. Specifically, each CPU will use its
-> softlockup hrtimer to check that the next CPU is processing hrtimer
-> interrupts by verifying that a counter is increasing.
-> 
-> --- a/kernel/watchdog.c
-> +++ b/kernel/watchdog.c
-> @@ -85,7 +85,7 @@ __setup("nmi_watchdog=", hardlockup_panic_setup);
->  
->  #endif /* CONFIG_HARDLOCKUP_DETECTOR */
->  
-> -#if defined(CONFIG_HARDLOCKUP_DETECTOR_PERF)
-> +#if defined(CONFIG_HARDLOCKUP_DETECTOR_COUNTS_HRTIMER)
->  
->  static DEFINE_PER_CPU(atomic_t, hrtimer_interrupts);
->  static DEFINE_PER_CPU(int, hrtimer_interrupts_saved);
-> @@ -106,6 +106,14 @@ notrace void arch_touch_nmi_watchdog(void)
->  }
->  EXPORT_SYMBOL(arch_touch_nmi_watchdog);
->  
-> +void watchdog_hardlockup_touch_cpu(unsigned int cpu)
-> +{
-> +	per_cpu(watchdog_hardlockup_touched, cpu) = true;
-> +
-> +	/* Match with smp_rmb() in watchdog_hardlockup_check() */
-> +	smp_wmb();
-
-It is great that you described where the related barrier is.
-
-Another important information is what exactly is synchronized.
-And I am actually not sure what we are synchronizing here.
-
-My understanding is that a write barrier should synchronize
-related writes, for example:
-
-	X = ...;
-	/* Make sure that X is modified before Y */
-	smp_wmb();
-	Y = ...;
-
-And the related read barrier should synchronize the related reads,
-for example:
-
-	if (test(Y)) {
-		/*
-		 * Make sure that we use the updated X when
-		 * we saw the updated Y.
-		 */
-		 smp_rmb();
-		 do_something(X);
-	 }
-
-IMHO, we do not need any barrier here because we have only
-one variable "watchdog_hardlockup_touched" here.
-watchdog_hardlockup_check() will either see the updated value
-or not. But it does not synchronize it against any other
-variables or values.
-
-> +}
-> +
->  static bool is_hardlockup(unsigned int cpu)
->  {
->  	int hrint = atomic_read(&per_cpu(hrtimer_interrupts, cpu));
-> @@ -443,11 +454,15 @@ static enum hrtimer_restart watchdog_timer_fn(struct hrtimer *hrtimer)
->  	struct pt_regs *regs = get_irq_regs();
->  	int duration;
->  	int softlockup_all_cpu_backtrace = sysctl_softlockup_all_cpu_backtrace;
-> +	unsigned long hrtimer_interrupts;
->  
->  	if (!watchdog_enabled)
->  		return HRTIMER_NORESTART;
->  
-> -	watchdog_hardlockup_kick();
-> +	hrtimer_interrupts = watchdog_hardlockup_kick();
-> +
-> +	/* test for hardlockups */
-
-I would omit the comment. It is not valid when perf detector is used.
-And checking the buddy is clear from the function name.
-
-> +	watchdog_buddy_check_hardlockup(hrtimer_interrupts);
-
-I would personally move this into watchdog_hardlockup_kick().
-watchdog_timer_fn() is already complex enough. And checking
-the buddy when kicking a CPU makes sense.
-
-Also I would not pass "hrtimer_interrupts". I guess that it is
-just an optimization. It is an extra churn in the code. IMHO,
-is is not wort it. This code does not need to be super optimized.
-
-> +
-
->  
->  	/* kick the softlockup detector */
->  	if (completion_done(this_cpu_ptr(&softlockup_completion))) {
-> diff --git a/kernel/watchdog_buddy.c b/kernel/watchdog_buddy.c
-> new file mode 100644
-> index 000000000000..fee45af2e5bd
-> --- /dev/null
-> +++ b/kernel/watchdog_buddy.c
-> @@ -0,0 +1,93 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +
-> +#include <linux/cpu.h>
-> +#include <linux/cpumask.h>
-> +#include <linux/kernel.h>
-> +#include <linux/nmi.h>
-> +#include <linux/percpu-defs.h>
-> +
-> +static cpumask_t __read_mostly watchdog_cpus;
-> +
-> +static unsigned int watchdog_next_cpu(unsigned int cpu)
-> +{
-> +	cpumask_t cpus = watchdog_cpus;
-
-A copy should be done by cpumask_copy().
-
-But the question is why a copy would be needed. When called from
-watchdog_buddy_check_hardlockup(), this function is not sychronized
-against the CPU hotplug. And even the copying would be racy.
-
-IMHO, the copy does not help much and we do not need it.
-
-The only important this is that this function would return
-a valid CPU. And I think that it is guarantted because
-CPU0 could not be disabled.
-
-> +	unsigned int next_cpu;
-> +
-> +	next_cpu = cpumask_next(cpu, &cpus);
-> +	if (next_cpu >= nr_cpu_ids)
-> +		next_cpu = cpumask_first(&cpus);
-> +
-> +	if (next_cpu == cpu)
-> +		return nr_cpu_ids;
->> +	return next_cpu;
-> +}
-> +
-> +int __init watchdog_hardlockup_probe(void)
-> +{
-> +	return 0;
-> +}
-> +
-> +void watchdog_hardlockup_enable(unsigned int cpu)
-> +{
-> +	unsigned int next_cpu;
-> +
-> +	/*
-> +	 * The new CPU will be marked online before the hrtimer interrupt
-> +	 * gets a chance to run on it. If another CPU tests for a
-> +	 * hardlockup on the new CPU before it has run its the hrtimer
-> +	 * interrupt, it will get a false positive. Touch the watchdog on
-> +	 * the new CPU to delay the check for at least 3 sampling periods
-> +	 * to guarantee one hrtimer has run on the new CPU.
-> +	 */
-> +	watchdog_hardlockup_touch_cpu(cpu);
-> +
-> +	/*
-> +	 * We are going to check the next CPU. Our watchdog_hrtimer
-> +	 * need not be zero if the CPU has already been online earlier.
-> +	 * Touch the watchdog on the next CPU to avoid false positive
-> +	 * if we try to check it in less then 3 interrupts.
-> +	 */
-> +	next_cpu = watchdog_next_cpu(cpu);
-> +	if (next_cpu < nr_cpu_ids)
-> +		watchdog_hardlockup_touch_cpu(next_cpu);
-
-Thinking loudly:
-
-This feels racy when many CPUs are enabled/disabled in parallel.
-I am not 100% sure it it can happen though.
-
-My understanding is that it can't happen because the CPU hotplug
-is serialized by cpu_add_remove_lock.
-
-So, this seems to work after all.
-
-> +
-> +	cpumask_set_cpu(cpu, &watchdog_cpus);
-> +}
-> +
-> --- a/lib/Kconfig.debug
-> +++ b/lib/Kconfig.debug
-> @@ -1035,10 +1035,55 @@ config BOOTPARAM_SOFTLOCKUP_PANIC
->  
->  	  Say N if unsure.
->  
-> -config HARDLOCKUP_DETECTOR_PERF
-> +# Both the "perf" and "buddy" hardlockup detectors count hrtimer
-> +# interrupts. This config enables functions managing this common code.
-> +config HARDLOCKUP_DETECTOR_COUNTS_HRTIMER
->  	bool
->  	select SOFTLOCKUP_DETECTOR
->  
-> +config HARDLOCKUP_DETECTOR_PERF
-> +	bool
-> +	depends on HAVE_HARDLOCKUP_DETECTOR_PERF
-> +	select HARDLOCKUP_DETECTOR_COUNTS_HRTIMER
-> +
-> +config HARDLOCKUP_DETECTOR_BUDDY
-> +	bool
-> +	depends on SMP
-> +	select HARDLOCKUP_DETECTOR_COUNTS_HRTIMER
-> +
-> +# For hardlockup detectors you can have one directly provided by the arch
-> +# or use a "non-arch" one. If you're using a "non-arch" one that is
-> +# further divided the perf hardlockup detector (which, confusingly, needs
-> +# arch-provided perf support) and the buddy hardlockup detector (which just
-> +# needs SMP). In either case, using the "non-arch" code conflicts with
-> +# the NMI watchdog code (which is sometimes used directly and sometimes used
-> +# by the arch-provided hardlockup detector).
-> +config HAVE_HARDLOCKUP_DETECTOR_NON_ARCH
-> +	bool
-> +	depends on (HAVE_HARDLOCKUP_DETECTOR_PERF || SMP) && !HAVE_NMI_WATCHDOG
-> +	default y
-> +
-> +config HARDLOCKUP_DETECTOR_PREFER_BUDDY
-> +	bool "Prefer the buddy CPU hardlockup detector"
-> +	depends on HAVE_HARDLOCKUP_DETECTOR_NON_ARCH && HAVE_HARDLOCKUP_DETECTOR_PERF && SMP
-
-Huh, I have big troubles to scratch my head around this check:
-
-       HAVE_HARDLOCKUP_DETECTOR_NON_ARCH depends on HAVE_HARDLOCKUP_DETECTOR_PERF and SMP
-
-       and this depends on HAVE_HARDLOCKUP_DETECTOR_NON_ARCH and again
-	       on HAVE_HARDLOCKUP_DETECTOR_PERF and SMP.
-
-> +	help
-> +	  Say Y here to prefer the buddy hardlockup detector over the perf one.
-> +
-> +	  With the buddy detector, each CPU uses its softlockup hrtimer
-> +	  to check that the next CPU is processing hrtimer interrupts by
-> +	  verifying that a counter is increasing.
-> +
-> +	  This hardlockup detector is useful on systems that don't have
-> +	  an arch-specific hardlockup detector or if resources needed
-> +	  for the hardlockup detector are better used for other things.
-> +
-> +# This will select the appropriate non-arch hardlockdup detector
-> +config HARDLOCKUP_DETECTOR_NON_ARCH
-> +	bool
-> +	depends on HAVE_HARDLOCKUP_DETECTOR_NON_ARCH
-> +	select HARDLOCKUP_DETECTOR_BUDDY if !HAVE_HARDLOCKUP_DETECTOR_PERF || HARDLOCKUP_DETECTOR_PREFER_BUDDY
-> +	select HARDLOCKUP_DETECTOR_PERF if HAVE_HARDLOCKUP_DETECTOR_PERF && !HARDLOCKUP_DETECTOR_PREFER_BUDDY
-> +
->  #
->  # Enables a timestamp based low pass filter to compensate for perf based
->  # hard lockup detection which runs too fast due to turbo modes.
-> @@ -1053,9 +1098,10 @@ config HARDLOCKUP_CHECK_TIMESTAMP
->  config HARDLOCKUP_DETECTOR
->  	bool "Detect Hard Lockups"
->  	depends on DEBUG_KERNEL && !S390
-
-Is there any reason why S390 could not or do not want to use the buddy
-hardlockup detector.
-
-> -	depends on HAVE_HARDLOCKUP_DETECTOR_PERF || HAVE_HARDLOCKUP_DETECTOR_ARCH
-> +	depends on HAVE_HARDLOCKUP_DETECTOR_NON_ARCH || HAVE_HARDLOCKUP_DETECTOR_ARCH
->  	select LOCKUP_DETECTOR
-> -	select HARDLOCKUP_DETECTOR_PERF if HAVE_HARDLOCKUP_DETECTOR_PERF
-> +	select HARDLOCKUP_DETECTOR_NON_ARCH if HAVE_HARDLOCKUP_DETECTOR_NON_ARCH
-
-Anyway, the configuration of the hard lockup detectors is insane and
-this patchset makes it even worse, especially the new
-HARDLOCKUP_DETECTOR_NON_ARCH stuff.
-
-It seems that sparc, powerpc and s390 are somehow special. Do you
-still have in mind how they are distinguished using the Kconfig
-variables?
-
-For example, I am pretty confused by the meaning of HAVE_NMI_WATCHDOG.
-
-And sparc has its own variant of
-watchdog_hardlockup_enable()/disable(). It means that it is
-arch-specific. Does it work with the 13th patch which made
-watchdog_hardlockup_enable()/disable() to be watchdog-hardlockup-type
-specific? Is is somehow related to HAVE_NMI_WATCHDOG?
-Does this replace the entire watchdog only only the enable part?
-
-I think that we need to make this more straightforward. But I first
-need to understand the existing maze of config variables.
-
-Best Regards,
-Petr
-
-
-_______________________________________________
-Kgdb-bugreport mailing list
-Kgdb-bugreport@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport
+SGksCgpPbiBUaHUsIE1heSAyNSwgMjAyMyBhdCA5OjI34oCvQU0gUGV0ciBNbGFkZWsgPHBtbGFk
+ZWtAc3VzZS5jb20+IHdyb3RlOgo+Cj4gT24gRnJpIDIwMjMtMDUtMTkgMTA6MTg6MzgsIERvdWds
+YXMgQW5kZXJzb24gd3JvdGU6Cj4gPiBJbXBsZW1lbnQgYSBoYXJkbG9ja3VwIGRldGVjdG9yIHRo
+YXQgZG9lc24ndCBkb2Vzbid0IG5lZWQgYW55IGV4dHJhCj4gPiBhcmNoLXNwZWNpZmljIHN1cHBv
+cnQgY29kZSB0byBkZXRlY3QgbG9ja3Vwcy4gSW5zdGVhZCBvZiB1c2luZwo+ID4gc29tZXRoaW5n
+IGFyY2gtc3BlY2lmaWMgd2Ugd2lsbCB1c2UgdGhlIGJ1ZGR5IHN5c3RlbSwgd2hlcmUgZWFjaCBD
+UFUKPiA+IHdhdGNoZXMgb3V0IGZvciBhbm90aGVyIG9uZS4gU3BlY2lmaWNhbGx5LCBlYWNoIENQ
+VSB3aWxsIHVzZSBpdHMKPiA+IHNvZnRsb2NrdXAgaHJ0aW1lciB0byBjaGVjayB0aGF0IHRoZSBu
+ZXh0IENQVSBpcyBwcm9jZXNzaW5nIGhydGltZXIKPiA+IGludGVycnVwdHMgYnkgdmVyaWZ5aW5n
+IHRoYXQgYSBjb3VudGVyIGlzIGluY3JlYXNpbmcuCj4gPgo+ID4gLS0tIGEva2VybmVsL3dhdGNo
+ZG9nLmMKPiA+ICsrKyBiL2tlcm5lbC93YXRjaGRvZy5jCj4gPiBAQCAtODUsNyArODUsNyBAQCBf
+X3NldHVwKCJubWlfd2F0Y2hkb2c9IiwgaGFyZGxvY2t1cF9wYW5pY19zZXR1cCk7Cj4gPgo+ID4g
+ICNlbmRpZiAvKiBDT05GSUdfSEFSRExPQ0tVUF9ERVRFQ1RPUiAqLwo+ID4KPiA+IC0jaWYgZGVm
+aW5lZChDT05GSUdfSEFSRExPQ0tVUF9ERVRFQ1RPUl9QRVJGKQo+ID4gKyNpZiBkZWZpbmVkKENP
+TkZJR19IQVJETE9DS1VQX0RFVEVDVE9SX0NPVU5UU19IUlRJTUVSKQo+ID4KPiA+ICBzdGF0aWMg
+REVGSU5FX1BFUl9DUFUoYXRvbWljX3QsIGhydGltZXJfaW50ZXJydXB0cyk7Cj4gPiAgc3RhdGlj
+IERFRklORV9QRVJfQ1BVKGludCwgaHJ0aW1lcl9pbnRlcnJ1cHRzX3NhdmVkKTsKPiA+IEBAIC0x
+MDYsNiArMTA2LDE0IEBAIG5vdHJhY2Ugdm9pZCBhcmNoX3RvdWNoX25taV93YXRjaGRvZyh2b2lk
+KQo+ID4gIH0KPiA+ICBFWFBPUlRfU1lNQk9MKGFyY2hfdG91Y2hfbm1pX3dhdGNoZG9nKTsKPiA+
+Cj4gPiArdm9pZCB3YXRjaGRvZ19oYXJkbG9ja3VwX3RvdWNoX2NwdSh1bnNpZ25lZCBpbnQgY3B1
+KQo+ID4gK3sKPiA+ICsgICAgIHBlcl9jcHUod2F0Y2hkb2dfaGFyZGxvY2t1cF90b3VjaGVkLCBj
+cHUpID0gdHJ1ZTsKPiA+ICsKPiA+ICsgICAgIC8qIE1hdGNoIHdpdGggc21wX3JtYigpIGluIHdh
+dGNoZG9nX2hhcmRsb2NrdXBfY2hlY2soKSAqLwo+ID4gKyAgICAgc21wX3dtYigpOwo+Cj4gSXQg
+aXMgZ3JlYXQgdGhhdCB5b3UgZGVzY3JpYmVkIHdoZXJlIHRoZSByZWxhdGVkIGJhcnJpZXIgaXMu
+Cj4KPiBBbm90aGVyIGltcG9ydGFudCBpbmZvcm1hdGlvbiBpcyB3aGF0IGV4YWN0bHkgaXMgc3lu
+Y2hyb25pemVkLgo+IEFuZCBJIGFtIGFjdHVhbGx5IG5vdCBzdXJlIHdoYXQgd2UgYXJlIHN5bmNo
+cm9uaXppbmcgaGVyZS4KPgo+IE15IHVuZGVyc3RhbmRpbmcgaXMgdGhhdCBhIHdyaXRlIGJhcnJp
+ZXIgc2hvdWxkIHN5bmNocm9uaXplCj4gcmVsYXRlZCB3cml0ZXMsIGZvciBleGFtcGxlOgo+Cj4g
+ICAgICAgICBYID0gLi4uOwo+ICAgICAgICAgLyogTWFrZSBzdXJlIHRoYXQgWCBpcyBtb2RpZmll
+ZCBiZWZvcmUgWSAqLwo+ICAgICAgICAgc21wX3dtYigpOwo+ICAgICAgICAgWSA9IC4uLjsKPgo+
+IEFuZCB0aGUgcmVsYXRlZCByZWFkIGJhcnJpZXIgc2hvdWxkIHN5bmNocm9uaXplIHRoZSByZWxh
+dGVkIHJlYWRzLAo+IGZvciBleGFtcGxlOgo+Cj4gICAgICAgICBpZiAodGVzdChZKSkgewo+ICAg
+ICAgICAgICAgICAgICAvKgo+ICAgICAgICAgICAgICAgICAgKiBNYWtlIHN1cmUgdGhhdCB3ZSB1
+c2UgdGhlIHVwZGF0ZWQgWCB3aGVuCj4gICAgICAgICAgICAgICAgICAqIHdlIHNhdyB0aGUgdXBk
+YXRlZCBZLgo+ICAgICAgICAgICAgICAgICAgKi8KPiAgICAgICAgICAgICAgICAgIHNtcF9ybWIo
+KTsKPiAgICAgICAgICAgICAgICAgIGRvX3NvbWV0aGluZyhYKTsKPiAgICAgICAgICB9Cj4KPiBJ
+TUhPLCB3ZSBkbyBub3QgbmVlZCBhbnkgYmFycmllciBoZXJlIGJlY2F1c2Ugd2UgaGF2ZSBvbmx5
+Cj4gb25lIHZhcmlhYmxlICJ3YXRjaGRvZ19oYXJkbG9ja3VwX3RvdWNoZWQiIGhlcmUuCj4gd2F0
+Y2hkb2dfaGFyZGxvY2t1cF9jaGVjaygpIHdpbGwgZWl0aGVyIHNlZSB0aGUgdXBkYXRlZCB2YWx1
+ZQo+IG9yIG5vdC4gQnV0IGl0IGRvZXMgbm90IHN5bmNocm9uaXplIGl0IGFnYWluc3QgYW55IG90
+aGVyCj4gdmFyaWFibGVzIG9yIHZhbHVlcy4KCkZhaXIuIFRoZXNlIGJhcnJpZXJzIHdlcmUgcHJl
+c2VudCBpbiB0aGUgb3JpZ2luYWwgYnVkZHkgbG9ja3VwCmRldGVjdG9yIHRoYXQgd2UndmUgYmVl
+biBjYXJyeWluZyBpbiBDaHJvbWVPUyBidXQgdGhhdCBkb2Vzbid0Cm5lY2Vzc2FyaWx5IG1lYW4g
+dGhhdCB0aGV5IHdlcmUgdGhlcmUgZm9yIGEgZ29vZCByZWFzb24uCgpSZWFzb25pbmcgYWJvdXQg
+d2Vha2x5IG9yZGVyZWQgbWVtb3J5IGFsd2F5cyBtYWtlcyBteSBicmFpbiBodXJ0IGFuZCBJCm5l
+dmVyIGZlZWwgY29uZmlkZW50IGF0IHRoZSBlbmQgdGhhdCBJIGdvdCB0aGUgcmlnaHQgYW5zd2Vy
+IGFuZCwgb2YKY291cnNlLCB0aGlzIGlzIGNvdXBsZWQgYnkgdGhlIGZhY3QgdGhhdCBpZiBJIGhh
+dmUgYSBsb2dpYyBlcnJvciBpbiBteQpyZWFzb25pbmcgdGhhdCBpdCBtaWdodCBjYXVzZSBhIHJh
+cmUgLyBzdWJ0bGUgYnVnLiA6KCBXaGVuIHBvc3NpYmxlIEkKdHJ5IHRvIHdyaXRlIGNvZGUgdGhh
+dCB1c2VzIGZ1bGwgYmxvd24gbG9ja3MgdG8gbWFrZSBpdCBlYXNpZXIgdG8KcmVhc29uIGFib3V0
+IChldmVuIGlmIGxlc3MgZWZmaWNpZW50KSwgYnV0IHRoYXQncyBub3QgbmVjZXNzYXJpbHkKcG9z
+c2libGUgaGVyZS4gV2hpbGUgd2Ugb2J2aW91c2x5IGRvbid0IGp1c3Qgd2FudCB0byBzcHJpbmts
+ZSBiYXJyaWVycwphbGwgb3ZlciB0aGUgY29kZSwgSU1PIGl0J3Mgbm90IGEgdGVycmlibGUgc2lu
+IHRvIHB1dCBhIGJhcnJpZXIgaW4gYQpjYXNlIHdoZXJlIGl0IG1ha2VzIGl0IGVhc2llciB0byBy
+ZWFzb24gYWJvdXQgdGhlIG9yZGVyIG9mIHRoaW5ncy4KCkluIGFueSBjYXNlLCBJIGd1ZXNzIGlu
+IHRoaXMgY2FzZSBJIHdvdWxkIHdvcnJ5IGFib3V0IHNvbWUgc29ydCBvZgpvcmRlcmluZyByYWNl
+IHdoZW4gZW5hYmxpbmcgLyBkaXNhYmxpbmcgdGhlIGJ1ZGR5IGxvY2t1cCBkZXRlY3Rvci4gQXQK
+dGhlIGVuZCBvZiB0aGUgYnVkZHkncyB3YXRjaGRvZ19oYXJkbG9ja3VwX2VuYWJsZSgpIC8Kd2F0
+Y2hkb2dfaGFyZGxvY2t1cF9kaXNhYmxlKCkgd2UgYWRqdXN0IHRoZSAid2F0Y2hkb2dfY3B1cyIg
+d2hpY2gKY2hhbmdlcyBidWRkeSBhc3NpZ25tZW50cy4gV2l0aG91dCBhIGJhcnJpZXIsIEkgX3Ro
+aW5rXyBpdCB3b3VsZCBiZQpwb3NzaWJsZSBmb3IgYSBuZXcgQ1BVIHRvIG5vdGljZSB0aGUgY2hh
+bmdlIGluIGJ1ZGRpZXMgd2l0aG91dApub3RpY2luZyB0aGUgdG91Y2guIERvZXMgdGhhdCBtYXRj
+aCB5b3VyIHVuZGVyc3RhbmRpbmc/IE5vdyB3aGVuCnJlYXNvbmluZyBhYm91dCBDUFVzIGdvaW5n
+IG9ubGluZS9vZmZsaW5lIHdlIG5lZWQgdG8gY29uc2lkZXIgdGhpcwpleHRyYSBjYXNlIGFuZCB3
+ZSBoYXZlIHRvIGRlY2lkZSBpZiB0aGVyZSdzIGFueSBjaGFuY2UgaXQgY291bGQgbGVhZAp0byBh
+IGZhbHNlIGxvY2t1cCBkZXRlY3Rpb24uIFdpdGggdGhlIG1lbW9yeSBiYXJyaWVycyBoZXJlLCBp
+dCdzIGEKbGl0dGxlIGVhc2llciB0byB0aGluayBhYm91dC4KCkRpZCB0aGUgYWJvdmUgY29udmlu
+Y2UgeW91IGFib3V0IGtlZXBpbmcgdGhlIGJhcnJpZXJzPyBJZiBzbywgZG8geW91CmhhdmUgYW55
+IHN1Z2dlc3RlZCBjb21tZW50IHRoYXQgd291bGQgbWFrZSBpdCBjbGVhcmVyPwoKCj4gPiArfQo+
+ID4gKwo+ID4gIHN0YXRpYyBib29sIGlzX2hhcmRsb2NrdXAodW5zaWduZWQgaW50IGNwdSkKPiA+
+ICB7Cj4gPiAgICAgICBpbnQgaHJpbnQgPSBhdG9taWNfcmVhZCgmcGVyX2NwdShocnRpbWVyX2lu
+dGVycnVwdHMsIGNwdSkpOwo+ID4gQEAgLTQ0MywxMSArNDU0LDE1IEBAIHN0YXRpYyBlbnVtIGhy
+dGltZXJfcmVzdGFydCB3YXRjaGRvZ190aW1lcl9mbihzdHJ1Y3QgaHJ0aW1lciAqaHJ0aW1lcikK
+PiA+ICAgICAgIHN0cnVjdCBwdF9yZWdzICpyZWdzID0gZ2V0X2lycV9yZWdzKCk7Cj4gPiAgICAg
+ICBpbnQgZHVyYXRpb247Cj4gPiAgICAgICBpbnQgc29mdGxvY2t1cF9hbGxfY3B1X2JhY2t0cmFj
+ZSA9IHN5c2N0bF9zb2Z0bG9ja3VwX2FsbF9jcHVfYmFja3RyYWNlOwo+ID4gKyAgICAgdW5zaWdu
+ZWQgbG9uZyBocnRpbWVyX2ludGVycnVwdHM7Cj4gPgo+ID4gICAgICAgaWYgKCF3YXRjaGRvZ19l
+bmFibGVkKQo+ID4gICAgICAgICAgICAgICByZXR1cm4gSFJUSU1FUl9OT1JFU1RBUlQ7Cj4gPgo+
+ID4gLSAgICAgd2F0Y2hkb2dfaGFyZGxvY2t1cF9raWNrKCk7Cj4gPiArICAgICBocnRpbWVyX2lu
+dGVycnVwdHMgPSB3YXRjaGRvZ19oYXJkbG9ja3VwX2tpY2soKTsKPiA+ICsKPiA+ICsgICAgIC8q
+IHRlc3QgZm9yIGhhcmRsb2NrdXBzICovCj4KPiBJIHdvdWxkIG9taXQgdGhlIGNvbW1lbnQuIEl0
+IGlzIG5vdCB2YWxpZCB3aGVuIHBlcmYgZGV0ZWN0b3IgaXMgdXNlZC4KPiBBbmQgY2hlY2tpbmcg
+dGhlIGJ1ZGR5IGlzIGNsZWFyIGZyb20gdGhlIGZ1bmN0aW9uIG5hbWUuCj4KPiA+ICsgICAgIHdh
+dGNoZG9nX2J1ZGR5X2NoZWNrX2hhcmRsb2NrdXAoaHJ0aW1lcl9pbnRlcnJ1cHRzKTsKPgo+IEkg
+d291bGQgcGVyc29uYWxseSBtb3ZlIHRoaXMgaW50byB3YXRjaGRvZ19oYXJkbG9ja3VwX2tpY2so
+KS4KPiB3YXRjaGRvZ190aW1lcl9mbigpIGlzIGFscmVhZHkgY29tcGxleCBlbm91Z2guIEFuZCBj
+aGVja2luZwo+IHRoZSBidWRkeSB3aGVuIGtpY2tpbmcgYSBDUFUgbWFrZXMgc2Vuc2UuCgpTdXJl
+LCBJJ2xsIGFkZCB0aGF0IHRvIG15IGxpc3Qgb2YgdGhpbmdzIHRvIGZvbGxvdy11cCB3aXRoLgoK
+Cj4gQWxzbyBJIHdvdWxkIG5vdCBwYXNzICJocnRpbWVyX2ludGVycnVwdHMiLiBJIGd1ZXNzIHRo
+YXQgaXQgaXMKPiBqdXN0IGFuIG9wdGltaXphdGlvbi4gSXQgaXMgYW4gZXh0cmEgY2h1cm4gaW4g
+dGhlIGNvZGUuIElNSE8sCj4gaXMgaXMgbm90IHdvcnQgaXQuIFRoaXMgY29kZSBkb2VzIG5vdCBu
+ZWVkIHRvIGJlIHN1cGVyIG9wdGltaXplZC4KClRoZSBtYWluIHJlYXNvbiBJIGRpZCBpdCBpcyB0
+aGF0ICJocnRpbWVyX2ludGVycnVwdHMiIGlzIHN0YXRpYyB0bwp3YXRjaGRvZy5jIG5vdy4gSWYg
+SSBkb24ndCBwYXNzIGl0IGluIHRoZW4gSSBoYXZlIHRvIG1ha2UgaXQKbm9uLXN0YXRpYyBhbmQg
+YWRkIGl0IHRvIHRoZSBoZWFkZXIuIFRoYXQgYWxzbyBtZWFucyBhbnlvbmUgbG9va2luZyBhdAp0
+aGUgdmFyaWFibGUgYW5kIGZpZ3VyaW5nIG91dCBob3cgaXQgaXMgcmVhZC93cml0dGVuIG5lZWRz
+IHRvIGdvCnNlYXJjaCBmb3Igb3RoZXIgcGVvcGxlIHRoYXQgcmVmZXJlbmNlIGl0LiBJIGZlZWwg
+bGlrZSBpdCdzIGNsZWFuZXIgdG8KanVzdCBwYXNzIGl0IGluLiBJZiB5b3UgZmVlbCBzdHJvbmds
+eSB0aGF0IEkgc2hvdWxkIGNoYW5nZSB0aGlzIHRoZW4KbGV0IG1lIGtub3csIGJ1dCBvdGhlcndp
+c2UgSSdsbCBwbGFuIHRvIGxlYXZlIHRoaXMgaG93IEkgaGF2ZSBpdC4KCgo+ID4gICAgICAgLyog
+a2ljayB0aGUgc29mdGxvY2t1cCBkZXRlY3RvciAqLwo+ID4gICAgICAgaWYgKGNvbXBsZXRpb25f
+ZG9uZSh0aGlzX2NwdV9wdHIoJnNvZnRsb2NrdXBfY29tcGxldGlvbikpKSB7Cj4gPiBkaWZmIC0t
+Z2l0IGEva2VybmVsL3dhdGNoZG9nX2J1ZGR5LmMgYi9rZXJuZWwvd2F0Y2hkb2dfYnVkZHkuYwo+
+ID4gbmV3IGZpbGUgbW9kZSAxMDA2NDQKPiA+IGluZGV4IDAwMDAwMDAwMDAwMC4uZmVlNDVhZjJl
+NWJkCj4gPiAtLS0gL2Rldi9udWxsCj4gPiArKysgYi9rZXJuZWwvd2F0Y2hkb2dfYnVkZHkuYwo+
+ID4gQEAgLTAsMCArMSw5MyBAQAo+ID4gKy8vIFNQRFgtTGljZW5zZS1JZGVudGlmaWVyOiBHUEwt
+Mi4wCj4gPiArCj4gPiArI2luY2x1ZGUgPGxpbnV4L2NwdS5oPgo+ID4gKyNpbmNsdWRlIDxsaW51
+eC9jcHVtYXNrLmg+Cj4gPiArI2luY2x1ZGUgPGxpbnV4L2tlcm5lbC5oPgo+ID4gKyNpbmNsdWRl
+IDxsaW51eC9ubWkuaD4KPiA+ICsjaW5jbHVkZSA8bGludXgvcGVyY3B1LWRlZnMuaD4KPiA+ICsK
+PiA+ICtzdGF0aWMgY3B1bWFza190IF9fcmVhZF9tb3N0bHkgd2F0Y2hkb2dfY3B1czsKPiA+ICsK
+PiA+ICtzdGF0aWMgdW5zaWduZWQgaW50IHdhdGNoZG9nX25leHRfY3B1KHVuc2lnbmVkIGludCBj
+cHUpCj4gPiArewo+ID4gKyAgICAgY3B1bWFza190IGNwdXMgPSB3YXRjaGRvZ19jcHVzOwo+Cj4g
+QSBjb3B5IHNob3VsZCBiZSBkb25lIGJ5IGNwdW1hc2tfY29weSgpLgo+Cj4gQnV0IHRoZSBxdWVz
+dGlvbiBpcyB3aHkgYSBjb3B5IHdvdWxkIGJlIG5lZWRlZC4gV2hlbiBjYWxsZWQgZnJvbQo+IHdh
+dGNoZG9nX2J1ZGR5X2NoZWNrX2hhcmRsb2NrdXAoKSwgdGhpcyBmdW5jdGlvbiBpcyBub3Qgc3lj
+aHJvbml6ZWQKPiBhZ2FpbnN0IHRoZSBDUFUgaG90cGx1Zy4gQW5kIGV2ZW4gdGhlIGNvcHlpbmcg
+d291bGQgYmUgcmFjeS4KPgo+IElNSE8sIHRoZSBjb3B5IGRvZXMgbm90IGhlbHAgbXVjaCBhbmQg
+d2UgZG8gbm90IG5lZWQgaXQuCj4KPiBUaGUgb25seSBpbXBvcnRhbnQgdGhpcyBpcyB0aGF0IHRo
+aXMgZnVuY3Rpb24gd291bGQgcmV0dXJuCj4gYSB2YWxpZCBDUFUuIEFuZCBJIHRoaW5rIHRoYXQg
+aXQgaXMgZ3VhcmFudHRlZCBiZWNhdXNlCj4gQ1BVMCBjb3VsZCBub3QgYmUgZGlzYWJsZWQuCgpZ
+dXAsIEknbGwgZ2V0IHJpZCBvZiB0aGUgY29weS4KCgo+ID4gKyAgICAgdW5zaWduZWQgaW50IG5l
+eHRfY3B1Owo+ID4gKwo+ID4gKyAgICAgbmV4dF9jcHUgPSBjcHVtYXNrX25leHQoY3B1LCAmY3B1
+cyk7Cj4gPiArICAgICBpZiAobmV4dF9jcHUgPj0gbnJfY3B1X2lkcykKPiA+ICsgICAgICAgICAg
+ICAgbmV4dF9jcHUgPSBjcHVtYXNrX2ZpcnN0KCZjcHVzKTsKPiA+ICsKPiA+ICsgICAgIGlmIChu
+ZXh0X2NwdSA9PSBjcHUpCj4gPiArICAgICAgICAgICAgIHJldHVybiBucl9jcHVfaWRzOwo+ID4+
+ICsgICAgcmV0dXJuIG5leHRfY3B1Owo+ID4gK30KPiA+ICsKPiA+ICtpbnQgX19pbml0IHdhdGNo
+ZG9nX2hhcmRsb2NrdXBfcHJvYmUodm9pZCkKPiA+ICt7Cj4gPiArICAgICByZXR1cm4gMDsKPiA+
+ICt9Cj4gPiArCj4gPiArdm9pZCB3YXRjaGRvZ19oYXJkbG9ja3VwX2VuYWJsZSh1bnNpZ25lZCBp
+bnQgY3B1KQo+ID4gK3sKPiA+ICsgICAgIHVuc2lnbmVkIGludCBuZXh0X2NwdTsKPiA+ICsKPiA+
+ICsgICAgIC8qCj4gPiArICAgICAgKiBUaGUgbmV3IENQVSB3aWxsIGJlIG1hcmtlZCBvbmxpbmUg
+YmVmb3JlIHRoZSBocnRpbWVyIGludGVycnVwdAo+ID4gKyAgICAgICogZ2V0cyBhIGNoYW5jZSB0
+byBydW4gb24gaXQuIElmIGFub3RoZXIgQ1BVIHRlc3RzIGZvciBhCj4gPiArICAgICAgKiBoYXJk
+bG9ja3VwIG9uIHRoZSBuZXcgQ1BVIGJlZm9yZSBpdCBoYXMgcnVuIGl0cyB0aGUgaHJ0aW1lcgo+
+ID4gKyAgICAgICogaW50ZXJydXB0LCBpdCB3aWxsIGdldCBhIGZhbHNlIHBvc2l0aXZlLiBUb3Vj
+aCB0aGUgd2F0Y2hkb2cgb24KPiA+ICsgICAgICAqIHRoZSBuZXcgQ1BVIHRvIGRlbGF5IHRoZSBj
+aGVjayBmb3IgYXQgbGVhc3QgMyBzYW1wbGluZyBwZXJpb2RzCj4gPiArICAgICAgKiB0byBndWFy
+YW50ZWUgb25lIGhydGltZXIgaGFzIHJ1biBvbiB0aGUgbmV3IENQVS4KPiA+ICsgICAgICAqLwo+
+ID4gKyAgICAgd2F0Y2hkb2dfaGFyZGxvY2t1cF90b3VjaF9jcHUoY3B1KTsKPiA+ICsKPiA+ICsg
+ICAgIC8qCj4gPiArICAgICAgKiBXZSBhcmUgZ29pbmcgdG8gY2hlY2sgdGhlIG5leHQgQ1BVLiBP
+dXIgd2F0Y2hkb2dfaHJ0aW1lcgo+ID4gKyAgICAgICogbmVlZCBub3QgYmUgemVybyBpZiB0aGUg
+Q1BVIGhhcyBhbHJlYWR5IGJlZW4gb25saW5lIGVhcmxpZXIuCj4gPiArICAgICAgKiBUb3VjaCB0
+aGUgd2F0Y2hkb2cgb24gdGhlIG5leHQgQ1BVIHRvIGF2b2lkIGZhbHNlIHBvc2l0aXZlCj4gPiAr
+ICAgICAgKiBpZiB3ZSB0cnkgdG8gY2hlY2sgaXQgaW4gbGVzcyB0aGVuIDMgaW50ZXJydXB0cy4K
+PiA+ICsgICAgICAqLwo+ID4gKyAgICAgbmV4dF9jcHUgPSB3YXRjaGRvZ19uZXh0X2NwdShjcHUp
+Owo+ID4gKyAgICAgaWYgKG5leHRfY3B1IDwgbnJfY3B1X2lkcykKPiA+ICsgICAgICAgICAgICAg
+d2F0Y2hkb2dfaGFyZGxvY2t1cF90b3VjaF9jcHUobmV4dF9jcHUpOwo+Cj4gVGhpbmtpbmcgbG91
+ZGx5Ogo+Cj4gVGhpcyBmZWVscyByYWN5IHdoZW4gbWFueSBDUFVzIGFyZSBlbmFibGVkL2Rpc2Fi
+bGVkIGluIHBhcmFsbGVsLgo+IEkgYW0gbm90IDEwMCUgc3VyZSBpdCBpdCBjYW4gaGFwcGVuIHRo
+b3VnaC4KPgo+IE15IHVuZGVyc3RhbmRpbmcgaXMgdGhhdCBpdCBjYW4ndCBoYXBwZW4gYmVjYXVz
+ZSB0aGUgQ1BVIGhvdHBsdWcKPiBpcyBzZXJpYWxpemVkIGJ5IGNwdV9hZGRfcmVtb3ZlX2xvY2su
+Cj4KPiBTbywgdGhpcyBzZWVtcyB0byB3b3JrIGFmdGVyIGFsbC4KPgo+ID4gKwo+ID4gKyAgICAg
+Y3B1bWFza19zZXRfY3B1KGNwdSwgJndhdGNoZG9nX2NwdXMpOwo+ID4gK30KPiA+ICsKPiA+IC0t
+LSBhL2xpYi9LY29uZmlnLmRlYnVnCj4gPiArKysgYi9saWIvS2NvbmZpZy5kZWJ1Zwo+ID4gQEAg
+LTEwMzUsMTAgKzEwMzUsNTUgQEAgY29uZmlnIEJPT1RQQVJBTV9TT0ZUTE9DS1VQX1BBTklDCj4g
+Pgo+ID4gICAgICAgICBTYXkgTiBpZiB1bnN1cmUuCj4gPgo+ID4gLWNvbmZpZyBIQVJETE9DS1VQ
+X0RFVEVDVE9SX1BFUkYKPiA+ICsjIEJvdGggdGhlICJwZXJmIiBhbmQgImJ1ZGR5IiBoYXJkbG9j
+a3VwIGRldGVjdG9ycyBjb3VudCBocnRpbWVyCj4gPiArIyBpbnRlcnJ1cHRzLiBUaGlzIGNvbmZp
+ZyBlbmFibGVzIGZ1bmN0aW9ucyBtYW5hZ2luZyB0aGlzIGNvbW1vbiBjb2RlLgo+ID4gK2NvbmZp
+ZyBIQVJETE9DS1VQX0RFVEVDVE9SX0NPVU5UU19IUlRJTUVSCj4gPiAgICAgICBib29sCj4gPiAg
+ICAgICBzZWxlY3QgU09GVExPQ0tVUF9ERVRFQ1RPUgo+ID4KPiA+ICtjb25maWcgSEFSRExPQ0tV
+UF9ERVRFQ1RPUl9QRVJGCj4gPiArICAgICBib29sCj4gPiArICAgICBkZXBlbmRzIG9uIEhBVkVf
+SEFSRExPQ0tVUF9ERVRFQ1RPUl9QRVJGCj4gPiArICAgICBzZWxlY3QgSEFSRExPQ0tVUF9ERVRF
+Q1RPUl9DT1VOVFNfSFJUSU1FUgo+ID4gKwo+ID4gK2NvbmZpZyBIQVJETE9DS1VQX0RFVEVDVE9S
+X0JVRERZCj4gPiArICAgICBib29sCj4gPiArICAgICBkZXBlbmRzIG9uIFNNUAo+ID4gKyAgICAg
+c2VsZWN0IEhBUkRMT0NLVVBfREVURUNUT1JfQ09VTlRTX0hSVElNRVIKPiA+ICsKPiA+ICsjIEZv
+ciBoYXJkbG9ja3VwIGRldGVjdG9ycyB5b3UgY2FuIGhhdmUgb25lIGRpcmVjdGx5IHByb3ZpZGVk
+IGJ5IHRoZSBhcmNoCj4gPiArIyBvciB1c2UgYSAibm9uLWFyY2giIG9uZS4gSWYgeW91J3JlIHVz
+aW5nIGEgIm5vbi1hcmNoIiBvbmUgdGhhdCBpcwo+ID4gKyMgZnVydGhlciBkaXZpZGVkIHRoZSBw
+ZXJmIGhhcmRsb2NrdXAgZGV0ZWN0b3IgKHdoaWNoLCBjb25mdXNpbmdseSwgbmVlZHMKPiA+ICsj
+IGFyY2gtcHJvdmlkZWQgcGVyZiBzdXBwb3J0KSBhbmQgdGhlIGJ1ZGR5IGhhcmRsb2NrdXAgZGV0
+ZWN0b3IgKHdoaWNoIGp1c3QKPiA+ICsjIG5lZWRzIFNNUCkuIEluIGVpdGhlciBjYXNlLCB1c2lu
+ZyB0aGUgIm5vbi1hcmNoIiBjb2RlIGNvbmZsaWN0cyB3aXRoCj4gPiArIyB0aGUgTk1JIHdhdGNo
+ZG9nIGNvZGUgKHdoaWNoIGlzIHNvbWV0aW1lcyB1c2VkIGRpcmVjdGx5IGFuZCBzb21ldGltZXMg
+dXNlZAo+ID4gKyMgYnkgdGhlIGFyY2gtcHJvdmlkZWQgaGFyZGxvY2t1cCBkZXRlY3RvcikuCj4g
+PiArY29uZmlnIEhBVkVfSEFSRExPQ0tVUF9ERVRFQ1RPUl9OT05fQVJDSAo+ID4gKyAgICAgYm9v
+bAo+ID4gKyAgICAgZGVwZW5kcyBvbiAoSEFWRV9IQVJETE9DS1VQX0RFVEVDVE9SX1BFUkYgfHwg
+U01QKSAmJiAhSEFWRV9OTUlfV0FUQ0hET0cKPiA+ICsgICAgIGRlZmF1bHQgeQo+ID4gKwo+ID4g
+K2NvbmZpZyBIQVJETE9DS1VQX0RFVEVDVE9SX1BSRUZFUl9CVUREWQo+ID4gKyAgICAgYm9vbCAi
+UHJlZmVyIHRoZSBidWRkeSBDUFUgaGFyZGxvY2t1cCBkZXRlY3RvciIKPiA+ICsgICAgIGRlcGVu
+ZHMgb24gSEFWRV9IQVJETE9DS1VQX0RFVEVDVE9SX05PTl9BUkNIICYmIEhBVkVfSEFSRExPQ0tV
+UF9ERVRFQ1RPUl9QRVJGICYmIFNNUAo+Cj4gSHVoLCBJIGhhdmUgYmlnIHRyb3VibGVzIHRvIHNj
+cmF0Y2ggbXkgaGVhZCBhcm91bmQgdGhpcyBjaGVjazoKPgo+ICAgICAgICBIQVZFX0hBUkRMT0NL
+VVBfREVURUNUT1JfTk9OX0FSQ0ggZGVwZW5kcyBvbiBIQVZFX0hBUkRMT0NLVVBfREVURUNUT1Jf
+UEVSRiBhbmQgU01QCj4KPiAgICAgICAgYW5kIHRoaXMgZGVwZW5kcyBvbiBIQVZFX0hBUkRMT0NL
+VVBfREVURUNUT1JfTk9OX0FSQ0ggYW5kIGFnYWluCj4gICAgICAgICAgICAgICAgb24gSEFWRV9I
+QVJETE9DS1VQX0RFVEVDVE9SX1BFUkYgYW5kIFNNUC4KClRoZSBnb2FsIGlzIHRvIGhhdmUgIkhB
+UkRMT0NLVVBfREVURUNUT1JfUFJFRkVSX0JVRERZIiB0byBzaG93IHVwIGFzCmFuIG9wdGlvbiBp
+ZiB0aGVyZSBpcyBhbiBvcHRpb24gX290aGVyXyB0aGFuIHRoZSBidWRkeS4gSWYgdGhlcmUncyBu
+b3QKbW9yZSB0aGFuIG9uZSBoYXJkbG9ja3VwIGRldGVjdG9yIHRvIHBpY2sgZnJvbSB0aGVuIHRo
+ZXJlJ3Mgbm8gcmVhc29uCnRvIGFzayB0aGUgcGVyc29uIGNvbmZpZ3VyaW5nIHRoZSBrZXJuZWwg
+d2hpY2ggb25lIHRoZXknZCBwcmVmZXIuIEF0CnRoZSBtb21lbnQsIGlmIHlvdSBoYXZlIGFuICJh
+cmNoIiBsb2NrdXAgZGV0ZWN0b3IgdGhlbiB5b3UncmUgc3R1Y2sKd2l0aCBpdCwgc28geW91IG9u
+bHkgZ2V0IGEgY2hvaWNlIGlmIGEgInBlcmYiIGRldGVjdG9yIGlzIGF2YWlsYWJsZQphbmQgeW91
+J3ZlIGdvdCBTTVAuCgpBaCwgc28gSSBndWVzcyB0aGlzIGNvdWxkIGJlIHNpbXBsaWZpZWQgdG86
+CgpkZXBlbmRzIG9uIEhBVkVfSEFSRExPQ0tVUF9ERVRFQ1RPUl9QRVJGICYmIFNNUAoKT0ssIEkn
+bGwgYWRkIHRoYXQgdG8gdGhlIGxpc3QuCgoKPiA+ICsgICAgIGhlbHAKPiA+ICsgICAgICAgU2F5
+IFkgaGVyZSB0byBwcmVmZXIgdGhlIGJ1ZGR5IGhhcmRsb2NrdXAgZGV0ZWN0b3Igb3ZlciB0aGUg
+cGVyZiBvbmUuCj4gPiArCj4gPiArICAgICAgIFdpdGggdGhlIGJ1ZGR5IGRldGVjdG9yLCBlYWNo
+IENQVSB1c2VzIGl0cyBzb2Z0bG9ja3VwIGhydGltZXIKPiA+ICsgICAgICAgdG8gY2hlY2sgdGhh
+dCB0aGUgbmV4dCBDUFUgaXMgcHJvY2Vzc2luZyBocnRpbWVyIGludGVycnVwdHMgYnkKPiA+ICsg
+ICAgICAgdmVyaWZ5aW5nIHRoYXQgYSBjb3VudGVyIGlzIGluY3JlYXNpbmcuCj4gPiArCj4gPiAr
+ICAgICAgIFRoaXMgaGFyZGxvY2t1cCBkZXRlY3RvciBpcyB1c2VmdWwgb24gc3lzdGVtcyB0aGF0
+IGRvbid0IGhhdmUKPiA+ICsgICAgICAgYW4gYXJjaC1zcGVjaWZpYyBoYXJkbG9ja3VwIGRldGVj
+dG9yIG9yIGlmIHJlc291cmNlcyBuZWVkZWQKPiA+ICsgICAgICAgZm9yIHRoZSBoYXJkbG9ja3Vw
+IGRldGVjdG9yIGFyZSBiZXR0ZXIgdXNlZCBmb3Igb3RoZXIgdGhpbmdzLgo+ID4gKwo+ID4gKyMg
+VGhpcyB3aWxsIHNlbGVjdCB0aGUgYXBwcm9wcmlhdGUgbm9uLWFyY2ggaGFyZGxvY2tkdXAgZGV0
+ZWN0b3IKPiA+ICtjb25maWcgSEFSRExPQ0tVUF9ERVRFQ1RPUl9OT05fQVJDSAo+ID4gKyAgICAg
+Ym9vbAo+ID4gKyAgICAgZGVwZW5kcyBvbiBIQVZFX0hBUkRMT0NLVVBfREVURUNUT1JfTk9OX0FS
+Q0gKPiA+ICsgICAgIHNlbGVjdCBIQVJETE9DS1VQX0RFVEVDVE9SX0JVRERZIGlmICFIQVZFX0hB
+UkRMT0NLVVBfREVURUNUT1JfUEVSRiB8fCBIQVJETE9DS1VQX0RFVEVDVE9SX1BSRUZFUl9CVURE
+WQo+ID4gKyAgICAgc2VsZWN0IEhBUkRMT0NLVVBfREVURUNUT1JfUEVSRiBpZiBIQVZFX0hBUkRM
+T0NLVVBfREVURUNUT1JfUEVSRiAmJiAhSEFSRExPQ0tVUF9ERVRFQ1RPUl9QUkVGRVJfQlVERFkK
+PiA+ICsKPiA+ICAjCj4gPiAgIyBFbmFibGVzIGEgdGltZXN0YW1wIGJhc2VkIGxvdyBwYXNzIGZp
+bHRlciB0byBjb21wZW5zYXRlIGZvciBwZXJmIGJhc2VkCj4gPiAgIyBoYXJkIGxvY2t1cCBkZXRl
+Y3Rpb24gd2hpY2ggcnVucyB0b28gZmFzdCBkdWUgdG8gdHVyYm8gbW9kZXMuCj4gPiBAQCAtMTA1
+Myw5ICsxMDk4LDEwIEBAIGNvbmZpZyBIQVJETE9DS1VQX0NIRUNLX1RJTUVTVEFNUAo+ID4gIGNv
+bmZpZyBIQVJETE9DS1VQX0RFVEVDVE9SCj4gPiAgICAgICBib29sICJEZXRlY3QgSGFyZCBMb2Nr
+dXBzIgo+ID4gICAgICAgZGVwZW5kcyBvbiBERUJVR19LRVJORUwgJiYgIVMzOTAKPgo+IElzIHRo
+ZXJlIGFueSByZWFzb24gd2h5IFMzOTAgY291bGQgbm90IG9yIGRvIG5vdCB3YW50IHRvIHVzZSB0
+aGUgYnVkZHkKPiBoYXJkbG9ja3VwIGRldGVjdG9yLgoKVGhpcyBpc24ndCBhIG5ldyBkZXBlbmRl
+bmN5LCBidXQgaXQncyBhIGdvb2QgcXVlc3Rpb24uIExvb2tpbmcgYXQgdGhlCmdpdCBoaXN0b3J5
+LCBJIHNlZSBjb21taXQgZGVhMjBhM2ZiZGQwICgiW1BBVENIXSBEaXNhYmxlCkRFVEVDVF9TT0ZU
+TE9DS1VQIGZvciBzMzkwIikuIC4uLmFuZCBpdCBsb29rcyBsaWtlIHRoZSBzb2Z0bG9ja3VwCmRl
+dGVjdG9yIHN0aWxsIHNheXMgaXQncyBicm9rZW4gb24gczM5MC4gVGhhdCB3b3VsZCBtZWFuIHRo
+YXQgdGhlCmJ1ZGR5IGRldGVjdG9yIGlzIGJyb2tlbiB0b28uCgoKPiA+IC0gICAgIGRlcGVuZHMg
+b24gSEFWRV9IQVJETE9DS1VQX0RFVEVDVE9SX1BFUkYgfHwgSEFWRV9IQVJETE9DS1VQX0RFVEVD
+VE9SX0FSQ0gKPiA+ICsgICAgIGRlcGVuZHMgb24gSEFWRV9IQVJETE9DS1VQX0RFVEVDVE9SX05P
+Tl9BUkNIIHx8IEhBVkVfSEFSRExPQ0tVUF9ERVRFQ1RPUl9BUkNICj4gPiAgICAgICBzZWxlY3Qg
+TE9DS1VQX0RFVEVDVE9SCj4gPiAtICAgICBzZWxlY3QgSEFSRExPQ0tVUF9ERVRFQ1RPUl9QRVJG
+IGlmIEhBVkVfSEFSRExPQ0tVUF9ERVRFQ1RPUl9QRVJGCj4gPiArICAgICBzZWxlY3QgSEFSRExP
+Q0tVUF9ERVRFQ1RPUl9OT05fQVJDSCBpZiBIQVZFX0hBUkRMT0NLVVBfREVURUNUT1JfTk9OX0FS
+Q0gKPgo+IEFueXdheSwgdGhlIGNvbmZpZ3VyYXRpb24gb2YgdGhlIGhhcmQgbG9ja3VwIGRldGVj
+dG9ycyBpcyBpbnNhbmUgYW5kCj4gdGhpcyBwYXRjaHNldCBtYWtlcyBpdCBldmVuIHdvcnNlLCBl
+c3BlY2lhbGx5IHRoZSBuZXcKPiBIQVJETE9DS1VQX0RFVEVDVE9SX05PTl9BUkNIIHN0dWZmLgo+
+Cj4gSXQgc2VlbXMgdGhhdCBzcGFyYywgcG93ZXJwYyBhbmQgczM5MCBhcmUgc29tZWhvdyBzcGVj
+aWFsLiBEbyB5b3UKPiBzdGlsbCBoYXZlIGluIG1pbmQgaG93IHRoZXkgYXJlIGRpc3Rpbmd1aXNo
+ZWQgdXNpbmcgdGhlIEtjb25maWcKPiB2YXJpYWJsZXM/Cj4KPiBGb3IgZXhhbXBsZSwgSSBhbSBw
+cmV0dHkgY29uZnVzZWQgYnkgdGhlIG1lYW5pbmcgb2YgSEFWRV9OTUlfV0FUQ0hET0cuCj4KPiBB
+bmQgc3BhcmMgaGFzIGl0cyBvd24gdmFyaWFudCBvZgo+IHdhdGNoZG9nX2hhcmRsb2NrdXBfZW5h
+YmxlKCkvZGlzYWJsZSgpLiBJdCBtZWFucyB0aGF0IGl0IGlzCj4gYXJjaC1zcGVjaWZpYy4gRG9l
+cyBpdCB3b3JrIHdpdGggdGhlIDEzdGggcGF0Y2ggd2hpY2ggbWFkZQo+IHdhdGNoZG9nX2hhcmRs
+b2NrdXBfZW5hYmxlKCkvZGlzYWJsZSgpIHRvIGJlIHdhdGNoZG9nLWhhcmRsb2NrdXAtdHlwZQo+
+IHNwZWNpZmljPyBJcyBpcyBzb21laG93IHJlbGF0ZWQgdG8gSEFWRV9OTUlfV0FUQ0hET0c/Cj4g
+RG9lcyB0aGlzIHJlcGxhY2UgdGhlIGVudGlyZSB3YXRjaGRvZyBvbmx5IG9ubHkgdGhlIGVuYWJs
+ZSBwYXJ0Pwo+Cj4gSSB0aGluayB0aGF0IHdlIG5lZWQgdG8gbWFrZSB0aGlzIG1vcmUgc3RyYWln
+aHRmb3J3YXJkLiBCdXQgSSBmaXJzdAo+IG5lZWQgdG8gdW5kZXJzdGFuZCB0aGUgZXhpc3Rpbmcg
+bWF6ZSBvZiBjb25maWcgdmFyaWFibGVzLgoKSSBhZ3JlZSB0aGF0IGl0J3MgY29uZnVzaW5nLiBJ
+J20gb2J2aW91c2x5IGJpYXNlZCwgYnV0IElNTyBpdCdzIGxlc3MKY29uZnVzaW5nIGFmdGVyIG15
+IHBhdGNoc2V0IHRoYW4gYmVmb3JlLiA7LSkgVGhlIHN0YXRlIG9mIHRoZSB3b3JsZApiZWZvcmUg
+bXkgcGF0Y2hzZXQgc2V0IGEgcHJldHR5IGxvdyBiYXIuCgpBcyBmYXIgYXMgSSB1bmRlcnN0YW5k
+IGl0LCBhdCBhbiBhcmNoaXRlY3R1cmUtbGV2ZWwgeW91IGNhbiBjaG9vc2UgYW55Cl9PTkVfIG9m
+IHRoZSBmb2xsb3dpbmc6CgphKSBJbXBsZW1lbnQgYml0cyBuZWVkZWQgZm9yIHRoZSB0aGUgInBl
+cmYiIGhhcmRsb2NrdXAgZGV0ZWN0b3IuIHg4NgpoYXMgZG9uZSB0aGlzLCBzb21lIGNvbmZpZ3Mg
+b2YgcG93ZXJwYyBkbyB0aGlzLCBhbmQgYXJtNjQgbm93IGFmdGVyIG15CnBhdGNoIHNlcmllcy4g
+VGhpcyBpcyBIQVZFX0hBUkRMT0NLVVBfREVURUNUT1JfUEVSRi4KCmIpIEltcGxlbWVudCB5b3Vy
+IG93biB0b3RhbGx5IHNlcGFyYXRlIGhhcmRsb2NrdXAgZGV0ZWN0b3IgdGhhdApkb2Vzbid0IHVz
+ZSBhbnkgb2YgdGhlIGNvbW1vbiAicGVyZiIgY29kZSBidXQgc3RpbGwgbG9va3MgdGhlIHNhbWUg
+dG8KdXNlcnNwYWNlIChzYW1lIHN5c2N0bHMsIGV0YykuIE9ubHkgcG93ZXJwYyBkb2VzIHRoaXMg
+KGluIHNvbWUKY29uZmlncykuIEFzIHBlciBjb252ZXJzYXRpb25zIGluIHByZXZpb3VzIHZlcnNp
+b25zIG9mIG15IHBhdGNoCnNlcmllcywgYXBwYXJlbnRseSBwb3dlcnBjJ3MgdmVyc2lvbiBpcyBx
+dWl0ZSBmYW5jeSBhbmQgbWF5YmUgc29tZWRheQpwZW9wbGUgY2FuIG1vdmUgc29tZSBvZiB0aGVz
+ZSBmZWF0dXJlcyB0byB0aGUgY29tbW9uIGNvZGUuIFRoaXMgaXMKSEFWRV9IQVJETE9DS1VQX0RF
+VEVDVE9SX0FSQ0guCgpjKSBEb24ndCBpbXBsZW1lbnQgdGhlIGZ1bGwgZmVhdHVyZXMgb2YgYSBo
+YXJkbG9ja3VwIGRldGVjdG9yIGJ1dApzdGlsbCBoYXZlIHRoZSBiYXNpY3MuIEluIHRoZSB2ZXJ5
+IGxlYXN0LCBJIHRoaW5rIGl0IGRvZXNuJ3Qgc3VwcG9ydAp0aGUgc3lzY3RscyAiaGFyZGxvY2t1
+cF9wYW5pYyIgYW5kICJoYXJkbG9ja3VwX2FsbF9jcHVfYmFja3RyYWNlIi4gSXQKZG9lc24ndCBz
+dXBwb3J0IHRoZSBrZXJuZWwgY29tbWFuZCBsaW5lIHBhcmFtZXRlciAibm1pX3dhdGNoZG9nPSIu
+IEkKZG9uJ3Qga25vdyBmb3Igc3VyZSBpZiB0aGVyZSBhcmUgYW55IG90aGVyIGRpZmZlcmVuY2Vz
+LiBPbmx5IHNwYXJjNjQKZG9lcyB0aGlzLiBUaGlzIGlzIEhBVkVfTk1JX1dBVENIRE9HLiBDb25m
+dXNpbmdseSwKSEFWRV9IQVJETE9DS1VQX0RFVEVDVE9SX0FSQ0ggc2VsZWN0cyBIQVZFX05NSV9X
+QVRDSERPRy4KCmQpIERvbid0IGltcGxlbWVudCBfYW55XyBoYXJkbG9ja3VwIGRldGVjdG9yIG9m
+IGFueSBzb3J0LiBBZnRlciBteQpwYXRjaHNldCB5b3UgY2FuIHN0aWxsIGVuZCB1cCB3aXRoICJi
+dWRkeSIgaWYgeW91IGhhdmUgU01QLgoKCk9uZSB0aGluZyB0aGF0IHdvdWxkIHByb2JhYmx5IGhl
+bHAgd291bGQgYmUgdG8gYnJpbmcgc3BhcmM2NCB0byBhIGZ1bGwKImFyY2giIGhhcmRsb2NrdXAg
+aW1wbGVtZW50YXRpb24gYW5kIHRoZW4gZ2V0IHJpZCBvZiB0aGUgc3BlY2lhbCBjYXNlLgpUaGF0
+IHNlZW1zIGEgYml0IG91dHNpZGUgbXkgc2NvcGUsIHRob3VnaCBpZiBzb21lb25lIHdhbnRlZCB0
+byBwb3N0CnBhdGNoZXMgZm9yIHRoYXQgSSdkIGJlIHdpbGxpbmcgdG8gZ2l2ZSB0aGVtIGEgcmV2
+aWV3LgoKSSBndWVzcyBvdGhlciB0aGFuIHRoYXQsIHRoZSBiZXN0IHdlIGNvdWxkIHRyeSB0byBk
+byBpcyB0byByZW5hbWUgc29tZQpjb25maWdzIGFuZC9vciBhZGQgc29tZSBzdWJjb25maWdzIHRv
+IGRlc2NyaWJlIGNlcnRhaW4gZmVhdHVyZXM/IE1heWJlCkhBVkVfTk1JX1dBVENIRE9HID0+IEhB
+VkVfSEFSRExPQ0tVUF9ERVRFQ1RPUl9BUkNIX0JBU0lDX0ZFQVRVUkVTCndvdWxkIGhlbHA/IEkn
+ZCBsb3ZlIHRvIGNvbWUgdXAgd2l0aCBhIGJldHRlciBuYW1lIGZvcgpIQVZFX0hBUkRMT0NLVVBf
+REVURUNUT1JfTk9OX0FSQ0ggYnV0IEkgY291bGRuJ3QgY29tZSB1cCB3aXRoIG9uZS4KTWF5YmUg
+dGhlIHVud2llbGR5ICAiSEFWRV9IQVJETE9DS1VQX0RFVEVDVE9SX1RIQVRfQ09VTlRTX0hSVElN
+RVIiPwoKSWYgeW91IGhhdmUgY29uY3JldGUgc3VnZ2VzdGlvbnMgZm9yIHdoYXQgd291bGQgYmUg
+Y2xlYW5lciwgbGV0IG1lCmtub3cgYW5kIEkgY2FuIHF1ZXVlIHVwIGEgcGF0Y2guIC4uLm9yIEkn
+bSBoYXBweSB0byByZXZpZXcgYSBwYXRjaC4KCi1Eb3VnCgoKX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX18KS2dkYi1idWdyZXBvcnQgbWFpbGluZyBsaXN0Cktn
+ZGItYnVncmVwb3J0QGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZv
+cmdlLm5ldC9saXN0cy9saXN0aW5mby9rZ2RiLWJ1Z3JlcG9ydAo=
