@@ -2,96 +2,118 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9052F719CE2
-	for <lists+kgdb-bugreport@lfdr.de>; Thu,  1 Jun 2023 15:04:08 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id CCF3E71F4D6
+	for <lists+kgdb-bugreport@lfdr.de>; Thu,  1 Jun 2023 23:37:18 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1q4hyJ-0005sW-DO
+	id 1q4pyv-0003fj-7k
 	for lists+kgdb-bugreport@lfdr.de;
-	Thu, 01 Jun 2023 13:04:07 +0000
+	Thu, 01 Jun 2023 21:37:17 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <pmladek@suse.com>) id 1q4hyH-0005sL-DJ
+ (envelope-from <dianders@chromium.org>) id 1q4pyt-0003fc-NM
  for kgdb-bugreport@lists.sourceforge.net;
- Thu, 01 Jun 2023 13:04:05 +0000
+ Thu, 01 Jun 2023 21:37:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=u3dPTilvXGp8uxMn4l+Fg2INpSwUqim9wefqzjAgkeE=; b=nJPlI/2mwQpszwB8j6vixiK7JL
- HOEEtzOIYDYG4wrf+aehGbGLQB+YzFnCergDVCYfO6nxsvQ/XXZxLalnRbtAC7307/W0SeD/VY4GY
- wcBH8po4K9qmwG+jflkjc1cl32298Buq/cuOZiSZeLH4+9hvUopmUaZoL5J2X4a2T8iw=;
+ bh=wK2qTWWUlvlWswvV25kHoV1Nx+E83dWl0Aza3PbFaXw=; b=Zgc5yHO0VH4+uVSJfsT2524JFQ
+ 8X+6EV9XhfWG80hskzLpw/gFepFzPMg0ba1IRnAAlMu1ZnQuYEKkdp4RQBclILqGzmQjLDQpPXvA6
+ 6TduXa3OXHozIw/id8R4YCqzduMXY+VeeE1zP4nAUoivOQ25qJ49/OuhTdfQM8L/9uxg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=u3dPTilvXGp8uxMn4l+Fg2INpSwUqim9wefqzjAgkeE=; b=NKbId5m4RgePXie6QEU0AqhjyY
- GQTPgMiLZeXOxuYDTI9uVAM+KyVRQwpCOSVU1uO9HLUaDb5ipwnhAeT5Zf+98KDdHmpYf+oACe5Nx
- 8iM1Wz9Ws6ntJLXfdXDBFIpxWaX2HQjSCNjETgt3dUOmkKHRYrUWDjYZqOzRB3i4u/UA=;
-Received: from smtp-out1.suse.de ([195.135.220.28])
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=wK2qTWWUlvlWswvV25kHoV1Nx+E83dWl0Aza3PbFaXw=; b=h
+ Il9ryUaTAD7YDANjzGMG+rk9Eb6veMMQEPSHZdJRfo/MUYFWcr4J7PBjAwjzM6UvQpbNuDmcQrdTP
+ o6Dh2CfUYnW4CtH37wgbxuBgYQDqaoocXAc3MRE11Mei86ELgya+9PLBNWt4KE5C0dOf83zGI5ZuN
+ u1EtU0CYNv7hNdD4=;
+Received: from mail-pf1-f175.google.com ([209.85.210.175])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1q4hyA-0002m3-CU for kgdb-bugreport@lists.sourceforge.net;
- Thu, 01 Jun 2023 13:04:04 +0000
-Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
- by smtp-out1.suse.de (Postfix) with ESMTP id 2C0F221980;
- Thu,  1 Jun 2023 13:03:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
- t=1685624632; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=u3dPTilvXGp8uxMn4l+Fg2INpSwUqim9wefqzjAgkeE=;
- b=sWoQjeSwqeyLwmTMHbHRK38BwL4BPEazkQloeg0LItKG4j9/aawcmj88GFMKrHarpA8e0E
- Ehq1Nt90b/lKIx9jbgcaGJiZEnTuSUReqF0MI+X4gZtM4+WPi/yWoq4XBhz7ZoTF3XDyX7
- nrCbe+8EAxSy9O43hxhmGrxArfXGyzc=
-Received: from suse.cz (pmladek.udp.ovpn2.prg.suse.de [10.100.201.202])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by relay2.suse.de (Postfix) with ESMTPS id 4B9812C142;
- Thu,  1 Jun 2023 13:03:48 +0000 (UTC)
-Date: Thu, 1 Jun 2023 15:03:44 +0200
-To: Douglas Anderson <dianders@chromium.org>
-Message-ID: <ZHiXMK1QPlCpTmKV@alley>
-References: <20230527014153.2793931-1-dianders@chromium.org>
- <20230526184139.10.I821fe7609e57608913fe05abd8f35b343e7a9aae@changeid>
+ id 1q4pyp-0005Bc-1R for kgdb-bugreport@lists.sourceforge.net;
+ Thu, 01 Jun 2023 21:37:16 +0000
+Received: by mail-pf1-f175.google.com with SMTP id
+ d2e1a72fcca58-64d247a023aso1064014b3a.2
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Thu, 01 Jun 2023 14:37:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1685655425; x=1688247425;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=wK2qTWWUlvlWswvV25kHoV1Nx+E83dWl0Aza3PbFaXw=;
+ b=VjkyfUKU1dkg5kT2BFXow4+y0HeGzDVKSaONjNBRNW8oLVR/Alj7nxwARt7jAN4AAd
+ LeszuaBRTc4EKoRYji2WEy+1ZUighHRYU33p6yuhIh4aTq/1brBqn37H8mLeVIu/k+4w
+ OX1kckaXSmVRq+aZdP5wkU6jO0HaJRTPBztMw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1685655425; x=1688247425;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=wK2qTWWUlvlWswvV25kHoV1Nx+E83dWl0Aza3PbFaXw=;
+ b=N6M4Aj3CmZKhUwBR3CPjpl3pxP/ly8CrR/ABP3KKgvRog6yu83Izbd9pq0L0q8pcyO
+ JXuGIdOwb78GgOymG64YvK017s9uP90OnE6BCu0mMSXUNZst4bzQGlrlu+7YpDFsnz3L
+ pq6Frk80qEeaCU+t7ivzBFrYz/zMWJHD+nEVACB5zkcCgY70rmy0O7oKiou5hE/Au0TP
+ 3m4g7Z6VF/kXvc0yGrweI9f284ffMGP0OF74cig920UXbaWFDd2cj+UjtzTLshJ4YgQA
+ hjWvo6GD80cvNOwnl6HD3HwgBUcpXrEMnjG2IoE/IVjuhoOV6pjqVdEVGiY/1WPMDOWA
+ IbsA==
+X-Gm-Message-State: AC+VfDyJAZi1Fmm1/vKyyxn6EwkB/8Fyf9ulDhNHWYoASblBypOgQEtE
+ nJ04JKZf7E08B2cEXtUnctk6iA==
+X-Google-Smtp-Source: ACHHUZ5HygCX8YZytHhbbDr3bRwb0rXBa6fo96DufozZDOKQ1Pv8Ou3d9q1G/o0NgyZNtzPCEB3dPQ==
+X-Received: by 2002:a05:6a20:4299:b0:10f:b53d:8641 with SMTP id
+ o25-20020a056a20429900b0010fb53d8641mr9155808pzj.46.1685655425420; 
+ Thu, 01 Jun 2023 14:37:05 -0700 (PDT)
+Received: from tictac2.mtv.corp.google.com ([2620:15c:9d:2:11b8:2d2:7e02:6bff])
+ by smtp.gmail.com with ESMTPSA id
+ g22-20020aa78756000000b0064d48d98260sm5319534pfo.156.2023.06.01.14.37.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 01 Jun 2023 14:37:04 -0700 (PDT)
+From: Douglas Anderson <dianders@chromium.org>
+To: Mark Rutland <mark.rutland@arm.com>,
+ Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>,
+ Sumit Garg <sumit.garg@linaro.org>,
+ Daniel Thompson <daniel.thompson@linaro.org>, Marc Zyngier <maz@kernel.org>
+Date: Thu,  1 Jun 2023 14:31:44 -0700
+Message-ID: <20230601213440.2488667-1-dianders@chromium.org>
+X-Mailer: git-send-email 2.41.0.rc2.161.g9c6817b8e7-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230526184139.10.I821fe7609e57608913fe05abd8f35b343e7a9aae@changeid>
-X-Spam-Score: -2.5 (--)
+X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Fri 2023-05-26 18:41:40,
- Douglas Anderson wrote: > HAVE_HARDLOCKUP_DETECTOR_NON_ARCH
- is a mouthful and > confusing. HAVE_HARDLOCKUP_DETECTOR_PERF_OR_BUDDY is
- even more of a > mouthful, but probably [...] 
- Content analysis details:   (-2.5 points, 6.0 required)
+ Content preview: This is an attempt to resurrect Sumit's old patch series [1]
+ that allowed us to use the arm64 pseudo-NMI to get backtraces of CPUs and
+ also to round up CPUs in kdb/kgdb. The last post from Sumit that [...] 
+ Content analysis details:   (-0.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [195.135.220.28 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.210.175 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.210.175 listed in list.dnswl.org]
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
-X-Headers-End: 1q4hyA-0002m3-CU
-Subject: Re: [Kgdb-bugreport] [PATCH 10/10] watchdog/hardlockup: Rename
- HAVE_HARDLOCKUP_DETECTOR_NON_ARCH to ..._PERF_OR_BUDDY
+ valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1q4pyp-0005Bc-1R
+Subject: [Kgdb-bugreport] [PATCH v9 0/7] arm64: Add debug IPI for backtraces
+ / kgdb; try to use NMI for it
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -103,200 +125,116 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-From: Petr Mladek via Kgdb-bugreport <kgdb-bugreport@lists.sourceforge.net>
-Reply-To: Petr Mladek <pmladek@suse.com>
-Cc: kgdb-bugreport@lists.sourceforge.net, linux-kernel@vger.kernel.org,
- Nicholas Piggin <npiggin@gmail.com>, linux-perf-users@vger.kernel.org,
- Christophe Leroy <christophe.leroy@csgroup.eu>,
- Michael Ellerman <mpe@ellerman.id.au>, sparclinux@vger.kernel.org,
- Andrew Morton <akpm@linux-foundation.org>, linuxppc-dev@lists.ozlabs.org,
- "David S . Miller" <davem@davemloft.net>
+Cc: Lecopzer Chen <lecopzer.chen@mediatek.com>,
+ Peter Zijlstra <peterz@infradead.org>, kgdb-bugreport@lists.sourceforge.net,
+ linux-kernel@vger.kernel.org, Ingo Molnar <mingo@kernel.org>,
+ Valentin Schneider <vschneid@redhat.com>,
+ Masahiro Yamada <masahiroy@kernel.org>,
+ "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
+ Ard Biesheuvel <ardb@kernel.org>, Chen-Yu Tsai <wens@csie.org>,
+ Masayoshi Mizuma <msys.mizuma@gmail.com>, Wei Li <liwei391@huawei.com>,
+ Frederic Weisbecker <frederic@kernel.org>, Stephen Boyd <swboyd@chromium.org>,
+ Ben Dooks <ben-linux@fluff.org>, Thomas Gleixner <tglx@linutronix.de>,
+ Josh Poimboeuf <jpoimboe@kernel.org>, linux-arm-kernel@lists.infradead.org,
+ Andrey Konovalov <andreyknvl@gmail.com>, ito-yuichi@fujitsu.com,
+ linux-perf-users@vger.kernel.org, "Gautham R. Shenoy" <gautham.shenoy@amd.com>,
+ Jason Wessel <jason.wessel@windriver.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Fri 2023-05-26 18:41:40, Douglas Anderson wrote:
-> HAVE_HARDLOCKUP_DETECTOR_NON_ARCH is a mouthful and
-> confusing. HAVE_HARDLOCKUP_DETECTOR_PERF_OR_BUDDY is even more of a
-> mouthful, but probably less confusing. Rename the Kconfig names.
+This is an attempt to resurrect Sumit's old patch series [1] that
+allowed us to use the arm64 pseudo-NMI to get backtraces of CPUs and
+also to round up CPUs in kdb/kgdb. The last post from Sumit that I
+could find was v7, so I started my series at v8. I haven't copied all
+of his old changelongs here, but you can find them from the link.
 
-It is better. But I have an idea that might be even better.
+I'm really looking for a way to land this patch series. In response to
+v8, Mark Rutland indicated [2] that he was worried about the soundness
+of pseudo NMI. Those definitely need to get fixed, but IMO this patch
+series could still land in the meantime. That would at least let
+people test with it.
 
-> Signed-off-by: Douglas Anderson <dianders@chromium.org>
-> ---
-> 
->  lib/Kconfig.debug | 12 ++++++------
->  1 file changed, 6 insertions(+), 6 deletions(-)
-> 
-> diff --git a/lib/Kconfig.debug b/lib/Kconfig.debug
-> index eb1edd5905bc..b9e162698a82 100644
-> --- a/lib/Kconfig.debug
-> +++ b/lib/Kconfig.debug
-> @@ -1058,7 +1058,7 @@ config HARDLOCKUP_DETECTOR_BUDDY
->  # needs SMP). In either case, using the "non-arch" code conflicts with
->  # the NMI watchdog code (which is sometimes used directly and sometimes used
->  # by the arch-provided hardlockup detector).
+Request for anyone reading this: please help indicate your support of
+this patch series landing by replying, even if you don't have the
+background for a full review. My suspicion is that there are a lot of
+people who agree that this would be super useful to get landed.
 
-The comment above still uses the term "no-arch" and tries to
-explain the confusion around it.
+Since v8, I have cleaned up this patch series by integrating the 10th
+patch from v8 [3] into the whole series. As part of this, I renamed
+the "NMI IPI" to the "debug IPI" since it could now be backed by a
+regular IPI in the case that pseudo NMIs weren't available. With the
+fallback, this allowed me to drop some extra patches from the
+series. This feels (to me) to be pretty clean and hopefully others
+agree. Any patch I touched significantly I removed Masayoshi and
+Chen-Yu's tags from.
 
-> -config HAVE_HARDLOCKUP_DETECTOR_NON_ARCH
-> +config HAVE_HARDLOCKUP_DETECTOR_PERF_OR_BUDDY
->  	bool
->  	depends on (HAVE_HARDLOCKUP_DETECTOR_PERF || SMP) && !HAVE_NMI_WATCHDOG
->  	default y
-> @@ -1077,10 +1077,10 @@ config HARDLOCKUP_DETECTOR_PREFER_BUDDY
->  	  an arch-specific hardlockup detector or if resources needed
->  	  for the hardlockup detector are better used for other things.
->  
-> -# This will select the appropriate non-arch hardlockdup detector
-> -config HARDLOCKUP_DETECTOR_NON_ARCH
-> +# This will select the appropriate non-arch hardlockup detector
-> +config HARDLOCKUP_DETECTOR_PERF_OR_BUDDY
->  	bool
-> -	depends on HAVE_HARDLOCKUP_DETECTOR_NON_ARCH
-> +	depends on HAVE_HARDLOCKUP_DETECTOR_PERF_OR_BUDDY
->  	select HARDLOCKUP_DETECTOR_BUDDY if !HAVE_HARDLOCKUP_DETECTOR_PERF || HARDLOCKUP_DETECTOR_PREFER_BUDDY
->  	select HARDLOCKUP_DETECTOR_PERF if HAVE_HARDLOCKUP_DETECTOR_PERF && !HARDLOCKUP_DETECTOR_PREFER_BUDDY
->  
-> @@ -1098,9 +1098,9 @@ config HARDLOCKUP_CHECK_TIMESTAMP
->  config HARDLOCKUP_DETECTOR
->  	bool "Detect Hard Lockups"
->  	depends on DEBUG_KERNEL && !S390
-> -	depends on HAVE_HARDLOCKUP_DETECTOR_NON_ARCH || HAVE_HARDLOCKUP_DETECTOR_ARCH
-> +	depends on HAVE_HARDLOCKUP_DETECTOR_PERF_OR_BUDDY || HAVE_HARDLOCKUP_DETECTOR_ARCH
->  	select LOCKUP_DETECTOR
-> -	select HARDLOCKUP_DETECTOR_NON_ARCH if HAVE_HARDLOCKUP_DETECTOR_NON_ARCH
-> +	select HARDLOCKUP_DETECTOR_PERF_OR_BUDDY if HAVE_HARDLOCKUP_DETECTOR_PERF_OR_BUDDY
->  
->  	help
->  	  Say Y here to enable the kernel to act as a watchdog to detect
+...also in v8, I reorderd the patches a bit in a way that seemed a
+little cleaner to me.
 
-I am sorry but I am still confused by the logic. For me, it is far
-from clear what combinations are possible, impossible, and optional.
+Since v7, I have:
+* Addressed the small amount of feedback that was there for v7.
+* Rebased.
+* Added a new patch that prevents us from spamming the logs with idle
+  tasks.
+* Added an extra patch to gracefully fall back to regular IPIs if
+  pseudo-NMIs aren't there.
 
-Especially, the effect of HAVE_NMI_WATCHDOG and
-HAVE_HARDLOCKUP_DETECTOR_ARCH is quite tricky.
+It can be noted that this patch series works very well with the recent
+"hardlockup" patches that have landed through Andrew Morton's tree and
+are currently in linuxnext. It works especially well with the "buddy"
+lockup detector.
 
-I was playing with it and came up with a more straightforward solution
-and found more possibilities how the simplify the logic. I am going
-to prepare a patchset that would replace this patch.
+[1] https://lore.kernel.org/linux-arm-kernel/1604317487-14543-1-git-send-email-sumit.garg@linaro.org/
+[2] https://lore.kernel.org/lkml/ZFvGqD%2F%2Fpm%2FlZb+p@FVFF77S0Q05N.cambridge.arm.com/
+[3] https://lore.kernel.org/r/20230419155341.v8.10.Ic3659997d6243139d0522fc3afcdfd88d7a5f030@changeid/
 
-Just to get the idea. I made the following changes:
+Changes in v9:
+- Add a warning if we don't have enough IPIs for the NMI IPI
+- Added comments that we might not be using NMI always.
+- Added missing "inline"
+- Added to commit message that this doesn't catch all cases.
+- Fold in v8 patch #10 ("Fallback to a regular IPI if NMI isn't enabled")
+- Moved header file out of "include" since it didn't need to be there.
+- Remove arm64_supports_nmi()
+- Remove fallback for when debug IPI isn't available.
+- Renamed "NMI IPI" to "debug IPI" since it might not be backed by NMI.
+- Update commit description
+- arch_trigger_cpumask_backtrace() no longer returns bool
 
-     + define the values in logical order:
-	+ HAVE_*
-	+ HARDLOCKUP_DETECTOR y/n value
-	+ HARDLOCKUP_DETECTOR_PREFER_BUDDY y/n value
-	+ HARDLOCKUP_DETECTOR_PERF decision based on above
-	+ HARDLOCKUP_DETECTOR_BUDDY decision based on above
+Changes in v8:
+- "Provide a stub kgdb_nmicallback() if !CONFIG_KGDB" new for v8
+- "Tag the arm64 idle functions as __cpuidle" new for v8
+- Removed "#ifdef CONFIG_SMP" since arm64 is always SMP
+- debug_ipi_setup() and debug_ipi_teardown() no longer take cpu param
 
-     + remove HAVE_HARDLOCKUP_DETECTOR_PERF_OR_BUDDY,
-       instead, explicitly define the dependencies on all HAVE_*
-       variables to make it clear what it possible
-       and what is not possible
+Douglas Anderson (2):
+  arm64: idle: Tag the arm64 idle functions as __cpuidle
+  kgdb: Provide a stub kgdb_nmicallback() if !CONFIG_KGDB
 
-     + remove HARDLOCKUP_DETECTOR_PERF_OR_BUDDY,
-       instead use "imply" in HARDLOCKUP_DETECTOR to trigger
-       re-evaluation of HARDLOCKUP_DETECTOR_PERF and
-       HARDLOCKUP_DETECTOR_BUDDY decisions
+Sumit Garg (5):
+  irqchip/gic-v3: Enable support for SGIs to act as NMIs
+  arm64: Add framework for a debug IPI
+  arm64: smp: Assign and setup the debug IPI
+  arm64: ipi_debug: Add support for backtrace using the debug IPI
+  arm64: kgdb: Roundup cpus using the debug IPI
 
+ arch/arm64/include/asm/irq.h  |   3 +
+ arch/arm64/kernel/Makefile    |   2 +-
+ arch/arm64/kernel/idle.c      |   4 +-
+ arch/arm64/kernel/ipi_debug.c | 102 ++++++++++++++++++++++++++++++++++
+ arch/arm64/kernel/ipi_debug.h |  13 +++++
+ arch/arm64/kernel/kgdb.c      |  14 +++++
+ arch/arm64/kernel/smp.c       |  11 ++++
+ drivers/irqchip/irq-gic-v3.c  |  29 +++++++---
+ include/linux/kgdb.h          |   1 +
+ 9 files changed, 168 insertions(+), 11 deletions(-)
+ create mode 100644 arch/arm64/kernel/ipi_debug.c
+ create mode 100644 arch/arm64/kernel/ipi_debug.h
 
-My current version has the following in lib/Kconfig.devel:
+-- 
+2.41.0.rc2.161.g9c6817b8e7-goog
 
---- cut ---
-config HAVE_HARDLOCKUP_DETECTOR_BUDDY
-	bool
-	depends on SMP
-	default y
-
-#
-# arch/ can define HAVE_NMI_WATCHDOG to provide their own hard
-# lockup detector rather than the generic perf or buddy detector.
-#
-config HARDLOCKUP_DETECTOR
-	bool "Detect Hard Lockups"
-	depends on DEBUG_KERNEL && !S390
-	depends on HAVE_HARDLOCKUP_DETECTOR_PERF || HAVE_HARDLOCKUP_DETECTOR_BUDDY || HAVE_NMI_WATCHDOG
-	imply HARDLOCKUP_DETECTOR_PERF
-	imply HARDLOCKUP_DETECTOR_BUDDY
-	select LOCKUP_DETECTOR
-
-	help
-	  Say Y here to enable the kernel to act as a watchdog to detect
-	  hard lockups.
-
-	  Hardlockups are bugs that cause the CPU to loop in kernel mode
-	  for more than 10 seconds, without letting other interrupts have a
-	  chance to run.  The current stack trace is displayed upon detection
-	  and the system will stay locked up.
-
-#
-# The architecture-specific variant is always used when available,
-# see HAVE_NMI_WATCHDOG
-#
-config HARDLOCKUP_DETECTOR_PREFER_BUDDY
-	bool "Prefer the buddy CPU hardlockup detector"
-	depends on HARDLOCKUP_DETECTOR
-	depends on HAVE_HARDLOCKUP_DETECTOR_PERF && HAVE_HARDLOCKUP_DETECTOR_BUDDY && !HAVE_NMI_WATCHDOG
-	default n
-	help
-	  Say Y here to prefer the buddy hardlockup detector over the perf one.
-
-	  With the buddy detector, each CPU uses its softlockup hrtimer
-	  to check that the next CPU is processing hrtimer interrupts by
-	  verifying that a counter is increasing.
-
-	  This hardlockup detector is useful on systems that don't have
-	  an arch-specific hardlockup detector or if resources needed
-	  for the hardlockup detector are better used for other things.
-
-config HARDLOCKUP_DETECTOR_PERF
-	bool
-	depends on HARDLOCKUP_DETECTOR
-	depends on HAVE_HARDLOCKUP_DETECTOR_PERF && !HARDLOCKUP_DETECTOR_PREFER_BUDDY && !HAVE_NMI_WATCHDOG
-	select HARDLOCKUP_DETECTOR_COUNTS_HRTIMER
-
-config HARDLOCKUP_DETECTOR_BUDDY
-	bool
-	depends on HARDLOCKUP_DETECTOR
-	depends on HAVE_HARDLOCKUP_DETECTOR_BUDDY
-	depends on HARDLOCKUP_DETECTOR_PREFER_BUDDY || !HAVE_HARDLOCKUP_DETECTOR_PERF
-	depends on !HAVE_NMI_WATCHDOG
-	select HARDLOCKUP_DETECTOR_COUNTS_HRTIMER
-
-# Both the "perf" and "buddy" hardlockup detectors need counting hrtimer
-# interrupts.
-config HARDLOCKUP_DETECTOR_COUNTS_HRTIMER
-	bool
-	depends on HARDLOCKUP_DETECTOR_PERF || HARDLOCKUP_DETECTOR_BUDDY
-	select SOFTLOCKUP_DETECTOR
---- cut ---
-
-Also I am going to break the dependency between HAVE_NMI_WATCHDOG and
-HAVE_HADRDLOCKUP_DETECTOR_ARCH. HAVE_NMI_WATCHDOG is needed only
-for the very special powerpc64 watchdog. I am going to make sure
-that it will be used only there and it will not be needed for
-sparc and arm. As a result, we would have 4 separate implementations:
-
-    + HAVE_HARDLOCKUP_DETECTOR_BUDDY enabled on any SMP system
-
-    + HAVE_HARDLOCKUP_DETECTOR_PERF enabled on architectures supporting
-	this perf-based solution
-
-    + HAVE_HARDLOCKUP_DETECTOR_ARCH enabled on architectures which
-	need another solution instead of the perf interface;
-	they would support the usual HARDLOCKUP_DETECTOR command
-	line parameters and sysctl interface
-
-    + HAVE_NMI_WATCHDOG enabled just on powerpc64; it is special
-	solution with its own command line parameters. Also it does
-	not support hardlockup sysctl interface. I think about
-	renaming it to HAVE_HARDLOCKUP_DETECTOR_POWERPC64 or
-	_CUSTOM.
-
-Best Regards,
-Petr
 
 
 _______________________________________________
