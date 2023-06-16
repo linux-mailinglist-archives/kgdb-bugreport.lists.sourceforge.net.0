@@ -2,96 +2,131 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A69C273349F
-	for <lists+kgdb-bugreport@lfdr.de>; Fri, 16 Jun 2023 17:21:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A530973372D
+	for <lists+kgdb-bugreport@lfdr.de>; Fri, 16 Jun 2023 19:10:01 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1qABGZ-0005Ja-L1
+	id 1qACxT-00019T-Jv
 	for lists+kgdb-bugreport@lfdr.de;
-	Fri, 16 Jun 2023 15:21:36 +0000
+	Fri, 16 Jun 2023 17:10:00 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <pmladek@suse.com>) id 1qABGV-0005JT-ML
+ (envelope-from <dianders@chromium.org>) id 1qACxS-00019N-EW
  for kgdb-bugreport@lists.sourceforge.net;
- Fri, 16 Jun 2023 15:21:32 +0000
+ Fri, 16 Jun 2023 17:09:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
+ Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
+ Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+ :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=iCxAnuiAG4ygU56OJZD6HlNc1oJ5LBT0CL0FndkD77E=; b=BWFvSD+1zuJyhM4/Rmeqf3B3uX
- Nfw4GlQRuRRFHP7NhX3NjMlMaWu/9XiSQmlE/aI3qCRGRM3BDU/oHrPLVacoOxs68CATLiAvBjOIi
- VYj7cCaWt+lDpjGOvOBdbUsT18X40eksoUmZVNzKTtx5LAoe2IaaNuwqCH7XyLewG2hk=;
+ bh=RlH6N4BeYWriIEzthku3f2s3TDY9tC006RTYxc81VbY=; b=bTqFO5HWH55Lo0bPz45oO8hDrc
+ MSRSHPRGThEzvwWCOZJ7IihT0ljwrBg2DuuSkC/ibyeG5ZTB2xMYg+NONCDzP8ZrXMC4bf38kqQMd
+ rR55B2ahJpA8jTQNTus8F+EOz81ZOnuMDRdz8e7hiTUx98U9PgxwHvEEaK2g7j5e/F6A=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
+ :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=iCxAnuiAG4ygU56OJZD6HlNc1oJ5LBT0CL0FndkD77E=; b=Ji2Kalekc0NYnrQVVOu8xutGXF
- MoOu21GtNeZGSM8f1M73Wr6o5lZA3vEH9J5a2b4m5crHS/iVefsuWHE4+/6X3pcXx0ZmHCe6OqJid
- YnGA4KoO9BlVHrbQIW9NUOztRZV+V/4dNXxxvrnfg2nvrd7gRnc4wNOTO63/w4VQZev4=;
-Received: from smtp-out2.suse.de ([195.135.220.29])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=RlH6N4BeYWriIEzthku3f2s3TDY9tC006RTYxc81VbY=; b=MUwKQlkwUzgZTfuvKcJpqQDYgy
+ rwvfLhOx9METrNzjSVeYbI6DVKm4JqN9VQVb5SjpcSb+wL7wo8db6PrdQ3swXEz2pnOsErNAn+QV3
+ XaCbEBSa0Y4DGdlDuZ4h7P1KKNGSUl/z1/ujNHU5GgY62iC7lDpDxs3IIentApz94MVc=;
+Received: from mail-ed1-f50.google.com ([209.85.208.50])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1qABGT-000227-4m for kgdb-bugreport@lists.sourceforge.net;
- Fri, 16 Jun 2023 15:21:32 +0000
-Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
- by smtp-out2.suse.de (Postfix) with ESMTP id DB79E1F7AB;
- Fri, 16 Jun 2023 15:21:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
- t=1686928882; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=iCxAnuiAG4ygU56OJZD6HlNc1oJ5LBT0CL0FndkD77E=;
- b=UR8LVjAMNY1NnmzQ7flafLkPmJeHFs+70HIwy87aZdn0U40lAAatxdBvkxVAjndAxXQ0DH
- Wzlo3GPFS5RFgX2Y3tmRK3p6tQDq9jTidMdgF5dJCPTQQbzyxHV7VGEZrbJl/Lr+88z+pn
- x8/UlDajd9OLFWIbP6eBJ/UNLlP8dQo=
-Received: from suse.cz (unknown [10.100.208.146])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by relay2.suse.de (Postfix) with ESMTPS id 911482C141;
- Fri, 16 Jun 2023 15:21:22 +0000 (UTC)
-Date: Fri, 16 Jun 2023 17:21:22 +0200
-To: Andrew Morton <akpm@linux-foundation.org>,
- Douglas Anderson <dianders@chromium.org>
-Message-ID: <ZIx98kCuA0P_pE4h@alley>
-References: <20230616150618.6073-1-pmladek@suse.com>
+ id 1qACxN-0063pF-Rr for kgdb-bugreport@lists.sourceforge.net;
+ Fri, 16 Jun 2023 17:09:59 +0000
+Received: by mail-ed1-f50.google.com with SMTP id
+ 4fb4d7f45d1cf-51a2fa4a45eso1201240a12.0
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Fri, 16 Jun 2023 10:09:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1686935385; x=1689527385;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=RlH6N4BeYWriIEzthku3f2s3TDY9tC006RTYxc81VbY=;
+ b=DpRGh5L4DZO0G3MQMESWZr/zmYeCrJlI3KwNFUQDHC9I1G3kxui98TCIVe41FS70Tz
+ Ghog+h9ZMDHGORN8I9/MrfXff6J9I+sJ3xPlan8HhF1oR295l/89WYwRWIEXy1j5Xzd0
+ kxUE386rWnZ+hstF/pcCW3JD9CrM1NPnmzpZg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1686935385; x=1689527385;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=RlH6N4BeYWriIEzthku3f2s3TDY9tC006RTYxc81VbY=;
+ b=l7nM9yt1y7mJ3JyHdHRi1vDFnIyg380YlrWoiahgUn0Il4oWPzuwy4z946EdzwNHq/
+ 6Ynk/0+SM39r+G9AvqexMWzzSrLdmHMrwyNo7PlNtvHH3cHbg1vPv+mcClnr5gvfeUYe
+ EjDI0npw2ebktePYvJMS8aCjYFgtpGkxtZ6t3R5a2io8prThWRyXjupX3pcR4M5GNQbq
+ dAvI66GZ/JuRhAzn0th5rPNOm+pWVkbheeFKW9syw4yaEMIUJWklMXOUmxIY0Zk5gz1l
+ QwlZ6Z3KMBz+gEAgKY1jK6wq+tbnwoGRONplKsCCc1Sy77fzlNCq+nL8W9QTZZuzQKhE
+ /iAw==
+X-Gm-Message-State: AC+VfDy5GCzvNZCuBvZObf4v7hKf2LEQjM4gi0SMpAprnu/YnrfIlvAx
+ wCUR9ZGTD7AhOre1W9K4t1l9yIr0zFiugQlIu+/FDG/p
+X-Google-Smtp-Source: ACHHUZ7XSyqqbGJc2rsLj9zh8c279XD30kkOe20LrdxeSGqFMgsohZPQlVWCrxbfC24D6PAfSKAhEw==
+X-Received: by 2002:a17:906:da83:b0:982:ab8d:1e08 with SMTP id
+ xh3-20020a170906da8300b00982ab8d1e08mr2625715ejb.59.1686933855772; 
+ Fri, 16 Jun 2023 09:44:15 -0700 (PDT)
+Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com.
+ [209.85.208.44]) by smtp.gmail.com with ESMTPSA id
+ z6-20020a1709060ac600b009745ecf5438sm10914952ejf.193.2023.06.16.09.44.15
+ for <kgdb-bugreport@lists.sourceforge.net>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 16 Jun 2023 09:44:15 -0700 (PDT)
+Received: by mail-ed1-f44.google.com with SMTP id
+ 4fb4d7f45d1cf-51400fa347dso115a12.0
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Fri, 16 Jun 2023 09:44:15 -0700 (PDT)
+X-Received: by 2002:a50:bac3:0:b0:506:b280:4993 with SMTP id
+ x61-20020a50bac3000000b00506b2804993mr233742ede.2.1686933854748; Fri, 16 Jun
+ 2023 09:44:14 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230616150618.6073-1-pmladek@suse.com>
-X-Spam-Score: -2.5 (--)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+References: <20230616150618.6073-1-pmladek@suse.com>
+ <20230616150618.6073-2-pmladek@suse.com>
+In-Reply-To: <20230616150618.6073-2-pmladek@suse.com>
+From: Doug Anderson <dianders@chromium.org>
+Date: Fri, 16 Jun 2023 09:44:01 -0700
+X-Gmail-Original-Message-ID: <CAD=FV=XUWnjCAjZKb5wYcGhC=T8+hoUr+1junoH5ognge1aZHg@mail.gmail.com>
+Message-ID: <CAD=FV=XUWnjCAjZKb5wYcGhC=T8+hoUr+1junoH5ognge1aZHg@mail.gmail.com>
+To: Petr Mladek <pmladek@suse.com>
+X-Spam-Score: -0.2 (/)
+X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Fri 2023-06-16 17:06:12, Petr Mladek wrote: > Hi, > > this
- patchset is supposed to replace the last patch in the patchset cleaning >
- up after introducing the buddy detector, see > https://lore.kern [...] 
- Content analysis details:   (-2.5 points, 6.0 required)
- pts rule name              description
+ 
+ Content preview:  Hi, On Fri, Jun 16, 2023 at 8:06 AM Petr Mladek <pmladek@suse.com>
+    wrote: > > There are four possible variants of hardlockup detectors: > >
+   + buddy: available when SMP is set. > > + perf: available when [...] 
+ 
+ Content analysis details:   (-0.2 points, 6.0 required)
+ 
+  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [195.135.220.29 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+                              no trust
+                             [209.85.208.50 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+                             [209.85.208.50 listed in wl.mailspike.net]
+  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+                             valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+                             author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+                             envelope-from domain
+ -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1qABGT-000227-4m
-Subject: Re: [Kgdb-bugreport] [PATCH v2 0/6] watchdog/hardlockup: Cleanup
- configuration of hardlockup detectors
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1qACxN-0063pF-Rr
+Subject: Re: [Kgdb-bugreport] [PATCH v2 1/6] watchdog/hardlockup: Sort
+ hardlockup detector related config values a logical way
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -103,678 +138,55 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-From: Petr Mladek via Kgdb-bugreport <kgdb-bugreport@lists.sourceforge.net>
-Reply-To: Petr Mladek <pmladek@suse.com>
 Cc: kgdb-bugreport@lists.sourceforge.net, linux-kernel@vger.kernel.org,
+ Nicholas Piggin <npiggin@gmail.com>, linux-perf-users@vger.kernel.org,
  Christophe Leroy <christophe.leroy@csgroup.eu>,
- linux-perf-users@vger.kernel.org, Nicholas Piggin <npiggin@gmail.com>,
  Michael Ellerman <mpe@ellerman.id.au>, sparclinux@vger.kernel.org,
- linuxppc-dev@lists.ozlabs.org, "David S . Miller" <davem@davemloft.net>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+ Andrew Morton <akpm@linux-foundation.org>, linuxppc-dev@lists.ozlabs.org,
+ "David S . Miller" <davem@davemloft.net>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Fri 2023-06-16 17:06:12, Petr Mladek wrote:
-> Hi,
-> 
-> this patchset is supposed to replace the last patch in the patchset cleaning
-> up after introducing the buddy detector, see
-> https://lore.kernel.org/r/20230526184139.10.I821fe7609e57608913fe05abd8f35b343e7a9aae@changeid
-> 
-> Changes against v1:
-> 
->   + Better explained the C-like ordering in the 1st patch.
-> 
->   + Squashed patches for splitting and renaming HAVE_NMI_WATCHDOG,
->     updated commit message with the history and more facts.
-> 
->   + Updated comments about the sparc64 variant. It is not handled together
->     with the softlockup detector. In fact, it is always build. And it even
->     used to be always enabled until the commit 7a5c8b57cec93196b ("sparc:
->     implement watchdog_nmi_enable and watchdog_nmi_disable") added in
->     v4.10-rc1.
-> 
->     I realized this when updating the comment for the 4th patch. My original
->     statement in v1 patchset was based on code reading. I looked at it from
->     a bad side.
-> 
->   + Removed superfluous "default n"
->   + Fixed typos.
-
-I sometimes find the diff between the two versions useful. Especially, when the
-patches are not trivial and the last version made only cosmetic
-changes.
-
-This is what I got by comparing "git format-patch" generated patchsets:
-
-diff -purN watchdog-buddy-hardlockup-detector-config-cleanup-v1-iter1-reference/0000-cover-letter.patch watchdog-buddy-hardlockup-detector-config-cleanup-v2-iter1/0000-cover-letter.patch
---- watchdog-buddy-hardlockup-detector-config-cleanup-v1-iter1-reference/0000-cover-letter.patch	2023-06-16 16:42:07.769941775 +0200
-+++ watchdog-buddy-hardlockup-detector-config-cleanup-v2-iter1/0000-cover-letter.patch	2023-06-16 16:39:42.179877676 +0200
-@@ -1,9 +1,33 @@
--From 0456ed568d98ba5bba8148e4f60d769e3c5a6c7a Mon Sep 17 00:00:00 2001
-+From bcf4dfab5a64ee691eb5154b1361ed59610c9387 Mon Sep 17 00:00:00 2001
- From: Petr Mladek <pmladek@suse.com>
--Date: Fri, 16 Jun 2023 16:42:07 +0200
--Subject: [PATCH 0/6] *** SUBJECT HERE ***
-+Date: Fri, 16 Jun 2023 16:28:13 +0200
-+Subject: [PATCH v2 0/6] watchdog/hardlockup: Cleanup configuration of hardlockup detectors
- 
--*** BLURB HERE ***
-+Hi,
-+
-+this patchset is supposed to replace the last patch in the patchset cleaning
-+up after introducing the buddy detector, see
-+https://lore.kernel.org/r/20230526184139.10.I821fe7609e57608913fe05abd8f35b343e7a9aae@changeid
-+
-+Changes against v1:
-+
-+  + Better explained the C-like ordering in the 1st patch.
-+
-+  + Squashed patches for splitting and renaming HAVE_NMI_WATCHDOG,
-+    updated commit message with the history and more facts.
-+
-+  + Updated comments about the sparc64 variant. It is not handled together
-+    with the softlockup detector. In fact, it is always build. And it even
-+    used to be always enabled until the commit 7a5c8b57cec93196b ("sparc:
-+    implement watchdog_nmi_enable and watchdog_nmi_disable") added in
-+    v4.10-rc1.
-+
-+    I realized this when updating the comment for the 4th patch. My original
-+    statement in v1 patchset was based on code reading. I looked at it from
-+    a bad side.
-+
-+  + Removed superfluous "default n"
-+  + Fixed typos.
- 
- Petr Mladek (6):
-   watchdog/hardlockup: Sort hardlockup detector related config values a
-@@ -19,12 +43,12 @@ Petr Mladek (6):
-  arch/powerpc/Kconfig           |   5 +-
-  arch/powerpc/include/asm/nmi.h |   2 -
-  arch/sparc/Kconfig             |   2 +-
-- arch/sparc/Kconfig.debug       |  20 ++++++
-+ arch/sparc/Kconfig.debug       |  14 ++++
-  arch/sparc/include/asm/nmi.h   |   1 -
-  include/linux/nmi.h            |  14 ++--
-  kernel/watchdog.c              |   2 +-
-- lib/Kconfig.debug              | 115 +++++++++++++++++++--------------
-- 9 files changed, 104 insertions(+), 74 deletions(-)
-+ lib/Kconfig.debug              | 114 ++++++++++++++++++---------------
-+ 9 files changed, 97 insertions(+), 74 deletions(-)
- 
- -- 
- 2.35.3
-diff -purN watchdog-buddy-hardlockup-detector-config-cleanup-v1-iter1-reference/0001-watchdog-hardlockup-Sort-hardlockup-detector-related.patch watchdog-buddy-hardlockup-detector-config-cleanup-v2-iter1/0001-watchdog-hardlockup-Sort-hardlockup-detector-related.patch
---- watchdog-buddy-hardlockup-detector-config-cleanup-v1-iter1-reference/0001-watchdog-hardlockup-Sort-hardlockup-detector-related.patch	2023-06-16 16:42:07.741941379 +0200
-+++ watchdog-buddy-hardlockup-detector-config-cleanup-v2-iter1/0001-watchdog-hardlockup-Sort-hardlockup-detector-related.patch	2023-06-16 16:28:53.594682369 +0200
-@@ -1,7 +1,7 @@
--From 9d643e4254b224d22dd1411c51386ab686c052a7 Mon Sep 17 00:00:00 2001
-+From bd7019bff3a28fb0bc163308101118adccf699d3 Mon Sep 17 00:00:00 2001
- From: Petr Mladek <pmladek@suse.com>
- Date: Thu, 1 Jun 2023 15:35:09 +0200
--Subject: [PATCH 1/6] watchdog/hardlockup: Sort hardlockup detector related
-+Subject: [PATCH v2 1/6] watchdog/hardlockup: Sort hardlockup detector related
-  config values a logical way
- 
- There are four possible variants of hardlockup detectors:
-@@ -40,6 +40,14 @@ The logical order is:
-       are temporary variables that are going to be removed in
-       a followup patch.
- 
-+This is a preparation step for further cleanup. It will change the logic
-+without shuffling the definitions.
-+
-+This change temporary breaks the C-like ordering where the variables are
-+declared or defined before they are used. It is not really needed for
-+Kconfig. Also the following patches will rework the logic so that
-+the ordering will be C-like in the end.
-+
- The patch just shuffles the definitions. It should not change the existing
- behavior.
- 
-diff -purN watchdog-buddy-hardlockup-detector-config-cleanup-v1-iter1-reference/0002-watchdog-hardlockup-Make-the-config-checks-more-stra.patch watchdog-buddy-hardlockup-detector-config-cleanup-v2-iter1/0002-watchdog-hardlockup-Make-the-config-checks-more-stra.patch
---- watchdog-buddy-hardlockup-detector-config-cleanup-v1-iter1-reference/0002-watchdog-hardlockup-Make-the-config-checks-more-stra.patch	2023-06-16 16:42:07.745941436 +0200
-+++ watchdog-buddy-hardlockup-detector-config-cleanup-v2-iter1/0002-watchdog-hardlockup-Make-the-config-checks-more-stra.patch	2023-06-16 16:28:53.594682369 +0200
-@@ -1,7 +1,7 @@
--From b36400b9adf92a911dc2b9ee8f471cf3066a9f74 Mon Sep 17 00:00:00 2001
-+From 91fabffa4aafae0611130d4de0471e847cee67dc Mon Sep 17 00:00:00 2001
- From: Petr Mladek <pmladek@suse.com>
- Date: Thu, 1 Jun 2023 17:10:11 +0200
--Subject: [PATCH 2/6] watchdog/hardlockup: Make the config checks more
-+Subject: [PATCH v2 2/6] watchdog/hardlockup: Make the config checks more
-  straightforward
- 
- There are four possible variants of hardlockup detectors:
-@@ -55,19 +55,19 @@ Make the logic more straightforward by t
- 
-     Another nice side effect is that HARDLOCKUP_DETECTOR_PREFER_BUDDY
-     value is not preserved when the global switch is disabled.
--    The user has to make the decision when it is enabled again.
-+    The user has to make the decision again when it gets re-enabled.
- 
- Signed-off-by: Petr Mladek <pmladek@suse.com>
- ---
-- arch/Kconfig      | 22 ++++++++++++-----
-- lib/Kconfig.debug | 63 ++++++++++++++++++++++++++++-------------------
-+ arch/Kconfig      | 23 +++++++++++++-----
-+ lib/Kconfig.debug | 62 +++++++++++++++++++++++++++--------------------
-  2 files changed, 53 insertions(+), 32 deletions(-)
- 
- diff --git a/arch/Kconfig b/arch/Kconfig
--index 422f0ffa269e..13c6e596cf9e 100644
-+index 422f0ffa269e..77e5af5fda3f 100644
- --- a/arch/Kconfig
- +++ b/arch/Kconfig
--@@ -404,17 +404,27 @@ config HAVE_NMI_WATCHDOG
-+@@ -404,17 +404,28 @@ config HAVE_NMI_WATCHDOG
-  	depends on HAVE_NMI
-  	bool
-  	help
-@@ -75,13 +75,14 @@ index 422f0ffa269e..13c6e596cf9e 100644
- -	  asm/nmi.h, and defines its own watchdog_hardlockup_probe() and
- -	  arch_touch_nmi_watchdog().
- +	  The arch provides its own hardlockup detector implementation instead
--+	  of the generic perf one.
-++	  of the generic ones.
- +
- +	  Sparc64 defines this variable without HAVE_HARDLOCKUP_DETECTOR_ARCH.
--+	  It does _not_ use the command line parameters and sysctl interface
--+	  used by generic hardlockup detectors. Instead it is enabled/disabled
--+	  by the top-level watchdog interface that is common for both softlockup
--+	  and hardlockup detectors.
-++	  It is the last arch-specific implementation which was developed before
-++	  adding the common infrastructure for handling hardlockup detectors.
-++	  It is always built. It does _not_ use the common command line
-++	  parameters and sysctl interface, except for
-++	  /proc/sys/kernel/nmi_watchdog.
-  
-  config HAVE_HARDLOCKUP_DETECTOR_ARCH
-  	bool
-@@ -102,7 +103,7 @@ index 422f0ffa269e..13c6e596cf9e 100644
-  config HAVE_PERF_REGS
-  	bool
- diff --git a/lib/Kconfig.debug b/lib/Kconfig.debug
--index 3e91fa33c7a0..d201f5d3876b 100644
-+index 3e91fa33c7a0..a0b0c4decb89 100644
- --- a/lib/Kconfig.debug
- +++ b/lib/Kconfig.debug
- @@ -1035,16 +1035,33 @@ config BOOTPARAM_SOFTLOCKUP_PANIC
-@@ -119,7 +120,7 @@ index 3e91fa33c7a0..d201f5d3876b 100644
- -# lockup detector rather than the perf based detector.
- +# Global switch whether to build a hardlockup detector at all. It is available
- +# only when the architecture supports at least one implementation. There are
--+# two exceptions. The hardlockup detector is newer enabled on:
-++# two exceptions. The hardlockup detector is never enabled on:
- +#
- +#	s390: it reported many false positives there
- +#
-@@ -143,7 +144,7 @@ index 3e91fa33c7a0..d201f5d3876b 100644
-  
-  	help
-  	  Say Y here to enable the kernel to act as a watchdog to detect
--@@ -1055,9 +1072,15 @@ config HARDLOCKUP_DETECTOR
-+@@ -1055,9 +1072,14 @@ config HARDLOCKUP_DETECTOR
-  	  chance to run.  The current stack trace is displayed upon detection
-  	  and the system will stay locked up.
-  
-@@ -156,11 +157,10 @@ index 3e91fa33c7a0..d201f5d3876b 100644
- +	depends on HARDLOCKUP_DETECTOR
- +	depends on HAVE_HARDLOCKUP_DETECTOR_PERF && HAVE_HARDLOCKUP_DETECTOR_BUDDY
- +	depends on !HAVE_NMI_WATCHDOG
--+	default n
-  	help
-  	  Say Y here to prefer the buddy hardlockup detector over the perf one.
-  
--@@ -1071,39 +1094,27 @@ config HARDLOCKUP_DETECTOR_PREFER_BUDDY
-+@@ -1071,39 +1093,27 @@ config HARDLOCKUP_DETECTOR_PREFER_BUDDY
-  
-  config HARDLOCKUP_DETECTOR_PERF
-  	bool
-diff -purN watchdog-buddy-hardlockup-detector-config-cleanup-v1-iter1-reference/0003-watchdog-hardlockup-Declare-arch_touch_nmi_watchdog-.patch watchdog-buddy-hardlockup-detector-config-cleanup-v2-iter1/0003-watchdog-hardlockup-Declare-arch_touch_nmi_watchdog-.patch
---- watchdog-buddy-hardlockup-detector-config-cleanup-v1-iter1-reference/0003-watchdog-hardlockup-Declare-arch_touch_nmi_watchdog-.patch	2023-06-16 16:42:07.749941492 +0200
-+++ watchdog-buddy-hardlockup-detector-config-cleanup-v2-iter1/0003-watchdog-hardlockup-Declare-arch_touch_nmi_watchdog-.patch	2023-06-16 16:28:53.594682369 +0200
-@@ -1,16 +1,17 @@
--From b132b032466f5c07bc31bb1c22ed6db32871d725 Mon Sep 17 00:00:00 2001
-+From f4b7044dd7847ae8d12535c464ea4bd0568b5456 Mon Sep 17 00:00:00 2001
- From: Petr Mladek <pmladek@suse.com>
- Date: Fri, 2 Jun 2023 16:38:43 +0200
--Subject: [PATCH 3/6] watchdog/hardlockup: Declare arch_touch_nmi_watchdog()
-+Subject: [PATCH v2 3/6] watchdog/hardlockup: Declare arch_touch_nmi_watchdog()
-  only in linux/nmi.h
- 
- arch_touch_nmi_watchdog() needs a different implementation for various
- hardlockup detector implementations. And it does nothing when
--any hardlockup detector is not build at all.
-+any hardlockup detector is not built at all.
- 
--arch_touch_nmi_watchdog() has to be declared in linux/nmi.h. It is done
--directly in this header file for the perf and buddy detectors. And it
--is done in the included asm/linux.h for arch specific detectors.
-+arch_touch_nmi_watchdog() is declared via linux/nmi.h. And it must be
-+defined as an empty function when there is no hardlockup detector.
-+It is done directly in this header file for the perf and buddy detectors.
-+And it is done in the included asm/linux.h for arch specific detectors.
- 
- The reason probably is that the arch specific variants build the code
- using another conditions. For example, powerpc64/sparc64 builds the code
-@@ -19,13 +20,14 @@ when CONFIG_PPC_WATCHDOG is enabled.
- Another reason might be that these architectures define more functions
- in asm/nmi.h anyway.
- 
--However the generic code actually knows the information. The config
--variables HAVE_NMI_WATCHDOG and HAVE_HARDLOCKUP_DETECTOR_ARCH are used
--to decide whether to build the buddy detector.
--
--In particular, CONFIG_HARDLOCKUP_DETECTOR is set only when a generic
--or arch-specific hardlockup detector is built. The only exception
--is sparc64 which ignores the global HARDLOCKUP_DETECTOR switch.
-+However the generic code actually knows when the function will be
-+implemented. It happens when some full featured or the sparc64-specific
-+hardlockup detector is built.
-+
-+In particular, CONFIG_HARDLOCKUP_DETECTOR can be enabled only when
-+a generic or arch-specific full featured hardlockup detector is available.
-+The only exception is sparc64 which can be built even when the global
-+HARDLOCKUP_DETECTOR switch is disabled.
- 
- The information about sparc64 is a bit complicated. The hardlockup
- detector is built there when CONFIG_HAVE_NMI_WATCHDOG is set and
-@@ -48,6 +50,7 @@ The motivation is:
- The change should not change the existing behavior.
- 
- Signed-off-by: Petr Mladek <pmladek@suse.com>
-+Reviewed-by: Douglas Anderson <dianders@chromium.org>
- ---
-  arch/powerpc/include/asm/nmi.h |  2 --
-  arch/sparc/include/asm/nmi.h   |  1 -
-diff -purN watchdog-buddy-hardlockup-detector-config-cleanup-v1-iter1-reference/0004-watchdog-hardlockup-Make-HAVE_NMI_WATCHDOG-sparc64-s.patch watchdog-buddy-hardlockup-detector-config-cleanup-v2-iter1/0004-watchdog-hardlockup-Make-HAVE_NMI_WATCHDOG-sparc64-s.patch
---- watchdog-buddy-hardlockup-detector-config-cleanup-v1-iter1-reference/0004-watchdog-hardlockup-Make-HAVE_NMI_WATCHDOG-sparc64-s.patch	2023-06-16 16:42:07.757941606 +0200
-+++ watchdog-buddy-hardlockup-detector-config-cleanup-v2-iter1/0004-watchdog-hardlockup-Make-HAVE_NMI_WATCHDOG-sparc64-s.patch	2023-06-16 16:28:53.598682426 +0200
-@@ -1,58 +1,95 @@
--From b898a6715dd01a5e3a6a404d70e12dcb2d9d7d0d Mon Sep 17 00:00:00 2001
-+From 89632da8754cb2a70a48b357c2d5f099b121b88a Mon Sep 17 00:00:00 2001
- From: Petr Mladek <pmladek@suse.com>
--Date: Tue, 6 Jun 2023 17:19:08 +0200
--Subject: [PATCH 4/6] watchdog/hardlockup:  Make HAVE_NMI_WATCHDOG
-+Date: Fri, 16 Jun 2023 15:43:34 +0200
-+Subject: [PATCH v2 4/6] watchdog/hardlockup:  Make HAVE_NMI_WATCHDOG
-  sparc64-specific
- 
--watchdog/hardlockup: Enable HAVE_NMI_WATCHDOG only on sparc64
-+There are several hardlockup detector implementations and several Kconfig
-+values which allow selection and build of the preferred one.
- 
--HAVE_NMI_WATCHDOG is always enabled when SPARC64 is enabled. The sparc64
--implementation is special. It does not support the generic hardlockup
--related Kconfig values, command line parameters, and sysctl interface.
--Instead it is enabled/disabled by the top-level watchdog interface
--that is common for both softlockup and hardlockup detectors.
--
--As a result, sparc64 needs special treating in Kconfig and source
--files. The checks are a bit complicated because HAVE_NMI_WATCHDOG is
--automatically set when HAVE_HARDLOCKUP_DETECTOR_ARCH is set.
--But HAVE_HARDLOCKUP_DETECTOR_ARCH is set when the arch specific
--implementation uses the generic hardlockup detector related
--Kconfig variables, command line parameters, and sysctl interface.
--
--The motivation probably was to avoid changes in the code when
--the powerpc64-specific watchdog introduced HAVE_HARDLOCKUP_DETECTOR_ARCH.
--It probably allowed to re-use some existing checks for HAVE_NMI_WATCHDOG.
--
--But it actually made things pretty complicated. For example,
--the following check was needed in HARDLOCKUP_DETECTOR config variable:
--
--   depends on ((HAVE_HARDLOCKUP_DETECTOR_PERF || HAVE_HARDLOCKUP_DETECTOR_BUDDY) && !HAVE_NMI_WATCHDOG) || HAVE_HARDLOCKUP_DETECTOR_ARCH
--
--The inverted logic makes things easier:
--
--  + HAVE_NMI_WATCHDOG is used only on sparc64. It is clear when
--    the sparc64 specific watchdog is used.
--
--  + HAVE_HARDLOCKUP_DETECTOR_ARCH is basically compatible with
--    the generic watchdogs. As a result, the common code
--    is marked by ifdef CONFIG_HARDLOCKUP_DETECTOR.
--
--As a result:
--
--  + Some conditions are easier.
--
--  + Some conditions use HAVE_HARDLOCKUP_DETECTOR_ARCH instead of
--    HAVE_NMI_WATCHDOG.
-+CONFIG_HARDLOCKUP_DETECTOR was introduced by the commit 23637d477c1f53acb
-+("lockup_detector: Introduce CONFIG_HARDLOCKUP_DETECTOR") in v2.6.36.
-+It was a preparation step for introducing the new generic perf hardlockup
-+detector.
-+
-+The existing arch-specific variants did not support the to-be-created
-+generic build configurations, sysctl interface, etc. This distinction
-+was made explicit by the commit 4a7863cc2eb5f98 ("x86, nmi_watchdog:
-+Remove ARCH_HAS_NMI_WATCHDOG and rely on CONFIG_HARDLOCKUP_DETECTOR")
-+in v2.6.38.
-+
-+CONFIG_HAVE_NMI_WATCHDOG was introduced by the commit d314d74c695f967e105
-+("nmi watchdog: do not use cpp symbol in Kconfig") in v3.4-rc1. It replaced
-+the above mentioned ARCH_HAS_NMI_WATCHDOG. At that time, it was still used
-+by three architectures, namely blackfin, mn10300, and sparc.
-+
-+The support for blackfin and mn10300 architectures has been completely
-+dropped some time ago. And sparc is the only architecture with the historic
-+NMI watchdog at the moment.
-+
-+And the old sparc implementation is really special. It is always built on
-+sparc64. It used to be always enabled until the commit 7a5c8b57cec93196b
-+("sparc: implement watchdog_nmi_enable and watchdog_nmi_disable") added
-+in v4.10-rc1.
-+
-+There are only few locations where the sparc64 NMI watchdog interacts
-+with the generic hardlockup detectors code:
-+
-+  + implements arch_touch_nmi_watchdog() which is called from the generic
-+    touch_nmi_watchdog()
-+
-+  + implements watchdog_hardlockup_enable()/disable() to support
-+    /proc/sys/kernel/nmi_watchdog
-+
-+  + is always preferred over other generic watchdogs, see
-+    CONFIG_HARDLOCKUP_DETECTOR
-+
-+  + includes asm/nmi.h into linux/nmi.h because some sparc-specific
-+    functions are needed in sparc-specific code which includes
-+    only linux/nmi.h.
-+
-+The situation became more complicated after the commit 05a4a95279311c3
-+("kernel/watchdog: split up config options") and commit 2104180a53698df5
-+("powerpc/64s: implement arch-specific hardlockup watchdog") in v4.13-rc1.
-+They introduced HAVE_HARDLOCKUP_DETECTOR_ARCH. It was used for powerpc
-+specific hardlockup detector. It was compatible with the perf one
-+regarding the general boot, sysctl, and programming interfaces.
-+
-+HAVE_HARDLOCKUP_DETECTOR_ARCH was defined as a superset of
-+HAVE_NMI_WATCHDOG. It made some sense because all arch-specific
-+detectors had some common requirements, namely:
-+
-+  + implemented arch_touch_nmi_watchdog()
-+  + included asm/nmi.h into linux/nmi.h
-+  + defined the default value for /proc/sys/kernel/nmi_watchdog
-+
-+But it actually has made things pretty complicated when the generic
-+buddy hardlockup detector was added. Before the generic perf detector
-+was newer supported together with an arch-specific one. But the buddy
-+detector could work on any SMP system. It means that an architecture
-+could support both the arch-specific and buddy detector.
-+
-+As a result, there are few tricky dependencies. For example,
-+CONFIG_HARDLOCKUP_DETECTOR depends on:
-+
-+  ((HAVE_HARDLOCKUP_DETECTOR_PERF || HAVE_HARDLOCKUP_DETECTOR_BUDDY) && !HAVE_NMI_WATCHDOG) || HAVE_HARDLOCKUP_DETECTOR_ARCH
-+
-+The problem is that the very special sparc implementation is defined as:
-+
-+  HAVE_NMI_WATCHDOG && !HAVE_HARDLOCKUP_DETECTOR_ARCH
-+
-+Another problem is that the meaning of HAVE_NMI_WATCHDOG is far from clear
-+without reading understanding the history.
-+
-+Make the logic less tricky and more self-explanatory by making
-+HAVE_NMI_WATCHDOG specific for the sparc64 implementation. And rename it to
-+HAVE_HARDLOCKUP_DETECTOR_SPARC64.
- 
- Note that HARDLOCKUP_DETECTOR_PREFER_BUDDY, HARDLOCKUP_DETECTOR_PERF,
--and HARDLOCKUP_DETECTOR_BUDDY might depend only on
-+and HARDLOCKUP_DETECTOR_BUDDY may conflict only with
- HAVE_HARDLOCKUP_DETECTOR_ARCH. They depend on HARDLOCKUP_DETECTOR
- and it is not longer enabled when HAVE_NMI_WATCHDOG is set.
- 
--Note that asm/nmi.h still has to be included for all arch-specific
--watchdogs. It declares more functions that are used in another
--arch specific code which includes only linux/nmi.h.
--
- Signed-off-by: Petr Mladek <pmladek@suse.com>
- 
- watchdog/sparc64: Rename HAVE_NMI_WATCHDOG to HAVE_HARDLOCKUP_WATCHDOG_SPARC64
-@@ -74,19 +111,19 @@ from arch/Kconfig to arch/sparc/Kconfig.
- 
- Signed-off-by: Petr Mladek <pmladek@suse.com>
- ---
-- arch/Kconfig             | 17 -----------------
-+ arch/Kconfig             | 18 ------------------
-  arch/sparc/Kconfig       |  2 +-
-- arch/sparc/Kconfig.debug | 12 ++++++++++++
-+ arch/sparc/Kconfig.debug |  9 +++++++++
-  include/linux/nmi.h      |  5 ++---
-  kernel/watchdog.c        |  2 +-
-  lib/Kconfig.debug        | 15 +++++----------
-- 6 files changed, 21 insertions(+), 32 deletions(-)
-+ 6 files changed, 18 insertions(+), 33 deletions(-)
- 
- diff --git a/arch/Kconfig b/arch/Kconfig
--index 13c6e596cf9e..6517e5477459 100644
-+index 77e5af5fda3f..6517e5477459 100644
- --- a/arch/Kconfig
- +++ b/arch/Kconfig
--@@ -400,22 +400,8 @@ config HAVE_HARDLOCKUP_DETECTOR_PERF
-+@@ -400,23 +400,8 @@ config HAVE_HARDLOCKUP_DETECTOR_PERF
-  	  The arch chooses to use the generic perf-NMI-based hardlockup
-  	  detector. Must define HAVE_PERF_EVENTS_NMI.
-  
-@@ -95,13 +132,14 @@ index 13c6e596cf9e..6517e5477459 100644
- -	bool
- -	help
- -	  The arch provides its own hardlockup detector implementation instead
---	  of the generic perf one.
-+-	  of the generic ones.
- -
- -	  Sparc64 defines this variable without HAVE_HARDLOCKUP_DETECTOR_ARCH.
---	  It does _not_ use the command line parameters and sysctl interface
---	  used by generic hardlockup detectors. Instead it is enabled/disabled
---	  by the top-level watchdog interface that is common for both softlockup
---	  and hardlockup detectors.
-+-	  It is the last arch-specific implementation which was developed before
-+-	  adding the common infrastructure for handling hardlockup detectors.
-+-	  It is always built. It does _not_ use the common command line
-+-	  parameters and sysctl interface, except for
-+-	  /proc/sys/kernel/nmi_watchdog.
- -
-  config HAVE_HARDLOCKUP_DETECTOR_ARCH
-  	bool
-@@ -109,7 +147,7 @@ index 13c6e596cf9e..6517e5477459 100644
-  	help
-  	  The arch provides its own hardlockup detector implementation instead
-  	  of the generic ones.
--@@ -423,9 +409,6 @@ config HAVE_HARDLOCKUP_DETECTOR_ARCH
-+@@ -424,9 +409,6 @@ config HAVE_HARDLOCKUP_DETECTOR_ARCH
-  	  It uses the same command line parameters, and sysctl interface,
-  	  as the generic hardlockup detectors.
-  
-@@ -133,10 +171,10 @@ index 8535e19062f6..7297f69635cb 100644
-  	select HAVE_EBPF_JIT if SPARC64
-  	select HAVE_DEBUG_BUGVERBOSE
- diff --git a/arch/sparc/Kconfig.debug b/arch/sparc/Kconfig.debug
--index 6b2bec1888b3..b6695303b8d4 100644
-+index 6b2bec1888b3..4903b6847e43 100644
- --- a/arch/sparc/Kconfig.debug
- +++ b/arch/sparc/Kconfig.debug
--@@ -14,3 +14,15 @@ config FRAME_POINTER
-+@@ -14,3 +14,12 @@ config FRAME_POINTER
-  	bool
-  	depends on MCOUNT
-  	default y
-@@ -145,13 +183,10 @@ index 6b2bec1888b3..b6695303b8d4 100644
- +	depends on HAVE_NMI
- +	bool
- +	help
--+	  Sparc64 provides its own hardlockup detector implementation instead
--+	  of the generic perf one.
--+
--+	  It does _not_ use the command line parameters and sysctl interface
--+	  used by generic hardlockup detectors. Instead it is enabled/disabled
--+	  by the top-level watchdog interface that is common for both softlockup
--+	  and hardlockup detectors.
-++	  Sparc64 hardlockup detector is the last one developed before adding
-++	  the common infrastructure for handling hardlockup detectors. It is
-++	  always built. It does _not_ use the common command line parameters
-++	  and sysctl interface, except for /proc/sys/kernel/nmi_watchdog.
- diff --git a/include/linux/nmi.h b/include/linux/nmi.h
- index b9e816bde14a..7ee6c35d1f05 100644
- --- a/include/linux/nmi.h
-@@ -189,7 +224,7 @@ index 437c198933cf..babd2f3c8b72 100644
-  #else
-  # define WATCHDOG_HARDLOCKUP_DEFAULT	0
- diff --git a/lib/Kconfig.debug b/lib/Kconfig.debug
--index d201f5d3876b..2d8d8ce7c2d7 100644
-+index a0b0c4decb89..e94664339e28 100644
- --- a/lib/Kconfig.debug
- +++ b/lib/Kconfig.debug
- @@ -1050,15 +1050,10 @@ config HAVE_HARDLOCKUP_DETECTOR_BUDDY
-@@ -216,10 +251,10 @@ index d201f5d3876b..2d8d8ce7c2d7 100644
-  	depends on HAVE_HARDLOCKUP_DETECTOR_PERF && HAVE_HARDLOCKUP_DETECTOR_BUDDY
- -	depends on !HAVE_NMI_WATCHDOG
- +	depends on !HAVE_HARLOCKUP_DETECTOR_ARCH
-- 	default n
-  	help
-  	  Say Y here to prefer the buddy hardlockup detector over the perf one.
--@@ -1096,7 +1091,7 @@ config HARDLOCKUP_DETECTOR_PERF
-+ 
-+@@ -1095,7 +1090,7 @@ config HARDLOCKUP_DETECTOR_PERF
-  	bool
-  	depends on HARDLOCKUP_DETECTOR
-  	depends on HAVE_HARDLOCKUP_DETECTOR_PERF && !HARDLOCKUP_DETECTOR_PREFER_BUDDY
-@@ -228,7 +263,7 @@ index d201f5d3876b..2d8d8ce7c2d7 100644
-  	select HARDLOCKUP_DETECTOR_COUNTS_HRTIMER
-  
-  config HARDLOCKUP_DETECTOR_BUDDY
--@@ -1104,7 +1099,7 @@ config HARDLOCKUP_DETECTOR_BUDDY
-+@@ -1103,7 +1098,7 @@ config HARDLOCKUP_DETECTOR_BUDDY
-  	depends on HARDLOCKUP_DETECTOR
-  	depends on HAVE_HARDLOCKUP_DETECTOR_BUDDY
-  	depends on !HAVE_HARDLOCKUP_DETECTOR_PERF || HARDLOCKUP_DETECTOR_PREFER_BUDDY
-diff -purN watchdog-buddy-hardlockup-detector-config-cleanup-v1-iter1-reference/0005-watchdog-sparc64-Define-HARDLOCKUP_DETECTOR_SPARC64.patch watchdog-buddy-hardlockup-detector-config-cleanup-v2-iter1/0005-watchdog-sparc64-Define-HARDLOCKUP_DETECTOR_SPARC64.patch
---- watchdog-buddy-hardlockup-detector-config-cleanup-v1-iter1-reference/0005-watchdog-sparc64-Define-HARDLOCKUP_DETECTOR_SPARC64.patch	2023-06-16 16:42:07.761941662 +0200
-+++ watchdog-buddy-hardlockup-detector-config-cleanup-v2-iter1/0005-watchdog-sparc64-Define-HARDLOCKUP_DETECTOR_SPARC64.patch	2023-06-16 16:28:53.598682426 +0200
-@@ -1,7 +1,7 @@
--From 39b335cbe5fff566d41a35b1211f92a5d1a56575 Mon Sep 17 00:00:00 2001
-+From 1426aca29d60fcaa06c8ca125f236beca28f997a Mon Sep 17 00:00:00 2001
- From: Petr Mladek <pmladek@suse.com>
--Date: Wed, 7 Jun 2023 14:59:58 +0200
--Subject: [PATCH 5/6] watchdog/sparc64: Define HARDLOCKUP_DETECTOR_SPARC64
-+Date: Fri, 16 Jun 2023 15:45:49 +0200
-+Subject: [PATCH v2 5/6] watchdog/sparc64: Define HARDLOCKUP_DETECTOR_SPARC64
- 
- The HAVE_ prefix means that the code could be enabled. Add another
- variable for HAVE_HARDLOCKUP_DETECTOR_SPARC64 without this prefix.
-@@ -24,18 +24,19 @@ CONFIG_HAVE_HARDLOCKUP_DETECTOR_SPARC64=
- CONFIG_HARDLOCKUP_DETECTOR_SPARC64=y
- 
- Signed-off-by: Petr Mladek <pmladek@suse.com>
-+Reviewed-by: Douglas Anderson <dianders@chromium.org>
- ---
-- arch/sparc/Kconfig.debug | 10 +++++++++-
-- include/linux/nmi.h      |  4 ++--
-- kernel/watchdog.c        |  2 +-
-- lib/Kconfig.debug        |  2 +-
-- 4 files changed, 13 insertions(+), 5 deletions(-)
-+ arch/sparc/Kconfig.debug | 7 ++++++-
-+ include/linux/nmi.h      | 4 ++--
-+ kernel/watchdog.c        | 2 +-
-+ lib/Kconfig.debug        | 2 +-
-+ 4 files changed, 10 insertions(+), 5 deletions(-)
- 
- diff --git a/arch/sparc/Kconfig.debug b/arch/sparc/Kconfig.debug
--index b6695303b8d4..0bb95b0aacf4 100644
-+index 4903b6847e43..37e003665de6 100644
- --- a/arch/sparc/Kconfig.debug
- +++ b/arch/sparc/Kconfig.debug
--@@ -16,8 +16,9 @@ config FRAME_POINTER
-+@@ -16,10 +16,15 @@ config FRAME_POINTER
-  	default y
-  
-  config HAVE_HARDLOCKUP_DETECTOR_SPARC64
-@@ -44,19 +45,14 @@ index b6695303b8d4..0bb95b0aacf4 100644
- +	depends on HAVE_NMI
- +	select HARDLOCKUP_DETECTOR_SPARC64
-  	help
-- 	  Sparc64 provides its own hardlockup detector implementation instead
-- 	  of the generic perf one.
--@@ -26,3 +27,10 @@ config HAVE_HARDLOCKUP_DETECTOR_SPARC64
-- 	  used by generic hardlockup detectors. Instead it is enabled/disabled
-- 	  by the top-level watchdog interface that is common for both softlockup
-- 	  and hardlockup detectors.
-+ 	  Sparc64 hardlockup detector is the last one developed before adding
-+ 	  the common infrastructure for handling hardlockup detectors. It is
-+ 	  always built. It does _not_ use the common command line parameters
-+ 	  and sysctl interface, except for /proc/sys/kernel/nmi_watchdog.
- +
- +config HARDLOCKUP_DETECTOR_SPARC64
- +	bool
- +	depends on HAVE_HARDLOCKUP_DETECTOR_SPARC64
--+
--+	help
--+	  The custom hardlockup detector is always built when possible.
- diff --git a/include/linux/nmi.h b/include/linux/nmi.h
- index 7ee6c35d1f05..515d6724f469 100644
- --- a/include/linux/nmi.h
-@@ -93,7 +89,7 @@ index babd2f3c8b72..a2154e753cb4 100644
-  #else
-  # define WATCHDOG_HARDLOCKUP_DEFAULT	0
- diff --git a/lib/Kconfig.debug b/lib/Kconfig.debug
--index 2d8d8ce7c2d7..116904e65d9f 100644
-+index e94664339e28..f285e9cf967a 100644
- --- a/lib/Kconfig.debug
- +++ b/lib/Kconfig.debug
- @@ -1052,7 +1052,7 @@ config HAVE_HARDLOCKUP_DETECTOR_BUDDY
-diff -purN watchdog-buddy-hardlockup-detector-config-cleanup-v1-iter1-reference/0006-watchdog-hardlockup-Define-HARDLOCKUP_DETECTOR_ARCH.patch watchdog-buddy-hardlockup-detector-config-cleanup-v2-iter1/0006-watchdog-hardlockup-Define-HARDLOCKUP_DETECTOR_ARCH.patch
---- watchdog-buddy-hardlockup-detector-config-cleanup-v1-iter1-reference/0006-watchdog-hardlockup-Define-HARDLOCKUP_DETECTOR_ARCH.patch	2023-06-16 16:42:07.769941775 +0200
-+++ watchdog-buddy-hardlockup-detector-config-cleanup-v2-iter1/0006-watchdog-hardlockup-Define-HARDLOCKUP_DETECTOR_ARCH.patch	2023-06-16 16:28:53.598682426 +0200
-@@ -1,7 +1,7 @@
--From 0456ed568d98ba5bba8148e4f60d769e3c5a6c7a Mon Sep 17 00:00:00 2001
-+From bcf4dfab5a64ee691eb5154b1361ed59610c9387 Mon Sep 17 00:00:00 2001
- From: Petr Mladek <pmladek@suse.com>
- Date: Tue, 6 Jun 2023 09:32:05 +0200
--Subject: [PATCH 6/6] watchdog/hardlockup: Define HARDLOCKUP_DETECTOR_ARCH
-+Subject: [PATCH v2 6/6] watchdog/hardlockup: Define HARDLOCKUP_DETECTOR_ARCH
- 
- The HAVE_ prefix means that the code could be enabled. Add another
- variable for HAVE_HARDLOCKUP_DETECTOR_ARCH without this prefix.
-@@ -15,6 +15,7 @@ As a result HAVE_HARDLOCKUP_DETECTOR_PER
- on arm, x86, powerpc architectures.
- 
- Signed-off-by: Petr Mladek <pmladek@suse.com>
-+Reviewed-by: Douglas Anderson <dianders@chromium.org>
- ---
-  arch/powerpc/Kconfig | 5 ++---
-  include/linux/nmi.h  | 2 +-
-@@ -58,7 +59,7 @@ index 515d6724f469..ec808ebd36ba 100644
-  #endif
-  
- diff --git a/lib/Kconfig.debug b/lib/Kconfig.debug
--index 116904e65d9f..97853ca54dc7 100644
-+index f285e9cf967a..2c4bb72e72ad 100644
- --- a/lib/Kconfig.debug
- +++ b/lib/Kconfig.debug
- @@ -1056,6 +1056,7 @@ config HARDLOCKUP_DETECTOR
-@@ -69,7 +70,7 @@ index 116904e65d9f..97853ca54dc7 100644
-  	select LOCKUP_DETECTOR
-  
-  	help
--@@ -1102,6 +1103,14 @@ config HARDLOCKUP_DETECTOR_BUDDY
-+@@ -1101,6 +1102,14 @@ config HARDLOCKUP_DETECTOR_BUDDY
-  	depends on !HAVE_HARDLOCKUP_DETECTOR_ARCH
-  	select HARDLOCKUP_DETECTOR_COUNTS_HRTIMER
-  
-@@ -78,8 +79,8 @@ index 116904e65d9f..97853ca54dc7 100644
- +	depends on HARDLOCKUP_DETECTOR
- +	depends on HAVE_HARDLOCKUP_DETECTOR_ARCH
- +	help
--+	  The arch-specific implementation of the hardlockup detector is
--+	  available.
-++	  The arch-specific implementation of the hardlockup detector will
-++	  be used.
- +
-  #
-  # Both the "perf" and "buddy" hardlockup detectors count hrtimer
-
-
-_______________________________________________
-Kgdb-bugreport mailing list
-Kgdb-bugreport@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport
+SGksCgpPbiBGcmksIEp1biAxNiwgMjAyMyBhdCA4OjA24oCvQU0gUGV0ciBNbGFkZWsgPHBtbGFk
+ZWtAc3VzZS5jb20+IHdyb3RlOgo+Cj4gVGhlcmUgYXJlIGZvdXIgcG9zc2libGUgdmFyaWFudHMg
+b2YgaGFyZGxvY2t1cCBkZXRlY3RvcnM6Cj4KPiAgICsgYnVkZHk6IGF2YWlsYWJsZSB3aGVuIFNN
+UCBpcyBzZXQuCj4KPiAgICsgcGVyZjogYXZhaWxhYmxlIHdoZW4gSEFWRV9IQVJETE9DS1VQX0RF
+VEVDVE9SX1BFUkYgaXMgc2V0Lgo+Cj4gICArIGFyY2gtc3BlY2lmaWM6IGF2YWlsYWJsZSB3aGVu
+IEhBVkVfSEFSRExPQ0tVUF9ERVRFQ1RPUl9BUkNIIGlzIHNldC4KPgo+ICAgKyBzcGFyYzY0IHNw
+ZWNpYWwgdmFyaWFudDogYXZhaWxhYmxlIHdoZW4gSEFWRV9OTUlfV0FUQ0hET0cgaXMgc2V0Cj4g
+ICAgICAgICBhbmQgSEFWRV9IQVJETE9DS1VQX0RFVEVDVE9SX0FSQ0ggaXMgbm90IHNldC4KPgo+
+IE9ubHkgb25lIGhhcmRsb2NrdXAgZGV0ZWN0b3IgY2FuIGJlIGNvbXBpbGVkIGluLiBUaGUgc2Vs
+ZWN0aW9uIGlzIGRvbmUKPiB1c2luZyBxdWl0ZSBjb21wbGV4IGRlcGVuZGVuY2llcyBiZXR3ZWVu
+IHNldmVyYWwgQ09ORklHIHZhcmlhYmxlcy4KPiBUaGUgZm9sbG93aW5nIHBhdGNoZXMgd2lsbCB0
+cnkgdG8gbWFrZSBpdCBtb3JlIHN0cmFpZ2h0Zm9yd2FyZC4KPgo+IEFzIGEgZmlyc3Qgc3RlcCwg
+cmVvcmRlciB0aGUgZGVmaW5pdGlvbnMgb2YgdGhlIHZhcmlvdXMgQ09ORklHIHZhcmlhYmxlcy4K
+PiBUaGUgbG9naWNhbCBvcmRlciBpczoKPgo+ICAgIDEuIEhBVkVfKiB2YXJpYWJsZXMgZGVmaW5l
+IGF2YWlsYWJsZSB2YXJpYW50cy4gVGhleSBhcmUgdHlwaWNhbGx5Cj4gICAgICAgZGVmaW5lZCBp
+biB0aGUgYXJjaC8gY29uZmlnIGZpbGVzLgo+Cj4gICAgMi4gSEFSRExPQ0tVUF9ERVRFQ1RPUiB5
+L24gdmFyaWFibGUgZGVmaW5lcyB3aGV0aGVyIHRoZSBoYXJkbG9ja3VwCj4gICAgICAgZGV0ZWN0
+b3IgaXMgZW5hYmxlZCBhdCBhbGwuCj4KPiAgICAzLiBIQVJETE9DS1VQX0RFVEVDVE9SX1BSRUZF
+Ul9CVUREWSB5L24gdmFyaWFibGUgZGVmaW5lcyB3aGV0aGVyCj4gICAgICAgdGhlIGJ1ZGR5IGRl
+dGVjdG9yIHNob3VsZCBiZSBwcmVmZXJyZWQgb3ZlciB0aGUgcGVyZiBvbmUuCj4gICAgICAgTm90
+ZSB0aGF0IHRoZSBhcmNoIHNwZWNpZmljIHZhcmlhbnRzIGFyZSBhbHdheXMgcHJlZmVycmVkIHdo
+ZW4KPiAgICAgICBhdmFpbGFibGUuCj4KPiAgICA0LiBIQVJETE9DS1VQX0RFVEVDVE9SX1BFUkYv
+QlVERFkgdmFyaWFibGVzIGRlZmluZSB3aGV0aGVyIHRoZSBnaXZlbgo+ICAgICAgIGRldGVjdG9y
+IGlzIGVuYWJsZWQgaW4gdGhlIGVuZC4KPgo+ICAgIDUuIEhBVkVfSEFSRExPQ0tVUF9ERVRFQ1RP
+Ul9OT05fQVJDSCBhbmQgSEFSRExPQ0tVUF9ERVRFQ1RPUl9OT05fQVJDSAo+ICAgICAgIGFyZSB0
+ZW1wb3JhcnkgdmFyaWFibGVzIHRoYXQgYXJlIGdvaW5nIHRvIGJlIHJlbW92ZWQgaW4KPiAgICAg
+ICBhIGZvbGxvd3VwIHBhdGNoLgo+Cj4gVGhpcyBpcyBhIHByZXBhcmF0aW9uIHN0ZXAgZm9yIGZ1
+cnRoZXIgY2xlYW51cC4gSXQgd2lsbCBjaGFuZ2UgdGhlIGxvZ2ljCj4gd2l0aG91dCBzaHVmZmxp
+bmcgdGhlIGRlZmluaXRpb25zLgo+Cj4gVGhpcyBjaGFuZ2UgdGVtcG9yYXJ5IGJyZWFrcyB0aGUg
+Qy1saWtlIG9yZGVyaW5nIHdoZXJlIHRoZSB2YXJpYWJsZXMgYXJlCj4gZGVjbGFyZWQgb3IgZGVm
+aW5lZCBiZWZvcmUgdGhleSBhcmUgdXNlZC4gSXQgaXMgbm90IHJlYWxseSBuZWVkZWQgZm9yCj4g
+S2NvbmZpZy4gQWxzbyB0aGUgZm9sbG93aW5nIHBhdGNoZXMgd2lsbCByZXdvcmsgdGhlIGxvZ2lj
+IHNvIHRoYXQKPiB0aGUgb3JkZXJpbmcgd2lsbCBiZSBDLWxpa2UgaW4gdGhlIGVuZC4KPgo+IFRo
+ZSBwYXRjaCBqdXN0IHNodWZmbGVzIHRoZSBkZWZpbml0aW9ucy4gSXQgc2hvdWxkIG5vdCBjaGFu
+Z2UgdGhlIGV4aXN0aW5nCj4gYmVoYXZpb3IuCj4KPiBTaWduZWQtb2ZmLWJ5OiBQZXRyIE1sYWRl
+ayA8cG1sYWRla0BzdXNlLmNvbT4KPiAtLS0KPiAgbGliL0tjb25maWcuZGVidWcgfCAxMTIgKysr
+KysrKysrKysrKysrKysrKysrKystLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQo+ICAxIGZpbGUgY2hh
+bmdlZCwgNTYgaW5zZXJ0aW9ucygrKSwgNTYgZGVsZXRpb25zKC0pCgpSZXZpZXdlZC1ieTogRG91
+Z2xhcyBBbmRlcnNvbiA8ZGlhbmRlcnNAY2hyb21pdW0ub3JnPgoKCl9fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCktnZGItYnVncmVwb3J0IG1haWxpbmcgbGlz
+dApLZ2RiLWJ1Z3JlcG9ydEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3Vy
+Y2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8va2dkYi1idWdyZXBvcnQK
