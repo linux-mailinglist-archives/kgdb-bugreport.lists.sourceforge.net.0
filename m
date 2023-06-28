@@ -2,127 +2,114 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 20C4B73E229
-	for <lists+kgdb-bugreport@lfdr.de>; Mon, 26 Jun 2023 16:30:53 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id DDAB1741923
+	for <lists+kgdb-bugreport@lfdr.de>; Wed, 28 Jun 2023 21:58:30 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1qDnEx-0006iR-Ub
+	id 1qEbJ7-0006zi-BT
 	for lists+kgdb-bugreport@lfdr.de;
-	Mon, 26 Jun 2023 14:30:52 +0000
+	Wed, 28 Jun 2023 19:58:29 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <daniel.thompson@linaro.org>) id 1qDnEv-0006iL-Gv
+ (envelope-from <dianders@chromium.org>) id 1qEbJ2-0006zb-1P
  for kgdb-bugreport@lists.sourceforge.net;
- Mon, 26 Jun 2023 14:30:49 +0000
+ Wed, 28 Jun 2023 19:58:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
- MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=sOo0XC/Y4flNUsbiJzBoRTnJAgB9VDv1XM+zJzFrca0=; b=HdDHQjoOGdLGDzAkG3ecX6em6w
- Xz0Ux4oNMIP7FZBhPZDg5pjnaFWPUQuMwUizDp8KQKO2X4nNWcgzspGyX+GYxNw2ffQQSlfMj1yTm
- 68GyEeLQ589fj6I4854sNYVi88DC0HJ1gonAcXZtd0GnauLvmdM/0rVQUV74gcCFTyvM=;
+ bh=SLKKj3K4u0AlIAtmQW7z5se9epOJGry5f3WiL2g4NwY=; b=HtHFVSBho7a0Gv27HuiDUgZkXf
+ g/QSiBxvbRqqtfq4FW2weHSNHddYa/aoRjdvTnhjKQULF5mmFgwK2u7gz33cJM+0mFLxVQFwUNaxo
+ d6eiBKgUhN+eEXFSGpsdR42rziL9RjnmHwhQHJbWxrCd69FColsHkxmfTaAOQrKTG4y8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=sOo0XC/Y4flNUsbiJzBoRTnJAgB9VDv1XM+zJzFrca0=; b=Q5+GclBk6nbEZH/3LZrpsPfkSN
- AnhD0PwFIcHG1FtuzcmJra9d4OAI6tmGMZ36OFQF9/NlJUKaUzGMLypKy3E0iav5S+lapDolyuQsG
- GBYyT+YK6Bt2+Lr8eMocTjTmSGquYyzEbFCRXIZm/MXkqDj9zJ8EB/3MsnOjdx5LK++M=;
-Received: from mail-wm1-f41.google.com ([209.85.128.41])
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=SLKKj3K4u0AlIAtmQW7z5se9epOJGry5f3WiL2g4NwY=; b=B
+ s0v3MYR/VgbtHcC2BxiBe6a8bcf6hmegzDg/TQ6AANrozIlYwsnRfrbdK68yLG6z8ETVoA5EJkJWg
+ 7CMOB3kvqDIe8lPTXRsRUxS70n3J5PxWq5/r2L5jTiNFlvT4EDHqUCm5A4yzWwDmAL4EGivyu4m54
+ lxRpW7vKJfRUCZf4=;
+Received: from mail-pg1-f176.google.com ([209.85.215.176])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1qDnEt-00FP5s-Uy for kgdb-bugreport@lists.sourceforge.net;
- Mon, 26 Jun 2023 14:30:49 +0000
-Received: by mail-wm1-f41.google.com with SMTP id
- 5b1f17b1804b1-3fb4146e8fcso2417015e9.0
+ id 1qEbJ1-000Tf6-5b for kgdb-bugreport@lists.sourceforge.net;
+ Wed, 28 Jun 2023 19:58:24 +0000
+Received: by mail-pg1-f176.google.com with SMTP id
+ 41be03b00d2f7-55adfa61199so58951a12.2
  for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 26 Jun 2023 07:30:47 -0700 (PDT)
+ Wed, 28 Jun 2023 12:58:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1687789841; x=1690381841;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=sOo0XC/Y4flNUsbiJzBoRTnJAgB9VDv1XM+zJzFrca0=;
- b=QsW3/nHLhkexzxGA0twe/x2qW+MofrKWc20XzfvTwk9ZpPAmfEi5ih1e5YIuIT2lNC
- tjzCItcBDxFEFpbD7plDyGkfJ6B6tktDh1RDsc6ybYsCUOAiNzUnoB7b3UCawebRTjP+
- IoVoceQUvr2vN6a2MOQFkk1b5sL3SecejNjv+vqiS03ImU7+AJ6TLazciDLoJy1LmNi/
- QDPMsiuJuIIhwrC2wnDBhy0BD7hQrTbGaXffjQQ/QtmqFhMAfZPpTXoSijvnZwqpNWbS
- O7tcEJhLj/e72X+eQkt3abY6eNBxVugwOG2ALiWE2YSEe8VNPf1Bl5GntO/vsmEX50nc
- 9ayg==
+ d=chromium.org; s=google; t=1687982297; x=1690574297;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=SLKKj3K4u0AlIAtmQW7z5se9epOJGry5f3WiL2g4NwY=;
+ b=bX9n4EZZyTbXN54Rp0GUhOYll5IXE//1a0nNjN2h20oHk4WN/oIlsZWQFuTtDjNB3s
+ a0ls74kLCHwip1lHi8qogxSWcaGBS6fcnDHDR26NY29EEYazFE7nYZEwDlzaY4KmCu1z
+ iN9/b9wlgfLjIXCZRzzSwOVfWJtLNKQEP06VI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1687789841; x=1690381841;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=sOo0XC/Y4flNUsbiJzBoRTnJAgB9VDv1XM+zJzFrca0=;
- b=hiPSa793yMNgt0XhqzgMa6f7QrocwAED7jgyMxisKDd46Qmo0V3LhrQTucdjON5is6
- UV0VurnSaQHWQ0dCnam9WOZ3Xdq5KSp9umvYVEgYo/neFI01vF6pn9+95FjDmKIfb5Xu
- Jxi5bIepWMMEx5ttNX2ULRHMSuHiwLNwEYfxZnQJ0nmHZuSS6cIEmEkKPAmN10TTHgsU
- YG/w3WtOpKc5A/vsMResMNGIFxzwnJcqLac30zUVKsD/M1tMfmLVDhjDuMbgOQZqa3ZM
- T40Zp4impQVEhNuKjIhnHXTvNzELfreGjZAS+gCmlvLkPq9XzufLZLZFtglZH5xMr2xH
- Om9Q==
-X-Gm-Message-State: AC+VfDwwgys1W/Wxld7HTlrBEisU0Y5SpiQ+uDNG/w0Kw4WSPH1Z3AiB
- h424iDn+XC4XK8HI0+9fPrQ9UA==
-X-Google-Smtp-Source: ACHHUZ6VWP4raj9cfLAIOeEgLIdxBNSr9wdsVkIQVnyoeIOHSC4oDNzgvxTcgh/C0ZjUg/zNHcMRlg==
-X-Received: by 2002:a05:600c:10d1:b0:3f7:a20a:561d with SMTP id
- l17-20020a05600c10d100b003f7a20a561dmr27638549wmd.8.1687789841362; 
- Mon, 26 Jun 2023 07:30:41 -0700 (PDT)
-Received: from aspen.lan
- (aztw-34-b2-v4wan-166919-cust780.vm26.cable.virginm.net. [82.37.195.13])
+ d=1e100.net; s=20221208; t=1687982297; x=1690574297;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=SLKKj3K4u0AlIAtmQW7z5se9epOJGry5f3WiL2g4NwY=;
+ b=OvOzJZj5V+vcAUwE4Gil7sgCqnXHnzvcy1ZuBXLYjnXHQPTgHjqWWA9vG+CJmoUznj
+ NVOjBbR4xzmlOSCN0Fjtva2EOh3EZ3ZdZoT5Owc+onlNQatRUFFJaKrCayqls4l0AvFK
+ 9Zs3oCBMLOavrWnmqMa68MSub8P1OGl496KRi6/lmrxWWvwbJpdofo0yrKGkCnHN94VM
+ m8Gx6eFA+j41J0Y8nrpW4NR7bgmXw4jxnAtk2hnkvu4tU+CLSC+GY0IGm4LfvQHxw7EF
+ RMAQ/wb7JUemNa5wg8NFaDzQ7FJB/iz5k/ZWjn4rt46iZ9uS/vhnZ8ODe1e/6YBEE6qn
+ nd8Q==
+X-Gm-Message-State: AC+VfDzTxMknKvvduT2CF2qKlsPff6Vpuo38wqW3iyHCdB6OUQIt74+2
+ KczEk6bbYMdLBoQq8PwEaIWg2A==
+X-Google-Smtp-Source: ACHHUZ5TLdkXmDvbkiEIedIWvx1hwus+8KkOIvcmR/GosTyB+JZbqCpMg+YoO6VmeXjJk4WpAJVCQA==
+X-Received: by 2002:a17:90a:930f:b0:262:ebb9:dd59 with SMTP id
+ p15-20020a17090a930f00b00262ebb9dd59mr9131691pjo.20.1687982297575; 
+ Wed, 28 Jun 2023 12:58:17 -0700 (PDT)
+Received: from tictac2.mtv.corp.google.com
+ ([2620:15c:9d:2:1228:a4c5:d742:666b])
  by smtp.gmail.com with ESMTPSA id
- t15-20020a0560001a4f00b00313f676832bsm1380811wry.93.2023.06.26.07.30.40
+ nw13-20020a17090b254d00b00262ff206931sm5040108pjb.42.2023.06.28.12.58.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Jun 2023 07:30:40 -0700 (PDT)
-Date: Mon, 26 Jun 2023 15:30:38 +0100
-From: Daniel Thompson <daniel.thompson@linaro.org>
-To: Doug Anderson <dianders@chromium.org>
-Message-ID: <20230626143038.GB95170@aspen.lan>
-References: <20230601213440.2488667-1-dianders@chromium.org>
- <20230601143109.v9.6.Ia3aeac89bb6751b682237e76e5ba594318e4b1aa@changeid>
- <CAD=FV=XbnUZh2uQ5Sr3Dg=+Kiz7rfZVyP-zNQtXrV_NSsCTFcA@mail.gmail.com>
+ Wed, 28 Jun 2023 12:58:16 -0700 (PDT)
+From: Douglas Anderson <dianders@chromium.org>
+To: Daniel Thompson <daniel.thompson@linaro.org>
+Date: Wed, 28 Jun 2023 12:56:17 -0700
+Message-ID: <20230628125612.1.I5cc6c3d916195f5bcfdf5b75d823f2037707f5dc@changeid>
+X-Mailer: git-send-email 2.41.0.162.gfafddb0af9-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAD=FV=XbnUZh2uQ5Sr3Dg=+Kiz7rfZVyP-zNQtXrV_NSsCTFcA@mail.gmail.com>
-X-Spam-Score: -0.2 (/)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
+X-Spam-Score: -0.9 (/)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  On Thu, Jun 15, 2023 at 11:14:18AM -0700, Doug Anderson wrote:
-    > Daniel, > > On Thu, Jun 1, 2023 at 2:37 PM Douglas Anderson <dianders@chromium.org>
-    wrote: > > > > To save architectures from needing [...] 
- 
- Content analysis details:   (-0.2 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview:  The main kdb command parser only handles CR (ASCII 13 AKA
+ '\r') today, but not LF (ASCII 10 AKA '\n'). That means that the kdb command
+ parser can handle terminals that send just CR or that send CR+LF [...] 
+ Content analysis details:   (-0.9 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
-                              no trust
-                             [209.85.128.41 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
-                             [209.85.128.41 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.215.176 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.215.176 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1qDnEt-00FP5s-Uy
-Subject: Re: [Kgdb-bugreport] [PATCH v9 6/7] kgdb: Provide a stub
- kgdb_nmicallback() if !CONFIG_KGDB
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1qEbJ1-000Tf6-5b
+Subject: [Kgdb-bugreport] [PATCH] kdb: Handle LF in the command parser
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -134,56 +121,114 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: Mark Rutland <mark.rutland@arm.com>,
- "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
- Lecopzer Chen <lecopzer.chen@mediatek.com>,
- Peter Zijlstra <peterz@infradead.org>,
- Catalin Marinas <catalin.marinas@arm.com>,
- Jason Wessel <jason.wessel@windriver.com>, ito-yuichi@fujitsu.com,
- linux-kernel@vger.kernel.org, Stephen Boyd <swboyd@chromium.org>,
- linux-perf-users@vger.kernel.org, Chen-Yu Tsai <wens@csie.org>,
- Marc Zyngier <maz@kernel.org>, kgdb-bugreport@lists.sourceforge.net,
- Thomas Gleixner <tglx@linutronix.de>, Masayoshi Mizuma <msys.mizuma@gmail.com>,
- Will Deacon <will@kernel.org>, Ard Biesheuvel <ardb@kernel.org>,
- linux-arm-kernel@lists.infradead.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Petr Mladek <pmladek@suse.com>, John Ogness <john.ogness@linutronix.de>,
+ kgdb-bugreport@lists.sourceforge.net, linux-kernel@vger.kernel.org,
+ Aaron Tomlin <atomlin@atomlin.com>, Jason Wessel <jason.wessel@windriver.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-T24gVGh1LCBKdW4gMTUsIDIwMjMgYXQgMTE6MTQ6MThBTSAtMDcwMCwgRG91ZyBBbmRlcnNvbiB3
-cm90ZToKPiBEYW5pZWwsCj4KPiBPbiBUaHUsIEp1biAxLCAyMDIzIGF0IDI6MzfigK9QTSBEb3Vn
-bGFzIEFuZGVyc29uIDxkaWFuZGVyc0BjaHJvbWl1bS5vcmc+IHdyb3RlOgo+ID4KPiA+IFRvIHNh
-dmUgYXJjaGl0ZWN0dXJlcyBmcm9tIG5lZWRpbmcgdG8gd3JhcCB0aGUgY2FsbCBpbiAjaWZkZWZz
-LCBhZGQgYQo+ID4gc3R1YiBuby1vcCB2ZXJzaW9uIG9mIGtnZGJfbm1pY2FsbGJhY2soKSwgd2hp
-Y2ggcmV0dXJucyAxIGlmIGl0IGRpZG4ndAo+ID4gaGFuZGxlIGFueXRoaW5nLgo+ID4KPiA+IFJl
-dmlld2VkLWJ5OiBEYW5pZWwgVGhvbXBzb24gPGRhbmllbC50aG9tcHNvbkBsaW5hcm8ub3JnPgo+
-ID4gU2lnbmVkLW9mZi1ieTogRG91Z2xhcyBBbmRlcnNvbiA8ZGlhbmRlcnNAY2hyb21pdW0ub3Jn
-Pgo+ID4gLS0tCj4gPiBJbiB2OSB0aGlzIGlzIHRoZSBvbmx5IGtnZGIgZGVwZW5kZW5jeS4gSSdt
-IGFzc3VtaW5nIGl0IGNvdWxkIGdvCj4gPiB0aHJvdWdoIHRoZSBhcm02NCB0cmVlPyBJZiB0aGF0
-J3Mgbm90IGEgZ29vZCBpZGVhLCB3ZSBjb3VsZCBhbHdheXMKPiA+IGNoYW5nZSB0aGUgcGF0Y2gg
-KCJhcm02NDoga2dkYjogUm91bmR1cCBjcHVzIHVzaW5nIElQSSBhcyBOTUkiKSBub3QgdG8KPiA+
-IGRlcGVuZCBvbiBpdCBieSBvbmx5IGNhbGxpbmcga2dkYl9ubWljYWxsYmFjaygpIGlmIENPTkZJ
-R19LR0RCIGlzIG5vdAo+ID4gZGVmaW5lZC4KPiA+Cj4gPiBDaGFuZ2VzIGluIHY5Ogo+ID4gLSBB
-ZGRlZCBtaXNzaW5nICJpbmxpbmUiCj4gPgo+ID4gQ2hhbmdlcyBpbiB2ODoKPiA+IC0gIlByb3Zp
-ZGUgYSBzdHViIGtnZGJfbm1pY2FsbGJhY2soKSBpZiAhQ09ORklHX0tHREIiIG5ldyBmb3IgdjgK
-PiA+Cj4gPiAgaW5jbHVkZS9saW51eC9rZ2RiLmggfCAxICsKPiA+ICAxIGZpbGUgY2hhbmdlZCwg
-MSBpbnNlcnRpb24oKykKPiA+Cj4gPiBkaWZmIC0tZ2l0IGEvaW5jbHVkZS9saW51eC9rZ2RiLmgg
-Yi9pbmNsdWRlL2xpbnV4L2tnZGIuaAo+ID4gaW5kZXggMjU4Y2RkZThkMzU2Li43NmU4OTFlZTll
-MzcgMTAwNjQ0Cj4gPiAtLS0gYS9pbmNsdWRlL2xpbnV4L2tnZGIuaAo+ID4gKysrIGIvaW5jbHVk
-ZS9saW51eC9rZ2RiLmgKPiA+IEBAIC0zNjUsNSArMzY1LDYgQEAgZXh0ZXJuIHZvaWQga2dkYl9m
-cmVlX2luaXRfbWVtKHZvaWQpOwo+ID4gICNkZWZpbmUgZGJnX2xhdGVfaW5pdCgpCj4gPiAgc3Rh
-dGljIGlubGluZSB2b2lkIGtnZGJfcGFuaWMoY29uc3QgY2hhciAqbXNnKSB7fQo+ID4gIHN0YXRp
-YyBpbmxpbmUgdm9pZCBrZ2RiX2ZyZWVfaW5pdF9tZW0odm9pZCkgeyB9Cj4gPiArc3RhdGljIGlu
-bGluZSBpbnQga2dkYl9ubWljYWxsYmFjayhpbnQgY3B1LCB2b2lkICpyZWdzKSB7IHJldHVybiAx
-OyB9Cj4KPiBXaGF0IGRvIHlvdSB0aGluayBhYm91dCBsYW5kaW5nIGp1c3QgJHtTVUJKRUNUfSBw
-YXRjaCBpbiBrZ2RiIHJpZ2h0Cj4gbm93IHNvIGl0IGNhbiBlbmQgdXAgaW4gdjYuNS1yYzE/IEl0
-IHNlZW1zIGxpa2UgdGhpcyBzZXJpZXMgaXMKPiBjdXJyZW50bHkgYmxvY2tlZCBvbiBNYXJrIGdl
-dHRpbmcgYSBzcGFyZSBtb21lbnQgYW5kIGl0IHNlZW1zIHVubGlrZWx5Cj4gdGhhdCdsbCBoYXBw
-ZW4gdGhpcyBjeWNsZS4gSWYgd2UgYXQgbGVhc3QgbGFuZCB0aGUga2dkYiBwYXRjaCB0aGVuIGl0
-Cj4gd291bGQgbWFrZSB0aGluZ3MgYWxsIHRoYXQgbXVjaCBlYXNpZXIgdG8gbGFuZCBpbiB0aGUg
-bmV4dCBjeWNsZS4gVGhlCj4ga2dkYiBwYXRjaCBmZWVscyBsaWtlIGl0IGNhbiBtYWtlIHNlbnNl
-IG9uIGl0cyBvd24uLi4KClllcywgZ3JhYmJpbmcgdGhpcyBvbmUgc2hvdWxkIGJlIGZpbmUhCgoK
-RGFuaWVsLgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-CktnZGItYnVncmVwb3J0IG1haWxpbmcgbGlzdApLZ2RiLWJ1Z3JlcG9ydEBsaXN0cy5zb3VyY2Vm
-b3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8va2dk
-Yi1idWdyZXBvcnQK
+The main kdb command parser only handles CR (ASCII 13 AKA '\r') today,
+but not LF (ASCII 10 AKA '\n'). That means that the kdb command parser
+can handle terminals that send just CR or that send CR+LF but can't
+handle terminals that send just LF.
+
+The fact that kdb didn't handle LF in the command parser tripped up a
+tool I tried to use with it. Specifically, I was trying to send a
+command to my device to resume it from kdb using a ChromeOS tool like:
+  dut-control cpu_uart_cmd:"g"
+That tool only terminates lines with LF, not CR+LF.
+
+Arguably the ChromeOS tool should be fixed. After all, officially kdb
+seems to be designed such that CR+LF is the official line ending
+transmitted over the wire and that internally a line ending is just
+'\n' (LF). Some evidence:
+* uart_poll_put_char(), which is used by kdb, notices a '\n' and
+  converts it to '\r\n'.
+* kdb functions specifically use '\r' to get a carriage return without
+  a newline. You can see this in the pager where kdb will write a '\r'
+  and then write over the pager prompt.
+
+However, all that being said there's no real harm in accepting LF as a
+command terminator in the kdb parser and doing so seems like it would
+improve compatibility. After this, I'd expect that things would work
+OK-ish with a remote terminal that used any of CR, CR+LF, or LF as a
+line ending. Someone using CR as a line ending might get some ugliness
+where kdb wasn't able to overwrite the last line, but basic commands
+would work. Someone using just LF as a line ending would probably also
+work OK.
+
+A few other notes:
+- It can be noted that "bash" running on an "agetty" handles LF as a
+  line termination with no complaints.
+- Historically, kdb's "pager" actually handled either CR or LF fine. A
+  very quick inspection would make one think that kdb's pager actually
+  could have paged down two lines instead of one for anyone using
+  CR+LF, but this is generally avoided because of kdb_input_flush().
+- Conceivably one could argue that some of this special case logic
+  belongs in uart_poll_get_char() since uart_poll_put_char() handles
+  the '\n' => '\r\n' conversion. I would argue that perhaps we should
+  eventually do the opposite and move the '\n' => '\r\n' out of
+  uart_poll_put_char(). Having that conversion at such a low level
+  could interfere if we ever want to transfer binary data. In
+  addition, if we truly made uart_poll_get_char() the inverse of
+  uart_poll_put_char() it would convert back to '\n' and (ironically)
+  kdb's parser currently only looks for '\r' to find the end of a
+  command.
+
+Signed-off-by: Douglas Anderson <dianders@chromium.org>
+---
+
+ kernel/debug/kdb/kdb_io.c | 16 +++++++++++++++-
+ 1 file changed, 15 insertions(+), 1 deletion(-)
+
+diff --git a/kernel/debug/kdb/kdb_io.c b/kernel/debug/kdb/kdb_io.c
+index 5c7e9ba7cd6b..813cb6cf72d6 100644
+--- a/kernel/debug/kdb/kdb_io.c
++++ b/kernel/debug/kdb/kdb_io.c
+@@ -131,6 +131,7 @@ char kdb_getchar(void)
+ 	int escape_delay = 0;
+ 	get_char_func *f, *f_prev = NULL;
+ 	int key;
++	static bool last_char_was_cr;
+ 
+ 	for (f = &kdb_poll_funcs[0]; ; ++f) {
+ 		if (*f == NULL) {
+@@ -149,6 +150,18 @@ char kdb_getchar(void)
+ 			continue;
+ 		}
+ 
++		/*
++		 * The caller expects that newlines are either CR or LF. However
++		 * some terminals send _both_ CR and LF. Avoid having to handle
++		 * this in the caller by stripping the LF if we saw a CR right
++		 * before.
++		 */
++		if (last_char_was_cr && key == '\n') {
++			last_char_was_cr = false;
++			continue;
++		}
++		last_char_was_cr = (key == '\r');
++
+ 		/*
+ 		 * When the first character is received (or we get a change
+ 		 * input source) we set ourselves up to handle an escape
+@@ -244,7 +257,8 @@ static char *kdb_read(char *buffer, size_t bufsize)
+ 			*cp = tmp;
+ 		}
+ 		break;
+-	case 13: /* enter */
++	case 10: /* linefeed */
++	case 13: /* carriage return */
+ 		*lastchar++ = '\n';
+ 		*lastchar++ = '\0';
+ 		if (!KDB_STATE(KGDB_TRANS)) {
+-- 
+2.41.0.162.gfafddb0af9-goog
+
+
+
+_______________________________________________
+Kgdb-bugreport mailing list
+Kgdb-bugreport@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport
