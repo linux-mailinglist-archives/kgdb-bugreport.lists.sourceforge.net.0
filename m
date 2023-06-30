@@ -2,130 +2,130 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1CE817443B0
-	for <lists+kgdb-bugreport@lfdr.de>; Fri, 30 Jun 2023 22:57:25 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id AB4D7744540
+	for <lists+kgdb-bugreport@lfdr.de>; Sat,  1 Jul 2023 01:36:03 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1qFLBD-0007vW-U9
+	id 1qFNej-00013y-3q
 	for lists+kgdb-bugreport@lfdr.de;
-	Fri, 30 Jun 2023 20:57:23 +0000
+	Fri, 30 Jun 2023 23:36:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <dianders@chromium.org>) id 1qFLBB-0007vE-OK
+ (envelope-from <arnd@arndb.de>) id 1qFNeh-00013e-BO
  for kgdb-bugreport@lists.sourceforge.net;
- Fri, 30 Jun 2023 20:57:21 +0000
+ Fri, 30 Jun 2023 23:36:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
- Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Subject:Cc:To:From:Date:References:
+ In-Reply-To:Message-Id:Mime-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=u15VNGIEnyJtLjVOKUkj2c2i24i64I8f65ANMrqewQM=; b=gXVrKSHJHoitq2JFyYDRxDskP3
- 75zWPwI1pe4nxu2/BbImKCoygvG7XQGRD28LAkW32qy0cTBfFdZifKu7hf9/lT224f/0Nd0m9NF6C
- 9YPmybvdfpL39EfMaY2SEJedfUepniwpxp0Kzr8AuYaRFOk1CeboRc2STzjytbKRlFV4=;
+ bh=upLBwBc2dBmHKX9v2pXFENlWMqDWFCIobcQ0HEfLYik=; b=aHwnNTpMnjR1oNbfV7arLAlYXC
+ 8sD8nT4zSpVZECoiGChrlkoY/FSr4C0DMM21o4kv0svIXQf10f3N33ts88Hds5d4ucSlvVE5OBfzo
+ dGA+p2qOcuu9h9OHQmew58ceR+sDBKIr6XzILsOVpAGeuG+RCLlhc5Q9xlMmuzPIOhS0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
- :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
+ h=Content-Type:Subject:Cc:To:From:Date:References:In-Reply-To:Message-Id:
+ Mime-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=u15VNGIEnyJtLjVOKUkj2c2i24i64I8f65ANMrqewQM=; b=UuIi4fwGhUB5Ip+Xg4lz8266iV
- hHSCcfBhizddLU4ym3wlqGE9Q0Gt0bQUGt9v69QtPlwYmoCaX9yLewq0ir4Svn9as+P8SHMzcT1fN
- I/rMOiYhuNS8VDsw02cTeAiv+EKXBTNUKkEHQexHvLbVOboRnNRCL51PqURA4/Bu+FR0=;
-Received: from mail-ed1-f48.google.com ([209.85.208.48])
+ bh=upLBwBc2dBmHKX9v2pXFENlWMqDWFCIobcQ0HEfLYik=; b=SduxgCBK42i04rRgZ5c30NHoD2
+ S2hnXwFGO40ZaW9vVKH8/FbmxoY6aImRaTr9bGm4gFK9F0e8Hjr45ohxkaMmP7XemnAJYgwTGdtXi
+ rId0yzR8qEJCGlJ97zjq5dPzUIMLthWF5FMGwBxzGRVtIEBJpnOYap9WO2zv2OigoJss=;
+Received: from out5-smtp.messagingengine.com ([66.111.4.29])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1qFLB7-002SdY-AM for kgdb-bugreport@lists.sourceforge.net;
- Fri, 30 Jun 2023 20:57:21 +0000
-Received: by mail-ed1-f48.google.com with SMTP id
- 4fb4d7f45d1cf-51d9865b8a2so2414707a12.3
- for <kgdb-bugreport@lists.sourceforge.net>;
- Fri, 30 Jun 2023 13:57:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1688158628; x=1690750628;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=u15VNGIEnyJtLjVOKUkj2c2i24i64I8f65ANMrqewQM=;
- b=btJkZ0iLQG+NRsVw2AQQDXuuT9vpF1tYhpTZYL4yb83A0vdq+iWygwiBo2GuM/3Jfr
- xh6nRSePdbR29E9916Q9Cvl+JjaqsXcN16jhamj9j7OiK6DFM2Jvxrw/p4YnhLXmNKBH
- 09NSP9ImnpOhpgkEjSPPJ1LtxXhbKGgP6taD8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688158628; x=1690750628;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=u15VNGIEnyJtLjVOKUkj2c2i24i64I8f65ANMrqewQM=;
- b=A9vAQcKUwstkWhIFNv3WYzaW7HwZ7Pxraj/vai5htKUQX8RfPBTyDE1kQGYz70qVTc
- C/e99fl1iWdhSWLR8d+IenyW/cAGobgFPx00VxAB4n+MSvfagtwBZk+AC3eVR+KsbvrX
- QCDEA3J/tDV6RO4yBCa3lyg6zud/499mWywjE2Ot2de0lAsXK0KQr29bDd7B16xyW67/
- oXw7PXKioUrpssAV3dGHWys2cxLrJY0Nr/ZdozsZkrOQwUqRsaxgcEl5RFTrKKC2aP7h
- vym+TeRw1BdEqwqM/+4+V8TOvBJ0uhq0qpCuihnz3m6n34C1N0bjdHf9ECs/i+/QZ1cT
- HiKQ==
-X-Gm-Message-State: ABy/qLacME37Lwi8skcQSOYTiYVq8/EDqH+mOTZiNx4YfVBlpSJEXnmV
- /MVGVCRBYTH6dWGUWXjzjc0pRmAU6aN1qW43ILVSWA==
-X-Google-Smtp-Source: APBJJlE2+NWH63LUz2QeOGtBR6l85WX17GPOmUJXAqO2+99QXV9FxXvMJQcvGSvCfRbr49kJubBWHQ==
-X-Received: by 2002:a05:6402:1b1b:b0:51a:3760:b4c8 with SMTP id
- by27-20020a0564021b1b00b0051a3760b4c8mr2232253edb.14.1688158628723; 
- Fri, 30 Jun 2023 13:57:08 -0700 (PDT)
-Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com.
- [209.85.208.52]) by smtp.gmail.com with ESMTPSA id
- z24-20020aa7cf98000000b0051bfcd3c4desm6946782edx.19.2023.06.30.13.57.07
- for <kgdb-bugreport@lists.sourceforge.net>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 30 Jun 2023 13:57:07 -0700 (PDT)
-Received: by mail-ed1-f52.google.com with SMTP id
- 4fb4d7f45d1cf-516500163b2so623a12.1
- for <kgdb-bugreport@lists.sourceforge.net>;
- Fri, 30 Jun 2023 13:57:07 -0700 (PDT)
-X-Received: by 2002:a50:d544:0:b0:50b:c48c:8a25 with SMTP id
- f4-20020a50d544000000b0050bc48c8a25mr23065edj.6.1688158627455; Fri, 30 Jun
- 2023 13:57:07 -0700 (PDT)
-MIME-Version: 1.0
-References: <20230630201206.2396930-1-daniel.thompson@linaro.org>
-In-Reply-To: <20230630201206.2396930-1-daniel.thompson@linaro.org>
-From: Doug Anderson <dianders@chromium.org>
-Date: Fri, 30 Jun 2023 13:56:55 -0700
-X-Gmail-Original-Message-ID: <CAD=FV=WCa5LugcNwosHOPG8GSVfUEnDB9hbXWEop0z0ner12Yg@mail.gmail.com>
-Message-ID: <CAD=FV=WCa5LugcNwosHOPG8GSVfUEnDB9hbXWEop0z0ner12Yg@mail.gmail.com>
-To: Daniel Thompson <daniel.thompson@linaro.org>
-X-Spam-Score: -0.2 (/)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1qFNef-002WZa-C0 for kgdb-bugreport@lists.sourceforge.net;
+ Fri, 30 Jun 2023 23:35:59 +0000
+Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
+ by mailout.nyi.internal (Postfix) with ESMTP id BE81F5C163D;
+ Fri, 30 Jun 2023 11:31:22 -0400 (EDT)
+Received: from imap51 ([10.202.2.101])
+ by compute6.internal (MEProxy); Fri, 30 Jun 2023 11:31:22 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arndb.de; h=cc
+ :cc:content-type:content-type:date:date:from:from:in-reply-to
+ :in-reply-to:message-id:mime-version:references:reply-to:sender
+ :subject:subject:to:to; s=fm1; t=1688139082; x=1688225482; bh=up
+ LBwBc2dBmHKX9v2pXFENlWMqDWFCIobcQ0HEfLYik=; b=IoTcM+BNU5go7enV0u
+ JT9XMkqfYa+qdnubg8XHBYF5i2NXlo1fPOir8T9gSOmYLYMpuFSxn3GNQB3AGn+s
+ 7BfpTods5F9J1kJLl4nO3S61LUPhcF8jfTyqwB04PFuykuZHbHQzPLLzIpKJwqsY
+ hBBJpbeQ0+GTse6FIeoTtMMOYvX2Wdbp8itXv7Q4u85pghNbUCeLexA79b/yEXBa
+ gChy7+PUrSV/UlYFI1hWbWMoYl0AebKqaEQfVHAu9u8HP12coHAnFnlB81WMvVJ/
+ BnRLGVToZB8scM6QJXWLEuZAx2IuhvYExOJUo1NopgYSaDJ3rUFlOQNqx8jaCGD/
+ Zhow==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-type:content-type:date:date
+ :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+ :message-id:mime-version:references:reply-to:sender:subject
+ :subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+ :x-sasl-enc; s=fm2; t=1688139082; x=1688225482; bh=upLBwBc2dBmHK
+ X9v2pXFENlWMqDWFCIobcQ0HEfLYik=; b=dSAPUWjPp1SYx2dhvpDc6kP0C4o9a
+ W0kiwUjeRa6rut+EfGy3P42zbh922ribXMJL+v+gMBV6g7YIHyV0LR5X+kGe2kpQ
+ eLw8A+ar9zyIpRgI/nin3JlfuNFLpnIwdaHIzSDeEV6uYXns8HDuKaBI2YMzjb+c
+ xAYJcOcRvb6oDTMb5iCQCLsr0gcJz+reoQmMio5yGRO6pwKZlRnGdmOvOsHJr2l9
+ ZLwm8DcOKLsDabMw5s35yyXcPo9puH1MadTBf4iTeXUK4PxWMt5X2P5Es/gle9gE
+ JO3gxF2j0JogtIhvBO+/zMmbU/uZwuEUDbVEs4KGAHBfmmBpTKuM+TEyw==
+X-ME-Sender: <xms:SvWeZPVlXpa0WqrDZq4956SnxDgJS3IHYuk4KACxRyH5xAX5-2r1Yw>
+ <xme:SvWeZHmjnZGfiKsXuXrI2INfaRI33I7gLBBWnmgLdafkhpL9ECNZAsfGFg56f0qR1
+ upnW0lWMmMgBty0170>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedviedrtdeigdekkecutefuodetggdotefrodftvf
+ curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+ uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
+ fjughrpefofgggkfgjfhffhffvvefutgesthdtredtreertdenucfhrhhomhepfdetrhhn
+ ugcuuegvrhhgmhgrnhhnfdcuoegrrhhnugesrghrnhgusgdruggvqeenucggtffrrghtth
+ gvrhhnpeffheeugeetiefhgeethfejgfdtuefggeejleehjeeutefhfeeggefhkedtkeet
+ ffenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpegrrh
+ hnugesrghrnhgusgdruggv
+X-ME-Proxy: <xmx:SvWeZLao6TmHJFrx3m7a1abR0ScevQl2ysVKrgAb1r68RwqxrZmFTg>
+ <xmx:SvWeZKXFuzaAkLRaTR5DnB52NF0n1dVGTQ6Hs3XNolHIJNO19SVE_A>
+ <xmx:SvWeZJkp5Ye0ibJuLPmUOVfA4COMkNxHhKpMIlnUQQgRsP6oRB5A-w>
+ <xmx:SvWeZPX9ipntvWfaN-beytqmFz_yGGpiAJksGvMbhcdHAp-hOL0gCw>
+Feedback-ID: i56a14606:Fastmail
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+ id 2B7DAB60092; Fri, 30 Jun 2023 11:31:22 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.9.0-alpha0-499-gf27bbf33e2-fm-20230619.001-gf27bbf33
+Mime-Version: 1.0
+Message-Id: <51b8b3c2-f4ac-454c-acde-e1d136139109@app.fastmail.com>
+In-Reply-To: <20230630152439.GA2900969@aspen.lan>
+References: <20230517125423.930967-1-arnd@kernel.org>
+ <20230630152439.GA2900969@aspen.lan>
+Date: Fri, 30 Jun 2023 17:31:01 +0200
+From: "Arnd Bergmann" <arnd@arndb.de>
+To: "Daniel Thompson" <daniel.thompson@linaro.org>,
+ "Arnd Bergmann" <arnd@kernel.org>
+X-Spam-Score: -0.9 (/)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  Hi, On Fri, Jun 30, 2023 at 1:12 PM Daniel Thompson <daniel.thompson@linaro.org>
-    wrote: > > kdb_send_sig() is defined in the signal code and called from kdb,
-    > but the declaration is part of the kdb int [...] 
- 
- Content analysis details:   (-0.2 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview:  On Fri, Jun 30, 2023, at 17:24, Daniel Thompson wrote: > On
+ Wed, May 17, 2023 at 02:54:09PM +0200, Arnd Bergmann wrote: >> diff --git
+ a/kernel/signal.c b/kernel/signal.c >> index 8f6330f0e9ca..d38df14 [...] 
+ Content analysis details:   (-0.9 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
-                              no trust
-                             [209.85.208.48 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
-                             [209.85.208.48 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
+ [66.111.4.29 listed in wl.mailspike.net]
+ -0.7 RCVD_IN_DNSWL_LOW      RBL: Sender listed at https://www.dnswl.org/,
+ low trust [66.111.4.29 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qFLB7-002SdY-AM
-Subject: Re: [Kgdb-bugreport] [PATCH] kdb: move kdb_send_sig() declaration
- to a better header file
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1qFNef-002WZa-C0
+Subject: Re: [Kgdb-bugreport] [PATCH] kdb: include header in signal handling
+ code
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -137,28 +137,41 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: kgdb-bugreport@lists.sourceforge.net, Arnd Bergmann <arnd@arndb.de>,
- Kees Cook <keescook@chromium.org>, linux-kernel@vger.kernel.org,
- Jason Wessel <jason.wessel@windriver.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Kees Cook <keescook@chromium.org>, Peter Zijlstra <peterz@infradead.org>,
+ kgdb-bugreport@lists.sourceforge.net,
+ "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>, linux-kernel@vger.kernel.org,
+ Jason Wessel <jason.wessel@windriver.com>, Dmitry Vyukov <dvyukov@google.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-SGksCgpPbiBGcmksIEp1biAzMCwgMjAyMyBhdCAxOjEy4oCvUE0gRGFuaWVsIFRob21wc29uCjxk
-YW5pZWwudGhvbXBzb25AbGluYXJvLm9yZz4gd3JvdGU6Cj4KPiBrZGJfc2VuZF9zaWcoKSBpcyBk
-ZWZpbmVkIGluIHRoZSBzaWduYWwgY29kZSBhbmQgY2FsbGVkIGZyb20ga2RiLAo+IGJ1dCB0aGUg
-ZGVjbGFyYXRpb24gaXMgcGFydCBvZiB0aGUga2RiIGludGVybmFsIGNvZGUuCj4gTW92ZSB0aGUg
-ZGVjbGFyYXRpb24gdG8gdGhlIHNoYXJlZCBoZWFkZXIgdG8gYXZvaWQgdGhlIHdhcm5pbmc6Cj4K
-PiBrZXJuZWwvc2lnbmFsLmM6NDc4OTo2OiBlcnJvcjogbm8gcHJldmlvdXMgcHJvdG90eXBlIGZv
-ciAna2RiX3NlbmRfc2lnJyBbLVdlcnJvcj1taXNzaW5nLXByb3RvdHlwZXNdCj4KPiBSZXBvcnRl
-ZC1ieTogQXJuZCBCZXJnbWFubiA8YXJuZEBhcm5kYi5kZT4KCkZXSVc6IHRoZXNlIGRheXMsIEkg
-dGhpbmsgY2hlY2twYXRjaCB5ZWxscyBhdCB5b3UgZm9yIGEgYmFyZQoiUmVwb3J0ZWQtYnkiIGxp
-a2UgYWJvdmUuIEl0IGlkZWFsbHkgd2FudHMgYSAiQ2xvc2VzIiB0YWcgdG8gZm9sbG93CmltbWVk
-aWF0ZWx5IHdpdGggYSBsaW5rIHRvIHRoZSByZXBvcnQsIG9yIGluIHRoZSB2ZXJ5IGxlYXN0IGEg
-IkxpbmsiCnRhZyBpZiB0aGlzIGRvZXNuJ3QgZnVsbHkgYWRkcmVzcyB0aGUgaXNzdWUuCgo+IFNp
-Z25lZC1vZmYtYnk6IERhbmllbCBUaG9tcHNvbiA8ZGFuaWVsLnRob21wc29uQGxpbmFyby5vcmc+
-CgpSZXZpZXdlZC1ieTogRG91Z2xhcyBBbmRlcnNvbiA8ZGlhbmRlcnNAY2hyb21pdW0ub3JnPgoK
-Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCktnZGItYnVn
-cmVwb3J0IG1haWxpbmcgbGlzdApLZ2RiLWJ1Z3JlcG9ydEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQK
-aHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8va2dkYi1idWdyZXBv
-cnQK
+On Fri, Jun 30, 2023, at 17:24, Daniel Thompson wrote:
+> On Wed, May 17, 2023 at 02:54:09PM +0200, Arnd Bergmann wrote:
+>> diff --git a/kernel/signal.c b/kernel/signal.c
+>> index 8f6330f0e9ca..d38df14f71ac 100644
+>> --- a/kernel/signal.c
+>> +++ b/kernel/signal.c
+>> @@ -4780,6 +4780,8 @@ void __init signals_init(void)
+>>
+>>  #ifdef CONFIG_KGDB_KDB
+>>  #include <linux/kdb.h>
+>> +#include "debug/kdb/kdb_private.h"
+>> +
+>
+> Isn't is better to move the prototype for kdb_send_sig() into
+> linux/kdb.h instead?
+>
+> That's what other kdb helpers spread across the kernel do
+> (kdb_walk_kallsyms() for example).
+
+Right, that is probably better here. Not sure if it's worth
+reworking the branch if you already merged it, the difference
+seems rather minor.
+
+       Arnd
+
+
+_______________________________________________
+Kgdb-bugreport mailing list
+Kgdb-bugreport@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport
