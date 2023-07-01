@@ -2,130 +2,131 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AB4D7744540
-	for <lists+kgdb-bugreport@lfdr.de>; Sat,  1 Jul 2023 01:36:03 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 268C5744A71
+	for <lists+kgdb-bugreport@lfdr.de>; Sat,  1 Jul 2023 18:09:12 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1qFNej-00013y-3q
+	id 1qFd9p-0001Ol-W9
 	for lists+kgdb-bugreport@lfdr.de;
-	Fri, 30 Jun 2023 23:36:01 +0000
+	Sat, 01 Jul 2023 16:09:10 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <arnd@arndb.de>) id 1qFNeh-00013e-BO
+ (envelope-from <dianders@chromium.org>) id 1qFd9o-0001Of-DB
  for kgdb-bugreport@lists.sourceforge.net;
- Fri, 30 Jun 2023 23:36:00 +0000
+ Sat, 01 Jul 2023 16:09:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Subject:Cc:To:From:Date:References:
- In-Reply-To:Message-Id:Mime-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
+ Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
+ Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+ :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=upLBwBc2dBmHKX9v2pXFENlWMqDWFCIobcQ0HEfLYik=; b=aHwnNTpMnjR1oNbfV7arLAlYXC
- 8sD8nT4zSpVZECoiGChrlkoY/FSr4C0DMM21o4kv0svIXQf10f3N33ts88Hds5d4ucSlvVE5OBfzo
- dGA+p2qOcuu9h9OHQmew58ceR+sDBKIr6XzILsOVpAGeuG+RCLlhc5Q9xlMmuzPIOhS0=;
+ bh=Ng1EwQD5y0cvCYQ4WXImHX40YGNrjiR/qucwDkIAqw0=; b=Ug5Gwt3ILL7WnarfX1UeuwJvhZ
+ EutuJGcG1OtN1raibs0lgdcvUZ2rM//IzSk+xxgAGv9mOimWkHjxRYalIq7QGi4/LaN7UXO19zvcn
+ ex9hdRi9QdUc1Uoe2pbAGtRyFf4AF7/plCKz2/1LQz7/NiISfrTVDxmh/KVJldKIy/lE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Subject:Cc:To:From:Date:References:In-Reply-To:Message-Id:
- Mime-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
+ :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=upLBwBc2dBmHKX9v2pXFENlWMqDWFCIobcQ0HEfLYik=; b=SduxgCBK42i04rRgZ5c30NHoD2
- S2hnXwFGO40ZaW9vVKH8/FbmxoY6aImRaTr9bGm4gFK9F0e8Hjr45ohxkaMmP7XemnAJYgwTGdtXi
- rId0yzR8qEJCGlJ97zjq5dPzUIMLthWF5FMGwBxzGRVtIEBJpnOYap9WO2zv2OigoJss=;
-Received: from out5-smtp.messagingengine.com ([66.111.4.29])
+ bh=Ng1EwQD5y0cvCYQ4WXImHX40YGNrjiR/qucwDkIAqw0=; b=X5mqn+Xj318+HcX5W5JFu79irT
+ 0w+2n5doB/Y1diO/1oXG6JlbsWIMd4T4aA/EBV9AOwK2X8uZKHiP2fVP1SB6QBBX0sEyXNneQSMZ4
+ uSOYVTymMdVhaNE9Ug3CKHK4HL8p80dq6CrUFViRFvhlOmxPo3jJEX7h2p1wKWBLDq8o=;
+Received: from mail-lj1-f182.google.com ([209.85.208.182])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qFNef-002WZa-C0 for kgdb-bugreport@lists.sourceforge.net;
- Fri, 30 Jun 2023 23:35:59 +0000
-Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
- by mailout.nyi.internal (Postfix) with ESMTP id BE81F5C163D;
- Fri, 30 Jun 2023 11:31:22 -0400 (EDT)
-Received: from imap51 ([10.202.2.101])
- by compute6.internal (MEProxy); Fri, 30 Jun 2023 11:31:22 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arndb.de; h=cc
- :cc:content-type:content-type:date:date:from:from:in-reply-to
- :in-reply-to:message-id:mime-version:references:reply-to:sender
- :subject:subject:to:to; s=fm1; t=1688139082; x=1688225482; bh=up
- LBwBc2dBmHKX9v2pXFENlWMqDWFCIobcQ0HEfLYik=; b=IoTcM+BNU5go7enV0u
- JT9XMkqfYa+qdnubg8XHBYF5i2NXlo1fPOir8T9gSOmYLYMpuFSxn3GNQB3AGn+s
- 7BfpTods5F9J1kJLl4nO3S61LUPhcF8jfTyqwB04PFuykuZHbHQzPLLzIpKJwqsY
- hBBJpbeQ0+GTse6FIeoTtMMOYvX2Wdbp8itXv7Q4u85pghNbUCeLexA79b/yEXBa
- gChy7+PUrSV/UlYFI1hWbWMoYl0AebKqaEQfVHAu9u8HP12coHAnFnlB81WMvVJ/
- BnRLGVToZB8scM6QJXWLEuZAx2IuhvYExOJUo1NopgYSaDJ3rUFlOQNqx8jaCGD/
- Zhow==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-type:content-type:date:date
- :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
- :message-id:mime-version:references:reply-to:sender:subject
- :subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
- :x-sasl-enc; s=fm2; t=1688139082; x=1688225482; bh=upLBwBc2dBmHK
- X9v2pXFENlWMqDWFCIobcQ0HEfLYik=; b=dSAPUWjPp1SYx2dhvpDc6kP0C4o9a
- W0kiwUjeRa6rut+EfGy3P42zbh922ribXMJL+v+gMBV6g7YIHyV0LR5X+kGe2kpQ
- eLw8A+ar9zyIpRgI/nin3JlfuNFLpnIwdaHIzSDeEV6uYXns8HDuKaBI2YMzjb+c
- xAYJcOcRvb6oDTMb5iCQCLsr0gcJz+reoQmMio5yGRO6pwKZlRnGdmOvOsHJr2l9
- ZLwm8DcOKLsDabMw5s35yyXcPo9puH1MadTBf4iTeXUK4PxWMt5X2P5Es/gle9gE
- JO3gxF2j0JogtIhvBO+/zMmbU/uZwuEUDbVEs4KGAHBfmmBpTKuM+TEyw==
-X-ME-Sender: <xms:SvWeZPVlXpa0WqrDZq4956SnxDgJS3IHYuk4KACxRyH5xAX5-2r1Yw>
- <xme:SvWeZHmjnZGfiKsXuXrI2INfaRI33I7gLBBWnmgLdafkhpL9ECNZAsfGFg56f0qR1
- upnW0lWMmMgBty0170>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedviedrtdeigdekkecutefuodetggdotefrodftvf
- curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
- uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
- fjughrpefofgggkfgjfhffhffvvefutgesthdtredtreertdenucfhrhhomhepfdetrhhn
- ugcuuegvrhhgmhgrnhhnfdcuoegrrhhnugesrghrnhgusgdruggvqeenucggtffrrghtth
- gvrhhnpeffheeugeetiefhgeethfejgfdtuefggeejleehjeeutefhfeeggefhkedtkeet
- ffenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpegrrh
- hnugesrghrnhgusgdruggv
-X-ME-Proxy: <xmx:SvWeZLao6TmHJFrx3m7a1abR0ScevQl2ysVKrgAb1r68RwqxrZmFTg>
- <xmx:SvWeZKXFuzaAkLRaTR5DnB52NF0n1dVGTQ6Hs3XNolHIJNO19SVE_A>
- <xmx:SvWeZJkp5Ye0ibJuLPmUOVfA4COMkNxHhKpMIlnUQQgRsP6oRB5A-w>
- <xmx:SvWeZPX9ipntvWfaN-beytqmFz_yGGpiAJksGvMbhcdHAp-hOL0gCw>
-Feedback-ID: i56a14606:Fastmail
-Received: by mailuser.nyi.internal (Postfix, from userid 501)
- id 2B7DAB60092; Fri, 30 Jun 2023 11:31:22 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
-User-Agent: Cyrus-JMAP/3.9.0-alpha0-499-gf27bbf33e2-fm-20230619.001-gf27bbf33
-Mime-Version: 1.0
-Message-Id: <51b8b3c2-f4ac-454c-acde-e1d136139109@app.fastmail.com>
-In-Reply-To: <20230630152439.GA2900969@aspen.lan>
-References: <20230517125423.930967-1-arnd@kernel.org>
- <20230630152439.GA2900969@aspen.lan>
-Date: Fri, 30 Jun 2023 17:31:01 +0200
-From: "Arnd Bergmann" <arnd@arndb.de>
-To: "Daniel Thompson" <daniel.thompson@linaro.org>,
- "Arnd Bergmann" <arnd@kernel.org>
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1qFd9n-0039eW-Oj for kgdb-bugreport@lists.sourceforge.net;
+ Sat, 01 Jul 2023 16:09:08 +0000
+Received: by mail-lj1-f182.google.com with SMTP id
+ 38308e7fff4ca-2b6a1245542so48945261fa.1
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Sat, 01 Jul 2023 09:09:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1688227740; x=1690819740;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Ng1EwQD5y0cvCYQ4WXImHX40YGNrjiR/qucwDkIAqw0=;
+ b=UZYCFRSzR+fLKW3hjwx6MJoSjyPdFqdjl04g2hUifIPlH3Pci7Lps7Lmay/4wTw/q8
+ 4fOftK0DL494NLdIQAc2qDSGJmWAwHoSYmGWoH1bv5bQIg02N1NCkR2scq9hIgqm+bGL
+ 6eoLgF0hMWHXmvbfMg1LbdiOfkdEzJmnkDH/U=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1688227740; x=1690819740;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Ng1EwQD5y0cvCYQ4WXImHX40YGNrjiR/qucwDkIAqw0=;
+ b=YQy3nkvzY3qEw2A14Zn7EJclgqSnMdkrFC+RIXsdRRG3PACG/8nN1YBBP/QozO035i
+ PzMJ36Y3eWUYPh7cmIjGGy16NwgGTlG8NiK1H0WVQjgMPt2Tz+brL56cG1MHsydREMak
+ XiIEaM+JwOyK45oa4FXBgWQD5JCLRcppbgdcRNVOcohgba2JlnHgS49I9gKgGsIiki0K
+ 9qiQipq38pCQq6Pu9BwHHS1JBOu1asPrQCzxoEqUIT3r6KiynGoORLwDdqJ8QyP/8AXl
+ g2ZsuVLbJGtEol+7g4Q/pGEbFYpPf49C9KxTmJfHv57pY4SkasQoFOTXhx+nEcvZ2jrl
+ TrUA==
+X-Gm-Message-State: ABy/qLboXJ7okntGRkkMn6m7snqNv1QeJgpQodIHV8OYf9Gq5551o4ZT
+ c8zQRVMEuZBj2a8C8eukTATsRn4hq4D+6YyTGHDuB8X5
+X-Google-Smtp-Source: APBJJlHphpSW0Zl4wB5IxVlqP0eLme2XRZUCqtSJOQIpxFCZGY8X7vOCqICDfMQKNay2qUV+iTAWHQ==
+X-Received: by 2002:a2e:a0c8:0:b0:2b6:d8e4:71b3 with SMTP id
+ f8-20020a2ea0c8000000b002b6d8e471b3mr1879912ljm.21.1688227740512; 
+ Sat, 01 Jul 2023 09:09:00 -0700 (PDT)
+Received: from mail-lf1-f42.google.com (mail-lf1-f42.google.com.
+ [209.85.167.42]) by smtp.gmail.com with ESMTPSA id
+ l17-20020a2e8691000000b002b6a6574313sm2848584lji.62.2023.07.01.09.08.56
+ for <kgdb-bugreport@lists.sourceforge.net>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 01 Jul 2023 09:08:59 -0700 (PDT)
+Received: by mail-lf1-f42.google.com with SMTP id
+ 2adb3069b0e04-4fb0336ed4fso1424e87.1
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Sat, 01 Jul 2023 09:08:56 -0700 (PDT)
+X-Received: by 2002:a19:ee17:0:b0:4f2:7840:e534 with SMTP id
+ g23-20020a19ee17000000b004f27840e534mr36733lfb.0.1688227736365; Sat, 01 Jul
+ 2023 09:08:56 -0700 (PDT)
+MIME-Version: 1.0
+References: <20230616150618.6073-1-pmladek@suse.com>
+ <20230616150618.6073-7-pmladek@suse.com>
+ <7cfc15f1-d8d0-4418-b7a1-5aa9e90e3fb3@roeck-us.net>
+In-Reply-To: <7cfc15f1-d8d0-4418-b7a1-5aa9e90e3fb3@roeck-us.net>
+From: Doug Anderson <dianders@chromium.org>
+Date: Sat, 1 Jul 2023 09:08:43 -0700
+X-Gmail-Original-Message-ID: <CAD=FV=UsgweS0pTpr=6xE-+Dx0fqXgjN=3Gf-4MQcNAzjL+64w@mail.gmail.com>
+Message-ID: <CAD=FV=UsgweS0pTpr=6xE-+Dx0fqXgjN=3Gf-4MQcNAzjL+64w@mail.gmail.com>
+To: Guenter Roeck <linux@roeck-us.net>
 X-Spam-Score: -0.9 (/)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Fri, Jun 30, 2023, at 17:24, Daniel Thompson wrote: > On
- Wed, May 17, 2023 at 02:54:09PM +0200, Arnd Bergmann wrote: >> diff --git
- a/kernel/signal.c b/kernel/signal.c >> index 8f6330f0e9ca..d38df14 [...] 
+ 
+ Content preview:  Hi, On Sat, Jul 1, 2023 at 7:40 AM Guenter Roeck <linux@roeck-us.net>
+    wrote: > > On Fri, Jun 16, 2023 at 05:06:18PM +0200, Petr Mladek wrote: >
+    > The HAVE_ prefix means that the code could be enabled. A [...] 
+ 
  Content analysis details:   (-0.9 points, 6.0 required)
- pts rule name              description
+ 
+  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
- [66.111.4.29 listed in wl.mailspike.net]
- -0.7 RCVD_IN_DNSWL_LOW      RBL: Sender listed at https://www.dnswl.org/,
- low trust [66.111.4.29 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+                             [209.85.208.182 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+                              no trust
+                             [209.85.208.182 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+                             envelope-from domain
+ -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1qFNef-002WZa-C0
-Subject: Re: [Kgdb-bugreport] [PATCH] kdb: include header in signal handling
- code
+                             author's domain
+  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+                             valid
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1qFd9n-0039eW-Oj
+Subject: Re: [Kgdb-bugreport] [PATCH v2 6/6] watchdog/hardlockup: Define
+ HARDLOCKUP_DETECTOR_ARCH
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -137,41 +138,48 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: Kees Cook <keescook@chromium.org>, Peter Zijlstra <peterz@infradead.org>,
- kgdb-bugreport@lists.sourceforge.net,
- "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>, linux-kernel@vger.kernel.org,
- Jason Wessel <jason.wessel@windriver.com>, Dmitry Vyukov <dvyukov@google.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: Petr Mladek <pmladek@suse.com>, kgdb-bugreport@lists.sourceforge.net,
+ linux-kernel@vger.kernel.org, Nicholas Piggin <npiggin@gmail.com>,
+ linux-perf-users@vger.kernel.org, sparclinux@vger.kernel.org,
+ Andrew Morton <akpm@linux-foundation.org>, linuxppc-dev@lists.ozlabs.org,
+ "David S . Miller" <davem@davemloft.net>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Fri, Jun 30, 2023, at 17:24, Daniel Thompson wrote:
-> On Wed, May 17, 2023 at 02:54:09PM +0200, Arnd Bergmann wrote:
->> diff --git a/kernel/signal.c b/kernel/signal.c
->> index 8f6330f0e9ca..d38df14f71ac 100644
->> --- a/kernel/signal.c
->> +++ b/kernel/signal.c
->> @@ -4780,6 +4780,8 @@ void __init signals_init(void)
->>
->>  #ifdef CONFIG_KGDB_KDB
->>  #include <linux/kdb.h>
->> +#include "debug/kdb/kdb_private.h"
->> +
->
-> Isn't is better to move the prototype for kdb_send_sig() into
-> linux/kdb.h instead?
->
-> That's what other kdb helpers spread across the kernel do
-> (kdb_walk_kallsyms() for example).
-
-Right, that is probably better here. Not sure if it's worth
-reworking the branch if you already merged it, the difference
-seems rather minor.
-
-       Arnd
-
-
-_______________________________________________
-Kgdb-bugreport mailing list
-Kgdb-bugreport@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport
+SGksCgpPbiBTYXQsIEp1bCAxLCAyMDIzIGF0IDc6NDDigK9BTSBHdWVudGVyIFJvZWNrIDxsaW51
+eEByb2Vjay11cy5uZXQ+IHdyb3RlOgo+Cj4gT24gRnJpLCBKdW4gMTYsIDIwMjMgYXQgMDU6MDY6
+MThQTSArMDIwMCwgUGV0ciBNbGFkZWsgd3JvdGU6Cj4gPiBUaGUgSEFWRV8gcHJlZml4IG1lYW5z
+IHRoYXQgdGhlIGNvZGUgY291bGQgYmUgZW5hYmxlZC4gQWRkIGFub3RoZXIKPiA+IHZhcmlhYmxl
+IGZvciBIQVZFX0hBUkRMT0NLVVBfREVURUNUT1JfQVJDSCB3aXRob3V0IHRoaXMgcHJlZml4Lgo+
+ID4gSXQgd2lsbCBiZSBzZXQgd2hlbiBpdCBzaG91bGQgYmUgYnVpbHQuIEl0IHdpbGwgbWFrZSBp
+dCBjb21wYXRpYmxlCj4gPiB3aXRoIHRoZSBvdGhlciBoYXJkbG9ja3VwIGRldGVjdG9ycy4KPiA+
+Cj4gPiBUaGUgY2hhbmdlIGFsbG93cyB0byBjbGVhbiB1cCBkZXBlbmRlbmNpZXMgb2YgUFBDX1dB
+VENIRE9HCj4gPiBhbmQgSEFWRV9IQVJETE9DS1VQX0RFVEVDVE9SX1BFUkYgZGVmaW5pdGlvbnMg
+Zm9yIHBvd2VycGMuCj4gPgo+ID4gQXMgYSByZXN1bHQgSEFWRV9IQVJETE9DS1VQX0RFVEVDVE9S
+X1BFUkYgaGFzIHRoZSBzYW1lIGRlcGVuZGVuY2llcwo+ID4gb24gYXJtLCB4ODYsIHBvd2VycGMg
+YXJjaGl0ZWN0dXJlcy4KPiA+Cj4gPiBTaWduZWQtb2ZmLWJ5OiBQZXRyIE1sYWRlayA8cG1sYWRl
+a0BzdXNlLmNvbT4KPiA+IFJldmlld2VkLWJ5OiBEb3VnbGFzIEFuZGVyc29uIDxkaWFuZGVyc0Bj
+aHJvbWl1bS5vcmc+Cj4gPiAtLS0KPiAuLi4KPiA+IC0tLSBhL2luY2x1ZGUvbGludXgvbm1pLmgK
+PiA+ICsrKyBiL2luY2x1ZGUvbGludXgvbm1pLmgKPiA+IEBAIC05LDcgKzksNyBAQAo+ID4gICNp
+bmNsdWRlIDxhc20vaXJxLmg+Cj4gPgo+ID4gIC8qIEFyY2ggc3BlY2lmaWMgd2F0Y2hkb2dzIG1p
+Z2h0IG5lZWQgdG8gc2hhcmUgZXh0cmEgd2F0Y2hkb2ctcmVsYXRlZCBBUElzLiAqLwo+ID4gLSNp
+ZiBkZWZpbmVkKENPTkZJR19IQVZFX0hBUkRMT0NLVVBfREVURUNUT1JfQVJDSCkgfHwgZGVmaW5l
+ZChDT05GSUdfSEFSRExPQ0tVUF9ERVRFQ1RPUl9TUEFSQzY0KQo+ID4gKyNpZiBkZWZpbmVkKENP
+TkZJR19IQVJETE9DS1VQX0RFVEVDVE9SX0FSQ0gpIHx8IGRlZmluZWQoQ09ORklHX0hBUkRMT0NL
+VVBfREVURUNUT1JfU1BBUkM2NCkKPgo+IFRoaXMgcmVzdWx0cyBpbjoKPgo+IGFyY2gvcG93ZXJw
+Yy9wbGF0Zm9ybXMvcHNlcmllcy9tb2JpbGl0eS5jOiBJbiBmdW5jdGlvbiAncHNlcmllc19taWdy
+YXRlX3BhcnRpdGlvbic6Cj4gYXJjaC9wb3dlcnBjL3BsYXRmb3Jtcy9wc2VyaWVzL21vYmlsaXR5
+LmM6NzUzOjE3OiBlcnJvcjogaW1wbGljaXQgZGVjbGFyYXRpb24gb2YgZnVuY3Rpb24gJ3dhdGNo
+ZG9nX2hhcmRsb2NrdXBfc2V0X3RpbWVvdXRfcGN0JzsgZGlkIHlvdSBtZWFuICd3YXRjaGRvZ19o
+YXJkbG9ja3VwX3N0b3AnPyBbLVdlcnJvcj1pbXBsaWNpdC1mdW5jdGlvbi1kZWNsYXJhdGlvbl0K
+PiAgIDc1MyB8ICAgICAgICAgICAgICAgICB3YXRjaGRvZ19oYXJkbG9ja3VwX3NldF90aW1lb3V0
+X3BjdChmYWN0b3IpOwo+Cj4gd2l0aCBwcGM2NF9kZWZjb25maWcgLUNPTkZJR19IQVJETE9DS1VQ
+X0RFVEVDVE9SLCBiZWNhdXNlIHRoZSBkdW1teQo+IGZvciB3YXRjaGRvZ19oYXJkbG9ja3VwX3Nl
+dF90aW1lb3V0X3BjdCgpIGlzIHN0aWxsIGRlZmluZWQgaW4KPiBhcmNoL3Bvd2VycGMvaW5jbHVk
+ZS9hc20vbm1pLmggd2hpY2ggaXMgbm8gbG9uZ2VyIGluY2x1ZGVkLgoKQ2FuIHlvdSB0ZXN0IHdp
+dGg6CgpodHRwczovL2xvcmUua2VybmVsLm9yZy9yLzIwMjMwNjI5MTI0NTAwLjEuSTU1ZTJmNGU3
+OTAzZDY4NmM0NDg0Y2IyM2MwMzNjNmE5ZTFhOWQ0YzRAY2hhbmdlaWQKClRoYW5rcyEKCgpfX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpLZ2RiLWJ1Z3JlcG9y
+dCBtYWlsaW5nIGxpc3QKS2dkYi1idWdyZXBvcnRAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBz
+Oi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2tnZGItYnVncmVwb3J0Cg==
