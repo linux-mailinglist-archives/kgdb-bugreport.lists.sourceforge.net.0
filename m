@@ -2,133 +2,79 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 02FB475FB44
-	for <lists+kgdb-bugreport@lfdr.de>; Mon, 24 Jul 2023 17:56:13 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 58F7E771D7C
+	for <lists+kgdb-bugreport@lfdr.de>; Mon,  7 Aug 2023 11:50:41 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1qNxuu-0008Fj-Tx
+	id 1qSwsp-0006S6-4T
 	for lists+kgdb-bugreport@lfdr.de;
-	Mon, 24 Jul 2023 15:56:11 +0000
+	Mon, 07 Aug 2023 09:50:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <dianders@chromium.org>) id 1qNxut-0008FV-Et
+ (envelope-from <mark.rutland@arm.com>) id 1qSwsn-0006S0-Iq
  for kgdb-bugreport@lists.sourceforge.net;
- Mon, 24 Jul 2023 15:56:10 +0000
+ Mon, 07 Aug 2023 09:50:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
- Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hqJrERUDo+zp/o5kHkQ6aMOqQKKqLEOmzFVk7PKhL/I=; b=QS66rbZdhrDfM5aS+1QjDPksPD
- nMPAbjSB1OhyJDOp90zN7M1zGwCN5wUJ+oJVDNACXp5N8ID8xu6CtBWZY2Nn7ss6e5zXB3/IfsEMN
- 11XnhOle0O2/Y9wVhiXRZKht7Temgnlz6NjDW+80x+WHUAnTVHgMht8Y8YeUieu3ikIs=;
+ bh=73dP15BuS0YyohjzvuTaNa9POKGz6VfB6MV1dNoawWM=; b=O4VX5xEQJ99O2qicEpttQ1Wg7V
+ 4Y27hohIG9RadMZE3J5AMCTiJ8mysN6tajrnlT/g/TpoZ34Xl6MplbYc+K8ESOy4YvihdiCWYRuWo
+ 3XWyaci6rnNZPN+geXkuNwj5HNkZlPQubmB3QJBS3URrdLMm7pk9uBPdPNDwJxqc9dAA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
- :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=hqJrERUDo+zp/o5kHkQ6aMOqQKKqLEOmzFVk7PKhL/I=; b=EWjjgRkoPbntHrTk3hHrWRQJQT
- AKRYfzRa8dZXVR/xqSLuqpIiS9cLh6Mhyq2SVA7mZJu2iQF+Q0OmHZVhRVKwvbvSoe0w3gT7fTDn7
- O605368DMTIc9lCRkqoMjH2uNbvqPuzV92A2XKNy7KX+GS2iSiK0NByrWh78bucPw3UQ=;
-Received: from mail-ed1-f54.google.com ([209.85.208.54])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1qNxuo-0002YO-H7 for kgdb-bugreport@lists.sourceforge.net;
- Mon, 24 Jul 2023 15:56:10 +0000
-Received: by mail-ed1-f54.google.com with SMTP id
- 4fb4d7f45d1cf-5217ad95029so5960131a12.2
- for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 24 Jul 2023 08:56:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1690214158; x=1690818958;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=hqJrERUDo+zp/o5kHkQ6aMOqQKKqLEOmzFVk7PKhL/I=;
- b=SrkEWragiyal8ZEiT1/Rd/fxkuDejUOg6Ue7v8n0fy94wSxfTLmbDmd7XVZEplUH+h
- zJCLKe4D/uljzic4FUrF4tfHdAcSJ67uwq/6r5tfiVXwpeOfKZ/xNARMvTfAeCdmicOW
- X40+q98fKabBQxH4JLxUiNEEHbS9TAti/WlkM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1690214158; x=1690818958;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=hqJrERUDo+zp/o5kHkQ6aMOqQKKqLEOmzFVk7PKhL/I=;
- b=CEMALfCDCuTKFBKxNi6RnCQSGBGz+OUaQ8InOaluV01M/kcsnDiAfq0vvZuv8cN7tQ
- RK+TKhH0LayRmcyvTGWvxi3VgMRphPf9/P138Y4i14x96CgHoCxGdwEnltkkVRWaOy60
- NyqsjHagDNmbUvKSi++4zuIxb/GY0O8wz4xuXfssuznvZ9k0ADEgrVmgtGxV1ufcoI8+
- 96Ma4gTvmgLBxEoj23/YvVbWisrfu5O4bTm4CLZtenvfHr/ujlw+AFEfRTsRnMsgEXbF
- tIlQcrMGZqauyvvTn0nUrHvzFJLVnGmUWNjTm+htuaEJr7rPj12UyUsJJeSz1d2gnQYi
- mZJA==
-X-Gm-Message-State: ABy/qLYUWyqtPhLLwOjluDhBWSWVFh/JrSDdCJdEVrvO1DCaBxWTs3j5
- FaSd352Bv4JCUSOg6Jwq6WdkyfwuvQdgzlrAXdKrEA==
-X-Google-Smtp-Source: APBJJlEQW8NogcELEQmbqv9b3pdp98fdaQVzdUJVuqVIb0RaPC2PO2nKV8oeGXd+jlCbMwOHXM65PQ==
-X-Received: by 2002:a05:6402:799:b0:521:8777:b00d with SMTP id
- d25-20020a056402079900b005218777b00dmr7380550edy.15.1690214158254; 
- Mon, 24 Jul 2023 08:55:58 -0700 (PDT)
-Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com.
- [209.85.208.43]) by smtp.gmail.com with ESMTPSA id
- k10-20020aa7c04a000000b0050488d1d376sm6427573edo.0.2023.07.24.08.55.57
- for <kgdb-bugreport@lists.sourceforge.net>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 24 Jul 2023 08:55:57 -0700 (PDT)
-Received: by mail-ed1-f43.google.com with SMTP id
- 4fb4d7f45d1cf-51e24210395so16897a12.0
- for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 24 Jul 2023 08:55:57 -0700 (PDT)
-X-Received: by 2002:a50:f68e:0:b0:522:3ead:377 with SMTP id
- d14-20020a50f68e000000b005223ead0377mr33590edn.7.1690214156878; Mon, 24 Jul
- 2023 08:55:56 -0700 (PDT)
-MIME-Version: 1.0
+ bh=73dP15BuS0YyohjzvuTaNa9POKGz6VfB6MV1dNoawWM=; b=KQRMpb8XHFnKUdfeI349FuAeFe
+ fJknOYQuEvcZbE9PZyPo+ikNEQ1+FXz409EY5JOloyVz+PeuiZFzhlOa22GGKql7s0Hjfv2DIktVV
+ CdD6921goM2DyFOD3O+XNy+E48WlSKs1h/B3NNH+6vBG739o9Tkjy/fuhplEDDZEcIck=;
+Received: from foss.arm.com ([217.140.110.172])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtp (Exim 4.95)
+ id 1qSwsn-0004U7-2W for kgdb-bugreport@lists.sourceforge.net;
+ Mon, 07 Aug 2023 09:50:38 +0000
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 990C31FB;
+ Mon,  7 Aug 2023 02:51:13 -0700 (PDT)
+Received: from FVFF77S0Q05N.cambridge.arm.com (FVFF77S0Q05N.cambridge.arm.com
+ [10.1.32.139])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id DE1003F59C;
+ Mon,  7 Aug 2023 02:50:27 -0700 (PDT)
+Date: Mon, 7 Aug 2023 10:50:25 +0100
+From: Mark Rutland <mark.rutland@arm.com>
+To: Douglas Anderson <dianders@chromium.org>, Marc Zyngier <maz@kernel.org>
+Message-ID: <ZNC-YRQopO0PaIIo@FVFF77S0Q05N.cambridge.arm.com>
 References: <20230601213440.2488667-1-dianders@chromium.org>
-In-Reply-To: <20230601213440.2488667-1-dianders@chromium.org>
-From: Doug Anderson <dianders@chromium.org>
-Date: Mon, 24 Jul 2023 08:55:44 -0700
-X-Gmail-Original-Message-ID: <CAD=FV=V2fFqwg3f3KS29+AkggHFDbyYvfAb12DrDn_PF8+bJjA@mail.gmail.com>
-Message-ID: <CAD=FV=V2fFqwg3f3KS29+AkggHFDbyYvfAb12DrDn_PF8+bJjA@mail.gmail.com>
-To: Mark Rutland <mark.rutland@arm.com>,
- Catalin Marinas <catalin.marinas@arm.com>, 
- Will Deacon <will@kernel.org>, Sumit Garg <sumit.garg@linaro.org>, 
- Daniel Thompson <daniel.thompson@linaro.org>, Marc Zyngier <maz@kernel.org>
-X-Spam-Score: -0.9 (/)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
+ <20230601143109.v9.1.I1223c11c88937bd0cbd9b086d4ef216985797302@changeid>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20230601143109.v9.1.I1223c11c88937bd0cbd9b086d4ef216985797302@changeid>
+X-Spam-Score: -2.3 (--)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  Hi folks, On Thu, Jun 1, 2023 at 2:37 PM Douglas Anderson
-    <dianders@chromium.org> wrote: > > This is an attempt to resurrect Sumit's
-    old patch series [1] that > allowed us to use the arm64 pseudo-NMI to get
-    b [...] 
- 
- Content analysis details:   (-0.9 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview:  Hi Doug, On Thu, Jun 01, 2023 at 02:31:45PM -0700, Douglas
+ Anderson wrote: > From: Sumit Garg <sumit.garg@linaro.org> > > Add support
+ to handle SGIs as pseudo NMIs. As SGIs or IPIs default to a > special flow
+ [...] Content analysis details:   (-2.3 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
-                             [209.85.208.54 listed in wl.mailspike.net]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [217.140.110.172 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
-                              no trust
-                             [209.85.208.54 listed in list.dnswl.org]
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qNxuo-0002YO-H7
-Subject: Re: [Kgdb-bugreport] [PATCH v9 0/7] arm64: Add debug IPI for
- backtraces / kgdb; try to use NMI for it
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+X-Headers-End: 1qSwsn-0004U7-2W
+Subject: Re: [Kgdb-bugreport] [PATCH v9 1/7] irqchip/gic-v3: Enable support
+ for SGIs to act as NMIs
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -140,116 +86,185 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: Lecopzer Chen <lecopzer.chen@mediatek.com>,
- Peter Zijlstra <peterz@infradead.org>, kgdb-bugreport@lists.sourceforge.net,
- Ingo Molnar <mingo@kernel.org>, Valentin Schneider <vschneid@redhat.com>,
- Masahiro Yamada <masahiroy@kernel.org>,
+Cc: Masayoshi Mizuma <m.mizuma@jp.fujitsu.com>,
+ Daniel Thompson <daniel.thompson@linaro.org>,
  "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
- Ard Biesheuvel <ardb@kernel.org>, Chen-Yu Tsai <wens@csie.org>,
- Masayoshi Mizuma <msys.mizuma@gmail.com>, Wei Li <liwei391@huawei.com>,
- Frederic Weisbecker <frederic@kernel.org>, Stephen Boyd <swboyd@chromium.org>,
- Ben Dooks <ben-linux@fluff.org>, Thomas Gleixner <tglx@linutronix.de>,
- Josh Poimboeuf <jpoimboe@kernel.org>, linux-arm-kernel@lists.infradead.org,
- Andrey Konovalov <andreyknvl@gmail.com>, ito-yuichi@fujitsu.com,
- linux-kernel@vger.kernel.org, linux-perf-users@vger.kernel.org,
- "Gautham R. Shenoy" <gautham.shenoy@amd.com>,
- Jason Wessel <jason.wessel@windriver.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ Lecopzer Chen <lecopzer.chen@mediatek.com>,
+ Peter Zijlstra <peterz@infradead.org>,
+ Catalin Marinas <catalin.marinas@arm.com>, ito-yuichi@fujitsu.com,
+ linux-kernel@vger.kernel.org, Stephen Boyd <swboyd@chromium.org>,
+ linux-perf-users@vger.kernel.org, Chen-Yu Tsai <wens@csie.org>,
+ kgdb-bugreport@lists.sourceforge.net, Thomas Gleixner <tglx@linutronix.de>,
+ Masayoshi Mizuma <msys.mizuma@gmail.com>, Will Deacon <will@kernel.org>,
+ Ard Biesheuvel <ardb@kernel.org>, linux-arm-kernel@lists.infradead.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-SGkgZm9sa3MsCgpPbiBUaHUsIEp1biAxLCAyMDIzIGF0IDI6MzfigK9QTSBEb3VnbGFzIEFuZGVy
-c29uIDxkaWFuZGVyc0BjaHJvbWl1bS5vcmc+IHdyb3RlOgo+Cj4gVGhpcyBpcyBhbiBhdHRlbXB0
-IHRvIHJlc3VycmVjdCBTdW1pdCdzIG9sZCBwYXRjaCBzZXJpZXMgWzFdIHRoYXQKPiBhbGxvd2Vk
-IHVzIHRvIHVzZSB0aGUgYXJtNjQgcHNldWRvLU5NSSB0byBnZXQgYmFja3RyYWNlcyBvZiBDUFVz
-IGFuZAo+IGFsc28gdG8gcm91bmQgdXAgQ1BVcyBpbiBrZGIva2dkYi4gVGhlIGxhc3QgcG9zdCBm
-cm9tIFN1bWl0IHRoYXQgSQo+IGNvdWxkIGZpbmQgd2FzIHY3LCBzbyBJIHN0YXJ0ZWQgbXkgc2Vy
-aWVzIGF0IHY4LiBJIGhhdmVuJ3QgY29waWVkIGFsbAo+IG9mIGhpcyBvbGQgY2hhbmdlbG9uZ3Mg
-aGVyZSwgYnV0IHlvdSBjYW4gZmluZCB0aGVtIGZyb20gdGhlIGxpbmsuCj4KPiBJJ20gcmVhbGx5
-IGxvb2tpbmcgZm9yIGEgd2F5IHRvIGxhbmQgdGhpcyBwYXRjaCBzZXJpZXMuIEluIHJlc3BvbnNl
-IHRvCj4gdjgsIE1hcmsgUnV0bGFuZCBpbmRpY2F0ZWQgWzJdIHRoYXQgaGUgd2FzIHdvcnJpZWQg
-YWJvdXQgdGhlIHNvdW5kbmVzcwo+IG9mIHBzZXVkbyBOTUkuIFRob3NlIGRlZmluaXRlbHkgbmVl
-ZCB0byBnZXQgZml4ZWQsIGJ1dCBJTU8gdGhpcyBwYXRjaAo+IHNlcmllcyBjb3VsZCBzdGlsbCBs
-YW5kIGluIHRoZSBtZWFudGltZS4gVGhhdCB3b3VsZCBhdCBsZWFzdCBsZXQKPiBwZW9wbGUgdGVz
-dCB3aXRoIGl0Lgo+Cj4gUmVxdWVzdCBmb3IgYW55b25lIHJlYWRpbmcgdGhpczogcGxlYXNlIGhl
-bHAgaW5kaWNhdGUgeW91ciBzdXBwb3J0IG9mCj4gdGhpcyBwYXRjaCBzZXJpZXMgbGFuZGluZyBi
-eSByZXBseWluZywgZXZlbiBpZiB5b3UgZG9uJ3QgaGF2ZSB0aGUKPiBiYWNrZ3JvdW5kIGZvciBh
-IGZ1bGwgcmV2aWV3LiBNeSBzdXNwaWNpb24gaXMgdGhhdCB0aGVyZSBhcmUgYSBsb3Qgb2YKPiBw
-ZW9wbGUgd2hvIGFncmVlIHRoYXQgdGhpcyB3b3VsZCBiZSBzdXBlciB1c2VmdWwgdG8gZ2V0IGxh
-bmRlZC4KPgo+IFNpbmNlIHY4LCBJIGhhdmUgY2xlYW5lZCB1cCB0aGlzIHBhdGNoIHNlcmllcyBi
-eSBpbnRlZ3JhdGluZyB0aGUgMTB0aAo+IHBhdGNoIGZyb20gdjggWzNdIGludG8gdGhlIHdob2xl
-IHNlcmllcy4gQXMgcGFydCBvZiB0aGlzLCBJIHJlbmFtZWQKPiB0aGUgIk5NSSBJUEkiIHRvIHRo
-ZSAiZGVidWcgSVBJIiBzaW5jZSBpdCBjb3VsZCBub3cgYmUgYmFja2VkIGJ5IGEKPiByZWd1bGFy
-IElQSSBpbiB0aGUgY2FzZSB0aGF0IHBzZXVkbyBOTUlzIHdlcmVuJ3QgYXZhaWxhYmxlLiBXaXRo
-IHRoZQo+IGZhbGxiYWNrLCB0aGlzIGFsbG93ZWQgbWUgdG8gZHJvcCBzb21lIGV4dHJhIHBhdGNo
-ZXMgZnJvbSB0aGUKPiBzZXJpZXMuIFRoaXMgZmVlbHMgKHRvIG1lKSB0byBiZSBwcmV0dHkgY2xl
-YW4gYW5kIGhvcGVmdWxseSBvdGhlcnMKPiBhZ3JlZS4gQW55IHBhdGNoIEkgdG91Y2hlZCBzaWdu
-aWZpY2FudGx5IEkgcmVtb3ZlZCBNYXNheW9zaGkgYW5kCj4gQ2hlbi1ZdSdzIHRhZ3MgZnJvbS4K
-Pgo+IC4uLmFsc28gaW4gdjgsIEkgcmVvcmRlcmQgdGhlIHBhdGNoZXMgYSBiaXQgaW4gYSB3YXkg
-dGhhdCBzZWVtZWQgYQo+IGxpdHRsZSBjbGVhbmVyIHRvIG1lLgo+Cj4gU2luY2UgdjcsIEkgaGF2
-ZToKPiAqIEFkZHJlc3NlZCB0aGUgc21hbGwgYW1vdW50IG9mIGZlZWRiYWNrIHRoYXQgd2FzIHRo
-ZXJlIGZvciB2Ny4KPiAqIFJlYmFzZWQuCj4gKiBBZGRlZCBhIG5ldyBwYXRjaCB0aGF0IHByZXZl
-bnRzIHVzIGZyb20gc3BhbW1pbmcgdGhlIGxvZ3Mgd2l0aCBpZGxlCj4gICB0YXNrcy4KPiAqIEFk
-ZGVkIGFuIGV4dHJhIHBhdGNoIHRvIGdyYWNlZnVsbHkgZmFsbCBiYWNrIHRvIHJlZ3VsYXIgSVBJ
-cyBpZgo+ICAgcHNldWRvLU5NSXMgYXJlbid0IHRoZXJlLgo+Cj4gSXQgY2FuIGJlIG5vdGVkIHRo
-YXQgdGhpcyBwYXRjaCBzZXJpZXMgd29ya3MgdmVyeSB3ZWxsIHdpdGggdGhlIHJlY2VudAo+ICJo
-YXJkbG9ja3VwIiBwYXRjaGVzIHRoYXQgaGF2ZSBsYW5kZWQgdGhyb3VnaCBBbmRyZXcgTW9ydG9u
-J3MgdHJlZSBhbmQKPiBhcmUgY3VycmVudGx5IGluIGxpbnV4bmV4dC4gSXQgd29ya3MgZXNwZWNp
-YWxseSB3ZWxsIHdpdGggdGhlICJidWRkeSIKPiBsb2NrdXAgZGV0ZWN0b3IuCj4KPiBbMV0gaHR0
-cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtYXJtLWtlcm5lbC8xNjA0MzE3NDg3LTE0NTQzLTEt
-Z2l0LXNlbmQtZW1haWwtc3VtaXQuZ2FyZ0BsaW5hcm8ub3JnLwo+IFsyXSBodHRwczovL2xvcmUu
-a2VybmVsLm9yZy9sa21sL1pGdkdxRCUyRiUyRnBtJTJGbFpiK3BARlZGRjc3UzBRMDVOLmNhbWJy
-aWRnZS5hcm0uY29tLwo+IFszXSBodHRwczovL2xvcmUua2VybmVsLm9yZy9yLzIwMjMwNDE5MTU1
-MzQxLnY4LjEwLkljMzY1OTk5N2Q2MjQzMTM5ZDA1MjJmYzNhZmNkZmQ4OGQ3YTVmMDMwQGNoYW5n
-ZWlkLwo+Cj4gQ2hhbmdlcyBpbiB2OToKPiAtIEFkZCBhIHdhcm5pbmcgaWYgd2UgZG9uJ3QgaGF2
-ZSBlbm91Z2ggSVBJcyBmb3IgdGhlIE5NSSBJUEkKPiAtIEFkZGVkIGNvbW1lbnRzIHRoYXQgd2Ug
-bWlnaHQgbm90IGJlIHVzaW5nIE5NSSBhbHdheXMuCj4gLSBBZGRlZCBtaXNzaW5nICJpbmxpbmUi
-Cj4gLSBBZGRlZCB0byBjb21taXQgbWVzc2FnZSB0aGF0IHRoaXMgZG9lc24ndCBjYXRjaCBhbGwg
-Y2FzZXMuCj4gLSBGb2xkIGluIHY4IHBhdGNoICMxMCAoIkZhbGxiYWNrIHRvIGEgcmVndWxhciBJ
-UEkgaWYgTk1JIGlzbid0IGVuYWJsZWQiKQo+IC0gTW92ZWQgaGVhZGVyIGZpbGUgb3V0IG9mICJp
-bmNsdWRlIiBzaW5jZSBpdCBkaWRuJ3QgbmVlZCB0byBiZSB0aGVyZS4KPiAtIFJlbW92ZSBhcm02
-NF9zdXBwb3J0c19ubWkoKQo+IC0gUmVtb3ZlIGZhbGxiYWNrIGZvciB3aGVuIGRlYnVnIElQSSBp
-c24ndCBhdmFpbGFibGUuCj4gLSBSZW5hbWVkICJOTUkgSVBJIiB0byAiZGVidWcgSVBJIiBzaW5j
-ZSBpdCBtaWdodCBub3QgYmUgYmFja2VkIGJ5IE5NSS4KPiAtIFVwZGF0ZSBjb21taXQgZGVzY3Jp
-cHRpb24KPiAtIGFyY2hfdHJpZ2dlcl9jcHVtYXNrX2JhY2t0cmFjZSgpIG5vIGxvbmdlciByZXR1
-cm5zIGJvb2wKPgo+IENoYW5nZXMgaW4gdjg6Cj4gLSAiUHJvdmlkZSBhIHN0dWIga2dkYl9ubWlj
-YWxsYmFjaygpIGlmICFDT05GSUdfS0dEQiIgbmV3IGZvciB2OAo+IC0gIlRhZyB0aGUgYXJtNjQg
-aWRsZSBmdW5jdGlvbnMgYXMgX19jcHVpZGxlIiBuZXcgZm9yIHY4Cj4gLSBSZW1vdmVkICIjaWZk
-ZWYgQ09ORklHX1NNUCIgc2luY2UgYXJtNjQgaXMgYWx3YXlzIFNNUAo+IC0gZGVidWdfaXBpX3Nl
-dHVwKCkgYW5kIGRlYnVnX2lwaV90ZWFyZG93bigpIG5vIGxvbmdlciB0YWtlIGNwdSBwYXJhbQo+
-Cj4gRG91Z2xhcyBBbmRlcnNvbiAoMik6Cj4gICBhcm02NDogaWRsZTogVGFnIHRoZSBhcm02NCBp
-ZGxlIGZ1bmN0aW9ucyBhcyBfX2NwdWlkbGUKPiAgIGtnZGI6IFByb3ZpZGUgYSBzdHViIGtnZGJf
-bm1pY2FsbGJhY2soKSBpZiAhQ09ORklHX0tHREIKPgo+IFN1bWl0IEdhcmcgKDUpOgo+ICAgaXJx
-Y2hpcC9naWMtdjM6IEVuYWJsZSBzdXBwb3J0IGZvciBTR0lzIHRvIGFjdCBhcyBOTUlzCj4gICBh
-cm02NDogQWRkIGZyYW1ld29yayBmb3IgYSBkZWJ1ZyBJUEkKPiAgIGFybTY0OiBzbXA6IEFzc2ln
-biBhbmQgc2V0dXAgdGhlIGRlYnVnIElQSQo+ICAgYXJtNjQ6IGlwaV9kZWJ1ZzogQWRkIHN1cHBv
-cnQgZm9yIGJhY2t0cmFjZSB1c2luZyB0aGUgZGVidWcgSVBJCj4gICBhcm02NDoga2dkYjogUm91
-bmR1cCBjcHVzIHVzaW5nIHRoZSBkZWJ1ZyBJUEkKPgo+ICBhcmNoL2FybTY0L2luY2x1ZGUvYXNt
-L2lycS5oICB8ICAgMyArCj4gIGFyY2gvYXJtNjQva2VybmVsL01ha2VmaWxlICAgIHwgICAyICst
-Cj4gIGFyY2gvYXJtNjQva2VybmVsL2lkbGUuYyAgICAgIHwgICA0ICstCj4gIGFyY2gvYXJtNjQv
-a2VybmVsL2lwaV9kZWJ1Zy5jIHwgMTAyICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
-KysKPiAgYXJjaC9hcm02NC9rZXJuZWwvaXBpX2RlYnVnLmggfCAgMTMgKysrKysKPiAgYXJjaC9h
-cm02NC9rZXJuZWwva2dkYi5jICAgICAgfCAgMTQgKysrKysKPiAgYXJjaC9hcm02NC9rZXJuZWwv
-c21wLmMgICAgICAgfCAgMTEgKysrKwo+ICBkcml2ZXJzL2lycWNoaXAvaXJxLWdpYy12My5jICB8
-ICAyOSArKysrKysrLS0tCj4gIGluY2x1ZGUvbGludXgva2dkYi5oICAgICAgICAgIHwgICAxICsK
-PiAgOSBmaWxlcyBjaGFuZ2VkLCAxNjggaW5zZXJ0aW9ucygrKSwgMTEgZGVsZXRpb25zKC0pCgpJ
-J20gbG9va2luZyBmb3Igc29tZSBpZGVhcyBvbiB3aGF0IHRvIGRvIHRvIG1vdmUgdGhpcyBwYXRj
-aCBzZXJpZXMKZm9yd2FyZC4gVGhhbmtzIHRvIERhbmllbCwgdGhlIGtnZGIgcGF0Y2ggaXMgbm93
-IGluIExpbnVzJ3MgdHJlZSB3aGljaApob3BlZnVsbHkgbWFrZXMgdGhpcyBzaW1wbGVyIHRvIGxh
-bmQuIEkgZ3Vlc3MgdGhlcmUgaXMgc3RpbGwgdGhlCmlycWNoaXAgZGVwZW5kZW5jeSB0aGF0IHdp
-bGwgbmVlZCB0byBiZSBzb3J0ZWQgb3V0LCB0aG91Z2guLi4KCkV2ZW4gaWYgZm9sa3MgYXJlbid0
-IGluIGFncmVlbWVudCBhYm91dCB3aGV0aGVyIHRoaXMgaXMgcmVhZHkgdG8gYmUKZW5hYmxlZCBp
-biBwcm9kdWN0aW9uLCBJIGRvbid0IHRoaW5rIGFueXRoaW5nIGhlcmUgaXMgc3VwZXIKb2JqZWN0
-aW9uYWJsZSBvciBjb250cm92ZXJzaWFsLCBpcyBpdD8gQ2FuIHdlIGxhbmQgaXQ/IElmIHlvdSBm
-ZWVsCmxpa2UgaXQgbmVlZHMgZXh0cmEgcmV2aWV3LCB3b3VsZCBpdCBoZWxwIGlmIEkgdHJpZWQg
-dG8gZHJ1bSB1cCBzb21lCmV4dHJhIHBlb3BsZSB0byBwcm92aWRlIHJldmlldyBmZWVkYmFjaz8K
-CkFsc286IGluIGNhc2UgaXQncyBpbnRlcmVzdGluZyB0byBhbnlvbmUsIEkndmUgYmVlbiBkb2lu
-ZyBiZW5jaG1hcmtzCm9uIHNjNzE4MC10cm9nZG9yIGRldmljZXMgaW4gcHJlcGFyYXRpb24gZm9y
-IGVuYWJsaW5nIHRoaXMuIE9uIHRoYXQKcGxhdGZvcm0sIEkgZGlkIG1hbmFnZSB0byBzZWUgYWJv
-dXQgNCUgcmVkdWN0aW9uIGluIGEgc2V0IG9mIGhhY2tiZW5jaApudW1iZXJzIHdoZW4gZnVsbHkg
-ZW5hYmxpbmcgcHNldWRvLU5NSS4gSG93ZXZlciwgd2hlbiBJIGluc3RlYWQgcmFuClNwZWVkb21l
-dGVyIDIuMSBJIHNhdyBubyBkaWZmZXJlbmNlLiBTZWU6CgpodHRwczovL2lzc3VldHJhY2tlci5n
-b29nbGUuY29tL2lzc3Vlcy8xOTcwNjE5ODcKCi1Eb3VnCgoKX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KS2dkYi1idWdyZXBvcnQgbWFpbGluZyBsaXN0Cktn
-ZGItYnVncmVwb3J0QGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZv
-cmdlLm5ldC9saXN0cy9saXN0aW5mby9rZ2RiLWJ1Z3JlcG9ydAo=
+Hi Doug,
+
+On Thu, Jun 01, 2023 at 02:31:45PM -0700, Douglas Anderson wrote:
+> From: Sumit Garg <sumit.garg@linaro.org>
+> 
+> Add support to handle SGIs as pseudo NMIs. As SGIs or IPIs default to a
+> special flow handler: handle_percpu_devid_fasteoi_ipi(), so skip NMI
+> handler update in case of SGIs.
+
+I couldn't find handle_percpu_devid_fasteoi_ipi() in mainline, and when
+researching I found that we changed that in commit:
+
+  6abbd6988971aaa6 ("irqchip/gic, gic-v3: Make SGIs use handle_percpu_devid_irq()")
+
+... which was in v5.11, so it looks like this is stale?
+
+Since that commit, SGIs are treated the same as PPIs/EPPIs, and use
+handle_percpu_devid_irq() by default.
+
+IIUC handle_percpu_devid_irq() isn't NMI safe, and so to run in an NMI context
+those should use handle_percpu_devid_fasteoi_nmi().
+
+Marc, does that sound right to you? i.e. SGI NMIs should be handled exactly the
+same as PPI NMIs, and use handle_percpu_devid_fasteoi_nmi()?
+
+I have some comments below assuming that SGI NMIs should use
+handle_percpu_devid_fasteoi_nmi().
+
+> Also, enable NMI support prior to gic_smp_init() as allocation of SGIs
+> as IRQs/NMIs happen as part of this routine.
+
+This bit looks fine to me.
+
+> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> Reviewed-by: Masayoshi Mizuma <m.mizuma@jp.fujitsu.com>
+> Tested-by: Chen-Yu Tsai <wens@csie.org>
+> Signed-off-by: Douglas Anderson <dianders@chromium.org>
+> ---
+> 
+> (no changes since v1)
+> 
+>  drivers/irqchip/irq-gic-v3.c | 29 +++++++++++++++++++++--------
+>  1 file changed, 21 insertions(+), 8 deletions(-)
+> 
+> diff --git a/drivers/irqchip/irq-gic-v3.c b/drivers/irqchip/irq-gic-v3.c
+> index 0c6c1af9a5b7..ed37e02d4c5f 100644
+> --- a/drivers/irqchip/irq-gic-v3.c
+> +++ b/drivers/irqchip/irq-gic-v3.c
+> @@ -525,6 +525,7 @@ static u32 gic_get_ppi_index(struct irq_data *d)
+>  static int gic_irq_nmi_setup(struct irq_data *d)
+>  {
+>  	struct irq_desc *desc = irq_to_desc(d->irq);
+> +	u32 idx;
+>  
+>  	if (!gic_supports_nmi())
+>  		return -EINVAL;
+> @@ -542,16 +543,22 @@ static int gic_irq_nmi_setup(struct irq_data *d)
+>  		return -EINVAL;
+>  
+>  	/* desc lock should already be held */
+> -	if (gic_irq_in_rdist(d)) {
+> -		u32 idx = gic_get_ppi_index(d);
+> +	switch (get_intid_range(d)) {
+> +	case SGI_RANGE:
+> +		break;
+> +	case PPI_RANGE:
+> +	case EPPI_RANGE:
+> +		idx = gic_get_ppi_index(d);
+>  
+>  		/* Setting up PPI as NMI, only switch handler for first NMI */
+>  		if (!refcount_inc_not_zero(&ppi_nmi_refs[idx])) {
+>  			refcount_set(&ppi_nmi_refs[idx], 1);
+>  			desc->handle_irq = handle_percpu_devid_fasteoi_nmi;
+>  		}
+> -	} else {
+> +		break;
+> +	default:
+>  		desc->handle_irq = handle_fasteoi_nmi;
+> +		break;
+>  	}
+
+As above, I reckon this isn't right, and we should treat all rdist interrupts
+(which are all percpu) the same.
+
+I reckon what we should be doing here is make ppi_nmi_refs cover all of the
+rdist interrupts (e.g. make that rdist_nmi_refs, add a gic_get_rdist_idx()
+helper), and then here have something like:
+
+	if (gic_irq_in_rdist(d)) {
+		u32 idx = gic_get_rdist_idx(d);
+
+		/* 
+		 * Setting up a percpu interrupt as NMI, only switch handler
+		 * for first NMI
+		 */
+		if (!refcount_inc_not_zero(&rdist_nmi_refs[idx])) {
+			refcount_set(&ppi_nmi_refs[idx], 1);
+			desc->handle_irq = handle_percpu_devid_fasteoi_nmi;
+		}
+	}
+
+... as an aside, it'd be nicer if we could switch the handler at request time,
+as then we wouldn't need the refcount at all, but I couldn't see a good irqchip
+hook to hang that off, so I don't think that needs to change as a prerequisite.
+
+>  
+>  	gic_irq_set_prio(d, GICD_INT_NMI_PRI);
+> @@ -562,6 +569,7 @@ static int gic_irq_nmi_setup(struct irq_data *d)
+>  static void gic_irq_nmi_teardown(struct irq_data *d)
+>  {
+>  	struct irq_desc *desc = irq_to_desc(d->irq);
+> +	u32 idx;
+>  
+>  	if (WARN_ON(!gic_supports_nmi()))
+>  		return;
+> @@ -579,14 +587,20 @@ static void gic_irq_nmi_teardown(struct irq_data *d)
+>  		return;
+>  
+>  	/* desc lock should already be held */
+> -	if (gic_irq_in_rdist(d)) {
+> -		u32 idx = gic_get_ppi_index(d);
+> +	switch (get_intid_range(d)) {
+> +	case SGI_RANGE:
+> +		break;
+> +	case PPI_RANGE:
+> +	case EPPI_RANGE:
+> +		idx = gic_get_ppi_index(d);
+>  
+>  		/* Tearing down NMI, only switch handler for last NMI */
+>  		if (refcount_dec_and_test(&ppi_nmi_refs[idx]))
+>  			desc->handle_irq = handle_percpu_devid_irq;
+> -	} else {
+> +		break;
+> +	default:
+>  		desc->handle_irq = handle_fasteoi_irq;
+> +		break;
+>  	}
+
+Same comments as for gic_irq_nmi_setup() here.
+
+>  
+>  	gic_irq_set_prio(d, GICD_INT_DEF_PRI);
+> @@ -2001,6 +2015,7 @@ static int __init gic_init_bases(phys_addr_t dist_phys_base,
+>  
+>  	gic_dist_init();
+>  	gic_cpu_init();
+> +	gic_enable_nmi_support();
+>  	gic_smp_init();
+>  	gic_cpu_pm_init();
+>  
+> @@ -2013,8 +2028,6 @@ static int __init gic_init_bases(phys_addr_t dist_phys_base,
+>  			gicv2m_init(handle, gic_data.domain);
+>  	}
+>  
+> -	gic_enable_nmi_support();
+> -
+
+This bit looks fine to me.
+
+Thanks,
+Mark.
+
+
+_______________________________________________
+Kgdb-bugreport mailing list
+Kgdb-bugreport@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport
