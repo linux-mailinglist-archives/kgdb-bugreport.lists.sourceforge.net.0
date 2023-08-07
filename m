@@ -2,29 +2,29 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0A109771DCB
-	for <lists+kgdb-bugreport@lfdr.de>; Mon,  7 Aug 2023 12:12:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 495A8771DD2
+	for <lists+kgdb-bugreport@lfdr.de>; Mon,  7 Aug 2023 12:18:00 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1qSxE3-0004xh-V6
+	id 1qSxJI-0005EF-25
 	for lists+kgdb-bugreport@lfdr.de;
-	Mon, 07 Aug 2023 10:12:34 +0000
+	Mon, 07 Aug 2023 10:17:58 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <mark.rutland@arm.com>) id 1qSxE2-0004wl-Du
+ (envelope-from <mark.rutland@arm.com>) id 1qSxJH-0005E9-31
  for kgdb-bugreport@lists.sourceforge.net;
- Mon, 07 Aug 2023 10:12:33 +0000
+ Mon, 07 Aug 2023 10:17:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=B0yh28AhvzEFlTUwhhsM9ewZoWg7KJxCNoDwky8DI9c=; b=WatPsxcQ1zA3OL/SpSP07J8HBL
- Fb+7CZB/Y6/B2EDes7ZzYAgjdozdE1aKstC5uhVlVg/+n4XMcY96rdzsEDhbI229S2oOMP5ErTII9
- wbaOfsosa5k3A3WTCeHzN/yl4AvOBFzvgktqnKkqnsRkl2uifTrYeUeqRxefe7FgXKLw=;
+ bh=qNZrcqTF7KswT5cHbPZG74YUwWazwpel/1kelT5zAVY=; b=MY8SVqcHN3W0uxUUxQ131WsWug
+ fOf6DOqJZv33GkW6qX21A9lgsyN/fbHLT5u7OLgOo2k99jml+0XENwSPZvUZCPrLM8awqmS63jAxM
+ hXBXcQv0j/401KwqQuysDOWMyiSVK8t5EbRr7FH/my3yaHQ8YYnTlDTJYdg1Z6vzQu0U=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -32,49 +32,50 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=B0yh28AhvzEFlTUwhhsM9ewZoWg7KJxCNoDwky8DI9c=; b=K9l5AMrz+F8JrjX4htW01EWoKF
- uxUCeMvGKiiVmD6GC6ndevMFm4zLtAAebROEEQDtBmEh33Wo8/DECulKBCQSSxSTYzY/KKflP14CP
- 3ZL8Kvei7FLhwst6jQe5OUiQMTwJSuZG0qAK/xieB+qWouXgxkrhv0ahmMUc+U4GF84k=;
+ bh=qNZrcqTF7KswT5cHbPZG74YUwWazwpel/1kelT5zAVY=; b=jSaqyDf/W6CEHqk+Jm5iVIpcg3
+ A3vqg758MNKmq1hhYIdyrkdCa6/DWY1+q3vt2o5u5sWOVoMH5GvCWQKMNWreDJCAUmaXEFF64UTXb
+ WcKJbHDSXm7ST4yCr/Uth8s4qOvwK9Kib/Yw6TRg8MaYgIbexZ5M2lrt7NlA51jgV3LE=;
 Received: from foss.arm.com ([217.140.110.172])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtp (Exim 4.95)
- id 1qSxDx-00FoiR-GR for kgdb-bugreport@lists.sourceforge.net;
- Mon, 07 Aug 2023 10:12:30 +0000
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtp (Exim 4.95)
+ id 1qSxJF-0005RZ-7Z for kgdb-bugreport@lists.sourceforge.net;
+ Mon, 07 Aug 2023 10:17:57 +0000
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 126241FB;
- Mon,  7 Aug 2023 03:13:06 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id BE9E61FB;
+ Mon,  7 Aug 2023 03:18:34 -0700 (PDT)
 Received: from FVFF77S0Q05N.cambridge.arm.com (FVFF77S0Q05N.cambridge.arm.com
  [10.1.32.139])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 3B1A13F59C;
- Mon,  7 Aug 2023 03:12:20 -0700 (PDT)
-Date: Mon, 7 Aug 2023 11:12:17 +0100
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A99AB3F59C;
+ Mon,  7 Aug 2023 03:17:48 -0700 (PDT)
+Date: Mon, 7 Aug 2023 11:17:45 +0100
 From: Mark Rutland <mark.rutland@arm.com>
 To: Douglas Anderson <dianders@chromium.org>
-Message-ID: <ZNDDgRuNGzovddaO@FVFF77S0Q05N.cambridge.arm.com>
+Message-ID: <ZNDEyT3mHCl0UQIV@FVFF77S0Q05N.cambridge.arm.com>
 References: <20230601213440.2488667-1-dianders@chromium.org>
- <20230601143109.v9.3.Ie6c132b96ebbbcddbf6954b9469ed40a6960343c@changeid>
+ <20230601143109.v9.4.I6d7f7d5fa0aa293c8c3374194947254b93114d37@changeid>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20230601143109.v9.3.Ie6c132b96ebbbcddbf6954b9469ed40a6960343c@changeid>
+In-Reply-To: <20230601143109.v9.4.I6d7f7d5fa0aa293c8c3374194947254b93114d37@changeid>
 X-Spam-Score: -2.3 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Jun 01, 2023 at 02:31:47PM -0700, Douglas Anderson
- wrote: > From: Sumit Garg <sumit.garg@linaro.org> > > Introduce a framework
- for an IPI that will be used for debug > purposes. The primary us [...] 
+ Content preview:  On Thu, Jun 01, 2023 at 02:31:48PM -0700, Douglas Anderson
+ wrote: > From: Sumit Garg <sumit.garg@linaro.org> > > All current arm64
+ interrupt
+ controllers have at least 8 > IPIs. Currently we are only u [...] 
  Content analysis details:   (-2.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
  medium trust [217.140.110.172 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1qSxDx-00FoiR-GR
-Subject: Re: [Kgdb-bugreport] [PATCH v9 3/7] arm64: Add framework for a
- debug IPI
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+X-Headers-End: 1qSxJF-0005RZ-7Z
+Subject: Re: [Kgdb-bugreport] [PATCH v9 4/7] arm64: smp: Assign and setup
+ the debug IPI
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -86,293 +87,113 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daniel Thompson <daniel.thompson@linaro.org>,
- "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
- Lecopzer Chen <lecopzer.chen@mediatek.com>,
+Cc: Lecopzer Chen <lecopzer.chen@mediatek.com>,
  Peter Zijlstra <peterz@infradead.org>,
- Catalin Marinas <catalin.marinas@arm.com>,
- Masahiro Yamada <masahiroy@kernel.org>, ito-yuichi@fujitsu.com,
- linux-kernel@vger.kernel.org, Stephen Boyd <swboyd@chromium.org>,
- linux-perf-users@vger.kernel.org, Chen-Yu Tsai <wens@csie.org>,
- Marc Zyngier <maz@kernel.org>, kgdb-bugreport@lists.sourceforge.net,
- Thomas Gleixner <tglx@linutronix.de>, Masayoshi Mizuma <msys.mizuma@gmail.com>,
- Will Deacon <will@kernel.org>, Ard Biesheuvel <ardb@kernel.org>,
- linux-arm-kernel@lists.infradead.org, Andrey Konovalov <andreyknvl@gmail.com>
+ Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>,
+ Ingo Molnar <mingo@kernel.org>, Daniel Thompson <daniel.thompson@linaro.org>,
+ Marc Zyngier <maz@kernel.org>,
+ "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
+ Ard Biesheuvel <ardb@kernel.org>, Chen-Yu Tsai <wens@csie.org>,
+ kgdb-bugreport@lists.sourceforge.net, Masayoshi Mizuma <msys.mizuma@gmail.com>,
+ Valentin Schneider <vschneid@redhat.com>, Stephen Boyd <swboyd@chromium.org>,
+ Ben Dooks <ben-linux@fluff.org>, Thomas Gleixner <tglx@linutronix.de>,
+ Josh Poimboeuf <jpoimboe@kernel.org>, linux-arm-kernel@lists.infradead.org,
+ ito-yuichi@fujitsu.com, linux-kernel@vger.kernel.org,
+ linux-perf-users@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Thu, Jun 01, 2023 at 02:31:47PM -0700, Douglas Anderson wrote:
+On Thu, Jun 01, 2023 at 02:31:48PM -0700, Douglas Anderson wrote:
 > From: Sumit Garg <sumit.garg@linaro.org>
 > 
-> Introduce a framework for an IPI that will be used for debug
-> purposes. The primary use case of this IPI will be to generate stack
-> crawls on other CPUs, but it will also be used to round up CPUs for
-> kgdb.
-> 
-> When possible, we try to allocate this debug IPI as an NMI (or a
-> pseudo NMI). If that fails (due to CONFIG, an incompatible interrupt
-> controller, a quirk, missing the "irqchip.gicv3_pseudo_nmi=1" kernel
-> parameter, etc) we fall back to a normal IPI.
-> 
-> NOTE: hooking this up for CPU backtrace / kgdb will happen in a future
-> patch, this just adds the framework.
+> All current arm64 interrupt controllers have at least 8
+> IPIs. Currently we are only using 7 of them on arm64. Let's use the
+> 8th one as a debug IPI. This uses the new "debug IPI" infrastructure
+> which will try to allocate this IPI as an NMI/pseudo NMI if possible.
 > 
 > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 > Signed-off-by: Douglas Anderson <dianders@chromium.org>
 
-I think that we shouldn't add a framework in a separate file for this:
+I think with my suggestion on the prior patch, we don't need the additional
+logic here.
 
-* This is very similar to our existing IPI management in smp.c, so it feels
-  like duplication, or at least another thing we'd like to keep in-sync.
+> ---
+> I could imagine that people object to using up the last free IPI on
+> interrupt controllers with only 8 IPIs. However, it shouldn't be a big
+> deal. If we later need an extra IPI, it shouldn't be too hard to
+> combine some of the existing ones. Presumably we could just get rid of
+> the "crash stop" IPI and have the normal "stop" IPI do the crash if
+> "waiting_for_crash_ipi" is non-zero
 
-* We're going to want an NMI backtrace regardless of KGDB
+TBH, I'd love to unify the logic for IPI_CPU_STOP and IPI_CPU_CRASH_STOP as
+they have a bunch of pointless divergence.
 
-* We're going to want the IPI_CPU_STOP and IPI_CRASH_CPU_STOP IPIs to be NMIs
-  too.
+We could also remove IPI_WAKEUP and replace that with something else (e.g.
+IPI_CALL_FUNC with an empty function) in order to free up an IPI.
 
-I reckon it'd be better to extend the existing IPI logic in smp.c to allow IPIs
-to be requested as NMIs, e.g.
-
-----
-diff --git a/arch/arm64/kernel/smp.c b/arch/arm64/kernel/smp.c
-index edd63894d61e8..48e6aa62c473e 100644
---- a/arch/arm64/kernel/smp.c
-+++ b/arch/arm64/kernel/smp.c
-@@ -33,6 +33,7 @@
- #include <linux/kernel_stat.h>
- #include <linux/kexec.h>
- #include <linux/kvm_host.h>
-+#include <linux/nmi.h>
- 
- #include <asm/alternative.h>
- #include <asm/atomic.h>
-@@ -926,6 +927,21 @@ static void smp_cross_call(const struct cpumask *target, unsigned int ipinr)
- 	__ipi_send_mask(ipi_desc[ipinr], target);
- }
- 
-+static bool ipi_should_be_nmi(enum ipi_msg_type ipi)
-+{
-+	if (!system_uses_irq_prio_masking())
-+		return false;
-+
-+	switch (ipi) {
-+	/*
-+	 * TODO: select NMI IPIs here
-+	 */
-+		return true;
-+	default:
-+		return false;
-+	}
-+}
-+
- static void ipi_setup(int cpu)
- {
- 	int i;
-@@ -933,8 +949,14 @@ static void ipi_setup(int cpu)
- 	if (WARN_ON_ONCE(!ipi_irq_base))
- 		return;
- 
--	for (i = 0; i < nr_ipi; i++)
--		enable_percpu_irq(ipi_irq_base + i, 0);
-+	for (i = 0; i < nr_ipi; i++) {
-+		if (ipi_should_be_nmi(i)) {
-+			prepare_percpu_nmi(ipi_irq_base + i);
-+			enable_percpu_nmi(ipi_irq_base + i, 0);
-+		} else {
-+			enable_percpu_irq(ipi_irq_base + i, 0);
-+		}
-+	}
- }
- 
- #ifdef CONFIG_HOTPLUG_CPU
-@@ -945,8 +967,14 @@ static void ipi_teardown(int cpu)
- 	if (WARN_ON_ONCE(!ipi_irq_base))
- 		return;
- 
--	for (i = 0; i < nr_ipi; i++)
--		disable_percpu_irq(ipi_irq_base + i);
-+	for (i = 0; i < nr_ipi; i++) {
-+		if (ipi_should_be_nmi(i)) {
-+			disable_percpu_nmi(ipi_irq_base + i);
-+			teardown_percpu_nmi(ipi_irq_base + i);
-+		} else {
-+			disable_percpu_irq(ipi_irq_base + i);
-+		}
-+	}
- }
- #endif
- 
-@@ -958,11 +986,19 @@ void __init set_smp_ipi_range(int ipi_base, int n)
- 	nr_ipi = min(n, NR_IPI);
- 
- 	for (i = 0; i < nr_ipi; i++) {
--		int err;
--
--		err = request_percpu_irq(ipi_base + i, ipi_handler,
--					 "IPI", &cpu_number);
--		WARN_ON(err);
-+		int err = -EINVAL;
-+
-+		if (ipi_should_be_nmi(i)) {
-+			err = request_percpu_nmi(ipi_base + i, ipi_handler,
-+						 "IPI", &cpu_number);
-+			WARN(err, "Could not request IPI %d as NMI, err=%d\n",
-+			     i, err);
-+		} else {
-+			err = request_percpu_irq(ipi_base + i, ipi_handler,
-+						 "IPI", &cpu_number);
-+			WARN(err, "Could not request IPI %d as IRQ, err=%d\n",
-+			     i, err);
-+		}
- 
- 		ipi_desc[i] = irq_to_desc(ipi_base + i);
- 		irq_set_status_flags(ipi_base + i, IRQ_HIDDEN);
-----
-
-... and then if we need an IPI for KGDB, we can add that to the existing list
-of IPIs, and have it requested/enabled/disabled as usual.
+I'd *also* prefer to have separate IPI_CPU_BACKTRACE and IPI_CPU_DEBUG as the
+backtrace logic is used for a bunch of things other than KGDB (e.g. RCU stalls,
+panic), and that would clearly separate the logic for the two cases.
 
 Thanks,
 Mark.
 
-> ---
-> I didn't get any feedback from v8 patch #10 [1], but I went ahead and
-> folded it in here anyway since it really simplfies things. If people
-> don't like the fallback to regular IPI, I can also undo it.
-> 
-> [1] https://lore.kernel.org/r/20230419155341.v8.10.Ic3659997d6243139d0522fc3afcdfd88d7a5f030@changeid/
 > 
 > Changes in v9:
-> - Fold in v8 patch #10 ("Fallback to a regular IPI if NMI isn't enabled")
-> - Moved header file out of "include" since it didn't need to be there.
-> - Remove arm64_supports_nmi()
+> - Add a warning if we don't have enough IPIs for the NMI IPI
 > - Renamed "NMI IPI" to "debug IPI" since it might not be backed by NMI.
+> - Update commit description
 > 
 > Changes in v8:
 > - debug_ipi_setup() and debug_ipi_teardown() no longer take cpu param
 > 
->  arch/arm64/kernel/Makefile    |  2 +-
->  arch/arm64/kernel/ipi_debug.c | 76 +++++++++++++++++++++++++++++++++++
->  arch/arm64/kernel/ipi_debug.h | 13 ++++++
->  3 files changed, 90 insertions(+), 1 deletion(-)
->  create mode 100644 arch/arm64/kernel/ipi_debug.c
->  create mode 100644 arch/arm64/kernel/ipi_debug.h
+>  arch/arm64/kernel/smp.c | 11 +++++++++++
+>  1 file changed, 11 insertions(+)
 > 
-> diff --git a/arch/arm64/kernel/Makefile b/arch/arm64/kernel/Makefile
-> index cc22011ab66a..737838f803b7 100644
-> --- a/arch/arm64/kernel/Makefile
-> +++ b/arch/arm64/kernel/Makefile
-> @@ -34,7 +34,7 @@ obj-y			:= debug-monitors.o entry.o irq.o fpsimd.o		\
->  			   cpufeature.o alternative.o cacheinfo.o		\
->  			   smp.o smp_spin_table.o topology.o smccc-call.o	\
->  			   syscall.o proton-pack.o idreg-override.o idle.o	\
-> -			   patching.o
-> +			   patching.o ipi_debug.o
+> diff --git a/arch/arm64/kernel/smp.c b/arch/arm64/kernel/smp.c
+> index edd63894d61e..db019b49d3bd 100644
+> --- a/arch/arm64/kernel/smp.c
+> +++ b/arch/arm64/kernel/smp.c
+> @@ -53,6 +53,8 @@
 >  
->  obj-$(CONFIG_COMPAT)			+= sys32.o signal32.o			\
->  					   sys_compat.o
-> diff --git a/arch/arm64/kernel/ipi_debug.c b/arch/arm64/kernel/ipi_debug.c
-> new file mode 100644
-> index 000000000000..b57833e31eaf
-> --- /dev/null
-> +++ b/arch/arm64/kernel/ipi_debug.c
-> @@ -0,0 +1,76 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +/*
-> + * Debug IPI support
-> + *
-> + * Copyright (C) 2020 Linaro Limited
-> + * Author: Sumit Garg <sumit.garg@linaro.org>
-> + */
-> +
-> +#include <linux/interrupt.h>
-> +#include <linux/irq.h>
-> +#include <linux/smp.h>
-> +
+>  #include <trace/events/ipi.h>
+>  
 > +#include "ipi_debug.h"
 > +
-> +static struct irq_desc *ipi_debug_desc __read_mostly;
-> +static int ipi_debug_id __read_mostly;
-> +static bool is_nmi;
+>  DEFINE_PER_CPU_READ_MOSTLY(int, cpu_number);
+>  EXPORT_PER_CPU_SYMBOL(cpu_number);
+>  
+> @@ -935,6 +937,8 @@ static void ipi_setup(int cpu)
+>  
+>  	for (i = 0; i < nr_ipi; i++)
+>  		enable_percpu_irq(ipi_irq_base + i, 0);
 > +
-> +void arm64_debug_ipi(cpumask_t *mask)
-> +{
-> +	if (WARN_ON_ONCE(!ipi_debug_desc))
-> +		return;
+> +	debug_ipi_setup();
+>  }
+>  
+>  #ifdef CONFIG_HOTPLUG_CPU
+> @@ -947,6 +951,8 @@ static void ipi_teardown(int cpu)
+>  
+>  	for (i = 0; i < nr_ipi; i++)
+>  		disable_percpu_irq(ipi_irq_base + i);
 > +
-> +	__ipi_send_mask(ipi_debug_desc, mask);
-> +}
+> +	debug_ipi_teardown();
+>  }
+>  #endif
+>  
+> @@ -968,6 +974,11 @@ void __init set_smp_ipi_range(int ipi_base, int n)
+>  		irq_set_status_flags(ipi_base + i, IRQ_HIDDEN);
+>  	}
+>  
+> +	if (n > nr_ipi)
+> +		set_smp_debug_ipi(ipi_base + nr_ipi);
+> +	else
+> +		WARN(1, "Not enough IPIs for NMI IPI\n");
 > +
-> +static irqreturn_t ipi_debug_handler(int irq, void *data)
-> +{
-> +	/* nop, NMI handlers for special features can be added here. */
-> +
-> +	return IRQ_NONE;
-> +}
-> +
-> +void debug_ipi_setup(void)
-> +{
-> +	if (!ipi_debug_desc)
-> +		return;
-> +
-> +	if (is_nmi) {
-> +		if (!prepare_percpu_nmi(ipi_debug_id))
-> +			enable_percpu_nmi(ipi_debug_id, IRQ_TYPE_NONE);
-> +	} else {
-> +		enable_percpu_irq(ipi_debug_id, IRQ_TYPE_NONE);
-> +	}
-> +}
-> +
-> +void debug_ipi_teardown(void)
-> +{
-> +	if (!ipi_debug_desc)
-> +		return;
-> +
-> +	if (is_nmi) {
-> +		disable_percpu_nmi(ipi_debug_id);
-> +		teardown_percpu_nmi(ipi_debug_id);
-> +	} else {
-> +		disable_percpu_irq(ipi_debug_id);
-> +	}
-> +}
-> +
-> +void __init set_smp_debug_ipi(int ipi)
-> +{
-> +	int err;
-> +
-> +	if (!request_percpu_nmi(ipi, ipi_debug_handler, "IPI", &cpu_number)) {
-> +		is_nmi = true;
-> +	} else {
-> +		err = request_percpu_irq(ipi, ipi_debug_handler, "IPI", &cpu_number);
-> +		if (WARN_ON(err))
-> +			return;
-> +
-> +		irq_set_status_flags(ipi, IRQ_HIDDEN);
-> +	}
-> +
-> +	ipi_debug_desc = irq_to_desc(ipi);
-> +	ipi_debug_id = ipi;
-> +}
-> diff --git a/arch/arm64/kernel/ipi_debug.h b/arch/arm64/kernel/ipi_debug.h
-> new file mode 100644
-> index 000000000000..f6011a09282f
-> --- /dev/null
-> +++ b/arch/arm64/kernel/ipi_debug.h
-> @@ -0,0 +1,13 @@
-> +/* SPDX-License-Identifier: GPL-2.0 */
-> +#ifndef __ASM_NMI_H
-> +#define __ASM_NMI_H
-> +
-> +#include <linux/cpumask.h>
-> +
-> +void arm64_debug_ipi(cpumask_t *mask);
-> +
-> +void set_smp_debug_ipi(int ipi);
-> +void debug_ipi_setup(void);
-> +void debug_ipi_teardown(void);
-> +
-> +#endif
+>  	ipi_irq_base = ipi_base;
+>  
+>  	/* Setup the boot CPU immediately */
 > -- 
 > 2.41.0.rc2.161.g9c6817b8e7-goog
 > 
