@@ -2,29 +2,29 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 439D07891B4
-	for <lists+kgdb-bugreport@lfdr.de>; Sat, 26 Aug 2023 00:27:46 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id BECE97891B5
+	for <lists+kgdb-bugreport@lfdr.de>; Sat, 26 Aug 2023 00:28:33 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1qZfHO-0000pL-0d
+	id 1qZfI8-0001AV-HZ
 	for lists+kgdb-bugreport@lfdr.de;
-	Fri, 25 Aug 2023 22:27:45 +0000
+	Fri, 25 Aug 2023 22:28:32 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <swboyd@chromium.org>) id 1qZfHI-0000ou-28
+ (envelope-from <swboyd@chromium.org>) id 1qZfI7-0001AP-R8
  for kgdb-bugreport@lists.sourceforge.net;
- Fri, 25 Aug 2023 22:27:43 +0000
+ Fri, 25 Aug 2023 22:28:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
  References:In-Reply-To:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
  :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ozIL3ztcMY/CjRnACD5tsgtlWnLwTY4DlCvApQ3YGH8=; b=HGWO4QQj+e3Okko2Pg6b/zQElJ
- wxNH3qPc+oaknz7j5qLhtRYYXFPapO02DgkKS4nIZo0FbMkdkqbfpTNggGccdBgb919EC7e1yhF12
- QRFM0s3JMkYDQNztHZ4I51pA2Mp5IBD2q2saCUfy44MAlKEGEYPUSFqr8tPh3Fos0B6s=;
+ bh=3/6agghUlnzcFD5k9bdIOnu9jgMgVxK8eg7bQBbKSXA=; b=KD5KXdHZMkj8xbqMtEJFP7kdwk
+ 6ujGqLrolZK9eoPqgFWm2IQmztujwPufw6glSkAjySml/vtluFsBlSRvcjHyYnfl5D83nKqAhE7HR
+ YQ6BTkx8s65I2jaP49vq+OBZbX6btQQPWHXnefKp3NKk3UUbi6Atbeof+dqvScWYaHRs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Cc:To:Subject:Message-ID:Date:From:References:In-Reply-To:
@@ -32,54 +32,54 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ozIL3ztcMY/CjRnACD5tsgtlWnLwTY4DlCvApQ3YGH8=; b=VjJRYVAou6GXPTefHFPEcNFd1j
- Qv0snpBi5ehJ4i9YkUSHUIHOi5yTbawugNW11KLZMsB5rw4E2s6OCEuyDBs7kBN2PNpOQC2V7/dii
- 2GLtnHW+bWUvqEf3AB85009a/UMvvvPiBfeXferzkxro7aZheKR85rRLTTjKi/zPkHMA=;
-Received: from mail-lf1-f45.google.com ([209.85.167.45])
+ bh=3/6agghUlnzcFD5k9bdIOnu9jgMgVxK8eg7bQBbKSXA=; b=TrWmMR//NROFQpWs2DDku91cu1
+ einPVAxH0Zppt4pxYV8EDuMHdNt4Yj7U5XORwb/K7ma/aJVvsSmpMrB2wqz1vlm9coBWxcRqzd8Bc
+ SHPeja82JaIr/6vXEvXVbQgQueb0ANN+QpqNMKi0SMPZ5RHrsu0e2mZA+O4qw4vdrB/g=;
+Received: from mail-lf1-f43.google.com ([209.85.167.43])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1qZfHC-00FbZn-Qe for kgdb-bugreport@lists.sourceforge.net;
- Fri, 25 Aug 2023 22:27:38 +0000
-Received: by mail-lf1-f45.google.com with SMTP id
- 2adb3069b0e04-50078eba7afso2194370e87.0
+ id 1qZfI7-00FbbT-6E for kgdb-bugreport@lists.sourceforge.net;
+ Fri, 25 Aug 2023 22:28:31 +0000
+Received: by mail-lf1-f43.google.com with SMTP id
+ 2adb3069b0e04-4ffa6e25ebbso2907069e87.0
  for <kgdb-bugreport@lists.sourceforge.net>;
- Fri, 25 Aug 2023 15:27:34 -0700 (PDT)
+ Fri, 25 Aug 2023 15:28:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693002448; x=1693607248;
+ d=chromium.org; s=google; t=1693002504; x=1693607304;
  h=cc:to:subject:message-id:date:user-agent:from:references
  :in-reply-to:mime-version:from:to:cc:subject:date:message-id
- :reply-to; bh=ozIL3ztcMY/CjRnACD5tsgtlWnLwTY4DlCvApQ3YGH8=;
- b=Ov9w9fm79WxSQCPhsJOvhtQl9wezVlm7usWwtpySiNQyWRnOHMCtrRKP9iDDQR5wiz
- uEpyEOsQCfAUrxRj+Fg1pOoOZoau8Ac9zH+X6lspQB/f3kBk6JhesTbnZ0eI8Wyqz+pM
- i9X06ciV6i1kAwgpoqX6YVyLxG8jQ2oS3Eua4=
+ :reply-to; bh=3/6agghUlnzcFD5k9bdIOnu9jgMgVxK8eg7bQBbKSXA=;
+ b=mItPAx/UGYcPcSxAVRQwnU5sZ+4qTl8el9xJ72Vsl3/8vqtU5cYlaaCsVsHNFnlmWT
+ Aacfa3xGzdoA//R6GPCO5jTJ97DUV+6JBiaaMWbn2gKi8c7ukMjI3906eBVrlrzDaQYs
+ txG+AaV0Hpsqt5sgQAT2z/Dz3uWfVnrX7UCUc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693002448; x=1693607248;
+ d=1e100.net; s=20221208; t=1693002504; x=1693607304;
  h=cc:to:subject:message-id:date:user-agent:from:references
  :in-reply-to:mime-version:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ozIL3ztcMY/CjRnACD5tsgtlWnLwTY4DlCvApQ3YGH8=;
- b=EfNPFyV5xUJzmUY826P/m15NulTJ7CU8Gi1OlQAHMoSjn3qqHWj2GP1ZUv+Xtgb5N6
- WWgl7AOT/65We3/TmYLKJtHEjY0SHwaIug1SSK0dvNDCViUPNtriZfD3kxOJcxJcRj6Q
- xSsFbFq6GAqr27AF3JmSqSiy0umU/ZBxB37yCUqPOrGPWZBFyecDIiXaZ+7c2mEUmRI9
- aOV9wvf3JLAridF1s9mFSlA42P3SHQeFXYAq3kFThbc60K8xqNoXy7uadiHKNxdWJ2Ow
- x14MQOmIBapGSogUQ25pDZQMMmrnRYPg4ddd3L+26Csupy2do6vG40foQpDH92BbIzrL
- KrMw==
-X-Gm-Message-State: AOJu0YzbAKmSFbOkhjPJ+Heina0nGIHhUk5Z/FEevQ5gUdgUxKbjSksx
- xlZYj8BKUyMLLo1d0YviQjDTADHaVgMmZ74pCIH7dQ==
-X-Google-Smtp-Source: AGHT+IFQRv+LRhmJpKCQ1JJuh/OxEc+CDv/RRDR6yVXx8WifztG0VJqHHXmhp+GvZCUxdtO/gLoTkhk63iMCDLx4NVQ=
-X-Received: by 2002:a05:6512:b94:b0:4ff:8c0f:a745 with SMTP id
- b20-20020a0565120b9400b004ff8c0fa745mr17432931lfv.54.1693002448042; Fri, 25
- Aug 2023 15:27:28 -0700 (PDT)
+ bh=3/6agghUlnzcFD5k9bdIOnu9jgMgVxK8eg7bQBbKSXA=;
+ b=cYYWimqSL2VY5toqqk2qg4pE/Ssquklc9FEf6pxP2PCDANoWRqDkvGBC1eWK2aVLZs
+ KJjYIcDUpxQOTOjCKj1uec61pVKN+qhFGLsqTxeFTIAAhl3+Y4XHPQCsWlZTPgt0o6vS
+ uVWvXgxyRMAu30XW/muEOwDhaa+WawzCzhzcqTsAM5yfmxjKuKpmhz66Cu2DDr2Ho1jH
+ WdCGOAbIZdT4aVfj+dlvExZ5Ym0mOrKPSD1lhvFD4ZFNE9dDKpOjqmBGsB9rxu4zGXW5
+ 1HqmGbjWBQe02BDuXi5zZoTOZLFON9U7tEIkgHUqgub7ekPsO/W+Kww8rFIhLA9eq/Dn
+ SN/g==
+X-Gm-Message-State: AOJu0Yzd/d8sDaY7QbNdLJLudlFAhqT/ma1Anj4a4dgMsTsF/E8/ezgH
+ c5/LneEZsxaUIsfD79yYpqKbAqHhllP0iXmqiTcfhQ==
+X-Google-Smtp-Source: AGHT+IH4+ved9NrODcrL+cqJbDqjLcbW0OPzmoiiz6NJNlJxDjHXtWqNbZlF13w6x+zbyE8eQz2Y96JFLeuco6d5oUs=
+X-Received: by 2002:a05:6512:2348:b0:500:8be5:1cb8 with SMTP id
+ p8-20020a056512234800b005008be51cb8mr4417150lfu.30.1693002503728; Fri, 25 Aug
+ 2023 15:28:23 -0700 (PDT)
 Received: from 753933720722 named unknown by gmailapi.google.com with
- HTTPREST; Fri, 25 Aug 2023 17:27:27 -0500
+ HTTPREST; Fri, 25 Aug 2023 17:28:23 -0500
 MIME-Version: 1.0
-In-Reply-To: <20230824083012.v11.4.Ie6c132b96ebbbcddbf6954b9469ed40a6960343c@changeid>
+In-Reply-To: <20230824083012.v11.6.I2ef26d1b3bfbed2d10a281942b0da7d9854de05e@changeid>
 References: <20230824153233.1006420-1-dianders@chromium.org>
- <20230824083012.v11.4.Ie6c132b96ebbbcddbf6954b9469ed40a6960343c@changeid>
+ <20230824083012.v11.6.I2ef26d1b3bfbed2d10a281942b0da7d9854de05e@changeid>
 From: Stephen Boyd <swboyd@chromium.org>
 User-Agent: alot/0.10
-Date: Fri, 25 Aug 2023 17:27:27 -0500
-Message-ID: <CAE-0n52iVDgZa8XT8KTMj12c_ESSJt7f7A0fuZ_oAMMqpGcSzA@mail.gmail.com>
+Date: Fri, 25 Aug 2023 17:28:23 -0500
+Message-ID: <CAE-0n50sODsofOC-5uhs_1E6aHyTmyK45nPUvFddq9N9jhqUXg@mail.gmail.com>
 To: Catalin Marinas <catalin.marinas@arm.com>,
  Daniel Thompson <daniel.thompson@linaro.org>, 
  Douglas Anderson <dianders@chromium.org>, Marc Zyngier <maz@kernel.org>, 
@@ -92,19 +92,15 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Quoting Douglas Anderson (2023-08-24 08:30:30) > diff --git
- a/arch/arm64/include/asm/irq.h b/arch/arm64/include/asm/irq.h > index
- fac08e18bcd5..50ce8b697ff3
- 100644 > --- a/arch/arm64/include/asm/irq.h [...] 
+ Content preview:  Quoting Douglas Anderson (2023-08-24 08:30:32) > Up until
+ now we've been using the generic (weak) implementation for >
+ kgdb_roundup_cpus()
+ when using kgdb on arm64. Let's move to a custom > one. The a [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.167.45 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.167.45 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -112,10 +108,14 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.167.43 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.167.43 listed in list.dnswl.org]
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qZfHC-00FbZn-Qe
-Subject: Re: [Kgdb-bugreport] [PATCH v11 4/6] arm64: smp: Add arch support
- for backtrace using pseudo-NMI
+X-Headers-End: 1qZfI7-00FbbT-6E
+Subject: Re: [Kgdb-bugreport] [PATCH v11 6/6] arm64: kgdb: Implement
+ kgdb_roundup_cpus() to enable pseudo-NMI roundup
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -131,9 +131,8 @@ Cc: Valentin Schneider <vschneid@redhat.com>, ito-yuichi@fujitsu.com,
  D Scott Phillips <scott@os.amperecomputing.com>,
  Lecopzer Chen <lecopzer.chen@mediatek.com>,
  Peter Zijlstra <peterz@infradead.org>, kgdb-bugreport@lists.sourceforge.net,
- Josh Poimboeuf <jpoimboe@kernel.org>,
  "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
- linux-kernel@vger.kernel.org, Ingo Molnar <mingo@kernel.org>,
+ linux-kernel@vger.kernel.org, Josh Poimboeuf <jpoimboe@kernel.org>,
  linux-perf-users@vger.kernel.org, Chen-Yu Tsai <wens@csie.org>,
  Thomas Gleixner <tglx@linutronix.de>, Masayoshi Mizuma <msys.mizuma@gmail.com>,
  Ard Biesheuvel <ardb@kernel.org>, linux-arm-kernel@lists.infradead.org
@@ -141,80 +140,23 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Quoting Douglas Anderson (2023-08-24 08:30:30)
-> diff --git a/arch/arm64/include/asm/irq.h b/arch/arm64/include/asm/irq.h
-> index fac08e18bcd5..50ce8b697ff3 100644
-> --- a/arch/arm64/include/asm/irq.h
-> +++ b/arch/arm64/include/asm/irq.h
-> @@ -6,6 +6,9 @@
+Quoting Douglas Anderson (2023-08-24 08:30:32)
+> Up until now we've been using the generic (weak) implementation for
+> kgdb_roundup_cpus() when using kgdb on arm64. Let's move to a custom
+> one. The advantage here is that, when pseudo-NMI is enabled on a
+> device, we'll be able to round up CPUs using pseudo-NMI. This allows
+> us to debug CPUs that are stuck with interrupts disabled. If
+> pseudo-NMIs are not enabled then we'll fallback to just using an IPI,
+> which is still slightly better than the generic implementation since
+> it avoids the potential situation described in the generic
+> kgdb_call_nmi_hook().
 >
->  #include <asm-generic/irq.h>
->
-> +void arch_trigger_cpumask_backtrace(const cpumask_t *mask, int exclude_cpu);
-
-Some nits, but otherwise
+> Co-developed-by: Sumit Garg <sumit.garg@linaro.org>
+> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> Signed-off-by: Douglas Anderson <dianders@chromium.org>
+> ---
 
 Reviewed-by: Stephen Boyd <swboyd@chromium.org>
-
-> +#define arch_trigger_cpumask_backtrace arch_trigger_cpumask_backtrace
-> +
->  struct pt_regs;
->
->  int set_handle_irq(void (*handle_irq)(struct pt_regs *));
-> diff --git a/arch/arm64/kernel/smp.c b/arch/arm64/kernel/smp.c
-> index a5848f1ef817..c8896cbc5327 100644
-> --- a/arch/arm64/kernel/smp.c
-> +++ b/arch/arm64/kernel/smp.c
-> @@ -72,12 +73,18 @@ enum ipi_msg_type {
->         IPI_CPU_CRASH_STOP,
->         IPI_TIMER,
->         IPI_IRQ_WORK,
-> -       NR_IPI
-> +       NR_IPI,
-> +       /*
-> +        * Any enum >= NR_IPI and < MAX_IPI is special and not tracable
-> +        * with trace_ipi_*
-> +        */
-> +       IPI_CPU_BACKTRACE = NR_IPI,
-> +       MAX_IPI
->  };
->
->  static int ipi_irq_base __read_mostly;
->  static int nr_ipi __read_mostly = NR_IPI;
-> -static struct irq_desc *ipi_desc[NR_IPI] __read_mostly;
-> +static struct irq_desc *ipi_desc[MAX_IPI] __read_mostly;
-
-Side note: it would be nice to mark ipi_desc as __ro_after_init. Same
-for nr_ipi and ipi_irq_base.
-
->
->  static void ipi_setup(int cpu);
->
-> @@ -845,6 +852,22 @@ static void __noreturn ipi_cpu_crash_stop(unsigned int cpu, struct pt_regs *regs
->  #endif
->  }
->
-> +static void arm64_backtrace_ipi(cpumask_t *mask)
-> +{
-> +       __ipi_send_mask(ipi_desc[IPI_CPU_BACKTRACE], mask);
-> +}
-> +
-> +void arch_trigger_cpumask_backtrace(const cpumask_t *mask, int exclude_cpu)
-
-Can this be 'bool exclude_self' instead of int? That matches all other
-implementations from what I can tell.
-
-> +{
-> +       /*
-> +        * NOTE: though nmi_trigger_cpumask_backtrace has "nmi_" in the name,
-
-USe nmi_trigger_cpumask_backtrace() to indicate function.
-
-> +        * nothing about it truly needs to be implemented using an NMI, it's
-> +        * just that it's _allowed_ to work with NMIs. If ipi_should_be_nmi()
-> +        * returned false our backtrace attempt will just use a regular IPI.
-> +        */
-> +       nmi_trigger_cpumask_backtrace(mask, exclude_cpu, arm64_backtrace_ipi);
 
 
 _______________________________________________
