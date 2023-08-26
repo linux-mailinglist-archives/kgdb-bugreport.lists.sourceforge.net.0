@@ -2,121 +2,120 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 315A178924C
-	for <lists+kgdb-bugreport@lfdr.de>; Sat, 26 Aug 2023 01:23:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 796B4789604
+	for <lists+kgdb-bugreport@lfdr.de>; Sat, 26 Aug 2023 12:37:10 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1qZg9G-00060P-SL
+	id 1qZqfD-0007l4-8s
 	for lists+kgdb-bugreport@lfdr.de;
-	Fri, 25 Aug 2023 23:23:27 +0000
+	Sat, 26 Aug 2023 10:37:08 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <swboyd@chromium.org>) id 1qZg9F-00060J-Gl
+ (envelope-from <maz@kernel.org>) id 1qZqfB-0007kx-Vw
  for kgdb-bugreport@lists.sourceforge.net;
- Fri, 25 Aug 2023 23:23:26 +0000
+ Sat, 26 Aug 2023 10:37:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
- Subject:Message-ID:Date:From:References:In-Reply-To:MIME-Version:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:References:In-Reply-To:
+ Subject:Cc:To:From:Message-ID:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=4y/MCOutpdQ9jrdBYlOHctxvB4AexelxGOeGhkirgy8=; b=Tq9vyO2EqxPdLvI7+kHhr7gUSP
- SONxTFvWA59gOlxcdEifmCJmybRt1ALOPOOHl7SBmXGyPlPamDiA7jRRg1Cqw4Rl3K14iYIvBtwuF
- 6qXu28OIareyTySsxiQfTbiJWkU/sfntf2RHyefupzMbWQRI1cEkpUQ4/2Les1AmWHAI=;
+ bh=6NQAb0EA9zs3gKJrb80A9QlrJn4UKcoF4EzmZje4yKg=; b=dBXHIxHWc2GwWb6+kmmsE2HEiW
+ ILd/ses8tZ/5P+snA2eYbGFJW6J9JLfe6VfS7VTRRirlCjNTMREX7wl7ej12cQBvzyM8cx9HYiJLX
+ hdSh0ejrdHPbmUanpOpEXKWKlsykcMDBx89kNuxUH5owCzRHUT+sT/YRH+6PFTZZxC8M=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
- :References:In-Reply-To:MIME-Version:Sender:Reply-To:Content-ID:
+ h=Content-Type:MIME-Version:References:In-Reply-To:Subject:Cc:To:From:
+ Message-ID:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=4y/MCOutpdQ9jrdBYlOHctxvB4AexelxGOeGhkirgy8=; b=WmT1FD7LMK2xa6ba6uV3xRJydJ
- PZjZM0ePt+3YdsAFjK/Dv+FOyljWfmCuJhU38kOaS9i4aPgdlteSwSxZ0fR4AsYsZgebBxksxe1If
- a5aHGo/L4M00XoICDTkbwjBVX8azF1yTObA2D64rVtCjEUwUw9xyQe23x0PxM4RH9Xu4=;
-Received: from mail-lf1-f43.google.com ([209.85.167.43])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1qZg9F-00Fdvn-Ow for kgdb-bugreport@lists.sourceforge.net;
- Fri, 25 Aug 2023 23:23:26 +0000
-Received: by mail-lf1-f43.google.com with SMTP id
- 2adb3069b0e04-50079d148aeso2156554e87.3
- for <kgdb-bugreport@lists.sourceforge.net>;
- Fri, 25 Aug 2023 16:23:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693005799; x=1693610599;
- h=content-transfer-encoding:cc:to:subject:message-id:date:user-agent
- :from:references:in-reply-to:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=4y/MCOutpdQ9jrdBYlOHctxvB4AexelxGOeGhkirgy8=;
- b=U8NKwCCNSifsc2lSTaq4WiTeE1T6YuPABAyz74CRhWhIPiyirbpLKqOOyHPBIdfVD0
- Itd8MKaLEcUQ+vuDtqtCUcpbE2MedhssvMzV160oBFM/wKbNn9o4q7ThtKK6zbFpzaiE
- BMDad/zHG8StzWD3C1o3qgOLzhAp0vVKoTLs4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693005799; x=1693610599;
- h=content-transfer-encoding:cc:to:subject:message-id:date:user-agent
- :from:references:in-reply-to:mime-version:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=4y/MCOutpdQ9jrdBYlOHctxvB4AexelxGOeGhkirgy8=;
- b=LbKKUlRU6ynjfnwjeA+a2j8OJw/u5BsSSbzhfc6tezl38UtUEHrX5BMNMVuP3VWnYw
- lMT4wQVP6lhgv556qLq7YELtTah4oKvEqtf/YiRttw+qL0l3m5PsZuHU9jGqxmiV/wiK
- jJV4xnOng2t/mOoG4FaTCCgH/KeoK+gspHUFl9mbMH318nIUiuyWXWBs8ENQXaO/FWhp
- tBJ16THCEukKg5T4uV48T0ZVf9TgJk50JnC7ytFMbK3MIL/kknFvn2BWcF0aGD+nnMzG
- O40kyPKXgQ0cAQ+o4ZNxS6g4EyKEpK8n9F+2hB9js0VNVX9lSEKoeyYp0Klm9CkmTL47
- 4SdQ==
-X-Gm-Message-State: AOJu0Yz7yPazuphVis8pjn4gU046jWq7+IYAFDonJvIgLXMNJRsy/kiP
- agmZDzjNy7MaIHorz7p23yqkPFm1rIdasB50hHDycg==
-X-Google-Smtp-Source: AGHT+IEHxDRNRzDhD7J/HEqvUIEgnQd72FT7NvreGyXrsE98RFOiKe9Js51h5J1CykBkagVO4tydb+PQ0x7QUhyImSE=
-X-Received: by 2002:ac2:5f4b:0:b0:500:9ee2:15f with SMTP id
- 11-20020ac25f4b000000b005009ee2015fmr3398223lfz.46.1693005799136; Fri, 25 Aug
- 2023 16:23:19 -0700 (PDT)
-Received: from 753933720722 named unknown by gmailapi.google.com with
- HTTPREST; Fri, 25 Aug 2023 18:23:18 -0500
-MIME-Version: 1.0
-In-Reply-To: <CAD=FV=U24kF7WbZPKMbk=kJMU14+yFJXpGWWfj0fPbA9J6h0Eg@mail.gmail.com>
+ bh=6NQAb0EA9zs3gKJrb80A9QlrJn4UKcoF4EzmZje4yKg=; b=QNrPustPwnntmRtKOCeTCInPUX
+ 76W4WwEwVSeqelkjaNORg/mzsn0PsKt3YzMqbsyRdWKM4qRmo5oRA8bRkRTF2DOiiCtK2BU1fGLU8
+ 5sv+Or3rUXQNZDdhQUWrgZvQ9Mx2xauqHFV9DQW2YmuUPl+WCxJHn3d/nrQrSKYge6eQ=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1qZqf8-0003tS-Qz for kgdb-bugreport@lists.sourceforge.net;
+ Sat, 26 Aug 2023 10:37:06 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 3865260AFD;
+ Sat, 26 Aug 2023 10:36:57 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9021CC433C7;
+ Sat, 26 Aug 2023 10:36:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1693046216;
+ bh=x1hOMfWCNnRRZv1VfAf0PBdXlkAf5G9BLURODcZBglk=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=INzayd/CTmJb+InHsokVpOULz3x6muV25aBm0mPqEw5jfo+8CgFASIKNwIygd2qRz
+ ASLD4A6FPW2/bVKVqRWz9Tmnq3x/ryEhj7kB5JqwIIljpwsz0XyBaigRicvQ2MUxZ6
+ 9SeIUiYTlUSOqPcXab93ZFCURk9AEjjZFPX74JkMLwEW6HV0sDIcL0L+UsNC0CW+Nd
+ ejD8KU80BIUMYLKxmIZusLkv+rADwxfx8fUZvvHSUgEcd64pNj+32X8SCWfv+DFrbE
+ K6iWQ3Csc4DwvMEQ8c/gLicqpfOPlgawDltamb847SQOFnwV6M/U2XavLzVM7jB+NL
+ xuWH/NY09ITuQ==
+Received: from sofa.misterjones.org ([185.219.108.64]
+ helo=goblin-girl.misterjones.org)
+ by disco-boy.misterjones.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <maz@kernel.org>) id 1qZqez-008Gjw-Rk;
+ Sat, 26 Aug 2023 11:36:54 +0100
+Date: Sat, 26 Aug 2023 11:36:53 +0100
+Message-ID: <86bkeuf5tm.wl-maz@kernel.org>
+From: Marc Zyngier <maz@kernel.org>
+To: Douglas Anderson <dianders@chromium.org>
+In-Reply-To: <20230824083012.v11.1.I1223c11c88937bd0cbd9b086d4ef216985797302@changeid>
 References: <20230824153233.1006420-1-dianders@chromium.org>
- <20230824083012.v11.4.Ie6c132b96ebbbcddbf6954b9469ed40a6960343c@changeid>
- <CAE-0n52iVDgZa8XT8KTMj12c_ESSJt7f7A0fuZ_oAMMqpGcSzA@mail.gmail.com>
- <CAD=FV=U24kF7WbZPKMbk=kJMU14+yFJXpGWWfj0fPbA9J6h0Eg@mail.gmail.com>
-From: Stephen Boyd <swboyd@chromium.org>
-User-Agent: alot/0.10
-Date: Fri, 25 Aug 2023 18:23:18 -0500
-Message-ID: <CAE-0n514xGWz1yaF84zL=QBCQcMwct+pu8nLBgRHPq6+DE3g5g@mail.gmail.com>
-To: Doug Anderson <dianders@chromium.org>
-X-Spam-Score: -0.2 (/)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
+ <20230824083012.v11.1.I1223c11c88937bd0cbd9b086d4ef216985797302@changeid>
+User-Agent: Wanderlust/2.15.9 (Almost Unreal) SEMI-EPG/1.14.7 (Harue)
+ FLIM-LB/1.14.9 (=?UTF-8?B?R29qxY0=?=) APEL-LB/10.8 EasyPG/1.0.0 Emacs/28.2
+ (aarch64-unknown-linux-gnu) MULE/6.0 (HANACHIRUSATO)
+MIME-Version: 1.0 (generated by SEMI-EPG 1.14.7 - "Harue")
+X-SA-Exim-Connect-IP: 185.219.108.64
+X-SA-Exim-Rcpt-To: dianders@chromium.org, mark.rutland@arm.com,
+ catalin.marinas@arm.com, will@kernel.org, sumit.garg@linaro.org,
+ daniel.thompson@linaro.org, rafael.j.wysocki@intel.com, ardb@kernel.org,
+ tglx@linutronix.de, kgdb-bugreport@lists.sourceforge.net,
+ lecopzer.chen@mediatek.com, linux-perf-users@vger.kernel.org,
+ msys.mizuma@gmail.com, wens@csie.org, linux-arm-kernel@lists.infradead.org,
+ ito-yuichi@fujitsu.com, swboyd@chromium.org, peterz@infradead.org,
+ linux-kernel@vger.kernel.org
+X-SA-Exim-Mail-From: maz@kernel.org
+X-SA-Exim-Scanned: No (on disco-boy.misterjones.org);
+ SAEximRunCond expanded to false
+X-Spam-Score: -5.2 (-----)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  Quoting Doug Anderson (2023-08-25 16:02:46) > On Fri, Aug
-   25, 2023 at 3:27 PM Stephen Boyd <swboyd@chromium.org> wrote: > > > > Quoting
-    Douglas Anderson (2023-08-24 08:30:30) > > > diff --git a/arch [...] 
- 
- Content analysis details:   (-0.2 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview:  On Thu, 24 Aug 2023 16:30:27 +0100,
+ Douglas Anderson <dianders@chromium.org>
+ wrote: > > As of commit 6abbd6988971 ("irqchip/gic, gic-v3: Make SGIs use
+ > handle_percpu_devid_irq()") SGIs are treated th [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
-                              no trust
-                             [209.85.167.43 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
-                             [209.85.167.43 listed in wl.mailspike.net]
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
+ envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qZg9F-00Fdvn-Ow
-Subject: Re: [Kgdb-bugreport] [PATCH v11 4/6] arm64: smp: Add arch support
- for backtrace using pseudo-NMI
+X-Headers-End: 1qZqf8-0003tS-Qz
+Subject: Re: [Kgdb-bugreport] [PATCH v11 1/6] irqchip/gic-v3: Enable support
+ for SGIs to act as NMIs
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -129,52 +128,91 @@ List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
 Cc: Mark Rutland <mark.rutland@arm.com>,
+ Daniel Thompson <daniel.thompson@linaro.org>, ito-yuichi@fujitsu.com,
  Lecopzer Chen <lecopzer.chen@mediatek.com>,
  Peter Zijlstra <peterz@infradead.org>,
- Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>,
- Ingo Molnar <mingo@kernel.org>, Daniel Thompson <daniel.thompson@linaro.org>,
- Marc Zyngier <maz@kernel.org>,
+ Catalin Marinas <catalin.marinas@arm.com>,
  "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
- Ard Biesheuvel <ardb@kernel.org>, Chen-Yu Tsai <wens@csie.org>,
- kgdb-bugreport@lists.sourceforge.net, Masayoshi Mizuma <msys.mizuma@gmail.com>,
- Valentin Schneider <vschneid@redhat.com>, Thomas Gleixner <tglx@linutronix.de>,
- Josh Poimboeuf <jpoimboe@kernel.org>, linux-arm-kernel@lists.infradead.org,
- D Scott Phillips <scott@os.amperecomputing.com>, ito-yuichi@fujitsu.com,
- linux-kernel@vger.kernel.org, linux-perf-users@vger.kernel.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ linux-kernel@vger.kernel.org, Stephen Boyd <swboyd@chromium.org>,
+ linux-perf-users@vger.kernel.org, Chen-Yu Tsai <wens@csie.org>,
+ kgdb-bugreport@lists.sourceforge.net, Thomas Gleixner <tglx@linutronix.de>,
+ Masayoshi Mizuma <msys.mizuma@gmail.com>, Will Deacon <will@kernel.org>,
+ Ard Biesheuvel <ardb@kernel.org>, linux-arm-kernel@lists.infradead.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-UXVvdGluZyBEb3VnIEFuZGVyc29uICgyMDIzLTA4LTI1IDE2OjAyOjQ2KQo+IE9uIEZyaSwgQXVn
-IDI1LCAyMDIzIGF0IDM6MjfigK9QTSBTdGVwaGVuIEJveWQgPHN3Ym95ZEBjaHJvbWl1bS5vcmc+
-IHdyb3RlOgo+ID4KPiA+IFF1b3RpbmcgRG91Z2xhcyBBbmRlcnNvbiAoMjAyMy0wOC0yNCAwODoz
-MDozMCkKPiA+ID4gZGlmZiAtLWdpdCBhL2FyY2gvYXJtNjQvaW5jbHVkZS9hc20vaXJxLmggYi9h
-cmNoL2FybTY0L2luY2x1ZGUvYXNtL2lycS5oCj4gPiA+Cj4gPiA+ICBzdGF0aWMgaW50IGlwaV9p
-cnFfYmFzZSBfX3JlYWRfbW9zdGx5Owo+ID4gPiAgc3RhdGljIGludCBucl9pcGkgX19yZWFkX21v
-c3RseSA9IE5SX0lQSTsKPiA+ID4gLXN0YXRpYyBzdHJ1Y3QgaXJxX2Rlc2MgKmlwaV9kZXNjW05S
-X0lQSV0gX19yZWFkX21vc3RseTsKPiA+ID4gK3N0YXRpYyBzdHJ1Y3QgaXJxX2Rlc2MgKmlwaV9k
-ZXNjW01BWF9JUEldIF9fcmVhZF9tb3N0bHk7Cj4gPgo+ID4gU2lkZSBub3RlOiBpdCB3b3VsZCBi
-ZSBuaWNlIHRvIG1hcmsgaXBpX2Rlc2MgYXMgX19yb19hZnRlcl9pbml0LiBTYW1lCj4gPiBmb3Ig
-bnJfaXBpIGFuZCBpcGlfaXJxX2Jhc2UuCj4KPiBJJ2QgcmF0aGVyIG5vdCBjaGFuZ2UgaXQgaW4g
-dGhpcyBwYXRjaCBzaW5jZSBpdCdzIGEgcHJlLWV4aXN0aW5nIGFuZAo+IHNlcGFyYXRlIGlzc3Vl
-LCBidXQgSSBjYW4gYWRkIGEgcGF0Y2ggdG8gdGhlIGVuZCBvZiB0aGUgc2VyaWVzIGZvcgo+IHRo
-YXQgaWYgSSBlbmQgdXAgc3Bpbm5pbmcgaXQuIE90aGVyd2lzZSBJIGNhbiBzZW5kIGEgZm9sbG93
-LXVwIHBhdGNoCj4gZm9yIGl0LgoKT2YgY291cnNlLiBEb24ndCBjaGFuZ2UgaXQgaW4gdGhpcyBw
-YXRjaC4KCj4KPgo+ID4gPiAgc3RhdGljIHZvaWQgaXBpX3NldHVwKGludCBjcHUpOwo+ID4gPgo+
-ID4gPiBAQCAtODQ1LDYgKzg1MiwyMiBAQCBzdGF0aWMgdm9pZCBfX25vcmV0dXJuIGlwaV9jcHVf
-Y3Jhc2hfc3RvcCh1bnNpZ25lZCBpbnQgY3B1LCBzdHJ1Y3QgcHRfcmVncyAqcmVncwo+ID4gPiAg
-I2VuZGlmCj4gPiA+ICB9Cj4gPiA+Cj4gPiA+ICtzdGF0aWMgdm9pZCBhcm02NF9iYWNrdHJhY2Vf
-aXBpKGNwdW1hc2tfdCAqbWFzaykKPiA+ID4gK3sKPiA+ID4gKyAgICAgICBfX2lwaV9zZW5kX21h
-c2soaXBpX2Rlc2NbSVBJX0NQVV9CQUNLVFJBQ0VdLCBtYXNrKTsKPiA+ID4gK30KPiA+ID4gKwo+
-ID4gPiArdm9pZCBhcmNoX3RyaWdnZXJfY3B1bWFza19iYWNrdHJhY2UoY29uc3QgY3B1bWFza190
-ICptYXNrLCBpbnQgZXhjbHVkZV9jcHUpCj4gPgo+ID4gQ2FuIHRoaXMgYmUgJ2Jvb2wgZXhjbHVk
-ZV9zZWxmJyBpbnN0ZWFkIG9mIGludD8gVGhhdCBtYXRjaGVzIGFsbCBvdGhlcgo+ID4gaW1wbGVt
-ZW50YXRpb25zIGZyb20gd2hhdCBJIGNhbiB0ZWxsLgo+Cj4gTm9wZS4gU2VlIHRoZSBwYXJ0IG9m
-IHRoZSBjb21taXQgbWVzc2FnZSB0aGF0IHNheXM6Cj4KPiBUaGlzIHBhdGNoIGRlcGVuZHMgb24g
-Y29tbWl0IDM2NzU5ZTM0M2ZmOSAoIm5taV9iYWNrdHJhY2U6IGFsbG93Cj4gZXhjbHVkaW5nIGFu
-IGFyYml0cmFyeSBDUFUiKSBzaW5jZSB0aGF0IGNvbW1pdCBjaGFuZ2VkIHRoZSBwcm90b3R5cGUK
-PiBvZiBhcmNoX3RyaWdnZXJfY3B1bWFza19iYWNrdHJhY2UoKSwgd2hpY2ggdGhpcyBwYXRjaCBp
-bXBsZW1lbnRzLgoKQWgsIG9rLiBTb3VuZHMgZmluZSB0aGVuLgoKCl9fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCktnZGItYnVncmVwb3J0IG1haWxpbmcgbGlz
-dApLZ2RiLWJ1Z3JlcG9ydEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3Vy
-Y2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8va2dkYi1idWdyZXBvcnQK
+On Thu, 24 Aug 2023 16:30:27 +0100,
+Douglas Anderson <dianders@chromium.org> wrote:
+> 
+> As of commit 6abbd6988971 ("irqchip/gic, gic-v3: Make SGIs use
+> handle_percpu_devid_irq()") SGIs are treated the same as PPIs/EPPIs
+> and use handle_percpu_devid_irq() by default. Unfortunately,
+> handle_percpu_devid_irq() isn't NMI safe, and so to run in an NMI
+> context those should use handle_percpu_devid_fasteoi_nmi().
+> 
+> In order to accomplish this, we just have to make room for SGIs in the
+> array of refcounts that keeps track of which interrupts are set as
+> NMI. We also rename the array and create a new indexing scheme that
+> accounts for SGIs.
+> 
+> Also, enable NMI support prior to gic_smp_init() as allocation of SGIs
+> as IRQs/NMIs happen as part of this routine.
+> 
+> Co-developed-by: Sumit Garg <sumit.garg@linaro.org>
+> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> Signed-off-by: Douglas Anderson <dianders@chromium.org>
+> ---
+> In v10 I removed the previous Reviewed-by and Tested-by tags since the
+> patch contents changed pretty drastically.
+> 
+> I'll also note that this change is a little more black magic to me
+> than others in this series. I don't have a massive amounts of
+> familiarity with all the moving parts of gic-v3, so I mostly just
+> followed Mark Rutland's advice [1]. Please pay extra attention to make
+> sure I didn't do anything too terrible.
+> 
+> Mark's advice wasn't a full patch and I ended up doing a bit of work
+> to translate it to reality, so I did not add him as "Co-developed-by"
+> here. Mark: if you would like this tag then please provide it and your
+> Signed-off-by. I certainly won't object.
+> 
+> [1] https://lore.kernel.org/r/ZNC-YRQopO0PaIIo@FVFF77S0Q05N.cambridge.arm.com
+> 
+> (no changes since v10)
+> 
+> Changes in v10:
+> - Rewrite as needed for 5.11+ as per Mark Rutland and Sumit.
+> 
+>  drivers/irqchip/irq-gic-v3.c | 54 ++++++++++++++++++++++++------------
+>  1 file changed, 36 insertions(+), 18 deletions(-)
+> 
+> diff --git a/drivers/irqchip/irq-gic-v3.c b/drivers/irqchip/irq-gic-v3.c
+> index eedfa8e9f077..49d18cf3f636 100644
+> --- a/drivers/irqchip/irq-gic-v3.c
+> +++ b/drivers/irqchip/irq-gic-v3.c
+> @@ -78,6 +78,8 @@ static DEFINE_STATIC_KEY_TRUE(supports_deactivate_key);
+>  #define GIC_LINE_NR	min(GICD_TYPER_SPIS(gic_data.rdists.gicd_typer), 1020U)
+>  #define GIC_ESPI_NR	GICD_TYPER_ESPIS(gic_data.rdists.gicd_typer)
+>  
+> +#define SGI_NR		16
+
+Why 16? We only allocate 8, as the other 8 are potentially stolen by
+the secure side. We do try and initialise them all so that they have a
+known state if they were actually configured as Group-1NS, but we
+don't use them.
+
+I understand that this simplifies the indexing in the rdist_nmi_refs
+array and I'm not going to cry over 32 wasted bytes, but this
+definitely deserves a comment.
+
+	M.
+
+-- 
+Without deviation from the norm, progress is not possible.
+
+
+_______________________________________________
+Kgdb-bugreport mailing list
+Kgdb-bugreport@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport
