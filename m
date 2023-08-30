@@ -2,126 +2,119 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C45BD78D4F6
-	for <lists+kgdb-bugreport@lfdr.de>; Wed, 30 Aug 2023 11:54:17 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id CA32178DE99
+	for <lists+kgdb-bugreport@lfdr.de>; Wed, 30 Aug 2023 21:13:49 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1qbHtw-0001WY-4v
+	id 1qbQdP-0001mz-Hs
 	for lists+kgdb-bugreport@lfdr.de;
-	Wed, 30 Aug 2023 09:54:16 +0000
+	Wed, 30 Aug 2023 19:13:48 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <daniel.thompson@linaro.org>) id 1qbHtu-0001WR-Hp
+ (envelope-from <dianders@chromium.org>) id 1qbQdM-0001ms-7H
  for kgdb-bugreport@lists.sourceforge.net;
- Wed, 30 Aug 2023 09:54:14 +0000
+ Wed, 30 Aug 2023 19:13:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
- MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=TQrf16cg+NiqdMGdtFVNJcxqedj4vde246HAhKjb6+Y=; b=QcWMjapK6ySg34fvZ4T1r84o55
- xA8chMxlmHshGjzZEweSVXa35+v7JTJLFEYBlRC9zwDBHgMK5PN2mewbechMBMbJgw0mZvIRKJIOD
- 8btdA/iwvx4EVaVAkj6jrcxd1FPZc9Nc9qs5wrQLGH3xaV6SQvAmGLjwAXF29Q5W+rD8=;
+ bh=JDyOflW/myJYlvUctAoCcIDpgS4q3OQICcXlfqcE06A=; b=SMYjwHZdCrFpacMIn8of9x0oiU
+ Ls/IixWbVzFOz1OdoYYd3DjNfji8QFcWKQf5kyJCw3dr6apfY5AQUbN5w5i+d7OYIHRc7a76tvgd8
+ DWCSlVkiop0RhZPTArW/ehVsALGg8/K23Q0bmLP1V1PXXEKDHJOSejh6XwLO3sIq1Gzc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=TQrf16cg+NiqdMGdtFVNJcxqedj4vde246HAhKjb6+Y=; b=Xj9ji+jhukakGHYPgr/Yr9S3vq
- FPZBSTyFw5miJGzU+5pdN8xQbgOtpPte1kpENkhWgecQPi2Byg0aIkxxq1O0kICDLT9sfxCa/Z3hL
- c0Y/n+7OHyOPR2sTDQNaSazPczpD3OfoVQN2S1snLz39F5EDgNVPl6WP3ptU8ykp0I8Q=;
-Received: from mail-wm1-f48.google.com ([209.85.128.48])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=JDyOflW/myJYlvUctAoCcIDpgS4q3OQICcXlfqcE06A=; b=S
+ 5zkkWncXyA+RF9xXjLe2eWpaF+poog78b75Dm0uDeA531dsOC9FQKoRqZejX3dR/Y6H34ltocTyAM
+ P8MobtogC66M42glc2kjTBwtzcLI/ViXyZ//xt+/iLZYXfJNSIWG9Dlkl5dUkycJbzZe9iZYM7TPC
+ 0uI2hlOZNhpDzsu4=;
+Received: from mail-pl1-f172.google.com ([209.85.214.172])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1qbHtn-003P7j-Rn for kgdb-bugreport@lists.sourceforge.net;
- Wed, 30 Aug 2023 09:54:14 +0000
-Received: by mail-wm1-f48.google.com with SMTP id
- 5b1f17b1804b1-401d80f4ef8so14569415e9.1
+ id 1qbQdJ-0003qu-Dc for kgdb-bugreport@lists.sourceforge.net;
+ Wed, 30 Aug 2023 19:13:45 +0000
+Received: by mail-pl1-f172.google.com with SMTP id
+ d9443c01a7336-1bf1935f6c2so8947515ad.1
  for <kgdb-bugreport@lists.sourceforge.net>;
- Wed, 30 Aug 2023 02:54:07 -0700 (PDT)
+ Wed, 30 Aug 2023 12:13:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1693389241; x=1693994041; darn=lists.sourceforge.net;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=TQrf16cg+NiqdMGdtFVNJcxqedj4vde246HAhKjb6+Y=;
- b=gwWVPwForjaqc8ja1uge3DHdq14ujALHRqSXiJk7ZIcegKMXWsc5bKpx0Rf6QSOoES
- h4ocWyYdQFhgid1KzSifyplREobS2LuVMJyuDo+1U+Rpkz+qliBuJbz/UiSB+M+17HKw
- i/0M3a2BX6XiPieQoVQl5PvKJFoCA6snXWA7O3VEykBlMFGfr5nHBzTKuLeoDYPU3fKa
- LL9rTcU/VkeNVpV1Nv95W0FvZdI6pOBwsvm8p1YhVmWjS/fyCnbP8j8vpSU0/pg5QeTs
- 8QfP4qqvOiL1DlmbPGqQ+98y0620ppGJZwcTQYs0zWLXjx/WKNACzUE57vS2IcURzqek
- XWMw==
+ d=chromium.org; s=google; t=1693422816; x=1694027616;
+ darn=lists.sourceforge.net; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=JDyOflW/myJYlvUctAoCcIDpgS4q3OQICcXlfqcE06A=;
+ b=Cv0LG1IJ1Ftzjxqv6+NQyE/I43FlI6rT76NZV8Ec090c9ulyu9FkzcRJbhpZK8O03K
+ eFjYc3cXKEj5YDe6fJBajSepNPRZpQyuYqETIWJPYFg/Adq4ZqLmYOtj51B5t+UcYh14
+ r9PZzCXWubpW1wR1NrcAKAIyZL5xFETE7XOZ0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693389241; x=1693994041;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=TQrf16cg+NiqdMGdtFVNJcxqedj4vde246HAhKjb6+Y=;
- b=INQMGKy2f6o5NYacgtFbfLUzKA98xjeK5qRfjVaQNJzjho02B2h9ztYvBOmpDNtqzj
- j8z/xqlaCtHsV8G6QKQlgs9dm/v1kDPeAFQtCg7pH/N8YxrBKPyND6khZhIEJW4Luw1t
- n+jMbJ3n4QwV1YLfTB73QsS+iCVACcPPJVFyJcrFb44hvaN0z+8h0GiBjiXz1NOPYSKB
- qFXomxzWAGkMBxQxuqYLgfLTjLTtgpo+mAVBO4DPv9IG0KQQOfKBXGxmy94X8iSQZ7JJ
- G0phJMBp2S4KxYwKVcdDkiFAtJY1Q63DySSz2jXPyVB4d/UoAB/MZt+ChhlsOPbgQj7k
- wd2g==
-X-Gm-Message-State: AOJu0YzKM9/66EjBQJ7VxN40eM/Yf2iE7TX/s1WBXh7iMBEomW4BBSCi
- hJNL9Zt7Hi4BBaaoOHxzDFRbzQ==
-X-Google-Smtp-Source: AGHT+IH+QX2uRpED63uPhWYhweJ0cWpNkPglQheXInf45HGQ9LkmLBDlmGod1hs8yCfFV8wKBunKpQ==
-X-Received: by 2002:a05:600c:b57:b0:401:73b2:f039 with SMTP id
- k23-20020a05600c0b5700b0040173b2f039mr1530156wmr.7.1693389241342; 
- Wed, 30 Aug 2023 02:54:01 -0700 (PDT)
-Received: from aspen.lan
- (aztw-34-b2-v4wan-166919-cust780.vm26.cable.virginm.net. [82.37.195.13])
+ d=1e100.net; s=20221208; t=1693422816; x=1694027616;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=JDyOflW/myJYlvUctAoCcIDpgS4q3OQICcXlfqcE06A=;
+ b=kc7f3IsPVemcVLcokQrepITwfTNdGy7H73Gf2iyAjSyjhdR9jFh6UkJfU2mi2TaCZs
+ Ys+qY7vTiXXRP4e3JYvEaLsCYt8MA1I8pyQnQ86TxkoKMYaY1gpiwpF/ReWr8KK2pMl6
+ vMXFxnkUX69VQpZmEyEygNDEiKZh6o2AZnFQgm5sEqNZcZFYX2CPWf8pMDpl544cSnjx
+ M0HcfiaI0pOrtKIQ6DUyu5gvDc0te82m2k4kIUNg4P9Yhn3EgyeURm057PbitXmb1hx5
+ t77W57hDa2/PhF1wqyH1lobmHsmTvs7pyknR87TIfiKhHBlGkEvIsXHSDrVtOw3u9Her
+ ns/w==
+X-Gm-Message-State: AOJu0YxGk6pY62vX7SvXfc2H+jH68oPoYiT5k1LlGbaDiGD/xSHm4/GP
+ ohLk4FjisS30y+yM4oI4yffksA==
+X-Google-Smtp-Source: AGHT+IGIFKcBlvPX1UPhPdOymNrV4WzWDOO5asyuyncWbRsGOmjSkkWcqoVmoyXrNeHfI0T2bMbH7A==
+X-Received: by 2002:a17:902:c941:b0:1c0:bcbc:d67 with SMTP id
+ i1-20020a170902c94100b001c0bcbc0d67mr767212pla.22.1693422815685; 
+ Wed, 30 Aug 2023 12:13:35 -0700 (PDT)
+Received: from tictac2.mtv.corp.google.com
+ ([2620:15c:9d:2:e315:dec6:467c:83c5])
  by smtp.gmail.com with ESMTPSA id
- z23-20020a1c4c17000000b00401d8181f8bsm1729781wmf.25.2023.08.30.02.54.00
+ c15-20020a170902d48f00b001bbdf32f011sm11338928plg.269.2023.08.30.12.13.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Aug 2023 02:54:00 -0700 (PDT)
-Date: Wed, 30 Aug 2023 10:53:59 +0100
-From: Daniel Thompson <daniel.thompson@linaro.org>
-To: Doug Anderson <dianders@chromium.org>
-Message-ID: <20230830095359.GA44243@aspen.lan>
-References: <20230822131945.1.I5b460ae8f954e4c4f628a373d6e74713c06dd26f@changeid>
- <20230825100854.GC270740@aspen.lan>
- <CAD=FV=VHa1arysMgqZcGFGFi2N8i0BeKWD6BM8dSsg0Xq2LUFQ@mail.gmail.com>
+ Wed, 30 Aug 2023 12:13:34 -0700 (PDT)
+From: Douglas Anderson <dianders@chromium.org>
+To: Mark Rutland <mark.rutland@arm.com>,
+ Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>,
+ Sumit Garg <sumit.garg@linaro.org>,
+ Daniel Thompson <daniel.thompson@linaro.org>, Marc Zyngier <maz@kernel.org>
+Date: Wed, 30 Aug 2023 12:11:21 -0700
+Message-ID: <20230830191314.1618136-1-dianders@chromium.org>
+X-Mailer: git-send-email 2.42.0.283.g2d96d420d3-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAD=FV=VHa1arysMgqZcGFGFi2N8i0BeKWD6BM8dSsg0Xq2LUFQ@mail.gmail.com>
 X-Spam-Score: -0.2 (/)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  On Fri, Aug 25, 2023 at 07:18:44AM -0700, Doug Anderson wrote:
-    > Hi, > > On Fri, Aug 25, 2023 at 3:09 AM Daniel Thompson > <daniel.thompson@linaro.org>
-    wrote: > > > > On Tue, Aug 22, 2023 at 01:19:4 [...] 
- 
+ Content preview: This is an attempt to resurrect Sumit's old patch series [1]
+ that allowed us to use the arm64 pseudo-NMI to get backtraces of CPUs and
+ also to round up CPUs in kdb/kgdb. The last post from Sumit that [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
- 
-  pts rule name              description
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
-                             [209.85.128.48 listed in wl.mailspike.net]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
-                              no trust
-                             [209.85.128.48 listed in list.dnswl.org]
+ no trust [209.85.214.172 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.214.172 listed in wl.mailspike.net]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
-X-Headers-End: 1qbHtn-003P7j-Rn
-Subject: Re: [Kgdb-bugreport] [PATCH] kgdb: Flush console before entering
- kgdb on panic
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1qbQdJ-0003qu-Dc
+Subject: [Kgdb-bugreport] [PATCH v12 0/7] arm64: Add IPI for backtraces /
+ kgdb; try to use NMI for some IPIs
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -133,95 +126,155 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: kgdb-bugreport@lists.sourceforge.net, Petr Mladek <pmladek@suse.com>,
- linux-kernel@vger.kernel.org, Jason Wessel <jason.wessel@windriver.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Lecopzer Chen <lecopzer.chen@mediatek.com>,
+ Peter Zijlstra <peterz@infradead.org>, kgdb-bugreport@lists.sourceforge.net,
+ Stephane Eranian <eranian@google.com>, linux-kernel@vger.kernel.org,
+ Ingo Molnar <mingo@kernel.org>, Valentin Schneider <vschneid@redhat.com>,
+ "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
+ Ard Biesheuvel <ardb@kernel.org>, Chen-Yu Tsai <wens@csie.org>,
+ Sami Tolvanen <samitolvanen@google.com>,
+ Masayoshi Mizuma <msys.mizuma@gmail.com>, Kees Cook <keescook@chromium.org>,
+ Frederic Weisbecker <frederic@kernel.org>, Stephen Boyd <swboyd@chromium.org>,
+ Tomohiro Misono <misono.tomohiro@fujitsu.com>,
+ Thomas Gleixner <tglx@linutronix.de>, Josh Poimboeuf <jpoimboe@kernel.org>,
+ linux-arm-kernel@lists.infradead.org,
+ D Scott Phillips <scott@os.amperecomputing.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ ito-yuichi@fujitsu.com, linux-perf-users@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-T24gRnJpLCBBdWcgMjUsIDIwMjMgYXQgMDc6MTg6NDRBTSAtMDcwMCwgRG91ZyBBbmRlcnNvbiB3
-cm90ZToKPiBIaSwKPgo+IE9uIEZyaSwgQXVnIDI1LCAyMDIzIGF0IDM6MDnigK9BTSBEYW5pZWwg
-VGhvbXBzb24KPiA8ZGFuaWVsLnRob21wc29uQGxpbmFyby5vcmc+IHdyb3RlOgo+ID4KPiA+IE9u
-IFR1ZSwgQXVnIDIyLCAyMDIzIGF0IDAxOjE5OjQ2UE0gLTA3MDAsIERvdWdsYXMgQW5kZXJzb24g
-d3JvdGU6Cj4gPiA+IFdoZW4gZW50ZXJpbmcga2RiL2tnZGIgb24gYSBrZXJuZWwgcGFuaWMsIGl0
-IHdhcyBiZSBvYnNlcnZlZCB0aGF0IHRoZQo+ID4gPiBjb25zb2xlIGlzbid0IGZsdXNoZWQgYmVm
-b3JlIHRoZSBga2RiYCBwcm9tcHQgY2FtZSB1cC4gU3BlY2lmaWNhbGx5LAo+ID4gPiB3aGVuIHVz
-aW5nIHRoZSBidWRkeSBsb2NrdXAgZGV0ZWN0b3Igb24gYXJtNjQgYW5kIHJ1bm5pbmc6Cj4gPiA+
-ICAgZWNobyBIQVJETE9DS1VQID4gL3N5cy9rZXJuZWwvZGVidWcvcHJvdm9rZS1jcmFzaC9ESVJF
-Q1QKPiA+ID4KPiA+ID4gSSBjb3VsZCBzZWU6Cj4gPiA+ICAgWyAgIDI2LjE2MTA5OV0gbGtkdG06
-IFBlcmZvcm1pbmcgZGlyZWN0IGVudHJ5IEhBUkRMT0NLVVAKPiA+ID4gICBbICAgMzIuNDk5ODgx
-XSB3YXRjaGRvZzogV2F0Y2hkb2cgZGV0ZWN0ZWQgaGFyZCBMT0NLVVAgb24gY3B1IDYKPiA+ID4g
-ICBbICAgMzIuNTUyODY1XSBTZW5kaW5nIE5NSSBmcm9tIENQVSA1IHRvIENQVXMgNjoKPiA+ID4g
-ICBbICAgMzIuNTU3MzU5XSBOTUkgYmFja3RyYWNlIGZvciBjcHUgNgo+ID4gPiAgIC4uLiBbYmFj
-a3RyYWNlIGZvciBjcHUgNl0gLi4uCj4gPiA+ICAgWyAgIDMyLjU1ODM1M10gTk1JIGJhY2t0cmFj
-ZSBmb3IgY3B1IDUKPiA+ID4gICAuLi4gW2JhY2t0cmFjZSBmb3IgY3B1IDVdIC4uLgo+ID4gPiAg
-IFsgICAzMi44Njc0NzFdIFNlbmRpbmcgTk1JIGZyb20gQ1BVIDUgdG8gQ1BVcyAwLTQsNzoKPiA+
-ID4gICBbICAgMzIuODcyMzIxXSBOTUkgYmFja3RyYWNlIGZvclAgY3B1QU5DOiBIYXJkIExPQ0tV
-UAo+ID4gPgo+ID4gPiAgIEVudGVyaW5nIGtkYiAoY3VycmVudD0uLi4sIHBpZCAwKSBvbiBwcm9j
-ZXNzb3IgNSBkdWUgdG8gS2V5Ym9hcmQgRW50cnkKPiA+ID4gICBbNV1rZGI+Cj4gPiA+Cj4gPiA+
-IEFzIHlvdSBjYW4gc2VlLCBiYWNrdHJhY2VzIGZvciB0aGUgb3RoZXIgQ1BVcyBzdGFydCBwcmlu
-dGluZyBhbmQgZ2V0Cj4gPiA+IGludGVybGVhdmVkIHdpdGggdGhlIGtkYiBQQU5JQyBwcmludC4K
-PiA+ID4KPiA+ID4gTGV0J3MgcmVwbGljYXRlIHRoZSBjb21tYW5kcyB0byBmbHVzaCB0aGUgY29u
-c29sZSBpbiB0aGUga2RiIHBhbmljCj4gPiA+IGVudHJ5IHBvaW50IHRvIGF2b2lkIHRoaXMuCj4g
-PiA+Cj4gPiA+IFNpZ25lZC1vZmYtYnk6IERvdWdsYXMgQW5kZXJzb24gPGRpYW5kZXJzQGNocm9t
-aXVtLm9yZz4KPiA+ID4gLS0tCj4gPiA+Cj4gPiA+ICBrZXJuZWwvZGVidWcvZGVidWdfY29yZS5j
-IHwgMyArKysKPiA+ID4gIDEgZmlsZSBjaGFuZ2VkLCAzIGluc2VydGlvbnMoKykKPiA+ID4KPiA+
-ID4gZGlmZiAtLWdpdCBhL2tlcm5lbC9kZWJ1Zy9kZWJ1Z19jb3JlLmMgYi9rZXJuZWwvZGVidWcv
-ZGVidWdfY29yZS5jCj4gPiA+IGluZGV4IGQ1ZTljY2RlM2FiOC4uM2E5MDRkODY5N2M4IDEwMDY0
-NAo+ID4gPiAtLS0gYS9rZXJuZWwvZGVidWcvZGVidWdfY29yZS5jCj4gPiA+ICsrKyBiL2tlcm5l
-bC9kZWJ1Zy9kZWJ1Z19jb3JlLmMKPiA+ID4gQEAgLTEwMDYsNiArMTAwNiw5IEBAIHZvaWQga2dk
-Yl9wYW5pYyhjb25zdCBjaGFyICptc2cpCj4gPiA+ICAgICAgIGlmIChwYW5pY190aW1lb3V0KQo+
-ID4gPiAgICAgICAgICAgICAgIHJldHVybjsKPiA+ID4KPiA+ID4gKyAgICAgZGVidWdfbG9ja3Nf
-b2ZmKCk7Cj4gPiA+ICsgICAgIGNvbnNvbGVfZmx1c2hfb25fcGFuaWMoQ09OU09MRV9GTFVTSF9Q
-RU5ESU5HKTsKPiA+ID4gKwo+ID4gPiAgICAgICBpZiAoZGJnX2tkYl9tb2RlKQo+ID4gPiAgICAg
-ICAgICAgICAgIGtkYl9wcmludGYoIlBBTklDOiAlc1xuIiwgbXNnKTsKPiA+Cj4gPiBJJ20gc29t
-ZXdoYXQgaW5jbHVkZWQgdG8gc2F5ICp0aGlzKiAoY2FsbGluZyBrZGJfcHJpbnRmKCkgd2hlbiBu
-b3QKPiA+IGFjdHVhbGx5IGluIHRoZSBkZWJ1Z2dlcikgaXMgdGhlIGNhdXNlIG9mIHRoZSBwcm9i
-bGVtLiBrZGJfcHJpbnRmKCkKPiA+IGRvZXMgc29tZSBwcmV0dHkgaG9yaWQgdGhpbmdzIHRvIHRo
-ZSBjb25zb2xlIGFuZCBpc24ndCBpbnRlbmRlZCB0bwo+ID4gcnVuIHdoaWxlIHRoZSBzeXN0ZW0g
-aXMgYWN0aXZlLgo+ID4KPiA+IEknZCB0aGVyZWZvcmUgYmUgbW9yZSB0ZW1wdGVkIHRvIGRlZmVy
-IHRoZSBwcmludCB0byB0aGUgYi5wLiB0cmFwCj4gPiBoYW5kbGVyIGl0c2VsZiBhbmQgbWFrZSB0
-aGlzIHBhcnQgb2Yga2dkYl9wYW5pYygpIGxvb2sgbW9yZSBsaWtlOgo+ID4KPiA+ICAgICAgICAg
-a2dkYl9wYW5pY19tc2cgPSBtc2c7Cj4gPiAgICAgICAgIGtnZGJfYnJlYWtwb2ludCgpOwo+ID4g
-ICAgICAgICBrZ2RiX3BhbmljX21zZyA9IE5VTEw7Cj4KPiBVbmZvcnR1bmF0ZWx5IEkgdGhpbmsg
-dGhhdCBvbmx5IHNvbHZlcyBoYWxmIHRoZSBwcm9ibGVtLiBBcyBhIHF1aWNrCj4gdGVzdCwgSSB0
-cmllZCBzaW1wbHkgY29tbWVudGluZyBvdXQgdGhlICJrZGJfcHJpbnRmIiBsaW5lIGluCj4ga2dk
-Yl9wYW5pYygpLiBXaGlsZSB0aGF0IGF2b2lkcyB0aGUgaW50ZXJsZWF2ZWQgcGFuaWMgbWVzc2Fn
-ZSBhbmQKPiBiYWNrdHJhY2UsIGl0IGRvZXMgbm90aGluZyB0byBhY3R1YWxseSBnZXQgdGhlIGJh
-Y2t0cmFjZXMgcHJpbnRlZCBvdXQKPiBiZWZvcmUgeW91IGVuZCB1cCBpbiBrZGIuIEFzIGFuIGV4
-YW1wbGUsIHRoaXMgaXMgd2hhdCBoYXBwZW5lZCB3aGVuIEkKPiB1c2VkIGBlY2hvIEhBUkRMT0NL
-VVAgPiAvc3lzL2tlcm5lbC9kZWJ1Zy9wcm92b2tlLWNyYXNoL0RJUkVDVGAgYW5kCj4gaGFkIHRo
-ZSAia2RiX3ByaW50ZiIgaW4ga2dkYl9wYW5pYygpIGNvbW1lbnRlZCBvdXQ6Cj4KPiBbICAgNzIu
-NjU4NDI0XSBsa2R0bTogUGVyZm9ybWluZyBkaXJlY3QgZW50cnkgSEFSRExPQ0tVUAo+IFsgICA4
-Mi4xODE4NTddIHdhdGNoZG9nOiBXYXRjaGRvZyBkZXRlY3RlZCBoYXJkIExPQ0tVUCBvbiBjcHUg
-Ngo+IC4uLgo+IFsgICA4Mi4yMzQ4MDFdIFNlbmRpbmcgTk1JIGZyb20gQ1BVIDUgdG8gQ1BVcyA2
-Ogo+IFsgICA4Mi4yMzkyOTZdIE5NSSBiYWNrdHJhY2UgZm9yIGNwdSA2Cj4gLi4uIFsgc3RhY2sg
-dHJhY2UgZm9yIENQVSA2IF0gLi4uCj4gWyAgIDgyLjI0MDI5NF0gTk1JIGJhY2t0cmFjZSBmb3Ig
-Y3B1IDUKPiAuLi4gWyBzdGFjayB0cmFjZSBmb3IgQ1BVIDUgXSAuLi4KPiBbICAgODIuNTc2NDQz
-XSBTZW5kaW5nIE5NSSBmcm9tIENQVSA1IHRvIENQVXMgMC00LDc6Cj4gWyAgIDgyLjU4MTI5MV0g
-Tk1JIGJhY2t0cmFjZQo+IEVudGVyaW5nIGtkYiAoY3VycmVudD0weGZmZmZmZjgwZGE1YTEwODAs
-IHBpZCA2OTc4KSBvbiBwcm9jZXNzb3IgNSBkdWUKPiB0byBLZXlib2FyZCBFbnRyeQo+IFs1XWtk
-Yj4KPgo+IEFzIHlvdSBjYW4gc2VlLCBJIGRvbid0IHNlZSB0aGUgdHJhY2VzIGZvciBDUFVzIDAt
-NCBhbmQgNy4gVGhvc2UgZG8KPiBzaG93IHVwIGlmIEkgdXNlIHRoZSAiZG1lc2ciIGNvbW1hbmQg
-YnV0IGl0J3MgYSBiaXQgb2YgYSBoYXNzbGUgdG8gcnVuCj4gImRtZXNnIiB0byBsb29rIGZvciBh
-bnkgZXh0cmEgZGVidWcgbWVzc2FnZXMgZXZlcnkgdGltZSBJIGRyb3AgaW4ga2RiLgo+Cj4gSSBn
-dWVzcyBwZXJoYXBzIHRoYXQgcGFydCBpc24ndCBvYnZpb3VzIGZyb20gdGhlIGNvbW1pdCBtZXNz
-YWdlPwoKSSBmaWd1cmVkIGl0IHdhcyBhIHJpc2suCgpJbiBmYWN0IGl0J3MgYW4gYXJlYSB3aGVy
-ZSBteSBpbnN0aW5jdCB0byBob25vdXIgY29uc29sZSBtZXNzYWdlcyBhbmQgbXkKaW5zdGluY3Qg
-dG8gZ2V0IGludG8gdGhlIGtlcm5lbCBhcyBzb29uIGFzIHBvc3NpYmxlIGFmdGVyIHRoZSBkZWNp
-c2lvbgp0byBpbnZva2UgaXQgaGFzIGJlZW4gbWFkZSBjb21lIGludG8gY29uZmxpY3QuCgpJbiBv
-dGhlciB3b3JkcyBkb2VzIGl0IG1hdHRlciB0aGF0IHRoZSBjb25zb2xlIGJ1ZmZlcnMgYXJlIG5v
-dCBmbHVzaGVkCmJlZm9yZSBlbnRlcmluZyBrZ2RiPyBIb3dldmVyIGhhdmluZyB0aG91Z2h0IGFi
-b3V0IGl0IGZvciBhIGxpdHRsZSB3aGlsZQooYW5kIGtub3dpbmcgdGhlIGNvbnNvbGUgY29kZSB0
-ZW5kcyB0byBiZSB3cml0dGVuIHRvIGJlIGRlY2VudGx5IHJvYnVzdCkKSSBjYW4gY29tZSB0byB0
-aGUgdmlldyB0aGUgZmx1c2hpbmcgaXMgYmVzdC4KCgo+IFNob3VsZCBJIHNlbmQgYSBuZXcgdmVy
-c2lvbiB3aXRoIGFuIHVwZGF0ZWQgY29tbWl0IG1lc3NhZ2UgaW5kaWNhdGluZwo+IHRoYXQgaXQn
-cyBub3QganVzdCB0aGUganVtYmxlZCB0ZXh0IHRoYXQncyBhIHByb2JsZW0gYnV0IGFsc28gdGhl
-IGxhY2sKPiBvZiBzdGFjayB0cmFjZXM/CgpObyByZWFsIG5lZWQuCgpJIGRvbid0IHJlYWxseSBs
-aWtlIHNlZWluZyBrZGJfcHJpbnRmKCkgYmVpbmcgY2FsbGVkIGZyb20gaGVyZSBidXQKaGF2aW5n
-IHJldmlld2VkIGEgYml0IG9mIGNvbnNvbGUgY29kZSBJIHRoaW5rIHdlIGNhbiBtaWdodCBiZSBh
-YmxlCnRvIHVzZSB0aGUgbmV3IGluZnJhc3RydWN0dXJlIHRvIG1ha2Uga2RiX3ByaW50ZigpIGEg
-c2xpZ2h0bHkgbGVzcwpoYXRlZnVsIDstKS4KCgpEYW5pZWwuCgoKX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KS2dkYi1idWdyZXBvcnQgbWFpbGluZyBsaXN0
-CktnZGItYnVncmVwb3J0QGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJj
-ZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9rZ2RiLWJ1Z3JlcG9ydAo=
+This is an attempt to resurrect Sumit's old patch series [1] that
+allowed us to use the arm64 pseudo-NMI to get backtraces of CPUs and
+also to round up CPUs in kdb/kgdb. The last post from Sumit that I
+could find was v7, so I started my series at v8. I haven't copied all
+of his old changelongs here, but you can find them from the link.
+
+This patch series targets v6.6. Specifically it can't land in v6.5
+since it depends on commit 8d539b84f1e3 ("nmi_backtrace: allow
+excluding an arbitrary CPU").
+
+It should be noted that Mark still feels there might be some corner
+cases where pseudo-NMI is not production ready [2] [3], but as far as
+I'm aware there are no concrete/documented issues. Regardless of
+whether this should be enabled for production, though, this series
+will be invaluable to anyone trying to debug crashes on arm64
+machines.
+
+v12 of this series collects tags, fixes a few small nits in comments
+and commit messages from v11 and adds a new (and somewhat unrelated)
+small patch to the end of the series. There are no code changes other
+than the last patch, which is tiny.
+
+v11 of this series addressed Stephen Boyd's feedback on v10 and added
+a missing "static" that the patches robot found.
+
+v10 of this series attempted to address all of Mark's feedback on
+v9. As a quick summary:
+- It includes his patch to remove IPI_WAKEUP, freeing up an extra IPI.
+- It no longer combines the "kgdb" and "backtrace" IPIs. If we need
+  another IPI these could always be recombined later.
+- It promotes IPI_CPU_STOP and IPI_CPU_CRASH_STOP to NMI.
+- It puts nearly all the code directly in smp.c.
+- Several of the patches are squashed together.
+- Patch #6 ("kgdb: Provide a stub kgdb_nmicallback() if !CONFIG_KGDB")
+  was dropped from the series since it landed.
+
+Between v8 and v9, I had cleaned up this patch series by integrating
+the 10th patch from v8 [4] into the whole series. As part of this, I
+renamed the "NMI IPI" to the "debug IPI" since it could now be backed
+by a regular IPI in the case that pseudo NMIs weren't available. With
+the fallback, this allowed me to drop some extra patches from the
+series. This feels (to me) to be pretty clean and hopefully others
+agree. Any patch I touched significantly I removed Masayoshi and
+Chen-Yu's tags from.
+
+...also in v8, I reorderd the patches a bit in a way that seemed a
+little cleaner to me.
+
+Since v7, I have:
+* Addressed the small amount of feedback that was there for v7.
+* Rebased.
+* Added a new patch that prevents us from spamming the logs with idle
+  tasks.
+* Added an extra patch to gracefully fall back to regular IPIs if
+  pseudo-NMIs aren't there.
+
+It can be noted that this patch series works very well with the recent
+"hardlockup" patches that have landed through Andrew Morton's tree and
+are currently in mainline. It works especially well with the "buddy"
+lockup detector.
+
+[1] https://lore.kernel.org/linux-arm-kernel/1604317487-14543-1-git-send-email-sumit.garg@linaro.org/
+[2] https://lore.kernel.org/lkml/ZFvGqD%2F%2Fpm%2FlZb+p@FVFF77S0Q05N.cambridge.arm.com/
+[3] https://lore.kernel.org/lkml/ZNDKVP2m-iiZCz3v@FVFF77S0Q05N.cambridge.arm.com
+[4] https://lore.kernel.org/r/20230419155341.v8.10.Ic3659997d6243139d0522fc3afcdfd88d7a5f030@changeid/
+
+Changes in v12:
+- ("arm64: smp: Mark IPI globals as __ro_after_init") new for v12.
+- Added a comment about why we account for 16 SGIs when Linux uses 8.
+- Minor comment change to add "()" after nmi_trigger_cpumask_backtrace.
+- Updated the commit hash of the commit this depends on.
+
+Changes in v11:
+- Adjust comment about NR_IPI/MAX_IPI.
+- Don't use confusing "backed by" idiom in comment.
+- Made arm64_backtrace_ipi() static.
+- Updated commit message as per Stephen.
+- arch_send_wakeup_ipi() now takes an unsigned int.
+
+Changes in v10:
+- ("IPI_CPU_STOP and IPI_CPU_CRASH_STOP should try for NMI") new for v10.
+- ("arm64: smp: Remove dedicated wakeup IPI") new for v10.
+- Backtrace now directly supported in smp.c
+- Don't allocate the cpumask on the stack; just iterate.
+- Moved kgdb calls to smp.c to avoid needing to export IPI info.
+- Rewrite as needed for 5.11+ as per Mark Rutland and Sumit.
+- Squash backtrace into patch adding support for pseudo-NMI IPIs.
+- kgdb now has its own IPI.
+
+Changes in v9:
+- Added comments that we might not be using NMI always.
+- Added to commit message that this doesn't catch all cases.
+- Fold in v8 patch #10 ("Fallback to a regular IPI if NMI isn't enabled")
+- Moved header file out of "include" since it didn't need to be there.
+- Remove arm64_supports_nmi()
+- Remove fallback for when debug IPI isn't available.
+- Renamed "NMI IPI" to "debug IPI" since it might not be backed by NMI.
+- arch_trigger_cpumask_backtrace() no longer returns bool
+
+Changes in v8:
+- "Tag the arm64 idle functions as __cpuidle" new for v8
+- Removed "#ifdef CONFIG_SMP" since arm64 is always SMP
+- debug_ipi_setup() and debug_ipi_teardown() no longer take cpu param
+
+Douglas Anderson (6):
+  irqchip/gic-v3: Enable support for SGIs to act as NMIs
+  arm64: idle: Tag the arm64 idle functions as __cpuidle
+  arm64: smp: Add arch support for backtrace using pseudo-NMI
+  arm64: smp: IPI_CPU_STOP and IPI_CPU_CRASH_STOP should try for NMI
+  arm64: kgdb: Implement kgdb_roundup_cpus() to enable pseudo-NMI
+    roundup
+  arm64: smp: Mark IPI globals as __ro_after_init
+
+Mark Rutland (1):
+  arm64: smp: Remove dedicated wakeup IPI
+
+ arch/arm64/include/asm/irq.h              |   3 +
+ arch/arm64/include/asm/smp.h              |   4 +-
+ arch/arm64/kernel/acpi_parking_protocol.c |   2 +-
+ arch/arm64/kernel/idle.c                  |   4 +-
+ arch/arm64/kernel/smp.c                   | 139 +++++++++++++++++-----
+ drivers/irqchip/irq-gic-v3.c              |  59 ++++++---
+ 6 files changed, 160 insertions(+), 51 deletions(-)
+
+-- 
+2.42.0.283.g2d96d420d3-goog
+
+
+
+_______________________________________________
+Kgdb-bugreport mailing list
+Kgdb-bugreport@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport
