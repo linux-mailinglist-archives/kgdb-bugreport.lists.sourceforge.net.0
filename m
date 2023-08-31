@@ -2,29 +2,29 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D5A4278E9FB
-	for <lists+kgdb-bugreport@lfdr.de>; Thu, 31 Aug 2023 12:14:22 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 989A578EA04
+	for <lists+kgdb-bugreport@lfdr.de>; Thu, 31 Aug 2023 12:15:29 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1qbegv-0000cM-7S
+	id 1qbei0-0003BY-CQ
 	for lists+kgdb-bugreport@lfdr.de;
-	Thu, 31 Aug 2023 10:14:21 +0000
+	Thu, 31 Aug 2023 10:15:28 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <mark.rutland@arm.com>) id 1qbegu-0000cG-6p
+ (envelope-from <mark.rutland@arm.com>) id 1qbehz-0003BS-I9
  for kgdb-bugreport@lists.sourceforge.net;
- Thu, 31 Aug 2023 10:14:20 +0000
+ Thu, 31 Aug 2023 10:15:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Ruz0wFPc3l/TqNSLMZ3I6tFcHpk3Q5NvNxGqrvq9TR8=; b=d8k/ZVe8vZHQLHvLnfvfRaTIbL
- N4c3qHemmnZu+8evBlQtvmxd0UqVckvsdqp6FTt0UaIifq2OJWEhbJY75Tx+3P3f9lMi4DUfEw1fK
- SZlVCYUNuzBLrTaw2oqjUHqNBvIrO1xovNQnirPeHRlLe4ezfn5ePU+CZpPaiBtdG96w=;
+ bh=EKgw+n9+nd/zVFaVnxW1zkVg4zBBYSraXWQp2zNDN0o=; b=ik7pkvgzkfNxPtEiMUzROWbeMQ
+ bZpHWsJhS2NHlaMHUYPk0kJt2cK48GPryqTQgEKMcXONTiY8qNvUFziNWVy65WsFQZ6nPIOywT+if
+ 1V6ZHrS4aAewD1VgMMUnThm1W5PKeCSsl6/ASVV39QigBi3AMvYpu5bDUCYXSjMc4edM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -32,48 +32,48 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Ruz0wFPc3l/TqNSLMZ3I6tFcHpk3Q5NvNxGqrvq9TR8=; b=Jt3LZNeteawQwYOwEMoPDXEgBr
- 3bJhq2e7cu7kRMP3ybRAXP+ytMNI+yVUf4ulsg8cQ5PwnrONe6+vtJ56pcdg89XpfTVCRGechHZtz
- J76YrorYi8x8DQ1e2DRIKNYWEVBLg5JMFj4JrEXii63Zqp549kLTdTfDOxffltefRnx8=;
+ bh=EKgw+n9+nd/zVFaVnxW1zkVg4zBBYSraXWQp2zNDN0o=; b=dKQswlD0/mnIWPbxcjZuzAp6nB
+ sAuupapm3mp7C36uIIaf7+1pUuTocYhHrPbsMCvktsU11LEZrdbqYA4iqicx48xKUkhTuwtqjXMNg
+ h/7MPRDSEzajlcYs2LBNoG5fWFHH/f6ebJUZdslolrSA8tJG3ji2GhU6k5eLwUYxU4nc=;
 Received: from foss.arm.com ([217.140.110.172])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtp (Exim 4.95)
- id 1qbegq-00014Y-1P for kgdb-bugreport@lists.sourceforge.net;
- Thu, 31 Aug 2023 10:14:20 +0000
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtp (Exim 4.95)
+ id 1qbehy-004cTH-Sd for kgdb-bugreport@lists.sourceforge.net;
+ Thu, 31 Aug 2023 10:15:27 +0000
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0DFCCC15;
- Thu, 31 Aug 2023 03:14:50 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 187F7C15;
+ Thu, 31 Aug 2023 03:16:01 -0700 (PDT)
 Received: from FVFF77S0Q05N (unknown [10.57.3.201])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 3EF463F64C;
- Thu, 31 Aug 2023 03:14:07 -0700 (PDT)
-Date: Thu, 31 Aug 2023 11:14:04 +0100
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 42A9D3F64C;
+ Thu, 31 Aug 2023 03:15:18 -0700 (PDT)
+Date: Thu, 31 Aug 2023 11:15:15 +0100
 From: Mark Rutland <mark.rutland@arm.com>
 To: Douglas Anderson <dianders@chromium.org>
-Message-ID: <ZPBn7CJ9ppIheCT4@FVFF77S0Q05N>
+Message-ID: <ZPBoMx8fsFRnC8gI@FVFF77S0Q05N>
 References: <20230830191314.1618136-1-dianders@chromium.org>
- <20230830121115.v12.6.I2ef26d1b3bfbed2d10a281942b0da7d9854de05e@changeid>
+ <20230830121115.v12.7.I625d393afd71e1766ef73d3bfaac0b347a4afd19@changeid>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20230830121115.v12.6.I2ef26d1b3bfbed2d10a281942b0da7d9854de05e@changeid>
+In-Reply-To: <20230830121115.v12.7.I625d393afd71e1766ef73d3bfaac0b347a4afd19@changeid>
 X-Spam-Score: -2.3 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Aug 30, 2023 at 12:11:27PM -0700, Douglas Anderson
- wrote: > Up until now we've been using the generic (weak) implementation
- for > kgdb_roundup_cpus() when using kgdb on arm64. Let's move to a [...] 
+ Content preview:  On Wed, Aug 30, 2023 at 12:11:28PM -0700, Douglas Anderson
+ wrote: > Mark the three IPI-related globals in smp.c as "__ro_after_init"
+ since > they are only ever set in set_smp_ipi_range(), which is mar [...]
  Content analysis details:   (-2.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
  medium trust [217.140.110.172 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1qbegq-00014Y-1P
-Subject: Re: [Kgdb-bugreport] [PATCH v12 6/7] arm64: kgdb: Implement
- kgdb_roundup_cpus() to enable pseudo-NMI roundup
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+X-Headers-End: 1qbehy-004cTH-Sd
+Subject: Re: [Kgdb-bugreport] [PATCH v12 7/7] arm64: smp: Mark IPI globals
+ as __ro_after_init
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,118 +104,55 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Wed, Aug 30, 2023 at 12:11:27PM -0700, Douglas Anderson wrote:
-> Up until now we've been using the generic (weak) implementation for
-> kgdb_roundup_cpus() when using kgdb on arm64. Let's move to a custom
-> one. The advantage here is that, when pseudo-NMI is enabled on a
-> device, we'll be able to round up CPUs using pseudo-NMI. This allows
-> us to debug CPUs that are stuck with interrupts disabled. If
-> pseudo-NMIs are not enabled then we'll fallback to just using an IPI,
-> which is still slightly better than the generic implementation since
-> it avoids the potential situation described in the generic
-> kgdb_call_nmi_hook().
+On Wed, Aug 30, 2023 at 12:11:28PM -0700, Douglas Anderson wrote:
+> Mark the three IPI-related globals in smp.c as "__ro_after_init" since
+> they are only ever set in set_smp_ipi_range(), which is marked
+> "__init". This is a better and more secure marking than the old
+> "__read_mostly".
 > 
-> Co-developed-by: Sumit Garg <sumit.garg@linaro.org>
-> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> Reviewed-by: Daniel Thompson <daniel.thompson@linaro.org>
-> Reviewed-by: Stephen Boyd <swboyd@chromium.org>
+> Suggested-by: Stephen Boyd <swboyd@chromium.org>
 > Signed-off-by: Douglas Anderson <dianders@chromium.org>
 > ---
-> I debated whether this should be in "arch/arm64/kernel/smp.c" or if I
-> should try to find a way for it to go into "arch/arm64/kernel/kgdb.c".
-> In the end this is so little code that it didn't seem worth it to find
-> a way to export the IPI defines or to otherwise come up with some API
-> between kgdb.c and smp.c. If someone has strong feelings and wants
-> this to change, please shout and give details of your preferred
-> solution.
+> This patch is almost completely unrelated to the rest of the series
+> other than the fact that it would cause a merge conflict with the
+> series if sent separately. I tacked it on to this series in response
+> to Stephen's feedback on v11 of this series [1]. If someone hates it
+> (not sure why they would), it could be dropped. If someone loves it,
+> it could be promoted to the start of the series and/or land on its own
+> (resolving merge conflicts).
+> 
+> [1] https://lore.kernel.org/r/CAE-0n52iVDgZa8XT8KTMj12c_ESSJt7f7A0fuZ_oAMMqpGcSzA@mail.gmail.com
 
-Putting this in smp.c seems fine to me.
+This looks reasonable to me, so:
 
 Acked-by: Mark Rutland <mark.rutland@arm.com>
 
 Mark.
 
 > 
-> FWIW, it seems like ~half the other platforms put this in "smp.c" with
-> an ifdef for KGDB and the other half put it in "kgdb.c" with an ifdef
-> for SMP. :-P
+> Changes in v12:
+> - ("arm64: smp: Mark IPI globals as __ro_after_init") new for v12.
 > 
-> (no changes since v10)
-> 
-> Changes in v10:
-> - Don't allocate the cpumask on the stack; just iterate.
-> - Moved kgdb calls to smp.c to avoid needing to export IPI info.
-> - kgdb now has its own IPI.
-> 
-> Changes in v9:
-> - Remove fallback for when debug IPI isn't available.
-> - Renamed "NMI IPI" to "debug IPI" since it might not be backed by NMI.
-> 
->  arch/arm64/kernel/smp.c | 23 +++++++++++++++++++++++
->  1 file changed, 23 insertions(+)
+>  arch/arm64/kernel/smp.c | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
 > 
 > diff --git a/arch/arm64/kernel/smp.c b/arch/arm64/kernel/smp.c
-> index 800c59cf9b64..1a53e57c81d0 100644
+> index 1a53e57c81d0..814d9aa93b21 100644
 > --- a/arch/arm64/kernel/smp.c
 > +++ b/arch/arm64/kernel/smp.c
-> @@ -32,6 +32,7 @@
->  #include <linux/irq_work.h>
->  #include <linux/kernel_stat.h>
->  #include <linux/kexec.h>
-> +#include <linux/kgdb.h>
->  #include <linux/kvm_host.h>
->  #include <linux/nmi.h>
->  
-> @@ -79,6 +80,7 @@ enum ipi_msg_type {
->  	 * with trace_ipi_*
->  	 */
->  	IPI_CPU_BACKTRACE = NR_IPI,
-> +	IPI_KGDB_ROUNDUP,
+> @@ -84,9 +84,9 @@ enum ipi_msg_type {
 >  	MAX_IPI
 >  };
 >  
-> @@ -868,6 +870,22 @@ void arch_trigger_cpumask_backtrace(const cpumask_t *mask, int exclude_cpu)
->  	nmi_trigger_cpumask_backtrace(mask, exclude_cpu, arm64_backtrace_ipi);
->  }
+> -static int ipi_irq_base __read_mostly;
+> -static int nr_ipi __read_mostly = NR_IPI;
+> -static struct irq_desc *ipi_desc[MAX_IPI] __read_mostly;
+> +static int ipi_irq_base __ro_after_init;
+> +static int nr_ipi __ro_after_init = NR_IPI;
+> +static struct irq_desc *ipi_desc[MAX_IPI] __ro_after_init;
 >  
-> +#ifdef CONFIG_KGDB
-> +void kgdb_roundup_cpus(void)
-> +{
-> +	int this_cpu = raw_smp_processor_id();
-> +	int cpu;
-> +
-> +	for_each_online_cpu(cpu) {
-> +		/* No need to roundup ourselves */
-> +		if (cpu == this_cpu)
-> +			continue;
-> +
-> +		__ipi_send_single(ipi_desc[IPI_KGDB_ROUNDUP], cpu);
-> +	}
-> +}
-> +#endif
-> +
->  /*
->   * Main handler for inter-processor interrupts
->   */
-> @@ -919,6 +937,10 @@ static void do_handle_IPI(int ipinr)
->  		nmi_cpu_backtrace(get_irq_regs());
->  		break;
+>  static void ipi_setup(int cpu);
 >  
-> +	case IPI_KGDB_ROUNDUP:
-> +		kgdb_nmicallback(cpu, get_irq_regs());
-> +		break;
-> +
->  	default:
->  		pr_crit("CPU%u: Unknown IPI message 0x%x\n", cpu, ipinr);
->  		break;
-> @@ -949,6 +971,7 @@ static bool ipi_should_be_nmi(enum ipi_msg_type ipi)
->  	case IPI_CPU_STOP:
->  	case IPI_CPU_CRASH_STOP:
->  	case IPI_CPU_BACKTRACE:
-> +	case IPI_KGDB_ROUNDUP:
->  		return true;
->  	default:
->  		return false;
 > -- 
 > 2.42.0.283.g2d96d420d3-goog
 > 
