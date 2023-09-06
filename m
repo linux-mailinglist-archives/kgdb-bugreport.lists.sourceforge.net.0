@@ -2,84 +2,120 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 85F2478F08D
-	for <lists+kgdb-bugreport@lfdr.de>; Thu, 31 Aug 2023 17:46:02 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2E43B7942A9
+	for <lists+kgdb-bugreport@lfdr.de>; Wed,  6 Sep 2023 20:03:30 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1qbjrs-0004GH-Su
+	id 1qdwsE-0006Ir-1R
 	for lists+kgdb-bugreport@lfdr.de;
-	Thu, 31 Aug 2023 15:46:01 +0000
+	Wed, 06 Sep 2023 18:03:28 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <mark.rutland@arm.com>) id 1qbjrr-0004G3-E4
+ (envelope-from <dianders@chromium.org>) id 1qdv2i-000728-GR
  for kgdb-bugreport@lists.sourceforge.net;
- Thu, 31 Aug 2023 15:45:59 +0000
+ Wed, 06 Sep 2023 16:06:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
- MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=LZow47Kex7qe5G1wo/JuFG5Y52MAGB51lS0AjEldOW8=; b=YDvANz47EMY2FBK6pgxbeabFUs
- 3fn6PWmBnoBe7fk+G6ILja74XLe6GCk/xXD+7s6sF/MWRVm8qOZDVa5bLTrwpsKmIW7VMWYkuT4Oo
- 3rq9ocjW36bVe1hKLZWmAE2reC1rC06+yBMp+8mawrE2kH6Av3/rR9uep05S2ZjPuaQ8=;
+ bh=40QKmfVrm/S2M2VgYVRI0LFwAITDoJdd6JPq7BaPxzU=; b=JbdQ8k9BOyIZv34yNMYfwyf8YO
+ fnzkAMTkHa4iI88/rxqpOeld95oBBVxIZdXogHJN/JLQd72mQhPeCuogYvk8sk5HZv2RbexoGQgBz
+ zv2Ycw8u+rRowcZo5HcvGLN9ueRHCaxrDhJ2iBttR5lZlNkpwU3U7vLjtlP64wxxswaw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=LZow47Kex7qe5G1wo/JuFG5Y52MAGB51lS0AjEldOW8=; b=IzmidFO1Sfz3C3E1v7SfCQmGr3
- Of6Rx3FUwBs+AW/lwKAZan9DVRd9KSncysoe2gWGr/yGKDNwkyStfdzFue4ZfDAg6rexL1hOtnJgn
- rKPh5IVbxmjtjHKzC2wGtR+qGHMbPwlA1ycxF781nV1jySll7iiP3GePbcxsq0kCMGOE=;
-Received: from foss.arm.com ([217.140.110.172])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtp (Exim 4.95)
- id 1qbjrn-004s80-8M for kgdb-bugreport@lists.sourceforge.net;
- Thu, 31 Aug 2023 15:45:59 +0000
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 158B1C15;
- Thu, 31 Aug 2023 08:46:29 -0700 (PDT)
-Received: from FVFF77S0Q05N.cambridge.arm.com (FVFF77S0Q05N.cambridge.arm.com
- [10.1.36.128])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id CB55A3F64C;
- Thu, 31 Aug 2023 08:45:41 -0700 (PDT)
-Date: Thu, 31 Aug 2023 16:45:33 +0100
-From: Mark Rutland <mark.rutland@arm.com>
-To: Doug Anderson <dianders@chromium.org>, Marc Zyngier <maz@kernel.org>
-Message-ID: <ZPC1nUw3qKWrC85l@FVFF77S0Q05N.cambridge.arm.com>
-References: <20230830191314.1618136-1-dianders@chromium.org>
- <20230830121115.v12.1.I1223c11c88937bd0cbd9b086d4ef216985797302@changeid>
- <ZPBVB_z3FTl2nBy0@FVFF77S0Q05N>
- <CAD=FV=V3-XaT_KsJXwUXVuaXfx-RfbW3ehW4JJcvWLsty_9fcA@mail.gmail.com>
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=40QKmfVrm/S2M2VgYVRI0LFwAITDoJdd6JPq7BaPxzU=; b=R
+ Gg1J4fQV2fdtUHlnWoYZt/wL1jJwMGs2HGbyvOq3XqbkNlY9R0XMf/qANZbINHBkWRiL78nkF3q6z
+ oREQJ5F3gkeI8K3ihxcDvrPXsxFL8QTXECMSutDKvht6aXtdWgXdBXXPs8Ho18x/KYkFz8FQ/5T8U
+ mMgNjFUcu4WO7JjM=;
+Received: from mail-pl1-f174.google.com ([209.85.214.174])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1qdv2c-00BPge-M5 for kgdb-bugreport@lists.sourceforge.net;
+ Wed, 06 Sep 2023 16:06:11 +0000
+Received: by mail-pl1-f174.google.com with SMTP id
+ d9443c01a7336-1c1ff5b741cso30370675ad.2
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Wed, 06 Sep 2023 09:06:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1694016361; x=1694621161;
+ darn=lists.sourceforge.net; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=40QKmfVrm/S2M2VgYVRI0LFwAITDoJdd6JPq7BaPxzU=;
+ b=IgRPYGuNlJc6JPk5/UQU8M/YcgwMc/R6ce7AaHnDmKFhvYQS03ziJoN8rmQNmYoUyU
+ Ed0lOzOqZIAbfcow2BI4JDQSOrQnboIsQaSZlpPGqOwbL1JvOnPET9XYjg3EyWbmhOYF
+ hjHOO+OcBzndvOrEY+T8e1JGcBM594ciBysuk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1694016361; x=1694621161;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=40QKmfVrm/S2M2VgYVRI0LFwAITDoJdd6JPq7BaPxzU=;
+ b=MNTcXQca1xNeXmrnWmK5fyngEsBjpdsNTEERe2pdOGWBRKa9Q3KlzMoxkt9/FUxv7F
+ kykiS6GiXLjhtHPW7t77JgfQJpLNM2u0VUuV3Rmt+9lIba3GZnlc9dn6k9G/lmRE/pR8
+ LBEmMZ/TuMxX9LoU/I5yybaCQkFKkExFYc5hsA1zDKnXsFFOUBRNErwR8VooGvI9pJ2q
+ 07MpXeordqNRpTXs9QXAxCuQ7Q8+8I7xQ3HzaKxDSaoV1Z89FXh9BsMZnNXiORKG8xf9
+ Fu8lZpKhHyhm6z2fbkgJc/8CyeCRR4LUfQ3Kk+J61jumLpcAQxRPRNXNKBabD9S7v1ti
+ LL+A==
+X-Gm-Message-State: AOJu0YzUhnwXk6x2os+3DUCdyhqrEtgpUwMjvF5y6Iu/NsR2lqs/4490
+ 0hvy0bX2KLPYl2D9DTtiwzEYgg==
+X-Google-Smtp-Source: AGHT+IEw+PXUwhie7KJ2E87OyohhJv30VQYXEUCgPe7wkvDQHzvzLZKdXR/46xhEPqhJn/sSFLk6lw==
+X-Received: by 2002:a17:903:495:b0:1bb:8e13:deba with SMTP id
+ jj21-20020a170903049500b001bb8e13debamr14919135plb.11.1694016360921; 
+ Wed, 06 Sep 2023 09:06:00 -0700 (PDT)
+Received: from tictac2.mtv.corp.google.com
+ ([2620:15c:9d:2:4a07:e00a:fdae:750b])
+ by smtp.gmail.com with ESMTPSA id
+ ju19-20020a170903429300b001b8c689060dsm11338859plb.28.2023.09.06.09.05.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 06 Sep 2023 09:06:00 -0700 (PDT)
+From: Douglas Anderson <dianders@chromium.org>
+To: Mark Rutland <mark.rutland@arm.com>,
+ Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>,
+ Sumit Garg <sumit.garg@linaro.org>,
+ Daniel Thompson <daniel.thompson@linaro.org>, Marc Zyngier <maz@kernel.org>
+Date: Wed,  6 Sep 2023 09:02:55 -0700
+Message-ID: <20230906160505.2431857-1-dianders@chromium.org>
+X-Mailer: git-send-email 2.42.0.283.g2d96d420d3-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAD=FV=V3-XaT_KsJXwUXVuaXfx-RfbW3ehW4JJcvWLsty_9fcA@mail.gmail.com>
-X-Spam-Score: -2.3 (--)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
+X-Spam-Score: -0.2 (/)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  On Thu, Aug 31, 2023 at 08:31:37AM -0700, Doug Anderson wrote:
-    > Hi, > > On Thu, Aug 31, 2023 at 1:53 AM Mark Rutland <mark.rutland@arm.com>
-    wrote: > > > > On Wed, Aug 30, 2023 at 12:11:22PM -0700, [...] 
- 
- Content analysis details:   (-2.3 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview: This is an attempt to resurrect Sumit's old patch series [1]
+ that allowed us to use the arm64 pseudo-NMI to get backtraces of CPUs and
+ also to round up CPUs in kdb/kgdb. The last post from Sumit that [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
-                             medium trust
-                             [217.140.110.172 listed in list.dnswl.org]
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.214.174 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.214.174 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1qbjrn-004s80-8M
-Subject: Re: [Kgdb-bugreport] [PATCH v12 1/7] irqchip/gic-v3: Enable support
- for SGIs to act as NMIs
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1qdv2c-00BPge-M5
+Subject: [Kgdb-bugreport] [PATCH v13 0/7] arm64: Add IPI for backtraces /
+ kgdb; try to use NMI for some IPIs
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -91,125 +127,162 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daniel Thompson <daniel.thompson@linaro.org>, ito-yuichi@fujitsu.com,
- Lecopzer Chen <lecopzer.chen@mediatek.com>,
- Peter Zijlstra <peterz@infradead.org>,
- Catalin Marinas <catalin.marinas@arm.com>,
+Cc: Lecopzer Chen <lecopzer.chen@mediatek.com>,
+ Peter Zijlstra <peterz@infradead.org>, kgdb-bugreport@lists.sourceforge.net,
+ Stephane Eranian <eranian@google.com>, mingo@kernel.org, vschneid@redhat.com,
  "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
- linux-kernel@vger.kernel.org, Stephane Eranian <eranian@google.com>,
- Stephen Boyd <swboyd@chromium.org>, linux-perf-users@vger.kernel.org,
- Chen-Yu Tsai <wens@csie.org>, kgdb-bugreport@lists.sourceforge.net,
+ Ard Biesheuvel <ardb@kernel.org>, Chen-Yu Tsai <wens@csie.org>,
+ samitolvanen@google.com, Masayoshi Mizuma <msys.mizuma@gmail.com>,
+ keescook@chromium.org, Stephen Boyd <swboyd@chromium.org>,
  Tomohiro Misono <misono.tomohiro@fujitsu.com>,
- Thomas Gleixner <tglx@linutronix.de>, Masayoshi Mizuma <msys.mizuma@gmail.com>,
- Will Deacon <will@kernel.org>, Ard Biesheuvel <ardb@kernel.org>,
- linux-arm-kernel@lists.infradead.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ Thomas Gleixner <tglx@linutronix.de>, jpoimboe@kernel.org,
+ linux-arm-kernel@lists.infradead.org, scott@os.amperecomputing.com,
+ philmd@linaro.org, ito-yuichi@fujitsu.com, linux-kernel@vger.kernel.org,
+ linux-perf-users@vger.kernel.org, gautham.shenoy@amd.com
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-T24gVGh1LCBBdWcgMzEsIDIwMjMgYXQgMDg6MzE6MzdBTSAtMDcwMCwgRG91ZyBBbmRlcnNvbiB3
-cm90ZToKPiBIaSwKPiAKPiBPbiBUaHUsIEF1ZyAzMSwgMjAyMyBhdCAxOjUz4oCvQU0gTWFyayBS
-dXRsYW5kIDxtYXJrLnJ1dGxhbmRAYXJtLmNvbT4gd3JvdGU6Cj4gPgo+ID4gT24gV2VkLCBBdWcg
-MzAsIDIwMjMgYXQgMTI6MTE6MjJQTSAtMDcwMCwgRG91Z2xhcyBBbmRlcnNvbiB3cm90ZToKPiA+
-ID4gQXMgb2YgY29tbWl0IDZhYmJkNjk4ODk3MSAoImlycWNoaXAvZ2ljLCBnaWMtdjM6IE1ha2Ug
-U0dJcyB1c2UKPiA+ID4gaGFuZGxlX3BlcmNwdV9kZXZpZF9pcnEoKSIpIFNHSXMgYXJlIHRyZWF0
-ZWQgdGhlIHNhbWUgYXMgUFBJcy9FUFBJcwo+ID4gPiBhbmQgdXNlIGhhbmRsZV9wZXJjcHVfZGV2
-aWRfaXJxKCkgYnkgZGVmYXVsdC4gVW5mb3J0dW5hdGVseSwKPiA+ID4gaGFuZGxlX3BlcmNwdV9k
-ZXZpZF9pcnEoKSBpc24ndCBOTUkgc2FmZSwgYW5kIHNvIHRvIHJ1biBpbiBhbiBOTUkKPiA+ID4g
-Y29udGV4dCB0aG9zZSBzaG91bGQgdXNlIGhhbmRsZV9wZXJjcHVfZGV2aWRfZmFzdGVvaV9ubWko
-KS4KPiA+ID4KPiA+ID4gSW4gb3JkZXIgdG8gYWNjb21wbGlzaCB0aGlzLCB3ZSBqdXN0IGhhdmUg
-dG8gbWFrZSByb29tIGZvciBTR0lzIGluIHRoZQo+ID4gPiBhcnJheSBvZiByZWZjb3VudHMgdGhh
-dCBrZWVwcyB0cmFjayBvZiB3aGljaCBpbnRlcnJ1cHRzIGFyZSBzZXQgYXMKPiA+ID4gTk1JLiBX
-ZSBhbHNvIHJlbmFtZSB0aGUgYXJyYXkgYW5kIGNyZWF0ZSBhIG5ldyBpbmRleGluZyBzY2hlbWUg
-dGhhdAo+ID4gPiBhY2NvdW50cyBmb3IgU0dJcy4KPiA+ID4KPiA+ID4gQWxzbywgZW5hYmxlIE5N
-SSBzdXBwb3J0IHByaW9yIHRvIGdpY19zbXBfaW5pdCgpIGFzIGFsbG9jYXRpb24gb2YgU0dJcwo+
-ID4gPiBhcyBJUlFzL05NSXMgaGFwcGVuIGFzIHBhcnQgb2YgdGhpcyByb3V0aW5lLgo+ID4gPgo+
-ID4gPiBDby1kZXZlbG9wZWQtYnk6IFN1bWl0IEdhcmcgPHN1bWl0LmdhcmdAbGluYXJvLm9yZz4K
-PiA+ID4gU2lnbmVkLW9mZi1ieTogU3VtaXQgR2FyZyA8c3VtaXQuZ2FyZ0BsaW5hcm8ub3JnPgo+
-ID4gPiBTaWduZWQtb2ZmLWJ5OiBEb3VnbGFzIEFuZGVyc29uIDxkaWFuZGVyc0BjaHJvbWl1bS5v
-cmc+Cj4gPiA+IC0tLQo+ID4gPiBJJ2xsIG5vdGUgdGhhdCB0aGlzIGNoYW5nZSBpcyBhIGxpdHRs
-ZSBtb3JlIGJsYWNrIG1hZ2ljIHRvIG1lIHRoYW4KPiA+ID4gb3RoZXJzIGluIHRoaXMgc2VyaWVz
-LiBJIGRvbid0IGhhdmUgYSBtYXNzaXZlIGFtb3VudHMgb2YgZmFtaWxpYXJpdHkKPiA+ID4gd2l0
-aCBhbGwgdGhlIG1vdmluZyBwYXJ0cyBvZiBnaWMtdjMsIHNvIEkgbW9zdGx5IGp1c3QgZm9sbG93
-ZWQgTWFyawo+ID4gPiBSdXRsYW5kJ3MgYWR2aWNlIFsxXS4gUGxlYXNlIHBheSBleHRyYSBhdHRl
-bnRpb24gdG8gbWFrZSBzdXJlIEkgZGlkbid0Cj4gPiA+IGRvIGFueXRoaW5nIHRvbyB0ZXJyaWJs
-ZS4KPiA+ID4KPiA+ID4gTWFyaydzIGFkdmljZSB3YXNuJ3QgYSBmdWxsIHBhdGNoIGFuZCBJIGVu
-ZGVkIHVwIGRvaW5nIGEgYml0IG9mIHdvcmsKPiA+ID4gdG8gdHJhbnNsYXRlIGl0IHRvIHJlYWxp
-dHksIHNvIEkgZGlkIG5vdCBhZGQgaGltIGFzICJDby1kZXZlbG9wZWQtYnkiCj4gPiA+IGhlcmUu
-IE1hcms6IGlmIHlvdSB3b3VsZCBsaWtlIHRoaXMgdGFnIHRoZW4gcGxlYXNlIHByb3ZpZGUgaXQg
-YW5kIHlvdXIKPiA+ID4gU2lnbmVkLW9mZi1ieS4gSSBjZXJ0YWlubHkgd29uJ3Qgb2JqZWN0Lgo+
-ID4KPiA+IFRoYXQncyBhbGwgcmVhc29uYWJsZSwgYW5kIEknbSBwZXJmZWN0bHkgaGFwcHkgd2l0
-aG91dCBhIHRhZy4KPiA+Cj4gPiBJIGhhdmUgb25lIHRyaXZpYWwgbml0IGJlbG93LCBidXQgd2l0
-aCBvciB3aXRob3V0IHRoYXQgZml4ZWQgdXA6Cj4gPgo+ID4gQWNrZWQtYnk6IE1hcmsgUnV0bGFu
-ZCA8bWFyay5ydXRsYW5kQGFybS5jb20+Cj4gPgo+ID4gPgo+ID4gPiBbMV0gaHR0cHM6Ly9sb3Jl
-Lmtlcm5lbC5vcmcvci9aTkMtWVJRb3BPMFBhSUlvQEZWRkY3N1MwUTA1Ti5jYW1icmlkZ2UuYXJt
-LmNvbQo+ID4gPgo+ID4gPiBDaGFuZ2VzIGluIHYxMjoKPiA+ID4gLSBBZGRlZCBhIGNvbW1lbnQg
-YWJvdXQgd2h5IHdlIGFjY291bnQgZm9yIDE2IFNHSXMgd2hlbiBMaW51eCB1c2VzIDguCj4gPiA+
-Cj4gPiA+IENoYW5nZXMgaW4gdjEwOgo+ID4gPiAtIFJld3JpdGUgYXMgbmVlZGVkIGZvciA1LjEx
-KyBhcyBwZXIgTWFyayBSdXRsYW5kIGFuZCBTdW1pdC4KPiA+ID4KPiA+ID4gIGRyaXZlcnMvaXJx
-Y2hpcC9pcnEtZ2ljLXYzLmMgfCA1OSArKysrKysrKysrKysrKysrKysrKysrKysrLS0tLS0tLS0t
-LS0KPiA+ID4gIDEgZmlsZSBjaGFuZ2VkLCA0MSBpbnNlcnRpb25zKCspLCAxOCBkZWxldGlvbnMo
-LSkKPiA+ID4KPiA+ID4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvaXJxY2hpcC9pcnEtZ2ljLXYzLmMg
-Yi9kcml2ZXJzL2lycWNoaXAvaXJxLWdpYy12My5jCj4gPiA+IGluZGV4IGVlZGZhOGU5ZjA3Ny4u
-OGQyMDEyMmJhMGE4IDEwMDY0NAo+ID4gPiAtLS0gYS9kcml2ZXJzL2lycWNoaXAvaXJxLWdpYy12
-My5jCj4gPiA+ICsrKyBiL2RyaXZlcnMvaXJxY2hpcC9pcnEtZ2ljLXYzLmMKPiA+ID4gQEAgLTc4
-LDYgKzc4LDEzIEBAIHN0YXRpYyBERUZJTkVfU1RBVElDX0tFWV9UUlVFKHN1cHBvcnRzX2RlYWN0
-aXZhdGVfa2V5KTsKPiA+ID4gICNkZWZpbmUgR0lDX0xJTkVfTlIgIG1pbihHSUNEX1RZUEVSX1NQ
-SVMoZ2ljX2RhdGEucmRpc3RzLmdpY2RfdHlwZXIpLCAxMDIwVSkKPiA+ID4gICNkZWZpbmUgR0lD
-X0VTUElfTlIgIEdJQ0RfVFlQRVJfRVNQSVMoZ2ljX2RhdGEucmRpc3RzLmdpY2RfdHlwZXIpCj4g
-PiA+Cj4gPiA+ICsvKgo+ID4gPiArICogVGhlcmUgYXJlIDE2IFNHSXMsIHRob3VnaCB3ZSBvbmx5
-IGFjdHVhbGx5IHVzZSA4IGluIExpbnV4LiBUaGUgb3RoZXIgOCBTR0lzCj4gPiA+ICsgKiBhcmUg
-cG90ZW50aWFsbHkgc3RvbGVuIGJ5IHRoZSBzZWN1cmUgc2lkZS4gU29tZSBjb2RlLCBlc3BlY2lh
-bGx5IGNvZGUgZGVhbGluZwo+ID4gPiArICogd2l0aCBod2lycSBJRHMsIGlzIHNpbXBsaWZpZWQg
-YnkgYWNjb3VudGluZyBmb3IgYWxsIDE2Lgo+ID4gPiArICovCj4gPiA+ICsjZGVmaW5lIFNHSV9O
-UiAgICAgICAgICAgICAgIDE2Cj4gPiA+ICsKPiA+ID4gIC8qCj4gPiA+ICAgKiBUaGUgYmVoYXZp
-b3VycyBvZiBSUFIgYW5kIFBNUiByZWdpc3RlcnMgZGlmZmVyIGRlcGVuZGluZyBvbiB0aGUgdmFs
-dWUgb2YKPiA+ID4gICAqIFNDUl9FTDMuRklRLCBhbmQgdGhlIGJlaGF2aW91ciBvZiBub24tc2Vj
-dXJlIHByaW9yaXR5IHJlZ2lzdGVycyBvZiB0aGUKPiA+ID4gQEAgLTEyNSw4ICsxMzIsOCBAQCBF
-WFBPUlRfU1lNQk9MKGdpY19ub25zZWN1cmVfcHJpb3JpdGllcyk7Cj4gPiA+ICAgICAgICAgICAg
-ICAgX19wcmlvcml0eTsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBcCj4gPiA+ICAgICAgIH0pCj4gPiA+Cj4gPiA+IC0vKiBwcGlfbm1pX3JlZnNbbl0gPT0gbnVt
-YmVyIG9mIGNwdXMgaGF2aW5nIHBwaVtuICsgMTZdIHNldCBhcyBOTUkgKi8KPiA+ID4gLXN0YXRp
-YyByZWZjb3VudF90ICpwcGlfbm1pX3JlZnM7Cj4gPiA+ICsvKiByZGlzdF9ubWlfcmVmc1tuXSA9
-PSBudW1iZXIgb2YgY3B1cyBoYXZpbmcgdGhlIHJkaXN0IGludGVycnVwdCBuIHNldCBhcyBOTUkg
-Ki8KPiA+ID4gK3N0YXRpYyByZWZjb3VudF90ICpyZGlzdF9ubWlfcmVmczsKPiA+ID4KPiA+ID4g
-IHN0YXRpYyBzdHJ1Y3QgZ2ljX2t2bV9pbmZvIGdpY192M19rdm1faW5mbyBfX2luaXRkYXRhOwo+
-ID4gPiAgc3RhdGljIERFRklORV9QRVJfQ1BVKGJvb2wsIGhhc19yc3MpOwo+ID4gPiBAQCAtNTE5
-LDkgKzUyNiwyMiBAQCBzdGF0aWMgdTMyIF9fZ2ljX2dldF9wcGlfaW5kZXgoaXJxX2h3X251bWJl
-cl90IGh3aXJxKQo+ID4gPiAgICAgICB9Cj4gPiA+ICB9Cj4gPiA+Cj4gPiA+IC1zdGF0aWMgdTMy
-IGdpY19nZXRfcHBpX2luZGV4KHN0cnVjdCBpcnFfZGF0YSAqZCkKPiA+ID4gK3N0YXRpYyB1MzIg
-X19naWNfZ2V0X3JkaXN0X2lkeChpcnFfaHdfbnVtYmVyX3QgaHdpcnEpCj4gPiA+ICt7Cj4gPiA+
-ICsgICAgIHN3aXRjaCAoX19nZXRfaW50aWRfcmFuZ2UoaHdpcnEpKSB7Cj4gPiA+ICsgICAgIGNh
-c2UgU0dJX1JBTkdFOgo+ID4gPiArICAgICBjYXNlIFBQSV9SQU5HRToKPiA+ID4gKyAgICAgICAg
-ICAgICByZXR1cm4gaHdpcnE7Cj4gPiA+ICsgICAgIGNhc2UgRVBQSV9SQU5HRToKPiA+ID4gKyAg
-ICAgICAgICAgICByZXR1cm4gaHdpcnEgLSBFUFBJX0JBU0VfSU5USUQgKyAzMjsKPiA+ID4gKyAg
-ICAgZGVmYXVsdDoKPiA+ID4gKyAgICAgICAgICAgICB1bnJlYWNoYWJsZSgpOwo+ID4gPiArICAg
-ICB9Cj4gPiA+ICt9Cj4gPiA+ICsKPiA+ID4gK3N0YXRpYyB1MzIgZ2ljX2dldF9yZGlzdF9pZHgo
-c3RydWN0IGlycV9kYXRhICpkKQo+ID4gPiAgewo+ID4gPiAtICAgICByZXR1cm4gX19naWNfZ2V0
-X3BwaV9pbmRleChkLT5od2lycSk7Cj4gPiA+ICsgICAgIHJldHVybiBfX2dpY19nZXRfcmRpc3Rf
-aWR4KGQtPmh3aXJxKTsKPiA+ID4gIH0KPiA+Cj4gPiBOaXQ6IEl0IHdvdWxkIGJlIG5pY2VyIHRv
-IGNhbGwgdGhpcyBnaWNfZ2V0X3JkaXN0X2luZGV4KCkgdG8gbWF0Y2gKPiA+IGdpY19nZXRfcHBp
-X2luZGV4KCk7IGxpa2V3aXNlIHdpdGggX19naWNfZ2V0X3JkaXN0X2luZGV4KCkuCj4gPgo+ID4g
-VGhhdCdzIG15IGZhdWx0IGdpdmVuIEkgc3VnZ2VzdGVkIHRoZSBnaWNfZ2V0X3JkaXN0X2lkeCgp
-IG5hbWUgaW46Cj4gPgo+ID4gICBodHRwczovL2xvcmUua2VybmVsLm9yZy9saW51eC1hcm0ta2Vy
-bmVsL1pOQy1ZUlFvcE8wUGFJSW9ARlZGRjc3UzBRMDVOLmNhbWJyaWRnZS5hcm0uY29tLwo+ID4K
-PiA+IC4uLiBzbyBzb3JyeSBhYm91dCB0aGF0IQo+IAo+IFllYWgsIEkga2VwdCB0aGUgbmFtZSB5
-b3Ugc3VnZ2VzdGVkIGV2ZW4gdGhvdWdoIGl0IHNlZW1lZCBhIGxpdHRsZQo+IGluY29uc2lzdGVu
-dC4gSSdsbCBoYXBwaWx5IHNlbmQgYSB2MTMgd2l0aCB0aGF0IGZpeGVkIHVwLCB0aG91Z2ggSSds
-bAo+IHByb2JhYmx5IHdhaXQgYSBsaXR0bGUgYml0IGp1c3QgdG8gYXZvaWQgc3BhbW1pbmcgbmV3
-IHZlcnNpb25zIHRvbwo+IHF1aWNrbHkuIEl0J3Mgbm90IGxpa2UgdGhlIHBhdGNoZXMgY2FuIGxh
-bmQgaW4gdGhlIG1pZGRsZSBvZiB0aGUgbWVyZ2UKPiB3aW5kb3cgYW55d2F5Lgo+IAo+IFVubGVz
-cyBzb21lb25lIHNheXMgb3RoZXJ3aXNlLCBJIGd1ZXNzIHRoaXMgc2VyaWVzIGlzIGluIGdvb2Qg
-c2hhcGUgdG8KPiBsYW5kIHRoZW4uIAoKSSB0aGluayBzbywgeWVzLgoKPiBEb2VzIGFueW9uZSBo
-YXZlIGFueSBwbGFucyBmb3IgdGhlIGRldGFpbHMgb2YgaG93IHRvIGxhbmQgaXQ/IEkgZ3Vlc3Mg
-dGhpcwo+IHdvdWxkIGJlIHNvbWV0aGluZyB0aGF0IE1hcmMsIENhdGFsaW4gYW5kIFdpbGwgd291
-bGQgbmVlZCB0byBoYXNoIG91dCBzaW5jZQo+IHRoZSBmaXJzdCBwYXRjaCB3b3VsZCBpZGVhbGx5
-IGdvIHRocm91Z2ggYSBkaWZmZXJlbnQgdHJlZSB0aGFuIHRoZSBvdGhlcnMuCgpJIHN1c3BlY3Qg
-dGhhdCBhcyBsb25nIGFzIHRoZSBHSUMgcGF0Y2ggZG9lc24ndCBjb25mbGljdCB3aXRoIGFueXRo
-aW5nIGluIHRoZQppcnFjaGlwIHRyZWUgKGFuZCBhc3N1bWluZyBNYXJjJ3MgaGFwcHkgd2l0aCBp
-dCksIHdlIGNvdWxkIHJvdXRlIHRoaXMgYWxsCnRocm91Z2ggdGhlIGFybTY0IHRyZWUgYXMgdGhh
-dCdzIHdoYXQgd2UgZGlkIHdoZW4gd2UgYWRkZWQgc3VwcG9ydCBmb3IKcHNldWRvLU5NSSBpbiB0
-aGUgZmlyc3QgcGxhY2UuCgpNYXJjLCB0aG91Z2h0cz8KCk1hcmsuCgoKX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KS2dkYi1idWdyZXBvcnQgbWFpbGluZyBs
-aXN0CktnZGItYnVncmVwb3J0QGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNv
-dXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9rZ2RiLWJ1Z3JlcG9ydAo=
+This is an attempt to resurrect Sumit's old patch series [1] that
+allowed us to use the arm64 pseudo-NMI to get backtraces of CPUs and
+also to round up CPUs in kdb/kgdb. The last post from Sumit that I
+could find was v7, so I started my series at v8. I haven't copied all
+of his old changelongs here, but you can find them from the link.
+
+This patch series targets v6.6. Specifically it can't land in v6.5
+since it depends on commit 8d539b84f1e3 ("nmi_backtrace: allow
+excluding an arbitrary CPU").
+
+It should be noted that Mark still feels there might be some corner
+cases where pseudo-NMI is not production ready [2] [3], but as far as
+I'm aware there are no concrete/documented issues. Regardless of
+whether this should be enabled for production, though, this series
+will be invaluable to anyone trying to debug crashes on arm64
+machines.
+
+v13 of this series fixes a nit with the names of two functions and
+collects more tags. There are no code changes other than the renames
+and these have no functional impact. I believe that the series is
+ready to land. As per the note in patch #1, I'm hoping for an Ack from
+Marc Zyngier on patch #1 and then the whole series can land through
+the arm64 tree.
+
+v12 of this series collects tags, fixes a few small nits in comments
+and commit messages from v11 and adds a new (and somewhat unrelated)
+small patch to the end of the series. There are no code changes other
+than the last patch, which is tiny.
+
+v11 of this series addressed Stephen Boyd's feedback on v10 and added
+a missing "static" that the patches robot found.
+
+v10 of this series attempted to address all of Mark's feedback on
+v9. As a quick summary:
+- It includes his patch to remove IPI_WAKEUP, freeing up an extra IPI.
+- It no longer combines the "kgdb" and "backtrace" IPIs. If we need
+  another IPI these could always be recombined later.
+- It promotes IPI_CPU_STOP and IPI_CPU_CRASH_STOP to NMI.
+- It puts nearly all the code directly in smp.c.
+- Several of the patches are squashed together.
+- Patch #6 ("kgdb: Provide a stub kgdb_nmicallback() if !CONFIG_KGDB")
+  was dropped from the series since it landed.
+
+Between v8 and v9, I had cleaned up this patch series by integrating
+the 10th patch from v8 [4] into the whole series. As part of this, I
+renamed the "NMI IPI" to the "debug IPI" since it could now be backed
+by a regular IPI in the case that pseudo NMIs weren't available. With
+the fallback, this allowed me to drop some extra patches from the
+series. This feels (to me) to be pretty clean and hopefully others
+agree. Any patch I touched significantly I removed Masayoshi and
+Chen-Yu's tags from.
+
+...also in v8, I reorderd the patches a bit in a way that seemed a
+little cleaner to me.
+
+Since v7, I have:
+* Addressed the small amount of feedback that was there for v7.
+* Rebased.
+* Added a new patch that prevents us from spamming the logs with idle
+  tasks.
+* Added an extra patch to gracefully fall back to regular IPIs if
+  pseudo-NMIs aren't there.
+
+It can be noted that this patch series works very well with the recent
+"hardlockup" patches that have landed through Andrew Morton's tree and
+are currently in mainline. It works especially well with the "buddy"
+lockup detector.
+
+[1] https://lore.kernel.org/linux-arm-kernel/1604317487-14543-1-git-send-email-sumit.garg@linaro.org/
+[2] https://lore.kernel.org/lkml/ZFvGqD%2F%2Fpm%2FlZb+p@FVFF77S0Q05N.cambridge.arm.com/
+[3] https://lore.kernel.org/lkml/ZNDKVP2m-iiZCz3v@FVFF77S0Q05N.cambridge.arm.com
+[4] https://lore.kernel.org/r/20230419155341.v8.10.Ic3659997d6243139d0522fc3afcdfd88d7a5f030@changeid/
+
+Changes in v13:
+- s/_idx/_index/ on the patch to make function names consistent.
+
+Changes in v12:
+- ("arm64: smp: Mark IPI globals as __ro_after_init") new for v12.
+- Added a comment about why we account for 16 SGIs when Linux uses 8.
+- Minor comment change to add "()" after nmi_trigger_cpumask_backtrace.
+- Updated the commit hash of the commit this depends on.
+
+Changes in v11:
+- Adjust comment about NR_IPI/MAX_IPI.
+- Don't use confusing "backed by" idiom in comment.
+- Made arm64_backtrace_ipi() static.
+- Updated commit message as per Stephen.
+- arch_send_wakeup_ipi() now takes an unsigned int.
+
+Changes in v10:
+- ("IPI_CPU_STOP and IPI_CPU_CRASH_STOP should try for NMI") new for v10.
+- ("arm64: smp: Remove dedicated wakeup IPI") new for v10.
+- Backtrace now directly supported in smp.c
+- Don't allocate the cpumask on the stack; just iterate.
+- Moved kgdb calls to smp.c to avoid needing to export IPI info.
+- Rewrite as needed for 5.11+ as per Mark Rutland and Sumit.
+- Squash backtrace into patch adding support for pseudo-NMI IPIs.
+- kgdb now has its own IPI.
+
+Changes in v9:
+- Added comments that we might not be using NMI always.
+- Added to commit message that this doesn't catch all cases.
+- Fold in v8 patch #10 ("Fallback to a regular IPI if NMI isn't enabled")
+- Moved header file out of "include" since it didn't need to be there.
+- Remove arm64_supports_nmi()
+- Remove fallback for when debug IPI isn't available.
+- Renamed "NMI IPI" to "debug IPI" since it might not be backed by NMI.
+- arch_trigger_cpumask_backtrace() no longer returns bool
+
+Changes in v8:
+- "Tag the arm64 idle functions as __cpuidle" new for v8
+- Removed "#ifdef CONFIG_SMP" since arm64 is always SMP
+- debug_ipi_setup() and debug_ipi_teardown() no longer take cpu param
+
+Douglas Anderson (6):
+  irqchip/gic-v3: Enable support for SGIs to act as NMIs
+  arm64: idle: Tag the arm64 idle functions as __cpuidle
+  arm64: smp: Add arch support for backtrace using pseudo-NMI
+  arm64: smp: IPI_CPU_STOP and IPI_CPU_CRASH_STOP should try for NMI
+  arm64: kgdb: Implement kgdb_roundup_cpus() to enable pseudo-NMI
+    roundup
+  arm64: smp: Mark IPI globals as __ro_after_init
+
+Mark Rutland (1):
+  arm64: smp: Remove dedicated wakeup IPI
+
+ arch/arm64/include/asm/irq.h              |   3 +
+ arch/arm64/include/asm/smp.h              |   4 +-
+ arch/arm64/kernel/acpi_parking_protocol.c |   2 +-
+ arch/arm64/kernel/idle.c                  |   4 +-
+ arch/arm64/kernel/smp.c                   | 139 +++++++++++++++++-----
+ drivers/irqchip/irq-gic-v3.c              |  59 ++++++---
+ 6 files changed, 160 insertions(+), 51 deletions(-)
+
+-- 
+2.42.0.283.g2d96d420d3-goog
+
+
+
+_______________________________________________
+Kgdb-bugreport mailing list
+Kgdb-bugreport@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport
