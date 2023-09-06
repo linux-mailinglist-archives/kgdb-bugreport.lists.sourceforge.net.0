@@ -2,29 +2,29 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5D63E7942B7
-	for <lists+kgdb-bugreport@lfdr.de>; Wed,  6 Sep 2023 20:05:13 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 081287942B1
+	for <lists+kgdb-bugreport@lfdr.de>; Wed,  6 Sep 2023 20:04:07 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1qdwtt-0000mb-Bw
+	id 1qdwsn-0006Pr-Bw
 	for lists+kgdb-bugreport@lfdr.de;
-	Wed, 06 Sep 2023 18:05:13 +0000
+	Wed, 06 Sep 2023 18:04:05 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <dianders@chromium.org>) id 1qdv2j-0000Hf-0g
+ (envelope-from <dianders@chromium.org>) id 1qdv2k-00053o-Ts
  for kgdb-bugreport@lists.sourceforge.net;
- Wed, 06 Sep 2023 16:06:13 +0000
+ Wed, 06 Sep 2023 16:06:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9AStTiUn2wkKE7iLM15Ptbf7v9P7cN3w/9Lr/OinoUk=; b=G1qC47LdXVAwWFrqpsbYVgMpO7
- 7GupZXSv0XphI8SkRrRD2N2voVVusleMGuklJybAy6+vhVEASHJAOSsT2VXG2vEU2D1HCXL5fFK34
- ZIYwektU7AYXylaZCbyTaE5uPjHQYNGo/aXfsAYrHAL7eTIpw6AlgOuha/9riaJyBud4=;
+ bh=75Al5ao5WDqui4OmFiH4pa1bGdzkgKG2d24XEXDdpOo=; b=iyIBCYj1HCkD8diAM7GL0/789a
+ b6IHmu+gLUYzdga1zKV0oWe+sKGvwsSskVYPyxOURSH4d93nwrG0NUvPxkjmh20QLpOMpvZ93dtff
+ mOKgj9nG625BKpKup0FqX9Y6rQIyij0fc7+D6z+Aoe+vut/2zifIQ+wKF5EAM+fS0YlU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -32,59 +32,59 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=9AStTiUn2wkKE7iLM15Ptbf7v9P7cN3w/9Lr/OinoUk=; b=bAwAVCQaWXG12l8gt6nPQNSUjH
- ejVlpvCcYuFRlIErHYQmrtsfjZ5nPckzsGicwTXGIq+lNWxJzy2K7ydUmM9LB2scb//DzfkrdFzVj
- YXKj0/zb/osxfM0IEu6v1pcAs2cI2QZd83yMfD8gRHlobUT65SFc+LF9C6G+l77umUNc=;
+ bh=75Al5ao5WDqui4OmFiH4pa1bGdzkgKG2d24XEXDdpOo=; b=MJvJoXgYxd4QSaL5vRZpzxsWPR
+ z3M/LPZUT8R8uTyVHU10u6mqfgDROMDlxqPZNPl/Lgi3B7310qWpDMnUpepdcU7GqCYcp+EOAaCoD
+ Hb2ww1dCAIAoxCHeHUd1X4vEUdPhArFAtTjms/ypEzkmq45aZf+lF3peiBoiSA6lp3qo=;
 Received: from mail-pl1-f171.google.com ([209.85.214.171])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1qdv2f-0003zW-3w for kgdb-bugreport@lists.sourceforge.net;
- Wed, 06 Sep 2023 16:06:12 +0000
+ id 1qdv2h-0003zh-HU for kgdb-bugreport@lists.sourceforge.net;
+ Wed, 06 Sep 2023 16:06:15 +0000
 Received: by mail-pl1-f171.google.com with SMTP id
- d9443c01a7336-1bf078d5f33so30445295ad.3
+ d9443c01a7336-1c0d5b16aacso26273775ad.1
  for <kgdb-bugreport@lists.sourceforge.net>;
- Wed, 06 Sep 2023 09:06:09 -0700 (PDT)
+ Wed, 06 Sep 2023 09:06:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1694016363; x=1694621163;
+ d=chromium.org; s=google; t=1694016366; x=1694621166;
  darn=lists.sourceforge.net; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9AStTiUn2wkKE7iLM15Ptbf7v9P7cN3w/9Lr/OinoUk=;
- b=WViuAz9bY9G96kiA3vk3AURuYDprJBXy2zsIZ7cjyHd+f8Ml/VIJ0Jd9Oswstc9071
- i9tPonB3P8ZB0aDw5hRqvIeFO2HNlVye+6rRBsShmXEbdL48iVhWMzCUxhLgXj4/gVd5
- WdnZgwjhxvSJrW+LvgClh83Fhjk+I4oaufhUI=
+ bh=75Al5ao5WDqui4OmFiH4pa1bGdzkgKG2d24XEXDdpOo=;
+ b=OvV56wNk8Jqhz+mJqhx3Vc5fQQOvCXXcqNjH3Kz+3Erg2qhAgW+QpeYUUFCiKIaM02
+ wIXGo1HIS9Zc6IOJp7MuWtfSoL0AkUo5bWL1UU6+Qw8Z0J4A1ISfBU8UsGA2ENk6wWA0
+ N2Xqo7CCp3PZbCdIQkLyK03eQRnps+k06FJAA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1694016363; x=1694621163;
+ d=1e100.net; s=20221208; t=1694016366; x=1694621166;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9AStTiUn2wkKE7iLM15Ptbf7v9P7cN3w/9Lr/OinoUk=;
- b=Rv8Pv1BIPSG9v+Ss7YvNdYMCK9/5uvUg3Eb8SwrypQRHIgbI8L/6bx653MzLi15pNb
- Xr216ALmfWRm9oFBCx9XiByc7URCKsVoiPARYn2FazoZ0i/pyk72JcjFcKWRz1TWVaUD
- Anb3uT2dDXOODCLkRrzFEF4cXuP2pDuuI0NYIEgzBoiSUSowSaaaOOPFWzJFsDlTF0PS
- /Prmn7dXhug+IC6i/NGJHtSeeh7dnd3cDpyq0akQr+F4BdR0EIE8UDD5R7NJOdOoMo/R
- jTsDbdcJQwpxUS0IXEEHt9/Dl+UciHhku5imHxSRR3/XP0pCxtu1BDz39BDp4QMX4XVo
- sC0g==
-X-Gm-Message-State: AOJu0Yzyfnde1Po9Zjl38/GgkjXoNcj/Ki3zwRG4XhqiqYrpc2rCOP/I
- ou8lQx6VgYaHYWP323iyHsEkqg==
-X-Google-Smtp-Source: AGHT+IHvnL/4JaRFUJ+xW/5TxV7a56fOHoi2Ui181sO6LOlIeDV0WX7gAscP3gPGe2rpmUXdId80sQ==
-X-Received: by 2002:a17:902:ea01:b0:1bf:205e:fe5d with SMTP id
- s1-20020a170902ea0100b001bf205efe5dmr20963955plg.7.1694016363355; 
- Wed, 06 Sep 2023 09:06:03 -0700 (PDT)
+ bh=75Al5ao5WDqui4OmFiH4pa1bGdzkgKG2d24XEXDdpOo=;
+ b=ISHtPvV+ccFbIf3W2z2Ufd0fA07MrUtQJxOaZ+u2FdT4MZXncXdbd92tkWub9mBi4Q
+ cOH+AiTaAmkuYruvV5bVg7434ktCgHQxyudaAPpRNXq+j1ZFj6WMI9JPQlcb72UBYzHr
+ NP5AA0Rj9dZfdVDioU4dw1gz5gA+J3klc6K09EXM83Nhbpfc/cVb2lSrNoQ9tjuhlR2B
+ 3wEJd+Vn587Fwrevx5i1bazoJgP/1H8H5g/Ls6bJbC9v1WXKv+dnU9cCjegk3CE1VXV/
+ Ewks4FHYO6iDBnj5vXoXNbzlvmGv/DL03ftVK+w28YwUcYdRtp2fVOYtqkbq2+lVtE8u
+ W8wA==
+X-Gm-Message-State: AOJu0YzrnAu+scR2AhEQRxTugucuA+hhVY6wMzRj3UTPuJHwBQOjuoNd
+ yb7gHZkoKUpLpMVcVL5nFMB7Ww==
+X-Google-Smtp-Source: AGHT+IFaCX4dzk7MQ4n11lP2A0zTWCxziDQ4gl6uWPxHEa+/LvA96OgqNZMwWgUuk5iyV1hMWWWj0Q==
+X-Received: by 2002:a17:902:c40a:b0:1c2:811:2cee with SMTP id
+ k10-20020a170902c40a00b001c208112ceemr18484732plk.23.1694016365967; 
+ Wed, 06 Sep 2023 09:06:05 -0700 (PDT)
 Received: from tictac2.mtv.corp.google.com
  ([2620:15c:9d:2:4a07:e00a:fdae:750b])
  by smtp.gmail.com with ESMTPSA id
- ju19-20020a170903429300b001b8c689060dsm11338859plb.28.2023.09.06.09.06.01
+ ju19-20020a170903429300b001b8c689060dsm11338859plb.28.2023.09.06.09.06.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 Sep 2023 09:06:02 -0700 (PDT)
+ Wed, 06 Sep 2023 09:06:05 -0700 (PDT)
 From: Douglas Anderson <dianders@chromium.org>
 To: Mark Rutland <mark.rutland@arm.com>,
  Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>,
  Sumit Garg <sumit.garg@linaro.org>,
  Daniel Thompson <daniel.thompson@linaro.org>, Marc Zyngier <maz@kernel.org>
-Date: Wed,  6 Sep 2023 09:02:56 -0700
-Message-ID: <20230906090246.v13.1.I1223c11c88937bd0cbd9b086d4ef216985797302@changeid>
+Date: Wed,  6 Sep 2023 09:02:57 -0700
+Message-ID: <20230906090246.v13.2.I4baba13e220bdd24d11400c67f137c35f07f82c7@changeid>
 X-Mailer: git-send-email 2.42.0.283.g2d96d420d3-goog
 In-Reply-To: <20230906160505.2431857-1-dianders@chromium.org>
 References: <20230906160505.2431857-1-dianders@chromium.org>
@@ -96,9 +96,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  As of commit 6abbd6988971 ("irqchip/gic, gic-v3: Make SGIs
- use handle_percpu_devid_irq()") SGIs are treated the same as PPIs/EPPIs and
- use handle_percpu_devid_irq() by default. Unfortunately, handle_p [...] 
+ Content preview:  As per the (somewhat recent) comment before the definition
+ of `__cpuidle`, the tag is like `noinstr` but also marks a function so it
+ can be identified by cpu_in_idle(). Let's add these markings to arm [...]
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -116,9 +116,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qdv2f-0003zW-3w
-Subject: [Kgdb-bugreport] [PATCH v13 1/7] irqchip/gic-v3: Enable support for
- SGIs to act as NMIs
+X-Headers-End: 1qdv2h-0003zh-HU
+Subject: [Kgdb-bugreport] [PATCH v13 2/7] arm64: idle: Tag the arm64 idle
+ functions as __cpuidle
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -130,13 +130,13 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: ito-yuichi@fujitsu.com, linux-kernel@vger.kernel.org,
+Cc: mingo@kernel.org, ito-yuichi@fujitsu.com, linux-kernel@vger.kernel.org,
  Lecopzer Chen <lecopzer.chen@mediatek.com>,
  Peter Zijlstra <peterz@infradead.org>, kgdb-bugreport@lists.sourceforge.net,
  "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
  Stephane Eranian <eranian@google.com>, Stephen Boyd <swboyd@chromium.org>,
  linux-perf-users@vger.kernel.org, Chen-Yu Tsai <wens@csie.org>,
- Chen-Yu Tsai <wenst@chromium.org>,
+ gautham.shenoy@amd.com, Chen-Yu Tsai <wenst@chromium.org>,
  Tomohiro Misono <misono.tomohiro@fujitsu.com>,
  Thomas Gleixner <tglx@linutronix.de>, Masayoshi Mizuma <msys.mizuma@gmail.com>,
  Ard Biesheuvel <ardb@kernel.org>, linux-arm-kernel@lists.infradead.org
@@ -144,185 +144,75 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-As of commit 6abbd6988971 ("irqchip/gic, gic-v3: Make SGIs use
-handle_percpu_devid_irq()") SGIs are treated the same as PPIs/EPPIs
-and use handle_percpu_devid_irq() by default. Unfortunately,
-handle_percpu_devid_irq() isn't NMI safe, and so to run in an NMI
-context those should use handle_percpu_devid_fasteoi_nmi().
+As per the (somewhat recent) comment before the definition of
+`__cpuidle`, the tag is like `noinstr` but also marks a function so it
+can be identified by cpu_in_idle(). Let's add these markings to arm64
+cpuidle functions
 
-In order to accomplish this, we just have to make room for SGIs in the
-array of refcounts that keeps track of which interrupts are set as
-NMI. We also rename the array and create a new indexing scheme that
-accounts for SGIs.
+With this change we get useful backtraces like:
 
-Also, enable NMI support prior to gic_smp_init() as allocation of SGIs
-as IRQs/NMIs happen as part of this routine.
+  NMI backtrace for cpu N skipped: idling at cpu_do_idle+0x94/0x98
 
-Co-developed-by: Sumit Garg <sumit.garg@linaro.org>
-Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+instead of useless backtraces when dumping all processors using
+nmi_cpu_backtrace().
+
+NOTE: this patch won't make cpu_in_idle() work perfectly for arm64,
+but it doesn't hurt and does catch some cases. Specifically an example
+that wasn't caught in my testing looked like this:
+
+ gic_cpu_sys_reg_init+0x1f8/0x314
+ gic_cpu_pm_notifier+0x40/0x78
+ raw_notifier_call_chain+0x5c/0x134
+ cpu_pm_notify+0x38/0x64
+ cpu_pm_exit+0x20/0x2c
+ psci_enter_idle_state+0x48/0x70
+ cpuidle_enter_state+0xb8/0x260
+ cpuidle_enter+0x44/0x5c
+ do_idle+0x188/0x30c
+
 Acked-by: Mark Rutland <mark.rutland@arm.com>
+Reviewed-by: Stephen Boyd <swboyd@chromium.org>
+Acked-by: Sumit Garg <sumit.garg@linaro.org>
 Tested-by: Chen-Yu Tsai <wenst@chromium.org>
 Signed-off-by: Douglas Anderson <dianders@chromium.org>
 ---
-I'll note that this change is a little more black magic to me than
-others in this series. I don't have a massive amounts of familiarity
-with all the moving parts of gic-v3, so I mostly just followed Mark
-Rutland's advice [1].
 
-As per discussion [2], the hope is that this patch could get Acked by
-Marc Zyngier and then land through the arm64 tree. If this isn't a
-good idea for some reason, I'd love suggestions for alternate ways for
-this series to land.
+(no changes since v11)
 
-[1] https://lore.kernel.org/r/ZNC-YRQopO0PaIIo@FVFF77S0Q05N.cambridge.arm.com
-[2] https://lore.kernel.org/r/ZPC1nUw3qKWrC85l@FVFF77S0Q05N.cambridge.arm.com
+Changes in v11:
+- Updated commit message as per Stephen.
 
-Changes in v13:
-- s/_idx/_index/ on the patch to make function names consistent.
+Changes in v9:
+- Added to commit message that this doesn't catch all cases.
 
-Changes in v12:
-- Added a comment about why we account for 16 SGIs when Linux uses 8.
+Changes in v8:
+- "Tag the arm64 idle functions as __cpuidle" new for v8
 
-Changes in v10:
-- Rewrite as needed for 5.11+ as per Mark Rutland and Sumit.
+ arch/arm64/kernel/idle.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
- drivers/irqchip/irq-gic-v3.c | 59 +++++++++++++++++++++++++-----------
- 1 file changed, 41 insertions(+), 18 deletions(-)
-
-diff --git a/drivers/irqchip/irq-gic-v3.c b/drivers/irqchip/irq-gic-v3.c
-index eedfa8e9f077..787ccc880b22 100644
---- a/drivers/irqchip/irq-gic-v3.c
-+++ b/drivers/irqchip/irq-gic-v3.c
-@@ -78,6 +78,13 @@ static DEFINE_STATIC_KEY_TRUE(supports_deactivate_key);
- #define GIC_LINE_NR	min(GICD_TYPER_SPIS(gic_data.rdists.gicd_typer), 1020U)
- #define GIC_ESPI_NR	GICD_TYPER_ESPIS(gic_data.rdists.gicd_typer)
- 
-+/*
-+ * There are 16 SGIs, though we only actually use 8 in Linux. The other 8 SGIs
-+ * are potentially stolen by the secure side. Some code, especially code dealing
-+ * with hwirq IDs, is simplified by accounting for all 16.
-+ */
-+#define SGI_NR		16
-+
- /*
-  * The behaviours of RPR and PMR registers differ depending on the value of
-  * SCR_EL3.FIQ, and the behaviour of non-secure priority registers of the
-@@ -125,8 +132,8 @@ EXPORT_SYMBOL(gic_nonsecure_priorities);
- 		__priority;						\
- 	})
- 
--/* ppi_nmi_refs[n] == number of cpus having ppi[n + 16] set as NMI */
--static refcount_t *ppi_nmi_refs;
-+/* rdist_nmi_refs[n] == number of cpus having the rdist interrupt n set as NMI */
-+static refcount_t *rdist_nmi_refs;
- 
- static struct gic_kvm_info gic_v3_kvm_info __initdata;
- static DEFINE_PER_CPU(bool, has_rss);
-@@ -519,9 +526,22 @@ static u32 __gic_get_ppi_index(irq_hw_number_t hwirq)
- 	}
- }
- 
--static u32 gic_get_ppi_index(struct irq_data *d)
-+static u32 __gic_get_rdist_index(irq_hw_number_t hwirq)
-+{
-+	switch (__get_intid_range(hwirq)) {
-+	case SGI_RANGE:
-+	case PPI_RANGE:
-+		return hwirq;
-+	case EPPI_RANGE:
-+		return hwirq - EPPI_BASE_INTID + 32;
-+	default:
-+		unreachable();
-+	}
-+}
-+
-+static u32 gic_get_rdist_index(struct irq_data *d)
+diff --git a/arch/arm64/kernel/idle.c b/arch/arm64/kernel/idle.c
+index c1125753fe9b..05cfb347ec26 100644
+--- a/arch/arm64/kernel/idle.c
++++ b/arch/arm64/kernel/idle.c
+@@ -20,7 +20,7 @@
+  *	ensure that interrupts are not masked at the PMR (because the core will
+  *	not wake up if we block the wake up signal in the interrupt controller).
+  */
+-void noinstr cpu_do_idle(void)
++void __cpuidle cpu_do_idle(void)
  {
--	return __gic_get_ppi_index(d->hwirq);
-+	return __gic_get_rdist_index(d->hwirq);
- }
+ 	struct arm_cpuidle_irq_context context;
  
- static int gic_irq_nmi_setup(struct irq_data *d)
-@@ -545,11 +565,14 @@ static int gic_irq_nmi_setup(struct irq_data *d)
- 
- 	/* desc lock should already be held */
- 	if (gic_irq_in_rdist(d)) {
--		u32 idx = gic_get_ppi_index(d);
-+		u32 idx = gic_get_rdist_index(d);
- 
--		/* Setting up PPI as NMI, only switch handler for first NMI */
--		if (!refcount_inc_not_zero(&ppi_nmi_refs[idx])) {
--			refcount_set(&ppi_nmi_refs[idx], 1);
-+		/*
-+		 * Setting up a percpu interrupt as NMI, only switch handler
-+		 * for first NMI
-+		 */
-+		if (!refcount_inc_not_zero(&rdist_nmi_refs[idx])) {
-+			refcount_set(&rdist_nmi_refs[idx], 1);
- 			desc->handle_irq = handle_percpu_devid_fasteoi_nmi;
- 		}
- 	} else {
-@@ -582,10 +605,10 @@ static void gic_irq_nmi_teardown(struct irq_data *d)
- 
- 	/* desc lock should already be held */
- 	if (gic_irq_in_rdist(d)) {
--		u32 idx = gic_get_ppi_index(d);
-+		u32 idx = gic_get_rdist_index(d);
- 
- 		/* Tearing down NMI, only switch handler for last NMI */
--		if (refcount_dec_and_test(&ppi_nmi_refs[idx]))
-+		if (refcount_dec_and_test(&rdist_nmi_refs[idx]))
- 			desc->handle_irq = handle_percpu_devid_irq;
- 	} else {
- 		desc->handle_irq = handle_fasteoi_irq;
-@@ -1279,10 +1302,10 @@ static void gic_cpu_init(void)
- 	rbase = gic_data_rdist_sgi_base();
- 
- 	/* Configure SGIs/PPIs as non-secure Group-1 */
--	for (i = 0; i < gic_data.ppi_nr + 16; i += 32)
-+	for (i = 0; i < gic_data.ppi_nr + SGI_NR; i += 32)
- 		writel_relaxed(~0, rbase + GICR_IGROUPR0 + i / 8);
- 
--	gic_cpu_config(rbase, gic_data.ppi_nr + 16, gic_redist_wait_for_rwp);
-+	gic_cpu_config(rbase, gic_data.ppi_nr + SGI_NR, gic_redist_wait_for_rwp);
- 
- 	/* initialise system registers */
- 	gic_cpu_sys_reg_init();
-@@ -1939,12 +1962,13 @@ static void gic_enable_nmi_support(void)
- 		return;
- 	}
- 
--	ppi_nmi_refs = kcalloc(gic_data.ppi_nr, sizeof(*ppi_nmi_refs), GFP_KERNEL);
--	if (!ppi_nmi_refs)
-+	rdist_nmi_refs = kcalloc(gic_data.ppi_nr + SGI_NR,
-+				 sizeof(*rdist_nmi_refs), GFP_KERNEL);
-+	if (!rdist_nmi_refs)
- 		return;
- 
--	for (i = 0; i < gic_data.ppi_nr; i++)
--		refcount_set(&ppi_nmi_refs[i], 0);
-+	for (i = 0; i < gic_data.ppi_nr + SGI_NR; i++)
-+		refcount_set(&rdist_nmi_refs[i], 0);
- 
- 	pr_info("Pseudo-NMIs enabled using %s ICC_PMR_EL1 synchronisation\n",
- 		gic_has_relaxed_pmr_sync() ? "relaxed" : "forced");
-@@ -2061,6 +2085,7 @@ static int __init gic_init_bases(phys_addr_t dist_phys_base,
- 
- 	gic_dist_init();
- 	gic_cpu_init();
-+	gic_enable_nmi_support();
- 	gic_smp_init();
- 	gic_cpu_pm_init();
- 
-@@ -2073,8 +2098,6 @@ static int __init gic_init_bases(phys_addr_t dist_phys_base,
- 			gicv2m_init(handle, gic_data.domain);
- 	}
- 
--	gic_enable_nmi_support();
--
- 	return 0;
- 
- out_free:
+@@ -35,7 +35,7 @@ void noinstr cpu_do_idle(void)
+ /*
+  * This is our default idle handler.
+  */
+-void noinstr arch_cpu_idle(void)
++void __cpuidle arch_cpu_idle(void)
+ {
+ 	/*
+ 	 * This should do all the clock switching and wait for interrupt
 -- 
 2.42.0.283.g2d96d420d3-goog
 
