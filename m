@@ -2,101 +2,102 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6CB5579454B
-	for <lists+kgdb-bugreport@lfdr.de>; Wed,  6 Sep 2023 23:46:09 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id BD12379D148
+	for <lists+kgdb-bugreport@lfdr.de>; Tue, 12 Sep 2023 14:44:16 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1qe0Lf-00020R-6X
+	id 1qg2kZ-0000hC-S9
 	for lists+kgdb-bugreport@lfdr.de;
-	Wed, 06 Sep 2023 21:46:08 +0000
+	Tue, 12 Sep 2023 12:44:14 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <swboyd@chromium.org>) id 1qe0Le-00020K-Eq
+ (envelope-from <maz@kernel.org>) id 1qg2kX-0000gy-PH
  for kgdb-bugreport@lists.sourceforge.net;
- Wed, 06 Sep 2023 21:46:07 +0000
+ Tue, 12 Sep 2023 12:44:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- References:In-Reply-To:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:References:In-Reply-To:
+ Subject:Cc:To:From:Message-ID:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=96tt7mjy0zwf48H2OXBzxLiMPsP9ITEZSEJu0hJniYk=; b=Z61ZlluCO/tv6MzolyVkMRyYUh
- GdI29m3U2iI3TNFTr9kUxC/shaMF2WNs2rURCp3EHH5KOGlBFa5EFeBxMz84L0UEdZsqp+8e/dUs6
- IZVyZxtaSpUoz3vxnrMtXl4WxX6g+mdCofSGdOMyH7V0bc021BQMG3x04S2u/d2RNFeI=;
+ bh=bQ3I88CGXVffUpBHj8jO80ePUXcRzuL0FDDH4PWsyHc=; b=FK1rJJBXVVWHHUAmqPEpYhA+XY
+ /cBdt+y+qh2OvvbmcX5GjhCmvAc5Un6+zsv8dJDyNjUPkta4sFrt4tsVJP94G67HIAmr8R+RE6pdQ
+ 5bJXnn1FuBSguE6x0ZIci7g6SM1r5n8CfZ059lHZDsF7NKL7C8uT7QHNFrl10kFgz4jk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:References:In-Reply-To:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Type:MIME-Version:References:In-Reply-To:Subject:Cc:To:From:
+ Message-ID:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=96tt7mjy0zwf48H2OXBzxLiMPsP9ITEZSEJu0hJniYk=; b=I2i5pVwQDzPJIywdXnFDDN/AhE
- I4bBUFdlNChIFIHHyFlL23CDJkB9kVfTB3Q+SMXixEycyuUTC7ac/Gvgr/d8qfhiMjyPuCS3tvObc
- wIoMFb49pSa6lVUvHt0j1s3MP28Qnocj1cqNqP7dJhHFrz8XAVXGUulvrB4upsfr62a0=;
-Received: from mail-lf1-f52.google.com ([209.85.167.52])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1qe0La-0004J4-Mc for kgdb-bugreport@lists.sourceforge.net;
- Wed, 06 Sep 2023 21:46:07 +0000
-Received: by mail-lf1-f52.google.com with SMTP id
- 2adb3069b0e04-501cba1ec0aso374780e87.2
- for <kgdb-bugreport@lists.sourceforge.net>;
- Wed, 06 Sep 2023 14:46:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1694036756; x=1694641556;
- darn=lists.sourceforge.net; 
- h=cc:to:subject:message-id:date:user-agent:from:references
- :in-reply-to:mime-version:from:to:cc:subject:date:message-id
- :reply-to; bh=96tt7mjy0zwf48H2OXBzxLiMPsP9ITEZSEJu0hJniYk=;
- b=OwiLDsnGTkqvM3xZtn6PsFuXdKl0n76Ys6A87BMvdMiBI4GhOIfzIlwUsYQRm16ZzQ
- Nv7QDPNSAl9ePBc4Sf3OgToEGhCHZx7V8JNTz3T2MQpXfQtm3tNUl7pHx7TxA6ayzrSA
- jB6th3sm7Xdb0O8UTu1HKTWSb/GhMljZ4idOg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1694036756; x=1694641556;
- h=cc:to:subject:message-id:date:user-agent:from:references
- :in-reply-to:mime-version:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=96tt7mjy0zwf48H2OXBzxLiMPsP9ITEZSEJu0hJniYk=;
- b=jNZQe8bVTLySznkWBKYSeHJxx2wcSgPonI3Afvh//PDkZiwZjNano6+eTclAMxf4WH
- FL1PPY24wyPWF0sC8QzB9uV6f4CDeaiV5XCnrQf8bBeaKJNoCvBtyshS99lxJCV6K6K6
- QQQAD50uQDPNqnjcXjtzzuroSKhzrD+5uk3W9uMw7is4BgD+eGkkiSvWEvwZEer2rrRk
- O6sdueonDITgiSmLIlfSQ+cwEDxzxgP/zS936SdTaIfYT/wpm4L4NXfVt3xgttSN/8MZ
- +ntgs9GhrkfxhEGgXaWLb6CMQIMzRElitD2A2eQO/0BRX6uJxxHLa6EE4n1JrhExOZxw
- Hz3w==
-X-Gm-Message-State: AOJu0YyYxTY+243ffcfNT1dP0iaSd99nQT7ZBy/FKk6Tv+PfwR2AtQox
- LJ0ffQ8fc8uyXk7CBrfwv8/jPXWR5pyrEgl8cv1PGw==
-X-Google-Smtp-Source: AGHT+IEYoUZI7EWDiVFAQU39A6TrMXW8B5b18tDscF/EUhrbaZ1WRb+HiEMWcNMeUUEWh0eVYCDRP1QX9A6MMJC7hB8=
-X-Received: by 2002:a05:6512:2820:b0:4fd:c84f:30d4 with SMTP id
- cf32-20020a056512282000b004fdc84f30d4mr3797056lfb.36.1694036756018; Wed, 06
- Sep 2023 14:45:56 -0700 (PDT)
-Received: from 753933720722 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 6 Sep 2023 16:45:55 -0500
-MIME-Version: 1.0
-In-Reply-To: <20230906090246.v13.7.I625d393afd71e1766ef73d3bfaac0b347a4afd19@changeid>
+ bh=bQ3I88CGXVffUpBHj8jO80ePUXcRzuL0FDDH4PWsyHc=; b=AEEbIQQLhG+2CR8bzqgrDRMe9K
+ 4yC1yIb0oz2+GsIyIs9x72kfAXekLWJV07i02qKc+ge8owWH6kkMegrYiMPiQI2Yz0sHsaZsmboI2
+ w7iYYLi3AvFL+WwKR4W5/e6vJFbevHv4fIM2wC6qntUzvw8/Vv1LiCdiC/ZDFsxo5EDI=;
+Received: from sin.source.kernel.org ([145.40.73.55])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1qg2kU-001h2a-6M for kgdb-bugreport@lists.sourceforge.net;
+ Tue, 12 Sep 2023 12:44:12 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by sin.source.kernel.org (Postfix) with ESMTPS id CB90DCE19F9;
+ Tue, 12 Sep 2023 12:43:57 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 092B0C433C7;
+ Tue, 12 Sep 2023 12:43:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1694522636;
+ bh=vDRcqUDqXbFXurXPW7gwG53pXOp3uFkEpLpaY//XLWw=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=eS3rQfqFviXYu+moVkZOlwmkwVPzUvcKYZ6kmQqhBUWYHE/xjCAQ7CXO2N5uVxw4W
+ +2NFYlBY9p3u3wuCAMoi93ZDa3HnNJpp/LL0ho1Z3ZBeDFSm5h2OZZXbt7i6lLwHir
+ N63GSMMd0zM7AJIwua+0xGV2eQAxPdHIGR/jYq141Q20Jn/J/O+F11DumpRi/gychQ
+ 7UrKCfdDb9LNb1xBIXtLn5fvcodVm7sTf1NRD61uc9+Q4jyJPsNbEhRg0O9Sp1HMnR
+ hNqZxJ2MQWNbGz+DrdBXWSFfcbnQHrYhZaWA5g/G+p+Yt7/r7Q0nOoBCXyZRFS/bRT
+ tFg1/wPUaidWQ==
+Received: from [104.132.96.100] (helo=wait-a-minute.misterjones.org)
+ by disco-boy.misterjones.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <maz@kernel.org>) id 1qg2kC-00CGSX-R9;
+ Tue, 12 Sep 2023 13:43:53 +0100
+Date: Tue, 12 Sep 2023 13:43:44 +0100
+Message-ID: <87il8f4l4v.wl-maz@kernel.org>
+From: Marc Zyngier <maz@kernel.org>
+To: Douglas Anderson <dianders@chromium.org>
+In-Reply-To: <20230906090246.v13.1.I1223c11c88937bd0cbd9b086d4ef216985797302@changeid>
 References: <20230906160505.2431857-1-dianders@chromium.org>
- <20230906090246.v13.7.I625d393afd71e1766ef73d3bfaac0b347a4afd19@changeid>
-From: Stephen Boyd <swboyd@chromium.org>
-User-Agent: alot/0.10
-Date: Wed, 6 Sep 2023 16:45:55 -0500
-Message-ID: <CAE-0n52v7kcfiX3=4PKUPJpiCm4rmSr8xpKnaD+Q4-BS9t_prg@mail.gmail.com>
-To: Catalin Marinas <catalin.marinas@arm.com>,
- Daniel Thompson <daniel.thompson@linaro.org>, 
- Douglas Anderson <dianders@chromium.org>, Marc Zyngier <maz@kernel.org>, 
- Mark Rutland <mark.rutland@arm.com>, Sumit Garg <sumit.garg@linaro.org>, 
- Will Deacon <will@kernel.org>
-X-Spam-Score: -0.2 (/)
+ <20230906090246.v13.1.I1223c11c88937bd0cbd9b086d4ef216985797302@changeid>
+User-Agent: Wanderlust/2.15.9 (Almost Unreal) SEMI-EPG/1.14.7 (Harue)
+ FLIM-LB/1.14.9 (=?UTF-8?B?R29qxY0=?=) APEL-LB/10.8 EasyPG/1.0.0 Emacs/28.2
+ (x86_64-pc-linux-gnu) MULE/6.0 (HANACHIRUSATO)
+MIME-Version: 1.0 (generated by SEMI-EPG 1.14.7 - "Harue")
+X-SA-Exim-Connect-IP: 104.132.96.100
+X-SA-Exim-Rcpt-To: dianders@chromium.org, mark.rutland@arm.com,
+ catalin.marinas@arm.com, will@kernel.org, sumit.garg@linaro.org,
+ daniel.thompson@linaro.org, linux-arm-kernel@lists.infradead.org,
+ rafael.j.wysocki@intel.com, lecopzer.chen@mediatek.com, wens@csie.org,
+ misono.tomohiro@fujitsu.com, peterz@infradead.org, msys.mizuma@gmail.com,
+ eranian@google.com, ardb@kernel.org, kgdb-bugreport@lists.sourceforge.net,
+ swboyd@chromium.org, linux-perf-users@vger.kernel.org, tglx@linutronix.de,
+ ito-yuichi@fujitsu.com, wenst@chromium.org, linux-kernel@vger.kernel.org
+X-SA-Exim-Mail-From: maz@kernel.org
+X-SA-Exim-Scanned: No (on disco-boy.misterjones.org);
+ SAEximRunCond expanded to false
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Quoting Douglas Anderson (2023-09-06 09:03:02) > Mark the
- three IPI-related globals in smp.c as "__ro_after_init" since > they are only
- ever set in set_smp_ipi_range(), which is marked > "__init". Thi [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  On Wed, 06 Sep 2023 17:02:56 +0100,
+ Douglas Anderson <dianders@chromium.org>
+ wrote: > > As of commit 6abbd6988971 ("irqchip/gic, gic-v3: Make SGIs use
+ > handle_percpu_devid_irq()") SGIs are treated th [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -108,14 +109,12 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.167.52 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.167.52 listed in wl.mailspike.net]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [145.40.73.55 listed in list.dnswl.org]
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qe0La-0004J4-Mc
-Subject: Re: [Kgdb-bugreport] [PATCH v13 7/7] arm64: smp: Mark IPI globals
- as __ro_after_init
+X-Headers-End: 1qg2kU-001h2a-6M
+Subject: Re: [Kgdb-bugreport] [PATCH v13 1/7] irqchip/gic-v3: Enable support
+ for SGIs to act as NMIs
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -127,33 +126,53 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: vschneid@redhat.com, ito-yuichi@fujitsu.com, scott@os.amperecomputing.com,
+Cc: Mark Rutland <mark.rutland@arm.com>,
+ Daniel Thompson <daniel.thompson@linaro.org>, ito-yuichi@fujitsu.com,
  Lecopzer Chen <lecopzer.chen@mediatek.com>,
- Peter Zijlstra <peterz@infradead.org>, kgdb-bugreport@lists.sourceforge.net,
+ Peter Zijlstra <peterz@infradead.org>,
+ Catalin Marinas <catalin.marinas@arm.com>,
  "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
  linux-kernel@vger.kernel.org, Stephane Eranian <eranian@google.com>,
- jpoimboe@kernel.org, linux-perf-users@vger.kernel.org,
- Chen-Yu Tsai <wens@csie.org>, Chen-Yu Tsai <wenst@chromium.org>,
+ Stephen Boyd <swboyd@chromium.org>, linux-perf-users@vger.kernel.org,
+ Chen-Yu Tsai <wenst@chromium.org>, Chen-Yu Tsai <wens@csie.org>,
+ kgdb-bugreport@lists.sourceforge.net,
  Tomohiro Misono <misono.tomohiro@fujitsu.com>,
  Thomas Gleixner <tglx@linutronix.de>, Masayoshi Mizuma <msys.mizuma@gmail.com>,
- Ard Biesheuvel <ardb@kernel.org>, linux-arm-kernel@lists.infradead.org
+ Will Deacon <will@kernel.org>, Ard Biesheuvel <ardb@kernel.org>,
+ linux-arm-kernel@lists.infradead.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Quoting Douglas Anderson (2023-09-06 09:03:02)
-> Mark the three IPI-related globals in smp.c as "__ro_after_init" since
-> they are only ever set in set_smp_ipi_range(), which is marked
-> "__init". This is a better and more secure marking than the old
-> "__read_mostly".
->
-> Suggested-by: Stephen Boyd <swboyd@chromium.org>
+On Wed, 06 Sep 2023 17:02:56 +0100,
+Douglas Anderson <dianders@chromium.org> wrote:
+> 
+> As of commit 6abbd6988971 ("irqchip/gic, gic-v3: Make SGIs use
+> handle_percpu_devid_irq()") SGIs are treated the same as PPIs/EPPIs
+> and use handle_percpu_devid_irq() by default. Unfortunately,
+> handle_percpu_devid_irq() isn't NMI safe, and so to run in an NMI
+> context those should use handle_percpu_devid_fasteoi_nmi().
+> 
+> In order to accomplish this, we just have to make room for SGIs in the
+> array of refcounts that keeps track of which interrupts are set as
+> NMI. We also rename the array and create a new indexing scheme that
+> accounts for SGIs.
+> 
+> Also, enable NMI support prior to gic_smp_init() as allocation of SGIs
+> as IRQs/NMIs happen as part of this routine.
+> 
+> Co-developed-by: Sumit Garg <sumit.garg@linaro.org>
+> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 > Acked-by: Mark Rutland <mark.rutland@arm.com>
 > Tested-by: Chen-Yu Tsai <wenst@chromium.org>
 > Signed-off-by: Douglas Anderson <dianders@chromium.org>
-> ---
 
-Reviewed-by: Stephen Boyd <swboyd@chromium.org>
+Acked-by: Marc Zyngier <maz@kernel.org>
+
+	M.
+
+-- 
+Without deviation from the norm, progress is not possible.
 
 
 _______________________________________________
