@@ -2,29 +2,29 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 99CAF7AE302
-	for <lists+kgdb-bugreport@lfdr.de>; Tue, 26 Sep 2023 02:40:02 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id ED53C7B5804
+	for <lists+kgdb-bugreport@lfdr.de>; Mon,  2 Oct 2023 18:48:40 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1qkw7O-0001V5-RW
+	id 1qnM62-0003ak-IR
 	for lists+kgdb-bugreport@lfdr.de;
-	Tue, 26 Sep 2023 00:40:01 +0000
+	Mon, 02 Oct 2023 16:48:39 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <dianders@chromium.org>) id 1qkw7L-0001Ux-Q9
+ (envelope-from <dianders@chromium.org>) id 1qnM61-0003ad-IH
  for kgdb-bugreport@lists.sourceforge.net;
- Tue, 26 Sep 2023 00:39:58 +0000
+ Mon, 02 Oct 2023 16:48:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
  Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ZnEgEKAhGM5JWN8y/Tiqur2/djSzZqgbL2OPyciIbQ0=; b=VHSSvir1bflUSymRAodl3abqXk
- X8dTFlCrx92CRsyWgZqSS3L+s1XWhIPAv1IDFHUhNTvoU2Tw8pRbByzAhmMdtIE22T07+RVs/QlQl
- CH9Y45JW/U3JyDhf69UZfmvtMtHGhyzjGyz0xy2+wwvpG35o/4qyBzssIXAwQwPjhVLk=;
+ bh=/tGIS2d4IoBhPIJormO2ARUKb4WPqFJw4stm8Ff0wEc=; b=W+Y8NZfmrepWPgvz+BgacJ1TMs
+ XH2FNaHvyJcGnxqnK8N+2VIPW6tctfmyn9Dw+zgT0GljHd0v0e4JD6W+qFAGSSlE8sAa4JK+N3utw
+ k7ftvfTu5kwSi2M4Wj7jN7Fxrwf/U1C9+okmNVooRGkFBxK7kGzjmunCYnyh5C8we2YQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
@@ -32,102 +32,104 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ZnEgEKAhGM5JWN8y/Tiqur2/djSzZqgbL2OPyciIbQ0=; b=ij+ujl5miPJqLY8lfEOHTI0ZKx
- /CsyJl9l6pov02usCiw+uKuLs6mb8KOlyoOUMNQKHT9jandsBw7jjmwhsQhztX2wkqaqeyi3EmGdv
- /eeOTUaCuv+tYwdhkSADjv5wn6Lx5C1lZcwdcNkiJRrQxzAXprhYFl1NirLFv+X1B3zY=;
-Received: from mail-wr1-f52.google.com ([209.85.221.52])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=/tGIS2d4IoBhPIJormO2ARUKb4WPqFJw4stm8Ff0wEc=; b=lw6Qt8x36vhg9NeK0xpx+nGFIa
+ tvX2/VMailnPWGaLv+IZGwIEkgYNkmaPufxk8aAjgY4PzNSfhSDYt9N/zSvsU8jlJGIpX3dHmoUA7
+ GOSD3FUMU9Asqoae6rqzEWlgVN0MSwwjC1VVptZpKAljHTThkKZa/Ei4B48Wjd1hlQnw=;
+Received: from mail-ej1-f53.google.com ([209.85.218.53])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1qkw7G-006YAT-IJ for kgdb-bugreport@lists.sourceforge.net;
- Tue, 26 Sep 2023 00:39:58 +0000
-Received: by mail-wr1-f52.google.com with SMTP id
- ffacd0b85a97d-32172f8a5dbso6426946f8f.3
+ id 1qnM5x-0008Eq-VK for kgdb-bugreport@lists.sourceforge.net;
+ Mon, 02 Oct 2023 16:48:38 +0000
+Received: by mail-ej1-f53.google.com with SMTP id
+ a640c23a62f3a-9b2cee40de8so743727466b.1
  for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 25 Sep 2023 17:39:54 -0700 (PDT)
+ Mon, 02 Oct 2023 09:48:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695688786; x=1696293586;
+ d=chromium.org; s=google; t=1696265304; x=1696870104;
  darn=lists.sourceforge.net; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZnEgEKAhGM5JWN8y/Tiqur2/djSzZqgbL2OPyciIbQ0=;
- b=UXcVi6gGRzHptbts03ClwVIDOajE4EDRFvEnxrBrpdwG5u0ofiboo9VBQUKBwVhEnz
- SwwslOCAZBGX3LnxBeySEHlpvyLZdN6hPbJ3ovNaiJCVW/OFHmPLfq1rbgudFpJ6YB9t
- vbQaqfDpbeBugOWvaP4n2+Ma9bB+pbx2m1Lt0=
+ bh=/tGIS2d4IoBhPIJormO2ARUKb4WPqFJw4stm8Ff0wEc=;
+ b=oZTgVFd1OVlojtTHUs8mywYjIjFuQi1APrcnpQvpKX963rIugaMYJylp0kbpl6xS5X
+ y9bKvEHA3Wfma9saQiGw0RbUgVDxFarCjivbhtbeOytEGxRC3GKrvZd5cTTUmJz3vrGt
+ DhYfHZOHtRJQMqLRJhxEVLM+tnTo5lB3kb1dI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695688786; x=1696293586;
+ d=1e100.net; s=20230601; t=1696265304; x=1696870104;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ZnEgEKAhGM5JWN8y/Tiqur2/djSzZqgbL2OPyciIbQ0=;
- b=AlVDZJUt+r2jl6lctAcosNEol3EXrD5M4BKeZ6d2StqwwwMKwTDWKH+1Uo+2ZftVwb
- 6SObxUmg4hNo7ulHWvSVUfqVxFSwWdeBvtmuDl8CCw39URjAfqUoJ7p6w1pSpAs7RsXb
- 7DhirBikUnZn01O6uxzI7DKm5wam5YSPh1w8n5dLaHUL6B8N7NVIA06aGUjLHsRPUkGG
- FgS+1zjpqJsVsIUSZFcPO8RCvln+pF/Mopanou4z4aePuc2Ay8TVjXDUABfe1JXUjd7/
- OkuA0JSbbWYyfIHPcnDq69QNyqpPHwJbUbQJA1OuSxVlesJMPU9/sDrkb/WrC9uRjUnp
- O0UA==
-X-Gm-Message-State: AOJu0Yy7+Dr7v5ioSCPSIevFK4AoEUzluyjwcr5WXv4NOBuwwa6EE+Ju
- AfLki7W0yHahoTH/YjwW4GXvOiTyKfbxN30XsOD9NAzo
-X-Google-Smtp-Source: AGHT+IH7iJZSsufzC9Nz5t0HAOpSDXbEzmMOqz7FDLVhvpcKiAMQjNa9gCTjrOpHWL/8tPEbb50sKA==
-X-Received: by 2002:adf:f1c9:0:b0:31f:9398:3654 with SMTP id
- z9-20020adff1c9000000b0031f93983654mr7014460wro.40.1695688786362; 
- Mon, 25 Sep 2023 17:39:46 -0700 (PDT)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com.
- [209.85.128.44]) by smtp.gmail.com with ESMTPSA id
- rv7-20020a17090710c700b009adc81bb544sm6971462ejb.106.2023.09.25.17.39.45
+ bh=/tGIS2d4IoBhPIJormO2ARUKb4WPqFJw4stm8Ff0wEc=;
+ b=u3wtCCcmMAc7fmfsCuOwmYZOSVwTMkauuWKXU/dKDczhROF9vkIGAN5quS6o5KzthJ
+ 8cu4dK/XbudKAbjx1Zk+UvPKHwr5t0lSxN9Rr1NiKatK1I7827FXbQP3JJhUH3FV+kdm
+ A3Db4y2K7lB7xedYTBEUjIa43r9J5ofdn9xomc4oUyKXr46m5gQndo8sGsFoCKpiad92
+ BTM/Tg0B8th0mde2hozIkBu27Kotc25WONvvvgP8Zjyljhrp7lu9B98Tr2a7PzC/t9la
+ OAGPomUlJgCMplU0m0NP2yHuV1F6qBLKCGrT88jvvSn6gya34AASoSN092sf/xksjSPv
+ 93HQ==
+X-Gm-Message-State: AOJu0YxERU1UF25IO+5zNpdkC8ayjYT/13itCgORS5cfHHbiLPdDmnIK
+ /KKNy2iezc/O5bEua+GwJFElat8eyBeKwoWWkFIPYVbq
+X-Google-Smtp-Source: AGHT+IHYbcUUVP1V8NWbZ2rlcGoBZHkxiwl6z7Sm1zN5HTa74m32cPr/fcb/9ZAaZqVm1RqqxG1SwQ==
+X-Received: by 2002:a17:907:b1a:b0:9ae:699d:8a31 with SMTP id
+ h26-20020a1709070b1a00b009ae699d8a31mr173237ejl.33.1696265304730; 
+ Mon, 02 Oct 2023 09:48:24 -0700 (PDT)
+Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com.
+ [209.85.208.41]) by smtp.gmail.com with ESMTPSA id
+ zg22-20020a170907249600b009a5f1d15642sm17287315ejb.158.2023.10.02.09.48.23
  for <kgdb-bugreport@lists.sourceforge.net>
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 25 Sep 2023 17:39:45 -0700 (PDT)
-Received: by mail-wm1-f44.google.com with SMTP id
- 5b1f17b1804b1-4063c2ed5ebso2295e9.1
+ Mon, 02 Oct 2023 09:48:24 -0700 (PDT)
+Received: by mail-ed1-f41.google.com with SMTP id
+ 4fb4d7f45d1cf-537f07dfe8eso53a12.1
  for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 25 Sep 2023 17:39:45 -0700 (PDT)
-X-Received: by 2002:a05:600c:3b90:b0:405:35bf:7362 with SMTP id
- n16-20020a05600c3b9000b0040535bf7362mr54102wms.0.1695688785170; Mon, 25 Sep
- 2023 17:39:45 -0700 (PDT)
+ Mon, 02 Oct 2023 09:48:23 -0700 (PDT)
+X-Received: by 2002:a50:96d1:0:b0:522:4741:d992 with SMTP id
+ z17-20020a5096d1000000b005224741d992mr2415eda.4.1696265303058; Mon, 02 Oct
+ 2023 09:48:23 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230906160505.2431857-1-dianders@chromium.org>
  <20230906090246.v13.3.I7209db47ef8ec151d3de61f59005bbc59fe8f113@changeid>
-In-Reply-To: <20230906090246.v13.3.I7209db47ef8ec151d3de61f59005bbc59fe8f113@changeid>
+ <CAD=FV=UBw1-9=LPUydewyOg8oL2WMG+ZCQ=PBpe0CiCs-ToWSg@mail.gmail.com>
+In-Reply-To: <CAD=FV=UBw1-9=LPUydewyOg8oL2WMG+ZCQ=PBpe0CiCs-ToWSg@mail.gmail.com>
 From: Doug Anderson <dianders@chromium.org>
-Date: Mon, 25 Sep 2023 17:39:32 -0700
-X-Gmail-Original-Message-ID: <CAD=FV=UBw1-9=LPUydewyOg8oL2WMG+ZCQ=PBpe0CiCs-ToWSg@mail.gmail.com>
-Message-ID: <CAD=FV=UBw1-9=LPUydewyOg8oL2WMG+ZCQ=PBpe0CiCs-ToWSg@mail.gmail.com>
+Date: Mon, 2 Oct 2023 09:48:08 -0700
+X-Gmail-Original-Message-ID: <CAD=FV=WCcwc71hSMQVQN4AYi7XhKpOwbOZnt8b9iGUgqmvzuKw@mail.gmail.com>
+Message-ID: <CAD=FV=WCcwc71hSMQVQN4AYi7XhKpOwbOZnt8b9iGUgqmvzuKw@mail.gmail.com>
 To: Mark Rutland <mark.rutland@arm.com>,
  Catalin Marinas <catalin.marinas@arm.com>, 
  Will Deacon <will@kernel.org>, Sumit Garg <sumit.garg@linaro.org>, 
  Daniel Thompson <daniel.thompson@linaro.org>, Marc Zyngier <maz@kernel.org>
 X-Spam-Score: -0.2 (/)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
+X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  
- Content preview:  Mark, On Wed, Sep 6, 2023 at 9:06 AM Douglas Anderson <dianders@chromium.org>
-    wrote: > > +#ifdef CONFIG_ARM64_ACPI_PARKING_PROTOCOL > +void arch_send_wakeup_ipi(unsigned
-    int cpu) > +{ > + /* > + * We use [...] 
+ Content preview:  Hi, On Mon, Sep 25, 2023 at 5:39 PM Doug Anderson <dianders@chromium.org>
+    wrote: > > Mark, > > On Wed, Sep 6, 2023 at 9:06 AM Douglas Anderson <dianders@chromium.org>
+    wrote: > > > > +#ifdef CONFIG_ARM [...] 
  
  Content analysis details:   (-0.2 points, 6.0 required)
  
   pts rule name              description
  ---- ---------------------- --------------------------------------------------
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
-                             [209.85.221.52 listed in wl.mailspike.net]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
                               no trust
-                             [209.85.221.52 listed in list.dnswl.org]
+                             [209.85.218.53 listed in list.dnswl.org]
+  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+                             [209.85.218.53 listed in wl.mailspike.net]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+                             author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+                             envelope-from domain
+ -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
+  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+                             valid
+  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qkw7G-006YAT-IJ
+X-Headers-End: 1qnM5x-0008Eq-VK
 Subject: Re: [Kgdb-bugreport] [PATCH v13 3/7] arm64: smp: Remove dedicated
  wakeup IPI
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
@@ -157,23 +159,29 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-TWFyaywKCk9uIFdlZCwgU2VwIDYsIDIwMjMgYXQgOTowNuKAr0FNIERvdWdsYXMgQW5kZXJzb24g
-PGRpYW5kZXJzQGNocm9taXVtLm9yZz4gd3JvdGU6Cj4KPiArI2lmZGVmIENPTkZJR19BUk02NF9B
-Q1BJX1BBUktJTkdfUFJPVE9DT0wKPiArdm9pZCBhcmNoX3NlbmRfd2FrZXVwX2lwaSh1bnNpZ25l
-ZCBpbnQgY3B1KQo+ICt7Cj4gKyAgICAgICAvKgo+ICsgICAgICAgICogV2UgdXNlIGEgc2NoZWR1
-bGVyIElQSSB0byB3YWtlIHRoZSBDUFUgYXMgdGhpcyBhdm9pZHMgdGhlIG5lZWQgZm9yIGEKPiAr
-ICAgICAgICAqIGRlZGljYXRlZCBJUEkgYW5kIHdlIGNhbiBzYWZlbHkgaGFuZGxlIHNwdXJpb3Vz
-IHNjaGVkdWxlciBJUElzLgo+ICsgICAgICAgICovCj4gKyAgICAgICBhcmNoX3NtcF9zZW5kX3Jl
-c2NoZWR1bGUoY3B1KTsKCkkgd2FzIGJhY2twb3J0aW5nIHRoaXMgdG8gb3VyIENocm9tZU9TIGtl
-cm5lbHMgYW5kIG91ciBidWlsZCB0ZXN0IGJvdApub3RpY2VkIHRoYXQgYXJjaF9zbXBfc2VuZF9y
-ZXNjaGVkdWxlKCkgZGlkbid0IGV4aXN0IGluIG9sZGVyIGtlcm5lbHMuClRoYXQncyBmaW5lLS1J
-IGNhbiBhbHdheXMgYWRqdXN0IHRoaXMgcGF0Y2ggd2hlbiBiYWNrcG9ydGluZyBvcgpjaGVycnkt
-cGljayBleHRyYSBwYXRjaGVzLCBidXQgaXQgbWFkZSBtZSB3b25kZXIuIElzIHRoZXJlIGEgcmVh
-c29uCnlvdSBjaG9zZSB0byB1c2UgYXJjaF9zbXBfc2VuZF9yZXNjaGVkdWxlKCkgZGlyZWN0bHkg
-aGVyZSBpbnN0ZWFkIG9mCnNtcF9zZW5kX3Jlc2NoZWR1bGUoKT8gSSBndWVzcyB0aGUgb25seSBk
-aWZmZXJlbmNlIGlzIHRoYXQgeW91J3JlCmJ5cGFzc2luZyB0aGUgdHJhY2luZy4gSXMgdGhhdCBv
-biBwdXJwb3NlPyBTaG91bGQgd2UgYWRkIGEgY29tbWVudAphYm91dCBpdCwgb3IgY2hhbmdlIHRo
-aXMgdG8gc21wX3NlbmRfcmVzY2hlZHVsZSgpPwoKVGhhbmtzIQoKLURvdWcKCgpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpLZ2RiLWJ1Z3JlcG9ydCBtYWls
-aW5nIGxpc3QKS2dkYi1idWdyZXBvcnRAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlz
-dHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2tnZGItYnVncmVwb3J0Cg==
+SGksCgpPbiBNb24sIFNlcCAyNSwgMjAyMyBhdCA1OjM54oCvUE0gRG91ZyBBbmRlcnNvbiA8ZGlh
+bmRlcnNAY2hyb21pdW0ub3JnPiB3cm90ZToKPgo+IE1hcmssCj4KPiBPbiBXZWQsIFNlcCA2LCAy
+MDIzIGF0IDk6MDbigK9BTSBEb3VnbGFzIEFuZGVyc29uIDxkaWFuZGVyc0BjaHJvbWl1bS5vcmc+
+IHdyb3RlOgo+ID4KPiA+ICsjaWZkZWYgQ09ORklHX0FSTTY0X0FDUElfUEFSS0lOR19QUk9UT0NP
+TAo+ID4gK3ZvaWQgYXJjaF9zZW5kX3dha2V1cF9pcGkodW5zaWduZWQgaW50IGNwdSkKPiA+ICt7
+Cj4gPiArICAgICAgIC8qCj4gPiArICAgICAgICAqIFdlIHVzZSBhIHNjaGVkdWxlciBJUEkgdG8g
+d2FrZSB0aGUgQ1BVIGFzIHRoaXMgYXZvaWRzIHRoZSBuZWVkIGZvciBhCj4gPiArICAgICAgICAq
+IGRlZGljYXRlZCBJUEkgYW5kIHdlIGNhbiBzYWZlbHkgaGFuZGxlIHNwdXJpb3VzIHNjaGVkdWxl
+ciBJUElzLgo+ID4gKyAgICAgICAgKi8KPiA+ICsgICAgICAgYXJjaF9zbXBfc2VuZF9yZXNjaGVk
+dWxlKGNwdSk7Cj4KPiBJIHdhcyBiYWNrcG9ydGluZyB0aGlzIHRvIG91ciBDaHJvbWVPUyBrZXJu
+ZWxzIGFuZCBvdXIgYnVpbGQgdGVzdCBib3QKPiBub3RpY2VkIHRoYXQgYXJjaF9zbXBfc2VuZF9y
+ZXNjaGVkdWxlKCkgZGlkbid0IGV4aXN0IGluIG9sZGVyIGtlcm5lbHMuCj4gVGhhdCdzIGZpbmUt
+LUkgY2FuIGFsd2F5cyBhZGp1c3QgdGhpcyBwYXRjaCB3aGVuIGJhY2twb3J0aW5nIG9yCj4gY2hl
+cnJ5LXBpY2sgZXh0cmEgcGF0Y2hlcywgYnV0IGl0IG1hZGUgbWUgd29uZGVyLiBJcyB0aGVyZSBh
+IHJlYXNvbgo+IHlvdSBjaG9zZSB0byB1c2UgYXJjaF9zbXBfc2VuZF9yZXNjaGVkdWxlKCkgZGly
+ZWN0bHkgaGVyZSBpbnN0ZWFkIG9mCj4gc21wX3NlbmRfcmVzY2hlZHVsZSgpPyBJIGd1ZXNzIHRo
+ZSBvbmx5IGRpZmZlcmVuY2UgaXMgdGhhdCB5b3UncmUKPiBieXBhc3NpbmcgdGhlIHRyYWNpbmcu
+IElzIHRoYXQgb24gcHVycG9zZT8gU2hvdWxkIHdlIGFkZCBhIGNvbW1lbnQKPiBhYm91dCBpdCwg
+b3IgY2hhbmdlIHRoaXMgdG8gc21wX3NlbmRfcmVzY2hlZHVsZSgpPwoKRldJVywgSSBwb3N0ZWQg
+YSBwYXRjaCBjaGFuZ2luZyB0aGlzIHRvIHNtcF9zZW5kX3Jlc2NoZWR1bGUoKS4gUGxlYXNlCnll
+bGwgaWYgdGhpcyBpcyBpbmNvcnJlY3QuCgpodHRwczovL2xvcmUua2VybmVsLm9yZy9yLzIwMjMx
+MDAyMDk0NTI2LjIuSTJlNmQyMmZjNDJjY2JmNmIyNjQ2NWEyOGExMGUzNmUwNWNjZjMwNzVAY2hh
+bmdlaWQKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpL
+Z2RiLWJ1Z3JlcG9ydCBtYWlsaW5nIGxpc3QKS2dkYi1idWdyZXBvcnRAbGlzdHMuc291cmNlZm9y
+Z2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2tnZGIt
+YnVncmVwb3J0Cg==
