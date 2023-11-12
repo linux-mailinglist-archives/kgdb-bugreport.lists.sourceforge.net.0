@@ -2,72 +2,72 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 09C407E9085
+	by mail.lfdr.de (Postfix) with ESMTPS id E8CC07E9086
 	for <lists+kgdb-bugreport@lfdr.de>; Sun, 12 Nov 2023 14:30:30 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1r2AXl-0000Te-Ku
+	id 1r2AXm-0002sn-Mb
 	for lists+kgdb-bugreport@lfdr.de;
-	Sun, 12 Nov 2023 13:30:28 +0000
+	Sun, 12 Nov 2023 13:30:29 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <sashal@kernel.org>) id 1r2AXj-0000TV-VX
+ (envelope-from <sashal@kernel.org>) id 1r2AXl-0002sg-GJ
  for kgdb-bugreport@lists.sourceforge.net;
- Sun, 12 Nov 2023 13:30:26 +0000
+ Sun, 12 Nov 2023 13:30:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=IQPPz4jxJwch01VTxO31F0KrRSvsMUSg/HSisS/6vm0=; b=bgVFHAQ4++/ISG69fSpMgwYLK9
- xrfjsrHCiRpKEGgfqJ/s2QsF2JOBPMVXbMjwpmWnrfi9R6RD19PIjbRgiP00QdQ6A99wF7SgWkagE
- giV05GbKQoE05vUOd9TFwQx+p79UFxHAqwvgnO50qSMvVTiXKGBji1Mn5XHbPDzNhSXk=;
+ bh=uoil9CTTm2t5Vsiw/pVhYMYB8u/2080dJp2+HwY6zOA=; b=Qa+DvwYNDL/W/pswNlI+Ho4Msa
+ DgJSIU92Y440xuQ3ybPQ6DMkydP8Y9lYTCY0XynQJJCsl50suhUUHfqEvGZI64sWLAcnBbanP2Iad
+ 1UnnM1E3g7GqhsBvJhdUjvO+qhwCV92IdDdKFOSvIqkOOE77TB78WWjnOKL+AbXOP41I=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=IQPPz4jxJwch01VTxO31F0KrRSvsMUSg/HSisS/6vm0=; b=c
- UjTLooBpbU81Hw5Uuu9qvkvT+0Swn18TFJ7n2NY4zYCxwe5gOyxHahJPIZNiUx8qLa1XY9W+ODRks
- HYEK2SoPY/HLY+WGGPzjwoLuCbRJv3+bWUkatUQDzzEWBOOSKvFMx1FPrhPZsE4hL8UmTlZD64MV7
- aXbxQtd/alqLfSMM=;
-Received: from sin.source.kernel.org ([145.40.73.55])
+ List-Owner:List-Archive; bh=uoil9CTTm2t5Vsiw/pVhYMYB8u/2080dJp2+HwY6zOA=; b=G
+ O4mxcfovaN7geLiiXWkbiOlGi09wABZHNrcCHNKBQ9sfnyU0wCpgEiI55t4UGlTCla/99geoLtTOL
+ 2SKDp4iLefmn15CGhDku7cm5Wy372OGK7xmw8YbduzAX+jPCnAwEP9bgPsy9Y3fTe6djNYZ0JReoB
+ EoM9ihusYi3aYXaE=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1r2AXh-0003aH-OZ for kgdb-bugreport@lists.sourceforge.net;
- Sun, 12 Nov 2023 13:30:26 +0000
+ id 1r2AXj-0003Zz-Ru for kgdb-bugreport@lists.sourceforge.net;
+ Sun, 12 Nov 2023 13:30:28 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id D2469CE0ECD;
+ by dfw.source.kernel.org (Postfix) with ESMTP id 971DF60C43;
+ Sun, 12 Nov 2023 13:30:17 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A4E68C433AB;
  Sun, 12 Nov 2023 13:30:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 63C5DC433BB;
- Sun, 12 Nov 2023 13:30:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1699795814;
- bh=0ANct9uzWMSwze0AymbEtxpr/siGufLZfiZESREAaXE=;
+ s=k20201202; t=1699795817;
+ bh=Cms4YnTTbuEQBpW/YysiUYP4BKHKaSDMT6NsoG3U41w=;
  h=From:To:Cc:Subject:Date:From;
- b=Sjm7gLHRaxgMBb9HcZRLm1YCBe7cA5fMyAyJh+yK9krGN2O63bzsvc/TOfVfG+iF+
- TW50BJRYj9IBGY0iRFOzlsfSqJ9yRyFtHypXc3g7EwKDYAowS1wloWtZgFqEEOo9EG
- 2T+ROdK+DNkwxk3jg4YD6LmoqE7SNkDqcH16te/39KDmGds4s76BqazzZR3Hxw3bYV
- aYD56VPX9OnxpF0a+5prTGJqXPwqgpb2+5kYIPRsffQ8ewuHp0Z4d+KXGq01yi9XWM
- 6w7jZeNazUzdS0PMVUQI4zxHG00A6XP99f6eJPNiDRp3NzWL4BW7ZZU3biILpi/Kx0
- j7PkgZWgKaLPA==
+ b=KDZWl9MV0AezypuIO/m4955TgXuALihuBPKQeg0kHr+wtpJDZ0O8/fF6+V8gAquNS
+ SG2ZSg/UvrZ9JshSfGHaPjXczrI5n/QkmtJTGMVv+nWcPUVOLhkzJfq2Ugh9SHPMvQ
+ oSthcJo7giYOD2/ag4GvYyIwWIqIKj6PG5bFQ+NlgJTFvfbfbMlugLmELTz/TZWHSi
+ T4Xk9o6O5tDewOwRcw18TnMPRriGRlYqhkZE9aHR3GsknjBu7S1j7bgIqVcB2tlMvg
+ pZm8ZVHNzREvGDhZOhkyUC1CmoHp9pzDgLUEgZ+koIzF/bke3aqro02se7VdXjqR/7
+ c621Nym7VLQDg==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Sun, 12 Nov 2023 08:30:11 -0500
-Message-ID: <20231112133011.177297-1-sashal@kernel.org>
+Date: Sun, 12 Nov 2023 08:30:14 -0500
+Message-ID: <20231112133014.177336-1-sashal@kernel.org>
 X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-X-stable-base: Linux 5.10.200
-X-Spam-Score: -2.5 (--)
+X-stable-base: Linux 5.4.260
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
@@ -77,23 +77,24 @@ X-Spam-Report: Spam detection software,
  a kernel panic, it was be observed that the console isn't flushed before
  the `kdb` prompt came up. Specifically, when using the buddy lockup detector
  on arm64 and running: ec [...] 
- Content analysis details:   (-2.5 points, 6.0 required)
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [145.40.73.55 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1r2AXh-0003aH-OZ
-Subject: [Kgdb-bugreport] [PATCH AUTOSEL 5.10] kgdb: Flush console before
+X-Headers-End: 1r2AXj-0003Zz-Ru
+Subject: [Kgdb-bugreport] [PATCH AUTOSEL 5.4] kgdb: Flush console before
  entering kgdb on panic
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -150,10 +151,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 3 insertions(+)
 
 diff --git a/kernel/debug/debug_core.c b/kernel/debug/debug_core.c
-index 0f31b22abe8d9..ef54254a5dd13 100644
+index f88611fadb195..1ab2e97034868 100644
 --- a/kernel/debug/debug_core.c
 +++ b/kernel/debug/debug_core.c
-@@ -1022,6 +1022,9 @@ void kgdb_panic(const char *msg)
+@@ -945,6 +945,9 @@ void kgdb_panic(const char *msg)
  	if (panic_timeout)
  		return;
  
