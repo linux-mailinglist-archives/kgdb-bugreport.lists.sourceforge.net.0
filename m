@@ -2,69 +2,69 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E537B7E9083
-	for <lists+kgdb-bugreport@lfdr.de>; Sun, 12 Nov 2023 14:30:20 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 09C407E9085
+	for <lists+kgdb-bugreport@lfdr.de>; Sun, 12 Nov 2023 14:30:30 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1r2AXb-0004Ps-NU
+	id 1r2AXl-0000Te-Ku
 	for lists+kgdb-bugreport@lfdr.de;
-	Sun, 12 Nov 2023 13:30:19 +0000
+	Sun, 12 Nov 2023 13:30:28 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <sashal@kernel.org>) id 1r2AXa-0004Pl-AB
+ (envelope-from <sashal@kernel.org>) id 1r2AXj-0000TV-VX
  for kgdb-bugreport@lists.sourceforge.net;
- Sun, 12 Nov 2023 13:30:18 +0000
+ Sun, 12 Nov 2023 13:30:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=XjD572+may40qpgX6C1lxFjYjEE7EL3kAww978rcE9c=; b=hpKERW8FZ/4Wk7Rd2ehJk88CBK
- w4K9+zu98ScaRJJ9YAYINdZjmmyddK+OCd1zorzrmIrQxalPZzzWPXiQ5pg7NwmB8He4OGiqC6GaW
- W1f4pkt4vcnoStFHUXjm1z0PDJe0klUtDTF3c6CSZ+i7qcFgVTDbtD+sS8RMTf2UMgdA=;
+ bh=IQPPz4jxJwch01VTxO31F0KrRSvsMUSg/HSisS/6vm0=; b=bgVFHAQ4++/ISG69fSpMgwYLK9
+ xrfjsrHCiRpKEGgfqJ/s2QsF2JOBPMVXbMjwpmWnrfi9R6RD19PIjbRgiP00QdQ6A99wF7SgWkagE
+ giV05GbKQoE05vUOd9TFwQx+p79UFxHAqwvgnO50qSMvVTiXKGBji1Mn5XHbPDzNhSXk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=XjD572+may40qpgX6C1lxFjYjEE7EL3kAww978rcE9c=; b=V
- qBiVfO9+zm4jgOFMJR+SC8WnHMNscWnNxWNR9+xoukFWBYTLj2Di5ImpN0KnM3OHPFr/teKJwojQT
- DxEHixHaHTo+1g/0yIO8/im5FtL9Y76oT+eYg/ieDks2M0NDT3J0AEXGVTQRXA9+SHaVlTTKqokP8
- WwwYcUO8DvxN/Iqs=;
-Received: from ams.source.kernel.org ([145.40.68.75])
+ List-Owner:List-Archive; bh=IQPPz4jxJwch01VTxO31F0KrRSvsMUSg/HSisS/6vm0=; b=c
+ UjTLooBpbU81Hw5Uuu9qvkvT+0Swn18TFJ7n2NY4zYCxwe5gOyxHahJPIZNiUx8qLa1XY9W+ODRks
+ HYEK2SoPY/HLY+WGGPzjwoLuCbRJv3+bWUkatUQDzzEWBOOSKvFMx1FPrhPZsE4hL8UmTlZD64MV7
+ aXbxQtd/alqLfSMM=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1r2AXZ-0003ZP-Kg for kgdb-bugreport@lists.sourceforge.net;
- Sun, 12 Nov 2023 13:30:18 +0000
+ id 1r2AXh-0003aH-OZ for kgdb-bugreport@lists.sourceforge.net;
+ Sun, 12 Nov 2023 13:30:26 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by ams.source.kernel.org (Postfix) with ESMTP id 654AEB80AC5;
- Sun, 12 Nov 2023 13:30:11 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 36419C433AD;
- Sun, 12 Nov 2023 13:30:10 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id D2469CE0ECD;
+ Sun, 12 Nov 2023 13:30:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 63C5DC433BB;
+ Sun, 12 Nov 2023 13:30:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1699795810;
- bh=rSHwLfhtCVBMigQms0wvzh98GAQWIiBb07jyHbJ1hXc=;
+ s=k20201202; t=1699795814;
+ bh=0ANct9uzWMSwze0AymbEtxpr/siGufLZfiZESREAaXE=;
  h=From:To:Cc:Subject:Date:From;
- b=i9KM8E0BDEtlg1PVtdj+bCh8XBuLlxTl/b7LwIQ90dp2GSvxkKtVObRm9eGHfzU6K
- GayTB2nMRV7hBSiht8sQd7ywP/RsUK9hUpDAijEAw7Ghup90uKEB0qTy5lmmxIcS/B
- 6yIMPZrOeH1jcoyiUSkHN+m+AiZ3U+t5qc5y5FxKiZXN9r1mPS81FsNckJCQntF9da
- lihLLy6DfOnfwdljuMstopysG3gBnbB89eskNhrN8SGTXxAI/Svq4GUYeQ7NrwssJV
- TdOo6WZlbaSpi+JmDuaogkTCl4lXv0HLFTQyuko/Ow+teBjidqSyLbQKR+EC2VuUqh
- aVpVDMvbON6zw==
+ b=Sjm7gLHRaxgMBb9HcZRLm1YCBe7cA5fMyAyJh+yK9krGN2O63bzsvc/TOfVfG+iF+
+ TW50BJRYj9IBGY0iRFOzlsfSqJ9yRyFtHypXc3g7EwKDYAowS1wloWtZgFqEEOo9EG
+ 2T+ROdK+DNkwxk3jg4YD6LmoqE7SNkDqcH16te/39KDmGds4s76BqazzZR3Hxw3bYV
+ aYD56VPX9OnxpF0a+5prTGJqXPwqgpb2+5kYIPRsffQ8ewuHp0Z4d+KXGq01yi9XWM
+ 6w7jZeNazUzdS0PMVUQI4zxHG00A6XP99f6eJPNiDRp3NzWL4BW7ZZU3biILpi/Kx0
+ j7PkgZWgKaLPA==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Sun, 12 Nov 2023 08:30:08 -0500
-Message-ID: <20231112133008.177262-1-sashal@kernel.org>
+Date: Sun, 12 Nov 2023 08:30:11 -0500
+Message-ID: <20231112133011.177297-1-sashal@kernel.org>
 X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-X-stable-base: Linux 5.15.138
+X-stable-base: Linux 5.10.200
 X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -81,7 +81,7 @@ X-Spam-Report: Spam detection software,
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [145.40.68.75 listed in list.dnswl.org]
+ medium trust [145.40.73.55 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -92,8 +92,8 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1r2AXZ-0003ZP-Kg
-Subject: [Kgdb-bugreport] [PATCH AUTOSEL 5.15] kgdb: Flush console before
+X-Headers-End: 1r2AXh-0003aH-OZ
+Subject: [Kgdb-bugreport] [PATCH AUTOSEL 5.10] kgdb: Flush console before
  entering kgdb on panic
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -150,10 +150,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 3 insertions(+)
 
 diff --git a/kernel/debug/debug_core.c b/kernel/debug/debug_core.c
-index 7beceb447211d..f40ca4f09afce 100644
+index 0f31b22abe8d9..ef54254a5dd13 100644
 --- a/kernel/debug/debug_core.c
 +++ b/kernel/debug/debug_core.c
-@@ -1018,6 +1018,9 @@ void kgdb_panic(const char *msg)
+@@ -1022,6 +1022,9 @@ void kgdb_panic(const char *msg)
  	if (panic_timeout)
  		return;
  
