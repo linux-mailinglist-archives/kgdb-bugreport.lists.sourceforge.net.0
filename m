@@ -2,69 +2,69 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D0F737E9081
-	for <lists+kgdb-bugreport@lfdr.de>; Sun, 12 Nov 2023 14:30:18 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 24A027E9084
+	for <lists+kgdb-bugreport@lfdr.de>; Sun, 12 Nov 2023 14:30:22 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1r2AXa-0000Sp-90
+	id 1r2AXc-0001SQ-Ip
 	for lists+kgdb-bugreport@lfdr.de;
-	Sun, 12 Nov 2023 13:30:16 +0000
+	Sun, 12 Nov 2023 13:30:20 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <sashal@kernel.org>) id 1r2AXZ-0000Si-6U
+ (envelope-from <sashal@kernel.org>) id 1r2AXa-0001SI-UC
  for kgdb-bugreport@lists.sourceforge.net;
- Sun, 12 Nov 2023 13:30:15 +0000
+ Sun, 12 Nov 2023 13:30:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=iVz6vcgmfTEJjPRiHo4ncfeGBqNi4EJPplEHHXgad+Y=; b=Y2IcuzSr7UAGDjYudXDNqD97hE
- 34hGAJkV5pFfZvxuY9jWTy73M5vjeajQC0o/bBhPL+6L+SpnL3vfp05aBl9b/BTh0119xLGbi1QY+
- EkY7YFG6Q2cVTT3UpRT64UWFPBMGUm/kV05gCsvmMTbY2UMf/BzSJv8C2aDiN+nWFfq8=;
+ bh=LwCoi2/hBcr1zKH1YE3Abh0B2ICkPke+vw/dc8rtRDY=; b=cTCy/AjzVY0k664kKI0a9VFI2b
+ kBJfzu5aP21cLT7MCntxMpzyv3fH5hY+tFMbL4wh4td2bPvXPuP6ULUTxjbx2SW2SHpEDV/6RvtpP
+ nlK2w5+wBKO5IHc2qh0eL3D2KzihXJtw0G/OLdaVGwIzfIrXgMczm9GEw/5uf6jTPqao=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=iVz6vcgmfTEJjPRiHo4ncfeGBqNi4EJPplEHHXgad+Y=; b=b
- Q0+r0GDiWh5QsRkBZf4uUdE+Y0B8vh2ha3bOfKfvXESzbA904MdX7fi7d/hJ7ZC1DTVxI9qvv2zFA
- y8aEf8L/PP4Ou7eKkZzQHJYHrNxjhk0sahbCwr5Dmwsx1/IXnyMcuLXLZY1vMK+QoWivTBKgKtBcd
- D9dpO6/9wV42/bx4=;
+ List-Owner:List-Archive; bh=LwCoi2/hBcr1zKH1YE3Abh0B2ICkPke+vw/dc8rtRDY=; b=B
+ Exq26QKyPNdz2sS3iIBXJ4+086yXB7EFmj/r5gek2m+JdmzZYuGcNaPWFWSMthiRg0Izk38h8NDMM
+ e+bkY5k/X/x4BrD3zk6Fp5ZjTUUo+UK6KX2NdPGSfxaqHHULWhmK9RPqgO4HRm+WNJgJCl1mJpN4p
+ scx46f0aWQ3r0osQ=;
 Received: from sin.source.kernel.org ([145.40.73.55])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1r2AXQ-0003Xr-R3 for kgdb-bugreport@lists.sourceforge.net;
- Sun, 12 Nov 2023 13:30:15 +0000
+ id 1r2AXa-003HcK-IF for kgdb-bugreport@lists.sourceforge.net;
+ Sun, 12 Nov 2023 13:30:19 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id A7418CE0EE9;
- Sun, 12 Nov 2023 13:29:57 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9FCE7C433C9;
- Sun, 12 Nov 2023 13:29:55 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id 13181CE0ED3;
+ Sun, 12 Nov 2023 13:30:07 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A68B5C433C8;
+ Sun, 12 Nov 2023 13:30:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1699795796;
- bh=JZZrqTDdJSuxU5MLpAn5uf5riXSkGMInIf8m1NqXxDk=;
+ s=k20201202; t=1699795802;
+ bh=tNC/DsCjLvIyEu8EYISzzrl6+JlkcbjlQUsWvWqeMGM=;
  h=From:To:Cc:Subject:Date:From;
- b=REa0CdnXCd2gfthn0+5I3wmT1sNBEtNqMOBoJ11RIg1hzHvXvCa0TG+xx8T5kSFqu
- HJgJ98xLq8duHNyIYGbL+p6bbUFVEE2RgIOoSqMGjw2PJAFZluJA7ZqUJrXJUaen9J
- Bq9rCIn+PBjyNEjse0sO/VT0MCvJRXhXPqyY3H7XXYY7kKbBDLlHALIlXg5WxsSmFf
- Zv3oc96cdEIyFNZDNCsJhWdfC1Bwd+9lmE/EXZ9gDGvI1vX40IIWz6kZCns6lA/Zy6
- lNUD5Enw7PIPaTGqE3Hpu3Bf0jsxEqi4r+80XiUGgaNDvG/JIk6rPJI5pOYYMa+7eE
- mQjge9oWLwUFA==
+ b=tVF5aTDB9F52otH7aU4PSLBpH+Pp6PjAp+E5rdTUWDYQrUjTfoesX1UmM+w46o5AF
+ kNtpGG9307hmCguiuTcyB7BemM78Yyt63RATDkDqHOcwirdWSrXohek8+Swcjy/2d0
+ RF/3zK+JohdmO7LwfGVRrktz6CAvZ6Rj3koFPOAGq29OXUzHaUwIEy3UxG9NqWlA9h
+ hYmv9ePRLDMSwR1x1mqq3B26zJQK6MAovfC2wy8RX3hwXMfJxn+OhNIM8X9KsduARC
+ 1vLRSCFwt6mPVyHfoZTQRztfJnBoedslcbIjp1c5y+k1FuGF/ExkPj73/8EI2FdtSF
+ HJE+P5Ex+FoLw==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Sun, 12 Nov 2023 08:29:51 -0500
-Message-ID: <20231112132953.177067-1-sashal@kernel.org>
+Date: Sun, 12 Nov 2023 08:29:58 -0500
+Message-ID: <20231112132959.177146-1-sashal@kernel.org>
 X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-X-stable-base: Linux 6.6.1
+X-stable-base: Linux 6.5.11
 X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -93,8 +93,8 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1r2AXQ-0003Xr-R3
-Subject: [Kgdb-bugreport] [PATCH AUTOSEL 6.6 1/2] kgdb: Flush console before
+X-Headers-End: 1r2AXa-003HcK-IF
+Subject: [Kgdb-bugreport] [PATCH AUTOSEL 6.5 1/2] kgdb: Flush console before
  entering kgdb on panic
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -151,7 +151,7 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 3 insertions(+)
 
 diff --git a/kernel/debug/debug_core.c b/kernel/debug/debug_core.c
-index 621037a0aa870..ce1bb2301c061 100644
+index d5e9ccde3ab8e..3a904d8697c8f 100644
 --- a/kernel/debug/debug_core.c
 +++ b/kernel/debug/debug_core.c
 @@ -1006,6 +1006,9 @@ void kgdb_panic(const char *msg)
