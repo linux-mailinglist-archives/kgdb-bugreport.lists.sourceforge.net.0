@@ -2,118 +2,131 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B5CED80EFAD
-	for <lists+kgdb-bugreport@lfdr.de>; Tue, 12 Dec 2023 16:08:52 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1079E80DE63
+	for <lists+kgdb-bugreport@lfdr.de>; Mon, 11 Dec 2023 23:40:27 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1rD4NO-0002HG-Ly
+	id 1rCows-0000F2-Qe
 	for lists+kgdb-bugreport@lfdr.de;
-	Tue, 12 Dec 2023 15:08:51 +0000
+	Mon, 11 Dec 2023 22:40:25 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <michael@amarulasolutions.com>) id 1rBipf-00075H-6v
+ (envelope-from <dianders@chromium.org>) id 1rCows-0000Ew-7z
  for kgdb-bugreport@lists.sourceforge.net;
- Fri, 08 Dec 2023 21:56:27 +0000
+ Mon, 11 Dec 2023 22:40:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
+ Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
+ Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+ :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=6V8Ylaoxxzu+9oG2y6Rx/LCYzw5rlCqx8iBGwVLGR7U=; b=BclA2Vv+G5BTCMvWoobIxq94oI
- K5v4Q49lbRcOqLUx6w1VwZpZBXLxdBmwKKrhQ7k7Gl9AEsPPGdN4XIxjmtiBs26tpmkpheeNkzftV
- mYiCrI8MQzYw/DabXK5S6uMsR1zLO+N8jq4FX6SnXoD4iy4YL7EefTfi3brc+r89Ex+U=;
+ bh=SySyhdl+LwK97eXIEdoblEzUW4l78p2e3ZeB9Nc8urE=; b=TWr2SW9Wq6edsP4huREyaqTdbW
+ dD1BGif18UvWj88fTQXqhknTgkdhz5flBBFC3MAyYuoGHH0jATZA6CLyrdOebU36RlqqpHklI8kkK
+ Wt6FH/ZOAHVmF+gcD2qiL0liGzCIxmbO0rvSYdjJ6msK3sdYKgykLqF/wRUVPtUXU2uM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=6V8Ylaoxxzu+9oG2y6Rx/LCYzw5rlCqx8iBGwVLGR7U=; b=H
- tmlvq0/zshJ3YpE5k6pcIfH6kp+IRunok5o/MufBc75flKL3p+eDFRfZQrtyrMOJm93pgJXO+sH8b
- imYQyCQi9XepelLc+gM1m5ifckK/Rvg+UZi8CORTzZfkxZ43fhLAbHN3nq64jDVBopeEduGBcaDLr
- K4JkX0pelS59SmZE=;
-Received: from mail-ed1-f42.google.com ([209.85.208.42])
+ h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
+ :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=SySyhdl+LwK97eXIEdoblEzUW4l78p2e3ZeB9Nc8urE=; b=ZQjQyf+xpPxSOQ6dmny5GU2CB9
+ v8wekHpCQcsghArAYTa5ITzIUjkWwRBDv4SSR9UX7jwk172SYpu7+0LWYlGALFZcfckEZJcUi6XmM
+ G0HuDEvGA+ta9f3xEsGiOzLMJwQWJuchRll4uY+7yWdH/o85wxnBm1u2nORTJhO7k8j0=;
+Received: from mail-wm1-f45.google.com ([209.85.128.45])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1rBipc-00017d-PV for kgdb-bugreport@lists.sourceforge.net;
- Fri, 08 Dec 2023 21:56:27 +0000
-Received: by mail-ed1-f42.google.com with SMTP id
- 4fb4d7f45d1cf-54cc60f3613so3363716a12.2
+ id 1rCowq-0007jU-EN for kgdb-bugreport@lists.sourceforge.net;
+ Mon, 11 Dec 2023 22:40:25 +0000
+Received: by mail-wm1-f45.google.com with SMTP id
+ 5b1f17b1804b1-40c0fc1cf3dso52544395e9.0
  for <kgdb-bugreport@lists.sourceforge.net>;
- Fri, 08 Dec 2023 13:56:24 -0800 (PST)
+ Mon, 11 Dec 2023 14:40:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1702072578; x=1702677378;
+ d=chromium.org; s=google; t=1702334413; x=1702939213;
  darn=lists.sourceforge.net; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=6V8Ylaoxxzu+9oG2y6Rx/LCYzw5rlCqx8iBGwVLGR7U=;
- b=KYFgC+fm5fUxoUcUPMXICD4mqvuMz8/6UWX0V09gXPYhR91eLMzxtY3zXURVSzqFop
- QV/ew8+9kG81UZU8Y+n4FodYOZS348Cgz+UsYw/XiQVbap7peBxPzxzXbXMUfIBGGnaA
- xBnNK7BOwZcNuH/A09rPuc58lgUbBh3NPspJA=
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=SySyhdl+LwK97eXIEdoblEzUW4l78p2e3ZeB9Nc8urE=;
+ b=jxASOkbSEYUtOEgdmb/0hUziZw8okpvkkEqz03qNaENb+N6QQFpKvhgWr0qumITyJD
+ cWaankWy1A5izDv8V+lb6+9rdgo9JEOlZlrPiKGPaMW26Ek+vLxYoh+1RLiA5vfcb9KR
+ /AtfVnhaqerwhyRU26RVB0koxZG8gX+tLTU4s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702072578; x=1702677378;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=6V8Ylaoxxzu+9oG2y6Rx/LCYzw5rlCqx8iBGwVLGR7U=;
- b=MDVMchk8dVA3ctgMVcdMxQQsCThxcC1nbfTL1SR4vPqoSus1yCkHM4PdrKoP3AJfZb
- vWkCK38MpqJ9++dmAfdcNiA+pttHGJv54bVezwI9UCmlDlXEURi1itfwNZ7h/v2LdBM4
- 6EqwR5wUrXBMg8XxmMI+9bnZiO1Ljx+TdXXfU0sgh59XzmUkPsnarLcrHGFxvdoHwP+r
- 96Jx86YLS4FwJ5ETD4O+C5pYfcGXAj63sI1sZWho+Mc9C8Qqo5/u/GBhPF2MCzZ1O8xX
- RJ40UwgN5Fg4U3EezF0ARh4fVxgsPtJv8BY7Tg3NSIA+c7cThPfe8F8gQoe5WSxzv7fo
- w/2A==
-X-Gm-Message-State: AOJu0YzGc/52VTJrHcUDT26PO8NORSEy/nkQbxMMIMI3nGWFnT9m1kw2
- 94ge3SYga2wo2YUZNq15xDlldeHFqlQ/Dy4sIk0ApQ==
-X-Google-Smtp-Source: AGHT+IGYN5HCwJK3OM8bxqFpusenKLhgt3chUXjnxN08LF0iP0PwVv99wQqo+2Zb35veTwsVVm6utA==
-X-Received: by 2002:a7b:c4cb:0:b0:40b:5e21:cc28 with SMTP id
- g11-20020a7bc4cb000000b0040b5e21cc28mr296135wmk.83.1702070930308; 
- Fri, 08 Dec 2023 13:28:50 -0800 (PST)
-Received: from panicking.amarulasolutions.com ([2.198.79.154])
- by smtp.gmail.com with ESMTPSA id
- e12-20020a05600c4e4c00b0040b398f0585sm4081068wmq.9.2023.12.08.13.28.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 Dec 2023 13:28:49 -0800 (PST)
-From: Michael Trimarchi <michael@amarulasolutions.com>
-To: Jason Wessel <jason.wessel@windriver.com>,
- Daniel Thompson <daniel.thompson@linaro.org>
-Date: Fri,  8 Dec 2023 22:28:45 +0100
-Message-Id: <20231208212845.1679621-1-michael@amarulasolutions.com>
-X-Mailer: git-send-email 2.40.1
+ d=1e100.net; s=20230601; t=1702334413; x=1702939213;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=SySyhdl+LwK97eXIEdoblEzUW4l78p2e3ZeB9Nc8urE=;
+ b=So02Ozhn8ZXOW4eZSomO/out9/tl1mA8ztN7op6Qn58l08mflP44tn241sgx95VF5s
+ S22dLbm6ew15l+0J4BZqsrOPkQMiLgQqABFsXWp+hCSc6YI5mNx/Zja4de6/S8xdNoSL
+ N/mXblxtCJFpO9F/loJLK7QosxF427TppWi8ac9Xj/+7TBh95eE7XMlg9uSksPt2re68
+ 1V17o9CsKKaWiHUMYxR4spCITEbLDTW7rDTm0YwndC14cRdMHoQAqa2Y+HGL4WH2Zcn8
+ bOjX/nPIpPBCZdFoNCIBD2htR0dfAoqg8rfwtKuVC0cct8sf7MKgqQSNwd7B/B1fHSjT
+ yW5Q==
+X-Gm-Message-State: AOJu0YznADX5JbltOTQsMgYBdWVP307icxB1n0CUUfAVrI+Av1jIL4AU
+ 2fOo0gRsPKLI1Ysgb82Qdb9GGtQX5SWScXVEeZT2nNtr
+X-Google-Smtp-Source: AGHT+IFgEKwT6nGyruMnHDn77dpUSgtXcYIlGNuiaCtY9/B/FP74mA29ivmdMwZGgJlHgcDb6HkZXw==
+X-Received: by 2002:a17:906:3c57:b0:a19:a19b:78b7 with SMTP id
+ i23-20020a1709063c5700b00a19a19b78b7mr2297229ejg.122.1702330750123; 
+ Mon, 11 Dec 2023 13:39:10 -0800 (PST)
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com.
+ [209.85.128.48]) by smtp.gmail.com with ESMTPSA id
+ d11-20020a170907272b00b00a1e2aa3d094sm5439700ejl.173.2023.12.11.13.39.09
+ for <kgdb-bugreport@lists.sourceforge.net>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 11 Dec 2023 13:39:10 -0800 (PST)
+Received: by mail-wm1-f48.google.com with SMTP id
+ 5b1f17b1804b1-40c3963f9fcso4195e9.1
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Mon, 11 Dec 2023 13:39:09 -0800 (PST)
+X-Received: by 2002:a05:600c:1e27:b0:40b:5972:f56b with SMTP id
+ ay39-20020a05600c1e2700b0040b5972f56bmr252603wmb.3.1702330749230; Mon, 11 Dec
+ 2023 13:39:09 -0800 (PST)
 MIME-Version: 1.0
+References: <20231208212845.1679621-1-michael@amarulasolutions.com>
+In-Reply-To: <20231208212845.1679621-1-michael@amarulasolutions.com>
+From: Doug Anderson <dianders@chromium.org>
+Date: Mon, 11 Dec 2023 13:38:51 -0800
+X-Gmail-Original-Message-ID: <CAD=FV=WthrukuM5e6VH4wKH0CQ5k08A_g_Ehpo-NsouxxCiibw@mail.gmail.com>
+Message-ID: <CAD=FV=WthrukuM5e6VH4wKH0CQ5k08A_g_Ehpo-NsouxxCiibw@mail.gmail.com>
+To: Michael Trimarchi <michael@amarulasolutions.com>
 X-Spam-Score: -0.2 (/)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Use late_initcall_sync insted of module init to be sure that
- serial driver is really probed and get take handover from early driver. The
- 8250 register the platform driver after the 8250 core is initia [...] 
+ 
+ Content preview:  Hi, On Fri, Dec 8, 2023 at 1:28 PM Michael Trimarchi <michael@amarulasolutions.com>
+    wrote: > > Use late_initcall_sync insted of module init to be sure that >
+    serial driver is really probed and get take [...] 
+ 
  Content analysis details:   (-0.2 points, 6.0 required)
- pts rule name              description
+ 
+  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.208.42 listed in wl.mailspike.net]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.208.42 listed in list.dnswl.org]
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+                              no trust
+                             [209.85.128.45 listed in list.dnswl.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+                             [209.85.128.45 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+                             author's domain
+  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+                             valid
+ -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+                             envelope-from domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1rBipc-00017d-PV
-X-Mailman-Approved-At: Tue, 12 Dec 2023 15:08:49 +0000
-Subject: [Kgdb-bugreport] [RFC PATCH] tty: serial: kgdboc: Fix 8250_* kgd
- over serial
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1rCowq-0007jU-EN
+Subject: Re: [Kgdb-bugreport] [RFC PATCH] tty: serial: kgdboc: Fix 8250_*
+ kgd over serial
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -125,105 +138,122 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- linux-kernel@vger.kernel.org, linux-serial@vger.kernel.org,
+Cc: Daniel Thompson <daniel.thompson@linaro.org>,
  kgdb-bugreport@lists.sourceforge.net,
- Michael Trimarchi <michael@amarulasolutions.com>,
+ Jason Wessel <jason.wessel@windriver.com>, linux-kernel@vger.kernel.org,
+ linux-serial@vger.kernel.org, Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
  Jiri Slaby <jirislaby@kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Use late_initcall_sync insted of module init to be sure that
-serial driver is really probed and get take handover from
-early driver. The 8250 register the platform driver after
-the 8250 core is initialized. As shown by kdbg
-
-Thread 2 received signal SIGSEGV, Segmentation fault.
-[Switching to Thread 1]
-_outb (addr=<optimized out>, value=<optimized out>) at ./include/asm-generic/io.h:584
-584		__raw_writeb(value, PCI_IOBASE + addr);
-(gdb) bt
-
-This section of the code is too early because in this case
-the omap serial is not probed
-
-Thread 2 received signal SIGSEGV, Segmentation fault.
-[Switching to Thread 1]
-_outb (addr=<optimized out>, value=<optimized out>) at ./include/asm-generic/io.h:584
-584		__raw_writeb(value, PCI_IOBASE + addr);
-(gdb) bt
-
-Thread 2 received signal SIGSEGV, Segmentation fault.
-[Switching to Thread 1]
-_outb (addr=<optimized out>, value=<optimized out>) at ./include/asm-generic/io.h:584
-584		__raw_writeb(value, PCI_IOBASE + addr);
-(gdb) bt
-0  _outb (addr=<optimized out>, value=<optimized out>) at ./include/asm-generic/io.h:584
-1  logic_outb (value=0 '\000', addr=18446739675637874689) at lib/logic_pio.c:299
-2  0xffff80008082dfcc in io_serial_out (p=0x0, offset=16760830, value=0) at drivers/tty/serial/8250/8250_port.c:416
-3  0xffff80008082fe34 in serial_port_out (value=<optimized out>, offset=<optimized out>, up=<optimized out>)
-    at ./include/linux/serial_core.h:677
-4  serial8250_do_set_termios (port=0xffff8000828ee940 <serial8250_ports+1568>, termios=0xffff80008292b93c, old=0x0)
-    at drivers/tty/serial/8250/8250_port.c:2860
-5  0xffff800080830064 in serial8250_set_termios (port=0xfffffbfffe800000, termios=0xffbffe, old=0x0)
-    at drivers/tty/serial/8250/8250_port.c:2912
-6  0xffff80008082571c in uart_set_options (port=0xffff8000828ee940 <serial8250_ports+1568>, co=0x0, baud=115200, parity=110, bits=8, flow=110)
-    at drivers/tty/serial/serial_core.c:2285
-7  0xffff800080828434 in uart_poll_init (driver=0xfffffbfffe800000, line=16760830, options=0xffff8000828f7506 <config+6> "115200n8")
-    at drivers/tty/serial/serial_core.c:2656
-8  0xffff800080801690 in tty_find_polling_driver (name=0xffff8000828f7500 <config> "ttyS2,115200n8", line=0xffff80008292ba90)
-    at drivers/tty/tty_io.c:410
-9  0xffff80008086c0b0 in configure_kgdboc () at drivers/tty/serial/kgdboc.c:194
-10 0xffff80008086c1ec in kgdboc_probe (pdev=0xfffffbfffe800000) at drivers/tty/serial/kgdboc.c:249
-11 0xffff8000808b399c in platform_probe (_dev=0xffff000000ebb810) at drivers/base/platform.c:1404
-12 0xffff8000808b0b44 in call_driver_probe (drv=<optimized out>, dev=<optimized out>) at drivers/base/dd.c:579
-13 really_probe (dev=0xffff000000ebb810, drv=0xffff80008277f138 <kgdboc_platform_driver+48>) at drivers/base/dd.c:658
-14 0xffff8000808b0d2c in __driver_probe_device (drv=0xffff80008277f138 <kgdboc_platform_driver+48>, dev=0xffff000000ebb810)
-    at drivers/base/dd.c:800
-15 0xffff8000808b0eb8 in driver_probe_device (drv=0xfffffbfffe800000, dev=0xffff000000ebb810) at drivers/base/dd.c:830
-16 0xffff8000808b0ff4 in __device_attach_driver (drv=0xffff80008277f138 <kgdboc_platform_driver+48>, _data=0xffff80008292bc48)
-    at drivers/base/dd.c:958
-17 0xffff8000808ae970 in bus_for_each_drv (bus=0xfffffbfffe800000, start=0x0, data=0xffff80008292bc48,
-    fn=0xffff8000808b0f3c <__device_attach_driver>) at drivers/base/bus.c:457
-18 0xffff8000808b1408 in __device_attach (dev=0xffff000000ebb810, allow_async=true) at drivers/base/dd.c:1030
-19 0xffff8000808b16d8 in device_initial_probe (dev=0xfffffbfffe800000) at drivers/base/dd.c:1079
-20 0xffff8000808af9f4 in bus_probe_device (dev=0xffff000000ebb810) at drivers/base/bus.c:532
-21 0xffff8000808ac77c in device_add (dev=0xfffffbfffe800000) at drivers/base/core.c:3625
-22 0xffff8000808b3428 in platform_device_add (pdev=0xffff000000ebb800) at drivers/base/platform.c:716
-23 0xffff800081b5dc0c in init_kgdboc () at drivers/tty/serial/kgdboc.c:292
-24 0xffff800080014db0 in do_one_initcall (fn=0xffff800081b5dba4 <init_kgdboc>) at init/main.c:1236
-25 0xffff800081b0114c in do_initcall_level (command_line=<optimized out>, level=<optimized out>) at init/main.c:1298
-26 do_initcalls () at init/main.c:1314
-27 do_basic_setup () at init/main.c:1333
-28 kernel_init_freeable () at init/main.c:1551
-29 0xffff8000810271ec in kernel_init (unused=0xfffffbfffe800000) at init/main.c:1441
-30 0xffff800080015e80 in ret_from_fork () at arch/arm64/kernel/entry.S:857
-
-Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
----
- drivers/tty/serial/kgdboc.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/drivers/tty/serial/kgdboc.c b/drivers/tty/serial/kgdboc.c
-index 7ce7bb164005..7f8364507f55 100644
---- a/drivers/tty/serial/kgdboc.c
-+++ b/drivers/tty/serial/kgdboc.c
-@@ -622,7 +622,7 @@ console_initcall(kgdboc_earlycon_late_init);
- 
- #endif /* IS_BUILTIN(CONFIG_KGDB_SERIAL_CONSOLE) */
- 
--module_init(init_kgdboc);
-+late_initcall_sync(init_kgdboc);
- module_exit(exit_kgdboc);
- module_param_call(kgdboc, param_set_kgdboc_var, param_get_string, &kps, 0644);
- MODULE_PARM_DESC(kgdboc, "<serial_device>[,baud]");
--- 
-2.40.1
-
-
-
-_______________________________________________
-Kgdb-bugreport mailing list
-Kgdb-bugreport@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport
+SGksCgpPbiBGcmksIERlYyA4LCAyMDIzIGF0IDE6MjjigK9QTSBNaWNoYWVsIFRyaW1hcmNoaQo8
+bWljaGFlbEBhbWFydWxhc29sdXRpb25zLmNvbT4gd3JvdGU6Cj4KPiBVc2UgbGF0ZV9pbml0Y2Fs
+bF9zeW5jIGluc3RlZCBvZiBtb2R1bGUgaW5pdCB0byBiZSBzdXJlIHRoYXQKPiBzZXJpYWwgZHJp
+dmVyIGlzIHJlYWxseSBwcm9iZWQgYW5kIGdldCB0YWtlIGhhbmRvdmVyIGZyb20KPiBlYXJseSBk
+cml2ZXIuCgpBd2Vzb21lIHRoYXQgeW91IHVzZWQgdGhlIGVhcmx5Y29uIGRyaXZlciB0byBkZWJ1
+ZyBwcm9ibGVtcyB3aXRoCnJlZ2lzdGVyaW5nIHRoZSBub3JtYWwgZHJpdmVyISA6LVAKCgo+IFRo
+ZSA4MjUwIHJlZ2lzdGVyIHRoZSBwbGF0Zm9ybSBkcml2ZXIgYWZ0ZXIKPiB0aGUgODI1MCBjb3Jl
+IGlzIGluaXRpYWxpemVkLiBBcyBzaG93biBieSBrZGJnCj4KPiBUaHJlYWQgMiByZWNlaXZlZCBz
+aWduYWwgU0lHU0VHViwgU2VnbWVudGF0aW9uIGZhdWx0Lgo+IFtTd2l0Y2hpbmcgdG8gVGhyZWFk
+IDFdCj4gX291dGIgKGFkZHI9PG9wdGltaXplZCBvdXQ+LCB2YWx1ZT08b3B0aW1pemVkIG91dD4p
+IGF0IC4vaW5jbHVkZS9hc20tZ2VuZXJpYy9pby5oOjU4NAo+IDU4NCAgICAgICAgICAgICBfX3Jh
+d193cml0ZWIodmFsdWUsIFBDSV9JT0JBU0UgKyBhZGRyKTsKPiAoZ2RiKSBidAo+Cj4gVGhpcyBz
+ZWN0aW9uIG9mIHRoZSBjb2RlIGlzIHRvbyBlYXJseSBiZWNhdXNlIGluIHRoaXMgY2FzZQo+IHRo
+ZSBvbWFwIHNlcmlhbCBpcyBub3QgcHJvYmVkCj4KPiBUaHJlYWQgMiByZWNlaXZlZCBzaWduYWwg
+U0lHU0VHViwgU2VnbWVudGF0aW9uIGZhdWx0Lgo+IFtTd2l0Y2hpbmcgdG8gVGhyZWFkIDFdCj4g
+X291dGIgKGFkZHI9PG9wdGltaXplZCBvdXQ+LCB2YWx1ZT08b3B0aW1pemVkIG91dD4pIGF0IC4v
+aW5jbHVkZS9hc20tZ2VuZXJpYy9pby5oOjU4NAo+IDU4NCAgICAgICAgICAgICBfX3Jhd193cml0
+ZWIodmFsdWUsIFBDSV9JT0JBU0UgKyBhZGRyKTsKPiAoZ2RiKSBidAo+Cj4gVGhyZWFkIDIgcmVj
+ZWl2ZWQgc2lnbmFsIFNJR1NFR1YsIFNlZ21lbnRhdGlvbiBmYXVsdC4KPiBbU3dpdGNoaW5nIHRv
+IFRocmVhZCAxXQo+IF9vdXRiIChhZGRyPTxvcHRpbWl6ZWQgb3V0PiwgdmFsdWU9PG9wdGltaXpl
+ZCBvdXQ+KSBhdCAuL2luY2x1ZGUvYXNtLWdlbmVyaWMvaW8uaDo1ODQKPiA1ODQgICAgICAgICAg
+ICAgX19yYXdfd3JpdGViKHZhbHVlLCBQQ0lfSU9CQVNFICsgYWRkcik7Cj4gKGdkYikgYnQKPiAw
+ICBfb3V0YiAoYWRkcj08b3B0aW1pemVkIG91dD4sIHZhbHVlPTxvcHRpbWl6ZWQgb3V0PikgYXQg
+Li9pbmNsdWRlL2FzbS1nZW5lcmljL2lvLmg6NTg0Cj4gMSAgbG9naWNfb3V0YiAodmFsdWU9MCAn
+XDAwMCcsIGFkZHI9MTg0NDY3Mzk2NzU2Mzc4NzQ2ODkpIGF0IGxpYi9sb2dpY19waW8uYzoyOTkK
+PiAyICAweGZmZmY4MDAwODA4MmRmY2MgaW4gaW9fc2VyaWFsX291dCAocD0weDAsIG9mZnNldD0x
+Njc2MDgzMCwgdmFsdWU9MCkgYXQgZHJpdmVycy90dHkvc2VyaWFsLzgyNTAvODI1MF9wb3J0LmM6
+NDE2Cj4gMyAgMHhmZmZmODAwMDgwODJmZTM0IGluIHNlcmlhbF9wb3J0X291dCAodmFsdWU9PG9w
+dGltaXplZCBvdXQ+LCBvZmZzZXQ9PG9wdGltaXplZCBvdXQ+LCB1cD08b3B0aW1pemVkIG91dD4p
+Cj4gICAgIGF0IC4vaW5jbHVkZS9saW51eC9zZXJpYWxfY29yZS5oOjY3Nwo+IDQgIHNlcmlhbDgy
+NTBfZG9fc2V0X3Rlcm1pb3MgKHBvcnQ9MHhmZmZmODAwMDgyOGVlOTQwIDxzZXJpYWw4MjUwX3Bv
+cnRzKzE1Njg+LCB0ZXJtaW9zPTB4ZmZmZjgwMDA4MjkyYjkzYywgb2xkPTB4MCkKPiAgICAgYXQg
+ZHJpdmVycy90dHkvc2VyaWFsLzgyNTAvODI1MF9wb3J0LmM6Mjg2MAo+IDUgIDB4ZmZmZjgwMDA4
+MDgzMDA2NCBpbiBzZXJpYWw4MjUwX3NldF90ZXJtaW9zIChwb3J0PTB4ZmZmZmZiZmZmZTgwMDAw
+MCwgdGVybWlvcz0weGZmYmZmZSwgb2xkPTB4MCkKPiAgICAgYXQgZHJpdmVycy90dHkvc2VyaWFs
+LzgyNTAvODI1MF9wb3J0LmM6MjkxMgo+IDYgIDB4ZmZmZjgwMDA4MDgyNTcxYyBpbiB1YXJ0X3Nl
+dF9vcHRpb25zIChwb3J0PTB4ZmZmZjgwMDA4MjhlZTk0MCA8c2VyaWFsODI1MF9wb3J0cysxNTY4
+PiwgY289MHgwLCBiYXVkPTExNTIwMCwgcGFyaXR5PTExMCwgYml0cz04LCBmbG93PTExMCkKPiAg
+ICAgYXQgZHJpdmVycy90dHkvc2VyaWFsL3NlcmlhbF9jb3JlLmM6MjI4NQo+IDcgIDB4ZmZmZjgw
+MDA4MDgyODQzNCBpbiB1YXJ0X3BvbGxfaW5pdCAoZHJpdmVyPTB4ZmZmZmZiZmZmZTgwMDAwMCwg
+bGluZT0xNjc2MDgzMCwgb3B0aW9ucz0weGZmZmY4MDAwODI4Zjc1MDYgPGNvbmZpZys2PiAiMTE1
+MjAwbjgiKQo+ICAgICBhdCBkcml2ZXJzL3R0eS9zZXJpYWwvc2VyaWFsX2NvcmUuYzoyNjU2Cj4g
+OCAgMHhmZmZmODAwMDgwODAxNjkwIGluIHR0eV9maW5kX3BvbGxpbmdfZHJpdmVyIChuYW1lPTB4
+ZmZmZjgwMDA4MjhmNzUwMCA8Y29uZmlnPiAidHR5UzIsMTE1MjAwbjgiLCBsaW5lPTB4ZmZmZjgw
+MDA4MjkyYmE5MCkKPiAgICAgYXQgZHJpdmVycy90dHkvdHR5X2lvLmM6NDEwCj4gOSAgMHhmZmZm
+ODAwMDgwODZjMGIwIGluIGNvbmZpZ3VyZV9rZ2Rib2MgKCkgYXQgZHJpdmVycy90dHkvc2VyaWFs
+L2tnZGJvYy5jOjE5NAo+IDEwIDB4ZmZmZjgwMDA4MDg2YzFlYyBpbiBrZ2Rib2NfcHJvYmUgKHBk
+ZXY9MHhmZmZmZmJmZmZlODAwMDAwKSBhdCBkcml2ZXJzL3R0eS9zZXJpYWwva2dkYm9jLmM6MjQ5
+Cj4gMTEgMHhmZmZmODAwMDgwOGIzOTljIGluIHBsYXRmb3JtX3Byb2JlIChfZGV2PTB4ZmZmZjAw
+MDAwMGViYjgxMCkgYXQgZHJpdmVycy9iYXNlL3BsYXRmb3JtLmM6MTQwNAo+IDEyIDB4ZmZmZjgw
+MDA4MDhiMGI0NCBpbiBjYWxsX2RyaXZlcl9wcm9iZSAoZHJ2PTxvcHRpbWl6ZWQgb3V0PiwgZGV2
+PTxvcHRpbWl6ZWQgb3V0PikgYXQgZHJpdmVycy9iYXNlL2RkLmM6NTc5Cj4gMTMgcmVhbGx5X3By
+b2JlIChkZXY9MHhmZmZmMDAwMDAwZWJiODEwLCBkcnY9MHhmZmZmODAwMDgyNzdmMTM4IDxrZ2Ri
+b2NfcGxhdGZvcm1fZHJpdmVyKzQ4PikgYXQgZHJpdmVycy9iYXNlL2RkLmM6NjU4Cj4gMTQgMHhm
+ZmZmODAwMDgwOGIwZDJjIGluIF9fZHJpdmVyX3Byb2JlX2RldmljZSAoZHJ2PTB4ZmZmZjgwMDA4
+Mjc3ZjEzOCA8a2dkYm9jX3BsYXRmb3JtX2RyaXZlcis0OD4sIGRldj0weGZmZmYwMDAwMDBlYmI4
+MTApCj4gICAgIGF0IGRyaXZlcnMvYmFzZS9kZC5jOjgwMAo+IDE1IDB4ZmZmZjgwMDA4MDhiMGVi
+OCBpbiBkcml2ZXJfcHJvYmVfZGV2aWNlIChkcnY9MHhmZmZmZmJmZmZlODAwMDAwLCBkZXY9MHhm
+ZmZmMDAwMDAwZWJiODEwKSBhdCBkcml2ZXJzL2Jhc2UvZGQuYzo4MzAKPiAxNiAweGZmZmY4MDAw
+ODA4YjBmZjQgaW4gX19kZXZpY2VfYXR0YWNoX2RyaXZlciAoZHJ2PTB4ZmZmZjgwMDA4Mjc3ZjEz
+OCA8a2dkYm9jX3BsYXRmb3JtX2RyaXZlcis0OD4sIF9kYXRhPTB4ZmZmZjgwMDA4MjkyYmM0OCkK
+PiAgICAgYXQgZHJpdmVycy9iYXNlL2RkLmM6OTU4Cj4gMTcgMHhmZmZmODAwMDgwOGFlOTcwIGlu
+IGJ1c19mb3JfZWFjaF9kcnYgKGJ1cz0weGZmZmZmYmZmZmU4MDAwMDAsIHN0YXJ0PTB4MCwgZGF0
+YT0weGZmZmY4MDAwODI5MmJjNDgsCj4gICAgIGZuPTB4ZmZmZjgwMDA4MDhiMGYzYyA8X19kZXZp
+Y2VfYXR0YWNoX2RyaXZlcj4pIGF0IGRyaXZlcnMvYmFzZS9idXMuYzo0NTcKPiAxOCAweGZmZmY4
+MDAwODA4YjE0MDggaW4gX19kZXZpY2VfYXR0YWNoIChkZXY9MHhmZmZmMDAwMDAwZWJiODEwLCBh
+bGxvd19hc3luYz10cnVlKSBhdCBkcml2ZXJzL2Jhc2UvZGQuYzoxMDMwCj4gMTkgMHhmZmZmODAw
+MDgwOGIxNmQ4IGluIGRldmljZV9pbml0aWFsX3Byb2JlIChkZXY9MHhmZmZmZmJmZmZlODAwMDAw
+KSBhdCBkcml2ZXJzL2Jhc2UvZGQuYzoxMDc5Cj4gMjAgMHhmZmZmODAwMDgwOGFmOWY0IGluIGJ1
+c19wcm9iZV9kZXZpY2UgKGRldj0weGZmZmYwMDAwMDBlYmI4MTApIGF0IGRyaXZlcnMvYmFzZS9i
+dXMuYzo1MzIKPiAyMSAweGZmZmY4MDAwODA4YWM3N2MgaW4gZGV2aWNlX2FkZCAoZGV2PTB4ZmZm
+ZmZiZmZmZTgwMDAwMCkgYXQgZHJpdmVycy9iYXNlL2NvcmUuYzozNjI1Cj4gMjIgMHhmZmZmODAw
+MDgwOGIzNDI4IGluIHBsYXRmb3JtX2RldmljZV9hZGQgKHBkZXY9MHhmZmZmMDAwMDAwZWJiODAw
+KSBhdCBkcml2ZXJzL2Jhc2UvcGxhdGZvcm0uYzo3MTYKPiAyMyAweGZmZmY4MDAwODFiNWRjMGMg
+aW4gaW5pdF9rZ2Rib2MgKCkgYXQgZHJpdmVycy90dHkvc2VyaWFsL2tnZGJvYy5jOjI5Mgo+IDI0
+IDB4ZmZmZjgwMDA4MDAxNGRiMCBpbiBkb19vbmVfaW5pdGNhbGwgKGZuPTB4ZmZmZjgwMDA4MWI1
+ZGJhNCA8aW5pdF9rZ2Rib2M+KSBhdCBpbml0L21haW4uYzoxMjM2Cj4gMjUgMHhmZmZmODAwMDgx
+YjAxMTRjIGluIGRvX2luaXRjYWxsX2xldmVsIChjb21tYW5kX2xpbmU9PG9wdGltaXplZCBvdXQ+
+LCBsZXZlbD08b3B0aW1pemVkIG91dD4pIGF0IGluaXQvbWFpbi5jOjEyOTgKPiAyNiBkb19pbml0
+Y2FsbHMgKCkgYXQgaW5pdC9tYWluLmM6MTMxNAo+IDI3IGRvX2Jhc2ljX3NldHVwICgpIGF0IGlu
+aXQvbWFpbi5jOjEzMzMKPiAyOCBrZXJuZWxfaW5pdF9mcmVlYWJsZSAoKSBhdCBpbml0L21haW4u
+YzoxNTUxCj4gMjkgMHhmZmZmODAwMDgxMDI3MWVjIGluIGtlcm5lbF9pbml0ICh1bnVzZWQ9MHhm
+ZmZmZmJmZmZlODAwMDAwKSBhdCBpbml0L21haW4uYzoxNDQxCj4gMzAgMHhmZmZmODAwMDgwMDE1
+ZTgwIGluIHJldF9mcm9tX2ZvcmsgKCkgYXQgYXJjaC9hcm02NC9rZXJuZWwvZW50cnkuUzo4NTcK
+Pgo+IFNpZ25lZC1vZmYtYnk6IE1pY2hhZWwgVHJpbWFyY2hpIDxtaWNoYWVsQGFtYXJ1bGFzb2x1
+dGlvbnMuY29tPgo+IC0tLQo+ICBkcml2ZXJzL3R0eS9zZXJpYWwva2dkYm9jLmMgfCAyICstCj4g
+IDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQo+Cj4gZGlmZiAt
+LWdpdCBhL2RyaXZlcnMvdHR5L3NlcmlhbC9rZ2Rib2MuYyBiL2RyaXZlcnMvdHR5L3NlcmlhbC9r
+Z2Rib2MuYwo+IGluZGV4IDdjZTdiYjE2NDAwNS4uN2Y4MzY0NTA3ZjU1IDEwMDY0NAo+IC0tLSBh
+L2RyaXZlcnMvdHR5L3NlcmlhbC9rZ2Rib2MuYwo+ICsrKyBiL2RyaXZlcnMvdHR5L3NlcmlhbC9r
+Z2Rib2MuYwo+IEBAIC02MjIsNyArNjIyLDcgQEAgY29uc29sZV9pbml0Y2FsbChrZ2Rib2NfZWFy
+bHljb25fbGF0ZV9pbml0KTsKPgo+ICAjZW5kaWYgLyogSVNfQlVJTFRJTihDT05GSUdfS0dEQl9T
+RVJJQUxfQ09OU09MRSkgKi8KPgo+IC1tb2R1bGVfaW5pdChpbml0X2tnZGJvYyk7Cj4gK2xhdGVf
+aW5pdGNhbGxfc3luYyhpbml0X2tnZGJvYyk7CgpXaGlsZSBJJ20gbm90IGRlbnlpbmcgdGhhdCB5
+b3UgaGl0IGEgYnVnLCBJIGRvbid0IHRoaW5rIHRoaXMgaXMgdGhlCmNvcnJlY3QgZml4LiBUaGUg
+d2F5IGl0J3Mgc3VwcG9zZWQgdG8gd29yayBpczoKCjEuIGluaXRfa2dkYm9jKCkgcnVucyBhbmQg
+cmVnaXN0ZXJzIHRoZSBzaW5nbGV0b24ga2dkYiAicGxhdGZvcm0gZHJpdmVyIi4KCjIuIFRoZSBw
+bGF0Zm9ybSBkcml2ZXIncyBwcm9iZSBmdW5jdGlvbiwga2dkYm9jX3Byb2JlKCksIHJ1bnMgYW5k
+CmNoZWNrcyB0byBzZWUgaWYgdGhlIGNvbnNvbGUgaXMgcmVhZHkgYnkgbG9va2luZyBhdCB0aGUg
+cmV0dXJuIHZhbHVlCm9mIGNvbmZpZ3VyZV9rZ2Rib2MoKS4gSWYgaXQncyByZWFkeSB0aGVuIHdl
+J3JlIGdvb2QgdG8gZ28uIElmIGl0J3MKbm90IHJlYWR5IHRoZW4gd2UgZGVmZXIuCgpTbyBJIHRo
+aW5rIHRoZSBidWcgaGVyZSBpcyB0aGF0IHNvbWVob3cgdGhlIGNvbnNvbGUgbG9va3MgInJlYWR5
+IgooYmVjYXVzZSB0dHlfZmluZF9wb2xsaW5nX2RyaXZlcigpIGNhbiBmaW5kIGl0KSBidXQgaXQg
+aXNuJ3QgYWN0dWFsbHkKcmVhZHkgeWV0IChiZWNhdXNlIGl0IGNyYXNoZXMpLiBUaGF0J3Mgd2hh
+dCB5b3UgbmVlZCB0byBmaXguCgpJJ2xsIG5vdGUgdGhhdCwgaW4gdGhlIHBhc3QsIEkndmUgZGVm
+aW5pdGVseSB1c2VkIGtnZGIgb24gODI1MC1iYXNlZApVQVJUcy4gSXMgeW91ciBoYXJkd2FyZSBz
+b21laG93IHNwZWNpYWwgb3IgaXMgdGhpcyBhIHJlZ3Jlc3Npb24/CgotRG91ZwoKCl9fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCktnZGItYnVncmVwb3J0IG1h
+aWxpbmcgbGlzdApLZ2RiLWJ1Z3JlcG9ydEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9s
+aXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8va2dkYi1idWdyZXBvcnQK
