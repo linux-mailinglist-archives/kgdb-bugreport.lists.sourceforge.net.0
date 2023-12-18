@@ -2,78 +2,89 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C4FDB815DCA
-	for <lists+kgdb-bugreport@lfdr.de>; Sun, 17 Dec 2023 07:43:52 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9C478816772
+	for <lists+kgdb-bugreport@lfdr.de>; Mon, 18 Dec 2023 08:34:34 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1rEksR-0001fK-1g
+	id 1rF892-0002xZ-Eo
 	for lists+kgdb-bugreport@lfdr.de;
-	Sun, 17 Dec 2023 06:43:51 +0000
+	Mon, 18 Dec 2023 07:34:32 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <lkp@intel.com>) id 1rEksP-0001f0-13
+ (envelope-from <michael@amarulasolutions.com>) id 1rF892-0002xT-0k
  for kgdb-bugreport@lists.sourceforge.net;
- Sun, 17 Dec 2023 06:43:49 +0000
+ Mon, 18 Dec 2023 07:34:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=kRztQcaw2qOnTjmDY6Lo4gpIvMD80Mi7s9GbAEaGkzE=; b=J//JtPyLY/aRf2P9JiEdvU9gl4
- ul3EFPHP/cefXAce86/EkelSIh6SXS+MY5UEY6LBFr0hyjVWVcfSMb6TjeUd5ZINlf9bIJ2R3qeW0
- nBAWrZ9ZfPb+UWOs9hJ4rxTzaziWPJXwJUTmVdwF4Id5nyYZ2pGI5Y0eR5YQC6Ddq80w=;
+ bh=olULgM359/ngO2eLxqKPg4Bd8lNvjNS8Vgzy23+KEiE=; b=lkulfQiimsr3J+r+Eto+TxvGLJ
+ gkPDU8fQyhBg0NK382+YMWSgfgAhn9ob4b4Ivd8wLf/29olQ+7MHsg4uppLx/ML7z8b3RQJWa8iJu
+ zl3+DnNe8F5Pxc2dvHUdKrtgYY4rcH0QLSoCcGfayWPGiUWBWCqO7qIU9Y5pmWvsdW3s=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=kRztQcaw2qOnTjmDY6Lo4gpIvMD80Mi7s9GbAEaGkzE=; b=QzvupDj02sm/G8ZCa8GJ1A/Pl8
- sS6hOG/ig1vx2shinpxJs2bJudyW7zyNswQgTGUtPseDksWO5BFsSWsp+b0sZDhrgZCBhIW0P4yVY
- f+aJTjosttgYOSC4GFVxgMXiKR143wQghxE1v1fBLsl8BYabPZ/hnEtASQ5MSdDIHmtM=;
-Received: from mgamail.intel.com ([192.198.163.8])
+ bh=olULgM359/ngO2eLxqKPg4Bd8lNvjNS8Vgzy23+KEiE=; b=Jgpx+ZoTCEd+C8qgrxGfWkqYvw
+ S1UvsyE5yDcx4GUKcPl07CoBlRwfHbof9H2PKv886VCiNFFd0sXntDu4/WZkO2f6+fdYVBc4L4Sih
+ tVm9l6SoIjn1BysKdaEfGVRoSWwTUCMSaKlOw0CQBjh4mX8Rk+zZqpYD/S6yy6ol5qO8=;
+Received: from mail-wm1-f54.google.com ([209.85.128.54])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rEksL-0003zm-DU for kgdb-bugreport@lists.sourceforge.net;
- Sun, 17 Dec 2023 06:43:49 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1702795425; x=1734331425;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=5JlpsvbWOqFLfck4pPpsmwWV8XlbmxCzw6ZMnROIL8c=;
- b=gaCPeFC36JEObaVNB4u82bSI1uIOpYeUDLD0mVLW67jgXgkU+4UGsS4s
- /FHVoZQMzaP+PEZyyFeusPTkrRRy/lOjTJB7X6LDMn3KkiC2kqjdfq0wJ
- 1OsIujJ1W1U1gMuHKnvqtcN8iCZ9ogWnl04JyedEoecoYVoUyH5LuU/LA
- 49nBzQxkwhPqrvn5ZM2rCVi8Nas01d9IQ9bulfcYAUWfGQgLqAP1j+6UH
- warmHApr+9+GIr/1MArDVswp1dlnHF3hzDJM4Qu//ARTOXfMctjxmsnkK
- 2r8AJo+/F5lgjOk189KdlNnw+xnVTf+Lab3uLJDPWLqIQrf4b3W8aSC2Y A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10926"; a="8827579"
-X-IronPort-AV: E=Sophos;i="6.04,282,1695711600"; 
-   d="scan'208";a="8827579"
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
- by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 16 Dec 2023 22:43:35 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10926"; a="948412847"
-X-IronPort-AV: E=Sophos;i="6.04,282,1695711600"; d="scan'208";a="948412847"
-Received: from lkp-server02.sh.intel.com (HELO b07ab15da5fe) ([10.239.97.151])
- by orsmga005.jf.intel.com with ESMTP; 16 Dec 2023 22:43:31 -0800
-Received: from kbuild by b07ab15da5fe with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1rEks5-0002lD-1l;
- Sun, 17 Dec 2023 06:43:29 +0000
-Date: Sun, 17 Dec 2023 14:43:02 +0800
-From: kernel test robot <lkp@intel.com>
-To: Michael Trimarchi <michael@amarulasolutions.com>
-Message-ID: <202312171453.mT4pH4uH-lkp@intel.com>
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1rF88u-00034h-IZ for kgdb-bugreport@lists.sourceforge.net;
+ Mon, 18 Dec 2023 07:34:32 +0000
+Received: by mail-wm1-f54.google.com with SMTP id
+ 5b1f17b1804b1-40c6e2a47f6so25704115e9.0
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Sun, 17 Dec 2023 23:34:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1702884850; x=1703489650;
+ darn=lists.sourceforge.net; 
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=olULgM359/ngO2eLxqKPg4Bd8lNvjNS8Vgzy23+KEiE=;
+ b=qb5MHoDegEw4S6vsHiPqNVSI8ZggiKO/Ih6u11h2f9jhrgSVrr/w7Dxmi4MFku9r43
+ BXWR65zPYMqKY8/C5qGGsETGR+alDw1WREBgEYJF/qJ6zPdHbNWHcuPkMlyGfjv9Datg
+ mgSs9HpjJuKe8DRRFVP4JFnnwgl3j7pUTQrE8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702884850; x=1703489650;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=olULgM359/ngO2eLxqKPg4Bd8lNvjNS8Vgzy23+KEiE=;
+ b=dpTYZLcwIwcNZPKW4APg0mLayE047J6Hf/8qhk7y7jG3m4uZCxBJal6AuTV9gwj4uW
+ Ia0HVnjiDRLNpvL1AlesSQLjGKH+kuU3mV5CzhP9x7aRZg6XZE2Phsi6l8pfXta4DSlv
+ bhBOEAAwxge4RPts+nrOGHnlBYwxsr4QpzS8cMn2PlMoKM93y71iEEYiR2X8oXjU5Ttb
+ v2E02EU43Tx7CayEAA7hKtpxH/l9AwqWHxfabhJcIgmGQznM0qUqHOEMel6h8JdNQrY2
+ DirBcy2L/SdXKujpvZs4dAH4KUSzD0PcfagixO+2Fg4kDKSekP1f2XvgM7uBT79RLg2Y
+ DAAg==
+X-Gm-Message-State: AOJu0YxOVadnVGA1jg7VUGuDxBvaaANujAHnNpHI/8V5z4Nv3T2uU2BC
+ 5A/b29aJjs8ljrnJJfiVkwZ2ZQ==
+X-Google-Smtp-Source: AGHT+IHC5jYHllOjb186unx3YfcDbKt7AIbFqpN8EjgWqZvjfYR4lwv1hDUQzlnE34dKvK9KzZNUBw==
+X-Received: by 2002:a7b:ca54:0:b0:40c:2db0:c803 with SMTP id
+ m20-20020a7bca54000000b0040c2db0c803mr4103238wml.92.1702884850242; 
+ Sun, 17 Dec 2023 23:34:10 -0800 (PST)
+Received: from panicking.QSD (net-91-81-8-146.cust.vodafonedsl.it.
+ [91.81.8.146]) by smtp.gmail.com with ESMTPSA id
+ iv19-20020a05600c549300b0040b397787d3sm37153199wmb.24.2023.12.17.23.34.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 17 Dec 2023 23:34:09 -0800 (PST)
+From: Michael Trimarchi <michael@amarulasolutions.com>
+To: michael@amarulasolutions.com
+Date: Mon, 18 Dec 2023 08:34:07 +0100
+Message-Id: <20231218073407.300982-1-michael@amarulasolutions.com>
+X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20231216173409.1264655-1-michael@amarulasolutions.com>
 References: <20231216173409.1264655-1-michael@amarulasolutions.com>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20231216173409.1264655-1-michael@amarulasolutions.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -81,26 +92,28 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi Michael, kernel test robot noticed the following build
- errors: [auto build test ERROR on tty/tty-testing] [also build test ERROR
- on tty/tty-next tty/tty-linus linus/master v6.7-rc5 next-20231215] [If your
- patch is applied to the wrong git tree, kindly drop us a n [...] 
+ Content preview: Check if port type is not PORT_UNKNOWN during poll_init. The
+ kgdboc calls the tty_find_polling_driver that check if the serial is able
+ to use poll_init. The poll_init calls the uart uart_poll_init tha [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 T_SPF_TEMPERROR        SPF: test of record failed (temperror)
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.128.54 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.128.54 listed in list.dnswl.org]
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rEksL-0003zm-DU
-Subject: Re: [Kgdb-bugreport] [PATCH] tty: serial: kgdboc: Fix 8250_* kgd
+X-Headers-End: 1rF88u-00034h-IZ
+Subject: [Kgdb-bugreport] [PATCH V2] tty: serial: kgdboc: Fix 8250_* kgd
  over serial
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -113,99 +126,116 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: daniel.thompson@linaro.org, gregkh@linuxfoundation.org,
- oe-kbuild-all@lists.linux.dev, linux-kernel@vger.kernel.org,
- linux-serial@vger.kernel.org, jason.wessel@windriver.com,
- kgdb-bugreport@lists.sourceforge.net, jirislaby@kernel.org
+Cc: daniel.thompson@linaro.org, kgdb-bugreport@lists.sourceforge.net,
+ jason.wessel@windriver.com, linux-kernel@vger.kernel.org,
+ linux-serial@vger.kernel.org, gregkh@linuxfoundation.org, jirislaby@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Hi Michael,
+Check if port type is not PORT_UNKNOWN during poll_init.
+The kgdboc calls the tty_find_polling_driver that check
+if the serial is able to use poll_init. The poll_init calls
+the uart uart_poll_init that try to configure the uart with the
+selected boot parameters. The uart must be ready before setting
+parameters. Seems that PORT_UNKNOWN is already used by other
+functions in serial_core to detect uart status, so use the same
+to avoid to use it in invalid state.
 
-kernel test robot noticed the following build errors:
+The crash happen for instance in am62x architecture where the 8250
+register the platform driver after the 8250 core is initialized.
 
-[auto build test ERROR on tty/tty-testing]
-[also build test ERROR on tty/tty-next tty/tty-linus linus/master v6.7-rc5 next-20231215]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
+Follow the report crash coming from KGDB
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Michael-Trimarchi/tty-serial-kgdboc-Fix-8250_-kgd-over-serial/20231217-013726
-base:   https://git.kernel.org/pub/scm/linux/kernel/git/gregkh/tty.git tty-testing
-patch link:    https://lore.kernel.org/r/20231216173409.1264655-1-michael%40amarulasolutions.com
-patch subject: [PATCH] tty: serial: kgdboc: Fix 8250_* kgd over serial
-config: sh-allmodconfig (https://download.01.org/0day-ci/archive/20231217/202312171453.mT4pH4uH-lkp@intel.com/config)
-compiler: sh4-linux-gcc (GCC) 13.2.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20231217/202312171453.mT4pH4uH-lkp@intel.com/reproduce)
+Thread 2 received signal SIGSEGV, Segmentation fault.
+[Switching to Thread 1]
+_outb (addr=<optimized out>, value=<optimized out>) at ./include/asm-generic/io.h:584
+584		__raw_writeb(value, PCI_IOBASE + addr);
+(gdb) bt
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202312171453.mT4pH4uH-lkp@intel.com/
+This section of the code is too early because in this case
+the omap serial is not probed
 
-All errors (new ones prefixed by >>):
+Thread 2 received signal SIGSEGV, Segmentation fault.
+[Switching to Thread 1]
+_outb (addr=<optimized out>, value=<optimized out>) at ./include/asm-generic/io.h:584
+584		__raw_writeb(value, PCI_IOBASE + addr);
+(gdb) bt
 
-   drivers/tty/serial/serial_core.c: In function 'uart_poll_init':
->> drivers/tty/serial/serial_core.c:2636:33: error: lvalue required as left operand of assignment
-    2636 |         if (!port || port->type = PORT_UNKNOWN || !(port->ops->poll_get_char && port->ops->poll_put_char)) {
-         |                                 ^
+Thread 2 received signal SIGSEGV, Segmentation fault.
+[Switching to Thread 1]
+_outb (addr=<optimized out>, value=<optimized out>) at ./include/asm-generic/io.h:584
+584		__raw_writeb(value, PCI_IOBASE + addr);
+(gdb) bt
+0  _outb (addr=<optimized out>, value=<optimized out>) at ./include/asm-generic/io.h:584
+1  logic_outb (value=0 '\000', addr=18446739675637874689) at lib/logic_pio.c:299
+2  0xffff80008082dfcc in io_serial_out (p=0x0, offset=16760830, value=0) at drivers/tty/serial/8250/8250_port.c:416
+3  0xffff80008082fe34 in serial_port_out (value=<optimized out>, offset=<optimized out>, up=<optimized out>)
+    at ./include/linux/serial_core.h:677
+4  serial8250_do_set_termios (port=0xffff8000828ee940 <serial8250_ports+1568>, termios=0xffff80008292b93c, old=0x0)
+    at drivers/tty/serial/8250/8250_port.c:2860
+5  0xffff800080830064 in serial8250_set_termios (port=0xfffffbfffe800000, termios=0xffbffe, old=0x0)
+    at drivers/tty/serial/8250/8250_port.c:2912
+6  0xffff80008082571c in uart_set_options (port=0xffff8000828ee940 <serial8250_ports+1568>, co=0x0, baud=115200, parity=110, bits=8, flow=110)
+    at drivers/tty/serial/serial_core.c:2285
+7  0xffff800080828434 in uart_poll_init (driver=0xfffffbfffe800000, line=16760830, options=0xffff8000828f7506 <config+6> "115200n8")
+    at drivers/tty/serial/serial_core.c:2656
+8  0xffff800080801690 in tty_find_polling_driver (name=0xffff8000828f7500 <config> "ttyS2,115200n8", line=0xffff80008292ba90)
+    at drivers/tty/tty_io.c:410
+9  0xffff80008086c0b0 in configure_kgdboc () at drivers/tty/serial/kgdboc.c:194
+10 0xffff80008086c1ec in kgdboc_probe (pdev=0xfffffbfffe800000) at drivers/tty/serial/kgdboc.c:249
+11 0xffff8000808b399c in platform_probe (_dev=0xffff000000ebb810) at drivers/base/platform.c:1404
+12 0xffff8000808b0b44 in call_driver_probe (drv=<optimized out>, dev=<optimized out>) at drivers/base/dd.c:579
+13 really_probe (dev=0xffff000000ebb810, drv=0xffff80008277f138 <kgdboc_platform_driver+48>) at drivers/base/dd.c:658
+14 0xffff8000808b0d2c in __driver_probe_device (drv=0xffff80008277f138 <kgdboc_platform_driver+48>, dev=0xffff000000ebb810)
+    at drivers/base/dd.c:800
+15 0xffff8000808b0eb8 in driver_probe_device (drv=0xfffffbfffe800000, dev=0xffff000000ebb810) at drivers/base/dd.c:830
+16 0xffff8000808b0ff4 in __device_attach_driver (drv=0xffff80008277f138 <kgdboc_platform_driver+48>, _data=0xffff80008292bc48)
+    at drivers/base/dd.c:958
+17 0xffff8000808ae970 in bus_for_each_drv (bus=0xfffffbfffe800000, start=0x0, data=0xffff80008292bc48,
+    fn=0xffff8000808b0f3c <__device_attach_driver>) at drivers/base/bus.c:457
+18 0xffff8000808b1408 in __device_attach (dev=0xffff000000ebb810, allow_async=true) at drivers/base/dd.c:1030
+19 0xffff8000808b16d8 in device_initial_probe (dev=0xfffffbfffe800000) at drivers/base/dd.c:1079
+20 0xffff8000808af9f4 in bus_probe_device (dev=0xffff000000ebb810) at drivers/base/bus.c:532
+21 0xffff8000808ac77c in device_add (dev=0xfffffbfffe800000) at drivers/base/core.c:3625
+22 0xffff8000808b3428 in platform_device_add (pdev=0xffff000000ebb800) at drivers/base/platform.c:716
+23 0xffff800081b5dc0c in init_kgdboc () at drivers/tty/serial/kgdboc.c:292
+24 0xffff800080014db0 in do_one_initcall (fn=0xffff800081b5dba4 <init_kgdboc>) at init/main.c:1236
+25 0xffff800081b0114c in do_initcall_level (command_line=<optimized out>, level=<optimized out>) at init/main.c:1298
+26 do_initcalls () at init/main.c:1314
+27 do_basic_setup () at init/main.c:1333
+28 kernel_init_freeable () at init/main.c:1551
+29 0xffff8000810271ec in kernel_init (unused=0xfffffbfffe800000) at init/main.c:1441
+30 0xffff800080015e80 in ret_from_fork () at arch/arm64/kernel/entry.S:857
 
+Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
+---
+v1 -> v2:
+	- fix if condition during submission
+	- improve a bit the commit message
+RFC -> v1:
+        - refuse uart that has type PORT_UNKNOWN
 
-vim +2636 drivers/tty/serial/serial_core.c
+---
+ drivers/tty/serial/serial_core.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-  2618	
-  2619	static int uart_poll_init(struct tty_driver *driver, int line, char *options)
-  2620	{
-  2621		struct uart_driver *drv = driver->driver_state;
-  2622		struct uart_state *state = drv->state + line;
-  2623		enum uart_pm_state pm_state;
-  2624		struct tty_port *tport;
-  2625		struct uart_port *port;
-  2626		int baud = 9600;
-  2627		int bits = 8;
-  2628		int parity = 'n';
-  2629		int flow = 'n';
-  2630		int ret = 0;
-  2631	
-  2632		tport = &state->port;
-  2633		mutex_lock(&tport->mutex);
-  2634	
-  2635		port = uart_port_check(state);
-> 2636		if (!port || port->type = PORT_UNKNOWN || !(port->ops->poll_get_char && port->ops->poll_put_char)) {
-  2637			ret = -1;
-  2638			goto out;
-  2639		}
-  2640	
-  2641		pm_state = state->pm_state;
-  2642		uart_change_pm(state, UART_PM_STATE_ON);
-  2643	
-  2644		if (port->ops->poll_init) {
-  2645			/*
-  2646			 * We don't set initialized as we only initialized the hw,
-  2647			 * e.g. state->xmit is still uninitialized.
-  2648			 */
-  2649			if (!tty_port_initialized(tport))
-  2650				ret = port->ops->poll_init(port);
-  2651		}
-  2652	
-  2653		if (!ret && options) {
-  2654			uart_parse_options(options, &baud, &parity, &bits, &flow);
-  2655			console_list_lock();
-  2656			ret = uart_set_options(port, NULL, baud, parity, bits, flow);
-  2657			console_list_unlock();
-  2658		}
-  2659	out:
-  2660		if (ret)
-  2661			uart_change_pm(state, pm_state);
-  2662		mutex_unlock(&tport->mutex);
-  2663		return ret;
-  2664	}
-  2665	
-
+diff --git a/drivers/tty/serial/serial_core.c b/drivers/tty/serial/serial_core.c
+index f1348a509552..9b7ed4aac77a 100644
+--- a/drivers/tty/serial/serial_core.c
++++ b/drivers/tty/serial/serial_core.c
+@@ -2633,7 +2633,7 @@ static int uart_poll_init(struct tty_driver *driver, int line, char *options)
+ 	mutex_lock(&tport->mutex);
+ 
+ 	port = uart_port_check(state);
+-	if (!port || !(port->ops->poll_get_char && port->ops->poll_put_char)) {
++	if (!port || port->type == PORT_UNKNOWN || !(port->ops->poll_get_char && port->ops->poll_put_char)) {
+ 		ret = -1;
+ 		goto out;
+ 	}
 -- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+2.40.1
+
 
 
 _______________________________________________
