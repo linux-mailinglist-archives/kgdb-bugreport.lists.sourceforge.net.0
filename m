@@ -2,120 +2,93 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 76BC081DAC4
-	for <lists+kgdb-bugreport@lfdr.de>; Sun, 24 Dec 2023 14:12:20 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0D01786AAD1
+	for <lists+kgdb-bugreport@lfdr.de>; Wed, 28 Feb 2024 10:06:01 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1rHOHB-0008V0-Da
+	id 1rfFt0-00009W-SV
 	for lists+kgdb-bugreport@lfdr.de;
-	Sun, 24 Dec 2023 13:12:17 +0000
+	Wed, 28 Feb 2024 09:05:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <michael@amarulasolutions.com>) id 1rHOHA-0008Uu-08
+ (envelope-from <liu.yeC@h3c.com>) id 1rfCE6-0004gF-HZ
  for kgdb-bugreport@lists.sourceforge.net;
- Sun, 24 Dec 2023 13:12:16 +0000
+ Wed, 28 Feb 2024 05:11:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
+ :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=VWTZ2Sa9HaAdVOS8JszMBrVk7S9FMz/EGRcmeM4FejM=; b=FChA9pUNfOHpYdZqBjfMt8/qCz
- wPHzICPuaFk90/pYc4M3OVbHIzBHF76KHkeOloqS9JhwMdJzl7vdjWe/FFBWmgkwgxCkorQ34GWkh
- 0c701mv9m33ShGb5915At6uIb+n+J4L0pF6/mWS9XSpT2qXTk7lLeI+2T2EzXCeosM6g=;
+ bh=Fg2VLF977/jLXbNNPHD/JylkDCE81XXuOm/sIRtLOEM=; b=HsTpMK+HOkQ/ccfuVAMRCc8Huf
+ McIm3hUMAfz1yP5hCnrsvjn9yQovZiW/JHhbspMyYN08FkLkStatB3UNhjD9E+zyJJABfmntrRzEL
+ WsgNODP0vYSfinExGfsdWeCAWVSGvOnCfFwEk9lderFXnV+eggEESDd9e32Yfm9VpGKU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=VWTZ2Sa9HaAdVOS8JszMBrVk7S9FMz/EGRcmeM4FejM=; b=XVSujkor5CeOKYwb11xvDiUCzC
- PiGJ5PQ9DcTxu87dpJuvLK/1V9O7SETlLg1KUokZcciEFE+p5uQC5R1msnwpBhuOaMnUR/fHk6J7B
- xYrIhCkKSo4WchKwBAv8VCG9L18SP481CRYcTqGAgeobjimhqZpUkFvwjE2m6zdLvYng=;
-Received: from mail-wm1-f41.google.com ([209.85.128.41])
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=Fg2VLF977/jLXbNNPHD/JylkDCE81XXuOm/sIRtLOEM=; b=R
+ CtkYd8FK6NTNAngKcMQ1noo3ikgpa+sKkWa84FvEcpxmc9IEDnZ7l12rY7zxWf2IKftvmELO4SN7s
+ VEMsnhDNFFv2eaxcChjipzPoOGg79OmTbcZQSYOH7Pu+JJbjEWUdswJUBWNjbrS/+z0e7SPo/OC/Y
+ l1fhzEDixha/TuKw=;
+Received: from smtp.h3c.com ([60.191.123.50] helo=h3cspam02-ex.h3c.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1rHOH6-00087V-GJ for kgdb-bugreport@lists.sourceforge.net;
- Sun, 24 Dec 2023 13:12:15 +0000
-Received: by mail-wm1-f41.google.com with SMTP id
- 5b1f17b1804b1-40c48d7a7a7so29317725e9.3
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1rfCE2-0007jR-LE for kgdb-bugreport@lists.sourceforge.net;
+ Wed, 28 Feb 2024 05:11:31 +0000
+Received: from h3cspam02-ex.h3c.com (localhost [127.0.0.2] (may be forged))
+ by h3cspam02-ex.h3c.com with ESMTP id 41S2val1090649
  for <kgdb-bugreport@lists.sourceforge.net>;
- Sun, 24 Dec 2023 05:12:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1703423526; x=1704028326;
- darn=lists.sourceforge.net; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VWTZ2Sa9HaAdVOS8JszMBrVk7S9FMz/EGRcmeM4FejM=;
- b=k9pI42dWUb1GeDR/fyBfjbhRBkhJRdb0S9g++nMfXLy5CDGXIHdGhoZldvS9rwaYOP
- L25lKb9BX/J99/Bzxj7LUoLKGt1bYIxBY04amBXOzDwVXhkBE1zSzr7aV/K1drdJEHgg
- w4z9bfJ8N2lydyOsC1ZH92/XfrcbQ27O7/9ZU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703423526; x=1704028326;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=VWTZ2Sa9HaAdVOS8JszMBrVk7S9FMz/EGRcmeM4FejM=;
- b=xNvCvuFokIonCC8oJacUASiV22dfl0lhxkDXt7Fiw4cg9f9C/INMpeqMiT09cWwN1g
- 2Sc6syGBMMSDKgBHQEZvb2wcKMV7to3LIeJWKzoyCLd0mj2+5jJGGpiQZ390lGlRefJG
- YfZaagTnb7NHDbKwgnaG9poDWyLyEdB7YFh5gOSxCZu5I2xsi/D8CC2BYHjWjhF0yiI3
- Rh9EtdGdUQgsntNRhLAQsggXaD9GBwP43fi1CVxB1KPJzj+IJbf0fUeLHJoUXl938xzJ
- TC/IWkkBgmoiT1ZQFAU/DBozC3dZnNsm1EDRbglbIiWcidJJa7lKmESvB60zOO4l5v8o
- ZGAg==
-X-Gm-Message-State: AOJu0YyW6DZjZ4lLBWFC4J6dUVq76mlcHsnMFPons3R7POKtEBohr2jh
- JHt/+DXPq2iXLyxFULmVMmKvCmYiY9lgnQ==
-X-Google-Smtp-Source: AGHT+IHp/ktMkz0AZUoRhKZmWhT//doTxmCQDDKVOxYizpmOAnDCPfph9YKV1slVH4cyewfqiuCPDg==
-X-Received: by 2002:a05:600c:5490:b0:40d:4153:59b with SMTP id
- iv16-20020a05600c549000b0040d4153059bmr2964155wmb.101.1703423525726; 
- Sun, 24 Dec 2023 05:12:05 -0800 (PST)
-Received: from panicking.amarulasolutions.com
- (93-35-133-136.ip55.fastwebnet.it. [93.35.133.136])
- by smtp.gmail.com with ESMTPSA id
- q15-20020a05600c46cf00b0040d5112fcb8sm4898968wmo.38.2023.12.24.05.12.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 24 Dec 2023 05:12:05 -0800 (PST)
-From: Michael Trimarchi <michael@amarulasolutions.com>
-To: dianders@chromium.org
-Date: Sun, 24 Dec 2023 14:12:00 +0100
-Message-Id: <20231224131200.266224-1-michael@amarulasolutions.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <CAD=FV=VaDJSXt5kyfzZ=qv9ZHRNerHFs7izXZbgudvfcOThc_Q@mail.gmail.com>
-References: <CAD=FV=VaDJSXt5kyfzZ=qv9ZHRNerHFs7izXZbgudvfcOThc_Q@mail.gmail.com>
+ Wed, 28 Feb 2024 10:57:36 +0800 (GMT-8)
+ (envelope-from liu.yeC@h3c.com)
+Received: from mail.maildlp.com ([172.25.15.154])
+ by h3cspam02-ex.h3c.com with ESMTP id 41S2uMv7083766;
+ Wed, 28 Feb 2024 10:56:22 +0800 (GMT-8)
+ (envelope-from liu.yeC@h3c.com)
+Received: from DAG6EX02-IMDC.srv.huawei-3com.com (unknown [10.62.14.11])
+ by mail.maildlp.com (Postfix) with ESMTP id F15DC2004BB7;
+ Wed, 28 Feb 2024 10:57:30 +0800 (CST)
+Received: from localhost.localdomain (10.114.186.34) by
+ DAG6EX02-IMDC.srv.huawei-3com.com (10.62.14.11) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.2.1258.27; Wed, 28 Feb 2024 10:56:22 +0800
+From: LiuYe <liu.yeC@h3c.com>
+To: <jason.wessel@windriver.com>, <daniel.thompson@linaro.org>
+Date: Wed, 28 Feb 2024 10:56:02 +0800
+Message-ID: <20240228025602.3087748-1-liu.yeC@h3c.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Spam-Score: -0.2 (/)
+X-Originating-IP: [10.114.186.34]
+X-ClientProxiedBy: BJSMTP02-EX.srv.huawei-3com.com (10.63.20.133) To
+ DAG6EX02-IMDC.srv.huawei-3com.com (10.62.14.11)
+X-DNSRBL: 
+X-SPAM-SOURCE-CHECK: pass
+X-MAIL: h3cspam02-ex.h3c.com 41S2val1090649
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Check if port type is not PORT_UNKNOWN during poll_init. The
- kgdboc calls the tty_find_polling_driver that check if the serial is able
- to use poll_init. The poll_init calls the uart uart_poll_init tha [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  master cpu : After executing the go command,
+ a deadlock occurs.
+ slave cpu: may be performing thread migration, acquiring the running queue
+ lock of master CPU. Then it was interrupted by kdb NMI and en [...] 
+ Content analysis details:   (-0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.128.41 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.128.41 listed in wl.mailspike.net]
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1rHOH6-00087V-GJ
-Subject: [Kgdb-bugreport] [PATCH V3] tty: serial: kgdboc: Fix 8250_* kgdb
- over serial
+X-Headers-End: 1rfCE2-0007jR-LE
+X-Mailman-Approved-At: Wed, 28 Feb 2024 09:05:58 +0000
+Subject: [Kgdb-bugreport] [PATCH] kdb: Fix the deadlock issue in KDB
+ debugging.
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -127,125 +100,142 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: daniel.thompson@linaro.org, kgdb-bugreport@lists.sourceforge.net,
- jason.wessel@windriver.com, linux-kernel@vger.kernel.org,
- linux-serial@vger.kernel.org, gregkh@linuxfoundation.org,
- michael@amarulasolutions.com, jirislaby@kernel.org
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: gregkh@linuxfoundation.org, linux-kernel@vger.kernel.org, liu.yeC@h3c.com,
+ linux-serial@vger.kernel.org, kgdb-bugreport@lists.sourceforge.net,
+ jirislaby@kernel.org
+Content-Type: multipart/mixed; boundary="===============3885290191479739081=="
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Check if port type is not PORT_UNKNOWN during poll_init.
-The kgdboc calls the tty_find_polling_driver that check
-if the serial is able to use poll_init. The poll_init calls
-the uart uart_poll_init that try to configure the uart with the
-selected boot parameters. The uart must be ready before setting
-parameters. Seems that PORT_UNKNOWN is already used by other
-functions in serial_core to detect uart status, so use the same
-to avoid to use it in invalid state.
+--===============3885290191479739081==
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 
-The crash happen for instance in am62x architecture where the 8250
-register the platform driver after the 8250 core is initialized.
+master cpu : After executing the go command, a deadlock occurs.
+slave cpu: may be performing thread migration,
+        acquiring the running queue lock of master CPU.
+        Then it was interrupted by kdb NMI and entered the nmi_handler proc=
+ess.
+        (nmi_handle-> kgdb_nmicallback-> kgdb_cpu_enter
+        while(1){ touch wathcdog}.)
 
-Follow the report crash coming from KGDB
+example:
+ BUG: spinlock lockup suspected on CPU#0, namex/10450
+ lock: 0xffff881ffe823980, .magic: dead4ead, .owner: namexx/21888, .owner_c=
+pu: 1
+ ffff881741d00000 ffff881741c01000 0000000000000000 0000000000000000
+ ffff881740f58e78 ffff881741cffdd0 ffffffff8147a7fc ffff881740f58f20
+Call Trace:
+ [<ffffffff81479e6d>] ? __schedule+0x16d/0xac0
+ [<ffffffff8147a7fc>] ? schedule+0x3c/0x90
+ [<ffffffff8147e71a>] ? schedule_hrtimeout_range_clock+0x10a/0x120
+ [<ffffffff8147d22e>] ? mutex_unlock+0xe/0x10
+ [<ffffffff811c839b>] ? ep_scan_ready_list+0x1db/0x1e0
+ [<ffffffff8147e743>] ? schedule_hrtimeout_range+0x13/0x20
+ [<ffffffff811c864a>] ? ep_poll+0x27a/0x3b0
+ [<ffffffff8108c540>] ? wake_up_q+0x70/0x70
+ [<ffffffff811c99a8>] ? SyS_epoll_wait+0xb8/0xd0
+ [<ffffffff8147f296>] ? entry_SYSCALL_64_fastpath+0x12/0x75
+ CPU: 0 PID: 10450 Comm: namex Tainted: G           O    4.4.65 #1
+ Hardware name: Insyde Purley/Type2 - Board Product Name1, BIOS 05.21.51.00=
+36 07/19/2019
+  0000000000000000 ffff881ffe813c10 ffffffff8124e883 ffff881741c01000
+  ffff881ffe823980 ffff881ffe813c38 ffffffff810a7f7f ffff881ffe823980
+  000000007d2b7cd0 0000000000000001 ffff881ffe813c68 ffffffff810a80e0
+  Call Trace:
+  <#DB>  [<ffffffff8124e883>] dump_stack+0x85/0xc2
+  [<ffffffff810a7f7f>] spin_dump+0x7f/0x100
+  [<ffffffff810a80e0>] do_raw_spin_lock+0xa0/0x150
+  [<ffffffff8147eb55>] _raw_spin_lock+0x15/0x20
+  [<ffffffff8108c256>] try_to_wake_up+0x176/0x3d0
+  [<ffffffff8108c4c5>] wake_up_process+0x15/0x20
+  [<ffffffff8107b371>] insert_work+0x81/0xc0
+  [<ffffffff8107b4e5>] __queue_work+0x135/0x390
+  [<ffffffff8107b786>] queue_work_on+0x46/0x90
+  [<ffffffff81313d28>] kgdboc_post_exp_handler+0x48/0x70
+  [<ffffffff810ed488>] kgdb_cpu_enter+0x598/0x610
+  [<ffffffff810ed6e2>] kgdb_handle_exception+0xf2/0x1f0
+  [<ffffffff81054e21>] __kgdb_notify+0x71/0xd0
+  [<ffffffff81054eb5>] kgdb_notify+0x35/0x70
+  [<ffffffff81082e6a>] notifier_call_chain+0x4a/0x70
+  [<ffffffff8108304d>] notify_die+0x3d/0x50
+  [<ffffffff81017219>] do_int3+0x89/0x120
+  [<ffffffff81480fb4>] int3+0x44/0x80
 
-Thread 2 received signal SIGSEGV, Segmentation fault.
-[Switching to Thread 1]
-_outb (addr=<optimized out>, value=<optimized out>) at ./include/asm-generic/io.h:584
-584		__raw_writeb(value, PCI_IOBASE + addr);
-(gdb) bt
-
-This section of the code is too early because in this case
-the omap serial is not probed
-
-Thread 2 received signal SIGSEGV, Segmentation fault.
-[Switching to Thread 1]
-_outb (addr=<optimized out>, value=<optimized out>) at ./include/asm-generic/io.h:584
-584		__raw_writeb(value, PCI_IOBASE + addr);
-(gdb) bt
-
-Thread 2 received signal SIGSEGV, Segmentation fault.
-[Switching to Thread 1]
-_outb (addr=<optimized out>, value=<optimized out>) at ./include/asm-generic/io.h:584
-584		__raw_writeb(value, PCI_IOBASE + addr);
-(gdb) bt
-0  _outb (addr=<optimized out>, value=<optimized out>) at ./include/asm-generic/io.h:584
-1  logic_outb (value=0 '\000', addr=18446739675637874689) at lib/logic_pio.c:299
-2  0xffff80008082dfcc in io_serial_out (p=0x0, offset=16760830, value=0) at drivers/tty/serial/8250/8250_port.c:416
-3  0xffff80008082fe34 in serial_port_out (value=<optimized out>, offset=<optimized out>, up=<optimized out>)
-    at ./include/linux/serial_core.h:677
-4  serial8250_do_set_termios (port=0xffff8000828ee940 <serial8250_ports+1568>, termios=0xffff80008292b93c, old=0x0)
-    at drivers/tty/serial/8250/8250_port.c:2860
-5  0xffff800080830064 in serial8250_set_termios (port=0xfffffbfffe800000, termios=0xffbffe, old=0x0)
-    at drivers/tty/serial/8250/8250_port.c:2912
-6  0xffff80008082571c in uart_set_options (port=0xffff8000828ee940 <serial8250_ports+1568>, co=0x0, baud=115200, parity=110, bits=8, flow=110)
-    at drivers/tty/serial/serial_core.c:2285
-7  0xffff800080828434 in uart_poll_init (driver=0xfffffbfffe800000, line=16760830, options=0xffff8000828f7506 <config+6> "115200n8")
-    at drivers/tty/serial/serial_core.c:2656
-8  0xffff800080801690 in tty_find_polling_driver (name=0xffff8000828f7500 <config> "ttyS2,115200n8", line=0xffff80008292ba90)
-    at drivers/tty/tty_io.c:410
-9  0xffff80008086c0b0 in configure_kgdboc () at drivers/tty/serial/kgdboc.c:194
-10 0xffff80008086c1ec in kgdboc_probe (pdev=0xfffffbfffe800000) at drivers/tty/serial/kgdboc.c:249
-11 0xffff8000808b399c in platform_probe (_dev=0xffff000000ebb810) at drivers/base/platform.c:1404
-12 0xffff8000808b0b44 in call_driver_probe (drv=<optimized out>, dev=<optimized out>) at drivers/base/dd.c:579
-13 really_probe (dev=0xffff000000ebb810, drv=0xffff80008277f138 <kgdboc_platform_driver+48>) at drivers/base/dd.c:658
-14 0xffff8000808b0d2c in __driver_probe_device (drv=0xffff80008277f138 <kgdboc_platform_driver+48>, dev=0xffff000000ebb810)
-    at drivers/base/dd.c:800
-15 0xffff8000808b0eb8 in driver_probe_device (drv=0xfffffbfffe800000, dev=0xffff000000ebb810) at drivers/base/dd.c:830
-16 0xffff8000808b0ff4 in __device_attach_driver (drv=0xffff80008277f138 <kgdboc_platform_driver+48>, _data=0xffff80008292bc48)
-    at drivers/base/dd.c:958
-17 0xffff8000808ae970 in bus_for_each_drv (bus=0xfffffbfffe800000, start=0x0, data=0xffff80008292bc48,
-    fn=0xffff8000808b0f3c <__device_attach_driver>) at drivers/base/bus.c:457
-18 0xffff8000808b1408 in __device_attach (dev=0xffff000000ebb810, allow_async=true) at drivers/base/dd.c:1030
-19 0xffff8000808b16d8 in device_initial_probe (dev=0xfffffbfffe800000) at drivers/base/dd.c:1079
-20 0xffff8000808af9f4 in bus_probe_device (dev=0xffff000000ebb810) at drivers/base/bus.c:532
-21 0xffff8000808ac77c in device_add (dev=0xfffffbfffe800000) at drivers/base/core.c:3625
-22 0xffff8000808b3428 in platform_device_add (pdev=0xffff000000ebb800) at drivers/base/platform.c:716
-23 0xffff800081b5dc0c in init_kgdboc () at drivers/tty/serial/kgdboc.c:292
-24 0xffff800080014db0 in do_one_initcall (fn=0xffff800081b5dba4 <init_kgdboc>) at init/main.c:1236
-25 0xffff800081b0114c in do_initcall_level (command_line=<optimized out>, level=<optimized out>) at init/main.c:1298
-26 do_initcalls () at init/main.c:1314
-27 do_basic_setup () at init/main.c:1333
-28 kernel_init_freeable () at init/main.c:1551
-29 0xffff8000810271ec in kernel_init (unused=0xfffffbfffe800000) at init/main.c:1441
-30 0xffff800080015e80 in ret_from_fork () at arch/arm64/kernel/entry.S:857
-
-Reviewed-by: Douglas Anderson <dianders@chromium.org>
-Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
+Signed-off-by: LiuYe <liu.yeC@h3c.com>
 ---
-v2 -> v3:
-	- add reviewed-by
-	- fix  {SUBJECT} "kgdb over serial" instead of "kgd over serial"
-	- split long lines in 2 lines
-v1 -> v2:
-        - fix if condition during submission
-        - improve a bit the commit message
-RFC -> v1:
-        - refuse uart that has type PORT_UNKNOWN
----
- drivers/tty/serial/serial_core.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ drivers/tty/serial/kgdboc.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/tty/serial/serial_core.c b/drivers/tty/serial/serial_core.c
-index f1348a509552..497be381c647 100644
---- a/drivers/tty/serial/serial_core.c
-+++ b/drivers/tty/serial/serial_core.c
-@@ -2633,7 +2633,8 @@ static int uart_poll_init(struct tty_driver *driver, int line, char *options)
- 	mutex_lock(&tport->mutex);
- 
- 	port = uart_port_check(state);
--	if (!port || !(port->ops->poll_get_char && port->ops->poll_put_char)) {
-+	if (!port || port->type == PORT_UNKNOWN ||
-+	    !(port->ops->poll_get_char && port->ops->poll_put_char)) {
- 		ret = -1;
- 		goto out;
- 	}
--- 
-2.40.1
+diff --git a/drivers/tty/serial/kgdboc.c b/drivers/tty/serial/kgdboc.c
+index 7ce7bb164..945318ef1 100644
+--- a/drivers/tty/serial/kgdboc.c
++++ b/drivers/tty/serial/kgdboc.c
+@@ -22,6 +22,9 @@
+ #include <linux/module.h>
+ #include <linux/platform_device.h>
+ #include <linux/serial_core.h>
++#include <linux/smp.h>
++
++#include "../kernel/sched/sched.h"
+
+ #define MAX_CONFIG_LEN         40
+
+@@ -399,7 +402,8 @@ static void kgdboc_post_exp_handler(void)
+                dbg_restore_graphics =3D 0;
+                con_debug_leave();
+        }
+-       kgdboc_restore_input();
++       if (!raw_spin_is_locked(&(cpu_rq(smp_processor_id())->lock)))
++               kgdboc_restore_input();
+ }
+
+ static struct kgdb_io kgdboc_io_ops =3D {
+--
+2.25.1
+
+---------------------------------------------------------------------------=
+----------------------------------------------------------
+=B1=BE=D3=CA=BC=FE=BC=B0=C6=E4=B8=BD=BC=FE=BA=AC=D3=D0=D0=C2=BB=AA=C8=FD=BC=
+=AF=CD=C5=B5=C4=B1=A3=C3=DC=D0=C5=CF=A2=A3=AC=BD=F6=CF=DE=D3=DA=B7=A2=CB=CD=
+=B8=F8=C9=CF=C3=E6=B5=D8=D6=B7=D6=D0=C1=D0=B3=F6
+=B5=C4=B8=F6=C8=CB=BB=F2=C8=BA=D7=E9=A1=A3=BD=FB=D6=B9=C8=CE=BA=CE=C6=E4=CB=
+=FB=C8=CB=D2=D4=C8=CE=BA=CE=D0=CE=CA=BD=CA=B9=D3=C3=A3=A8=B0=FC=C0=A8=B5=AB=
+=B2=BB=CF=DE=D3=DA=C8=AB=B2=BF=BB=F2=B2=BF=B7=D6=B5=D8=D0=B9=C2=B6=A1=A2=B8=
+=B4=D6=C6=A1=A2
+=BB=F2=C9=A2=B7=A2=A3=A9=B1=BE=D3=CA=BC=FE=D6=D0=B5=C4=D0=C5=CF=A2=A1=A3=C8=
+=E7=B9=FB=C4=FA=B4=ED=CA=D5=C1=CB=B1=BE=D3=CA=BC=FE=A3=AC=C7=EB=C4=FA=C1=A2=
+=BC=B4=B5=E7=BB=B0=BB=F2=D3=CA=BC=FE=CD=A8=D6=AA=B7=A2=BC=FE=C8=CB=B2=A2=C9=
+=BE=B3=FD=B1=BE
+=D3=CA=BC=FE=A3=A1
+This e-mail and its attachments contain confidential information from New H=
+3C, which is
+intended only for the person or entity whose address is listed above. Any u=
+se of the
+information contained herein in any way (including, but not limited to, tot=
+al or partial
+disclosure, reproduction, or dissemination) by persons other than the inten=
+ded
+recipient(s) is prohibited. If you receive this e-mail in error, please not=
+ify the sender
+by phone or email immediately and delete it!
 
 
+--===============3885290191479739081==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+
+--===============3885290191479739081==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Kgdb-bugreport mailing list
 Kgdb-bugreport@lists.sourceforge.net
 https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport
+
+--===============3885290191479739081==--
