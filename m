@@ -2,125 +2,97 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D562A86AEBA
-	for <lists+kgdb-bugreport@lfdr.de>; Wed, 28 Feb 2024 13:05:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6545686DA0C
+	for <lists+kgdb-bugreport@lfdr.de>; Fri,  1 Mar 2024 04:31:53 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1rfIgm-0005TQ-Le
+	id 1rftcl-0003Fa-V1
 	for lists+kgdb-bugreport@lfdr.de;
-	Wed, 28 Feb 2024 12:05:32 +0000
+	Fri, 01 Mar 2024 03:31:51 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <daniel.thompson@linaro.org>) id 1rfIgl-0005TI-JC
+ (envelope-from <liu.yeC@h3c.com>) id 1rftck-0003FR-8A
  for kgdb-bugreport@lists.sourceforge.net;
- Wed, 28 Feb 2024 12:05:31 +0000
+ Fri, 01 Mar 2024 03:31:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=PzqyTr5X+aYREyJTGjIbzkTXpuehiLhDk3JwLwQ/6fk=; b=Q5Xi9ED7G+HZSqPy36agTBJc0Z
- N9MXo7l7PIA/kQhaQSvu9vssBDzMmvPLcPB5c2c5wjGuaQU3OGZ31SCmSuVzkFZRnPTiSiHowyXZl
- cII5BMSJdJjal+H1C99RwzoMwJboeWlAEGqPXy+twpX3bj+ThAzRyoJZcH2xhFFFaDKU=;
+ bh=jqABAPinIeSW8r47TeU7SpC3jbn5amSg5vy82qMBGxc=; b=I5JcST0ldlpHSA4cMRjPly8bf+
+ p4TDibpTI6DfZn1GpE9655x7HK3IIoREufPcEGFkpGGueNCqcKBCpghy8zvite1LB+Dyg5eeIyTQz
+ XpoAbCYlD4Pohcj5SzLDtO4wO8PiKD3PK7uUkA7q7Xc8pT6GBilRiM3BCwd9QxAdMM4M=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=PzqyTr5X+aYREyJTGjIbzkTXpuehiLhDk3JwLwQ/6fk=; b=Cfxbr3Cq7OWrfxf/kpxuXnEDSi
- D34fqTdST1WaqdUkDyoe40aQngcCMBgvq8rtmrhL2VgkkjC9P31KX24LTqYshVJ78ib/3aR72ZMMs
- S0RymbPmaS5BTPGy71Z69pLwROQ4vzV+CSu3vEFhVi6Hedzb3/gI4qvfLqQ9Ey3QUcdg=;
-Received: from mail-wr1-f52.google.com ([209.85.221.52])
+ bh=jqABAPinIeSW8r47TeU7SpC3jbn5amSg5vy82qMBGxc=; b=fogI0QFweNfeGt0MRtZXJJrP1e
+ QAnwJ21olXKJMgUsG86gJug6IjX0IJyLritCa1WSViSe7oYn0ZtB4EwbxIJBRs4s94nlmTXWD6jLg
+ uP2tqR1rg6gOIM/wj4s95tIX0xAYZWLMlbB5DfxZG2WiGtQHS5Ax6mh4hLu5ztgvoQyk=;
+Received: from smtp.h3c.com ([60.191.123.50] helo=h3cspam02-ex.h3c.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1rfIgk-0006I8-Pg for kgdb-bugreport@lists.sourceforge.net;
- Wed, 28 Feb 2024 12:05:31 +0000
-Received: by mail-wr1-f52.google.com with SMTP id
- ffacd0b85a97d-33d28468666so4573950f8f.0
- for <kgdb-bugreport@lists.sourceforge.net>;
- Wed, 28 Feb 2024 04:05:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709121919; x=1709726719; darn=lists.sourceforge.net;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=PzqyTr5X+aYREyJTGjIbzkTXpuehiLhDk3JwLwQ/6fk=;
- b=gwIU0llj//fJK0yWXXaJceywcphg/ZWMuh1fq2cTKmmn7EqneHT+E131/q6pxg6jT7
- x5Banj5Xllg0YGatD9orWDBG7wEkyaAWJszT/boM72Sym7Rlr5hVk+PWIy+tAOHvGyE3
- DChtmO8WcltYosqQCjpxT2VunsdpD0Bs3n7PLHF1ZW5WRC1yLwhEmWl0Zw3u91U3oCDg
- juOELq4EFsPx3xtp37IBDzvRso1zLUPXv09I4xtEgOLmdWbqpDNB+fqEeTlmwLh8d/3W
- mOiEeAc6RvLyblLXdvsYmdKyU/jlNKv+KN4es6UaJjhd/U0ZL8OoFqxNSMWZI+js2+N0
- 9sqg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709121919; x=1709726719;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PzqyTr5X+aYREyJTGjIbzkTXpuehiLhDk3JwLwQ/6fk=;
- b=FcOCCoTvPry7AJbO++CsVr6AY2q2r2DwXNwil2gpyhvotuywFrriy07uTg2vLYBwNa
- ZlYKin3ZApslIN8nr15SAq098h6sbb2EnDxtSpZr9eHhD1xMQS7v+Bp5OElaU66WiP9J
- ospsWzjHa3VS4bGVZc2l+aq6X8QQNIyVHLTGrPKitNqUlzyPyQ7VexL9Weo+wtm4wOs4
- DFKMGdd7z0X68OBIce6o2JG493ijDOlVgi1DDJeNQbEXrp2KXjThLlA5kudBj5Xz0/OQ
- kiPJpEJKTs4Nmo97EKYVMdKrzUSaM6Kik8zzzjzFUxw55KWho3rPmLONYzAjb3HSHNZE
- D2sg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUkx3K9TQy3yy1ytiffeNSO4VXgnHa+z9gJxRq4qKDRC0p190qX2T2bAh8uAqgHLZMW1ZTrTjlrG6wtpJfMQJd+7pxCaJJZO1lHo5RgwUPsF0j82Ro=
-X-Gm-Message-State: AOJu0Yz4MROFml/fd8P+HiwJAJxxwXlx1kD8BwOx4jtlvqfRu/43jfiD
- MHZ7kCs59DbsdKKJleVbtlUA4wBgMrTUjWi3WgFtl6Ri8dPbG84kxjb8V9XvtdIHMdHFtvFmTo5
- S8n4=
-X-Google-Smtp-Source: AGHT+IGzDI2CfjF+ZrK4HMu6I+33GKctiF8gxjlQv7RCYlslkD+rRN0WYOsloPznRjtf3XKHGUlwOA==
-X-Received: by 2002:a5d:52cb:0:b0:33d:89a8:6b99 with SMTP id
- r11-20020a5d52cb000000b0033d89a86b99mr7802213wrv.70.1709121919242; 
- Wed, 28 Feb 2024 04:05:19 -0800 (PST)
-Received: from aspen.lan
- (aztw-34-b2-v4wan-166919-cust780.vm26.cable.virginm.net. [82.37.195.13])
- by smtp.gmail.com with ESMTPSA id
- by15-20020a056000098f00b0033e02f181f7sm1248178wrb.89.2024.02.28.04.05.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Feb 2024 04:05:18 -0800 (PST)
-Date: Wed, 28 Feb 2024 12:05:16 +0000
-From: Daniel Thompson <daniel.thompson@linaro.org>
-To: LiuYe <liu.yeC@h3c.com>
-Message-ID: <20240228120516.GA22898@aspen.lan>
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1rftch-0000Fo-IJ for kgdb-bugreport@lists.sourceforge.net;
+ Fri, 01 Mar 2024 03:31:50 +0000
+Received: from mail.maildlp.com ([172.25.15.154])
+ by h3cspam02-ex.h3c.com with ESMTP id 4213UQ8F071199;
+ Fri, 1 Mar 2024 11:30:26 +0800 (GMT-8)
+ (envelope-from liu.yeC@h3c.com)
+Received: from DAG6EX01-IMDC.srv.huawei-3com.com (unknown [10.62.14.10])
+ by mail.maildlp.com (Postfix) with ESMTP id 538602004BBA;
+ Fri,  1 Mar 2024 11:31:37 +0800 (CST)
+Received: from DAG6EX02-IMDC.srv.huawei-3com.com (10.62.14.11) by
+ DAG6EX01-IMDC.srv.huawei-3com.com (10.62.14.10) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1258.27; Fri, 1 Mar 2024 11:30:26 +0800
+Received: from DAG6EX02-IMDC.srv.huawei-3com.com ([fe80::4c21:7c89:4f9d:e4c4])
+ by DAG6EX02-IMDC.srv.huawei-3com.com
+ ([fe80::4c21:7c89:4f9d:e4c4%16]) with
+ mapi id 15.02.1258.027; Fri, 1 Mar 2024 11:30:26 +0800
+From: Liuye <liu.yeC@h3c.com>
+To: Daniel Thompson <daniel.thompson@linaro.org>
+Thread-Topic: [PATCH] kdb: Fix the deadlock issue in KDB debugging.
+Thread-Index: AQHaafG3YC/Li+j42kau1FDQhHr2m7EfIsgAgAMadaA=
+Date: Fri, 1 Mar 2024 03:30:25 +0000
+Message-ID: <8b41d34adaef4ddcacde2dd00d4e3541@h3c.com>
 References: <20240228025602.3087748-1-liu.yeC@h3c.com>
+ <20240228120516.GA22898@aspen.lan>
+In-Reply-To: <20240228120516.GA22898@aspen.lan>
+Accept-Language: zh-CN, en-US
+Content-Language: zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.114.188.68]
+x-sender-location: DAG2
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20240228025602.3087748-1-liu.yeC@h3c.com>
-X-Spam-Score: -0.2 (/)
+X-DNSRBL: 
+X-SPAM-SOURCE-CHECK: pass
+X-MAIL: h3cspam02-ex.h3c.com 4213UQ8F071199
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Feb 28, 2024 at 10:56:02AM +0800,
- LiuYe wrote: > master
- cpu : After executing the go command, a deadlock occurs. > slave cpu: may
- be performing thread migration, > acquiring the running queue [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  >On Wed, Feb 28, 2024 at 10:56:02AM +0800, LiuYe wrote: >>
+ master cpu : After executing the go command, a deadlock occurs. >> slave
+ cpu: may be performing thread migration, >> acquiring the running qu [...]
+ Content analysis details:   (-0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.221.52 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.221.52 listed in list.dnswl.org]
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1rfIgk-0006I8-Pg
-Subject: Re: [Kgdb-bugreport] [PATCH] kdb: Fix the deadlock issue in KDB
- debugging.
+X-Headers-End: 1rftch-0000Fo-IJ
+Subject: [Kgdb-bugreport] =?gb2312?b?tPC4tDogW1BBVENIXSBrZGI6IEZpeCB0aGUg?=
+ =?gb2312?b?ZGVhZGxvY2sgaXNzdWUgaW4gS0RCIGRlYnVnZ2luZy4=?=
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -132,121 +104,145 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: kgdb-bugreport@lists.sourceforge.net, jason.wessel@windriver.com,
- linux-kernel@vger.kernel.org, linux-serial@vger.kernel.org,
- gregkh@linuxfoundation.org, jirislaby@kernel.org
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: "kgdb-bugreport@lists.sourceforge.net"
+ <kgdb-bugreport@lists.sourceforge.net>,
+ "jason.wessel@windriver.com" <jason.wessel@windriver.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ Liuye <liu.yeC@h3c.com>,
+ "linux-serial@vger.kernel.org" <linux-serial@vger.kernel.org>,
+ "gregkh@linuxfoundation.org" <gregkh@linuxfoundation.org>,
+ "jirislaby@kernel.org" <jirislaby@kernel.org>
+Content-Type: text/plain; charset="gb2312"
+Content-Transfer-Encoding: base64
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Wed, Feb 28, 2024 at 10:56:02AM +0800, LiuYe wrote:
-> master cpu : After executing the go command, a deadlock occurs.
-> slave cpu: may be performing thread migration,
->         acquiring the running queue lock of master CPU.
->         Then it was interrupted by kdb NMI and entered the nmi_handler process.
->         (nmi_handle-> kgdb_nmicallback-> kgdb_cpu_enter
->         while(1){ touch wathcdog}.)
-
-I think this description is a little short and doesn't clearly explain
-the cause. How about:
-
-Currently, if kgdboc includes 'kdb', then kgdboc will attempt to
-use schedule_work() to provoke a keyboard reset when transitioning out
-of the debugger and back to normal operation. This can cause
-deadlock because schedule_work() is not NMI-safe.
-
-The stack trace below shows an example of the problem. In this
-case the master cpu is not running from NMI but it has parked
-the slace CPUs using an NMI and the parked CPUs is holding
-spinlocks needed by schedule_work().
-
-
-> example:
->  BUG: spinlock lockup suspected on CPU#0, namex/10450
->  lock: 0xffff881ffe823980, .magic: dead4ead, .owner: namexx/21888, .owner_cpu: 1
->  ffff881741d00000 ffff881741c01000 0000000000000000 0000000000000000
->  ffff881740f58e78 ffff881741cffdd0 ffffffff8147a7fc ffff881740f58f20
-> Call Trace:
->  [<ffffffff81479e6d>] ? __schedule+0x16d/0xac0
->  [<ffffffff8147a7fc>] ? schedule+0x3c/0x90
->  [<ffffffff8147e71a>] ? schedule_hrtimeout_range_clock+0x10a/0x120
->  [<ffffffff8147d22e>] ? mutex_unlock+0xe/0x10
->  [<ffffffff811c839b>] ? ep_scan_ready_list+0x1db/0x1e0
->  [<ffffffff8147e743>] ? schedule_hrtimeout_range+0x13/0x20
->  [<ffffffff811c864a>] ? ep_poll+0x27a/0x3b0
->  [<ffffffff8108c540>] ? wake_up_q+0x70/0x70
->  [<ffffffff811c99a8>] ? SyS_epoll_wait+0xb8/0xd0
->  [<ffffffff8147f296>] ? entry_SYSCALL_64_fastpath+0x12/0x75
->  CPU: 0 PID: 10450 Comm: namex Tainted: G           O    4.4.65 #1
->  Hardware name: Insyde Purley/Type2 - Board Product Name1, BIOS 05.21.51.0036 07/19/2019
->   0000000000000000 ffff881ffe813c10 ffffffff8124e883 ffff881741c01000
->   ffff881ffe823980 ffff881ffe813c38 ffffffff810a7f7f ffff881ffe823980
->   000000007d2b7cd0 0000000000000001 ffff881ffe813c68 ffffffff810a80e0
->   Call Trace:
->   <#DB>  [<ffffffff8124e883>] dump_stack+0x85/0xc2
->   [<ffffffff810a7f7f>] spin_dump+0x7f/0x100
->   [<ffffffff810a80e0>] do_raw_spin_lock+0xa0/0x150
->   [<ffffffff8147eb55>] _raw_spin_lock+0x15/0x20
->   [<ffffffff8108c256>] try_to_wake_up+0x176/0x3d0
->   [<ffffffff8108c4c5>] wake_up_process+0x15/0x20
->   [<ffffffff8107b371>] insert_work+0x81/0xc0
->   [<ffffffff8107b4e5>] __queue_work+0x135/0x390
->   [<ffffffff8107b786>] queue_work_on+0x46/0x90
->   [<ffffffff81313d28>] kgdboc_post_exp_handler+0x48/0x70
->   [<ffffffff810ed488>] kgdb_cpu_enter+0x598/0x610
->   [<ffffffff810ed6e2>] kgdb_handle_exception+0xf2/0x1f0
->   [<ffffffff81054e21>] __kgdb_notify+0x71/0xd0
->   [<ffffffff81054eb5>] kgdb_notify+0x35/0x70
->   [<ffffffff81082e6a>] notifier_call_chain+0x4a/0x70
->   [<ffffffff8108304d>] notify_die+0x3d/0x50
->   [<ffffffff81017219>] do_int3+0x89/0x120
->   [<ffffffff81480fb4>] int3+0x44/0x80
->
-> Signed-off-by: LiuYe <liu.yeC@h3c.com>
-> ---
->  drivers/tty/serial/kgdboc.c | 6 +++++-
->  1 file changed, 5 insertions(+), 1 deletion(-)
->
-> diff --git a/drivers/tty/serial/kgdboc.c b/drivers/tty/serial/kgdboc.c
-> index 7ce7bb164..945318ef1 100644
-> --- a/drivers/tty/serial/kgdboc.c
-> +++ b/drivers/tty/serial/kgdboc.c
-> @@ -22,6 +22,9 @@
->  #include <linux/module.h>
->  #include <linux/platform_device.h>
->  #include <linux/serial_core.h>
-> +#include <linux/smp.h>
-> +
-> +#include "../kernel/sched/sched.h"
->
->  #define MAX_CONFIG_LEN         40
->
-> @@ -399,7 +402,8 @@ static void kgdboc_post_exp_handler(void)
->                 dbg_restore_graphics = 0;
->                 con_debug_leave();
->         }
-> -       kgdboc_restore_input();
-> +       if (!raw_spin_is_locked(&(cpu_rq(smp_processor_id())->lock)))
-> +               kgdboc_restore_input();
-
-I don't think solving this by access internal scheduler state is the
-right approach .
-
-The description I wrote above perhaps already suggests why. The
-deadlock occurs because it is unsafe to call schedule_work() from
-the debug trap handler. The debug trap handler in your stack trace is not
-running from an NMI but it certainly has NMI-like properties. Therefore
-a better fix is not to call schedule_work() at all from the debug trap
-handler.
-
-Instead we need to use an NMI-safe API such as irq_work_queue() and that
-irq_work can call schedule_work() and trigger the keyboard reset.
-
-
-Daniel.
-
-
-_______________________________________________
-Kgdb-bugreport mailing list
-Kgdb-bugreport@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport
+Pk9uIFdlZCwgRmViIDI4LCAyMDI0IGF0IDEwOjU2OjAyQU0gKzA4MDAsIExpdVllIHdyb3RlOg0K
+Pj4gbWFzdGVyIGNwdSA6IEFmdGVyIGV4ZWN1dGluZyB0aGUgZ28gY29tbWFuZCwgYSBkZWFkbG9j
+ayBvY2N1cnMuDQo+PiBzbGF2ZSBjcHU6IG1heSBiZSBwZXJmb3JtaW5nIHRocmVhZCBtaWdyYXRp
+b24sDQo+PiAgICAgICAgIGFjcXVpcmluZyB0aGUgcnVubmluZyBxdWV1ZSBsb2NrIG9mIG1hc3Rl
+ciBDUFUuDQo+PiAgICAgICAgIFRoZW4gaXQgd2FzIGludGVycnVwdGVkIGJ5IGtkYiBOTUkgYW5k
+IGVudGVyZWQgdGhlIG5taV9oYW5kbGVyIHByb2Nlc3MuDQo+PiAgICAgICAgIChubWlfaGFuZGxl
+LT4ga2dkYl9ubWljYWxsYmFjay0+IGtnZGJfY3B1X2VudGVyDQo+PiAgICAgICAgIHdoaWxlKDEp
+eyB0b3VjaCB3YXRoY2RvZ30uKQ0KPg0KPkkgdGhpbmsgdGhpcyBkZXNjcmlwdGlvbiBpcyBhIGxp
+dHRsZSBzaG9ydCBhbmQgZG9lc24ndCBjbGVhcmx5IGV4cGxhaW4gdGhlIGNhdXNlLiBIb3cgYWJv
+dXQ6DQo+DQo+Q3VycmVudGx5LCBpZiBrZ2Rib2MgaW5jbHVkZXMgJ2tkYicsIHRoZW4ga2dkYm9j
+IHdpbGwgYXR0ZW1wdCB0byB1c2Ugc2NoZWR1bGVfd29yaygpIHRvIHByb3Zva2UgYSBrZXlib2Fy
+ZCByZXNldCB3aGVuIHRyYW5zaXRpb25pbmcgb3V0IG9mIHRoZSBkZWJ1Z2dlciBhbmQgYmFjayB0
+byBub3JtYWwgb3BlcmF0aW9uLiBUaGlzIGNhbiBjYXVzZSBkZWFkbG9jayBiZWNhdXNlIHNjaGVk
+dWxlX3dvcmsoKSBpcyBub3QgTk1JLXNhZmUuDQo+DQo+VGhlIHN0YWNrIHRyYWNlIGJlbG93IHNo
+b3dzIGFuIGV4YW1wbGUgb2YgdGhlIHByb2JsZW0uIEluIHRoaXMgY2FzZSB0aGUgbWFzdGVyIGNw
+dSBpcyBub3QgcnVubmluZyBmcm9tIE5NSSBidXQgaXQgaGFzIHBhcmtlZCB0aGUgc2xhY2UgQ1BV
+cyB1c2luZyBhbiBOTUkgYW5kIHRoZSBwYXJrZWQgQ1BVcyBpcyBob2xkaW5nIHNwaW5sb2NrcyBu
+ZWVkZWQgYnkgc2NoZWR1bGVfd29yaygpLg0KPg0KPg0KDQpEdWUgdG8gdGhlIGJyZXZpdHkgb2Yg
+dGhlIGRlc2NyaXB0aW9uLCB0aGVyZSBtYXkgYmUgc29tZSBtaXN1bmRlcnN0YW5kaW5nLCBzbyBh
+IGRldGFpbGVkIGRlc2NyaXB0aW9uIGlzIHByb3ZpZGVkIGFzIGZvbGxvd3M6DQoNCmJlZm9yZSBL
+REIgY29tbWFuZCChsGdvobGjug0KDQpXaGVuIGEgc3BlY2lmaWMga2V5IGlzIGRldGVjdGVkIGJ5
+IHRoZSBzZXJpYWwgcG9ydCwgaXQgd2lsbCB0cmlnZ2VyIGtnZGJfYnJlYWtwb2ludCwgYW5kIHRo
+ZSBtYXN0ZXIgQ1BVMCB3aWxsIGVudGVyIHRoZSBrZGJfbWFpbl9sb29wIHRvIHByb2Nlc3MgdXNl
+ciBjb21tYW5kcyBpbiBhIGxvb3AuDQoNCmtnZGJfYnJlYWtwb2ludA0KaW50Mw0KZG9faW50Mw0K
+bm90aWZ5X2RpZQ0KYXRvbWljX25vdGlmaWVyX2NhbGxfY2hhaW4NCl9fYXRvbWljX25vdGlmaWVy
+X2NhbGxfY2hhaW4NCm5vdGlmaWVyX2NhbGxfY2hhaW4NCmtnZGJfbm90aWZ5DQpfX2tnZGJfbm90
+aWZ5DQprZ2RiX2hhbmRsZV9leGNlcHRpb24NCmtnZGJfY3B1X2VudGVyIChrZ2RiX3JvdW5kdXBf
+Y3B1cyBzZW5kIElQSSB0byBvdGhlciBzbGF2ZSBDUFUpDQprZGJfc3R1Yg0Ka2RiX21haW5fbG9v
+cA0KDQpzbGF2ZSBDUFUxLCBDUFUyLCBDUFUzIC4uLiBhbmQgb3RoZXIgQ1BVczoNClVzaW5nIENQ
+VTEgYXMgYW4gZXhhbXBsZToNCkN1cnJlbnRseSBob2xkaW5nIHRoZSBydW5uaW5nIHF1ZXVlIGxv
+Y2sgb2YgdGhlIG1hc3RlciBDUFUwIGR1ZSB0byBsb2FkX2JhbGFuY2Ugb3Igb3RoZXIgcmVhc29u
+cywgcmVzcG9uZGluZyB0byB0aGUgTk1JIHNlbnQgYnkgbWFzdGVyIENQVTAgdGhyb3VnaCBrZ2Ri
+X3JvdW5kdXBfY3B1cy4gRW50ZXIgdGhlIGZvbGxvd2luZyBzdGFjazoNCm5taV9oYW5kbGUNCmtn
+ZGJfbm1pY2FsbGJhY2sNCmtnZGJfY3B1X2VudGVyIChUaGUgc2xhdmUgQ1BVMSB3aWxsIGxvb3Ag
+dG91Y2ggd2F0Y2hkb2cgYW5kIHdhaXQgZm9yIHRoZSBtYXN0ZXIgQ1BVMCB0byBleGl0LikNCg0K
+VGhlIGFib3ZlIGlzIHRoZSBzdGF0ZSBiZWZvcmUgZXhlY3V0aW5nIHRoZSBLREIgY29tbWFuZCAi
+Z28iLg0KDQpXaGVuIHRoZSB1c2VyIGV4ZWN1dGVzIHRoZSBLREIgY29tbWFuZCAiZ28iLCBpdCB3
+aWxsIHRyaWdnZXIgYSBkZWFkbG9jay4NCm1hc3RlciBDUFUwIDoNCmtkYl9tYWluX2xvb3AgcmV0
+dXJuDQprZGJfc3R1YiByZXR1cm4NCmtnZGJfY3B1X2VudGVyDQprZ2Rib2NfcG9zdF9leHBfaGFu
+ZGxlcg0KcXVldWVfd29ya19vbg0KX19xdWV1ZV93b3JrDQppbnNlcnRfd29yaw0Kd2FrZV91cF9w
+cm9jZXNzDQp0cnlfdG9fd2FrZV91cA0KX3Jhd19zcGluX2xvY2sgo6hBY3F1aXJlIHRoZSBzcGlu
+IGxvY2sgb2YgbWFzdGVyIENQVTAgcnEtPmxvY2ssIGJ1dCBhdCB0aGlzIHRpbWUgdGhlIHNwaW4g
+bG9jayBvZiBtYXN0ZXIgQ1BVMCBpcyBoZWxkIGJ5IENQVTGjqQ0KDQpBcyBhIHJlc3VsdCwgYSBk
+ZWFkbG9jayBoYXMgb2NjdXJyZWQuDQoNClRoZXJlZm9yZSwgd2hlbiB0aGUgbWFzdGVyIENQVTAg
+ZXhpdHMsIGlmIHRoZSBycS0+bG9jayBvZiBDUFUwIGlzIGxvY2tlZCwgaXQgc2hvdWxkIG5vdCB3
+YWtlIHVwIHRoZSB3b3JrZXIgb24gdGhlIHN5c3RlbV93cS4NCg0KPj4gZXhhbXBsZToNCj4+ICBC
+VUc6IHNwaW5sb2NrIGxvY2t1cCBzdXNwZWN0ZWQgb24gQ1BVIzAsIG5hbWV4LzEwNDUwDQo+PiAg
+bG9jazogMHhmZmZmODgxZmZlODIzOTgwLCAubWFnaWM6IGRlYWQ0ZWFkLCAub3duZXI6IG5hbWV4
+eC8yMTg4OCwNCj4+IC5vd25lcl9jcHU6IDENCj4+ICBmZmZmODgxNzQxZDAwMDAwIGZmZmY4ODE3
+NDFjMDEwMDAgMDAwMDAwMDAwMDAwMDAwMCAwMDAwMDAwMDAwMDAwMDAwDQo+PiAgZmZmZjg4MTc0
+MGY1OGU3OCBmZmZmODgxNzQxY2ZmZGQwIGZmZmZmZmZmODE0N2E3ZmMgZmZmZjg4MTc0MGY1OGYy
+MA0KPj4gQ2FsbCBUcmFjZToNCj4+ICBbPGZmZmZmZmZmODE0NzllNmQ+XSA/IF9fc2NoZWR1bGUr
+MHgxNmQvMHhhYzAgIFs8ZmZmZmZmZmY4MTQ3YTdmYz5dID8NCj4+IHNjaGVkdWxlKzB4M2MvMHg5
+MCAgWzxmZmZmZmZmZjgxNDdlNzFhPl0gPw0KPj4gc2NoZWR1bGVfaHJ0aW1lb3V0X3JhbmdlX2Ns
+b2NrKzB4MTBhLzB4MTIwDQo+PiAgWzxmZmZmZmZmZjgxNDdkMjJlPl0gPyBtdXRleF91bmxvY2sr
+MHhlLzB4MTAgIFs8ZmZmZmZmZmY4MTFjODM5Yj5dID8NCj4+IGVwX3NjYW5fcmVhZHlfbGlzdCsw
+eDFkYi8weDFlMCAgWzxmZmZmZmZmZjgxNDdlNzQzPl0gPw0KPj4gc2NoZWR1bGVfaHJ0aW1lb3V0
+X3JhbmdlKzB4MTMvMHgyMA0KPj4gIFs8ZmZmZmZmZmY4MTFjODY0YT5dID8gZXBfcG9sbCsweDI3
+YS8weDNiMCAgWzxmZmZmZmZmZjgxMDhjNTQwPl0gPw0KPj4gd2FrZV91cF9xKzB4NzAvMHg3MCAg
+WzxmZmZmZmZmZjgxMWM5OWE4Pl0gPyBTeVNfZXBvbGxfd2FpdCsweGI4LzB4ZDANCj4+IFs8ZmZm
+ZmZmZmY4MTQ3ZjI5Nj5dID8gZW50cnlfU1lTQ0FMTF82NF9mYXN0cGF0aCsweDEyLzB4NzUNCj4+
+ICBDUFU6IDAgUElEOiAxMDQ1MCBDb21tOiBuYW1leCBUYWludGVkOiBHICAgICAgICAgICBPICAg
+IDQuNC42NSAjMQ0KPj4gIEhhcmR3YXJlIG5hbWU6IEluc3lkZSBQdXJsZXkvVHlwZTIgLSBCb2Fy
+ZCBQcm9kdWN0IE5hbWUxLCBCSU9TIDA1LjIxLjUxLjAwMzYgMDcvMTkvMjAxOQ0KPj4gICAwMDAw
+MDAwMDAwMDAwMDAwIGZmZmY4ODFmZmU4MTNjMTAgZmZmZmZmZmY4MTI0ZTg4MyBmZmZmODgxNzQx
+YzAxMDAwDQo+PiAgIGZmZmY4ODFmZmU4MjM5ODAgZmZmZjg4MWZmZTgxM2MzOCBmZmZmZmZmZjgx
+MGE3ZjdmIGZmZmY4ODFmZmU4MjM5ODANCj4+ICAgMDAwMDAwMDA3ZDJiN2NkMCAwMDAwMDAwMDAw
+MDAwMDAxIGZmZmY4ODFmZmU4MTNjNjggZmZmZmZmZmY4MTBhODBlMA0KPj4gICBDYWxsIFRyYWNl
+Og0KPj4gICA8I0RCPiAgWzxmZmZmZmZmZjgxMjRlODgzPl0gZHVtcF9zdGFjaysweDg1LzB4YzIN
+Cj4+ICAgWzxmZmZmZmZmZjgxMGE3ZjdmPl0gc3Bpbl9kdW1wKzB4N2YvMHgxMDANCj4+ICAgWzxm
+ZmZmZmZmZjgxMGE4MGUwPl0gZG9fcmF3X3NwaW5fbG9jaysweGEwLzB4MTUwDQo+PiAgIFs8ZmZm
+ZmZmZmY4MTQ3ZWI1NT5dIF9yYXdfc3Bpbl9sb2NrKzB4MTUvMHgyMA0KPj4gICBbPGZmZmZmZmZm
+ODEwOGMyNTY+XSB0cnlfdG9fd2FrZV91cCsweDE3Ni8weDNkMA0KPj4gICBbPGZmZmZmZmZmODEw
+OGM0YzU+XSB3YWtlX3VwX3Byb2Nlc3MrMHgxNS8weDIwDQo+PiAgIFs8ZmZmZmZmZmY4MTA3YjM3
+MT5dIGluc2VydF93b3JrKzB4ODEvMHhjMA0KPj4gICBbPGZmZmZmZmZmODEwN2I0ZTU+XSBfX3F1
+ZXVlX3dvcmsrMHgxMzUvMHgzOTANCj4+ICAgWzxmZmZmZmZmZjgxMDdiNzg2Pl0gcXVldWVfd29y
+a19vbisweDQ2LzB4OTANCj4+ICAgWzxmZmZmZmZmZjgxMzEzZDI4Pl0ga2dkYm9jX3Bvc3RfZXhw
+X2hhbmRsZXIrMHg0OC8weDcwDQo+PiAgIFs8ZmZmZmZmZmY4MTBlZDQ4OD5dIGtnZGJfY3B1X2Vu
+dGVyKzB4NTk4LzB4NjEwDQo+PiAgIFs8ZmZmZmZmZmY4MTBlZDZlMj5dIGtnZGJfaGFuZGxlX2V4
+Y2VwdGlvbisweGYyLzB4MWYwDQo+PiAgIFs8ZmZmZmZmZmY4MTA1NGUyMT5dIF9fa2dkYl9ub3Rp
+ZnkrMHg3MS8weGQwDQo+PiAgIFs8ZmZmZmZmZmY4MTA1NGViNT5dIGtnZGJfbm90aWZ5KzB4MzUv
+MHg3MA0KPj4gICBbPGZmZmZmZmZmODEwODJlNmE+XSBub3RpZmllcl9jYWxsX2NoYWluKzB4NGEv
+MHg3MA0KPj4gICBbPGZmZmZmZmZmODEwODMwNGQ+XSBub3RpZnlfZGllKzB4M2QvMHg1MA0KPj4g
+ICBbPGZmZmZmZmZmODEwMTcyMTk+XSBkb19pbnQzKzB4ODkvMHgxMjANCj4+ICAgWzxmZmZmZmZm
+ZjgxNDgwZmI0Pl0gaW50MysweDQ0LzB4ODANCj4+DQo+PiBTaWduZWQtb2ZmLWJ5OiBMaXVZZSA8
+bGl1LnllQ0BoM2MuY29tPg0KPj4gLS0tDQo+PiAgZHJpdmVycy90dHkvc2VyaWFsL2tnZGJvYy5j
+IHwgNiArKysrKy0NCj4+ICAxIGZpbGUgY2hhbmdlZCwgNSBpbnNlcnRpb25zKCspLCAxIGRlbGV0
+aW9uKC0pDQo+Pg0KPj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvdHR5L3NlcmlhbC9rZ2Rib2MuYyBi
+L2RyaXZlcnMvdHR5L3NlcmlhbC9rZ2Rib2MuYw0KPj4gaW5kZXggN2NlN2JiMTY0Li45NDUzMThl
+ZjEgMTAwNjQ0DQo+PiAtLS0gYS9kcml2ZXJzL3R0eS9zZXJpYWwva2dkYm9jLmMNCj4+ICsrKyBi
+L2RyaXZlcnMvdHR5L3NlcmlhbC9rZ2Rib2MuYw0KPj4gQEAgLTIyLDYgKzIyLDkgQEANCj4+ICAj
+aW5jbHVkZSA8bGludXgvbW9kdWxlLmg+DQo+PiAgI2luY2x1ZGUgPGxpbnV4L3BsYXRmb3JtX2Rl
+dmljZS5oPg0KPj4gICNpbmNsdWRlIDxsaW51eC9zZXJpYWxfY29yZS5oPg0KPj4gKyNpbmNsdWRl
+IDxsaW51eC9zbXAuaD4NCj4+ICsNCj4+ICsjaW5jbHVkZSAiLi4va2VybmVsL3NjaGVkL3NjaGVk
+LmgiDQo+Pg0KPj4gICNkZWZpbmUgTUFYX0NPTkZJR19MRU4gICAgICAgICA0MA0KPj4NCj4+IEBA
+IC0zOTksNyArNDAyLDggQEAgc3RhdGljIHZvaWQga2dkYm9jX3Bvc3RfZXhwX2hhbmRsZXIodm9p
+ZCkNCj4+ICAgICAgICAgICAgICAgICBkYmdfcmVzdG9yZV9ncmFwaGljcyA9IDA7DQo+PiAgICAg
+ICAgICAgICAgICAgY29uX2RlYnVnX2xlYXZlKCk7DQo+PiAgICAgICAgIH0NCj4+IC0gICAgICAg
+a2dkYm9jX3Jlc3RvcmVfaW5wdXQoKTsNCj4+ICsgICAgICAgaWYgKCFyYXdfc3Bpbl9pc19sb2Nr
+ZWQoJihjcHVfcnEoc21wX3Byb2Nlc3Nvcl9pZCgpKS0+bG9jaykpKQ0KPj4gKyAgICAgICAgICAg
+ICAgIGtnZGJvY19yZXN0b3JlX2lucHV0KCk7DQo+DQo+SSBkb24ndCB0aGluayBzb2x2aW5nIHRo
+aXMgYnkgYWNjZXNzIGludGVybmFsIHNjaGVkdWxlciBzdGF0ZSBpcyB0aGUgcmlnaHQgYXBwcm9h
+Y2ggLg0KPg0KPlRoZSBkZXNjcmlwdGlvbiBJIHdyb3RlIGFib3ZlIHBlcmhhcHMgYWxyZWFkeSBz
+dWdnZXN0cyB3aHkuIFRoZSBkZWFkbG9jayBvY2N1cnMgYmVjYXVzZSBpdCBpcyB1bnNhZmUgdG8g
+Y2FsbCBzY2hlZHVsZV93b3JrKCkgZnJvbSB0aGUgZGVidWcgdHJhcCBoYW5kbGVyLiBUaGUgZGVi
+dWcgdHJhcCBoYW5kbGVyIGluIHlvdXIgc3RhY2sgdHJhY2UgaXMgbm90IHJ1bm5pbmcgZnJvbSBh
+biBOTUkgYnV0IGl0IGNlcnRhaW5seSBoYXMgTk1JLWxpa2UgcHJvcGVydGllcy4gVGhlcmVmb3Jl
+IGEgYmV0dGVyIGZpeCBpcyBub3QgdG8gY2FsbCBzY2hlZHVsZV93b3JrKCkgYXQgYWxsIGZyb20g
+dGhlIGRlYnVnIHRyYXAgaGFuZGxlci4NCj4NCj5JbnN0ZWFkIHdlIG5lZWQgdG8gdXNlIGFuIE5N
+SS1zYWZlIEFQSSBzdWNoIGFzIGlycV93b3JrX3F1ZXVlKCkgYW5kIHRoYXQgaXJxX3dvcmsgY2Fu
+IGNhbGwgc2NoZWR1bGVfd29yaygpIGFuZCB0cmlnZ2VyIHRoZSBrZXlib2FyZCByZXNldC4NCj4N
+Cj4NCj5EYW5pZWwuDQoNCg0KLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0Ksb7Tyrz+vLDG5Li9vP66rNPQ
+0MK7qsj9vK/NxbXEsaPD3NDFz6KjrL32z97T2reiy824+MnPw+a12Na31tDB0LP2DQq1xLj2yMu7
+8si61+mho7371rnIzrrOxuTL+8jL0tTIzrrO0M7Kvcq508OjqLD8wKi1q7K7z97T2sirsr+78rK/
+t9a12NC5wrahori01sahog0Ku/LJoreio6mxvtPKvP7W0LXE0MXPoqGjyOe5+8T6tO3K1cHLsb7T
+yrz+o6zH68T6waK8tLXnu7C78tPKvP7NqNaqt6K8/sjLsqLJvrP9sb4NCtPKvP6joQ0KVGhpcyBl
+LW1haWwgYW5kIGl0cyBhdHRhY2htZW50cyBjb250YWluIGNvbmZpZGVudGlhbCBpbmZvcm1hdGlv
+biBmcm9tIE5ldyBIM0MsIHdoaWNoIGlzDQppbnRlbmRlZCBvbmx5IGZvciB0aGUgcGVyc29uIG9y
+IGVudGl0eSB3aG9zZSBhZGRyZXNzIGlzIGxpc3RlZCBhYm92ZS4gQW55IHVzZSBvZiB0aGUNCmlu
+Zm9ybWF0aW9uIGNvbnRhaW5lZCBoZXJlaW4gaW4gYW55IHdheSAoaW5jbHVkaW5nLCBidXQgbm90
+IGxpbWl0ZWQgdG8sIHRvdGFsIG9yIHBhcnRpYWwNCmRpc2Nsb3N1cmUsIHJlcHJvZHVjdGlvbiwg
+b3IgZGlzc2VtaW5hdGlvbikgYnkgcGVyc29ucyBvdGhlciB0aGFuIHRoZSBpbnRlbmRlZA0KcmVj
+aXBpZW50KHMpIGlzIHByb2hpYml0ZWQuIElmIHlvdSByZWNlaXZlIHRoaXMgZS1tYWlsIGluIGVy
+cm9yLCBwbGVhc2Ugbm90aWZ5IHRoZSBzZW5kZXINCmJ5IHBob25lIG9yIGVtYWlsIGltbWVkaWF0
+ZWx5IGFuZCBkZWxldGUgaXQhDQoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX18KS2dkYi1idWdyZXBvcnQgbWFpbGluZyBsaXN0CktnZGItYnVncmVwb3J0QGxp
+c3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9s
+aXN0aW5mby9rZ2RiLWJ1Z3JlcG9ydAo=
