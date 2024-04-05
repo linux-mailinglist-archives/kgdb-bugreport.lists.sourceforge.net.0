@@ -2,133 +2,121 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6057E8994BF
-	for <lists+kgdb-bugreport@lfdr.de>; Fri,  5 Apr 2024 07:32:20 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 888498999DD
+	for <lists+kgdb-bugreport@lfdr.de>; Fri,  5 Apr 2024 11:52:06 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1rscBW-0003z9-NB
+	id 1rsgEu-0005Fh-IK
 	for lists+kgdb-bugreport@lfdr.de;
-	Fri, 05 Apr 2024 05:32:18 +0000
+	Fri, 05 Apr 2024 09:52:04 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3F2MPZgsKAFI3ECD27CD2DD08805y.w86@flex--justinstitt.bounces.google.com>)
- id 1rscBU-0003z3-OP for kgdb-bugreport@lists.sourceforge.net;
- Fri, 05 Apr 2024 05:32:16 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <daniel.thompson@linaro.org>) id 1rsgEq-0005Ey-N5
+ for kgdb-bugreport@lists.sourceforge.net;
+ Fri, 05 Apr 2024 09:52:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:Message-ID:
- Mime-Version:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=iwbHBqeRFEUfVJ+3aD1i4LMY2bXuO8BYqPMFzWHirHE=; b=Nm3CKsUSBzfP3YChwHJ0rI0gqh
- CJ4ygCB0buBYN+lIOtDeCmUrwYRNXNyIaJKcbkm/pU/rsE5M3JpPvWe/x3SFdfiOnYgYnAcNlQmmO
- RxNs7pQaGG0LIItb4+fxLu3X7xmHILyYeIFXZPbQ88lK/wdifhWG02ODkqwQIN31HR5Q=;
+ bh=XznLbi2Z1SKvx8bRj0+Hw75ngrOt6iwbmtsVcIRJxZA=; b=OjVivDVceGN3I3ESyLCQ09B/46
+ N/3vkQfIPGEl/bBGZHXFUxbqpUwEyypoYfEC+nPuGNdMv2J0yu/e+iG8hMe2eZd8GNuy93Rw9bMZB
+ If5YgpbbqwitHGJy4fm3W8Hp4daCSyy31ExTzVchAqfEznvma+veC4U4a8jFAiDUrDIc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:From:Subject:Message-ID:Mime-Version:Date:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=iwbHBqeRFEUfVJ+3aD1i4LMY2bXuO8BYqPMFzWHirHE=; b=S
- and3sst7GtjYPERzkTGEEXwjxPfHvx9zIDzkQ0QKtTp5ciXRNt+DPIz1N5nGMmdOqnbq7kn844SEQ
- JRpHxlasKNmnLCsvTCUWyTnZU/FaKxMZiDsRAFnEgnO456x/0Js6mJhk3YVUg+quc28v7mWb5s6Y9
- WcYYtOa+Ry2Bd6iE=;
-Received: from mail-pj1-f74.google.com ([209.85.216.74])
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=XznLbi2Z1SKvx8bRj0+Hw75ngrOt6iwbmtsVcIRJxZA=; b=X6gPKDTAwZagLNoGDKYalQqkwz
+ 1EAP+mAZlvjHJnnDudxEdXu467FBXed9GXshlZZOkAQ3jf2s8H/SZB60+A7WzQfjotX/9zI7Jp31h
+ j9yMJ9hjRvny1Os5GKqS3alhjuCe7MvU2/6sskcqUwTS0nJhzTqp1tjKHDTIO7kDYyj0=;
+Received: from mail-lf1-f52.google.com ([209.85.167.52])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1rscBS-0003Th-M0 for kgdb-bugreport@lists.sourceforge.net;
- Fri, 05 Apr 2024 05:32:16 +0000
-Received: by mail-pj1-f74.google.com with SMTP id
- 98e67ed59e1d1-2a367a1c4c2so322368a91.2
+ id 1rsgEo-0003lV-9i for kgdb-bugreport@lists.sourceforge.net;
+ Fri, 05 Apr 2024 09:51:59 +0000
+Received: by mail-lf1-f52.google.com with SMTP id
+ 2adb3069b0e04-516d0c004b1so1741163e87.2
  for <kgdb-bugreport@lists.sourceforge.net>;
- Thu, 04 Apr 2024 22:32:14 -0700 (PDT)
+ Fri, 05 Apr 2024 02:51:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1712295124; x=1712899924;
- darn=lists.sourceforge.net; 
- h=cc:to:from:subject:message-id:mime-version:date:from:to:cc:subject
- :date:message-id:reply-to;
- bh=iwbHBqeRFEUfVJ+3aD1i4LMY2bXuO8BYqPMFzWHirHE=;
- b=zAqLo9QcJdpOPKGvxcpBQnUPogR/lcZ3FE+M+h+ho366+qgiaDWOaqKf431UlPi1iB
- zacjizBeeQZ/5hs9AzbtT31fZToUFhuAJ4Gy72gkl/4PbD3fb9bgVREPreKRzbtQKt27
- YLKk0wDiCLcqI5pUG+49oEnqQinKXxsBCc2iRVsnVFppLME+K2pmRwLzF0cvRHDt01PI
- +fZiEqG/aIeP5SBglzjq4cfhIqYaXQjtccHYqWFFPk/PumMd5f4WKRyPU594fT8pIm03
- MgimoMxImKBiVahUmE3R9tyJjB0sU/zEPEnnLTmQm4pu0TeIqHP+54Rz95aEt4VPxF+l
- c2PA==
+ d=linaro.org; s=google; t=1712310707; x=1712915507; darn=lists.sourceforge.net;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=XznLbi2Z1SKvx8bRj0+Hw75ngrOt6iwbmtsVcIRJxZA=;
+ b=dZhlwGB52T1KtYS6VIy0AVB8gT/Qkvh9A6/M0AFfu/lTTaskNTmXx4R6DWdMxxTp9n
+ QSM/51kvSil6dJj/ZgX16O6WEk7j1HK+aFwZbjGwfpZFuuTkYEIACvfPzIrW6p3yPwen
+ 1yjXIkd8k254SMIIll/vMPndHNaxd8vLIqyB8HQixNQ5c1hHi5qOQeYMRonUEgRgF2WU
+ 1E3h4Bjf419uN7jYMnl3jpq+0xYw72tcb+Z4h7uFGbA5SpqdpCA3HanpowbocwNe7Eoh
+ 4Ah3iwjw5gZPiOCnvGWxMmqyfN89+w4IEhksMQUZUZlr37I4gvfK0tzxH5voRlKwVT1H
+ 9N4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712295124; x=1712899924;
- h=cc:to:from:subject:message-id:mime-version:date:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=iwbHBqeRFEUfVJ+3aD1i4LMY2bXuO8BYqPMFzWHirHE=;
- b=OEeB1tIKC8WcIkCN/IsewQUcP81+SPFSWRJPwOf2gopRrAcJk4YvkGIi3KOeAi4McK
- 5sBnSY3MMfBGApm4YddDildTuEXQlVhQxEHMVYyk/K0tKKDjHx1mKH7G7mWMuO2Fvj6i
- 0ACfZ8v2ccswE5kfqLJPU/ihglwbSDbaonzwz/bIhsrpdkGkip2wZQAEUozcgVpQ1Ikc
- EnxlSVg+5HJe/qQqVM5K3dNua5SfTqFku5uyacE2wdvBZa4vO56PNjTaooP2b5ZRFj0x
- NbLHOZ/I3V/k24gmvmBn3t5R9GRI1Yo6enQZLmsTjE30WsZOx+jJWBvbR71vxvtvlQX7
- Jkhg==
-X-Gm-Message-State: AOJu0Yx9uDjwz85FdeBSZ9PzMuAip3HfHpsMA1dOiygKk4HdkjCYKPkt
- OKgVUcOyb+UXQ7hqelTEiwjchQObwD3OKQ3Ike7HtCNrvzh3Fhpi2+2E3ny3ampDg1TAPcf1FFQ
- IWKoFuwxUkz8aqbaHf1q6OQ==
-X-Google-Smtp-Source: AGHT+IEZvT3gn3hf4hHPSv3p3Ssos4Ig8JcIIIdsmab32//XdptkM2Ej7aJXeeyV6n+4mylECLbx+EvZkt8mAqr8xw==
-X-Received: from jstitt-linux1.c.googlers.com
- ([fda3:e722:ac3:cc00:2b:ff92:c0a8:23b5])
- (user=justinstitt job=sendgmr) by 2002:a05:6902:100a:b0:dc6:c94e:fb85 with
- SMTP id w10-20020a056902100a00b00dc6c94efb85mr476ybt.2.1712284439335; Thu, 04
- Apr 2024 19:33:59 -0700 (PDT)
-Date: Fri, 05 Apr 2024 02:33:58 +0000
-Mime-Version: 1.0
-X-B4-Tracking: v=1; b=H4sIABVjD2YC/42NwQ6CMBAFf4X07JpSQNCT/2GIgXZbNmBLWiQSw
- r9bSLx7eId5h5mVBfSEgd2SlXmcKZCzEcQpYbJrrEEgFZkJLnKecwFh8laOC/ToLQ6gsH0b6FW
- 770kOJBQZFqjERTWZYtEzetT0ORqPOnJHYXJ+OZJzur8/e/aHfU4hhVKXVcMrvGqd341zZsCzd
- C9Wb9v2BejKJwHTAAAA
-X-Developer-Key: i=justinstitt@google.com; a=ed25519;
- pk=tC3hNkJQTpNX/gLKxTNQKDmiQl6QjBNCGKJINqAdJsE=
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1712284438; l=2619;
- i=justinstitt@google.com; s=20230717; h=from:subject:message-id;
- bh=wO+X3saS4uyVLQDMRU+NaQhCLOWmvrK0q75shb6+LmM=;
- b=uqRBHljMePkjFgGA0deBKFCE5V0apxMiuEMkeOwlan7tyHSjXUKzCeg0mE+95hPCVFwwbSokl
- ESs9XgcTc+DDjmV0K//0Bq6uIuu5zDuqfFSrMH8KvRmXFvYxKVLM0j2
-X-Mailer: b4 0.12.3
-Message-ID: <20240405-strncpy-kernel-debug-kdb-kdb_io-c-v2-1-d0bf595ab301@google.com>
-To: Jason Wessel <jason.wessel@windriver.com>, 
- Daniel Thompson <daniel.thompson@linaro.org>,
- Douglas Anderson <dianders@chromium.org>
-X-Spam-Score: -7.7 (-------)
+ d=1e100.net; s=20230601; t=1712310707; x=1712915507;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=XznLbi2Z1SKvx8bRj0+Hw75ngrOt6iwbmtsVcIRJxZA=;
+ b=mkyUn03Q6uuqkeaN2rektwc8UPlqeVuv8541wFgd6sSNf3Og+mIogoHMFI5quMenti
+ bQcRQK72InoFlqfw4Qq2F8fTh0Nlc03dPqY7VwIjUQjDXLHqra8LMdK3IxyijzKkybQa
+ dqrVsSxD96HKGNthzgRXiRhaNf+kWQBWKmlEQLKSCRt5AxclLF1KXUUHxohi7FzcAyTN
+ hAE+8W0hts8h7y0rmT2UyvXKSIlVzgz3oUu0uu3QoFtyRQ7ZH38ZiVrlPfKYwQvZYGgd
+ e0BfL66/bWb7m08RGYWsTuibfwgYLJVdUgAcwDLjm8pZ+rJm5HvlKWgQb2NpQdf4+857
+ i+6Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWiNsuLoZDq7Jh+DSfGyAyaHM4INd9/1Vn5xMqMcC5BeaqugJpaf0fXZj/qSbBceRVOm+KMAtdrMHptEX1zSmTZ4QTALTZIqMx8wzmXiC2GPhMSfCM=
+X-Gm-Message-State: AOJu0Yx2VjATVfKo6U7Uf6S7ktaS73IVLabRwlPq8TThPvQTy71d/Wpk
+ Om2Tl625TL2NE8LCSR1ehd1TxyJuarcoH6GZUHbiLbBiQ9lAigwSwDH2VAwATcc=
+X-Google-Smtp-Source: AGHT+IFuRBcasfkE1HoHSCQ7OdWv+EtlpW9OQz09tguqfMAKrRd1NUyHNpjIOZuZmN0l9ZISYTgUFw==
+X-Received: by 2002:ac2:5ddb:0:b0:516:d2eb:6edd with SMTP id
+ x27-20020ac25ddb000000b00516d2eb6eddmr735020lfq.26.1712310706830; 
+ Fri, 05 Apr 2024 02:51:46 -0700 (PDT)
+Received: from aspen.lan
+ (aztw-34-b2-v4wan-166919-cust780.vm26.cable.virginm.net. [82.37.195.13])
+ by smtp.gmail.com with ESMTPSA id
+ e28-20020adfa45c000000b00343e1c3298asm1428854wra.0.2024.04.05.02.51.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 05 Apr 2024 02:51:46 -0700 (PDT)
+Date: Fri, 5 Apr 2024 10:51:44 +0100
+From: Daniel Thompson <daniel.thompson@linaro.org>
+To: Justin Stitt <justinstitt@google.com>
+Message-ID: <20240405095144.GB2890893@aspen.lan>
+References: <20240405-strncpy-kernel-debug-kdb-kdb_io-c-v2-1-d0bf595ab301@google.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20240405-strncpy-kernel-debug-kdb-kdb_io-c-v2-1-d0bf595ab301@google.com>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: We should move away from using strncpy because it is
- deprecated
- [1]. Since these buffers want to be NUL-terminated, let's use strscpy() which
- guarantees this behavior. The code in question enables the visual autocomplete
- when using kdb tab completion. After pressing tab a couple times when sitting
- on a partial symbol it will attempt to fill it in. In my testing, str [...]
- Content analysis details:   (-7.7 points, 6.0 required)
+ Content preview:  On Fri, Apr 05, 2024 at 02:33:58AM +0000, Justin Stitt wrote:
+ > We should move away from using strncpy because it is deprecated [1]. >
+ > Since these buffers want to be NUL-terminated, let's use strscp [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
- -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM
- welcome-list
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.216.74 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.216.74 listed in wl.mailspike.net]
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ no trust [209.85.167.52 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.167.52 listed in wl.mailspike.net]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium trust sender
-X-Headers-End: 1rscBS-0003Th-M0
-Subject: [Kgdb-bugreport] [PATCH v2] kdb: replace deprecated strncpy
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+X-Headers-End: 1rsgEo-0003lV-9i
+Subject: Re: [Kgdb-bugreport] [PATCH v2] kdb: replace deprecated strncpy
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -140,80 +128,97 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-From: Justin Stitt via Kgdb-bugreport <kgdb-bugreport@lists.sourceforge.net>
-Reply-To: Justin Stitt <justinstitt@google.com>
-Cc: kgdb-bugreport@lists.sourceforge.net, Justin Stitt <justinstitt@google.com>,
- linux-kernel@vger.kernel.org, linux-hardening@vger.kernel.org
+Cc: kgdb-bugreport@lists.sourceforge.net, linux-hardening@vger.kernel.org,
+ linux-kernel@vger.kernel.org, Jason Wessel <jason.wessel@windriver.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-We should move away from using strncpy because it is deprecated [1].
+On Fri, Apr 05, 2024 at 02:33:58AM +0000, Justin Stitt wrote:
+> We should move away from using strncpy because it is deprecated [1].
+>
+> Since these buffers want to be NUL-terminated, let's use strscpy() which
+> guarantees this behavior.
+>
+> The code in question enables the visual autocomplete when using kdb tab
+> completion. After pressing tab a couple times when sitting on a partial
+> symbol it will attempt to fill it in.
 
-Since these buffers want to be NUL-terminated, let's use strscpy() which
-guarantees this behavior.
+FWIW the code that this patch changes is only executed when tab is
+pressed once.
 
-The code in question enables the visual autocomplete when using kdb tab
-completion. After pressing tab a couple times when sitting on a partial
-symbol it will attempt to fill it in. In my testing, strscpy() provides
-the exact same autocomplete behavior that strncpy() provides here (i.e:
-it fills in the same number of characters for the user).
 
-You can confirm this by enabling kdb [3] and booting up the kernel. I
-performed my tests with qemu with this incantation (wow these get long):
+> In my testing, strscpy() provides
+> the exact same autocomplete behavior that strncpy() provides here (i.e:
+> it fills in the same number of characters for the user).
+>
+> You can confirm this by enabling kdb [3] and booting up the kernel. I
+> performed my tests with qemu with this incantation (wow these get long):
+>
+> $ /usr/bin/qemu-system-x86_64 -display none -nodefaults -cpu Nehalem
+> -append 'console=ttyS0,115200 earlycon=uart8250,io,0x3f8 rdinit=/bin/sh
+> kgdboc=ttyS0,115200 nokaslr' -kernel $BUILD_DIR/arch/x86/boot/bzImage
+> -initrd $REPOS/boot-utils/images/x86_64/rootfs.cpio -m 512m -serial
+> mon:stdio
+>
+> ... then you can type some symbols and see that autocomplete still kicks
+> in and performs exactly the same.
+>
+> For example:
+> tes <tab><tab> gives you "test",
+> then "test_ap" <tab><tab> gives you "test_aperfmperf"
+>
+> Link: https://www.kernel.org/doc/html/latest/process/deprecated.html#strncpy-on-nul-terminated-strings [1]
+> Link: https://github.com/KSPP/linux/issues/90 [2]
+> Link: https://www.kernel.org/doc/html/v5.0/dev-tools/kgdb.html#using-kdb [3]
+> Cc: linux-hardening@vger.kernel.org
+> Signed-off-by: Justin Stitt <justinstitt@google.com>
+> ---
+> Changes in v2:
+> - use strscpy over memcpy (thanks Daniel T.)
+> - Link to v1: https://lore.kernel.org/r/20240403-strncpy-kernel-debug-kdb-kdb_io-c-v1-1-7f78a08e9ff4@google.com
+> ---
+> ---
+>  kernel/debug/kdb/kdb_io.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/kernel/debug/kdb/kdb_io.c b/kernel/debug/kdb/kdb_io.c
+> index 9443bc63c5a2..60be22132020 100644
+> --- a/kernel/debug/kdb/kdb_io.c
+> +++ b/kernel/debug/kdb/kdb_io.c
+> @@ -368,9 +368,9 @@ static char *kdb_read(char *buffer, size_t bufsize)
+>  			kdb_printf("%s", buffer);
+>  		} else if (tab != 2 && count > 0) {
+>  			len_tmp = strlen(p_tmp);
+> -			strncpy(p_tmp+len_tmp, cp, lastchar-cp+1);
+> +			strscpy(p_tmp+len_tmp, cp, lastchar-cp+1);
 
-$ /usr/bin/qemu-system-x86_64 -display none -nodefaults -cpu Nehalem
--append 'console=ttyS0,115200 earlycon=uart8250,io,0x3f8 rdinit=/bin/sh
-kgdboc=ttyS0,115200 nokaslr' -kernel $BUILD_DIR/arch/x86/boot/bzImage
--initrd $REPOS/boot-utils/images/x86_64/rootfs.cpio -m 512m -serial
-mon:stdio
+This still looks like it is reproducing the obvious[1] error in
+the original strncpy() call. The third argument does *not* provide the
+number of characters in the destination buffer.
 
-... then you can type some symbols and see that autocomplete still kicks
-in and performs exactly the same.
+Just to be really clear, I think this patch and your original memcpy()
+conversion is mechanically correct, in that the new code is equivalent
+to the original strncpy(). The problem is that neither patch acts
+on the warning signs that the original code is broken.
 
-For example:
-tes <tab><tab> gives you "test",
-then "test_ap" <tab><tab> gives you "test_aperfmperf"
 
-Link: https://www.kernel.org/doc/html/latest/process/deprecated.html#strncpy-on-nul-terminated-strings [1]
-Link: https://github.com/KSPP/linux/issues/90 [2]
-Link: https://www.kernel.org/doc/html/v5.0/dev-tools/kgdb.html#using-kdb [3]
-Cc: linux-hardening@vger.kernel.org
-Signed-off-by: Justin Stitt <justinstitt@google.com>
----
-Changes in v2:
-- use strscpy over memcpy (thanks Daniel T.)
-- Link to v1: https://lore.kernel.org/r/20240403-strncpy-kernel-debug-kdb-kdb_io-c-v1-1-7f78a08e9ff4@google.com
----
----
- kernel/debug/kdb/kdb_io.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+[1] I know that this code is hard to read so "obvious" is a relative
+    term. However just looking at one line tells us that the source
+    pointer is part of a two pointer calculation that purports to
+    give the length of the destination string! Such code is almost
+    always going to be wrong.
 
-diff --git a/kernel/debug/kdb/kdb_io.c b/kernel/debug/kdb/kdb_io.c
-index 9443bc63c5a2..60be22132020 100644
---- a/kernel/debug/kdb/kdb_io.c
-+++ b/kernel/debug/kdb/kdb_io.c
-@@ -368,9 +368,9 @@ static char *kdb_read(char *buffer, size_t bufsize)
- 			kdb_printf("%s", buffer);
- 		} else if (tab != 2 && count > 0) {
- 			len_tmp = strlen(p_tmp);
--			strncpy(p_tmp+len_tmp, cp, lastchar-cp+1);
-+			strscpy(p_tmp+len_tmp, cp, lastchar-cp+1);
- 			len_tmp = strlen(p_tmp);
--			strncpy(cp, p_tmp+len, len_tmp-len + 1);
-+			strscpy(cp, p_tmp+len, len_tmp-len + 1);
- 			len = len_tmp - len;
- 			kdb_printf("%s", cp);
- 			cp += len;
 
----
-base-commit: 026e680b0a08a62b1d948e5a8ca78700bfac0e6e
-change-id: 20240402-strncpy-kernel-debug-kdb-kdb_io-c-53e5ed26da3d
+>  			len_tmp = strlen(p_tmp);
+> -			strncpy(cp, p_tmp+len, len_tmp-len + 1);
+> +			strscpy(cp, p_tmp+len, len_tmp-len + 1);
 
-Best regards,
---
-Justin Stitt <justinstitt@google.com>
+Again, I really don't think the third argument provides the number of
+characters in the destination buffer.
 
+
+Daniel.
 
 
 _______________________________________________
