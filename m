@@ -2,84 +2,133 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 43686897BB0
-	for <lists+kgdb-bugreport@lfdr.de>; Thu,  4 Apr 2024 00:38:43 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6057E8994BF
+	for <lists+kgdb-bugreport@lfdr.de>; Fri,  5 Apr 2024 07:32:20 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1rs9Fg-0004m0-Rw
+	id 1rscBW-0003z9-NB
 	for lists+kgdb-bugreport@lfdr.de;
-	Wed, 03 Apr 2024 22:38:41 +0000
+	Fri, 05 Apr 2024 05:32:18 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <andy.shevchenko@gmail.com>) id 1rs9Fb-0004lU-Re
- for kgdb-bugreport@lists.sourceforge.net;
- Wed, 03 Apr 2024 22:38:36 +0000
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
+ <3F2MPZgsKAFI3ECD27CD2DD08805y.w86@flex--justinstitt.bounces.google.com>)
+ id 1rscBU-0003z3-OP for kgdb-bugreport@lists.sourceforge.net;
+ Fri, 05 Apr 2024 05:32:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:Date:From:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:Message-ID:
+ Mime-Version:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=3GazrtOVbXgEQbTVf985kxaeojFqB3sYjP57s6wUjZU=; b=eVPrDT42pgxg3e4VorFyC2zTu7
- kT2FzyunVdVyFhoiyFEBTd/95aP7fg94aSITyQgrZDKN8Msv05TChtCiYq5ZeyFD4KMET/h/M4vP+
- pCWY9pqdOAyJ7gD5eipfJ7XF/YSFXcfpAoAN2pl4mID8dIc2rzO/20gohR2ilkssLqw4=;
+ bh=iwbHBqeRFEUfVJ+3aD1i4LMY2bXuO8BYqPMFzWHirHE=; b=Nm3CKsUSBzfP3YChwHJ0rI0gqh
+ CJ4ygCB0buBYN+lIOtDeCmUrwYRNXNyIaJKcbkm/pU/rsE5M3JpPvWe/x3SFdfiOnYgYnAcNlQmmO
+ RxNs7pQaGG0LIItb4+fxLu3X7xmHILyYeIFXZPbQ88lK/wdifhWG02ODkqwQIN31HR5Q=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :Date:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=3GazrtOVbXgEQbTVf985kxaeojFqB3sYjP57s6wUjZU=; b=JIUNH8zdLeQG3NWwwaojAg3rm3
- j4kLWDBYSEYP3/HYCAIg76zYcJK6fmWKo5JaK+DXyYwakKJCklUPF//lNWPl1vzC/9mvFoV0WIynX
- QYB3yhSEdCgBnqt6L6HDYojHrRpCstfZCiOp/IAqOXzgVVqn19i74ZGIdLuRpim9LWlU=;
-Received: from fgw20-7.mail.saunalahti.fi ([62.142.5.81])
+ h=Content-Type:Cc:To:From:Subject:Message-ID:Mime-Version:Date:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=iwbHBqeRFEUfVJ+3aD1i4LMY2bXuO8BYqPMFzWHirHE=; b=S
+ and3sst7GtjYPERzkTGEEXwjxPfHvx9zIDzkQ0QKtTp5ciXRNt+DPIz1N5nGMmdOqnbq7kn844SEQ
+ JRpHxlasKNmnLCsvTCUWyTnZU/FaKxMZiDsRAFnEgnO456x/0Js6mJhk3YVUg+quc28v7mWb5s6Y9
+ WcYYtOa+Ry2Bd6iE=;
+Received: from mail-pj1-f74.google.com ([209.85.216.74])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rs9Fa-0005pL-7b for kgdb-bugreport@lists.sourceforge.net;
- Wed, 03 Apr 2024 22:38:36 +0000
-Received: from localhost (88-113-26-217.elisa-laajakaista.fi [88.113.26.217])
- by fgw23.mail.saunalahti.fi (Halon) with ESMTP
- id 981322a9-f208-11ee-b972-005056bdfda7;
- Thu, 04 Apr 2024 01:22:03 +0300 (EEST)
-From: Andy Shevchenko <andy.shevchenko@gmail.com>
-Date: Thu, 4 Apr 2024 01:22:01 +0300
-To: liu.yec@h3c.com
-Message-ID: <Zg3WicDB8m9am7dJ@surfacebook.localdomain>
-References: <20240402125802.GC25200@aspen.lan>
- <20240403061109.3142580-1-liu.yec@h3c.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20240403061109.3142580-1-liu.yec@h3c.com>
-X-Spam-Score: 3.2 (+++)
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1rscBS-0003Th-M0 for kgdb-bugreport@lists.sourceforge.net;
+ Fri, 05 Apr 2024 05:32:16 +0000
+Received: by mail-pj1-f74.google.com with SMTP id
+ 98e67ed59e1d1-2a367a1c4c2so322368a91.2
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Thu, 04 Apr 2024 22:32:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=google.com; s=20230601; t=1712295124; x=1712899924;
+ darn=lists.sourceforge.net; 
+ h=cc:to:from:subject:message-id:mime-version:date:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=iwbHBqeRFEUfVJ+3aD1i4LMY2bXuO8BYqPMFzWHirHE=;
+ b=zAqLo9QcJdpOPKGvxcpBQnUPogR/lcZ3FE+M+h+ho366+qgiaDWOaqKf431UlPi1iB
+ zacjizBeeQZ/5hs9AzbtT31fZToUFhuAJ4Gy72gkl/4PbD3fb9bgVREPreKRzbtQKt27
+ YLKk0wDiCLcqI5pUG+49oEnqQinKXxsBCc2iRVsnVFppLME+K2pmRwLzF0cvRHDt01PI
+ +fZiEqG/aIeP5SBglzjq4cfhIqYaXQjtccHYqWFFPk/PumMd5f4WKRyPU594fT8pIm03
+ MgimoMxImKBiVahUmE3R9tyJjB0sU/zEPEnnLTmQm4pu0TeIqHP+54Rz95aEt4VPxF+l
+ c2PA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1712295124; x=1712899924;
+ h=cc:to:from:subject:message-id:mime-version:date:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=iwbHBqeRFEUfVJ+3aD1i4LMY2bXuO8BYqPMFzWHirHE=;
+ b=OEeB1tIKC8WcIkCN/IsewQUcP81+SPFSWRJPwOf2gopRrAcJk4YvkGIi3KOeAi4McK
+ 5sBnSY3MMfBGApm4YddDildTuEXQlVhQxEHMVYyk/K0tKKDjHx1mKH7G7mWMuO2Fvj6i
+ 0ACfZ8v2ccswE5kfqLJPU/ihglwbSDbaonzwz/bIhsrpdkGkip2wZQAEUozcgVpQ1Ikc
+ EnxlSVg+5HJe/qQqVM5K3dNua5SfTqFku5uyacE2wdvBZa4vO56PNjTaooP2b5ZRFj0x
+ NbLHOZ/I3V/k24gmvmBn3t5R9GRI1Yo6enQZLmsTjE30WsZOx+jJWBvbR71vxvtvlQX7
+ Jkhg==
+X-Gm-Message-State: AOJu0Yx9uDjwz85FdeBSZ9PzMuAip3HfHpsMA1dOiygKk4HdkjCYKPkt
+ OKgVUcOyb+UXQ7hqelTEiwjchQObwD3OKQ3Ike7HtCNrvzh3Fhpi2+2E3ny3ampDg1TAPcf1FFQ
+ IWKoFuwxUkz8aqbaHf1q6OQ==
+X-Google-Smtp-Source: AGHT+IEZvT3gn3hf4hHPSv3p3Ssos4Ig8JcIIIdsmab32//XdptkM2Ej7aJXeeyV6n+4mylECLbx+EvZkt8mAqr8xw==
+X-Received: from jstitt-linux1.c.googlers.com
+ ([fda3:e722:ac3:cc00:2b:ff92:c0a8:23b5])
+ (user=justinstitt job=sendgmr) by 2002:a05:6902:100a:b0:dc6:c94e:fb85 with
+ SMTP id w10-20020a056902100a00b00dc6c94efb85mr476ybt.2.1712284439335; Thu, 04
+ Apr 2024 19:33:59 -0700 (PDT)
+Date: Fri, 05 Apr 2024 02:33:58 +0000
+Mime-Version: 1.0
+X-B4-Tracking: v=1; b=H4sIABVjD2YC/42NwQ6CMBAFf4X07JpSQNCT/2GIgXZbNmBLWiQSw
+ r9bSLx7eId5h5mVBfSEgd2SlXmcKZCzEcQpYbJrrEEgFZkJLnKecwFh8laOC/ToLQ6gsH0b6FW
+ 770kOJBQZFqjERTWZYtEzetT0ORqPOnJHYXJ+OZJzur8/e/aHfU4hhVKXVcMrvGqd341zZsCzd
+ C9Wb9v2BejKJwHTAAAA
+X-Developer-Key: i=justinstitt@google.com; a=ed25519;
+ pk=tC3hNkJQTpNX/gLKxTNQKDmiQl6QjBNCGKJINqAdJsE=
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1712284438; l=2619;
+ i=justinstitt@google.com; s=20230717; h=from:subject:message-id;
+ bh=wO+X3saS4uyVLQDMRU+NaQhCLOWmvrK0q75shb6+LmM=;
+ b=uqRBHljMePkjFgGA0deBKFCE5V0apxMiuEMkeOwlan7tyHSjXUKzCeg0mE+95hPCVFwwbSokl
+ ESs9XgcTc+DDjmV0K//0Bq6uIuu5zDuqfFSrMH8KvRmXFvYxKVLM0j2
+X-Mailer: b4 0.12.3
+Message-ID: <20240405-strncpy-kernel-debug-kdb-kdb_io-c-v2-1-d0bf595ab301@google.com>
+To: Jason Wessel <jason.wessel@windriver.com>, 
+ Daniel Thompson <daniel.thompson@linaro.org>,
+ Douglas Anderson <dianders@chromium.org>
+X-Spam-Score: -7.7 (-------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Wed, Apr 03, 2024 at 02:11:09PM +0800,
- > From: LiuYe > > Currently, if CONFIG_KDB_KEYBOARD is enabled,
- then kgdboc will > attempt to use schedule_work()
- to provoke a keyboard reset when > transiti [...] 
- Content analysis details:   (3.2 points, 6.0 required)
+ Content preview: We should move away from using strncpy because it is
+ deprecated
+ [1]. Since these buffers want to be NUL-terminated, let's use strscpy() which
+ guarantees this behavior. The code in question enables the visual autocomplete
+ when using kdb tab completion. After pressing tab a couple times when sitting
+ on a partial symbol it will attempt to fill it in. In my testing, str [...]
+ Content analysis details:   (-7.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM
+ welcome-list
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [andy.shevchenko[at]gmail.com]
- 1.0 SPF_SOFTFAIL           SPF: sender does not match SPF record (softfail)
- 1.0 FORGED_GMAIL_RCVD      'From' gmail.com does not match 'Received'
- headers
- 0.0 DKIM_ADSP_CUSTOM_MED   No valid author signature, adsp_override is
- CUSTOM_MED
- 1.2 NML_ADSP_CUSTOM_MED    ADSP custom_med hit, and not from a mailing
- list
-X-Headers-End: 1rs9Fa-0005pL-7b
-Subject: Re: [Kgdb-bugreport] [PATCH V8] kdb: Fix the deadlock issue in KDB
- debugging.
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.216.74 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.216.74 listed in wl.mailspike.net]
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium trust sender
+X-Headers-End: 1rscBS-0003Th-M0
+Subject: [Kgdb-bugreport] [PATCH v2] kdb: replace deprecated strncpy
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -91,105 +140,79 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: daniel.thompson@linaro.org, kgdb-bugreport@lists.sourceforge.net,
- jason.wessel@windriver.com, linux-kernel@vger.kernel.org,
- linux-serial@vger.kernel.org, gregkh@linuxfoundation.org, jirislaby@kernel.org
+From: Justin Stitt via Kgdb-bugreport <kgdb-bugreport@lists.sourceforge.net>
+Reply-To: Justin Stitt <justinstitt@google.com>
+Cc: kgdb-bugreport@lists.sourceforge.net, Justin Stitt <justinstitt@google.com>,
+ linux-kernel@vger.kernel.org, linux-hardening@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Wed, Apr 03, 2024 at 02:11:09PM +0800, liu.yec@h3c.com kirjoitti:
-> From: LiuYe <liu.yeC@h3c.com>
-> 
-> Currently, if CONFIG_KDB_KEYBOARD is enabled, then kgdboc will
-> attempt to use schedule_work() to provoke a keyboard reset when
-> transitioning out of the debugger and back to normal operation.
-> This can cause deadlock because schedule_work() is not NMI-safe.
-> 
-> The stack trace below shows an example of the problem. In this
-> case the master cpu is not running from NMI but it has parked
-> the slave CPUs using an NMI and the parked CPUs is holding
-> spinlocks needed by schedule_work().
+We should move away from using strncpy because it is deprecated [1].
 
-> example:
->  BUG: spinlock lockup suspected on CPU#0, namex/10450
->  lock: 0xffff881ffe823980, .magic: dead4ead, .owner: namexx/21888, .owner_cpu: 1
->  ffff881741d00000 ffff881741c01000 0000000000000000 0000000000000000
->  ffff881740f58e78 ffff881741cffdd0 ffffffff8147a7fc ffff881740f58f20
-> Call Trace:
->  [<ffffffff81479e6d>] ? __schedule+0x16d/0xac0
->  [<ffffffff8147a7fc>] ? schedule+0x3c/0x90
->  [<ffffffff8147e71a>] ? schedule_hrtimeout_range_clock+0x10a/0x120
->  [<ffffffff8147d22e>] ? mutex_unlock+0xe/0x10
->  [<ffffffff811c839b>] ? ep_scan_ready_list+0x1db/0x1e0
->  [<ffffffff8147e743>] ? schedule_hrtimeout_range+0x13/0x20
->  [<ffffffff811c864a>] ? ep_poll+0x27a/0x3b0
->  [<ffffffff8108c540>] ? wake_up_q+0x70/0x70
->  [<ffffffff811c99a8>] ? SyS_epoll_wait+0xb8/0xd0
->  [<ffffffff8147f296>] ? entry_SYSCALL_64_fastpath+0x12/0x75
->  CPU: 0 PID: 10450 Comm: namex Tainted: G           O    4.4.65 #1
->  Hardware name: Insyde Purley/Type2 - Board Product Name1, BIOS 05.21.51.0036 07/19/2019
->   0000000000000000 ffff881ffe813c10 ffffffff8124e883 ffff881741c01000
->   ffff881ffe823980 ffff881ffe813c38 ffffffff810a7f7f ffff881ffe823980
->   000000007d2b7cd0 0000000000000001 ffff881ffe813c68 ffffffff810a80e0
->   Call Trace:
->   <#DB>  [<ffffffff8124e883>] dump_stack+0x85/0xc2
->   [<ffffffff810a7f7f>] spin_dump+0x7f/0x100
->   [<ffffffff810a80e0>] do_raw_spin_lock+0xa0/0x150
->   [<ffffffff8147eb55>] _raw_spin_lock+0x15/0x20
->   [<ffffffff8108c256>] try_to_wake_up+0x176/0x3d0
->   [<ffffffff8108c4c5>] wake_up_process+0x15/0x20
->   [<ffffffff8107b371>] insert_work+0x81/0xc0
->   [<ffffffff8107b4e5>] __queue_work+0x135/0x390
->   [<ffffffff8107b786>] queue_work_on+0x46/0x90
->   [<ffffffff81313d28>] kgdboc_post_exp_handler+0x48/0x70
->   [<ffffffff810ed488>] kgdb_cpu_enter+0x598/0x610
->   [<ffffffff810ed6e2>] kgdb_handle_exception+0xf2/0x1f0
->   [<ffffffff81054e21>] __kgdb_notify+0x71/0xd0
->   [<ffffffff81054eb5>] kgdb_notify+0x35/0x70
->   [<ffffffff81082e6a>] notifier_call_chain+0x4a/0x70
->   [<ffffffff8108304d>] notify_die+0x3d/0x50
->   [<ffffffff81017219>] do_int3+0x89/0x120
->   [<ffffffff81480fb4>] int3+0x44/0x80
+Since these buffers want to be NUL-terminated, let's use strscpy() which
+guarantees this behavior.
 
-Ouch.
-Please, read this
-https://www.kernel.org/doc/html/latest/process/submitting-patches.html#backtraces-in-commit-messages
-and modify the commit message accordingly.
+The code in question enables the visual autocomplete when using kdb tab
+completion. After pressing tab a couple times when sitting on a partial
+symbol it will attempt to fill it in. In my testing, strscpy() provides
+the exact same autocomplete behavior that strncpy() provides here (i.e:
+it fills in the same number of characters for the user).
 
-> We fix the problem by using irq_work to call schedule_work()
-> instead of calling it directly. This is because we cannot
-> resynchronize the keyboard state from the hardirq context
-> provided by irq_work. This must be done from the task context
-> in order to call the input subsystem.
-> 
-> Therefore, we have to defer the work twice. First, safely
-> switch from the debug trap context (similar to NMI) to the
-> hardirq, and then switch from the hardirq to the system work queue.
+You can confirm this by enabling kdb [3] and booting up the kernel. I
+performed my tests with qemu with this incantation (wow these get long):
 
-> Signed-off-by: LiuYe <liu.yeC@h3c.com>
-> Co-authored-by: Daniel Thompson <daniel.thompson@linaro.org>
+$ /usr/bin/qemu-system-x86_64 -display none -nodefaults -cpu Nehalem
+-append 'console=ttyS0,115200 earlycon=uart8250,io,0x3f8 rdinit=/bin/sh
+kgdboc=ttyS0,115200 nokaslr' -kernel $BUILD_DIR/arch/x86/boot/bzImage
+-initrd $REPOS/boot-utils/images/x86_64/rootfs.cpio -m 512m -serial
+mon:stdio
 
-Correct tag is Co-developed-by, btw it's written in the same document the link
-to which I provided a few lines above.
+... then you can type some symbols and see that autocomplete still kicks
+in and performs exactly the same.
 
-...
+For example:
+tes <tab><tab> gives you "test",
+then "test_ap" <tab><tab> gives you "test_aperfmperf"
 
-> --- a/drivers/tty/serial/kgdboc.c
-> +++ b/drivers/tty/serial/kgdboc.c
-> @@ -22,6 +22,7 @@
->  #include <linux/module.h>
->  #include <linux/platform_device.h>
->  #include <linux/serial_core.h>
-> +#include <linux/irq_work.h>
+Link: https://www.kernel.org/doc/html/latest/process/deprecated.html#strncpy-on-nul-terminated-strings [1]
+Link: https://github.com/KSPP/linux/issues/90 [2]
+Link: https://www.kernel.org/doc/html/v5.0/dev-tools/kgdb.html#using-kdb [3]
+Cc: linux-hardening@vger.kernel.org
+Signed-off-by: Justin Stitt <justinstitt@google.com>
+---
+Changes in v2:
+- use strscpy over memcpy (thanks Daniel T.)
+- Link to v1: https://lore.kernel.org/r/20240403-strncpy-kernel-debug-kdb-kdb_io-c-v1-1-7f78a08e9ff4@google.com
+---
+---
+ kernel/debug/kdb/kdb_io.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Please, keep it ordered (with visible context this should go at least before
-module.h).
+diff --git a/kernel/debug/kdb/kdb_io.c b/kernel/debug/kdb/kdb_io.c
+index 9443bc63c5a2..60be22132020 100644
+--- a/kernel/debug/kdb/kdb_io.c
++++ b/kernel/debug/kdb/kdb_io.c
+@@ -368,9 +368,9 @@ static char *kdb_read(char *buffer, size_t bufsize)
+ 			kdb_printf("%s", buffer);
+ 		} else if (tab != 2 && count > 0) {
+ 			len_tmp = strlen(p_tmp);
+-			strncpy(p_tmp+len_tmp, cp, lastchar-cp+1);
++			strscpy(p_tmp+len_tmp, cp, lastchar-cp+1);
+ 			len_tmp = strlen(p_tmp);
+-			strncpy(cp, p_tmp+len, len_tmp-len + 1);
++			strscpy(cp, p_tmp+len, len_tmp-len + 1);
+ 			len = len_tmp - len;
+ 			kdb_printf("%s", cp);
+ 			cp += len;
 
--- 
-With Best Regards,
-Andy Shevchenko
+---
+base-commit: 026e680b0a08a62b1d948e5a8ca78700bfac0e6e
+change-id: 20240402-strncpy-kernel-debug-kdb-kdb_io-c-53e5ed26da3d
 
+Best regards,
+--
+Justin Stitt <justinstitt@google.com>
 
 
 
