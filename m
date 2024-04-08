@@ -2,87 +2,122 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7178989B5B2
-	for <lists+kgdb-bugreport@lfdr.de>; Mon,  8 Apr 2024 03:46:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B66C189BD2E
+	for <lists+kgdb-bugreport@lfdr.de>; Mon,  8 Apr 2024 12:30:55 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1rte5f-0003Uc-F5
+	id 1rtmH8-000763-58
 	for lists+kgdb-bugreport@lfdr.de;
-	Mon, 08 Apr 2024 01:46:31 +0000
+	Mon, 08 Apr 2024 10:30:54 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <liu.yeC@h3c.com>) id 1rte5d-0003UW-Rt
+ (envelope-from <andy.shevchenko@gmail.com>) id 1rtmH4-00075s-2x
  for kgdb-bugreport@lists.sourceforge.net;
- Mon, 08 Apr 2024 01:46:30 +0000
+ Mon, 08 Apr 2024 10:30:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :References:In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
+ Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
+ Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+ :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=QXlkBNTNIsjUTqKIsBmW2qqUatJfppgOnxlgoMpNlPc=; b=lzFHuvPToGwAoxOLby+crcYmju
- yaf2bu/OgGITE5O4shXQclWT8XLMTqGKbXALNRzcF5Dsocw3fB1HCzYeoLJOZogJo8LhOOhmejVEP
- U0T0tbEgDvtcn8gIVfoh8EKzxzx4WH53vSwzITgKLNIMndXCxnkmM/QuJ9XbYXNH/7ok=;
+ bh=zDrTyP2Vy4iVLI6V80x+ZoMCFhWQosP2tXbTa3RDay8=; b=S3pACVVblKCCDIpz+Vi2cjdvsy
+ DiooG6e0Imke/h+FLbGFHSuNohPRfxa88wrE2AphBSrbUGNP5QShZOqamyegFyYIkUEJSD5B+UYZ+
+ 6fXXE6YeFyfTrMxazh9qXGwZEgLhnpO/y3aIUIlUz4RALZzLi0n+GRQhx0dC6eHSq6a4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
+ :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=QXlkBNTNIsjUTqKIsBmW2qqUatJfppgOnxlgoMpNlPc=; b=JbBCDcC4fdE1D6VzpANDEpvqxP
- L56tGasi5qRhArqivS4Ol+eqaD/GTQl8HF/pewcQUVLBjMc818HSItGjv8I39uh/MgX4ApcyM8M9v
- TwP8IUyHS0kV9FZU3H5TIeQeGCcSs9xO/EBPKEmutZX1A4Ycef+wgD9o9eXZZwPd3SCY=;
-Received: from smtp.h3c.com ([60.191.123.50] helo=h3cspam02-ex.h3c.com)
+ bh=zDrTyP2Vy4iVLI6V80x+ZoMCFhWQosP2tXbTa3RDay8=; b=Kf9rAx1wdBhY6uEOcBHi4PUC9Z
+ jbwsYHk5ujcfPDEaB6Hm9pirbx/2ubKIuBqJvhocNv4Mptn1F5QqvxMUSSVRQ7pw3fDvxORxPC8wm
+ k96s5DMX2+jI68LPQ+Cjm6dSGaGmSJqr4Whk+AETL65s5Z4Cg9bAwLfp2K6M8YLHvVRQ=;
+Received: from mail-ej1-f43.google.com ([209.85.218.43])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rte5Z-00056E-LR for kgdb-bugreport@lists.sourceforge.net;
- Mon, 08 Apr 2024 01:46:30 +0000
-Received: from mail.maildlp.com ([172.25.15.154])
- by h3cspam02-ex.h3c.com with ESMTP id 4381jBwW077166;
- Mon, 8 Apr 2024 09:45:11 +0800 (GMT-8)
- (envelope-from liu.yeC@h3c.com)
-Received: from DAG6EX02-IMDC.srv.huawei-3com.com (unknown [10.62.14.11])
- by mail.maildlp.com (Postfix) with ESMTP id D6F9D2004BBA;
- Mon,  8 Apr 2024 09:47:16 +0800 (CST)
-Received: from localhost.localdomain (10.114.186.34) by
- DAG6EX02-IMDC.srv.huawei-3com.com (10.62.14.11) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.2.1258.27; Mon, 8 Apr 2024 09:45:11 +0800
-From: LiuYe <liu.yeC@h3c.com>
-To: <andy.shevchenko@gmail.com>
-Date: Mon, 8 Apr 2024 09:44:53 +0800
-Message-ID: <20240408014453.1431652-1-liu.yeC@h3c.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <Zg3WicDB8m9am7dJ@surfacebook.localdomain>
-References: <Zg3WicDB8m9am7dJ@surfacebook.localdomain>
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1rtmH1-0001yE-Nd for kgdb-bugreport@lists.sourceforge.net;
+ Mon, 08 Apr 2024 10:30:49 +0000
+Received: by mail-ej1-f43.google.com with SMTP id
+ a640c23a62f3a-a51ddc783e3so62731366b.0
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Mon, 08 Apr 2024 03:30:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1712572236; x=1713177036; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zDrTyP2Vy4iVLI6V80x+ZoMCFhWQosP2tXbTa3RDay8=;
+ b=fZw7eNGOoN5fNFvmgnJSQC1HGxYqWYh2R+YF4tmrd+acxI1SN24opSFUc2dOz8zKY/
+ R5t1FRDJXQQ/rXR4qsEhFRg9XWXRipWDroKgjUEJIzkble9bRWYsT3uZ2qItjRS1pxAq
+ uaDLM9miaGWScyNcLdISyuIfHQo4pF4U9q/yksw9xa4R5zKNwbWnQi8uPaqrON/ZpbJ6
+ 5/+MVlf1lLqlroz6I3Lb47/AJPD5k0BZC2WpAdfHYvMkamI91C7fwJWVcZkVbY6Vyegy
+ BvuW2UVRof6SzBqB9XxCsxbXY2fa+H9xd97eD6VEz2N4xR9K4wahWZAYppytkk8wU4gY
+ 5wSA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1712572236; x=1713177036;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=zDrTyP2Vy4iVLI6V80x+ZoMCFhWQosP2tXbTa3RDay8=;
+ b=vBCj873AXO9Kc6i2gBtLa9u44xtD0b8arch9lYSFhvoejQypcriYi/QGL4mjoLxV4U
+ HBhQubOeJ/ZVpvCm2ZzzG2hHzNzRIpcB1f4mwgQYzniay5Fj9hLxJEzh3SyWrzndbuPo
+ esEj+EEQ2pBaG79OI66PiseUJ69uE6Zk7RKiYLgqwNwgmJ+a/m52T+O1nuGQqF4eEXtg
+ UxA4rmqQb8M5O7E0bbmu/Qzek3mWoPeNwx7o0IR5NHIuIZMt7v4rfpoqmpekVtE3dmdV
+ yjDaICgxxFfCtac5SlhpPJH/DYRQ4ChvEHVz6rZDsjpCMqqDSLv5paaIwT7e5pleIHkh
+ Q4ng==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVJfolF+Vg8TUflxyx6unmAut04QOmtQjXAZe9uZioy91JJfZRSqTg92YDLdluECQzM8t6nyVfhS1k5Hm+wU2Kw7JMKid23TswtrtUMDhgARcmf5rg=
+X-Gm-Message-State: AOJu0Yy45Xe40n+LyNEgTziHzEi/FOm3fTUkT10+WOG8Cw/DekFC3LUF
+ aKMoRDbuWdq2+6VJh/0VsYf1mG3MUGoQxY/ZVfO7fJFY0UcTCE5DSglfJtokGMDDpYsFaDpXXBX
+ oWUaQhwM7/b9FPZ15GBy7gMPprws=
+X-Google-Smtp-Source: AGHT+IHrzBrC48Lrtrj0shD3qgiyxsJ2BMGxhjJ541np4p2WV47+CJO76OS97mZZAM7ikNc4i6v64annsIx0/tuLNHw=
+X-Received: by 2002:a17:906:f218:b0:a51:a676:db26 with SMTP id
+ gt24-20020a170906f21800b00a51a676db26mr5349858ejb.21.1712572236205; Mon, 08
+ Apr 2024 03:30:36 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [10.114.186.34]
-X-ClientProxiedBy: BJSMTP02-EX.srv.huawei-3com.com (10.63.20.133) To
- DAG6EX02-IMDC.srv.huawei-3com.com (10.62.14.11)
-X-DNSRBL: 
-X-SPAM-SOURCE-CHECK: pass
-X-MAIL: h3cspam02-ex.h3c.com 4381jBwW077166
-X-Spam-Score: 2.5 (++)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+References: <Zg3WicDB8m9am7dJ@surfacebook.localdomain>
+ <20240408014453.1431652-1-liu.yeC@h3c.com>
+In-Reply-To: <20240408014453.1431652-1-liu.yeC@h3c.com>
+From: Andy Shevchenko <andy.shevchenko@gmail.com>
+Date: Mon, 8 Apr 2024 13:29:59 +0300
+Message-ID: <CAHp75Vd3xAxmEEHHTXWvKYtieV+kUmP+L+tQGq30YDH9S2hc-w@mail.gmail.com>
+To: LiuYe <liu.yeC@h3c.com>
+X-Spam-Score: -0.2 (/)
+X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  >Wed, Apr 03, 2024 at 02:11:09PM +0800,
- liu.yec@h3c.com kirjoitti:
- >> From: LiuYe <liu.yeC@h3c.com> >> >> Currently, if CONFIG_KDB_KEYBOARD
- is enabled, then kgdboc will >> attempt to use schedule_work [...] 
- Content analysis details:   (2.5 points, 6.0 required)
- pts rule name              description
+ 
+ Content preview:  On Mon, Apr 8, 2024 at 4:46 AM LiuYe wrote: > >Wed, Apr
+   03, 2024 at 02:11:09PM +0800, ... > >Ouch. > >Please, read this > >https://www.kernel.org/doc/html/latest/process/submitting-patches.html#backtraces-in-commit-messages
+    > >and modify the commit message accordingly. > > The example is t [...] 
+ 
+ Content analysis details:   (-0.2 points, 6.0 required)
+ 
+  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+                              no trust
+                             [209.85.218.43 listed in list.dnswl.org]
+  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 2.5 SORTED_RECIPS          Recipient list is sorted by address
-X-Headers-End: 1rte5Z-00056E-LR
+  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+                             provider
+                             [andy.shevchenko[at]gmail.com]
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+                             author's domain
+ -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+                             envelope-from domain
+  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+                             valid
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+                             [209.85.218.43 listed in wl.mailspike.net]
+X-Headers-End: 1rtmH1-0001yE-Nd
 Subject: Re: [Kgdb-bugreport] [PATCH V8] kdb: Fix the deadlock issue in KDB
  debugging.
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
@@ -98,153 +133,44 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>,
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
 Cc: daniel.thompson@linaro.org, kgdb-bugreport@lists.sourceforge.net,
  jason.wessel@windriver.com, linux-kernel@vger.kernel.org,
- LiuYe <liu.yeC@h3c.com>, linux-serial@vger.kernel.org,
- gregkh@linuxfoundation.org, jirislaby@kernel.org
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+ linux-serial@vger.kernel.org, gregkh@linuxfoundation.org, jirislaby@kernel.org
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
->Wed, Apr 03, 2024 at 02:11:09PM +0800, liu.yec@h3c.com kirjoitti:
->> From: LiuYe <liu.yeC@h3c.com>
->> 
->> Currently, if CONFIG_KDB_KEYBOARD is enabled, then kgdboc will
->> attempt to use schedule_work() to provoke a keyboard reset when
->> transitioning out of the debugger and back to normal operation.
->> This can cause deadlock because schedule_work() is not NMI-safe.
->> 
->> The stack trace below shows an example of the problem. In this
->> case the master cpu is not running from NMI but it has parked
->> the slave CPUs using an NMI and the parked CPUs is holding
->> spinlocks needed by schedule_work().
->
->> example:
->>  BUG: spinlock lockup suspected on CPU#0, namex/10450
->>  lock: 0xffff881ffe823980, .magic: dead4ead, .owner: namexx/21888, .owner_cpu: 1
->>  ffff881741d00000 ffff881741c01000 0000000000000000 0000000000000000
->>  ffff881740f58e78 ffff881741cffdd0 ffffffff8147a7fc ffff881740f58f20
->> Call Trace:
->>  [<ffffffff81479e6d>] ? __schedule+0x16d/0xac0
->>  [<ffffffff8147a7fc>] ? schedule+0x3c/0x90
->>  [<ffffffff8147e71a>] ? schedule_hrtimeout_range_clock+0x10a/0x120
->>  [<ffffffff8147d22e>] ? mutex_unlock+0xe/0x10
->>  [<ffffffff811c839b>] ? ep_scan_ready_list+0x1db/0x1e0
->>  [<ffffffff8147e743>] ? schedule_hrtimeout_range+0x13/0x20
->>  [<ffffffff811c864a>] ? ep_poll+0x27a/0x3b0
->>  [<ffffffff8108c540>] ? wake_up_q+0x70/0x70
->>  [<ffffffff811c99a8>] ? SyS_epoll_wait+0xb8/0xd0
->>  [<ffffffff8147f296>] ? entry_SYSCALL_64_fastpath+0x12/0x75
->>  CPU: 0 PID: 10450 Comm: namex Tainted: G           O    4.4.65 #1
->>  Hardware name: Insyde Purley/Type2 - Board Product Name1, BIOS 05.21.51.0036 07/19/2019
->>   0000000000000000 ffff881ffe813c10 ffffffff8124e883 ffff881741c01000
->>   ffff881ffe823980 ffff881ffe813c38 ffffffff810a7f7f ffff881ffe823980
->>   000000007d2b7cd0 0000000000000001 ffff881ffe813c68 ffffffff810a80e0
->>   Call Trace:
->>   <#DB>  [<ffffffff8124e883>] dump_stack+0x85/0xc2
->>   [<ffffffff810a7f7f>] spin_dump+0x7f/0x100
->>   [<ffffffff810a80e0>] do_raw_spin_lock+0xa0/0x150
->>   [<ffffffff8147eb55>] _raw_spin_lock+0x15/0x20
->>   [<ffffffff8108c256>] try_to_wake_up+0x176/0x3d0
->>   [<ffffffff8108c4c5>] wake_up_process+0x15/0x20
->>   [<ffffffff8107b371>] insert_work+0x81/0xc0
->>   [<ffffffff8107b4e5>] __queue_work+0x135/0x390
->>   [<ffffffff8107b786>] queue_work_on+0x46/0x90
->>   [<ffffffff81313d28>] kgdboc_post_exp_handler+0x48/0x70
->>   [<ffffffff810ed488>] kgdb_cpu_enter+0x598/0x610
->>   [<ffffffff810ed6e2>] kgdb_handle_exception+0xf2/0x1f0
->>   [<ffffffff81054e21>] __kgdb_notify+0x71/0xd0
->>   [<ffffffff81054eb5>] kgdb_notify+0x35/0x70
->>   [<ffffffff81082e6a>] notifier_call_chain+0x4a/0x70
->>   [<ffffffff8108304d>] notify_die+0x3d/0x50
->>   [<ffffffff81017219>] do_int3+0x89/0x120
->>   [<ffffffff81480fb4>] int3+0x44/0x80
->
->Ouch.
->Please, read this
->https://www.kernel.org/doc/html/latest/process/submitting-patches.html#backtraces-in-commit-messages
->and modify the commit message accordingly.
-
-The example is the printout of the kernel lockup detection mechanism, which may be easier to understand. 
-If organized according to the format provided in the previous link, should it be arranged as follows?
-
-Example:
-BUG: spinlock lockup suspected on CPU#0. owner_cpu: 1
-CPU1: Call Trace:
-__schedule
-schedule
-schedule_hrtimeout_range_clock
-mutex_unlock
-ep_scan_ready_list
-schedule_hrtimeout_range
-ep_poll
-wake_up_q
-SyS_epoll_wait
-entry_SYSCALL_64_fastpath
-
-CPU0: Call Trace:
-dump_stack
-spin_dump
-do_raw_spin_lock
-_raw_spin_lock
-try_to_wake_up
-wake_up_process
-insert_work
-__queue_work
-queue_work_on
-kgdboc_post_exp_handler
-kgdb_cpu_enter
-kgdb_handle_exception
-__kgdb_notify
-kgdb_notify
-notifier_call_chain
-notify_die
-do_int3
-int3
-
->> We fix the problem by using irq_work to call schedule_work()
->> instead of calling it directly. This is because we cannot
->> resynchronize the keyboard state from the hardirq context
->> provided by irq_work. This must be done from the task context
->> in order to call the input subsystem.
->> 
->> Therefore, we have to defer the work twice. First, safely
->> switch from the debug trap context (similar to NMI) to the
->> hardirq, and then switch from the hardirq to the system work queue.
->
->> Signed-off-by: LiuYe <liu.yeC@h3c.com>
->> Co-authored-by: Daniel Thompson <daniel.thompson@linaro.org>
->
->Correct tag is Co-developed-by, btw it's written in the same document the link
->to which I provided a few lines above.
-
-Yes, there will be warnings when using the ./scripts/checkpatch.pl script to check.
-
-WARNING: Non-standard signature: Co-authored-by:
-#68:
-Co-authored-by: Daniel Thompson <daniel.thompson@linaro.org>
-
-total: 0 errors, 1 warnings, 51 lines checked 
-
-I will change it to the following:
-
-Co-developed-by: Daniel Thompson <daniel.thompson@linaro.org>
-
->
->> --- a/drivers/tty/serial/kgdboc.c
->> +++ b/drivers/tty/serial/kgdboc.c
->> @@ -22,6 +22,7 @@
->>  #include <linux/module.h>
->>  #include <linux/platform_device.h>
->>  #include <linux/serial_core.h>
->> +#include <linux/irq_work.h>
->
->Please, keep it ordered (with visible context this should go at least before
->module.h).
-
-I don't understand why this needs to be placed before module.h. Please explain further, thank you.
-
-
-
-_______________________________________________
-Kgdb-bugreport mailing list
-Kgdb-bugreport@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport
+T24gTW9uLCBBcHIgOCwgMjAyNCBhdCA0OjQ24oCvQU0gTGl1WWUgPGxpdS55ZUNAaDNjLmNvbT4g
+d3JvdGU6Cj4gPldlZCwgQXByIDAzLCAyMDI0IGF0IDAyOjExOjA5UE0gKzA4MDAsIGxpdS55ZWNA
+aDNjLmNvbSBraXJqb2l0dGk6CgouLi4KCj4gPk91Y2guCj4gPlBsZWFzZSwgcmVhZCB0aGlzCj4g
+Pmh0dHBzOi8vd3d3Lmtlcm5lbC5vcmcvZG9jL2h0bWwvbGF0ZXN0L3Byb2Nlc3Mvc3VibWl0dGlu
+Zy1wYXRjaGVzLmh0bWwjYmFja3RyYWNlcy1pbi1jb21taXQtbWVzc2FnZXMKPiA+YW5kIG1vZGlm
+eSB0aGUgY29tbWl0IG1lc3NhZ2UgYWNjb3JkaW5nbHkuCj4KPiBUaGUgZXhhbXBsZSBpcyB0aGUg
+cHJpbnRvdXQgb2YgdGhlIGtlcm5lbCBsb2NrdXAgZGV0ZWN0aW9uIG1lY2hhbmlzbSwgd2hpY2gg
+bWF5IGJlIGVhc2llciB0byB1bmRlcnN0YW5kLgo+IElmIG9yZ2FuaXplZCBhY2NvcmRpbmcgdG8g
+dGhlIGZvcm1hdCBwcm92aWRlZCBpbiB0aGUgcHJldmlvdXMgbGluaywgc2hvdWxkIGl0IGJlIGFy
+cmFuZ2VkIGFzIGZvbGxvd3M/CgpEbyB5b3UgdGhpbmsgYWxsIGxpbmVzIGFyZSBpbXBvcnRhbnQg
+ZnJvbSB0aGlzPwpEbyB5b3UgdGhpbmsgeW91IGhhdmVuJ3QgZHJvcHBlZCBhbnl0aGluZyB1c2Vm
+dWw/CgpJZiAieWVzIiBpcyB0aGUgYW5zd2VyIHRvIGJvdGggUXMsIHRoZW4gZ28gd2l0aCBpdCAo
+YnV0IGF0IGxlYXN0IEkgc2VlCnRoYXQgZmlyc3Qgc2VlbXMgdG8gbWUgYXMgIm5vIiwgc29tZSBs
+aW5lcyBhcmUgbm90IGltcG9ydGFudCkKCgo+IEV4YW1wbGU6Cj4gQlVHOiBzcGlubG9jayBsb2Nr
+dXAgc3VzcGVjdGVkIG9uIENQVSMwLiBvd25lcl9jcHU6IDEKPiBDUFUxOiBDYWxsIFRyYWNlOgo+
+IF9fc2NoZWR1bGUKPiBzY2hlZHVsZQo+IHNjaGVkdWxlX2hydGltZW91dF9yYW5nZV9jbG9jawo+
+IG11dGV4X3VubG9jawo+IGVwX3NjYW5fcmVhZHlfbGlzdAo+IHNjaGVkdWxlX2hydGltZW91dF9y
+YW5nZQo+IGVwX3BvbGwKPiB3YWtlX3VwX3EKPiBTeVNfZXBvbGxfd2FpdAo+IGVudHJ5X1NZU0NB
+TExfNjRfZmFzdHBhdGgKPgo+IENQVTA6IENhbGwgVHJhY2U6Cj4gZHVtcF9zdGFjawo+IHNwaW5f
+ZHVtcAo+IGRvX3Jhd19zcGluX2xvY2sKPiBfcmF3X3NwaW5fbG9jawo+IHRyeV90b193YWtlX3Vw
+Cj4gd2FrZV91cF9wcm9jZXNzCj4gaW5zZXJ0X3dvcmsKPiBfX3F1ZXVlX3dvcmsKPiBxdWV1ZV93
+b3JrX29uCj4ga2dkYm9jX3Bvc3RfZXhwX2hhbmRsZXIKPiBrZ2RiX2NwdV9lbnRlcgo+IGtnZGJf
+aGFuZGxlX2V4Y2VwdGlvbgo+IF9fa2dkYl9ub3RpZnkKPiBrZ2RiX25vdGlmeQo+IG5vdGlmaWVy
+X2NhbGxfY2hhaW4KPiBub3RpZnlfZGllCj4gZG9faW50Mwo+IGludDMKCi4uLgoKPiA+PiAgI2lu
+Y2x1ZGUgPGxpbnV4L21vZHVsZS5oPgo+ID4+ICAjaW5jbHVkZSA8bGludXgvcGxhdGZvcm1fZGV2
+aWNlLmg+Cj4gPj4gICNpbmNsdWRlIDxsaW51eC9zZXJpYWxfY29yZS5oPgo+ID4+ICsjaW5jbHVk
+ZSA8bGludXgvaXJxX3dvcmsuaD4KPiA+Cj4gPlBsZWFzZSwga2VlcCBpdCBvcmRlcmVkICh3aXRo
+IHZpc2libGUgY29udGV4dCB0aGlzIHNob3VsZCBnbyBhdCBsZWFzdCBiZWZvcmUKPiA+bW9kdWxl
+LmgpLgo+Cj4gSSBkb24ndCB1bmRlcnN0YW5kIHdoeSB0aGlzIG5lZWRzIHRvIGJlIHBsYWNlZCBi
+ZWZvcmUgbW9kdWxlLmguIFBsZWFzZSBleHBsYWluIGZ1cnRoZXIsIHRoYW5rIHlvdS4KCkFscGhh
+YmV0aWNhbCBvcmRlciBoZWxwcyBsb25nLXRlcm0gbWFpbnRlbmFuY2UuIFllcywgSSBrbm93IHRo
+YXQgaXQgaXMKbm90IF9mdWxseV8gc29ydGVkLCBidXQgZG9uJ3QgYWRkIG1vcmUgbWVzcyB0byBp
+dC4KCi0tIApXaXRoIEJlc3QgUmVnYXJkcywKQW5keSBTaGV2Y2hlbmtvCgoKX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KS2dkYi1idWdyZXBvcnQgbWFpbGlu
+ZyBsaXN0CktnZGItYnVncmVwb3J0QGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3Rz
+LnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9rZ2RiLWJ1Z3JlcG9ydAo=
