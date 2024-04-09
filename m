@@ -2,127 +2,90 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2D96A89CF92
-	for <lists+kgdb-bugreport@lfdr.de>; Tue,  9 Apr 2024 02:54:23 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id CA57589D036
+	for <lists+kgdb-bugreport@lfdr.de>; Tue,  9 Apr 2024 04:06:25 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1rtzkj-0002ca-PW
+	id 1ru0sR-0002Xo-5W
 	for lists+kgdb-bugreport@lfdr.de;
-	Tue, 09 Apr 2024 00:54:21 +0000
+	Tue, 09 Apr 2024 02:06:23 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <justinstitt@google.com>) id 1rtzkg-0002cR-IK
+ (envelope-from <liu.yeC@h3c.com>) id 1ru0sP-0002XZ-Iz
  for kgdb-bugreport@lists.sourceforge.net;
- Tue, 09 Apr 2024 00:54:18 +0000
+ Tue, 09 Apr 2024 02:06:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
- Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
+ :References:In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=IAaOrnh08gDDN4c+q0l1+Xwj6sb8iH6us+XtwUqPkIo=; b=YI6JMlT27bG/VW5r+9jVzqFxFR
- CRFfea9xY1XJG8cNza0a3l4zFqxkmpRSFf/IeKOzx5M6/II7HpttP+LAv2pFhGoyxsxLvY3aEj66B
- i502ZI+adYkgG0i2R6qPtefqnzaB6ipj6i82Yrx1YST9Y3QCwH/mB/GlHdMHk0kWeJ24=;
+ bh=4w8p4+YEadN74jeCgqG5oj0oFct9TmfDEBw7HbUk4Og=; b=Uzx+mjr1PHlE0mCyniNv0CPLDL
+ UE7PRKZC8nf3sjCljQXKUfKF9ls1qT2WqLLvVthhME3BTRMN8zxS82PyLfdoSnXg0zhuQZCMtoV8U
+ DSDlmpgbzLzCFRqCDfwsydl6P4yFDTg4SKnbU7Ux5O2DzzZtGZCYG+J7bdncQRaTyV2I=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
- :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=IAaOrnh08gDDN4c+q0l1+Xwj6sb8iH6us+XtwUqPkIo=; b=Ix3GjoREnlbSf9Cxbr3ylFI/5E
- 1VZJxPIZxIL167bADQrJW1KAiM7XSJ6O6xbwKIY/KSYm2NNKnJvkeIhW6v1H7WpTGn9eqoCMbPtIg
- rmvusEK93y3rkcWUfgDyP7ALussWHp2kmY0eCMmFzrOMJMsFtMpERirwmxnQ7bw5Mzbc=;
-Received: from mail-wr1-f47.google.com ([209.85.221.47])
+ bh=4w8p4+YEadN74jeCgqG5oj0oFct9TmfDEBw7HbUk4Og=; b=fAh51EV31tAfjybF4CnM4Ldc6B
+ hA83YM7RBpRvrWgcGP36bw8vtH6dM4oKnppVt44bnnpFW6IVYMSG9m3748BWC8Ulmzh7IwqulQh1n
+ zNS0anQFyhDcUKfUJZbZ7ckhrP+7h6UdWmwHTcXXJBmTU4O9DhAMWxzMNSVK0YdkaOH4=;
+Received: from smtp.h3c.com ([60.191.123.50] helo=h3cspam02-ex.h3c.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1rtzkb-0001pg-4L for kgdb-bugreport@lists.sourceforge.net;
- Tue, 09 Apr 2024 00:54:17 +0000
-Received: by mail-wr1-f47.google.com with SMTP id
- ffacd0b85a97d-3454fbdd88aso2331546f8f.3
- for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 08 Apr 2024 17:54:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1712624041; x=1713228841;
- darn=lists.sourceforge.net; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=IAaOrnh08gDDN4c+q0l1+Xwj6sb8iH6us+XtwUqPkIo=;
- b=naIf51vV6A1qJRQx/BuIR40AE7CClYKU9EGOHXYItqez+6vPB0oPexVfdlYco3gq+q
- 47PcBHot3lW2Go91vk5Rz7XjcaLLuWtft05EtwRSkx+Ra4xqNucBVSKZ5qGQ1eP/QgeY
- tT+fSOquPClBy+lfRlRY6lyBHBWxPMNUACkIZKjZyKZ4TSlgPVGfBEaShqs7O+dhVK3l
- zpvMn3TKCYzA2cH7ZoWKjpa/m+ItGvmNdgl8N9ceIr6JOj28gmBqk1s7g/BdV4Xh7/s6
- D1phGB9CjAzqbizMISxKgujiZmlQA16wJWu/JQiyJNWuRaRA6JAO9dSqGGCxEGgkAIsm
- Wseg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712624041; x=1713228841;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=IAaOrnh08gDDN4c+q0l1+Xwj6sb8iH6us+XtwUqPkIo=;
- b=Gpka19kJ+9EyUMgG6cLHHVR2CHQA+7g/c0w7l/J99KznxXv7JEyXn9SajDYWWXCtm3
- OQ+++DWBCkgLCzR0fLbY0PiFGnzgGJkoCx3Ism56akXIpaJByRLxN7JqX9M0X56uqQbx
- 2r46P0EUyqmKlIpqd+us5XHKYg0dVE61M7oeEOttZzVdVb8P+DMQVfV5jFKDxMx52X4x
- wjUpJSV57PhH+711G1aTLOBPT4YGApFYUa2QORBIhgGjQZMpgtyZ+vTgYXoA8qPIG8KB
- QCUgbPPk1YYaX18W5lzSBzEjVYuRN95H/LWjACdsgBfi1/5I7bPjHXGnFVhtnKNDdB40
- Cbpg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXUUnL2LGNtTd/gR24bUFipYCow7d4pDhXYDJIxkILTo7+JZazdhAjDJnZlX5r9sSoVUBU8UfCKTt4uu/KboBxXXg2YZ3hLk7SkiANF20tNNmzx9pM=
-X-Gm-Message-State: AOJu0YxSAjm/PzewHBW55ZL0n1fwtFQvrh2DKNktNV9zP2hFoEorsBTY
- KSdBh9VtcsKoTiRALroyP+VCZ+6P+SQQeukrm9huAVnpbkzbnASWKBL2p3b/a1LsABSk+qoi0ou
- mfVAsjCoZh9MJhnaxFa7A9qPaxKnkRhEbU0xlpZcJ7yIqFNysoK26
-X-Google-Smtp-Source: AGHT+IGc0lj+fiC2sXIjuliZLsfp/BjTYjGSVXvVjzrsIb1sivcbJfZxakLmiUfgp5f/pckL+Y6vnZ7DHo+6jCgBIfk=
-X-Received: by 2002:a50:d796:0:b0:56e:2ebc:5c4 with SMTP id
- w22-20020a50d796000000b0056e2ebc05c4mr7572527edi.20.1712623614748; Mon, 08
- Apr 2024 17:46:54 -0700 (PDT)
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1ru0sM-0004ds-0j for kgdb-bugreport@lists.sourceforge.net;
+ Tue, 09 Apr 2024 02:06:22 +0000
+Received: from mail.maildlp.com ([172.25.15.154])
+ by h3cspam02-ex.h3c.com with ESMTP id 43923xpo075028;
+ Tue, 9 Apr 2024 10:03:59 +0800 (GMT-8)
+ (envelope-from liu.yeC@h3c.com)
+Received: from DAG6EX02-IMDC.srv.huawei-3com.com (unknown [10.62.14.11])
+ by mail.maildlp.com (Postfix) with ESMTP id D12482004C43;
+ Tue,  9 Apr 2024 10:06:05 +0800 (CST)
+Received: from localhost.localdomain (10.114.186.34) by
+ DAG6EX02-IMDC.srv.huawei-3com.com (10.62.14.11) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.2.1258.27; Tue, 9 Apr 2024 10:03:58 +0800
+From: <liu.yec@h3c.com>
+To: <andy.shevchenko@gmail.com>, <daniel.thompson@linaro.org>
+Date: Tue, 9 Apr 2024 10:03:26 +0800
+Message-ID: <20240409020326.2125332-1-liu.yec@h3c.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <CAHp75Vd3xAxmEEHHTXWvKYtieV+kUmP+L+tQGq30YDH9S2hc-w@mail.gmail.com>
+References: <CAHp75Vd3xAxmEEHHTXWvKYtieV+kUmP+L+tQGq30YDH9S2hc-w@mail.gmail.com>
 MIME-Version: 1.0
-References: <20240405-strncpy-kernel-debug-kdb-kdb_io-c-v2-1-d0bf595ab301@google.com>
- <20240405095144.GB2890893@aspen.lan>
-In-Reply-To: <20240405095144.GB2890893@aspen.lan>
-Date: Mon, 8 Apr 2024 17:46:42 -0700
-Message-ID: <CAFhGd8q99emm1SFJSs=L7Pn0A79vCtDHtTD5XUbVCNh=DDadaQ@mail.gmail.com>
-To: Daniel Thompson <daniel.thompson@linaro.org>
-X-Spam-Score: -15.7 (---------------)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
+X-Originating-IP: [10.114.186.34]
+X-ClientProxiedBy: BJSMTP01-EX.srv.huawei-3com.com (10.63.20.132) To
+ DAG6EX02-IMDC.srv.huawei-3com.com (10.62.14.11)
+X-DNSRBL: 
+X-SPAM-SOURCE-CHECK: pass
+X-MAIL: h3cspam02-ex.h3c.com 43923xpo075028
+X-Spam-Score: 2.5 (++)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  On Fri, Apr 5, 2024 at 2:51 AM Daniel Thompson <daniel.thompson@linaro.org>
-    wrote: > > > len_tmp = strlen(p_tmp); > > - strncpy(cp, p_tmp+len, len_tmp-len
-    + 1); > > + strscpy(cp, p_tmp+len, len_tmp- [...] 
- 
- Content analysis details:   (-15.7 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview:  From: LiuYe <liu.yeC@h3c.com> Currently,
+ if CONFIG_KDB_KEYBOARD
+ is enabled, then kgdboc will attempt to use schedule_work() to provoke a
+ keyboard reset when transitioning out of the debugger and back to normal
+ operation. This can [...] 
+ Content analysis details:   (2.5 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
-                              no trust
-                             [209.85.221.47 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 2.5 SORTED_RECIPS          Recipient list is sorted by address
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -7.5 USER_IN_DEF_SPF_WL     From: address is in the default SPF
-                             welcome-list
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM
-                             welcome-list
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
-                             [209.85.221.47 listed in wl.mailspike.net]
- -0.5 ENV_AND_HDR_SPF_MATCH  Env and Hdr From used in default SPF WL
-                             Match
- -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium trust sender
-X-Headers-End: 1rtzkb-0001pg-4L
-Subject: Re: [Kgdb-bugreport] [PATCH v2] kdb: replace deprecated strncpy
+X-Headers-End: 1ru0sM-0004ds-0j
+Subject: [Kgdb-bugreport] [PATCH V9] kdb: Fix the deadlock issue in KDB
+ debugging.
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -134,37 +97,153 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-From: Justin Stitt via Kgdb-bugreport <kgdb-bugreport@lists.sourceforge.net>
-Reply-To: Justin Stitt <justinstitt@google.com>
-Cc: kgdb-bugreport@lists.sourceforge.net, linux-hardening@vger.kernel.org,
- linux-kernel@vger.kernel.org, Jason Wessel <jason.wessel@windriver.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: kgdb-bugreport@lists.sourceforge.net, jason.wessel@windriver.com,
+ linux-kernel@vger.kernel.org, liu.yeC@h3c.com, linux-serial@vger.kernel.org,
+ gregkh@linuxfoundation.org, jirislaby@kernel.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-T24gRnJpLCBBcHIgNSwgMjAyNCBhdCAyOjUx4oCvQU0gRGFuaWVsIFRob21wc29uCjxkYW5pZWwu
-dGhvbXBzb25AbGluYXJvLm9yZz4gd3JvdGU6Cj4KPiA+ICAgICAgICAgICAgICAgICAgICAgICBs
-ZW5fdG1wID0gc3RybGVuKHBfdG1wKTsKPiA+IC0gICAgICAgICAgICAgICAgICAgICBzdHJuY3B5
-KGNwLCBwX3RtcCtsZW4sIGxlbl90bXAtbGVuICsgMSk7Cj4gPiArICAgICAgICAgICAgICAgICAg
-ICAgc3Ryc2NweShjcCwgcF90bXArbGVuLCBsZW5fdG1wLWxlbiArIDEpOwo+Cj4gQWdhaW4sIEkg
-cmVhbGx5IGRvbid0IHRoaW5rIHRoZSB0aGlyZCBhcmd1bWVudCBwcm92aWRlcyB0aGUgbnVtYmVy
-IG9mCj4gY2hhcmFjdGVycyBpbiB0aGUgZGVzdGluYXRpb24gYnVmZmVyLgo+CgpSaWdodCwgdGhl
-IHRoaXJkIGFyZ3VtZW50IGlzIHRoZSBsZW5ndGggb2YgdGhlICJyZW1haW5pbmciIGNoYXJhY3Rl
-cnMKZnJvbSB0aGUgY29tcGxldGlvbiBwb2ludC4KCmlmIHlvdSB0eXBlICJ0ZXMiIGFuZCBwcmVz
-cyB0YWIgdGhlbiBrYWxsc3ltc19zeW1ib2xfY29tcGxldGUoKSB3aWxsCnBvcHVsYXRlIHBfdG1w
-IHdpdGggInRlc3QiLiBQcmlvciB0byByZW5kZXJpbmcgdG8gdGhlIHVzZXIsIEBjcCBwb2ludHMK
-dG8gInMiLCB3ZSBuZWVkIHRvIGNhdGNoIHRoZSB1c2VyIHVwIGFuZCBwcmludCB0aGUgcmVzdCBv
-ZiB0aGUgc3ltYm9sCm5hbWUgc2luY2UgdGhleSd2ZSBhbHJlYWR5IHR5cGVkICJ0ZXMiIHdlIG9u
-bHkgbmVlZCB0byBwcmludCBvdXQgInQiLgoKbGVuX3RtcCBpcyB0aGUgbGVuZ3RoIG9mIHRoZSBl
-bnRpcmUgc3ltYm9sIHBhcnQgYXMgcmV0dXJuZWQgYnkKa2FsbHN5bXNfc3ltYm9sX2NvbXBsZXRl
-KCkgYW5kIGxlbiBpcyB0aGUgbGVuZ3RoIG9mIG9ubHkgdGhlCnVzZXItdHlwZWQgc3ltYm9sLiBU
-aGVyZWZvcmUsIHRoZSBhbW91bnQgb2YgcmVtYWluaW5nIGNoYXJhY3RlcnMgdG8KcHJpbnQgaXMg
-Z2l2ZW4gYnkgbGVuX3RtcC1sZW4gKGFuZCArMSBmb3IgYSBOVUwtYnl0ZSkuCgpTbywgeWVhaCwg
-eW91J3JlIHJpZ2h0LiBUaGlzIGlzbid0IHRoZSBsZW5ndGggb2YgdGhlIGRlc3RpbmF0aW9uIGJ1
-dCBJCmRvbid0IHNlZSB3aHkgd2UgY2FuJ3QgdXNlIG1lbWNweSgpIChvciBzdHJzY3B5KCkpIGFu
-ZCBoYXZlIHRoaXMgbm90CmJlIGNvbnNpZGVyZWQgImJyb2tlbiIuIFRoZSBwb2ludGVyIGFyaXRo
-bWV0aWMgY2hlY2tzIG91dC4KCkkgdGVzdGVkIG91dCBzdHJjYXQgYW5kIG90aGVyIGFsdGVybmF0
-aXZlcyBhbmQgdGhleSBhbGwgc2VlbSBsZXNzIHJlYWRhYmxlLgoKPgo+IERhbmllbC4KCgpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpLZ2RiLWJ1Z3JlcG9y
-dCBtYWlsaW5nIGxpc3QKS2dkYi1idWdyZXBvcnRAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBz
-Oi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2tnZGItYnVncmVwb3J0Cg==
+From: LiuYe <liu.yeC@h3c.com>
+
+Currently, if CONFIG_KDB_KEYBOARD is enabled, then kgdboc will
+attempt to use schedule_work() to provoke a keyboard reset when
+transitioning out of the debugger and back to normal operation.
+This can cause deadlock because schedule_work() is not NMI-safe.
+
+The stack trace below shows an example of the problem. In this
+case the master cpu is not running from NMI but it has parked
+the slave CPUs using an NMI and the parked CPUs is holding
+spinlocks needed by schedule_work().
+
+Example:
+BUG: spinlock lockup suspected on CPU#0. owner_cpu: 1
+CPU1: Call Trace:
+__schedule
+schedule
+schedule_hrtimeout_range_clock
+mutex_unlock
+ep_scan_ready_list
+schedule_hrtimeout_range
+ep_poll
+wake_up_q
+SyS_epoll_wait
+entry_SYSCALL_64_fastpath
+
+CPU0: Call Trace:
+dump_stack
+spin_dump
+do_raw_spin_lock
+_raw_spin_lock
+try_to_wake_up
+wake_up_process
+insert_work
+__queue_work
+queue_work_on
+kgdboc_post_exp_handler
+kgdb_cpu_enter
+kgdb_handle_exception
+__kgdb_notify
+kgdb_notify
+notifier_call_chain
+notify_die
+do_int3
+int3
+
+We fix the problem by using irq_work to call schedule_work()
+instead of calling it directly. This is because we cannot
+resynchronize the keyboard state from the hardirq context
+provided by irq_work. This must be done from the task context
+in order to call the input subsystem.
+
+Therefore, we have to defer the work twice. First, safely
+switch from the debug trap context (similar to NMI) to the
+hardirq, and then switch from the hardirq to the system work queue.
+
+Signed-off-by: LiuYe <liu.yeC@h3c.com>
+Co-developed-by: Daniel Thompson <daniel.thompson@linaro.org>
+Signed-off-by: Daniel Thompson <daniel.thompson@linaro.org>
+
+---
+V8 -> V9: Modify call trace format and move irq_work.h before module.h
+V7 -> V8: Update the description information and comments in the code.
+	: Submit this patch based on version linux-6.9-rc2.
+V6 -> V7: Add comments in the code.
+V5 -> V6: Replace with a more professional and accurate answer.
+V4 -> V5: Answer why schedule another work in the irq_work and not do the job directly.
+V3 -> V4: Add changelogs
+V2 -> V3: Add description information
+V1 -> V2: using irq_work to solve this properly.
+---
+---
+ drivers/tty/serial/kgdboc.c | 24 +++++++++++++++++++++++-
+ 1 file changed, 23 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/tty/serial/kgdboc.c b/drivers/tty/serial/kgdboc.c
+index 7ce7bb164..32410fec7 100644
+--- a/drivers/tty/serial/kgdboc.c
++++ b/drivers/tty/serial/kgdboc.c
+@@ -19,6 +19,7 @@
+ #include <linux/console.h>
+ #include <linux/vt_kern.h>
+ #include <linux/input.h>
++#include <linux/irq_work.h>
+ #include <linux/module.h>
+ #include <linux/platform_device.h>
+ #include <linux/serial_core.h>
+@@ -82,6 +83,19 @@ static struct input_handler kgdboc_reset_handler = {
+ 
+ static DEFINE_MUTEX(kgdboc_reset_mutex);
+ 
++/*
++ * This code ensures that the keyboard state, which is changed during kdb
++ * execution, is resynchronized when we leave the debug trap. The resync
++ * logic calls into the input subsystem to force a reset. The calls into
++ * the input subsystem must be executed from normal task context.
++ *
++ * We need to trigger the resync from the debug trap, which executes in an
++ * NMI (or similar) context. To make it safe to call into the input
++ * subsystem we end up having use two deferred execution techniques.
++ * Firstly, we use irq_work, which is NMI-safe, to provoke a callback from
++ * hardirq context. Then, from the hardirq callback we use the system
++ * workqueue to provoke the callback that actually performs the resync.
++ */
+ static void kgdboc_restore_input_helper(struct work_struct *dummy)
+ {
+ 	/*
+@@ -99,10 +113,17 @@ static void kgdboc_restore_input_helper(struct work_struct *dummy)
+ 
+ static DECLARE_WORK(kgdboc_restore_input_work, kgdboc_restore_input_helper);
+ 
++static void kgdboc_queue_restore_input_helper(struct irq_work *unused)
++{
++	schedule_work(&kgdboc_restore_input_work);
++}
++
++static DEFINE_IRQ_WORK(kgdboc_restore_input_irq_work, kgdboc_queue_restore_input_helper);
++
+ static void kgdboc_restore_input(void)
+ {
+ 	if (likely(system_state == SYSTEM_RUNNING))
+-		schedule_work(&kgdboc_restore_input_work);
++		irq_work_queue(&kgdboc_restore_input_irq_work);
+ }
+ 
+ static int kgdboc_register_kbd(char **cptr)
+@@ -133,6 +154,7 @@ static void kgdboc_unregister_kbd(void)
+ 			i--;
+ 		}
+ 	}
++	irq_work_sync(&kgdboc_restore_input_irq_work);
+ 	flush_work(&kgdboc_restore_input_work);
+ }
+ #else /* ! CONFIG_KDB_KEYBOARD */
+-- 
+2.25.1
+
+
+
+_______________________________________________
+Kgdb-bugreport mailing list
+Kgdb-bugreport@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport
