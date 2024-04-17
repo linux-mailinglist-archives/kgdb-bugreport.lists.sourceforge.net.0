@@ -2,140 +2,101 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4EFC98A68E9
-	for <lists+kgdb-bugreport@lfdr.de>; Tue, 16 Apr 2024 12:45:48 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id AE95A8A8186
+	for <lists+kgdb-bugreport@lfdr.de>; Wed, 17 Apr 2024 13:03:01 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1rwgJu-0000m2-QI
+	id 1rx348-0000Sw-3Y
 	for lists+kgdb-bugreport@lfdr.de;
-	Tue, 16 Apr 2024 10:45:47 +0000
+	Wed, 17 Apr 2024 11:03:00 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <daniel.thompson@linaro.org>) id 1rwgJs-0000lo-CB
+ (envelope-from <liu.yeC@h3c.com>) id 1rx343-0000Si-By
  for kgdb-bugreport@lists.sourceforge.net;
- Tue, 16 Apr 2024 10:45:44 +0000
+ Wed, 17 Apr 2024 11:02:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
- Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=qax0/HGbPdCX4M7gDaYwDwDlZ1cE1xlWdr0Di9/Hmb0=; b=M/ajSEn5G10vwLu+zWOq9wjWQy
- NGIcBf2SSOzPDZaVtJmIJwgWHXJ4XmTt7NoXYos0/hc3rKsXoaIWvmW4xM0G7jxNPe7L7o11YsAi7
- R7rqgzJVWSPuWTOa6XlpLaypxUV/VvzPQaMAZfRjFosWYC6mCxA5rd9zFYAx8MR9dQ/E=;
+ bh=wHagZgJ1UrEYJuHzwZutWplINcdj15Jxx0feiVfHIvo=; b=hm7GABNJ4K+J9N/lfL0IQwLtsg
+ qNmYC3j1BHQarOQTS1evT7Hfr/BWmH8EncHiwBaPr9TYYZMFi4DjbzOOxy6maOWhqx/OrxTgN4beC
+ h4BEzgwYeZIPo+Uzmymnk5voWpGz6Iad91GNjX97NtZm3/5772CvZFjEN39oZqoDv4FA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
- Content-Type:MIME-Version:Subject:Date:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=qax0/HGbPdCX4M7gDaYwDwDlZ1cE1xlWdr0Di9/Hmb0=; b=bfjTdsnaShXy1cBVLR+jDyU1W7
- 8P4jxlinvG1InIGlSZXuiRaFHaaMLX1pgn4piEtWRNfU7JbEYv3iJJMQgoFR9GSBVm0nTrXMkqh7i
- IRPKo+/ZNX2kYWvWhfDfcXM62EktwPvHUaLyk/x6A+2Kgqs13LTFcJeIG9hlpKQmJCaQ=;
-Received: from mail-wr1-f53.google.com ([209.85.221.53])
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:Message-ID:Date:
+ Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=wHagZgJ1UrEYJuHzwZutWplINcdj15Jxx0feiVfHIvo=; b=L
+ BfmQlbbzRpPhx6l88EweEXMIUn9D3OOVvwpbMeq3rrHmYgHSG1ucRfjdu8RYlwSd319SK3jLYE2Z3
+ PT3Q7JUtAxrTNeogiYAn2lmAISroDwz55o5Lr0G/Kswbm3LdfkKrxjcro52g0R5QjI89nlBxXzzt8
+ r4ziYjrY4DyhSgY8=;
+Received: from smtp.h3c.com ([60.191.123.50] helo=h3cspam02-ex.h3c.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1rwgJs-0003ap-5N for kgdb-bugreport@lists.sourceforge.net;
- Tue, 16 Apr 2024 10:45:44 +0000
-Received: by mail-wr1-f53.google.com with SMTP id
- ffacd0b85a97d-3497f4336d7so205967f8f.1
- for <kgdb-bugreport@lists.sourceforge.net>;
- Tue, 16 Apr 2024 03:45:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713264332; x=1713869132; darn=lists.sourceforge.net;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=qax0/HGbPdCX4M7gDaYwDwDlZ1cE1xlWdr0Di9/Hmb0=;
- b=J8b0TiCpRygbh1wliWiRXi6S4UCRzP/DPaVNTPvVTTNncuM2KzGgMsM//oVamMdcYn
- eXNjp/F/1h6BVY+55MiUClx40cycWCJPIYGyYN3v8wa/JAcYXqNyMiX/thMq+d0ixEws
- oUacjUt95qOH5g+KF5S5cDb/wvcGNWjYk75NJvLWMHTQS2szdD5aTf2lTBnuQiONsqBQ
- KIbdFXgmFbNq4XywWHZk2A7UIjcNJFkd8Yv17VLCCqYVDSs0KRvlCh6brEb1tAw8Sqij
- 3Mu/+G6bd4rGLw9hVIaChZsapO1h5TqLPrOZw+HqOQSCncXuf5rRQ9AFc2MoGfahCa3u
- JfHA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713264332; x=1713869132;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=qax0/HGbPdCX4M7gDaYwDwDlZ1cE1xlWdr0Di9/Hmb0=;
- b=A2aHSDzwnM8WMDTI80biK9UZzAZs+kBCdRoMh/hhqynUZ/DhGdSRS6WQvC09ddpyel
- SQriIolv93NjXBiQgMtAWSmmDFjp56vHuNvGqtL048tQwO/Iy2rGXSfViHXFw8gtyJR1
- HkvHweIdtopEJeA3TThlxN2USpiF8HJgc/3V5Kx09qq5YROeHl5NePJ5Lq2gElidm6s0
- unRNNaTezOemA7xdS88WeGC+VyDq9BaQAdjPCWGPzYS315wGbPUR1sBEGyyeyQ2ngCvi
- pzEM7aAvRTwWjroWgZdEEMUvBIX4fGtSAIemNq1tRBSqGZIOIxKkUvXtHlGqniEd1j8y
- xayQ==
-X-Gm-Message-State: AOJu0YyYkMuj4ADvNsNYZs7eDlJrJ9NJlFFxGeLwWOn4CPU/kjwTFKoQ
- ZqvxcR4EL+wInDaH7l/6KNaIffPFSs8SBWCKSi1FxRgOj52xjT52BObvWSDVXI0=
-X-Google-Smtp-Source: AGHT+IE6Vo/tbKSEfCm2gz79le7FExVDtRtCuxkP1pWrZlx5DmQCQVvhm0MvVCYaPpwW+OmM5iOP3w==
-X-Received: by 2002:a5d:6791:0:b0:346:aac5:add8 with SMTP id
- v17-20020a5d6791000000b00346aac5add8mr2282957wru.6.1713264332537; 
- Tue, 16 Apr 2024 03:45:32 -0700 (PDT)
-Received: from aspen.lan
- (aztw-34-b2-v4wan-166919-cust780.vm26.cable.virginm.net. [82.37.195.13])
- by smtp.gmail.com with ESMTPSA id
- o9-20020a5d6709000000b00343956e8852sm14470141wru.42.2024.04.16.03.45.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Apr 2024 03:45:31 -0700 (PDT)
-From: Daniel Thompson <daniel.thompson@linaro.org>
-Date: Tue, 16 Apr 2024 11:43:24 +0100
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1rx33z-0005k1-1S for kgdb-bugreport@lists.sourceforge.net;
+ Wed, 17 Apr 2024 11:02:53 +0000
+Received: from mail.maildlp.com ([172.25.15.154])
+ by h3cspam02-ex.h3c.com with ESMTP id 43HB1rZL029440;
+ Wed, 17 Apr 2024 19:01:53 +0800 (GMT-8)
+ (envelope-from liu.yeC@h3c.com)
+Received: from DAG6EX03-IMDC.srv.huawei-3com.com (unknown [10.62.14.12])
+ by mail.maildlp.com (Postfix) with ESMTP id 2E5972004BB6;
+ Wed, 17 Apr 2024 19:04:14 +0800 (CST)
+Received: from DAG6EX02-IMDC.srv.huawei-3com.com (10.62.14.11) by
+ DAG6EX03-IMDC.srv.huawei-3com.com (10.62.14.12) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1258.27; Wed, 17 Apr 2024 19:01:56 +0800
+Received: from DAG6EX02-IMDC.srv.huawei-3com.com ([fe80::4c21:7c89:4f9d:e4c4])
+ by DAG6EX02-IMDC.srv.huawei-3com.com
+ ([fe80::4c21:7c89:4f9d:e4c4%16]) with
+ mapi id 15.02.1258.027; Wed, 17 Apr 2024 19:01:56 +0800
+From: Liuye <liu.yeC@h3c.com>
+To: Greg KH <gregkh@linuxfoundation.org>, "daniel.thompson@linaro.org"
+ <daniel.thompson@linaro.org>, "andy.shevchenko@gmail.com"
+ <andy.shevchenko@gmail.com>
+Thread-Topic: =?utf-8?B?UmXvvJpbUEFUQ0ggVjExXSBrZGI6IEZpeCB0aGUgZGVhZGxvY2sgaXNzdWUg?=
+ =?utf-8?Q?in_KDB_debugging.?=
+Thread-Index: AdqQtooIBYtuhnKkS7qg1BKYvEtNZA==
+Date: Wed, 17 Apr 2024 11:01:56 +0000
+Message-ID: <186cdeea58094d06b351b07eefa2189d@h3c.com>
+Accept-Language: zh-CN, en-US
+Content-Language: zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.114.188.68]
+x-sender-location: DAG2
 MIME-Version: 1.0
-Message-Id: <20240416-kgdb_read_refactor-v1-7-b18c2d01076d@linaro.org>
-References: <20240416-kgdb_read_refactor-v1-0-b18c2d01076d@linaro.org>
-In-Reply-To: <20240416-kgdb_read_refactor-v1-0-b18c2d01076d@linaro.org>
-To: Jason Wessel <jason.wessel@windriver.com>, 
- Douglas Anderson <dianders@chromium.org>
-X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3364;
- i=daniel.thompson@linaro.org; h=from:subject:message-id;
- bh=d2qYpbUEJ3bo57WTysC1k9+78U0fLX5bGNTDzJBq7DU=;
- b=owEBbQKS/ZANAwAKAXzjJV0594ihAcsmYgBmHlay6q04sxazUzKyygazLoHSnpWmcuHg4udwO
- xXfJvb8gt2JAjMEAAEKAB0WIQQvNUFTUPeVarpwrPB84yVdOfeIoQUCZh5WsgAKCRB84yVdOfeI
- oSyTD/9r+1V/UTe9ST/Zl2Db/l6Ln98PrTz7OiluHWNsXyfaYlgHmjNI7O64hSS+7rFMZDn5dnZ
- TRwrfbtR3nFvp/Xnb+o0oVUe+K83Zh1hSKkOjVFgX8KoRJ0e2kLRogrHokcCsKByowRwWNXqmEc
- Ac6RHvWWJPimqlww+6L1WrQdauaOoHY9siRHtwma7dkoPkquERl05mbtp+DKjJ7TXoqqyqShwxm
- 2HeOIV2U3ZSME9btaKm0UGLVTIG7qbsEVtGShbcTKMaxjzkIK87hMwvAIqyaztOIAaWPCCiL5qo
- nn4EVAkxRRVz8dQwZsZ5HEiVdhFDquBDjw2D3EdspgOsn7VepOLbLbP9i0ROkmJjyLm4k6QEBBH
- K8XIHU6HL4zCUDMGqwHQIDv5AJzaV7SvM6nBLClF6TxdMSfxax/gLvw+nI5AS+yGYBvlWo3yNSd
- aYAceh7ZdtZ9tBbsiuZ6p89XTgFIlgP5Iv2ok5Ga4biX6xlg+urxEykyft456ro5TJKiKDfJhgo
- W0oG0jNON8RIkjPW66QNgbv2xCwt6VOSVmmEQDRMn5hZcmPkyGRvZQPyHksgGESr5Gvp44eFDee
- T2l92jNwr56mCfxQ9+OBTn2pEWTS70hD8zQoMTfkd2BzjwuMVLBHMRugNLCM6KQD+eb6McwgwtG
- D0SmOWQvPxMM4ng==
-X-Developer-Key: i=daniel.thompson@linaro.org; a=openpgp;
- fpr=E38BE19861669213F6E2661AA8A4E3BC5B7B28BE
-X-Spam-Score: -0.2 (/)
+X-DNSRBL: 
+X-SPAM-SOURCE-CHECK: pass
+X-MAIL: h3cspam02-ex.h3c.com 43HB1rZL029440
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  The current approach to filling tmpbuffer with completion
- candidates is confusing, with the buffer management being especially hard
- to reason about. That's because it doesn't copy the completion canid [...]
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  >From: LiuYe <liu.yeC@h3c.com> > >Currently,
+ if CONFIG_KDB_KEYBOARD
+ is enabled, then kgdboc will >attempt to use schedule_work() to provoke a
+ keyboard reset when >transitioning out of the debugger and [...] 
+ Content analysis details:   (0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
- blocked.  See
+ 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
+ DNSWL was blocked.  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: linaro.org]
+ for more information. [60.191.123.50 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.221.53 listed in wl.mailspike.net]
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
-X-Headers-End: 1rwgJs-0003ap-5N
-Subject: [Kgdb-bugreport] [PATCH 7/7] kdb: Simplify management of tmpbuffer
- in kdb_read()
+X-Headers-End: 1rx33z-0005k1-1S
+Subject: [Kgdb-bugreport] =?utf-8?b?UmXvvJpbUEFUQ0ggVjExXSBrZGI6IEZpeCB0?=
+ =?utf-8?q?he_deadlock_issue_in_KDB_debugging=2E?=
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -147,116 +108,156 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: kgdb-bugreport@lists.sourceforge.net, linux-kernel@vger.kernel.org
+Cc: "kgdb-bugreport@lists.sourceforge.net"
+ <kgdb-bugreport@lists.sourceforge.net>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "linux-serial@vger.kernel.org" <linux-serial@vger.kernel.org>,
+ "jason.wessel@windriver.com" <jason.wessel@windriver.com>,
+ "jirislaby@kernel.org" <jirislaby@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-The current approach to filling tmpbuffer with completion candidates is
-confusing, with the buffer management being especially hard to reason
-about. That's because it doesn't copy the completion canidate into
-tmpbuffer, instead of copies a whole bunch of other nonsense and then
-runs the completion stearch from the middle of tmpbuffer!
+>From: LiuYe <liu.yeC@h3c.com>
+>
+>Currently, if CONFIG_KDB_KEYBOARD is enabled, then kgdboc will
+>attempt to use schedule_work() to provoke a keyboard reset when
+>transitioning out of the debugger and back to normal operation.
+>This can cause deadlock because schedule_work() is not NMI-safe.
+>
+>The stack trace below shows an example of the problem. In this
+>case the master cpu is not running from NMI but it has parked
+>the slave CPUs using an NMI and the parked CPUs is holding
+>spinlocks needed by schedule_work().
+>
+>Example:
+>BUG: spinlock lockup suspected on CPU#0. owner_cpu: 1
+>CPU1: Call Trace:
+>__schedule
+>schedule
+>schedule_hrtimeout_range_clock
+>mutex_unlock
+>ep_scan_ready_list
+>schedule_hrtimeout_range
+>ep_poll
+>wake_up_q
+>SyS_epoll_wait
+>entry_SYSCALL_64_fastpath
+>
+>CPU0: Call Trace:
+>dump_stack
+>spin_dump
+>do_raw_spin_lock
+>_raw_spin_lock
+>try_to_wake_up
+>wake_up_process
+>insert_work
+>__queue_work
+>queue_work_on
+>kgdboc_post_exp_handler
+>kgdb_cpu_enter
+>kgdb_handle_exception
+>__kgdb_notify
+>kgdb_notify
+>notifier_call_chain
+>notify_die
+>do_int3
+>int3
+>
+>We fix the problem by using irq_work to call schedule_work()
+>instead of calling it directly. This is because we cannot
+>resynchronize the keyboard state from the hardirq context
+>provided by irq_work. This must be done from the task context
+>in order to call the input subsystem.
+>
+>Therefore, we have to defer the work twice. First, safely
+>switch from the debug trap context (similar to NMI) to the
+>hardirq, and then switch from the hardirq to the system work queue.
+>
+>Signed-off-by: LiuYe <liu.yeC@h3c.com>
+>Co-developed-by: Daniel Thompson <daniel.thompson@linaro.org>
+>Signed-off-by: Daniel Thompson <daniel.thompson@linaro.org>
+>
+>---
+>V10 -> V11: Revert to V9
+>V9 -> V10 : Add Signed-off-by of Greg KH and Andy Shevchenko, Acked-by of Daniel Thompson
+>V8 -> V9: Modify call trace format and move irq_work.h before module.h
+>V7 -> V8: Update the description information and comments in the code.
+>	: Submit this patch based on version linux-6.9-rc2.
+>V6 -> V7: Add comments in the code.
+>V5 -> V6: Replace with a more professional and accurate answer.
+>V4 -> V5: Answer why schedule another work in the irq_work and not do the job directly.
+>V3 -> V4: Add changelogs
+>V2 -> V3: Add description information
+>V1 -> V2: using irq_work to solve this properly.
+>---
+>---
+> drivers/tty/serial/kgdboc.c | 24 +++++++++++++++++++++++-
+> 1 file changed, 23 insertions(+), 1 deletion(-)
+>
+>diff --git a/drivers/tty/serial/kgdboc.c b/drivers/tty/serial/kgdboc.c
+>index 7ce7bb164..32410fec7 100644
+>--- a/drivers/tty/serial/kgdboc.c
+>+++ b/drivers/tty/serial/kgdboc.c
+>@@ -19,6 +19,7 @@
+> #include <linux/console.h>
+> #include <linux/vt_kern.h>
+> #include <linux/input.h>
+>+#include <linux/irq_work.h>
+> #include <linux/module.h>
+> #include <linux/platform_device.h>
+> #include <linux/serial_core.h>
+>@@ -82,6 +83,19 @@ static struct input_handler kgdboc_reset_handler = {
+> 
+> static DEFINE_MUTEX(kgdboc_reset_mutex);
+> 
+>+/*
+>+ * This code ensures that the keyboard state, which is changed during kdb
+>+ * execution, is resynchronized when we leave the debug trap. The resync
+>+ * logic calls into the input subsystem to force a reset. The calls into
+>+ * the input subsystem must be executed from normal task context.
+>+ *
+>+ * We need to trigger the resync from the debug trap, which executes in an
+>+ * NMI (or similar) context. To make it safe to call into the input
+>+ * subsystem we end up having use two deferred execution techniques.
+>+ * Firstly, we use irq_work, which is NMI-safe, to provoke a callback from
+>+ * hardirq context. Then, from the hardirq callback we use the system
+>+ * workqueue to provoke the callback that actually performs the resync.
+>+ */
+> static void kgdboc_restore_input_helper(struct work_struct *dummy)
+> {
+> 	/*
+>@@ -99,10 +113,17 @@ static void kgdboc_restore_input_helper(struct work_struct *dummy)
+> 
+> static DECLARE_WORK(kgdboc_restore_input_work, kgdboc_restore_input_helper);
+> 
+>+static void kgdboc_queue_restore_input_helper(struct irq_work *unused)
+>+{
+>+	schedule_work(&kgdboc_restore_input_work);
+>+}
+>+
+>+static DEFINE_IRQ_WORK(kgdboc_restore_input_irq_work, kgdboc_queue_restore_input_helper);
+>+
+> static void kgdboc_restore_input(void)
+> {
+> 	if (likely(system_state == SYSTEM_RUNNING))
+>-		schedule_work(&kgdboc_restore_input_work);
+>+		irq_work_queue(&kgdboc_restore_input_irq_work);
+> }
+> 
+> static int kgdboc_register_kbd(char **cptr)
+>@@ -133,6 +154,7 @@ static void kgdboc_unregister_kbd(void)
+> 			i--;
+> 		}
+> 	}
+>+	irq_work_sync(&kgdboc_restore_input_irq_work);
+> 	flush_work(&kgdboc_restore_input_work);
+> }
+> #else /* ! CONFIG_KDB_KEYBOARD */
+>-- 
+>2.25.1
 
-Change this to copy nothing but the completion candidate into tmpbuffer.
-
-Pretty much everything else in this patch is renaming to reflect the
-above change:
-
-    s/p_tmp/tmpbuffer/
-    s/buf_size/sizeof(tmpbuffer)/
-
-Signed-off-by: Daniel Thompson <daniel.thompson@linaro.org>
----
- kernel/debug/kdb/kdb_io.c | 40 +++++++++++++++++-----------------------
- 1 file changed, 17 insertions(+), 23 deletions(-)
-
-diff --git a/kernel/debug/kdb/kdb_io.c b/kernel/debug/kdb/kdb_io.c
-index 94a638a9d52fa..640208675c9a8 100644
---- a/kernel/debug/kdb/kdb_io.c
-+++ b/kernel/debug/kdb/kdb_io.c
-@@ -227,8 +227,7 @@ static char *kdb_read(char *buffer, size_t bufsize)
- 	int count;
- 	int i;
- 	int diag, dtab_count;
--	int key, buf_size, ret;
--
-+	int key, ret;
- 
- 	diag = kdbgetintenv("DTABCOUNT", &dtab_count);
- 	if (diag)
-@@ -310,21 +309,16 @@ static char *kdb_read(char *buffer, size_t bufsize)
- 	case 9: /* Tab */
- 		if (tab < 2)
- 			++tab;
--		p_tmp = buffer;
--		while (*p_tmp == ' ')
--			p_tmp++;
--		if (p_tmp > cp)
--			break;
--		memcpy(tmpbuffer, p_tmp, cp-p_tmp);
--		*(tmpbuffer + (cp-p_tmp)) = '\0';
--		p_tmp = strrchr(tmpbuffer, ' ');
--		if (p_tmp)
--			++p_tmp;
--		else
--			p_tmp = tmpbuffer;
--		len = strlen(p_tmp);
--		buf_size = sizeof(tmpbuffer) - (p_tmp - tmpbuffer);
--		count = kallsyms_symbol_complete(p_tmp, buf_size);
-+
-+		tmp = *cp;
-+		*cp = '\0';
-+		p_tmp = strrchr(buffer, ' ');
-+		p_tmp = (p_tmp ? p_tmp + 1 : buffer);
-+		strscpy(tmpbuffer, p_tmp, sizeof(tmpbuffer));
-+		*cp = tmp;
-+
-+		len = strlen(tmpbuffer);
-+		count = kallsyms_symbol_complete(tmpbuffer, sizeof(tmpbuffer));
- 		if (tab == 2 && count > 0) {
- 			kdb_printf("\n%d symbols are found.", count);
- 			if (count > dtab_count) {
-@@ -336,14 +330,14 @@ static char *kdb_read(char *buffer, size_t bufsize)
- 			}
- 			kdb_printf("\n");
- 			for (i = 0; i < count; i++) {
--				ret = kallsyms_symbol_next(p_tmp, i, buf_size);
-+				ret = kallsyms_symbol_next(tmpbuffer, i, sizeof(tmpbuffer));
- 				if (WARN_ON(!ret))
- 					break;
- 				if (ret != -E2BIG)
--					kdb_printf("%s ", p_tmp);
-+					kdb_printf("%s ", tmpbuffer);
- 				else
--					kdb_printf("%s... ", p_tmp);
--				*(p_tmp + len) = '\0';
-+					kdb_printf("%s... ", tmpbuffer);
-+				tmpbuffer[len] = '\0';
- 			}
- 			if (i >= dtab_count)
- 				kdb_printf("...");
-@@ -354,14 +348,14 @@ static char *kdb_read(char *buffer, size_t bufsize)
- 				kdb_position_cursor(kdb_prompt_str, buffer, cp);
- 		} else if (tab != 2 && count > 0) {
- 			/* How many new characters do we want from tmpbuffer? */
--			len_tmp = strlen(p_tmp) - len;
-+			len_tmp = strlen(tmpbuffer) - len;
- 			if (lastchar + len_tmp >= bufend)
- 				len_tmp = bufend - lastchar;
- 
- 			if (len_tmp) {
- 				/* + 1 ensures the '\0' is memmove'd */
- 				memmove(cp+len_tmp, cp, (lastchar-cp) + 1);
--				memcpy(cp, p_tmp+len, len_tmp);
-+				memcpy(cp, tmpbuffer+len, len_tmp);
- 				kdb_printf("%s", cp);
- 				cp += len_tmp;
- 				lastchar += len_tmp;
-
--- 
-2.43.0
-
+What is the current status of PATCH V11? Are there any additional modifications needed?
 
 
 _______________________________________________
