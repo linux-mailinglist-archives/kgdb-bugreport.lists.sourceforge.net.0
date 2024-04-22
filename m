@@ -2,137 +2,128 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A493E8AD732
-	for <lists+kgdb-bugreport@lfdr.de>; Tue, 23 Apr 2024 00:20:31 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9EFAF8AD786
+	for <lists+kgdb-bugreport@lfdr.de>; Tue, 23 Apr 2024 00:49:41 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1rz21W-0001nt-5J
+	id 1rz2Tk-0001h0-AR
 	for lists+kgdb-bugreport@lfdr.de;
-	Mon, 22 Apr 2024 22:20:30 +0000
+	Mon, 22 Apr 2024 22:49:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <dianders@chromium.org>) id 1rz21T-0001nm-VI
+ (envelope-from <justinstitt@google.com>) id 1rz2Ti-0001gs-UA
  for kgdb-bugreport@lists.sourceforge.net;
- Mon, 22 Apr 2024 22:20:28 +0000
+ Mon, 22 Apr 2024 22:49:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
- Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=b4TkjiOmnf7EkU2uUP7WyZ/U9eWwbiO9i0mpJYmLC7M=; b=celu+beDqkfGaSlY1R/NbLpYNF
- 92d2WKGbC4ZTUToRtOH2CApjl0N3QyTQfS0X+a0qyNl35Q73K7qZ21DDYzQzGw5kabgwzfzlu9m1t
- OcXnzbQktz0VbN68ntUYuHTu8j1IRGi+vaNcsAUSOmkVPWOpck+xcRZmJZFC+JFQJteA=;
+ bh=KCKJmu5bl2+zxy0B9al546VeTzaNGWidDB8dfZXwONo=; b=jz+FcfjUKBPG1y2UX65wmNwhtq
+ f+W6OhcG3zWeOTPBK3vpOJQseOes0N+cyTvLC+8xfAdHS9/ePTn0VNPNYFsu214Fg5jT5/hVkfXhp
+ zpy5fjseGg4NkooQikTK7KdNqH50b8hOC2Kj9RBnzsPvPGvXDgBTuMnaVkQ1FzD+50sQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
- :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=b4TkjiOmnf7EkU2uUP7WyZ/U9eWwbiO9i0mpJYmLC7M=; b=ibjcGTFj1adiqtBW6UQRe7CKWi
- 0cNqQVZEnIyy6tIKbk/lIovAlrx40GbfNU2JU+Hq1bEbnY4lH2QUkqMx9oVz6viZZS2trmCw0AyeQ
- h2yBoOlvaxfNTYKy2l4UKVUfMUud/1D7LMkTuHL0iYN02EmG+0Xd3q1qwfSq2eOGxtJU=;
-Received: from mail-oa1-f48.google.com ([209.85.160.48])
+ bh=KCKJmu5bl2+zxy0B9al546VeTzaNGWidDB8dfZXwONo=; b=brrxUwVNYb2Iec/tVQJ8M8Qb0/
+ pth8+P827NVQHFSMkQr+deg0Vkee3+CylPwUWoTAa4VE5/W2PlvfUY74UZgJX1a9pZoDrnPBvJ81u
+ myX5OvvuXmkpB/tJL8QHPAVXu50lT4J0a+eOJ4b7r1xtF7FDbH/vZK39vHPW8BBVW7j0=;
+Received: from mail-io1-f44.google.com ([209.85.166.44])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1rz21S-0006N5-RY for kgdb-bugreport@lists.sourceforge.net;
- Mon, 22 Apr 2024 22:20:28 +0000
-Received: by mail-oa1-f48.google.com with SMTP id
- 586e51a60fabf-2228c4c5ac3so2864547fac.0
+ id 1rz2Th-0007xx-RY for kgdb-bugreport@lists.sourceforge.net;
+ Mon, 22 Apr 2024 22:49:39 +0000
+Received: by mail-io1-f44.google.com with SMTP id
+ ca18e2360f4ac-7d9c2096c29so245875939f.0
  for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 22 Apr 2024 15:20:27 -0700 (PDT)
+ Mon, 22 Apr 2024 15:49:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1713824416; x=1714429216;
+ d=google.com; s=20230601; t=1713826172; x=1714430972;
  darn=lists.sourceforge.net; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=b4TkjiOmnf7EkU2uUP7WyZ/U9eWwbiO9i0mpJYmLC7M=;
- b=QULjxj4P8po07N/pKK9wdC5L04MOn4B5/t3gEeKAb0PUzmb/0UDQO06VrOr7tOJw92
- KS9r8Keoxmz8PVZsl6mWeLebjtG/zvSm1rrXFfGNlq5Vw82RUxXNjjcFuOQ2jYdPIrDE
- vv9GuHvAo+rT8twln3wvy5w/Fgs8TAlv9RcQE=
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=KCKJmu5bl2+zxy0B9al546VeTzaNGWidDB8dfZXwONo=;
+ b=DcZTTtbg76IAwWSN6QvStN5moFW1FSrBQ/NcQjpvOV0IOdVS6jYFrgov1yJmFhn55z
+ wZWhLFdy+AtkgyyU+Oh8FWY0haVOrfN6VMyJrh9GtX2AV81of9QZtDH+FrTR67WtVQzK
+ jsqaiUuqXd5NYx+/N2RWauAQFswJrXiG87vodvd9n3jEESSkI/FCmUXJwJaO1iPZBzri
+ QetU9SP4MAOBFXkF31rXkjcjifVS/f4ZF0yBpGpRfVyc663crAWBlOxcZCP/y2dgZyyI
+ 3yA6mSigmtoroQi10W84hoTa6KJ/7IyFFArDEhOuqP60nAK90SEAwzgPV3Cx8F0PWACx
+ pZIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713824416; x=1714429216;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=b4TkjiOmnf7EkU2uUP7WyZ/U9eWwbiO9i0mpJYmLC7M=;
- b=DEPL6x2I4cB71XxqDuEzhb96iA/TPLRSSQ7mZc7jJOKvQB6Vc7w0mVVc+LuDRgrZhK
- +6cCNkC0M5ZKz0gxEClq9pJLxJkVQ0l/wGxH7Z3Q1Emw30hqoT+AkrJbKqAZI2TPxa4Y
- zUM4IZD/pK1K7rqubBXMc71ryZIuXqzLt1pCPmfiik5mXaKcJzOhxMknkLZFGZKRAYvS
- 43BvkLdPA0h7kQRGXmyL3+ZPfi/cbZzczckI8nZDBMTX5YCC3Ggq6YCZZOmQ25Of8Gh+
- NePJ4gYJ/CtqGViGew3Aejxp0eE5dDId+jC/Drleoz/ESuHTk7e4WxFSPISgKyushqhO
- noow==
+ d=1e100.net; s=20230601; t=1713826172; x=1714430972;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=KCKJmu5bl2+zxy0B9al546VeTzaNGWidDB8dfZXwONo=;
+ b=Q8FdJ6SB+iNz5lOgXQEmyRVc/jI6SVa5CVwHDM4JvFZCPSyWwdmH8Tm/5jieK/bPiT
+ rwkNDo1qwPa5aMrQ6RNksQ0vAha0Yxem5aeCTLJ1EhaH/qCc7/nNmeAVGC2z0l6ScjS+
+ patlqdlLb+YueDLIitbQ0XTttx1poR0Lk6h64dGUCoC5vhDe9dNxsbRUQGmOGOu8f/46
+ 7q428T5vcgdfzoJvr7vqH37TDaPDrtxIW/7uA5pCtUDq2kxAKSEFik5bQHHc14Qqkr7c
+ HsNNU/hvuua92udgekWy50RuaIt6YcM0DFkhkmQZZoRLe1ZPw5mN6GwuaSZ9qFTPtEnz
+ XDMQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWZenIf06M77WdUw1VttfwFwbzRzVBDEP2wtk8P+Rk+eAeC/H0TNu0hA93HDXioiID7Tj+sdiVbOBJjjWaJIv/Em7HlXxKAWYbe1NgHXEN8OrqDNx8=
-X-Gm-Message-State: AOJu0Yx/3rs3gXe50uLi+6wz6gIMGeOej8mqC10F2vf3h0PZmKOLANPN
- GcOqQ46DjgHuoNZNecP+ivtBcvIn0q527RUxZ6TEai4TtHqX7CfvLBFTcO0ASV/zBohviPBZm0p
- 3vwbM
-X-Google-Smtp-Source: AGHT+IHdLZfrzSoet3W2/U2JqGsh8oSfLPJaqH92nUAQqDkdFwWBtDoRL0wZL/fK98bsQSBWH7eK6A==
-X-Received: by 2002:a05:6214:923:b0:6a0:8778:b40b with SMTP id
- dk3-20020a056214092300b006a08778b40bmr1927581qvb.18.1713822866322; 
- Mon, 22 Apr 2024 14:54:26 -0700 (PDT)
-Received: from mail-qt1-f182.google.com (mail-qt1-f182.google.com.
- [209.85.160.182]) by smtp.gmail.com with ESMTPSA id
- w2-20020a0cb542000000b0069b55bf11a2sm4658690qvd.139.2024.04.22.14.54.24
- for <kgdb-bugreport@lists.sourceforge.net>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 22 Apr 2024 14:54:25 -0700 (PDT)
-Received: by mail-qt1-f182.google.com with SMTP id
- d75a77b69052e-434ffc2b520so61921cf.0
- for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 22 Apr 2024 14:54:24 -0700 (PDT)
-X-Forwarded-Encrypted: i=1;
- AJvYcCUeRjpeayvqoOWqZ5Tn/mHC5GvxHHfY/JQ/hloqa7jPBGa8a7Y/8aSglUH5K+6SYAEhJ7ae0ep8EbJPLc8w17ssOyR8bLPft1cfTBgC2wCTG3JkBCQ=
-X-Received: by 2002:ac8:550d:0:b0:439:9aa4:41ed with SMTP id
- j13-20020ac8550d000000b004399aa441edmr95963qtq.16.1713822864486; Mon, 22 Apr
- 2024 14:54:24 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240419-kgdboc_fix_schedule_work-v1-1-ff19881677e5@linaro.org>
-In-Reply-To: <20240419-kgdboc_fix_schedule_work-v1-1-ff19881677e5@linaro.org>
-From: Doug Anderson <dianders@chromium.org>
-Date: Mon, 22 Apr 2024 14:54:08 -0700
-X-Gmail-Original-Message-ID: <CAD=FV=UHt7Pm-qEBs7vtK0B0DCbu9YbU465OdpSKCYZVpNuOaA@mail.gmail.com>
-Message-ID: <CAD=FV=UHt7Pm-qEBs7vtK0B0DCbu9YbU465OdpSKCYZVpNuOaA@mail.gmail.com>
+ AJvYcCUicZaMZuWqzx1X++BZd7rUn+ATI15eOhHDR7FBBS+EM2gdYwxyQXFA0LZT8zJmldEiyVRU5KzSFSiqImGzSe8htowvR84uQ2fHQKlb2SgMMHEBAho=
+X-Gm-Message-State: AOJu0Yxua8WtKIg3sjSI1sFoZpEBRl81dRY1IiY0uI4w4kKRQfwjav3l
+ MpthNIr0wYKni5rdqjVT0KYcP+6SRwkBJmoaMfCMntOR67Pm508cDJjww9HuPiCv+v6mMIlpEFP
+ Khg==
+X-Google-Smtp-Source: AGHT+IGD8E3UcrR5oTnyvVhpyX1RzPfTUHBhXeNY2iPixwVxtpyiWDPRP4/gkHWCWW3HKlkRlz40SA==
+X-Received: by 2002:a5e:d718:0:b0:7de:49c:9d3e with SMTP id
+ v24-20020a5ed718000000b007de049c9d3emr793297iom.21.1713826172599; 
+ Mon, 22 Apr 2024 15:49:32 -0700 (PDT)
+Received: from google.com (195.121.66.34.bc.googleusercontent.com.
+ [34.66.121.195]) by smtp.gmail.com with ESMTPSA id
+ u16-20020a056638305000b004830b70971asm3266609jak.122.2024.04.22.15.49.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 22 Apr 2024 15:49:32 -0700 (PDT)
+Date: Mon, 22 Apr 2024 22:49:29 +0000
 To: Daniel Thompson <daniel.thompson@linaro.org>
-X-Spam-Score: -0.9 (/)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
+Message-ID: <kvmf4hcnoeuogggx5jmcqjch32shyswjv5cqvg4hwdg4g27rup@t4ddszao3354>
+References: <20240422-kgdb_read_refactor-v2-0-ed51f7d145fe@linaro.org>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20240422-kgdb_read_refactor-v2-0-ed51f7d145fe@linaro.org>
+X-Spam-Score: -15.7 (---------------)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  Hi, On Fri, Apr 19, 2024 at 3:30 AM Daniel Thompson <daniel.thompson@linaro.org>
-    wrote: > > Currently, when kdb is compiled with keyboard support, then we
-    will use > schedule_work() to provoke reset of [...] 
- 
- Content analysis details:   (-0.9 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview:  Hi, On Mon, Apr 22, 2024 at 05:35:53PM +0100, Daniel Thompson
+ wrote: > Inspired by a patch from [Justin][1] I took a closer look at
+ kdb_read().
+ > > Despite Justin's patch being a (correct) one-line manipu [...] 
+ Content analysis details:   (-15.7 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
-  0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
-                             blocked.  See
-                             http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
-                              for more information.
-                             [URIs: chromium.org]
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -7.5 USER_IN_DEF_SPF_WL     From: address is in the default SPF
+ welcome-list
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM
+ welcome-list
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
-                             [209.85.160.48 listed in wl.mailspike.net]
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
+ [209.85.166.44 listed in wl.mailspike.net]
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rz21S-0006N5-RY
-Subject: Re: [Kgdb-bugreport] [PATCH] serial: kgdboc: Fix NMI-safety
- problems from keyboard reset code
+ envelope-from domain
+ -0.5 ENV_AND_HDR_SPF_MATCH  Env and Hdr From used in default SPF WL
+ Match
+ -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium trust sender
+X-Headers-End: 1rz2Th-0007xx-RY
+Subject: Re: [Kgdb-bugreport] [PATCH v2 0/7] kdb: Refactor and fix bugs in
+ kdb_read()
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -144,67 +135,89 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: kgdb-bugreport@lists.sourceforge.net,
- Jason Wessel <jason.wessel@windriver.com>, linux-kernel@vger.kernel.org,
- stable@vger.kernel.org, Liuye <liu.yeC@h3c.com>, linux-serial@vger.kernel.org,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Jiri Slaby <jirislaby@kernel.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Justin Stitt via Kgdb-bugreport <kgdb-bugreport@lists.sourceforge.net>
+Reply-To: Justin Stitt <justinstitt@google.com>
+Cc: kgdb-bugreport@lists.sourceforge.net, stable@vger.kernel.org,
+ linux-kernel@vger.kernel.org, Jason Wessel <jason.wessel@windriver.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-SGksCgpPbiBGcmksIEFwciAxOSwgMjAyNCBhdCAzOjMw4oCvQU0gRGFuaWVsIFRob21wc29uCjxk
-YW5pZWwudGhvbXBzb25AbGluYXJvLm9yZz4gd3JvdGU6Cj4KPiBDdXJyZW50bHksIHdoZW4ga2Ri
-IGlzIGNvbXBpbGVkIHdpdGgga2V5Ym9hcmQgc3VwcG9ydCwgdGhlbiB3ZSB3aWxsIHVzZQo+IHNj
-aGVkdWxlX3dvcmsoKSB0byBwcm92b2tlIHJlc2V0IG9mIHRoZSBrZXlib2FyZCBzdGF0dXMuICBV
-bmZvcnR1bmF0ZWx5Cj4gc2NoZWR1bGVfd29yaygpIGdldHMgY2FsbGVkIGZyb20gdGhlIGtnZGJv
-YyBwb3N0LWRlYnVnLWV4Y2VwdGlvbgo+IGhhbmRsZXIuICBUaGF0IHJpc2tzIGRlYWRsb2NrIHNp
-bmNlIHNjaGVkdWxlX3dvcmsoKSBpcyBub3QgTk1JLXNhZmUgYW5kLAo+IGV2ZW4gb24gcGxhdGZv
-cm1zIHdoZXJlIHRoZSBOTUkgaXMgbm90IGRpcmVjdGx5IHVzZWQgZm9yIGRlYnVnZ2luZywgdGhl
-Cj4gZGVidWcgdHJhcCBjYW4gaGF2ZSBOTUktbGlrZSBiZWhhdmlvdXIgZGVwZW5kaW5nIG9uIHdo
-ZXJlIGJyZWFrcG9pbnRzCj4gYXJlIHBsYWNlZC4KPgo+IEZpeCB0aGlzIGJ5IHVzaW5nIHRoZSBp
-cnEgd29yayBzeXN0ZW0sIHdoaWNoIGlzIE5NSS1zYWZlLCB0byBkZWZlciB0aGUKPiBjYWxsIHRv
-IHNjaGVkdWxlX3dvcmsoKSB0byBhIHBvaW50IHdoZW4gaXQgaXMgc2FmZSB0byBjYWxsLgo+Cj4g
-UmVwb3J0ZWQtYnk6IExpdXllIDxsaXUueWVDQGgzYy5jb20+Cj4gQ2xvc2VzOiBodHRwczovL2xv
-cmUua2VybmVsLm9yZy9hbGwvMjAyNDAyMjgwMjU2MDIuMzA4Nzc0OC0xLWxpdS55ZUNAaDNjLmNv
-bS8KPiBDYzogc3RhYmxlQHZnZXIua2VybmVsLm9yZwo+IFNpZ25lZC1vZmYtYnk6IERhbmllbCBU
-aG9tcHNvbiA8ZGFuaWVsLnRob21wc29uQGxpbmFyby5vcmc+Cj4gLS0tCj4gIGRyaXZlcnMvdHR5
-L3NlcmlhbC9rZ2Rib2MuYyB8IDMwICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrLQo+ICAx
-IGZpbGUgY2hhbmdlZCwgMjkgaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlvbigtKQo+Cj4gZGlmZiAt
-LWdpdCBhL2RyaXZlcnMvdHR5L3NlcmlhbC9rZ2Rib2MuYyBiL2RyaXZlcnMvdHR5L3NlcmlhbC9r
-Z2Rib2MuYwo+IGluZGV4IDdjZTdiYjE2NDAwNTQuLmFkY2VhNzBmZDc1MDcgMTAwNjQ0Cj4gLS0t
-IGEvZHJpdmVycy90dHkvc2VyaWFsL2tnZGJvYy5jCj4gKysrIGIvZHJpdmVycy90dHkvc2VyaWFs
-L2tnZGJvYy5jCj4gQEAgLTE5LDYgKzE5LDcgQEAKPiAgI2luY2x1ZGUgPGxpbnV4L2NvbnNvbGUu
-aD4KPiAgI2luY2x1ZGUgPGxpbnV4L3Z0X2tlcm4uaD4KPiAgI2luY2x1ZGUgPGxpbnV4L2lucHV0
-Lmg+Cj4gKyNpbmNsdWRlIDxsaW51eC9pcnFfd29yay5oPgo+ICAjaW5jbHVkZSA8bGludXgvbW9k
-dWxlLmg+Cj4gICNpbmNsdWRlIDxsaW51eC9wbGF0Zm9ybV9kZXZpY2UuaD4KPiAgI2luY2x1ZGUg
-PGxpbnV4L3NlcmlhbF9jb3JlLmg+Cj4gQEAgLTQ4LDYgKzQ5LDI1IEBAIHN0YXRpYyBzdHJ1Y3Qg
-a2dkYl9pbyAgICAgICAgICAgICAgICBrZ2Rib2NfZWFybHljb25faW9fb3BzOwo+ICBzdGF0aWMg
-aW50ICAgICAgICAgICAgICAgICAgICAgICgqZWFybHljb25fb3JpZ19leGl0KShzdHJ1Y3QgY29u
-c29sZSAqY29uKTsKPiAgI2VuZGlmIC8qIElTX0JVSUxUSU4oQ09ORklHX0tHREJfU0VSSUFMX0NP
-TlNPTEUpICovCj4KPiArLyoKPiArICogV2hlbiB3ZSBsZWF2ZSB0aGUgZGVidWcgdHJhcCBoYW5k
-bGVyIHdlIG5lZWQgdG8gcmVzZXQgdGhlIGtleWJvYXJkIHN0YXR1cwo+ICsgKiAoc2luY2UgdGhl
-IG9yaWdpbmFsIGtleWJvYXJkIHN0YXRlIGdldHMgcGFydGlhbGx5IGNsb2JiZXJlZCBieSBrZGIg
-dXNlIG9mCj4gKyAqIHRoZSBrZXlib2FyZCkuCj4gKyAqCj4gKyAqIFRoZSBwYXRoIHRvIGRlbGl2
-ZXIgdGhlIHJlc2V0IGlzIHNvbWV3aGF0IGNpcmN1aXRvdXMuCj4gKyAqCj4gKyAqIFRvIGRlbGl2
-ZXIgdGhlIHJlc2V0IHdlIHJlZ2lzdGVyIGFuIGlucHV0IGhhbmRsZXIsIHJlc2V0IHRoZSBrZXli
-b2FyZCBhbmQKPiArICogdGhlbiBkZXJlZ2lzdGVyIHRoZSBpbnB1dCBoYW5kbGVyLiBIb3dldmVy
-LCB0byBnZXQgdGhpcyBkb25lIHJpZ2h0LCB3ZSBkbwo+ICsgKiBoYXZlIHRvIGNhcmVmdWxseSBt
-YW5hZ2UgdGhlIGNhbGxpbmcgY29udGV4dCBiZWNhdXNlIHdlIGNhbiBvbmx5IHJlZ2lzdGVyCj4g
-KyAqIGlucHV0IGhhbmRsZXJzIGZyb20gdGFzayBjb250ZXh0Lgo+ICsgKgo+ICsgKiBJbiBwYXJ0
-aWN1bGFyIHdlIG5lZWQgdG8gdHJpZ2dlciB0aGUgYWN0aW9uIGZyb20gdGhlIGRlYnVnIHRyYXAg
-aGFuZGxlciB3aXRoCj4gKyAqIGFsbCBpdHMgTk1JIGFuZC9vciBOTUktbGlrZSBvZGRpdGllcy4g
-VG8gc29sdmUgdGhpcyB0aGUga2dkYm9jIHRyYXAgZXhpdCBjb2RlCj4gKyAqICh0aGUgInBvc3Rf
-ZXhjZXB0aW9uIiBjYWxsYmFjaykgdXNlcyBpcnFfd29ya19xdWV1ZSgpLCB3aGljaCBpcyBOTUkt
-c2FmZSwgdG8KPiArICogc2NoZWR1bGUgYSBjYWxsYmFjayBmcm9tIGEgaGFyZGlycSBjb250ZXh0
-LiBGcm9tIHRoZXJlIHdlIGhhdmUgdG8gZGVmZXIgdGhlCj4gKyAqIHdvcmsgYWdhaW4sIHRoaXMg
-dGltZSB1c2luZyBzY2hlZHVsZV9Xb3JrKCksIHRvIGdldCBhIGNhbGxiYWNrIHVzaW5nIHRoZQoK
-bml0OiBzY2hlZHVsZV93b3JrKCkgKG5vIGNhcGl0YWwgIlciKS4KCj4gKyAqIHN5c3RlbSB3b3Jr
-cXVldWUsIHdoaWNoIHJ1bnMgaW4gdGFzayBjb250ZXh0LgoKVGhhbmsgeW91IGZvciB0aGUgY29t
-bWVudC4gSXQgbWFrZXMgdGhlIGRvdWJsZS1qdW1wIHRocm91Z2ggSVJRIHdvcmsKYW5kIHRoZW4g
-bm9ybWFsIHdvcmsgY2xlYXJlci4KCgpPdGhlciB0aGFuIHRoZSBuaXQgaW4gdGhlIGNvbW1lbnQs
-IHRoaXMgbG9va3MgZ29vZCB0byBtZS4KClJldmlld2VkLWJ5OiBEb3VnbGFzIEFuZGVyc29uIDxk
-aWFuZGVyc0BjaHJvbWl1bS5vcmc+CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX18KS2dkYi1idWdyZXBvcnQgbWFpbGluZyBsaXN0CktnZGItYnVncmVwb3J0
-QGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0
-cy9saXN0aW5mby9rZ2RiLWJ1Z3JlcG9ydAo=
+Hi,
+
+On Mon, Apr 22, 2024 at 05:35:53PM +0100, Daniel Thompson wrote:
+> Inspired by a patch from [Justin][1] I took a closer look at kdb_read().
+> 
+> Despite Justin's patch being a (correct) one-line manipulation it was a
+> tough patch to review because the surrounding code was hard to read and
+> it looked like there were unfixed problems.
+> 
+> This series isn't enough to make kdb_read() beautiful but it does make
+> it shorter, easier to reason about and fixes two buffer overflows and a
+> screen redraw problem!
+> 
+> [1]: https://lore.kernel.org/all/20240403-strncpy-kernel-debug-kdb-kdb_io-c-v1-1-7f78a08e9ff4@google.com/
+> 
+> Signed-off-by: Daniel Thompson <daniel.thompson@linaro.org>
+
+Seems to work nicely.
+
+There is some weird behavior which was present before your patch and is
+still present with it (let >< represent cursor position):
+
+[0]kdb> test_ap>< (now press TAB)
+
+[0]kdb> test_aperfmperf>< (so far so good, we got our autocomplete)
+
+[0]kdb> test_ap><erfmperf (now, let's move the cursor back and press TAB again)
+
+[0]kdb> test_aperfmperf><erfmperf
+
+This is because the autocomplete engine is not considering the
+characters after the cursor position. To be clear, this isn't really a
+bug but rather a decision to be made about which functionality is
+desired.
+
+For example, my shell (zsh) will just simply move the cursor back to
+the end of the complete match instead of re-writing stuff.
+
+At any rate,
+Tested-by: Justin Stitt <justinstitt@google.com>
+
+> ---
+> Changes in v2:
+> - No code changes!
+> - I belatedly realized that one of the cleanups actually fixed a buffer
+>   overflow so there are changes to Cc: (to add stable@...) and to one
+>   of the patch descriptions.
+> - Link to v1: https://lore.kernel.org/r/20240416-kgdb_read_refactor-v1-0-b18c2d01076d@linaro.org
+> 
+> ---
+> Daniel Thompson (7):
+>       kdb: Fix buffer overflow during tab-complete
+>       kdb: Use format-strings rather than '\0' injection in kdb_read()
+>       kdb: Fix console handling when editing and tab-completing commands
+>       kdb: Merge identical case statements in kdb_read()
+>       kdb: Use format-specifiers rather than memset() for padding in kdb_read()
+>       kdb: Replace double memcpy() with memmove() in kdb_read()
+>       kdb: Simplify management of tmpbuffer in kdb_read()
+> 
+>  kernel/debug/kdb/kdb_io.c | 133 ++++++++++++++++++++--------------------------
+>  1 file changed, 58 insertions(+), 75 deletions(-)
+> ---
+> base-commit: dccce9b8780618986962ba37c373668bcf426866
+> change-id: 20240415-kgdb_read_refactor-2ea2dfc15dbb
+> 
+> Best regards,
+> -- 
+> Daniel Thompson <daniel.thompson@linaro.org>
+> 
+
+Thanks
+Justin
+
+
+_______________________________________________
+Kgdb-bugreport mailing list
+Kgdb-bugreport@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport
