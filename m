@@ -2,115 +2,108 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A6D1E8ADAD0
-	for <lists+kgdb-bugreport@lfdr.de>; Tue, 23 Apr 2024 02:21:48 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id D73748AE1F3
+	for <lists+kgdb-bugreport@lfdr.de>; Tue, 23 Apr 2024 12:17:46 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1rz3ut-00043k-Ac
+	id 1rzDDc-0006QN-Ur
 	for lists+kgdb-bugreport@lfdr.de;
-	Tue, 23 Apr 2024 00:21:47 +0000
+	Tue, 23 Apr 2024 10:17:45 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <dianders@chromium.org>) id 1rz3uo-00043Z-E6
+ (envelope-from <daniel.thompson@linaro.org>) id 1rzDDb-0006QE-Cv
  for kgdb-bugreport@lists.sourceforge.net;
- Tue, 23 Apr 2024 00:21:42 +0000
+ Tue, 23 Apr 2024 10:17:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
- Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
+ MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=OvKHZ9JjRUWbi49dOaz2jnKn8wC1TnFH6x1+VhyrjCQ=; b=Ah0mrHgiNp9LMEb+hYZpfzimLe
- KR4vdxHTaNFe7MOSLQBJ+aXAsxeH5y6cyprVXvUtfxq+hnQYrUAYPDUm2kojCzkilvld3vn15zcct
- KRtkuCcm4cGovxNVnut/AW36Vx0phKsriT2/DCy9/FdESw1z22s0huHup9mN3Qt+c1yU=;
+ bh=WSIhEkyuGlAKLZqnsx6pwNHAFthAMdp875SAIfIKU9Y=; b=ODz0RMh68hARH8eFzQCAe3fK1s
+ n3vXM31BUkVSKKG+9hLVOaMtt3+sp3ddEMuvEFbBI0GONf2lZ/FYZHAj8Xke3R24L4l1dKezfeEor
+ LWzZereN7Cx5PUhl78iZhALqi9faUmXBp6XFR87qPTm7Ti+oUaC4U7y1g5pfTh2/7QTo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
- :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=OvKHZ9JjRUWbi49dOaz2jnKn8wC1TnFH6x1+VhyrjCQ=; b=fT9kIjJtLbfcjtuNmd//B74Bs7
- eMl+4J+0rgFczveajvDuHn44ZTK5yBu1gMJ7QE/V2UHl7LQV6lypfLxp7ruAnpUNnLkOvQdks/52u
- Us828jmBY8vWT1qY/7w8k5ITg6Qmt+n26uDOnzpBGvdl5KrB9Kgu5fUP4uUNTVwEEbyM=;
-Received: from mail-yb1-f178.google.com ([209.85.219.178])
+ bh=WSIhEkyuGlAKLZqnsx6pwNHAFthAMdp875SAIfIKU9Y=; b=CMDa1m5UZHr9sOUEYKGt46TVy2
+ 3fe203L5tRZ3S5P/cnoTeCIRgLEpRwo7PsB5UoAZXyLgV/jsbIzshiHB8HedsJ4NLVOhSIBPXJW9p
+ jUuJH5gY1is3dZDr95nMkuviIMoAA3ciqakZ1yG4XOLVwXRZW9Gz0nhbUO2/KvgJ2jQg=;
+Received: from mail-wm1-f51.google.com ([209.85.128.51])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1rz3un-0004zM-98 for kgdb-bugreport@lists.sourceforge.net;
- Tue, 23 Apr 2024 00:21:42 +0000
-Received: by mail-yb1-f178.google.com with SMTP id
- 3f1490d57ef6-de466c641aaso4400149276.3
+ id 1rzDDa-0002nU-QD for kgdb-bugreport@lists.sourceforge.net;
+ Tue, 23 Apr 2024 10:17:44 +0000
+Received: by mail-wm1-f51.google.com with SMTP id
+ 5b1f17b1804b1-41ac4cd7a1cso2432605e9.1
  for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 22 Apr 2024 17:21:41 -0700 (PDT)
+ Tue, 23 Apr 2024 03:17:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1713831695; x=1714436495;
- darn=lists.sourceforge.net; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=OvKHZ9JjRUWbi49dOaz2jnKn8wC1TnFH6x1+VhyrjCQ=;
- b=KRYVB72AEc77NZCEkCPxjJm8jY8Q3nd0nlq3nBXgQRqe8hZT3NUoyrIBB6ndO+zUP5
- lKEG4g+V58SuCWox0ONkwmQO6FXjG2Xfgp1orkCZcZfeIoncuz3eg1Na6mCiDUsKhUYO
- L2p9KXmsOk5oaf05HVAzFeFcOVAaL6JLFKiOQ=
+ d=linaro.org; s=google; t=1713867456; x=1714472256; darn=lists.sourceforge.net;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=WSIhEkyuGlAKLZqnsx6pwNHAFthAMdp875SAIfIKU9Y=;
+ b=oqMiUjxNyRxfKtKXnriNauQ3XljnFcccG3wg2eleXYzNrJx6Nd3rUHb13ruNVcwVe4
+ TappdugdAqeeNR4Ld9y46ygSbptib34nsgjnP56YfHOJWHpbMX5l1WtE7XiOQKcnqq4J
+ Yctel9uOGZ0kGtRprGIGzfZKj1TCz04ESqiYH/xggIYRFH5jF+KCV5+oMYVsHbzqOANX
+ gDFKDM8aDdnW6za/SdIcnqZ01pck6YMbh0QWHJEJN+J7uB24WNGAg5rkMorluhaAcegE
+ UW0zfJT1zUfFWj7ZDwPdRp7CSYA2Q8mnUofeqgFvKNFa9go3yra0P8cBG6B7VoR8NPR0
+ uO1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713831695; x=1714436495;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=OvKHZ9JjRUWbi49dOaz2jnKn8wC1TnFH6x1+VhyrjCQ=;
- b=hxSy/TdrV4UITwQ9fXeQ4NuA2lWYs9Hb09guy2E/F9yUXTwyIz7p50oiVeRFi1OXrj
- Jhgi14LLanhwC8oHYMS0r9nzhps7FVlP/9iohNqDerfURg3iwiv56HxXPFVDhirE7gxo
- yRJDuXdwfaRes8kDXKeIDVsCSupW8J1c07rVnXhLfqHbKTbieGWStBVUvBXfkO6w3rUR
- dP3u1I8GQdW4PtuQhFK6OLqQC+ycoWlbzq7pC5DAnOmxM1PUXTRPL9MWIILMRvgo2qoN
- doG5tqEP20TyFQWSXAR5uhgSvCt/0+WrTt3cVz3h6LpBUjG4GVc1J1HrFfWVee7mD+mR
- 96Xg==
+ d=1e100.net; s=20230601; t=1713867456; x=1714472256;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=WSIhEkyuGlAKLZqnsx6pwNHAFthAMdp875SAIfIKU9Y=;
+ b=EItpnbhN5DjY0fMdqlYYGRJ1+sW8HQ96CZZwyb7WpscRRDqW4PF692D91UQ8x+erlt
+ tQ7etxpSVj9sMZ5pZllOQ+o+0Ii8myjWpi/5KkEfl0jNKITM7q2AJDUt7VkeUY39Q2y1
+ sDaqxNFA6IEMoWsAts64nPESdWKIGCdniMcCt3IcUQpeYr5UAoAMx7+GVSR6pJ7AHXsz
+ p+uIOwwE4u6oKLlGQPrKOTOweYS4XCugYXoD5wPtY2+SN1s7Rdrp0Mrq/FQEyOavKiox
+ z7YU/41O3upwl35x+RnhCM5X4LPbxocT743mYwDAO0fJN4khDoJR1EHJWDCuN2lRCSZY
+ rxuA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVEZ+d2bdU2XDnZSDu99O+JwmpXbGAVXXI3569BRj8Q9mZ7ZHN13dgTEtMRs8R4yABHbrVcFexhb/kHlYK/S1dCdJcdi63wHqe6TrRWFqaoZoKkmcw=
-X-Gm-Message-State: AOJu0Yy6MELuQnT+pE31OtdJq7zl06UGoxrXUgOY4/5rsc+Hx3kGNDii
- aXHOu5nHPzFrmijx0dQLbfTIhsNgMrgrYMHL7f9adV3eMzPXoz/XDdrjWdqJgja2ah6Qvpt3dXO
- bOVf7
-X-Google-Smtp-Source: AGHT+IFEz0GjDmxhlf8lNt6HFMdctD1KNn6pEAK3Au851o8L4WaPKtsqLQJ8xVtHqLOitiagk1PUlA==
-X-Received: by 2002:a54:458b:0:b0:3c7:48a3:b28 with SMTP id
- z11-20020a54458b000000b003c748a30b28mr12944474oib.0.1713829985430; 
- Mon, 22 Apr 2024 16:53:05 -0700 (PDT)
-Received: from mail-qt1-f172.google.com (mail-qt1-f172.google.com.
- [209.85.160.172]) by smtp.gmail.com with ESMTPSA id
- de19-20020a05620a371300b0078ec3f23519sm4758060qkb.8.2024.04.22.16.53.04
- for <kgdb-bugreport@lists.sourceforge.net>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 22 Apr 2024 16:53:04 -0700 (PDT)
-Received: by mail-qt1-f172.google.com with SMTP id
- d75a77b69052e-43989e6ca42so140051cf.0
- for <kgdb-bugreport@lists.sourceforge.net>;
- Mon, 22 Apr 2024 16:53:04 -0700 (PDT)
-X-Forwarded-Encrypted: i=1;
- AJvYcCWQ4n/i6BKarIuZnOH8xXDxBIkdSGIbzvtRHL9ZXCa0TncrbOMTVYot9tx8g/6g0ORSB6Im2DqdNwidNsPyTjdtVz3OKEqs9CAe6t3yQXFhPXBeUEI=
-X-Received: by 2002:ac8:7c6:0:b0:439:b85a:3fa with SMTP id
- m6-20020ac807c6000000b00439b85a03famr67307qth.11.1713829984304; 
- Mon, 22 Apr 2024 16:53:04 -0700 (PDT)
-MIME-Version: 1.0
+ AJvYcCW4I5XX3N/4R3STgQ51h01ATkabQZDmfQJ5sWCesET3gzFcU0bqnq5ygzAKJ+Aezv7GoYqN9N9DHREsGlYm+kNUVIZzhvQ/ZwkcN/FAT9WJ4v01du0=
+X-Gm-Message-State: AOJu0YyuuLx0LkJuzSovtIcLNqkW8OmVDwwKm1Q0oL8yY7PQFZze0bkx
+ e8Je9UW9Ngp0wMpn037huuRPdgLwtwgNdd3EOza5efdPF5xihskVcGSEgokxJIU=
+X-Google-Smtp-Source: AGHT+IG1QPul9ff/agjnfVb1zx0R1tS4WbYQ6DGw9mfuJGNwEgeOG9LlcF2fpwcDxX4nEz6RCXCQZw==
+X-Received: by 2002:a05:600c:5008:b0:41a:81be:3e5e with SMTP id
+ n8-20020a05600c500800b0041a81be3e5emr2823760wmr.22.1713867456447; 
+ Tue, 23 Apr 2024 03:17:36 -0700 (PDT)
+Received: from aspen.lan
+ (aztw-34-b2-v4wan-166919-cust780.vm26.cable.virginm.net. [82.37.195.13])
+ by smtp.gmail.com with ESMTPSA id
+ v11-20020a05600c444b00b00418d5b16f85sm19577127wmn.21.2024.04.23.03.17.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 23 Apr 2024 03:17:35 -0700 (PDT)
+Date: Tue, 23 Apr 2024 11:17:34 +0100
+From: Daniel Thompson <daniel.thompson@linaro.org>
+To: Doug Anderson <dianders@chromium.org>
+Message-ID: <20240423101734.GA1567803@aspen.lan>
 References: <20240422-kgdb_read_refactor-v2-0-ed51f7d145fe@linaro.org>
- <20240422-kgdb_read_refactor-v2-7-ed51f7d145fe@linaro.org>
-In-Reply-To: <20240422-kgdb_read_refactor-v2-7-ed51f7d145fe@linaro.org>
-From: Doug Anderson <dianders@chromium.org>
-Date: Mon, 22 Apr 2024 16:52:52 -0700
-X-Gmail-Original-Message-ID: <CAD=FV=XqSmD4WGyBp7Cv1i8X9yjk2gH1y2j_5qzkxtDL+GKv3g@mail.gmail.com>
-Message-ID: <CAD=FV=XqSmD4WGyBp7Cv1i8X9yjk2gH1y2j_5qzkxtDL+GKv3g@mail.gmail.com>
-To: Daniel Thompson <daniel.thompson@linaro.org>
-X-Spam-Score: -5.9 (-----)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
+ <20240422-kgdb_read_refactor-v2-1-ed51f7d145fe@linaro.org>
+ <CAD=FV=VrOSN8VFaRwH-k4wCLm6Xb=zJyozJac+ijzhDvH8BYxA@mail.gmail.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <CAD=FV=VrOSN8VFaRwH-k4wCLm6Xb=zJyozJac+ijzhDvH8BYxA@mail.gmail.com>
+X-Spam-Score: -0.2 (/)
+X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  
- Content preview:  Hi, On Mon, Apr 22, 2024 at 9:38 AM Daniel Thompson <daniel.thompson@linaro.org>
-    wrote: > > The current approach to filling tmpbuffer with completion candidates
-    is > confusing, with the buffer managemen [...] 
+ Content preview:  On Mon, Apr 22, 2024 at 04:51:49PM -0700, Doug Anderson wrote:
+    > Hi, > > On Mon, Apr 22, 2024 at 9:37 AM Daniel Thompson > <daniel.thompson@linaro.org>
+    wrote: > > > > Currently, when the user attemp [...] 
  
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content analysis details:   (-0.2 points, 6.0 required)
  
   pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -118,25 +111,26 @@ X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.
                              blocked.  See
                              http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
                               for more information.
-                             [URIs: chromium.org]
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
-                             high trust
-                             [209.85.219.178 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+                             [URIs: linaro.org]
+  0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
+                             DNSWL was blocked.  See
+                             http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+                              for more information.
+                             [209.85.128.51 listed in list.dnswl.org]
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
-                             [209.85.219.178 listed in wl.mailspike.net]
+                             [209.85.128.51 listed in wl.mailspike.net]
+  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
   0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
                              valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
                              author's domain
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
                              envelope-from domain
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rz3un-0004zM-98
-Subject: Re: [Kgdb-bugreport] [PATCH v2 7/7] kdb: Simplify management of
- tmpbuffer in kdb_read()
+X-Headers-End: 1rzDDa-0002nU-QD
+Subject: Re: [Kgdb-bugreport] [PATCH v2 1/7] kdb: Fix buffer overflow during
+ tab-complete
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -148,63 +142,43 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: kgdb-bugreport@lists.sourceforge.net, linux-kernel@vger.kernel.org,
+Cc: kgdb-bugreport@lists.sourceforge.net, Justin Stitt <justinstitt@google.com>,
+ linux-kernel@vger.kernel.org, stable@vger.kernel.org,
  Jason Wessel <jason.wessel@windriver.com>
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-SGksCgpPbiBNb24sIEFwciAyMiwgMjAyNCBhdCA5OjM44oCvQU0gRGFuaWVsIFRob21wc29uCjxk
-YW5pZWwudGhvbXBzb25AbGluYXJvLm9yZz4gd3JvdGU6Cj4KPiBUaGUgY3VycmVudCBhcHByb2Fj
-aCB0byBmaWxsaW5nIHRtcGJ1ZmZlciB3aXRoIGNvbXBsZXRpb24gY2FuZGlkYXRlcyBpcwo+IGNv
-bmZ1c2luZywgd2l0aCB0aGUgYnVmZmVyIG1hbmFnZW1lbnQgYmVpbmcgZXNwZWNpYWxseSBoYXJk
-IHRvIHJlYXNvbgo+IGFib3V0LiBUaGF0J3MgYmVjYXVzZSBpdCBkb2Vzbid0IGNvcHkgdGhlIGNv
-bXBsZXRpb24gY2FuaWRhdGUgaW50bwo+IHRtcGJ1ZmZlciwgaW5zdGVhZCBvZiBjb3BpZXMgYSB3
-aG9sZSBidW5jaCBvZiBvdGhlciBub25zZW5zZSBhbmQgdGhlbgo+IHJ1bnMgdGhlIGNvbXBsZXRp
-b24gc3RlYXJjaCBmcm9tIHRoZSBtaWRkbGUgb2YgdG1wYnVmZmVyIQo+Cj4gQ2hhbmdlIHRoaXMg
-dG8gY29weSBub3RoaW5nIGJ1dCB0aGUgY29tcGxldGlvbiBjYW5kaWRhdGUgaW50byB0bXBidWZm
-ZXIuCj4KPiBQcmV0dHkgbXVjaCBldmVyeXRoaW5nIGVsc2UgaW4gdGhpcyBwYXRjaCBpcyByZW5h
-bWluZyB0byByZWZsZWN0IHRoZQo+IGFib3ZlIGNoYW5nZToKPgo+ICAgICBzL3BfdG1wL3RtcGJ1
-ZmZlci8KPiAgICAgcy9idWZfc2l6ZS9zaXplb2YodG1wYnVmZmVyKS8KPgo+IFNpZ25lZC1vZmYt
-Ynk6IERhbmllbCBUaG9tcHNvbiA8ZGFuaWVsLnRob21wc29uQGxpbmFyby5vcmc+Cj4gLS0tCj4g
-IGtlcm5lbC9kZWJ1Zy9rZGIva2RiX2lvLmMgfCA0MCArKysrKysrKysrKysrKysrKy0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tCj4gIDEgZmlsZSBjaGFuZ2VkLCAxNyBpbnNlcnRpb25zKCspLCAyMyBk
-ZWxldGlvbnMoLSkKCkRlZmluaXRlbHkgYW4gaW1wcm92ZW1lbnQuCgpSZXZpZXdlZC1ieTogRG91
-Z2xhcyBBbmRlcnNvbiA8ZGlhbmRlcnNAY2hyb21pdW0ub3JnPgoKCj4gZGlmZiAtLWdpdCBhL2tl
-cm5lbC9kZWJ1Zy9rZGIva2RiX2lvLmMgYi9rZXJuZWwvZGVidWcva2RiL2tkYl9pby5jCj4gaW5k
-ZXggOTRhNjM4YTlkNTJmYS4uNjQwMjA4Njc1YzlhOCAxMDA2NDQKPiAtLS0gYS9rZXJuZWwvZGVi
-dWcva2RiL2tkYl9pby5jCj4gKysrIGIva2VybmVsL2RlYnVnL2tkYi9rZGJfaW8uYwo+IEBAIC0y
-MjcsOCArMjI3LDcgQEAgc3RhdGljIGNoYXIgKmtkYl9yZWFkKGNoYXIgKmJ1ZmZlciwgc2l6ZV90
-IGJ1ZnNpemUpCj4gICAgICAgICBpbnQgY291bnQ7Cj4gICAgICAgICBpbnQgaTsKPiAgICAgICAg
-IGludCBkaWFnLCBkdGFiX2NvdW50Owo+IC0gICAgICAgaW50IGtleSwgYnVmX3NpemUsIHJldDsK
-PiAtCj4gKyAgICAgICBpbnQga2V5LCByZXQ7Cj4KPiAgICAgICAgIGRpYWcgPSBrZGJnZXRpbnRl
-bnYoIkRUQUJDT1VOVCIsICZkdGFiX2NvdW50KTsKPiAgICAgICAgIGlmIChkaWFnKQo+IEBAIC0z
-MTAsMjEgKzMwOSwxNiBAQCBzdGF0aWMgY2hhciAqa2RiX3JlYWQoY2hhciAqYnVmZmVyLCBzaXpl
-X3QgYnVmc2l6ZSkKPiAgICAgICAgIGNhc2UgOTogLyogVGFiICovCj4gICAgICAgICAgICAgICAg
-IGlmICh0YWIgPCAyKQo+ICAgICAgICAgICAgICAgICAgICAgICAgICsrdGFiOwo+IC0gICAgICAg
-ICAgICAgICBwX3RtcCA9IGJ1ZmZlcjsKPiAtICAgICAgICAgICAgICAgd2hpbGUgKCpwX3RtcCA9
-PSAnICcpCj4gLSAgICAgICAgICAgICAgICAgICAgICAgcF90bXArKzsKPiAtICAgICAgICAgICAg
-ICAgaWYgKHBfdG1wID4gY3ApCj4gLSAgICAgICAgICAgICAgICAgICAgICAgYnJlYWs7Cj4gLSAg
-ICAgICAgICAgICAgIG1lbWNweSh0bXBidWZmZXIsIHBfdG1wLCBjcC1wX3RtcCk7Cj4gLSAgICAg
-ICAgICAgICAgICoodG1wYnVmZmVyICsgKGNwLXBfdG1wKSkgPSAnXDAnOwo+IC0gICAgICAgICAg
-ICAgICBwX3RtcCA9IHN0cnJjaHIodG1wYnVmZmVyLCAnICcpOwo+IC0gICAgICAgICAgICAgICBp
-ZiAocF90bXApCj4gLSAgICAgICAgICAgICAgICAgICAgICAgKytwX3RtcDsKPiAtICAgICAgICAg
-ICAgICAgZWxzZQo+IC0gICAgICAgICAgICAgICAgICAgICAgIHBfdG1wID0gdG1wYnVmZmVyOwo+
-IC0gICAgICAgICAgICAgICBsZW4gPSBzdHJsZW4ocF90bXApOwo+IC0gICAgICAgICAgICAgICBi
-dWZfc2l6ZSA9IHNpemVvZih0bXBidWZmZXIpIC0gKHBfdG1wIC0gdG1wYnVmZmVyKTsKPiAtICAg
-ICAgICAgICAgICAgY291bnQgPSBrYWxsc3ltc19zeW1ib2xfY29tcGxldGUocF90bXAsIGJ1Zl9z
-aXplKTsKPiArCj4gKyAgICAgICAgICAgICAgIHRtcCA9ICpjcDsKPiArICAgICAgICAgICAgICAg
-KmNwID0gJ1wwJzsKPiArICAgICAgICAgICAgICAgcF90bXAgPSBzdHJyY2hyKGJ1ZmZlciwgJyAn
-KTsKPiArICAgICAgICAgICAgICAgcF90bXAgPSAocF90bXAgPyBwX3RtcCArIDEgOiBidWZmZXIp
-Owo+ICsgICAgICAgICAgICAgICBzdHJzY3B5KHRtcGJ1ZmZlciwgcF90bXAsIHNpemVvZih0bXBi
-dWZmZXIpKTsKCllvdSdyZSBub3cgdXNpbmcgc3Ryc2NweSgpIGhlcmUuIElzIHRoYXQgYWN0dWFs
-bHkgaW1wb3J0YW50LCBvciBhcmUKeW91IGp1c3QgZm9sbG93aW5nIGdvb2QgcHJhY3RpY2VzIGFu
-ZCBiZWluZyBleHRyYSBwYXJhbm9pZD8gSWYgaXQncwphY3R1YWxseSBpbXBvcnRhbnQsIHRoaXMg
-cHJvYmFibHkgYWxzbyBuZWVkcyB0byBiZSBDQ2VkIHRvIHN0YWJsZSwKcmlnaHQ/IFRoZSBvbGQg
-Y29kZSBqdXN0IGFzc3VtZWQgdGhhdCBpdCAgY291bGQgY29weSB0aGUgd2hvbGUgYnVmZmVyCmlu
-dG8gdG1wYnVmZmVyLiBJIGFzc3VtZSB0aGF0IHdhcyBPSywgYnV0IGl0IHdhc24ndCBkb2N1bWVu
-dGVkIGluIHRoZQpmdW5jdGlvbiBjb21tZW50cyB0aGF0IHRoZXJlIHdhcyBhIG1heGltdW0gc2l6
-ZSB0aGF0IGJ1ZmZlciBjb3VsZApiZS4uLgoKCi1Eb3VnCgoKX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KS2dkYi1idWdyZXBvcnQgbWFpbGluZyBsaXN0Cktn
-ZGItYnVncmVwb3J0QGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZv
-cmdlLm5ldC9saXN0cy9saXN0aW5mby9rZ2RiLWJ1Z3JlcG9ydAo=
+T24gTW9uLCBBcHIgMjIsIDIwMjQgYXQgMDQ6NTE6NDlQTSAtMDcwMCwgRG91ZyBBbmRlcnNvbiB3
+cm90ZToKPiBIaSwKPgo+IE9uIE1vbiwgQXByIDIyLCAyMDI0IGF0IDk6MzfigK9BTSBEYW5pZWwg
+VGhvbXBzb24KPiA8ZGFuaWVsLnRob21wc29uQGxpbmFyby5vcmc+IHdyb3RlOgo+ID4KPiA+IEN1
+cnJlbnRseSwgd2hlbiB0aGUgdXNlciBhdHRlbXB0cyBzeW1ib2wgY29tcGxldGlvbiB3aXRoIHRo
+ZSBUYWIga2V5LCBrZGIKPiA+IHdpbGwgdXNlIHN0cm5jcHkoKSB0byBpbnNlcnQgdGhlIGNvbXBs
+ZXRlZCBzeW1ib2wgaW50byB0aGUgY29tbWFuZCBidWZmZXIuCj4gPiBVbmZvcnR1bmF0ZWx5IGl0
+IHBhc3NlcyB0aGUgc2l6ZSBvZiB0aGUgc291cmNlIGJ1ZmZlciByYXRoZXIgdGhhbiB0aGUKPiA+
+IGRlc3RpbmF0aW9uIHRvIHN0cm5jcHkoKSB3aXRoIHByZWRpY3RhYmx5IGhvcnJpYmxlIHJlc3Vs
+dHMuIE1vc3Qgb2J2aW91c2x5Cj4gPiBpZiB0aGUgY29tbWFuZCBidWZmZXIgaXMgYWxyZWFkeSBm
+dWxsIGJ1dCBjcCwgdGhlIGN1cnNvciBwb3NpdGlvbiwgaXMgaW4KPiA+IHRoZSBtaWRkbGUgb2Yg
+dGhlIGJ1ZmZlciwgdGhlbiB3ZSB3aWxsIHdyaXRlIHBhc3QgdGhlIGVuZCBvZiB0aGUgc3VwcGxp
+ZWQKPiA+IGJ1ZmZlci4KPiA+Cj4gPiBGaXggdGhpcyBieSByZXBsYWNpbmcgdGhlIGR1YmlvdXMg
+c3RybmNweSgpIGNhbGxzIHdpdGggbWVtbW92ZSgpL21lbWNweSgpCj4gPiBjYWxscyBwbHVzIGV4
+cGxpY2l0IGJvdW5kYXJ5IGNoZWNrcyB0byBtYWtlIHN1cmUgd2UgaGF2ZSBlbm91Z2ggc3BhY2UK
+PiA+IGJlZm9yZSB3ZSBzdGFydCBtb3ZpbmcgY2hhcmFjdGVycyBhcm91bmQuCj4gPgo+ID4gUmVw
+b3J0ZWQtYnk6IEp1c3RpbiBTdGl0dCA8anVzdGluc3RpdHRAZ29vZ2xlLmNvbT4KPiA+IENsb3Nl
+czogaHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvYWxsL0NBRmhHZDhxRVN1dWlmdUhzTmpGUFItVmEz
+UDgwYnhydytMcXZDOGRlQThHemlVSkxwd0BtYWlsLmdtYWlsLmNvbS8KPiA+IENjOiBzdGFibGVA
+dmdlci5rZXJuZWwub3JnCj4gPiBTaWduZWQtb2ZmLWJ5OiBEYW5pZWwgVGhvbXBzb24gPGRhbmll
+bC50aG9tcHNvbkBsaW5hcm8ub3JnPgo+ID4gLS0tCj4gPiAga2VybmVsL2RlYnVnL2tkYi9rZGJf
+aW8uYyB8IDIxICsrKysrKysrKysrKystLS0tLS0tLQo+ID4gIDEgZmlsZSBjaGFuZ2VkLCAxMyBp
+bnNlcnRpb25zKCspLCA4IGRlbGV0aW9ucygtKQo+Cj4gQm95LCB0aGlzIGZ1bmN0aW9uIChhbmQg
+ZXNwZWNpYWxseSB0aGUgdGFiIGhhbmRsaW5nKSBpcyBoYXJkIHRvIHJlYWQuCgpUb28gcmlnaHQu
+IEkgZXZlbiByZXdyb3RlIGl0IHVzaW5nIG9mZnNldHMgcmF0aGVyIHRoYW4gcG9pbnRlcnMgYXQg
+b25lCnBvaW50IChpdCBkaWRuJ3QgcmVhbGx5IG1ha2UgaXQgbXVjaCBjbGVhcmVyIHNvIEkgZHJv
+cHBlZCB0aGF0IGZvciBub3cpLgoKCj4gSSBzcGVudCBhIGJpdCBvZiB0aW1lIHRyeWluZyB0byBn
+cm9rIGl0IGFuZCwgYXMgZmFyIGFzIEkgY2FuIHRlbGwsCj4geW91ciBwYXRjaCBtYWtlcyB0aGlu
+Z3MgYmV0dGVyIGFuZCBJIGRvbid0IHNlZSBhbnkgYnVncy4KPgo+IFJldmlld2VkLWJ5OiBEb3Vn
+bGFzIEFuZGVyc29uIDxkaWFuZGVyc0BjaHJvbWl1bS5vcmc+CgpUaGFua3MhCgpEYW5pZWwuCgoK
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KS2dkYi1idWdy
+ZXBvcnQgbWFpbGluZyBsaXN0CktnZGItYnVncmVwb3J0QGxpc3RzLnNvdXJjZWZvcmdlLm5ldApo
+dHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9rZ2RiLWJ1Z3JlcG9y
+dAo=
