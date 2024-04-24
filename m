@@ -2,29 +2,29 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 98C658B0BEA
-	for <lists+kgdb-bugreport@lfdr.de>; Wed, 24 Apr 2024 16:06:10 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id D072B8B0BED
+	for <lists+kgdb-bugreport@lfdr.de>; Wed, 24 Apr 2024 16:06:14 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1rzdGD-0004vY-93
+	id 1rzdGH-0003Da-65
 	for lists+kgdb-bugreport@lfdr.de;
-	Wed, 24 Apr 2024 14:06:09 +0000
+	Wed, 24 Apr 2024 14:06:13 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <daniel.thompson@linaro.org>) id 1rzdG7-0004vH-Md
+ (envelope-from <daniel.thompson@linaro.org>) id 1rzdGC-0003DG-9R
  for kgdb-bugreport@lists.sourceforge.net;
- Wed, 24 Apr 2024 14:06:03 +0000
+ Wed, 24 Apr 2024 14:06:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
  Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=CiQSgCwG9Fjd2pIkvI/eNn2TXAIZ8kV9PyuFCdDbFAA=; b=A1khFPcT3h6NEnTFn1wcVvtXRv
- uNN1CxQvAw+IVPsqtnFBKrYA2VCZGWAV/u5EW1m7Sqo82Xaf6pDLMjiomIOR7i/YdhaChy9ru5fr0
- Dmc5EHjxqaLDRpwIYZVT1NmRguQwnoqm57Pedapt+mGK2DDqS2qaxgIIMJ2y9VJ4y2B0=;
+ bh=wTP9sloie88dSAOWvNZGscW0v0fJi60UyTt3HwL6Nts=; b=YHkJLJlkKtQHhNJn122lwTnL6O
+ HOW8h4Dh1QkfU5dz355HeeSHQNKqRs+WHoyaVVwV+Qsg3B358yYrkgggnboSe7KlFA62oAW8+ZlXM
+ nuaEeZ40ichuMg7YO22Ybv/M4KWWdHc5DVDzXP1MKcVOk8ib3CSc2YlALwVHgOYp/DAM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
@@ -32,113 +32,117 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=CiQSgCwG9Fjd2pIkvI/eNn2TXAIZ8kV9PyuFCdDbFAA=; b=dtFHtCGbQr3XwD2Vc8gGFN5OYv
- s6QmtYFMOVLPL/hJ1DRNercR3F6bgdBLoU6jaUBY5jOFB8hTVj5LGnsKDa9r0zIf3HP4gq3e1Nuq0
- oHtLm3RvHwgVlMHanD3xQdWnMcGfjoYRi72UkWUJotLpPFt3cdMOfxI5G3vw1mJol12w=;
-Received: from mail-wm1-f41.google.com ([209.85.128.41])
+ bh=wTP9sloie88dSAOWvNZGscW0v0fJi60UyTt3HwL6Nts=; b=iztm2/Js7otiTHWhUbJoc8JOTd
+ 8iU8GwFOdD3Ny9ek946Ti9uRYnvKU+R90xBvg6pImwiDHyqwDntFyIxbxPU8iorjcsMcr76YbfuSF
+ SvxaL1PXk0qf2ta9w9VV0bckl5r+fyu+nJ5MZtqjoU22T0qN79TgeE9lFO6G1gIjBr4M=;
+Received: from mail-wr1-f41.google.com ([209.85.221.41])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1rzdG3-0001oJ-Hk for kgdb-bugreport@lists.sourceforge.net;
- Wed, 24 Apr 2024 14:06:03 +0000
-Received: by mail-wm1-f41.google.com with SMTP id
- 5b1f17b1804b1-41aa15ae26dso19448835e9.3
+ id 1rzdGA-0001og-8k for kgdb-bugreport@lists.sourceforge.net;
+ Wed, 24 Apr 2024 14:06:08 +0000
+Received: by mail-wr1-f41.google.com with SMTP id
+ ffacd0b85a97d-343d7ff2350so5248136f8f.0
  for <kgdb-bugreport@lists.sourceforge.net>;
- Wed, 24 Apr 2024 07:06:00 -0700 (PDT)
+ Wed, 24 Apr 2024 07:06:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713967553; x=1714572353; darn=lists.sourceforge.net;
+ d=linaro.org; s=google; t=1713967555; x=1714572355; darn=lists.sourceforge.net;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=CiQSgCwG9Fjd2pIkvI/eNn2TXAIZ8kV9PyuFCdDbFAA=;
- b=v6QsklDAvBIYj/vKGMQ/B6HIe2RYtfZTmPsbYvpd48CHPEs8cVENLqfewkyWWPxnwy
- 4qmNyxjo61XhAiYLOs3Z3NzCk0sqxQalx41sI6n5IFjRIkEbKDUoY+iNhCXrJkYZ5WVy
- asexU5yq/aw3HrYAA1gR6AE4f/s8lDVCpOhfpeLIKKlx7lbMCLnhwH6dVnBM+vrleMyd
- SRBtqqGrm7JFo/5+bVVMh5Mbljn7WVvAmvmCEcoDNOM2ObvsngvCuJAwMLO5mLeyc+cV
- q+qH0B5O/OfPLxkFJcGM70A0nWLKgymXWneh2LEGyXEwiPqD4TFERniIek0nfzgBr6qG
- 3Q9A==
+ :reply-to; bh=wTP9sloie88dSAOWvNZGscW0v0fJi60UyTt3HwL6Nts=;
+ b=Xq8KqKdqQws64bDMu+wylsqgwOP3rhWuJENditEDdNOadILQeHkLtAbrCPlFuGGRfV
+ 8Ei0/43oyot5bpJejzWcoc6T2JRaflpsCX3u4dlfs+B3EPFj2q0n42BvtwNwTvYt7wfg
+ yhlyuHzx/TIl/QyzGAnNBc67kpqTXsjottiHMf+GyJmaybHmnXfEIVc0gO6FTk0cPo+w
+ xsOlx/UyjzI5YPOP+SVbf01HFXFpRjfVMXKtf6fdL9DXN0R49jMy4WcirXZ7HXu+t/iF
+ Eh1VOGOgHNgxcHyRBWHjwQvaT+s05O3xRs0vpRpBs0UiZI6tLgk7dSGBOK1RJeDzXmVg
+ EKTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713967553; x=1714572353;
+ d=1e100.net; s=20230601; t=1713967555; x=1714572355;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=CiQSgCwG9Fjd2pIkvI/eNn2TXAIZ8kV9PyuFCdDbFAA=;
- b=IOsSEA5hLrHfBq0m23bI75J2Dc2xGSlqFVkbq+V9tecdlfRX99HAXjZ1G1RGoLJQXe
- sR0R5ziYp3Yzuc5v1nMreSwR/nnzv+4uVMNTW5Smh4yDs9ZYrHqWD3RTXU73FqkN361H
- Z9nwh3xEl2DkJEHm6rh2kBjg/Bc/o4DY2izfSYAhahABRKDmEDmIGHkbKjpscDDXTf2K
- lq8aBatE/vDgPZ4taxl8AMPQ+uUsOcNJcZpbFNMZgV0rKN7sdZfToBzuzrIQA4b67g1O
- AdHOVqfeKRW4efS//CjVY9TbZER0z+s8K7N77q2kBiGJ6g5pDosM7oipL8S8FbrJY7CU
- QJ0A==
-X-Gm-Message-State: AOJu0Yx0w9cgWcj4PbtkDJAqfojOuNcXuSXz+0HEyroRs2mfiTQR4h2w
- pLrlWHnmUJnLrLUsawUMZGtK/eLav/SB2koH13IWMV3R1elTA00jNSGeNdFSIUg=
-X-Google-Smtp-Source: AGHT+IGqG2RVeoMAdeMDYTn9tNZggqfDQ+qae44PwKczUO0hg8teOGcUdrRa+KCXGTu719wfKa2arQ==
-X-Received: by 2002:a5d:5449:0:b0:34a:a836:b940 with SMTP id
- w9-20020a5d5449000000b0034aa836b940mr1496105wrv.18.1713967553671; 
- Wed, 24 Apr 2024 07:05:53 -0700 (PDT)
+ bh=wTP9sloie88dSAOWvNZGscW0v0fJi60UyTt3HwL6Nts=;
+ b=COdeZOBjiZ8SWV69pO9gw7wKAClBtqOWMSQCYqs6pFz9kmPXcrP9gExrtgWYeTyp/O
+ ZUmriYfcH9CavfQLIVRsywhamqihfoGE1mSyhuPFZCFJF/emHA+a0zi+1vmkhLEGEX3Y
+ hydIU43pIgFVBYfJthWYo0Lq1J6k6CZS10crtx5Zdh4w0c26f3B54wBNdb6HuEDAO7Pt
+ NOGtxCRnOK5FqgXYynPah2NHDuz9lRuyC8w1ke5NS2tncDPuHj3iMnyJmjWJgcPpfccp
+ 7wel0IttUIyHhWyCT8dmeV+sAKwnlLdotojPYJ9jRlsCHyrvaoFeJREp/x3S/K4x8iRx
+ soLA==
+X-Gm-Message-State: AOJu0Yw50FilhcvqybKNE9k6iXY9l8qKM78dF2fKi7IYrZcxwOyGzlzo
+ ChoMGhdKuB8h6EfT0IGiNp1Wl0xxv7OUDO9GCXlXtbE72iSzzUPTgFV/m4LqCv14OnUOb0lFj2w
+ jqz8=
+X-Google-Smtp-Source: AGHT+IEPX+Xxot+imSpOcgmGXIlR2aQ/wmTSkNDbehn8kMSExZwzE+2IRDZ83atLmZU3x+oYV22avw==
+X-Received: by 2002:adf:fd05:0:b0:347:70ce:acbe with SMTP id
+ e5-20020adffd05000000b0034770ceacbemr1867171wrr.67.1713967555393; 
+ Wed, 24 Apr 2024 07:05:55 -0700 (PDT)
 Received: from aspen.lan
  (aztw-34-b2-v4wan-166919-cust780.vm26.cable.virginm.net. [82.37.195.13])
  by smtp.gmail.com with ESMTPSA id
- p8-20020a5d48c8000000b0034af40b2efdsm9105325wrs.108.2024.04.24.07.05.51
+ p8-20020a5d48c8000000b0034af40b2efdsm9105325wrs.108.2024.04.24.07.05.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Apr 2024 07:05:52 -0700 (PDT)
+ Wed, 24 Apr 2024 07:05:54 -0700 (PDT)
 From: Daniel Thompson <daniel.thompson@linaro.org>
-Date: Wed, 24 Apr 2024 15:03:36 +0100
+Date: Wed, 24 Apr 2024 15:03:37 +0100
 MIME-Version: 1.0
-Message-Id: <20240424-kgdb_read_refactor-v3-3-f236dbe9828d@linaro.org>
+Message-Id: <20240424-kgdb_read_refactor-v3-4-f236dbe9828d@linaro.org>
 References: <20240424-kgdb_read_refactor-v3-0-f236dbe9828d@linaro.org>
 In-Reply-To: <20240424-kgdb_read_refactor-v3-0-f236dbe9828d@linaro.org>
 To: Jason Wessel <jason.wessel@windriver.com>, 
  Douglas Anderson <dianders@chromium.org>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1858;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1374;
  i=daniel.thompson@linaro.org; h=from:subject:message-id;
- bh=wti5kj6bWe28mBREcjkcFgjgGXuk8vkEPAf7amsQIJY=;
- b=owEBbQKS/ZANAwAKAXzjJV0594ihAcsmYgBmKRF5rcqN5Dgc+qstFjiPAW9G3hYBgyjtuKx/O
- swzPOkiGi2JAjMEAAEKAB0WIQQvNUFTUPeVarpwrPB84yVdOfeIoQUCZikReQAKCRB84yVdOfeI
- oZjqD/43oGbEO2TFmRq3wSCHWMsq9Im7d0XzuP6Xg6OkzQSMPMsg/HnNUiCk/wDXM00xOeKEbii
- 4cU4AETV3oDjp6xBzEveKXrybeWohUWm5Xw4A7NBghLtRIxQZiqPo1K5ZFYwEx9wJ0H5bV9i8V+
- 5+40DrU28YsTTricP5jKJzKqTQX+JRuurE8td8GTROh/0HElI0ivzakG7tSJJd5yzM+FFiTJTin
- sVuW+imTw06DPAVR5SlUiBPtWOQ/maUdfNmCf1HDz9iqG35YH58o4ld3cn/4WiC4GAEfEQQZKn6
- uLMK5tZGYB7/AjkgsKuxbpGhUCzv9U2toh+zg9Uk5RcJnDDm/GXuYPOFZiEpVErNH+2JFt8CBJm
- n8l8XydEaaFvPUgXY6/wJZ1R5R4FqOsosP9RRdIZK7g8SGek6RUebPV7T+RE7FA3n7uEbdQwctI
- 7K91q6CqDsJaGD1PeCm/vCiLKC9mNv66KCVzCK0FDtUfjLP8zLTGYuYbCoKbqY/BRYY376R17Vz
- SYuypvrzNgSz0GVneF5COWavX9vMDvfIaDaYcjiALtgCIIHM4NKgDSzBZsX52dflKFeUzDBPWy1
- 5sb1DLSBpau+aa0r7C0Mb+MBz/JAMUMyVK4PXUP9PAfDSgAD6nHQEfoQbizf/PhzwHm+nkgTsJ5
- fAV1buYnpy4dfLw==
+ bh=rg+wVmfYkRGv9/2I6H3Tms0eU7TpUVK8/Yo0BHNg5Cg=;
+ b=owEBbQKS/ZANAwAKAXzjJV0594ihAcsmYgBmKRGGUIqVKrOdXwYeS3cqs6ybpiHvyFYQnDNDX
+ wKlZXU4yfOJAjMEAAEKAB0WIQQvNUFTUPeVarpwrPB84yVdOfeIoQUCZikRhgAKCRB84yVdOfeI
+ obU+EACP6jy9g//wnAmPJ7pvsIGCksOaTaiCmuiV6HeoRkqrYb/8LXKinX2ulqQtBlzx/m3gj/1
+ r903vaASLGgIfcByimnXKvcBwOWOKSCtf7hg+Pdz3H6UPCSHLi09U4EjXe4Z0Q7KmX+rpHHt4Rm
+ cXCJDQw6Oi6GThI2/YK4ZU2AXlxUwH7EscpSbEJSDljvRzqTkCFIGUo/NhMhpAyB2MEK+GuftBT
+ CcrpGKerGJGD9X/I/YPLD1r8PMxTXMPSiWJpJWttiy45HQiX2ziL42syJibH2kb84KjzQbgXOt6
+ 0puhYjeHPcK1L14d051++9Cp+bdKdhPuDLY6X5wjKHTY2rFW06Ms0wwIzE/QIrXwT+t3J6KKW+w
+ 66Zxi6Bm6O15lrO5AlEXAQL7eCNIMWmIuUHWXP3iihytoXvwViLOWQ6A5BVeG5cu+F/r95czqdj
+ QYiOJ8A06T6q2kI/f7WVIh+NU0AUJSQu0Pna52M+mJHAmymxRQUDrs/aDXncVh/pRgS6hiBIqpq
+ 36eHXGO6Ykh7SoLQRVzmkpbbKQ+aXLMcL0PAy0GdvDJGYqcvWtRxEXmSrfF0rwYJnBKhuXA0Ah5
+ gAqwsPthBijNpxOESrNb7XMHsUvEaDHlcuzeKwkpcTO7wTFuiOB7GfjdTniKGz9JXyoDCmVisXR
+ sF37CLSCUj/j3YA==
 X-Developer-Key: i=daniel.thompson@linaro.org; a=openpgp;
  fpr=E38BE19861669213F6E2661AA8A4E3BC5B7B28BE
-X-Spam-Score: -5.2 (-----)
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Currently, if the cursor position is not at the end of the
- command buffer and the user uses the Tab-complete functions, then the console
- does not leave the cursor in the correct position. For example consider the
- following buffer with the cursor positioned at the ^: 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  The code that handles case 14 (down) and case 16 (up) has
+ been copy and pasted despite being byte-for-byte identical. Combine them.
+ Cc: stable@vger.kernel.org # Not a bug fix but it is needed for later bug
+ fixes Reviewed-by: Douglas Anderson <dianders@chromium.org> Tested-by: Justin
+ Stitt <justinstitt@google.com> Signed-off-by: Da [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
  blocked.  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: linaro.org]
+ 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
+ DNSWL was blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [209.85.221.41 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.128.41 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [209.85.128.41 listed in list.dnswl.org]
-X-Headers-End: 1rzdG3-0001oJ-Hk
-Subject: [Kgdb-bugreport] [PATCH v3 3/7] kdb: Fix console handling when
- editing and tab-completing commands
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.221.41 listed in wl.mailspike.net]
+X-Headers-End: 1rzdGA-0001og-8k
+Subject: [Kgdb-bugreport] [PATCH v3 4/7] kdb: Merge identical case
+ statements in kdb_read()
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -157,60 +161,45 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Currently, if the cursor position is not at the end of the command buffer
-and the user uses the Tab-complete functions, then the console does not
-leave the cursor in the correct position.
+The code that handles case 14 (down) and case 16 (up) has been copy and
+pasted despite being byte-for-byte identical. Combine them.
 
-For example consider the following buffer with the cursor positioned
-at the ^:
-
-md kdb_pro 10
-          ^
-
-Pressing tab should result in:
-
-md kdb_prompt_str 10
-                 ^
-
-However this does not happen. Instead the cursor is placed at the end
-(after then 10) and further cursor movement redraws incorrectly. The
-same problem exists when we double-Tab but in a different part of the
-code.
-
-Fix this by sending a carriage return and then redisplaying the text to
-the left of the cursor.
-
-Cc: stable@vger.kernel.org
+Cc: stable@vger.kernel.org # Not a bug fix but it is needed for later bug fixes
 Reviewed-by: Douglas Anderson <dianders@chromium.org>
 Tested-by: Justin Stitt <justinstitt@google.com>
 Signed-off-by: Daniel Thompson <daniel.thompson@linaro.org>
 ---
- kernel/debug/kdb/kdb_io.c | 5 +++++
- 1 file changed, 5 insertions(+)
+ kernel/debug/kdb/kdb_io.c | 10 +---------
+ 1 file changed, 1 insertion(+), 9 deletions(-)
 
 diff --git a/kernel/debug/kdb/kdb_io.c b/kernel/debug/kdb/kdb_io.c
-index 50789c99b3ba8..5fccb46f399e5 100644
+index 5fccb46f399e5..a73779529803f 100644
 --- a/kernel/debug/kdb/kdb_io.c
 +++ b/kernel/debug/kdb/kdb_io.c
-@@ -383,6 +383,8 @@ static char *kdb_read(char *buffer, size_t bufsize)
- 			kdb_printf("\n");
- 			kdb_printf(kdb_prompt_str);
- 			kdb_printf("%s", buffer);
-+			if (cp != lastchar)
-+				kdb_position_cursor(kdb_prompt_str, buffer, cp);
- 		} else if (tab != 2 && count > 0) {
- 			/* How many new characters do we want from tmpbuffer? */
- 			len_tmp = strlen(p_tmp) - len;
-@@ -396,6 +398,9 @@ static char *kdb_read(char *buffer, size_t bufsize)
- 				kdb_printf("%s", cp);
- 				cp += len_tmp;
- 				lastchar += len_tmp;
-+				if (cp != lastchar)
-+					kdb_position_cursor(kdb_prompt_str,
-+							    buffer, cp);
- 			}
+@@ -317,6 +317,7 @@ static char *kdb_read(char *buffer, size_t bufsize)
  		}
- 		kdb_nextline = 1; /* reset output line number */
+ 		break;
+ 	case 14: /* Down */
++	case 16: /* Up */
+ 		memset(tmpbuffer, ' ',
+ 		       strlen(kdb_prompt_str) + (lastchar-buffer));
+ 		*(tmpbuffer+strlen(kdb_prompt_str) +
+@@ -331,15 +332,6 @@ static char *kdb_read(char *buffer, size_t bufsize)
+ 			++cp;
+ 		}
+ 		break;
+-	case 16: /* Up */
+-		memset(tmpbuffer, ' ',
+-		       strlen(kdb_prompt_str) + (lastchar-buffer));
+-		*(tmpbuffer+strlen(kdb_prompt_str) +
+-		  (lastchar-buffer)) = '\0';
+-		kdb_printf("\r%s\r", tmpbuffer);
+-		*lastchar = (char)key;
+-		*(lastchar+1) = '\0';
+-		return lastchar;
+ 	case 9: /* Tab */
+ 		if (tab < 2)
+ 			++tab;
 
 -- 
 2.43.0
