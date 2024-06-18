@@ -2,132 +2,149 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D2E0290D7EF
-	for <lists+kgdb-bugreport@lfdr.de>; Tue, 18 Jun 2024 17:59:49 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id A004A90DC7E
+	for <lists+kgdb-bugreport@lfdr.de>; Tue, 18 Jun 2024 21:33:36 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1sJbFM-0006sJ-9Y
+	id 1sJeaD-0002N8-Qr
 	for lists+kgdb-bugreport@lfdr.de;
-	Tue, 18 Jun 2024 15:59:48 +0000
+	Tue, 18 Jun 2024 19:33:34 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <daniel.thompson@linaro.org>) id 1sJbFL-0006s5-BF
+ (envelope-from <dianders@chromium.org>) id 1sJeaC-0002N1-3p
  for kgdb-bugreport@lists.sourceforge.net;
- Tue, 18 Jun 2024 15:59:47 +0000
+ Tue, 18 Jun 2024 19:33:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
+ Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
+ Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+ :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=KW5CYpn36l//7aM9dysfyiIEFCEnSC7/zTj92FzcYsw=; b=KTeURvpz0+b95LkHxq9YXgxvQw
- Srzx+ypPDz/aOAM1Ckm0BHiM7Y8b7zZy/UhqMKwsHiK337XIeOUY5JqlZUxKiWyGJBgGVSYESjLcI
- p+BIo3IwicD1aWui2g7++O0CIoYqbn8Ht1CNF3v/WEkhesMGa0/xPCLj8kMjekYSF84k=;
+ bh=BjbV2Qzy50FvElTGCdfHDo5Cwkx902dlsw8DvDAu3gM=; b=VukL6GkDuo13qNspmsTPaZLFw2
+ PP2RojJ00/Y+77d9jGPaqtR+uthW8pQrGuEW1vlo56IYElCbLuq2y8fPPW5ufrMGGFqOL6P4yMpOI
+ Q8dfxY0Bemhb60Xa3ohMJ5Xn6vBJ5cCAB9kEbYXFCKkH7Oy+f7tCky6M2FDYoUylX1Cw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
+ :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=KW5CYpn36l//7aM9dysfyiIEFCEnSC7/zTj92FzcYsw=; b=fiC3WJQzWcyeH+fm4npR/uqmLU
- w9KRAL/Yp4v9Jr2+DjxRO/CbIhFLMV30MHKD7agEYyVf+ier5yBmEeInJBtIPyBAA+1eNP5v24ZRQ
- 8rouOKbE/su0++Aus9ou20auOoDi5XRiuGLQ1yhantguiuGxFHfb20e/90AtIYlQ5FNA=;
-Received: from mail-wm1-f42.google.com ([209.85.128.42])
+ bh=BjbV2Qzy50FvElTGCdfHDo5Cwkx902dlsw8DvDAu3gM=; b=RXsca5onw/BcIc7zj5oLWc+k1R
+ WMIYs6NKql3ltEgOdjz9EEbZg3CDacIMX8zd3tCdEHRwcLDBfgQvkLFtU8AbCzOZjhsAEk3CkUy3h
+ mrSpVen2EljQikG5RYsQfV16CzGlccFgbF8hq6nI79JJCh6yIGNWod/P0lzVob5FnqaI=;
+Received: from mail-qk1-f174.google.com ([209.85.222.174])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1sJbFL-0001Ld-Lk for kgdb-bugreport@lists.sourceforge.net;
- Tue, 18 Jun 2024 15:59:47 +0000
-Received: by mail-wm1-f42.google.com with SMTP id
- 5b1f17b1804b1-421d32fda86so58860035e9.0
+ id 1sJeaC-00046b-Fh for kgdb-bugreport@lists.sourceforge.net;
+ Tue, 18 Jun 2024 19:33:32 +0000
+Received: by mail-qk1-f174.google.com with SMTP id
+ af79cd13be357-7960454db4fso339616185a.2
  for <kgdb-bugreport@lists.sourceforge.net>;
- Tue, 18 Jun 2024 08:59:46 -0700 (PDT)
+ Tue, 18 Jun 2024 12:33:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718726380; x=1719331180; darn=lists.sourceforge.net;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=KW5CYpn36l//7aM9dysfyiIEFCEnSC7/zTj92FzcYsw=;
- b=oYg2bC8G0DAh2GmgawImNhVFlp7HunhoDMVXf+boSGjw32DJ18M17V2EGm0hH0Yhyg
- j873hMCJcASOqC7UOAFKGAAhwpdXrv4Ie4R4PjcaEidElen8DxSQnQmbjjhCexoTIdfJ
- PmNS0+7T0wh4lNWLH5Gar2k9nwhlTsXtN22SdNH4hDQW5M/aFwsf8BiAI0kCmsOSw9I/
- qi7yZ6kTQoHL3Ci/7a/K+nK3up5YeITBGX+BwJ/nShBB2gCdGR0/r6SrEdfpBl/dPaqq
- +L6a5Ta4SU/4TJDBXGe+IXh5SfwUj6mZK7RgnwZYJq0oFkmpyQlcDVjFx/A+lij0ByBE
- R9pQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718726380; x=1719331180;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1718739204; x=1719344004;
+ darn=lists.sourceforge.net; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KW5CYpn36l//7aM9dysfyiIEFCEnSC7/zTj92FzcYsw=;
- b=p/M8fWk1FgqQHJHSUabpzDN4jk3QhnpHYiAygzYaC+lx6Tw/UEh8LiBFBy/ZR3aGED
- KostycJvubYOzbNbx1VZYpaJ/iolVHSe82opH/UIScNyTaXJhuT1yg4ffvzNIARQT4Ct
- dS2QXO4IvehwGCqT3ijoxlxk7wFtCyIMnrQs5Uq4UmoXWAyvK2644K0816tcZTULotY/
- Kep2uID9sURpHq7Fozrh8QIaz1UGU2ZjU4WPowzh2Z9N89Pb2GBfVLEWKfxR/7xBRKWs
- c/dj3nHHo96uao0DsPcCaQB1sQ8oX3VtklMY99v257AeWDKW7zt5Fxqg39MZjv3IwaO6
- 3RpA==
-X-Gm-Message-State: AOJu0YzRpzGqnvBquxSAd5SBko9/E73Cqj/xdl0jA8v76xTiDci9OIhY
- jAymVe0VUHkjeWf7qEo+bwEmaXF404bWztvAdHyzn10SeAMcMFiDmQ7kOn2sN+Y=
-X-Google-Smtp-Source: AGHT+IEOulskKK0DQifFRFKsJWs4iBdG02SkiZn2is5YgIwx6kR6gYve5+eWcIIhl+AbQIyMYcD69A==
-X-Received: by 2002:a05:600c:474d:b0:422:178b:bedd with SMTP id
- 5b1f17b1804b1-4230481a0bdmr116566685e9.1.1718726380384; 
- Tue, 18 Jun 2024 08:59:40 -0700 (PDT)
-Received: from aspen.lan
- (aztw-34-b2-v4wan-166919-cust780.vm26.cable.virginm.net. [82.37.195.13])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-422870e9590sm228819345e9.23.2024.06.18.08.59.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Jun 2024 08:59:39 -0700 (PDT)
-Date: Tue, 18 Jun 2024 16:59:38 +0100
-From: Daniel Thompson <daniel.thompson@linaro.org>
-To: Douglas Anderson <dianders@chromium.org>
-Message-ID: <20240618155938.GG11330@aspen.lan>
+ bh=BjbV2Qzy50FvElTGCdfHDo5Cwkx902dlsw8DvDAu3gM=;
+ b=lv2A0zVbsN90F8Ydu6xSr4qPX4/VPPnV/LC5VgWGr/E0EL2NC1UGERIi8BFJ86iIrk
+ sYHgehSq0HIgnOjd36kTkXXffy1GEdHyQsCXXMyymzy5sd2tzzpXXj2JyeSuX4Kr/AwC
+ kcSR+ioUYupUIZRy9K5Jbg6WfkZKeGHesVuTU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718739204; x=1719344004;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=BjbV2Qzy50FvElTGCdfHDo5Cwkx902dlsw8DvDAu3gM=;
+ b=kU1NCZxBEjNAXK5PvA7kFbB1trxfkUd5U8SOvczM/mVcik51vA9sfgM2ubPNk21fuY
+ hAeeCn7uPN5fv2Q2+TDrhYKwsNGjFp2sGGo3P42WE6NqNWTrsjdexAKp/1FTuGY64npY
+ kRBdx3eXUuxFrG3JxDTeHuru2cb71bS2jCIuWG6sQ5DnQGwN9S9m8sw4CUWgx87I3cYL
+ bGFB9n59zQqFgf0DOgIIiQ9Xnz/7+iy62UQP0cUTbWmR2PsMZRhNFwgC65m0QRJOclpe
+ GZeS8/DCKZYnq7UlYXWM2HPYznWXMK3nhDzspzm6BumGFuD7Scw/C9Eg+wUwnImrI3QK
+ Llpg==
+X-Gm-Message-State: AOJu0YxG3ZXqpk/csx5QMgGfOsKzK3eiK3qSPXqtN1AJ/RFUuTrYF9fD
+ 6EvCyE3q2WWRrpexs+wAwrzDRotXtN8aPUkL1Bx85gHwkc/4HuBRAH2HAv/7ohmnm3vOWu+hW80
+ =
+X-Google-Smtp-Source: AGHT+IGdvY0crcYVmTtg35Jz3hbKhIANAliuPJUWJRlrzGTc6/qrMSzzj4Sk6T+f4TgNmDFCzQH7cA==
+X-Received: by 2002:a0c:f9c5:0:b0:6b0:6a57:c982 with SMTP id
+ 6a1803df08f44-6b501e38f7emr6016046d6.28.1718739204518; 
+ Tue, 18 Jun 2024 12:33:24 -0700 (PDT)
+Received: from mail-qt1-f174.google.com (mail-qt1-f174.google.com.
+ [209.85.160.174]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6b2a5bf1f69sm68872666d6.17.2024.06.18.12.33.23
+ for <kgdb-bugreport@lists.sourceforge.net>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 18 Jun 2024 12:33:23 -0700 (PDT)
+Received: by mail-qt1-f174.google.com with SMTP id
+ d75a77b69052e-443580f290dso60851cf.1
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Tue, 18 Jun 2024 12:33:23 -0700 (PDT)
+X-Received: by 2002:ac8:58c9:0:b0:442:1bc4:8fb2 with SMTP id
+ d75a77b69052e-444a8fcee3cmr465821cf.20.1718739203008; Tue, 18 Jun 2024
+ 12:33:23 -0700 (PDT)
+MIME-Version: 1.0
 References: <20240618003546.4144638-1-dianders@chromium.org>
  <20240617173426.13.I572fb3cf62fae1e728dd154081101ae264dc3670@changeid>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20240617173426.13.I572fb3cf62fae1e728dd154081101ae264dc3670@changeid>
-X-Spam-Score: -0.2 (/)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ <20240618155938.GG11330@aspen.lan>
+In-Reply-To: <20240618155938.GG11330@aspen.lan>
+From: Doug Anderson <dianders@chromium.org>
+Date: Tue, 18 Jun 2024 12:33:05 -0700
+X-Gmail-Original-Message-ID: <CAD=FV=VTegKBcHY9pgfFUs7T1Ug5r1yg+CxLE6sBhBBt4csfkw@mail.gmail.com>
+Message-ID: <CAD=FV=VTegKBcHY9pgfFUs7T1Ug5r1yg+CxLE6sBhBBt4csfkw@mail.gmail.com>
+To: Daniel Thompson <daniel.thompson@linaro.org>
+X-Spam-Score: -0.4 (/)
+X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, Jun 17, 2024 at 05:34:47PM -0700, Douglas Anderson
- wrote: > Add commands that are like the other "md" commands but that allow
- you > to read memory that's in the IO space. > > Signed-off-by: Do [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
- pts rule name              description
+ 
+ Content preview:  Hi, On Tue, Jun 18, 2024 at 8:59 AM Daniel Thompson <daniel.thompson@linaro.org>
+    wrote: > > On Mon, Jun 17, 2024 at 05:34:47PM -0700, Douglas Anderson wrote:
+    > > Add commands that are like the other "md [...] 
+ 
+ Content analysis details:   (-0.4 points, 6.0 required)
+ 
+  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
- blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: linaro.org]
- 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [209.85.128.42 listed in bl.score.senderscore.com]
- 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [209.85.128.42 listed in sa-accredit.habeas.com]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.128.42 listed in wl.mailspike.net]
+  0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
+                             DNSWL was blocked.  See
+                             http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+                              for more information.
+                             [209.85.222.174 listed in list.dnswl.org]
+  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+                             query to Validity was blocked.  See
+                             https://knowledge.validity.com/hc/en-us/articles/20961730681243
+                              for more information.
+                            [209.85.222.174 listed in bl.score.senderscore.com]
+  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+                             query to Validity was blocked.  See
+                             https://knowledge.validity.com/hc/en-us/articles/20961730681243
+                              for more information.
+                         [209.85.222.174 listed in sa-trusted.bondedsender.org]
+  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+                             [209.85.222.174 listed in wl.mailspike.net]
+  0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
+                             blocked.  See
+                             http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+                              for more information.
+                             [URIs: chromium.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+                             envelope-from domain
+ -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+                             author's domain
+  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+                             valid
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1sJbFL-0001Ld-Lk
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1sJeaC-00046b-Fh
 Subject: Re: [Kgdb-bugreport] [PATCH 13/13] kdb: Add mdi,
  mdiW / mdiWcN commands to show iomapped memory
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
@@ -146,45 +163,51 @@ Cc: kgdb-bugreport@lists.sourceforge.net, linux-kernel@vger.kernel.org,
  Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
  Jason Wessel <jason.wessel@windriver.com>,
  Yuran Pereira <yuran.pereira@hotmail.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Mon, Jun 17, 2024 at 05:34:47PM -0700, Douglas Anderson wrote:
-> Add commands that are like the other "md" commands but that allow you
-> to read memory that's in the IO space.
->
-> Signed-off-by: Douglas Anderson <dianders@chromium.org>
-
-Sorry to be the bearer of bad news but...
-
-
-> ---
-> <snip>
-> +/*
-> + * kdb_getioword
-> + * Inputs:
-> + *	word	Pointer to the word to receive the result.
-> + *	addr	Address of the area to copy.
-> + *	size	Size of the area.
-> + * Returns:
-> + *	0 for success, < 0 for error.
-> + */
-> +int kdb_getioword(unsigned long *word, unsigned long addr, size_t size)
-> +{
-> +	void __iomem *mapped = ioremap(addr, size);
-
-ioremap() is a might_sleep() function. It's unsafe to call it from the
-debug trap handler.
-
-I'm afraid I don't know a safe alternative either. Machinary such as
-kmap_atomic() needs a page and iomem won't have one.
-
-
-Daniel.
-
-
-_______________________________________________
-Kgdb-bugreport mailing list
-Kgdb-bugreport@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport
+SGksCgpPbiBUdWUsIEp1biAxOCwgMjAyNCBhdCA4OjU54oCvQU0gRGFuaWVsIFRob21wc29uCjxk
+YW5pZWwudGhvbXBzb25AbGluYXJvLm9yZz4gd3JvdGU6Cj4KPiBPbiBNb24sIEp1biAxNywgMjAy
+NCBhdCAwNTozNDo0N1BNIC0wNzAwLCBEb3VnbGFzIEFuZGVyc29uIHdyb3RlOgo+ID4gQWRkIGNv
+bW1hbmRzIHRoYXQgYXJlIGxpa2UgdGhlIG90aGVyICJtZCIgY29tbWFuZHMgYnV0IHRoYXQgYWxs
+b3cgeW91Cj4gPiB0byByZWFkIG1lbW9yeSB0aGF0J3MgaW4gdGhlIElPIHNwYWNlLgo+ID4KPiA+
+IFNpZ25lZC1vZmYtYnk6IERvdWdsYXMgQW5kZXJzb24gPGRpYW5kZXJzQGNocm9taXVtLm9yZz4K
+Pgo+IFNvcnJ5IHRvIGJlIHRoZSBiZWFyZXIgb2YgYmFkIG5ld3MgYnV0Li4uCj4KPgo+ID4gLS0t
+Cj4gPiA8c25pcD4KPiA+ICsvKgo+ID4gKyAqIGtkYl9nZXRpb3dvcmQKPiA+ICsgKiBJbnB1dHM6
+Cj4gPiArICogICB3b3JkICAgIFBvaW50ZXIgdG8gdGhlIHdvcmQgdG8gcmVjZWl2ZSB0aGUgcmVz
+dWx0Lgo+ID4gKyAqICAgYWRkciAgICBBZGRyZXNzIG9mIHRoZSBhcmVhIHRvIGNvcHkuCj4gPiAr
+ICogICBzaXplICAgIFNpemUgb2YgdGhlIGFyZWEuCj4gPiArICogUmV0dXJuczoKPiA+ICsgKiAg
+IDAgZm9yIHN1Y2Nlc3MsIDwgMCBmb3IgZXJyb3IuCj4gPiArICovCj4gPiAraW50IGtkYl9nZXRp
+b3dvcmQodW5zaWduZWQgbG9uZyAqd29yZCwgdW5zaWduZWQgbG9uZyBhZGRyLCBzaXplX3Qgc2l6
+ZSkKPiA+ICt7Cj4gPiArICAgICB2b2lkIF9faW9tZW0gKm1hcHBlZCA9IGlvcmVtYXAoYWRkciwg
+c2l6ZSk7Cj4KPiBpb3JlbWFwKCkgaXMgYSBtaWdodF9zbGVlcCgpIGZ1bmN0aW9uLiBJdCdzIHVu
+c2FmZSB0byBjYWxsIGl0IGZyb20gdGhlCj4gZGVidWcgdHJhcCBoYW5kbGVyLgoKSG1tbW0uIERv
+IHlvdSBoYXZlIGEgcG9pbnRlciB0byBkb2N1bWVudGF0aW9uIG9yIGNvZGUgc2hvd2luZyB0aGF0
+Cml0J3MgYSBtaWdodF9zbGVlcCgpIGZ1bmN0aW9uLiBJIHdhcyB3b3JyaWVkIGFib3V0IHRoaXMg
+aW5pdGlhbGx5IGJ1dApJIGNvdWxkbid0IGZpbmQgYW55IGRvY3VtZW50YXRpb24gb3IgY29kZSBp
+bmRpY2F0aW5nIGl0IHRvIGJlIHNvLiBJCmFsc28gZ290IG5vIHdhcm5pbmdzIHdoZW4gSSByYW4g
+bXkgcHJvdG90eXBlIGNvZGUgYW5kIHRoZW4gdGhlIGNvZGUKd29ya2VkIGZpbmUsIHNvIEkgYXNz
+dW1lZCB0aGF0IGl0IG11c3Qgc29tZWhvdyB3b3JrLiBTaWdoLi4uCgpMb29raW5nIG1vcmUgY2xv
+c2VseSwgbWF5YmUgdGhpcyBpczoKCmlvcmVtYXAoKSAtPiBpb3JlbWFwX3Byb3QoKSAtPiBnZW5l
+cmljX2lvcmVtYXBfcHJvdCgpIC0+Cl9fZ2V0X3ZtX2FyZWFfY2FsbGVyKCkgLT4gX19nZXRfdm1f
+YXJlYV9ub2RlKCkgLT4gX19nZXRfdm1fYXJlYV9ub2RlKCkKCi4uLmFuZCB0aGF0IGhhcyBhIGtl
+cm5lbCBhbGxvY2F0aW9uIHdpdGggR0ZQX0tFUk5FTD8KCkkgZ3Vlc3MgaXQgYWxzbyB0aGVuIGNh
+bGxzIGFsbG9jX3ZtYXBfYXJlYSgpICB3aGljaCBoYXMgbWlnaHRfc2xlZXAoKS4uLgoKSSdsbCBo
+YXZlIHRvIHRyYWNrIGRvd24gd2h5IG5vIHdhcm5pbmdzIHRyaWdnZXJlZC4uLgoKPiBJJ20gYWZy
+YWlkIEkgZG9uJ3Qga25vdyBhIHNhZmUgYWx0ZXJuYXRpdmUgZWl0aGVyLiBNYWNoaW5hcnkgc3Vj
+aCBhcwo+IGttYXBfYXRvbWljKCkgbmVlZHMgYSBwYWdlIGFuZCBpb21lbSB3b24ndCBoYXZlIG9u
+ZS4KClVnaC4gSXQgd291bGQgYmUgbmljZSB0byBjb21lIHVwIHdpdGggc29tZXRoaW5nIHNpbmNl
+IGl0J3Mgbm90CnVuY29tbW9uIHRvIG5lZWQgdG8gbG9vayBhdCB0aGUgc3RhdGUgb2YgaGFyZHdh
+cmUgcmVnaXN0ZXJzIHdoZW4gYQpjcmFzaCBoYXBwZW5zLiBJbiB0aGUgcGFzdCBJJ3ZlIG1hbmFn
+ZWQgdG8gZ2V0IGludG8gZ2RiLCB0cmFjayBkb3duIGEKZ2xvYmFsIHZhcmlhYmxlIHdoZXJlIHNv
+bWVvbmUgaGFzIGFscmVhZHkgbWFwcGVkIHRoZSBtZW1vcnksIGFuZCB0aGVuCnVzZSBnZGIgdG8g
+bG9vayBhdCB0aGUgbWVtb3J5LiBJdCdzIGFsd2F5cyBhIGJpZyBwYWluLCB0aG91Z2guLi4KCi4u
+LmV2ZW4gaWYgSSBjb3VsZCBqdXN0IGxvb2sgdXAgdGhlIHZpcnR1YWwgYWRkcmVzcyB3aGVyZSBz
+b21lb25lIGVsc2UKaGFkIGFscmVhZHkgbWFwcGVkIGl0IHRoYXQgbWlnaHQgYmUgZW5vdWdoLiBB
+dCBsZWFzdCBJIHdvdWxkbid0IG5lZWQKdG8gZ28gdHJhY2sgZG93biB0aGUgZ2xvYmFscyBteXNl
+bGYuLi4KCi4uLmFueXdheSwgSSBndWVzcyBJJ2xsIHBvbmRlciBvbiBpdCBhbmQgcG9rZSBpZiBJ
+IGhhdmUgdGltZS4uLgoKCi1Eb3VnCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX18KS2dkYi1idWdyZXBvcnQgbWFpbGluZyBsaXN0CktnZGItYnVncmVwb3J0
+QGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0
+cy9saXN0aW5mby9rZ2RiLWJ1Z3JlcG9ydAo=
