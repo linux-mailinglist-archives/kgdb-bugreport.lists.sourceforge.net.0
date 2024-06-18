@@ -2,29 +2,29 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 44DA190D732
-	for <lists+kgdb-bugreport@lfdr.de>; Tue, 18 Jun 2024 17:26:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D2E0290D7EF
+	for <lists+kgdb-bugreport@lfdr.de>; Tue, 18 Jun 2024 17:59:49 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1sJajA-00040w-Px
+	id 1sJbFM-0006sJ-9Y
 	for lists+kgdb-bugreport@lfdr.de;
-	Tue, 18 Jun 2024 15:26:33 +0000
+	Tue, 18 Jun 2024 15:59:48 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <daniel.thompson@linaro.org>) id 1sJaj9-00040j-JC
+ (envelope-from <daniel.thompson@linaro.org>) id 1sJbFL-0006s5-BF
  for kgdb-bugreport@lists.sourceforge.net;
- Tue, 18 Jun 2024 15:26:31 +0000
+ Tue, 18 Jun 2024 15:59:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=j5B2trNpXh5L0I47RQYjAXwFGQO0vFRPcG1PhQTg8CE=; b=mv+QK1Vp0hN0dBpZp8bYCphmh1
- mV7hcDrj1GQX9vw/y1pZU8jKo0B8URqGvylS1e+BxOo7gEtM331S+r6g9D/6Z2as79smYlYJLNRfN
- dKVvQIuc6Tz+xfdPOJ5X5rtM5jBTXOLZjxNWIqAmFocq8QuvxrIzWwc/tFL1AnE7wbu0=;
+ bh=KW5CYpn36l//7aM9dysfyiIEFCEnSC7/zTj92FzcYsw=; b=KTeURvpz0+b95LkHxq9YXgxvQw
+ Srzx+ypPDz/aOAM1Ckm0BHiM7Y8b7zZy/UhqMKwsHiK337XIeOUY5JqlZUxKiWyGJBgGVSYESjLcI
+ p+BIo3IwicD1aWui2g7++O0CIoYqbn8Ht1CNF3v/WEkhesMGa0/xPCLj8kMjekYSF84k=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -32,105 +32,104 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=j5B2trNpXh5L0I47RQYjAXwFGQO0vFRPcG1PhQTg8CE=; b=bhZpqGRRIzAGhr+odP/XkXsjRe
- OvPoEvqqrVp97aE8Ymrj1SYRJpRDRPVPl89ESSpCyTQO5dPeUZQ9vGR4Q9vfBhX5j9O9vjtfz67tl
- Mu9Y0une7+be/TDtKyEjrAcMlq+azvBZOWSRkHvL8OcAoH3dFg++RymbOeCii3To0ijk=;
-Received: from mail-wr1-f41.google.com ([209.85.221.41])
+ bh=KW5CYpn36l//7aM9dysfyiIEFCEnSC7/zTj92FzcYsw=; b=fiC3WJQzWcyeH+fm4npR/uqmLU
+ w9KRAL/Yp4v9Jr2+DjxRO/CbIhFLMV30MHKD7agEYyVf+ier5yBmEeInJBtIPyBAA+1eNP5v24ZRQ
+ 8rouOKbE/su0++Aus9ou20auOoDi5XRiuGLQ1yhantguiuGxFHfb20e/90AtIYlQ5FNA=;
+Received: from mail-wm1-f42.google.com ([209.85.128.42])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1sJaj9-00087R-UN for kgdb-bugreport@lists.sourceforge.net;
- Tue, 18 Jun 2024 15:26:31 +0000
-Received: by mail-wr1-f41.google.com with SMTP id
- ffacd0b85a97d-35f1c567ae4so4328489f8f.1
+ id 1sJbFL-0001Ld-Lk for kgdb-bugreport@lists.sourceforge.net;
+ Tue, 18 Jun 2024 15:59:47 +0000
+Received: by mail-wm1-f42.google.com with SMTP id
+ 5b1f17b1804b1-421d32fda86so58860035e9.0
  for <kgdb-bugreport@lists.sourceforge.net>;
- Tue, 18 Jun 2024 08:26:31 -0700 (PDT)
+ Tue, 18 Jun 2024 08:59:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718724380; x=1719329180; darn=lists.sourceforge.net;
+ d=linaro.org; s=google; t=1718726380; x=1719331180; darn=lists.sourceforge.net;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=j5B2trNpXh5L0I47RQYjAXwFGQO0vFRPcG1PhQTg8CE=;
- b=dSynwzvPkuDu/FaTm7txsAk7+s9y9fEiuZ3m50g2YtgoosZFZnorOiYPYWQ/woVhCZ
- XQS5mp7Dzl4IC+9PvkFu9lrddPXRHXNjKOAoX23eolyw61lKUD4cQP71k84FbTTfwc5f
- 1lCzl/XNr0/TwWD3a3FBPn94gKzxq/RvYyGORuDKxRvU54puieLODmLY3L+cIIf96sZ7
- WIN5bu98oR1oaiGbCVHmP5eas/W//TTTFOm5qpO+FC54MTrIqcKtA/jOVC8F0OZpEao4
- K61ik+eksQs9bhalq5viifmiVfVHDwSaujGzk/gHu4MY1cyicTDkxBRyW3T+fv+Mn8rv
- kwkw==
+ bh=KW5CYpn36l//7aM9dysfyiIEFCEnSC7/zTj92FzcYsw=;
+ b=oYg2bC8G0DAh2GmgawImNhVFlp7HunhoDMVXf+boSGjw32DJ18M17V2EGm0hH0Yhyg
+ j873hMCJcASOqC7UOAFKGAAhwpdXrv4Ie4R4PjcaEidElen8DxSQnQmbjjhCexoTIdfJ
+ PmNS0+7T0wh4lNWLH5Gar2k9nwhlTsXtN22SdNH4hDQW5M/aFwsf8BiAI0kCmsOSw9I/
+ qi7yZ6kTQoHL3Ci/7a/K+nK3up5YeITBGX+BwJ/nShBB2gCdGR0/r6SrEdfpBl/dPaqq
+ +L6a5Ta4SU/4TJDBXGe+IXh5SfwUj6mZK7RgnwZYJq0oFkmpyQlcDVjFx/A+lij0ByBE
+ R9pQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718724380; x=1719329180;
+ d=1e100.net; s=20230601; t=1718726380; x=1719331180;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=j5B2trNpXh5L0I47RQYjAXwFGQO0vFRPcG1PhQTg8CE=;
- b=miGS+6rYzkE9PMsfBActddQfONRtOmzB3oycZuf4KI6GiGK+lnp0HBQpuI2yNIxQIc
- kAWaSaYApc6JncmFMQpL4I9ZtnKPQl/tEhEI1G/g76vP7J+Ct7UnngKtrZD58Luslhmi
- cje2wcCZIeUE5uuyyrUzPVQC4I71B7aaXPTL2BuDAAVlpabaN7lTSChJMc7ItLC/e69D
- nZO1MrxUMNHiGGYV8iZtEuhpBZ1uhJAFQJv72lVzXbDpNHaeyZNI8kfPoSCWYFCNwMk/
- XoytHMyCSOiCek58w8bMqy6W5ldNsA5YNW4jogfuJ2UPXocKqbPBrPuIONi50o+qC7ks
- C8IQ==
-X-Gm-Message-State: AOJu0YyZEWytCXqMveC1COsUViqrsprx1sa+OpijH4qnwNzKmv5wsquC
- uhMMdKC+KeL8By/5mwE0zU3iAD5zBBXwbmRS2+wMlGu99SK7UpZs4S9AlJtkTqc=
-X-Google-Smtp-Source: AGHT+IFko0ZVQHKPPOkLVKQkbHGo/8Z4TkJ5VFh493yXuyA4aG+1zvplXZXGK68vb6yBbrYE7fPF8g==
-X-Received: by 2002:a5d:5917:0:b0:360:7c13:761e with SMTP id
- ffacd0b85a97d-3607c137725mr10358113f8f.65.1718724379686; 
- Tue, 18 Jun 2024 08:26:19 -0700 (PDT)
+ bh=KW5CYpn36l//7aM9dysfyiIEFCEnSC7/zTj92FzcYsw=;
+ b=p/M8fWk1FgqQHJHSUabpzDN4jk3QhnpHYiAygzYaC+lx6Tw/UEh8LiBFBy/ZR3aGED
+ KostycJvubYOzbNbx1VZYpaJ/iolVHSe82opH/UIScNyTaXJhuT1yg4ffvzNIARQT4Ct
+ dS2QXO4IvehwGCqT3ijoxlxk7wFtCyIMnrQs5Uq4UmoXWAyvK2644K0816tcZTULotY/
+ Kep2uID9sURpHq7Fozrh8QIaz1UGU2ZjU4WPowzh2Z9N89Pb2GBfVLEWKfxR/7xBRKWs
+ c/dj3nHHo96uao0DsPcCaQB1sQ8oX3VtklMY99v257AeWDKW7zt5Fxqg39MZjv3IwaO6
+ 3RpA==
+X-Gm-Message-State: AOJu0YzRpzGqnvBquxSAd5SBko9/E73Cqj/xdl0jA8v76xTiDci9OIhY
+ jAymVe0VUHkjeWf7qEo+bwEmaXF404bWztvAdHyzn10SeAMcMFiDmQ7kOn2sN+Y=
+X-Google-Smtp-Source: AGHT+IEOulskKK0DQifFRFKsJWs4iBdG02SkiZn2is5YgIwx6kR6gYve5+eWcIIhl+AbQIyMYcD69A==
+X-Received: by 2002:a05:600c:474d:b0:422:178b:bedd with SMTP id
+ 5b1f17b1804b1-4230481a0bdmr116566685e9.1.1718726380384; 
+ Tue, 18 Jun 2024 08:59:40 -0700 (PDT)
 Received: from aspen.lan
  (aztw-34-b2-v4wan-166919-cust780.vm26.cable.virginm.net. [82.37.195.13])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-36268ad16b6sm1097771f8f.92.2024.06.18.08.26.19
+ 5b1f17b1804b1-422870e9590sm228819345e9.23.2024.06.18.08.59.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Jun 2024 08:26:19 -0700 (PDT)
-Date: Tue, 18 Jun 2024 16:26:17 +0100
+ Tue, 18 Jun 2024 08:59:39 -0700 (PDT)
+Date: Tue, 18 Jun 2024 16:59:38 +0100
 From: Daniel Thompson <daniel.thompson@linaro.org>
 To: Douglas Anderson <dianders@chromium.org>
-Message-ID: <20240618152617.GF11330@aspen.lan>
+Message-ID: <20240618155938.GG11330@aspen.lan>
 References: <20240618003546.4144638-1-dianders@chromium.org>
- <20240617173426.9.I95a99321878631c9ed6a520feba65b949f948529@changeid>
+ <20240617173426.13.I572fb3cf62fae1e728dd154081101ae264dc3670@changeid>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20240617173426.9.I95a99321878631c9ed6a520feba65b949f948529@changeid>
-X-Spam-Score: -5.2 (-----)
+In-Reply-To: <20240617173426.13.I572fb3cf62fae1e728dd154081101ae264dc3670@changeid>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, Jun 17, 2024 at 05:34:43PM -0700, Douglas Anderson
- wrote: > Several of the integers in kdb_md() should be marked unsigned. Mark
- > them as such. When doing this, we need to add an explicit cast [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  On Mon, Jun 17, 2024 at 05:34:47PM -0700, Douglas Anderson
+ wrote: > Add commands that are like the other "md" commands but that allow
+ you > to read memory that's in the IO space. > > Signed-off-by: Do [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
  blocked.  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: linaro.org]
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [209.85.221.41 listed in list.dnswl.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [209.85.221.41 listed in bl.score.senderscore.com]
+ [209.85.128.42 listed in bl.score.senderscore.com]
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [209.85.221.41 listed in sa-accredit.habeas.com]
+ [209.85.128.42 listed in sa-accredit.habeas.com]
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.221.41 listed in wl.mailspike.net]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ [209.85.128.42 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1sJaj9-00087R-UN
-Subject: Re: [Kgdb-bugreport] [PATCH 09/13] kdb: Use 'unsigned int' in
- kdb_md() where appropriate
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+X-Headers-End: 1sJbFL-0001Ld-Lk
+Subject: Re: [Kgdb-bugreport] [PATCH 13/13] kdb: Add mdi,
+ mdiW / mdiWcN commands to show iomapped memory
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -151,43 +150,35 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Mon, Jun 17, 2024 at 05:34:43PM -0700, Douglas Anderson wrote:
-> Several of the integers in kdb_md() should be marked unsigned. Mark
-> them as such. When doing this, we need to add an explicit cast to the
-> address masking or it ends up getting truncated down to "int" size.
+On Mon, Jun 17, 2024 at 05:34:47PM -0700, Douglas Anderson wrote:
+> Add commands that are like the other "md" commands but that allow you
+> to read memory that's in the IO space.
 >
 > Signed-off-by: Douglas Anderson <dianders@chromium.org>
+
+Sorry to be the bearer of bad news but...
+
+
 > ---
->
->  kernel/debug/kdb/kdb_main.c | 10 +++++-----
->  1 file changed, 5 insertions(+), 5 deletions(-)
->
-> diff --git a/kernel/debug/kdb/kdb_main.c b/kernel/debug/kdb/kdb_main.c
-> index fcd5292351a7..c064ff093670 100644
-> --- a/kernel/debug/kdb/kdb_main.c
-> +++ b/kernel/debug/kdb/kdb_main.c
-> @@ -1594,8 +1594,8 @@ static void kdb_md_line(const char *fmtstr, unsigned long addr,
->  static int kdb_md(int argc, const char **argv)
->  {
->  	static unsigned long last_addr;
-> -	static int last_radix, last_bytesperword, last_repeat;
-> -	int radix = 16, mdcount = 8, bytesperword = KDB_WORD_SIZE, repeat = 0;
-> +	static unsigned int last_radix, last_bytesperword, last_repeat;
-> +	unsigned int radix = 16, mdcount = 8, bytesperword = KDB_WORD_SIZE, repeat = 0;
->  	char fmtchar, fmtstr[64];
->  	unsigned long addr;
->  	unsigned long word;
-> @@ -1722,11 +1722,11 @@ static int kdb_md(int argc, const char **argv)
->
->  	/* Round address down modulo BYTESPERWORD */
->
-> -	addr &= ~(bytesperword-1);
-> +	addr &= ~((unsigned long)bytesperword - 1);
+> <snip>
+> +/*
+> + * kdb_getioword
+> + * Inputs:
+> + *	word	Pointer to the word to receive the result.
+> + *	addr	Address of the area to copy.
+> + *	size	Size of the area.
+> + * Returns:
+> + *	0 for success, < 0 for error.
+> + */
+> +int kdb_getioword(unsigned long *word, unsigned long addr, size_t size)
+> +{
+> +	void __iomem *mapped = ioremap(addr, size);
 
-I think the round_down() macro will take care of the cast for you (and
-probably render the comment pointless too).
+ioremap() is a might_sleep() function. It's unsafe to call it from the
+debug trap handler.
 
-Other than that it looks like a good change.
+I'm afraid I don't know a safe alternative either. Machinary such as
+kmap_atomic() needs a page and iomem won't have one.
 
 
 Daniel.
