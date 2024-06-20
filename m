@@ -2,66 +2,66 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D1C6C912293
+	by mail.lfdr.de (Postfix) with ESMTPS id EF4FE912294
 	for <lists+kgdb-bugreport@lfdr.de>; Fri, 21 Jun 2024 12:37:32 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1sKbe7-0001vy-T4
+	id 1sKbe8-0001w6-65
 	for lists+kgdb-bugreport@lfdr.de;
 	Fri, 21 Jun 2024 10:37:31 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <zhengzengkai@huawei.com>) id 1sJuWP-0000AI-39
+ (envelope-from <zhengzengkai@huawei.com>) id 1sKIIu-0007As-J9
  for kgdb-bugreport@lists.sourceforge.net;
- Wed, 19 Jun 2024 12:34:41 +0000
+ Thu, 20 Jun 2024 13:58:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
  :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=meCZsXasSK5ysPre2L4XAlOZjGIH3AkaUcAhY/FiadM=; b=TM81lPfjADn+fHYbmNqSpq5qYi
- vOyj4rshNGLzibfeq+DkQk7jHK+/H+xytFrP5wMlOWoI2hLMNnVZffs5NoJEYdzsvlTAY2wsiTN1M
- 8x361pMek6aGs+m5PxE6VOQD6bYfdat2dwdm5BVGTMhBneqfQKjdOtrCZVNJtZAvZtWk=;
+ bh=meCZsXasSK5ysPre2L4XAlOZjGIH3AkaUcAhY/FiadM=; b=B1rt08OQEHt6uJsLO8L7d3z36l
+ 51Fj3wkrSbmw46JjZzO+gzCSqu2lJlCdg7XXg/vQETmMtOfRAaWsK+N+6SWgGl1EbXcp037bYaooY
+ n0pVlYlNoYzU4LC1uye3WGHVEef+yhiT+5oPv8anR2zbOTmPt5NLnpTJTpzIkT2HaCqw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
  Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
  :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=meCZsXasSK5ysPre2L4XAlOZjGIH3AkaUcAhY/FiadM=; b=E
- KrhWSPcug12Drk5wVW+qhJ+g1wGoiLgIlD8at+jr/kwNeP2tc7BCQj6SSWH7u1z5HNW2LDgvKy5q7
- 458hvL0MCce21Xa+sXKYWr1Q3s4EDbm/LxgrO5d/LZSKRLa2IEdDKEK1+P0L1I3uVPtcbsd9nRVng
- bo5YsjygRJzo2PPY=;
-Received: from szxga02-in.huawei.com ([45.249.212.188])
+ List-Owner:List-Archive; bh=meCZsXasSK5ysPre2L4XAlOZjGIH3AkaUcAhY/FiadM=; b=k
+ XByCowG0M9Mlyp0Jfbj29wC2MeO1+rFraTcuLObqKE0whbbCW+LXXfimE7jJ3Y9xpIJap0PsDx/S4
+ 8te8KeQqu12sA84jQHxIOJ1MgMpo9XiZ8omDSbCO5CVyt0WzW2B6obs0ZjxAc2ZMAaHElq1T1rsk9
+ h02Efwv2HsxuRGMo=;
+Received: from szxga08-in.huawei.com ([45.249.212.255])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sJuWO-0008NF-Ft for kgdb-bugreport@lists.sourceforge.net;
- Wed, 19 Jun 2024 12:34:41 +0000
-Received: from mail.maildlp.com (unknown [172.19.163.48])
- by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4W431T6RzwzDqTn;
- Wed, 19 Jun 2024 20:33:01 +0800 (CST)
+ id 1sKIIt-0008IZ-9k for kgdb-bugreport@lists.sourceforge.net;
+ Thu, 20 Jun 2024 13:58:19 +0000
+Received: from mail.maildlp.com (unknown [172.19.88.194])
+ by szxga08-in.huawei.com (SkyGuard) with ESMTP id 4W4hmF25Dxz1N7vY;
+ Thu, 20 Jun 2024 21:53:49 +0800 (CST)
 Received: from kwepemd200010.china.huawei.com (unknown [7.221.188.124])
- by mail.maildlp.com (Postfix) with ESMTPS id 8CB1E18007A;
- Wed, 19 Jun 2024 20:34:32 +0800 (CST)
+ by mail.maildlp.com (Postfix) with ESMTPS id A2D1C140123;
+ Thu, 20 Jun 2024 21:58:05 +0800 (CST)
 Received: from huawei.com (10.175.113.25) by kwepemd200010.china.huawei.com
  (7.221.188.124) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1258.34; Wed, 19 Jun
- 2024 20:34:31 +0800
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1258.34; Thu, 20 Jun
+ 2024 21:58:04 +0800
 To: <jason.wessel@windriver.com>, <daniel.thompson@linaro.org>,
  <dianders@chromium.org>
-Date: Wed, 19 Jun 2024 20:58:03 +0800
-Message-ID: <20240619125803.148130-1-zhengzengkai@huawei.com>
+Date: Thu, 20 Jun 2024 22:21:32 +0800
+Message-ID: <20240620142132.157518-1-zhengzengkai@huawei.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 X-Originating-IP: [10.175.113.25]
 X-ClientProxiedBy: dggems704-chm.china.huawei.com (10.3.19.181) To
  kwepemd200010.china.huawei.com (7.221.188.124)
-X-Spam-Score: -0.0 (/)
+X-Spam-Score: -2.3 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
@@ -70,32 +70,31 @@ X-Spam-Report: Spam detection software,
  architecture")
  removed the only definition of macro _TIF_MCA_INIT, so kdb_curr_task() is
  actually the same as curr_task() now and becomes redundant. 
- Content analysis details:   (-0.0 points, 6.0 required)
+ Content analysis details:   (-2.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
- DNSWL was blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [45.249.212.188 listed in list.dnswl.org]
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [45.249.212.188 listed in sa-trusted.bondedsender.org]
+ [45.249.212.255 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [45.249.212.188 listed in bl.score.senderscore.com]
+ [45.249.212.255 listed in bl.score.senderscore.com]
  0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.188 listed in wl.mailspike.net]
+ [45.249.212.255 listed in wl.mailspike.net]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [45.249.212.255 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1sJuWO-0008NF-Ft
+X-Headers-End: 1sKIIt-0008IZ-9k
 X-Mailman-Approved-At: Fri, 21 Jun 2024 10:37:30 +0000
-Subject: [Kgdb-bugreport] [PATCH] kdb: Get rid of redundant kdb_curr_task()
+Subject: [Kgdb-bugreport] [PATCH RESEND] kdb: Get rid of redundant
+ kdb_curr_task()
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,8 +109,9 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>,
 From: Zheng Zengkai via Kgdb-bugreport <kgdb-bugreport@lists.sourceforge.net>
 Reply-To: Zheng Zengkai <zhengzengkai@huawei.com>
 Cc: pmladek@suse.com, zhengzengkai@huawei.com,
- kgdb-bugreport@lists.sourceforge.net, thorsten.blum@toblux.com,
- christophe.jaillet@wanadoo.fr, yuran.pereira@hotmail.com
+ kgdb-bugreport@lists.sourceforge.net, linux-kernel@vger.kernel.org,
+ thorsten.blum@toblux.com, christophe.jaillet@wanadoo.fr,
+ yuran.pereira@hotmail.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
