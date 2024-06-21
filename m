@@ -2,98 +2,104 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF4FE912294
-	for <lists+kgdb-bugreport@lfdr.de>; Fri, 21 Jun 2024 12:37:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1CF28912295
+	for <lists+kgdb-bugreport@lfdr.de>; Fri, 21 Jun 2024 12:37:33 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1sKbe8-0001w6-65
+	id 1sKbe8-0001wK-FE
 	for lists+kgdb-bugreport@lfdr.de;
 	Fri, 21 Jun 2024 10:37:31 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <zhengzengkai@huawei.com>) id 1sKIIu-0007As-J9
+ (envelope-from <zhengzengkai@huawei.com>) id 1sKTGR-0000sM-VJ
  for kgdb-bugreport@lists.sourceforge.net;
- Thu, 20 Jun 2024 13:58:20 +0000
+ Fri, 21 Jun 2024 01:40:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=meCZsXasSK5ysPre2L4XAlOZjGIH3AkaUcAhY/FiadM=; b=B1rt08OQEHt6uJsLO8L7d3z36l
- 51Fj3wkrSbmw46JjZzO+gzCSqu2lJlCdg7XXg/vQETmMtOfRAaWsK+N+6SWgGl1EbXcp037bYaooY
- n0pVlYlNoYzU4LC1uye3WGHVEef+yhiT+5oPv8anR2zbOTmPt5NLnpTJTpzIkT2HaCqw=;
+ bh=JKhxfHOMB6KnncW3S2OrNIF7IBZRga4U3eVDGHFU+Qg=; b=ljW3L4D0TSTgoVMap3A0RhnjI2
+ iduvOGKfUVrdG8BvN3C6Dk3EbEHcp9RnR96x+Xs3jAEcot42PAzdvh0GTch8ZsZwWzcOdJ7603/Qd
+ T7iU2iL+63jppOCVirkIYV24s8D7jc+FI/iYWKyfAbDjJz660y43pkZQtj1NXuoHrUHs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
- Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=meCZsXasSK5ysPre2L4XAlOZjGIH3AkaUcAhY/FiadM=; b=k
- XByCowG0M9Mlyp0Jfbj29wC2MeO1+rFraTcuLObqKE0whbbCW+LXXfimE7jJ3Y9xpIJap0PsDx/S4
- 8te8KeQqu12sA84jQHxIOJ1MgMpo9XiZ8omDSbCO5CVyt0WzW2B6obs0ZjxAc2ZMAaHElq1T1rsk9
- h02Efwv2HsxuRGMo=;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=JKhxfHOMB6KnncW3S2OrNIF7IBZRga4U3eVDGHFU+Qg=; b=d83l3UniO+jCc7OHdQoGB9uLpr
+ iFBg9OWWs0XWKthJ+axEcJDyZX+ZUKpOMrUl2CQGd4HGQt5QkI6DY8rII/ZOGHrfha7mWIXCsL97r
+ RvE/Ly76RkvzYl/dm7uMjy1NYy5caRb09tchyLtaQqCS09dv4hWjLrm6q1MI3JahSYUg=;
 Received: from szxga08-in.huawei.com ([45.249.212.255])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sKIIt-0008IZ-9k for kgdb-bugreport@lists.sourceforge.net;
- Thu, 20 Jun 2024 13:58:19 +0000
-Received: from mail.maildlp.com (unknown [172.19.88.194])
- by szxga08-in.huawei.com (SkyGuard) with ESMTP id 4W4hmF25Dxz1N7vY;
- Thu, 20 Jun 2024 21:53:49 +0800 (CST)
+ id 1sKTGS-00021s-H1 for kgdb-bugreport@lists.sourceforge.net;
+ Fri, 21 Jun 2024 01:40:33 +0000
+Received: from mail.maildlp.com (unknown [172.19.163.48])
+ by szxga08-in.huawei.com (SkyGuard) with ESMTP id 4W50Lb4xHHz1N7w5;
+ Fri, 21 Jun 2024 09:36:07 +0800 (CST)
 Received: from kwepemd200010.china.huawei.com (unknown [7.221.188.124])
- by mail.maildlp.com (Postfix) with ESMTPS id A2D1C140123;
- Thu, 20 Jun 2024 21:58:05 +0800 (CST)
-Received: from huawei.com (10.175.113.25) by kwepemd200010.china.huawei.com
- (7.221.188.124) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1258.34; Thu, 20 Jun
- 2024 21:58:04 +0800
-To: <jason.wessel@windriver.com>, <daniel.thompson@linaro.org>,
- <dianders@chromium.org>
-Date: Thu, 20 Jun 2024 22:21:32 +0800
-Message-ID: <20240620142132.157518-1-zhengzengkai@huawei.com>
-X-Mailer: git-send-email 2.20.1
+ by mail.maildlp.com (Postfix) with ESMTPS id ABF2818001C;
+ Fri, 21 Jun 2024 09:40:24 +0800 (CST)
+Received: from [10.174.183.193] (10.174.183.193) by
+ kwepemd200010.china.huawei.com (7.221.188.124) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1258.34; Fri, 21 Jun 2024 09:40:23 +0800
+To: Doug Anderson <dianders@chromium.org>
+References: <20240619125803.148130-1-zhengzengkai@huawei.com>
+ <CAD=FV=Xi+dWZtt1oJYMgz-AKMX4EF7euASCQh0ygLhxCaaNDuw@mail.gmail.com>
+Message-ID: <cdb6b464-4d01-12f3-b022-dcd8d9076f49@huawei.com>
+Date: Fri, 21 Jun 2024 09:40:22 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
 MIME-Version: 1.0
-X-Originating-IP: [10.175.113.25]
-X-ClientProxiedBy: dggems704-chm.china.huawei.com (10.3.19.181) To
+In-Reply-To: <CAD=FV=Xi+dWZtt1oJYMgz-AKMX4EF7euASCQh0ygLhxCaaNDuw@mail.gmail.com>
+X-Originating-IP: [10.174.183.193]
+X-ClientProxiedBy: dggems701-chm.china.huawei.com (10.3.19.178) To
  kwepemd200010.china.huawei.com (7.221.188.124)
-X-Spam-Score: -2.3 (--)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+X-Spam-Score: -6.9 (------)
+X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Commit cf8e8658100d ("arch: Remove Itanium (IA-64)
- architecture")
- removed the only definition of macro _TIF_MCA_INIT, so kdb_curr_task() is
- actually the same as curr_task() now and becomes redundant. 
- Content analysis details:   (-2.3 points, 6.0 required)
- pts rule name              description
+ 
+ Content preview:  在 2024/6/21 5:57, Doug Anderson 写道: > Hi, > > On Wed,
+    Jun 19, 2024 at 5:34 AM Zheng Zengkai <zhengzengkai@huawei.com> wrote:
+   >> Commit cf8e8658100d ("arch: Remove Itanium (IA-64) architecture" [...] 
+ 
+ Content analysis details:   (-6.9 points, 6.0 required)
+ 
+  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [45.249.212.255 listed in sa-trusted.bondedsender.org]
- 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [45.249.212.255 listed in bl.score.senderscore.com]
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.255 listed in wl.mailspike.net]
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [45.249.212.255 listed in list.dnswl.org]
+  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+                             query to Validity was blocked.  See
+                             https://knowledge.validity.com/hc/en-us/articles/20961730681243
+                              for more information.
+                         [45.249.212.255 listed in sa-trusted.bondedsender.org]
+  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+                             query to Validity was blocked.  See
+                             https://knowledge.validity.com/hc/en-us/articles/20961730681243
+                              for more information.
+                            [45.249.212.255 listed in bl.score.senderscore.com]
+  0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+                             [45.249.212.255 listed in wl.mailspike.net]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+                             high trust
+                             [45.249.212.255 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1sKIIt-0008IZ-9k
+ -1.9 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1sKTGS-00021s-H1
 X-Mailman-Approved-At: Fri, 21 Jun 2024 10:37:30 +0000
-Subject: [Kgdb-bugreport] [PATCH RESEND] kdb: Get rid of redundant
+Subject: Re: [Kgdb-bugreport] [PATCH] kdb: Get rid of redundant
  kdb_curr_task()
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -108,117 +114,34 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>,
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
 From: Zheng Zengkai via Kgdb-bugreport <kgdb-bugreport@lists.sourceforge.net>
 Reply-To: Zheng Zengkai <zhengzengkai@huawei.com>
-Cc: pmladek@suse.com, zhengzengkai@huawei.com,
- kgdb-bugreport@lists.sourceforge.net, linux-kernel@vger.kernel.org,
- thorsten.blum@toblux.com, christophe.jaillet@wanadoo.fr,
+Cc: pmladek@suse.com, daniel.thompson@linaro.org,
+ kgdb-bugreport@lists.sourceforge.net, thorsten.blum@toblux.com,
+ christophe.jaillet@wanadoo.fr, jason.wessel@windriver.com,
  yuran.pereira@hotmail.com
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Commit cf8e8658100d ("arch: Remove Itanium (IA-64) architecture")
-removed the only definition of macro _TIF_MCA_INIT, so kdb_curr_task()
-is actually the same as curr_task() now and becomes redundant.
-
-Let's remove the definition of kdb_curr_task() and replace remaining
-calls with curr_task().
-
-Signed-off-by: Zheng Zengkai <zhengzengkai@huawei.com>
----
- kernel/debug/kdb/kdb_bt.c      |  2 +-
- kernel/debug/kdb/kdb_main.c    | 18 ++++--------------
- kernel/debug/kdb/kdb_private.h |  2 --
- 3 files changed, 5 insertions(+), 17 deletions(-)
-
-diff --git a/kernel/debug/kdb/kdb_bt.c b/kernel/debug/kdb/kdb_bt.c
-index 10b454554ab0..137ba73f56fc 100644
---- a/kernel/debug/kdb/kdb_bt.c
-+++ b/kernel/debug/kdb/kdb_bt.c
-@@ -144,7 +144,7 @@ kdb_bt(int argc, const char **argv)
- 			kdb_ps_suppressed();
- 		/* Run the active tasks first */
- 		for_each_online_cpu(cpu) {
--			p = kdb_curr_task(cpu);
-+			p = curr_task(cpu);
- 			if (kdb_bt1(p, mask, btaprompt))
- 				return 0;
- 		}
-diff --git a/kernel/debug/kdb/kdb_main.c b/kernel/debug/kdb/kdb_main.c
-index 664bae55f2c9..f5f7d7fb5936 100644
---- a/kernel/debug/kdb/kdb_main.c
-+++ b/kernel/debug/kdb/kdb_main.c
-@@ -155,16 +155,6 @@ static char *__env[31] = {
- 
- static const int __nenv = ARRAY_SIZE(__env);
- 
--struct task_struct *kdb_curr_task(int cpu)
--{
--	struct task_struct *p = curr_task(cpu);
--#ifdef	_TIF_MCA_INIT
--	if ((task_thread_info(p)->flags & _TIF_MCA_INIT) && KDB_TSK(cpu))
--		p = krp->p;
--#endif
--	return p;
--}
--
- /*
-  * Update the permissions flags (kdb_cmd_enabled) to match the
-  * current lockdown state.
-@@ -1228,7 +1218,7 @@ static int kdb_local(kdb_reason_t reason, int error, struct pt_regs *regs,
- 	char *cmdbuf;
- 	int diag;
- 	struct task_struct *kdb_current =
--		kdb_curr_task(raw_smp_processor_id());
-+		curr_task(raw_smp_processor_id());
- 
- 	KDB_DEBUG_STATE("kdb_local 1", reason);
- 
-@@ -2278,7 +2268,7 @@ void kdb_ps_suppressed(void)
- 	unsigned long cpu;
- 	const struct task_struct *p, *g;
- 	for_each_online_cpu(cpu) {
--		p = kdb_curr_task(cpu);
-+		p = curr_task(cpu);
- 		if (kdb_task_state(p, "-"))
- 			++idle;
- 	}
-@@ -2314,7 +2304,7 @@ void kdb_ps1(const struct task_struct *p)
- 		   kdb_task_has_cpu(p), kdb_process_cpu(p),
- 		   kdb_task_state_char(p),
- 		   (void *)(&p->thread),
--		   p == kdb_curr_task(raw_smp_processor_id()) ? '*' : ' ',
-+		   p == curr_task(raw_smp_processor_id()) ? '*' : ' ',
- 		   p->comm);
- 	if (kdb_task_has_cpu(p)) {
- 		if (!KDB_TSK(cpu)) {
-@@ -2350,7 +2340,7 @@ static int kdb_ps(int argc, const char **argv)
- 	for_each_online_cpu(cpu) {
- 		if (KDB_FLAG(CMD_INTERRUPT))
- 			return 0;
--		p = kdb_curr_task(cpu);
-+		p = curr_task(cpu);
- 		if (kdb_task_state(p, mask))
- 			kdb_ps1(p);
- 	}
-diff --git a/kernel/debug/kdb/kdb_private.h b/kernel/debug/kdb/kdb_private.h
-index 548fd4059bf9..d2520d72b1f5 100644
---- a/kernel/debug/kdb/kdb_private.h
-+++ b/kernel/debug/kdb/kdb_private.h
-@@ -210,8 +210,6 @@ extern void kdb_gdb_state_pass(char *buf);
- #define KDB_TSK(cpu) kgdb_info[cpu].task
- #define KDB_TSKREGS(cpu) kgdb_info[cpu].debuggerinfo
- 
--extern struct task_struct *kdb_curr_task(int);
--
- #define kdb_task_has_cpu(p) (task_curr(p))
- 
- #define GFP_KDB (in_dbg_master() ? GFP_ATOMIC : GFP_KERNEL)
--- 
-2.20.1
-
-
-
-_______________________________________________
-Kgdb-bugreport mailing list
-Kgdb-bugreport@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport
+CuWcqCAyMDI0LzYvMjEgNTo1NywgRG91ZyBBbmRlcnNvbiDlhpnpgZM6Cj4gSGksCj4KPiBPbiBX
+ZWQsIEp1biAxOSwgMjAyNCBhdCA1OjM04oCvQU0gWmhlbmcgWmVuZ2thaSA8emhlbmd6ZW5na2Fp
+QGh1YXdlaS5jb20+IHdyb3RlOgo+PiBDb21taXQgY2Y4ZTg2NTgxMDBkICgiYXJjaDogUmVtb3Zl
+IEl0YW5pdW0gKElBLTY0KSBhcmNoaXRlY3R1cmUiKQo+PiByZW1vdmVkIHRoZSBvbmx5IGRlZmlu
+aXRpb24gb2YgbWFjcm8gX1RJRl9NQ0FfSU5JVCwgc28ga2RiX2N1cnJfdGFzaygpCj4+IGlzIGFj
+dHVhbGx5IHRoZSBzYW1lIGFzIGN1cnJfdGFzaygpIG5vdyBhbmQgYmVjb21lcyByZWR1bmRhbnQu
+Cj4+Cj4+IExldCdzIHJlbW92ZSB0aGUgZGVmaW5pdGlvbiBvZiBrZGJfY3Vycl90YXNrKCkgYW5k
+IHJlcGxhY2UgcmVtYWluaW5nCj4+IGNhbGxzIHdpdGggY3Vycl90YXNrKCkuCj4+Cj4+IFNpZ25l
+ZC1vZmYtYnk6IFpoZW5nIFplbmdrYWkgPHpoZW5nemVuZ2thaUBodWF3ZWkuY29tPgo+PiAtLS0K
+Pj4gICBrZXJuZWwvZGVidWcva2RiL2tkYl9idC5jICAgICAgfCAgMiArLQo+PiAgIGtlcm5lbC9k
+ZWJ1Zy9rZGIva2RiX21haW4uYyAgICB8IDE4ICsrKystLS0tLS0tLS0tLS0tLQo+PiAgIGtlcm5l
+bC9kZWJ1Zy9rZGIva2RiX3ByaXZhdGUuaCB8ICAyIC0tCj4+ICAgMyBmaWxlcyBjaGFuZ2VkLCA1
+IGluc2VydGlvbnMoKyksIDE3IGRlbGV0aW9ucygtKQo+IExvb2tzIHJpZ2h0IHRvIG1lLgo+Cj4g
+UmV2aWV3ZWQtYnk6IERvdWdsYXMgQW5kZXJzb24gPGRpYW5kZXJzQGNocm9taXVtLm9yZz4KPgo+
+IEl0J3Mgc2xpZ2h0bHkgYW5ub3lpbmcgdGhhdCB0aGlzIGlzbid0IENDZWQgYW55IGtlcm5lbCBt
+YWlsaW5nIGxpc3RzCj4gdGhhdCBhcmUgdHJhY2tlZCBieSBsb3JlLmtlcm5lbC5vcmcsIGJ1dCBJ
+IGd1ZXNzIHRoYXQnbGwgYmUgdXAgdG8KPiBEYW5pZWwgdG8gZmlndXJlIG91dC4gOi1QCgpTb3Jy
+eSBmb3IgZm9yZ2V0dGluZyB0aGF0LCBhY3R1YWxseSBJIHJlYWxpemVkIHRoYXQgeWVzdGVyZGF5
+IGFuZCByZXNlbnQgCm9uZSBwYXRjaCBDQ2VkIGxpbnV4LWtlcm5lbEB2Z2VyLmtlcm5lbC5vcmcs
+CgpUaGFua3MhCgo+Cj4gLURvdWcKPiAuCj4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fXwpLZ2RiLWJ1Z3JlcG9ydCBtYWlsaW5nIGxpc3QKS2dkYi1idWdy
+ZXBvcnRAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0
+L2xpc3RzL2xpc3RpbmZvL2tnZGItYnVncmVwb3J0Cg==
