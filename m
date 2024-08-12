@@ -2,91 +2,77 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 95D4994E8F8
-	for <lists+kgdb-bugreport@lfdr.de>; Mon, 12 Aug 2024 10:54:21 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8E7B694E8FD
+	for <lists+kgdb-bugreport@lfdr.de>; Mon, 12 Aug 2024 10:55:21 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1sdQom-0002Ve-DG
+	id 1sdQpk-0001Z5-Ve
 	for lists+kgdb-bugreport@lfdr.de;
-	Mon, 12 Aug 2024 08:54:20 +0000
+	Mon, 12 Aug 2024 08:55:20 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <mail@florommel.de>) id 1sdIJs-0006ba-GB
+ (envelope-from <mail@florommel.de>) id 1sdQpi-0001Yx-Mw
  for kgdb-bugreport@lists.sourceforge.net;
- Sun, 11 Aug 2024 23:49:51 +0000
+ Mon, 12 Aug 2024 08:55:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=uYjCP7UXLF4DdjV7606xxZ82CC5pSdMtpBCsqR8XzSE=; b=TY/3tvSrZKeqoAB+nsrPR0JNp2
- WAqzdkUb/fyAbLXZGNY46SwrvFxRfXomv5VUVjc6xIbW4r4thcDmtaYtS4cG0Fp1CKVBypk3a/QIE
- fixkKRO0S49FSzzfhR5ESp17rS0hFsonimiRkWQr0Uxem7lvAnQ5Jw+64C4Es27OmtEc=;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=uYjCP7UXLF4DdjV7606xxZ82CC5pSdMtpBCsqR8XzSE=; b=X41N47dRs9R3qXRmgJitj+XxaJ
- sFvj2o1TE8s1g6orWFxIqcMpwC/Q263vOWJTFs0N2aIpT1CryV8vINmYwYW/+Gg5Cm2Pj/MBK8nlX
- ZqL4O4Q+GBOPLysilgXMW3/+R7Uy+LoA5Kp7T/+5WvqbEBQI1HGe3qj77gg8O3kbRvD8=;
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=57sepqWn/sUxIbQd3TpbiUWWZXp1hqxPZsAhBlY1icA=; b=CmUCVN2W2drWCz3JWs9BTk+X5z
+ tvgzYXEW/GU5XiM7Q4PrHYXqkiJ7+E9tasJ/1tmS87OE/aT6XpudkDL6cGT2+0fWeYXbXzCbmjL9m
+ Pqs+ULFzdbhXiKeclfXQA8kTd43vnEXwT5cDDIZAW6krwR7bXm7JRqYWsgNcKn05iWa8=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
+ ;
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=57sepqWn/sUxIbQd3TpbiUWWZXp1hqxPZsAhBlY1icA=; b=a
+ NvqhPZ3vjuN1w/QqEIUTe9d2lBJ0jj5CYzn0wkrbcEFFwtk4Ywu/fNsasZDVbbosLZcH8pDfL6gas
+ ilU48uhOhDuVieweXwo+YtUO/THsgdRiBvJzejMuYcBbBp6ajNilGJN18Td11ZWk9BJHgZc1gp+cj
+ Sk7WfjL5B6fOjpy4=;
 Received: from read.uberspace.de ([185.26.156.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sdIJq-0007Fw-V9 for kgdb-bugreport@lists.sourceforge.net;
- Sun, 11 Aug 2024 23:49:51 +0000
-Received: (qmail 9135 invoked by uid 990); 11 Aug 2024 23:22:58 -0000
+ id 1sdQpg-0000Xd-66 for kgdb-bugreport@lists.sourceforge.net;
+ Mon, 12 Aug 2024 08:55:18 +0000
+Received: (qmail 17320 invoked by uid 990); 12 Aug 2024 08:55:09 -0000
 Authentication-Results: read.uberspace.de;
 	auth=pass (plain)
 Received: from unknown (HELO unkown) (::1)
  by read.uberspace.de (Haraka/3.0.1) with ESMTPSA;
- Mon, 12 Aug 2024 01:22:58 +0200
+ Mon, 12 Aug 2024 10:55:08 +0200
 From: Florian Rommel <mail@florommel.de>
-To: Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
- Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>,
- "H . Peter Anvin" <hpa@zytor.com>,
- Jason Wessel <jason.wessel@windriver.com>,
+To: Jason Wessel <jason.wessel@windriver.com>,
  Daniel Thompson <daniel.thompson@linaro.org>,
- Douglas Anderson <dianders@chromium.org>,
- Lorena Kretzschmar <qy15sije@cip.cs.fau.de>,
- Stefan Saecherl <stefan.saecherl@fau.de>,
- Peter Zijlstra <peterz@infradead.org>,
- Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
- Randy Dunlap <rdunlap@infradead.org>,
- Masami Hiramatsu <mhiramat@kernel.org>,
- Andrew Morton <akpm@linux-foundation.org>,
- Christophe Leroy <christophe.leroy@csgroup.eu>,
- Geert Uytterhoeven <geert+renesas@glider.be>,
- kgdb-bugreport@lists.sourceforge.net, x86@kernel.org,
- linux-kernel@vger.kernel.org
-Date: Mon, 12 Aug 2024 01:22:08 +0200
-Message-ID: <20240811232208.234261-3-mail@florommel.de>
+ Douglas Anderson <dianders@chromium.org>, Arnd Bergmann <arnd@arndb.de>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ kgdb-bugreport@lists.sourceforge.net, linux-kernel@vger.kernel.org
+Date: Mon, 12 Aug 2024 10:54:59 +0200
+Message-ID: <20240812085459.291741-1-mail@florommel.de>
 X-Mailer: git-send-email 2.46.0
-In-Reply-To: <20240811232208.234261-1-mail@florommel.de>
-References: <20240811232208.234261-1-mail@florommel.de>
 MIME-Version: 1.0
-X-Rspamd-Bar: ---
-X-Rspamd-Report: REPLY(-4) SUSPICIOUS_RECIPS(1.5) MID_CONTAINS_FROM(1)
- MIME_GOOD(-0.1) BAYES_HAM(-2.887071) R_MISSING_CHARSET(0.5)
-X-Rspamd-Score: -3.987071
+X-Rspamd-Bar: -
+X-Rspamd-Report: MID_CONTAINS_FROM(1) BAYES_HAM(-2.998197) MIME_GOOD(-0.1)
+ R_MISSING_CHARSET(0.5)
+X-Rspamd-Score: -1.598197
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=florommel.de; s=uberspace; h=from:to:cc:subject:date;
- bh=83ni0oxgvU7wO3TGJK4AznLbgJf+G+hKoJ+YstNEvTc=;
- b=yTRAEKNfu1DizVL9DZp9uTn697ofRBui9cOjT13fsPEl2wk0mZ8VMKLxbCwDm9LE/xraa+LilK
- xkuBOCGh2wg9jBunAPd/pGpWp3c2DLS/IahJoY5MT2At3OsiIj/9yv6vfTmEKy+d1TBIrxcwOjza
- SY/bAhv+BE6ohili6YsSh/l0NJv8ueyYFtIHsoV6qJ4vACEdw1iOwbp7DG4k4okloO4+U5Xhi3Gu
- gfKonjkdwqjtqXqZiOp4ZGqU3b78MmwHUj1bznmcJmMVAjDyQdP2l/asruvG5OTUJNpI3bKw2Lo7
- BWFU4NeVZSh5sI+H4cP003mI+plpSHvhI/qCm//JtMEkNDumD/3hZOULvL39X1eTPPtWklJ6j7vM
- tcdbZREELmIy48Bkfxdl9Fig+EOucGNedN0fTU93srnjUuDIXw7iFxjMkZplJvzuxemS0wheK6TG
- YgXJU1Euz64JZMoccHy6crRTWTQcb87ewqAbI61J2zbyinq3qLt7d6YkBxTqTfsj/zdFw3Kg5xF4
- MtNDA23Y20WbGc5zzQpo7zr79uO7h9FxHH8QUVEpfoHoYl7vgqXdgb1cclIlot9ezVog9qFXsaSG
- shuLUtOJYYS0+MAMKS0FiyBMb9ZXypikP7Up9EYwdqdrrOIOljW5ES+Oo71MiAr83ks3TSW8G4d5
- k=
+ bh=U2xzaysom7aggwNAgqQ4tbOTx6Vj6CldEEI4Twwh5kA=;
+ b=f/GZTBtKx8fKpeZpOmH3VDWt4ZZOWTfNNz77oPV7I3KGPFg3FOxX//BswJY12X9wpP2Q/5btGX
+ CGGBIntfumlcApFZwoIdl2pV+km8FrAjU5I27wK1YPuuIyaEAUp4UWFj3VxETl6UfyhjlVPfhwN9
+ Pxom3lf5rKr3fkN93yX7mkDPedQ5NpttPtcpZLS6D1aSuL723ijrjhTr4wV1tYY7mHEodCw6fYkQ
+ 6h7y9qD9RRki9mWvfiehPdW6qnCQTQ8gz2KlNNCZ57ndpljzMxFvw/7/yY+c9cRNrXyx0mePFnYk
+ Px33vDGlkqxeA2AJI3n+EPMBXuMdmuH6FLOkicbUTR2Mjy0pvgK094dySYevapWndSkkNqpDp+4A
+ hijYDzqVUIDAV9mF9HhLM64Re/+uYGIyzXh5i6BqiqjucRLUcL6O2GhcTw5GHlwX4+IihFgI7B/0
+ /XytifEyKhhKfW7WUItH/uz45L5nSXTMcvW7k4xEWwIKJRlRnLeWxJ1TFbGxBuvEvMrX6SZMrkLI
+ YwtYlNY63CO7b2uamtUpiy46JfqcnBMVwGFABdbCIelzjpcfKJojU0pbaFMkwNVmvikrv9uqgWx1
+ i8qM6DU9OInhOUg7q2t6LfA45FEYOl6sjxuKm2TEJBBcVTDF08RUoFN5VCI3sI6ZTRZU1Qo1bgtw
+ s=
 X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -94,33 +80,29 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On x86, occasionally, the removal of a breakpoint (i.e.,
- removal
- of the int3 instruction) fails because the text_mutex is taken by another
- CPU (mainly due to the static_key mechanism, I think). The fu [...] 
+ Content preview:  The test for access watchpoints (hw_access_break_test) was
+ broken (always failed) because the compiler optimized out the write to the
+ static helper variable (hw_break_val2), as it is never read anywhe [...] 
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [185.26.156.133 listed in list.dnswl.org]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
  blocked.  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: florommel.de]
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [185.26.156.133 listed in list.dnswl.org]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1sdIJq-0007Fw-V9
-X-Mailman-Approved-At: Mon, 12 Aug 2024 08:54:17 +0000
-Subject: [Kgdb-bugreport] [PATCH 2/2] x86/kgdb: fix hang on failed
- breakpoint removal
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+X-Headers-End: 1sdQpg-0000Xd-66
+Subject: [Kgdb-bugreport] [PATCH] kgdbts: fix hw_access_break_test
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -137,63 +119,49 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On x86, occasionally, the removal of a breakpoint (i.e., removal of
-the int3 instruction) fails because the text_mutex is taken by another
-CPU (mainly due to the static_key mechanism, I think).  The function
-kgdb_skipexception catches exceptions from these spurious int3
-instructions, bails out of KGDB, and continues execution from the
-previous PC address.
+The test for access watchpoints (hw_access_break_test) was broken
+(always failed) because the compiler optimized out the write to the
+static helper variable (hw_break_val2), as it is never read anywhere.
+This resulted in the target variable (hw_break_val) not being accessed
+and thus the breakpoint not being triggered.
 
-However, this led to an endless loop between the int3 instruction and
-kgdb_skipexception since the int3 instruction (being still present)
-triggered again.  This effectively caused the system to hang.
-
-With this patch, we try to remove the concerned spurious int3
-instruction in kgdb_skipexception before continuing execution.  This
-may take a few attempts until the concurrent holders of the text_mutex
-have released it, but eventually succeeds and the kernel can continue.
+Remove the helper variable (hw_break_val2), and use READ_ONCE to force
+reading the target variable (hw_break_val).
 
 Signed-off-by: Florian Rommel <mail@florommel.de>
 ---
- arch/x86/kernel/kgdb.c | 24 ++++++++++++++++++++++++
- 1 file changed, 24 insertions(+)
+ drivers/misc/kgdbts.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/arch/x86/kernel/kgdb.c b/arch/x86/kernel/kgdb.c
-index 64c332151af7..585a7a72af74 100644
---- a/arch/x86/kernel/kgdb.c
-+++ b/arch/x86/kernel/kgdb.c
-@@ -723,7 +723,31 @@ void kgdb_arch_exit(void)
- int kgdb_skipexception(int exception, struct pt_regs *regs)
+diff --git a/drivers/misc/kgdbts.c b/drivers/misc/kgdbts.c
+index 88b91ad8e541..0cf31164b470 100644
+--- a/drivers/misc/kgdbts.c
++++ b/drivers/misc/kgdbts.c
+@@ -95,6 +95,7 @@
+ #include <linux/kallsyms.h>
+ 
+ #include <asm/sections.h>
++#include <asm/rwonce.h>
+ 
+ #define v1printk(a...) do {		\
+ 	if (verbose)			\
+@@ -126,7 +127,6 @@ static int final_ack;
+ static int force_hwbrks;
+ static int hwbreaks_ok;
+ static int hw_break_val;
+-static int hw_break_val2;
+ static int cont_instead_of_sstep;
+ static unsigned long cont_thread_id;
+ static unsigned long sstep_thread_id;
+@@ -284,7 +284,7 @@ static void hw_rem_access_break(char *arg)
+ 
+ static void hw_break_val_access(void)
  {
- 	if (exception == 3 && kgdb_isremovedbreak(regs->ip - 1)) {
-+		struct kgdb_bkpt *bpt;
-+		int i, error;
-+
- 		regs->ip -= 1;
-+
-+		/*
-+		 * Try to remove the spurious int3 instruction.
-+		 * These int3s can result from failed breakpoint removals
-+		 * in kgdb_arch_remove_breakpoint.
-+		 */
-+		for (bpt = NULL, i = 0; i < KGDB_MAX_BREAKPOINTS; i++) {
-+			if (kgdb_break[i].bpt_addr == regs->ip &&
-+			    kgdb_break[i].state == BP_REMOVED &&
-+			    (kgdb_break[i].type == BP_BREAKPOINT ||
-+			     kgdb_break[i].type == BP_POKE_BREAKPOINT)) {
-+				bpt = &kgdb_break[i];
-+				break;
-+			}
-+		}
-+		if (!bpt)
-+			return 1;
-+		error = kgdb_arch_remove_breakpoint(bpt);
-+		if (error)
-+			pr_err("skipexception: breakpoint remove failed: %lx\n",
-+			       bpt->bpt_addr);
- 		return 1;
- 	}
- 	return 0;
+-	hw_break_val2 = hw_break_val;
++	READ_ONCE(hw_break_val);
+ }
+ 
+ static void hw_break_val_write(void)
 -- 
 2.46.0
 
