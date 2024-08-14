@@ -2,96 +2,102 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2FCC0951107
-	for <lists+kgdb-bugreport@lfdr.de>; Wed, 14 Aug 2024 02:28:58 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id B0E2E95110E
+	for <lists+kgdb-bugreport@lfdr.de>; Wed, 14 Aug 2024 02:33:41 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1se1sm-0007gM-9U
+	id 1se1xM-0004cv-Rq
 	for lists+kgdb-bugreport@lfdr.de;
-	Wed, 14 Aug 2024 00:28:57 +0000
+	Wed, 14 Aug 2024 00:33:40 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <akpm@linux-foundation.org>) id 1se1sl-0007gE-Ey
+ (envelope-from <mail@florommel.de>) id 1se1xK-0004cn-PF
  for kgdb-bugreport@lists.sourceforge.net;
- Wed, 14 Aug 2024 00:28:56 +0000
+ Wed, 14 Aug 2024 00:33:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Mime-Version
- :References:In-Reply-To:Message-Id:Subject:Cc:To:From:Date:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=YsebQo1cZKRplbBhc9NTORJ9iC9DHFnOV4ie7i5c6FQ=; b=OsSSpmSijqT7hFTxRFGXYFzPTi
- dP+8RiP12wO9MXOTSvv8tMF4m0vJC3Ou7LzmbkgEwj0skyYpS2HcNdyhlOyWHcrEfYCnAlSCOUomc
- oQnhN4QpH7t8NMW0bIOhCJ1CBA5Hy3H21lWa+Nbg0g4k00RXHz8c5udQByZYLvm8cDPE=;
+ bh=+Ycj0yGxUE2XPlmp3FEdF3w2hLPJnIihR4vsD0HmzrU=; b=SO8d+SPFyP9BtmsJR8lLGN/adI
+ I8r2ySy7+0+XWSUrBSBplmXTzMyS5Yu3pxgkNk4UvpTlvsoyR+BN/a/kqJyyeEENxwjVLr6806vp+
+ 1GpmdCymbRB6zJurfa+atzKr+SPXZoxNxJhktVFevkBlK0JLdwrNzjDMT4sBGiet+X6Q=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Mime-Version:References:
- In-Reply-To:Message-Id:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
+ In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=YsebQo1cZKRplbBhc9NTORJ9iC9DHFnOV4ie7i5c6FQ=; b=bS9T5fBEsA1JUBxKK4o9ARTDmb
- VZiTNFoYWFiFVlpjSesk6w4YbAah+o9olLQcDIqg1Qdx3LTZA4nX029M9fV3m/2Jah/h8d5JPYRPu
- 0XFp2+MYSsF1SKssfftBelf4Kgjz03BW34lXBRo4pSNbVU/wab6URoAeVuW3SLD4cpqA=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=+Ycj0yGxUE2XPlmp3FEdF3w2hLPJnIihR4vsD0HmzrU=; b=H96FENB+AagBVAah04DSGBxS6z
+ LPdh/IM09PjJmi/Euec46Y1tHN2kDrYxh20P/vGeepVuZjICnPEsi6m2gyZZlbcraErJjZ9ZZ4rhQ
+ LGi1/h/ObdM0y0XHGK9R2aEILtlWX+V2pGN/BxrminJoG1FbY2k/JJZaADUqW4yCvQWc=;
+Received: from read.uberspace.de ([185.26.156.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1se1sl-0006ZG-Gu for kgdb-bugreport@lists.sourceforge.net;
- Wed, 14 Aug 2024 00:28:56 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 3E1E2618DB;
- Wed, 14 Aug 2024 00:10:57 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5883BC32782;
- Wed, 14 Aug 2024 00:10:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linux-foundation.org;
- s=korg; t=1723594256;
- bh=c7r5OUmvaJQiZogtT5yLK0btcxbn7sNq/ZTe8Wov/6c=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=IHoY/9ZrpQJOK/DT41cyEvhebsBWlOij3Ygq4bBZKodxAgT6oUW2b/vDDa6zk8qOu
- fpQPKjnhIQqiK1cGtDaHVQkhmBjQ5foFuCgAj3UTUFsQED4ojiCah5e3uI7salS6O9
- Jw0iF3qWL7RATbT07B0ik4z4oV4DCHcA79KmX8fE=
-Date: Tue, 13 Aug 2024 17:10:55 -0700
-From: Andrew Morton <akpm@linux-foundation.org>
-To: Florian Rommel <mail@florommel.de>
-Message-Id: <20240813171055.f8805c1db539dfa18e80026b@linux-foundation.org>
-In-Reply-To: <20240811232208.234261-1-mail@florommel.de>
+ id 1se1xI-0006ne-Oo for kgdb-bugreport@lists.sourceforge.net;
+ Wed, 14 Aug 2024 00:33:38 +0000
+Received: (qmail 6617 invoked by uid 990); 14 Aug 2024 00:33:29 -0000
+Authentication-Results: read.uberspace.de;
+	auth=pass (plain)
+Received: from unknown (HELO unkown) (::1)
+ by read.uberspace.de (Haraka/3.0.1) with ESMTPSA;
+ Wed, 14 Aug 2024 02:33:29 +0200
+Message-ID: <d5c8fdfbdfa096c9c1215a2ccd1cabefc63f1ec8.camel@florommel.de>
+From: Florian Rommel <mail@florommel.de>
+To: Andrew Morton <akpm@linux-foundation.org>
+Date: Wed, 14 Aug 2024 02:33:29 +0200
+In-Reply-To: <20240813171055.f8805c1db539dfa18e80026b@linux-foundation.org>
 References: <20240811232208.234261-1-mail@florommel.de>
-X-Mailer: Sylpheed 3.8.0beta1 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
-Mime-Version: 1.0
-X-Spam-Score: -2.5 (--)
+ <20240813171055.f8805c1db539dfa18e80026b@linux-foundation.org>
+User-Agent: Evolution 3.52.4 
+MIME-Version: 1.0
+X-Rspamd-Bar: +
+X-Rspamd-Report: SUSPICIOUS_RECIPS(1.5) BAYES_HAM(-0.138129) MIME_GOOD(-0.1)
+X-Rspamd-Score: 1.26187
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=florommel.de; s=uberspace; h=from:to:cc:subject:date;
+ bh=mZxBMSBOXUjPtNMzQYsC/w4amo62xoxfgDzla/4sRKo=;
+ b=gRFugSD/tFere1sDgEeavx+9foLS7dCf39ZuQyBbk24KBMq0GPAaDRviGhNNPNOf/tmQR8NVBS
+ yEPWObIrPYUHPIwSBkTG6qi7uEg9/sGe5nCNsPCg5+EMypljVKsHiLU1tExSECKFDv5DMOHVB/Gj
+ xV712O5dIx1V9i86TrdMDqw+z+Fg2P0Lgib740/zYXAC/LDSquElO2jaZMaPo9xhW3WMAkkHxFUG
+ 3zFRVtkJxlUhUYDrv/l3Vlt+xE0TLoCZtxepeV8+wUJH/JvaM+jisIG2Hcfp26CGAatyQ2fD3KGy
+ DBf951Q5cTmuh+EZKOya/Oc4WH4Vuy4RS/8VqRYFybcOY9aJWSqNn7X8lY9jdi06bwBstMDJ22Fb
+ i7KKLjfHKujr6MwkTaIWSCDrDkKKsc6iJ30/wZpDtYfpmEhoHr6k/jiWdeNL06ekJ/EJwFmNkyO8
+ CpVkPPYipmzVJczFD2EDfNt3VKjGFe6s27dGRsutnGMNcVaRg/iTf3FM8sqlCZsta7KZ3Am7lSzt
+ AW1E6DFHBsHIL2MLCTnow+n9lH3HAB6nP0U9dAiqOZgCwO8Kb5QDMsVBbtPRPIjAJH4WmisHz4d+
+ IdkBh0+P9JuJ5t/gIS/eNGUAPy5b5s1d8dzMAX7VOJUaD8Kfe6wsOhcpGmCtmvOIKw4aEieg10gZ
+ o=
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon,
- 12 Aug 2024 01:22:06 +0200 Florian Rommel <mail@florommel.de>
- wrote: > This series fixes two problems with KGDB on x86 concerning the
- removal
- > of breakpoints, causing the kernel to hang. Note that breakpoint > removal
- is not only performed when explicitly deleting a b [...] 
- Content analysis details:   (-2.5 points, 6.0 required)
+ Content preview:  On Tue, 2024-08-13 at 17:10 -0700, Andrew Morton wrote: >
+ On Mon, 12 Aug 2024 01:22:06 +0200 Florian Rommel <mail@florommel.de> wrote:
+ > > > This series fixes two problems with KGDB on x86 concerning [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
  blocked.  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: linux-foundation.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ for more information. [URIs: florommel.de]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -2.3 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1se1sl-0006ZG-Gu
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+X-Headers-End: 1se1xI-0006ne-Oo
 Subject: Re: [Kgdb-bugreport] [PATCH 0/2] kgdb: x86: fix breakpoint removal
  problems
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
@@ -120,17 +126,26 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Mon, 12 Aug 2024 01:22:06 +0200 Florian Rommel <mail@florommel.de> wrote:
+On Tue, 2024-08-13 at 17:10 -0700, Andrew Morton wrote:
+> On Mon, 12 Aug 2024 01:22:06 +0200 Florian Rommel <mail@florommel.de> wrote:
+> 
+> > This series fixes two problems with KGDB on x86 concerning the removal
+> > of breakpoints, causing the kernel to hang.  Note that breakpoint
+> > removal is not only performed when explicitly deleting a breakpoint,
+> > but also happens before continuing execution or single stepping.
+> 
+> Neat.  It would be nice to fix earlier kernels; for that it is
+> desirable to identify a Fixes: target.  From a quick look it appears
+> this issue is more than a decade old, in which case I don't believe a
+> Fixes: is needed - our request becomes "please backport to everything".
+> 
 
-> This series fixes two problems with KGDB on x86 concerning the removal
-> of breakpoints, causing the kernel to hang.  Note that breakpoint
-> removal is not only performed when explicitly deleting a breakpoint,
-> but also happens before continuing execution or single stepping.
+Thanks. There is already a v2 (due to my negligence on the details) and
+a bit of discussion:
+https://lore.kernel.org/all/20240812174338.363838-1-mail@florommel.de/
 
-Neat.  It would be nice to fix earlier kernels; for that it is
-desirable to identify a Fixes: target.  From a quick look it appears
-this issue is more than a decade old, in which case I don't believe a
-Fixes: is needed - our request becomes "please backport to everything".
+Rgeards,
+Florian
 
 
 
