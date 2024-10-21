@@ -2,93 +2,93 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D8F4F9B2EFF
-	for <lists+kgdb-bugreport@lfdr.de>; Mon, 28 Oct 2024 12:36:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8C2B59B2F00
+	for <lists+kgdb-bugreport@lfdr.de>; Mon, 28 Oct 2024 12:36:07 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1t5O2X-0007d9-Mz
+	id 1t5O2Y-0007dM-0o
 	for lists+kgdb-bugreport@lfdr.de;
-	Mon, 28 Oct 2024 11:36:05 +0000
+	Mon, 28 Oct 2024 11:36:06 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <nir@lichtman.org>) id 1t2GHI-0004YE-3b
+ (envelope-from <nir@lichtman.org>) id 1t2y8k-0002fw-MZ
  for kgdb-bugreport@lists.sourceforge.net;
- Sat, 19 Oct 2024 20:42:23 +0000
+ Mon, 21 Oct 2024 19:32:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
+ MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=4yjKeglWKrH6owi0pztnoYq9KsxnkOkLZvWrO1hqThU=; b=cvamqgPYN+q7HNlaWL3o2/MLeg
- DOYDWGx6zRke5hvlPaZlDlkH7KbPekYGhhNG7ZAXErq70dhE7aIONfbKckel1bkt5CtJJ2+n2pOr6
- 4S4zrWZ3zK7YaDCrTKxjDgnMif68Z2bu4dsFwoQuC7/9jYtQYjHskEoSwpkfMVcKAwus=;
+ bh=zQ42qSgPqN2BzDinrVgIpIX1EKJo8qAiwqlENos+Cw0=; b=JOfmHSt1GE0R0Q7I18U4ALMR3U
+ vMDAQzFzaaFDLWU9BHqQV5EjkK3hbP8iDcWoASrS7jxvR5oYY/Um+Y0kFizdEX7HDkHqBe2W3SLH0
+ A7sk9xweUohycyWTSWYQB6VGbTRP9OhkVMB9MXefQQAocQ65lZDIbqEd9iYHW3u0FLro=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
- From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=4yjKeglWKrH6owi0pztnoYq9KsxnkOkLZvWrO1hqThU=; b=hZU8t6Lopu4tTTp9SF46HflAQT
- EpLt1jS64B8Mu+jG5bFnPUVhDf/lbm4XiYbNaW2EZMsFiq0NYNuSaB6b99TmNnJiTcWcNNA5/mSkv
- LlxgEsM0+/NB1MjEhz7Cq1w4BtCtW91k9uE9XwYJRFi7QwejOcaBsLEylV9YgLnPF9Co=;
+ bh=zQ42qSgPqN2BzDinrVgIpIX1EKJo8qAiwqlENos+Cw0=; b=DBZ6HrLa0oVPgOnPglQ22Oj8WD
+ +zJWoTcheV5Kh4PwPPTPiVgC6pbr4zInManGXNDtt0CsNKteJz2SIfgbiOT6LoN2UgaQUasjYEQok
+ aALQXZudEX+15uSGGFke0O4aYsU7v9nasBGzXc0SRBxIzg7eki3WqckvP5JZKoORM4co=;
 Received: from lichtman.org ([149.28.33.109])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1t2GHG-0008Sn-Sa for kgdb-bugreport@lists.sourceforge.net;
- Sat, 19 Oct 2024 20:42:23 +0000
+ id 1t2y8j-00019j-Ec for kgdb-bugreport@lists.sourceforge.net;
+ Mon, 21 Oct 2024 19:32:30 +0000
 Received: by lichtman.org (Postfix, from userid 1000)
- id 41DC21770FF; Sat, 19 Oct 2024 20:42:12 +0000 (UTC)
+ id BCC6D177106; Mon, 21 Oct 2024 19:32:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=lichtman.org; s=mail;
- t=1729370532; bh=ye+sQb4lcoOQCfVxdUhggBdY5bpunrH2WtgJp84HDHk=;
- h=Date:From:To:Subject:References:In-Reply-To:From;
- b=vPXF3yvGzoTaX36QmS5Ubhia6Efa+0RX/GIDyYARchI2/uBcKRKOsk4FtFpBMD2wY
- IzOc8D/0qAQ23xnglP3TddH0X+QomOYCRJdmA9LVJSgC3MOy0YrwL0wNaNfkv/FOh2
- JvpDdB1ttreZCsuWf0+T7L4IWt/fAN+BkalIDP9eIFlsfjVxOWlKdftqhkfEMXs7PZ
- hN5ZTN7OYPDkgNNRprtA43zzB/QwGJuwpBA/31T6MaHFKAKLRX/O1ykazKD/LyrpK5
- mq8svYhEoKzqdEL3Wniw3pBTL8Vz/WvlSPGRbjw2L3r6YnLENgxdsKWylUrt17GylR
- /ttUDrubo3cYg==
-Date: Sat, 19 Oct 2024 20:42:12 +0000
+ t=1729539143; bh=lvbUhXDFjOdI5unZDc8utq3G1xeo/THENAURmkXLtAI=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=ayevwYMRcN7dicEdONEvabO2FibzrRiry7l5ZKbLeqdEgM8C8FaRZoTMQVuPKL/7I
+ Et2VA8ljzNLKY9zPdDYbbxvHuD+lIwdl6VPDDDUOIc0Vy/qMQKWzNLBlLQIU+o+R2p
+ Ui+iR14IjhPFSVqK/T5jYQwr94mQkpEAtlg0OtsARJ/hVi/8OeArLGdJy79OTDrjug
+ Nc3xHcIuUBcocj0T4z/yRBFvRmOrIPcszGXMf2RftseF0iS3mzW1wfM1ZFYAE4aE0O
+ xea9b72iRodg9saIxHHB6StUI2eehfJbzhVw9GoMG6GZgm/uLFj8uBxiCYTPKUxeQD
+ Rc99NetmJWMPQ==
+Date: Mon, 21 Oct 2024 19:32:23 +0000
 From: Nir Lichtman <nir@lichtman.org>
-To: jason.wessel@windriver.com, daniel.thompson@linaro.org,
- dianders@chromium.org, kgdb-bugreport@lists.sourceforge.net,
- linux-kernel@vger.kernel.org
-Message-ID: <20241019204212.GA811391@lichtman.org>
+To: Doug Anderson <dianders@chromium.org>
+Message-ID: <20241021193223.GA834839@lichtman.org>
 References: <20241019195715.GA810861@lichtman.org>
+ <20241019204212.GA811391@lichtman.org>
+ <CAD=FV=UpKjTe78vexUXFThPXtx1KjhfR_u+1hpQpkh8ei-F5aA@mail.gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20241019195715.GA810861@lichtman.org>
+In-Reply-To: <CAD=FV=UpKjTe78vexUXFThPXtx1KjhfR_u+1hpQpkh8ei-F5aA@mail.gmail.com>
 X-Spam-Score: -0.2 (/)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Problem: In many cases,
- KDB treats invalid commands as numbers
- and instead of printing a usage error, goes ahead and just prints the number
- in hex Example: This can be demonstrated when typing for example "aaazzz",
- this confuses KDB into thinking this is the hexadecimal 0xAAA 
+ 
+ Content preview:  On Mon, Oct 21, 2024 at 10:14:15AM -0700, Doug Anderson wrote:
+    > Hi, > > On Sat, Oct 19, 2024 at 1:42 PM Nir Lichtman <nir@lichtman.org>
+    wrote: > > > > Problem: In many cases, KDB treats invalid com [...] 
+ 
  Content analysis details:   (-0.2 points, 6.0 required)
- pts rule name              description
+ 
+  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+                             author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
-X-Headers-End: 1t2GHG-0008Sn-Sa
+                             envelope-from domain
+  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+                             valid
+X-Headers-End: 1t2y8j-00019j-Ec
 X-Mailman-Approved-At: Mon, 28 Oct 2024 11:35:55 +0000
-Subject: [Kgdb-bugreport] [PATCH v2] KDB: Fix incorrect treatment of numbers
- in the CLI
+Subject: Re: [Kgdb-bugreport] [PATCH v2] KDB: Fix incorrect treatment of
+ numbers in the CLI
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -100,59 +100,53 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: kgdb-bugreport@lists.sourceforge.net, daniel.thompson@linaro.org,
+ Yuran Pereira <yuran.pereira@hotmail.com>, linux-kernel@vger.kernel.org,
+ jason.wessel@windriver.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Problem: In many cases, KDB treats invalid commands as numbers and
-instead of printing a usage error, goes ahead and just prints the number
-in hex
-
-Example: This can be demonstrated when typing for example "aaazzz", this
-confuses KDB into thinking this is the hexadecimal 0xAAA
-
-Solution: Transition to using kstrtoul instead of simple_strtoul.
-This function is more strict with what it treats as a number
-and thus solves the issue.
-(also better practice as stated in the definition of simple_strtoul).
-
-v2: Removed redundant if condition I put in v1
-
-Signed-off-by: Nir Lichtman <nir@lichtman.org>
----
- kernel/debug/kdb/kdb_main.c | 7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
-
-diff --git a/kernel/debug/kdb/kdb_main.c b/kernel/debug/kdb/kdb_main.c
-index f5f7d7fb5936..4cbd5cd26821 100644
---- a/kernel/debug/kdb/kdb_main.c
-+++ b/kernel/debug/kdb/kdb_main.c
-@@ -402,18 +402,15 @@ static void kdb_printenv(void)
-  */
- int kdbgetularg(const char *arg, unsigned long *value)
- {
--	char *endp;
- 	unsigned long val;
- 
--	val = simple_strtoul(arg, &endp, 0);
- 
--	if (endp == arg) {
-+	if (kstrtoul(arg, 0, &val) != 0) {
- 		/*
- 		 * Also try base 16, for us folks too lazy to type the
- 		 * leading 0x...
- 		 */
--		val = simple_strtoul(arg, &endp, 16);
--		if (endp == arg)
-+		if (kstrtoul(arg, 16, &val) != 0)
- 			return KDB_BADINT;
- 	}
- 
--- 
-2.39.2
-
-
-_______________________________________________
-Kgdb-bugreport mailing list
-Kgdb-bugreport@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport
+T24gTW9uLCBPY3QgMjEsIDIwMjQgYXQgMTA6MTQ6MTVBTSAtMDcwMCwgRG91ZyBBbmRlcnNvbiB3
+cm90ZToKPiBIaSwKPiAKPiBPbiBTYXQsIE9jdCAxOSwgMjAyNCBhdCAxOjQy4oCvUE0gTmlyIExp
+Y2h0bWFuIDxuaXJAbGljaHRtYW4ub3JnPiB3cm90ZToKPiA+Cj4gPiBQcm9ibGVtOiBJbiBtYW55
+IGNhc2VzLCBLREIgdHJlYXRzIGludmFsaWQgY29tbWFuZHMgYXMgbnVtYmVycyBhbmQKPiA+IGlu
+c3RlYWQgb2YgcHJpbnRpbmcgYSB1c2FnZSBlcnJvciwgZ29lcyBhaGVhZCBhbmQganVzdCBwcmlu
+dHMgdGhlIG51bWJlcgo+ID4gaW4gaGV4Cj4gPgo+ID4gRXhhbXBsZTogVGhpcyBjYW4gYmUgZGVt
+b25zdHJhdGVkIHdoZW4gdHlwaW5nIGZvciBleGFtcGxlICJhYWF6enoiLCB0aGlzCj4gPiBjb25m
+dXNlcyBLREIgaW50byB0aGlua2luZyB0aGlzIGlzIHRoZSBoZXhhZGVjaW1hbCAweEFBQQo+ID4K
+PiA+IFNvbHV0aW9uOiBUcmFuc2l0aW9uIHRvIHVzaW5nIGtzdHJ0b3VsIGluc3RlYWQgb2Ygc2lt
+cGxlX3N0cnRvdWwuCj4gPiBUaGlzIGZ1bmN0aW9uIGlzIG1vcmUgc3RyaWN0IHdpdGggd2hhdCBp
+dCB0cmVhdHMgYXMgYSBudW1iZXIKPiA+IGFuZCB0aHVzIHNvbHZlcyB0aGUgaXNzdWUuCj4gPiAo
+YWxzbyBiZXR0ZXIgcHJhY3RpY2UgYXMgc3RhdGVkIGluIHRoZSBkZWZpbml0aW9uIG9mIHNpbXBs
+ZV9zdHJ0b3VsKS4KPiA+Cj4gPiB2MjogUmVtb3ZlZCByZWR1bmRhbnQgaWYgY29uZGl0aW9uIEkg
+cHV0IGluIHYxCj4gPgo+ID4gU2lnbmVkLW9mZi1ieTogTmlyIExpY2h0bWFuIDxuaXJAbGljaHRt
+YW4ub3JnPgo+ID4gLS0tCj4gPiAga2VybmVsL2RlYnVnL2tkYi9rZGJfbWFpbi5jIHwgNyArKy0t
+LS0tCj4gPiAgMSBmaWxlIGNoYW5nZWQsIDIgaW5zZXJ0aW9ucygrKSwgNSBkZWxldGlvbnMoLSkK
+PiA+Cj4gPiBkaWZmIC0tZ2l0IGEva2VybmVsL2RlYnVnL2tkYi9rZGJfbWFpbi5jIGIva2VybmVs
+L2RlYnVnL2tkYi9rZGJfbWFpbi5jCj4gPiBpbmRleCBmNWY3ZDdmYjU5MzYuLjRjYmQ1Y2QyNjgy
+MSAxMDA2NDQKPiA+IC0tLSBhL2tlcm5lbC9kZWJ1Zy9rZGIva2RiX21haW4uYwo+ID4gKysrIGIv
+a2VybmVsL2RlYnVnL2tkYi9rZGJfbWFpbi5jCj4gPiBAQCAtNDAyLDE4ICs0MDIsMTUgQEAgc3Rh
+dGljIHZvaWQga2RiX3ByaW50ZW52KHZvaWQpCj4gPiAgICovCj4gPiAgaW50IGtkYmdldHVsYXJn
+KGNvbnN0IGNoYXIgKmFyZywgdW5zaWduZWQgbG9uZyAqdmFsdWUpCj4gPiAgewo+ID4gLSAgICAg
+ICBjaGFyICplbmRwOwo+ID4gICAgICAgICB1bnNpZ25lZCBsb25nIHZhbDsKPiA+Cj4gPiAtICAg
+ICAgIHZhbCA9IHNpbXBsZV9zdHJ0b3VsKGFyZywgJmVuZHAsIDApOwo+ID4KPiA+IC0gICAgICAg
+aWYgKGVuZHAgPT0gYXJnKSB7Cj4gPiArICAgICAgIGlmIChrc3RydG91bChhcmcsIDAsICZ2YWwp
+ICE9IDApIHsKPiA+ICAgICAgICAgICAgICAgICAvKgo+ID4gICAgICAgICAgICAgICAgICAqIEFs
+c28gdHJ5IGJhc2UgMTYsIGZvciB1cyBmb2xrcyB0b28gbGF6eSB0byB0eXBlIHRoZQo+ID4gICAg
+ICAgICAgICAgICAgICAqIGxlYWRpbmcgMHguLi4KPiA+ICAgICAgICAgICAgICAgICAgKi8KPiA+
+IC0gICAgICAgICAgICAgICB2YWwgPSBzaW1wbGVfc3RydG91bChhcmcsICZlbmRwLCAxNik7Cj4g
+PiAtICAgICAgICAgICAgICAgaWYgKGVuZHAgPT0gYXJnKQo+ID4gKyAgICAgICAgICAgICAgIGlm
+IChrc3RydG91bChhcmcsIDE2LCAmdmFsKSAhPSAwKQo+IAo+IEluc3RlYWQgb2YganVzdCBmaXhp
+bmcgdGhlIG9uZSBjYXNlLCBkbyB5b3Ugd2FudCB0byBqdXN0IHRha2Ugb3ZlciB0aGUKPiBvbGQg
+cGF0Y2ggc2VyaWVzIHRoYXQgdHJpZWQgdG8gZG8gYSBtb3JlIGNvbXBsZXRlIGpvYjoKPiAKPiBo
+dHRwczovL2xvcmUua2VybmVsLm9yZy9yL0dWMVBSMTBNQjY1NjNFMEY4REIyRDMzNUJEOUNGRTRE
+M0U4QjRBQEdWMVBSMTBNQjY1NjMuRVVSUFJEMTAuUFJPRC5PVVRMT09LLkNPTS8KPiAKPiBJIHRo
+aW5rIGluIGdlbmVyYWwgdGhhdCBzZXJpZXMgbG9va2VkIGdvb2QgYnV0IGp1c3QgaGFkIGEgZmV3
+IG5pdHMgb24KPiBpdCwgYnV0IHRoZSBhdXRob3IgKFl1cmFuIFBlcmVpcmEpIG5ldmVyIGZvbGxv
+d2VkIHVwIHdpdGggYSB2Mi4gWW91Cj4gY291bGQgdGFrZSB0aGF0IHNlcmllcywgZml4IHRoZSBu
+aXRzLCBhZGQgeW91ciBzaWduZWQtb2ZmLWJ5LCBhbmQgcG9zdAo+IGEgdjI/Cj4gCj4gLURvdWcK
+CkludGVyZXN0aW5nLCB3aWxsIHRha2UgYSBsb29rLgoKCgoKX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX18KS2dkYi1idWdyZXBvcnQgbWFpbGluZyBsaXN0Cktn
+ZGItYnVncmVwb3J0QGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZv
+cmdlLm5ldC9saXN0cy9saXN0aW5mby9rZ2RiLWJ1Z3JlcG9ydAo=
