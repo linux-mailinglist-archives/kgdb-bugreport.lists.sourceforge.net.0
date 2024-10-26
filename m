@@ -2,60 +2,60 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 26C149B2F03
+	by mail.lfdr.de (Postfix) with ESMTPS id 708659B2F04
 	for <lists+kgdb-bugreport@lfdr.de>; Mon, 28 Oct 2024 12:36:08 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1t5O2Y-0007eA-UP
+	id 1t5O2Z-0007eT-7p
 	for lists+kgdb-bugreport@lfdr.de;
-	Mon, 28 Oct 2024 11:36:06 +0000
+	Mon, 28 Oct 2024 11:36:07 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <nir@lichtman.org>) id 1t2zmS-0004mt-1Q
+ (envelope-from <nir@lichtman.org>) id 1t4i4m-00057D-6E
  for kgdb-bugreport@lists.sourceforge.net;
- Mon, 21 Oct 2024 21:17:35 +0000
+ Sat, 26 Oct 2024 14:47:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:
  From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=A5LGOtiISLUiCvf9KmrdeJ6L2aabjMzUqrgj6LflPMQ=; b=GBVBJ3XTlKKYmLv97S7RJYoIV5
- 9RG3Tu0vg6O7aAFd0i68SSMsQ7QTLtOM14Jo5n5L+GCJR4XBo/XDiJlJEgy1HKUe0SovrO+oTe1kV
- Edbawmtn1YM/BMK8uP4duSrmmQlIUYIdWLUN8Eq0/y4mCpbJ3pejxsSmf3ahfu2xJylo=;
+ bh=Mz5jJOWSMM1lgSGz29NH1bEK4owMhrFPbiGQV0BSQ3Q=; b=MHVAMh6QkhgGUyKL3pBscR041v
+ LVTci/qmE/rYLMcR5mo3pR+/PB3m9OmBggK95vYIYh2BD3SVscufqwL17sh6qpuCAuuc8SmUnmXRn
+ aa5Y7jvoA1zMNysm0eO2eZwzOUzjsWu4vgFSaivOyT2CG7rtNv9jVRTTnqLe9F0rUoVM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Sender:
  Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
  :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=A5LGOtiISLUiCvf9KmrdeJ6L2aabjMzUqrgj6LflPMQ=; b=C
- G+QRrHJJ7hgB+JLFWk4LnYI4f0FcHVd4sI7ZgshF1JptjtNvwonpXa0uVvaf5MHuwSqhFn8VgawsC
- eqWShTPMg833rwZslc5T4PkPvDJAXIo3hEA0kkyHvOtG/1vRNa/oNh7HbuaIu0n2GNTl7D6UiPXME
- wPHXZA+qTWDMXP8Y=;
+ List-Owner:List-Archive; bh=Mz5jJOWSMM1lgSGz29NH1bEK4owMhrFPbiGQV0BSQ3Q=; b=O
+ CTx5d9DDalizUiHkUExx8AMc8ZYT6XLnLPzGZvDpDoe/tweJ1ujZBHzIiaJDIh9FyEG6mPz2ymk/M
+ Ag+Zi+Yz5rx5Xq0sYHtxKpNUFaVbrPh5SIzguU6q1tr+v/cgoWnPv4RXELMMKChokCKtMppHRLuvc
+ rbNpFyQqPZNljC+0=;
 Received: from lichtman.org ([149.28.33.109])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1t2zmQ-0007uZ-Mj for kgdb-bugreport@lists.sourceforge.net;
- Mon, 21 Oct 2024 21:17:35 +0000
+ id 1t4i4l-0007FW-E6 for kgdb-bugreport@lists.sourceforge.net;
+ Sat, 26 Oct 2024 14:47:36 +0000
 Received: by lichtman.org (Postfix, from userid 1000)
- id 0A5D417710F; Mon, 21 Oct 2024 21:17:24 +0000 (UTC)
+ id 90D25177103; Sat, 26 Oct 2024 14:47:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=lichtman.org; s=mail;
- t=1729545444; bh=pv3jKh6fN2c1jXFgbQJcvaSmIksdraQtfExZKZJ0xQg=;
+ t=1729954044; bh=j+zxkjt/Kb9ZF1jAWfGzqPmaDqTM2RiQ22KLaeHRslQ=;
  h=Date:From:To:Cc:Subject:From;
- b=DqQPc+5iwL76k7nifgNBW/2C7LN3NSs/j6dz8GLd/XOA7Il8N4L4PAIXl0BgC8FRt
- E6ThUou2WHr2qg1dPEMmJc64DCdwDKemhuVZdO1u1IYChppbArGhqf38OqMyTfKa4S
- BtRl5hVXjd7brJr6qWDnS0xVZyrpQq2dpSDAn2yqIIZ48wZk3TPVZhE2G/lhBz/YU+
- 19gYj34z8OMzG8Rb7AABQXgIczFGVtHFAgG7WL12w4Ss28s+YtPLOdGH4uRcfByJ4u
- JMOprs0koHPZOmrc+yULjEuBc0SBXeBKoJ5l+GtyLwf0x5x4PUhVDq9wTpTa6jsC0x
- al8BV/sTyPfSw==
-Date: Mon, 21 Oct 2024 21:17:24 +0000
+ b=mbxLIxyoPJjSgjZSh+W916g6DJSQdBE1FmCERgWyFWCx4d0ljEmnc8QCzzGMWXWua
+ px4OPssGIc98PD7NatN5drTQm5+VaHmO7FY9pCuS3svpNNWFKhU1FCvruP6krBokcS
+ P6dmzVLYtAt0GTOIKZ3HopigNTsJ+beXZ/pABzRRgoZmjyzE/iPbtK35OiC+lkwjOO
+ KE7C4Ui1NUaa2lYB+27Wk+GCSABZnGd9q/unCQAYM26Nmmvt/1BnYnfhixy8UhpfJQ
+ dqhb6JbOnA+bqP99/gFAs6AggFdxF+3HfSQ+8w8vLUGMxDBd8yAteF8QWDnph0tApQ
+ j/r66CBCb1fXg==
+Date: Sat, 26 Oct 2024 14:47:24 +0000
 From: Nir Lichtman <nir@lichtman.org>
 To: kgdb-bugreport@lists.sourceforge.net,
 	linux-trace-kernel@vger.kernel.org
-Message-ID: <20241021211724.GC835676@lichtman.org>
+Message-ID: <20241026144724.GA892311@lichtman.org>
 MIME-Version: 1.0
 Content-Disposition: inline
 X-Spam-Score: -0.2 (/)
@@ -65,25 +65,25 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  The function simple_strtoul performs no error checking in
- scenarios where the input value overflows the intended output variable. This
- results in this function successfully returning, even when the ou [...] 
+ Content preview: The simple_str* family of functions perform no error checking
+ in scenarios where the input value overflows the intended output variable.
+ This results in these function successfully returning even when [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
-X-Headers-End: 1t2zmQ-0007uZ-Mj
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+X-Headers-End: 1t4i4l-0007FW-E6
 X-Mailman-Approved-At: Mon, 28 Oct 2024 11:35:55 +0000
-Subject: [Kgdb-bugreport] [PATCH v2 2/2] trace: kdb: Replace simple_strtoul
- with kstrtoul in kdb_ftdump
+Subject: [Kgdb-bugreport] [PATCH v3 0/2] Replace the use of simple_strtol/ul
+ functions with kstrto
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,63 +102,48 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-The function simple_strtoul performs no error checking in scenarios
-where the input value overflows the intended output variable.
-This results in this function successfully returning, even when the
-output does not match the input string (aka the function returns
-successfully even when the result is wrong).
+The simple_str* family of functions perform no error checking in
+scenarios where the input value overflows the intended output variable.
+This results in these function successfully returning even when the
+output does not match the input string.
 
 Or as it was mentioned [1], "...simple_strtol(), simple_strtoll(),
 simple_strtoul(), and simple_strtoull() functions explicitly ignore
 overflows, which may lead to unexpected results in callers."
 Hence, the use of those functions is discouraged.
 
-This patch replaces all uses of the simple_strtoul with the safer
-alternatives kstrtoint and kstrtol.
+This patch series replaces uses of the simple_strto* series of function
+with the safer  kstrto* alternatives.
 
+  
 [1] https://www.kernel.org/doc/html/latest/process/deprecated.html#simple-strtol-simple-strtoll-simple-strtoul-simple-strtoull
 
-Signed-off-by: Yuran Pereira <yuran.pereira@hotmail.com>
-Signed-off-by: Nir Lichtman <nir@lichtman.org>
----
- kernel/trace/trace_kdb.c | 15 ++++++---------
- 1 file changed, 6 insertions(+), 9 deletions(-)
+Yuran Pereira (2):
+  kdb: Replace the use of simple_strto with safer kstrto in kdb_main
+  trace: kdb: Replace simple_strtoul with kstrtoul in kdb_ftdump
+Nir Lichtman (1):
+  kdb: Remove fallback interpretation of arbitrary numbers as hex
 
-diff --git a/kernel/trace/trace_kdb.c b/kernel/trace/trace_kdb.c
-index 59857a1ee44c..eadda6e05526 100644
---- a/kernel/trace/trace_kdb.c
-+++ b/kernel/trace/trace_kdb.c
-@@ -96,23 +96,20 @@ static int kdb_ftdump(int argc, const char **argv)
- {
- 	int skip_entries = 0;
- 	long cpu_file;
--	char *cp;
-+	int err;
- 	int cnt;
- 	int cpu;
- 
- 	if (argc > 2)
- 		return KDB_ARGCOUNT;
- 
--	if (argc) {
--		skip_entries = simple_strtol(argv[1], &cp, 0);
--		if (*cp)
--			skip_entries = 0;
--	}
-+	if (argc && kstrtoint(argv[1], 0, &skip_entries))
-+		return KDB_BADINT;
- 
- 	if (argc == 2) {
--		cpu_file = simple_strtol(argv[2], &cp, 0);
--		if (*cp || cpu_file >= NR_CPUS || cpu_file < 0 ||
--		    !cpu_online(cpu_file))
-+		err = kstrtol(argv[2], 0, &cpu_file);
-+		if (err || cpu_file >= NR_CPUS || cpu_file < 0 ||
-+			!cpu_online(cpu_file))
- 			return KDB_BADINT;
- 	} else {
- 		cpu_file = RING_BUFFER_ALL_CPUS;
--- 
+This patch is originally based upon
+https://lore.kernel.org/all/GV1PR10MB65635561FB160078C3744B5FE8B4A@GV1PR10MB6563.EURPRD10.PROD.OUTLOOK.COM/
+
+Since the original thread was left with a review and the comments have not been addressed,
+decided to continue the minor work left to move this patch forward.
+
+v2:
+- Styling fixes
+- Fix an invalid conversion to unsigned int instead of signed as it was supposed to be
+- Fix one of the conversions to return an error in case of failure, instead of silently falling back to a default value
+- Add Douglas's suggestion for removing the hex interpretation fallback
+v3: 
+- Split to 3 parts instead of 2 (in which the 3rd part now contains the hex interpretation fix)
+- Fix the patch series to properly reference the cover
+- Fix credit tags
+
+ kernel/debug/kdb/kdb_main.c | 69 +++++++++--------------------------
+ kernel/trace/trace_kdb.c    | 15 +++-----
+ 2 files changed, 23 insertions(+), 61 deletions(-)
+--
 2.39.2
 
 
