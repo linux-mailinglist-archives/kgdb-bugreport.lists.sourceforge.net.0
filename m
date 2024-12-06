@@ -2,110 +2,100 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B1E5A9E5D1F
-	for <lists+kgdb-bugreport@lfdr.de>; Thu,  5 Dec 2024 18:30:23 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 446FA9E623F
+	for <lists+kgdb-bugreport@lfdr.de>; Fri,  6 Dec 2024 01:31:25 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1tJFgE-0001Ul-Dn
+	id 1tJMFe-00077D-FQ
 	for lists+kgdb-bugreport@lfdr.de;
-	Thu, 05 Dec 2024 17:30:21 +0000
+	Fri, 06 Dec 2024 00:31:23 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <rdunlap@infradead.org>) id 1tJFgD-0001Ue-HV
+ (envelope-from <rdunlap@infradead.org>) id 1tJMFc-000777-K6
  for kgdb-bugreport@lists.sourceforge.net;
- Thu, 05 Dec 2024 17:30:20 +0000
+ Fri, 06 Dec 2024 00:31:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=+qJf5Q6Eld3EBOT/qf+hwJg4g1YOizrbg7xTLfswxlE=; b=BCpg9WAAxlq3Pg+SMZeCIkl4mU
- 5LwM2ETX54yf+drhJZIfhYDIXR0PSRu1pc4gEq71STyM0LOdjDOxIjyd5kyHYPa8JdkprhVfgYiuI
- 3kIa+YhP8y/ESxoTrY3nWhydkIBnhxlzRv1cqdYmau+iRjU+HpJqCZjktne8nbDWHcX0=;
+ bh=Na6pnlklJTA1xNU44wRBfwwfuxFdNDpARjvimFThkjw=; b=ZeqwvTRIT61LI8ss7ULl80n+S3
+ ZDaAq5t7VOjnYCtXo8WtwC3euunx7i7K63TaYEyetbIJd7E79fH4SaAzvEnjQ85BEDB/o9MnWRsLG
+ 68h3ltM45UPc1SHhmi+Zf/AB5cUV1Stx61BKkvgMUrRkKvLk2cV+GJGh6tGNmR8DAUas=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=+qJf5Q6Eld3EBOT/qf+hwJg4g1YOizrbg7xTLfswxlE=; b=NkpZJG1aV2ppJeY2Sws8HUnZP+
- q6399VitFLTB05EJL45Lg5zvNqAX+zhcLJCjBvTZ2IIVWrSXeyKpxEhMMiZq5OyrkS9/vOZ0+TCVf
- gSXHiQwSKFUb/fRL2UR5TCsOCb9qPE3fSz9ZWwQXCCVEwYHGi2ifGz41pPx+qcbbtv08=;
-Received: from [90.155.92.199] (helo=desiato.infradead.org)
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=Na6pnlklJTA1xNU44wRBfwwfuxFdNDpARjvimFThkjw=; b=V
+ bSfFduRwPKb7jZ/QOLHiTcWfHyB0V6AS+LGrCQ/gbFJ4caIzqI/VUNx7DmZM1iheMbkwDvlf5zB4e
+ wva2NE0qR7oFf5IMnpIgTid6WvQGFvhS8u0ipH2Q+Z4nYPS6e5m0dXJNC9pU5W6cJSCJCteQFV15T
+ xUot1wBYF/eKehOU=;
+Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tJFgB-0006zS-Lw for kgdb-bugreport@lists.sourceforge.net;
- Thu, 05 Dec 2024 17:30:20 +0000
+ id 1tJMFb-0008Lt-RO for kgdb-bugreport@lists.sourceforge.net;
+ Fri, 06 Dec 2024 00:31:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=desiato.20200630; h=Content-Transfer-Encoding:Content-Type
- :In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:
- Sender:Reply-To:Content-ID:Content-Description;
- bh=+qJf5Q6Eld3EBOT/qf+hwJg4g1YOizrbg7xTLfswxlE=; b=P3wLQoIjFeVD+btfbNE+DbucDt
- sJimhkl12CQr6KNZYt3maAUojCYSSU95lNWp17vOvQ8bGgMqwBYQi6bbcUEWXT/ZWoDAzM/KjACB6
- sW/INyYFUMEgD1PzIIsU8fOLuEgIFoWbz/rP0HIw9txoubV3IqDZyhHnecsr0DiK2YB0zCwOJXb5a
- vL+0wKfT/Io723kp6wbB2fuCEk4p3qwdtXGeLonLVPMyZriWehkirWqc1UdR15QrZ7QLnqcwkMPV9
- 5aNkr78eVqHvSZlqJEfe7vgSG4hK1UWAKMlUoS31qexZl7zlJuKFb2iPu3Bdm3HSVK3iQLWuS978B
- cvV3riTQ==;
-Received: from [50.53.2.24] (helo=[192.168.254.17])
- by desiato.infradead.org with esmtpsa (Exim 4.98 #2 (Red Hat Linux))
- id 1tJFLd-00000002x1e-0eJC; Thu, 05 Dec 2024 17:09:05 +0000
-Message-ID: <cf29b196-5376-4fdf-88b5-28b1d0da9c8c@infradead.org>
-Date: Thu, 5 Dec 2024 09:08:58 -0800
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Sebastian Fricke <sebastian.fricke@collabora.com>
-References: <20241204221720.66146-1-rdunlap@infradead.org>
- <CAD=FV=WhQFxUNr6vyMVBn9CmZPnnntDP2nH=Tp1Rm=xH+YsE2w@mail.gmail.com>
- <e3e78060-0939-4078-989c-acd7ca1c90d2@infradead.org>
- <20241205090914.h34rhyzhhazas6l4@basti-XPS-13-9310>
-Content-Language: en-US
+ d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+ MIME-Version:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:In-Reply-To:References;
+ bh=Na6pnlklJTA1xNU44wRBfwwfuxFdNDpARjvimFThkjw=; b=2Px4gFdHWZQt7NnF1mG2vxWvZf
+ tOnXDgZkAAMp1JowFHc9Wp9x3Y13VV7DZKQ/omSbTAaNqMBS58RPxf78hAexZ3mevs5CJose11QAx
+ nRg3lov+vEp/u7BWR8u0KcZSr6f2MpgJKrOyTC2FV546GMzTTmLDm9sS/RcuNmgF8Gv4YkworMEeF
+ 0FBKXIIvRoO2BbPQG755jXeuubcmIloHm+9sIwm+XZCyUUYLB0lHM4gkEyeeDHstjNZ4gnE1VSBBg
+ SvGTD7rJFCyhWH9Ajdedg1EyNoGkfQy969GrN/o7vglUkE9ZfmCbNcwExDD3NYV5/So2TmuFy+XR9
+ HIZb9PYQ==;
+Received: from [50.53.2.24] (helo=bombadil.infradead.org)
+ by bombadil.infradead.org with esmtpsa (Exim 4.98 #2 (Red Hat Linux))
+ id 1tJMFL-000000005HF-0UgE; Fri, 06 Dec 2024 00:31:03 +0000
 From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <20241205090914.h34rhyzhhazas6l4@basti-XPS-13-9310>
-X-Spam-Score: -1.2 (-)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
+To: linux-doc@vger.kernel.org
+Date: Thu,  5 Dec 2024 16:31:00 -0800
+Message-ID: <20241206003100.38142-1-rdunlap@infradead.org>
+X-Mailer: git-send-email 2.47.1
+MIME-Version: 1.0
+X-Spam-Score: -2.5 (--)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  On 12/5/24 1:09 AM, Sebastian Fricke wrote: > Greetings! >
-    > On 04.12.2024 15:09, Randy Dunlap wrote: >> >> >> On 12/4/24 3:07 PM, Doug
-    Anderson wrote: >>> Hi, >>> >>> On Wed, Dec 4, 2024 at 2:17 PM [...] 
- 
- Content analysis details:   (-1.2 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview:  Move gdb and kgdb debugging documentation to the dedicated
+ debugging directory (Documentation/process/debugging/). Adjust the index.rst
+ files to follow the file movement. Adjust files that refer to th [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [198.137.202.133 listed in sa-trusted.bondedsender.org]
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [198.137.202.133 listed in bl.score.senderscore.com]
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
-                             medium trust
-                             [90.155.92.199 listed in list.dnswl.org]
-  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
-                             query to Validity was blocked.  See
-                             https://knowledge.validity.com/hc/en-us/articles/20961730681243
-                              for more information.
-                             [90.155.92.199 listed in bl.score.senderscore.com]
-  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
-                             query to Validity was blocked.  See
-                             https://knowledge.validity.com/hc/en-us/articles/20961730681243
-                              for more information.
-                          [90.155.92.199 listed in sa-trusted.bondedsender.org]
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ medium trust [198.137.202.133 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
-  1.3 RDNS_NONE              Delivered to internal network by a host with no rDNS
-X-Headers-End: 1tJFgB-0006zS-Lw
-Subject: Re: [Kgdb-bugreport] [PATCH] Documentation: move dev-tools
- debugging files to process/debugging/
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+X-Headers-End: 1tJMFb-0008Lt-RO
+Subject: [Kgdb-bugreport] [PATCH v2] Documentation: move dev-tools debugging
+ files to process/debugging/
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,76 +107,160 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jonathan Corbet <corbet@lwn.net>, kgdb-bugreport@lists.sourceforge.net,
- linux-doc@vger.kernel.org, Daniel Thompson <danielt@kernel.org>,
- workflows@vger.kernel.org, Jason Wessel <jason.wessel@windriver.com>,
+Cc: Yanteng Si <siyanteng@loongson.cn>, linux-serial@vger.kernel.org,
+ Sebastian Fricke <sebastian.fricke@collabora.com>,
+ Jonathan Corbet <corbet@lwn.net>, kgdb-bugreport@lists.sourceforge.net,
+ Randy Dunlap <rdunlap@infradead.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Daniel Thompson <danielt@kernel.org>, workflows@vger.kernel.org,
+ Jason Wessel <jason.wessel@windriver.com>,
+ Hu Haowen <2023002089@link.tyut.edu.cn>,
+ Andrew Morton <akpm@linux-foundation.org>, Alex Shi <alexs@kernel.org>,
  linux-debuggers@vger.kernel.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-CgpPbiAxMi81LzI0IDE6MDkgQU0sIFNlYmFzdGlhbiBGcmlja2Ugd3JvdGU6Cj4gR3JlZXRpbmdz
-IQo+IAo+IE9uIDA0LjEyLjIwMjQgMTU6MDksIFJhbmR5IER1bmxhcCB3cm90ZToKPj4KPj4KPj4g
-T24gMTIvNC8yNCAzOjA3IFBNLCBEb3VnIEFuZGVyc29uIHdyb3RlOgo+Pj4gSGksCj4+Pgo+Pj4g
-T24gV2VkLCBEZWMgNCwgMjAyNCBhdCAyOjE34oCvUE0gUmFuZHkgRHVubGFwIDxyZHVubGFwQGlu
-ZnJhZGVhZC5vcmc+IHdyb3RlOgo+Pj4+Cj4+Pj4gTW92ZSBnZGIgYW5kIGtnZGIgZGVidWdnaW5n
-IGRvY3VtZW50YXRpb24gdG8gdGhlIGRlZGljYXRlZAo+Pj4+IGRlYnVnZ2luZyBkaXJlY3Rvcnkg
-KERvY3VtZW50YXRpb24vcHJvY2Vzcy9kZWJ1Z2dpbmcvKS4KPj4+PiBBZGp1c3QgdGhlIGluZGV4
-LnJzdCBmaWxlcyB0byBmb2xsb3cgdGhlIGZpbGUgbW92ZW1lbnQuCj4+Pj4gVXBkYXRlIGxvY2F0
-aW9uIG9mIGtnZGIucnN0IGluIE1BSU5UQUlORVJTIGZpbGUuCj4+Pj4KPj4+PiBTaWduZWQtb2Zm
-LWJ5OiBSYW5keSBEdW5sYXAgPHJkdW5sYXBAaW5mcmFkZWFkLm9yZz4KPj4+PiBDYzogU2ViYXN0
-aWFuIEZyaWNrZSA8c2ViYXN0aWFuLmZyaWNrZUBjb2xsYWJvcmEuY29tPgo+Pj4+IENjOiBKb25h
-dGhhbiBDb3JiZXQgPGNvcmJldEBsd24ubmV0Pgo+Pj4+IENjOiB3b3JrZmxvd3NAdmdlci5rZXJu
-ZWwub3JnCj4+Pj4gQ2M6IEphc29uIFdlc3NlbCA8amFzb24ud2Vzc2VsQHdpbmRyaXZlci5jb20+
-Cj4+Pj4gQ2M6IERhbmllbCBUaG9tcHNvbiA8ZGFuaWVsdEBrZXJuZWwub3JnPgo+Pj4+IENjOiBE
-b3VnbGFzIEFuZGVyc29uIDxkaWFuZGVyc0BjaHJvbWl1bS5vcmc+Cj4+Pj4gQ2M6IGxpbnV4LWRl
-YnVnZ2Vyc0B2Z2VyLmtlcm5lbC5vcmcKPj4+PiBDYzoga2dkYi1idWdyZXBvcnRAbGlzdHMuc291
-cmNlZm9yZ2UubmV0Cj4+Pj4gLS0tCj4+Pj4gwqBEb2N1bWVudGF0aW9uL2Rldi10b29scy9pbmRl
-eC5yc3TCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHwgMiAtLQo+Pj4+IMKgRG9jdW1lbnRhdGlvbi97ZGV2
-LXRvb2xzID0+IHByb2Nlc3MvZGVidWdnaW5nfS9nZGIta2VybmVsLWRlYnVnZ2luZy5yc3QgfCAw
-Cj4+Pgo+Pj4gQWZ0ZXIgYXBwbHlpbmcgeW91ciBwYXRjaCBhbmQgZG9pbmcgYGdpdCBncmVwCj4+
-PiBnZGIta2VybmVsLWRlYnVnZ2luZy5yc3RgLCBJIHN0aWxsIHNlZSBzZXZlcmFsIHJlZmVyZW5j
-ZXMgdG8gdGhlIG9sZAo+Pj4gbG9jYXRpb24uIFRob3NlIHNob3VsZCBiZSB1cGRhdGVkIGFzIHBh
-cnQgb2YgdGhpcyBwYXRjaCwgcmlnaHQ/Cj4+Pgo+Pj4KPj4+Cj4+Pj4gwqBEb2N1bWVudGF0aW9u
-L3Byb2Nlc3MvZGVidWdnaW5nL2luZGV4LnJzdMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8IDIgKysKPj4+PiDCoERvY3VtZW50YXRp
-b24ve2Rldi10b29scyA9PiBwcm9jZXNzL2RlYnVnZ2luZ30va2dkYi5yc3TCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoCB8IDAKPj4+Cj4+PiBTaW1pbGFybHkgYGdpdCBncmVwIGtnZGIu
-cnN0YCBzdGlsbCBoYXMgc2V2ZXJhbCByZWZlcmVuY2VzIHRvIHRoZSBvbGQgbG9jYXRpb24uCj4+
-Cj4+Cj4+IFRoYW5rcy4gSSBzaG91bGQgaGF2ZSBkb25lIHRoYXQuwqAgOigKPj4KPj4+PiDCoE1B
-SU5UQUlORVJTwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgIHwgMiArLQo+Pj4+IMKgNSBmaWxlcyBjaGFuZ2VkLCAzIGluc2VydGlv
-bnMoKyksIDMgZGVsZXRpb25zKC0pCj4+Pj4KPj4+PiBkaWZmIC0tZ2l0IGEvRG9jdW1lbnRhdGlv
-bi9kZXYtdG9vbHMvaW5kZXgucnN0IGIvRG9jdW1lbnRhdGlvbi9kZXYtdG9vbHMvaW5kZXgucnN0
-Cj4+Pj4gaW5kZXggM2MwYWMwOGIyNzA5Li5jMWU3M2U3NWY1NTEgMTAwNjQ0Cj4+Pj4gLS0tIGEv
-RG9jdW1lbnRhdGlvbi9kZXYtdG9vbHMvaW5kZXgucnN0Cj4+Pj4gKysrIGIvRG9jdW1lbnRhdGlv
-bi9kZXYtdG9vbHMvaW5kZXgucnN0Cj4+Pj4gQEAgLTI3LDggKzI3LDYgQEAgRG9jdW1lbnRhdGlv
-bi9kZXYtdG9vbHMvdGVzdGluZy1vdmVydmlldy5yc3QKPj4+PiDCoMKgwqAga21lbWxlYWsKPj4+
-PiDCoMKgwqAga2NzYW4KPj4+PiDCoMKgwqAga2ZlbmNlCj4+Pj4gLcKgwqAgZ2RiLWtlcm5lbC1k
-ZWJ1Z2dpbmcKPj4+PiAtwqDCoCBrZ2RiCj4+Pj4gwqDCoMKgIGtzZWxmdGVzdAo+Pj4+IMKgwqDC
-oCBrdW5pdC9pbmRleAo+Pj4+IMKgwqDCoCBrdGFwCj4+Pj4gZGlmZiAtLWdpdCBhL0RvY3VtZW50
-YXRpb24vZGV2LXRvb2xzL2dkYi1rZXJuZWwtZGVidWdnaW5nLnJzdCBiL0RvY3VtZW50YXRpb24v
-cHJvY2Vzcy9kZWJ1Z2dpbmcvZ2RiLWtlcm5lbC1kZWJ1Z2dpbmcucnN0Cj4+Pj4gc2ltaWxhcml0
-eSBpbmRleCAxMDAlCj4+Pj4gcmVuYW1lIGZyb20gRG9jdW1lbnRhdGlvbi9kZXYtdG9vbHMvZ2Ri
-LWtlcm5lbC1kZWJ1Z2dpbmcucnN0Cj4+Pj4gcmVuYW1lIHRvIERvY3VtZW50YXRpb24vcHJvY2Vz
-cy9kZWJ1Z2dpbmcvZ2RiLWtlcm5lbC1kZWJ1Z2dpbmcucnN0Cj4+Pj4gZGlmZiAtLWdpdCBhL0Rv
-Y3VtZW50YXRpb24vcHJvY2Vzcy9kZWJ1Z2dpbmcvaW5kZXgucnN0IGIvRG9jdW1lbnRhdGlvbi9w
-cm9jZXNzL2RlYnVnZ2luZy9pbmRleC5yc3QKPj4+PiBpbmRleCBmNmU0YTAwZGZlZTMuLmJjNGE4
-MTZlM2QzMiAxMDA2NDQKPj4+PiAtLS0gYS9Eb2N1bWVudGF0aW9uL3Byb2Nlc3MvZGVidWdnaW5n
-L2luZGV4LnJzdAo+Pj4+ICsrKyBiL0RvY3VtZW50YXRpb24vcHJvY2Vzcy9kZWJ1Z2dpbmcvaW5k
-ZXgucnN0Cj4+Pj4gQEAgLTEyLDYgKzEyLDggQEAgZ2VuZXJhbCBndWlkZXMKPj4+Pgo+Pj4+IMKg
-wqDCoCBkcml2ZXJfZGV2ZWxvcG1lbnRfZGVidWdnaW5nX2d1aWRlCj4+Pj4gwqDCoMKgIHVzZXJz
-cGFjZV9kZWJ1Z2dpbmdfZ3VpZGUKPj4+PiArwqDCoCBnZGIta2VybmVsLWRlYnVnZ2luZwo+Pj4+
-ICvCoMKgIGtnZGIKPj4+Cj4+PiBTaG91bGQgdGhlIGxpc3QgYWJvdmUgYmUga2VwdCBhbHBoYWJl
-dGljYWwuIFRoZSBsaXN0IHlvdSByZW1vdmVkIHRoZXNlCj4+PiBlbnRyaWVzIGZyb20gd2FzIF9h
-bG1vc3RfIGFscGhhYmV0aWNhbC4uLgo+Pgo+PiBOb3QgdGhhdCBJIGtub3cgb2YuwqAgSSdsbCBs
-aXN0ZW4gZm9yIG90aGVyIG9waW5pb25zIHRob3VnaC4KPiAKPiBJJ2Qgc2F5IGl0IGlzIGVhc3kg
-ZW5vdWdoIGZvciB1cyB0byBkbywgc28gSSdkIGFkdm9jYXRlIGZvciBtYWtpbmcgdGhlCj4gbGlz
-dCBhbHBoYWJldGljYWwgKC4uIGV2ZW4gdGhvdWdoIEkgZm9yZ290IHRvIGRvIHRoYXQgaW4gbXkg
-aW5pdGlhbCBsaXN0IPCfmIUpCgpPSywgd2lsbCBkby4KVGhhbmtzLgoKLS0gCn5SYW5keQoKCgpf
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpLZ2RiLWJ1Z3Jl
-cG9ydCBtYWlsaW5nIGxpc3QKS2dkYi1idWdyZXBvcnRAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0
-dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2tnZGItYnVncmVwb3J0
-Cg==
+Move gdb and kgdb debugging documentation to the dedicated
+debugging directory (Documentation/process/debugging/).
+Adjust the index.rst files to follow the file movement.
+Adjust files that refer to these moved files to follow the file movement.
+Update location of kgdb.rst in MAINTAINERS file.
+
+Note: translations are not updated.
+
+Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
+Cc: Sebastian Fricke <sebastian.fricke@collabora.com>
+Cc: Jonathan Corbet <corbet@lwn.net>
+Cc: workflows@vger.kernel.org
+Cc: Jason Wessel <jason.wessel@windriver.com>
+Cc: Daniel Thompson <danielt@kernel.org>
+Cc: Douglas Anderson <dianders@chromium.org>
+Cc: linux-debuggers@vger.kernel.org
+Cc: kgdb-bugreport@lists.sourceforge.net
+Cc: Doug Anderson <dianders@chromium.org>
+Cc: Alex Shi <alexs@kernel.org>
+Cc: Yanteng Si <siyanteng@loongson.cn>
+Cc: Hu Haowen <2023002089@link.tyut.edu.cn>
+Cc: Andrew Morton <akpm@linux-foundation.org>
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: linux-serial@vger.kernel.org
+---
+v2: Make process/debugging/index alpha by filename.
+    Update references to the moved files.
+
+ Documentation/admin-guide/README.rst                                  | 4 ++--
+ Documentation/dev-tools/index.rst                                     | 2 --
+ .../{dev-tools => process/debugging}/gdb-kernel-debugging.rst         | 0
+ Documentation/process/debugging/index.rst                             | 2 ++
+ Documentation/{dev-tools => process/debugging}/kgdb.rst               | 0
+ MAINTAINERS                                                           | 2 +-
+ include/linux/tty_driver.h                                            | 2 +-
+ lib/Kconfig.debug                                                     | 2 +-
+ lib/Kconfig.kgdb                                                      | 2 +-
+ 9 files changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/Documentation/admin-guide/README.rst b/Documentation/admin-guide/README.rst
+index f2bebff6a733..eb9452668909 100644
+--- a/Documentation/admin-guide/README.rst
++++ b/Documentation/admin-guide/README.rst
+@@ -356,5 +356,5 @@ instructions at 'Documentation/admin-guide/reporting-issues.rst'.
+ 
+ Hints on understanding kernel bug reports are in
+ 'Documentation/admin-guide/bug-hunting.rst'. More on debugging the kernel
+-with gdb is in 'Documentation/dev-tools/gdb-kernel-debugging.rst' and
+-'Documentation/dev-tools/kgdb.rst'.
++with gdb is in 'Documentation/process/debugging/gdb-kernel-debugging.rst' and
++'Documentation/process/debugging/kgdb.rst'.
+diff --git a/Documentation/dev-tools/index.rst b/Documentation/dev-tools/index.rst
+index 3c0ac08b2709..c1e73e75f551 100644
+--- a/Documentation/dev-tools/index.rst
++++ b/Documentation/dev-tools/index.rst
+@@ -27,8 +27,6 @@ Documentation/dev-tools/testing-overview.rst
+    kmemleak
+    kcsan
+    kfence
+-   gdb-kernel-debugging
+-   kgdb
+    kselftest
+    kunit/index
+    ktap
+diff --git a/Documentation/dev-tools/gdb-kernel-debugging.rst b/Documentation/process/debugging/gdb-kernel-debugging.rst
+similarity index 100%
+rename from Documentation/dev-tools/gdb-kernel-debugging.rst
+rename to Documentation/process/debugging/gdb-kernel-debugging.rst
+diff --git a/Documentation/process/debugging/index.rst b/Documentation/process/debugging/index.rst
+index f6e4a00dfee3..387d33d16f5e 100644
+--- a/Documentation/process/debugging/index.rst
++++ b/Documentation/process/debugging/index.rst
+@@ -11,6 +11,8 @@ general guides
+    :maxdepth: 1
+ 
+    driver_development_debugging_guide
++   gdb-kernel-debugging
++   kgdb
+    userspace_debugging_guide
+ 
+ .. only::  subproject and html
+diff --git a/Documentation/dev-tools/kgdb.rst b/Documentation/process/debugging/kgdb.rst
+similarity index 100%
+rename from Documentation/dev-tools/kgdb.rst
+rename to Documentation/process/debugging/kgdb.rst
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 1e930c7a58b1..1753fe792d04 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -12809,7 +12809,7 @@ L:	kgdb-bugreport@lists.sourceforge.net
+ S:	Maintained
+ W:	http://kgdb.wiki.kernel.org/
+ T:	git git://git.kernel.org/pub/scm/linux/kernel/git/jwessel/kgdb.git
+-F:	Documentation/dev-tools/kgdb.rst
++F:	Documentation/process/debugging/kgdb.rst
+ F:	drivers/misc/kgdbts.c
+ F:	drivers/tty/serial/kgdboc.c
+ F:	include/linux/kdb.h
+diff --git a/include/linux/tty_driver.h b/include/linux/tty_driver.h
+index dd4b31ce6d5d..d4cdc089f6c3 100644
+--- a/include/linux/tty_driver.h
++++ b/include/linux/tty_driver.h
+@@ -320,7 +320,7 @@ struct serial_struct;
+  *
+  * @poll_init: ``int ()(struct tty_driver *driver, int line, char *options)``
+  *
+- *	kgdboc support (Documentation/dev-tools/kgdb.rst). This routine is
++ *	kgdboc support (Documentation/process/debugging/kgdb.rst). This routine is
+  *	called to initialize the HW for later use by calling @poll_get_char or
+  *	@poll_put_char.
+  *
+diff --git a/lib/Kconfig.debug b/lib/Kconfig.debug
+index f3d723705879..d2cf74cbbe70 100644
+--- a/lib/Kconfig.debug
++++ b/lib/Kconfig.debug
+@@ -433,7 +433,7 @@ config GDB_SCRIPTS
+ 	  build directory. If you load vmlinux into gdb, the helper
+ 	  scripts will be automatically imported by gdb as well, and
+ 	  additional functions are available to analyze a Linux kernel
+-	  instance. See Documentation/dev-tools/gdb-kernel-debugging.rst
++	  instance. See Documentation/process/debugging/gdb-kernel-debugging.rst
+ 	  for further details.
+ 
+ endif # DEBUG_INFO
+diff --git a/lib/Kconfig.kgdb b/lib/Kconfig.kgdb
+index 537e1b3f5734..8336b1a489a3 100644
+--- a/lib/Kconfig.kgdb
++++ b/lib/Kconfig.kgdb
+@@ -19,7 +19,7 @@ menuconfig KGDB
+ 	  CONFIG_FRAME_POINTER to aid in producing more reliable stack
+ 	  backtraces in the external debugger.  Documentation of
+ 	  kernel debugger is available at http://kgdb.sourceforge.net
+-	  as well as in Documentation/dev-tools/kgdb.rst.  If
++	  as well as in Documentation/process/debugging/kgdb.rst.  If
+ 	  unsure, say N.
+ 
+ if KGDB
+
+
+_______________________________________________
+Kgdb-bugreport mailing list
+Kgdb-bugreport@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport
