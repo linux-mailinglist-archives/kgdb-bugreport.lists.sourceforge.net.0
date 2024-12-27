@@ -2,63 +2,65 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 06FA39FD131
-	for <lists+kgdb-bugreport@lfdr.de>; Fri, 27 Dec 2024 08:28:55 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 61B4F9FD136
+	for <lists+kgdb-bugreport@lfdr.de>; Fri, 27 Dec 2024 08:29:10 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1tR4mD-00069y-38
+	id 1tR4mT-0005gP-63
 	for lists+kgdb-bugreport@lfdr.de;
-	Fri, 27 Dec 2024 07:28:53 +0000
+	Fri, 27 Dec 2024 07:29:09 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <rppt@kernel.org>) id 1tR4mB-00069r-Ob
+ (envelope-from <rppt@kernel.org>) id 1tR4mR-0005g9-Dw
  for kgdb-bugreport@lists.sourceforge.net;
- Fri, 27 Dec 2024 07:28:52 +0000
+ Fri, 27 Dec 2024 07:29:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=qcorEnshSlUvWUIclIaQ7O5Fp0YwV8Jv7lKKOj/FCyU=; b=UWG8Z+5eXINXiN1ycwjx/viDgi
- QSFXpyaPwe9c7mneThdtF8Ph6J6Y737nIrG58SDUt2LBNKS78ItwbWaIiymk5hJwbzzNrsG6zL0gW
- n0IGkiLNdLh3Klsha4s9KB8GU1LoD5ac2O4gBUv4j69ryF1ZO1+ZqljaXVhpTRFI4sOU=;
+ bh=+HrNZ99qkNC8KEVuL9mBInkUyujn5g9T+2i2xoZ40eA=; b=eqER2wohIgImWKLSeEdqGpwpDY
+ VpaleP0L1AQ2vbxy1JxEMBzgbGihLOain4nFsNHYR1srI4PODFbwMb2NlHsY19sWwAokhaoxLTKE8
+ ppIeC51H4HZTErPyn9gRXtYS5PPigoQObEBUZaE/qrtn1EMDdr6GiKdw2d7pQF7CqQxU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=qcorEnshSlUvWUIclIaQ7O5Fp0YwV8Jv7lKKOj/FCyU=; b=U
- +tVw/+2uHo2QLTvlvd1l/SaumRQhuejNRjGNf5/5so4fXM5ni8nmRukH3Y4/gR07irxaoFFeC7WSL
- I9q2D9IyaBjBdP7fPyZb4OKBb1lAPREnTE3beLyZKA2cADOF6fN33G6Q6AokMzIytm0cN/k4CgLU7
- 70UaXK1E9j+H3Mow=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=+HrNZ99qkNC8KEVuL9mBInkUyujn5g9T+2i2xoZ40eA=; b=dk36Fdx/xR7wsWzIrdbbF88YB7
+ xlrrL0rry2w452hnXo4gUBrY1tL+Fmnh4yC2IO0ircfm6svtmnkuo7E89xn2U0dyvaAl0+kh48Cz1
+ xt5D/QtNBHt52sjL6Q4HpM9oV924oBU+VBNnFI37kikbectnw+wP4ioNUEysnPhO6eB0=;
 Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tR4mB-0007EW-OB for kgdb-bugreport@lists.sourceforge.net;
- Fri, 27 Dec 2024 07:28:52 +0000
+ id 1tR4mQ-0007Fb-Jy for kgdb-bugreport@lists.sourceforge.net;
+ Fri, 27 Dec 2024 07:29:07 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id BC6DCA41191;
- Fri, 27 Dec 2024 07:26:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6BECBC4CED0;
- Fri, 27 Dec 2024 07:28:35 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 121E2A411C2;
+ Fri, 27 Dec 2024 07:27:06 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BE67BC4CEE0;
+ Fri, 27 Dec 2024 07:28:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1735284525;
- bh=jbs+82vTwYkxQ3EpjI+1yvm0nBPBr9HhcF8xhKMgyb4=;
- h=From:To:Cc:Subject:Date:From;
- b=VWflVN7Vf0mMrePAw/GmezMrZdtva3K3h36HGmBxa/KroU575WF5NJHeh0C6TXNjF
- qQhJ4X9PGAqzjrUVpQRiVvwIGMd+mISM5MQXFvk45sfhmzlny3nUqVMIbeY6kdii/w
- zWWKCDoOIlTrr71quUFFRbqLg+DHcfKtQtVHdMmb1lnaMhGLAzyiY7V3autquhweL9
- gpxz7kV3lQ4EAySR1yDZ2syQZsNyGHLgB/w6HxDmV2RAqrWKXeYkMQOMk5oc3c8Pn5
- sSBAIqOuQ0ZL0h2iDfLAfuFMjvlnSpx46Mfk1CVcx/gQmlnCTUUVbl2c6KeEM5cwGT
- y+LUWaqHdI5Jg==
+ s=k20201202; t=1735284535;
+ bh=dDY3jvGc45EmH43gWTWL5MYq9/Q1o2IM8rTUBWv64F4=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=XIKjst/1wY9OLHzpWhKj4UYzvvFmcR4hmg80K6xgftHuqpsmSc/WhiGud59GDjjzi
+ aNz3dTtAuVNVEHjllJa1agh/PcGzzQ66TpAnxGLd8odvdPn/NGL5AyLFLNK0v+Lnhp
+ bhPN1Os0xv0DFA2Rowt02pnOqtwzGCgnOcp8m0lYJbqUII24zTaeAR3jrs4wuFfxUY
+ +QIvMRxsnN0EZtVPbUliy1r7vLNbumpP1LYjLd+z4MU8NZ06lZWiXEn3S3nkWyCjKQ
+ N/1w2f1V8lMe32qPhndZ+dbjWAY10MCC6iOXhG754bFZ9u/qEZfhDQflknVMn5jliH
+ ZskGTUVYsxgjw==
 To: Andrew Morton <akpm@linux-foundation.org>
-Date: Fri, 27 Dec 2024 09:28:17 +0200
-Message-ID: <20241227072825.1288491-1-rppt@kernel.org>
+Date: Fri, 27 Dec 2024 09:28:18 +0200
+Message-ID: <20241227072825.1288491-2-rppt@kernel.org>
 X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20241227072825.1288491-1-rppt@kernel.org>
+References: <20241227072825.1288491-1-rppt@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -2.6 (--)
 X-Spam-Report: Spam detection software,
@@ -67,27 +69,28 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  From: "Mike Rapoport (Microsoft)" <rppt@kernel.org> Hi,
- Following
- Peter's comments [1] these patches rework handling of ROX caches for module
- text allocations. 
+ Content preview: From: "Mike Rapoport (Microsoft)" <rppt@kernel.org> The
+ CPA_ARRAY
+ test always uses len[1] as numpages argument to change_page_attr_set()
+ although
+ the addresses array is different each iteration of the test loop. 
  Content analysis details:   (-2.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [147.75.193.91 listed in list.dnswl.org]
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [147.75.193.91 listed in sa-accredit.habeas.com]
+ [147.75.193.91 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
  [147.75.193.91 listed in bl.score.senderscore.com]
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [147.75.193.91 listed in list.dnswl.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
@@ -95,9 +98,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tR4mB-0007EW-OB
-Subject: [Kgdb-bugreport] [PATCH 0/8] x86/module: rework ROX cache to avoid
- writable copy
+X-Headers-End: 1tR4mQ-0007Fb-Jy
+Subject: [Kgdb-bugreport] [PATCH 1/8] x86/mm/pat: cpa-test: fix length for
+ CPA_ARRAY test
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -139,67 +142,31 @@ Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
 From: "Mike Rapoport (Microsoft)" <rppt@kernel.org>
 
-Hi,
+The CPA_ARRAY test always uses len[1] as numpages argument to
+change_page_attr_set() although the addresses array is different each
+iteration of the test loop.
 
-Following Peter's comments [1] these patches rework handling of ROX caches
-for module text allocations. 
+Replace len[1] with len[i] to have numpages matching the addresses array.
 
-Instead of using a writable copy that really complicates alternatives
-patching, temporarily remap parts of a large ROX page as RW for the time of
-module formation and then restore it's ROX protections when the module is
-ready.
+Fixes: ecc729f1f471 ("x86/mm/cpa: Add ARRAY and PAGES_ARRAY selftests")
+Signed-off-by: Mike Rapoport (Microsoft) <rppt@kernel.org>
+---
+ arch/x86/mm/pat/cpa-test.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-To keep the ROX memory mapped with large pages, make set_memory code
-capable of restoring large pages (more details are in patch 3).
-
-The patches also available in git
-https://git.kernel.org/rppt/h/execmem/x86-rox/v8
-
-[1] https://lore.kernel.org/all/20241209083818.GK8562@noisy.programming.kicks-ass.net
-
-Kirill A. Shutemov (1):
-  x86/mm/pat: Restore large pages after fragmentation
-
-Mike Rapoport (Microsoft) (7):
-  x86/mm/pat: cpa-test: fix length for CPA_ARRAY test
-  x86/mm/pat: drop duplicate variable in cpa_flush()
-  execmem: add API for temporal remapping as RW and restoring ROX
-    afterwards
-  module: introduce MODULE_STATE_GONE
-  modules: switch to execmem API for remapping as RW and restoring ROX
-  Revert "x86/module: prepare module loading for ROX allocations of
-    text"
-  module: drop unused module_writable_address()
-
- arch/um/kernel/um_arch.c                      |  11 +-
- arch/x86/entry/vdso/vma.c                     |   3 +-
- arch/x86/include/asm/alternative.h            |  14 +-
- arch/x86/include/asm/pgtable_types.h          |   2 +
- arch/x86/kernel/alternative.c                 | 181 ++++++---------
- arch/x86/kernel/ftrace.c                      |  30 ++-
- arch/x86/kernel/module.c                      |  45 ++--
- arch/x86/mm/pat/cpa-test.c                    |   2 +-
- arch/x86/mm/pat/set_memory.c                  | 216 +++++++++++++++++-
- include/linux/execmem.h                       |  31 +++
- include/linux/module.h                        |  21 +-
- include/linux/moduleloader.h                  |   4 -
- include/linux/vm_event_item.h                 |   2 +
- kernel/module/kallsyms.c                      |   8 +-
- kernel/module/kdb.c                           |   2 +-
- kernel/module/main.c                          |  86 ++-----
- kernel/module/procfs.c                        |   2 +-
- kernel/module/strict_rwx.c                    |   9 +-
- kernel/tracepoint.c                           |   2 +
- lib/kunit/test.c                              |   2 +
- mm/execmem.c                                  | 118 ++++++++--
- mm/vmstat.c                                   |   2 +
- samples/livepatch/livepatch-callbacks-demo.c  |   1 +
- .../test_modules/test_klp_callbacks_demo.c    |   1 +
- .../test_modules/test_klp_callbacks_demo2.c   |   1 +
- .../livepatch/test_modules/test_klp_state.c   |   1 +
- .../livepatch/test_modules/test_klp_state2.c  |   1 +
- 27 files changed, 511 insertions(+), 287 deletions(-)
-
+diff --git a/arch/x86/mm/pat/cpa-test.c b/arch/x86/mm/pat/cpa-test.c
+index 3d2f7f0a6ed1..ad3c1feec990 100644
+--- a/arch/x86/mm/pat/cpa-test.c
++++ b/arch/x86/mm/pat/cpa-test.c
+@@ -183,7 +183,7 @@ static int pageattr_test(void)
+ 			break;
+ 
+ 		case 1:
+-			err = change_page_attr_set(addrs, len[1], PAGE_CPA_TEST, 1);
++			err = change_page_attr_set(addrs, len[i], PAGE_CPA_TEST, 1);
+ 			break;
+ 
+ 		case 2:
 -- 
 2.45.2
 
