@@ -2,29 +2,29 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 666899FD144
-	for <lists+kgdb-bugreport@lfdr.de>; Fri, 27 Dec 2024 08:29:37 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id AD3429FD148
+	for <lists+kgdb-bugreport@lfdr.de>; Fri, 27 Dec 2024 08:29:47 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1tR4mt-0006BH-Fy
+	id 1tR4n4-0005jy-Gt
 	for lists+kgdb-bugreport@lfdr.de;
-	Fri, 27 Dec 2024 07:29:36 +0000
+	Fri, 27 Dec 2024 07:29:46 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <rppt@kernel.org>) id 1tR4mr-0006B9-4q
+ (envelope-from <rppt@kernel.org>) id 1tR4n2-0005jc-8m
  for kgdb-bugreport@lists.sourceforge.net;
- Fri, 27 Dec 2024 07:29:33 +0000
+ Fri, 27 Dec 2024 07:29:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=2g+SxczDYlrf43JjC8UJiDwBf+Z9UmJvZ80gCTVUkgY=; b=fj6YSc+kY3GTuwgE31Rq80bV6o
- w/jbdJOjcmIPToJjf5bjbfE3nO7mySLWlzpFPE+lrRHsxndPV3F1GFhtwyLFjtyq+RkySajgQb84M
- XfEGo6E3KKCF2MVL9YfZ0zxpybeKUBLbwzuRbJPm/BzBQE3HdiUVVjVN+6HvJZt2hhVI=;
+ bh=bhAs81WsdmaB1BC5mVN5DKU+/2vSD1EVP4twaFT9Vd4=; b=jzXgm3eL9VuXpqmuZkiRM73mGE
+ +PcTIrmjBlp4ZpfOMRwe2CbXj42jK8P9+5WMwuTbehXjncRlQ+pWPSIxcz7WK88IRC0+mZ73awtS3
+ qgkVhlp3rWMfI3UvIltKJ7zch8rq7KkJS78TBNbrGabcQoMGGoq/4CZe8RR1pCnOvgSg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -32,50 +32,54 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=2g+SxczDYlrf43JjC8UJiDwBf+Z9UmJvZ80gCTVUkgY=; b=mkB8HOBvZXBxuEijE43Gzg532u
- B4bVFxUftTafoNqJIzL6voH9HtUkiHrM6G8CuGNJSnOM7at9xufB4p/INqMVSVnV43ebDwvzkHTR6
- st39QLlj1Y3Y2jlW1Y5+Jieuu6GH0eqDiDQpoIb/ENeiw4wZT5Ru5+7G+N32m3wNlj7Q=;
+ bh=bhAs81WsdmaB1BC5mVN5DKU+/2vSD1EVP4twaFT9Vd4=; b=UdiUappthSHLoBlNWh2rTTWcd9
+ SCGFA3h9V1muRODnG9FjdmS2D0b+iFep5C/FiCNqXmeBxiQC5Y1rzOmwjWheX4bi7haFz6o/i5wjG
+ zRCk/wUP4XpTMDgIxxGiWPMAXn8cohAD/Y8GiJ7GJSyJhXByDsq7KQ5+wvPNTbiiGSrI=;
 Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tR4mq-0007HB-LY for kgdb-bugreport@lists.sourceforge.net;
- Fri, 27 Dec 2024 07:29:33 +0000
+ id 1tR4n0-0007Hl-Py for kgdb-bugreport@lists.sourceforge.net;
+ Fri, 27 Dec 2024 07:29:43 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id EAFEDA41216;
- Fri, 27 Dec 2024 07:27:36 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A41ABC4CED7;
- Fri, 27 Dec 2024 07:29:16 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 40680A411C6;
+ Fri, 27 Dec 2024 07:27:47 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id ED23AC4CEDE;
+ Fri, 27 Dec 2024 07:29:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1735284566;
- bh=eadd2fhesnrBbYUtyPuDOjZKluNBdPkoQ6My17z11ds=;
+ s=k20201202; t=1735284576;
+ bh=FmTrET8nL2UmyRc6aQAH2J1SgS8cwR3X1MoKmnTcl78=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=V7rL/1CgjCZvQAHg7NIcED5Na02EGjDigmzncnfAGdsE4oPXN9GFMNUqOgGKcIAxK
- hSznXGjRdJakuaXWQ8k1hzlFSbmpLCpkjLNAHE9LAlkf8Pyn2im17Lax3zToCNnlDO
- sF35OhD0vR+mDq6BWIXP/rORjFkoB2OmxqrXTUnH03R297ViXYi/DxGzjgG/PiNdu0
- UHjn6xvvqWwhXwUiJ2EvGaz72tB1oOF/eaVLHsZ/Slq/nm9qigaXwYR1thVtB6yGTd
- HfkagPFgCDXBJAQttID2sWzOm9fw+FJoE9uewLZw8sH2jQV7a2Ah68AXl/hMetNBpC
- 0CKPg/BqE8lzg==
+ b=ScuKV2kD6qnanPStFqpYQm0FgQDVh0DLb3NJ4mtpO81hTHINYHF0xekTtwDQfutNa
+ 5HKFQzwtfQTvNvihXCd5kB4OjdDHB0EgoIFx02GxxN3l+EmLdLZCev+8FpmEu9CC4k
+ eMT9y14Y+PeB1o2Tfc/girl/nvsZSOezNPfNaMWFzyJZUyEKRLnNC7r43j4jRHie3x
+ /okfVqQiHOWC+vCecEU5ddItPuJAZnoPoFpdYKjuRTORzV98ljXX49DwlOe+fDP1f0
+ KYHcHr1ZIK6uxPwndLMeq8O6yIz3Hp7YubMI/Xsj65vbvOwrCzxasJFI+iE6G6/Qwt
+ XiyJ1o1+qm82Q==
 To: Andrew Morton <akpm@linux-foundation.org>
-Date: Fri, 27 Dec 2024 09:28:21 +0200
-Message-ID: <20241227072825.1288491-5-rppt@kernel.org>
+Date: Fri, 27 Dec 2024 09:28:22 +0200
+Message-ID: <20241227072825.1288491-6-rppt@kernel.org>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241227072825.1288491-1-rppt@kernel.org>
 References: <20241227072825.1288491-1-rppt@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -2.6 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  From: "Mike Rapoport (Microsoft)" <rppt@kernel.org> Using
- a writable copy for ROX memory is cumbersome and error prone. Add API that
- allow temporarily remapping of ranges in the ROX cache as writable and then
- restoring their read-only-execute permissions. 
+ Content preview: From: "Mike Rapoport (Microsoft)" <rppt@kernel.org> In order
+ to use execmem's API for temporal remapping of the memory allocated from
+ ROX cache as writable, there is a need to distinguish between the state when
+ the module is being formed and the state [...] 
  Content analysis details:   (-2.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [147.75.193.91 listed in list.dnswl.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
@@ -86,21 +90,15 @@ X-Spam-Report: Spam detection software,
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
  [147.75.193.91 listed in bl.score.senderscore.com]
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [147.75.193.91 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tR4mq-0007HB-LY
-Subject: [Kgdb-bugreport] [PATCH 4/8] execmem: add API for temporal
- remapping as RW and restoring ROX afterwards
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1tR4n0-0007Hl-Py
+Subject: [Kgdb-bugreport] [PATCH 5/8] module: introduce MODULE_STATE_GONE
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -142,316 +140,294 @@ Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
 From: "Mike Rapoport (Microsoft)" <rppt@kernel.org>
 
-Using a writable copy for ROX memory is cumbersome and error prone.
+In order to use execmem's API for temporal remapping of the memory
+allocated from ROX cache as writable, there is a need to distinguish
+between the state when the module is being formed and the state when it is
+deconstructed and freed so that when module_memory_free() is called from
+error paths during module loading it could restore ROX mappings.
 
-Add API that allow temporarily remapping of ranges in the ROX cache as
-writable  and then restoring their read-only-execute permissions.
-
-This API will be later used in modules code and will allow removing nasty
-games with writable copy in alternatives patching on x86.
-
-The restoring of the ROX permissions relies on the ability of architecture
-to reconstruct large pages in its set_memory_rox() method.
+Replace open coded checks for MODULE_STATE_UNFORMED with a helper
+function module_is_formed() and add a new MODULE_STATE_GONE that will be
+set when the module is deconstructed and freed.
 
 Signed-off-by: Mike Rapoport (Microsoft) <rppt@kernel.org>
 ---
- include/linux/execmem.h |  31 +++++++++++
- mm/execmem.c            | 118 +++++++++++++++++++++++++++++++++-------
- 2 files changed, 130 insertions(+), 19 deletions(-)
+ include/linux/module.h                        |  6 ++++++
+ kernel/module/kallsyms.c                      |  8 ++++----
+ kernel/module/kdb.c                           |  2 +-
+ kernel/module/main.c                          | 19 +++++++++----------
+ kernel/module/procfs.c                        |  2 +-
+ kernel/tracepoint.c                           |  2 ++
+ lib/kunit/test.c                              |  2 ++
+ samples/livepatch/livepatch-callbacks-demo.c  |  1 +
+ .../test_modules/test_klp_callbacks_demo.c    |  1 +
+ .../test_modules/test_klp_callbacks_demo2.c   |  1 +
+ .../livepatch/test_modules/test_klp_state.c   |  1 +
+ .../livepatch/test_modules/test_klp_state2.c  |  1 +
+ 12 files changed, 30 insertions(+), 16 deletions(-)
 
-diff --git a/include/linux/execmem.h b/include/linux/execmem.h
-index 64130ae19690..65655a5d1be2 100644
---- a/include/linux/execmem.h
-+++ b/include/linux/execmem.h
-@@ -65,6 +65,37 @@ enum execmem_range_flags {
-  * Architectures that use EXECMEM_ROX_CACHE must implement this.
+diff --git a/include/linux/module.h b/include/linux/module.h
+index 94acbacdcdf1..bd8cf93d32c8 100644
+--- a/include/linux/module.h
++++ b/include/linux/module.h
+@@ -320,6 +320,7 @@ enum module_state {
+ 	MODULE_STATE_COMING,	/* Full formed, running module_init. */
+ 	MODULE_STATE_GOING,	/* Going away. */
+ 	MODULE_STATE_UNFORMED,	/* Still setting it up. */
++	MODULE_STATE_GONE,	/* Deconstructing and freeing. */
+ };
+ 
+ struct mod_tree_node {
+@@ -620,6 +621,11 @@ static inline bool module_is_coming(struct module *mod)
+         return mod->state == MODULE_STATE_COMING;
+ }
+ 
++static inline bool module_is_formed(struct module *mod)
++{
++	return mod->state < MODULE_STATE_UNFORMED;
++}
++
+ struct module *__module_text_address(unsigned long addr);
+ struct module *__module_address(unsigned long addr);
+ bool is_module_address(unsigned long addr);
+diff --git a/kernel/module/kallsyms.c b/kernel/module/kallsyms.c
+index bf65e0c3c86f..daf9a9b3740f 100644
+--- a/kernel/module/kallsyms.c
++++ b/kernel/module/kallsyms.c
+@@ -361,7 +361,7 @@ int lookup_module_symbol_name(unsigned long addr, char *symname)
+ 
+ 	preempt_disable();
+ 	list_for_each_entry_rcu(mod, &modules, list) {
+-		if (mod->state == MODULE_STATE_UNFORMED)
++		if (!module_is_formed(mod))
+ 			continue;
+ 		if (within_module(addr, mod)) {
+ 			const char *sym;
+@@ -389,7 +389,7 @@ int module_get_kallsym(unsigned int symnum, unsigned long *value, char *type,
+ 	list_for_each_entry_rcu(mod, &modules, list) {
+ 		struct mod_kallsyms *kallsyms;
+ 
+-		if (mod->state == MODULE_STATE_UNFORMED)
++		if (!module_is_formed(mod))
+ 			continue;
+ 		kallsyms = rcu_dereference_sched(mod->kallsyms);
+ 		if (symnum < kallsyms->num_symtab) {
+@@ -441,7 +441,7 @@ static unsigned long __module_kallsyms_lookup_name(const char *name)
+ 	list_for_each_entry_rcu(mod, &modules, list) {
+ 		unsigned long ret;
+ 
+-		if (mod->state == MODULE_STATE_UNFORMED)
++		if (!module_is_formed(mod))
+ 			continue;
+ 		ret = __find_kallsyms_symbol_value(mod, name);
+ 		if (ret)
+@@ -484,7 +484,7 @@ int module_kallsyms_on_each_symbol(const char *modname,
+ 	list_for_each_entry(mod, &modules, list) {
+ 		struct mod_kallsyms *kallsyms;
+ 
+-		if (mod->state == MODULE_STATE_UNFORMED)
++		if (!module_is_formed(mod))
+ 			continue;
+ 
+ 		if (modname && strcmp(modname, mod->name))
+diff --git a/kernel/module/kdb.c b/kernel/module/kdb.c
+index 995c32d3698f..14f14700ffc2 100644
+--- a/kernel/module/kdb.c
++++ b/kernel/module/kdb.c
+@@ -23,7 +23,7 @@ int kdb_lsmod(int argc, const char **argv)
+ 
+ 	kdb_printf("Module                  Size  modstruct     Used by\n");
+ 	list_for_each_entry(mod, &modules, list) {
+-		if (mod->state == MODULE_STATE_UNFORMED)
++		if (!module_is_formed(mod))
+ 			continue;
+ 
+ 		kdb_printf("%-20s%8u", mod->name, mod->mem[MOD_TEXT].size);
+diff --git a/kernel/module/main.c b/kernel/module/main.c
+index 5399c182b3cb..ad8ef20c120f 100644
+--- a/kernel/module/main.c
++++ b/kernel/module/main.c
+@@ -153,7 +153,7 @@ EXPORT_SYMBOL(unregister_module_notifier);
   */
- void execmem_fill_trapping_insns(void *ptr, size_t size, bool writable);
-+
-+/**
-+ * execmem_make_temp_rw - temporarily remap region with read-write
-+ *			  permissions
-+ * @ptr:	address of the region to remap
-+ * @size:	size of the region to remap
-+ *
-+ * Remaps a part of the cached large page in the ROX cache in the range
-+ * [@ptr, @ptr + @size) as writable and not executable. The caller must
-+ * have exclusive ownership of this range and ensure nothing will try to
-+ * execute code in this range.
-+ *
-+ * Return: 0 on success or negative error code on failure.
-+ */
-+int execmem_make_temp_rw(void *ptr, size_t size);
-+
-+/**
-+ * execmem_restore_rox - restore read-only-execute permissions
-+ * @ptr:	address of the region to remap
-+ * @size:	size of the region to remap
-+ *
-+ * Restores read-only-execute permissions on a range [@ptr, @ptr + @size)
-+ * after it was temporarily remapped as writable. Relies on architecture
-+ * implementation of set_memory_rox() to restore mapping using large pages.
-+ *
-+ * Return: 0 on success or negative error code on failure.
-+ */
-+int execmem_restore_rox(void *ptr, size_t size);
-+#else
-+static inline int execmem_make_temp_rw(void *ptr, size_t size) { return 0; }
-+static inline int execmem_restore_rox(void *ptr, size_t size) { return 0; }
- #endif
+ static inline int strong_try_module_get(struct module *mod)
+ {
+-	BUG_ON(mod && mod->state == MODULE_STATE_UNFORMED);
++	BUG_ON(mod && !module_is_formed(mod));
+ 	if (mod && mod->state == MODULE_STATE_COMING)
+ 		return -EBUSY;
+ 	if (try_module_get(mod))
+@@ -361,7 +361,7 @@ bool find_symbol(struct find_symbol_arg *fsa)
+ 			  GPL_ONLY },
+ 		};
  
- /**
-diff --git a/mm/execmem.c b/mm/execmem.c
-index 317b6a8d35be..be6b234c032e 100644
---- a/mm/execmem.c
-+++ b/mm/execmem.c
-@@ -89,6 +89,12 @@ static void *execmem_vmalloc(struct execmem_range *range, size_t size,
- #endif /* CONFIG_MMU */
+-		if (mod->state == MODULE_STATE_UNFORMED)
++		if (!module_is_formed(mod))
+ 			continue;
  
- #ifdef CONFIG_ARCH_HAS_EXECMEM_ROX
-+struct execmem_area {
-+	struct vm_struct *vm;
-+	unsigned int rw_mappings;
-+	size_t size;
-+};
-+
- struct execmem_cache {
- 	struct mutex mutex;
- 	struct maple_tree busy_areas;
-@@ -135,7 +141,7 @@ static void execmem_cache_clean(struct work_struct *work)
- 	struct maple_tree *free_areas = &execmem_cache.free_areas;
- 	struct mutex *mutex = &execmem_cache.mutex;
- 	MA_STATE(mas, free_areas, 0, ULONG_MAX);
--	void *area;
-+	struct execmem_area *area;
+ 		for (i = 0; i < ARRAY_SIZE(arr); i++)
+@@ -386,7 +386,7 @@ struct module *find_module_all(const char *name, size_t len,
  
- 	mutex_lock(mutex);
- 	mas_for_each(&mas, area, ULONG_MAX) {
-@@ -143,11 +149,12 @@ static void execmem_cache_clean(struct work_struct *work)
+ 	list_for_each_entry_rcu(mod, &modules, list,
+ 				lockdep_is_held(&module_mutex)) {
+-		if (!even_unformed && mod->state == MODULE_STATE_UNFORMED)
++		if (!even_unformed && !module_is_formed(mod))
+ 			continue;
+ 		if (strlen(mod->name) == len && !memcmp(mod->name, name, len))
+ 			return mod;
+@@ -457,7 +457,7 @@ bool __is_module_percpu_address(unsigned long addr, unsigned long *can_addr)
+ 	preempt_disable();
  
- 		if (IS_ALIGNED(size, PMD_SIZE) &&
- 		    IS_ALIGNED(mas.index, PMD_SIZE)) {
--			struct vm_struct *vm = find_vm_area(area);
-+			struct vm_struct *vm = area->vm;
+ 	list_for_each_entry_rcu(mod, &modules, list) {
+-		if (mod->state == MODULE_STATE_UNFORMED)
++		if (!module_is_formed(mod))
+ 			continue;
+ 		if (!mod->percpu_size)
+ 			continue;
+@@ -1326,7 +1326,7 @@ static void free_module(struct module *mod)
+ 	 * that noone uses it while it's being deconstructed.
+ 	 */
+ 	mutex_lock(&module_mutex);
+-	mod->state = MODULE_STATE_UNFORMED;
++	mod->state = MODULE_STATE_GONE;
+ 	mutex_unlock(&module_mutex);
  
- 			execmem_set_direct_map_valid(vm, true);
- 			mas_store_gfp(&mas, NULL, GFP_KERNEL);
--			vfree(area);
-+			vfree(vm->addr);
-+			kfree(area);
- 		}
+ 	/* Arch-specific cleanup. */
+@@ -3048,8 +3048,7 @@ static int module_patient_check_exists(const char *name,
+ 	if (old == NULL)
+ 		return 0;
+ 
+-	if (old->state == MODULE_STATE_COMING ||
+-	    old->state == MODULE_STATE_UNFORMED) {
++	if (old->state == MODULE_STATE_COMING || !module_is_formed(old)) {
+ 		/* Wait in case it fails to load. */
+ 		mutex_unlock(&module_mutex);
+ 		err = wait_event_interruptible(module_wq,
+@@ -3608,7 +3607,7 @@ char *module_flags(struct module *mod, char *buf, bool show_state)
+ {
+ 	int bx = 0;
+ 
+-	BUG_ON(mod->state == MODULE_STATE_UNFORMED);
++	BUG_ON(!module_is_formed(mod));
+ 	if (!mod->taints && !show_state)
+ 		goto out;
+ 	if (mod->taints ||
+@@ -3702,7 +3701,7 @@ struct module *__module_address(unsigned long addr)
+ 	mod = mod_find(addr, &mod_tree);
+ 	if (mod) {
+ 		BUG_ON(!within_module(addr, mod));
+-		if (mod->state == MODULE_STATE_UNFORMED)
++		if (!module_is_formed(mod))
+ 			mod = NULL;
  	}
- 	mutex_unlock(mutex);
-@@ -155,30 +162,31 @@ static void execmem_cache_clean(struct work_struct *work)
+ 	return mod;
+@@ -3756,7 +3755,7 @@ void print_modules(void)
+ 	/* Most callers should already have preempt disabled, but make sure */
+ 	preempt_disable();
+ 	list_for_each_entry_rcu(mod, &modules, list) {
+-		if (mod->state == MODULE_STATE_UNFORMED)
++		if (!module_is_formed(mod))
+ 			continue;
+ 		pr_cont(" %s%s", mod->name, module_flags(mod, buf, true));
+ 	}
+diff --git a/kernel/module/procfs.c b/kernel/module/procfs.c
+index 0a4841e88adb..2c617e6f8bc0 100644
+--- a/kernel/module/procfs.c
++++ b/kernel/module/procfs.c
+@@ -79,7 +79,7 @@ static int m_show(struct seq_file *m, void *p)
+ 	unsigned int size;
  
- static DECLARE_WORK(execmem_cache_clean_work, execmem_cache_clean);
+ 	/* We always ignore unformed modules. */
+-	if (mod->state == MODULE_STATE_UNFORMED)
++	if (!module_is_formed(mod))
+ 		return 0;
  
--static int execmem_cache_add(void *ptr, size_t size)
-+static int execmem_cache_add(void *ptr, size_t size, struct execmem_area *area)
- {
- 	struct maple_tree *free_areas = &execmem_cache.free_areas;
- 	struct mutex *mutex = &execmem_cache.mutex;
- 	unsigned long addr = (unsigned long)ptr;
- 	MA_STATE(mas, free_areas, addr - 1, addr + 1);
-+	struct execmem_area *lower_area = NULL;
-+	struct execmem_area *upper_area = NULL;
- 	unsigned long lower, upper;
--	void *area = NULL;
- 	int err;
- 
- 	lower = addr;
- 	upper = addr + size - 1;
- 
- 	mutex_lock(mutex);
--	area = mas_walk(&mas);
--	if (area && mas.last == addr - 1)
-+	lower_area = mas_walk(&mas);
-+	if (lower_area && lower_area == area && mas.last == addr - 1)
- 		lower = mas.index;
- 
--	area = mas_next(&mas, ULONG_MAX);
--	if (area && mas.index == addr + size)
-+	upper_area = mas_next(&mas, ULONG_MAX);
-+	if (upper_area && upper_area == area && mas.index == addr + size)
- 		upper = mas.last;
- 
- 	mas_set_range(&mas, lower, upper);
--	err = mas_store_gfp(&mas, (void *)lower, GFP_KERNEL);
-+	err = mas_store_gfp(&mas, area, GFP_KERNEL);
- 	mutex_unlock(mutex);
- 	if (err)
- 		return err;
-@@ -209,7 +217,8 @@ static void *__execmem_cache_alloc(struct execmem_range *range, size_t size)
- 	MA_STATE(mas_busy, busy_areas, 0, ULONG_MAX);
- 	struct mutex *mutex = &execmem_cache.mutex;
- 	unsigned long addr, last, area_size = 0;
--	void *area, *ptr = NULL;
-+	struct execmem_area *area;
-+	void *ptr = NULL;
- 	int err;
- 
- 	mutex_lock(mutex);
-@@ -228,20 +237,18 @@ static void *__execmem_cache_alloc(struct execmem_range *range, size_t size)
- 
- 	/* insert allocated size to busy_areas at range [addr, addr + size) */
- 	mas_set_range(&mas_busy, addr, addr + size - 1);
--	err = mas_store_gfp(&mas_busy, (void *)addr, GFP_KERNEL);
-+	err = mas_store_gfp(&mas_busy, area, GFP_KERNEL);
- 	if (err)
- 		goto out_unlock;
- 
- 	mas_store_gfp(&mas_free, NULL, GFP_KERNEL);
- 	if (area_size > size) {
--		void *ptr = (void *)(addr + size);
--
- 		/*
- 		 * re-insert remaining free size to free_areas at range
- 		 * [addr + size, last]
- 		 */
- 		mas_set_range(&mas_free, addr + size, last);
--		err = mas_store_gfp(&mas_free, ptr, GFP_KERNEL);
-+		err = mas_store_gfp(&mas_free, area, GFP_KERNEL);
- 		if (err) {
- 			mas_store_gfp(&mas_busy, NULL, GFP_KERNEL);
- 			goto out_unlock;
-@@ -257,16 +264,21 @@ static void *__execmem_cache_alloc(struct execmem_range *range, size_t size)
- static int execmem_cache_populate(struct execmem_range *range, size_t size)
- {
- 	unsigned long vm_flags = VM_ALLOW_HUGE_VMAP;
-+	struct execmem_area *area;
- 	unsigned long start, end;
- 	struct vm_struct *vm;
- 	size_t alloc_size;
- 	int err = -ENOMEM;
- 	void *p;
- 
-+	area = kzalloc(sizeof(*area), GFP_KERNEL);
-+	if (!area)
-+		return err;
-+
- 	alloc_size = round_up(size, PMD_SIZE);
- 	p = execmem_vmalloc(range, alloc_size, PAGE_KERNEL, vm_flags);
- 	if (!p)
--		return err;
-+		goto err_free_area;
- 
- 	vm = find_vm_area(p);
- 	if (!vm)
-@@ -289,7 +301,9 @@ static int execmem_cache_populate(struct execmem_range *range, size_t size)
- 	if (err)
- 		goto err_free_mem;
- 
--	err = execmem_cache_add(p, alloc_size);
-+	area->size = alloc_size;
-+	area->vm = vm;
-+	err = execmem_cache_add(p, alloc_size, area);
- 	if (err)
- 		goto err_free_mem;
- 
-@@ -297,6 +311,8 @@ static int execmem_cache_populate(struct execmem_range *range, size_t size)
- 
- err_free_mem:
- 	vfree(p);
-+err_free_area:
-+	kfree(area);
- 	return err;
+ 	size = module_total_size(mod);
+diff --git a/kernel/tracepoint.c b/kernel/tracepoint.c
+index 1848ce7e2976..e94247afb2c6 100644
+--- a/kernel/tracepoint.c
++++ b/kernel/tracepoint.c
+@@ -668,6 +668,8 @@ static int tracepoint_module_notify(struct notifier_block *self,
+ 		break;
+ 	case MODULE_STATE_UNFORMED:
+ 		break;
++	case MODULE_STATE_GONE:
++		break;
+ 	}
+ 	return notifier_from_errno(ret);
  }
+diff --git a/lib/kunit/test.c b/lib/kunit/test.c
+index 089c832e3cdb..54eaed92a2d3 100644
+--- a/lib/kunit/test.c
++++ b/lib/kunit/test.c
+@@ -836,6 +836,8 @@ static int kunit_module_notify(struct notifier_block *nb, unsigned long val,
+ 		break;
+ 	case MODULE_STATE_UNFORMED:
+ 		break;
++	case MODULE_STATE_GONE:
++		break;
+ 	}
  
-@@ -305,6 +321,9 @@ static void *execmem_cache_alloc(struct execmem_range *range, size_t size)
- 	void *p;
- 	int err;
+ 	return 0;
+diff --git a/samples/livepatch/livepatch-callbacks-demo.c b/samples/livepatch/livepatch-callbacks-demo.c
+index 11c3f4357812..324bddaef9a6 100644
+--- a/samples/livepatch/livepatch-callbacks-demo.c
++++ b/samples/livepatch/livepatch-callbacks-demo.c
+@@ -93,6 +93,7 @@ static const char *const module_state[] = {
+ 	[MODULE_STATE_COMING]	= "[MODULE_STATE_COMING] Full formed, running module_init",
+ 	[MODULE_STATE_GOING]	= "[MODULE_STATE_GOING] Going away",
+ 	[MODULE_STATE_UNFORMED]	= "[MODULE_STATE_UNFORMED] Still setting it up",
++	[MODULE_STATE_GONE]	= "[MODULE_STATE_GONE] Deconstructing and freeing",
+ };
  
-+	/* make sure everything in the cache is page aligned */
-+	size = PAGE_ALIGN(size);
-+
- 	p = __execmem_cache_alloc(range, size);
- 	if (p)
- 		return p;
-@@ -322,8 +341,8 @@ static bool execmem_cache_free(void *ptr)
- 	struct mutex *mutex = &execmem_cache.mutex;
- 	unsigned long addr = (unsigned long)ptr;
- 	MA_STATE(mas, busy_areas, addr, addr);
-+	struct execmem_area *area;
- 	size_t size;
--	void *area;
+ static void callback_info(const char *callback, struct klp_object *obj)
+diff --git a/tools/testing/selftests/livepatch/test_modules/test_klp_callbacks_demo.c b/tools/testing/selftests/livepatch/test_modules/test_klp_callbacks_demo.c
+index 3fd8fe1cd1cc..8435e3254f85 100644
+--- a/tools/testing/selftests/livepatch/test_modules/test_klp_callbacks_demo.c
++++ b/tools/testing/selftests/livepatch/test_modules/test_klp_callbacks_demo.c
+@@ -16,6 +16,7 @@ static const char *const module_state[] = {
+ 	[MODULE_STATE_COMING]	= "[MODULE_STATE_COMING] Full formed, running module_init",
+ 	[MODULE_STATE_GOING]	= "[MODULE_STATE_GOING] Going away",
+ 	[MODULE_STATE_UNFORMED]	= "[MODULE_STATE_UNFORMED] Still setting it up",
++	[MODULE_STATE_GONE]	= "[MODULE_STATE_GONE] Deconstructing and freeing",
+ };
  
- 	mutex_lock(mutex);
- 	area = mas_walk(&mas);
-@@ -338,12 +357,73 @@ static bool execmem_cache_free(void *ptr)
+ static void callback_info(const char *callback, struct klp_object *obj)
+diff --git a/tools/testing/selftests/livepatch/test_modules/test_klp_callbacks_demo2.c b/tools/testing/selftests/livepatch/test_modules/test_klp_callbacks_demo2.c
+index 5417573e80af..78c1fff5d977 100644
+--- a/tools/testing/selftests/livepatch/test_modules/test_klp_callbacks_demo2.c
++++ b/tools/testing/selftests/livepatch/test_modules/test_klp_callbacks_demo2.c
+@@ -16,6 +16,7 @@ static const char *const module_state[] = {
+ 	[MODULE_STATE_COMING]	= "[MODULE_STATE_COMING] Full formed, running module_init",
+ 	[MODULE_STATE_GOING]	= "[MODULE_STATE_GOING] Going away",
+ 	[MODULE_STATE_UNFORMED]	= "[MODULE_STATE_UNFORMED] Still setting it up",
++	[MODULE_STATE_GONE]	= "[MODULE_STATE_GONE] Deconstructing and freeing",
+ };
  
- 	execmem_fill_trapping_insns(ptr, size, /* writable = */ false);
+ static void callback_info(const char *callback, struct klp_object *obj)
+diff --git a/tools/testing/selftests/livepatch/test_modules/test_klp_state.c b/tools/testing/selftests/livepatch/test_modules/test_klp_state.c
+index 57a4253acb01..bdebf1d24c98 100644
+--- a/tools/testing/selftests/livepatch/test_modules/test_klp_state.c
++++ b/tools/testing/selftests/livepatch/test_modules/test_klp_state.c
+@@ -18,6 +18,7 @@ static const char *const module_state[] = {
+ 	[MODULE_STATE_COMING]	= "[MODULE_STATE_COMING] Full formed, running module_init",
+ 	[MODULE_STATE_GOING]	= "[MODULE_STATE_GOING] Going away",
+ 	[MODULE_STATE_UNFORMED]	= "[MODULE_STATE_UNFORMED] Still setting it up",
++	[MODULE_STATE_GONE]	= "[MODULE_STATE_GONE] Deconstructing and freeing",
+ };
  
--	execmem_cache_add(ptr, size);
-+	execmem_cache_add(ptr, size, area);
+ static void callback_info(const char *callback, struct klp_object *obj)
+diff --git a/tools/testing/selftests/livepatch/test_modules/test_klp_state2.c b/tools/testing/selftests/livepatch/test_modules/test_klp_state2.c
+index c978ea4d5e67..1a55f84a8eb3 100644
+--- a/tools/testing/selftests/livepatch/test_modules/test_klp_state2.c
++++ b/tools/testing/selftests/livepatch/test_modules/test_klp_state2.c
+@@ -18,6 +18,7 @@ static const char *const module_state[] = {
+ 	[MODULE_STATE_COMING]	= "[MODULE_STATE_COMING] Full formed, running module_init",
+ 	[MODULE_STATE_GOING]	= "[MODULE_STATE_GOING] Going away",
+ 	[MODULE_STATE_UNFORMED]	= "[MODULE_STATE_UNFORMED] Still setting it up",
++	[MODULE_STATE_GONE]	= "[MODULE_STATE_GONE] Deconstructing and freeing",
+ };
  
- 	schedule_work(&execmem_cache_clean_work);
- 
- 	return true;
- }
-+
-+int execmem_make_temp_rw(void *ptr, size_t size)
-+{
-+	struct maple_tree *busy_areas = &execmem_cache.busy_areas;
-+	unsigned int nr = PAGE_ALIGN(size) >> PAGE_SHIFT;
-+	struct mutex *mutex = &execmem_cache.mutex;
-+	unsigned long addr = (unsigned long)ptr;
-+	MA_STATE(mas, busy_areas, addr, addr);
-+	struct execmem_area *area;
-+	int ret = -ENOMEM;
-+
-+	mutex_lock(mutex);
-+	area = mas_walk(&mas);
-+	if (!area)
-+		goto out;
-+
-+	ret = set_memory_nx(addr, nr);
-+	if (ret)
-+		goto out;
-+
-+	/*
-+	 * If a split of large page was required, it already happened when
-+	 * we marked the pages NX which guarantees that this call won't
-+	 * fail
-+	 */
-+	set_memory_rw(addr, nr);
-+	area->rw_mappings++;
-+
-+out:
-+	mutex_unlock(mutex);
-+	return ret;
-+}
-+
-+int execmem_restore_rox(void *ptr, size_t size)
-+{
-+	struct maple_tree *busy_areas = &execmem_cache.busy_areas;
-+	struct mutex *mutex = &execmem_cache.mutex;
-+	unsigned long addr = (unsigned long)ptr;
-+	MA_STATE(mas, busy_areas, addr, addr);
-+	struct execmem_area *area;
-+	int err = 0;
-+
-+	size = PAGE_ALIGN(size);
-+
-+	mutex_lock(mutex);
-+	mas_for_each(&mas, area, addr + size - 1) {
-+		area->rw_mappings--;
-+		if (!area->rw_mappings) {
-+			unsigned int nr = area->size >> PAGE_SHIFT;
-+
-+			addr = (unsigned long)area->vm->addr;
-+			err = set_memory_rox(addr, nr);
-+			if (err)
-+				break;
-+		}
-+	}
-+	mutex_unlock(mutex);
-+
-+	return err;
-+}
-+
- #else /* CONFIG_ARCH_HAS_EXECMEM_ROX */
- static void *execmem_cache_alloc(struct execmem_range *range, size_t size)
- {
+ static void callback_info(const char *callback, struct klp_object *obj)
 -- 
 2.45.2
 
