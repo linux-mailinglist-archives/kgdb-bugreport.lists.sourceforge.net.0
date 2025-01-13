@@ -2,106 +2,229 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 38ACBA0A7D3
-	for <lists+kgdb-bugreport@lfdr.de>; Sun, 12 Jan 2025 09:55:19 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 08C48A0BEA5
+	for <lists+kgdb-bugreport@lfdr.de>; Mon, 13 Jan 2025 18:13:35 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1tWtkc-0004XT-0A
+	id 1tXO0M-0004TI-DM
 	for lists+kgdb-bugreport@lfdr.de;
-	Sun, 12 Jan 2025 08:55:18 +0000
+	Mon, 13 Jan 2025 17:13:33 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <rppt@kernel.org>) id 1tWtkb-0004XL-46
+ (envelope-from <stephen.s.brennan@oracle.com>) id 1tXO0L-0004TB-JC
  for kgdb-bugreport@lists.sourceforge.net;
- Sun, 12 Jan 2025 08:55:17 +0000
+ Mon, 13 Jan 2025 17:13:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=R0zwgCtXOX9INcLxT8PUdhpiuzZmyEDq1CB3lorjDO8=; b=AGEMNHnYzmJkXPjaASG3Bre3l+
- O0yNUKbuk51i8bfBl6cL1LeC6YzqOYl/33tHyORwtSm8+FZl9zQtN1SIHjI1qV+TaURb3+xZEsgWH
- NPrZSOzatqMJvoy9xL/m2gVUjhbcpfhPErkgJgAyZT1Ku9h6oq2Aqf2kafu0Sw8xJdxs=;
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Message-ID:Date:
+ References:In-Reply-To:Subject:Cc:To:From:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=lmzwDqmIFd4KhDLfFX63Bdknk43UO/DOazGO740Xzxc=; b=OTkvcF2dsJRDAJdPq7mwcu8Yei
+ ftlcUivH86U8pKMrqSD/SbfsLox5vuMcO2UogRWV0qpF+XcEnEeqbwLBt23VCzInA4AQBR9vOOhNu
+ 3XZqUcl2KoxoFF1LhBTGBrbQtpof0T1JnGEc10pfDoBL60PJ4sUAD9YTR6JHv100HT2Y=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=MIME-Version:Content-Type:Message-ID:Date:References:In-Reply-To:Subject:
+ Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=R0zwgCtXOX9INcLxT8PUdhpiuzZmyEDq1CB3lorjDO8=; b=QISVdSsvVzffu+Pa0yzw80Rf+T
- GOF1ukmu5fvfcuPK0o9792+YQB8w2jT2Tv9hZH9fXbm5LhXOlGng0HmjPo+PGeuuVZiTTe0a9McPL
- s3otlB9AH4cMrydYGU1Z2xb3lEKUnsNhBm00LaCiV8ZneHfr5W/JCmKfs43ZA9FQwjdA=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=lmzwDqmIFd4KhDLfFX63Bdknk43UO/DOazGO740Xzxc=; b=aFIn14FF7TZ34r2wVy3YcMwu3l
+ YymmdtLhByfQ6i5XxuhCw5gdYRKz4d7aADBi8OHQshsfSCnBVvPo1m0D13xDOFx9cpQ/1TdGwnm2J
+ v3tnCGOl8isjX6EIhlWO/i+1C9VAb9fgnNr7gXs0cFoOlDao6w7nI6KFFDT1LkpXH55Q=;
+Received: from mx0a-00069f02.pphosted.com ([205.220.165.32])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tWtka-00029Q-Az for kgdb-bugreport@lists.sourceforge.net;
- Sun, 12 Jan 2025 08:55:17 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 7D03C5C2CB5;
- Sun, 12 Jan 2025 08:54:29 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 78674C4CEDF;
- Sun, 12 Jan 2025 08:54:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1736672109;
- bh=2OdLtNhpOzwVLBuyjT4Pmrh9g+J++anxIOyBzX8oFRo=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=bt//TFsjp7oBP/+mYKotPM1CCH/pvCViP9lReiFZD2VikywkhE1q0XvAzRMYgR9w/
- rDXqF5aM9MujwGkgmdrwVN+U9S/HNKSeUhH0oeUj1JklV0TXx4lQhSwaKnFu9xce32
- ftWG7NtXr9D1Marf2RroYue+KEiHc08VUhcxsxtgtvH/1RuSspxTlk/8FfWRwTUUWL
- GQrOHNuzVf53wyl/rIxgHT4G9jfVuY7AOydTBH62p6BSjVcKmEwo1PW/k1dMtwfkJE
- pWwQqokKV7JcLsi4Ix+zyeqNEodjirjOo+JMvLDH6LUhiX+SLLVYTId1lNsII6yjXH
- ekVDGfSuma34Q==
-Date: Sun, 12 Jan 2025 10:54:46 +0200
-To: "Kirill A. Shutemov" <kirill@shutemov.name>
-Message-ID: <Z4ODVmnC4fDnIUSN@kernel.org>
-References: <20241227072825.1288491-1-rppt@kernel.org>
- <20241227072825.1288491-4-rppt@kernel.org>
- <jut35igb2kstpz24apqdeubv5rvyl3vmp2s43xtivpz54uiedj@wmd2onulv4xw>
+ id 1tXO0J-00015e-PW for kgdb-bugreport@lists.sourceforge.net;
+ Mon, 13 Jan 2025 17:13:32 +0000
+Received: from pps.filterd (m0246617.ppops.net [127.0.0.1])
+ by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50DHBe5t015899;
+ Mon, 13 Jan 2025 17:13:20 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
+ :content-type:date:from:in-reply-to:message-id:mime-version
+ :references:subject:to; s=corp-2023-11-20; bh=lmzwDqmIFd4KhDLfFX
+ 63Bdknk43UO/DOazGO740Xzxc=; b=FUFqGHZpDkogD/nqlm8n2HPAb8Ix8KmwfZ
+ j5EPJDNR+Vuf8JYGFKGBeUP+IxWLsyHg2IODBcO9tNLQN9scKfmhyTvw9DLqRhM9
+ qmhaBhdGwpr2QQKYzRKQ2Aa36+KcdOlY1GK0fzcSp4OxZaWMaLIMCRLc64Bf5iM0
+ rSwSwQWjYHAAf6u6Bp6QduL/SWrsjIR5mC3WiBDuJRCg21GCStKVVeiYcy60vC71
+ FfDLfuVp+bSiDvA2NJLqLbKWz4156INtsFK0qFyNJvpbWEEAJr/CIsCnXpn7tzry
+ VfuiOIE69oVciTaptdOzWldKYrC/IS0nV1wd3O0bbdoWfxlk2KBQ==
+Received: from phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com
+ (phxpaimrmta03.appoci.oracle.com [138.1.37.129])
+ by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 443h6sv0uu-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Mon, 13 Jan 2025 17:13:20 +0000 (GMT)
+Received: from pps.filterd
+ (phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
+ by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (8.18.1.2/8.18.1.2)
+ with ESMTP id 50DFkc2M035098; Mon, 13 Jan 2025 17:13:19 GMT
+Received: from nam04-dm6-obe.outbound.protection.outlook.com
+ (mail-dm6nam04lp2043.outbound.protection.outlook.com [104.47.73.43])
+ by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id
+ 443f3781x7-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Mon, 13 Jan 2025 17:13:19 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=dcyrQvIsgn0VtY5tZ7CsUlicskn/yvgPvNxj0poqhQvyHN9U0+Zu04CAcIl0Yt8ufjyi7H2Udp9pzpBaR7vGueWFY6MjAzZp5lafyT1UMVIjEORrISu6+VawLNZsR1D9MrEqCChbHNI8EqDMGvlQU2Z3Ap7YO0D3DQVLrbKzSY118CJ2Y6nkr26Kek3ja9V96z1bFKANYUK21LRQeuU5QUlQveI8qgHL4XHDhMdTzKru83ygFZWCHsOrVHmzSKUFzwrDm0vGfUjdByC+eNCVj2/YOn1IGhSBkShpbRIh1qQBsTpBODwYoZFyMHcbYqqFa68VI5K7snnBaaF9AgWj5g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=lmzwDqmIFd4KhDLfFX63Bdknk43UO/DOazGO740Xzxc=;
+ b=Z+2yEXqXoZBTJAghMP8O7qA5AsSvBj25HVvhVKjR2Qd/Iq7hw1dsSnJ3hUCi1t3O7iPItbE1O0iAQ1L9910jDjyVqK+kyf2rKWrMPjog12cjYt7fc7eVAvu7cFXBJNSfngdVJi6b7h8K++Jf4P7vuIM7zmyT/Q8eiMekuTGgtpmVtgq7S9pWX1G0a7p3vUc5m+XNoaI3tUcOyHQ8fgNjJ6NK/AKti0b51dbA1K1JScDsVsfFeab3uElsrzhxdjjE1+UcUwK6NmkuvIis3q/B2uGYbVWlMwhQ1/rv4ktYwTna1xUxjvxJT9PXcXIrjbpAwUMIElHz6sV+0pXQ3doB9A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
+ dkim=pass header.d=oracle.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=lmzwDqmIFd4KhDLfFX63Bdknk43UO/DOazGO740Xzxc=;
+ b=Ao+sy3Sh0horF1436Wff9AMeSd8eOix3IEdrhNCVUKBoUOEpGDc9JVcczRUwhhNc18DFP/i2Gcw+WQcvaDhNR3G9Y7rPeJ7lAi508t0D6Ll742UDOWwgdNHcF4adZfmVXPn0GhuYiPwGDJ/+7czdz/aO6jxVJUFswMvyfaAdnGQ=
+Received: from PH8PR10MB6597.namprd10.prod.outlook.com (2603:10b6:510:226::20)
+ by CY8PR10MB6780.namprd10.prod.outlook.com (2603:10b6:930:9b::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8335.18; Mon, 13 Jan
+ 2025 17:13:17 +0000
+Received: from PH8PR10MB6597.namprd10.prod.outlook.com
+ ([fe80::6874:4af6:bf0a:6ca]) by PH8PR10MB6597.namprd10.prod.outlook.com
+ ([fe80::6874:4af6:bf0a:6ca%4]) with mapi id 15.20.8335.017; Mon, 13 Jan 2025
+ 17:13:17 +0000
+To: Muhammad Usama Anjum <Usama.Anjum@collabora.com>,
+ linux-debuggers@vger.kernel.org, linux-serial@vger.kernel.org,
+ kgdb-bugreport@lists.sourceforge.net, LKML <linux-kernel@vger.kernel.org>
+In-Reply-To: <8b118e93-c159-40f0-b89a-817752d11627@collabora.com>
+References: <8b118e93-c159-40f0-b89a-817752d11627@collabora.com>
+Date: Mon, 13 Jan 2025 09:13:16 -0800
+Message-ID: <87msfutz6b.fsf@oracle.com>
+X-ClientProxiedBy: SJ0PR13CA0136.namprd13.prod.outlook.com
+ (2603:10b6:a03:2c6::21) To PH8PR10MB6597.namprd10.prod.outlook.com
+ (2603:10b6:510:226::20)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <jut35igb2kstpz24apqdeubv5rvyl3vmp2s43xtivpz54uiedj@wmd2onulv4xw>
-X-Spam-Score: -5.2 (-----)
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH8PR10MB6597:EE_|CY8PR10MB6780:EE_
+X-MS-Office365-Filtering-Correlation-Id: 362ae5a9-ec6e-4fc0-7f80-08dd33f5924b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016|7053199007;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?P0+VnD65YOH4jH3XitlK0sjTwB0ZzszgWwoVttar3CekizuJJMJPZ7zsLlaR?=
+ =?us-ascii?Q?IDt1f9YvifYHD2wqAkjeX5sqTGM+1Fwzz9fr1qNEEZKuF7y9s5RosiN4eEqi?=
+ =?us-ascii?Q?a+2ubH9jZZN0IyQ+LH+UiSJeKfN9M+JRzFaXqPs60wwClhQEQgiSNr6PvL6g?=
+ =?us-ascii?Q?3poQV3lPgLh/eQmYht3RVULV4tHHWwgI5q6LVnMEwr2yK3fD1Y+/yCGqk2Fv?=
+ =?us-ascii?Q?0F1HqO/CDo63aR9ge1TpgWbqnMzsVo9qypKIYkRbpxqvhYBwkN+1QuHm74IX?=
+ =?us-ascii?Q?/umtZDP1WSj/xUTR+mnX2wr4Dvqek79vZ1cAf+XnYwOscDZVM/5//7+YfJxz?=
+ =?us-ascii?Q?HRR9F+qmRgHA/m+CwA7cloPHD9nZktHj/4O+JFJq5KuaNVhnTwaT/FHY2QP6?=
+ =?us-ascii?Q?skh2wydzOjc3JIyDZl7W+cfX86TLarxwltq9bV6Wqnla9YCe5OsB7+1qnzF8?=
+ =?us-ascii?Q?l3oQQ/TqnnD4cCqE/vF3U1JXXY0ie/Et7O1wkJJjUAXbBGD6zls4OlvAWrfv?=
+ =?us-ascii?Q?Y8uH0wLF1T09hLmMhLw991AZJzjjhAruv09cQ3ZaW+Z6LCKiLrred7mK/LXJ?=
+ =?us-ascii?Q?w0tOg/JX4FIY5lNOUy2l2D52DCgy+yOq1TF5vLr7BiBpL/NwTSDRnqW3Chp8?=
+ =?us-ascii?Q?IbFjXA0ousZStTOHNACaf8PtvYJ1n+gJe6RO2bUWb/JoLYxBVpBCr0ixxPxA?=
+ =?us-ascii?Q?w5raeJoFWOjuW4jWO+wfgEQtguia6G5UTrHW+g0h3T4Ba/i4LPFbBAvpGYMv?=
+ =?us-ascii?Q?fUvIgruW6oi1Tk+i4/yguHhVcjWxvgNpNaQ3oOEtLa5MyobRE2Ik8nHQjCq1?=
+ =?us-ascii?Q?gdTu3vCIe+u8KYGoZKoskhhvArZYV6s/RR1lJKOrWGTeWCXm8cj3+L0Q/Bw6?=
+ =?us-ascii?Q?lfLfpKQkrF1vmcIZ+VfsvR+WtWmFVATamQGGh/p7ksE4VfgJ0pPOg80zr/Jz?=
+ =?us-ascii?Q?oJHsNk+BhslAuMSIPcaRjQo2g4CZNr0sY9prDI4RUun9kDwB7o0EqIAXNEB8?=
+ =?us-ascii?Q?LJAxOJVCf6WAM4r1/GUB+uAvkFvwGNqUunC77Zg4MxQ+3MumvRpASg107XQ1?=
+ =?us-ascii?Q?G32Qu2UdKh0p2Z0HukXoWH7vTpp/KiOzxYqjixy3a2dFPrTCME2y8leLKyzY?=
+ =?us-ascii?Q?zAqIVu3gkBbLV3+bwcpj3ZC8pdsz3ysqDNrWzhJ3P7Gw8ehZWnJsnbYz2Xgd?=
+ =?us-ascii?Q?bG3h15Xq/KwcRbSwamcuM5IB7HtuX8CgZBeSNwucvLA8x9fLMh6I3xNVOmvg?=
+ =?us-ascii?Q?+qmmydgY0SA7b4BqYADl6Rry4XANRkqN6bwdxC5Ejb3xpxnWvvi8+YMV4wkc?=
+ =?us-ascii?Q?1LoNzV3tQ4QVj3j7KnBm19Vryc8ht8jWY1RQf8XFMvCpxA=3D=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PH8PR10MB6597.namprd10.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(366016)(7053199007); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?owxbEIh67rFR6CMDpNuZHFyC+e5ymNsXGRz1N+HuXarScUxTnhqdXISveJzl?=
+ =?us-ascii?Q?32eOISTefubcCWIE39YLEd5h9bTWH7UuiQ9q2DsSDYnWxpVsq7EgfH1jnFj8?=
+ =?us-ascii?Q?sUSJI3NLsoRA4KZckVTlXJ5M2sliSxbF0b2trj4Ezo/filyORyt//OMx5iMC?=
+ =?us-ascii?Q?giGfhgA8SfNdCnjL3EptrhYpOeczn5WeEjwNTKPctYkV8XVxiqaYHGzYMTiF?=
+ =?us-ascii?Q?5d9PSvE+oPYO4/fUBa+E0jpthjeVG1AQDdQO1tCwa/8Ef81dnf+gsukWDI09?=
+ =?us-ascii?Q?SHezxUAaPiO94x4j4am41ALnStcFg2EKrteLhs2f103SCW+dcQrOrAhYZbdc?=
+ =?us-ascii?Q?Xe3MN9CWCe6UT/NrmkWC8LOYnv5WlGbAQPPDOGYktkuKWTbknVO/BkmA89fY?=
+ =?us-ascii?Q?4okRtEfoTg+DvMZ4+LU/0X9cijx9WV2jsvJWvGKWEZJHloi/u6EGxQ/whQbA?=
+ =?us-ascii?Q?WFhVhrDDwRx1wxMyK1QzEevpYc7Uh6E3Dt7fXz0486DUsU12eX9MqVxqPdot?=
+ =?us-ascii?Q?497CZbRy7iQMnofG4XDn9JDMKoGBVuWoQ5cxenp0Z9htFFQA9LFb0dX64sV5?=
+ =?us-ascii?Q?qobbyabuDbm9FIZU+Z3mICHZpt4pW9JsZa4NK4gg1BGAjGOHlPmxVFCmALrJ?=
+ =?us-ascii?Q?eIAY7khNS2rhzdVYneIGx5Hc9a8IZbPjkZBePDol1dh471Gif0nBIzzfG0PT?=
+ =?us-ascii?Q?aNFtRC33chj08FauGumBLePGxpNdOXxBUpRGk+IIPKfBFMzhPoZ8bAwaCTkp?=
+ =?us-ascii?Q?vR/A50Cpn1BXj/Ge99iavTRTHJ+rt7FRTdEedJT3rxp9ND3hoL7T1sZ6W/vR?=
+ =?us-ascii?Q?tkx0Gd6nMv9ynViHv+orIyEvzsdLbY5SWP61iAM9QhyBTGCmEzpgW716zm4/?=
+ =?us-ascii?Q?zAuz9Ln1qHS9iPjVy3PGQXC1mD1vrO4qomGIPjSdF+cxqmehXLjwTo3DnUT6?=
+ =?us-ascii?Q?ThmZ5sfRmnDTUcz4xSH1TuZLUzWIognvgbqD5dBaMVhiN8LqPtOUBdK5x+eX?=
+ =?us-ascii?Q?U5Y0aseOZsU6fdmmvbtgZi3LXBqmZvxoVTZqrI0be6XqruFxJKh+62SSR1+8?=
+ =?us-ascii?Q?Hc5ULkrvytCmPRcqSfhjyrjlBvfuXQZqBqSJNjSNaP6c9ib+PyayVtfMlNfJ?=
+ =?us-ascii?Q?5zn6NkNHxi+YaqOdyXjke8+DYOIXNlZaUInD2TMtGb71KvIb2npxS/480wW0?=
+ =?us-ascii?Q?os/f8D8wizEfGvWlDpb43QNmHq16VmJDEz95MrBE0AcHNnQMrjgngpHWBKR8?=
+ =?us-ascii?Q?eaZvKil9CP+CCDogq/4JTY1RX8A82NjfohqzNeqAyOF3Y/ZRV0ed3uQY76Ik?=
+ =?us-ascii?Q?yj6Wi8cPvo9gHgRWkf7vI5sL046LJNhHvDLtLxa+q+6xgl4Vl2r9HSVnVdK5?=
+ =?us-ascii?Q?ODi4kfW5sCTorGuZYI+x4wNX83icaZt/qVN8DweCUWuKx8rq1gGU4rWphJwH?=
+ =?us-ascii?Q?mJcrumDXbrPGSufZKmz176XvrgyNJNXz9tK+PyM2f7dKIGZB0e573Wy8JDNl?=
+ =?us-ascii?Q?ewARcCgPZfv1udhIM6bZNMAEj1FCTnDmYKqJJI4dlVL39mMBqDp8tIk7ig57?=
+ =?us-ascii?Q?qw7EG0VGpgz991JCu6UEA3MRyu1y5Hrqh44IicgFS4s3bMdAsVJBHe7nq9ID?=
+ =?us-ascii?Q?OA=3D=3D?=
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: p8ssDYMd+3H+8CaAq5zcjNR5SiIlrLcW2fovjNRUsI7PvOFPjttf9fil4w6nHczSs2TPJx645Xu1/cGmY/SUr+cVVCQdm0/6P/1pQdoLEf/xVrrvFREj49uwcmSZJ+hXijhodm52vQuzyCjHIpvN8rJMoHPzphBbFEbzKSJ1B/vEyifxYcHHl6kR1wKTvFkU9DhB3WNQumGSZ8R7xT41ftqXph+mnBtGBSLtmRaqlP+tar5WB6asoqD3VQak05Ce2phMXPCet1+WSIgGafQ/jXNHzmik1ZQ6X2hNCncUXDNTI2Red1KfgsKgYHGEaEsTbn8Vt4upFyoWY7+lmfi1MCBfXa4qulF2mL3Nh32f0xDuGhdII7LapUR8JknNS/Uidpw31JK+YH64kpsXyIup+YlpcqGacpS4Jl0Ck+kZGcIFNr1N8pXfwirD+KyMrtHiihlxCftM2t7nZNoC5ehR81SUTT2VA+XyYfBlGj8lvBYjNdB5w3QyqAVGYE5Y5FO3J+FOmTcjrpwIdPfuCbf6/sfipf18/pZOJCwsg6fCUxueAPey7pYTNf9+42MPsg9varNK3a6wz2iSUlocXOSNqE97iF9o/EvBJdBvfHFNXEU=
+X-OriginatorOrg: oracle.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 362ae5a9-ec6e-4fc0-7f80-08dd33f5924b
+X-MS-Exchange-CrossTenant-AuthSource: PH8PR10MB6597.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jan 2025 17:13:17.3080 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 10omxcoBR/Riji7/LEwabbbmS5I4+5Sb8xLGpelCpqITwQ5oRigp6SwLJAKLIlcwJMcvOK0BdoSMg/K3czK+I9RJuhVrgVbF+i265nhiesw=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR10MB6780
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-01-13_06,2025-01-13_02,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
+ bulkscore=0 adultscore=0
+ suspectscore=0 phishscore=0 malwarescore=0 mlxlogscore=999 mlxscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2411120000
+ definitions=main-2501130140
+X-Proofpoint-GUID: f9g_8eBkSwZFU_8H_aFH0no419sd61Gv
+X-Proofpoint-ORIG-GUID: f9g_8eBkSwZFU_8H_aFH0no419sd61Gv
+X-Spam-Score: -2.7 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi Kirill, On Fri, Jan 10, 2025 at 12:36:59PM +0200, Kirill
- A. Shutemov wrote: > On Fri, Dec 27, 2024 at 09:28:20AM +0200, Mike Rapoport
- wrote: > > From: "Kirill A. Shutemov" <kirill.shutemov@linux.intel.com> >
- [...] Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  Hi Muhammad, Muhammad Usama Anjum <Usama.Anjum@collabora.com>
+ writes: > Hi, > > I'm new to trying KGDB/KDB. My test machine doesn't have
+ serial port. > I've been trying to run it over internet. I get following
+ dme [...] 
+ Content analysis details:   (-2.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.7 RCVD_IN_DNSWL_LOW      RBL: Sender listed at https://www.dnswl.org/,
+ low trust [205.220.165.32 listed in list.dnswl.org]
  0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
  The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [139.178.84.217 listed in sa-accredit.habeas.com]
+ [205.220.165.32 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [139.178.84.217 listed in bl.score.senderscore.com]
+ [205.220.165.32 listed in bl.score.senderscore.com]
+ -1.8 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [205.220.165.32 listed in wl.mailspike.net]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tWtka-00029Q-Az
-Subject: Re: [Kgdb-bugreport] [PATCH 3/8] x86/mm/pat: Restore large pages
- after fragmentation
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+X-Headers-End: 1tXO0J-00015e-PW
+Subject: Re: [Kgdb-bugreport] KGDB/KDB running over internet as serial
+ connection isn't possible
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,99 +236,95 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-From: Mike Rapoport via Kgdb-bugreport <kgdb-bugreport@lists.sourceforge.net>
-Reply-To: Mike Rapoport <rppt@kernel.org>
-Cc: Mark Rutland <mark.rutland@arm.com>, Andy Lutomirski <luto@kernel.org>,
- Peter Zijlstra <peterz@infradead.org>, kgdb-bugreport@lists.sourceforge.net,
- Dave Hansen <dave.hansen@linux.intel.com>, Rae Moar <rmoar@google.com>,
- linux-kernel@vger.kernel.org, linux-mm@kvack.org,
- Brendan Higgins <brendan.higgins@linux.dev>, linux-kselftest@vger.kernel.org,
- "H. Peter Anvin" <hpa@zytor.com>, live-patching@vger.kernel.org,
- Miroslav Benes <mbenes@suse.cz>, Shuah Khan <shuah@kernel.org>,
- Anton Ivanov <anton.ivanov@cambridgegreys.com>,
- Joe Lawrence <joe.lawrence@redhat.com>, Richard Weinberger <richard@nod.at>,
- x86@kernel.org, Ingo Molnar <mingo@redhat.com>,
- Daniel Thompson <danielt@kernel.org>, Sami Tolvanen <samitolvanen@google.com>,
- linux-trace-kernel@vger.kernel.org, Petr Mladek <pmladek@suse.com>,
- Petr Pavlu <petr.pavlu@suse.com>, Jiri Kosina <jikos@kernel.org>,
- linux-um@lists.infradead.org, Steven Rostedt <rostedt@goodmis.org>,
- Daniel Gomez <da.gomez@samsung.com>, Borislav Petkov <bp@alien8.de>,
- David Gow <davidgow@google.com>, Thomas Gleixner <tglx@linutronix.de>,
- Josh Poimboeuf <jpoimboe@kernel.org>, kunit-dev@googlegroups.com,
- Song Liu <song@kernel.org>, Johannes Berg <johannes@sipsolutions.net>,
- Luis Chamberlain <mcgrof@kernel.org>, Masami Hiramatsu <mhiramat@kernel.org>,
- Jason Wessel <jason.wessel@windriver.com>, linux-modules@vger.kernel.org,
- Andrew Morton <akpm@linux-foundation.org>,
- "Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>
+From: Stephen Brennan via Kgdb-bugreport <kgdb-bugreport@lists.sourceforge.net>
+Reply-To: Stephen Brennan <stephen.s.brennan@oracle.com>
+Cc: Usama.Anjum@collabora.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-Hi Kirill,
+Hi Muhammad,
 
-On Fri, Jan 10, 2025 at 12:36:59PM +0200, Kirill A. Shutemov wrote:
-> On Fri, Dec 27, 2024 at 09:28:20AM +0200, Mike Rapoport wrote:
-> > From: "Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>
-> > 
-> > Change of attributes of the pages may lead to fragmentation of direct
-> > mapping over time and performance degradation as result.
-> > 
-> > With current code it's one way road: kernel tries to avoid splitting
-> > large pages, but it doesn't restore them back even if page attributes
-> > got compatible again.
-> > 
-> > Any change to the mapping may potentially allow to restore large page.
-> > 
-> > Hook up into cpa_flush() path to check if there's any pages to be
-> > recovered in PUD_SIZE range around pages we've just touched.
-> > 
-> > CPUs don't like[1] to have to have TLB entries of different size for the
-> > same memory, but looks like it's okay as long as these entries have
-> > matching attributes[2]. Therefore it's critical to flush TLB before any
-> > following changes to the mapping.
-> > 
-> > Note that we already allow for multiple TLB entries of different sizes
-> > for the same memory now in split_large_page() path. It's not a new
-> > situation.
-> > 
-> > set_memory_4k() provides a way to use 4k pages on purpose. Kernel must
-> > not remap such pages as large. Re-use one of software PTE bits to
-> > indicate such pages.
-> > 
-> > [1] See Erratum 383 of AMD Family 10h Processors
-> > [2] https://lore.kernel.org/linux-mm/1da1b025-cabc-6f04-bde5-e50830d1ecf0@amd.com/
-> > 
-> > [rppt@kernel.org:
-> >  * s/restore/collapse/
-> >  * update formatting per peterz
-> >  * use 'struct ptdesc' instead of 'struct page' for list of page tables to
-> >    be freed
-> >  * try to collapse PMD first and if it succeeds move on to PUD as peterz
-> >    suggested
-> >  * flush TLB twice: for changes done in the original CPA call and after
-> >    collapsing of large pages
-> > ]
-> > 
-> > Link: https://lore.kernel.org/all/20200416213229.19174-1-kirill.shutemov@linux.intel.com
-> > Signed-off-by: Kirill A. Shutemov <kirill.shutemov@linux.intel.com>
-> > Co-developed-by: Mike Rapoport (Microsoft) <rppt@kernel.org>
-> > Signed-off-by: Mike Rapoport (Microsoft) <rppt@kernel.org>
-> 
-> When I originally attempted this, the patch was dropped because of
-> performance regressions. Was it addressed somehow?
+Muhammad Usama Anjum <Usama.Anjum@collabora.com> writes:
+> Hi,
+>
+> I'm new to trying KGDB/KDB. My test machine doesn't have serial port.
+> I've been trying to run it over internet. I get following dmesg log:
+> KGDB: Registered I/O driver kgdboc
+>
+> On test machine command line:
+> kgdboc=kbd
+> sudo sh -c "echo g > /proc/sysrq-trigger" # Launch KGDB
+>
+> System freezes at this point meaning the debugger got activated
+> correctly. But I'm unable to connect from host side:
+> gdb vmlinux
+> set debug remote 1
+> target remote <test_machine_ip>:2012
+>
+> I may be missing something trivial. Please can someone point/correct
+> me how to connect correctly?
 
-I didn't realize the patch was dropped because of performance regressions,
-so I didn't address it.
+Unfortunately you are not. You've configured kgdb to run with keyboard
+input (though I'm not certain where the output would go without "kms"
+included in the argument). As far as I know there is no in-tree
+mechanism for connecting to kgdb over the network.
 
-Do you remember where did the regressions show up?
- 
+To my understanding, the reason is that the kdb/kgdb internals rely on
+low-level polling drivers to read and write input. Serial ports & 
+PS/2 keyboards can be used in this mode (I'm not sure about USB
+keyboards). This means that a single CPU can use these devices without
+relying on services--like scheduling, or locks--provided & used by the
+rest of the kernel, since the kernel is halted. Using a network device
+for I/O would be a difficult situation, because these devices & drivers
+are far more complex.
+
+Your options are serial or keyboard. There are, however, plenty of
+interesting ways where hardware can help out here. For desktop machines,
+most motherboards do have a header for the serial port; you just need to
+get an inexpensive face plate to expose the port. Then an external
+machine could connect to that serial port, and even proxy it to the
+network. For servers, most manufacturers provide some sort of management
+system (they go by different names, e.g. ILOM) that allows you to
+remotely manage (power on/off, view console, etc). Most of these are
+accessible over IP with some authentication, and many would allow you to
+connect to a serial stream over the network, and even attach something
+like gdb. Laptops are a bit of a sad state, since they don't normally
+have a serial port. Some have poorly-documented management hardware
+which can be enabled in your BIOS settings. For instance, my Thinkpad
+has "Realtek DASH", which some adventurous souls on the internet have
+succeeded in getting a serial connection going[1]. However, it seems that
+overall the experience is buggy and not supported.
+
+Finally, for VMs you're in a great place, because most hypervisors
+provide virtualized serial ports which you can attach to from the host.
+Of course, QEMU also provides a GDB server which is frequently a more
+direct route to debugging, compared to configuring serial & kgdb.  But
+I'm assuming that if you're asking this question, you're not in a VM.
+
+I'd encourage you to go through your boot logs and see which "ttyS"
+devices get registered and which PCI devices (if any) they are
+associated with. Then you can cross reference with "lspci" output and
+identify any interesting hardware that may contain a previously-unknown
+serial port. Unfortunately it's all hardware-specific, and if you don't
+have anything, then you're truly out of luck.
+
+Good luck!
+Stephen
+
+[1]: https://www.reddit.com/r/Amd/comments/ism4wg/trying_out_dash_remote_access_on_a_thinkpad_t14s/
+
+> PS: kgdboe [2] seems like a out of tree module for help. But it doesn't
+> seem to be supported anymore.
+>
+> Is it possible to connect from another machine over internet and debug
+> the target?
+>
+> [1] https://docs.kernel.org/dev-tools/kgdb.html
+> [2] https://github.com/sysprogs/kgdboe
 > -- 
->   Kiryl Shutsemau / Kirill A. Shutemov
-> 
-
--- 
-Sincerely yours,
-Mike.
+> BR,
+> Muhammad Usama Anjum
 
 
 _______________________________________________
