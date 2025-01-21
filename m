@@ -2,29 +2,29 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4D37DA17AC3
-	for <lists+kgdb-bugreport@lfdr.de>; Tue, 21 Jan 2025 10:58:53 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4C31BA17AC7
+	for <lists+kgdb-bugreport@lfdr.de>; Tue, 21 Jan 2025 10:58:58 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1taB24-0004Lu-MS
+	id 1taB29-0005i8-47
 	for lists+kgdb-bugreport@lfdr.de;
-	Tue, 21 Jan 2025 09:58:52 +0000
+	Tue, 21 Jan 2025 09:58:57 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <rppt@kernel.org>) id 1taB23-0004Lm-7D
+ (envelope-from <rppt@kernel.org>) id 1taB27-0005hn-OU
  for kgdb-bugreport@lists.sourceforge.net;
- Tue, 21 Jan 2025 09:58:50 +0000
+ Tue, 21 Jan 2025 09:58:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=KIFxGxnvBKihw4fTbFCPK+DYQ7uljyxljs0IBYR0gFM=; b=fRPCnt4TzTZzuCnBteLrVsfpOv
- 3byVej/AiCvp0s1Q5fu4hsGByflvt9khzZ435UPfN5xRHzp88OhFWzmsI+mq59gx1ydBzuuhuFPLL
- ShqbslHzlXnSWtkC+10FJJs6xIWCMDlZgsy9z1GMEllg4jHNb1Q4cNb4DIASXUHojRkY=;
+ bh=NfiOldQuoBsOca6bai8743RJBuvry8sUliN14rP7yPw=; b=GKGP/3Ez/r43jGk5zDDuOia7M0
+ INm4xHpBvD4iicrNZBxMep9UZR1KXh9+B4vY40u+IcDCV71NzA2IiD3++zzMB77UyxyDnwuvMiBKV
+ L/ec0yZaRBjFz60rIMVEwanQpy1uCvIkfL1IyLVwBjQmCP0sQT/cFT5NttX2RCaEs1AA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -32,32 +32,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=KIFxGxnvBKihw4fTbFCPK+DYQ7uljyxljs0IBYR0gFM=; b=Ph3yEWxavhXlxcb3iWbXtWEPp3
- MK6D1OQo5hMnUTe6l20FgcB39EyQgSPsupUmHtyKf9ALm28IXtuISMlLVjslSSMwVPp7ISABtLApt
- kgFtPfRJNpYcrZTlWjZRmuVE7+lVwUIFvNusQqAikcf0c84rTezwCVaIMHPIFiOUHigI=;
+ bh=NfiOldQuoBsOca6bai8743RJBuvry8sUliN14rP7yPw=; b=CmDdMwgWMBLXPUqvhRnIsK5yeG
+ 2uLQPTJxYY6uF7tHw/3pTkPmcDWRn0YOXrx5iv4qBJag3UFO2IUaWvq9lb4/fg6Dl8ZDjHeglIDCo
+ 33CaOqN4b53DkfWi+mjOzPjEYcNMU1zjLSNz8UBwOL9+l3ptrbJYQ6i3vstohj4LPVK4=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1taB21-0000yE-NV for kgdb-bugreport@lists.sourceforge.net;
- Tue, 21 Jan 2025 09:58:50 +0000
+ id 1taB27-0000yb-1D for kgdb-bugreport@lists.sourceforge.net;
+ Tue, 21 Jan 2025 09:58:55 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id C80885C5542;
- Tue, 21 Jan 2025 09:57:58 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 77818C4CEEB;
- Tue, 21 Jan 2025 09:58:29 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id C96385C57C1;
+ Tue, 21 Jan 2025 09:58:08 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 73BD0C4CEE5;
+ Tue, 21 Jan 2025 09:58:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1737453519;
- bh=WqNu22Xx50tarZUt/SmRrxy/7e4ez9U96yWXlx51zT4=;
+ s=k20201202; t=1737453528;
+ bh=mjWwPz12D8IuXSas4rcsP8ghTqzzxxLYwZNdxRHbGuE=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=FoJDZOnleAZwQIodwpQ5Ij7X645HWLirwOfQ0PhgbtrAeGgWm0F1BXmNxBMxNOwHb
- BDgECe3T1RZ/O+9XVPcSbALd53EQ/PlnqBfdQBdMhcXcZ+XXMzcLKMhHhdcZtfJpkQ
- lvZ+7uhS8+o8oy4nUgdHZsuP0yWdBRXAQZqs+NOswDcGekMvmFjYb/p3oM9oZLjscE
- ODzHCzjWAHlUfeWSzGBEWwQ7S2LmdR+XTiDwEsXBXcAVr05ZGnWSHBHO5NprCQ7JQH
- 9e0Wc/fjy9kaqfaasO/7S8ssSjD4RHcmUTWiXWg8YtQu/ZrYdH7nv7nO1DVVQfGz7j
- awdEEf3waopQw==
+ b=Tph63LwihacCRZdg3/KoXRXy/L8AEtUnxQkyTo32q1HWh2AdKzVUCfdT4rNz4dVjq
+ Uv4xokrygxNH5zuKByyprdx7K9MGUClZEw98LpFNi9DGq1AeEI9urWLO16DE8FCydn
+ MB+GzWkdUS5ylBIb8pvzI7nmdNLQefTvXwvnjRMO5efH8KnRrrazKBkaJ/CCm6zth/
+ cdwCt2pktttCf5JCsGO3f3zrex39RCF8Mnj7/5AD2T54mQvWaqDwzhSsBwDWy+H4v0
+ sa5AuN1ZYYZvtmMB5CDOjglr2nV8Tt1tyIuB8pqeOrHWhJajf65QoJYARxpi7qVP/+
+ OuIH4NaKXIiqw==
 To: x86@kernel.org
-Date: Tue, 21 Jan 2025 11:57:33 +0200
-Message-ID: <20250121095739.986006-5-rppt@kernel.org>
+Date: Tue, 21 Jan 2025 11:57:34 +0200
+Message-ID: <20250121095739.986006-6-rppt@kernel.org>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20250121095739.986006-1-rppt@kernel.org>
 References: <20250121095739.986006-1-rppt@kernel.org>
@@ -69,17 +69,15 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: "Mike Rapoport (Microsoft)" <rppt@kernel.org> The
- memory
- allocated for the ROX cache was removed from the direct map to reduce amount
- of direct map updates, however this cannot be tolerated by /proc/kcore that
- accesses module memory using vread_i [...] 
+ Content preview:  From: "Mike Rapoport (Microsoft)" <rppt@kernel.org> Using
+ a writable copy for ROX memory is cumbersome and error prone. Add API that
+ allow temporarily remapping of ranges in the ROX cache as writable and then
+ restoring their read-only-execute permissions. 
  Content analysis details:   (-8.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
@@ -90,6 +88,7 @@ X-Spam-Report: Spam detection software,
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
  [139.178.84.217 listed in sa-accredit.habeas.com]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
@@ -99,9 +98,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -3.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1taB21-0000yE-NV
-Subject: [Kgdb-bugreport] [PATCH v2 04/10] execmem: don't remove ROX cache
- from the direct map
+X-Headers-End: 1taB27-0000yb-1D
+Subject: [Kgdb-bugreport] [PATCH v2 05/10] execmem: add API for temporal
+ remapping as RW and restoring ROX afterwards
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -144,63 +143,98 @@ Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
 From: "Mike Rapoport (Microsoft)" <rppt@kernel.org>
 
-The memory allocated for the ROX cache was removed from the direct map to
-reduce amount of direct map updates, however this cannot be tolerated by
-/proc/kcore that accesses module memory using vread_iter() and the latter
-does vmalloc_to_page() and copy_page_to_iter_nofault().
+Using a writable copy for ROX memory is cumbersome and error prone.
 
-Instead of removing ROX cache memory from the direct map and mapping it as
-ROX in vmalloc space, simply call set_memory_rox() that will take care of
-proper permissions on both vmalloc and in the direct map.
+Add API that allow temporarily remapping of ranges in the ROX cache as
+writable  and then restoring their read-only-execute permissions.
+
+This API will be later used in modules code and will allow removing nasty
+games with writable copy in alternatives patching on x86.
+
+The restoring of the ROX permissions relies on the ability of architecture
+to reconstruct large pages in its set_memory_rox() method.
 
 Signed-off-by: Mike Rapoport (Microsoft) <rppt@kernel.org>
 ---
- mm/execmem.c | 17 ++++-------------
- 1 file changed, 4 insertions(+), 13 deletions(-)
+ include/linux/execmem.h | 31 +++++++++++++++++++++++++++++++
+ mm/execmem.c            | 22 ++++++++++++++++++++++
+ 2 files changed, 53 insertions(+)
 
+diff --git a/include/linux/execmem.h b/include/linux/execmem.h
+index 64130ae19690..65655a5d1be2 100644
+--- a/include/linux/execmem.h
++++ b/include/linux/execmem.h
+@@ -65,6 +65,37 @@ enum execmem_range_flags {
+  * Architectures that use EXECMEM_ROX_CACHE must implement this.
+  */
+ void execmem_fill_trapping_insns(void *ptr, size_t size, bool writable);
++
++/**
++ * execmem_make_temp_rw - temporarily remap region with read-write
++ *			  permissions
++ * @ptr:	address of the region to remap
++ * @size:	size of the region to remap
++ *
++ * Remaps a part of the cached large page in the ROX cache in the range
++ * [@ptr, @ptr + @size) as writable and not executable. The caller must
++ * have exclusive ownership of this range and ensure nothing will try to
++ * execute code in this range.
++ *
++ * Return: 0 on success or negative error code on failure.
++ */
++int execmem_make_temp_rw(void *ptr, size_t size);
++
++/**
++ * execmem_restore_rox - restore read-only-execute permissions
++ * @ptr:	address of the region to remap
++ * @size:	size of the region to remap
++ *
++ * Restores read-only-execute permissions on a range [@ptr, @ptr + @size)
++ * after it was temporarily remapped as writable. Relies on architecture
++ * implementation of set_memory_rox() to restore mapping using large pages.
++ *
++ * Return: 0 on success or negative error code on failure.
++ */
++int execmem_restore_rox(void *ptr, size_t size);
++#else
++static inline int execmem_make_temp_rw(void *ptr, size_t size) { return 0; }
++static inline int execmem_restore_rox(void *ptr, size_t size) { return 0; }
+ #endif
+ 
+ /**
 diff --git a/mm/execmem.c b/mm/execmem.c
-index 317b6a8d35be..04b0bf1b5025 100644
+index 04b0bf1b5025..e6c4f5076ca8 100644
 --- a/mm/execmem.c
 +++ b/mm/execmem.c
-@@ -257,7 +257,6 @@ static void *__execmem_cache_alloc(struct execmem_range *range, size_t size)
- static int execmem_cache_populate(struct execmem_range *range, size_t size)
+@@ -335,6 +335,28 @@ static bool execmem_cache_free(void *ptr)
+ 
+ 	return true;
+ }
++
++int execmem_make_temp_rw(void *ptr, size_t size)
++{
++	unsigned int nr = PAGE_ALIGN(size) >> PAGE_SHIFT;
++	unsigned long addr = (unsigned long)ptr;
++	int ret;
++
++	ret = set_memory_nx(addr, nr);
++	if (ret)
++		return ret;
++
++	return set_memory_rw(addr, nr);
++}
++
++int execmem_restore_rox(void *ptr, size_t size)
++{
++	unsigned int nr = PAGE_ALIGN(size) >> PAGE_SHIFT;
++	unsigned long addr = (unsigned long)ptr;
++
++	return set_memory_rox(addr, nr);
++}
++
+ #else /* CONFIG_ARCH_HAS_EXECMEM_ROX */
+ static void *execmem_cache_alloc(struct execmem_range *range, size_t size)
  {
- 	unsigned long vm_flags = VM_ALLOW_HUGE_VMAP;
--	unsigned long start, end;
- 	struct vm_struct *vm;
- 	size_t alloc_size;
- 	int err = -ENOMEM;
-@@ -275,26 +274,18 @@ static int execmem_cache_populate(struct execmem_range *range, size_t size)
- 	/* fill memory with instructions that will trap */
- 	execmem_fill_trapping_insns(p, alloc_size, /* writable = */ true);
- 
--	start = (unsigned long)p;
--	end = start + alloc_size;
--
--	vunmap_range(start, end);
--
--	err = execmem_set_direct_map_valid(vm, false);
--	if (err)
--		goto err_free_mem;
--
--	err = vmap_pages_range_noflush(start, end, range->pgprot, vm->pages,
--				       PMD_SHIFT);
-+	err = set_memory_rox((unsigned long)p, vm->nr_pages);
- 	if (err)
- 		goto err_free_mem;
- 
- 	err = execmem_cache_add(p, alloc_size);
- 	if (err)
--		goto err_free_mem;
-+		goto err_reset_direct_map;
- 
- 	return 0;
- 
-+err_reset_direct_map:
-+	execmem_set_direct_map_valid(vm, true);
- err_free_mem:
- 	vfree(p);
- 	return err;
 -- 
 2.45.2
 
