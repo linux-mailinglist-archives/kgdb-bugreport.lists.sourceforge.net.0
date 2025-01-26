@@ -2,92 +2,93 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 30A72A1C6C2
-	for <lists+kgdb-bugreport@lfdr.de>; Sun, 26 Jan 2025 08:48:38 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7746EA1C6FE
+	for <lists+kgdb-bugreport@lfdr.de>; Sun, 26 Jan 2025 09:29:06 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1tbxNj-0002jQ-TT
+	id 1tby0v-0001JR-7n
 	for lists+kgdb-bugreport@lfdr.de;
-	Sun, 26 Jan 2025 07:48:36 +0000
+	Sun, 26 Jan 2025 08:29:05 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <rppt@kernel.org>) id 1tbxND-0002j4-Kt
+ (envelope-from <rppt@kernel.org>) id 1tby0t-0001JL-G0
  for kgdb-bugreport@lists.sourceforge.net;
- Sun, 26 Jan 2025 07:48:04 +0000
+ Sun, 26 Jan 2025 08:29:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=YIQ0s0g5S9fyvQvFERMkRZcwWuhXAVgFU48sXR83+1U=; b=YipydxZPJHQAncq8A+KoPpLQBl
- 0dFmBrN4QDprn4KQRHbogyGAvXT4omA7Lhueefes8Pm6/23ZM3ZAfKAgESHTAeJTk3ieATsMM59Tp
- rucLfhJ35yJdryE5fZOQfyooy6Ukz/xXqrhD6Wlu0Z3ankm+bf0jIFRrp5E74uFhg+rQ=;
+ bh=+HrNZ99qkNC8KEVuL9mBInkUyujn5g9T+2i2xoZ40eA=; b=C3xrmVVUCYJ/fGWWuyY9Gw4dIC
+ kHY8i/JLY8lSGlynFbKMFDSBLoPlcJ6tGppDeO2NkrUD2NJGrL8UW/oL1+jExfwttPGz41y+ChDHi
+ MaPbbA2tlxQ3DZR6ZeMXLkXh7zaUcVKC9APZBEdyzo/WJJX9HxS484mX19etXRmAKPMI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=YIQ0s0g5S9fyvQvFERMkRZcwWuhXAVgFU48sXR83+1U=; b=h
- iK82WZ0EDMARa5yIpnkGmMX6pPJR67mgIAMEkJ+gADrJp7Ad0LRQ49cCNMoy+QnW8Xhs44Giy4WTn
- Vhejcvk0K3rOey7H0zcFQI5yfi3jiGrglEn/0Y/59Kp3/qperxae1tAZ/ZDLKE8ktfa2qm3+UWBTz
- CZr8aLjiWHRpfujw=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=+HrNZ99qkNC8KEVuL9mBInkUyujn5g9T+2i2xoZ40eA=; b=d3M92Kx9H/MntmuRJqasIX6LEt
+ js/y2j8heLgen7B6EPTw3bMVQccK2CiBnQX3K4h9Yd3PyFp3IbDen/mt5LT4gAgXVuYH7GV7Pc8tr
+ JyOQ0AC8fZChFc1uxFZlX7CFh4+z1DKPDpA5x1t1Rvm7Z4F3Jg6ttDjEY/SL5G4tTJUA=;
+Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tbxND-0001u4-Ko for kgdb-bugreport@lists.sourceforge.net;
- Sun, 26 Jan 2025 07:48:04 +0000
+ id 1tbxNO-0001ud-Do for kgdb-bugreport@lists.sourceforge.net;
+ Sun, 26 Jan 2025 07:48:14 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 0E6585C5720;
- Sun, 26 Jan 2025 07:47:13 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0308BC4CED3;
- Sun, 26 Jan 2025 07:47:42 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 1B329A40135;
+ Sun, 26 Jan 2025 07:46:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 34FF5C4CEEA;
+ Sun, 26 Jan 2025 07:47:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1737877672;
- bh=HLFoZ/RTXnZ46FvNWum031IGZxxS7sqpbzrgDdi90jg=;
- h=From:To:Cc:Subject:Date:From;
- b=O52qDEgeuHxYD2iQ4xVmnqYxiwXRFmkUqlcKMuNcYvDExkrNljEPYGIg5HmQGU/Ug
- /xLdmcQJl0r8LS6YITXOURsoDrFjRH7Vf1NWeYRZBpPHxIex/Heg933xHgI+2XQYQt
- T2FyMaAF6aDVsZgf2jH9M6BmaqSKuErVdM2ekeSAQHgs1ra7L/qWcBRJVfXA7Bwui6
- JQIw6oanU4TdzC3qTSdWgiP5J0Fs8IwRp9NtQsJf2dYunc46TUkAwiH5EfpWpSIW0G
- dhh2niwb+KzVKCI36j9CIUaA95SSBjMVt9Aoz8DpyaXk0a5r20lhoEcG6fpH76MmtA
- YFbdLW4stYwdA==
+ s=k20201202; t=1737877682;
+ bh=dDY3jvGc45EmH43gWTWL5MYq9/Q1o2IM8rTUBWv64F4=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=t5r4qgbbVp+nn4AwESyq/kRBw7iTmIzwwOhO3g1QZKZPsL1LLunQnJSvESCwGNX31
+ fLfPLM9b9UVXxJ1voOhzdE2kaPMQswbGjy8LnTPVrwb6a+JqfwGRg2d2bTNgrVscEe
+ wSEIp2UELK9QFXarhTcBem6rAsoeTzDEztXuHCE2IDKD+8q+h8vaMBMOtMBsslCWMI
+ LgFtJPlxWPZ4Duaypkzc9ZGfgijEAzwbLYGxqkBN05QJpFrSNxB7AbaKYpR/BrwIrv
+ JImzfewDKD/78iXFN+lUP0nSrcuA/GyVpaKeOoJZZ9LFtTqCUm0WT0cIxtZCjp9p3E
+ Oz/ejtI5b29RQ==
 To: x86@kernel.org
-Date: Sun, 26 Jan 2025 09:47:24 +0200
-Message-ID: <20250126074733.1384926-1-rppt@kernel.org>
+Date: Sun, 26 Jan 2025 09:47:25 +0200
+Message-ID: <20250126074733.1384926-2-rppt@kernel.org>
 X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20250126074733.1384926-1-rppt@kernel.org>
+References: <20250126074733.1384926-1-rppt@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: -6.5 (------)
+X-Spam-Score: -3.8 (---)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  From: "Mike Rapoport (Microsoft)" <rppt@kernel.org> Hi,
- Following
- Peter's comments [1] these patches rework handling of ROX caches for module
- text allocations. 
- Content analysis details:   (-6.5 points, 6.0 required)
+ Content preview: From: "Mike Rapoport (Microsoft)" <rppt@kernel.org> The
+ CPA_ARRAY
+ test always uses len[1] as numpages argument to change_page_attr_set()
+ although
+ the addresses array is different each iteration of the test loop. 
+ Content analysis details:   (-3.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
  The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [139.178.84.217 listed in sa-accredit.habeas.com]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ [147.75.193.91 listed in sa-accredit.habeas.com]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [139.178.84.217 listed in bl.score.senderscore.com]
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ [147.75.193.91 listed in bl.score.senderscore.com]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -95,11 +96,13 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [147.75.193.91 listed in list.dnswl.org]
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -1.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tbxND-0001u4-Ko
-Subject: [Kgdb-bugreport] [PATCH v3 0/9] x86/module: rework ROX cache to
- avoid writable copy
+X-Headers-End: 1tbxNO-0001ud-Do
+Subject: [Kgdb-bugreport] [PATCH v3 1/9] x86/mm/pat: cpa-test: fix length
+ for CPA_ARRAY test
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -142,72 +145,31 @@ Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
 From: "Mike Rapoport (Microsoft)" <rppt@kernel.org>
 
-Hi,
+The CPA_ARRAY test always uses len[1] as numpages argument to
+change_page_attr_set() although the addresses array is different each
+iteration of the test loop.
 
-Following Peter's comments [1] these patches rework handling of ROX caches
-for module text allocations. 
+Replace len[1] with len[i] to have numpages matching the addresses array.
 
-Instead of using a writable copy that really complicates alternatives
-patching, temporarily remap parts of a large ROX page as RW for the time of
-module formation and then restore it's ROX protections when the module is
-ready.
+Fixes: ecc729f1f471 ("x86/mm/cpa: Add ARRAY and PAGES_ARRAY selftests")
+Signed-off-by: Mike Rapoport (Microsoft) <rppt@kernel.org>
+---
+ arch/x86/mm/pat/cpa-test.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-To keep the ROX memory mapped with large pages, make set_memory_rox()
-capable of restoring large pages (more details are in patch 3).
-
-Since this is really about x86, I believe this should go in via tip tree.
-
-The patches also available in git
-https://git.kernel.org/rppt/h/execmem/x86-rox/v10
-
-v3 changes:
-* instead of adding a new module state handle ROX restoration locally in
-  load_module() as Petr suggested
-
-v2: https://lore.kernel.org/all/20250121095739.986006-1-rppt@kernel.org
-* only collapse large mappings in set_memory_rox()
-* simplify RW <-> ROX remapping
-* don't remove ROX cache pages from the direct map (patch 4)
-
-v1: https://lore.kernel.org/all/20241227072825.1288491-1-rppt@kernel.org
-
-[1] https://lore.kernel.org/all/20241209083818.GK8562@noisy.programming.kicks-ass.net
-
-Kirill A. Shutemov (1):
-  x86/mm/pat: restore large ROX pages after fragmentation
-
-Mike Rapoport (Microsoft) (8):
-  x86/mm/pat: cpa-test: fix length for CPA_ARRAY test
-  x86/mm/pat: drop duplicate variable in cpa_flush()
-  execmem: don't remove ROX cache from the direct map
-  execmem: add API for temporal remapping as RW and restoring ROX afterwards
-  module: switch to execmem API for remapping as RW and restoring ROX
-  Revert "x86/module: prepare module loading for ROX allocations of text"
-  module: drop unused module_writable_address()
-  x86: re-enable EXECMEM_ROX support
-
- arch/um/kernel/um_arch.c             |  11 +-
- arch/x86/Kconfig                     |   1 +
- arch/x86/entry/vdso/vma.c            |   3 +-
- arch/x86/include/asm/alternative.h   |  14 +-
- arch/x86/include/asm/pgtable_types.h |   2 +
- arch/x86/kernel/alternative.c        | 181 +++++++++-------------
- arch/x86/kernel/ftrace.c             |  30 ++--
- arch/x86/kernel/module.c             |  45 ++----
- arch/x86/mm/pat/cpa-test.c           |   2 +-
- arch/x86/mm/pat/set_memory.c         | 220 ++++++++++++++++++++++++++-
- include/linux/execmem.h              |  31 ++++
- include/linux/module.h               |  16 --
- include/linux/moduleloader.h         |   4 -
- include/linux/vm_event_item.h        |   2 +
- kernel/module/main.c                 |  78 +++-------
- kernel/module/strict_rwx.c           |   9 +-
- mm/execmem.c                         |  39 +++--
- mm/vmstat.c                          |   2 +
- 18 files changed, 422 insertions(+), 268 deletions(-)
-
-
-base-commit: ffd294d346d185b70e28b1a28abe367bbfe53c04
+diff --git a/arch/x86/mm/pat/cpa-test.c b/arch/x86/mm/pat/cpa-test.c
+index 3d2f7f0a6ed1..ad3c1feec990 100644
+--- a/arch/x86/mm/pat/cpa-test.c
++++ b/arch/x86/mm/pat/cpa-test.c
+@@ -183,7 +183,7 @@ static int pageattr_test(void)
+ 			break;
+ 
+ 		case 1:
+-			err = change_page_attr_set(addrs, len[1], PAGE_CPA_TEST, 1);
++			err = change_page_attr_set(addrs, len[i], PAGE_CPA_TEST, 1);
+ 			break;
+ 
+ 		case 2:
 -- 
 2.45.2
 
