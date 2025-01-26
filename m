@@ -2,29 +2,29 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A8E22A1C6D2
-	for <lists+kgdb-bugreport@lfdr.de>; Sun, 26 Jan 2025 08:49:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 48B25A1C705
+	for <lists+kgdb-bugreport@lfdr.de>; Sun, 26 Jan 2025 09:31:42 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1tbxOV-0002PX-Gc
+	id 1tby3R-0004GG-1p
 	for lists+kgdb-bugreport@lfdr.de;
-	Sun, 26 Jan 2025 07:49:23 +0000
+	Sun, 26 Jan 2025 08:31:41 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <rppt@kernel.org>) id 1tbxOQ-0002NN-2S
+ (envelope-from <rppt@kernel.org>) id 1tby3P-0004G8-H7
  for kgdb-bugreport@lists.sourceforge.net;
- Sun, 26 Jan 2025 07:49:18 +0000
+ Sun, 26 Jan 2025 08:31:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=+HrNZ99qkNC8KEVuL9mBInkUyujn5g9T+2i2xoZ40eA=; b=C3xrmVVUCYJ/fGWWuyY9Gw4dIC
- kHY8i/JLY8lSGlynFbKMFDSBLoPlcJ6tGppDeO2NkrUD2NJGrL8UW/oL1+jExfwttPGz41y+ChDHi
- MaPbbA2tlxQ3DZR6ZeMXLkXh7zaUcVKC9APZBEdyzo/WJJX9HxS484mX19etXRmAKPMI=;
+ bh=1vYutUlTp3JX+hNbxqRR2ioYt+s65i5HZVu0KwP9iP0=; b=jeey7wdENppwquUC7l0JGUjqk6
+ 8PvdWyeb2sOf9O2qyHJB0lg2/XleX6e88w3TsYDaYhK5raLhy06cU0qsJt20lds/c/eS//sqIoyk2
+ tWNG6DP5QZDF9hhr198l5vMvgKZlfO4Oxa5C0+PYU7NpNz6ikd/QKMDrba4xM4gqRDEc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -32,77 +32,76 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=+HrNZ99qkNC8KEVuL9mBInkUyujn5g9T+2i2xoZ40eA=; b=d3M92Kx9H/MntmuRJqasIX6LEt
- js/y2j8heLgen7B6EPTw3bMVQccK2CiBnQX3K4h9Yd3PyFp3IbDen/mt5LT4gAgXVuYH7GV7Pc8tr
- JyOQ0AC8fZChFc1uxFZlX7CFh4+z1DKPDpA5x1t1Rvm7Z4F3Jg6ttDjEY/SL5G4tTJUA=;
-Received: from nyc.source.kernel.org ([147.75.193.91])
+ bh=1vYutUlTp3JX+hNbxqRR2ioYt+s65i5HZVu0KwP9iP0=; b=AWrWjmqwO4VRiKZ3YebpzKCRlw
+ cK92IOalt+cNy+rQLkkCvjiHhsnQJA6TXukBgtuNYtTkcANBz49brjoviwyboauUVWHs72HFKUbrT
+ BSg8W1C+uTx3vDhgQgW286QjRfU62aawHxdT4CFgivOU37/pFt8ACOkt8Yqg8zCKX6b0=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tbxNO-0001ud-Do for kgdb-bugreport@lists.sourceforge.net;
- Sun, 26 Jan 2025 07:48:14 +0000
+ id 1tbxNS-0001uz-Qy for kgdb-bugreport@lists.sourceforge.net;
+ Sun, 26 Jan 2025 07:48:19 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 1B329A40135;
- Sun, 26 Jan 2025 07:46:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 34FF5C4CEEA;
- Sun, 26 Jan 2025 07:47:53 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 30E485C5C75;
+ Sun, 26 Jan 2025 07:47:33 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 62EF0C4CED3;
+ Sun, 26 Jan 2025 07:48:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1737877682;
- bh=dDY3jvGc45EmH43gWTWL5MYq9/Q1o2IM8rTUBWv64F4=;
+ s=k20201202; t=1737877693;
+ bh=UnbrmexawgONPYMAXBvIF3DzXjQu5/b5KeCmUo86HRs=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=t5r4qgbbVp+nn4AwESyq/kRBw7iTmIzwwOhO3g1QZKZPsL1LLunQnJSvESCwGNX31
- fLfPLM9b9UVXxJ1voOhzdE2kaPMQswbGjy8LnTPVrwb6a+JqfwGRg2d2bTNgrVscEe
- wSEIp2UELK9QFXarhTcBem6rAsoeTzDEztXuHCE2IDKD+8q+h8vaMBMOtMBsslCWMI
- LgFtJPlxWPZ4Duaypkzc9ZGfgijEAzwbLYGxqkBN05QJpFrSNxB7AbaKYpR/BrwIrv
- JImzfewDKD/78iXFN+lUP0nSrcuA/GyVpaKeOoJZZ9LFtTqCUm0WT0cIxtZCjp9p3E
- Oz/ejtI5b29RQ==
+ b=Ip3YgJ3YSP9SXdUh/kxhiQVdDs3WVvuBouH5X89T+VIIo6TzzE7FCt0gM5JJ90qdB
+ qFokyCnFrMLuusz7d73gejhGjtpaGSOXriTKI4BIE1yBpNhZEiDufYAcmk+Bny0+pi
+ mka5HQUFLD61qPJQ38dTyd3ZKji3uDer4OdT9bFadlUYLCQs+5YalQ3gY2xBjNUrYT
+ hZa97zbHTVoKXZmQKChwE4mHoQs3pRngNrmPu2jrkNiOIXVi1uwbrn+txO4g/aUq6L
+ gISj+VrDa5T7aQN4aew1n4foLfwHD83fvLl/TKDYXV703XcKmVLgmgNS/HPpngfLaF
+ tGV4//yCmaeKQ==
 To: x86@kernel.org
-Date: Sun, 26 Jan 2025 09:47:25 +0200
-Message-ID: <20250126074733.1384926-2-rppt@kernel.org>
+Date: Sun, 26 Jan 2025 09:47:26 +0200
+Message-ID: <20250126074733.1384926-3-rppt@kernel.org>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20250126074733.1384926-1-rppt@kernel.org>
 References: <20250126074733.1384926-1-rppt@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: -3.8 (---)
+X-Spam-Score: -6.5 (------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: "Mike Rapoport (Microsoft)" <rppt@kernel.org> The
- CPA_ARRAY
- test always uses len[1] as numpages argument to change_page_attr_set()
- although
- the addresses array is different each iteration of the test loop. 
- Content analysis details:   (-3.8 points, 6.0 required)
+ Content preview:  From: "Mike Rapoport (Microsoft)" <rppt@kernel.org> There
+ is a 'struct cpa_data *data' parameter in cpa_flush() that is assigned to
+ a local 'struct cpa_data *cpa' variable. Rename the parameter from 'data'
+ to 'cpa' and drop declaration of the local 'cpa' variable. 
+ Content analysis details:   (-6.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
- The query to Validity was blocked.  See
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [147.75.193.91 listed in sa-accredit.habeas.com]
+ [139.178.84.217 listed in sa-trusted.bondedsender.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [147.75.193.91 listed in bl.score.senderscore.com]
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ [139.178.84.217 listed in bl.score.senderscore.com]
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [147.75.193.91 listed in list.dnswl.org]
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -1.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tbxNO-0001ud-Do
-Subject: [Kgdb-bugreport] [PATCH v3 1/9] x86/mm/pat: cpa-test: fix length
- for CPA_ARRAY test
+X-Headers-End: 1tbxNS-0001uz-Qy
+Subject: [Kgdb-bugreport] [PATCH v3 2/9] x86/mm/pat: drop duplicate variable
+ in cpa_flush()
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -145,31 +144,32 @@ Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
 From: "Mike Rapoport (Microsoft)" <rppt@kernel.org>
 
-The CPA_ARRAY test always uses len[1] as numpages argument to
-change_page_attr_set() although the addresses array is different each
-iteration of the test loop.
+There is a 'struct cpa_data *data' parameter in cpa_flush() that is
+assigned to a local 'struct cpa_data *cpa' variable.
 
-Replace len[1] with len[i] to have numpages matching the addresses array.
+Rename the parameter from 'data' to 'cpa' and drop declaration of the
+local 'cpa' variable.
 
-Fixes: ecc729f1f471 ("x86/mm/cpa: Add ARRAY and PAGES_ARRAY selftests")
 Signed-off-by: Mike Rapoport (Microsoft) <rppt@kernel.org>
 ---
- arch/x86/mm/pat/cpa-test.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/x86/mm/pat/set_memory.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/arch/x86/mm/pat/cpa-test.c b/arch/x86/mm/pat/cpa-test.c
-index 3d2f7f0a6ed1..ad3c1feec990 100644
---- a/arch/x86/mm/pat/cpa-test.c
-+++ b/arch/x86/mm/pat/cpa-test.c
-@@ -183,7 +183,7 @@ static int pageattr_test(void)
- 			break;
+diff --git a/arch/x86/mm/pat/set_memory.c b/arch/x86/mm/pat/set_memory.c
+index 95bc50a8541c..d43b919b11ae 100644
+--- a/arch/x86/mm/pat/set_memory.c
++++ b/arch/x86/mm/pat/set_memory.c
+@@ -396,9 +396,8 @@ static void __cpa_flush_tlb(void *data)
+ 		flush_tlb_one_kernel(fix_addr(__cpa_addr(cpa, i)));
+ }
  
- 		case 1:
--			err = change_page_attr_set(addrs, len[1], PAGE_CPA_TEST, 1);
-+			err = change_page_attr_set(addrs, len[i], PAGE_CPA_TEST, 1);
- 			break;
+-static void cpa_flush(struct cpa_data *data, int cache)
++static void cpa_flush(struct cpa_data *cpa, int cache)
+ {
+-	struct cpa_data *cpa = data;
+ 	unsigned int i;
  
- 		case 2:
+ 	BUG_ON(irqs_disabled() && !early_boot_irqs_disabled);
 -- 
 2.45.2
 
