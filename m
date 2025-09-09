@@ -2,96 +2,124 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CF00FB4A457
-	for <lists+kgdb-bugreport@lfdr.de>; Tue,  9 Sep 2025 09:57:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B3F91B4FDF3
+	for <lists+kgdb-bugreport@lfdr.de>; Tue,  9 Sep 2025 15:48:52 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:Message-ID:Date:References:In-Reply-To:To:From:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=B4oiX4yJ7bpQ9RMQYMrov0TDRTqygXYNY/NHt2tuSwo=; b=ES5WcC5EGx6GSFVz8St0LlSISO
-	jVaIZoHrohDvX6aphPvyHQScr5i8fRMsvsa9SAvquGGhzGNy+Kih/GQuhA8UOYKqByZJLZ1n1GE0n
-	NgwZ4Ll3BCgpD+EQw5X9yGhPha50dm82L653phuHYv0qAubGlehl04UMRMZrM1FNMy+U=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
+	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=LY86ywkgAgvvrOyscJQl62b8kXHryLN+xD4wxjogmyw=; b=M0pfOQbxS/YBF0CwK6VHcQsMaZ
+	UlXA/mE53/J0PrnKMOvPuIGB3W9T66N2ui7nDpY9LTUYLwOEvsGohspS6bz3JEoHjvQZUw/m29BfT
+	686ctJrIWwI1Ntlbl60L1zgAXJBqKLbB4i8Xyu+VkQSWNBy+RUIwsjpvuAmf4UqXWNcQ=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1uvtE3-0002ZL-LR
+	id 1uvyiJ-00039v-IM
 	for lists+kgdb-bugreport@lfdr.de;
-	Tue, 09 Sep 2025 07:57:15 +0000
+	Tue, 09 Sep 2025 13:48:51 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <john.ogness@linutronix.de>) id 1uvtE1-0002ZE-Pd
+ (envelope-from <pmladek@suse.com>) id 1uvyiH-00039n-Pt
  for kgdb-bugreport@lists.sourceforge.net;
- Tue, 09 Sep 2025 07:57:13 +0000
+ Tue, 09 Sep 2025 13:48:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :Message-ID:Date:References:In-Reply-To:Subject:Cc:To:From:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
+ MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=LlA4fNeih3Yuh862kDvLzQfFmFoDZ1djlkzFIKbBwH0=; b=V3xkYQL05/bjR830E+zrZV9SyS
- N4QYIPP1mYIi6lOZ7eiL+IWynR8Kfabew6m9FONpZlW8xHz1ozrOLz4mzNleqIRG++K8tTG8Wd4jf
- KJzr9bsBBoGumyrce+guaDKHs3MIjxPIeUoqa/3EpE75gWB5709RpssZYyfncsmZamcw=;
+ bh=wzdJUr2aAZ317oMLdDooM8ha31xvzXYVNa8DDq4GgnM=; b=bt6IrAhnspwq7rKzs391wJUueX
+ /Lyo76UkSaFh28pubtmPq8wGMDXyhhaUErqtL5TSWV8S0qpMcSDU2Y9x7VVbM9X1JnSOWC3RfO3q8
+ S0nYtyYYjjJbOrGoKGHIZ9UMn9XIqfQOjEXMsMomlleIZe5WMijpxAEQJIQayGlcbSMA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:
- References:In-Reply-To:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=LlA4fNeih3Yuh862kDvLzQfFmFoDZ1djlkzFIKbBwH0=; b=GpdZwm5yPnrmJFEIaaBBBFc2aU
- upUhmbsuQG1qs3gXmg3UjtgdjQea6D66oYX5A+4j/3DonrVzFSttDqRsnwhGl1toGRAtzjEIQM6zc
- up1dtGLpdsTNMUgyrUWFqGpr+b2p4E6WbQ3OzkqDlhcdt+d2P5mi2LfjeGUXdb/jjL+g=;
-Received: from galois.linutronix.de ([193.142.43.55])
+ bh=wzdJUr2aAZ317oMLdDooM8ha31xvzXYVNa8DDq4GgnM=; b=UBifL3cpgefMY+HXNKLLTxXOCz
+ vvbZ/hNu2kVOWGTpGrJygK+gn2gyJBZgIKbaGF/lPhjTH8HAfmnKgucBHKwFGQ+1iwT0TvxWN+AYM
+ kHjAiARXgnBNh8WXuKj0VNPJTL7BXXvPgcsJ6RTYHdAKcNsSAcGWImtM4064Qnz2bcSs=;
+Received: from mail-ej1-f66.google.com ([209.85.218.66])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uvtE0-0002zT-Sq for kgdb-bugreport@lists.sourceforge.net;
- Tue, 09 Sep 2025 07:57:13 +0000
-From: John Ogness <john.ogness@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1757404626;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=LlA4fNeih3Yuh862kDvLzQfFmFoDZ1djlkzFIKbBwH0=;
- b=pir1gPcGIuy/zUO83ooLypux2Pokq5tlqGwL6Ruxaff1BdVT7P1L7b9wVsuEU2GQSWZnfh
- znaZszpwMIvUndwHgNI2Z3MWO8E3IoQag14zrz7YfJN15RkwxfEut79XgJGUjWPrQYkWJd
- r7YwAMs5co40OG+YZTQitJ3InvEc3p4Oa8N/UT2WEyuxswQlkCFtK5xGf05JAViNjN8GGg
- ngSjHq1eMIrN9fJUC9vNORfWreWrMDsDUNzdcmaqXi2hhzQuGhmObWjLEQFLBaWrTdTE/f
- sjKqyDhmBu1CWOrtwNaEms/MiutsE9D6x0xdu7xe1agClyoY6uko9kvTRvs3sw==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1757404626;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=LlA4fNeih3Yuh862kDvLzQfFmFoDZ1djlkzFIKbBwH0=;
- b=633o4RpSGY9ffnBY2DE7J3M9XmJxcJVm8kdqos4GNAGGqBwpJeW3m3Dtgg1fwYBSwIMulv
- Jdhm+5d/J9DjdEDw==
-To: Marcos Paulo de Souza <mpdesouza@suse.com>, Petr Mladek <pmladek@suse.com>
-In-Reply-To: <d73e8cc0259c140a0a49f670c6c165bb662281ed.camel@suse.com>
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1uvyiH-0001D0-AY for kgdb-bugreport@lists.sourceforge.net;
+ Tue, 09 Sep 2025 13:48:49 +0000
+Received: by mail-ej1-f66.google.com with SMTP id
+ a640c23a62f3a-b00a9989633so184785666b.0
+ for <kgdb-bugreport@lists.sourceforge.net>;
+ Tue, 09 Sep 2025 06:48:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=suse.com; s=google; t=1757425718; x=1758030518; darn=lists.sourceforge.net; 
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=wzdJUr2aAZ317oMLdDooM8ha31xvzXYVNa8DDq4GgnM=;
+ b=gLI1mHOsdJqqoWRWp5WnsiQdgRX3bC556yq2GcM4mDy1huCh4fgLcao2hs76KS/ofm
+ VTUxjWKFY27yMrmUzYUEq6gA/u7gfH/z+AoqVe8wXkyz51mabru6nK5Fx7MkMDvNcLVT
+ mmjOfX9EPRhR2y94Y38Urts2ljduteZ57SHl1OyQp6xNG8CeZt6QFIhb6isvr1DUfdtk
+ 6byF6Oj8/H/IA0MgBMrPJSHsP4950JwU5j8oHP1Dul2VRy/CBQDXkRrid+7aVg2NpbQs
+ +k3hObGda+pfmQ3oSNcC9uUeYTFhgvM/UuYFVov1etPsM3hSIOLfLgYvLC5O97T2T54H
+ z3Lw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1757425718; x=1758030518;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=wzdJUr2aAZ317oMLdDooM8ha31xvzXYVNa8DDq4GgnM=;
+ b=P2FabnyiB3egSiwVA2Y3H4L8v/V4RX3xW7jDMLdKa5GCFI50IlLIniMQg8z5NvINqw
+ qEJsG2YCjzr0fuAngqj+7vnyO1ae+CKdrKsmxdYKnY+6i2pNUkBCZCPbhYOZxO4LIsO2
+ wG9xNdsdVHZEhDumo8vPRuWKm2cabuZly3ihXPb3eGtGdPW/NVbAEcrNolTxTkYDzSsc
+ vvG/jIFbDzhflmhhh3VrqtJVlh4zZa1nppVqy3NFYiHSfZrKOGhYF4xiIF0MZTsBRb4S
+ LLphVZ7ZgqsWgTWDcDfEvo30JocLh/Zjb+/MCj5BbkWG+wPnqZKtJJ093EzybWHKbcDP
+ AyWw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXs5PEwxLpHjMUP9pj0dobFtFDmtkYVimdhnjyhbyFw6AdxODivY8p9daXHovsx/GXaeSYmoRfTFigoFOzr3w==@lists.sourceforge.net
+X-Gm-Message-State: AOJu0Yxf6d0AuYrwdHKVYA1A2xqVLNX9GEWporqtWpk2HPigFfnDB/fQ
+ 2aZOtlPagfQUFjPWQOjW37eGnQ3F0h1WrnrddIQ7rZC+bUh49iM+nTiAnzw+NmfuPEc=
+X-Gm-Gg: ASbGnctK6shxwru6L80HP+uc6tFC/LP0YRjS26PigZzeG6OvTdRQkDiQ0YWSWIBe6eo
+ zGoZxiXu6HanTWBce2+p1sptlA7bMWBFltlWzC3en+UbiZpNsQLfpDdv1rqy4CDbP1kPwXUHHxp
+ VdMaauPzr/ORFP8DHbE1rLLqTpvGfE5KN14eH+6Rek8VB4Z4bmh1y000tOM/E9QU4eBfJdKhgeQ
+ daS56bZEgf26D8ARGrUN+9ANzbBTt1VhwkbfAeWBuuibHjxl2BAdNRe1QegWoRXREQlXOZjRDbU
+ UHyDwcx0IaLUZub+i0pSKmvYBGdmp3NW9YcB8BQ2I/5PcIaJ27mTr48LFooKRB0rxdKWJb1nkXb
+ sMDiKU5SZR1QXpI9p2Jm3x7EEdA==
+X-Google-Smtp-Source: AGHT+IHgk5tFhwF30rudU5mtYNqfAuQeHF11cAlAbcY+uYtRgicaAE41/MCIBs7pCIURzp5gb19rEw==
+X-Received: by 2002:a17:907:3e09:b0:afe:6648:a243 with SMTP id
+ a640c23a62f3a-b049307ef09mr1831123266b.3.1757425717645; 
+ Tue, 09 Sep 2025 06:48:37 -0700 (PDT)
+Received: from pathway.suse.cz ([176.114.240.130])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b046af12536sm1492637866b.100.2025.09.09.06.48.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 09 Sep 2025 06:48:37 -0700 (PDT)
+Date: Tue, 9 Sep 2025 15:48:35 +0200
+To: John Ogness <john.ogness@linutronix.de>
+Message-ID: <aMAwMz4vWC5u9OpN@pathway.suse.cz>
 References: <20250902-nbcon-kgdboc-v3-0-cd30a8106f1c@suse.com>
  <20250902-nbcon-kgdboc-v3-4-cd30a8106f1c@suse.com>
  <aL77aq4gZBsn4epT@pathway.suse.cz>
  <d73e8cc0259c140a0a49f670c6c165bb662281ed.camel@suse.com>
-Date: Tue, 09 Sep 2025 10:03:05 +0206
-Message-ID: <84segwjbxq.fsf@jogness.linutronix.de>
+ <84segwjbxq.fsf@jogness.linutronix.de>
 MIME-Version: 1.0
-X-Spam-Score: 0.4 (/)
+Content-Disposition: inline
+In-Reply-To: <84segwjbxq.fsf@jogness.linutronix.de>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2025-09-08, Marcos Paulo de Souza <mpdesouza@suse.com>
- wrote: >> > --- a/kernel/debug/kdb/kdb_io.c >> > +++
- b/kernel/debug/kdb/kdb_io.c
- >> > @@ -589,24 +589,40 @@ static void kdb_msg_write(const ch [...] 
- Content analysis details:   (0.4 points, 5.0 required)
+ Content preview:  On Tue 2025-09-09 10:03:05,
+ John Ogness wrote: > On 2025-09-08, 
+ Marcos Paulo de Souza <mpdesouza@suse.com> wrote: > >> > ---
+ a/kernel/debug/kdb/kdb_io.c
+ > >> > +++ b/kernel/debug/kdb/kdb_io.c > >> > @ [...] 
+ Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
@@ -101,8 +129,10 @@ X-Spam-Report: Spam detection software,
  domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- 0.6 INVALID_DATE_TZ_ABSURD Invalid Date: header (timezone does not exist)
-X-Headers-End: 1uvtE0-0002zT-Sq
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.218.66 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1uvyiH-0001D0-AY
 Subject: Re: [Kgdb-bugreport] [PATCH v3 4/4] kdb: Adapt kdb_msg_write to
  work with NBCON consoles
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
@@ -116,58 +146,128 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
+From: Petr Mladek via Kgdb-bugreport <kgdb-bugreport@lists.sourceforge.net>
+Reply-To: Petr Mladek <pmladek@suse.com>
 Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Marcos Paulo de Souza <mpdesouza@suse.com>,
  Steven Rostedt <rostedt@goodmis.org>, linux-kernel@vger.kernel.org,
  Sergey Senozhatsky <senozhatsky@chromium.org>,
  Daniel Thompson <danielt@kernel.org>,
  Jason Wessel <jason.wessel@windriver.com>,
  kgdb-bugreport@lists.sourceforge.net
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-T24gMjAyNS0wOS0wOCwgTWFyY29zIFBhdWxvIGRlIFNvdXphIDxtcGRlc291emFAc3VzZS5jb20+
-IHdyb3RlOgo+PiA+IC0tLSBhL2tlcm5lbC9kZWJ1Zy9rZGIva2RiX2lvLmMKPj4gPiArKysgYi9r
-ZXJuZWwvZGVidWcva2RiL2tkYl9pby5jCj4+ID4gQEAgLTU4OSwyNCArNTg5LDQwIEBAIHN0YXRp
-YyB2b2lkIGtkYl9tc2dfd3JpdGUoY29uc3QgY2hhciAqbXNnLAo+PiA+IGludCBtc2dfbGVuKQo+
-PiA+IMKgCSAqLwo+PiA+IMKgCWNvb2tpZSA9IGNvbnNvbGVfc3JjdV9yZWFkX2xvY2soKTsKPj4g
-PiDCoAlmb3JfZWFjaF9jb25zb2xlX3NyY3UoYykgewo+PiA+IC0JCWlmICghKGNvbnNvbGVfc3Jj
-dV9yZWFkX2ZsYWdzKGMpICYgQ09OX0VOQUJMRUQpKQo+PiA+ICsJCXN0cnVjdCBuYmNvbl93cml0
-ZV9jb250ZXh0IHdjdHh0ID0geyB9Owo+PiA+ICsJCXNob3J0IGZsYWdzID0gY29uc29sZV9zcmN1
-X3JlYWRfZmxhZ3MoYyk7Cj4+ID4gKwo+PiA+ICsJCWlmICghY29uc29sZV9pc191c2FibGUoYywg
-ZmxhZ3MsIHRydWUpKQo+PiA+IMKgCQkJY29udGludWU7Cj4+ID4gwqAJCWlmIChjID09IGRiZ19p
-b19vcHMtPmNvbnMpCj4+ID4gwqAJCQljb250aW51ZTsKPj4gPiAtCQlpZiAoIWMtPndyaXRlKQo+
-PiA+IC0JCQljb250aW51ZTsKPj4gPiAtCQkvKgo+PiA+IC0JCSAqIFNldCBvb3BzX2luX3Byb2dy
-ZXNzIHRvIGVuY291cmFnZSB0aGUgY29uc29sZQo+PiA+IGRyaXZlcnMgdG8KPj4gPiAtCQkgKiBk
-aXNyZWdhcmQgdGhlaXIgaW50ZXJuYWwgc3BpbiBsb2NrczogaW4gdGhlCj4+ID4gY3VycmVudCBj
-YWxsaW5nCj4+ID4gLQkJICogY29udGV4dCB0aGUgcmlzayBvZiBkZWFkbG9jayBpcyBhIGJpZ2dl
-cgo+PiA+IHByb2JsZW0gdGhhbiByaXNrcwo+PiA+IC0JCSAqIGR1ZSB0byByZS1lbnRlcmluZyB0
-aGUgY29uc29sZSBkcml2ZXIuIFdlCj4+ID4gb3BlcmF0ZSBkaXJlY3RseSBvbgo+PiA+IC0JCSAq
-IG9vcHNfaW5fcHJvZ3Jlc3MgcmF0aGVyIHRoYW4gdXNpbmcKPj4gPiBidXN0X3NwaW5sb2Nrcygp
-IGJlY2F1c2UKPj4gPiAtCQkgKiB0aGUgY2FsbHMgYnVzdF9zcGlubG9ja3MoKSBtYWtlcyBvbiBl
-eGl0IGFyZQo+PiA+IG5vdCBhcHByb3ByaWF0ZQo+PiA+IC0JCSAqIGZvciB0aGlzIGNhbGxpbmcg
-Y29udGV4dC4KPj4gPiAtCQkgKi8KPj4gPiAtCQkrK29vcHNfaW5fcHJvZ3Jlc3M7Cj4+ID4gLQkJ
-Yy0+d3JpdGUoYywgbXNnLCBtc2dfbGVuKTsKPj4gPiAtCQktLW9vcHNfaW5fcHJvZ3Jlc3M7Cj4+
-ID4gKwo+PiA+ICsJCWlmIChmbGFncyAmIENPTl9OQkNPTikgewo+PiA+ICsJCQkvKgo+PiA+ICsJ
-CQkgKiBEbyBub3QgY29udGludWUgaWYgdGhlIGNvbnNvbGUgaXMgTkJDT04KPj4gPiBhbmQgdGhl
-IGNvbnRleHQKPj4gPiArCQkJICogY2FuJ3QgYmUgYWNxdWlyZWQuCj4+ID4gKwkJCSAqLwo+PiA+
-ICsJCQlpZiAoIW5iY29uX2tkYl90cnlfYWNxdWlyZShjLCAmd2N0eHQpKQo+PiA+ICsJCQkJY29u
-dGludWU7Cj4+ID4gKwo+PiA+ICsJCQl3Y3R4dC5vdXRidWYgPSAoY2hhciAqKW1zZzsKPj4gPiAr
-CQkJd2N0eHQubGVuID0gbXNnX2xlbjsKPj4gCj4+IEkgZG91YmxlIGNoZWNrZWQgd2hldGhlciB3
-ZSBpbml0aWFsaXplZCBhbGwgbWVtYmVycyBvZiB0aGUgc3RydWN0dXJlCj4+IGNvcnJlY3RseS4g
-QW5kIEkgZm91bmQgdGhhdCB3ZSBkaWRuJ3QuIFdlIHNob3VsZCBjYWxsIGhlcmU6Cj4+IAo+PiAJ
-CQluYmNvbl93cml0ZV9jb250ZXh0X3NldF9idWYoJndjdHh0LAo+PiAJCQkJCQnCoMKgwqAgJnBt
-c2cucGJ1ZnMtCj4+ID5vdXRidWZbMF0sCj4+IAkJCQkJCcKgwqDCoAo+PiBwbXNnLm91dGJ1Zl9s
-ZW4pOwoKTmljZSBjYXRjaC4KCj4+IFNpZ2gsIHRoaXMgaXMgZWFzeSB0byBtaXNzLiBJIHJlbWVt
-YmVyIHRoYXQgSSB3YXMgbm90IHN1cGVyIGhhcHB5Cj4+IGFib3V0IHRoaXMgZGVzaWduLiBCdXQg
-dGhlIG9yaWdpbmFsIGNvZGUgaW5pdGlhbGl6ZWQgdGhlIHN0cnVjdHVyZQo+PiBvbiBhIHNpbmds
-ZSBwbGFjZS4uLgo+Cj4gT2ssIHNvIEknbGwgbmVlZCB0byBhbHNvIGV4cG9ydCBuYmNvbl93cml0
-ZV9jb250ZXh0X3NldF9idWYsIHNpbmNlIGl0J3MKPiBjdXJyZW50bHkgc3RhdGljIGluc2lkZSBr
-ZXJuZWwvcHJpbnRrL25iY29uLmMuIEknbGwgZG8gaXQgZm9yIHRoZSBuZXh0Cj4gdmVyc2lvbi4K
-CkhvdyBhYm91dCBtb2RpZnlpbmcgbmJjb25fa2RiX3RyeV9hY3F1aXJlKCkgdG8gYWxzbyB0YWtl
-IEBtc2cgYW5kCkBtc2dfbGVuLiBUaGVuLCBvbiBzdWNjZXNzLCBAd2N0eHQgaXMgYWxyZWFkeSBw
-cmVwYXJlZC4gSSBkbyBub3QgbGlrZQp0aGUgaWRlYSBvZiBleHRlcm5hbCBjb2RlIGZpZGRsaW5n
-IHdpdGggdGhlIGZpZWxkcy4KCkpvaG4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fXwpLZ2RiLWJ1Z3JlcG9ydCBtYWlsaW5nIGxpc3QKS2dkYi1idWdyZXBv
-cnRAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xp
-c3RzL2xpc3RpbmZvL2tnZGItYnVncmVwb3J0Cg==
+On Tue 2025-09-09 10:03:05, John Ogness wrote:
+> On 2025-09-08, Marcos Paulo de Souza <mpdesouza@suse.com> wrote:
+> >> > --- a/kernel/debug/kdb/kdb_io.c
+> >> > +++ b/kernel/debug/kdb/kdb_io.c
+> >> > @@ -589,24 +589,40 @@ static void kdb_msg_write(const char *msg,
+> >> > int msg_len)
+> >> > =A0	 */
+> >> > =A0	cookie =3D console_srcu_read_lock();
+> >> > =A0	for_each_console_srcu(c) {
+> >> > -		if (!(console_srcu_read_flags(c) & CON_ENABLED))
+> >> > +		struct nbcon_write_context wctxt =3D { };
+> >> > +		short flags =3D console_srcu_read_flags(c);
+> >> > +
+> >> > +		if (!console_is_usable(c, flags, true))
+> >> > =A0			continue;
+> >> > =A0		if (c =3D=3D dbg_io_ops->cons)
+> >> > =A0			continue;
+> >> > -		if (!c->write)
+> >> > -			continue;
+> >> > -		/*
+> >> > -		 * Set oops_in_progress to encourage the console
+> >> > drivers to
+> >> > -		 * disregard their internal spin locks: in the
+> >> > current calling
+> >> > -		 * context the risk of deadlock is a bigger
+> >> > problem than risks
+> >> > -		 * due to re-entering the console driver. We
+> >> > operate directly on
+> >> > -		 * oops_in_progress rather than using
+> >> > bust_spinlocks() because
+> >> > -		 * the calls bust_spinlocks() makes on exit are
+> >> > not appropriate
+> >> > -		 * for this calling context.
+> >> > -		 */
+> >> > -		++oops_in_progress;
+> >> > -		c->write(c, msg, msg_len);
+> >> > -		--oops_in_progress;
+> >> > +
+> >> > +		if (flags & CON_NBCON) {
+> >> > +			/*
+> >> > +			 * Do not continue if the console is NBCON
+> >> > and the context
+> >> > +			 * can't be acquired.
+> >> > +			 */
+> >> > +			if (!nbcon_kdb_try_acquire(c, &wctxt))
+> >> > +				continue;
+> >> > +
+> >> > +			wctxt.outbuf =3D (char *)msg;
+> >> > +			wctxt.len =3D msg_len;
+> >> =
+
+> >> I double checked whether we initialized all members of the structure
+> >> correctly. And I found that we didn't. We should call here:
+> >> =
+
+> >> 			nbcon_write_context_set_buf(&wctxt,
+> >> 						=A0=A0=A0 &pmsg.pbufs-
+> >> >outbuf[0],
+> >> 						=A0=A0=A0
+> >> pmsg.outbuf_len);
+> =
+
+> Nice catch.
+> =
+
+> >> Sigh, this is easy to miss. I remember that I was not super happy
+> >> about this design.
+
+I looked for details. I described my concerns at
+https://lore.kernel.org/lkml/ZNY5gPNyyw9RTo4X@alley/#t
+
+> >> But the original code initialized the structure
+> >> on a single place...
+> > =
+
+> > Ok, so I'll need to also export nbcon_write_context_set_buf, since it's
+> > currently static inside kernel/printk/nbcon.c. I'll do it for the next
+> > version.
+> =
+
+> How about modifying nbcon_kdb_try_acquire() to also take @msg and
+> @msg_len. Then, on success, @wctxt is already prepared. I do not like
+> the idea of external code fiddling with the fields.
+
+I was thinking about another solution, e.g. an nbcon_wctxt_init()
+function. The problem is that wctxt->unsafe_takeover would need
+to get updated after acquiring the context. And might be reused
+for different consoles, ...
+
+But wait. I do not see any code using wctxt->unsafe_takeover.
+
+It seems that the motivation was that console drivers might
+do something else when there was an unsafe_takeover in the past,
+see https://lore.kernel.org/lkml/87cyz6ro62.fsf@jogness.linutronix.de/
+But it seems that no console driver is using it.
+
+So, I would prefer to remove the "unsafe_takeover" field from
+struct nbcon_write_context and keep this kdb code as it is now.
+
+We could always add it back when really needed.
+Alternatively, we could create an API which could read this information
+from struct wctxt.ctxt.con. But I would create this API only when
+there is an user.
+
+Best Regards,
+Petr
+
+
+_______________________________________________
+Kgdb-bugreport mailing list
+Kgdb-bugreport@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport
