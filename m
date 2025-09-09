@@ -2,111 +2,109 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B3F91B4FDF3
-	for <lists+kgdb-bugreport@lfdr.de>; Tue,  9 Sep 2025 15:48:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B9BB6B4FF35
+	for <lists+kgdb-bugreport@lfdr.de>; Tue,  9 Sep 2025 16:21:39 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
 	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=LY86ywkgAgvvrOyscJQl62b8kXHryLN+xD4wxjogmyw=; b=M0pfOQbxS/YBF0CwK6VHcQsMaZ
-	UlXA/mE53/J0PrnKMOvPuIGB3W9T66N2ui7nDpY9LTUYLwOEvsGohspS6bz3JEoHjvQZUw/m29BfT
-	686ctJrIWwI1Ntlbl60L1zgAXJBqKLbB4i8Xyu+VkQSWNBy+RUIwsjpvuAmf4UqXWNcQ=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=dmREJmxdHN+hF9N4Zj3q0FyEB42dexawBvMuHLWDTdM=; b=de7bGLBm0Ftx9HmgR0dVSzcMza
+	kPW495u/mU/dRKj9hMfuefWp1QdcXrjk2vYi/ykQ0JAEnpp34RpuMQFLgmp6qqruN4j/Sj6sLRrYo
+	NJgvoLJ5SLtfx6GgpXC0l6q9gDRycoDCsUn/JCsFmAeSdfGNd0Fn9zaehlk6OMDZVH4w=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1uvyiJ-00039v-IM
+	id 1uvzE1-0001uk-PW
 	for lists+kgdb-bugreport@lfdr.de;
-	Tue, 09 Sep 2025 13:48:51 +0000
+	Tue, 09 Sep 2025 14:21:38 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <pmladek@suse.com>) id 1uvyiH-00039n-Pt
+ (envelope-from <pmladek@suse.com>) id 1uvzDv-0001u5-8L
  for kgdb-bugreport@lists.sourceforge.net;
- Tue, 09 Sep 2025 13:48:49 +0000
+ Tue, 09 Sep 2025 14:21:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
- MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wzdJUr2aAZ317oMLdDooM8ha31xvzXYVNa8DDq4GgnM=; b=bt6IrAhnspwq7rKzs391wJUueX
- /Lyo76UkSaFh28pubtmPq8wGMDXyhhaUErqtL5TSWV8S0qpMcSDU2Y9x7VVbM9X1JnSOWC3RfO3q8
- S0nYtyYYjjJbOrGoKGHIZ9UMn9XIqfQOjEXMsMomlleIZe5WMijpxAEQJIQayGlcbSMA=;
+ bh=z9XzVsrF/2kVcEs9PtV7OlqggBEMEvqZHeycAS9T7Mw=; b=fleSJqHcVyXoiKm4YC3aq4q/5l
+ lSsfd90SaM5M9In+llw2PlywcMt4SEgFGLV7nplFyN9ZLHgZwjw9i2hJLevbNYiG43abO6XNyYiFw
+ 0yjTeMYeXcuQZGBBbOx3wjsUqhh30Mqyk8nVO/NW7XCsp6WK7wIs/a8MxepL6STAYNn0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=wzdJUr2aAZ317oMLdDooM8ha31xvzXYVNa8DDq4GgnM=; b=UBifL3cpgefMY+HXNKLLTxXOCz
- vvbZ/hNu2kVOWGTpGrJygK+gn2gyJBZgIKbaGF/lPhjTH8HAfmnKgucBHKwFGQ+1iwT0TvxWN+AYM
- kHjAiARXgnBNh8WXuKj0VNPJTL7BXXvPgcsJ6RTYHdAKcNsSAcGWImtM4064Qnz2bcSs=;
-Received: from mail-ej1-f66.google.com ([209.85.218.66])
+ bh=z9XzVsrF/2kVcEs9PtV7OlqggBEMEvqZHeycAS9T7Mw=; b=O8JXjLVr2oF7aK6DEKKNzGnUfm
+ Lcfoj/Zr+VQvYsB8xVfHrpJ66BDm+9G7MxIZTZV6IN1uWz+xYpBAzb/Yfs5JYOdWFZmmvjSHNaJMg
+ eO62r+ABM67sG/C0A+pcuTvTAEzJNbCgSPr6ALm1EhDGN842HL68MPrdoKkQ3NEhSOxo=;
+Received: from mail-ej1-f43.google.com ([209.85.218.43])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1uvyiH-0001D0-AY for kgdb-bugreport@lists.sourceforge.net;
- Tue, 09 Sep 2025 13:48:49 +0000
-Received: by mail-ej1-f66.google.com with SMTP id
- a640c23a62f3a-b00a9989633so184785666b.0
+ id 1uvzDv-0002w9-J6 for kgdb-bugreport@lists.sourceforge.net;
+ Tue, 09 Sep 2025 14:21:31 +0000
+Received: by mail-ej1-f43.google.com with SMTP id
+ a640c23a62f3a-b046fc9f359so1018931966b.0
  for <kgdb-bugreport@lists.sourceforge.net>;
- Tue, 09 Sep 2025 06:48:49 -0700 (PDT)
+ Tue, 09 Sep 2025 07:21:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=suse.com; s=google; t=1757425718; x=1758030518; darn=lists.sourceforge.net; 
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=wzdJUr2aAZ317oMLdDooM8ha31xvzXYVNa8DDq4GgnM=;
- b=gLI1mHOsdJqqoWRWp5WnsiQdgRX3bC556yq2GcM4mDy1huCh4fgLcao2hs76KS/ofm
- VTUxjWKFY27yMrmUzYUEq6gA/u7gfH/z+AoqVe8wXkyz51mabru6nK5Fx7MkMDvNcLVT
- mmjOfX9EPRhR2y94Y38Urts2ljduteZ57SHl1OyQp6xNG8CeZt6QFIhb6isvr1DUfdtk
- 6byF6Oj8/H/IA0MgBMrPJSHsP4950JwU5j8oHP1Dul2VRy/CBQDXkRrid+7aVg2NpbQs
- +k3hObGda+pfmQ3oSNcC9uUeYTFhgvM/UuYFVov1etPsM3hSIOLfLgYvLC5O97T2T54H
- z3Lw==
+ d=suse.com; s=google; t=1757427685; x=1758032485; darn=lists.sourceforge.net; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=z9XzVsrF/2kVcEs9PtV7OlqggBEMEvqZHeycAS9T7Mw=;
+ b=QRl1L5TFvx1+zPgvhYvLpuuUcbr+fG2oMwzhL3IEm6UPnp2V/VmUFatuqL4B3a2sR/
+ obOfCsHGZZ+UTBMcXW+lsv2zLKdlBVr/PjID77YiI5cbUhy2VizPRrXPyj9HHyADAOs8
+ yTaA9d7ORTDyQZMUVdU3MeptXw+k9RNKgEP9yTGEaDFO8JWp9+fHYT1bWANpokEeT/Z6
+ aQ0HcWQXI7YlsfhRy4W2ILZ+1Kreexr6jGbM6VJMfhvqDmVA+jj8ulK9h3+XR1z8aDTq
+ WGAYm98Fb974zolH24Ohr1LHkPJUq5RcazRVYqvLnt2467bZTXYdv6BNjjG5fQVK06ga
+ TRhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757425718; x=1758030518;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=wzdJUr2aAZ317oMLdDooM8ha31xvzXYVNa8DDq4GgnM=;
- b=P2FabnyiB3egSiwVA2Y3H4L8v/V4RX3xW7jDMLdKa5GCFI50IlLIniMQg8z5NvINqw
- qEJsG2YCjzr0fuAngqj+7vnyO1ae+CKdrKsmxdYKnY+6i2pNUkBCZCPbhYOZxO4LIsO2
- wG9xNdsdVHZEhDumo8vPRuWKm2cabuZly3ihXPb3eGtGdPW/NVbAEcrNolTxTkYDzSsc
- vvG/jIFbDzhflmhhh3VrqtJVlh4zZa1nppVqy3NFYiHSfZrKOGhYF4xiIF0MZTsBRb4S
- LLphVZ7ZgqsWgTWDcDfEvo30JocLh/Zjb+/MCj5BbkWG+wPnqZKtJJ093EzybWHKbcDP
- AyWw==
+ d=1e100.net; s=20230601; t=1757427685; x=1758032485;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=z9XzVsrF/2kVcEs9PtV7OlqggBEMEvqZHeycAS9T7Mw=;
+ b=hUuqcdAIdHwC1pW/SiuQmcVzx3ph3zuvF3B07PFYbqT0SxHG5tIzwQed5JZbrVTj/j
+ JqsoL8BkzXxbE2KodTNvaBPXg8geeczsz/YLMpRUbxYzEUrVx64VlaQN/8hnX6Kn3ocv
+ /IzuGyiT6sfA3DdAxvfDdO25W9Fqz6EzndGMs7LXyVGGqTT7YNaw5qfqYWxL1HNUB9du
+ jsWcJHmVEOQI+1tQLQmpUS2OggXDyUk/J6WRja41uAVY7Smlvl+Oc8N1muMmjbG+ZPZ4
+ Ez4Svtf6rQfSeaNVpSQ2SRJ0Yyn/38SJFDBoqEDSCeaEZlYGXR1DL46zUeloDUEXEQee
+ Iytw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXs5PEwxLpHjMUP9pj0dobFtFDmtkYVimdhnjyhbyFw6AdxODivY8p9daXHovsx/GXaeSYmoRfTFigoFOzr3w==@lists.sourceforge.net
-X-Gm-Message-State: AOJu0Yxf6d0AuYrwdHKVYA1A2xqVLNX9GEWporqtWpk2HPigFfnDB/fQ
- 2aZOtlPagfQUFjPWQOjW37eGnQ3F0h1WrnrddIQ7rZC+bUh49iM+nTiAnzw+NmfuPEc=
-X-Gm-Gg: ASbGnctK6shxwru6L80HP+uc6tFC/LP0YRjS26PigZzeG6OvTdRQkDiQ0YWSWIBe6eo
- zGoZxiXu6HanTWBce2+p1sptlA7bMWBFltlWzC3en+UbiZpNsQLfpDdv1rqy4CDbP1kPwXUHHxp
- VdMaauPzr/ORFP8DHbE1rLLqTpvGfE5KN14eH+6Rek8VB4Z4bmh1y000tOM/E9QU4eBfJdKhgeQ
- daS56bZEgf26D8ARGrUN+9ANzbBTt1VhwkbfAeWBuuibHjxl2BAdNRe1QegWoRXREQlXOZjRDbU
- UHyDwcx0IaLUZub+i0pSKmvYBGdmp3NW9YcB8BQ2I/5PcIaJ27mTr48LFooKRB0rxdKWJb1nkXb
- sMDiKU5SZR1QXpI9p2Jm3x7EEdA==
-X-Google-Smtp-Source: AGHT+IHgk5tFhwF30rudU5mtYNqfAuQeHF11cAlAbcY+uYtRgicaAE41/MCIBs7pCIURzp5gb19rEw==
-X-Received: by 2002:a17:907:3e09:b0:afe:6648:a243 with SMTP id
- a640c23a62f3a-b049307ef09mr1831123266b.3.1757425717645; 
- Tue, 09 Sep 2025 06:48:37 -0700 (PDT)
+ AJvYcCWQDV694p2VvXB5eA8fzExSbYDLYWmbsFcY+78WDbjJGCbPLEn0d/NZegUZMR2D7+9rZwKuGCgMmDe+vEQWVg==@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YwpvdlOLNwSILSOvmfRvIVV7D610ZsQxpqIc70Z/Ok2294OWSbM
+ 5BVEfarM5gM2y5YGcIEskaEHG9ueCnyyDr/fg0SCoHKI4yJtdflrmRrQUA+8JGBAMu0=
+X-Gm-Gg: ASbGncuu/NN4LOgh/XlRXsodgahuN6lLhv89zOQA9UxHCyOEY16QvN5cfXY1tJCQRW1
+ 2xgWptk8lJy0gxMNlr/HinFHR0XrxsCQBzVFRmomdHzAcIe/a5wBomDqqI+W4TJY7T/165C35HB
+ kKypC/PsOhcAf19MXPDFHrY6fXluaqR054ZFrLq6tBSvopBe5EQq9KIA2mlxJY35KfRRiM/giMl
+ /3m58lJpX9jJ39NbvGhpYx59T62rDcIXNH2AkOH8w9tOYm6mR0hiF4XHUUfXNhDXnGRShXZ4A+H
+ kVE5Xed65WtSHJFApChpGltEgBdoxY/ActGdJjCgQhoFAdWZbawNIsbIV91BFwMr4D80+VfTxF7
+ MfB4n2FYqS4l+EN2L0w6jJVqd3PlLI3FfVcoz
+X-Google-Smtp-Source: AGHT+IFVx676s5fDldPoppGP+0iD62Fg0ydmFsY1JlJe8Cg8op6tEbpehOmgYitI9uLDtJtauCQmdg==
+X-Received: by 2002:a17:907:c21:b0:afe:a446:b22e with SMTP id
+ a640c23a62f3a-b04b13bbf13mr1201532366b.12.1757427684927; 
+ Tue, 09 Sep 2025 07:21:24 -0700 (PDT)
 Received: from pathway.suse.cz ([176.114.240.130])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b046af12536sm1492637866b.100.2025.09.09.06.48.36
+ a640c23a62f3a-b0466a962c4sm1591055666b.71.2025.09.09.07.21.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Sep 2025 06:48:37 -0700 (PDT)
-Date: Tue, 9 Sep 2025 15:48:35 +0200
+ Tue, 09 Sep 2025 07:21:24 -0700 (PDT)
+Date: Tue, 9 Sep 2025 16:21:22 +0200
 To: John Ogness <john.ogness@linutronix.de>
-Message-ID: <aMAwMz4vWC5u9OpN@pathway.suse.cz>
+Message-ID: <aMA34mPqHFC3v3Kf@pathway.suse.cz>
 References: <20250902-nbcon-kgdboc-v3-0-cd30a8106f1c@suse.com>
- <20250902-nbcon-kgdboc-v3-4-cd30a8106f1c@suse.com>
- <aL77aq4gZBsn4epT@pathway.suse.cz>
- <d73e8cc0259c140a0a49f670c6c165bb662281ed.camel@suse.com>
- <84segwjbxq.fsf@jogness.linutronix.de>
+ <20250902-nbcon-kgdboc-v3-2-cd30a8106f1c@suse.com>
+ <aLsOBwV6CVBwG9JV@pathway.suse.cz>
+ <84ikht87tn.fsf@jogness.linutronix.de>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <84segwjbxq.fsf@jogness.linutronix.de>
+In-Reply-To: <84ikht87tn.fsf@jogness.linutronix.de>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -114,11 +112,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue 2025-09-09 10:03:05,
- John Ogness wrote: > On 2025-09-08, 
- Marcos Paulo de Souza <mpdesouza@suse.com> wrote: > >> > ---
- a/kernel/debug/kdb/kdb_io.c
- > >> > +++ b/kernel/debug/kdb/kdb_io.c > >> > @ [...] 
+ Content preview:  On Mon 2025-09-08 14:15:08,
+ John Ogness wrote: > On 2025-09-05, 
+ Petr Mladek <pmladek@suse.com> wrote: > > On Tue 2025-09-02 15:33:53, Marcos
+ Paulo de Souza wrote: > >> These helpers will be used when [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -129,12 +126,11 @@ X-Spam-Report: Spam detection software,
  domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.218.66 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1uvyiH-0001D0-AY
-Subject: Re: [Kgdb-bugreport] [PATCH v3 4/4] kdb: Adapt kdb_msg_write to
- work with NBCON consoles
+ 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.218.43 listed in wl.mailspike.net]
+X-Headers-End: 1uvzDv-0002w9-J6
+Subject: Re: [Kgdb-bugreport] [PATCH v3 2/4] printk: nbcon: Introduce KDB
+ helpers
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -155,113 +151,95 @@ Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
  Daniel Thompson <danielt@kernel.org>,
  Jason Wessel <jason.wessel@windriver.com>,
  kgdb-bugreport@lists.sourceforge.net
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Tue 2025-09-09 10:03:05, John Ogness wrote:
-> On 2025-09-08, Marcos Paulo de Souza <mpdesouza@suse.com> wrote:
-> >> > --- a/kernel/debug/kdb/kdb_io.c
-> >> > +++ b/kernel/debug/kdb/kdb_io.c
-> >> > @@ -589,24 +589,40 @@ static void kdb_msg_write(const char *msg,
-> >> > int msg_len)
-> >> > =A0	 */
-> >> > =A0	cookie =3D console_srcu_read_lock();
-> >> > =A0	for_each_console_srcu(c) {
-> >> > -		if (!(console_srcu_read_flags(c) & CON_ENABLED))
-> >> > +		struct nbcon_write_context wctxt =3D { };
-> >> > +		short flags =3D console_srcu_read_flags(c);
-> >> > +
-> >> > +		if (!console_is_usable(c, flags, true))
-> >> > =A0			continue;
-> >> > =A0		if (c =3D=3D dbg_io_ops->cons)
-> >> > =A0			continue;
-> >> > -		if (!c->write)
-> >> > -			continue;
-> >> > -		/*
-> >> > -		 * Set oops_in_progress to encourage the console
-> >> > drivers to
-> >> > -		 * disregard their internal spin locks: in the
-> >> > current calling
-> >> > -		 * context the risk of deadlock is a bigger
-> >> > problem than risks
-> >> > -		 * due to re-entering the console driver. We
-> >> > operate directly on
-> >> > -		 * oops_in_progress rather than using
-> >> > bust_spinlocks() because
-> >> > -		 * the calls bust_spinlocks() makes on exit are
-> >> > not appropriate
-> >> > -		 * for this calling context.
-> >> > -		 */
-> >> > -		++oops_in_progress;
-> >> > -		c->write(c, msg, msg_len);
-> >> > -		--oops_in_progress;
-> >> > +
-> >> > +		if (flags & CON_NBCON) {
-> >> > +			/*
-> >> > +			 * Do not continue if the console is NBCON
-> >> > and the context
-> >> > +			 * can't be acquired.
-> >> > +			 */
-> >> > +			if (!nbcon_kdb_try_acquire(c, &wctxt))
-> >> > +				continue;
-> >> > +
-> >> > +			wctxt.outbuf =3D (char *)msg;
-> >> > +			wctxt.len =3D msg_len;
-> >> =
+On Mon 2025-09-08 14:15:08, John Ogness wrote:
+> On 2025-09-05, Petr Mladek <pmladek@suse.com> wrote:
+> > On Tue 2025-09-02 15:33:53, Marcos Paulo de Souza wrote:
+> >> These helpers will be used when calling console->write_atomic on
+> >> KDB code in the next patch. It's basically the same implementaion
+> >> as nbcon_device_try_acquire, but using NBCON_PORIO_EMERGENCY when
+> >> acquiring the context.
+> >> 
+> >> For release we need to flush the console, since some messages could be
+> >> added before the context was acquired, as KDB emits the messages using
+> >> con->{write,write_atomic} instead of storing them on the ring buffer.
+> >
+> > I am a bit confused by the last paragraph. It is a very long sentence.
+> >
+> > Sigh, I wanted to propose a simple and clear alternative. But I ended
+> > in a rabbit hole and with a rather complex text:
+> >
+> > <proposal>
+> > The atomic flush in the release function is questionable. vkdb_printf()
+> > is primary called only when other CPUs are quiescent in kdb_main_loop()
+> > and do not call the classic printk(). But, for example, the
+> > write_atomic() callback might print debug messages. Or there is
+> > one kdb_printf() called in kgdb_panic() before other CPUs are
+> > quiescent. So the flush might be useful. Especially, when
+> > the kdb code fails to quiescent the CPUs and returns early.
+> >
+> > Let's keep it simple and just call __nbcon_atomic_flush_pending_con().
+> > It uses write_atomic() callback which is used by the locked kdb code
+> > anyway.
+> >
+> > The legacy loop (console_trylock()/console_unlock()) is not
+> > usable in kdb context.
+> >
+> > It might make sense to trigger the flush via the printk kthread.
+> > But it would not work in panic() where is the only known kdb_printf()
+> > called when other CPUs are not quiescent. So, it does not look
+> > worth it.
+> > </proposal>
+> >
+> > What do you think?
+> >
+> > My opinion:
+> >
+> > Honestly, I think that the flush is not much important because
+> > it will most offten have nothing to do.
+> >
+> > I am just not sure whether it is better to have it there
+> > or avoid it. It might be better to remove it after all.
+> > And just document the decision.
+> 
+> IMHO keeping the flush is fine. There are cases where there might be
+> something to print. And since a printing kthread will get no chance to
+> print as long as kdb is alive, we should have kdb flushing that
+> console.
+> 
+> Note that this is the only console that will actually see the new
+> messages immediately as all the other CPUs and quiesced.
 
-> >> I double checked whether we initialized all members of the structure
-> >> correctly. And I found that we didn't. We should call here:
-> >> =
+I do not understand this argument. IMHO, this new
+try_acquire()/release() API should primary flush only
+the console which was (b)locked by this API.
 
-> >> 			nbcon_write_context_set_buf(&wctxt,
-> >> 						=A0=A0=A0 &pmsg.pbufs-
-> >> >outbuf[0],
-> >> 						=A0=A0=A0
-> >> pmsg.outbuf_len);
-> =
+It will be called in kdb_msg_write() which tries to write
+to all registered consoles. So the other nbcon consoles will
+get flushed when the try_acquire() succeeds on them. And the
+legacy conosles were never flushed.
 
-> Nice catch.
-> =
+> For this reason
+> we probably want to use __nbcon_atomic_flush_pending() to try to flush
+> _all_ the consoles.
 
-> >> Sigh, this is easy to miss. I remember that I was not super happy
-> >> about this design.
+I would prefer to keep __nbcon_atomic_flush_pending_con().
+I mean to flush only the console which was blocked.
 
-I looked for details. I described my concerns at
-https://lore.kernel.org/lkml/ZNY5gPNyyw9RTo4X@alley/#t
+Note that we would need to increment oops_in_progress if we wanted
+to flush legacy consoles in this context... which would spread
+the mess into nbcon code...
 
-> >> But the original code initialized the structure
-> >> on a single place...
-> > =
+> As to the last paragraph of the commit message, I would keep it simple:
+> 
+> After release try to flush all consoles since there may be a backlog of
+> messages in the ringbuffer. The kthread console printers do not get a
+> chance to run while kdb is active.
 
-> > Ok, so I'll need to also export nbcon_write_context_set_buf, since it's
-> > currently static inside kernel/printk/nbcon.c. I'll do it for the next
-> > version.
-> =
-
-> How about modifying nbcon_kdb_try_acquire() to also take @msg and
-> @msg_len. Then, on success, @wctxt is already prepared. I do not like
-> the idea of external code fiddling with the fields.
-
-I was thinking about another solution, e.g. an nbcon_wctxt_init()
-function. The problem is that wctxt->unsafe_takeover would need
-to get updated after acquiring the context. And might be reused
-for different consoles, ...
-
-But wait. I do not see any code using wctxt->unsafe_takeover.
-
-It seems that the motivation was that console drivers might
-do something else when there was an unsafe_takeover in the past,
-see https://lore.kernel.org/lkml/87cyz6ro62.fsf@jogness.linutronix.de/
-But it seems that no console driver is using it.
-
-So, I would prefer to remove the "unsafe_takeover" field from
-struct nbcon_write_context and keep this kdb code as it is now.
-
-We could always add it back when really needed.
-Alternatively, we could create an API which could read this information
-from struct wctxt.ctxt.con. But I would create this API only when
-there is an user.
+I like this text.
 
 Best Regards,
 Petr
