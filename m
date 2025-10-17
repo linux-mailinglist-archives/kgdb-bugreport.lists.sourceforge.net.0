@@ -2,38 +2,38 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 04842BE6082
-	for <lists+kgdb-bugreport@lfdr.de>; Fri, 17 Oct 2025 03:26:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 290D7BE6179
+	for <lists+kgdb-bugreport@lfdr.de>; Fri, 17 Oct 2025 04:18:05 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=9Da9+GwyyolKTZlLRX7eO3OqNUuLmnmNLXsE9b8was4=; b=BfFJ4JlLY4C9zAsfl4hlaMkF1j
-	P3ZKpkVkKj32mu5DOM3FMKbJmUFdUNsNMEMPKxXqo7REtP9Kc3rk0Kl1iCW7IJ/ieplmxHMvCJy29
-	DevkB33I8K4T+DGaOc1alt7PKHAjRNEPpkEYJr7X4d1OBdR/NuseQDFtVoULs5IquXpY=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=PE8hoD0cWJwxGiMw5pcALFsRlwAbff6sordtyofOB3Y=; b=ZXgeX3KaoUlw4CJMlX3/Pzb4oF
+	ISrOJ+rBCgigeqnXkmH5D198mQdQR3JavvHQuPbGSvVd5wrEVngOVE+v8Moek080kJPlgP7AJnmBC
+	Kh9S6gZaFY2UFw5ud8EMbhN3LR3QFNBCJAaeete4mV21V30uwKPGqzy8sei7GjPUwY3Y=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1v9ZEr-0004Nr-PU
+	id 1v9a2d-0000aR-3Z
 	for lists+kgdb-bugreport@lfdr.de;
-	Fri, 17 Oct 2025 01:26:37 +0000
+	Fri, 17 Oct 2025 02:18:03 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <lkp@intel.com>) id 1v9ZEq-0004Nk-Gu
+ (envelope-from <lkp@intel.com>) id 1v9a2b-0000aL-Op
  for kgdb-bugreport@lists.sourceforge.net;
- Fri, 17 Oct 2025 01:26:36 +0000
+ Fri, 17 Oct 2025 02:18:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=sqAnkw3PiOi1j4s6CuolE99ttryngSmpW8X9kFTObzA=; b=BtoAHR43dLSVtuCagJhMYn+ek4
- eGwa0qPsojsGLNXo6F0iz2AXganfpoHGJRNNgj4vp2NBGlZppypzLwzXZJD+Wz8gfs9Ec9Wv+YI2N
- 4//cBoR2uZTqOB2aMRLdHmKpE1nXZMISBj6CeurP6gc2KwbVxf4LMijITjcYCJk9swLA=;
+ bh=EiXfsRjuj4xAImdjxzwqR2Q9sIG7WEb/aTbmnm7CCeA=; b=bDOeCckt9XlAWKAOdhF8tuVMKd
+ 5kIbvfsGuFPcNAk5369DZz6IBEWGCioeq8Dvthkl6gfSOPYPjWuBifP0GC482SQmQdIwAUmXUM+te
+ Jvl0PLRHgxcdDdpQOHoGTB5gqs+73VwATMdcude/eAwhBc36QcE7Ptam0nyWZLh4J5aM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -41,43 +41,43 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=sqAnkw3PiOi1j4s6CuolE99ttryngSmpW8X9kFTObzA=; b=D62jzyyGDprJMTWA3Ev7GpW3/f
- fnYYQ2wmZduC3woAsa5OGWG465kYeV9Lq9/t8fVI2qt9tE6V6cc4BUH0h2PMcmXdCUZa3LSdKqF0K
- /v8mvCBC/FEZQ8RGisnCNAC+Evi2r4eZEyM7Iu7Wb0dFqP1S51s7GFdnCUQxW5FpULkE=;
-Received: from mgamail.intel.com ([198.175.65.15])
+ bh=EiXfsRjuj4xAImdjxzwqR2Q9sIG7WEb/aTbmnm7CCeA=; b=E8qnPF4AxJZJLe3GueZJeC4PPX
+ mBvaZ+SPRoJvhk5sqzNpulHPU+TR2wbJyGDUYW0scw8ZumsK9/WSytUTncOcSGBhki32TbU+Ia3cF
+ VVCWFarBCd9CsWxSiLMXmOrvGVCcwA37m1JJn8MJ4XeLVcif1V4gxHApvwmtnqTVlVYA=;
+Received: from mgamail.intel.com ([198.175.65.16])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1v9ZEp-0002E7-Ou for kgdb-bugreport@lists.sourceforge.net;
- Fri, 17 Oct 2025 01:26:36 +0000
+ id 1v9a2b-0004aC-U2 for kgdb-bugreport@lists.sourceforge.net;
+ Fri, 17 Oct 2025 02:18:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1760664396; x=1792200396;
+ t=1760667482; x=1792203482;
  h=date:from:to:cc:subject:message-id:references:
  mime-version:in-reply-to;
- bh=8yqxrPMDUDIopjMpMaVfn56rVVvt//g54hut99p+kBE=;
- b=ZEtQKJQm/Jpkai6RpZuSo8+SIAPXrImSUiOC9IXfMsNyvIsyeo/dLwOO
- BRqYc4vuD/c1n1Jf+5WVbPo0UmDGX12QKDVOchlbUc4UTIkYBgU8xq/UV
- EfzMWsNMzI9tbyceYxDkJmaPGX75q+s18NzgiQG/olZ1fHBspZazzF2QJ
- 2EgTSJfa1wNbsR2HH+YzXkKXZq8Z34ylXGQPfRJQGtQL4tlFpXrq0LCKq
- RpoBZLDJuoIlKZqigdD0Rn1ceWXNASnlgtSdcomNV+QRk/mnlswn15Hqv
- 38iW8AuGAiwxJMEVAy2ecanQWBPQW7pMBPKuGOH6MigZs2Iogqqr/Q+5n g==;
-X-CSE-ConnectionGUID: hCkORbdPTpCEr3R2POBagw==
-X-CSE-MsgGUID: C77FEJUnT06YY/QDB7eyUw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11584"; a="66517232"
-X-IronPort-AV: E=Sophos;i="6.19,234,1754982000"; d="scan'208";a="66517232"
-Received: from orviesa006.jf.intel.com ([10.64.159.146])
- by orvoesa107.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 16 Oct 2025 18:26:25 -0700
-X-CSE-ConnectionGUID: Team0iFbSKqfERnQjCcG/Q==
-X-CSE-MsgGUID: 0W2mbKcvRo6bgWR+5Q+jtw==
+ bh=/Un8LzctEQSHO9DJEZfkZItIz+oWX/DCtNE4h4VMKzc=;
+ b=cAmFz4GHqvSfsb5hkWxqBetauifmP1YZAHWJPkgOGVvJt4/IZ2+iOv7k
+ vyKgyvFos3WgjODSJcal3JMAnnoDikGzOyQG1h4ZMiMKdOPN965xxpyXl
+ fHHQYfCyg0NlQXHkqkHHCtG4d2SgyFkjGK7/iYlI5NBoLzXXCmOJ+uydP
+ 8e2nALFge+k35lMAaKZ720Ca4zguGFDTzCV5Oka0j6VPSMbJZhYp72SGs
+ TmuAjawby4SilwRhSI3liPxYlUliQqj5kDlHMDu3aa49fkKpnqtZ/WIJH
+ tuYVR8fEVjuc58Zc/cEbMdmtIXFfYFK/douqRdxUDAZFQko4kzMJnC+4G w==;
+X-CSE-ConnectionGUID: AV1q9QAGQzmEiDwsxywLJw==
+X-CSE-MsgGUID: YPcwbAqfQ5uqQFdWWJCtng==
+X-IronPort-AV: E=McAfee;i="6800,10657,11584"; a="63020178"
+X-IronPort-AV: E=Sophos;i="6.19,234,1754982000"; d="scan'208";a="63020178"
+Received: from fmviesa006.fm.intel.com ([10.60.135.146])
+ by orvoesa108.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 16 Oct 2025 19:17:56 -0700
+X-CSE-ConnectionGUID: POrmFGVhRTOOw0UCY3eV/g==
+X-CSE-MsgGUID: B05CBBuHS1uXaiyX4dUmtQ==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.19,234,1754982000"; d="scan'208";a="181742346"
+X-IronPort-AV: E=Sophos;i="6.19,234,1754982000"; d="scan'208";a="182549461"
 Received: from lkp-server02.sh.intel.com (HELO 66d7546c76b2) ([10.239.97.151])
- by orviesa006.jf.intel.com with ESMTP; 16 Oct 2025 18:26:22 -0700
+ by fmviesa006.fm.intel.com with ESMTP; 16 Oct 2025 19:17:53 -0700
 Received: from kbuild by 66d7546c76b2 with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1v9ZEZ-0005P1-2Q;
- Fri, 17 Oct 2025 01:26:19 +0000
-Date: Fri, 17 Oct 2025 09:25:53 +0800
+ (envelope-from <lkp@intel.com>) id 1v9a2Q-0005Rv-2a;
+ Fri, 17 Oct 2025 02:17:50 +0000
+Date: Fri, 17 Oct 2025 10:17:37 +0800
 From: kernel test robot <lkp@intel.com>
 To: Marcos Paulo de Souza <mpdesouza@suse.com>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
@@ -87,11 +87,11 @@ To: Marcos Paulo de Souza <mpdesouza@suse.com>,
  Jason Wessel <jason.wessel@windriver.com>,
  Daniel Thompson <danielt@kernel.org>,
  Douglas Anderson <dianders@chromium.org>
-Message-ID: <202510170949.NTx9lt0p-lkp@intel.com>
-References: <20251016-nbcon-kgdboc-v6-3-866aac60a80e@suse.com>
+Message-ID: <202510171023.YREXxhMK-lkp@intel.com>
+References: <20251016-nbcon-kgdboc-v6-5-866aac60a80e@suse.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20251016-nbcon-kgdboc-v6-3-866aac60a80e@suse.com>
+In-Reply-To: <20251016-nbcon-kgdboc-v6-5-866aac60a80e@suse.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -113,9 +113,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1v9ZEp-0002E7-Ou
-Subject: Re: [Kgdb-bugreport] [PATCH v6 3/5] printk: nbcon: Allow KDB to
- acquire the NBCON context
+X-Headers-End: 1v9a2b-0004aC-U2
+Subject: Re: [Kgdb-bugreport] [PATCH v6 5/5] kdb: Adapt kdb_msg_write to
+ work with NBCON consoles
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -127,8 +127,8 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-Cc: kgdb-bugreport@lists.sourceforge.net,
- Marcos Paulo de Souza <mpdesouza@suse.com>, linux-kernel@vger.kernel.org,
+Cc: kgdb-bugreport@lists.sourceforge.net, llvm@lists.linux.dev,
+ linux-kernel@vger.kernel.org, Marcos Paulo de Souza <mpdesouza@suse.com>,
  oe-kbuild-all@lists.linux.dev
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
@@ -142,32 +142,102 @@ kernel test robot noticed the following build errors:
 
 url:    https://github.com/intel-lab-lkp/linux/commits/Marcos-Paulo-de-Souza/printk-nbcon-Export-console_is_usable/20251016-225503
 base:   3a8660878839faadb4f1a6dd72c3179c1df56787
-patch link:    https://lore.kernel.org/r/20251016-nbcon-kgdboc-v6-3-866aac60a80e%40suse.com
-patch subject: [PATCH v6 3/5] printk: nbcon: Allow KDB to acquire the NBCON context
-config: openrisc-allnoconfig (https://download.01.org/0day-ci/archive/20251017/202510170949.NTx9lt0p-lkp@intel.com/config)
-compiler: or1k-linux-gcc (GCC) 15.1.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20251017/202510170949.NTx9lt0p-lkp@intel.com/reproduce)
+patch link:    https://lore.kernel.org/r/20251016-nbcon-kgdboc-v6-5-866aac60a80e%40suse.com
+patch subject: [PATCH v6 5/5] kdb: Adapt kdb_msg_write to work with NBCON consoles
+config: i386-buildonly-randconfig-006-20251017 (https://download.01.org/0day-ci/archive/20251017/202510171023.YREXxhMK-lkp@intel.com/config)
+compiler: clang version 20.1.8 (https://github.com/llvm/llvm-project 87f0227cb60147a26a1eeb4fb06e3b505e9c7261)
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20251017/202510171023.YREXxhMK-lkp@intel.com/reproduce)
 
 If you fix the issue in a separate patch/commit (i.e. not just a new version of
 the same patch/commit), kindly add following tags
 | Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202510170949.NTx9lt0p-lkp@intel.com/
+| Closes: https://lore.kernel.org/oe-kbuild-all/202510171023.YREXxhMK-lkp@intel.com/
 
 All errors (new ones prefixed by >>):
 
-   In file included from kernel/kallsyms.c:19:
-   include/linux/kdb.h: In function 'kdb_printf_on_this_cpu':
->> include/linux/kdb.h:229:63: error: expected ';' before '}' token
-     229 | static inline bool kdb_printf_on_this_cpu(void) { return false };
-         |                                                               ^~
-         |                                                               ;
+>> kernel/debug/kdb/kdb_io.c:612:22: error: incompatible pointer types passing 'struct nbcon_write_context *' to parameter of type 'struct console *' [-Werror,-Wincompatible-pointer-types]
+     612 |                         nbcon_kdb_release(&wctxt);
+         |                                           ^~~~~~
+   include/linux/console.h:667:54: note: passing argument to parameter 'con' here
+     667 | static inline void nbcon_kdb_release(struct console *con) { }
+         |                                                      ^
+   1 error generated.
 
 
-vim +229 include/linux/kdb.h
+vim +612 kernel/debug/kdb/kdb_io.c
 
-   228	
- > 229	static inline bool kdb_printf_on_this_cpu(void) { return false };
-   230	
+   560	
+   561	static void kdb_msg_write(const char *msg, int msg_len)
+   562	{
+   563		struct console *c;
+   564		const char *cp;
+   565		int cookie;
+   566		int len;
+   567	
+   568		if (msg_len == 0)
+   569			return;
+   570	
+   571		cp = msg;
+   572		len = msg_len;
+   573	
+   574		while (len--) {
+   575			dbg_io_ops->write_char(*cp);
+   576			cp++;
+   577		}
+   578	
+   579		/*
+   580		 * The console_srcu_read_lock() only provides safe console list
+   581		 * traversal. The use of the ->write() callback relies on all other
+   582		 * CPUs being stopped at the moment and console drivers being able to
+   583		 * handle reentrance when @oops_in_progress is set.
+   584		 *
+   585		 * There is no guarantee that every console driver can handle
+   586		 * reentrance in this way; the developer deploying the debugger
+   587		 * is responsible for ensuring that the console drivers they
+   588		 * have selected handle reentrance appropriately.
+   589		 */
+   590		cookie = console_srcu_read_lock();
+   591		for_each_console_srcu(c) {
+   592			short flags = console_srcu_read_flags(c);
+   593	
+   594			if (!console_is_usable(c, flags, true))
+   595				continue;
+   596			if (c == dbg_io_ops->cons)
+   597				continue;
+   598	
+   599			if (flags & CON_NBCON) {
+   600				struct nbcon_write_context wctxt = { };
+   601	
+   602				/*
+   603				 * Do not continue if the console is NBCON and the context
+   604				 * can't be acquired.
+   605				 */
+   606				if (!nbcon_kdb_try_acquire(c, &wctxt))
+   607					continue;
+   608	
+   609				nbcon_write_context_set_buf(&wctxt, (char *)msg, msg_len);
+   610	
+   611				c->write_atomic(c, &wctxt);
+ > 612				nbcon_kdb_release(&wctxt);
+   613			} else {
+   614				/*
+   615				 * Set oops_in_progress to encourage the console drivers to
+   616				 * disregard their internal spin locks: in the current calling
+   617				 * context the risk of deadlock is a bigger problem than risks
+   618				 * due to re-entering the console driver. We operate directly on
+   619				 * oops_in_progress rather than using bust_spinlocks() because
+   620				 * the calls bust_spinlocks() makes on exit are not appropriate
+   621				 * for this calling context.
+   622				 */
+   623				++oops_in_progress;
+   624				c->write(c, msg, msg_len);
+   625				--oops_in_progress;
+   626			}
+   627			touch_nmi_watchdog();
+   628		}
+   629		console_srcu_read_unlock(cookie);
+   630	}
+   631	
 
 -- 
 0-DAY CI Kernel Test Service
