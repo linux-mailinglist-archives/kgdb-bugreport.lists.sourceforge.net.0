@@ -2,133 +2,138 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CC201D1AAC0
-	for <lists+kgdb-bugreport@lfdr.de>; Tue, 13 Jan 2026 18:37:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 55922D1D11F
+	for <lists+kgdb-bugreport@lfdr.de>; Wed, 14 Jan 2026 09:20:39 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
 	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=0l4pMR98h7cK/lZejvyGBSJoQIjFaDeQZ4PuUPd5Ako=; b=PJgKVz8EIn1JA1iN3HqIMP5Y/h
-	Sgkwdw3OqMmlRCxQdrHOxsVd4zazz4l3ryVVCNxRZI6hTQP3EqbKXcrYkVLkVaHk7mLlvlrgewbmp
-	Kc/XQtWN0rZfQIFSX2fZyCkxFdhy7kdoGAZpUM9QCb8YU7k49BMtJ9H+fOm94YB2Q/X8=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=2coMh0PXX6Kd5ofSfkt/ZO2xl8CjspTPS6mTktoJpvA=; b=E4K3m1AURmgmBt+UT9/UbLHD8d
+	L8/m+eZxRWC00FdjIDmUh37Y8nXQ7K9+UPHYbc3hHRZGZec7e9VzHMdEzKljUF7NflMflJXeTnj2k
+	r35FRTvBHoVH7/PojgY67qB1gynPcx7NSGjqRf/+JJlnpTuIqmVfk/jEKxhhJPdA+7us=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1vfiKl-0000AE-H7
+	id 1vfw7J-0000TZ-9g
 	for lists+kgdb-bugreport@lfdr.de;
-	Tue, 13 Jan 2026 17:37:35 +0000
+	Wed, 14 Jan 2026 08:20:38 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <pmladek@suse.com>) id 1vfiKk-0000A0-3z
+ (envelope-from <pmladek@suse.com>) id 1vfw7H-0000TI-JG
  for kgdb-bugreport@lists.sourceforge.net;
- Tue, 13 Jan 2026 17:37:34 +0000
+ Wed, 14 Jan 2026 08:20:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
+ MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/CVOy4tPw1zWY0e6rYcKRwtfrfRvUlKFzd8YTNoGp5w=; b=Nu63kEoq+7KrvhYo7EhJmqhBQu
- M+fyQ5P5WszjzyI9tI8AY07V86W0GML2LPq6WKjPV/qjyArsz2cVg19Pqy/5HPqg5PMAvz/wJu23q
- WmiJcfBPhAicPs1xRsbeHlt5Or6wD58d8NDKv+WU/zXlFb3vRqQC+EmIaeqUEcLfJcoA=;
+ bh=kOjWICKElajAktcnLTxDO0a0hjOrXuTPJG+TIiIDMlE=; b=TWi3vue8kS4nyMxkmVme+V14VM
+ C4MAwAGBc2fqBRtu5OPWGJ1jiwDBEw0fAmIqfnOWcaxly37fCK0cmMcNont5GkSgCj12ZIl0qb3j7
+ KjuJB6F7syHhaEXM0gkb5uCAutn2/LKFBa2sEWlmdkvLg3XB6poTnF3okizWWMamW2Ns=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=/CVOy4tPw1zWY0e6rYcKRwtfrfRvUlKFzd8YTNoGp5w=; b=mFPZcLmU2oOLtRYI9nelKrHIzb
- K/b1IiE59f5RsQawOmPyEZRKtqmLQqa65I6BnS8M+7Vj09w6xu1Uz9PQCmNYh1UPFEsONQY6g1Dux
- 65Po4fv5A79OsLRinIc4DYF+kVIEYAMXdrOO47Ren4HN1bUuXA4kFwIggbjhSY3aPzUA=;
-Received: from mail-wr1-f47.google.com ([209.85.221.47])
+ bh=kOjWICKElajAktcnLTxDO0a0hjOrXuTPJG+TIiIDMlE=; b=BXTSQ9EfZqEtnDH8k8t2ss6ghH
+ XkBhFVGS7XnSKVrkrqaLQXD89yg8/ExAtdFk5JpZ3lT0LZUZioUFFzff+ID0gpGUqjYXwRiJ1NTuZ
+ cQ8+JY2otvCVcXvQ/2wb0wh5oBpvxw0G87ZfrJqQAvB8V2BlJgAW1cSk9QGgPrbivw+M=;
+Received: from mail-wr1-f49.google.com ([209.85.221.49])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1vfiKh-00015G-Ub for kgdb-bugreport@lists.sourceforge.net;
- Tue, 13 Jan 2026 17:37:33 +0000
-Received: by mail-wr1-f47.google.com with SMTP id
- ffacd0b85a97d-430f57cd471so3943957f8f.0
+ id 1vfw7H-0005wf-QN for kgdb-bugreport@lists.sourceforge.net;
+ Wed, 14 Jan 2026 08:20:36 +0000
+Received: by mail-wr1-f49.google.com with SMTP id
+ ffacd0b85a97d-4327555464cso5005558f8f.1
  for <kgdb-bugreport@lists.sourceforge.net>;
- Tue, 13 Jan 2026 09:37:31 -0800 (PST)
+ Wed, 14 Jan 2026 00:20:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=suse.com; s=google; t=1768325840; x=1768930640; darn=lists.sourceforge.net; 
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=/CVOy4tPw1zWY0e6rYcKRwtfrfRvUlKFzd8YTNoGp5w=;
- b=FIkp44jL3Lii/7c/m/xlKh3P6b37JSUgELAWgqUpoNUzA/T42cBNLLIGScD1I6pbRw
- gNw+JlBYZusSPNeREbQb3gCv+t7mXWYFr/Qia6RUWMw8cd+TQkLkJwMKio+bPDFYp31d
- 5z01LdjQ5QqILrm38V6WVMcaSg7WkKva8LxqPGkLhBA0sOzCKM35998RG7BHHJ2+q0oY
- Hr1+mHI56X0h6N4sZC+1SHVblFDeuxVzGA56ZPBedrwSKHQxqNihVfC0jGFNXsxjH7ze
- Beo3yrKz3k6E4RuEWPZ8e3v6a551lC4ZSeK/y58RZDEFVuVFawpVVaRu5PK953fI3n+E
- unCA==
+ d=suse.com; s=google; t=1768378824; x=1768983624; darn=lists.sourceforge.net; 
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=kOjWICKElajAktcnLTxDO0a0hjOrXuTPJG+TIiIDMlE=;
+ b=GnTUaOgkvrPDc3Tqf4/6y+MHA7k1IfPzoGiXwFRoFJ3R/7flT1Fkl1z0vuzLUdd9QN
+ fqaSRu79oRLNgpOJGDZsREzpqPVB/dTvy2swJbtajeaYia25knUmWEc5obFgL2CpK0yZ
+ JHqsqW3Xy5qBfnzeJasug5puJVRnU1wGqHNsrmto43szKNeqo+gVRABhbtHxQh4sJ920
+ quKacdk2OHYgWjIfbAs9IWgttw9cCQNtNRm9MThQ9yxvEz7SIum2I/9SU+YnhXDOZNPr
+ 5UEOLGXJE36L9cmySWFHwKSbDsCMRdvkjReSkoqTu2oYHj9oY1PL4Ag7YAMg7AK5CPAJ
+ y1pQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768325840; x=1768930640;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=/CVOy4tPw1zWY0e6rYcKRwtfrfRvUlKFzd8YTNoGp5w=;
- b=I52PwakMhsXSue14ZKfKK/QhpO4tTiwdR3ui8AV0O2Hw5oO4y34cm7YE+zAD5j6NWR
- nspH1WaFJMXntyax54imcrTOjsZKcvS2A3k4TE6nSKOwOfu2rATumi3ZxMO38raX5/rV
- PJMVnDrkU51zX/dbyOL9Sb61ASFmxbdVCqkb2d/qpN+36YfyCG7UMhJDlShcEwIPtXJj
- WEdCX5uUJYsQxNI1tP1c+Re4BR8hE6PujuqC3h8+2hQADkvgGmRx6b1IypxvpN+RRDLo
- RAW4vkxaW0iG/v9/VymzA/4bzhGVotIqbyzYYic+bg8C1tYKWG+oqJh7Q62+RkhQ892p
- kCUQ==
+ d=1e100.net; s=20230601; t=1768378824; x=1768983624;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=kOjWICKElajAktcnLTxDO0a0hjOrXuTPJG+TIiIDMlE=;
+ b=aPVO1CzIdrYD/QA0kBnqPabtfbBRguMWz5WIOQYeFBRhK0ivjjN3fZyqUP9B7VWoZf
+ p+iQygAkm4Rr7rK2PB+sDQqLfNuWwqzBzgYJlIh0SREsIihFcg6xqAN9C3KVA2gezymE
+ gfQN5U2QRV9Q/WWSJhpeZQzj6og6lFaMGLtziVAY4JRX4b6lf6NZlz3314p4XUvTVqux
+ mCKEb+Cf0vY23A1Sgq6M989nYq9ERdP6SeVxx30ekU/ed5dGaLaDR47Cqr78RZDWOmaS
+ t5WXRHGdH7PnYjL5JolaxOHmX86xFz1F//d/WCHtCKzQ45YyffLDdLt1fJmHEFtsY+0U
+ OA3Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVXcyzzn5rookBJX7bZ1KHaPtZVEoXIgS4j+9v8ZY/ye35Puo6F25zyJZx4yWaDxmVf92FppmhfiLTALWGjSw==@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YyJjfOkxqAPatx8FxKwY8A5tqvymKA4uKYqCwScEUBlaBYtDV0A
- lWkfUT69ppGIeFC+crgzJl9NLoEmWtl04cgU1OdTCOj15fT32LvDgvRu6/WRCrkJ3cc=
-X-Gm-Gg: AY/fxX7YdEKeGk0i8u+Nzh5/iduv5XoCngOtJstU1kaPBBbyzkAnypQB8MSpjgOxsYx
- rJtpIBktc4PDsBrScDMgrYgFep+YR11sZRxDLLfB9ikm9orpZCgei2pblDnFc+ciJ77vtYyWKYa
- CY1SUNYyotultv93zlB+mXqajlsmxHK9noG4oeILhO4YR7M70gEkcrcD39j9KH5bQJTMVkWNwRq
- TAmOKfhowkT1A/HCD9ckTopnHqldbQEua/WCIq7vncYkr6rwFfHHDYtYFLDWjU9G66oPKNtthU0
- RyqJwqC2g7w2SN5FSrk8tVxn17dU8qnpqdb54G/uCwnGthc7numLD4Hv+qkvFQnTI8ddoGgDIkN
- 4jpz1uZOP7GukyXybjjKQKIVz/CZBhOoruGGIOmS4V4lrfndFpA7FWfWQi1lNZjpwAZD6fMKJ63
- +usz3NIboJbADoKQ==
-X-Google-Smtp-Source: AGHT+IHUReQqvVgC0db5F0/UgqAPwHgCcpq2ZD0lhm0g7XnDeEa3Phlj1/GEitKl8zvqkUFbSZC6XA==
-X-Received: by 2002:a05:6000:2dc9:b0:430:fced:902 with SMTP id
- ffacd0b85a97d-432c36436fbmr29258778f8f.26.1768325840268; 
- Tue, 13 Jan 2026 09:37:20 -0800 (PST)
+ AJvYcCXQkJcgeDborGCsBTa6n5Q4IrqHzvoeKu+URUj6kNRvI84T4hvTz49Z0Tw2x9w+CUMIO+9G5bVykUmb1h5QrQ==@lists.sourceforge.net
+X-Gm-Message-State: AOJu0Yx0ujUROrIOBofk05tOa0QWls+dzAkCwA3AB2t7lVXMWedkl3FJ
+ fkiwtLrCq4xaV05XJYSRodpZbPFAX7tY877l2nK8I42+ouq1K+Y2HT1icv5UxIpvdVY=
+X-Gm-Gg: AY/fxX7ciMDViL2HTY3ERRT5ORC0DdtAA9AIiO6RXMu3MdWqgVxPJz3F9/S2F1ccTuA
+ g3aTPogj0QUrUPaIee2nc6DMLfG88dvibNKgFPWB8HQtjNkPewT/AVXs7fVlrFuYRfxvq2iM99D
+ atzWTfyCNgcXECBw7SOpwmZSQ2yUZI9Rg6uSh27xaAJiueMa5l0vIICGvauTse8TC9yF2JsQa41
+ 00CFQrbX8yNTg4yqVboeGwrI3A6jjRp51ztuF+q+hrlPrdUn5tXO16P7iMCxWoj9F7pqGcnY/54
+ 2bEPOYYzmGrwYHC0LnHxB0wL2KAUZ7UzuaQGT9QEg8jFdC4R6fISqsx6O6dts+zEWzT8qUDBAYl
+ xaRx7vw0zPveiEEk4UvuJ5SEC8MJEJJz0Jt2nTX5glN390d0DEz4OpfkMABxDwP3oDeaxjf/JWs
+ /vxt4onrkMtPrSOA==
+X-Received: by 2002:a05:6000:40e1:b0:432:5b81:498 with SMTP id
+ ffacd0b85a97d-4342c4f4a32mr1782744f8f.23.1768378823922; 
+ Wed, 14 Jan 2026 00:20:23 -0800 (PST)
 Received: from pathway.suse.cz ([176.114.240.130])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-432d9610671sm28342147f8f.34.2026.01.13.09.37.18
+ ffacd0b85a97d-432bd0dad8bsm49346913f8f.8.2026.01.14.00.20.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 13 Jan 2026 09:37:19 -0800 (PST)
-Date: Tue, 13 Jan 2026 18:37:17 +0100
+ Wed, 14 Jan 2026 00:20:23 -0800 (PST)
+Date: Wed, 14 Jan 2026 09:20:20 +0100
 To: Marcos Paulo de Souza <mpdesouza@suse.com>
-Message-ID: <aWaCzZ8_UuyAa6xp@pathway.suse.cz>
+Message-ID: <aWdRxBbJOEIZ-KjE@pathway.suse.cz>
 References: <20251227-printk-cleanup-part3-v1-0-21a291bcf197@suse.com>
- <20251227-printk-cleanup-part3-v1-2-21a291bcf197@suse.com>
+ <aVuz_hpbrk8oSCVC@aspen.lan> <aVvF2hivCm0vIlfE@aspen.lan>
+ <a5d83903fe2d2c2eb21de1527007913ff00847c5.camel@suse.com>
+ <89409a0f48e6998ff6dd2245691b9954f0e1e435.camel@suse.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20251227-printk-cleanup-part3-v1-2-21a291bcf197@suse.com>
+In-Reply-To: <89409a0f48e6998ff6dd2245691b9954f0e1e435.camel@suse.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Sat 2025-12-27 09:16:09, Marcos Paulo de Souza wrote: >
- Besides checking if the current console is NBCON or not, console->flags >
- is also being read in order to serve as argument of the console_is_ [...]
+ Content preview:  On Tue 2026-01-13 21:32:33, Marcos Paulo de Souza wrote: >
+ On Tue, 2026-01-13 at 09:41 -0300, Marcos Paulo de Souza wrote: > > On Mon,
+ 2026-01-05 at 14:08 +0000, Daniel Thompson wrote: > > > On Mon, J [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
+ 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to DNSWL
+ was blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#DnsBlocklists-dnsbl-block
+ for more information. [209.85.221.49 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.221.47 listed in wl.mailspike.net]
-X-Headers-End: 1vfiKh-00015G-Ub
-Subject: Re: [Kgdb-bugreport] [PATCH 02/19] printk: Introduce
- console_is_nbcon
+ [209.85.221.49 listed in wl.mailspike.net]
+X-Headers-End: 1vfw7H-0005wf-QN
+Subject: Re: [Kgdb-bugreport] [PATCH 00/19] printk cleanup - part 3
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -145,10 +150,10 @@ Reply-To: Petr Mladek <pmladek@suse.com>
 Cc: Andreas Larsson <andreas@gaisler.com>, Kees Cook <kees@kernel.org>,
  kgdb-bugreport@lists.sourceforge.net,
  Alexandre Torgue <alexandre.torgue@foss.st.com>, linux-kernel@vger.kernel.org,
- Shan-Chun Hung <schung@nuvoton.com>, Eric Dumazet <edumazet@google.com>,
- netdev@vger.kernel.org, Michael Ellerman <mpe@ellerman.id.au>,
- Breno Leitao <leitao@debian.org>, Jiri Slaby <jirislaby@kernel.org>,
- linux-stm32@st-md-mailman.stormreply.com,
+ Daniel Thompson <daniel@riscstar.com>, Shan-Chun Hung <schung@nuvoton.com>,
+ Eric Dumazet <edumazet@google.com>, netdev@vger.kernel.org,
+ Michael Ellerman <mpe@ellerman.id.au>, Breno Leitao <leitao@debian.org>,
+ Jiri Slaby <jirislaby@kernel.org>, linux-stm32@st-md-mailman.stormreply.com,
  Anton Ivanov <anton.ivanov@cambridgegreys.com>, sparclinux@vger.kernel.org,
  Madhavan Srinivasan <maddy@linux.ibm.com>, Andrew Lunn <andrew+netdev@lunn.ch>,
  Richard Weinberger <richard@nod.at>,
@@ -168,85 +173,150 @@ Cc: Andreas Larsson <andreas@gaisler.com>, Kees Cook <kees@kernel.org>,
  Jason Wessel <jason.wessel@windriver.com>, linux-fsdevel@vger.kernel.org,
  Johannes Berg <johannes@sipsolutions.net>, linuxppc-dev@lists.ozlabs.org,
  "David S. Miller" <davem@davemloft.net>, linux-hardening@vger.kernel.org
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
 
-On Sat 2025-12-27 09:16:09, Marcos Paulo de Souza wrote:
-> Besides checking if the current console is NBCON or not, console->flags
-> is also being read in order to serve as argument of the console_is_usable
-> function.
-> 
-> But CON_NBCON flag is unique: it's set just once in the console
-> registration and never cleared. In this case it can be possible to read
-> the flag when console_srcu_lock is held (which is the case when using
-> for_each_console).
-> 
-> This change makes possible to remove the flags argument from
-> console_is_usable in the next patches.
-> 
-> Signed-off-by: Petr Mladek <pmladek@suse.com>
-> Signed-off-by: Marcos Paulo de Souza <mpdesouza@suse.com>
-> ---
->  include/linux/console.h   | 27 +++++++++++++++++++++++++++
->  kernel/debug/kdb/kdb_io.c |  2 +-
->  kernel/printk/nbcon.c     |  2 +-
->  kernel/printk/printk.c    | 15 ++++++---------
->  4 files changed, 35 insertions(+), 11 deletions(-)
-> 
-> diff --git a/include/linux/console.h b/include/linux/console.h
-> index 35c03fc4ed51..dd4ec7a5bff9 100644
-> --- a/include/linux/console.h
-> +++ b/include/linux/console.h
-> @@ -561,6 +561,33 @@ static inline void console_srcu_write_flags(struct console *con, short flags)
->  	WRITE_ONCE(con->flags, flags);
->  }
->  
-> +/**
-> + * console_srcu_is_nbcon - Locklessly check whether the console is nbcon
+On Tue 2026-01-13 21:32:33, Marcos Paulo de Souza wrote:
+> On Tue, 2026-01-13 at 09:41 -0300, Marcos Paulo de Souza wrote:
+> > On Mon, 2026-01-05 at 14:08 +0000, Daniel Thompson wrote:
+> > > On Mon, Jan 05, 2026 at 12:52:14PM +0000, Daniel Thompson wrote:
+> > > > Hi Marcos
+> > > > =
 
-There is _srcu in the function name, see below.
+> > > > On Sat, Dec 27, 2025 at 09:16:07AM -0300, Marcos Paulo de Souza
+> > > > wrote:
+> > > > > The parts 1 and 2 can be found here [1] and here[2].
+> > > > > =
 
-> + * @con:	struct console pointer of console to check
-> + *
-> + * Requires console_srcu_read_lock to be held, which implies that @con might
-> + * be a registered console. The purpose of holding console_srcu_read_lock is
-> + * to guarantee that no exit/cleanup routines will run if the console
-> + * is currently undergoing unregistration.
-> + *
-> + * If the caller is holding the console_list_lock or it is _certain_ that
-> + * @con is not and will not become registered, the caller may read
-> + * @con->flags directly instead.
-> + *
-> + * Context: Any context.
-> + * Return: True when CON_NBCON flag is set.
-> + */
-> +static inline bool console_is_nbcon(const struct console *con)
+> > > > > The changes proposed in this part 3 are mostly to clarify the
+> > > > > usage of
+> > > > > the interfaces for NBCON, and use the printk helpers more
+> > > > > broadly.
+> > > > > Besides it, it also introduces a new way to register consoles
+> > > > > and drop thes the CON_ENABLED flag. It seems too much, but in
+> > > > > reality
+> > > > > the changes are not complex, and as the title says, it's
+> > > > > basically a
+> > > > > cleanup without changing the functional changes.
+> > > > =
 
-And here it is without _srcu.
+> > > > I ran this patchset through the kgdb test suite and I'm afraid it
+> > > > is
+> > > > reporting functional changes.
+> > > > =
 
-I would prefer the variant with _srcu to make it clear that it
-can be called only under _srcu. Similar to console_srcu_read_flags(con).
+> > > > Specifically the earlycon support for kdb has regressed (FWIW the
+> > > > problem bisects down to the final patch in the series where
+> > > > CON_ENABLED
+> > > > is removed).
+> > > > =
 
-> +{
-> +	WARN_ON_ONCE(!console_srcu_read_lock_is_held());
-> +
-> +	/*
-> +	 * The CON_NBCON flag is statically initialized and is never
-> +	 * set or cleared at runtime.
-> +	 */
-> +	return data_race(con->flags & CON_NBCON);
-> +}
-> +
->  /* Variant of console_is_registered() when the console_list_lock is held. */
->  static inline bool console_is_registered_locked(const struct console *con)
->  {
+> > > > Reproduction on x86-64 KVM outside of the test suite should be
+> > > > easy:
+> > > > =
 
-Otherwise, it looks good to me.
+> > > > =A0=A0=A0 make defconfig
+> > > > =A0=A0=A0 scripts/config \
+> > > > =A0=A0=A0=A0=A0=A0=A0 --enable DEBUG_INFO \
+> > > > 	--enable DEBUG_INFO_DWARF_TOOLCHAIN_DEFAULT \
+> > > > 	--enable DEBUG_FS \
+> > > > 	--enable KALLSYMS_ALL \
+> > > > 	--enable MAGIC_SYSRQ \
+> > > > 	--enable KGDB \
+> > > > 	--enable KGDB_TESTS \
+> > > > 	--enable KGDB_KDB \
+> > > > 	--enable KDB_KEYBOARD \
+> > > > 	--enable LKDTM \
+> > > > 	--enable SECURITY_LOCKDOWN_LSM
+> > > > =A0=A0=A0 make olddefconfig
+> > > > =A0=A0=A0 make -j$(nproc)
+> > > > =A0=A0=A0 qemu-system-x86_64 \
+> > > > =A0=A0=A0=A0=A0=A0=A0 -m 1G -smp 2 -nographic \
+> > > > 	-kernel arch/x86/boot/bzImage \
+> > > > 	-append "console=3DttyS0,115200 kgdboc=3DttyS0
+> > > > earlycon=3Duart8250,io,0x3f8 kgdboc_earlycon kgdbwait"
+> > > =
 
-With a consistent name, feel free to use:
+> > > Actually I realized there was a simpler reproduction (hinted at by
+> > > the
+> > > missing "printk: legacy bootconsole [uart8250] enabled" in the
+> > > regressed
+> > > case). It looks like the earlycon simply doesn't work and that
+> > > means
+> > > the
+> > > reproduction doesn't require anything related to kgdb at all.
+> > > Simply:
+> > > =
 
-Reviewed-by: Petr Mladek <pmladek@suse.com>
+> > > =A0=A0=A0 make defconfig
+> > > =A0=A0=A0 make -j$(nproc)
+> > > =A0=A0=A0 qemu-system-x86_64 -m 1G -smp 2 -nographic -kernel
+> > > arch/x86/boot/bzImage \
+> > > =A0=A0=A0=A0=A0=A0=A0 -append "earlycon=3Duart8250,io,0x3f8"
+> > > =
+
+> > > With the part 3 patchset applied I get no output from the earlycon
+> > > (without the patch set I get the early boot messages which, as
+> > > expected,
+> > > stop when tty0 comes up).
+> > =
+
+> > Hi Daniel, sorry for the late reply! Lots of things to check lately
+> > :)
+> > =
+
+> > Ok, I reproduced here, thanks a lot for testing kgdboc, it's a quick
+> > way to check that the new register_console_force is not working. Let
+> > me
+> > take a look to find what's wrong. Thanks a lot for finding this
+> > issue!
+> =
+
+> Ok, I did a bisect and found out that the issue lies in the last
+> commit, where CON_ENABLED was removed. After it, I then checked what
+> was wrong, since everything was being plumbed correctly (tm), and then
+> I found that it was not:
+> =
+
+> On _register_console, the function try_enable_default_console is called
+> when there are not registered consoles, and then it sets CON_ENABLED
+> for the console. Later on, try_enable_preferred_console it checks if
+> the console was specified by the user, and at the same time it had
+> CON_ENABLED set.
+> =
+
+> It worked by chance, but now, we don't have this flag anymore, and then
+> we are not _marking_ the console on try_enable_default_console so
+> try_enable_preferred_console returns ENOENT.
+
+Great catch! Yeah, it worked just by chance.
+
+> So, without any console kgdb is activated much later in the boot
+> process, as you found it.
+> =
+
+> I talked with Petr Mladek and it would need to rework the way that we
+> register a console, and he's already working on it.
+
+Yes, I have some patches in early stages of developnent of another
+feature which would help here.
+
+> For now I believe
+> that we could take a look in all the patches besides the last one that
+> currently breaks the earlycon with kgdb and maybe other usecases.
+
+I agree. I am going to review this patchset first. Then I'll try to
+clean up the patches which remove the ugly side effect from
+try_enable_preferred_console(). Then we could discuss how
+to move forward. It might make sense to push this patchset
+first without the last patch...
+
+> Sorry for not catching this issue before. I'll use kgdb next time to
+> make sure that it keeps working :)
+
+Do not worry at all. It was a well hidden catch. It is great that
+Daniel found the regression in time...
 
 Best Regards,
 Petr
