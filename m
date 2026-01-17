@@ -2,38 +2,38 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8A9D4D38CD6
-	for <lists+kgdb-bugreport@lfdr.de>; Sat, 17 Jan 2026 07:22:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A4D31D38CFF
+	for <lists+kgdb-bugreport@lfdr.de>; Sat, 17 Jan 2026 07:44:59 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=lWDEtClzhzi5gY4oa9HiPb/cLV00KCC+HeXugXXvkrs=; b=imLKtUsl0z+V9a95CsZ4ZzY+fb
-	gLskOjtDARnSD0P7eR8GJ+tpfc0g9hxa+uQcuvFR+AMO0bedTRpqXuccqjEJQxyIPMFxe0MIAI3YW
-	/v8xUKCfHltn6jXX8QvK+WaV5KlLcp8eMQNP7mxAmBMal/Fd3JXraKqgSvFYyvtYb8ss=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=Ozjdes4JMraLpfGMTaiPB6WLD2WO8079KKaDSQXbqyY=; b=OwDjdvxU/RzF2bIwFJNYly3pcB
+	Y/iTSCrVmdvnwnt29e1noECId5HX79C58xOaBPgScrHELYAhpSNSPK4WKNZ5/aJNIvG2Wf+Likyk1
+	VCtOdJTHgN9ZsQqtf8mdLItjODIZpaJ03V41T0gYSrEqJV4JRbKJdKQpVlBG0QY/jMlg=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1vgzi5-0004Te-LW
+	id 1vh03O-00048d-DV
 	for lists+kgdb-bugreport@lfdr.de;
-	Sat, 17 Jan 2026 06:22:57 +0000
+	Sat, 17 Jan 2026 06:44:58 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <lkp@intel.com>) id 1vgzi3-0004TU-TP
+ (envelope-from <lkp@intel.com>) id 1vh03M-00048S-HM
  for kgdb-bugreport@lists.sourceforge.net;
- Sat, 17 Jan 2026 06:22:56 +0000
+ Sat, 17 Jan 2026 06:44:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1wmMsYUAk1kFdU0RfLSNV3fjUb4oIT7kyBeK513MjSU=; b=cko2nJ0fFRmtQbittySjtRh8oh
- 2jGcBxKbT7wDO/NtYDoG9OsLdP5C5qCaYaea1yeRXGP63JszZiov5Rvcjk2PTw9w+/G/j3iMcEDYM
- /hbinh106053LbIlEs0+b7K6/hA3bdo+66FoH5G0vaCKHlHifCXE9+n5nyTbKTU+m4lo=;
+ bh=V/NZQ4l7+wiCpJ9WKAKq5dJt/1Dd3eEqJptXaN6COvo=; b=YQKQKePxajXvALSmvrrnoAIUOB
+ Be65W7id/Kj7O2s3KRkV7kRvY3swe0uUs1PxiznRO+JwqkySo8bxAmu8b/Sb7kMRH8Eks9+3gKM77
+ 2zTYMZ8Xo4QFd02wuJ6xEuByokglsgn8ey8ANqmSMaNRGolH/ZDfkxI2W71p9b9F5BbY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -41,54 +41,54 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=1wmMsYUAk1kFdU0RfLSNV3fjUb4oIT7kyBeK513MjSU=; b=bYy9ERIFLXmanfCFLxZnYNSs2H
- bfb6LZGzJYRnG/6L6pLHMwx3ePdVosPLdq9v5K3iGt+dZL3jGp9WB+adFpS1/LdBqtDQgWs4ZxtDI
- TNQzWJAlzH844GBoLgMHSFt5/huCmCDyaLM2R/t7Z+rkdv5riMRHGuufeGgCKSAXzw0k=;
-Received: from mgamail.intel.com ([198.175.65.18])
+ bh=V/NZQ4l7+wiCpJ9WKAKq5dJt/1Dd3eEqJptXaN6COvo=; b=eEjOl7RO0vlv329s/+k0ONdZUy
+ EkpuwHLrypuLJI3wt2DrprirUlyf2i/0rQdgSS96kMJtVeA44kBjwAAxa/q9aHsfCz+B7IlgMTqLI
+ ZiLPo3lTlupNZ5D6FcK9MztFVIgZ3jBJX0knX5nRlreFPIyZ6A8n1+iAhsb7nGTIRS7k=;
+Received: from mgamail.intel.com ([192.198.163.10])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vgzi3-0003dS-47 for kgdb-bugreport@lists.sourceforge.net;
- Sat, 17 Jan 2026 06:22:55 +0000
+ id 1vh03L-0004Tx-TI for kgdb-bugreport@lists.sourceforge.net;
+ Sat, 17 Jan 2026 06:44:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1768630976; x=1800166976;
+ t=1768632296; x=1800168296;
  h=date:from:to:cc:subject:message-id:references:
  mime-version:in-reply-to;
- bh=/FquNOusjZSaYbIZE0kdN18qpsdzltFYXA3evu19SSo=;
- b=acTeIti5ai1H/UL0EzOxzLLTUMg8e3OGq+Ap46dSKfUoaV6tkwY/cHaZ
- 3dndT1VP9i5SHHm8ZO8yap7l2nYsY53Ip0uJQQ+ECJQL+jhbXyl4rrPlw
- oWrKewYOZ+C6a8CUI4oIYUfu5/oelwN4eCimUmxaJlB5aTgZLs9uMhRYo
- xFdQwVTwADXvY30F1uvvu8PHz8q2bxY2S+FwadvdusV8dB+I2Yle31EBt
- hJJSIaA58XUefaOJpWujVAlbJCOywYooTom0FEbVDCEL3Irt9ujAPPOIg
- JHt+pXCe8Jn1yCF+gU0icSfkKOEHS6Jg9nYuUZ2IiZhTAzNvDBRQhXs0s w==;
-X-CSE-ConnectionGUID: Lf0NqpJeT7uioSOTW+tBmg==
-X-CSE-MsgGUID: 9U0LuG41Tdik7dnTj62OHg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11673"; a="69987907"
-X-IronPort-AV: E=Sophos;i="6.21,233,1763452800"; d="scan'208";a="69987907"
-Received: from fmviesa006.fm.intel.com ([10.60.135.146])
- by orvoesa110.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 16 Jan 2026 22:22:45 -0800
-X-CSE-ConnectionGUID: IyrdKoFtSIyDNgKcW6DHRA==
-X-CSE-MsgGUID: /VkcHJltTaeqY+luj4ow6Q==
+ bh=h5zEsATfnYScF22N+HZNR9SRqd2Wz8gbmo392H7S5jo=;
+ b=n+7qupEXNumV2qx1ss60OMTxGrrSXtHMdKMKEnxo8MFnN/5rpTTULWTl
+ /HvUTaEWvPI7Iu6PH7ojaTzqZQXiE8ScgMDBzr+5XxKtBV6lxJnkGbHeg
+ LayRqRT8wgrjZ4KoytI97sWJIg3eCrdUUFeKdN2xOucAhtsrLvE6jxHt5
+ wGtYoesTuud05cYloTFdmhmP/Q69YYBBdNiBzEBMtZjFI7Svbnwc0G67z
+ CDjoaIhiMMu/0v4S/zmA4u4Yb9MFYIjkXrPuJD7v/LaC3rITdlwbRivHl
+ nbUUK0n0rb0vhkAIFBCJhzNexw4TT6luDyVg6XFWKPW+ojRoms2w99t6l w==;
+X-CSE-ConnectionGUID: tL8cjckGSHS8bcTSRAoD2g==
+X-CSE-MsgGUID: INc240gEScSxtTC7XzaCWg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11673"; a="81308785"
+X-IronPort-AV: E=Sophos;i="6.21,233,1763452800"; d="scan'208";a="81308785"
+Received: from orviesa005.jf.intel.com ([10.64.159.145])
+ by fmvoesa104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 16 Jan 2026 22:44:45 -0800
+X-CSE-ConnectionGUID: RrOnrlNdRzmGR0eHn+2eEw==
+X-CSE-MsgGUID: dflrg5N6Tae84BQKUAXiWg==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.21,233,1763452800"; d="scan'208";a="205319083"
+X-IronPort-AV: E=Sophos;i="6.21,233,1763452800"; d="scan'208";a="210436377"
 Received: from lkp-server01.sh.intel.com (HELO 765f4a05e27f) ([10.239.97.150])
- by fmviesa006.fm.intel.com with ESMTP; 16 Jan 2026 22:22:42 -0800
+ by orviesa005.jf.intel.com with ESMTP; 16 Jan 2026 22:44:43 -0800
 Received: from kbuild by 765f4a05e27f with local (Exim 4.98.2)
- (envelope-from <lkp@intel.com>) id 1vgzho-00000000LcK-09Ex;
- Sat, 17 Jan 2026 06:22:40 +0000
-Date: Sat, 17 Jan 2026 14:21:51 +0800
+ (envelope-from <lkp@intel.com>) id 1vh036-00000000Ld6-2c23;
+ Sat, 17 Jan 2026 06:44:40 +0000
+Date: Sat, 17 Jan 2026 14:44:25 +0800
 From: kernel test robot <lkp@intel.com>
 To: Tim Bird <tim.bird@sony.com>, jason.wessel@windriver.com,
  danielt@kernel.org
-Message-ID: <202601171457.nc8dNrA8-lkp@intel.com>
+Message-ID: <202601171534.EStWXGGO-lkp@intel.com>
 References: <20260117003621.669382-1-tim.bird@sony.com>
 MIME-Version: 1.0
 Content-Disposition: inline
 In-Reply-To: <20260117003621.669382-1-tim.bird@sony.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
@@ -104,13 +104,13 @@ X-Spam-Report: Spam detection software,
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vgzi3-0003dS-47
+X-Headers-End: 1vh03L-0004Tx-TI
 Subject: Re: [Kgdb-bugreport] [PATCH] kernel: debug: Add SPDX license ids to
  kdb files
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
@@ -145,24 +145,24 @@ url:    https://github.com/intel-lab-lkp/linux/commits/Tim-Bird/kernel-debug-Add
 base:   v6.19-rc5
 patch link:    https://lore.kernel.org/r/20260117003621.669382-1-tim.bird%40sony.com
 patch subject: [PATCH] kernel: debug: Add SPDX license ids to kdb files
-config: microblaze-defconfig (https://download.01.org/0day-ci/archive/20260117/202601171457.nc8dNrA8-lkp@intel.com/config)
-compiler: microblaze-linux-gcc (GCC) 15.2.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20260117/202601171457.nc8dNrA8-lkp@intel.com/reproduce)
+config: sparc-randconfig-002-20260117 (https://download.01.org/0day-ci/archive/20260117/202601171534.EStWXGGO-lkp@intel.com/config)
+compiler: sparc64-linux-gcc (GCC) 8.5.0
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20260117/202601171534.EStWXGGO-lkp@intel.com/reproduce)
 
 If you fix the issue in a separate patch/commit (i.e. not just a new version of
 the same patch/commit), kindly add following tags
 | Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202601171457.nc8dNrA8-lkp@intel.com/
+| Closes: https://lore.kernel.org/oe-kbuild-all/202601171534.EStWXGGO-lkp@intel.com/
 
 All warnings (new ones prefixed by >>):
 
-   In file included from kernel/debug/kdb/kdb_private.h:17,
-                    from kernel/debug/kdb/kdb_io.c:23:
->> kernel/debug/kdb/../debug_core.h:2:1: warning: '/*' within comment [-Wcomment]
-       2 | /*
+   In file included from kernel/debug/gdbstub.c:38:
+>> kernel/debug/debug_core.h:2:1: warning: "/*" within comment [-Wcomment]
+    /*
+     
 
 
-vim +2 kernel/debug/kdb/../debug_core.h
+vim +2 kernel/debug/debug_core.h
 
 53197fc4954924 Jason Wessel 2010-04-02 @2  /*
 53197fc4954924 Jason Wessel 2010-04-02  3   * Created by: Jason Wessel <jason.wessel@windriver.com>
