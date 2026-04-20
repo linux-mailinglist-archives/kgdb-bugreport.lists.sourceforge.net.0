@@ -2,136 +2,111 @@ Return-Path: <kgdb-bugreport-bounces@lists.sourceforge.net>
 Delivered-To: lists+kgdb-bugreport@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 2GDFGi344GnZnwAAu9opvQ
+	id sJtKHheP5Wk7lgEAu9opvQ
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	for <lists+kgdb-bugreport@lfdr.de>; Thu, 16 Apr 2026 16:54:37 +0200
+	for <lists+kgdb-bugreport@lfdr.de>; Mon, 20 Apr 2026 04:27:35 +0200
 X-Original-To: lists+kgdb-bugreport@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B786740FE3F
-	for <lists+kgdb-bugreport@lfdr.de>; Thu, 16 Apr 2026 16:54:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A4C28426437
+	for <lists+kgdb-bugreport@lfdr.de>; Mon, 20 Apr 2026 04:27:34 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
-	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
+	List-Unsubscribe:List-Id:Subject:Mime-Version:References:In-Reply-To:
+	Message-Id:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=HsAUubb3MdJIbGjhc+0J5lHok90oMgEqhoBQraiyr3s=; b=ZijzrK5hgVriid9S45r0YPwMQJ
-	GvHSfhBxyycCiQQWgmk9lhhCa96yDFCXQDLQPf4aR4M4JXgjwT11U9Qj8bY1Ql0tcz+o2ALiiGI/0
-	BhKLvrMrgnECZS16TqgK9G/IMpfwYIapG/0vh8lLgsBQDeqTXQKB4VggWkZ7Z5ougRy4=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=L1WFxAPI/my5Ybc1BsLi0phZAYy+Jw8aO44X/IUjiQc=; b=f/y8MkjP6hKIP4TX6C/sH0maDO
+	iv5/vpSyTBSa8fPdyG1Z8sXK36ycAIshPTYUxmQWwwMS07V9unbf0mpuwtiLBW9rWSDt1S3CTjFq4
+	fvKQe3A/BVwr8yJfBLcBPxBCpEcp6J+APLWNIoEKv7TutnsNEYtSynHJuNN+opCl9aCU=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <kgdb-bugreport-bounces@lists.sourceforge.net>)
-	id 1wDO71-0006Pw-DY
+	id 1wEeMG-00063a-Fv
 	for lists+kgdb-bugreport@lfdr.de;
-	Thu, 16 Apr 2026 14:54:35 +0000
+	Mon, 20 Apr 2026 02:27:32 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <pmladek@suse.com>) id 1wDO70-0006Pp-HM
+ (envelope-from <mhiramat@kernel.org>) id 1wEeMF-00063R-1M
  for kgdb-bugreport@lists.sourceforge.net;
- Thu, 16 Apr 2026 14:54:34 +0000
+ Mon, 20 Apr 2026 02:27:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Mime-Version
+ :References:In-Reply-To:Message-Id:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=nUk9+5ugjhG90uPs8bskXfY1v/H6BYvalTyZQcNSMUA=; b=KLu1db2Qv+hbu7XhZQnmFDHxgc
- hTr5EbecsRIXS2UCEZ1g1UUWKE0AbqE59kOz7fPASWFMUlj0QnUYLDAAK2g4dnXOAJ8OX6z7B5891
- RhTksKsw3kWdBSE6b+whA8gdBfTJD8FtaVEBgOmqBZzNOJC64jtTV+m2WPoBYvMl6gvQ=;
+ bh=CgubQB1vW9wxC8N4CxmIVsMLaWELotlZaO7YsaSUdG0=; b=fR92l7zRdfLjuIstLTqj9TMP/N
+ vTbyYs36SgkRqsYWlbf8AnZoCJKqG0iJ1IZsmECN+/bxia6pnejs1eXxHhnBvX6hwNtuNKYdiEHu4
+ s/lRvdUWYeusZ37YLjPOkRi1ov/5Xx2AEGabzBrv0zGYJgoT292MTAZmvaViKayQtM9o=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:Mime-Version:References:
+ In-Reply-To:Message-Id:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=nUk9+5ugjhG90uPs8bskXfY1v/H6BYvalTyZQcNSMUA=; b=mVQrWJnkRok9uez1H/Ey2ljfXx
- H37pe9C+Dp/QgAfdMitEAssuEgTtM16zzx8/n6bLUyjlF3JlniCq0xXrT8iN5I7yJrKDmui2iCDsH
- QIQ0woiJYjcfdAzZLpTxEcBVwIonqUztwutcajkRdS6dreX0v5DrChIB/8wt63pL6kQw=;
-Received: from mail-wm1-f43.google.com ([209.85.128.43])
+ bh=CgubQB1vW9wxC8N4CxmIVsMLaWELotlZaO7YsaSUdG0=; b=E+NqkYP5zmf1uUMzHaewLY0OV/
+ /+xeXLy/m3wCAEzO6YmhtQT2ACkKQF5Q33ZeLYQgadyI7e6ufCY93hkC8l3nlwhNUJ0W6P+byI8VR
+ vEgFXPvkRURlMG4rdYkpxFHqN+wL2Q3t98IuYGIvtA96fvNzR1sxyue1QKO3+aB5UdkA=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1wDO6z-0004La-3V for kgdb-bugreport@lists.sourceforge.net;
- Thu, 16 Apr 2026 14:54:34 +0000
-Received: by mail-wm1-f43.google.com with SMTP id
- 5b1f17b1804b1-488a29e6110so85163685e9.3
- for <kgdb-bugreport@lists.sourceforge.net>;
- Thu, 16 Apr 2026 07:54:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=suse.com; s=google; t=1776351266; x=1776956066; darn=lists.sourceforge.net; 
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=nUk9+5ugjhG90uPs8bskXfY1v/H6BYvalTyZQcNSMUA=;
- b=Ts35IozOUo5zidHYhPkotkUbSGIokIqpc51W29NmfTJGyKiItwQ1UMha6O8xnvIwYs
- zvpzY3Q45ivLrLoInRCoPF16E8lomfaDDWGs/ljLEMilgUyzG1xjkZwL650rWp6JszbE
- Pctm21jlQqppU4HgP7f4gYoHKIoiSilnUcturdMsW5RyLpGcuAWL9KKEI1NPVh8fCTRO
- hDASzeQsDq5Ajw6xoe0LBPH/1HbLz63GXCFACSE4P681DFQmR8IHBMBDpQruAHjejZus
- br4M9JRgDVQYLOIorJ7nyvL1edPFsqvnzUd6pJBw9u5ZTyQS4WHqO8LTDkmCd78baYGR
- DJDQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776351266; x=1776956066;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=nUk9+5ugjhG90uPs8bskXfY1v/H6BYvalTyZQcNSMUA=;
- b=HuO/ngB0xc747tASul3l63fTNl+zYhIvKjM4m65IDQ9D0ZeBREFKEHnIJhh2Q7HuO0
- M9MnzNX9s6ezi3PcO7i+ToHWSZWVkUcDPbbnZeqEcaxlddlKNDnM5IqTPLJ3sRN1Tm4l
- vh+u6fdP+txEMQzPyMUISZG3Oe6vbC6xIq7TrgMBCFbJfbXZLuLEF0HbNuj4eDnsJqCu
- dAI8rXIXJU34Wh1LIdd11wnF/GsWJok4Efvg7wwRFgevi767LocfH+moHtzJnuD2jDj/
- 7fhxBOu4HQ1UlgLyTjf+xeo34h06phmwGxAi/4QEcK6f7vVST6FbG6Z96RaQB2WyPUzX
- 5HiA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/j8BGNu0NlPDGGO2FXoUzSJJYwFeEz4L4gMDc+4De47Fzns9X/1KVLpDv8Y3UAOpuxn+rUUIYhiteTCrhseA==@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YwdT8FjwVdect1i272WGQwA55YosFZPO+xszzKr4stTtqJ9p+L/
- E83W6UQsLhtqZ4R7ys3ggAgODretve2yXfxK8f5SjgZJlXj3kwdPhQ3hw3wo6qQ9v5o=
-X-Gm-Gg: AeBDiesdmbbp+RXRnv4HrthVR+YF8jWOOZdql5zxq2DR17VO4Xuggxj0RIxL2PEMU1s
- SCLlv5JUHQQDjNZ/BJ0Tw6zK/xVke9aUe3tCFIk5NM3G6hNCRVy5nSiRy1eRhLbOrL84Ns7YFC1
- o5ACbguYDqjm/5JkgxI+LddHB7XC23yUNveV7zHcPoJwJZ4SPPfiCA/06WjyLqCrC0deyLe+gPH
- GingJpqfM8RdIfEefrMHg+OgRqqiDjLcyYuwdEtkIjWZ3rTD8+RBey/93jMke44s4eTzWLkZ2sB
- FD1A6+Wi+1MXClUfvE8pZQRmIXJ9Ti5m3/fjbF/jWcwq5me9JFMrJUqtcU3WdetIH7kfwIbb0RI
- 7W5LBbhhNSzOHtrmpI0xdbrZsVuwlW5FUmiUPjvH3h943IcwjpZiXlltycBY2i39UlmOGc94O+x
- vp6UrgGSJCUMBwseLk7r9HBhBadw==
-X-Received: by 2002:a05:600d:4:b0:480:69b6:dfed with SMTP id
- 5b1f17b1804b1-488d68ab2bfmr302762205e9.24.1776351266415; 
- Thu, 16 Apr 2026 07:54:26 -0700 (PDT)
-Received: from pathway.suse.cz ([176.114.240.130])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43ead2decafsm12915427f8f.0.2026.04.16.07.54.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Apr 2026 07:54:26 -0700 (PDT)
-Date: Thu, 16 Apr 2026 16:54:23 +0200
-To: David Laight <david.laight.linux@gmail.com>
-Message-ID: <aeD4H8P1DiPQoM8V@pathway.suse.cz>
-References: <20260415070137.17860-1-chensong_2000@189.cn>
- <20260416133004.07bd2886@pumpkin>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20260416133004.07bd2886@pumpkin>
-X-Spam-Score: -0.2 (/)
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1wEeME-0005Zh-92 for kgdb-bugreport@lists.sourceforge.net;
+ Mon, 20 Apr 2026 02:27:30 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 611C360055;
+ Mon, 20 Apr 2026 02:27:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 39F54C2BCAF;
+ Mon, 20 Apr 2026 02:27:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1776652038;
+ bh=ITFfxWVYZShfg8ObCYl+/A7sDctvchvGVKnsu2Q0ZLU=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=q/f2q8YrNja2t4MOJ3XZm+daEZl1FcXY4nfOVvtrtjvqt5MbZxWUYOT3wirQo6FaB
+ lOqgywkLPOjS1VIVUdoCXgyBgeqdQRzNwaylQtig4w+yS3qEz3gmO+SVZmZJKlQIS1
+ 5YnVfgyEXKpTOb6PrQd5kn+uZtfBKDFQ/8OCcifN8EDAPaZwjDRm8Zr0mh3XQALHBh
+ Up6SdMQEWfpLr4yC73WCFbktXDXdQ7dXOqJfGS3V/MWdgRmzjD+Y1d8LwFkLfl9Ev0
+ jN9uHYhQzEihNOM9Uulk+1xe1nQar6NN7XIMU3fvu8QzHpDFat9SPtxyteXUC9ijgd
+ FqU1Wkd4FKflw==
+Date: Mon, 20 Apr 2026 11:27:07 +0900
+To: Petr Mladek <pmladek@suse.com>
+Message-Id: <20260420112707.aa3627ca9f975eeaf7d8ea0e@kernel.org>
+In-Reply-To: <aeD2_FrFL6E3dbAC@pathway.suse.cz>
+References: <20260413080701.180976-1-chensong_2000@189.cn>
+ <1191caf5-6a61-4622-a15e-854d3701f4fc@suse.com>
+ <a35f5f94-7d5a-4347-974b-b270c89ef241@189.cn>
+ <1db425bf-58a9-4768-8c38-3ae25d7662a5@suse.com>
+ <aeD2_FrFL6E3dbAC@pathway.suse.cz>
+X-Mailer: Sylpheed 3.8.0beta1 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+Mime-Version: 1.0
+X-Spam-Score: -1.7 (-)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu 2026-04-16 13:30:04, David Laight wrote: > On Wed,
- 15 Apr 2026 15:01:37 +0800 > chensong_2000@189.cn wrote: > > > From: Song
- Chen <chensong_2000@189.cn> > > > > The current notifier chain imple [...]
- Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview:  On Thu,
+ 16 Apr 2026 16:49:32 +0200 Petr Mladek <pmladek@suse.com>
+ wrote: > On Thu 2026-04-16 13:18:30, Petr Pavlu wrote: > > On 4/15/26 8:43
+ AM, Song Chen wrote: > > > On 4/14/26 22:33, Petr Pavlu wrote: > > >> On
+ 4/13/26 10:07 AM, chensong_2000@189.cn wrote: > > >>> diff [...] 
+ Content analysis details:   (-1.7 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.128.43 listed in wl.mailspike.net]
-X-Headers-End: 1wDO6z-0004La-3V
-Subject: Re: [Kgdb-bugreport] [RFC PATCH 1/2] kernel/notifier: replace
- single-linked list with double-linked list for reverse traversal
+ -1.5 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1wEeME-0005Zh-92
+Subject: Re: [Kgdb-bugreport] [RFC PATCH 2/2] kernel/module: Decouple klp
+ and ftrace from load_module
 X-BeenThere: kgdb-bugreport@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -143,8 +118,9 @@ List-Post: <mailto:kgdb-bugreport@lists.sourceforge.net>
 List-Help: <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/kgdb-bugreport>, 
  <mailto:kgdb-bugreport-request@lists.sourceforge.net?subject=subscribe>
-From: Petr Mladek via Kgdb-bugreport <kgdb-bugreport@lists.sourceforge.net>
-Reply-To: Petr Mladek <pmladek@suse.com>
+From: "Masami Hiramatsu \(Google\) via Kgdb-bugreport"
+ <kgdb-bugreport@lists.sourceforge.net>
+Reply-To: "Masami Hiramatsu \(Google\)" <mhiramat@kernel.org>
 Cc: mark.rutland@arm.com, rafael@kernel.org, viresh.kumar@linaro.org,
  mturquette@baylibre.com, linux-kernel@vger.kernel.org, song@kernel.org,
  edumazet@google.com, da.gomez@kernel.org, live-patching@vger.kernel.org,
@@ -153,79 +129,243 @@ Cc: mark.rutland@arm.com, rafael@kernel.org, viresh.kumar@linaro.org,
  danielt@kernel.org, samitolvanen@google.com,
  kgdb-bugreport@lists.sourceforge.net, kuba@kernel.org, pabeni@redhat.com,
  linan122@huawei.com, lenb@kernel.org, dm-devel@lists.linux.dev,
- petr.pavlu@suse.com, paulmck@kernel.org, linux-pm@vger.kernel.org,
+ Petr Pavlu <petr.pavlu@suse.com>, paulmck@kernel.org, linux-pm@vger.kernel.org,
  frederic@kernel.org, jikos@kernel.org, snitzer@kernel.org, rostedt@goodmis.org,
  linux-raid@vger.kernel.org, mpatocka@redhat.com, yukuai@fnnas.com,
  jpoimboe@kernel.org, sboyd@kernel.org, netdev@vger.kernel.org,
- chensong_2000@189.cn, mcgrof@kernel.org, mhiramat@kernel.org, horms@kernel.org,
- jason.wessel@windriver.com, mathieu.desnoyers@efficios.com,
+ Song Chen <chensong_2000@189.cn>, mcgrof@kernel.org, mhiramat@kernel.org,
+ horms@kernel.org, jason.wessel@windriver.com, mathieu.desnoyers@efficios.com,
  bmarzins@redhat.com, linux-trace-kernel@vger.kernel.org, davem@davemloft.net,
  linux-modules@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: kgdb-bugreport-bounces@lists.sourceforge.net
-X-Spamd-Result: default: False [-7.11 / 15.00];
+X-Spamd-Result: default: False [-8.11 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
-	SUSPICIOUS_RECIPS(1.50)[];
+	MV_CASE(0.50)[];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MAILLIST(-0.20)[mailman];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[47];
-	TO_DN_SOME(0.00)[];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,suse.com:s=google];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
 	RCVD_TLS_LAST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
-	DKIM_MIXED(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	TO_DN_SOME(0.00)[];
 	FREEMAIL_CC(0.00)[arm.com,kernel.org,linaro.org,baylibre.com,vger.kernel.org,google.com,suse.cz,redhat.com,atomlin.com,lists.sourceforge.net,huawei.com,lists.linux.dev,suse.com,goodmis.org,fnnas.com,189.cn,windriver.com,efficios.com,davemloft.net];
+	DKIM_MIXED(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[47];
+	ARC_NA(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
+	MIME_TRACE(0.00)[0:+];
 	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[kgdb-bugreport@lists.sourceforge.net];
-	NEURAL_HAM(-0.00)[-1.000];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	RCVD_COUNT_FIVE(0.00)[5];
-	FROM_HAS_DN(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
 	FROM_NEQ_ENVFROM(0.00)[kgdb-bugreport@lists.sourceforge.net,kgdb-bugreport-bounces@lists.sourceforge.net];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,suse.com:-];
+	FROM_HAS_DN(0.00)[];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	TAGGED_RCPT(0.00)[kgdb-bugreport];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	HAS_REPLYTO(0.00)[pmladek@suse.com];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
+	HAS_REPLYTO(0.00)[mhiramat@kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[pathway.suse.cz:mid,suse.com:replyto,lists.sourceforge.net:dkim,lists.sourceforge.net:helo,lists.sourceforge.net:rdns]
-X-Rspamd-Queue-Id: B786740FE3F
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email,189.cn:email,lists.sourceforge.net:dkim,lists.sourceforge.net:helo,lists.sourceforge.net:rdns]
+X-Rspamd-Queue-Id: A4C28426437
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Thu 2026-04-16 13:30:04, David Laight wrote:
-> On Wed, 15 Apr 2026 15:01:37 +0800
-> chensong_2000@189.cn wrote:
-> 
-> > From: Song Chen <chensong_2000@189.cn>
+On Thu, 16 Apr 2026 16:49:32 +0200
+Petr Mladek <pmladek@suse.com> wrote:
+
+> On Thu 2026-04-16 13:18:30, Petr Pavlu wrote:
+> > On 4/15/26 8:43 AM, Song Chen wrote:
+> > > On 4/14/26 22:33, Petr Pavlu wrote:
+> > >> On 4/13/26 10:07 AM, chensong_2000@189.cn wrote:
+> > >>> diff --git a/include/linux/module.h b/include/linux/module.h
+> > >>> index 14f391b186c6..0bdd56f9defd 100644
+> > >>> --- a/include/linux/module.h
+> > >>> +++ b/include/linux/module.h
+> > >>> @@ -308,6 +308,14 @@ enum module_state {
+> > >>>       MODULE_STATE_COMING,    /* Full formed, running module_init. */
+> > >>>       MODULE_STATE_GOING,    /* Going away. */
+> > >>>       MODULE_STATE_UNFORMED,    /* Still setting it up. */
+> > >>> +    MODULE_STATE_FORMED,
+> > >>
+> > >> I don't see a reason to add a new module state. Why is it necessary and
+> > >> how does it fit with the existing states?
+> > >>
+> > > because once notifier fails in state MODULE_STATE_UNFORMED (now only ftrace has someting to do in this state), notifier chain will roll back by calling blocking_notifier_call_chain_robust, i'm afraid MODULE_STATE_GOING is going to jeopardise the notifers which don't handle it appropriately, like:
+> > > 
+> > > case MODULE_STATE_COMING:
+> > >      kmalloc();
+> > > case MODULE_STATE_GOING:
+> > >      kfree();
 > > 
-> > The current notifier chain implementation uses a single-linked list
-> > (struct notifier_block *next), which only supports forward traversal
-> > in priority order. This makes it difficult to handle cleanup/teardown
-> > scenarios that require notifiers to be called in reverse priority order.
+> > My understanding is that the current module "state machine" operates as
+> > follows. Transitions marked with an asterisk (*) are announced via the
+> > module notifier.
+> > 
+> > ---> UNFORMED --*> COMING --*> LIVE --*> GOING -.
+> >         ^            |                     ^    |
+> >         |            '---------------------*    |
+> >         '---------------------------------------'
+> > 
+> > The new code aims to replace the current ftrace_module_init() call in
+> > load_module(). To achieve this, it adds a notification for the UNFORMED
+> > state (only when loading a module) and introduces a new FORMED state for
+> > rollback. FORMED is purely a fake state because it never appears in
+> > module::state. The new structure is as follows:
+> > 
+> >         ,--*> (FORMED)
+> >         |
+> > --*> UNFORMED --*> COMING --*> LIVE --*> GOING -.
+> >         ^            |                     ^    |
+> >         |            '---------------------*    |
+> >         '---------------------------------------'
+> > 
+> > I'm afraid this is quite complex and inconsistent. Unless it can be kept
+> > simple, we would be just replacing one special handling with a different
+> > complexity, which is not worth it.
 > 
-> If it is only cleanup/teardown then the list can be order-reversed
-> as part of that process at the same time as the list is deleted.
+> > >>
+> > >>> +    if (err)
+> > >>> +        goto ddebug_cleanup;
+> > >>>         /* Finally it's fully formed, ready to start executing. */
+> > >>>       err = complete_formation(mod, info);
+> > >>> -    if (err)
+> > >>> +    if (err) {
+> > >>> +        blocking_notifier_call_chain_reverse(&module_notify_list,
+> > >>> +                MODULE_STATE_FORMED, mod);
+> > >>>           goto ddebug_cleanup;
+> > >>> +    }
+> > >>>   -    err = prepare_coming_module(mod);
+> > >>> +    err = prepare_module_state_transaction(mod,
+> > >>> +                MODULE_STATE_COMING, MODULE_STATE_GOING);
+> > >>>       if (err)
+> > >>>           goto bug_cleanup;
+> > >>>   @@ -3522,7 +3519,6 @@ static int load_module(struct load_info *info, const char __user *uargs,
+> > >>>       destroy_params(mod->kp, mod->num_kp);
+> > >>>       blocking_notifier_call_chain(&module_notify_list,
+> > >>>                        MODULE_STATE_GOING, mod);
+> > >>
+> > >> My understanding is that all notifier chains for MODULE_STATE_GOING
+> > >> should be reversed.
+> > > yes, all, from lowest priority notifier to highest.
+> > > I will resend patch 1 which was failed due to my proxy setting.
+> > 
+> > What I meant here is that the call:
+> > 
+> > blocking_notifier_call_chain(&module_notify_list, MODULE_STATE_GOING, mod);
+> > 
+> > should be replaced with:
+> > 
+> > blocking_notifier_call_chain_reverse(&module_notify_list, MODULE_STATE_GOING, mod);
+> > 
+> > > 
+> > >>
+> > >>> -    klp_module_going(mod);
+> > >>>    bug_cleanup:
+> > >>>       mod->state = MODULE_STATE_GOING;
+> > >>>       /* module_bug_cleanup needs module_mutex protection */
+> > >>
+> > >> The patch removes the klp_module_going() cleanup call in load_module().
+> > >> Similarly, the ftrace_release_mod() call under the ddebug_cleanup label
+> > >> should be removed and appropriately replaced with a cleanup via
+> > >> a notifier.
+> > >>
+> > >     err = prepare_module_state_transaction(mod,
+> > >                 MODULE_STATE_UNFORMED, MODULE_STATE_FORMED);
+> > >     if (err)
+> > >         goto ddebug_cleanup;
+> > > 
+> > > ftrace will be cleanup in blocking_notifier_call_chain_robust rolling back.
+> > > 
+> > >     err = prepare_module_state_transaction(mod,
+> > >                 MODULE_STATE_COMING, MODULE_STATE_GOING);
+> > > 
+> > > each notifier including ftrace and klp will be cleanup in blocking_notifier_call_chain_robust rolling back.
+> > > 
+> > > if all notifiers are successful in MODULE_STATE_COMING, they all will be clean up in
+> > >  coming_cleanup:
+> > >     mod->state = MODULE_STATE_GOING;
+> > >     destroy_params(mod->kp, mod->num_kp);
+> > >     blocking_notifier_call_chain(&module_notify_list,
+> > >                      MODULE_STATE_GOING, mod);
+> > > 
+> > > if  something wrong underneath.
+> > 
+> > My point is that the patch leaves a call to ftrace_release_mod() in
+> > load_module(), which I expected to be handled via a notifier.
+> 
+> I think that I have got it. The ftrace code needs two notifiers when
+> the module is being loaded and two when it is going.
+> 
+> This is why Sond added the new state. But I think that we would
+> need two new states to call:
+> 
+>     + ftrace_module_init() in MODULE_STATE_UNFORMED
+>     + ftrace_module_enable() in MODULE_STATE_FORMED
+> 
+> and
+> 
+>     + ftrace_free_mem() in MODULE_STATE_PRE_GOING
+>     + ftrace_free_mem() in MODULE_STATE_GOING
+> 
+> 
+> By using the ascii art:
+> 
+>  -*> UNFORMED -*> FORMED -> COMING -*> LIVE -*> PRE_GOING -*> GOING -.
+>               |          |         |                ^           ^    ^
+>               |          |         '----------------'           |    |
+>               |          '--------------------------------------'    |
+>               '------------------------------------------------------'
+> 
+> 
+> But I think that this is not worth it.
 
-Interesting idea. But it won't work in all situations.
+Agree.
 
-Note that the motivation for this update are the module loader
-notifiers which are called several times for each loaded/removed module.
+If this needs to be ordered so strictly, why we will use a "single"
+module notifier chain for this complex situation?
 
-Best Regards,
-Petr
+I think the notifier call chain is just for notice a single signal,
+instead of sending several different signals, especially if there is
+any dependency among the callbacks.
+
+If notification callbacks need to be ordered, they are currently
+sorted by representing priority numerically, but this is quite
+fragile for updating. It has to look up other registered priorities
+and adjust the order among dependencies each time. For this reason,
+this mechanism is not suitable for global ordering. (It's like line
+numbers in BASIC.)
+It is probably only useful for representing dependencies between
+two components maintained by the same maintainer.
+
+I'm against a general-purpose system that makes everything modular.
+It unnecessarily complicates things. If there are processes that
+require strict ordering, especially processes that must be performed
+before each stage as part of the framework, they should be called
+directly from the framework, not via notification callbacks.
+
+This makes it simpler and more robust to maintain.
+
+Only the framework's end users should utilize notification callbacks.
+
+Thank you,
+
+
+> 
+> Best Regards,
+> Petr
+> 
+
+
+-- 
+Masami Hiramatsu (Google) <mhiramat@kernel.org>
 
 
 _______________________________________________
